@@ -1,0 +1,942 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.0.0.0" version="2.1.0.1">
+  	<markers>
+    	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
+		<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
+		<marker id="8d994fe9-2422-4a9d-963d-3ad10b2b823d" name="Invisible" />
+		<marker id="b9b205a2-a998-44f5-97dc-c7f315afbbe2" name="Visible" />
+		<marker id="f7379e4e-8120-4f1f-b734-51f1bd9fbab9" name="Slam" />
+		<marker id="8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" name="Taunt (Thorg)" />
+		<marker id="72ee460f-adc1-41ab-9231-765001f9e08e" name="Veteran" />
+	</markers>
+	<cards>
+		<card id="7f88625f-591b-41ef-861d-4a89a4a57f24" name="Forcemaster">
+			<property name="Type" value="Mage" />
+			<property name="Stats" value="Spellbook=120,Life=32,Armor=0,Channeling=10,Mind=1, Creature=3" />
+			<property name="Text" value="Training: Trained in the Mind school of Magic.  Non-Mind creature spells cost triple during spellbook construction. \n Deflect: The Forcemaster uses telekinesis to deflect attacks. She has a Defense which can be used once per round, and avoids attacks on a roll of 7+. She must pay 1 mana each time she uses this Defense (before rolling for the Defense). This Defense uses its own unique ready marker &quot;Deflect&quot;. \n Force Pull: Once per round, she may cast this quick force spell. Target creature is Pushed 1 zone TOWARDS her. Will not Push a creature through a wall with the Passage Attacks trait. \n Basic Melee Attack: [Quick][Melee][Dice=3]" />
+		</card>
+		<card id="6d6362dc-1130-4bd0-ae5b-55ae2c59bc82" name="Forcemaster stats">
+			<property name="Type" value="Magestats" />
+		</card>
+		<card id="5cf0be26-ce65-405f-9c4a-312f31bceedb" name="Warlord">
+			<property name="Type" value="Mage" />
+			<property name="Stats" value="Spellbook=120,Life=36,Armor=0,Channeling=9,War=1,Earth=1,Arcane=3" />
+			<property name="Traits" value="Melee +1" />
+			<property name="Text" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction. \n Veterans: Whenever a friendly non-Mage creature melee attacks and destroys an enemy creature, place a veteran badge token on that creature (maximum of one token per creature). That creature gains Melee +1 and Armor +1. \n Battle Orders: Once per round, the Warlord may pay 1 mana and cast one of the following quick command spells. The chosen spell affects all friendly soldiers in his zone at the time it is cast and the effect lasts until the end of the round. To Battle! - Gain charge +1 trait; Release Volley! - Gain Ranged +1 trait; On Guard! - Gain Melee +1 and Armor +1 while guarding. \n Battle Skill: Warlord has Melee +1 trait. \n \n Basic Melee Attack: [Quick][Melee][Dice=3]" />
+		</card>
+		<card id="3b8c0ce6-8b89-4f40-b60a-a1530507ca4f" name="Warlord stats">
+			<property name="Type" value="Magestats" />
+		</card>
+
+		<card id="37ba1909-7eed-4b8a-8224-429f22674128" name="Arc Lightning">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Lightning" />
+			<property name="School" value="Air" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="5" />
+			<property name="Level" value="1" />
+			<property name="Traits" value="" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="Text" value="[Ranged] Lightning][Dice=3][d12][7-8 = Daze; 9+ = Stun][Ethereal,Unavoidable]" />
+			<property name="CardID" value="FWA01" />
+		</card>
+		<card id="590a9343-4aff-45e7-971d-43c1ec3c0e74" name="Force Hammer">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="9" />
+			<property name="Level" value="2" />
+			<property name="Traits" value="" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="Text" value="[Ranged][Dice=6][d12][8+ = Slam][Ethereal,+2 vs. Corporeal Conjurations]" />
+			<property name="CardID" value="FWA02" />
+		</card>
+		<card id="a4f6206e-6ee3-46e2-9cdf-0c69e51061ed" name="Hail of Stones">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="" />
+			<property name="School" value="Earth" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Traits" value="" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="[Ranged][Zone Attack][Dice=4][d12][6-10 = Daze; 11+ = Stun]" />
+			<property name="CardID" value="FWA03" />
+		</card>
+		<card id="f8e7349e-4779-447d-a4e7-ab0f2178392a" name="Hurl Boulder">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="" />
+			<property name="School" value="Earth" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Traits" value="" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="Text" value="[Ranged][Dice=7][d12][8+ = Slam]" />
+			<property name="CardID" value="FWA04" />
+		</card>
+		<card id="c807e217-baed-484c-9599-aeb0a23507b7" name="Invisible Fist">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="1" />
+			<property name="Traits" value="" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="Text" value="[Ranged][Dice=4][d12][8+ = Daze][Ethereal]" />
+			<property name="CardID" value="FWA05" />
+		</card>
+
+
+		<card id="13788dfb-6de8-4a9a-b00b-7c8f68ab7ca7" name="Dwarf Kriegsbiel">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Lightning +2" />
+			<property name="Subtype" value="Dwarf,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="11" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Life=9,Armor=3" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Chop: [Quick][Melee][Dice=4] \n Sweeping Attack: [Full][Melee][Dice=4][Sweeping]" />
+			<property name="CardID" value="FWC01" />
+		</card>
+		<card id="d04cb2a6-aadb-4c67-a6ad-1fc51e571b02" name="Earth Elemental">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Slow,Burnproof,Lightning -2,Tough -2,Nonliving,Unmovable" />
+			<property name="Subtype" value="Elemental" />
+			<property name="School" value="Earth" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="20" />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Life=35,Armor=-" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Two-Fisted Power Smash: [Full][Melee][Dice=7][d12][7-10 = Daze; 11+ = Stun] \n Quake Stomp: [Full][Ranged 0-0][Dice=3][d12][7+ = Slam] \n Earth Elemental is immune to his Quake Stomp attack." />
+			<property name="CardID" value="FWC02" />
+		</card>
+		<card id="a6846cb5-48b7-4d78-8e62-2ea8d212d2cd" name="Goblin Bomber">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Goblin,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=5,Armor=0" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Club: [Quick][Melee][Dice=2] \n Detonate: [Full][Ranged 0-0][Zone Attack][Dice=4][d12][5-10 = Slam; 11+ = Stun][Unavoidable] \n If Goblin Bomber uses his Detonate attack, destroy him as a cost of declaring that attack. If the Goblin Bomber is destroyed by taking damage, roll 1d12: On a 7+ the Detonate attack is triggered." />
+			<property name="CardID" value="FWC03" />
+		</card>
+		<card id="1cc87a8e-f6bb-44e9-be15-f12a31f9ea3a" name="Goblin Builder">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Pest,Familiar" />
+			<property name="Subtype" value="Goblin,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="5" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Life=6,Armor=0" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Hammer: [Quick][Melee][Dice=2] \n  [Quick][Remove 1 damage from a Corporeal Conjuration in his zone.] \n Can cast only Corporeal conjurations which are not attached to an object. He casts those spells as a full action with a range of 0-0" />
+			<property name="CardID" value="FWC04" />
+		</card>
+		<card id="3bd6c4b1-3c92-4626-8cbf-044b48970934" name="Goblin Grunt">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Goblin,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Life=4,Armor=0" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Shortsword: [Quick][Melee][Dice=3]" />
+			<property name="CardID" value="FWC05" />
+		</card>
+		<card id="cee127ec-8a55-47f9-a9f6-caaaaa419934" name="Goblin Slinger">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Goblin,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="7" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=6,Armor=0" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Stone Sling: [Full][Ranged 1-2][Dice=3] \n Knife: [Quick][Melee][Dice=2]" />
+			<property name="CardID" value="FWC06" />
+		</card>
+		<card id="f40c4fc3-45c9-437c-b536-25b68c1a7a02" name="Grimson Deadeye, Sniper">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Legendary" />
+			<property name="Subtype" value="Dwarf,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="15" />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Life=9,Armor=1" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Thundergun: [Full][Ranged 1-3][Dice=6][Roll 1 fewer attack die for each zone of range beyond 1.] \n Small Sword: [Quick][Melee][Dice=3]" />
+			<property name="CardID" value="FWC07" />
+		</card>
+		<card id="c42f5b13-b348-440a-962e-40ed4fa48603" name="Invisible Stalker">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Upkeep +1, Invisible, Incorporeal, Nonliving, Forcemaster Only, Epic" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="15" />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Life=7,Armor=-" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Phantom Talons: [Quick][Melee][Dice=5][Ethereal]" />
+			<property name="CardID" value="FWC08" />
+		</card>
+		<card id="e3232a64-6312-4893-ae8f-7af53b46c397" name="Iron Golem">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Slow,Unmovable,Lightning +2,Burnproof,Nonliving,Psychic Immunity" />
+			<property name="Subtype" value="Golem" />
+			<property name="School" value="Earth" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="13" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Life=13,Armor=5" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Iron Fists: [Quick][Melee][Dice=6]" />
+			<property name="CardID" value="FWC09" />
+		</card>
+		<card id="2327f50e-53df-43d0-9d07-0b01d9c3bcb2" name="Ludwig Boltstorm">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Legendary" />
+			<property name="Subtype" value="Dwarf,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="13" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Life=9,Armor=2" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Repeating Crossbow: [Full][Ranged 1-1][Dice=3][[Triplestrike] or [Zone Attack][Unavoidable]] \n Wristblade: [Quick][Melee][Dice=3]" />
+			<property name="CardID" value="FWC10" />
+		</card>
+		<card id="5f586516-6ffe-4e6f-b939-4f9d6e06997b" name="Orc Butcher">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Orc,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=10,Armor=1" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Meat Cleaver: [Quick][Melee][Dice=4]" />
+			<property name="CardID" value="FWC11" />
+		</card>
+		<card id="652b2fa3-b4d7-41e2-b819-745c7750b638" name="Psylok">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Flying,Pest" />
+			<property name="Subtype" value="Psyoculus" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=8,Armor=0" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Psionic Blast: [Full][Ranged 0-0][Psychic][Dice=2][d12][9+ = Daze][Ethereal,Unavoidable,Critical Damage]" />
+			<property name="CardID" value="FWC12" />
+		</card>
+		<card id="fec08b01-00f9-4003-93a6-d3d861007636" name="Selesius, the East Wind">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Aegis 1,Flying,Wind Immunity,Legendary" />
+			<property name="Subtype" value="Angel" />
+			<property name="School" value="Holy" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="21" />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Life=13,Armor=1" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged 0-1][Wind][Dice=2][d12][7+ = Push][Sweeping,Unavoidable,+2 vs. Flying, Ethereal]" />
+			<property name="CardID" value="FWC13" />
+		</card>
+		<card id="9f958d17-2f53-40b2-9b1a-5fa6c9b7d1e1" name="Sir Corazin, Blademaster">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Legendary" />
+			<property name="Subtype" value="Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="16" />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Life=13,Armor=1,Defense=6+ 2x No Ranged]" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Quick Strike: [Quick][Melee][Dice=4] \n [Full][Melee][Dice=4][Doublestrike OR Sweeping]" />
+			<property name="CardID" value="FWC14" />
+		</card>
+		<card id="88ee2f45-5730-4d7a-ae12-f7112a3522ac" name="Thorg, Chief Bodyguard">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Lightning +2,Legendary,Warlord Only" />
+			<property name="Subtype" value="Orc,Soldier" />
+			<property name="School" value="War" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="17" />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Life=12,Armor=4" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Spiked Mace: [Quick][Melee][Dice=5] \n " />
+			<property name="CardID" value="FWC15" />
+		</card>
+		<card id="bc7a9c30-8fa1-4b2e-90fa-74ef57eea278" name="Thoughtspore">
+			<property name="Type" value="Creature" />
+			<property name="Traits" value="Flying,Familiar,Spellbind,Pest,Mind Mage Only" />
+			<property name="Subtype" value="Psyoculus" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=7,Armor=0,Channeling=1" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Stinging Tentacle: [Quick][Melee][Dice=1] \n " />
+			<property name="CardID" value="FWC16" />
+		</card>
+
+
+		<card id="cf99cd9b-dc7a-4a61-b327-f62f78e731de" name="Akiro&apos;s Hammer">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Zone Exclusive,Flame +2,Legendary, Warlord Only" />
+			<property name="Subtype" value="War Machine" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="12" />
+			<property name="Level" value="3" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=11,Armor=2" />
+			<property name="Text" value="Boulder: [Ranged=2-3][Dice=8][Can only target Corporeal Conjurations] \n Rock Storm:[Ranged=2-3][Zone Attack][Dice=8][Unavoidable] / n Akiro&apos;s starts with 1 Load token on it. Each Upkeep Phase, place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make 1 of its 2 attacks listed above." />
+			<property name="CardID" value="FWJ01" />
+		</card>
+		<card id="d5a7e765-259d-449f-b38f-591990d0a24d" name="Archer&apos;s Watchtower">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Zone Exclusive, Flame +2" />
+			<property name="Subtype" value="Outpost" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=6,Armor=2" />
+			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Once per round, when a friendly soldier in this zone declares a ranged attack, Archer&apos;s Watchtower may give this solder the Ranged +1 and Indirect traits for that attack. Use a ready maker to keep track of this ability." />
+			<property name="CardID" value="FWJ02" />
+		</card>
+		<card id="22ea2891-f959-4d40-9123-def5bb2e3e23" name="Barracks">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Spawnpoint,Zone Exclusive,Flame +2,Epic,Warlord Only" />
+			<property name="Subtype" value="Outpost" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="12" />
+			<property name="Level" value="3" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=13,Armor=2,Channeling=X" />
+			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. X = the number of outposts you control, with a maximum value of 3. During the Deployment Phase, if there is 2 or more mana on Barracks, It may summon 1 soldier creature." />
+			<property name="CardID" value="FWJ03" />
+		</card>
+		<card id="8cc57f35-4ba7-45dc-b52b-326790f804d2" name="Garrison Post">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Zone Exclusive, Flame +2" />
+			<property name="Subtype" value="Outpost" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=6,Armor=1" />
+			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Whenever your Mage summons a friendly soldier creature, you may choose to summon it to Garrison Posts zone instead of his own zone, regardless of range or LoS." />
+			<property name="CardID" value="FWJ04" />
+		</card>
+		<card id="efe46b3c-9175-4cf0-be0a-d2738a63748a" name="Mana Prism">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Zone Exclusive,Burnproof,Unique" />
+			<property name="Subtype" value="Artifact,Obelisk,Mana" />
+			<property name="School" value="Arcane" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="7" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=8,Armor=2" />
+			<property name="Text" value="Whenever a spell or ability an opponent controls causes you lose or pay mana, including upkeep costs and Mana Drain/Transfer effects,  place that mana on Mare Prism instead.  If the mana was being transferred to their supply, cancel that transfer. During the Chanel Phase you may remove 2 mana from Mana Prism and place it in your supply." />
+			<property name="CardID" value="FWJ05" />
+		</card>
+		<card id="0c32a2d1-eef1-4233-a712-62e155402809" name="Mangler Caltrops">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="5" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=7,Armor=0" />
+			<property name="Text" value="[Dice=2][Unavoidable, Piercing +1] \n Mangler Caltrops attacks each non=Flying creature immediately after it enters the zone. Mangler Caltrops hinders non-Flying creatures. Ranged attacks cannot target Caltrops" />
+			<property name="CardID" value="FWJ06" />
+		</card>
+		<card id="3a8f2eb2-df0d-4108-a8f1-499c05fb0d35" name="Quicksand">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Indestructible" />
+			<property name="Subtype" value="" />
+			<property name="School" value="Earth" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2X" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Non-Mage, Non-Flying Corporeal Creature" />
+			<property name="Stats" value="" />
+			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases. Place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level." />
+			<property name="CardID" value="FWJ07" />
+		</card>
+		<card id="c8373d7e-a8be-47cf-a1e0-5e5e90d271e8" name="Renewing Spring">
+			<property name="Type" value="Conjuration" />
+			<property name="Traits" value="Zone Exclusive,Flame Immunity" />
+			<property name="Subtype" value="Well" />
+			<property name="School" value="Holy+Nature" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="6" />
+			<property name="Level" value="1+1" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=12,Armor=0" />
+			<property name="Text" value="As a quick action,  friendly Living creatures m this zone may drink; Roll 3 attack dice and heal that much damage from that creature. Additionally, you I may remove 1 condition from that creature by paying its removal cost." />
+			<property name="CardID" value="FWJ08" />
+		</card>
+		<card id="61dd52be-2c3b-420c-937a-dd1bdf44dd80" name="Wall of Pikes">
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Traits" value="Extendable,Lightning +2" />
+			<property name="Subtype" value="" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="1" />
+			<property name="CardID" value="FWW01" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Stats" value="Life=7,Armor=1" />
+			<property name="Text" value="[Passage Attacks][Dice=5][This attack is only made against creatures which pass through this wall from the direction the top of the card is facing.]" />
+		</card>
+
+
+		<card id="47f96e37-5008-43d1-a7c7-6ff3bd841bd3" name="Charm">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="Upkeep +1, Magecast, Mind Mage Only" />
+			<property name="Subtype" value="Psychic,Control" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+X" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Non-Mage Creature" />
+			<property name="Text" value="Charm can only be revealed between Acton Phases. This creature cannot make a melee or ranged attack against the controller of Charm. If the controller of Charm attacks and damages this creature, destroy Charm. \n X = Creature’s Level -1." />
+			<property name="CardID" value="FWE01" />
+		</card>
+		<card id="1ed8a709-4e3b-407f-bb43-426c3a8c06d9" name="Circle of Fire">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="Magebind +2" />
+			<property name="Subtype" value="Flame,Barrier" />
+			<property name="School" value="Fire" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+4" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="Text" value="[Damage Barrier][Flame][Dice=2][d12][7-9 = Burn; 10+ = 2 Burn][Ethereal, Unavoidable] \n This creature gains a Damage Barrier" />
+			<property name="CardID" value="FWE02" />
+		</card>
+		<card id="c738d5ed-d4a6-4695-9aa8-f41745da7257" name="Falcon Precision">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="" />
+			<property name="School" value="Nature" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+2" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Living Creature" />
+			<property name="Text" value="This creature&apos;s melee attacks gain the Unavoidable trait." />
+			<property name="CardID" value="FWE03" />
+		</card>
+		<card id="ea8fb903-9a56-4afe-a2d2-e452b3407605" name="Force Crush">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="Upkeep +4, Magebind +2" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+5" />
+			<property name="Level" value="3" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="Text" value="This creature is Restrained and gains the Unavoidable trait. Each Upkeep Phase, if Force Crush&apos;s upkeep cost is paid, this creature receives 2 direct damage. Does not affect creatures with the Uncontainable trait." />
+			<property name="CardID" value="FWE04" />
+		</card>
+		<card id="aa4cc3ff-7738-41c3-b5f6-f7b959ba71a5" name="Forcefield">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="Upkeep +2, Forcemaster Only" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+10" />
+			<property name="Level" value="4" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Forcemaster" />
+			<property name="Text" value="Forcefield starts with 3 Forcefield tokens on it. During the Upkeep Phase it gains 1 token, to a maximum of 3. Whenever you are attacked, before the Avoid Attack Step, you must remove a token. I you do, that attack is canceled." />
+			<property name="CardID" value="FWE05" />
+		</card>
+		<card id="b705917e-892a-41b4-9d04-62058197083e" name="Fortified Position">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Command" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+4" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="All friendly Corporeal creatures in this zone gain Armor +2." />
+			<property name="CardID" value="FWE06" />
+		</card>
+		<card id="1ee1f235-0acc-4752-b304-c7877e0c1f94" name="Mind Control">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="Upkeep +X, Mind Mage Only" />
+			<property name="Subtype" value="Psychic,Control" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+2X" />
+			<property name="Level" value="6" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Non-Mage Creature" />
+			<property name="Text" value="You control this creature. Mind Control can only be revealed between Action Phases, and the controller must be within 1 zone of Mind Control. When Mind Control is revealed or removed, place a Stun condition on this creature. X  = Target creature&apos;s Level. Mind Control cannot be moved to a new target." />
+			<property name="CardID" value="FWE07" />
+		</card>
+		<card id="8ab159b0-1318-4b8a-a68b-b5c41bb30a51" name="Mind Shield">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Psychic" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+0" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="Text" value="Mind Shield may be revealed during the Counter Spell or Avoid Attack steps to counter a psychic spell or cancel a psychic attack, respectively. If a psychic enchantment is revealed on this creature, you may immediately reveal Mind Shield; Cancel and destroy that enchantment before its reveal costs are paid. Then, destroy Mind Shield." />
+			<property name="CardID" value="FWE08" />
+		</card>
+		<card id="76b82cdc-fb4d-46e9-a4de-9fdac5ff41fc" name="Standard Bearer">
+			<property name="Type" value="Enchantment" />
+			<property name="Traits" value="Cantrip,Unique,Warlord Only" />
+			<property name="Subtype" value="Command" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2+5" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Friendly, Soldier Creature" />
+			<property name="Text" value="All other friendly creatures in the same zone gain Melee+1 and Armor +1." />
+			<property name="CardID" value="FWE09" />
+		</card>
+
+
+		<card id="1db6906f-12ec-4538-8d1e-534a7beb81d4" name="Dancing Scimitar">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Upkeep +1, Autonomous" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="5" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Defense=8+ 1x No Ranged" />
+			<property name="Text" value="[Melee][Dice=3] \n Once per round, you can use Dancing Scimitar as a Defense, or it can make its attack. Use a ready marker to keep track of its use." />
+			<property name="CardID" value="FWQ01" />
+		</card>
+		<card id="848e5beb-778e-4d42-a393-3122fb2271ce" name="Defense Ring">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="3" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="Text" value="Mage may add +1 to the d12 roll each time he uses a Defense to avoid an attack \n +1 Defense" />
+			<property name="CardID" value="FWQ02" />
+		</card>
+		<card id="119cb255-4b1e-42b9-9eba-d41935b9ae8e" name="Force Ring">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Forcemaster Only" />
+			<property name="Subtype" value="Mana, Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="3" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a force spell. Enchantments only receive this discount when they are revealed.\n[Casting Discount][1][Force]" />
+			<property name="CardID" value="FWQ03" />
+		</card>
+		<card id="e723b930-1d54-406f-bf69-72f14c66f561" name="Galvitar, Force Blade">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Cantrip, Forcemaster Only" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="11" />
+			<property name="Level" value="3" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="Text" value="Thrust: [Quick][Melee][Dice=4][Ethereal,Piercing +2] \n Spinning Slash: [Full][Melee][Dice=4][Ethereal,Sweeping or Doublestrike]" />
+			<property name="CardID" value="FWQ04" />
+		</card>
+		<card id="dd34f61a-bace-4d62-b262-4554afd245e3" name="Helm of Command">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Spellbind,Warlord Only" />
+			<property name="Subtype" value="" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="Text" value="You may bind a non-Epic command incantation spell from your spellbook to Helm of Command. As a quick spell, you may pay 1 mana to change the bound spell" />
+			<property name="CardID" value="FWQ05" />
+		</card>
+		<card id="43e7ffb8-e629-4629-b8ce-cb6ea5e4b268" name="Horn of Gothos">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Legendary, Warlord Only" />
+			<property name="Subtype" value="" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="3" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="Text" value="Whenever the Warlord uses his Battle Orders ability, he may pay an additional 3 mana during the Cast Spell Step to extend the spell&apos;s range so that it affects all friendly soldiers in the arena." />
+			<property name="CardID" value="FWQ06" />
+		</card>
+		<card id="9481805e-d24d-41d8-b02e-5c5ae55c4add" name="Psi-Orb">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Mind Mage Only" />
+			<property name="Subtype" value="Mana" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="7" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="Text" value="Each Upkeep Phase, you may pay 1 less upkeep for up to 3 different Mind spells you control." />
+			<property name="CardID" value="FWQ07" />
+		</card>
+		<card id="f0a799d6-3d47-4789-8873-bbb2cc2ff564" name="Ring of Command">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Warlord Only" />
+			<property name="Subtype" value="Mana" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="3" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a command spell. Enchantments only receive this discount when they are revealed.\n[Casting Discount][1][Command]" />
+			<property name="CardID" value="FWQ08" />
+		</card>
+		<card id="5f559e56-4454-41ef-a13d-bca2fa78559c" name="Sectarus, Dark Rune Sword">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Familiar,Legendary,Dark Mage Only" />
+			<property name="Subtype" value="Curse" />
+			<property name="School" value="Dark" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="10" />
+			<property name="Level" value="3" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Weapon,Channeling=1" />
+			<property name="Text" value="Sectarus is a non-creature familiar, which can be used to cast only curse enchantments. If Sectarus is used to attack and damage a creature, It may immediately cast the spell on that creature as a free action" />
+			<property name="CardID" value="FWQ09" />
+		</card>
+		<card id="5ef7e2aa-00ef-46a5-8a4c-344925eb1bb2" name="Storm Drake Hide">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="" />
+			<property name="School" value="Air" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="6" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="Text" value="Mage gains Armor +2 and the Lightning -2 trait" />
+			<property name="CardID" value="FWQ10" />
+		</card>
+		<card id="6883436a-f838-4fc6-ae53-a6b1fdb9ef72" name="War Sledge">
+			<property name="Type" value="Equipment" />
+			<property name="Traits" value="Warlord Only" />
+			<property name="Subtype" value="" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="Stats" value="Location=Weapon+Shield" />
+			<property name="Text" value="Quick Swing: [Quick][Melee][Dice=4] \n Power Swing: [Full][Melee][Dice=4][d12][7+ = Daze][Sweeping]" />
+			<property name="CardID" value="FWQ11" />
+		</card>
+
+
+		<card id="fb516e77-b9b5-440d-ac37-7926429d90bf" name="Destroy Magic">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="School" value="Arcane" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="16" />
+			<property name="Level" value="4" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Destroy all enchantments in target zone (both revealed an hidden), regardless of what they are attached to." />
+			<property name="CardID" value="FWI01" />
+		</card>
+		<card id="4f42afe3-cea5-4722-bd4a-7e95d666e54d" name="Earthquake">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Seismic" />
+			<property name="School" value="Earth" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="9" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="1-2 Adjacent Zones" />
+			<property name="Text" value="Target up to 2 adjacent zones, as long as at least one zone is in range and LoS. All Corporeal  conjurations in target zones, Including a wall between two zones, receive an unavoidable attack of 4 attack dice. Roll the effect die for each creature in the zones; on a  5+ it receives the Slam condition. Earthquake has no effect on Flying, Incorporeal, or Unmovable creatures." />
+			<property name="CardID" value="FWI02" />
+		</card>
+		<card id="ffe36005-ac0f-417e-a877-6b25ba561c0c" name="Force Bash">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="8" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. This will not Push it through a wall with the Passage  Attacks trait, unless you pay on additional  3 mana when this spell is cast. Target receives the Slam condition. If target Is Pushed into a zone with other creatures, you may choose one of those creatures and also give it the Slam condition." />
+			<property name="CardID" value="FWI03" />
+		</card>
+		<card id="b176fb6a-7ced-4f32-b008-90114cfaebde" name="Force Wave">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="5" />
+			<property name="Level" value="1" />
+			<property name="Range" value="1-1" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. If the targets is Pushed through a wall with the Passage Attacks trait, you must pay an additional 3 mana. This has no effect on Unmovable creatures." />
+			<property name="CardID" value="FWI04" />
+		</card>
+		<card id="060f5f28-8aab-4516-9c20-d4c0038c61ed" name="Mass Sleep">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Psychic" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="15" />
+			<property name="Level" value="4" />
+			<property name="Traits" value="" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Place a Sleep condition marker on each non-Mage Living creature in target zone." />
+			<property name="CardID" value="FWI05" />
+		</card>
+		<card id="edbc1aee-7d92-439c-9eb7-7a22fcbf947d" name="Power Strike">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="Novice" />
+			<property name="Subtype" value="Command" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="2" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="Text" value="Target gains the Melee +2 trait for its next melee attack this round. \n Melee +2" />
+			<property name="CardID" value="FWI06" />
+		</card>
+		<card id="c2a84121-e36b-4b21-9715-32bd43a21b15" name="Repulse">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="4" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="All creatures in target zone, except the caster, are Pushed 1 zone away in a random direction. Roll separately for each creature." />
+			<property name="CardID" value="FWI07" />
+		</card>
+		<card id="15d9b523-c6b1-4f5f-bbbe-0a555081b4e1" name="Sniper Shot">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Command" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="3" />
+			<property name="Level" value="1" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="Text" value="Target&apos;s next ranged attack this round, gains the Unavoidable and Piercing +1 traits. This spell has no effect no zone attacks. If the attack targets more than one object, this spell only affects an attack against the first target." />
+			<property name="CardID" value="FWI08" />
+		</card>
+		<card id="36fc7953-da2b-4fb2-9708-d163ecc6853b" name="Steal Equipment">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="Magecast" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="F" />
+			<property name="Cost" value="2X" />
+			<property name="Level" value="3" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Mage" />
+			<property name="Text" value="Choose an equipment object attached to attached to target Mage. You control that equipment. You may immediately destroy it; Or, if you can legally attach it to yourself, you may do so, returning any item in that location slot to your spellbook. X = the chosen equipments casting cost." />
+			<property name="CardID" value="FWI09" />
+		</card>
+		<card id="64aeddce-2f03-4e1a-8a31-19cc6248282b" name="Whirling Strike">
+			<property name="Type" value="Incantation" />
+			<property name="Traits" value="" />
+			<property name="Subtype" value="Command" />
+			<property name="School" value="War" />
+			<property name="Action" value="Q" />
+			<property name="Cost" value="9" />
+			<property name="Level" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="Text" value="Once this round, if this creature uses a full action to make a quick action melee attack it may use that attack against up to 3 different target objects in its zone. It attacks each target, one after the other, in the same manner as the Sweeping trait." />
+			<property name="CardID" value="FWI10" />
+		</card>			
+		<card id="095412af-70a2-4be8-90b4-f04b2ef6e0ee" name="Dispel">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="School" value="Arcane"  />
+			<property name="Action" value="Q"  />
+			<property name="Cost" value="X" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Revealed Enchantment" />
+			<property name="Level" value="1" />
+			<property name="Text" value="Destroy target revealed enchantment. X = total mana cost of target enchantment (hidden plus reveal cost)." />
+			<property name="CardID" value="FWI11" />
+		</card>
+		<card id="d0355220-fdba-45ae-a882-3677414a4e89" name="Minor Heal">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="School" value="Holy"  />
+			<property name="Action" value="Q"  />
+			<property name="Cost" value="5" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Living Creature" />
+			<property name="Level" value="1" />
+			<property name="Text" value="Heal target creature the amount rolled on 5 attack dice." />
+			<property name="CardID" value="FWI12" />
+		</card>
+		<card id="70788de8-63e8-4cd7-b3b1-03a59ce208ae" name="Seeking Dispel">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="School" value="Arcane"  />
+			<property name="Action" value="Q"  />
+			<property name="Cost" value="2" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Hidden Enchantment" />
+			<property name="Level" value="1" />
+			<property name="Text" value="Destroy target hidden enchantment. Controller of target enchantment cannot reveal the enchantment once Seeking Dispel has been cast." />
+			<property name="CardID" value="FWI13" />
+		</card>
+		<card id="eb0550ce-48ab-4eb3-81f2-241cdcf048de" name="Heal">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="School" value="Holy"  />
+			<property name="Action" value="Q"  />
+			<property name="Cost" value="9" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Living Creature" />
+			<property name="Level" value="2" />
+			<property name="Text" value="Heal target creature the amount rolled on 8 attack dice." />
+			<property name="CardID" value="FWI14" />
+		</card>
+		<card id="21acf2f7-bedf-480a-ae41-1d96b5f2ae42" name="Group Heal">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="School" value="Holy"  />
+			<property name="Action" value="F"  />
+			<property name="Cost" value="9" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="Level" value="2" />
+			<property name="Text" value="Heal each friendly Living creature in the target zone the amount rolled on 5 attack dice. Roll separately for each creature." />
+			<property name="CardID" value="FWI15" />
+		</card>
+		<card id="bc1a2534-6321-4489-b1b9-5e2a9dc08c99" name="Dissolve">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Acid" />
+			<property name="School" value="Water"  />
+			<property name="Action" value="Q"  />
+			<property name="Cost" value="X" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Mage" />
+			<property name="Level" value="1" />
+			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the choosen equipment. X = equipment's casting cost." />
+			<property name="CardID" value="FWI16" />
+		</card>
+		<card id="7575f333-31c4-4330-8a09-4a460543ec52" name="Force Push">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Force" />
+			<property name="School" value="Mind" />
+			<property name="Action" value="Q"  />
+			<property name="Cost" value="3" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="Level" value="1" />
+			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. If the target is Pushed through a wall with the Passage Attacks trait, you must pay an additional 3 mana. This has no effect on Unmovable creatures." />
+			<property name="CardID" value="FWI17" />
+		</card>
+	</cards>
+</set>

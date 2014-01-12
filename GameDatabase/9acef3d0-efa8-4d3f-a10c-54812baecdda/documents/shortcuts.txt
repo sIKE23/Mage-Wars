@@ -1,0 +1,15 @@
+Instructions
+===================================
+
+Players are free to ignore any automation but if you would like a little help with the book keeping do as follows:
+
+1. Load a deck prepared with the deckbuilder (preconstructed decks are included)
+2. Right-click anywhere on the main screen and choose "Player setup"
+3. Press ctrl+Down to activate phase management. 
+   Each phase change after the frist planning phase requires both players to press ctrl+Down
+4. Double click on any card in the hand area to prepare it for that round.
+5. Place markers tokens with the right click menu or through short-cuts
+
+When using the phase management the initiative, Reset & channeling phases are handled by the computer
+
+Have fun!

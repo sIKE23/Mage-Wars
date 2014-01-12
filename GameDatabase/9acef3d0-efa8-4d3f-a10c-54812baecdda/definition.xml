@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<game	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		name="Mage Wars"
+		id="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+		octgnVersion="3.1.50.145"
+		version="1.2.10.0"
+		markersize="16"
+		tags="Mage Wars"
+		description="A card game of duelling mages. Each mage brings his spellbook and abilities to a fight to the death"
+		setsurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
+		gameurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
+		authors="Cosworth, sIKE"
+		iconurl="http://octgn.gamersjudgement.com/wordpress/magewars/wp-content/uploads/sites/33/2013/06/image1.png">
+  <scripts>
+    <script src="scripts/actions.py" />
+  </scripts>
+  <proxygen definitionsrc="proxy/CardGenData.xml"/>
+  <documents>
+    <document name="Instructions" icon="documents/shortcuts.png" src="documents/shortcuts.txt" />	
+  </documents>
+  <card back="cards/card.jpg" front="cards/card.jpg" width="55" height="74" cornerRadius="3">
+    <property name="Type" type="String" hidden="False" ignoreText="False" />
+	<property name="Subtype" type="String" hidden="False" ignoreText="False" />
+	<property name="School" type="String" hidden="False" ignoreText="False"  />
+	<property name="Cost" type="String" hidden="False" ignoreText="False" />
+	<property name="Level" type="String" hidden="False" ignoreText="False" />
+	<property name="Action" type="String" hidden="False" ignoreText="False"  />
+	<property name="CardID" type="String" hidden="False" ignoreText="False" />
+	<property name="Traits" type="String" hidden="False" ignoreText="False" />
+	<property name="Stats" type="String" hidden="False" ignoreText="False" />
+	<property name="Range" type="String" hidden="False" ignoreText="False" />
+	<property name="Target" type="String" hidden="False" ignoreText="False" />
+	<property name="Text" type="String" hidden="False" ignoreText="False" />
+  </card>
+  <table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/board.png" background="background/dummy.png" boardPosition="-300,-225,600,450">
+    <groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone" />
+	<groupaction menu="Roll dice" default="False" shortcut="F1" execute="rollDice" />
+    <groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
+	<groupaction menu="Setup Player" default="False" execute="playerSetup" />
+	<groupaction menu="Add Vine marker" default="False" shortcut="F3" execute="createVineMarker" />
+    <groupactions menu="Automation">
+      <groupaction menu="Next Phase" default="False" shortcut="ctrl+Down" execute="nextPhase" />
+      <groupaction menu="Toggle debug mode" default="False" execute="toggleDebug" />
+    </groupactions>
+    <cardactions menu="Add Token">
+      <cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage" />
+	  <cardaction menu="Add Burn token" default="False" shortcut="ctrl+B" execute="addBurn" />
+	  <cardaction menu="Add Cripple token" default="False" shortcut="ctrl+C" execute="addCripple" />
+	  <cardaction menu="Add Daze token" default="False" shortcut="ctrl+D" execute="addDaze" />
+      <cardaction menu="Add Mana" default="False" shortcut="ctrl+M" execute="addMana" />
+	  <cardaction menu="Add Stun" default="False" shortcut="ctrl+S" execute="addStun" />
+      <cardaction menu="Add Weak" default="False" shortcut="ctrl+W" execute="addWeak" />	  
+	  <cardaction menu="Add other tokens" default="False" shortcut="ctrl+O" execute="addOther" />
+	  <cardaction menu="Toggle Action" default="False" shortcut="ctrl+A" execute="toggleAction" />
+	  <cardaction menu="Toggle Blood Reaper" default="False" shortcut="" execute="toggleBloodReaper" />
+	  <cardaction menu="Toggle Deflect" default="False" shortcut="alt+D" execute="toggleDeflect" />
+	  <cardaction menu="Toggle Guard" default="False" shortcut="ctrl+G" execute="toggleGuard" />
+	  <cardaction menu="Toggle Invisible" default="False" shortcut="ctrl+I" execute="toggleInvisible" />
+	  <cardaction menu="Toggle Ready" default="False" shortcut="ctrl+R" execute="toggleReady" />
+	  <cardaction menu="Toggle Pet" default="False" shortcut="ctrl+P" execute="togglePet" />
+	  <cardaction menu="Toggle Taunt" default="False" shortcut="ctrl+T" execute="toggleTaunt" />
+	  <cardaction menu="Toggle Quick cast" default="False" shortcut="ctrl+Q" execute="toggleQuick" />
+	  <cardaction menu="Toggle Voltaric" default="False" shortcut="ctrl+V" execute="toggleVoltaric" />
+    </cardactions>
+    <cardactions menu="Remove Token">
+      <cardaction menu="Remove Damage" default="False" shortcut="F4" execute="subDamage" />
+	  <cardaction menu="Remove Burn token" default="False" shortcut="ctrl+shift+B" execute="subBurn" />
+	  <cardaction menu="Remove Cripple token" default="False" shortcut="ctrl+shift+C" execute="subCripple" />
+	  <cardaction menu="Remove Daze token" default="False" shortcut="ctrl+shift+D" execute="subDaze" />
+      <cardaction menu="Remove Mana" default="False" shortcut="ctrl+shift+M" execute="subMana" />
+	  <cardaction menu="Remove Stun" default="False" shortcut="ctrl+shift+S" execute="subStun" />
+	  <cardaction menu="Removed Weak" default="False" shortcut="ctrl+shift+W" execute="subWeak" />	  
+	  <cardaction menu="Remove all tokens" default="False" shortcut="ctrl+shift+A" execute="clearTokens" />
+    </cardactions>
+    <cardaction menu="Exhaust/Ready" default="False" shortcut="F7" execute="kneel" />
+    <cardaction menu="Flip Card" default="False" shortcut="ctrl+F" execute="flipcard" />
+    <cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
+    <cardaction menu="Double Click" default="True" execute="defaultAction" />
+  </table>
+  <player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage} | Life: {#Life}">
+    <counter name="Channeling" default="0" reset="True" icon="counters/channeling.png" />
+    <counter name="Mana" default="0" reset="True" icon="counters/mana.png" />
+    <counter name="Damage" default="0" reset="True" icon="counters/damage.png" />
+	<counter name="Life" default="0" reset="True" icon="counters/life.png" />
+    <hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
+      <cardaction menu="Play card facedown" default="True" shortcut="Ctrl+shift+P" execute="playCardFaceDown" />
+      <cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
+    </hand>
+    <group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
+    </group>
+  </player>
+  <deck>
+    <section name="Mage" group="Hand" />
+	<section name="Attack" group="Hand" />
+	<section name="Conjuration" group="Hand" />
+	<section name="Creature" group="Hand" />
+	<section name="Enchantment" group="Hand" />
+	<section name="Equipment" group="Hand" />	
+	<section name="Incantation" group="Hand" />
+  </deck>
+  
+</game>
