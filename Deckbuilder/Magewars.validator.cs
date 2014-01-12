@@ -220,10 +220,50 @@
                                     }
                                 }
                             }
+                            if (magename == "Druid" && school.Contains("Water"))  //Druid pays double for Water spells 2 and up
+                            {
+                                string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
+                                var waterLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Water")]);  //whee
+                                if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
+                            }
+
+                            //check for multiples of Epic spells
+                            if (Property(card, "Traits").Contains("Epic") && card.Quantity > 1)
+                            {
+                                System.Windows.MessageBox.Show("Validation FAILED: Only one copy of Epic card " + card.Name + " is allowed.\n" +
+                                    card.Quantity + " copies found in spellbook.");
+                                return;
+                            }
+
+                            //check for illegal school- or mage-specific spells
+                            if (Property(card, "Traits").Contains("Only"))
+                            {
+                                string onlyPhrase = Property(card, "Traits").Split(',').First(s => s.Contains("Only"));
+                                bool legal = false;
+
+                                //check mage restriction
+                                if (onlyPhrase.Contains(magename))
+                                    legal = true;
+
+                                //check class restriction
+                                foreach (string schoolKey in training.Keys)
+                                {
+                                    if (training[schoolKey] == 1 && onlyPhrase.Contains(schoolKey))
+                                        legal = true;
+                                }
+
+                                if (!legal)
+                                {
+                                    System.Windows.MessageBox.Show("Validation FAILED: The card " + card.Name + " is not legal in a " + magename + " deck.");
+                                    return;
+                                }
+                            }
+
                             cardcount += card.Quantity;
-                        } 
-                    }
-                }
+
+                        }   //card has school and level 
+                    }   //foreach card
+                }   //foreach section
                 foreach (var t in training)
                 {
                     spellbook += t.Value * levels[t.Key];
@@ -233,7 +273,7 @@
                 reporttmp += reporttxt;
                 //System.Windows.MessageBox.Show(reporttmp);
                 Clipboard.SetText(reporttmp);
-                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook,magename,spellpoints));
+                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.",spellbook,magename,spellpoints));
             }   
 
         }
