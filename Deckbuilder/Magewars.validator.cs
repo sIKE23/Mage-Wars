@@ -1,4 +1,4 @@
-namespace Octgn.MageWarsValidator
+﻿namespace Octgn.MageWarsValidator
 {
     using System;
     using System.Collections.Generic;
@@ -220,12 +220,6 @@ namespace Octgn.MageWarsValidator
                                     }
                                 }
                             }
-                            if (magename == "Druid" && school.Contains("Water"))  //Druid pays double for Water spells 2 and up
-                            {
-                                string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
-                                var waterLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Water")]);  //whee
-                                if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
-                            }
                             cardcount += card.Quantity;
                         } 
                     }
@@ -239,7 +233,7 @@ namespace Octgn.MageWarsValidator
                 reporttmp += reporttxt;
                 //System.Windows.MessageBox.Show(reporttmp);
                 Clipboard.SetText(reporttmp);
-                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.",spellbook,magename,spellpoints));
+                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook,magename,spellpoints));
             }   
 
         }
