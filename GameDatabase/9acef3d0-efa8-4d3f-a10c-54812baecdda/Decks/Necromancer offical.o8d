@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="6b830552-8420-4797-bbb5-3ec5bb768265">Necromancer</card>
+    <card qty="1" id="682d3b40-7c08-437b-9c88-16e2f389773f">Necromancer stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="a5386a31-5786-4e70-9482-65657607d802">Acid Ball</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="31f4cf44-febc-46fb-920c-5293a7e2d615">Altar of Skulls</card>
+    <card qty="1" id="be8a0047-ad80-44c5-91cb-ab7a65cbdf1e">Graveyard</card>
+    <card qty="3" id="2518e7c2-bb94-4061-b2fc-f0435ef7e861">Wall of Bones</card>
+    <card qty="1" id="1aea1576-11e2-413c-b49a-50493f07fe99">Ziggurat of Undeath</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="3" id="9a1370a0-44cb-47ac-a736-807f96a51785">Acolyte of the Bog Queen</card>
+    <card qty="2" id="5f5be863-dbbe-4eb7-93c2-b933cc5eab89">Deathfang</card>
+    <card qty="2" id="4fc86a1f-d24d-4da7-9f85-5818df967abd">Grey Wraith</card>
+    <card qty="1" id="352583ca-7fed-481b-9b8a-456b05e61501">Mort</card>
+    <card qty="2" id="c0ae161f-891a-4fa8-824e-ca35ea8effeb">Plague Zombie</card>
+    <card qty="1" id="499cdd49-3a70-433b-8ecf-a43f1906b845">Ravenous Ghoul</card>
+    <card qty="1" id="42e4bd62-7a26-4d7a-9b19-21e4c26fc0dd">Shaggoth-Zora</card>
+    <card qty="2" id="310c13cd-b845-46c2-9ad7-94eda4626f1d">Skeletal Archer</card>
+    <card qty="2" id="b3ea6383-16dc-4786-92c5-e1498f2811c3">Skeletal Knight</card>
+    <card qty="5" id="d40817b6-6574-4d86-b0bf-0f32fb1e49cf">Skeletal Minion</card>
+    <card qty="1" id="fb442d50-c831-4da9-bbb8-dace15fea19b">Unstable Zombie</card>
+    <card qty="2" id="f4574320-6839-4346-a36f-cad119af8b43">Venomous Zombie</card>
+    <card qty="2" id="b37bdf0c-85f9-4b78-b32a-fe550c37d047">Zombie Brute</card>
+    <card qty="4" id="96c21a43-e794-4f23-9408-5c7f2523a4f6">Zombie Crawler</card>
+    <card qty="4" id="e91c66db-b4cc-4b38-8427-06dceb2103a0">Zombie Minion</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="69227c1a-b122-4395-a31a-463dab9d16e1">Rise Again</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="290f58ae-7089-4ddd-a7ad-3abdd129f9dc">Cloak of Shadows</card>
+    <card qty="1" id="70e1dca8-85ef-40f0-a18a-6904ed4539de">Death Ring</card>
+    <card qty="1" id="84aeeb75-a297-4b94-a79d-f9068e19dcd9">Deathshroud Staff</card>
+    <card qty="1" id="3eaae143-ac4b-4d8b-9396-83f8215aed51">Libro Mortuos</card>
+    <card qty="1" id="2fbb95eb-e736-4710-b3d1-7a0a399f5a76">Meditation Amulet</card>
+    <card qty="1" id="b96b5ebe-6e6b-4ee8-b644-8e68dda574c0">Wand of Healing</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="ee58773c-a3ea-42b9-b1ec-c0a4560f8cd6">Animate Dead</card>
+    <card qty="1" id="b6ba6985-8bc2-4e41-9883-9b44fc8ddadf">Dispel</card>
+    <card qty="1" id="12a46022-4004-47d3-82ca-f78230814d67">Dissolve</card>
+    <card qty="3" id="bdf3c1a5-2f4e-41bb-806f-b8db38ba7242">Reassemble</card>
+    <card qty="1" id="fed20306-b9fa-4351-acb0-126701a1bd8f">Unholy Resurgence</card>
+    <card qty="1" id="da57df3c-1a95-48dd-a340-e304fb2d8bb7">Zombie Frenzy</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
