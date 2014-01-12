@@ -248,7 +248,7 @@
                                 //check class restriction
                                 foreach (string schoolKey in training.Keys)
                                 {
-                                    if (training[schoolKey] == 1 && onlyPhrase.Contains(schoolKey))
+                                    if (training[schoolKey] == 1 && onlyPhrase.Contains(schoolKey + " Mage"))
                                         legal = true;
                                 }
 
