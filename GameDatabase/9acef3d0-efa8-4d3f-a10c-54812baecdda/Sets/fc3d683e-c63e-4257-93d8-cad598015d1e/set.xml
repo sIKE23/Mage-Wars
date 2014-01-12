@@ -849,7 +849,7 @@
 			<property name="Traits" value="" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="School" value="Arcane" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Q" />
 			<property name="Cost" value="X" />
 			<property name="Level" value="1" />
 			<property name="Range" value="0-2" />
@@ -862,7 +862,7 @@
 			<property name="Traits" value="" />
 			<property name="Subtype" value="Acid" />
 			<property name="School" value="Water" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Q" />
 			<property name="Cost" value="X" />
 			<property name="Level" value="1" />
 			<property name="Range" value="0-1" />
