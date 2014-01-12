@@ -483,20 +483,6 @@
 			<property name="Text" value="Magical Burst: [Quick][Melee][Dice=1][Ethereal] \n As a quick action, Tataree may choose and do one of the following to a plant object in its zone; Heal it 1 damage, or place 1 mana on it (if it has the Channel attribute)." />
 			<property name="CardID" value="DNC17" />
 		</card>
-		<card id="5065ae95-c3be-494f-ba68-afedb3b8c2d9" name="Thornlasher">
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Plant,Vine" />
-			<property name="Traits" value="Rooted,Regenerate 2,Flame +2,Hydro Immunity" />
-			<property name="School" value="Nature"  />
-			<property name="Action" value="F"  />
-			<property name="Cost" value="7" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Life=11,Armor=0" />
-			<property name="Range" value="0-0" />
-			<property name="Target" value="Zone" />
-			<property name="Text" value="Ensnaring Vine: [Ranged 0-1][Dice=3][d12][5+ = Snatch]" />
-			<property name="CardID" value="DNC21" />
-		</card>
 		<card id="b95362fb-2d0e-428d-af86-a85f667626dd" name="Togorah, Forest Sentinel">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant,Tree,Sequoian" />
@@ -537,6 +523,20 @@
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="Text" value=": [Quick][Melee][Dice=4] \n [Full][Melee][Dice=5][Piercing +1][Devour]" />
+			<property name="CardID" value="DNC20" />
+		</card>
+		<card id="5065ae95-c3be-494f-ba68-afedb3b8c2d9" name="Thornlasher">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Plant,Vine" />
+			<property name="Traits" value="Rooted,Regenerate 2,Flame +2,Hydro Immunity" />
+			<property name="School" value="Nature"  />
+			<property name="Action" value="F"  />
+			<property name="Cost" value="7" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=11,Armor=0" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="Text" value="Ensnaring Vine: [Ranged 0-1][Dice=3][d12][5+ = Snatch]" />
 			<property name="CardID" value="DNC21" />
 		</card>
 		<card id="b37bdf0c-85f9-4b78-b32a-fe550c37d047" name="Zombie Brute">

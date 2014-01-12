@@ -472,7 +472,7 @@
 			<property name="Level" value="2" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Corporeal Creature" />
-			<property name="Text" value="[Damage Barrier][Flame][Dice=2][d12][7-9 = Burn; 10+ = 2 Burn][Ethereal, Unavoidable] \n This creature gains a Damage Barrier" />
+			<property name="Text" value="[Damage Barrier][Flame][Dice=2][d12][7-9 = Burn; 10+ = 2 Burn][Unavoidable] \n This creature gains a Damage Barrier" />
 			<property name="CardID" value="FWE02" />
 		</card>
 		<card id="c738d5ed-d4a6-4695-9aa8-f41745da7257" name="Falcon Precision">
