@@ -238,24 +238,29 @@
                             //check for illegal school- or mage-specific spells
                             if (Property(card, "Traits").Contains("Only"))
                             {
-                                string onlyPhrase = Property(card, "Traits").Split(',').First(s => s.Contains("Only"));
-                                bool legal = false;
-
-                                //check mage restriction
-                                if (onlyPhrase.Contains(magename))
-                                    legal = true;
-
-                                //check class restriction
-                                foreach (string schoolKey in training.Keys)
+                                string[] traits = Property(card, "Traits").Split(',');
+                                List<string> onlyTraits = traits.Where(s => s.Contains("Only")).ToList();
+                                if (onlyTraits.Count == 1)
                                 {
-                                    if (training[schoolKey] == 1 && onlyPhrase.Contains(schoolKey + " Mage"))
+                                    string onlyPhrase = onlyTraits[0];
+                                    bool legal = false;
+
+                                    //check mage restriction
+                                    if (onlyPhrase.Contains(magename))
                                         legal = true;
-                                }
 
-                                if (!legal)
-                                {
-                                    System.Windows.MessageBox.Show("Validation FAILED: The card " + card.Name + " is not legal in a " + magename + " deck.");
-                                    return;
+                                    //check class restriction
+                                    foreach (string schoolKey in training.Keys)
+                                    {
+                                        if (training[schoolKey] == 1 && onlyPhrase.Contains(schoolKey + " Mage"))
+                                            legal = true;
+                                    }
+
+                                    if (!legal)
+                                    {
+                                        System.Windows.MessageBox.Show("Validation FAILED: The card " + card.Name + " is not legal in a " + magename + " deck.");
+                                        return;
+                                    }
                                 }
                             }
 
@@ -291,10 +296,19 @@
 
         private string Property(IMultiCard card, string p)
         {
-            return
+            string ret;
+            try
+            {
+                ret =
                 card.PropertySet()
                     .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
                     .Value as string;
+            }
+            catch (Exception e)
+            {
+                ret = "";
+            }
+            return ret;
         }
 
     }
