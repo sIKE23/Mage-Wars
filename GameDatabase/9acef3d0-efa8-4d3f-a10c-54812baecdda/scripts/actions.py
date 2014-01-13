@@ -4,6 +4,10 @@ ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
 ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58")
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649")
+ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949")
+ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee")
+ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be")
+ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6")
 Mana = ("Mana", "00000000-0000-0000-0000-000000000002")
 Damage = ("Damage", "00000000-0000-0000-0000-000000000004")
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce")
@@ -60,16 +64,17 @@ Die1s = ("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
 Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
 Died12 = ("Died12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 
-showDebug = False
-PlayerColor = ["#ff0000", # Red
-				"#5882fa", # Blue
-				"#facc2e", # Orange
-				"#82fa58" ] # Green 
-				
-mycolor = "#82fa58" # Green
+PlayerColor = 	["#DE2827", 	# Red 		R=222 G=40  B=39
+				"#171E78", 		# Blue		R=23  G=30  B=120
+				"#01603E", 		# Green		R=1   G=96  B=62
+				"#F7D917"] 		# Yellow 	R=247 G=217 B=23
+mycolor = "#800080" # Purple
 diceBank = [1]
+boardFlipped = False
+showDebug = False
 
 def debug(str):
+	global showDebug
 	if showDebug:
 		whisper(str)
 		
@@ -80,6 +85,14 @@ def toggleDebug(group, x=0, y=0):
 		notify("{} turns on debug".format(me))
 	else:
 		notify("{} turns off debug".format(me))
+		
+def flipGameBoard(group, x=0, y=0):
+	global boardFlipped
+	if not boardFlipped:
+		table.setBoardImage("background\\gameboard-alt-a.png")
+	else:
+		table.setBoardImage("background\\gameboard.png")
+	boardFlipped = not boardFlipped
 	
 def moveCard(model, x, y):
 	for c in table:
@@ -146,11 +159,11 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 	
 def nextPhase(group, x=-360, y=-125):
 	global mycolor
-	if mycolor == "#82fa58": # Playersetup is not done yet.
+	if mycolor == "#800080": # Player setup is not done yet.
 		return
 	mute()
 	card = None
-	for c in table: #find phasecard
+	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
 			card = c
 			break
@@ -171,7 +184,7 @@ def nextPhase(group, x=-360, y=-125):
 		switchPhase(card,"Quick2")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"") == True: #Back to Upkeep
-			notify("Performing ini, reset & channeling phases")
+			notify("Ready Stage: Performing Initiative, Reset, and Channeling Phases")
 			init = moveCard("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125)
 			flipcard(init)
 			for p in players:
@@ -185,6 +198,12 @@ def nextPhase(group, x=-360, y=-125):
 					if c.markers[ActionBlueUsed] == 1:
 						c.markers[ActionBlueUsed] = 0
 						c.markers[ActionBlue] = 1
+					if c.markers[ActionGreenUsed] == 1:
+						c.markers[ActionGreenUsed] = 0
+						c.markers[ActionGreen] = 1
+					if c.markers[ActionYellowUsed] == 1:
+						c.markers[ActionYellowUsed] = 0
+						c.markers[ActionYellow] = 1
 					if c.markers[QuickBack] == 1:
 						c.markers[QuickBack] = 0
 						c.markers[Quick] = 1
@@ -221,27 +240,27 @@ def nextPhase(group, x=-360, y=-125):
 						if c2 != None and c2.Type != "Mage":
 							debug("Overlap found (top left) {}".format(c2.name))
 							addMana(c2)
-							whisper("Hamonize found and Mana added to channeling card")
+							whisper("Harmonize found and Mana added to channeling card")
 						else:
 							c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
 							if c2 != None and c2.Type !="Mage":
 								debug("Overlap found (bottom right) {}".format(c2.name))
 								addMana(c2)
-								whisper("Hamonize found and Mana added to channeling card")
+								whisper("Harmonize found and Mana added to channeling card")
 							else:
 								c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
 								if c2 != None and c2.Type !="Mage":
 									debug("Overlap found (bottom left) {}".format(c2.name))
 									addMana(c2)
-									whisper("Hamonize found and Mana added to channeling card")
+									whisper("Harmonize found and Mana added to channeling card")
 								else:
 									c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
 									if c2 != None and c2.Type !="Mage":
 										debug("Overlap found (top right) {}".format(c2.name))
 										addMana(c2)
-										whisper("Hamonize found and Mana added to channeling card")
+										whisper("Harmonize found and Mana added to channeling card")
 									else:
-										whisper("Hamonize found but no Mana added")
+										whisper("Harmonize found but no Mana added")
 			
 		
 def switchPhase(card, phase):
@@ -302,7 +321,7 @@ def diceRoller(num):
 	if (len(diceBank) < num): #diceBank running low - fetch more 
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 		debug("Random.org response code: {}".format(random_org[1]))
-		if random_org[1]==200: # ok code received:
+		if random_org[1]==200: # OK code received:
 			diceBank = random_org[0].splitlines()
 		else:
 			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
@@ -331,32 +350,50 @@ def playerSetup(group=None, x=0, y=0):
 	global mycolor
 	mute()
 	notify("{} performs a setup".format(me.name))
-	# Set color of players
-	id = 0
-	for p in players:
-		playername = getGlobalVariable("Player"+str(id))
-		if playername == "":
-			setGlobalVariable("Player"+str(id), str(p.name))
-			debug("player {} is {}".format(id,getGlobalVariable("Player"+str(id))))
-			if p.name == me.name:
-				mycolor = PlayerColor[id]
-		else:
-			if playername == me.name:
-				mycolor = PlayerColor[id]
-		id += 1
-	
-	# Reset counters by finding mage card and apply stats
-	debug("Hand length: {}".format(len(me.hand)))
 	if len(me.hand) == 0:
 		notify("Please load a deck before activating setup")
 		return
+	
+	# Players select their color
+	choiceList = ["Red", "Blue", "Green", "Yellow"]
+	while (True):
+		choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
+		colorsChosen = getGlobalVariable("ColorsChosen")
+		if colorsChosen == "":	#we're the first to pick
+			setGlobalVariable("ColorsChosen", str(choice))
+			mycolor = PlayerColor[choice]
+			break
+		elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
+			setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
+			mycolor = PlayerColor[choice]
+			break
+		else:	#someone else took our choice
+			askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+	
+#	id = 0
+#	for p in players:
+#		playername = getGlobalVariable("Player"+str(id))
+#		if playername == "":
+#			setGlobalVariable("Player"+str(id), str(p.name))
+#			debug("player {} is {}".format(id,getGlobalVariable("Player"+str(id))))
+#			if p.name == me.name:
+#				mycolor = PlayerColor[id]
+#		else:
+#			if playername == me.name:
+#				mycolor = PlayerColor[id]
+#		id += 1
+	
+	# Reset counters by finding mage card and apply stats
+	debug("Hand length: {}".format(len(me.hand)))
+	
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
 			break
+	
 	debug("Stats {}".format(stats))
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
-	
+				
 	for stat in stats:
 		debug("stat {}".format(stat))
 		statval = stat.split("=")
@@ -663,26 +700,36 @@ def clearTokens(card, x = 0, y = 0):
 def toggleAction(card, x=0, y=0):
 	global mycolor
 	mute()
-	#PlayerColor = ["#FF0000", # Red
-	#			"#5882FA", # Blue
-	#			"#FACC2E", # Orange
-	#			"#82FA58" ] # Green 
-	if mycolor == "#82fa58":
+	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
-	elif mycolor == "#ff0000": # Red
+	elif mycolor == "#DE2827": # Red
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
-	elif mycolor == "#5882fa": # Red
+	elif mycolor == "#171E78": # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
+	elif mycolor == "#01603E": #Green
+		if card.markers[ActionGreen] > 0:
+			card.markers[ActionGreen] = 1
+			card.markers[ActionGreenUsed] = 0
+		else:
+			card.Markers[ActionGreen] = 0
+			card.Markers[ActionGreenUsed] = 1
+	elif mycolor == "#F7D917": #Yellow
+		if card.markers[ActionYellow] > 0:
+			card.markers[ActionYellow] = 1
+			card.markers[ActionYellowUsed] = 0
+		else:
+			card.Markers[ActionYellow] = 0
+			card.Markers[ActionYellowUsed] = 1
 	
 def toggleBloodReaper(card, x=0, y=0):
 	toggleToken(card, BloodReaper)
@@ -774,7 +821,7 @@ def playCardFaceDown(card, x=-360, y=70):
 	global mycolor
 	offset=0
 	occupied = True
-	if mycolor != "#ff0000":
+	if mycolor != "#800080":
 		y = 140
 	while occupied:
 		occupied = False
