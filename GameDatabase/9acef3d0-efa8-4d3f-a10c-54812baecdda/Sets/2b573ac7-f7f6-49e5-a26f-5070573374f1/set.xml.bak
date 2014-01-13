@@ -445,7 +445,7 @@
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="Stats" value="Life=7,Armor=1" />
-			<property name="Text" value="[Passage Attack][Dice=5][This attack is only made against creatures which pass through this wall from the direction the top of the card is facing.]" />
+			<property name="Text" value="[Passage Attacks][Dice=5][This attack is only made against creatures which pass through this wall from the direction the top of the card is facing.]" />
 		</card>
 
 

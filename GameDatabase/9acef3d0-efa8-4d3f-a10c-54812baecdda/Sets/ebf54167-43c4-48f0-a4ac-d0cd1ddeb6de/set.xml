@@ -211,7 +211,7 @@
 			<property name="Stats" value="Life=13,Armor=4" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />
-			<property name="Text" value="" />			
+			<property name="Text" value="[Passage Blocked][Blocks Line of Sight]" />			
 			<property name="CardID" value="MWSTX1CKW01" />
 		</card>
 

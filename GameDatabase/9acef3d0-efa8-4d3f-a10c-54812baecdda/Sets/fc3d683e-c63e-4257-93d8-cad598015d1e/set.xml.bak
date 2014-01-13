@@ -22,7 +22,7 @@
 		<card id="6b830552-8420-4797-bbb5-3ec5bb768265" name="Necromancer">
 			<property name="Type" value="Mage" />
 			<property name="Stats" value="Spellbook=120,Life=32,Armor=0,Channeling=10,Dark=1,Holy=3" />
-			<property name="Text" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction. \n PLAGUE MASTER: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. \n ETERNAL SERVANT: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this  creature again when it comes into play, or save it to reassign. \n Basic Melee Attack: [Quick][Melee][Dice=3]" />
+			<property name="Text" value="Training: Trained in the Dark Schoolof Magic. Holy spells cost triple during spellbook construction. \n PLAGUE MASTER: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. \n ETERNAL SERVANT: When a friendly non-Legendary, non-Epice, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this  creature again when it comes into play, or save it to reassign. \n Basic Melee Attack: [Quick][Melee][Dice=3]" />
 			<property name="Traits" value="" />
 			<alternate name="Necromancer" type="B" />
 		</card>
@@ -126,7 +126,7 @@
 			<property name="Level" value="3" />
 			<property name="Stats" value="Life=7,Armor=0" />
 			<property name="Traits" value="Living,Flame +2,Hydro Immunity" />
-			<property name="Text" value="Poison Sleep Mist: [Ranged 0-0][Poison][Dice=3][Unavoidable] \n Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature." />
+			<property name="Text" value="Poison Sleep Mist: [Ranged 0-0][Poision][Dice=3][Unavoidable] \n Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature." />
 			<property name="CardID" value="DNJ06" />
 		</card>
 		<card id="11a15edf-2a69-4507-9449-f57badafcfe4" name="Seedling Pod">
@@ -140,7 +140,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="Life=5,Armor=0,Channeling=1" />
 			<property name="Traits" value="Spawnpoint,Regenerate 2,Living,Flame +2,Hydro Immunity,Druid Only" />
-			<property name="Text" value="During the Deployment Phase, if there is 3 or more mana on Seedling Pod, it may cast 1 plant creature or conjuration which targets its zone, an object on its zone, or a border of its zone. It it does, destroy Seedling Pod." />
+			<property name="Text" value="During the Deployment Phase, if there is 3 or more mana on Seedling Pod, it may cast 1 plant creature or conjution which targets its zone, an object on its zone, or a border of its zone. It it does, destroy Seedling Pod." />
 			<property name="CardID" value="DNJ08" />
 		</card>
 		<card id="f839c0c0-ed2f-4440-931f-ec5ecf6b385d" name="Samara Tree">
@@ -168,7 +168,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="Life=6,Armor=0" />
 			<property name="Traits" value="Upkeep +X,Living,Flame +2,Hydro Immunity" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
+			<property name="Text" value="Target is Restrained and gains the Unmoveable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature recieves X direct damage. Strangleving gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
 			<property name="CardID" value="DNJ10" />
 		</card>
 		<card id="a7f900e4-64ac-4c1b-8905-90607feb7d1a" name="Tanglevine">
@@ -226,7 +226,7 @@
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />
 			<property name="Stats" value="Life=6,Armor=0" />
-			<property name="Text" value="Impaling Thorns: [Passage Blocked][Dice=3][d12][5+ = Bleed][Unavoidable][Piercing +2]" />
+			<property name="Text" value="Impaling Thorns: [Passage Blocked][Dice=3][d12][5+ = Bleed][Unavoidable][Piecering +2]" />
 			<property name="CardID" value="DNW01" />
 		</card>
 		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones">
@@ -284,7 +284,7 @@
 			<property name="Stats" value="Life=9,Armor=-" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Corrosive Juices: [Full][Melee][Acid][Dice=5][d12][5-8 = Corrode 9+ = 2 Corrode][Devour] \n Whenever Devouring Jelly attacks and damages a Corporeal creature, it may Reconstruct up to 2 damage." />
+			<property name="Text" value="Corrosvie Jucies: [Full][Melee][Acid][Dice=5][d12][5-8 = Corrode 9+ = 2 Corrode][Devour] \n Whenever Devouring Jelly attacks and damages a Corporeal creature, it may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC03" />
 		</card>
 		<card id="4fc86a1f-d24d-4da7-9f85-5818df967abd" name="Grey Wraith">
@@ -312,7 +312,7 @@
 			<property name="Stats" value="Life=5,Armor=2" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Impregnating Bite: [Quick][Melee][Dice=3][Piece ring +1] \n Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
+			<property name="Text" value="Impregnating Bite: [Quick][Melee][Dice=3][Piecering +1] \n Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
 		</card>
 		<card id="e4fb0871-99e8-40c3-b744-828400701c36" name="Kralathor, The Devourer">
@@ -340,7 +340,7 @@
 			<property name="Stats" value="Life=13,Armor=1" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Cursed Sword: [Quick][Melee][Dice=4][d12][8+ = Tainted] \n Each Upkeep Phase, each friendly skeleton object, in or bodering Mort&apos;s zone, may Reconstruct up to 2 damage." />
+			<property name="Text" value="Cursed Sword: [Quick][Melee][Dice=4][d12][8+ = Tainted] \n Each Upkeep Phase, each friendly skeleton object, in or bording Mort&apos;s zone, may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC07" />
 		</card>
 		<card id="fb442d50-c831-4da9-bbb8-dace15fea19b" name="Unstable Zombie">
@@ -649,7 +649,7 @@
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="Stats" value="Location=Ring" />
-			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts or reveals a necro or undead spell. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts ot reveals a necro or undead spell. Enchantments only receive this discount when they are revealed." />
 			<property name="CardID" value="DNQ02" />
 		</card>
 		<card id="84aeeb75-a297-4b94-a79d-f9068e19dcd9" name="Deathshroud Staff">
@@ -802,7 +802,7 @@
 			<property name="Level" value="1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Skeleton Object" />
-			<property name="Text" value="Roll 6 attack dice. Target skeleton object may Reconstruct up to that much damage." />
+			<property name="Text" value="Roll 6 attck dice. Target skeleton object may Reconstruct up to that much damage." />
 			<property name="CardID" value="DNI03" />
 		</card>
 		<card id="8cdd0758-7dcb-4c58-9855-a1d852b86e33" name="Renewing Rain">
@@ -815,7 +815,7 @@
 			<property name="Level" value="1+1" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Arena" />
-			<property name="Text" value="Remove all Burn condition markers from all objects. All friendly Living objects may heal up to 2 damage." />
+			<property name="Text" value="Remove all Burn condition markers from all objects. All friendly Living objecta may heal up to 2 damage." />
 			<property name="CardID" value="DNI04" />
 		</card>
 		<card id="fed20306-b9fa-4351-acb0-126701a1bd8f" name="Unholy Resurgence">
