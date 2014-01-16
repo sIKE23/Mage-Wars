@@ -661,6 +661,9 @@ def addToken(card, tokenType):
 	
 def addStun(card, x=0, y=0):
 	addToken(card, Stun)
+
+def addSlam(card, x=0, y=0):
+	addToken(card, Slam)
 	
 def addWeak(card, x=0, y=0):
 	addToken(card, Weak)
@@ -687,6 +690,9 @@ def subToken(card, tokenType):
 
 def subStun(card, x = 0, y = 0):
     subToken(card, Stun)
+
+def subSlam(card, x = 0, y = 0):
+    subToken(card, Slam)
 	
 def subWeak(card, x = 0, y = 0):
     subToken(card, Weak)
