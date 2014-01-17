@@ -1133,7 +1133,7 @@
 			<property name="Subtype" value="" />
 			<property name="School" value="Nature" />
 			<property name="Action" value="Q" />
-			<property name="Cost" value="7" />
+			<property name="Cost" value="5" />
 			<property name="Level" value="1" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />

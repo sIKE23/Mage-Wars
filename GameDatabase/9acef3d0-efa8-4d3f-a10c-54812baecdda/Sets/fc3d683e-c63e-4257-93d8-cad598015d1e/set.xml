@@ -332,7 +332,7 @@
 		<card id="352583ca-7fed-481b-9b8a-456b05e61501" name="Mort">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead,Skeleton,Soldier" />
-			<property name="Traits" value="Hydro Immunity,Flame +2" />
+			<property name="Traits" value="Nonliving,Psychic Immunity,Legendary" />
 			<property name="School" value="Dark"  />
 			<property name="Action" value="F"  />
 			<property name="Cost" value="16" />
@@ -573,7 +573,7 @@
 			<property name="Traits" value="Bloodthirsty +1,Lumbering,Pest,Resilient,Psychic Immunity,Nonliving" />
 			<property name="School" value="Dark"  />
 			<property name="Action" value="F"  />
-			<property name="Cost" value="5" />
+			<property name="Cost" value="7" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Life=7,Armor=0" />
 			<property name="Range" value="0-0" />
