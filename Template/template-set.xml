@@ -95,7 +95,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War"  />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Armor=0,Life=11" />
+			<property name="Stats" value="Life=1,Armor=0" />
 			<property name="AttackBar" value="Bow: [Ranged 1-2][Dice=4]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="." />
@@ -110,7 +110,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature"  />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Life=6 ,Armor=4" />
+			<property name="Stats" value="Armor=4,Life=6" />
 			<property name="AttackBar" value="Pinchers: [Quick][Melee][Dice=3] \n Deadly Stinger: [Full][Melee]Dice=1][d12][8+ = 2 Tainted][Piercing +2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="." />
