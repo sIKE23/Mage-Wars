@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Template"  id="00000000-aaaa-2222-bbbb-333333333333" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.12" version="1.2.1.12">
+	<markers>
+		<marker id="11111111-1111-1111-1111-111111111111" name="Template Marker" /> 
+		<!-- &apos;s -->
+	</markers>
+	<cards>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template-Attack">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Template,Template" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="[Ranged][Dice=2][d12][1-8 = Corrode; 9+ = 2 Corrode][Sweeping][Unavoidable]" />
+			<property name="CardID" value="MWTemplateAT01" />
+		</card>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template-Attack">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Template,Template" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="[Ranged][Dice=2][d12][1-8 = Corrode; 9+ = 2 Corrode][Sweeping][Unavoidable]" />
+			<property name="CardID" value="MWTemplateAT02" />
+		</card>
+
+
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Conjuration">
+			<property name="Type" value="Conjuration" />			
+			<property name="Subtype" value="" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=-,Life=5" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Hydro Immunity" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWTemplateCO01" />
+		</card>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Conjuration">
+			<property name="Type" value="Conjuration" />			
+			<property name="Subtype" value="" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value=""  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=-,Life=5" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Hydro Immunity" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWTemplateCO02" />
+		</card>
+
+
+		<card id="11111111-1111-1111-1111-111111111111" name="Wall of Template">
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone Border" />
+			<property name="School" value=""  />
+			<property name="Level" value="" />
+			<property name="Stats" value="Armor=-,Life=5" />
+			<property name="AttackBar" value="[Passage Blocked][Passage Attack][Blocks Line of Sight]" />
+			<property name="Traits" value="Immunity" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWTemplateWA01" />
+		</card>
+
+
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Creature Ranged">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Orc,Soldier" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="F"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0,Life=11" />
+			<property name="AttackBar" value="Bow: [Ranged 1-2][Dice=4]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWTemplateCR01" />
+		</card>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Creature Melee">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="F"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Life=6 ,Armor=4" />
+			<property name="AttackBar" value="Pinchers: [Quick][Melee][Dice=3] \n Deadly Stinger: [Full][Melee]Dice=1][d12][8+ = 2 Tainted][Piercing +2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWTemplateCR02" />
+		</card>
+
+
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Enchantment">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="School" value=""  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWTemplateEn01" />
+		</card>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Enchantment">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="Template: [Damage Barrier][Light][Dice=1][d12][5-10 = Daze;11+ = 2 Stun][Unavoidable][Ethereal][+2 vs. Nonliving]" />" />
+			<property name="Traits" value="
+			<property name="Text" value="." />
+			<property name="CardID" value="MWTemplateEN02" />
+		</card>
+
+
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Equipmentr">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value=""  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWTemplateEQ01" />
+		</card>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Equipment">
+			<property name="Type" value="Equipment" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value=""  />
+			<property name="Level" value="1" />
+			<property name="Subtype" value="" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="AttackBar" value="Template Strike: [Quick][Melee][Dice=4][d12][8+ = Rot]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWTemplateEQ02" />
+		</card>
+
+
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Incantation">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value=""  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWTemplateIN01" />
+		</card>
+		<card id="11111111-1111-1111-1111-111111111111" name="Template Incantation">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value=""  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Flame][d12][4-9 = Burn; 10+ = 2 Burn][Defrost]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target&apos;s next melee attack this round template." />
+			<property name="CardID" value="MWTemplateIN02" />
+		</card>
+	</cards>
+</set>
