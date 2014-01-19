@@ -497,7 +497,10 @@ def playerSetup(group=None, x=0, y=0):
 		if "Only" in card.Traits:	#check for school/mage restricted cards
 			ok = False
 			
-			if c.Name in card.Traits:	#mage restriction
+			magename = c.Name
+			if "Beastmaster" in magename:
+				magename = "Beastmaster"
+			if magename in card.Traits:	#mage restriction
 				ok = True
 				
 			for s in [school for school in spellbook if spellbook[school] == 1]:
