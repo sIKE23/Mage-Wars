@@ -417,6 +417,7 @@ def playerSetup(group=None, x=0, y=0):
 	#spellbook["Dark"] = sumLevel("Dark")
 	levels = {}
 	booktotal = 0
+	epics = ["", "three"]
 	for card in me.hand: #run through deck adding levels
 		if "Novice" in card.Traits: #Novice cards cost 1 spellpoint
 			debug("novice {}".format(card))
@@ -487,6 +488,24 @@ def playerSetup(group=None, x=0, y=0):
 					levels[card.School] -= 1
 					booktotal += 1
 				debug("levels {}".format(levels))
+				
+		if "Epic" in card.Traits:	#check for multiple epic cards
+			if card.Name in epics:
+				notify("*** ILLEGAL ***: multiple copies of Epic card {} found in spellbook".format(card.Name))
+			epics.append(card.Name)
+			
+		if "Only" in card.Traits:	#check for school/mage restricted cards
+			ok = False
+			
+			if c.Name in card.Traits:	#mage restriction
+				ok = True
+				
+			for s in [school for school in spellbook if spellbook[school] == 1]:
+				if s + " Mage" in card.Traits:
+					ok = True
+				
+			if not ok:
+				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
 					
 	debug("levels {}".format(levels))
 	for level in levels:
