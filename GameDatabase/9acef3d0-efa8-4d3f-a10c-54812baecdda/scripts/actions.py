@@ -1,5 +1,5 @@
 import time
-	
+
 ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
 ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58")
@@ -77,7 +77,7 @@ def debug(str):
 	global showDebug
 	if showDebug:
 		whisper(str)
-		
+
 def toggleDebug(group, x=0, y=0):
 	global showDebug
 	showDebug = not showDebug
@@ -85,7 +85,7 @@ def toggleDebug(group, x=0, y=0):
 		notify("{} turns on debug".format(me))
 	else:
 		notify("{} turns off debug".format(me))
-		
+
 def flipGameBoard(group, x=0, y=0):
 	global boardFlipped
 	if not boardFlipped:
@@ -93,16 +93,16 @@ def flipGameBoard(group, x=0, y=0):
 	else:
 		table.setBoardImage("background\\gameboard.png")
 	boardFlipped = not boardFlipped
-	
+
 def moveCard(model, x, y):
 	for c in table:
 		if c.model == model:
 			c.moveToTable(x, y)
 			return c
 	return table.create(model, x, y)
-	
+
 #Check see if a card at x1,y1 overlaps a card at x2,y2
-#Both have size w, h	
+#Both have size w, h
 def overlaps(x1, y1, x2, y2, w, h):
 	#Four checks, one for each corner
 	if x1 >= x2 and x1 <= x2 + w and y1 >= y2 and y1 <= y2 + h: return True
@@ -110,7 +110,7 @@ def overlaps(x1, y1, x2, y2, w, h):
 	if x1 >= x2 and x1 <= x2 + w and y1 + h >= y2 and y1 <= y2: return True
 	if x1 + w >= x2 and x1 <= x2 and y1 + h >= y2 and y1 <= y2: return True
 	return False
-	
+
 def cardHere(x, y, stat=""):
 	for c in table:
 		cx, cy = c.position
@@ -122,11 +122,11 @@ def cardHere(x, y, stat=""):
 def cardX(card):
 	x, y = card.position
 	return x
-	
+
 def cardY(card):
 	x, y = card.position
 	return y
-	
+
 def findCard(group, model):
 	for c in group:
 		if c.model == model:
@@ -156,7 +156,7 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 			except:
 				return 0
 	return 0
-	
+
 def nextPhase(group, x=-360, y=-125):
 	global mycolor
 	if mycolor == "#800080": # Player setup is not done yet.
@@ -261,8 +261,8 @@ def nextPhase(group, x=-360, y=-125):
 										whisper("Harmonize found and Mana added to channeling card")
 									else:
 										whisper("Harmonize found but no Mana added")
-			
-		
+
+
 def switchPhase(card, phase):
 	global mycolor
 	mute()
@@ -294,7 +294,7 @@ def rollDice(group, x=0, y=0):
 				notfound= True
 	if notfound:
 		dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -360, -35 )
-		
+
 	for tokenType in dieCard.markers:
 		dieCard.markers[tokenType] = 0
 	for tokenType in dieCard2.markers:
@@ -318,7 +318,7 @@ def rollDice(group, x=0, y=0):
 def diceRoller(num):
 	global diceBank
 	mute()
-	if (len(diceBank) < num): #diceBank running low - fetch more 
+	if (len(diceBank) < num): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 		debug("Random.org response code: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
@@ -328,12 +328,12 @@ def diceRoller(num):
 			while (len(diceBank) < 20):
 				diceBank.append(rnd(0,5))
 	result = [0,0,0,0,0,0]
-	for x in range(num): 
+	for x in range(num):
 		roll = int(diceBank.pop())
 		result[roll] += 1
 	debug("diceRoller result: {}".format(result))
 	return result
-	
+
 def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 350, -35)
 
@@ -343,9 +343,9 @@ def flipCoin(group, x = 0, y = 0):
     if n == 1:
         notify("{} flips heads.".format(me))
     else:
-        notify("{} flips tails.".format(me))	
+        notify("{} flips tails.".format(me))
 
-					
+
 def playerSetup(group=None, x=0, y=0):
 	global mycolor
 	mute()
@@ -353,7 +353,7 @@ def playerSetup(group=None, x=0, y=0):
 	if len(me.hand) == 0:
 		notify("Please load a deck before activating setup")
 		return
-	
+
 	# Players select their color
 	choiceList = ["Red", "Blue", "Green", "Yellow"]
 	while (True):
@@ -369,18 +369,18 @@ def playerSetup(group=None, x=0, y=0):
 			break
 		else:	#someone else took our choice
 			askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
-		
+
 	# Reset counters by finding mage card and apply stats
 	debug("Hand length: {}".format(len(me.hand)))
-	
+
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
 			break
-	
+
 	debug("Stats {}".format(stats))
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
-				
+
 	for stat in stats:
 		debug("stat {}".format(stat))
 		statval = stat.split("=")
@@ -398,7 +398,7 @@ def playerSetup(group=None, x=0, y=0):
 		elif statval[0] == "Holy":
 			spellbook["Holy"] = int(statval[1])
 		elif statval[0] == "Nature":
-			spellbook["Nature"] = int(statval[1])	
+			spellbook["Nature"] = int(statval[1])
 		elif statval[0] == "Mind":
 			spellbook["Mind"] = int(statval[1])
 		elif statval[0] == "Arcane":
@@ -454,7 +454,7 @@ def playerSetup(group=None, x=0, y=0):
 				levels[card.School] += int(card.Level)
 			except:
 				levels[card.School] = int(card.Level)
-	
+
 		if card.Type == "Creature" and c.name == "Forcemaster": #check for the forcemaster rule
 			debug("FM creature test")
 			if "Mind" not in card.School:
@@ -467,7 +467,7 @@ def playerSetup(group=None, x=0, y=0):
 					booktotal += int(level[0])
 				elif card.School != "": # only one school
 					booktotal += int(card.Level)
-		
+
 		if "Water" in card.School and c.name == "Druid": #check for the druid rule
 			if "1" in card.Level:
 				debug("Druid Water test: {}".format(card.name))
@@ -488,25 +488,25 @@ def playerSetup(group=None, x=0, y=0):
 					levels[card.School] -= 1
 					booktotal += 1
 				debug("levels {}".format(levels))
-				
+
 		if "Epic" in card.Traits:	#check for multiple epic cards
 			if card.Name in epics:
 				notify("*** ILLEGAL ***: multiple copies of Epic card {} found in spellbook".format(card.Name))
 			epics.append(card.Name)
-			
+
 		if "Only" in card.Traits:	#check for school/mage restricted cards
 			ok = False
-			
+
 			if c.Name in card.Traits:	#mage restriction
 				ok = True
-				
+
 			for s in [school for school in spellbook if spellbook[school] == 1]:
 				if s + " Mage" in card.Traits:
 					ok = True
-				
+
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
-					
+
 	debug("levels {}".format(levels))
 	for level in levels:
 		debug("booktotal {}, level {}".format(booktotal,level))
@@ -514,7 +514,7 @@ def playerSetup(group=None, x=0, y=0):
 	notify("Spellbook of {} calculated to {} points".format(me,booktotal))
 
 #def sumLevel(School):
-	
+
 #---------------------------------------------------------------------------
 # Table card actions
 #---------------------------------------------------------------------------
@@ -525,9 +525,9 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 	testlist += cspell.Subtype.split(",")
 	testlist += cspell.School.split(",")
 	debug("casting discount testlist: {}".format(testlist))
-	
+
 	lines = cdiscount.Text.split("[Casting Discount]")
-	debug("lines: {}".format(lines))	
+	debug("lines: {}".format(lines))
 	if len(lines)>1: #line found - now proces it
 		cells = lines[1].split("][")
 		debug("cells: {}".format(cells))
@@ -547,7 +547,7 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 			if not found:
 				return 0
 	return discount
-	
+
 def castSpell(card, x = 0, y = 0):
 	if card.Cost != "" and card.Cost != None:
 		notify("Printed casting cost of {} is {}".format(card,card.Cost))
@@ -565,7 +565,7 @@ def castSpell(card, x = 0, y = 0):
 				#target code
 			else:
 				castingcost = 0
-				
+
 		if castingcost > 0:
 			#TODO Who is casting the spell?
 			infostr = "Printed casting cost is {}".format(castingcost)
@@ -583,7 +583,7 @@ def castSpell(card, x = 0, y = 0):
 				return
 			me.Mana -= manacost
 			notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
-		
+
 def defaultAction(card, x = 0, y = 0):
 	mute()
 	if not card.isFaceUp: #Face down card - flip
@@ -594,7 +594,7 @@ def defaultAction(card, x = 0, y = 0):
 	#	kneel(card, x, y)
 	#else:
 	#	kneel(card, x, y)
-		
+
 def kneel(card, x = 0, y = 0):
     mute()
     card.orientation ^= Rot90
@@ -608,7 +608,7 @@ def inspectCard(card, x = 0, y = 0):
     for k in card.properties:
         if len(card.properties[k]) > 0:
             whisper("{}: {}".format(k, card.properties[k]))
-                                
+
 def flipcard(card, x = 0, y = 0):
 	mute()
 	if card.isFaceUp == False:
@@ -622,67 +622,70 @@ def flipcard(card, x = 0, y = 0):
 			toggleQuick(card)
 			if "Wizard" in card.name:
 					card.markers[VoltaricOFF] = 1
-			if "Forcemaster" == card.name:			
+			if "Forcemaster" == card.name:
 					card.markers[DeflectR] = 1
-			if "Beastmaster" == card.name:			
+			if "Beastmaster" == card.name:
 					card.markers[Pet] = 1
-			if "Beastmaster (Johktari)" == card.name:			
+			if "Beastmaster (Johktari)" == card.name:
 					card.markers[WoundedPrey] = 1
-			if "Priest" == card.name:			
+			if "Priest" == card.name:
 					card.markers[HolyAvenger] = 1
 	elif card.alternates is not None and "B" in card.alternates:
 		if card.alternate == "B":
 			card.switchTo("")
 		else:
-			card.switchTo("B")		
+			card.switchTo("B")
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		card.isFaceUp = False
-		notify("{} turns '{}' face down.".format(me, card.Name))        
-	
+		notify("{} turns '{}' face down.".format(me, card.Name))
+
 def addMana(card, x = 0, y = 0):
-	addToken(card, Mana)
-	
+		addToken(card, Mana)
+
 def addDamage(card, x = 0, y = 0):
     addToken(card, Damage)
-	
+
 def addBurn(card, x = 0, y = 0):
-	addToken(card, Burn)
-    
+		addToken(card, Burn)
+
 def addCripple(card, x = 0, y = 0):
     addToken(card, Cripple)
 
 def addDaze(card, x=0, y=0):
-	addToken(card, Daze)
+		addToken(card, Daze)
 
 def addOther(card, x = 0, y = 0):
-	marker, qty = askMarker()
-	if qty == 0: return
-	card.markers[marker] += qty
-	
+		marker, qty = askMarker()
+		if qty == 0: return
+		card.markers[marker] += qty
+
 def addToken(card, tokenType):
-	mute()
-	card.markers[tokenType] += 1
-	notify("{} added to '{}'".format(tokenType[0], card.Name))
-	
+		mute()
+		card.markers[tokenType] += 1
+		notify("{} added to '{}'".format(tokenType[0], card.Name))
+
 def addStun(card, x=0, y=0):
-	addToken(card, Stun)
-	
+		addToken(card, Stun)
+
+def addSlam(card, x=0, y=0):
+		addToken(card, Slam)
+
 def addWeak(card, x=0, y=0):
-	addToken(card, Weak)
-	
+		addToken(card, Weak)
+
 def subMana(card, x = 0, y = 0):
     subToken(card, Mana)
 
 def subDamage(card, x = 0, y = 0):
     subToken(card, Damage)
-	
+
 def subBurn(card, x = 0, y = 0):
     subToken(card, Burn)
-	
+
 def subCripple(card, x = 0, y = 0):
     subToken(card, Cripple)
-	
+
 def subDaze(card, x = 0, y = 0):
     subToken(card, Daze)
 
@@ -693,16 +696,20 @@ def subToken(card, tokenType):
 
 def subStun(card, x = 0, y = 0):
     subToken(card, Stun)
-	
+
+def subSlam(card, x = 0, y = 0):
+    subToken(card, Slam)
+
+
 def subWeak(card, x = 0, y = 0):
     subToken(card, Weak)
-	
+
 def clearTokens(card, x = 0, y = 0):
 	mute()
 	for tokenType in card.markers:
 		card.markers[tokenType] = 0
 	notify("{} removes all tokens from '{}'".format(me, card.Name))
-	
+
 def toggleAction(card, x=0, y=0):
 	global mycolor
 	mute()
@@ -736,7 +743,7 @@ def toggleAction(card, x=0, y=0):
 		else:
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
-	
+
 def toggleBloodReaper(card, x=0, y=0):
 	toggleToken(card, BloodReaper)
 
@@ -750,10 +757,10 @@ def toggleDeflect(card, x=0, y=0):
 		card.markers[DeflectR] = 1
 		card.markers[DeflectU] = 0
 		notify("'{}' readies deflect".format(card.Name))
-		
+
 def toggleGuard(card, x=0, y=0):
 	toggleToken(card, Guard)
-	
+
 def toggleInvisible(card, x=0, y=0):
 	mute()
 	if card.markers[Invisible] > 0:
@@ -764,7 +771,7 @@ def toggleInvisible(card, x=0, y=0):
 		card.markers[Invisible] = 1
 		card.markers[Visible] = 0
 		notify("'{}' becomes invisible".format(card.Name))
-		
+
 def toggleReady(card, x=0, y=0):
 	mute()
 	if card.markers[Ready] > 0:
@@ -775,10 +782,10 @@ def toggleReady(card, x=0, y=0):
 		card.markers[Ready] = 1
 		card.markers[Used] = 0
 		notify("'{}' becomes ready".format(card.Name))
-		
+
 def togglePet(card, x=0, y=0):
 	toggleToken(card, Pet)
-	
+
 def toggleQuick(card, x=0, y=0):
 	mute()
 	if card.markers[Quick] > 0:
@@ -789,10 +796,10 @@ def toggleQuick(card, x=0, y=0):
 		card.markers[Quick] = 1
 		card.markers[QuickBack] = 0
 		notify("'{}' readies Quick Cast action".format(card.Name))
-	
+
 def toggleTaunt(card, x=0, y=0):
 	toggleToken(card, Taunt)
-	
+
 def toggleToken(card, tokenType):
 	mute()
 	if card.markers[tokenType] > 0:
@@ -812,7 +819,7 @@ def toggleVoltaric(card, x=0, y=0):
 		card.markers[VoltaricON] = 1
 		card.markers[VoltaricOFF] = 0
 		notify("'{}' enables Voltaric shield".format(card.Name))
-		
+
 def discard(card, x=0, y=0):
 	mute()
 	if card.controller != me:
@@ -843,4 +850,3 @@ def playCardFaceDown(card, x=-360, y=70):
 	mute()
 	card.peek()
 	card.highlight = mycolor
-	
