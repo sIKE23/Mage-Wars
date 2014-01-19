@@ -246,7 +246,9 @@
                                     bool legal = false;
 
                                     //check mage restriction
-                                    if (onlyPhrase.Contains(magename))
+                                    string mname = magename;
+                                    if (mname.Contains("Beastmaster")) mname = "Beastmaster";
+                                    if (onlyPhrase.Contains(mname))
                                         legal = true;
 
                                     //check class restriction

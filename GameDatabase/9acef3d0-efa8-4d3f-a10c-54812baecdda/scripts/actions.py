@@ -4,10 +4,10 @@ ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
 ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58")
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649")
-#ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949")
-#ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee")
-#ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be")
-#ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6")
+ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949")
+ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee")
+ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be")
+ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6")
 Mana = ("Mana", "00000000-0000-0000-0000-000000000002")
 Damage = ("Damage", "00000000-0000-0000-0000-000000000004")
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce")
@@ -65,9 +65,9 @@ Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
 Died12 = ("Died12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 
 PlayerColor = 	["#DE2827", 	# Red 		R=222 G=40  B=39
-				"#171E78"] 		# Blue		R=23  G=30  B=120
-#				"#01603E", 		# Green		R=1   G=96  B=62
-#				"#F7D917"] 		# Yellow 	R=247 G=217 B=23
+				"#171E78", 		# Blue		R=23  G=30  B=120
+				"#01603E", 		# Green		R=1   G=96  B=62
+				"#F7D917"] 		# Yellow 	R=247 G=217 B=23
 mycolor = "#800080" # Purple
 diceBank = [1]
 boardFlipped = False
@@ -198,12 +198,12 @@ def nextPhase(group, x=-360, y=-125):
 					if c.markers[ActionBlueUsed] == 1:
 						c.markers[ActionBlueUsed] = 0
 						c.markers[ActionBlue] = 1
-#					if c.markers[ActionGreenUsed] == 1:
-#						c.markers[ActionGreenUsed] = 0
-#						c.markers[ActionGreen] = 1
-#					if c.markers[ActionYellowUsed] == 1:
-#						c.markers[ActionYellowUsed] = 0
-#						c.markers[ActionYellow] = 1
+					if c.markers[ActionGreenUsed] == 1:
+						c.markers[ActionGreenUsed] = 0
+						c.markers[ActionGreen] = 1
+					if c.markers[ActionYellowUsed] == 1:
+						c.markers[ActionYellowUsed] = 0
+						c.markers[ActionYellow] = 1
 					if c.markers[QuickBack] == 1:
 						c.markers[QuickBack] = 0
 						c.markers[Quick] = 1
@@ -355,7 +355,7 @@ def playerSetup(group=None, x=0, y=0):
 		return
 	
 	# Players select their color
-	choiceList = ["Red", "Blue"]#, "Green", "Yellow"]
+	choiceList = ["Red", "Blue", "Green", "Yellow"]
 	while (True):
 		choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
 		colorsChosen = getGlobalVariable("ColorsChosen")
@@ -369,20 +369,7 @@ def playerSetup(group=None, x=0, y=0):
 			break
 		else:	#someone else took our choice
 			askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
-	
-#	id = 0
-#	for p in players:
-#		playername = getGlobalVariable("Player"+str(id))
-#		if playername == "":
-#			setGlobalVariable("Player"+str(id), str(p.name))
-#			debug("player {} is {}".format(id,getGlobalVariable("Player"+str(id))))
-#			if p.name == me.name:
-#				mycolor = PlayerColor[id]
-#		else:
-#			if playername == me.name:
-#				mycolor = PlayerColor[id]
-#		id += 1
-	
+		
 	# Reset counters by finding mage card and apply stats
 	debug("Hand length: {}".format(len(me.hand)))
 	
@@ -430,6 +417,7 @@ def playerSetup(group=None, x=0, y=0):
 	#spellbook["Dark"] = sumLevel("Dark")
 	levels = {}
 	booktotal = 0
+	epics = ["", "three"]
 	for card in me.hand: #run through deck adding levels
 		if "Novice" in card.Traits: #Novice cards cost 1 spellpoint
 			debug("novice {}".format(card))
@@ -500,6 +488,27 @@ def playerSetup(group=None, x=0, y=0):
 					levels[card.School] -= 1
 					booktotal += 1
 				debug("levels {}".format(levels))
+				
+		if "Epic" in card.Traits:	#check for multiple epic cards
+			if card.Name in epics:
+				notify("*** ILLEGAL ***: multiple copies of Epic card {} found in spellbook".format(card.Name))
+			epics.append(card.Name)
+			
+		if "Only" in card.Traits:	#check for school/mage restricted cards
+			ok = False
+			
+			magename = c.Name
+			if "Beastmaster" in magename:
+				magename = "Beastmaster"
+			if magename in card.Traits:	#mage restriction
+				ok = True
+				
+			for s in [school for school in spellbook if spellbook[school] == 1]:
+				if s + " Mage" in card.Traits:
+					ok = True
+				
+			if not ok:
+				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
 					
 	debug("levels {}".format(levels))
 	for level in levels:
@@ -661,7 +670,7 @@ def addToken(card, tokenType):
 	
 def addStun(card, x=0, y=0):
 	addToken(card, Stun)
-
+	
 def addSlam(card, x=0, y=0):
 	addToken(card, Slam)
 	
@@ -690,9 +699,9 @@ def subToken(card, tokenType):
 
 def subStun(card, x = 0, y = 0):
     subToken(card, Stun)
-
+	
 def subSlam(card, x = 0, y = 0):
-    subToken(card, Slam)
+	subToken(card, Slam)
 	
 def subWeak(card, x = 0, y = 0):
     subToken(card, Weak)
@@ -722,20 +731,20 @@ def toggleAction(card, x=0, y=0):
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
-#	elif mycolor == "#01603E": #Green
-#		if card.markers[ActionGreen] > 0:
-#			card.markers[ActionGreen] = 1
-#			card.markers[ActionGreenUsed] = 0
-#		else:
-#			card.Markers[ActionGreen] = 0
-#			card.Markers[ActionGreenUsed] = 1
-#	elif mycolor == "#F7D917": #Yellow
-#		if card.markers[ActionYellow] > 0:
-#			card.markers[ActionYellow] = 1
-#			card.markers[ActionYellowUsed] = 0
-#		else:
-#			card.Markers[ActionYellow] = 0
-#			card.Markers[ActionYellowUsed] = 1
+	elif mycolor == "#01603E": #Green
+		if card.markers[ActionGreenUsed] > 0:
+			card.markers[ActionGreen] = 1
+			card.markers[ActionGreenUsed] = 0
+		else:
+			card.markers[ActionGreen] = 0
+			card.markers[ActionGreenUsed] = 1
+	elif mycolor == "#F7D917": #Yellow
+		if card.markers[ActionYellowUsed] > 0:
+			card.markers[ActionYellow] = 1
+			card.markers[ActionYellowUsed] = 0
+		else:
+			card.markers[ActionYellow] = 0
+			card.markers[ActionYellowUsed] = 1
 	
 def toggleBloodReaper(card, x=0, y=0):
 	toggleToken(card, BloodReaper)
