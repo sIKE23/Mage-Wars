@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.1.1.0" version="1.1.0.1">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.3.0.0" version="1.3.0.0">
 	<markers>  
 		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
 		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
@@ -12,7 +12,8 @@
 		<property name="Type" value="Mage" />
 		<property name="Stats" value="Spellbook=120,Life=34,Armor=0,Channeling=9,Nature=1,Fire=3" />
 		<property name="Traits" value="Fast,Ranged +1" />
-		<property name="Text" value="Basic Melee Attack: [Quick][Melee][Dice=3] \n Training: Trained in the Nature School. Fire Spells cost triple during spell book construction \n Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. \n Sprinting: She has the Fast trait. \n Archery Skill: She has the Ranged +1 trait for all of her nonspell ranged attacks." />
+		<property name="AttackBar" value="Basic Melee Attack: [Quick][Melee][Dice=3]" />
+		<property name="Text" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction \n Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. \n Sprinting: She has the Fast trait. \n Archery Skill: She has the Ranged +1 trait for all of her nonspell ranged attacks." />
 		</card>
 		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Beastmaster (Johktari) stats">
 		  <property name="Type" value="Magestats" />
@@ -20,7 +21,8 @@
 		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
 		<property name="Type" value="Mage" />
 		<property name="Stats" value="Spellbook=120,Life=34,Armor=0,Channeling=9,Holy=1,Dark=3" />
-		<property name="Text" value="Hand of Purification: [Quick][Melee][Light][Dice=2][d12][9+ = Daze][Ethereal] \n Training: Trained In the Holy school. Dark spells cost triple during spellbook construction.  The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only. \n Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 end Piercing +1 for that attack.  If it is destroyed, you may assign the marker again in the same manner. \n Malakai’S Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
+		<property name="AttackBar" value="Hand of Purification: [Quick][Melee][Light][Dice=2][d12][9+ = Daze][Ethereal]" />
+		<property name="Text" value="Training: Trained In the Holy school. Dark spells cost triple during spellbook construction.  The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only. \n Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 end Piercing +1 for that attack.  If it is destroyed, you may assign the marker again in the same manner. \n Malakai’S Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
 		</card>
 		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest stats">
 		  <property name="Type" value="Magestats" />
@@ -37,7 +39,8 @@
 			<property name="Level" value="1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Non-Flying Creature or Conjuration" />
-			<property name="Text" value="[Ranged][Zone Attack][Water][Dice=3][d12][3-7 = Stun; 8+ = Push &amp; Slam][Extinguish, Unavoidable]" />
+			<property name="AttackBar" value="[Ranged][Zone Attack][Water][Dice=3][d12][3-7 = Stun; 8+ = Push &amp; Slam][Extinguish, Unavoidable]" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKA01" />
 		</card>
 
@@ -53,7 +56,8 @@
 			<property name="Stats" value="Life=16,Armor=0" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Heavy Club: [Quick][Melee][Dice=5]" />
+			<property name="AttackBar" value="Heavy Club: [Quick][Melee][Dice=5]" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC01" />
 		</card>
 		<card id="7add1431-cfce-4c3e-b7bc-88cf0c126e9a" name="Dire Wolf">
@@ -67,7 +71,7 @@
 			<property name="Stats" value="Life=11,Armor=2" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Savage Bite: [Quick][Melee][Dice=3][d12][7+ = Bleed]" />
+			<property name="AttackBar" value="Savage Bite: [Quick][Melee][Dice=3][d12][7+ = Bleed]" />
 			<property name="CardID" value="MWSTX1CKC02" />
 		</card>
 		<card id="6122329b-8107-4d1a-a322-52311bd11a60" name="Dwarf Panzergarde">
@@ -81,7 +85,8 @@
 			<property name="Stats" value="Life=12,Armor=3,Defense=9+ 1x" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="War Hammer: [Quick][Melee][Dice=3] \n While guarding, Dwarf Panzergarde may add +3 to his Defense roll shown above." />
+			<property name="AttackBar" value="War Hammer: [Quick][Melee][Dice=3]" />
+			<property name="Text" value="While guarding, Dwarf Panzergarde may add +3 to his Defense roll shown above." />
 			<property name="CardID" value="MWSTX1CKC07" />
 		</card>
 		<card id="6ea8364e-2843-4649-af14-44ebedeeb41e" name="Galador, Protector of Straywood">
@@ -95,7 +100,8 @@
 			<property name="Stats" value="Life=14,Armor=2" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Antlers: [Quick][Melee][Dice=4][Charge +1][Piercing +1] \n Lightning Blast: [Full][Ranged:0-1][Lightning][Dice=4][d12][7-9 = Daze; 10+ = Stun][Ethereal]" />
+			<property name="AttackBar" value="Antlers: [Quick][Melee][Dice=4][Charge +1][Piercing +1] \n Lightning Blast: [Full][Ranged:0-1][Lightning][Dice=4][d12][7-9 = Daze; 10+ = Stun][Ethereal]" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC03" />
 		</card>
 		<card id="600817a2-1dc1-4ac8-bb73-838afbb8b929" name="Gargoyle Sentry">
@@ -109,7 +115,8 @@
 			<property name="Stats" value="Life=14,Armor=1" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Stone Fists: [Quick][Melee][Dice=3] \n While guarding, Gargoyle Sentry gains Armor +3 and Tough -3" />
+			<property name="AttackBar" value="Stone Fists: [Quick][Melee][Dice=3]" />
+			<property name="Text" value="While guarding, Gargoyle Sentry gains Armor +3 and Tough -3" />
 			<property name="CardID" value="MWSTX1CKC08" />
 		</card>
 		<card id="b6003a5c-e5ec-46fe-921f-1b1d02b2e48e" name="Giant Wolf Spider">
@@ -123,7 +130,8 @@
 			<property name="Stats" value="Life=13,Armor=2" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Poison Fangs: [Quick][Melee][Dice=2][d12][9+ = Tainted][If target is restrained add +4 to the Effect Die \n Web: [Full][Ranged:0-1][Dice=0][d12][5+ = Stuck][Unavoidable,No Damage]" />
+			<property name="AttackBar" value="Poison Fangs: [Quick][Melee][Dice=2][d12][9+ = Tainted][If target is restrained add +4 to the Effect Die \n Web: [Full][Ranged:0-1][Dice=0][d12][5+ = Stuck][Unavoidable,No Damage]" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC09" />
 		</card>
 
@@ -138,7 +146,8 @@
 			<property name="Stats" value="Life=12,Armor=1,Defense=8+ 1x" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Shortsword: [Quick][Melee][Dice=3] \n When Guardian Angel chooses the guard action she may heal up to 2 points of damage from herself." />
+			<property name="AttackBar" value="Shortsword: [Quick][Melee][Dice=3]" />
+			<property name="Text" value="When Guardian Angel chooses the guard action she may heal up to 2 points of damage from herself." />
 			<property name="CardID" value="MWSTX1CKC06" />
 		</card>
 		<card id="a47455b5-caf0-42c0-9e3c-5945a108767d" name="Makunda">
@@ -152,7 +161,8 @@
 			<property name="Stats" value="Life=14,Armor=1,Defense=8+ 1x" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Great Claws: [Quick][Melee][Dice=4][7+ = Bleed][Piercing +1] \n All other friendly cat creatures in the same zone as Makunda have their melee attacks gain the Piercing +1 trait" />
+			<property name="AttackBar" value="Great Claws: [Quick][Melee][Dice=4][7+ = Bleed][Piercing +1]" />
+			<property name="Text" value="All other friendly cat creatures in the same zone as Makunda have their melee attacks gain the Piercing +1 trait" />
 			<property name="CardID" value="MWSTX1CKC04" />
 		</card>
 		<card id="1f8f30b7-8d0c-4350-ae4f-0616df0abc88" name="Screech Harpy">
@@ -166,7 +176,8 @@
 			<property name="Stats" value="Life=8,Armor=1" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Talons: [Quick][Melee][Dice=3][Piercing +1] \n Web: [Full][Ranged:0-0][Psychic][Dice=1][d12][4+ = Daze][Ethereal,Unavoidable,Critical Damage]" />
+			<property name="AttackBar" value="Talons: [Quick][Melee][Dice=3][Piercing +1] \n Web: [Full][Ranged:0-0][Psychic][Dice=1][d12][4+ = Daze][Ethereal,Unavoidable,Critical Damage]" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC05" />
 		</card>
 
@@ -182,6 +193,7 @@
 			<property name="Stats" value="Life=4,Armor=4" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="When an enchantment you control would be destroyed by a spell or ability an opponent controls, prevent that destruction unless that opponent pays 2 mana." />
 			<property name="CardID" value="MWSTX1CKJ01" />
 		</card>
@@ -196,6 +208,7 @@
 			<property name="Stats" value="Life=7,Armor=3,Channeling=1" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="You may bind a non-Epic quick attack spell from your spellbook to Wizard&apos;s Tower. Wizard&apos;s Tower may cast that spell once per round, before or after any friendly Action Phase. Use a ready marker to keep track of this ability. During the Planning Phase you may change the bound spell." />
 			<property name="CardID" value="MWSTX1CKJ02" />
 		</card>
@@ -211,7 +224,8 @@
 			<property name="Stats" value="Life=13,Armor=4" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />
-			<property name="Text" value="[Passage Blocked][Blocks Line of Sight]" />			
+			<property name="AttackBar" value="[Passage Blocked][Blocks Line of Sight]" />
+			<property name="Text" value="" />			
 			<property name="CardID" value="MWSTX1CKW01" />
 		</card>
 
@@ -228,6 +242,7 @@
 			<property name="Level" value="1+1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="When an equipment object attached to this Mage would be destroyed by a spell or ability an opponent controls, prevent that destruction unless that opponent pays 4 mana." />
 			<property name="CardID" value="MWSTX1CKE01" />
 		</card>
@@ -241,6 +256,7 @@
 			<property name="Level" value="1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="This creature&amp;melee attacks gain the Ethereal trait" />
 			<property name="CardID" value="MWSTX1CKE02" />
 		</card>
@@ -254,6 +270,7 @@
 			<property name="Level" value="1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="When Enchantment Transfusion is revealed, you may move any enchantment you control from this creature to one legal target creature up to 2 zones away from this creature. X = 1 for each hidden enchantment moved, or its Level for each revealed enchantment moved. Then, destroy Enchantment Transfusion." />
 			<property name="CardID" value="MWSTX1CKE04" />
 		</card>
@@ -267,6 +284,7 @@
 			<property name="Level" value="1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="When Healing Charm is revealed, this creature heals the amount rolled on 4 attack dice. Then, destroy Healing Charm." />
 			<property name="CardID" value="MWSTX1CKE03" />
 		</card>
@@ -280,7 +298,8 @@
 			<property name="Level" value="1+1" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="[Dice=4][d12][1+ = Stuck][Unavoidable,Piercing +2] \n Spiked Pit can only target a zone with no enemy non-Flying creatures. When an enemy non-Flying creatures enters the zone, you must reveal Spiked Pit. Spiked Pit immediately attacks that creature. Then, destroy Spiked Pit." />
+			<property name="AttackBar" value="Impaling Spikes: [Dice=4][d12][1+ = Stuck][Unavoidable,Piercing +2]" />
+			<property name="Text" value="Spiked Pit can only target a zone with no enemy non-Flying creatures. When an enemy non-Flying creatures enters the zone, you must reveal Spiked Pit. Spiked Pit immediately attacks that creature. Then, destroy Spiked Pit." />
 			<property name="CardID" value="MWSTX1CKE05" />
 		</card>
 
@@ -296,6 +315,7 @@
 			<property name="Stats" value="Location=Belt" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="Mage gains the Tough -2 trait." />
 			<property name="CardID" value="MWSTX1CKQ03" />
 		</card>
@@ -310,7 +330,8 @@
 			<property name="Stats" value="Location=Weapon/Shield" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="Disenchant: [Cost=X][Quick][Ranged:0-1][Destroy target Level 1 revealed enchantment] \n Mage Sight: [Cost=0][Quick][Ranged:0-2][Look at target hidden enchantment. Then leave it face down after looking] \n Dispel Wand&apos;s abilities can each be used once per round as a quick spell. X = target&apos;s casting and reveal cost." />
+			<property name="AttackBar" value="Disenchant: [Cost=X][Quick][Ranged:0-1][Destroy target Level 1 revealed enchantment] \n Mage Sight: [Cost=0][Quick][Ranged:0-2][Look at target hidden enchantment. Then leave it face down after looking]" />
+			<property name="Text" value="Dispel Wand&apos;s abilities can each be used once per round as a quick spell. X = target&apos;s casting and reveal cost." />
 			<property name="CardID" value="MWSTX1CKQ05" />
 		</card>
 		<card id="c4daa855-667a-4211-8970-5b210eeb145d" name="Eagleclaw Boots">
@@ -324,6 +345,7 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="Mage gains the Unmovable and Climbing traits." />
 			<property name="CardID" value="MWSTX1CKQ06" />
 		</card>
@@ -338,7 +360,8 @@
 			<property name="Stats" value="Location=Weapon+Shield" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="[Full][Range:1-2][Dice=4][Piercing +1] \n If Hunting Bow is used to attack an enemy creature that was attacked and damaged by a friendly animal creature this round, this attack gains an additional Piercing +1 and this effect roll: [d12][7+ = Bleed]" />
+			<property name="AttackBar" value="[Full][Range:1-2][Dice=4][Piercing +1]" />
+			<property name="Text" value="If Hunting Bow is used to attack an enemy creature that was attacked and damaged by a friendly animal creature this round, this attack gains an additional Piercing +1 and this effect roll: [d12][7+ = Bleed]" />
 			<property name="CardID" value="MWSTX1CKQ02" />
 		</card>
 		<card id="f43f1435-b902-4d89-8feb-f69f34fac492" name="Reflex Boots">
@@ -352,6 +375,7 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="Mage gains a Defense \n [Defense 7+ 1x]" />
 			<property name="CardID" value="MWSTX1CKQ04" />
 		</card>
@@ -366,6 +390,7 @@
 			<property name="Stats" value="Location=Amulet" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="Each Upkeep Phase, Mage gains +1 Life" />
 			<property name="CardID" value="MWSTX1CKQ01" />
 		</card>
@@ -381,6 +406,7 @@
 			<property name="Level" value="4" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Arena" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="All friendly soldier creatures in the arena gain the Fast and Charge +2 traits until the end of the round." />
 			<property name="CardID" value="MWSTX1CKI02" />
 		</card>
@@ -394,6 +420,7 @@
 			<property name="Level" value="4" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Living Creature" />
+			<property name="AttackBar" value="" />
 			<property name="Text" value="Place 2 Tainted condition markers on target creature. Then, caster gains Life +6" />
 			<property name="CardID" value="MWSTX1CKI01" />
 		</card>

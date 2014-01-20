@@ -1,143 +1,156 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.1" version="1.0.0.1">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.3.0.0" version="1.3.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Type" value="Attack" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Earth"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="12" />
-			<property name="Level" value="3" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-3" />
 			<property name="Target" value="Creature or Conjuration" />
-			<property name="Text" value="[Ranged][Dice=9][d12][5-8 = Daze;9+ = Stun]" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged][Dice=9][d12][5-8 = Daze;9+ = Stun]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO9" />
 		</card>
 		<card id="12a6fc65-0f69-441a-9fe7-2719fb0b5857" name="Hurl Rock">
 			<property name="Type" value="Attack" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Earth"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="4" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Creature or Conjuration" />
-			<property name="Text" value="[Ranged][Dice=5][d12][9+ = Daze]" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged][Dice=5][d12][9+ = Daze]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO10" />
 		</card>
 		<card id="e63a5bc7-ddb8-4386-8173-03c873515c17" name="Sandstorm">
 			<property name="Type" value="Attack" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Air+Earth"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="8" />
-			<property name="Level" value="1+1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="[Ranged][Zone Attack][Air][Dice=2][d12][4-6=Push;7-9=Daze;10+ = Push &amp; Daze][Piercing +1,+2 vs. Flying,Unavoidable] \n If Pushed, roll for random direction." />
+			<property name="School" value="Air+Earth" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged][Zone Attack][Air][Dice=2][d12][4-6=Push;7-9=Daze;10+ = Push &amp; Daze][Piercing +1,+2 vs. Flyin][Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
 		</card>
 
 
 		<card id="0a4d7796-8763-4af6-b283-23d98582c5d0" name="Asyran Defender">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Knight,Soldier" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="8" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Life=8,Armor=2,Defense=9+ 1x" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Broadsword: [Quick][Melee][Dice=3]" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Defense=9+ 1x,Armor=2,Life=8" />
+			<property name="AttackBar" value="Broadsword: [Quick][Melee][Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO3" />
 		</card>
 		<card id="5c0a536d-f31e-4f46-b150-fe8841577c83" name="Bloodcrag Minotaur">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="Charge +2,Tough -2" />
 			<property name="Subtype" value="Minotaur,Soldier" />
-			<property name="School" value="War"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="15" />
-			<property name="Level" value="4" />
-			<property name="Stats" value="Life=14,Armor=3" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Horns: [Quick][Melee][Dice=4]" />
+			<property name="School" value="War" />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=3,Life=14" />
+			<property name="AttackBar" value="Horns: [Quick][Melee][Dice=4]" />
+			<property name="Traits" value="Charge +2,Tough -2" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO5" />
 		</card>
 		<card id="019fbc44-d07c-4510-9cac-7c998613bb05" name="Galador, Protector of Straywood">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="Legendary" />
 			<property name="Subtype" value="Animal" />
-			<property name="School" value="Nature+Air"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="16" />
-			<property name="Level" value="3+1" />
-			<property name="Stats" value="Life=14,Armor=2" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Antlers: [Quick][Melee][Dice=4][Charge +1][Piercing +1] \n Lightning Blast: [Full][Ranged:0-1][Lightning][Dice=4][d12][7-9 = Daze; 10+ = Stun][Ethereal]" />
+			<property name="School" value="Nature+Air" />
+			<property name="Level" value="3+1" />
+			<property name="Stats" value="Armor=2,Life=14" />
+			<property name="AttackBar" value="Antlers: [Quick][Melee][Dice=4][Charge +1][Piercing +1] \n Lightning Blast: [Full][Ranged:0-1][Lightning][Dice=4][d12][7-9 = Daze; 10+ = Stun][Ethereal]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPRO3" />
 		</card>
 		<card id="8ff009e0-eb99-49d3-86b4-5559e654abbe" name="Oscuda">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="Legendary" />
 			<property name="Subtype" value="Animal" />
-			<property name="School" value="Nature"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="13" />
-			<property name="Level" value="3" />
-			<property name="Stats" value="Life=10,Armor=2" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Claws: [Quick][Melee][Dice=4][Piercing +1] \n Stink Cloud: [Full][Ranged:0-0][Zone][Poison][Dice=2][d12][7+ = Daze][Unavoidable, Critical Damage] \n Oscuda is immune to his Stink Cloud" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2,Life=10" />
+			<property name="AttackBar" value="Claws: [Quick][Melee][Dice=4][Piercing +1] \n Stink Cloud: [Full][Ranged:0-0][Zone][Poison][Dice=2][d12][7+ = Daze][Unavoidable][Critical Damage]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="Oscuda is immune to his Stink Cloud" />
 			<property name="CardID" value="MWPROMO16" />
 		</card>
 		<card id="b68954f6-3fd7-4558-ae90-73d28681d5de" name="Sersiryx, Imp Familiar">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="Familiar,Flame -2,Legendary,Warlock Only" />
 			<property name="Subtype" value="Demon" />
-			<property name="School" value="Dark"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="12" />
-			<property name="Level" value="3" />
-			<property name="Stats" value="Life=9,Armor=2,Channeling=1" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Singe: [Quick][Melee][Flame][Dice=2][d12][7+ = Burn][Defrost] \n Sersiryx can cast only Level 1-2 Fire attack spells, or Level 1-2 curse enchantments." />
+			<property name="School" value="Dark" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Channeling=1,Armor=2,Life=9" />
+			<property name="AttackBar" value="Singe: [Quick][Melee][Flame][Dice=2][d12][7+ = Burn][Defrost]" />
+			<property name="Traits" value="Familiar,Flame -2,Legendary,Warlock Only" />
+			<property name="Text" value="Sersiryx can cast only Level 1-2 Fire attack spells, or Level 1-2 curse enchantments." />
 			<property name="CardID" value="MWPROMO18" />
-		</card>		
+		</card>
 		<card id="177a3787-5d22-43cd-9897-ac0e44156775" name="Selesius, the East Wind">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="Aegis 1,Flying,Wind Immunity,Legendary" />
 			<property name="Subtype" value="Angel" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="21" />
-			<property name="Level" value="5" />
-			<property name="Stats" value="Life=13,Armor=1" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged 0-1][Wind][Dice=2][d12][7+ = Push][Sweeping,Unavoidable,+2 vs. Flying, Ethereal]" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Armor=1,Life=13" />
+			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged 0-1][Wind][Dice=2][d12][7+ = Push][Sweeping][Unavoidable][+2 vs. Flying][Ethereal]" />
+			<property name="Traits" value="Aegis 1,Flying,Wind Immunity,Legendary" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO34" />
 		</card>
 		<card id="82b98f7b-6f00-4f84-ba31-31275906b59c" name="Temple High Guard">
 			<property name="Type" value="Creature" />
-			<property name="Traits" value="Lightning +2" />
 			<property name="Subtype" value="High Elf,Soldier" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="F"  />
 			<property name="Cost" value="12" />
-			<property name="Level" value="3" />
-			<property name="Stats" value="Life=11,Armor=2" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n When guarding, Temple High Guard gains Melee +2 and may counterstrike first (the Counterstrike Step is moved to just after the Declare Attack Step)." />
+			<property name="School" value="Holy" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2,Life=11" />
+			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1]" />
+			<property name="Traits" value="Lightning +2" />
+			<property name="Text" value="When guarding, Temple High Guard gains Melee +2 and may counterstrike first (the Counterstrike Step is moved to just after the Declare Attack Step)." />
 			<property name="CardID" value="MWPROMO20" />
 		</card>
 
@@ -145,57 +158,61 @@
 
 		<card id="5a6c0937-b7fb-4c68-a854-7e7d6dce4b3c" name="Altar of Peace">
 			<property name="Type" value="Conjuration" />
-			<property name="Traits" value="Zone Exclusive,Legendary,Epic" />
 			<property name="Subtype" value="Temple" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="7" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Life=9,Armor=1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1,Life=9" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive,Legendary,Epic" />
 			<property name="Text" value="All creatures must pay 1 mana during the Declare Attack Step when making a melee or ranged attack" />
 			<property name="CardID" value="MWPROMO2" />
 		</card>
 		<card id="0468e485-cced-4a0e-bf79-af4c03f2abe5" name="Altar of the Iron Guard">
 			<property name="Type" value="Conjuration" />
-			<property name="Traits" value="Zone Exclusive,Legendary" />
 			<property name="Subtype" value="Statue,Artifact" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="4" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Life=5,Armor=2" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=2,Life=5" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive,Legendary" />
 			<property name="Text" value="Whenever a creature comes into play, which you control, you may place a Guard marker on it." />
 			<property name="CardID" value="MWPROMO31" />
 		</card>
 		<card id="18b08e7f-4d82-4bcf-8a0c-fdf83b4683ac" name="Ballista">
 			<property name="Type" value="Conjuration" />
-			<property name="Traits" value="Zone Exclusive,Flame +2" />
 			<property name="Subtype" value="War Machine" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="8" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Life=8,Armor=2" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
-			<property name="Text" value="Giant Bolt: [Quick][Ranged=1-2][Dice=5][Piercing +3] \n Ballista starts with 1 Load token on it. Each Upkeep Phase, place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make its attack." />
+			<property name="School" value="War" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2,Life=8" />
+			<property name="AttackBar" value="Giant Bolt: [Quick][Ranged=1-2][Dice=5][Piercing +3]" />
+			<property name="Traits" value="Zone Exclusive,Flame +2" />
+			<property name="Text" value="Ballista starts with 1 Load token on it. Each Upkeep Phase, place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make its attack." />
 			<property name="CardID" value="MWPROMO4" />
 		</card>
 		<card id="90f01a26-1598-4df0-9fb3-5f40353bb6c9" name="Gravikor">
 			<property name="Type" value="Conjuration" />
-			<property name="Traits" value="Zone Exclusive,Legendary,Epic" />
 			<property name="Subtype" value="Obelisk,Artifact" />
-			<property name="School" value="Earth"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="8" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Life=6,Armor=4" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=4,Life=6" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive,Legendary,Epic" />
 			<property name="Text" value="All creatures within 2 zones of Gravikor lose, and cannot gain, the Flying trait." />
 			<property name="CardID" value="MWPROMO8" />
 		</card>
@@ -203,92 +220,106 @@
 
 		<card id="65d66e09-37bd-480d-a4a6-d98819b66b9e" name="Akiro&apos;s Favor">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="Magebind +2" />
 			<property name="Subtype" value="" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+1" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="Once per round,if this creature makes a melee or ranged attack, you may re-roll all of the attack dice, or the effect die. for that attack. Or, if the attack has to roll to hit (such as with a Daze condition), you may re-roll that die roll instead. Use a ready marker to keep track of this ability" />
 			<property name="CardID" value="MWPROMO1" />
 		</card>
 		<card id="ccc78522-653a-443d-9c36-5be3eb96f1e1" name="Critical Strike">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Command" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+3" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="The first melee attack this creature makes each round gains the Piercing +3 trait." />
 			<property name="CardID" value="MWPROMO17" />
 		</card>
 		<card id="ccba65d6-3b9a-484c-9517-ff7b3ef5cb21" name="Debilitate">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Curse" />
-			<property name="School" value="Dark"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+4" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="This creature loses, and cannot gain, Melee +X traits." />
 			<property name="CardID" value="MWPROMO29" />
 		</card>
 		<card id="901f4850-d501-4205-afa5-cdea2bb187f8" name="Lion Savagery">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Nature"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+3" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait." />
 			<property name="CardID" value="MWPROMO12" />
 		</card>
 		<card id="db4a3acd-3d6a-4ee1-8b74-b7b57407711d" name="Plagued">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="Magebind +2" />
 			<property name="Subtype" value="Curse,Poison" />
-			<property name="School" value="Dark"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+4" />
-			<property name="Level" value="2" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="Each Upkeep Phase, place a point of direct poison damage on each Living creature in this zone (including this creature)." />
 			<property name="CardID" value="MWPROMO30" />
 		</card>
 		<card id="17b28bea-2fff-41c3-b0f6-a28bcbb14aa6" name="Stumble">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Force" />
-			<property name="School" value="Mind"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+1" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Non-Flying Creature" />
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="You may reveal Stumble when this creature is activated. It stumbles and may not take a move action during its action phase. Then, destroy Stumble. Has no effect on creatures with the Unmovable trait." />
 			<property name="CardID" value="MWPROMO23" />
 		</card>
 		<card id="82956c06-e294-4d3e-bf84-7d6c56dcbb2c" name="Summoning Circle">
 			<property name="Type" value="Enchantment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Portal" />
-			<property name="School" value="Arcane"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2+4" />
-			<property name="Level" value="2" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Whenever your Mage summons a creature, he may place it in Summoning Circle&apos;s zone instead of his own zone, regardless of range or LoS." />
 			<property name="CardID" value="MWPROMO19" />
 		</card>
@@ -296,170 +327,185 @@
 
 		<card id="b070db04-d9b8-4f10-81cb-09feec6f73d1" name="Elfric&apos;s Life Ring">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="4" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Ring" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Mage gains Life +4" />
 			<property name="CardID" value="MWPROMO7" />
 		</card>
 		<card id="c84d3e91-00ff-4197-82c5-20f7217322f4" name="Meditation Amulet">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Mana" />
-			<property name="School" value="Mind"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="4" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Amulet" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="[Full]Add 3 mana to your mana supply" />
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Amulet" />
+			<property name="AttackBar" value="[Full]Add 3 mana to your mana supply" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO14" />
 		</card>
 		<card id="47f776f7-0abf-46f3-8279-e1cdde8ad0cd" name="Mordok&apos;s Tome">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="Legendary,Arcane Mage Only" />
 			<property name="Subtype" value="Tome" />
-			<property name="School" value="Arcane"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="5" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="Mage may choos one additional spell during the Planning Phase. This gives him an additional spell choice each round (it does not give him an addititoanl spell action" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Legendary,Arcane Mage Only" />
+			<property name="Text" value="Mage may choose one additional spell during the Planning Phase. This gives him an additional spell choice each round (it does not give him an addititoanl spell action)." />
 			<property name="CardID" value="MWPROMO27" />
 		</card>
 		<card id="d82d768a-5be2-4284-b9ab-b9d273a50a94" name="Morning Star">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="5" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Weapon" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Overhead Bash: [Quick][Melee][Dice=4][Unavoidable]" />
 			<property name="CardID" value="MWPROMO15" />
 		</card>
 		<card id="79692c1d-4dc8-4c84-9c04-9ad47d797bd6" name="Spiked Buckler">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Shield" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="8" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Location=Shield,Defense=8+ 1x No Ranged" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="Shield Bash: [Quick][Melee][Dice=3][Piercing +1] \n Mage gains a Defesne. Whenever this Defense successfully aviods an attack, Spiked Buckler's attack gains the CountrStrike trait until the end of that attack sequence." />
+			<property name="School" value="War" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Shield,Defense=8+ 1x No Ranged" />
+			<property name="AttackBar" value="Shield Bash: [Quick][Melee][Dice=3][Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains a Defensee. Whenever this Defense successfully aviods an attack, Spiked Buckler&apos;s attack gains the CountrStrike trait until the end of that attack sequence." />
 			<property name="CardID" value="MWPROMO26" />
 		</card>
 		<card id="3388ff14-df8b-448b-ae4f-1584c099a978" name="Storm Drake Hide">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Air"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="6" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Chest Piece" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Mage gains Armor +2 and the Lightning -2 trait" />
 			<property name="CardID" value="MWPROMO33" />
 		</card>
 		<card id="105b2ac7-86ac-42e3-9931-a40d39b28d3b" name="Vorpal Blade">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="" />
-			<property name="School" value="War"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="5" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Weapon" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="Razor Edged Slash: [Quick][Melee][Dice=4][Piercing +2]" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="AttackBar" value="Razor Edged Slash: [Quick][Melee][Dice=4][Piercing +2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO21" />
 		</card>
 		<card id="09028056-1cb4-4a85-888f-dbe0854ad016" name="Wand of Healing">
 			<property name="Type" value="Equipment" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Healing" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="2" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Text" value="Healing Light: [Cost=2][Quick][Ranged:0-1][Light][Dice=2][Heal target Living creature the amount rolled.] \n Cleansing Light: [Cost=X][Quick][Ranged:0-1][Remove 1 Condition marker from target Living creature. X = its removal cost] \n Once per round, this Mage may cast one of the 2 quick spells shown above." />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="AttackBar" value="Healing Light: [Cost=2][Quick][Ranged:0-1][Light][Dice=2][Heal target Living creature the amount rolled.] \n Cleansing Light: [Cost=X][Quick][Ranged:0-1][Remove 1 Condition marker from target Living creature. X = its removal cost]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Once per round, this Mage may cast one of the 2 quick spells shown above." />
 			<property name="CardID" value="MWPROMO22" />
 		</card>
 
 
 		<card id="a1d0ef02-3e53-4a53-8dc5-6460c16b0021" name="Clear Mind">
 			<property name="Type" value="Incantation" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Psychic" />
-			<property name="School" value="Mind"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="X" />
-			<property name="Level" value="1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Remove as many psycic, Daze, or Stun conditions as you wish from the target, paying the removal cost for eacn one. Then, destroy as many revealed psychic enchan tments from the target as you wish, paying the total mana cost (casting and reveal cost) for each one." />
 			<property name="CardID" value="MWPROMO6" />
 		</card>
 		<card id="c46fd335-9b2e-4a23-b52b-77e708de89c0" name="Dispel">
 			<property name="Type" value="Incantation" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Metamagic" />
-			<property name="School" value="Arcane"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="X" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Revealed Enchantment" />
+			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Destroy the target. X = total mana cost of target enchantment (casting plus reveal cost)." />
 			<property name="CardID" value="MWPRO1" />
 		</card>
 		<card id="a43ae982-247b-4783-ab1d-058e5a5c6b18" name="Holy Strike">
 			<property name="Type" value="Incantation" />
-			<property name="Traits" value="Novice" />
 			<property name="Subtype" value="" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="3" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
-			<property name="Text" value="Target's next melee attack this round gains the Etheral trait." />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Etheral trait." />
 			<property name="CardID" value="MWPROMO32" />
 		</card>
 		<card id="82174fd6-1e51-4aef-b5a5-fca0af2ff0bc" name="Minor Heal">
 			<property name="Type" value="Incantation" />
-			<property name="Traits" value="" />
 			<property name="Subtype" value="Healing" />
-			<property name="School" value="Holy"  />
-			<property name="Action" value="Q"  />
 			<property name="Cost" value="5" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Heal target creature the amount rolled on 5 attack dice." />
 			<property name="CardID" value="MWPRO2" />
 		</card>
-
 	</cards>
 </set>
