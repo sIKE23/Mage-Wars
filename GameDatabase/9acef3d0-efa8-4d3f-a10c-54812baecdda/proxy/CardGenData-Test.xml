@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+	<blocks>
+		<block type="text" id="title">
+			<location x="31" y="32" />
+			<text color="#000000" size="30" />
+			<border color="#FFFFFF" size="2" />
+			<wordwrap height="80" width="318" />
+		</block>
+	
+		<block type="text" id="Attack_Name">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Type">
+			<location x="1" y="20" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Subtype">
+			<location x="2" y="20" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Cost">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Action">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Range">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Target">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_School">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Level">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Stats">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Traits">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Attack_Text">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+			<wordwrap height="17" width="230" shrinktofit="True"/>
+		</block>
+		<block type="text" id="Attack_CardID">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+	</blocks>
+	<template src="proxy/card.png" default="True" >
+		<matches>
+			<match name="Type" value="Mage" />
+		</matches>
+		<textblocks>
+			<link block="title">
+				<property name="Name" />
+			</link>      
+		</textblocks> 
+	</template>
+	<template src="Proxy/Attack-Proxy.png">
+		<matches>
+			<match name="Type" value="Mage" />
+		</matches>
+		<textblocks>
+			<link block="title">
+				<property name="Name" />
+			</link>      
+		</textblocks> 
+	</template>
+</templates>
