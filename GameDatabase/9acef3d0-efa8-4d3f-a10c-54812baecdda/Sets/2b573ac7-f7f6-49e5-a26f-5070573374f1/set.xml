@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.3.0.0" version="1.3.0.0">
  	<markers>
-  	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
+ 	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
 			<marker id="8d994fe9-2422-4a9d-963d-3ad10b2b823d" name="Invisible" />
 			<marker id="b9b205a2-a998-44f5-97dc-c7f315afbbe2" name="Visible" />
@@ -252,7 +252,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=9" />
-			<property name="AttackBar" value="Repeating Crossbow: [Full][Ranged 1-1][Dice=3][[Triplestrike] or [Zone Attack][Unavoidable]] \n Wristblade: [Quick][Melee][Dice=3]" />			
+			<property name="AttackBar" value="Repeating Crossbow: [Full][Ranged 1-1][Dice=3][[Triplestrike] or [Zone Attack][Unavoidable]] \n Wristblade: [Quick][Melee][Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC10" />
@@ -311,7 +311,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="4" />
-			<property name="Stats" value="Defense=6+ 2x No Ranged],Armor=1,Life=13" />
+			<property name="Stats" value="Defense=6+ 2x No Ranged,Armor=1,Life=13" />
 			<property name="AttackBar" value="Quick Strike: [Quick][Melee][Dice=4] \n Flashing Blades: [Full][Melee][Dice=4][Doublestrike OR Sweeping]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
@@ -418,7 +418,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Life=8,Armor=2" />
+			<property name="Stats" value="Armor=2,Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive,Burnproof,Unique" />
 			<property name="Text" value="Whenever a spell or ability an opponent controls causes you lose or pay mana, including upkeep costs and Mana Drain/Transfer effects, place that mana on Mare Prism instead. If the mana was being transferred to their supply, cancel that transfer. During the Chanel Phase you may remove 2 mana from Mana Prism and place it in your supply." />
@@ -433,10 +433,10 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=0,Life=7" />
+			<property name="Stats" value="Life=7,Armor=0" />
 			<property name="AttackBar" value="Wicked Spikes: [Dice=2][Unavoidable][Piercing +1]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mangler Caltrops attacks each non=Flying creature immediately after it enters the zone. Mangler Caltrops hinders non-Flying creatures. Ranged attacks cannot target Caltrops" />
+			<property name="Text" value="Mangler Caltrops attacks each non-Flying creature immediately after it enters the zone. Mangler Caltrops hinders non-Flying creatures. Ranged attacks cannot target Caltrops" />
 			<property name="CardID" value="FWJ06" />
 		</card>
 		<card id="3a8f2eb2-df0d-4108-a8f1-499c05fb0d35" name="Quicksand">
@@ -457,12 +457,12 @@
 		<card id="c8373d7e-a8be-47cf-a1e0-5e5e90d271e8" name="Renewing Spring">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Well" />
-			<property name="School" value="Holy+Nature" />
-			<property name="Action" value="Q" />
 			<property name="Cost" value="6" />
-			<property name="Level" value="1+1" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
+			<property name="School" value="Holy+Nature" />
+			<property name="Level" value="1+1" />
 			<property name="Stats" value="Armor=0,Life=12" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive,Flame Immunity" />
@@ -823,8 +823,8 @@
 		<card id="ffe36005-ac0f-417e-a877-6b25ba561c0c" name="Force Bash">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Force" />
-			<property name="Action" value="Q" />
 			<property name="Cost" value="8" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Mind" />

@@ -350,7 +350,7 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Amulet" />
-			<property name="AttackBar" value="[Full]Add 3 mana to your mana supply" />
+			<property name="AttackBar" value="[Full][Add 3 mana to your mana supply]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO14" />
