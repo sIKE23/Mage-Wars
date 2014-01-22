@@ -96,7 +96,7 @@
 			<property name="School" value="War"  />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Life=1,Armor=0" />
-			<property name="AttackBar" value="Bow: [Ranged 1-2][Dice=4]" />
+			<property name="AttackBar" value="Bow: [Ranged:1-2][Dice=4]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="." />
 			<property name="CardID" value="MWTemplateCR01" />
