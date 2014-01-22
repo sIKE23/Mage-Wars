@@ -7,7 +7,7 @@
 		version="1.2.11.0"
 		markersize="16"
 		tags="Mage Wars"
-		description="A card game of duelling mages. Each mage brings his spellbook and abilities to a fight to the death"
+		description="A card game of dueling mages. Each mage brings his spellbook and abilities to a fight to the death"
 		setsurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
 		gameurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
 		authors="Cosworth, sIKE, lettucemode"
@@ -16,6 +16,10 @@
   <scripts>
     <script src="scripts/actions.py" />
   </scripts>
+  <events>
+	<event name="OnGameStart" action="onGameStart"/>
+	<event name="OnLoadDeck" action="onLoadDeck"/>
+  </events>
   <proxygen definitionsrc="proxy/CardGenData.xml"/>
   <documents>
     <document name="Instructions" icon="documents/shortcuts.png" src="documents/shortcuts.txt" />	
@@ -38,7 +42,6 @@
     <groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone" />
 	<groupaction menu="Roll dice" default="False" shortcut="F1" execute="rollDice" />
     <groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
-	<groupaction menu="Setup Player" default="False" execute="playerSetup" />
 	<groupaction menu="Add Vine marker" default="False" shortcut="F3" execute="createVineMarker" />
 	<groupaction menu="Flip Game Board" default="False" shortcut="F9" execute="flipGameBoard" />
     <groupactions menu="Automation">
