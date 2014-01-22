@@ -26,17 +26,18 @@
   </documents>
   <card back="cards/card.jpg" front="cards/card.jpg" width="55" height="74" cornerRadius="3">
   <property name="Type" type="String" hidden="False" ignoreText="False" />
-	<property name="Subtype" type="String" hidden="False" ignoreText="False" />
-	<property name="School" type="String" hidden="False" ignoreText="False"  />
-	<property name="Cost" type="String" hidden="False" ignoreText="False" />
-	<property name="Level" type="String" hidden="False" ignoreText="False" />
-	<property name="Action" type="String" hidden="False" ignoreText="False"  />
-	<property name="CardID" type="String" hidden="False" ignoreText="False" />
-	<property name="Traits" type="String" hidden="False" ignoreText="False" />
-	<property name="Stats" type="String" hidden="False" ignoreText="False" />
-	<property name="Range" type="String" hidden="False" ignoreText="False" />
-	<property name="Target" type="String" hidden="False" ignoreText="False" />
-	<property name="Text" type="String" hidden="False" ignoreText="False" />
+        <property name="Subtype" type="String" hidden="False" ignoreText="False" />        
+        <property name="Cost" type="String" hidden="False" ignoreText="False" />
+        <property name="Action" type="String" hidden="False" ignoreText="False"  />
+        <property name="Range" type="String" hidden="False" ignoreText="False" />
+        <property name="Target" type="String" hidden="False" ignoreText="False" />
+        <property name="School" type="String" hidden="False" ignoreText="False"  />
+        <property name="Level" type="String" hidden="False" ignoreText="False" />
+        <property name="Stats" type="String" hidden="False" ignoreText="False" />
+        <property name="AttackBar" type="String" hidden="False" ignoreText="False" />
+        <property name="Traits" type="String" hidden="False" ignoreText="False" />
+        <property name="Text" type="String" hidden="False" ignoreText="False" />
+        <property name="CardID" type="String" hidden="False" ignoreText="False" />
   </card>
   <table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/gameboard.png" background="background/background.png" boardPosition="-300,-225,600,450" backgroundStyle="uniformToFill">
     <groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone" />
@@ -98,8 +99,15 @@
     </group>
   </player>
   <deck>
+  <deck>
     <section name="Mage" group="Hand" />
+	<section name="Attack" group="Hand" />
+	<section name="Conjuration" group="Hand" />
+	<section name="Creature" group="Hand" />
+	<section name="Enchantment" group="Hand" />
+	<section name="Equipment" group="Hand" />	
 	<section name="Incantation" group="Hand" />
+  </deck>
   </deck>
   
 </game>
