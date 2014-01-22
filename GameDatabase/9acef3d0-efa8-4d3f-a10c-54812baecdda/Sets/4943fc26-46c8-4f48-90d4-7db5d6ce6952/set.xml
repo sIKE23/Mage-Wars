@@ -341,7 +341,7 @@
 		</card>
 		<card id="c4daa855-667a-4211-8970-5b210eeb145d" name="Eagleclaw Boots">
 			<property name="Type" value="Equipment" />
-			<property name="Subtype" value="" />
+			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />

@@ -133,7 +133,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=1,Life=13" />
-			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged 0-1][Wind][Dice=2][d12][7+ = Push][Sweeping][Unavoidable][+2 vs. Flying][Ethereal]" />
+			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged:0-1][Wind][Dice=2][d12][7+ = Push][Sweeping][Unavoidable][+2 vs. Flying][Ethereal]" />
 			<property name="Traits" value="Aegis 1,Flying,Wind Immunity,Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO34" />
@@ -196,7 +196,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2,Life=8" />
-			<property name="AttackBar" value="Giant Bolt: [Quick][Ranged=1-2][Dice=5][Piercing +3]" />
+			<property name="AttackBar" value="Giant Bolt: [Quick][Ranged:1-2][Dice=5][Piercing +3]" />
 			<property name="Traits" value="Zone Exclusive,Flame +2" />
 			<property name="Text" value="Ballista starts with 1 Load token on it. Each Upkeep Phase, place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make its attack." />
 			<property name="CardID" value="MWPROMO4" />

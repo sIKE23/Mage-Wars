@@ -182,6 +182,20 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A06" />
 		</card>
+		<card id="9217f8a0-e46d-401e-b8b6-477100eaba54" name="Lightning Bolt">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Lightning" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged][Lightning][Dice=5][d12][6-7 = Daze; 8+ = Stun][Ethereal]" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MW1A07" />
+		</card>
 		<card id="8ca4ca3f-2d9f-4828-bbfc-b106fb9b7b46" name="Geyser">
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Hydro" />
@@ -208,20 +222,6 @@
 			<property name="AttackBar" value="[Ranged][Wind][Dice=2][d12][4-10 = Push; 11+ = Push &amp; Daze][Ethereal][+2 vs Flying]" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A09" />
-		</card>
-		<card id="9217f8a0-e46d-401e-b8b6-477100eaba54" name="Lightning Bolt">
-			<property name="Type" value="Attack" />
-			<property name="Subtype" value="Lightning" />
-			<property name="Cost" value="8" />
-			<property name="Action" value="Q" />
-			<property name="Range" value="0-2" />
-			<property name="Target" value="Creature or Conjuration" />
-			<property name="School" value="Air" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged][Lightning][Dice=5][d12][6-7 = Daze; 8+ = Stun][Ethereal]" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MW1A07" />
 		</card>
 		<card id="d661f9e7-c9b5-4913-b809-e9fda8606c2b" name="Pillar of Light">
 			<property name="Type" value="Attack" />
@@ -293,7 +293,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=1,Life=6" />
-			<property name="AttackBar" value="Staff: [Quick][Melee][Dice=2] \n Healing Light: [Full][Ranged=0-1][Heal][Dice=1][Heal target Living Creature the amount rolled.]" />
+			<property name="AttackBar" value="Staff: [Quick][Melee][Dice=2] \n Healing Light: [Full][Ranged:0-1][Heal][Dice=1][Heal target Living Creature the amount rolled.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C02" />

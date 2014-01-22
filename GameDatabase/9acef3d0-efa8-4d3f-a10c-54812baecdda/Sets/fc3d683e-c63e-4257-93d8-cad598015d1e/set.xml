@@ -76,7 +76,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0,Life=7" />
-			<property name="AttackBar" value="Corrosive Mist: [Ranged 0-0][Acid][Dice=2][d12][7+ = Corrode][Unavoidable]" />
+			<property name="AttackBar" value="Corrosive Mist: [Ranged:0-0][Acid][Dice=2][d12][7+ = Corrode][Unavoidable]" />
 			<property name="Traits" value="Living,Flame +2,Hydro Immunity" />
 			<property name="Text" value="Comes into play with a Mist token on it. When Orchid&apos;s attack targets a Mage, at the end of the Damage &amp; Effects Step, you may remove the Mist token, choose an equipment object on that Mage, and pay its casting cost to destroy that object." />
 			<property name="CardID" value="DNJ02" />
@@ -136,7 +136,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0,Life=7" />
-			<property name="AttackBar" value="Poison Sleep Mist: [Ranged 0-0][Poison][Dice=3][Unavoidable] \n " />
+			<property name="AttackBar" value="Poison Sleep Mist: [Ranged:0-0][Poison][Dice=3][Unavoidable]" />
 			<property name="Traits" value="Living,Flame +2,Hydro Immunity" />
 			<property name="Text" value="Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature." />
 			<property name="CardID" value="DNJ06" />
@@ -275,7 +275,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0,Life=7" />
-			<property name="AttackBar" value="Sacrificial Knife: [Quick][Melee][Dice=2] \n Repair Bones: [Full][Ranged 0-1][Reconstruct 2 damage from target skeleton object.] \n Vigor of the Grave: [Full][Ranged 0-1][Target zombie creature gains the Melee +1 trait until end of round.]" />
+			<property name="AttackBar" value="Sacrificial Knife: [Quick][Melee][Dice=2] \n Repair Bones: [Full][Ranged:0-1][Reconstruct 2 damage from target skeleton object.] \n Vigor of the Grave: [Full][Ranged:0-1][Target zombie creature gains the Melee +1 trait until end of round.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC01" />
@@ -455,7 +455,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0,Life=9" />
-			<property name="AttackBar" value="Bow: [Full][Ranged 1-2][Dice=4] \n Fist: [Quick][Melee][Dice=2]" />
+			<property name="AttackBar" value="Bow: [Full][Ranged:1-2][Dice=4] \n Fist: [Quick][Melee][Dice=2]" />
 			<property name="Traits" value="Nonliving,Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC13" />
@@ -500,7 +500,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=9" />
-			<property name="AttackBar" value="Talons: [Quick][Melee][Dice=4][Piercing +1] \n Spitting Acid: [Full][Acid][Ranged 0-1][Dice=3][d12][5+ = Corrode]" />
+			<property name="AttackBar" value="Talons: [Quick][Melee][Dice=4][Piercing +1] \n Spitting Acid: [Full][Acid][Ranged:0-1][Dice=3][d12][5+ = Corrode]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC16" />
@@ -575,7 +575,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0,Life=11" />
-			<property name="AttackBar" value="Ensnaring Vine: [Ranged 0-1][Dice=3][d12][5+ = Snatch]" />
+			<property name="AttackBar" value="Ensnaring Vine: [Ranged:0-1][Dice=3][d12][5+ = Snatch]" />
 			<property name="Traits" value="Rooted,Regenerate 2,Flame +2,Hydro Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC21" />
@@ -851,7 +851,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="Thornburst: [Ranged 0-0][Dice=4][d12][7+ = Bleed][Piercing +1] \n " />
+			<property name="AttackBar" value="Thornburst: [Ranged:0-0][Dice=4][d12][7+ = Bleed][Piercing +1] \n " />
 			<property name="Traits" value="Druid Only" />
 			<property name="Text" value="Target friendly vine marker makes the above attack. Then, destroy that vine marker." />
 			<property name="CardID" value="DNI02" />

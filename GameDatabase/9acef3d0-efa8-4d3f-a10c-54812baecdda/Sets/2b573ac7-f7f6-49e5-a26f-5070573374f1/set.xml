@@ -132,7 +132,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=-,Life=35" />
-			<property name="AttackBar" value="Two-Fisted Power Smash: [Full][Melee][Dice=7][d12][7-10 = Daze; 11+ = Stun] \n Quake Stomp: [Full][Ranged 0-0][Dice=3][d12][7+ = Slam]" />
+			<property name="AttackBar" value="Two-Fisted Power Smash: [Full][Melee][Dice=7][d12][7-10 = Daze; 11+ = Stun] \n Quake Stomp: [Full][Ranged:0-0][Dice=3][d12][7+ = Slam]" />
 			<property name="Traits" value="Slow,Burnproof,Lightning -2,Tough -2,Nonliving,Unmovable" />
 			<property name="Text" value="Earth Elemental is immune to his Quake Stomp attack." />
 			<property name="CardID" value="FWC02" />
@@ -147,7 +147,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0,Life=5" />
-			<property name="AttackBar" value="Club: [Quick][Melee][Dice=2] \n Detonate: [Full][Ranged 0-0][Zone Attack][Dice=4][d12][5-10 = Slam; 11+ = Stun][Unavoidable]" />
+			<property name="AttackBar" value="Club: [Quick][Melee][Dice=2] \n Detonate: [Full][Ranged:0-0][Zone Attack][Dice=4][d12][5-10 = Slam; 11+ = Stun][Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Goblin Bomber uses his Detonate attack, destroy him as a cost of declaring that attack. If the Goblin Bomber is destroyed by taking damage, roll 1d12: On a 7+ the Detonate attack is triggered." />
 			<property name="CardID" value="FWC03" />
@@ -192,7 +192,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0,Life=6" />
-			<property name="AttackBar" value="Stone Sling: [Full][Ranged 1-2][Dice=3] \n Knife: [Quick][Melee][Dice=2]" />
+			<property name="AttackBar" value="Stone Sling: [Full][Ranged:1-2][Dice=3] \n Knife: [Quick][Melee][Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC06" />
@@ -207,7 +207,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1,Life=9" />
-			<property name="AttackBar" value="Thundergun: [Full][Ranged 1-3][Dice=6][Roll 1 fewer attack die for each zone of range beyond 1.] \n Small Sword: [Quick][Melee][Dice=3]" />
+			<property name="AttackBar" value="Thundergun: [Full][Ranged:1-3][Dice=6][Roll 1 fewer attack die for each zone of range beyond 1.] \n Small Sword: [Quick][Melee][Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC07" />
@@ -252,7 +252,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=9" />
-			<property name="AttackBar" value="Repeating Crossbow: [Full][Ranged 1-1][Dice=3][[Triplestrike] or [Zone Attack][Unavoidable]] \n Wristblade: [Quick][Melee][Dice=3]" />
+			<property name="AttackBar" value="Repeating Crossbow: [Full][Ranged:1-1][Dice=3][[Triplestrike] or [Zone Attack][Unavoidable]] \n Wristblade: [Quick][Melee][Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC10" />
@@ -282,7 +282,7 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0,Life=8" />
-			<property name="AttackBar" value="Psionic Blast: [Full][Ranged 0-0][Psychic][Dice=2][d12][9+ = Daze][Ethereal][Unavoidable][Critical Damage]" />
+			<property name="AttackBar" value="Psionic Blast: [Full][Ranged:0-0][Psychic][Dice=2][d12][9+ = Daze][Ethereal][Unavoidable][Critical Damage]" />
 			<property name="Traits" value="Flying,Pest" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC12" />
@@ -297,7 +297,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=1,Life=13" />
-			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged 0-1][Wind][Dice=2][d12][7+ = Push][Sweeping][Unavoidable][+2 vs. Flying][Ethereal]" />
+			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged:0-1][Wind][Dice=2][d12][7+ = Push][Sweeping][Unavoidable][+2 vs. Flying][Ethereal]" />
 			<property name="Traits" value="Aegis 1,Flying,Wind Immunity,Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC13" />
@@ -359,7 +359,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=11" />
-			<property name="AttackBar" value="Boulder: [Ranged=2-3][Dice=8][Can only target Corporeal Conjurations] \n Rock Storm:[Ranged=2-3][Zone Attack][Dice=8][Unavoidable]" />
+			<property name="AttackBar" value="Boulder: [Ranged:2-3][Dice=8][Can only target Corporeal Conjurations] \n Rock Storm:[Ranged:2-3][Zone Attack][Dice=8][Unavoidable]" />
 			<property name="Traits" value="Zone Exclusive,Flame +2,Legendary,Warlord Only" />
 			<property name="Text" value="Akiro&apos;s starts with 1 Load token on it. Each Upkeep Phase place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make 1 of its 2 attacks listed above." />
 			<property name="CardID" value="FWJ01" />
@@ -528,7 +528,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature&apos;s melee attacks gain the Unavoidable trait." />
+			<property name="Text" value="This creature&apos;s melee attacks gain the Unavoidable trait. \n [Unavoidable]" />
 			<property name="CardID" value="FWE03" />
 		</card>
 		<card id="ea8fb903-9a56-4afe-a2d2-e452b3407605" name="Force Crush">
