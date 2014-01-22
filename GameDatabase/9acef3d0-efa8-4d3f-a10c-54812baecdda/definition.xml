@@ -99,7 +99,6 @@
     </group>
   </player>
   <deck>
-  <deck>
     <section name="Mage" group="Hand" />
 	<section name="Attack" group="Hand" />
 	<section name="Conjuration" group="Hand" />
@@ -107,7 +106,6 @@
 	<section name="Enchantment" group="Hand" />
 	<section name="Equipment" group="Hand" />	
 	<section name="Incantation" group="Hand" />
-  </deck>
   </deck>
   
 </game>
