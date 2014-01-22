@@ -193,6 +193,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged][Lightning][Dice=5][d12][6-7 = Daze; 8+ = Stun][Ethereal]" />
+			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A07" />
 		</card>
@@ -208,6 +209,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Text" value="[Ranged][Hydro][Dice=3][d12][5+ = Daze][Unavoidable]" />
+			<property name="Traits" value="" />
 			<property name="CardID" value="MW1A08" />
 		</card>
 		<card id="effa9ea8-3cf2-4efe-a83f-6f920c8faa22" name="Jet Stream">
@@ -220,6 +222,7 @@
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="Level" value="1" />
 			<property name="AttackBar" value="[Ranged][Wind][Dice=2][d12][4-10 = Push; 11+ = Push &amp; Daze][Ethereal][+2 vs Flying]" />
+			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A09" />
 		</card>
@@ -235,6 +238,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged][Light][Dice=2][d12][4-10 = Daze; 11+ = Stun][Ethereal][+2 vs. Nonliving Creatures]" />
 			<property name="Text" value="" />
+			<property name="Traits" value="" />
 			<property name="CardID" value="MW1A11" />
 		</card>
 		<card id="297f9d29-cedf-4d1a-970c-703a3f978907" name="Ring of Fire">
@@ -249,6 +253,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged][Zone Attack][Flame][Dice=5][d12][7-10 = Burn; 11+ = 2 Burn][Unavoidable][Defrost]" />
+			<property name="Traits" value="" />
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
 			<property name="CardID" value="MW1A12" />
 		</card>
@@ -263,6 +268,7 @@
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged][Lightning][Dice=6][d12][4-6 = Daze; 7+ = Stun][Ethereal]" />
+			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A13" />
 		</card>
@@ -399,7 +405,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1,Life=15" />
-			<property name="AttackBar" value=Snapping Bite: [Quick][Melee][Dice=4][Counterstrike] \n Triple Bite: [Full][Melee][Dice=3][Triplestrike]" />
+			<property name="AttackBar" value="Snapping Bite: [Quick][Melee][Dice=4][Counterstrike] \n Triple Bite: [Full][Melee][Dice=3][Triplestrike]" />
 			<property name="Traits" value="Regenerate 2,Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C09" />
@@ -579,9 +585,9 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=3,Life=13" />
-			<property name="AttackBar" value=""Talons: [Quick][Melee][Dice=4][Piercing +1]" />
+			<property name="AttackBar" value="Talons: [Quick][Melee][Dice=4][Piercing +1]" />
 			<property name="Traits" value="Slow,Poison Immunity,Legendary" />
-			<property name="Text" value=Each Upkeep Phase, all Living creatures in Malacoda&apos;s zone receive 2 points of direct poison damage." />
+			<property name="Text" value="Each Upkeep Phase, all Living creatures in Malacoda&apos;s zone receive 2 points of direct poison damage." />
 			<property name="CardID" value="MW1C23" />
 		</card>
 		<card id="ad3b90cf-5a53-4541-903f-4b0cfe397f64" name="Mana Leech">
@@ -1238,21 +1244,6 @@
 		</card>
 
 
-		<card id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6" name="Agony">
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Curse" />
-			<property name="Cost" value="2+3" />
-			<property name="Action" value="Q" />
-			<property name="Range" value="0-2" />
-			<property name="Target" value="Creature" />
-			<property name="School" value="Dark" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-			<property name="Text" value="Whenever this creature makes a non-spell ranged or melee attack, it rolls 2 fewer attack dice." />
-			<property name="CardID" value="MW1E09" />
-		</card>
 		<card id="8df84f88-e24a-4517-aae5-8595c09cc3cd" name="Bear Strength">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
@@ -1372,6 +1363,21 @@
 			<property name="Traits" value="Magecast,Dark Mage Only,Unique" />
 			<property name="Text" value="Each Upkeep Phase, the controller of Death Link may heal up to 2 damage from his Mage and place it on this creature as direct damage, regardless of distance or LoS." />
 			<property name="CardID" value="MW1E08" />
+		</card>
+		<card id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6" name="Agony">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Whenever this creature makes a non-spell ranged or melee attack, it rolls 2 fewer attack dice." />
+			<property name="CardID" value="MW1E09" />
 		</card>
 		<card id="ed610a8f-e3f2-4d3e-8db6-5d85c42afb4b" name="Decoy">
 			<property name="Type" value="Enchantment" />
@@ -2714,8 +2720,7 @@
 			<property name="Text" value="Target&apos;s next melee attack this round gains the Vampiric and Piercing +1 traits." />
 			<property name="CardID" value="MW1I29" />
 		</card>
-
-
+<!--
 		<card id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Die roll area">
  			<property name="Type" value="Internal" />
 		</card>
@@ -2732,6 +2737,6 @@
 			<alternate name="1st Player Token Blue" type="B" />
 			<alternate name="1st Player Token Green" type="C" />
 			<alternate name="1st Player Token Yellow" type="D" />
-		</card>
+		</card>-->
 	</cards>
 </set>
