@@ -71,7 +71,7 @@ Die2 = ("Die2","b881f652-9384-43e1-9758-e68b04583b3b")
 Die1s = ("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
 Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
 Died12 = ("Died12","3cdf4231-065d-400e-9c74-d0ae669e852c")
-diceBank = [-1]
+diceBank = [1]
 
 ##########################		Other			############################
 
