@@ -71,14 +71,14 @@ Die2 = ("Die2","b881f652-9384-43e1-9758-e68b04583b3b")
 Die1s = ("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
 Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
 Died12 = ("Died12","3cdf4231-065d-400e-9c74-d0ae669e852c")
-diceBank = [1]
+diceBank = [-1]
 
 ##########################		Other			############################
 
-PlayerColor = 	["#DE2827", 	# Red 		R=222 G=40  B=39
-				"#171E78", 		# Blue		R=23  G=30  B=120
-				"#01603E", 		# Green		R=1   G=96  B=62
-				"#F7D917"] 		# Yellow 	R=247 G=217 B=23
+PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
+				"#171e78", 		# Blue		R=23  G=30  B=120
+				"#01603e", 		# Green		R=1   G=96  B=62
+				"#f7d917"] 		# Yellow 	R=247 G=217 B=23
 mycolor = "#800080" # Purple
 boardFlipped = False
 showDebug = False
@@ -93,8 +93,11 @@ def onGameStart():
 	setGlobalVariable("ColorsChosen", "")	#reset color picking
 	
 def onLoadDeck(player, groups):
-	if validateDeck(groups[0]):
-		playerSetup()
+	if player == me:
+		if validateDeck(groups[0]):
+			playerSetup()
+		else:
+			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
 
 
 ############################################################################
@@ -106,29 +109,18 @@ def playerDone(group, x=0, y=0):
 	
 def rollDice(group, x=0, y=0):
 	mute()
+	
 	global diceBank
-	dieCard = moveCard("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -410, -35 )
-	for c in table: #reuse existing diecard2 if possible
-		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd":
-			if (-360,-35) == c.position:
-				dieCard2 = c
-				debug("found diecard 2")
-				notfound = False
-				break
-			else:
-				notfound= True
-	if notfound:
-		dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -360, -35 )
-		
-	for tokenType in dieCard.markers:
-		dieCard.markers[tokenType] = 0
-	for tokenType in dieCard2.markers:
-		dieCard2.markers[tokenType] = 0
+	for c in table:
+		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
+			c.delete()
+	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -410, -35 )
+	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -360, -35 )
+	
 	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
 	
-	mute()
-	if (len(diceBank) < num): #diceBank running low - fetch more 
+	if (len(diceBank) < count): #diceBank running low - fetch more 
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 		debug("Random.org response code: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
@@ -137,13 +129,14 @@ def rollDice(group, x=0, y=0):
 			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
 			while (len(diceBank) < 20):
 				diceBank.append(rnd(0,5))
+				
 	result = [0,0,0,0,0,0]
-	for x in range(num): 
+	for x in range(count): 
 		roll = int(diceBank.pop())
 		result[roll] += 1
 	debug("diceRoller result: {}".format(result))
 	notify("{} rolls {} attack dice".format(me,count))
-
+	
 	damPiercing = result[4] + 2* result[5]
 	damNormal = result[2] + 2* result[3]
 	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
@@ -238,8 +231,13 @@ def nextPhase(group, x=-360, y=-125):
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"") == True: #Back to Upkeep
 			notify("Ready Stage: Performing Initiative, Reset, and Channeling Phases")
-			init = moveCard("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125)
-			flipcard(init)
+			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
+			if init.controller == me:			
+				init = moveCard("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125)
+				flipcard(init)
+			else:
+				remoteCall(init.controller, "moveCard", ["8ad1880e-afee-49fe-a9ef-b0c17aefac3f", -420, -125])
+				remoteCall(init.controller, "flipcard", [init])
 			for p in players:
 				p.Mana += p.Channeling
 				notify("{} channels {}".format(p.name,p.Channeling))
@@ -315,6 +313,30 @@ def nextPhase(group, x=-360, y=-125):
 									else:
 										whisper("Harmonize found but no Mana added")
 
+			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]	#any cards with burn?
+			if len(cardsWithBurn) > 0:	
+				notify("Resolving Burns...")	#found at least one
+				for c in cardsWithBurn:
+					#roll em
+					numMarkers = c.markers[Burn]
+					burnDamage = 0
+					burnsRemoved = 0
+					for i in range(0, numMarkers):
+						roll = rnd(0, 5)
+						if roll == 0 or roll == 1:
+							c.markers[Burn] -= 1
+							burnsRemoved += 1
+						elif roll == 2 or roll == 3:
+							burnDamage += 1
+						elif roll == 4 or roll == 5:
+							burnDamage += 2
+					#apply damage
+					if c.Type == "Mage":
+						c.controller.Damage += burnDamage
+					elif c.Type == "Creature":
+						c.markers[Damage] += burnDamage
+					notify("{} damage added to {}. {} Burns removed.".format(burnDamage, c.Name, burnsRemoved))
+						
 def toggleDebug(group, x=0, y=0):
 	global showDebug
 	showDebug = not showDebug
@@ -677,17 +699,27 @@ def switchPhase(card, phase):
 	global mycolor
 	mute()
 	if card.highlight == None: #other player not done yet
-		card.highlight = mycolor
+		if card.controller == me:
+			card.highlight = mycolor
+		else:
+			remoteCall(card.controller, "remoteHighlight", [card, mycolor])
 		notify("{} is done with {} phase".format(me.name,card.name))
 		return False
 	elif card.highlight != mycolor or showDebug:
-		#debug("HL {}, mycolor {}".format(card.highlight,mycolor))
-		card.highlight = None
-		card.switchTo(phase)
-		notify("Phase changed to {}".format(card.name))
+		if card.controller == me:
+			card.highlight = None
+			card.switchTo(phase)
+		else:
+			remoteCall(card.controller, "remoteHighlight", [card, None])
+			remoteCall(card.controller, "remoteSwitchPhase", [card, phase])
+		notify("Phase changed to {}".format(phase))
 		return True
 					
-#def sumLevel(School):
+def remoteHighlight(card, color):
+	card.highlight = color
+	
+def remoteSwitchPhase(card, phase):
+	card.switchTo(phase)
 	
 #---------------------------------------------------------------------------
 # Table card actions

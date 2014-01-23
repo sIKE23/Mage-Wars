@@ -1,4 +1,6 @@
-﻿namespace Octgn.MageWarsValidator
+﻿//Version: 1.3.0.0
+
+namespace Octgn.MageWarsValidator
 {
     using System;
     using System.Collections.Generic;
@@ -106,15 +108,15 @@
                 {
                     {"Dark", 0},{"Holy",0},{"Nature",0},{"Mind",0},{"Arcane",0},{"War",0},{"Earth",0},{"Water",0},{"Air",0},{"Fire",0},{"Creature",0}
                 };
-                
+
                 foreach (var section in secArray)
                 {
                     foreach (var card in section.Cards)
                     {
                         //MessageBox.Show(String.Format("{0}", card.Name));
-                        if ("Mage" == Property(card, "Type")) 
+                        if ("Mage" == Property(card, "Type"))
                         {
-                            var magestats = Splitme(Property(card, "Stats"),",");
+                            var magestats = Splitme(Property(card, "Stats"), ",");
                             magename = card.Name;
                             reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
                             foreach (var ms in magestats)
@@ -127,7 +129,7 @@
                                 {
                                     if (ms.Contains(t.Key)) //scan magestats for training info
                                     {
-                                        
+
                                         var tlevel = Splitme(ms, "=");
                                         training[t.Key] = Convert.ToInt32(tlevel[1]);
                                     }
@@ -160,7 +162,7 @@
                             var typestr = Property(card, "Type");
                             if (typestr.Equals("Conjuration-Wall")) typestr = "Conjuration";
                             if (!reporttxt.Contains(typestr)) // has this type been listed before??
-                            {                                
+                            {
                                 reporttxt += string.Format("\n---  {0}  ---\n", typestr);
                             }
                             reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
@@ -179,7 +181,7 @@
                             {
                                 if (magename == "none in deck") //no mage found yet
                                 {
-                                    System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");    
+                                    System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");
                                 }
                                 var lev = Splitme(level, "/")[0]; //just take the first value as each is the same
                                 var mincost = 3;
@@ -215,7 +217,7 @@
                                     }
                                     else //handle single school or "/" school cards
                                     {
-                                        var lev = Splitme(level, "/"); 
+                                        var lev = Splitme(level, "/");
                                         spellbook += Convert.ToInt32(lev[0]) * card.Quantity;
                                     }
                                 }
@@ -276,16 +278,16 @@
                     spellbook += t.Value * levels[t.Key];
                 }
                 string reporttmp = "Mage Wars deck (built using OCTGN deckbuilder) " + DateTime.Today.Date.ToString() + "\n\n";
-                reporttmp += string.Format("Spellbook points: {0} used of {0} allowed\n\n",spellbook, spellpoints);
+                reporttmp += string.Format("Spellbook points: {0} used of {0} allowed\n\n", spellbook, spellpoints);
                 reporttmp += reporttxt;
                 //System.Windows.MessageBox.Show(reporttmp);
                 Clipboard.SetText(reporttmp);
-                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.",spellbook,magename,spellpoints));
-            }   
+                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook, magename, spellpoints));
+            }
 
         }
 
-        private string [] Splitme(string prop, string delimstr)
+        private string[] Splitme(string prop, string delimstr)
         {
             char[] delimiter = delimstr.ToCharArray();
             return prop.Split(delimiter);
