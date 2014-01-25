@@ -41,7 +41,7 @@
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged][Zone Attack][Air][Dice=2][d12][4-6=Push;7-9=Daze;10+ = Push &amp; Daze][Piercing +1,+2 vs. Flyin][Unavoidable]" />
+			<property name="AttackBar" value="[Ranged][Zone Attack][Air][Dice=2][d12][4-6=Push;7-9=Daze;10+ = Push &amp; Daze][Piercing +1,+2 vs. Flying][Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
@@ -367,7 +367,7 @@
 			<property name="Stats" value="Location=Weapon/Shield" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Legendary,Arcane Mage Only" />
-			<property name="Text" value="Mage may choose one additional spell during the Planning Phase. This gives him an additional spell choice each round (it does not give him an addititoanl spell action)." />
+			<property name="Text" value="Mage may choose one additional spell during the Planning Phase. This gives him an additional spell choice each round (it does not give him an additional spell action)." />
 			<property name="CardID" value="MWPROMO27" />
 		</card>
 		<card id="d82d768a-5be2-4284-b9ab-b9d273a50a94" name="Morning Star">
@@ -397,7 +397,7 @@
 			<property name="Stats" value="Location=Shield,Defense=8+ 1x No Ranged" />
 			<property name="AttackBar" value="Shield Bash: [Quick][Melee][Dice=3][Piercing +1]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defensee. Whenever this Defense successfully aviods an attack, Spiked Buckler&apos;s attack gains the CountrStrike trait until the end of that attack sequence." />
+			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence." />
 			<property name="CardID" value="MWPROMO26" />
 		</card>
 		<card id="3388ff14-df8b-448b-ae4f-1584c099a978" name="Storm Drake Hide">
@@ -459,7 +459,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Remove as many psycic, Daze, or Stun conditions as you wish from the target, paying the removal cost for eacn one. Then, destroy as many revealed psychic enchan tments from the target as you wish, paying the total mana cost (casting and reveal cost) for each one." />
+			<property name="Text" value="Remove as many psychic, Daze, or Stun conditions as you wish from the target, paying the removal cost for each one. Then, destroy as many revealed psychic enchantments from the target as you wish, paying the total mana cost (casting and reveal cost) for each one." />
 			<property name="CardID" value="MWPROMO6" />
 		</card>
 		<card id="c46fd335-9b2e-4a23-b52b-77e708de89c0" name="Dispel">
@@ -489,7 +489,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Target&apos;s next melee attack this round gains the Etheral trait." />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Ethereal trait." />
 			<property name="CardID" value="MWPROMO32" />
 		</card>
 		<card id="82174fd6-1e51-4aef-b5a5-fca0af2ff0bc" name="Minor Heal">

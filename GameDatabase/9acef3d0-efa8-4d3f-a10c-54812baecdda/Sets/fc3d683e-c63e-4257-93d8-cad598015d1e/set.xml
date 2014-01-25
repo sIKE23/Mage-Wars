@@ -335,7 +335,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2,Life=5" />
-			<property name="AttackBar" value="Impregnating Bite: [Quick][Melee][Dice=3][Piecering +1] \n " />
+			<property name="AttackBar" value="Impregnating Bite: [Quick][Melee][Dice=3][Piercing +1] \n " />
 			<property name="Traits" value="Nonliving,Psychic Immunity,Climbing" />
 			<property name="Text" value="Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
@@ -367,7 +367,7 @@
 			<property name="Stats" value="Armor=1,Life=13" />
 			<property name="AttackBar" value="Cursed Sword: [Quick][Melee][Dice=4][d12][8+ = Tainted] \n " />
 			<property name="Traits" value="Nonliving,Psychic Immunity,Legendary" />
-			<property name="Text" value="Each Upkeep Phase, each friendly skeleton object, in or bodering Mort&apos;s zone, may Reconstruct up to 2 damage." />
+			<property name="Text" value="Each Upkeep Phase, each friendly skeleton object, in or bordering Mort&apos;s zone, may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC07" />
 		</card>
 		<card id="fb442d50-c831-4da9-bbb8-dace15fea19b" name="Unstable Zombie">
@@ -943,7 +943,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipmentapos;s casting cost" />
+			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost" />
 			<property name="CardID" value="DNI08" />
 		</card>
 

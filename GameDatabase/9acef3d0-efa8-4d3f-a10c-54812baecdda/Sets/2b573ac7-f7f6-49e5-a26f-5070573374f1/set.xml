@@ -252,7 +252,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=9" />
-			<property name="AttackBar" value="Repeating Crossbow: [Full][Ranged:1-1][Dice=3][[Triplestrike] or [Zone Attack][Unavoidable]] \n Wristblade: [Quick][Melee][Dice=3]" />
+			<property name="AttackBar" value="Repeating Crossbow: [Full][Ranged:1-1][Dice=3][Triplestrike] or [Zone Attack][Unavoidable] \n Wristblade: [Quick][Melee][Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC10" />
@@ -753,7 +753,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1,Location=Weapon" />
-			<property name="AttackBar" value="[Quick][[Melee][Dice=4][Piercing +1]" />
+			<property name="AttackBar" value="[Quick][Melee][Dice=4][Piercing +1]" />
 			<property name="Traits" value="Familiar,Legendary,Dark Mage Only" />
 			<property name="Text" value="Sectarus is a non-creature familiar, which can be used to cast only curse enchantments. If Sectarus is used to attack and damage a creature, it may immediately cast the spell on that creature as a free action" />
 			<property name="CardID" value="FWQ09" />
@@ -847,7 +847,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="ALl creature in target zone are Pushed 1 zone away in the same directione. This will not Push them through a wall with the Passage Attacks trait, unlessyou pay an additional 3 mana when this spell is cast." />
+			<property name="Text" value="All creature in target zone are Pushed 1 zone away in the same direction. This will not Push them through a wall with the Passage Attacks trait, unless you pay an additional 3 mana when this spell is cast." />
 			<property name="CardID" value="FWI04" />
 		</card>
 		<card id="060f5f28-8aab-4516-9c20-d4c0038c61ed" name="Mass Sleep">
@@ -1027,7 +1027,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the choosen equipment. X = equipmentapos;s casting cost." />
+			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost." />
 			<property name="CardID" value="FWI16" />
 		</card>
 		<card id="7575f333-31c4-4330-8a09-4a460543ec52" name="Force Push">

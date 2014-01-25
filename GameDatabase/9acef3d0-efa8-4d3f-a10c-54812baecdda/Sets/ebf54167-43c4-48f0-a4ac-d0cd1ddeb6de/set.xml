@@ -1486,7 +1486,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +3" />
-			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait. \n [Unmoveable]" />
+			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait. \n [Unmovable]" />
 			<property name="CardID" value="MW1E16" />
 		</card>
 		<card id="7fe6a6b2-4403-4a07-8048-4692d954898a" name="Force Orb">
@@ -1780,7 +1780,7 @@
 			<property name="Cost" value="2+4" />
 			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Creature" />
+			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
@@ -1906,7 +1906,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Chest Piece" />
-			<property name="AttackBar" value="[Damage Barrier][Dice=1][Etherea][Unavoidable][Critical Damage]" />
+			<property name="AttackBar" value="[Damage Barrier][Dice=1][Ethereal][Unavoidable][Critical Damage]" />
 			<property name="Traits" value="Dark Mage Only" />
 			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier. \n Armor +2" />
 			<property name="CardID" value="MW1Q05" />
@@ -2330,7 +2330,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="The next time this round the target creature makes a melee attack, if that attack is not a Counterstrike, at the end of that action it may immediately make another quick action melee attack. This extra attack counts as part of the same attack action. Only one Battle Fury spell may be cast per round on hte same creature" />
+			<property name="Text" value="The next time this round the target creature makes a melee attack, if that attack is not a Counterstrike, at the end of that action it may immediately make another quick action melee attack. This extra attack counts as part of the same attack action. Only one Battle Fury spell may be cast per round on hate same creature" />
 			<property name="CardID" value="MW1I02" />
 			<alternate name="Battle Fury" type="B" />
 		</card>

@@ -13,7 +13,7 @@
 		<property name="Stats" value="Spellbook=120,Life=34,Armor=0,Channeling=9,Nature=1,Fire=3" />
 		<property name="Traits" value="Fast,Ranged +1" />
 		<property name="AttackBar" value="Basic Melee Attack: [Quick][Melee][Dice=3]" />
-		<property name="Text" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction \n Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. \n Sprinting: She has the Fast trait. \n Archery Skill: She has the Ranged +1 trait for all of her nonspell ranged attacks." />
+		<property name="Text" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction \n Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. \n Sprinting: She has the Fast trait. \n Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
 		</card>
 		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Beastmaster (Johktari) stats">
 		 <property name="Type" value="Magestats" />
@@ -379,7 +379,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Boots" />
-			<property name="AttackBar" value="" />
+			<property name="AttackBar" value="" />C:\Users\fczajka\AppData\Roaming\IDMComp\UltraEdit
 			<property name="Traits" value="" />
 			<property name="Text" value="Mage gains a Defense \n Defense 7+ 1x" />
 			<property name="CardID" value="MWSTX1CKQ04" />
