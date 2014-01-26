@@ -41,48 +41,48 @@
   </card>
   <table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/gameboard.png" background="background/background.png" boardPosition="-300,-225,600,450" backgroundStyle="uniformToFill">
     <groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone" />
-	<groupaction menu="Roll dice" default="False" shortcut="F1" execute="rollDice" />
-    <groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
-	<groupaction menu="Add Vine marker" default="False" shortcut="F3" execute="createVineMarker" />
-	<groupaction menu="Flip Game Board" default="False" shortcut="F9" execute="flipGameBoard" />
+		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
+ 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
+		<groupaction menu="Add Vine marker" default="False" shortcut="F3" execute="createVineMarker" />
+		<groupaction menu="Flip Game Board" default="False" shortcut="F9" execute="flipGameBoard" />
     <groupactions menu="Automation">
-      <groupaction menu="Next Phase" default="False" shortcut="ctrl+Down" execute="nextPhase" />
+      <groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
       <groupaction menu="Toggle debug mode" default="False" execute="toggleDebug" />
     </groupactions>
     <cardactions menu="Add Token">
       <cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage" />
-	  <cardaction menu="Add Burn token" default="False" shortcut="ctrl+B" execute="addBurn" />
-	  <cardaction menu="Add Cripple token" default="False" shortcut="ctrl+C" execute="addCripple" />
-	  <cardaction menu="Add Daze token" default="False" shortcut="ctrl+D" execute="addDaze" />
-      <cardaction menu="Add Mana" default="False" shortcut="ctrl+M" execute="addMana" />
-	  <cardaction menu="Add Stun" default="False" shortcut="ctrl+S" execute="addStun" />
-	  <cardaction menu="Add Slam" default="False" shortcut="alt+S" execute="addSlam" />
-      <cardaction menu="Add Weak" default="False" shortcut="ctrl+W" execute="addWeak" />	  
-	  <cardaction menu="Add other tokens" default="False" shortcut="ctrl+O" execute="addOther" />
-	  <cardaction menu="Toggle Action" default="False" shortcut="ctrl+A" execute="toggleAction" />
-	  <cardaction menu="Toggle Blood Reaper" default="False" shortcut="" execute="toggleBloodReaper" />
-	  <cardaction menu="Toggle Deflect" default="False" shortcut="alt+D" execute="toggleDeflect" />
-	  <cardaction menu="Toggle Guard" default="False" shortcut="ctrl+G" execute="toggleGuard" />
-	  <cardaction menu="Toggle Invisible" default="False" shortcut="ctrl+I" execute="toggleInvisible" />
-	  <cardaction menu="Toggle Ready" default="False" shortcut="ctrl+R" execute="toggleReady" />
-	  <cardaction menu="Toggle Pet" default="False" shortcut="ctrl+P" execute="togglePet" />
-	  <cardaction menu="Toggle Taunt" default="False" shortcut="ctrl+T" execute="toggleTaunt" />
-	  <cardaction menu="Toggle Quick cast" default="False" shortcut="ctrl+Q" execute="toggleQuick" />
-	  <cardaction menu="Toggle Voltaric" default="False" shortcut="ctrl+V" execute="toggleVoltaric" />
+	  	<	cardaction menu="Add Burn token" default="False" shortcut="Ctrl+B" execute="addBurn" />
+	  	<cardaction menu="Add Cripple token" default="False" shortcut="Ctrl+C" execute="addCripple" />
+	  	<cardaction menu="Add Daze token" default="False" shortcut="Ctrl+D" execute="addDaze" />
+      <cardaction menu="Add Mana" default="False" shortcut="Ctrl+M" execute="addMana" />
+	  	<cardaction menu="Add Stun" default="False" shortcut="Ctrl+S" execute="addStun" />
+	  	<cardaction menu="Add Slam" default="False" shortcut="Alt+S" execute="addSlam" />
+      <cardaction menu="Add Weak" default="False" shortcut="Ctrl+W" execute="addWeak" />	  
+	 		<cardaction menu="Add other tokens" default="False" shortcut="Ctrl+O" execute="addOther" />
+	  	<cardaction menu="Toggle Action" default="False" shortcut="Ctrl+A" execute="toggleAction" />
+	 		<cardaction menu="Toggle Blood Reaper" default="False" shortcut="" execute="toggleBloodReaper" />
+	 		<cardaction menu="Toggle Deflect" default="False" shortcut="Alt+D" execute="toggleDeflect" />
+	 		<cardaction menu="Toggle Guard" default="False" shortcut="Ctrl+G" execute="toggleGuard" />
+	  	<cardaction menu="Toggle Invisible" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
+	  	<cardaction menu="Toggle Ready" default="False" shortcut="Ctrl+R" execute="toggleReady" />
+	  	<cardaction menu="Toggle Pet" default="False" shortcut="Ctrl+P" execute="togglePet" />
+	 		<cardaction menu="Toggle Taunt" default="False" shortcut="Ctrl+T" execute="toggleTaunt" />
+	  	<cardaction menu="Toggle Quick cast" default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
+	  	<cardaction menu="Toggle Voltaric" default="False" shortcut="Ctrl+V" execute="toggleVoltaric" />
     </cardactions>
     <cardactions menu="Remove Token">
-      <cardaction menu="Remove Damage" default="False" shortcut="F4" execute="subDamage" />
-	  <cardaction menu="Remove Burn token" default="False" shortcut="ctrl+shift+B" execute="subBurn" />
-	  <cardaction menu="Remove Cripple token" default="False" shortcut="ctrl+shift+C" execute="subCripple" />
-	  <cardaction menu="Remove Daze token" default="False" shortcut="ctrl+shift+D" execute="subDaze" />
-      <cardaction menu="Remove Mana" default="False" shortcut="ctrl+shift+M" execute="subMana" />
-	  <cardaction menu="Remove Stun" default="False" shortcut="ctrl+shift+S" execute="subStun" />
-	  <cardaction menu="Remove Slam" default="False" shortcut="alt+shift+S" execute="subSlam" />
-	  <cardaction menu="Removed Weak" default="False" shortcut="ctrl+shift+W" execute="subWeak" />	  
-	  <cardaction menu="Remove all tokens" default="False" shortcut="ctrl+shift+A" execute="clearTokens" />
+    	<cardaction menu="Remove Damage" default="False" shortcut="F4" execute="subDamage" />
+	  	<cardaction menu="Remove Burn token" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
+	  	<cardaction menu="Remove Cripple token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
+	  	<cardaction menu="Remove Daze token" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
+   	 	<cardaction menu="Remove Mana" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
+	  	<cardaction menu="Remove Stun" default="False" shortcut="Ctrl+Shift+S" execute="subStun" />
+	  	<cardaction menu="Remove Slam" default="False" shortcut="Alt+Shift+S" execute="subSlam" />
+	  	<cardaction menu="Removed Weak" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />	  
+	  	<cardaction menu="Remove all tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
     </cardactions>
     <cardaction menu="Exhaust/Ready" default="False" shortcut="F7" execute="kneel" />
-    <cardaction menu="Flip Card" default="False" shortcut="ctrl+F" execute="flipcard" />
+    <cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
     <cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
     <cardaction menu="Double Click" default="True" execute="defaultAction" />
   </table>
@@ -92,7 +92,7 @@
     <counter name="Damage" default="0" reset="True" icon="counters/damage.png" />
 	<counter name="Life" default="0" reset="True" icon="counters/life.png" />
     <hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
-      <cardaction menu="Play card facedown" default="True" shortcut="Ctrl+shift+P" execute="playCardFaceDown" />
+      <cardaction menu="Play card facedown" default="True" shortcut="Ctrl+Shift+P" execute="playCardFaceDown" />
       <cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
     </hand>
     <group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
@@ -100,12 +100,12 @@
   </player>
   <deck>
     <section name="Mage" group="Hand" />
-	<section name="Attack" group="Hand" />
-	<section name="Conjuration" group="Hand" />
-	<section name="Creature" group="Hand" />
-	<section name="Enchantment" group="Hand" />
-	<section name="Equipment" group="Hand" />	
-	<section name="Incantation" group="Hand" />
+		<section name="Attack" group="Hand" />
+		<section name="Conjuration" group="Hand" />
+		<section name="Creature" group="Hand" />
+		<section name="Enchantment" group="Hand" />
+		<section name="Equipment" group="Hand" />	
+		<section name="Incantation" group="Hand" />
   </deck>
   
 </game>
