@@ -17,7 +17,7 @@ When you have completed all of your actions during a particular phase (Upkeep, P
 
 Place marker on cards by using the right click menu or by using the associated keyboard shortcuts
 
-When using the phase management automation the Initiative is flipped automatically, markers on cards are reset, Burn damage is calculated and applied (during the Upkeep Phase), and Channeling phases are handled by the computer
+When using the phase management automation the Initiative marker is flipped automatically, markers on cards are reset, Burn damage is calculated and applied (during the Upkeep Phase), and Channeling phases are handled by the computer
 
 Have fun!
 
