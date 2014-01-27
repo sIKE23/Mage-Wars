@@ -470,6 +470,9 @@ def togglePet(card, x=0, y=0):
 		
 def toggleTaunt(card, x=0, y=0):
 	toggleToken(card, Taunt)
+	
+def toggleTauntT(card, x=0, y=0):
+	toggleToken(card, TauntT)
 
 def toggleQuick(card, x=0, y=0):
 	mute()

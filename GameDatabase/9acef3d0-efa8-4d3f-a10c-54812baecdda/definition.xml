@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.2.11.5"
+	version="1.2.11.6"
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -53,34 +53,35 @@
 			<cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage"/>
 			<cardaction menu="Add Mana" default="False" shortcut="Ctrl+M" execute="addMana"/>
 			<cardaction menu="Add Burn Token" default="False" shortcut="Ctrl+B" execute="addBurn"/>
-			<cardaction menu="Add Cripple Token" default="False" shortcut="Ctrl+C" execute="addCripple"/>
 			<cardaction menu="Add Daze Token" default="False" shortcut="Ctrl+D" execute="addDaze"/>
 			<cardaction menu="Add Stun Token" default="False" shortcut="Ctrl+S" execute="addStun"/>
 			<cardaction menu="Add Slam Token" default="False" shortcut="Alt+S" execute="addSlam" />
 			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak"/>
+			<cardaction menu="Add Cripple Token" default="False" shortcut="Ctrl+C" execute="addCripple"/>
 			<cardaction menu="Add Other Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
 		<cardactions menu="Toggle Markers">
 			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction"/>
-			<cardaction menu="Toggle Blood Reaper Token" default="False" shortcut="Alt+B" execute="toggleBloodReaper" />
-			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+D" execute="toggleDeflect" />
-			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard"/>
-			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible"/>
-			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady"/>
-			<cardaction menu="Toggle Pet Marker" default="False" shortcut="Ctrl+P" execute="togglePet"/>
-			<cardaction menu="Toggle Taunt Marker" default="False" shortcut="Ctrl+T" execute="toggleTaunt"/>
 			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
+			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady"/>
+			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard"/>
 			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric"/>
+			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+D" execute="toggleDeflect" />
+			<cardaction menu="Toggle Blood Reaper Token" default="False" shortcut="Alt+B" execute="toggleBloodReaper" />
+			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible"/>
+			<cardaction menu="Toggle Pet Marker" default="False" shortcut="Ctrl+P" execute="togglePet"/>
+			<cardaction menu="Toggle Taunt Marker (Sosruko)" default="False" shortcut="Ctrl+T" execute="toggleTaunt"/>
+			<cardaction menu="Toggle Taunt Marker (Thorg)" default="False" shortcut="Alt+T" execute="toggleTauntT"/>
 		</cardactions>
 		<cardactions menu="Remove Tokens">
 			<cardaction menu="Remove Damage" default="False" shortcut="F4" execute="subDamage" />
 			<cardaction menu="Remove Mana" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
 			<cardaction menu="Remove Burn Token" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
-			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
 			<cardaction menu="Remove Daze Token" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
 			<cardaction menu="Remove Stun Token" default="False" shortcut="Ctrl+Shift+S" execute="subStun" />
 			<cardaction menu="Remove Slam Token" default="False" shortcut="Alt+Shift+S" execute="subSlam"/>
 			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak"/>
+			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
 			<cardaction menu="Exhaust/Ready" default="False" shortcut="F7" execute="kneel" />
