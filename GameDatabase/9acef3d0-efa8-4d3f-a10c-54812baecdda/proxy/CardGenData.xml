@@ -1,21 +1,199 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <templates>
 	<blocks>
-		<block type="text" id="title">
-			<location x="31" y="32" />
+		<block type="text" id="Title">
+			<location x="1" y="1" />
 			<text color="#000000" size="30" />
-			<border color="#FFFFFF" size="2" />
+			<border color="#FFFFFF" size="1" />
 			<wordwrap height="80" width="318" />
 		</block>
+		<block type="text" id="Type">
+			<location x="1" y="20" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Subtype">
+			<location x="2" y="20" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Cost">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Action">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Range">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Target">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="School">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Level">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Stats">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="AttackBar">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Traits">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
+		<block type="text" id="Text">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+			<wordwrap height="17" width="230" shrinktofit="True"/>
+		</block>
+		<block type="text" id="CardID">
+			<location x="1" y="1" />
+			<text color="#000000" size="15" />
+		</block>
 	</blocks>
+
 	<template src="proxy/card.png" default="True" >
 		<matches>
 			<match name="Type" value="Mage" />
 		</matches>
 		<textblocks>
-			<link block="title">
-				<property name="Name" />
-			</link>      
+			<link block="title"><property name="Name" /></link>      
 		</textblocks> 
 	</template>
+	<template src="Proxy/Attack-Proxy.png">
+		<matches>
+			<match name="Type" value="Attack" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>
+	<template src="Proxy/Conjuration-Proxy.png">
+		<matches>
+			<match name="Type" value="Conjuration" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>
+	<template src="Proxy/Creature-Proxy.png">
+		<matches>
+			<match name="Type" value="Creature" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>
+	<template src="Proxy/Enchantment-Proxy.png">
+		<matches>
+			<match name="Type" value="Enchantment" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>
+	<template src="Proxy/Equipment-Proxy.png">
+		<matches>
+			<match name="Type" value="Equipment" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>
+	<template src="Proxy/Incantation-Proxy.png">
+		<matches>
+			<match name="Type" value="Incantation" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>	
 </templates>
