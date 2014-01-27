@@ -217,6 +217,14 @@ def nextPhase(group, x=-360, y=-125):
 		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", x, y )
 		card.switchTo("Planning") #skips upkeep for first turn
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125) #initiative token
+		if mycolor == "#de2827":
+			init.switchTo("")
+		elif mycolor == "171e78":
+			init.switchTo("B")
+		elif mycolor == "01603e":
+			init.switchTo("C")
+		else:
+			init.switchTo("D")
 		notify("Roll for initiative and flip token accordingly")
 	elif card.alternate == "":
 		switchPhase(card,"Planning")
@@ -553,11 +561,38 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[WoundedPrey] = 1
 			if "Priest" == card.name:			
 					card.markers[HolyAvenger] = 1
-	elif card.alternates is not None and "B" in card.alternates:
-		if card.alternate == "B":
-			card.switchTo("")
-		else:
-			card.switchTo("B")		
+	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
+		colorsChosen = getGlobalVariable("ColorsChosen")
+		if "0" in colorsChosen and "1" in colorsChosen: #red and blue
+			if card.alternate == "B":
+				card.switchTo("")
+			else:
+				card.switchTo("B")
+		elif "0" in colorsChosen and "2" in colorsChosen: #red and green
+			if card.alternate == "C":
+				card.switchTo("")
+			else:
+				card.switchTo("C")
+		elif "0" in colorsChosen and "3" in colorsChosen: #red and yellow
+			if card.alternate == "D":
+				card.switchTo("")
+			else:
+				card.switchTo("D")	
+		elif "1" in colorsChosen and "2" in colorsChosen: #blue and green
+			if card.alternate == "C":
+				card.switchTo("B")
+			else:
+				card.switchTo("C")	
+		elif "1" in colorsChosen and "3" in colorsChosen: #blue and yellow
+			if card.alternate == "D":
+				card.switchTo("B")
+			else:
+				card.switchTo("D")	
+		elif "2" in colorsChosen and "3" in colorsChosen: #green and yellow
+			if card.alternate == "D":
+				card.switchTo("C")
+			else:
+				card.switchTo("D")	
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		card.isFaceUp = False
