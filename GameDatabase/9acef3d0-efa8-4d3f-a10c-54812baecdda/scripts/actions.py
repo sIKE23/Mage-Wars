@@ -389,28 +389,28 @@ def toggleAction(card, x=0, y=0):
 	mute()
 	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
-	elif mycolor == "#DE2827": # Red
+	elif mycolor == "#de2827": # Red
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
-	elif mycolor == "#171E78": # Blue
+	elif mycolor == "#171e78": # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
-	elif mycolor == "#01603E": #Green
+	elif mycolor == "#01603e": #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
 		else:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
-	elif mycolor == "#F7D917": #Yellow
+	elif mycolor == "#f7d917": #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
