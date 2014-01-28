@@ -1,79 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <templates>
 	<blocks>
+		<block type="overlay" id="Diane" src="proxy/Template/Mana.png">
+			<location x="0" y="0" />
+		</block>
 		<block type="text" id="Title">
 			<location x="1" y="1" />
-			<text color="#000000" size="30" />
-			<border color="#FFFFFF" size="1" />
-			<wordwrap height="80" width="318" />
+			<text color="#000000" size="27" />
+ 			<wordwrap height="80" width="270" />
 		</block>
 		<block type="text" id="Type">
-			<location x="1" y="20" />
-			<text color="#000000" size="15" />
+			<location x="260" y="1" />
+			<text color="#000000" size="17" />
 		</block>
 		<block type="text" id="Subtype">
-			<location x="2" y="20" />
+			<location x="260" y="25" />
 			<text color="#000000" size="15" />
 		</block>
 		<block type="text" id="Cost">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="2" y="68" />
+			<text color="#FFFFFF" size="25" />
 		</block>
 		<block type="text" id="Action">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="60" y="70" />
+			<text color="#000000" size="20" />
 		</block>
 		<block type="text" id="Range">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="85" y="70" />
+			<text color="#000000" size="18" />
 		</block>
 		<block type="text" id="Target">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="125" y="70" />
+			<text color="#000000" size="18" />
+			<wordwrap height="80" width="150" />
 		</block>
 		<block type="text" id="School">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="325" y="50" />
+			<text color="#000000" size="18" />
+			<wordwrap height="80" width="70" />
 		</block>
 		<block type="text" id="Level">
-			<location x="1" y="1" />
+			<location x="325" y="130" />
 			<text color="#000000" size="15" />
 		</block>
 		<block type="text" id="Stats">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="75" y="250" />
+			<text color="#000000" size="20" />
 		</block>
 		<block type="text" id="AttackBar">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="1" y="335" />
+			<text color="#000000" size="17" />
+			<wordwrap height="40" width="400" />
 		</block>
 		<block type="text" id="Traits">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
+			<location x="1" y="380" />
+			<text color="#000000" size="18" />
+			<wordwrap height="40" width="400" />
 		</block>
 		<block type="text" id="Text">
-			<location x="1" y="1" />
-			<text color="#000000" size="15" />
-			<wordwrap height="17" width="230" shrinktofit="True"/>
+			<location x="1" y="425" />
+			<text color="#000000" size="12" />
+			<wordwrap height="72" width="400" />
 		</block>
 		<block type="text" id="CardID">
-			<location x="1" y="1" />
+			<location x="160" y="525" />
 			<text color="#000000" size="15" />
 		</block>
 	</blocks>
 
-	<template src="proxy/card.png" default="True" >
+<!--	<template src="proxy/card.png" default="True" >
 		<matches>
 			<match name="Type" value="Mage" />
 		</matches>
 		<textblocks>
 			<link block="title"><property name="Name" /></link>      
 		</textblocks> 
-	</template>
+	</template>-->
 	<template src="Proxy/Attack-Proxy.png">
 		<matches>
 			<match name="Type" value="Attack" />
 		</matches>
+		<overlayblocks>
+			<case value="Cost"><link block="Cost" /></case>
+		</overlayblocks>
 		<textblocks>
 			<link block="Title"><property name="Name" /></link>
 			<link block="Type"><property name="Type" /></link>
@@ -94,6 +103,27 @@
 	<template src="Proxy/Conjuration-Proxy.png">
 		<matches>
 			<match name="Type" value="Conjuration" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link> 
+		</textblocks>
+	</template>
+		<template src="Proxy/Conjuration-Proxy.png">
+		<matches>
+			<match name="Type" value="Conjuration-Wall" />
 		</matches>
 		<textblocks>
 			<link block="Title"><property name="Name" /></link>
