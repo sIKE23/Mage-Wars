@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <templates>
 	<blocks>
-		<block type="overlay" id="Diane" src="proxy/Template/Mana.png">
+		<block type="overlay" id="Cost" src="proxy/Template/Mana.png">
 			<location x="0" y="0" />
 		</block>
 		<block type="text" id="Title">
