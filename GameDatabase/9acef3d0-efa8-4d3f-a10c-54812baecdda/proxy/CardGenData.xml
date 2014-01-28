@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <templates>
 	<blocks>
-		<block type="overlay" id="Cost" src="proxy/Template/Mana.png">
+		<block type="overlay" id="CostCircle" src="proxy/Components/Mana.png">
 			<location x="0" y="0" />
 		</block>
 		<block type="text" id="Title">
@@ -68,20 +68,23 @@
 		</block>
 	</blocks>
 
-<!--	<template src="proxy/card.png" default="True" >
-		<matches>
-			<match name="Type" value="Mage" />
-		</matches>
-		<textblocks>
-			<link block="title"><property name="Name" /></link>      
-		</textblocks> 
-	</template>-->
 	<template src="Proxy/Attack-Proxy.png">
 		<matches>
 			<match name="Type" value="Attack" />
 		</matches>
 		<overlayblocks>
-			<case value="Cost"><link block="Cost" /></case>
+            <conditional>
+            <switch property="Cost" >
+                <case value="#NULL#" break="True">
+                </case>
+                <case valie="9" break="True">
+                    <link block="CostCircle" />
+                </case>
+                <default>
+                    <link block="CostCircle" />
+                </default>
+            </switch>
+            </conditional>
 		</overlayblocks>
 		<textblocks>
 			<link block="Title"><property name="Name" /></link>
@@ -226,4 +229,13 @@
 			<link block="CardID"><property name="CardID" /></link> 
 		</textblocks>
 	</template>	
+	<template src="proxy/card.png" default="True" >
+		<matches>
+			<match name="Type" value="Mage" />
+		</matches>
+		<textblocks>
+			<link block="title"><property name="Name" /></link>      
+		</textblocks> 
+	</template>
+
 </templates>
