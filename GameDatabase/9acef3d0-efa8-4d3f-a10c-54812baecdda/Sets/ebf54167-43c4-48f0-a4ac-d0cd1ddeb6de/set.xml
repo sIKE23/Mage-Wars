@@ -1334,8 +1334,8 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="[Damage Barrier][Lightning][Dice=2][d12][7-10 = Daze; 11+ = Stun][Ethereal,Unavoidable]" />
+			<property name="AttackBar" value="[Damage Barrier][Lightning][Dice=2][d12][7-10 = Daze; 11+ = Stun][Ethereal,Unavoidable]" />
+			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1E06" />
 		</card>

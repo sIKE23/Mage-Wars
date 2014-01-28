@@ -543,7 +543,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +4,Magebind +2" />
-			<property name="Text" value="This creature is Restrained and gains the Unavoidable trait. Each Upkeep Phase, if Force Crush&apos;s upkeep cost is paid, this creature receives 2 direct damage. Does not affect creatures with the Uncontainable trait." />
+			<property name="Text" value="This creature is Restrained and gains the Unmovable trait. Each Upkeep Phase, if Force Crush&apos;s upkeep cost is paid, this creature receives 2 direct damage. Does not affect creatures with the Uncontainable trait." />
 			<property name="CardID" value="FWE04" />
 		</card>
 		<card id="aa4cc3ff-7738-41c3-b5f6-f7b959ba71a5" name="Forcefield">
