@@ -15,7 +15,6 @@
 			<property name="AttackBar" value="Basic Melee Attack: [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple. &#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
-
 			<alternate name="Druid" type="B" />
 		</card>
 		<card id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260" name="Druid stats">
@@ -27,7 +26,7 @@
 			<property name="AttackBar" value="Basic Melee Attack: [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction. &#xD;&#xA;PLAGUE MASTER: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;ETERNAL SERVANT: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
-						<alternate name="Necromancer" type="B" />
+			<alternate name="Necromancer" type="B" />
 		</card>
 		<card id="682d3b40-7c08-437b-9c88-16e2f389773f" name="Necromancer stats">
 			<property name="Type" value="Magestats" />
