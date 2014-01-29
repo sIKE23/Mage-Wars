@@ -642,20 +642,27 @@ def toggleToken(card, tokenType):
 		card.markers[tokenType] = 1
 		notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
 
-def playCardFaceDown(card, x=-360, y=70):
+def playCardFaceDown(card, x=-360, y=0):
 	global mycolor
 	offset=0
 	occupied = True
-	if mycolor != "#800080":
+	if mycolor == PlayerColor[0]:
+		y = -10
+	elif mycolor == PlayerColor[1]:
+		y = 40
+	elif mycolor == PlayerColor[2]:
+		y = 90
+	elif mycolor == PlayerColor[3]:
 		y = 140
 	while occupied:
 		occupied = False
 		for c in table:
-			posx, posy = c.position
-			debug("c.position {}".format(c.position))
-			if posx == x+offset and posy == y:
-				occupied = True
-				break
+			if c.controller == me:
+				posx, posy = c.position
+				debug("c.position {}".format(c.position))
+				if posx == x+offset and posy == y:
+					occupied = True
+					break
 		if occupied:
 			offset -= 30
 	card.moveToTable(x+offset, y, True)
@@ -954,6 +961,8 @@ def validateDeck(deck):
 			magename = c.Name
 			if "Beastmaster" in magename:
 				magename = "Beastmaster"
+			if "Wizard" in magename:
+				magename = "Wizard"
 			if magename in card.Traits:	#mage restriction
 				ok = True
 				

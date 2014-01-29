@@ -250,6 +250,7 @@ namespace Octgn.MageWarsValidator
                                     //check mage restriction
                                     string mname = magename;
                                     if (mname.Contains("Beastmaster")) mname = "Beastmaster";
+                                    if (mname.Contains("Wizard")) mname = "Wizard";
                                     if (onlyPhrase.Contains(mname))
                                         legal = true;
 

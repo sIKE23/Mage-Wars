@@ -32,13 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Octgn.Core">
-      <HintPath>..\..\..\Desktop\OCTGN\octgnFX\Octgn.Core\bin\Debug\Octgn.Core.dll</HintPath>
+      <HintPath>..\..\..\OCTGN\OCTGN\Octgn.Core.dll</HintPath>
     </Reference>
     <Reference Include="Octgn.DataNew">
-      <HintPath>..\..\..\Desktop\OCTGN\octgnFX\Octgn.DataNew\bin\Debug\Octgn.DataNew.dll</HintPath>
+      <HintPath>..\..\..\OCTGN\OCTGN\Octgn.DataNew.dll</HintPath>
     </Reference>
     <Reference Include="Octgn.Library">
-      <HintPath>..\..\..\Desktop\OCTGN\octgnFX\Octgn.Library\bin\Debug\Octgn.Library.dll</HintPath>
+      <HintPath>..\..\..\OCTGN\OCTGN\Octgn.Library.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
