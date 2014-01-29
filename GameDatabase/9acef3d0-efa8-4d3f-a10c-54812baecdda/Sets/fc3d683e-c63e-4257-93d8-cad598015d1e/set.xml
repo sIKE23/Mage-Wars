@@ -946,8 +946,6 @@
 			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost" />
 			<property name="CardID" value="DNI08" />
 		</card>
-
-
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Front">			
 			<property name="Type" value="Internal" />
 			<property name="Subtype" value="" />
@@ -965,35 +963,6 @@
 			<alternate name="Vine Marker Back" type="B" />
 		</card>
 
-		<card id="63f3f7c5-bfac-4671-b74c-c045dd5c7ed9" name="Test of the Longest Named Card">
-			<property name="Type" value="Conjuration-Wall" />
-			<property name="Subtype" value="Plant, Healing, Protection" />
-			<property name="Cost" value="35" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-1" />
-			<property name="Target" value="Non-Mage, Non-Flying Corporeal Creature" />
-			<property name="School" value="Earth/Fire/Air/Water" />
-			<property name="Level" value="2/2/2/2" />
-			<property name="Stats" value="Defense=6+ 2x No Ranged, Armor=1, Life=13" />
-			<property name="AttackBar" value="Sacrificial Knife: [Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones: [Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave: [Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
-			<property name="Traits" value="Spawnpoint, Zone Exclusive, Regenerate 2, Flame +2, Hydro Immunity, Living, Druid Only, Epic" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
-			<property name="CardID" value="DNI08" />
-		</card>
-		<card id="7c9038a8-77b8-4142-87a8-a15f211d4e1f" name="Test of the Longest Named Card Deux">
-			<property name="Type" value="Conjuration-Wall" />
-			<property name="Subtype" value="Plant, Healing, Protection" />
-			<property name="Cost" value="35" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-1" />
-			<property name="Target" value="Non-Mage, Non-Flying Corporeal Creature" />
-			<property name="School" value="Earth/Fire/Air/Water" />
-			<property name="Level" value="2/2/2/2" />
-			<property name="Stats" value="Defense=6+ 2x No Ranged, Armor=1, Life=13" />
-			<property name="AttackBar" value="Sacrificial Knife: [Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones: [Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave: [Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
-			<property name="Traits" value="Spawnpoint, Zone Exclusive, Regenerate 2, Flame +2, Hydro Immunity, Living, Druid Only, Epic" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
-			<property name="CardID" value="MWSTX2CKC23" />
-		</card>
+
 	</cards>
 </set>
