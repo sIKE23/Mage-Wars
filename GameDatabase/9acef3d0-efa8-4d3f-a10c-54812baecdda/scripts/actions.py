@@ -217,13 +217,13 @@ def nextPhase(group, x=-360, y=-125):
 		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", x, y )
 		card.switchTo("Planning") #skips upkeep for first turn
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125) #initiative token
-		if mycolor == "#de2827":
+		if mycolor == PlayerColor[0]:
 			init.switchTo("")
-		elif mycolor == "171e78":
+		elif mycolor == PlayerColor[1]:
 			init.switchTo("B")
-		elif mycolor == "01603e":
+		elif mycolor == PlayerColor[2]:
 			init.switchTo("C")
-		else:
+		elif mycolor == PlayerColor[3]:
 			init.switchTo("D")
 		notify("Roll for initiative and flip token accordingly")
 	elif card.alternate == "":
@@ -240,11 +240,9 @@ def nextPhase(group, x=-360, y=-125):
 		if switchPhase(card,"") == True: #Back to Upkeep
 			notify("Ready Stage: Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-			if init.controller == me:			
-				init = moveCard("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125)
+			if init.controller == me:
 				flipcard(init)
 			else:
-				remoteCall(init.controller, "moveCard", ["8ad1880e-afee-49fe-a9ef-b0c17aefac3f", -420, -125])
 				remoteCall(init.controller, "flipcard", [init])
 			for p in players:
 				p.Mana += p.Channeling
@@ -397,28 +395,28 @@ def toggleAction(card, x=0, y=0):
 	mute()
 	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
-	elif mycolor == "#de2827": # Red
+	elif mycolor == PlayerColor[0]: # Red
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
-	elif mycolor == "#171e78": # Blue
+	elif mycolor == PlayerColor[1]: # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
-	elif mycolor == "#01603e": #Green
+	elif mycolor == PlayerColor[2]: #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
 		else:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
-	elif mycolor == "#f7d917": #Yellow
+	elif mycolor == PlayerColor[3]: #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
