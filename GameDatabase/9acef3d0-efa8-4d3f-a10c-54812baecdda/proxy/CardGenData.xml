@@ -7,20 +7,23 @@
 		<block type="overlay" id="CostCircle2" src="proxy/Template/Mana.png">
 			<location x="40" y="60" />
 		</block>
+		<block type="overlay" id="Inv" src="proxy/Template/Inv.png">
+			<location x="1" y="1" />
+		</block>
 		<block type="text" id="Title">
 			<location x="1" y="1" />
 			<text color="#000000" size="25" />
  			<wordwrap height="50" width="300" />
 		</block>
 		<block type="text" id="Type">
-			<location x="400" y="1" />
-			<text color="#000000" size="17" />
-			<wordwrap height="17" width="0" align="far" />
+			<location x="400" y="5" />
+			<text color="#000000" size="18" />
+			<wordwrap height="18" width="0" align="far" />
 		</block>
 		<block type="text" id="Subtype">
 			<location x="400" y="25" />
-			<text color="#000000" size="15" />
-			<wordwrap height="15" width="0" align="far" />
+			<text color="#000000" size="14" />
+			<wordwrap height="14" width="0" align="far" />
 		</block>
 		<block type="text" id="Cost">
 			<location x="22" y="66" />
@@ -44,13 +47,13 @@
 		</block>
 		<block type="text" id="School">
 			<location x="400" y="50" />
-			<text color="#000000" size="18" />
-			<wordwrap height="18" width="0" align="far" />
+			<text color="#000000" size="16" />
+			<wordwrap height="16" width="0" align="far" />
 		</block>
 		<block type="text" id="Level">
 			<location x="400" y="70" />
-			<text color="#000000" size="15" />
-			<wordwrap height="15" width="0" align="far" />
+			<text color="#000000" size="16" />
+			<wordwrap height="16" width="0" align="far" />
 		</block>
 		<block type="text" id="Stats">
 			<location x="400" y="180" />
@@ -69,7 +72,7 @@
 		</block>
 		<block type="text" id="Text">
 			<location x="1" y="400" />
-			<text color="#000000" size="16" />
+			<text color="#000000" size="15" />
 			<wordwrap height="94" width="400" align="near" />
 		</block>
 		<block type="text" id="CardID">
@@ -87,6 +90,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 	<default>
                     <link block="CostCircle" />
@@ -119,6 +123,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 	<default>
                     <link block="CostCircle" />
@@ -151,6 +156,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 	<default>
                     <link block="CostCircle" />
@@ -183,6 +189,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 	<default>
                     <link block="CostCircle" />
@@ -215,6 +222,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 	<default>
                     <link block="CostCircle" />
@@ -247,6 +255,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 <default>
                     <link block="CostCircle" />
@@ -254,7 +263,7 @@
             </switch>
             </conditional>
 		</overlayblocks>
-		<textblocks>>
+		<textblocks>
 			<link block="Title"><property name="Name" /></link>
 			<link block="Type"><property name="Type" /></link>
 			<link block="Subtype"><property name="Subtype" /></link>
@@ -279,6 +288,7 @@
             <conditional>
             <switch property="Cost" >
                 <case value="#NULL#" break="True">
+                	<link block="inv" />
                 </case>
                 	<default>
                     <link block="CostCircle" />
