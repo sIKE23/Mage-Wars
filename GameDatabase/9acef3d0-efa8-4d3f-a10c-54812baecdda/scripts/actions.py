@@ -97,7 +97,7 @@ def onLoadDeck(player, groups):
 		if validateDeck(groups[0]):
 			playerSetup()
 		else:
-			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
+			notify("Validation of {}'s deck FAILED. Please choose another deck (File -> Reset to clear your hand).".format(me.name))
 
 
 ############################################################################
@@ -851,27 +851,27 @@ def validateDeck(deck):
 	for stat in stats:
 		debug("stat {}".format(stat))
 		statval = stat.split("=")
-		if statval[0] == "Spellbook":
+		if "Spellbook" in statval[0]:
 			spellbook["spellpoints"] = int(statval[1])
-		elif statval[0] == "Dark":
+		elif "Dark" in statval[0]:
 			spellbook["Dark"] = int(statval[1])
-		elif statval[0] == "Holy":
+		elif "Holy" in statval[0]:
 			spellbook["Holy"] = int(statval[1])
-		elif statval[0] == "Nature":
+		elif "Nature" in statval[0]:
 			spellbook["Nature"] = int(statval[1])	
-		elif statval[0] == "Mind":
+		elif "Mind" in statval[0]:
 			spellbook["Mind"] = int(statval[1])
-		elif statval[0] == "Arcane":
+		elif "Arcane" in statval[0]:
 			spellbook["Arcane"] = int(statval[1])
-		elif statval[0] == "War":
+		elif "War" in statval[0]:
 			spellbook["War"] = int(statval[1])
-		elif statval[0] == "Earth":
+		elif "Earth" in statval[0]:
 			spellbook["Earth"] = int(statval[1])
-		elif statval[0] == "Water" and c.name != "Druid":
+		elif "Water" in statval[0] and c.name != "Druid":
 			spellbook["Water"] = int(statval[1])
-		elif statval[0] == "Air":
+		elif "Air" in statval[0]:
 			spellbook["Air"] = int(statval[1])
-		elif statval[0] == "Fire":
+		elif "Fire" in statval[0]:
 			spellbook["Fire"] = int(statval[1])
 	debug("Spellbook {}".format(spellbook))
 	#spellbook["Dark"] = sumLevel("Dark")
@@ -965,7 +965,7 @@ def validateDeck(deck):
 				magename = "Wizard"
 			if magename in card.Traits:	#mage restriction
 				ok = True
-				
+			
 			for s in [school for school in spellbook if spellbook[school] == 1]:
 				if s + " Mage" in card.Traits:
 					ok = True
