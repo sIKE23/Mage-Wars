@@ -80,6 +80,37 @@
 			<text color="#000000" size="15" />
 			<wordwrap height="15" width="0" align="center" />
 		</block>
+		<!-- Layout for Mage Stat Cards -->
+		<block type="text" id="MTitle">
+			<location x="1" y="1" />
+			<text color="#000000" size="25" />
+ 			<wordwrap height="50" width="300" />
+		</block>
+		<block type="text" id="MType">
+			<location x="400" y="5" />
+			<text color="#000000" size="18" />
+			<wordwrap height="18" width="0" align="far" />
+		</block>		
+		<block type="text" id="MStats">
+			<location x="400" y="180" />
+			<text color="#000000" size="16" />
+			<wordwrap height="16" width="0" align="far" />
+		</block>
+		<block type="text" id="MAttackBar">
+			<location x="0" y="220" />
+			<text color="#000000" size="15" />
+			<wordwrap height="100" width="400" align="center" />
+		</block>
+		<block type="text" id="MTraits">
+			<location x="1" y="340" />
+			<text color="#000000" size="16" />
+			<wordwrap height="32" width="400" align="center" />
+		</block>
+		<block type="text" id="MText">
+			<location x="1" y="400" />
+			<text color="#000000" size="15" />
+			<wordwrap height="94" width="400" align="near" />
+		</block>		
 	</blocks>
 
 	<template src="Proxy/Attack-Proxy.png">
@@ -313,12 +344,37 @@
 			<link block="CardID"><property name="CardID" /></link>
 		</textblocks>
 	</template>
-	<template src="proxy/card.png" default="True" >
+	<template src="Proxy/Mage-Stats-Proxy.png">
 		<matches>
 			<match name="Type" value="Mage" />
 		</matches>
+		<overlayblocks>
+            <conditional>
+            <switch property="Cost" >
+                <case value="#NULL#" break="True">
+                	<link block="inv" />
+                </case>
+                	<default>
+                    <link block="inv" />
+                	</default>
+            </switch>
+            </conditional>
+		</overlayblocks>
+		<textblocks>	
+			<link block="MTitle"><property name="Name" /></link>
+			<link block="MType"><property name="Type" /></link>
+			<link block="MStats"><property name="Stats" /></link>
+			<link block="MAttackBar"><property name="AttackBar" /></link>
+			<link block="MTraits"><property name="Traits" /></link>
+			<link block="MText"><property name="Text" /></link>
+		</textblocks>
+	</template>
+	<template src="proxy/Mage-Stats-Proxy.png" default="True" >
+		<matches>
+			<match name="Type" value="Magestats" />
+		</matches>
 		<textblocks>
-			<link block="title"><property name="Name" /></link>
+			<link block="Title"><property name="Name" /></link>
 		</textblocks>
 	</template>
 
