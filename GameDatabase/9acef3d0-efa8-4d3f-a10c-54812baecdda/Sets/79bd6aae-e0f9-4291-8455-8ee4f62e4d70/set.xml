@@ -11,7 +11,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged][Dice=9][d12][5-8 = Daze;9+ = Stun]" />
+			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze;9+ = Stun]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO9" />
@@ -26,7 +26,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged][Dice=5][d12][9+ = Daze]" />
+			<property name="AttackBar" value="[Ranged] [Dice=5] [d12] [9+ = Daze]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO10" />
@@ -41,7 +41,7 @@
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged][Zone Attack][Air][Dice=2][d12][4-6=Push;7-9=Daze;10+ = Push &amp; Daze][Piercing +1,+2 vs. Flying][Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1,+2 vs. Flying] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
@@ -58,7 +58,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Defense=9+ 1x,Armor=2,Life=8" />
-			<property name="AttackBar" value="Broadsword: [Quick][Melee][Dice=3]" />
+			<property name="AttackBar" value="Broadsword:&#xD;&#xA; [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO3" />
@@ -73,7 +73,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=3,Life=14" />
-			<property name="AttackBar" value="Horns: [Quick][Melee][Dice=4]" />
+			<property name="AttackBar" value="Horns:&#xD;&#xA; [Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Charge +2,Tough -2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO5" />
@@ -88,7 +88,7 @@
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
 			<property name="Stats" value="Armor=2,Life=14" />
-			<property name="AttackBar" value="Antlers: [Quick][Melee][Dice=4][Charge +1][Piercing +1] \n Lightning Blast: [Full][Ranged:0-1][Lightning][Dice=4][d12][7-9 = Daze; 10+ = Stun][Ethereal]" />
+			<property name="AttackBar" value="Antlers:&#xD;&#xA; [Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1] &#xD;&#xA; Lightning Blast:&#xD;&#xA; [Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPRO3" />
@@ -103,7 +103,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=10" />
-			<property name="AttackBar" value="Claws: [Quick][Melee][Dice=4][Piercing +1] \n Stink Cloud: [Full][Ranged:0-0][Zone][Poison][Dice=2][d12][7+ = Daze][Unavoidable][Critical Damage]" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA; [Quick] [Melee] [Dice=4] [Piercing +1] &#xD;&#xA; Stink Cloud:&#xD;&#xA; [Full] [Ranged:0-0] [Zone] [Poison] [Dice=2] [d12] [7+ = Daze] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="Oscuda is immune to his Stink Cloud" />
 			<property name="CardID" value="MWPROMO16" />
@@ -118,7 +118,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1,Armor=2,Life=9" />
-			<property name="AttackBar" value="Singe: [Quick][Melee][Flame][Dice=2][d12][7+ = Burn][Defrost]" />
+			<property name="AttackBar" value="Singe:&#xD;&#xA; [Quick] [Melee] [Flame] [Dice=2] [d12] [7+ = Burn] [Defrost]" />
 			<property name="Traits" value="Familiar,Flame -2,Legendary,Warlock Only" />
 			<property name="Text" value="Sersiryx can cast only Level 1-2 Fire attack spells, or Level 1-2 curse enchantments." />
 			<property name="CardID" value="MWPROMO18" />
@@ -133,7 +133,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=1,Life=13" />
-			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1] \n Great Winged Wind Blast:[Full][Ranged:0-1][Wind][Dice=2][d12][7+ = Push][Sweeping][Unavoidable][+2 vs. Flying][Ethereal]" />
+			<property name="AttackBar" value="Halberd:&#xD;&#xA; [Quick] [Melee] [Dice=4] [Piercing +1] &#xD;&#xA; Great Winged Wind Blast:[Full] [Ranged:0-1] [Wind] [Dice=2] [d12] [7+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
 			<property name="Traits" value="Aegis 1,Flying,Wind Immunity,Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO34" />
@@ -148,7 +148,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2,Life=11" />
-			<property name="AttackBar" value="Halberd: [Quick][Melee][Dice=4][Piercing +1]" />
+			<property name="AttackBar" value="Halberd:&#xD;&#xA; [Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Lightning +2" />
 			<property name="Text" value="When guarding, Temple High Guard gains Melee +2 and may counterstrike first (the Counterstrike Step is moved to just after the Declare Attack Step)." />
 			<property name="CardID" value="MWPROMO20" />
@@ -196,7 +196,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2,Life=8" />
-			<property name="AttackBar" value="Giant Bolt: [Quick][Ranged:1-2][Dice=5][Piercing +3]" />
+			<property name="AttackBar" value="Giant Bolt:&#xD;&#xA; [Quick] [Ranged:1-2] [Dice=5] [Piercing +3]" />
 			<property name="Traits" value="Zone Exclusive,Flame +2" />
 			<property name="Text" value="Ballista starts with 1 Load token on it. Each Upkeep Phase, place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make its attack." />
 			<property name="CardID" value="MWPROMO4" />
@@ -350,7 +350,7 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Amulet" />
-			<property name="AttackBar" value="[Full][Add 3 mana to your mana supply]" />
+			<property name="AttackBar" value="[Full] [Add 3 mana to your mana supply]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO14" />
@@ -382,7 +382,7 @@
 			<property name="Stats" value="Location=Weapon" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Overhead Bash: [Quick][Melee][Dice=4][Unavoidable]" />
+			<property name="Text" value="Overhead Bash:&#xD;&#xA; [Quick] [Melee] [Dice=4] [Unavoidable]" />
 			<property name="CardID" value="MWPROMO15" />
 		</card>
 		<card id="79692c1d-4dc8-4c84-9c04-9ad47d797bd6" name="Spiked Buckler">
@@ -395,7 +395,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Shield,Defense=8+ 1x No Ranged" />
-			<property name="AttackBar" value="Shield Bash: [Quick][Melee][Dice=3][Piercing +1]" />
+			<property name="AttackBar" value="Shield Bash:&#xD;&#xA; [Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence." />
 			<property name="CardID" value="MWPROMO26" />
@@ -425,7 +425,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Razor Edged Slash: [Quick][Melee][Dice=4][Piercing +2]" />
+			<property name="AttackBar" value="Razor Edged Slash:&#xD;&#xA; [Quick] [Melee] [Dice=4] [Piercing +2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO21" />
@@ -440,7 +440,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon/Shield" />
-			<property name="AttackBar" value="Healing Light: [Cost=2][Quick][Ranged:0-1][Light][Dice=2][Heal target Living creature the amount rolled.] \n Cleansing Light: [Cost=X][Quick][Ranged:0-1][Remove 1 Condition marker from target Living creature. X = its removal cost]" />
+			<property name="AttackBar" value="Healing Light:&#xD;&#xA; [Cost=2] [Quick] [Ranged:0-1] [Light] [Dice=2] [Heal target Living creature the amount rolled.] &#xD;&#xA; Cleansing Light:&#xD;&#xA; [Cost=X] [Quick] [Ranged:0-1] [Remove 1 Condition marker from target Living creature. X = its removal cost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, this Mage may cast one of the 2 quick spells shown above." />
 			<property name="CardID" value="MWPROMO22" />
