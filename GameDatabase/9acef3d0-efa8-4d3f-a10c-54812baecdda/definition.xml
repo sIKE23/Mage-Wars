@@ -38,6 +38,9 @@
 		<property name="Traits" type="String" hidden="False" ignoreText="False"/>
 		<property name="Text" type="String" hidden="False" ignoreText="False"/>
 		<property name="CardID" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageTraining" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/gameboard.png" background="background/background.png" boardPosition="-300,-225,600,450" backgroundStyle="uniformToFill">
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>

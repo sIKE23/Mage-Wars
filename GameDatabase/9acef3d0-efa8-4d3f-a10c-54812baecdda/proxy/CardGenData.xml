@@ -84,35 +84,34 @@
 		<block type="text" id="MTitle">
 			<location x="1" y="1" />
 			<text color="#000000" size="25" />
- 			<wordwrap height="50" width="300" />
+ 			<wordwrap height="50" width="400" />
 		</block>
-		<block type="text" id="MType">
-			<location x="400" y="5" />
-			<text color="#000000" size="18" />
-			<wordwrap height="18" width="0" align="far" />
-		</block>		
 		<block type="text" id="MStats">
-			<location x="400" y="180" />
+			<location x="1" y="35" />
 			<text color="#000000" size="16" />
-			<wordwrap height="16" width="0" align="far" />
+			<wordwrap height="32" width="400" />
 		</block>
-		<block type="text" id="MAttackBar">
-			<location x="0" y="220" />
-			<text color="#000000" size="15" />
-			<wordwrap height="100" width="400" align="center" />
+		<block type="text" id="MageTraining">
+			<location x="1" y="60" />
+			<text color="#000000" size="16" />
+			<wordwrap height="48" width="400" />
 		</block>
 		<block type="text" id="MTraits">
-			<location x="1" y="340" />
-			<text color="#000000" size="16" />
-			<wordwrap height="32" width="400" align="center" />
+			<location x="1" y="450" />
+			<text color="#000000" size="18" />
+			<wordwrap height="36" width="390" align="center" />
 		</block>
-		<block type="text" id="MText">
-			<location x="1" y="400" />
+		<block type="text" id="MageAbilities">
+			<location x="1" y="155" />
 			<text color="#000000" size="15" />
-			<wordwrap height="94" width="400" align="near" />
-		</block>		
+			<wordwrap height="210" width="400" />
+		</block>
+		<block type="text" id="MAttackBar">
+			<location x="0" y="470" />
+			<text color="#000000" size="16" />
+			<wordwrap height="75" width="400" align="center" />
+		</block>
 	</blocks>
-
 	<template src="Proxy/Attack-Proxy.png">
 		<matches>
 			<match name="Type" value="Attack" />
@@ -348,25 +347,13 @@
 		<matches>
 			<match name="Type" value="Mage" />
 		</matches>
-		<overlayblocks>
-            <conditional>
-            <switch property="Cost" >
-                <case value="#NULL#" break="True">
-                	<link block="inv" />
-                </case>
-                	<default>
-                    <link block="inv" />
-                	</default>
-            </switch>
-            </conditional>
-		</overlayblocks>
-		<textblocks>	
+		<textblocks>
 			<link block="MTitle"><property name="Name" /></link>
-			<link block="MType"><property name="Type" /></link>
+			<link block="MageTraining"><property name="MageTraining" /></link>
 			<link block="MStats"><property name="Stats" /></link>
 			<link block="MAttackBar"><property name="AttackBar" /></link>
 			<link block="MTraits"><property name="Traits" /></link>
-			<link block="MText"><property name="Text" /></link>
+			<link block="MageAbilities"><property name="MageAbilities" /></link>
 		</textblocks>
 	</template>
 	<template src="proxy/Mage-Stats-Proxy.png" default="True" >
@@ -374,8 +361,14 @@
 			<match name="Type" value="Magestats" />
 		</matches>
 		<textblocks>
-			<link block="Title"><property name="Name" /></link>
+			<link block="MTitle"><property name="Name" /></link>
+			<link block="MageTraining"><property name="MageTraining" /></link>
+			<link block="MStats"><property name="Stats" /></link>
+			<link block="MAttackBar"><property name="AttackBar" /></link>
+			<link block="MTraits"><property name="Traits" /></link>
+			<link block="MageAbilities"><property name="MageAbilities" /></link>
 		</textblocks>
 	</template>
 
 </templates>
+
