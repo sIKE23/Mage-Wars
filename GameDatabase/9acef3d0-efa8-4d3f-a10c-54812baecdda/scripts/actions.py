@@ -250,37 +250,19 @@ def nextPhase(group, x=-360, y=-125):
 				notify("{} channels {}".format(p.name,p.Channeling))
 			for c in table:
 				if c.isFaceUp: #don't waste time on facedown cards
-					if c.markers[ActionRedUsed] == 1:
-						c.markers[ActionRedUsed] = 0
-						c.markers[ActionRed] = 1
-					if c.markers[ActionBlueUsed] == 1:
-						c.markers[ActionBlueUsed] = 0
-						c.markers[ActionBlue] = 1
-					if c.markers[ActionGreenUsed] == 1:
-						c.markers[ActionGreenUsed] = 0
-						c.markers[ActionGreen] = 1
-					if c.markers[ActionYellowUsed] == 1:
-						c.markers[ActionYellowUsed] = 0
-						c.markers[ActionYellow] = 1
-					if c.markers[QuickBack] == 1:
-						c.markers[QuickBack] = 0
-						c.markers[Quick] = 1
-					if c.markers[Used] == 1:
-						c.markers[Used] = 0
-						c.markers[Ready] = 1
-					if c.markers[VoltaricON] == 1:
-						c.markers[VoltaricON] = 0
-						c.markers[VoltaricOFF] = 1
-					if c.markers[DeflectU] == 1:
-						c.markers[DeflectU] = 0
-						c.markers[DeflectR] = 1
-					debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
+				
+					#reset markers
+					if c.controller == me:
+						resetMarkers(c)
+					else:
+						remoteCall(players[1], "resetMarkers", [c])
+					
 					
 					#resolve channeling cards (harmonize, spawnpoints, familiars)
 					if c.controller == me:
 						resolveChanneling(c)
 					else:
-						remoteCall(player[1], "resolveChanneling", [c])
+						remoteCall(players[1], "resolveChanneling", [c])
 					
 			#resolve burns
 			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
@@ -293,28 +275,58 @@ def nextPhase(group, x=-360, y=-125):
 						remoteCall(players[1], "resolveBurns", [c])
 					
 
+def resetMarkers(c):
+	mute()
+	if c.markers[ActionRedUsed] == 1:
+		c.markers[ActionRedUsed] = 0
+		c.markers[ActionRed] = 1
+	if c.markers[ActionBlueUsed] == 1:
+		c.markers[ActionBlueUsed] = 0
+		c.markers[ActionBlue] = 1
+	if c.markers[ActionGreenUsed] == 1:
+		c.markers[ActionGreenUsed] = 0
+		c.markers[ActionGreen] = 1
+	if c.markers[ActionYellowUsed] == 1:
+		c.markers[ActionYellowUsed] = 0
+		c.markers[ActionYellow] = 1
+	if c.markers[QuickBack] == 1:
+		c.markers[QuickBack] = 0
+		c.markers[Quick] = 1
+	if c.markers[Used] == 1:
+		c.markers[Used] = 0
+		c.markers[Ready] = 1
+	if c.markers[VoltaricON] == 1:
+		c.markers[VoltaricON] = 0
+		c.markers[VoltaricOFF] = 1
+	if c.markers[DeflectU] == 1:
+		c.markers[DeflectU] = 0
+		c.markers[DeflectR] = 1
+	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
+					
 def resolveBurns(card):
 	#roll em
+	mute()
 	numMarkers = card.markers[Burn]
 	burnDamage = 0
 	burnsRemoved = 0
 	for i in range(0, numMarkers):
 		roll = rnd(0, 2)
-		if roll == 0 :
-			c.markers[Burn] -= 1
+		if roll == 0:
+			card.markers[Burn] -= 1
 			burnsRemoved += 1
 		elif roll == 1:
 			burnDamage += 1
 		elif roll == 2:
 			burnDamage += 2
 	#apply damage
-	if c.Type == "Mage":
-		c.controller.Damage += burnDamage
-	elif c.Type == "Creature":
-		c.markers[Damage] += burnDamage
-	notify("{} damage added to {}. {} Burns removed.".format(burnDamage, c.Name, burnsRemoved))
+	if card.Type == "Mage":
+		card.controller.Damage += burnDamage
+	elif card.Type == "Creature":
+		card.markers[Damage] += burnDamage
+	notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
 	
-def resolveChanneling(card):
+def resolveChanneling(c):
+	mute()
 	if c.Stats != None and c.Type != "Mage":
 		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 			channel = getStat(c.Stats,"Channeling")
@@ -711,10 +723,11 @@ def overlaps(x1, y1, x2, y2, w, h):
 	
 def cardHere(x, y, stat=""):
 	for c in table:
-		cx, cy = c.position
-		#if overlaps(x, y, cx, cy, c.width(), c.height()):
-		if x >= cx and x <= cx+c.width() and y >= cy and y <= cy+c.height() and stat in c.Stats:
-			return c
+		if c.controller == me:
+			cx, cy = c.position
+			#if overlaps(x, y, cx, cy, c.width(), c.height()):
+			if x >= cx and x <= cx+c.width() and y >= cy and y <= cy+c.height() and stat in c.Stats:
+				return c
 	return None
 
 def cardX(card):
