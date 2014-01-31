@@ -97,7 +97,7 @@ def onLoadDeck(player, groups):
 		if validateDeck(groups[0]):
 			playerSetup()
 		else:
-			notify("Validation of {}'s deck FAILED. Please choose another deck (File -> Reset to clear your hand).".format(me.name))
+			notify("Validation of {}'s deck FAILED. Please choose another deck (Game -> Reset to clear your hand, note that this will clear the other player's hand as well).".format(me.name))
 
 
 ############################################################################
@@ -184,11 +184,11 @@ def playerSetup():
 	for stat in stats:
 		debug("stat {}".format(stat))
 		statval = stat.split("=")
-		if statval[0] == "Channeling":
+		if "Channeling" in statval[0]:
 			me.Channeling = int(statval[1])
 			me.Mana = 10+me.Channeling
 			whisper("Channeling set to {} and Mana to {}".format(me.Channeling,me.Mana))
-		elif statval[0] == "Life":
+		elif "Life" in statval[0]:
 			me.Life = int(statval[1])
 			whisper("Life set to {}".format(me.Life))
 		
@@ -196,6 +196,7 @@ def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 350, -35)
 	
 def flipGameBoard(group, x=0, y=0):
+	#TODO: add remote call to flip so both player's boards flip
 	global boardFlipped
 	if not boardFlipped:
 		table.setBoardImage("background\\gameboard-alt-a.png")
@@ -274,75 +275,91 @@ def nextPhase(group, x=-360, y=-125):
 						c.markers[DeflectU] = 0
 						c.markers[DeflectR] = 1
 					debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
-					if c.Stats != None and c.Type != "Mage":
-						if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
-							channel = getStat(c.Stats,"Channeling")
-							debug("Found Channeling stat {} in card {}".format(channel,c.name))
-							for x in range(channel):
-								addMana(c)
-					if c.name == "Barracks": #has the channeling=X stat
-						debug("Found Barracks")
-						x = 0
-						for c2 in table:
-							if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
-								#debug("owners {} {}".format(c.owner,c2.owner))
-								if "Outpost" in c2.Subtype and c.owner == c2.owner:
-									debug("Found Outpost")
-									addMana(c)
-									x += 1
-							if x == 3: #max 3 outpost count.
-								break
-					if c.name == "Harmonize":
-						c2 = cardHere(cardX(c)-1,cardY(c)-1,"Channeling=")
-						if c2 != None and c2.Type != "Mage":
-							debug("Overlap found (top left) {}".format(c2.name))
-							addMana(c2)
-							whisper("Harmonize found and Mana added to channeling card")
-						else:
-							c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
-							if c2 != None and c2.Type !="Mage":
-								debug("Overlap found (bottom right) {}".format(c2.name))
-								addMana(c2)
-								whisper("Harmonize found and Mana added to channeling card")
-							else:
-								c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
-								if c2 != None and c2.Type !="Mage":
-									debug("Overlap found (bottom left) {}".format(c2.name))
-									addMana(c2)
-									whisper("Harmonize found and Mana added to channeling card")
-								else:
-									c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
-									if c2 != None and c2.Type !="Mage":
-										debug("Overlap found (top right) {}".format(c2.name))
-										addMana(c2)
-										whisper("Harmonize found and Mana added to channeling card")
-									else:
-										whisper("Harmonize found but no Mana added")
-
-			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]	#any cards with burn?
+					
+					#resolve channeling cards (harmonize, spawnpoints, familiars)
+					if c.controller == me:
+						resolveChanneling(c)
+					else:
+						remoteCall(player[1], "resolveChanneling", [c])
+					
+			#resolve burns
+			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
 			if len(cardsWithBurn) > 0:	
 				notify("Resolving Burns...")	#found at least one
 				for c in cardsWithBurn:
-					#roll em
-					numMarkers = c.markers[Burn]
-					burnDamage = 0
-					burnsRemoved = 0
-					for i in range(0, numMarkers):
-						roll = rnd(0, 5)
-						if roll == 0 or roll == 1:
-							c.markers[Burn] -= 1
-							burnsRemoved += 1
-						elif roll == 2 or roll == 3:
-							burnDamage += 1
-						elif roll == 4 or roll == 5:
-							burnDamage += 2
-					#apply damage
-					if c.Type == "Mage":
-						c.controller.Damage += burnDamage
-					elif c.Type == "Creature":
-						c.markers[Damage] += burnDamage
-					notify("{} damage added to {}. {} Burns removed.".format(burnDamage, c.Name, burnsRemoved))
-						
+					if c.controller == me:
+						resolveBurns(c)
+					else:
+						remoteCall(players[1], "resolveBurns", [c])
+					
+
+def resolveBurns(card):
+	#roll em
+	numMarkers = card.markers[Burn]
+	burnDamage = 0
+	burnsRemoved = 0
+	for i in range(0, numMarkers):
+		roll = rnd(0, 2)
+		if roll == 0 :
+			c.markers[Burn] -= 1
+			burnsRemoved += 1
+		elif roll == 1:
+			burnDamage += 1
+		elif roll == 2:
+			burnDamage += 2
+	#apply damage
+	if c.Type == "Mage":
+		c.controller.Damage += burnDamage
+	elif c.Type == "Creature":
+		c.markers[Damage] += burnDamage
+	notify("{} damage added to {}. {} Burns removed.".format(burnDamage, c.Name, burnsRemoved))
+	
+def resolveChanneling(card):
+	if c.Stats != None and c.Type != "Mage":
+		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
+			channel = getStat(c.Stats,"Channeling")
+			debug("Found Channeling stat {} in card {}".format(channel,c.name))
+			for x in range(channel):
+				addMana(c)
+	if c.name == "Barracks": #has the channeling=X stat
+		debug("Found Barracks")
+		x = 0
+		for c2 in table:
+			if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
+				#debug("owners {} {}".format(c.owner,c2.owner))
+				if "Outpost" in c2.Subtype and c.owner == c2.owner:
+					debug("Found Outpost")
+					addMana(c)
+					x += 1
+			if x == 3: #max 3 outpost count.
+				break
+	if c.name == "Harmonize":
+		c2 = cardHere(cardX(c)-1,cardY(c)-1,"Channeling=")
+		if c2 != None and c2.Type != "Mage":
+			debug("Overlap found (top left) {}".format(c2.name))
+			addMana(c2)
+			whisper("Harmonize found and Mana added to channeling card")
+		else:
+			c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
+			if c2 != None and c2.Type !="Mage":
+				debug("Overlap found (bottom right) {}".format(c2.name))
+				addMana(c2)
+				whisper("Harmonize found and Mana added to channeling card")
+			else:
+				c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
+				if c2 != None and c2.Type !="Mage":
+					debug("Overlap found (bottom left) {}".format(c2.name))
+					addMana(c2)
+					whisper("Harmonize found and Mana added to channeling card")
+				else:
+					c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
+					if c2 != None and c2.Type !="Mage":
+						debug("Overlap found (top right) {}".format(c2.name))
+						addMana(c2)
+						whisper("Harmonize found and Mana added to channeling card")
+					else:
+						whisper("Harmonize found but no Mana added")
+					
 def toggleDebug(group, x=0, y=0):
 	global showDebug
 	showDebug = not showDebug
