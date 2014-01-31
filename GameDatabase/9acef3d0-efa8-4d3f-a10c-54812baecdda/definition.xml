@@ -4,7 +4,11 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
+<<<<<<< HEAD
 	version="1.2.11.10"
+=======
+	version="1.2.11.7"
+>>>>>>> origin/ProxyGenerator
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -38,6 +42,9 @@
 		<property name="Traits" type="String" hidden="False" ignoreText="False"/>
 		<property name="Text" type="String" hidden="False" ignoreText="False"/>
 		<property name="CardID" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageTraining" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/gameboard.png" background="background/background.png" boardPosition="-300,-225,600,450" backgroundStyle="uniformToFill">
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>

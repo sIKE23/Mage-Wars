@@ -11,11 +11,20 @@
 	<cards>
 		<card id="d20c9d4a-65a7-4018-bffc-16ed0cb62912" name="Druid">
 			<property name="Type" value="Mage" />
+<<<<<<< HEAD
 			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9, Nature=1, Water=1, 1, Fire=3, War=3" />
 			<property name="AttackBar" value="Basic Melee Attack: [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple. &#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
 
+=======
+			<property name="MageTraining" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple." />
+			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
+>>>>>>> origin/ProxyGenerator
 			<alternate name="Druid" type="B" />
 		</card>
 		<card id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260" name="Druid stats">
@@ -23,11 +32,21 @@
 		</card>
 		<card id="6b830552-8420-4797-bbb5-3ec5bb768265" name="Necromancer">
 			<property name="Type" value="Mage" />
+<<<<<<< HEAD
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Dark=1, Holy=3" />
 			<property name="AttackBar" value="Basic Melee Attack: [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction. &#xD;&#xA;PLAGUE MASTER: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;ETERNAL SERVANT: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
 						<alternate name="Necromancer" type="B" />
+=======
+			<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Poison Immunity" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
+			<alternate name="Necromancer" type="B" />
+>>>>>>> origin/ProxyGenerator
 		</card>
 		<card id="682d3b40-7c08-437b-9c88-16e2f389773f" name="Necromancer stats">
 			<property name="Type" value="Magestats" />
@@ -76,7 +95,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=7" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Corrosive Mist: [Ranged:0-0] [Acid] [Dice=2] [d12] [7+ = Corrode] [Unavoidable]" />
+=======
+			<property name="AttackBar" value="Corrosive Mist:&#xD;&#xA;[Ranged:0-0] [Acid] [Dice=2] [d12] [7+ = Corrode] [Unavoidable]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Comes into play with a Mist token on it. When Orchid&apos;s attack targets a Mage, at the end of the Damage &amp; Effects Step, you may remove the Mist token, choose an equipment object on that Mage, and pay its casting cost to destroy that object." />
 			<property name="CardID" value="DNJ02" />
@@ -136,7 +159,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=7" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Poison Sleep Mist: [Ranged:0-0] [Poison] [Dice=3] [Unavoidable]" />
+=======
+			<property name="AttackBar" value="Poison Sleep Mist:&#xD;&#xA;[Ranged:0-0] [Poison] [Dice=3] [Unavoidable]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature." />
 			<property name="CardID" value="DNJ06" />
@@ -243,7 +270,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Impaling Thorns: [Passage Blocked] [Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
+=======
+			<property name="AttackBar" value="Impaling Thorns:&#xD;&#xA;[Passage Blocked] [Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW01" />
@@ -275,7 +306,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=7" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Sacrificial Knife: [Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones: [Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave: [Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
+=======
+			<property name="AttackBar" value="Sacrificial Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones:&#xD;&#xA;[Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave:&#xD;&#xA;[Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC01" />
@@ -290,7 +325,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=9" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Bite: [Quick] [Melee] [Dice=3] [Piercing +1]" />
+=======
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Fast, Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC02" />
@@ -305,7 +344,11 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=-, Life=9" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Corrosive Juices: [Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode 9+ = 2 Corrode] [Devour]" />
+=======
+			<property name="AttackBar" value="Corrosive Juices:&#xD;&#xA;[Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode 9+ = 2 Corrode] [Devour]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Resilient, Uncontainable, Nonliving, Slow, Psychic Immunity, Acid Immunity" />
 			<property name="Text" value="Whenever Devouring Jelly attacks and damages a Corporeal creature, it may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC03" />
@@ -320,7 +363,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=-, Life=8" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Hand of Death: [Quick] [Melee] [Dice=3] [d12] [5+ = Weak] [Ethereal]" />
+=======
+			<property name="AttackBar" value="Hand of Death:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [5+ = Weak] [Ethereal]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Upkeep +1, Incorporeal, Nonliving" />
 			<property name="Text" value="Instead of taking a move action, Grey Wraith may pay 1 mana to teleport to an adjacent zone." />
 			<property name="CardID" value="DNC04" />
@@ -335,7 +382,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=5" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Impregnating Bite: [Quick] [Melee] [Dice=3] [Piercing +1] &#xD;&#xA;" />
+=======
+			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] &#xD;&#xA;" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Nonliving, Psychic Immunity, Climbing" />
 			<property name="Text" value="Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
@@ -349,7 +400,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Great Maw: [Quick] [Melee] [Dice=4] [Reach] [Devour] [+2 vs. Undead]" />
+=======
+			<property name="AttackBar" value="Great Maw:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Reach] [Devour] [+2 vs. Undead]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Legendary, Nature Mage Only, Epic, Regenerate 2, Hydro Immunity, Flame +2" />
 			<property name="Target" value="Zone" />
 			<property name="Text" value="When Kralathor attacks and devours a Corporeal creature, it places a Growth marker on itself." />
@@ -365,7 +420,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Cursed Sword: [Quick] [Melee] [Dice=4] [d12] [8+ = Tainted] &#xD;&#xA;" />
+=======
+			<property name="AttackBar" value="Cursed Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Tainted] &#xD;&#xA;" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Nonliving, Psychic Immunity, Legendary" />
 			<property name="Text" value="Each Upkeep Phase, each friendly skeleton object, in or bordering Mort&apos;s zone, may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC07" />
@@ -380,7 +439,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=5" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Talons: [Quick] [Melee] [Dice=3]" />
+=======
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="When Unstable Zombie is activated, it may choose on the following: Remove up to 2 damage from itself, its attacks gain Piercing +2 until end of round, or it loses the Lumbering trait until end of round." />
 			<property name="CardID" value="DNC08" />
@@ -395,7 +458,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=4" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Diseased Strike: [Quick] [Melee] [Dice=1] [d12] [8+ = Rot]" />
+=======
+			<property name="AttackBar" value="Diseased Strike:&#xD;&#xA;[Quick] [Melee] [Dice=1] [d12] [8+ = Rot]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="When Plague Zombie is destroyed, place a Rot condition on each Living creature in its " />
 			<property name="CardID" value="DNC09" />
@@ -410,7 +477,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=10" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Voracious Bite: [Quick] [Melee] [Dice=5] [Vampiric]" />
+=======
+			<property name="AttackBar" value="Voracious Bite:&#xD;&#xA;[Quick] [Melee] [Dice=5] [Vampiric]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Rooted, Uproot 1, Regenerate 1, Hydro Immunity, Flame +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC10" />
@@ -425,7 +496,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Bite: [Quick] [Melee] [Dice=4] [Piercing +1]" />
+=======
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Fast, Psychic Immunity, Nonliving" />
 			<property name="Text" value="If a Corporeal creature was destroyed this round, and Ravenous Ghoul is in (or moves to) the zone it was destroyed in, as a quick action it may take that creature from its discard pile and remove it from the game to gain a Growth marker." />
 			<property name="CardID" value="DNC11" />
@@ -440,7 +515,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=6" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Mangling Claws: [Quick] [Melee] [Dice=4]" />
+=======
+			<property name="AttackBar" value="Mangling Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Resilient, Psychic Immunity, Nonliving, Legendary" />
 			<property name="Text" value="When Shaggoth-Zora is activated, it may Obliterate 1 friendly zombie creature in its zone to place a Growth marker on itself. It can have a maximum of 6 Growth markers." />
 			<property name="CardID" value="DNC12" />
@@ -455,7 +534,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=9" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Bow: [Full] [Ranged:1-2] [Dice=4] &#xD;&#xA;Fist: [Quick] [Melee] [Dice=2]" />
+=======
+			<property name="AttackBar" value="Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] &#xD;&#xA;Fist:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC13" />
@@ -470,7 +553,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Defense=8+ 1x, Armor=1, Life=12" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Broadsword: [Quick] [Melee] [Dice=5]" />
+=======
+			<property name="AttackBar" value="Broadsword:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC14" />
@@ -485,7 +572,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Femur: [Quick] [Melee] [Dice=3]" />
+=======
+			<property name="AttackBar" value="Femur:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC15" />
@@ -500,7 +591,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Talons: [Quick] [Melee] [Dice=4] [Piercing +1] &#xD;&#xA;Spitting Acid: [Full] [Acid] [Ranged:0-1] [Dice=3] [d12] [5+ = Corrode]" />
+=======
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1] &#xD;&#xA;Spitting Acid:&#xD;&#xA;[Full] [Acid] [Ranged:0-1] [Dice=3] [d12] [5+ = Corrode]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC16" />
@@ -515,7 +610,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=3, Defense=3+ ∞" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Magical Burst: [Quick] [Melee] [Dice=1] [Ethereal]" />
+=======
+			<property name="AttackBar" value="Magical Burst:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Flying, Legendary, Pest, Druid Only" />
 			<property name="Text" value="As a quick action, Tataree may choose and do one of the following to a plant object in its zone; Heal it 1 damage, or place 1 mana on it (if it has the Channel attribute)." />
 			<property name="CardID" value="DNC17" />
@@ -530,7 +629,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="6" />
 			<property name="Stats" value="Armor=2, Life=18" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Massive Branch Smash: [Full] [Melee] [Dice=6] [d12] [7-10 = Daze; 11+ = Stun] [Reach]" />
+=======
+			<property name="AttackBar" value="Massive Branch Smash:&#xD;&#xA;[Full] [Melee] [Dice=6] [d12] [7-10 = Daze; 11+ = Stun] [Reach]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Rooted, Uproot 2, Vigilant, Intercept, Flame +2, Regenerate 2, Hydro Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC18" />
@@ -545,7 +648,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=5" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Venomous Bite: [Quick] [Melee] [Dice=2] [d12] [7+ = Tainted]" />
+=======
+			<property name="AttackBar" value="Venomous Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [7+ = Tainted]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC19" />
@@ -560,7 +667,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=10" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Headbutt: [Quick] [Melee] [Dice=4] &#xD;&#xA;Cavernous Maw: [Full] [Melee] [Dice=5] [Piercing +1] [Devour]" />
+=======
+			<property name="AttackBar" value="Headbutt:&#xD;&#xA;[Quick] [Melee] [Dice=4] &#xD;&#xA;Cavernous Maw:&#xD;&#xA;[Full] [Melee] [Dice=5] [Piercing +1] [Devour]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Rooted, Regenerate 1, Flame +2, Hydro Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC20" />
@@ -575,7 +686,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=11" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Ensnaring Vine: [Ranged:0-1] [Dice=3] [d12] [5+ = Snatch]" />
+=======
+			<property name="AttackBar" value="Ensnaring Vine:&#xD;&#xA;[Ranged:0-1] [Dice=3] [d12] [5+ = Snatch]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Rooted, Regenerate 2, Flame +2, Hydro Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC21" />
@@ -590,7 +705,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=10" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Mangling Claws: [Quick] [Melee] [Dice=4]" />
+=======
+			<property name="AttackBar" value="Mangling Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty +2, Lumbering, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC22" />
@@ -605,7 +724,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=4" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Bite: [Quick] [Melee] [Dice=2]" />
+=======
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty+1, Slow, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC23" />
@@ -620,7 +743,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=7" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Bite: [Quick] [Melee] [Dice=3]" />
+=======
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC24" />
@@ -714,7 +841,11 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Deathshroud Strike: [Quick] [Melee] [Dice=4] [d12] [8+ = Rot]" />
+=======
+			<property name="AttackBar" value="Deathshroud Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Rot]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Necromancer Only" />
 			<property name="Text" value="Once per round, as a quick necro spell, you may pay 2 mana to target a zone up to 1 zone away. All friendly undead creatures in that zone gain Melee +1 until the end of the round." />
 			<property name="CardID" value="DNQ03" />
@@ -759,7 +890,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Ring" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Mohktari&apos;s Touch: [Cost=X] [Quick] [Ranged:0-1] [Remove 1 condition marker from target plant object (pay its removal cost). If you do, you may heal it 1 damage.]" />
+=======
+			<property name="AttackBar" value="Mohktari&apos;s Touch:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 condition marker from target plant object (pay its removal cost). If you do, you may heal it 1 damage.]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, this Mage may cast the above quick spell." />
 			<property name="CardID" value="DNQ06" />
@@ -789,7 +924,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Vinelash: [Quick] [Melee] [Dice=4] [Reach]" />
+=======
+			<property name="AttackBar" value="Vinelash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Reach]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Druid Only" />
 			<property name="Text" value="As a quick spell, you may pay 1 mana to place a Vine Marker in a target zone up to 1 zone away. Once per round, as a quick spell, you may pay 4 mana and destroy a target friendly Vine marker up to 2 zones away, to give a target non-flying creature in that zone the Stuck condition." />
 			<property name="CardID" value="DNQ08" />
@@ -819,7 +958,11 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Amulet" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Meditate: [Full] [Add 3 mana to your mana supply.]" />
+=======
+			<property name="AttackBar" value="Meditate:&#xD;&#xA;[Full] [Add 3 mana to your mana supply.]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNQ10" />
@@ -851,7 +994,11 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+<<<<<<< HEAD
 			<property name="AttackBar" value="Thornburst: [Ranged:0-0] [Dice=4] [d12] [7+ = Bleed] [Piercing +1]" />
+=======
+			<property name="AttackBar" value="Thornburst:&#xD;&#xA;[Ranged:0-0] [Dice=4] [d12] [7+ = Bleed] [Piercing +1]" />
+>>>>>>> origin/ProxyGenerator
 			<property name="Traits" value="Druid Only" />
 			<property name="Text" value="Target friendly vine marker makes the above attack. Then, destroy that vine marker." />
 			<property name="CardID" value="DNI02" />
@@ -946,6 +1093,11 @@
 			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost" />
 			<property name="CardID" value="DNI08" />
 		</card>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/ProxyGenerator
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Front">			
 			<property name="Type" value="Internal" />
 			<property name="Subtype" value="" />
@@ -963,6 +1115,39 @@
 			<alternate name="Vine Marker Back" type="B" />
 		</card>
 
+<<<<<<< HEAD
 
+=======
+		<card id="63f3f7c5-bfac-4671-b74c-c045dd5c7ed9" name="Test of the Longest Named Card">
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Subtype" value="Plant, Healing, Protection" />
+			<property name="Cost" value="35" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Non-Mage, Non-Flying Corporeal Creature" />
+			<property name="School" value="Earth/Fire/Air/Water" />
+			<property name="Level" value="2/2/2/2" />
+			<property name="Stats" value="Defense=6+ 2x No Ranged, Armor=1, Life=13" />
+			<property name="AttackBar" value="Sacrificial Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones:&#xD;&#xA;[Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave:&#xD;&#xA;[Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
+			<property name="Traits" value="Spawnpoint, Zone Exclusive, Regenerate 2, Flame +2, Hydro Immunity, Living, Druid Only, Epic" />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
+			<property name="CardID" value="DNI08" />
+		</card>
+		<card id="7c9038a8-77b8-4142-87a8-a15f211d4e1f" name="Test of the Longest Named Card Deux">
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Subtype" value="Plant, Healing, Protection" />
+			<property name="Cost" value="35" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Non-Mage, Non-Flying Corporeal Creature" />
+			<property name="School" value="Earth/Fire/Air/Water" />
+			<property name="Level" value="2/2/2/2" />
+			<property name="Stats" value="Defense=6+ 2x No Ranged, Armor=1, Life=13" />
+			<property name="AttackBar" value="Sacrificial Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones:&#xD;&#xA;[Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave:&#xD;&#xA;[Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
+			<property name="Traits" value="Spawnpoint, Zone Exclusive, Regenerate 2, Flame +2, Hydro Immunity, Living, Druid Only, Epic" />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
+			<property name="CardID" value="MWSTX2CKC23" />
+		</card>
+>>>>>>> origin/ProxyGenerator
 	</cards>
 </set>
