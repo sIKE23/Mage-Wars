@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.3.0.0"
+	version="1.3.0.1"
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -61,6 +61,7 @@
 			<cardaction menu="Add Slam Token" default="False" shortcut="Alt+S" execute="addSlam" />
 			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak"/>
 			<cardaction menu="Add Cripple Token" default="False" shortcut="Ctrl+C" execute="addCripple"/>
+			<cardaction menu="Add Corrode Token" default="False" shortcut="Alt+C" execute="addCorrode"/>
 			<cardaction menu="Add Other Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
 		<cardactions menu="Toggle Markers">
@@ -85,6 +86,7 @@
 			<cardaction menu="Remove Slam Token" default="False" shortcut="Alt+Shift+S" execute="subSlam"/>
 			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak"/>
 			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
+			<cardaction menu="Remove Corrode Token" default="False" shortcut="Alt+Shift+C" execute="subCorrode" />
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
 			<cardaction menu="Exhaust/Ready" default="False" shortcut="F7" execute="kneel" />
