@@ -949,7 +949,7 @@
 			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost" />
 			<property name="CardID" value="DNI08" />
 		</card>
-		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Front">			
+		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">			
 			<property name="Type" value="Internal" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="" />
@@ -963,7 +963,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="" />
-			<alternate name="Vine Marker Back" type="B" />
+			<alternate name="Vine Marker Black" type="B" />
 		</card>
 	</cards>
 </set>
