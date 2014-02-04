@@ -89,21 +89,8 @@
 			<cardaction menu="Remove Corrode Token" default="False" shortcut="Alt+Shift+C" execute="subCorrode" />
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
-		<cardactions menu="Rotate Wall">
-<!--	<cardaction menu="Rotate the Wall so that the top is facing to the Left" default="False"  execute="rotateW0" />
-			<cardaction menu="Rotate the Wall so that the top is facing up" default="False" execute="rotateW90" />
-			<cardaction menu="Rotate the Wall so that the top is facing to the Right" default="False"  execute="rotateW180" />
-			<cardaction menu="Rotate the Wall so that the top is facing Down" default="False" execute="rotateW270" />
--->
-<!--			
-			<cardaction menu="Rotate Wall to the Left" default="False" execute="rotateL" />
-			<cardaction menu="Rotate Wall to the Right" default="False"  execute="rotateR" />		
--->			
-	</cardactions>
-			
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard"/>
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
-<!--	<cardaction menu="Flip Vine Marker" default="False" shortcut="Alt+V" execute="flipcardv"/>-->
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
 	</table>
