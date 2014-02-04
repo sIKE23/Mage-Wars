@@ -102,6 +102,7 @@
 	</cardactions>
 			
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard"/>
+			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
 <!--	<cardaction menu="Flip Vine Marker" default="False" shortcut="Alt+V" execute="flipcardv"/>-->
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />

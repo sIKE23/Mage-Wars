@@ -605,20 +605,22 @@ def clearTokens(card, x = 0, y = 0):
 #			notify("{} Rotates '{}' so the Top is facing Down".format(me, card.Name))
 #		else:
 #			notify("{} Rotates '{}' so the Top is facing to the Left".format(me, card.Name))
-#
-#def flipcardv(card, x = 0, y = 0):
-#	mute()
-#	vinename = c.name
-#	if "Vine" in vinename:
-#		if card.alternate == "B":
-#			card.switchTo("")
-#		else:
-#			card.switchTo("B")
-#		notify("{} Flips Vine Marker.".format(me, card.Name))
+
+def rotateCard(card, x = 0, y = 0):
+	# Rot90, Rot180, etc. are just aliases for the numbers 0-3
+	mute()
+	if card.controller == me:
+		card.orientation = (card.orientation + 1) % 4
 
 def flipcard(card, x = 0, y = 0):
 	mute()
-	if card.isFaceUp == False:
+	if "Vine" in card.name and card.controller == me:
+		if card.alternate == "B":
+			card.switchTo("")
+		else:
+			card.switchTo("B")
+		notify("{} Flips Vine Marker.".format(me))
+	elif card.isFaceUp == False:
 		card.isFaceUp = True
 		notify("{} turns '{}' face up.".format(me, card.Name))
 		card.highlight = None
