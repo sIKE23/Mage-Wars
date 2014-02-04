@@ -196,6 +196,9 @@ def playerSetup():
 
 def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 350, -35)
+	
+def createAltBoardCard(group, x=0, y=0):
+	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 350, -35)
 
 def flipGameBoard(group, x=0, y=0):
 	#TODO: add remote call to flip so both player's boards flip
@@ -567,44 +570,8 @@ def clearTokens(card, x = 0, y = 0):
 
 
 ############################################################################
-######################		Other  Actions		############################
+######################		Other  Actions		################################
 ############################################################################
-
-#def rotateW90(card, x = 0, y = 0):
-#	mute()
-#	if "Wall" in card.type:
-#		card.orientation ^= Rot90
-#		if card.orientation & Rot90 == Rot90:
-#			notify("{} Rotates '{}' so the Top is facing to the Left".format(me, card.Name))
-#		else:
-#			notify("{} Rotates '{}' so the Top is facing to the Left".format(me, card.Name))
-#
-#def rotateW90(card, x = 0, y = 0):
-#	mute()
-#	if "Wall" in card.type:
-#		card.orientation ^= Rot90
-#		if card.orientation & Rot90 == Rot90:
-#			notify("{} Rotates '{}' so the Top is facing Up".format(me, card.Name))
-#		else:
-#			notify("{} Rotates '{}' so the Top is facing to the Left".format(me, card.Name))
-#
-#def rotateW180(card, x = 0, y = 0):
-#	mute()
-#	if "Wall" in card.type:
-#		card.orientation ^= Rot180
-#		if card.orientation & Rot180 == Rot180:
-#			notify("{} Rotates '{}' so the Top is facing to the Right".format(me, card.Name))
-#		else:
-#			notify("{} Rotates '{}' so the Top is facing to the Left".format(me, card.Name))
-#
-#def rotateW270(card, x = 0, y = 0):
-#	mute()
-#	if "Wall" in card.type:
-#		card.orientation ^= Rot270
-#		if card.orientation & Rot270 == Rot270:
-#			notify("{} Rotates '{}' so the Top is facing Down".format(me, card.Name))
-#		else:
-#			notify("{} Rotates '{}' so the Top is facing to the Left".format(me, card.Name))
 
 def rotateCard(card, x = 0, y = 0):
 	# Rot90, Rot180, etc. are just aliases for the numbers 0-3
@@ -620,6 +587,12 @@ def flipcard(card, x = 0, y = 0):
 		else:
 			card.switchTo("B")
 		notify("{} Flips Vine Marker.".format(me))
+	elif "Alt Zone" in card.name and card.controller == me:
+		if card.alternate == "B":
+			card.switchTo("")
+		else:
+			card.switchTo("B")
+		notify("{} Flips Zone Marker.".format(me))	
 	elif card.isFaceUp == False:
 		card.isFaceUp = True
 		notify("{} turns '{}' face up.".format(me, card.Name))

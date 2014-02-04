@@ -52,6 +52,10 @@
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
 		</groupactions>
+		<groupactions menu="Alternative Play">
+			<groupaction menu="Flip Game Board" default="False" shortcut="Alt+F9" execute="flipGameBoard"/>
+			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F8" execute="createAltBoardCard" />
+		</groupactions>
 		<cardactions menu="Add Tokens">
 			<cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage"/>
 			<cardaction menu="Add Mana" default="False" shortcut="Ctrl+M" execute="addMana"/>

@@ -2757,5 +2757,21 @@
 			<alternate name="1st Player Token Green" type="C" />
 			<alternate name="1st Player Token Yellow" type="D" />
 		</card>
+		<card id="af14ca09-a83d-4185-afa0-bc38a31dbf82" name="Alt Zone Intersection">
+			<property name="Type" value="Internal" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="" />
+			<property name="Action" value="" />
+			<property name="Range" value="" />
+			<property name="Target" value="" />
+			<property name="School" value="" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="" />
+			<alternate name="Alt Zone Compass" type="B" />
+		</card>
 	</cards>
 </set>
