@@ -14,16 +14,20 @@ namespace Octgn.MageWarsValidator
     using Octgn.Core.Plugin;
     using Octgn.DataNew.Entities;
     using Octgn.Library.Plugin;
+    using System.Text;
 
     public class MageWarsValidator : IDeckBuilderPlugin
     {
+
+        public static bool deckValidated = false;
+        public static int bookPoints = 0;
 
         public IEnumerable<IPluginMenuItem> MenuItems
         {
             get
             {
                 // Add your menu items here.
-                return new List<IPluginMenuItem> { new PluginMenuItem() };
+                return new List<IPluginMenuItem> { new ValidatorMenuItem(), new ExportToForumMenuItem() };
             }
         }
 
@@ -72,7 +76,7 @@ namespace Octgn.MageWarsValidator
         }
     }
 
-    public class PluginMenuItem : IPluginMenuItem
+    public class ValidatorMenuItem : IPluginMenuItem
     {
         public string Name
         {
@@ -89,6 +93,7 @@ namespace Octgn.MageWarsValidator
         public void OnClick(IDeckBuilderPluginController con)
         {
             var curDeck = con.GetLoadedDeck();
+            MageWarsValidator.deckValidated = false;
 
             if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
             {
@@ -284,6 +289,11 @@ namespace Octgn.MageWarsValidator
                 //System.Windows.MessageBox.Show(reporttmp);
                 Clipboard.SetText(reporttmp);
                 System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook, magename, spellpoints));
+                if (spellbook <= spellpoints)
+                {
+                    MageWarsValidator.deckValidated = true;
+                    MageWarsValidator.bookPoints = spellbook;
+                }
             }
 
         }
@@ -316,5 +326,116 @@ namespace Octgn.MageWarsValidator
             return ret;
         }
 
+    }
+
+    public class ExportToForumMenuItem : IPluginMenuItem
+    {
+        public string Name
+        {
+            get { return "Export to Forum Post"; }
+        }
+
+        public void OnClick(IDeckBuilderPluginController controller)
+        {
+            //did they validate yet?
+            if (!MageWarsValidator.deckValidated)
+            {
+                System.Windows.MessageBox.Show("You muse successfully validate a deck before exporting to a forum post.");
+                return;
+            }
+
+            var curDeck = controller.GetLoadedDeck();
+            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
+            {
+                //setup some stuff
+                var secArray = curDeck.Sections.ToArray();
+                StringBuilder text = new StringBuilder();
+
+                //ask for the deck name
+                string deckName = Prompt.ShowDialog("What is the name of this deck?", "Deck Name");
+                if (string.IsNullOrEmpty(deckName))
+                {
+                    deckName = "Best Deck NA";
+                }
+
+                //start the writing
+                text.AppendLine("[spellbook]");
+                text.AppendLine("[spellbookheader]");
+                text.AppendLine("[spellbookname]" + deckName + "[/spellbookname]");
+                
+                //get and write mage name
+                foreach (var section in secArray)
+                {
+                    foreach (var card in section.Cards)
+                    {
+                        if (Property(card, "Type") == "Mage")
+                        {
+                            text.AppendLine("[mage]" + card.Name + "[/mage]");
+                        }
+                    }
+                }
+                text.AppendLine("[/spellbookheader]");
+                text.AppendLine("[spells]");
+
+                //do all the cards
+                foreach (var section in secArray)
+                {
+                    if (section.Name.Contains("Mage")) continue;
+
+                    text.AppendLine("[spellclass]" + section.Name + "[/spellclass]");
+                    foreach (var card in section.Cards)
+                    {
+                        text.AppendLine("[mwcard=" + Property(card, "CardID") + "]" + card.Quantity + " x " + card.Name + "[/mwcard]");
+                    }
+                }
+
+                //wrap up
+                text.AppendLine("[/spells]");
+                text.AppendLine("[cost]Total cost: " + MageWarsValidator.bookPoints + " pts[/cost]");
+                text.AppendLine("[/spellbook]");
+
+                //copy to clipboard
+                Clipboard.SetText(text.ToString());
+                System.Windows.MessageBox.Show("Forum post containing deck has been copied to clipboard.");
+            }
+        }
+
+        public static class Prompt
+        {
+            public static string ShowDialog(string text, string caption)
+            {
+                Form prompt = new Form();
+                prompt.StartPosition = FormStartPosition.CenterScreen;
+                prompt.Width = 500;
+                prompt.Height = 120;
+                prompt.Text = caption;
+                Label textLabel = new Label() { Left = 50, Top = 20, Text = text, Height = 30, Width = 400 };
+                TextBox inputField = new TextBox() { Left = 50, Top = 50, Width = 400 };
+                Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 50 };
+                confirmation.Click += (sender, e) => { prompt.Close(); };
+                prompt.Controls.Add(confirmation);
+                prompt.Controls.Add(textLabel);
+                prompt.Controls.Add(inputField);
+                prompt.ShowDialog();
+                return inputField.Text;
+            }
+        }
+
+        private string Property(IMultiCard card, string p)
+        {
+            string ret;
+            try
+            {
+                ret =
+                card.PropertySet()
+                    .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
+                    .Value as string;
+            }
+            catch (Exception e)
+            {
+                ret = "";
+            }
+            return ret;
+        }
     }
 }
