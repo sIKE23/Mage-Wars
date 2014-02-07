@@ -121,23 +121,27 @@ namespace Octgn.MageWarsValidator
                         //MessageBox.Show(String.Format("{0}", card.Name));
                         if ("Mage" == Property(card, "Type"))
                         {
-                            var magestats = Splitme(Property(card, "Stats"), ",");
+                            var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
+                            var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
                             magename = card.Name;
                             reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
-                            foreach (var ms in magestats)
+                            foreach (var msc in mageschoolcost)
                             {
-                                if (ms.Contains("Spellbook"))
-                                {
-                                    spellpoints = Convert.ToInt32(Splitme(ms, "=")[1]);
-                                }
                                 foreach (var t in training.ToList())
                                 {
-                                    if (ms.Contains(t.Key)) //scan magestats for training info
+                                    if (msc.Contains(t.Key)) //scan mageschoolcost for training info
                                     {
 
-                                        var tlevel = Splitme(ms, "=");
+                                        var tlevel = Splitme(msc, "=");
                                         training[t.Key] = Convert.ToInt32(tlevel[1]);
                                     }
+                                }
+                            }
+                            foreach (var mstat in magespellbooklimit)
+                            {
+                                if (mstat.Contains("Spellbook"))
+                                {
+                                    spellpoints = Convert.ToInt32(Splitme(mstat, "=")[1]);
                                 }
                             }
                             continue;
@@ -370,7 +374,10 @@ namespace Octgn.MageWarsValidator
                     {
                         if (Property(card, "Type") == "Mage")
                         {
-                            text.AppendLine("[mage]" + card.Name + "[/mage]");
+                            text.AppendLine("[mage]A " + card.Name + " book[/mage]");
+
+                            //built by me!
+                            text.AppendLine("[mage]built by the OCTGN SBB[/mage]");
                         }
                     }
                 }
@@ -378,6 +385,7 @@ namespace Octgn.MageWarsValidator
                 text.AppendLine("[spells]");
 
                 //do all the cards
+                bool promoFound = false;
                 foreach (var section in secArray)
                 {
                     if (section.Name.Contains("Mage")) continue;
@@ -386,6 +394,8 @@ namespace Octgn.MageWarsValidator
                     foreach (var card in section.Cards)
                     {
                         text.AppendLine("[mwcard=" + Property(card, "CardID") + "]" + card.Quantity + " x " + card.Name + "[/mwcard]");
+                        if (Property(card, "Set").Contains("Promo"))
+                            promoFound = true;
                     }
                 }
 
@@ -396,6 +406,8 @@ namespace Octgn.MageWarsValidator
 
                 //copy to clipboard
                 Clipboard.SetText(text.ToString());
+                if (promoFound)
+                    System.Windows.MessageBox.Show("Promos found in deck. Be aware that promos are not supported by the forum preview system.");
                 System.Windows.MessageBox.Show("Forum post containing deck has been copied to clipboard.");
             }
         }

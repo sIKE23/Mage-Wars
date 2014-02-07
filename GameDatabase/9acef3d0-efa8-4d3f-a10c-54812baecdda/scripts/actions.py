@@ -95,11 +95,15 @@ def onGameStart():
 	setGlobalVariable("ColorsChosen", "")	#reset color picking
 
 def onLoadDeck(player, groups):
+	mute()
 	if player == me:
 		if validateDeck(groups[0]):
 			playerSetup()
 		else:
-			notify("Validation of {}'s deck FAILED. Please choose another deck (Game -> Reset to clear your hand, note that this will clear the other player's hand as well).".format(me.name))
+			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
+			for group in groups:
+				for card in group:
+					card.delete()
 
 
 ############################################################################
@@ -892,37 +896,46 @@ def validateDeck(deck):
 	for c in deck:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
-#			stats = c.MageSchoolCost.split(",")
+			schoolcosts = c.MageSchoolCost.split(",")
 			break
 
 	debug("Stats {}".format(stats))
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 
+	#get spellbook point limit
 	for stat in stats:
 		debug("stat {}".format(stat))
 		statval = stat.split("=")
 		if "Spellbook" in statval[0]:
 			spellbook["spellpoints"] = int(statval[1])
-		elif "Dark" in statval[0]:
-			spellbook["Dark"] = int(statval[1])
-		elif "Holy" in statval[0]:
-			spellbook["Holy"] = int(statval[1])
-		elif "Nature" in statval[0]:
-			spellbook["Nature"] = int(statval[1])
-		elif "Mind" in statval[0]:
-			spellbook["Mind"] = int(statval[1])
-		elif "Arcane" in statval[0]:
-			spellbook["Arcane"] = int(statval[1])
-		elif "War" in statval[0]:
-			spellbook["War"] = int(statval[1])
-		elif "Earth" in statval[0]:
-			spellbook["Earth"] = int(statval[1])
-		elif "Water" in statval[0] and c.name != "Druid":
-			spellbook["Water"] = int(statval[1])
-		elif "Air" in statval[0]:
-			spellbook["Air"] = int(statval[1])
-		elif "Fire" in statval[0]:
-			spellbook["Fire"] = int(statval[1])
+			break
+	
+	#get school costs
+	for schoolcost in schoolcosts:
+		debug("schoolcost {}".format(schoolcost))
+		costval = schoolcost.split("=")
+		if "Spellbook" in costval[0]:
+			spellbook["spellpoints"] = int(costval[1])
+		elif "Dark" in costval[0]:
+			spellbook["Dark"] = int(costval[1])
+		elif "Holy" in costval[0]:
+			spellbook["Holy"] = int(costval[1])
+		elif "Nature" in costval[0]:
+			spellbook["Nature"] = int(costval[1])
+		elif "Mind" in costval[0]:
+			spellbook["Mind"] = int(costval[1])
+		elif "Arcane" in costval[0]:
+			spellbook["Arcane"] = int(costval[1])
+		elif "War" in costval[0]:
+			spellbook["War"] = int(costval[1])
+		elif "Earth" in costval[0]:
+			spellbook["Earth"] = int(costval[1])
+		elif "Water" in costval[0] and c.name != "Druid":
+			spellbook["Water"] = int(costval[1])
+		elif "Air" in costval[0]:
+			spellbook["Air"] = int(costval[1])
+		elif "Fire" in costval[0]:
+			spellbook["Fire"] = int(costval[1])
 	debug("Spellbook {}".format(spellbook))
 	#spellbook["Dark"] = sumLevel("Dark")
 	levels = {}
