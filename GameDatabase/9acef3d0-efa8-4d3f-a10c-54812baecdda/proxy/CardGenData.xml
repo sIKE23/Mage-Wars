@@ -73,7 +73,7 @@
 		<block type="text" id="Text">
 			<location x="1" y="400" />
 			<text color="#000000" size="15" />
-			<wordwrap height="94" width="400" align="near" />
+			<wordwrap height="94" width="400" align="center" />
 		</block>
 		<block type="text" id="CardID">
 			<location x="200" y="525" />
@@ -211,6 +211,39 @@
 			<link block="CardID"><property name="CardID" /></link>
 		</textblocks>
 	</template>
+		<template src="Proxy/Conjuration-Proxy.png">
+		<matches>
+			<match name="Type" value="Conjuration-Terrain" />
+		</matches>
+		<overlayblocks>
+            <conditional>
+            <switch property="Cost" >
+                <case value="#NULL#" break="True">
+                	<link block="inv" />
+                </case>
+                	<default>
+                    <link block="CostCircle" />
+                	</default>
+            </switch>
+            </conditional>
+		</overlayblocks>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Subtype"><property name="Subtype" /></link>
+			<link block="Cost"><property name="Cost" /></link>
+			<link block="Action"><property name="Action" /></link>
+			<link block="Range"><property name="Range" /></link>
+			<link block="Target"><property name="Target" /></link>
+			<link block="School"><property name="School" /></link>
+			<link block="Level"><property name="Level" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+			<link block="AttackBar"><property name="AttackBar" /></link>
+			<link block="Traits"><property name="Traits" /></link>
+			<link block="Text"><property name="Text" /></link>
+			<link block="CardID"><property name="CardID" /></link>
+		</textblocks>
+	</template>	
 	<template src="Proxy/Creature-Proxy.png">
 		<matches>
 			<match name="Type" value="Creature" />
