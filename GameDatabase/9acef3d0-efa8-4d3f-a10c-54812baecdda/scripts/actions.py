@@ -470,6 +470,8 @@ def toggleBloodReaper(card, x=0, y=0):
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
+	if not card.isFaceUp:
+		return
 	if card.markers[DeflectR] > 0:
 		card.markers[DeflectR] = 0
 		card.markers[DeflectU] = 1
@@ -484,6 +486,8 @@ def toggleGuard(card, x=0, y=0):
 
 def toggleInvisible(card, x=0, y=0):
 	mute()
+	if not card.isFaceUp:
+		return
 	if card.markers[Invisible] > 0:
 		card.markers[Invisible] = 0
 		card.markers[Visible] = 1
@@ -495,6 +499,8 @@ def toggleInvisible(card, x=0, y=0):
 
 def toggleReady(card, x=0, y=0):
 	mute()
+	if not card.isFaceUp:
+		return
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
@@ -515,6 +521,8 @@ def toggleTauntT(card, x=0, y=0):
 
 def toggleQuick(card, x=0, y=0):
 	mute()
+	if not card.isFaceUp:
+		return
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
@@ -526,6 +534,8 @@ def toggleQuick(card, x=0, y=0):
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
+	if not card.isFaceUp:
+		return
 	if card.markers[VoltaricON] > 0:
 		card.markers[VoltaricON] = 0
 		card.markers[VoltaricOFF] = 1
