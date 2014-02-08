@@ -120,8 +120,8 @@ def rollDice(group, x=0, y=0):
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -410, -35 )
-	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -360, -35 )
+	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -410, -80 )
+	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -360, -80 )
 
 	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
@@ -213,7 +213,7 @@ def flipGameBoard(group, x=0, y=0):
 		table.setBoardImage("background\\gameboard.png")
 	boardFlipped = not boardFlipped
 
-def nextPhase(group, x=-360, y=-125):
+def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	if mycolor == "#800080": # Player setup is not done yet.
 		return
@@ -226,7 +226,7 @@ def nextPhase(group, x=-360, y=-125):
 	if card == None:
 		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", x, y )
 		card.switchTo("Planning") #skips upkeep for first turn
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-125) #initiative token
+		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-150) #initiative token
 		if mycolor == PlayerColor[0]:
 			init.switchTo("")
 		elif mycolor == PlayerColor[1]:
@@ -678,21 +678,33 @@ def defaultAction(card, x = 0, y = 0):
 def addToken(card, tokenType):
 	mute()
 	card.markers[tokenType] += 1
-	notify("{} added to '{}'".format(tokenType[0], card.Name))
-
+	if card.isFaceUp:
+		notify("{} added to '{}'".format(tokenType[0], card.Name))
+	else:
+		notify("{} added to face-down card.".format(tokenType[0]))
+		
 def subToken(card, tokenType):
-    mute()
-    card.markers[tokenType] -= 1
-    notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
+	mute()
+	card.markers[tokenType] -= 1
+	if card.isFaceUp:
+		notify("{} removed from '{}'".format(tokenType[0], card.Name))
+	else:
+		notify("{} removed from face-down card.".format(tokenType[0]))
 
 def toggleToken(card, tokenType):
 	mute()
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] = 0
-		notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
+		if card.isFaceUp:
+			notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
+		else:
+			notify("{} removed from face-down card.".format(tokenType[0]))
 	else:
 		card.markers[tokenType] = 1
-		notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
+		if card.isFaceUp:
+			notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
+		else:
+			notify("{} added to face-down card.".format(tokenType[0]))
 
 def playCardFaceDown(card, x=-360, y=0):
 	global mycolor
@@ -880,6 +892,8 @@ def castSpell(card, x = 0, y = 0):
 						infostr += "\nCost reduced by {} due to {}".format(discount,c.name)
 			infostr += "\nTotal mana amount to subtract from mana pool?"
 			manacost = askInteger(infostr,castingcost-discount)
+			if manacost == None:
+				return
 			if me.Mana < manacost:
 				notify("{} has insufficient mana in pool".format(me))
 				return
