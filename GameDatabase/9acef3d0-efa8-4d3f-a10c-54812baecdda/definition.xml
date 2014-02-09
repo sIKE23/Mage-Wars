@@ -47,7 +47,6 @@
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
 		<groupaction menu="Add Vine a Marker" default="False" shortcut="F5" execute="createVineMarker" />
-		<groupaction menu="Flip Game Board" default="False" shortcut="F9" execute="flipGameBoard"/>
 		<groupactions menu="Automation">
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
