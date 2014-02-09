@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.3.0.1"
+	version="1.3.0.2"
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -52,7 +52,7 @@
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
 		</groupactions>
 		<groupactions menu="Alternative Play">
-			<groupaction menu="Flip Game Board" default="False" shortcut="Alt+F9" execute="flipGameBoard"/>
+			<groupaction menu="Flip Game Board" default="False" shortcut="Alt+F9" execute="invokeflipGameBoard"/>
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F8" execute="createAltBoardCard" />
 		</groupactions>
 		<cardactions menu="Add Tokens">

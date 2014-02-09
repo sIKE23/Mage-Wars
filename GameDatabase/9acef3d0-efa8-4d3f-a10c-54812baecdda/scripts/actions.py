@@ -1,7 +1,7 @@
 import time
 import re
 ############################################################################
-##########################    v1.3.0.0    ##################################
+##########################    v1.3.0.2    ##################################
 ############################################################################
 ##########################		Constants		##################################
 ############################################################################
@@ -200,7 +200,7 @@ def playerSetup():
 
 def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 350, -35)
-	
+
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 350, -35)
 
@@ -212,6 +212,12 @@ def flipGameBoard(group, x=0, y=0):
 	else:
 		table.setBoardImage("background\\gameboard.png")
 	boardFlipped = not boardFlipped
+
+#def invokeflipGameBoard()
+#	if c.controller == me:
+#		flipGameBoard(group,x=0,y=0)
+#	else:
+#		remoteCall(players[1], "flipGameBoard", [group,x=0,y=0])
 
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
@@ -606,7 +612,7 @@ def flipcard(card, x = 0, y = 0):
 			card.switchTo("")
 		else:
 			card.switchTo("B")
-		notify("{} Flips Zone Marker.".format(me))	
+		notify("{} Flips Zone Marker.".format(me))
 	elif card.isFaceUp == False:
 		card.isFaceUp = True
 		notify("{} turns '{}' face up.".format(me, card.Name))
@@ -692,7 +698,7 @@ def addToken(card, tokenType):
 		notify("{} added to '{}'".format(tokenType[0], card.Name))
 	else:
 		notify("{} added to face-down card.".format(tokenType[0]))
-		
+
 def subToken(card, tokenType):
 	mute()
 	card.markers[tokenType] -= 1
@@ -933,7 +939,7 @@ def validateDeck(deck):
 		if "Spellbook" in statval[0]:
 			spellbook["spellpoints"] = int(statval[1])
 			break
-	
+
 	#get school costs
 	for schoolcost in schoolcosts:
 		debug("schoolcost {}".format(schoolcost))
