@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="7f88625f-591b-41ef-861d-4a89a4a57f24">Forcemaster</card>
+    <card qty="1" id="6d6362dc-1130-4bd0-ae5b-55ae2c59bc82">Forcemaster stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="5a6c0937-b7fb-4c68-a854-7e7d6dce4b3c">Altar of Peace</card>
+    <card qty="1" id="0a4d7796-8763-4af6-b283-23d98582c5d0">Asyran Defender</card>
+    <card qty="1" id="90f01a26-1598-4df0-9fb3-5f40353bb6c9">Gravikor</card>
+    <card qty="1" id="177a3787-5d22-43cd-9897-ac0e44156775">Selesius, the East Wind</card>
+    <card qty="1" id="c46fd335-9b2e-4a23-b52b-77e708de89c0">Dispel</card>
+    <card qty="1" id="019fbc44-d07c-4510-9cac-7c998613bb05">Galador, Protector of Straywood</card>
+    <card qty="1" id="82174fd6-1e51-4aef-b5a5-fca0af2ff0bc">Minor Heal</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False" />
+  <section name="Enchantment" shared="False" />
+  <section name="Equipment" shared="False" />
+  <section name="Incantation" shared="False" />
+  <notes><![CDATA[]]></notes>
+</deck>
