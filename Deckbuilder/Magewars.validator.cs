@@ -2,20 +2,28 @@
 
 namespace Octgn.MageWarsValidator
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Windows;
-    using System.Windows.Forms;
-
     using Octgn.Core.DataExtensionMethods;
     using Octgn.Core.DataManagers;
     using Octgn.Core.Plugin;
     using Octgn.DataNew.Entities;
-    using Octgn.Library.Plugin;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Text;
+    using System.Windows.Forms;
 
+
+
+    /*********************************************
+     * 
+     * 
+     *          Main object thing
+     *                
+     * 
+     ********************************************/
     public class MageWarsValidator : IDeckBuilderPlugin
     {
 
@@ -76,6 +84,14 @@ namespace Octgn.MageWarsValidator
         }
     }
 
+
+    /*********************************************
+     * 
+     * 
+     *                Validator
+     *                
+     * 
+     ********************************************/
     public class ValidatorMenuItem : IPluginMenuItem
     {
         public string Name
@@ -331,7 +347,15 @@ namespace Octgn.MageWarsValidator
         }
 
     }
+    
 
+    /*********************************************
+     * 
+     * 
+     *           Export to Forum Post
+     *                
+     * 
+     ********************************************/
     public class ExportToForumMenuItem : IPluginMenuItem
     {
         public string Name
@@ -344,7 +368,7 @@ namespace Octgn.MageWarsValidator
             //did they validate yet?
             if (!MageWarsValidator.deckValidated)
             {
-                System.Windows.MessageBox.Show("You muse successfully validate a deck before exporting to a forum post.");
+                System.Windows.MessageBox.Show("You must successfully validate a deck before exporting to a forum post.");
                 return;
             }
 
@@ -359,7 +383,7 @@ namespace Octgn.MageWarsValidator
                 string deckName = Prompt.ShowDialog("What is the name of this deck?", "Deck Name");
                 if (string.IsNullOrEmpty(deckName))
                 {
-                    deckName = "Best Deck NA";
+                    deckName = "OCTGN Deck";
                 }
 
                 //start the writing

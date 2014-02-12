@@ -1,15 +1,11 @@
-import time
-<<<<<<< HEAD
-############################################################################
-##########################    v1.3.0.0    ##################################
-############################################################################
-=======
-import re
+
 ############################################################################
 ##########################    v1.3.0.2    ##################################
 ############################################################################
->>>>>>> origin/March-Release
-##########################		Constants		##################################
+import time
+import re
+############################################################################
+##########################		Constants		############################
 ############################################################################
 
 ##########################		Markers			############################
@@ -106,14 +102,10 @@ def onLoadDeck(player, groups):
 		if validateDeck(groups[0]):
 			playerSetup()
 		else:
-<<<<<<< HEAD
-			notify("Validation of {}'s deck FAILED. Please choose another deck (Game -> Reset to clear your hand, note that this will clear the other player's hand as well).".format(me.name))
-=======
 			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
 			for group in groups:
 				for card in group:
 					card.delete()
->>>>>>> origin/March-Release
 
 
 ############################################################################
@@ -214,20 +206,19 @@ def createVineMarker(group, x=0, y=0):
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 350, -35)
 
-def flipGameBoard(group, x=0, y=0):
-	#TODO: add remote call to flip so both player's boards flip
+def invokeflipGameBoard(group, x=0, y=0):
+	mute()
+	for p in players:
+		remoteCall(p, "flipGameBoard", [])
+
+def flipGameBoard():
+	mute()
 	global boardFlipped
 	if not boardFlipped:
 		table.setBoardImage("background\\gameboard-alt-a.png")
 	else:
 		table.setBoardImage("background\\gameboard.png")
 	boardFlipped = not boardFlipped
-
-#def invokeflipGameBoard()
-#	if c.controller == me:
-#		flipGameBoard(group,x=0,y=0)
-#	else:
-#		remoteCall(players[1], "flipGameBoard", [group,x=0,y=0])
 
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
@@ -275,50 +266,26 @@ def nextPhase(group, x=-360, y=-150):
 				notify("{} channels {}".format(p.name,p.Channeling))
 			for c in table:
 				if c.isFaceUp: #don't waste time on facedown cards
-<<<<<<< HEAD
-				
-=======
-
->>>>>>> origin/March-Release
 					#reset markers
 					if c.controller == me:
 						resetMarkers(c)
 					else:
 						remoteCall(players[1], "resetMarkers", [c])
-<<<<<<< HEAD
-					
-					
-=======
-
-
->>>>>>> origin/March-Release
 					#resolve channeling cards (harmonize, spawnpoints, familiars)
 					if c.controller == me:
 						resolveChanneling(c)
 					else:
 						remoteCall(players[1], "resolveChanneling", [c])
-<<<<<<< HEAD
-					
-			#resolve burns
-			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
-			if len(cardsWithBurn) > 0:	
-=======
-
+						
 			#resolve burns
 			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
 			if len(cardsWithBurn) > 0:
->>>>>>> origin/March-Release
 				notify("Resolving Burns...")	#found at least one
 				for c in cardsWithBurn:
 					if c.controller == me:
 						resolveBurns(c)
 					else:
 						remoteCall(players[1], "resolveBurns", [c])
-<<<<<<< HEAD
-					
-=======
-
->>>>>>> origin/March-Release
 
 def resetMarkers(c):
 	mute()
@@ -347,11 +314,7 @@ def resetMarkers(c):
 		c.markers[DeflectU] = 0
 		c.markers[DeflectR] = 1
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
-<<<<<<< HEAD
-					
-=======
-
->>>>>>> origin/March-Release
+	
 def resolveBurns(card):
 	#roll em
 	mute()
@@ -373,11 +336,7 @@ def resolveBurns(card):
 	elif card.Type == "Creature":
 		card.markers[Damage] += burnDamage
 	notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> origin/March-Release
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -424,11 +383,8 @@ def resolveChanneling(c):
 						whisper("Harmonize found and Mana added to channeling card")
 					else:
 						whisper("Harmonize found but no Mana added")
-<<<<<<< HEAD
-					
-=======
 
->>>>>>> origin/March-Release
+
 def toggleDebug(group, x=0, y=0):
 	global showDebug
 	showDebug = not showDebug
