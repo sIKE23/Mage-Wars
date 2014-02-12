@@ -4,7 +4,11 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
+<<<<<<< HEAD
 	version="1.3.0.0"
+=======
+	version="1.3.0.2"
+>>>>>>> origin/March-Release
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -38,15 +42,26 @@
 		<property name="Traits" type="String" hidden="False" ignoreText="False"/>
 		<property name="Text" type="String" hidden="False" ignoreText="False"/>
 		<property name="CardID" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageTraining" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/gameboard.png" background="background/background.png" boardPosition="-300,-225,600,450" backgroundStyle="uniformToFill">
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
+<<<<<<< HEAD
 		<groupaction menu="Add Vine a Marker" default="False" shortcut="F3" execute="createVineMarker" />
+=======
+		<groupaction menu="Add Vine a Marker" default="False" shortcut="F5" execute="createVineMarker" />
+>>>>>>> origin/March-Release
 		<groupactions menu="Automation">
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
+		</groupactions>
+		<groupactions menu="Alternative Play">
+			<groupaction menu="Flip Game Board" default="False" shortcut="Alt+F9" execute="invokeflipGameBoard"/>
+			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F8" execute="createAltBoardCard" />
 		</groupactions>
 		<cardactions menu="Add Tokens">
 			<cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage"/>
@@ -57,6 +72,7 @@
 			<cardaction menu="Add Slam Token" default="False" shortcut="Alt+S" execute="addSlam" />
 			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak"/>
 			<cardaction menu="Add Cripple Token" default="False" shortcut="Ctrl+C" execute="addCripple"/>
+			<cardaction menu="Add Corrode Token" default="False" shortcut="Alt+C" execute="addCorrode"/>
 			<cardaction menu="Add Other Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
 		<cardactions menu="Toggle Markers">
@@ -81,10 +97,11 @@
 			<cardaction menu="Remove Slam Token" default="False" shortcut="Alt+Shift+S" execute="subSlam"/>
 			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak"/>
 			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
+			<cardaction menu="Remove Corrode Token" default="False" shortcut="Alt+Shift+C" execute="subCorrode" />
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
-			<cardaction menu="Exhaust/Ready" default="False" shortcut="F7" execute="kneel" />
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard"/>
+			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
 	</table>

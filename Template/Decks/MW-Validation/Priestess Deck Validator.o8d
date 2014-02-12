@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="b5de32e7-8b57-44f2-a25a-b7bae56bffb7">Priestess</card>
+    <card qty="1" id="352e2f88-a99e-46f0-86f9-ab7b05d978cb">Priestess stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="ad9461c7-8594-44f6-9616-2bba7edbbd44">Helm of Fear</card>
+    <card qty="1" id="70e1dca8-85ef-40f0-a18a-6904ed4539de">Death Ring</card>
+    <card qty="1" id="ee58773c-a3ea-42b9-b1ec-c0a4560f8cd6">Animate Dead</card>
+    <card qty="1" id="d7ad20c5-f185-4e32-beec-f6e120e05719">Divine Intervention</card>
+    <card qty="1" id="5d82d063-51bc-491f-a9eb-a72a6722d509">Crown of Protection</card>
+    <card qty="1" id="7900f68c-f781-48d1-9c96-74973d16530c">Ring of Beasts</card>
+    <card qty="1" id="ceee5eaa-4aef-4b81-b272-b23d7e15380d">Druid's Leaf Ring</card>
+    <card qty="1" id="e4fb0871-99e8-40c3-b744-828400701c36">Kralathor, The Devourer</card>
+    <card qty="1" id="d927a1b6-06f0-4abc-b072-d2ea692c408c">Arcane Ring</card>
+    <card qty="1" id="f0a799d6-3d47-4789-8873-bbb2cc2ff564">Ring of Command</card>
+    <card qty="1" id="0ab22922-8394-4dbf-8d47-63deaf13f44f">Swordbreaker</card>
+    <card qty="1" id="119cb255-4b1e-42b9-9eba-d41935b9ae8e">Force Ring</card>
+    <card qty="1" id="9481805e-d24d-41d8-b02e-5c5ae55c4add">Psi-Orb</card>
+    <card qty="1" id="dbe14006-e729-4f6e-90f9-89eadb863a91">Wizard's Tower</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False" />
+  <section name="Enchantment" shared="False" />
+  <section name="Equipment" shared="False" />
+  <section name="Incantation" shared="False" />
+  <notes><![CDATA[Helm of Fear - Warlock Only
+Death Ring - Necromancer Only
+Animate Dead - Dark Only
+Divine Intervention - Holy Mage Only
+Crown of Protection - Priestess Only
+Ring of Beasts - Beastmaster Only
+Druid's Leaf Ring - Druid Only
+Kralathor, The Devourer - Nature Mage Only
+Arcane Ring - Wizard Only
+Ring of Command - Warlord Only
+Swordbreaker - War Mage Only
+Force Ring - Forcemaster Only
+PSI-Orb - Mind Mage Only
+Wizards Tower - Arcane Mage Only]]></notes>
+</deck>
