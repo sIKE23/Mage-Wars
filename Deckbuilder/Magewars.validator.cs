@@ -398,7 +398,7 @@ namespace Octgn.MageWarsValidator
                     {
                         if (Property(card, "Type") == "Mage")
                         {
-                            text.AppendLine("[mage]A " + card.Name + " book[/mage]");
+                            text.AppendLine("[mage]A " + card.Name + " Spellbook[/mage]");
 
                             //built by me!
                             text.AppendLine("[mage]built by the OCTGN SBB[/mage]");
@@ -418,7 +418,7 @@ namespace Octgn.MageWarsValidator
                     foreach (var card in section.Cards)
                     {
                         text.AppendLine("[mwcard=" + Property(card, "CardID") + "]" + card.Quantity + " x " + card.Name + "[/mwcard]");
-                        if (Property(card, "Set").Contains("Promo"))
+                        if (Property(card, "CardID").Contains("MWPRO"))
                             promoFound = true;
                     }
                 }
