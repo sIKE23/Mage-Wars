@@ -444,30 +444,38 @@ def toggleAction(card, x=0, y=0):
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
+			notify("'{}' readies Action Marker".format(card.Name))
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
+			notify("'{}' spends Action Marker".format(card.Name))
 	elif mycolor == PlayerColor[1]: # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
+			notify("'{}' readies Action Marker".format(card.Name))
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
+			notify("'{}' spends Action Marker".format(card.Name))
 	elif mycolor == PlayerColor[2]: #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
+			notify("'{}' readies Action Marker".format(card.Name))
 		else:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
+			notify("'{}' spends Action Marker".format(card.Name))
 	elif mycolor == PlayerColor[3]: #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
+			notify("'{}' readies Action Marker".format(card.Name))
 		else:
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
+			notify("'{}' spends Action Marker".format(card.Name))
 
 def toggleBloodReaper(card, x=0, y=0):
 	toggleToken(card, BloodReaper)

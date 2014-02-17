@@ -104,7 +104,7 @@
 		<block type="text" id="MageAbilities">
 			<location x="1" y="155" />
 			<text color="#000000" size="15" />
-			<wordwrap height="210" width="400" />
+			<wordwrap height="240" width="400" />
 		</block>
 		<block type="text" id="MAttackBar">
 			<location x="0" y="470" />

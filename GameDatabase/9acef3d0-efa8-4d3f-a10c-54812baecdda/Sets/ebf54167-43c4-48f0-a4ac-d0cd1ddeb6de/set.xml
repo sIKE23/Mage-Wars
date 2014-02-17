@@ -1641,7 +1641,7 @@
 		<card id="2d94d69e-5c08-4db2-89a0-5c811bfaca17" name="Marked for Death">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse" />
-			<property name="Cost" value="2+" />
+			<property name="Cost" value="2+2" />
 			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
