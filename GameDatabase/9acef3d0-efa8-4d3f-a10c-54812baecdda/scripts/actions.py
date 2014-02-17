@@ -604,7 +604,8 @@ def rotateCard(card, x = 0, y = 0):
 	mute()
 	if card.controller == me:
 		card.orientation = (card.orientation + 1) % 4
-
+		notify("{} Rotates '{}'".format(me, card.Name))
+		
 def flipcard(card, x = 0, y = 0):
 	mute()
 	if "Vine" in card.name and card.controller == me:
@@ -672,8 +673,8 @@ def flipcard(card, x = 0, y = 0):
 				card.switchTo("D")
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
-		card.isFaceUp = False
 		notify("{} turns '{}' face down.".format(me, card.Name))
+		card.isFaceUp = False
 
 def discard(card, x=0, y=0):
 	mute()
