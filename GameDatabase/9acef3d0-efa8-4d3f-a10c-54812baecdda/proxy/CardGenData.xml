@@ -96,18 +96,18 @@
 			<text color="#000000" size="16" />
 			<wordwrap height="48" width="400" />
 		</block>
+		<block type="text" id="MageAbilities">
+			<location x="1" y="130" />
+			<text color="#000000" size="12" />
+			<wordwrap height="300" width="400" />
+		</block>
 		<block type="text" id="MTraits">
 			<location x="1" y="450" />
 			<text color="#000000" size="18" />
 			<wordwrap height="36" width="390" align="center" />
 		</block>
-		<block type="text" id="MageAbilities">
-			<location x="1" y="155" />
-			<text color="#000000" size="15" />
-			<wordwrap height="240" width="400" />
-		</block>
 		<block type="text" id="MAttackBar">
-			<location x="0" y="470" />
+			<location x="0" y="480" />
 			<text color="#000000" size="16" />
 			<wordwrap height="75" width="400" align="center" />
 		</block>
@@ -243,7 +243,7 @@
 			<link block="Text"><property name="Text" /></link>
 			<link block="CardID"><property name="CardID" /></link>
 		</textblocks>
-	</template>	
+	</template>
 	<template src="Proxy/Creature-Proxy.png">
 		<matches>
 			<match name="Type" value="Creature" />

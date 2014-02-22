@@ -17,7 +17,7 @@
 		<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
 		</card>
-		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Beastmaster (Johktari) stats">
+		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Beastmaster (Johktari) Stats">
 		 <property name="Type" value="Magestats" />
 		</card>
 		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
@@ -28,7 +28,7 @@
 		<property name="AttackBar" value="Hand of Purification:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [d12] [9+ = Daze] [Ethereal]" />
 		<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 end Piercing +1 for that attack. If it is destroyed, you may assign the marker again in the same manner. &#xD;&#xD;&#xA;Malakai’s Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
 		</card>
-		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest stats">
+		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest Stats">
 		 <property name="Type" value="Magestats" />
 		</card>
 
@@ -37,7 +37,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Hydro" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Non-Flying Creature or Conjuration" />
 			<property name="School" value="Water" />
@@ -54,7 +54,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Soldier,Troll" />
 			<property name="Cost" value="13" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature+War" />
@@ -69,7 +69,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal,Canine" />
 			<property name="Cost" value="12" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
@@ -83,7 +83,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Soldier,Dwarf" />
 			<property name="Cost" value="11" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
@@ -98,7 +98,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal,Cervine" />
 			<property name="Cost" value="16" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature+Air" />
@@ -113,7 +113,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Gargoyle" />
 			<property name="Cost" value="11" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
@@ -128,7 +128,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect,Spider" />
 			<property name="Cost" value="15" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
@@ -143,7 +143,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Angel" />
 			<property name="Cost" value="12" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
@@ -158,7 +158,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal,Cat" />
 			<property name="Cost" value="17" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
@@ -173,7 +173,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Bird,Harpy" />
 			<property name="Cost" value="11" />
-			<property name="Action" value="F" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane+Air" />
@@ -190,7 +190,7 @@
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Protection,Rune" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
@@ -205,7 +205,7 @@
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Tower" />
 			<property name="Cost" value="7" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
@@ -222,7 +222,7 @@
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Metal" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />
 			<property name="School" value="Earth" />
@@ -240,7 +240,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Protection,Metamagic" />
 			<property name="Cost" value="2+4" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy+War" />
@@ -255,7 +255,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Holy" />
@@ -270,7 +270,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="2+X" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Arcane" />
@@ -285,7 +285,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Charm,Healing" />
 			<property name="Cost" value="2+3" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Holy" />
@@ -300,7 +300,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Trap" />
 			<property name="Cost" value="2+5" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War+Earth" />
@@ -317,7 +317,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
@@ -332,7 +332,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Arcane" />
@@ -347,7 +347,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
@@ -362,7 +362,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="11" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
@@ -377,7 +377,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Defense" />
 			<property name="Cost" value="9" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
@@ -392,7 +392,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="6" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy+Nature" />
@@ -409,7 +409,7 @@
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="14" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Arena" />
 			<property name="School" value="War" />
@@ -424,7 +424,7 @@
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Vampiric" />
 			<property name="Cost" value="16" />
-			<property name="Action" value="Q" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Dark" />
