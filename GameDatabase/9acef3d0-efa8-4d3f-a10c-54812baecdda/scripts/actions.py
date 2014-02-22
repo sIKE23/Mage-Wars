@@ -645,7 +645,10 @@ def flipcard(card, x = 0, y = 0):
 			if "Druid" == card.name:
 					card.markers[Treebond] = 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if card.Type == "Creature":			
+=======
+>>>>>>> da2286ddf757f971c2ce965bb73dc5ac79690c6f
 =======
 >>>>>>> da2286ddf757f971c2ce965bb73dc5ac79690c6f
 			if "Invisible Stalker" == card.name:
