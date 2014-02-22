@@ -1,6 +1,6 @@
 
 ############################################################################
-##########################    v1.3.0.2    ##################################
+##########################    v1.3.0.3    ##################################
 ############################################################################
 import time
 import re
@@ -644,13 +644,7 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[HolyAvenger] = 1
 			if "Druid" == card.name:
 					card.markers[Treebond] = 1
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if card.Type == "Creature":			
-=======
->>>>>>> da2286ddf757f971c2ce965bb73dc5ac79690c6f
-=======
->>>>>>> da2286ddf757f971c2ce965bb73dc5ac79690c6f
+		if card.Type == "Creature":	
 			if "Invisible Stalker" == card.name:
 					card.markers[Invisible] = 1
 			if "Thorg, Chief Bodyguard" == card.name:
@@ -707,7 +701,8 @@ def discard(card, x=0, y=0):
 def defaultAction(card, x = 0, y = 0):
 	mute()
 	if not card.isFaceUp: #Face down card - flip
-		flipcard(card, x, y)	else:
+		flipcard(card, x, y)
+	else:
 		castSpell(card, x, y)
 
 
