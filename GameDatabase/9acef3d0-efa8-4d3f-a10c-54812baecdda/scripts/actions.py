@@ -644,7 +644,10 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[HolyAvenger] = 1
 			if "Druid" == card.name:
 					card.markers[Treebond] = 1
+<<<<<<< HEAD
 		if card.Type == "Creature":			
+=======
+>>>>>>> da2286ddf757f971c2ce965bb73dc5ac79690c6f
 			if "Invisible Stalker" == card.name:
 					card.markers[Invisible] = 1
 			if "Thorg, Chief Bodyguard" == card.name:
@@ -701,8 +704,7 @@ def discard(card, x=0, y=0):
 def defaultAction(card, x = 0, y = 0):
 	mute()
 	if not card.isFaceUp: #Face down card - flip
-		flipcard(card, x, y)
-	else:
+		flipcard(card, x, y)	else:
 		castSpell(card, x, y)
 
 
