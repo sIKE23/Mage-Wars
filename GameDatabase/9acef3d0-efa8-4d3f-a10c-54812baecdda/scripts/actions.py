@@ -276,7 +276,7 @@ def nextPhase(group, x=-360, y=-150):
 						resolveChanneling(c)
 					else:
 						remoteCall(players[1], "resolveChanneling", [c])
-						
+
 			#resolve burns
 			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
 			if len(cardsWithBurn) > 0:
@@ -313,8 +313,11 @@ def resetMarkers(c):
 	if c.markers[DeflectU] == 1:
 		c.markers[DeflectU] = 0
 		c.markers[DeflectR] = 1
+	if c.markers[Visible] == 1:
+		c.markers[Visible] = 0
+		c.markers[Invisible] = 1
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
-	
+
 def resolveBurns(card):
 	#roll em
 	mute()
@@ -336,7 +339,7 @@ def resolveBurns(card):
 	elif card.Type == "Creature":
 		card.markers[Damage] += burnDamage
 	notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
-	
+
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -605,7 +608,7 @@ def rotateCard(card, x = 0, y = 0):
 	if card.controller == me:
 		card.orientation = (card.orientation + 1) % 4
 		notify("{} Rotates '{}'".format(me, card.Name))
-		
+
 def flipcard(card, x = 0, y = 0):
 	mute()
 	if "Vine" in card.name and card.controller == me:
@@ -639,6 +642,15 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[WoundedPrey] = 1
 			if "Priest" == card.name:
 					card.markers[HolyAvenger] = 1
+			if "Druid" == card.name:
+					card.markers[Treebond] = 1
+		if card.Type == "Creature":			
+			if "Invisible Stalker" == card.name:
+					card.markers[Invisible] = 1
+			if "Thorg, Chief Bodyguard" == card.name:
+					card.markers[TauntT] = 1
+			if "Sosruko, Ferret Companion" == card.name:
+					card.markers[Taunt] = 1
 	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
 		colorsChosen = getGlobalVariable("ColorsChosen")
 		if "0" in colorsChosen and "1" in colorsChosen: #red and blue
