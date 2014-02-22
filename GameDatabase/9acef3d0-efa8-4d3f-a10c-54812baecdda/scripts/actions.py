@@ -607,7 +607,10 @@ def rotateCard(card, x = 0, y = 0):
 	mute()
 	if card.controller == me:
 		card.orientation = (card.orientation + 1) % 4
-		notify("{} Rotates '{}'".format(me, card.Name))
+		if card.isFaceUp:
+			notify("{} Rotates '{}'".format(me, card.Name))
+		else:
+			notify("{} Rotates a card".format(me))
 
 def flipcard(card, x = 0, y = 0):
 	mute()
@@ -700,10 +703,22 @@ def discard(card, x=0, y=0):
 
 def defaultAction(card, x = 0, y = 0):
 	mute()
-	if not card.isFaceUp: #Face down card - flip
-		flipcard(card, x, y)
-	else:
-		castSpell(card, x, y)
+	if card.controller == me:
+		if not card.isFaceUp:
+			#is this a face-down enchantment? if so, prompt before revealing
+			if card.Type == "Enchantment":
+				if getSetting("EnchantPromptReveal", True):
+					choiceList = ['Yes', 'Yes, and don\'t ask me again', 'No']
+					colorsList = ['#0000FF', '#0000FF', '#FF0000'] 
+					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
+					if choice == 0 or choice == 2:
+						return
+					elif choice == 3:
+						setSetting("EnchantPromptReveal", False)
+			
+			flipcard(card, x, y)
+		else:
+			castSpell(card, x, y)
 
 
 ############################################################################
