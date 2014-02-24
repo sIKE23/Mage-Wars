@@ -86,27 +86,42 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 mycolor = "#800080" # Purple
 boardFlipped = False
 showDebug = False
-
-
+myIniRoll = 0
+hasRolledIni = True
 
 ############################################################################
 ############################		Events		############################
 ############################################################################
 
 def onGameStart():
-	setGlobalVariable("ColorsChosen", "")	#reset color picking
+	#reset color picking
+	setGlobalVariable("ColorsChosen", "")
+	
+	#reset initiative automation
+	setGlobalVariable("SetupDone", "")		
+	setGlobalVariable("OppIniRoll", "0")
+	setGlobalVariable("IniAllDone", "")
 
 def onLoadDeck(player, groups):
 	mute()
 	if player == me:
 		if validateDeck(groups[0]):
 			playerSetup()
+			if getGlobalVariable("SetupDone") == "": #we're the first done with setup
+				setGlobalVariable("SetupDone", "x")
+			else:	#other guy is done too
+				for p in players:
+					remoteCall(p, "SetupForIni", [])
+				notify("Both players have set up. Please roll for initiative.")
 		else:
 			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
 			for group in groups:
 				for card in group:
 					card.delete()
 
+def SetupForIni():
+	global hasRolledIni
+	hasRolledIni = False
 
 ############################################################################
 ######################		Group Actions			########################
@@ -117,8 +132,10 @@ def playerDone(group, x=0, y=0):
 
 def rollDice(group, x=0, y=0):
 	mute()
-
 	global diceBank
+	global hasRolledIni
+	global myIniRoll
+	
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
@@ -154,7 +171,24 @@ def rollDice(group, x=0, y=0):
 	dieCard2.markers[attackDie[5]] = result[5] #1*
 	effect = rnd(1,12)
 	dieCard2.markers[Died12] = effect
-	notify("{} rolled {} normal damage, {} critical damage and {} on effect die".format(me,damNormal,damPiercing,effect))
+	
+	if hasRolledIni:
+		notify("{} rolled {} normal damage, {} critical damage and {} on effect die".format(me,damNormal,damPiercing,effect))
+	else:
+		hasRolledIni = True
+		notify("{} rolled a {} for initiative".format(me, effect))
+		oppRoll = eval(getGlobalVariable("OppIniRoll"))
+		
+		if oppRoll == 0:	#they haven't rolled yet
+			setGlobalVariable("OppIniRoll", str(effect))
+		elif oppRoll == effect:	#tie!
+			notify("Tied initiative roll! Please roll again.")
+			hasRolledIni = False
+			setGlobalVariable("OppIniRoll", "0")
+		elif effect > oppRoll:	#we won
+			AskInitiative()
+		else:	#they won
+			remoteCall(players[1], "AskInitiative", [])
 
 def flipCoin(group, x = 0, y = 0):
     mute()
@@ -220,9 +254,37 @@ def flipGameBoard():
 		table.setBoardImage("background\\gameboard.png")
 	boardFlipped = not boardFlipped
 
+def AskInitiative():
+	notify("{} is choosing whether or not to go first.".format(me))
+	choiceList = ['Yes', 'No']
+	colorsList = ['#FF0000', '#0000FF'] 
+	choice = askChoice("You have won initiative! Would you like to go first?", choiceList, colorsList)
+	if choice == 1:
+		notify("{} has elected to go first!".format(me))
+		CreateIniToken()
+	else:
+		notify("{} has elected NOT to go first! {} has first initiative.".format(me, players[1]))
+		remoteCall(players[1], "CreateIniToken", [])
+
+def CreateIniToken():
+	mute()
+	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", -360, -150 )
+	card.switchTo("Planning") #skips upkeep for first turn
+	init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-150) #initiative token
+	if mycolor == PlayerColor[0]:
+		init.switchTo("")
+	elif mycolor == PlayerColor[1]:
+		init.switchTo("B")
+	elif mycolor == PlayerColor[2]:
+		init.switchTo("C")
+	elif mycolor == PlayerColor[3]:
+		init.switchTo("D")
+	setGlobalVariable("IniAllDone", "x")
+	notify("Setup is complete, let the battle begin!")
+	
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
-	if mycolor == "#800080": # Player setup is not done yet.
+	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
 		return
 	mute()
 	card = None
@@ -230,20 +292,7 @@ def nextPhase(group, x=-360, y=-150):
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
 			card = c
 			break
-	if card == None:
-		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", x, y )
-		card.switchTo("Planning") #skips upkeep for first turn
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",-420,-150) #initiative token
-		if mycolor == PlayerColor[0]:
-			init.switchTo("")
-		elif mycolor == PlayerColor[1]:
-			init.switchTo("B")
-		elif mycolor == PlayerColor[2]:
-			init.switchTo("C")
-		elif mycolor == PlayerColor[3]:
-			init.switchTo("D")
-		notify("Roll for initiative and flip token accordingly")
-	elif card.alternate == "":
+	if card.alternate == "":
 		switchPhase(card,"Planning")
 	elif card.alternate == "Planning":
 		switchPhase(card,"Deploy")
@@ -280,7 +329,7 @@ def nextPhase(group, x=-360, y=-150):
 			#resolve burns
 			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
 			if len(cardsWithBurn) > 0:
-				notify("Resolving Burns...")	#found at least one
+				notify("Resolving Burns (if enabled)...")	#found at least one
 				for c in cardsWithBurn:
 					if c.controller == me:
 						resolveBurns(c)
@@ -319,6 +368,10 @@ def resetMarkers(c):
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns(card):
+	#is the setting on?
+	if not getSetting("AutoResolveBurns", True):
+		return
+	
 	#roll em
 	mute()
 	numMarkers = card.markers[Burn]
@@ -396,7 +449,13 @@ def toggleDebug(group, x=0, y=0):
 	else:
 		notify("{} turns off debug".format(me))
 
-
+def toggleResolveBurns(group, x=0, y=0):
+	autoResolveBurns = getSetting("AutoResolveBurns", True)
+	setSetting("AutoResolveBurns", not autoResolveBurns)
+	if autoResolveBurns:
+		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
+	else:
+		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
 
 ############################################################################
 ######################		Card Actions			########################

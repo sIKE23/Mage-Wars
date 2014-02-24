@@ -50,6 +50,7 @@
 		<groupactions menu="Automation">
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
+			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns"/>
 		</groupactions>
 		<groupactions menu="Alternative Play">
 			<groupaction menu="Flip Game Board" default="False" shortcut="Alt+F9" execute="invokeflipGameBoard"/>
