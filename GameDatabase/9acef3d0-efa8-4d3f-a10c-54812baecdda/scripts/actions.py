@@ -709,11 +709,11 @@ def defaultAction(card, x = 0, y = 0):
 			if card.Type == "Enchantment":
 				if getSetting("EnchantPromptReveal", True):
 					choiceList = ['Yes', 'Yes, and don\'t ask me again', 'No']
-					colorsList = ['#0000FF', '#0000FF', '#FF0000'] 
+					colorsList = ['#0000FF', '#0040FF', '#FF0000'] 
 					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
-					if choice == 0 or choice == 2:
+					if choice == 0 or choice == 3:
 						return
-					elif choice == 3:
+					elif choice == 2:
 						setSetting("EnchantPromptReveal", False)
 			
 			flipcard(card, x, y)
