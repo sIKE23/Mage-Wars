@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- v1.3.0.4 -->
 <templates>
 	<blocks>
 		<block type="overlay" id="CostCircle" src="proxy/Template/Mana.png">

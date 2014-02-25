@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.3.0.0" version="1.3.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.3.0.4" version="1.4.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="12" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-3" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Earth" />
@@ -20,7 +20,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Earth" />
@@ -35,7 +35,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Air+Earth" />
@@ -52,7 +52,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Knight, Soldier" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
@@ -67,7 +67,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Minotaur, Soldier" />
 			<property name="Cost" value="15" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
@@ -82,7 +82,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="16" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature+Air" />
@@ -97,7 +97,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Cleric" />
 			<property name="Cost" value="12" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
@@ -112,13 +112,13 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="13" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
-			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Stink Cloud:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Poison] [Dice=2] [d12] [7+ = Daze] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Stink Cloud:&#xD;&#xA;[Full] [Ranged:0-0] [Zone] [Poison] [Dice=2] [d12] [7+ = Daze] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="Oscuda is immune to his Stink Cloud" />
 			<property name="CardID" value="MWPROMO16" />
@@ -127,7 +127,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="12" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
@@ -142,7 +142,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Angel" />
 			<property name="Cost" value="21" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
@@ -157,7 +157,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="High Elf, Soldier" />
 			<property name="Cost" value="12" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="F" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
@@ -175,7 +175,7 @@
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Temple" />
 			<property name="Cost" value="7" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
@@ -190,7 +190,7 @@
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Statue, Artifact" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
@@ -205,7 +205,7 @@
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="War Machine" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
@@ -220,7 +220,7 @@
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Obelisk, Artifact" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Earth" />
@@ -237,7 +237,7 @@
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick"  />
+			<property name="Action" value="Q"  />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />
 			<property name="School" value="Mind"  />
@@ -254,7 +254,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+1" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="War" />
@@ -269,7 +269,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="2+3" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="War" />
@@ -284,7 +284,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse" />
 			<property name="Cost" value="2+4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Dark" />
@@ -299,7 +299,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Nature" />
@@ -314,7 +314,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="2+2" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Corporeal Creature" />
 			<property name="School" value="Arcane" />
@@ -329,7 +329,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Poison" />
 			<property name="Cost" value="2+4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Corporeal Creature" />
 			<property name="School" value="Dark" />
@@ -344,7 +344,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="2+1" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Non-Flying Creature" />
 			<property name="School" value="Mind" />
@@ -359,7 +359,7 @@
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Portal" />
 			<property name="Cost" value="2+4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
@@ -376,7 +376,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy" />
@@ -391,7 +391,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Mind" />
@@ -406,7 +406,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Tome" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Arcane" />
@@ -421,7 +421,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
@@ -436,7 +436,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Shield" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
@@ -447,11 +447,11 @@
 			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence." />
 			<property name="CardID" value="MWPROMO26" />
 		</card>
-		<card id="3388ff14-df8b-448b-ae4f-1584c099a978" name="Staff of Storms">
+		<card id="eecd62c9-300c-4a7c-bef3-a57555b89bdc" name="Staff of Storms">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="7" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Air" />
@@ -466,7 +466,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="6" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Air" />
@@ -481,7 +481,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
@@ -496,7 +496,7 @@
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="2" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy" />
@@ -513,7 +513,7 @@
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Psychic" />
 			<property name="Cost" value="X" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Mind" />
@@ -528,7 +528,7 @@
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="X" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Revealed Enchantment" />
 			<property name="School" value="Arcane" />
@@ -543,7 +543,7 @@
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Holy" />
@@ -558,7 +558,7 @@
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Holy" />
