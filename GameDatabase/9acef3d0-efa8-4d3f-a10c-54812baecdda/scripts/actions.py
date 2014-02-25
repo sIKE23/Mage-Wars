@@ -95,9 +95,9 @@ hasRolledIni = True
 def onGameStart():
 	#reset color picking
 	setGlobalVariable("ColorsChosen", "")
-	
+
 	#reset initiative automation
-	setGlobalVariable("SetupDone", "")		
+	setGlobalVariable("SetupDone", "")
 	setGlobalVariable("OppIniRoll", "0")
 	setGlobalVariable("IniAllDone", "")
 
@@ -134,7 +134,7 @@ def rollDice(group, x=0, y=0):
 	global diceBank
 	global hasRolledIni
 	global myIniRoll
-	
+
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
@@ -170,14 +170,14 @@ def rollDice(group, x=0, y=0):
 	dieCard2.markers[attackDie[5]] = result[5] #1*
 	effect = rnd(1,12)
 	dieCard2.markers[Died12] = effect
-	
+
 	if hasRolledIni:
 		notify("{} rolled {} normal damage, {} critical damage and {} on effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
 		notify("{} rolled a {} for initiative".format(me, effect))
 		oppRoll = eval(getGlobalVariable("OppIniRoll"))
-		
+
 		if oppRoll == 0:	#they haven't rolled yet
 			setGlobalVariable("OppIniRoll", str(effect))
 		elif oppRoll == effect:	#tie!
@@ -256,7 +256,7 @@ def flipGameBoard():
 def AskInitiative():
 	notify("{} is choosing whether or not to go first.".format(me))
 	choiceList = ['Yes', 'No']
-	colorsList = ['#FF0000', '#0000FF'] 
+	colorsList = ['#FF0000', '#0000FF']
 	choice = askChoice("You have won initiative! Would you like to go first?", choiceList, colorsList)
 	if choice == 1:
 		notify("{} has elected to go first!".format(me))
@@ -280,7 +280,7 @@ def CreateIniToken():
 		init.switchTo("D")
 	setGlobalVariable("IniAllDone", "x")
 	notify("Setup is complete, let the battle begin!")
-	
+
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
@@ -371,7 +371,7 @@ def resolveBurns(card):
 	#is the setting on?
 	if not getSetting("AutoResolveBurns", True):
 		return
-	
+
 	#roll em
 	mute()
 	numMarkers = card.markers[Burn]
@@ -706,14 +706,27 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[HolyAvenger] = 1
 			if "Druid" == card.name:
 					card.markers[Treebond] = 1
-		if card.Type == "Creature":	
+			if "Necromancer" == card.name:
+					card.markers[Eternal_Servant] = 1
+		if card.Type == "Creature":
 			if "Invisible Stalker" == card.name:
 					card.markers[Invisible] = 1
 			if "Thorg, Chief Bodyguard" == card.name:
 					card.markers[TauntT] = 1
 			if "Sosruko, Ferret Companion" == card.name:
 					card.markers[Taunt] = 1
-	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
+			if "Ichthellid" == card.name:
+					card.markers[("Egg Token","00000000-0000-0000-0000-000000000001")] = 1
+		if card.Type == "Conjuration":
+			if "Ballista" == card.name:
+  				card.markers[("Load Token","00000000-0000-0000-0000-000000000004")] = 1
+			if "Akiro's Hammer" == card.name:
+  				card.markers[("Load Token","00000000-0000-0000-0000-000000000004")] = 1
+			if "Corrosive Orchid" == card.name:
+  				card.markers[("Mist Token","00000000-0000-0000-0000-000000000002")] = 1
+			if "Nightshade Lotus" == card.name:
+  				card.markers[("Mist Token","00000000-0000-0000-0000-000000000002")] = 1
+  	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
 		colorsChosen = getGlobalVariable("ColorsChosen")
 		if "0" in colorsChosen and "1" in colorsChosen: #red and blue
 			if card.alternate == "B":
@@ -768,13 +781,13 @@ def defaultAction(card, x = 0, y = 0):
 			if card.Type == "Enchantment":
 				if getSetting("EnchantPromptReveal", True):
 					choiceList = ['Yes', 'Yes, and don\'t ask me again', 'No']
-					colorsList = ['#0000FF', '#0040FF', '#FF0000'] 
+					colorsList = ['#0000FF', '#0040FF', '#FF0000']
 					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
 					if choice == 0 or choice == 3:
 						return
 					elif choice == 2:
 						setSetting("EnchantPromptReveal", False)
-			
+
 			flipcard(card, x, y)
 		else:
 			castSpell(card, x, y)
