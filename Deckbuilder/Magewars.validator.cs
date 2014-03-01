@@ -176,8 +176,6 @@ namespace Octgn.MageWarsValidator
                                     reporttxt += string.Format("\n---  {0}  ---\n", typestr);
                                 }
                                 reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
-                                /****** TEMP SPELL COUNT *****/
-                                reporttxt += (1).ToString() + "\n";
                                 continue;
                             }
                         }
@@ -201,8 +199,6 @@ namespace Octgn.MageWarsValidator
                                 foreach (var s in Splitme(school, "+"))
                                 {
                                     levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
-                                    /****** TEMP SPELL COUNT *****/
-                                    reporttxt += (Convert.ToInt32(lev[x]) * training[s] * card.Quantity).ToString() + "\n";
                                     x++;
                                 }
                             }
@@ -224,16 +220,12 @@ namespace Octgn.MageWarsValidator
                                     }
                                 }
                                 levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
-                                /****** TEMP SPELL COUNT *****/
-                                reporttxt += (Convert.ToInt32(lev) * training[minschool] * card.Quantity).ToString() + "\n";
                             }
                             else //Only one school in spell
                             {
                                 if (training.ContainsKey(school))
                                 {
                                     levels[school] += Convert.ToInt32(level) * card.Quantity;
-                                    /****** TEMP SPELL COUNT *****/
-                                    reporttxt += (Convert.ToInt32(level) * training[school] * card.Quantity).ToString() + "\n";
                                 }
                             }
                             if (magename == "Forcemaster" & "Creature" == Property(card, "Type")) //Forcemaster rule: Pay 3x for non-mind creatures
@@ -245,8 +237,6 @@ namespace Octgn.MageWarsValidator
                                         foreach (var lev in Splitme(level, "+"))
                                         {
                                             spellbook += Convert.ToInt32(lev) * card.Quantity; // we just add 1 point per spell level as 2 points already have been added
-                                            /****** TEMP SPELL COUNT *****/
-                                            reporttxt += ((Convert.ToInt32(lev) + 2) * training[Splitme(school, "+")[0]] * card.Quantity).ToString() + "\n";
                                         }
 
                                     }
@@ -254,8 +244,6 @@ namespace Octgn.MageWarsValidator
                                     {
                                         var lev = Splitme(level, "/");
                                         spellbook += Convert.ToInt32(lev[0]) * card.Quantity;
-                                        /****** TEMP SPELL COUNT *****/
-                                        reporttxt += ((Convert.ToInt32(lev[0]) + 2) * training[Splitme(school, "/")[0]] * card.Quantity).ToString() + "\n";
                                     }
                                 }
                             }
@@ -263,17 +251,7 @@ namespace Octgn.MageWarsValidator
                             {
                                 string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
                                 var waterLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Water")]);  //whee
-                                if (waterLevel > 1)
-                                {
-                                    spellbook += waterLevel * card.Quantity;
-                                    /****** TEMP SPELL COUNT *****/
-                                    reporttxt += (waterLevel * card.Quantity).ToString() + "\n";
-                                }
-                                else
-                                {
-                                    /****** TEMP SPELL COUNT *****/
-                                    reporttxt += (card.Quantity * training[Splitme(school, delim)[0]]).ToString() + "\n";
-                                }
+                                if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
                             }
 
                             //check for multiples of Epic spells
