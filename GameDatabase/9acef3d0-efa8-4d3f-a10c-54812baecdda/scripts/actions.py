@@ -326,15 +326,10 @@ def nextPhase(group, x=-360, y=-150):
 						remoteCall(players[1], "resolveChanneling", [c])
 
 			#resolve burns
-			cardsWithBurn = [c for c in table if c.markers[Burn] > 0]
-			if len(cardsWithBurn) > 0:
-				notify("Resolving Burns (if enabled)...")	#found at least one
-				for c in cardsWithBurn:
-					if c.controller == me:
-						resolveBurns(c)
-					else:
-						remoteCall(players[1], "resolveBurns", [c])
-				notify("Finished auto-resolving Burns.")
+			resolveBurns()
+			remoteCall(players[1], "resolveBurns", [])
+				
+	update() #attempt to resolve phase indicator sometimes not switching
 
 def resetMarkers(c):
 	mute()
@@ -367,31 +362,36 @@ def resetMarkers(c):
 		c.markers[Invisible] = 1
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
-def resolveBurns(card):
+def resolveBurns():
+	mute()
+	
 	#is the setting on?
 	if not getSetting("AutoResolveBurns", True):
 		return
 
-	#roll em
-	mute()
-	numMarkers = card.markers[Burn]
-	burnDamage = 0
-	burnsRemoved = 0
-	for i in range(0, numMarkers):
-		roll = rnd(0, 2)
-		if roll == 0:
-			card.markers[Burn] -= 1
-			burnsRemoved += 1
-		elif roll == 1:
-			burnDamage += 1
-		elif roll == 2:
-			burnDamage += 2
-	#apply damage
-	if card.Type == "Mage":
-		card.controller.Damage += burnDamage
-	elif card.Type == "Creature":
-		card.markers[Damage] += burnDamage
-	notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
+	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
+	if len(cardsWithBurn) > 0:
+		notify("Resolving Burns for {}...".format(me))	#found at least one
+		for card in cardsWithBurn:
+			numMarkers = card.markers[Burn]
+			burnDamage = 0
+			burnsRemoved = 0
+			for i in range(0, numMarkers):
+				roll = rnd(0, 2)
+				if roll == 0:
+					card.markers[Burn] -= 1
+					burnsRemoved += 1
+				elif roll == 1:
+					burnDamage += 1
+				elif roll == 2:
+					burnDamage += 2
+			#apply damage
+			if card.Type == "Mage":
+				card.controller.Damage += burnDamage
+			elif card.Type == "Creature":
+				card.markers[Damage] += burnDamage
+			notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
+	notify("Finished auto-resolving Burns for {}.".format(me))
 
 def resolveChanneling(c):
 	mute()
@@ -456,6 +456,14 @@ def toggleResolveBurns(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
+		
+def toggleEnchantRevealPrompt(group, x=0, y=0):
+	prompt = getSetting("EnchantPromptReveal", False)
+	setSetting("EnchantPromptReveal", not prompt)
+	if prompt:
+		whisper("You have disabled the enchantment reveal prompt.")
+	else:
+		whisper("You have enabled the enchantment reveal prompt.")
 
 ############################################################################
 ######################		Card Actions			########################
@@ -779,14 +787,12 @@ def defaultAction(card, x = 0, y = 0):
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
 			if card.Type == "Enchantment":
-				if getSetting("EnchantPromptReveal", True):
-					choiceList = ['Yes', 'Yes, and don\'t ask me again', 'No']
-					colorsList = ['#0000FF', '#0040FF', '#FF0000']
+				if getSetting("EnchantPromptReveal", False):
+					choiceList = ['Yes', 'No']
+					colorsList = ['#0000FF', '#FF0000']
 					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
-					if choice == 0 or choice == 3:
+					if choice == 0 or choice == 2:
 						return
-					elif choice == 2:
-						setSetting("EnchantPromptReveal", False)
 
 			flipcard(card, x, y)
 		else:
