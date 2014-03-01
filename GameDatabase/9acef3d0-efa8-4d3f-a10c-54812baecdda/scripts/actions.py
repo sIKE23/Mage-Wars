@@ -1,13 +1,13 @@
 ############################################################################
-##########################    v1.3.0.4    ##################################
+##########################    v1.4.0.0    ##################################
 ############################################################################
 import time
 import re
 ############################################################################
-##########################		Constants		############################
+##########################		Constants		##################################
 ############################################################################
 
-##########################		Markers			############################
+##########################		Markers			##################################
 
 ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
 ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
@@ -328,7 +328,7 @@ def nextPhase(group, x=-360, y=-150):
 			#resolve burns
 			resolveBurns()
 			remoteCall(players[1], "resolveBurns", [])
-				
+
 	update() #attempt to resolve phase indicator sometimes not switching
 
 def resetMarkers(c):
@@ -364,7 +364,7 @@ def resetMarkers(c):
 
 def resolveBurns():
 	mute()
-	
+
 	#is the setting on?
 	if not getSetting("AutoResolveBurns", True):
 		return
@@ -456,7 +456,7 @@ def toggleResolveBurns(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
-		
+
 def toggleEnchantRevealPrompt(group, x=0, y=0):
 	prompt = getSetting("EnchantPromptReveal", False)
 	setSetting("EnchantPromptReveal", not prompt)
