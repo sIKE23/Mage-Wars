@@ -202,7 +202,7 @@ namespace Octgn.MageWarsValidator
                                 {
                                     levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
                                     /****** TEMP SPELL COUNT *****/
-                                    reporttxt += (Convert.ToInt32(lev[x]) * training[school] * card.Quantity).ToString() + "\n";
+                                    reporttxt += (Convert.ToInt32(lev[x]) * training[s] * card.Quantity).ToString() + "\n";
                                     x++;
                                 }
                             }
@@ -246,7 +246,7 @@ namespace Octgn.MageWarsValidator
                                         {
                                             spellbook += Convert.ToInt32(lev) * card.Quantity; // we just add 1 point per spell level as 2 points already have been added
                                             /****** TEMP SPELL COUNT *****/
-                                            reporttxt += ((Convert.ToInt32(lev) + 2) * training[school] * card.Quantity).ToString() + "\n";
+                                            reporttxt += ((Convert.ToInt32(lev) + 2) * training[Splitme(school, "+")[0]] * card.Quantity).ToString() + "\n";
                                         }
 
                                     }
@@ -255,7 +255,7 @@ namespace Octgn.MageWarsValidator
                                         var lev = Splitme(level, "/");
                                         spellbook += Convert.ToInt32(lev[0]) * card.Quantity;
                                         /****** TEMP SPELL COUNT *****/
-                                        reporttxt += ((Convert.ToInt32(lev[0]) + 2) * training[school] * card.Quantity).ToString() + "\n";
+                                        reporttxt += ((Convert.ToInt32(lev[0]) + 2) * training[Splitme(school, "/")[0]] * card.Quantity).ToString() + "\n";
                                     }
                                 }
                             }
@@ -272,7 +272,7 @@ namespace Octgn.MageWarsValidator
                                 else
                                 {
                                     /****** TEMP SPELL COUNT *****/
-                                    reporttxt += (card.Quantity  * training[school]).ToString() + "\n";
+                                    reporttxt += (card.Quantity * training[Splitme(school, delim)[0]]).ToString() + "\n";
                                 }
                             }
 
