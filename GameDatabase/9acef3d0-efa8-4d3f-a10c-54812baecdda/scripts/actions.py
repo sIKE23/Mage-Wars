@@ -388,7 +388,7 @@ def resolveBurns():
 			#apply damage
 			if card.Type == "Mage":
 				card.controller.Damage += burnDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
+			elif card.Type == "Creature" or card.Type == "Conjuration" or card.Type == "Conjuration-Wall" or card.Type == "Conjuration-Terrain":
 				card.markers[Damage] += burnDamage
 			notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
 	notify("Finished auto-resolving Burns for {}.".format(me))
