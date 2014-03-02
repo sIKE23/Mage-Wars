@@ -30,8 +30,9 @@ HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
 Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d")
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167")
 Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b")
-QuickBack = ("Quick back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd")
+QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
+ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
@@ -40,6 +41,7 @@ Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
 Turn = ("Turn", "e0a54bea-6e30-409d-82cd-44a944e591dc")
 Used = ("Used", "ab8708ac-9735-4803-ba4d-4932a787540d" )
+UsedII = ("Used II", "61bec951-ebb1-48f7-a2ab-0b6364d262e6" )
 Veteran = ("Veteran", "72ee460f-adc1-41ab-9231-765001f9e08e" )
 Visible = ("Visible", "b9b205a2-a998-44f5-97dc-c7f315afbbe2")
 VoltaricON = ("Voltaric ON", "a6e79926-db8d-4095-9aee-e3b46bf24a3f" )
@@ -100,7 +102,7 @@ def onGameStart():
 	#setGlobalVariable("SetupDone", "")
 	#setGlobalVariable("OppIniRoll", "")
 	#setGlobalVariable("IniAllDone", "")
-	
+
 	#testing
 	#notify("game start {}".format(me))
 	five = 5
@@ -359,6 +361,9 @@ def resetMarkers(c):
 	if c.markers[Used] == 1:
 		c.markers[Used] = 0
 		c.markers[Ready] = 1
+	if c.markers[UsedII] == 1:
+		c.markers[UsedII] = 0
+		c.markers[ReadyII] = 1	
 	if c.markers[VoltaricON] == 1:
 		c.markers[VoltaricON] = 0
 		c.markers[VoltaricOFF] = 1
@@ -599,6 +604,19 @@ def toggleReady(card, x=0, y=0):
 		card.markers[Ready] = 1
 		card.markers[Used] = 0
 		notify("'{}' becomes ready".format(card.Name))
+		
+def toggleReadyII(card, x=0, y=0):
+	mute()
+	if not card.isFaceUp:
+		return
+	if card.markers[ReadyII] > 0:
+		card.markers[ReadyII] = 0
+		card.markers[UsedII] = 1
+		notify("'{}' becomes used".format(card.Name))
+	else:
+		card.markers[ReadyII] = 1
+		card.markers[UsedII] = 0
+		notify("'{}' becomes ready".format(card.Name))		
 
 def togglePet(card, x=0, y=0):
 	toggleToken(card, Pet)

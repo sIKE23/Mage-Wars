@@ -734,7 +734,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Druid Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Plant]" />
 			<property name="CardID" value="DNQ04" />
 		</card>
 		<card id="3eaae143-ac4b-4d8b-9396-83f8215aed51" name="Libro Mortuos">
