@@ -100,7 +100,7 @@ def onGameStart():
 	#setGlobalVariable("SetupDone", "")
 	#setGlobalVariable("OppIniRoll", "")
 	#setGlobalVariable("IniAllDone", "")
-	
+
 	#testing
 	#notify("game start {}".format(me))
 	five = 5
