@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.0.0" version="1.4.2.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.0.0" version="1.4.1.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -8,13 +8,11 @@
 		<marker id="91ed27dc-294d-4732-ab71-37911f4011f2" name="Guard" />
 		<marker id="f4a2d3d3-4a95-4b9a-b899-81ea58293167" name="Pet" />
 		<marker id="aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" name="Ready" />
-		<marker id="73fffebd-a8f0-43bd-a118-6aebc366ecf6" name="Ready II" />
 		<marker id="81360faf-87d6-42a8-a719-c49386bd2ab5" name="Rot" />
 		<marker id="ad0e8e3c-c1af-47b7-866d-427f8908dea4" name="Sleep" />
 		<marker id="4bbac09e-a46c-42de-9272-422e8074533f" name="Stun" />
 		<marker id="16f03c44-5656-4e9d-9629-90c4ff1765a7" name="Taunt(Sosroku)" />
 		<marker id="ab8708ac-9735-4803-ba4d-4932a787540d" name="Used" />
-		<marker id="61bec951-ebb1-48f7-a2ab-0b6364d262e6" name="Used II" />		
 		<marker id="d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" name="Voltaric OFF" />
 		<marker id="a6e79926-db8d-4095-9aee-e3b46bf24a3f" name="Voltaric ON" />
 		<marker id="22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" name="Weak" />
