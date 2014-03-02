@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.4.1.0    ##################################
+##########################    v1.4.2.0    ##################################
 ############################################################################
 import time
 import re
@@ -189,7 +189,8 @@ def rollDice(group, x=0, y=0):
 			setGlobalVariable("OppIniRoll", str(effect))
 		elif oppRoll == effect:	#tie!
 			notify("Tied initiative roll! Please roll again.")
-			hasRolledIni = False
+			for p in players:
+				remoteCall(p, "SetupForIni", [])
 			setGlobalVariable("OppIniRoll", "0")
 		elif effect > oppRoll:	#we won
 			AskInitiative()
