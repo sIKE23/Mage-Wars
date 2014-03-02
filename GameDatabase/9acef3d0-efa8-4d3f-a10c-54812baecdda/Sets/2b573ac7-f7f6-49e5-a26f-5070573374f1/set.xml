@@ -656,7 +656,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage may add +1 to the d12 roll each time he uses a Defense to avoid an attack&#xD;&#xA;+1 Defense" />
+			<property name="Text" value="Mage may add +1 to the d12 roll each time he uses a Defense to avoid an attack&#xD;&#xA;[+1 Defense]" />
 			<property name="CardID" value="FWQ02" />
 		</card>
 		<card id="119cb255-4b1e-42b9-9eba-d41935b9ae8e" name="Force Ring">
@@ -671,7 +671,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Forcemaster Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a force spell. Enchantments only receive this discount when they are revealed.\n[Casting Discount] [1] [Force]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a force spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Force]" />
 			<property name="CardID" value="FWQ03" />
 		</card>
 		<card id="e723b930-1d54-406f-bf69-72f14c66f561" name="Galvitar, Force Blade">
