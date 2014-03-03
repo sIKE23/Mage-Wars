@@ -517,7 +517,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=0, Life=3, Defense=3+ ∞" />
+			<property name="Stats" value="Defense=3+ ∞, Armor=0, Life=3" />
 			<property name="AttackBar" value="Magical Burst:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal]" />
 			<property name="Traits" value="Flying, Legendary, Pest, Druid Only" />
 			<property name="Text" value="As a quick action, Tataree may choose and do one of the following to a plant object in its zone; Heal it 1 damage, or place 1 mana on it (if it has the Channel attribute)." />
