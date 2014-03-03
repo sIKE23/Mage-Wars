@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.0.0" version="1.4.1.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.4.2.1">
  	<markers>
  	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
@@ -8,7 +8,8 @@
 			<marker id="f7379e4e-8120-4f1f-b734-51f1bd9fbab9" name="Slam" />
 			<marker id="8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" name="Taunt (Thorg)" />
 			<marker id="72ee460f-adc1-41ab-9231-765001f9e08e" name="Veteran" />
-		</markers>
+	</markers>
+
 	<cards>
 		<card id="7f88625f-591b-41ef-861d-4a89a4a57f24" name="Forcemaster">
 			<property name="Type" value="Mage" />
