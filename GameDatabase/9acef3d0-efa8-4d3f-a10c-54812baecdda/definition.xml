@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.4.1.0"
+	version="1.4.2.1"
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -73,6 +73,7 @@
 			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction"/>
 			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
 			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady"/>
+			<cardaction menu="Toggle Ready II Marker" default="False" shortcut="Alt+Ctrl+R" execute="toggleReadyII"/>
 			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard"/>
 			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric"/>
 			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+D" execute="toggleDeflect" />

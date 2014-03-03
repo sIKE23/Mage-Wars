@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.4.2.0    ##################################
+##########################    v1.4.2.1    ##################################
 ############################################################################
 import time
 import re
@@ -54,6 +54,9 @@ Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28")
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8")
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805")
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
+EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
+LoadToken = ("Load Token","68d0cebd-3d57-4fd8-a01c-f8045ce82f57")
+MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb")
 
 ##########################		Dice-related			########################
 
@@ -363,7 +366,7 @@ def resetMarkers(c):
 		c.markers[Ready] = 1
 	if c.markers[UsedII] == 1:
 		c.markers[UsedII] = 0
-		c.markers[ReadyII] = 1	
+		c.markers[ReadyII] = 1
 	if c.markers[VoltaricON] == 1:
 		c.markers[VoltaricON] = 0
 		c.markers[VoltaricOFF] = 1
@@ -604,7 +607,7 @@ def toggleReady(card, x=0, y=0):
 		card.markers[Ready] = 1
 		card.markers[Used] = 0
 		notify("'{}' becomes ready".format(card.Name))
-		
+
 def toggleReadyII(card, x=0, y=0):
 	mute()
 	if not card.isFaceUp:
@@ -616,7 +619,7 @@ def toggleReadyII(card, x=0, y=0):
 	else:
 		card.markers[ReadyII] = 1
 		card.markers[UsedII] = 0
-		notify("'{}' becomes ready".format(card.Name))		
+		notify("'{}' becomes ready".format(card.Name))
 
 def togglePet(card, x=0, y=0):
 	toggleToken(card, Pet)
@@ -750,16 +753,24 @@ def flipcard(card, x = 0, y = 0):
 			if "Sosruko, Ferret Companion" == card.name:
 					card.markers[Taunt] = 1
 			if "Ichthellid" == card.name:
-					card.markers[("Egg Token","00000000-0000-0000-0000-000000000001")] = 1
+					card.markers[EggToken] = 1
 		if card.Type == "Conjuration":
 			if "Ballista" == card.name:
-  				card.markers[("Load Token","00000000-0000-0000-0000-000000000004")] = 1
+  				card.markers[LoadToken] = 1
 			if "Akiro's Hammer" == card.name:
-  				card.markers[("Load Token","00000000-0000-0000-0000-000000000004")] = 1
+  				card.markers[LoadToken] = 1
 			if "Corrosive Orchid" == card.name:
-  				card.markers[("Mist Token","00000000-0000-0000-0000-000000000002")] = 1
+  				card.markers[MistToken] = 1
 			if "Nightshade Lotus" == card.name:
-  				card.markers[("Mist Token","00000000-0000-0000-0000-000000000002")] = 1
+  				card.markers[MistToken] = 1
+		if "Defense" in card.Stats:
+			if "1x" in card.Stats:
+				card.markers[Ready] = 1
+			if "2x" in card.Stats:
+				card.markers[Ready] = 1
+				card.markers[ReadyII] = 1
+		if "[ReadyMarker]" in card.Text:
+			card.markers[Ready] = 1
   	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
 		colorsChosen = getGlobalVariable("ColorsChosen")
 		if "0" in colorsChosen and "1" in colorsChosen: #red and blue

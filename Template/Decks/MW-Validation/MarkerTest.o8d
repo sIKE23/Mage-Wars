@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Creature" shared="False">
+    <card qty="1" id="6122329b-8107-4d1a-a322-52311bd11a60">Dwarf Panzergarde</card>
+    <card qty="1" id="dcc3b017-d4f4-479f-83c4-6597f06a2cce">Guardian Angel</card>
+    <card qty="1" id="a47455b5-caf0-42c0-9e3c-5945a108767d">Makunda</card>
+    <card qty="1" id="64ac6979-be87-4a71-b840-c60fade56a13">Blue Gremlin</card>
+    <card qty="1" id="1df603fc-3d5d-4a40-9942-640bca00e396">Cervere, The Forest Shadow</card>
+    <card qty="1" id="bf4ff874-b6f9-4f70-9dcb-7831a58c8997">Fellella, Pixie Familiar</card>
+    <card qty="1" id="acfc7da8-49f0-45f0-ab19-e7ccd124711f">Feral Bobcat</card>
+    <card qty="1" id="12f32a67-eb37-4311-ab57-addb40573990">Knight of Westlock</card>
+    <card qty="1" id="057affb5-b19a-4de0-b75a-abc5451897df">Moonglow Faerie</card>
+    <card qty="1" id="28828fac-23f8-4b66-bde0-38d4a4931862">Sosruko, Ferret Companion</card>
+    <card qty="1" id="5745219f-22d6-4027-8006-e71e9557b3ff">Tarok, the Skyhunter</card>
+    <card qty="1" id="b3ea6383-16dc-4786-92c5-e1498f2811c3">Skeletal Knight</card>
+    <card qty="1" id="9f958d17-2f53-40b2-9b1a-5fa6c9b7d1e1">Sir Corazin, Blademaster</card>
+    <card qty="1" id="0a4d7796-8763-4af6-b283-23d98582c5d0">Asyran Defender</card>
+    <card qty="1" id="0a4d7796-8763-4af6-b283-23d98582c5d0">Asyran Defender</card>
+    <card qty="1" id="08222fa4-57c4-4ebd-a27a-66f7942e46cb">Ichthellid</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="1db6906f-12ec-4538-8d1e-534a7beb81d4">Dancing Scimitar</card>
+    <card qty="1" id="79692c1d-4dc8-4c84-9c04-9ad47d797bd6">Spiked Buckler</card>
+  </section>
+  <section name="Mage" shared="False">
+    <card qty="1" id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f">Beastmaster</card>
+    <card qty="1" id="665fd551-678d-4b5c-94a3-347dd320f20a">Beastmaster Stats</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="804e971e-0b45-4198-bf12-ff71c7d43b05">Hand of Bim-Shalla</card>
+    <card qty="1" id="177abb85-6437-4e91-8ebb-7df1c9103c06">Temple of the Dawnbreaker</card>
+    <card qty="1" id="0e4eed2a-34a6-4b4f-9fb2-23aabb2e958c">Temple of Light</card>
+    <card qty="1" id="18b08e7f-4d82-4bcf-8a0c-fdf83b4683ac">Ballista</card>
+    <card qty="1" id="a3a04a1e-76e9-4043-a22c-d731ac2a103f">Corrosive Orchid</card>
+    <card qty="1" id="9192232a-e12a-4f84-8880-6ba315124062">Nightshade Lotus</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="65d66e09-37bd-480d-a4a6-d98819b66b9e">Akiro's Favor</card>
+    <card qty="1" id="65d66e09-37bd-480d-a4a6-d98819b66b9e">Akiro's Favor</card>
+  </section>
+  <section name="Attack" shared="False" />
+  <section name="Incantation" shared="False" />
+  <notes><![CDATA[]]></notes>
+</deck>
