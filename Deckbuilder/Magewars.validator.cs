@@ -1,4 +1,4 @@
-﻿//Version: 1.4.1.0
+﻿//Version: 1.4.2.0
 
 namespace Octgn.MageWarsValidator
 {
@@ -9,6 +9,7 @@ namespace Octgn.MageWarsValidator
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
@@ -29,13 +30,14 @@ namespace Octgn.MageWarsValidator
 
         public static bool deckValidated = false;
         public static int bookPoints = 0;
+        public static int totalCards = 0;
 
         public IEnumerable<IPluginMenuItem> MenuItems
         {
             get
             {
                 // Add your menu items here.
-                return new List<IPluginMenuItem> { new ValidatorMenuItem(), new ExportToForumMenuItem() };
+                return new List<IPluginMenuItem> { new ValidatorMenuItem(), new ExportToForumMenuItem(), new ExportToAWSBB() };
             }
         }
 
@@ -313,6 +315,7 @@ namespace Octgn.MageWarsValidator
                 {
                     MageWarsValidator.deckValidated = true;
                     MageWarsValidator.bookPoints = spellbook;
+                    MageWarsValidator.totalCards = cardcount;
                 }
             }
 
@@ -434,28 +437,7 @@ namespace Octgn.MageWarsValidator
                     System.Windows.MessageBox.Show("Promos found in deck. Be aware that promos are not supported by the forum preview system.");
                 System.Windows.MessageBox.Show("Forum post containing deck has been copied to clipboard.");
             }
-        }
-
-        public static class Prompt
-        {
-            public static string ShowDialog(string text, string caption)
-            {
-                Form prompt = new Form();
-                prompt.StartPosition = FormStartPosition.CenterScreen;
-                prompt.Width = 500;
-                prompt.Height = 120;
-                prompt.Text = caption;
-                Label textLabel = new Label() { Left = 50, Top = 20, Text = text, Height = 30, Width = 400 };
-                TextBox inputField = new TextBox() { Left = 50, Top = 50, Width = 400 };
-                Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 50 };
-                confirmation.Click += (sender, e) => { prompt.Close(); };
-                prompt.Controls.Add(confirmation);
-                prompt.Controls.Add(textLabel);
-                prompt.Controls.Add(inputField);
-                prompt.ShowDialog();
-                return inputField.Text;
-            }
-        }
+        }        
 
         private string Property(IMultiCard card, string p)
         {
@@ -474,4 +456,134 @@ namespace Octgn.MageWarsValidator
             return ret;
         }
     }
+
+
+    /*********************************************
+     * 
+     * 
+     *           Export to AW SBB
+     *                
+     * 
+     ********************************************/
+    public class ExportToAWSBB : IPluginMenuItem
+    {
+        public string Name
+        {
+            get { return "Export to Forum Spellbook Builder"; }
+        }
+
+        public void OnClick(IDeckBuilderPluginController controller)
+        {
+            //did they validate yet?
+            if (!MageWarsValidator.deckValidated)
+            {
+                System.Windows.MessageBox.Show("You must successfully validate a deck before exporting to a forum post.");
+                return;
+            }
+
+            var curDeck = controller.GetLoadedDeck();
+            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
+            {
+                var secArray = curDeck.Sections.ToArray();
+                StringBuilder text = new StringBuilder();
+
+                //ignore spell counts
+                text.AppendLine("1");
+
+                //ask for deck name
+                string deckName = Prompt.ShowDialog("What is the name of this deck?", "Deck Name");
+                if (string.IsNullOrEmpty(deckName))
+                {
+                    deckName = "OCTGN Deck";
+                }
+                text.AppendLine(deckName);
+
+                //get mage name
+                foreach (var section in secArray)
+                {
+                    foreach (var card in section.Cards)
+                    {
+                        if (Property(card, "Type") == "Mage")
+                        {
+                            text.AppendLine(card.Name);
+                        }
+                    }
+                }
+
+                //write spell set counts - one of each should be fine
+                text.AppendLine("1,1,1,1,1,1");
+
+                //spellbook cost
+                text.AppendLine(MageWarsValidator.bookPoints.ToString());
+
+                //cost per type - does this matter?
+                text.AppendLine("120,120,120,120,120,120");
+
+                //cards in deck
+                text.AppendLine(MageWarsValidator.totalCards.ToString());
+
+                //card ID and count
+                foreach (var section in secArray)
+                {
+                    foreach (var card in section.Cards)
+                    {
+                        if (section.Name.Contains("Mage")) continue;
+
+                        text.AppendLine(Property(card, "CardID") + "," + card.Quantity.ToString());
+                    }
+                }
+
+                //all done, ask for file location
+                FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+                folderDialog.Description = "Choose where to save the spellbook file.";
+                if (folderDialog.ShowDialog() != DialogResult.OK) return;
+                string writePath = folderDialog.SelectedPath;
+
+                //write file
+                StreamWriter writer = new StreamWriter(new FileStream(writePath + "\\" + deckName + ".sbb", FileMode.Create));
+                writer.Write(text.ToString());
+                writer.Close();
+                System.Windows.MessageBox.Show("File has been written to the specified location.");
+            }
+        }
+        
+        private string Property(IMultiCard card, string p)
+        {
+            string ret;
+            try
+            {
+                ret =
+                card.PropertySet()
+                    .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
+                    .Value as string;
+            }
+            catch (Exception e)
+            {
+                ret = "";
+            }
+            return ret;
+        }
+    }
+
+    public static class Prompt
+    {
+        public static string ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form();
+            prompt.StartPosition = FormStartPosition.CenterScreen;
+            prompt.Width = 500;
+            prompt.Height = 120;
+            prompt.Text = caption;
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text, Height = 30, Width = 400 };
+            TextBox inputField = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 50 };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(inputField);
+            prompt.ShowDialog();
+            return inputField.Text;
+        }
+    }
+
 }
