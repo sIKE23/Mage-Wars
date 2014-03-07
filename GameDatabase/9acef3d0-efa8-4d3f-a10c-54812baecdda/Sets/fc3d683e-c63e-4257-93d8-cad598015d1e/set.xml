@@ -704,7 +704,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Necromancer Only" />
-			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts or reveals a necro or undead spell. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts or reveals a necro or undead spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Necro/Undead] [x2]" />
 			<property name="CardID" value="DNQ02" />
 		</card>
 		<card id="84aeeb75-a297-4b94-a79d-f9068e19dcd9" name="Deathshroud Staff">
@@ -734,7 +734,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Druid Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Plant]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Plant] [x1]" />
 			<property name="CardID" value="DNQ04" />
 		</card>
 		<card id="3eaae143-ac4b-4d8b-9396-83f8215aed51" name="Libro Mortuos">

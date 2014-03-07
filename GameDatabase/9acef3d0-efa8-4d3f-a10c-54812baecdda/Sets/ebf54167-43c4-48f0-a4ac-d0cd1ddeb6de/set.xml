@@ -1867,7 +1867,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Wizard Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a metamagic or mana spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Metamagic/Mana]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a metamagic or mana spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Metamagic/Mana]  [x1]" />
 			<property name="CardID" value="MW1Q01" />
 		</card>
 		<card id="12b4584c-1338-4155-8a7f-6ba27ced88ba" name="Bearskin">
@@ -1987,7 +1987,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an enchantment spell that targets a friendly creature. &#xD;&#xA;[Casting Discount] [1] [Enchantment]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an enchantment spell that targets a friendly creature. &#xD;&#xA;[Casting Discount] [1] [Enchantment] [x1]" />
 			<property name="CardID" value="MW1Q09" />
 		</card>
 		<card id="42f6de77-bab3-4be7-a0e1-567957dc37ba" name="Fireshaper Ring">
@@ -2197,7 +2197,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Priestess Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Holy] [Enchantment] [Incantation]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Holy] [x1]" />
 			<property name="CardID" value="MW1Q24" />
 		</card>
 		<card id="7900f68c-f781-48d1-9c96-74973d16530c" name="Ring of Beasts">
@@ -2212,7 +2212,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Beastmaster Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell. &#xD;&#xA;[Casting Discount] [1] [Animal]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell. &#xD;&#xA;[Casting Discount] [1] [Animal] [x1]" />
 			<property name="CardID" value="MW1Q25" />
 		</card>
 		<card id="35592eff-8121-45e0-9c1f-a52bf24469ae" name="Dawnbreaker Ring">
@@ -2242,7 +2242,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlock Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Curse]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Curse] [x1]" />
 			<property name="CardID" value="MW1Q28" />
 		</card>
 		<card id="d78f4233-edf8-4535-b3db-37ba3a69d0ab" name="Staff of Asyra">

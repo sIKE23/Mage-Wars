@@ -672,7 +672,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Forcemaster Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a force spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Force]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a force spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Force] [x1]" />
 			<property name="CardID" value="FWQ03" />
 		</card>
 		<card id="e723b930-1d54-406f-bf69-72f14c66f561" name="Galvitar, Force Blade">
@@ -747,7 +747,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlord Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a command spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Command]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a command spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Command] [x1]" />
 			<property name="CardID" value="FWQ08" />
 		</card>
 		<card id="5f559e56-4454-41ef-a13d-bca2fa78559c" name="Sectarus, Dark Rune Sword">
