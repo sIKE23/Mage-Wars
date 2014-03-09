@@ -92,6 +92,7 @@ boardFlipped = False
 showDebug = False
 myIniRoll = 0
 hasRolledIni = True
+deckLoaded = False
 
 ############################################################################
 ############################		Events		############################
@@ -112,8 +113,10 @@ def onGameStart():
 
 def onLoadDeck(player, groups):
 	mute()
+	global deckLoaded
 	if player == me:
 		if validateDeck(groups[0]):
+			deckLoaded = True
 			playerSetup()
 			if getGlobalVariable("SetupDone") == "": #we're the first done with setup
 				setGlobalVariable("SetupDone", "x")
@@ -122,10 +125,19 @@ def onLoadDeck(player, groups):
 					remoteCall(p, "SetupForIni", [])
 				notify("Both players have set up. Please roll for initiative.")
 		else:
-			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
+			#notify and delete deck
+			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
 			for group in groups:
 				for card in group:
-					card.delete()
+					if card.controller == me:
+						card.delete()
+			#if a deck was already loaded, clear player's chosen color
+			if deckLoaded:
+				deckLoaded = False
+				colorsChosen = getGlobalVariable("ColorsChosen")
+				colorChoice = PlayerColor.index(mycolor)
+				colorsChosen = colorsChosen.replace(str(colorChoice), '')
+				setGlobalVariable("ColorsChosen", colorsChosen)
 
 def SetupForIni():
 	global hasRolledIni
