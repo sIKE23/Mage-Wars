@@ -111,6 +111,8 @@
 		</hand>
 		<group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
 		</group>
+		<group name="Obliterate Pile" visibility="all" ordered="False" width="126" height="176" icon="groups/obliterate.png" collapsed="True">
+		</group>
 	</player>
 	<deck>
 		<section name="Mage" group="Hand"/>
