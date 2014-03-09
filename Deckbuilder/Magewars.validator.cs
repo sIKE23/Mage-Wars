@@ -530,6 +530,9 @@ namespace Octgn.MageWarsValidator
                         if (section.Name.Contains("Mage")) continue;
 
                         text.AppendLine(Property(card, "CardID") + "," + card.Quantity.ToString());
+
+                        //and lower case until AW SBB is fixed
+                        text.AppendLine(Property(card, "CardID").ToLower() + "," + card.Quantity.ToString());
                     }
                 }
 
