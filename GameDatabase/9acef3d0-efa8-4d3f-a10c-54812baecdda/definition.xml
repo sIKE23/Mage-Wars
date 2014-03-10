@@ -98,6 +98,7 @@
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard"/>
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
+			<cardaction menu="Obliterate Card" default="False" shortcut="Alt+Del" execute="obliterate"/>
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">

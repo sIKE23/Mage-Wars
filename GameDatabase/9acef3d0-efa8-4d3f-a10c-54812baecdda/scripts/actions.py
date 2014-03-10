@@ -829,6 +829,16 @@ def discard(card, x=0, y=0):
 
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
+	
+def obliterate(card, x=0, y=0):
+	mute()
+	if card.controller != me:
+		whisper("{} does not control '{}' - card obliteration cancelled".format(me, card))
+		return
+	card.isFaceUp = True
+	
+	card.moveTo(me.piles['Obliterate Pile'])
+	notify("{} obliterates '{}'".format(me, card))
 
 def defaultAction(card, x = 0, y = 0):
 	mute()
