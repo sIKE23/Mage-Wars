@@ -328,7 +328,8 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"") == True: #Back to Upkeep
-			notify("Ready Stage: Performing Initiative, Reset, and Channeling Phases")
+			turn = turnNumber() + 1
+			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
