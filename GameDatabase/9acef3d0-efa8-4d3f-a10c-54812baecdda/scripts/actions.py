@@ -153,6 +153,7 @@ def playerDone(group, x=0, y=0):
 def rollDice(group, x=0, y=0):
 	mute()
 	global diceBank
+	global diceFrom
 	global hasRolledIni
 	global myIniRoll
 
@@ -170,8 +171,10 @@ def rollDice(group, x=0, y=0):
 		debug("Random.org response code: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
 			diceBank = random_org[0].splitlines()
+			diceFrom = "from Random.org"
 		else:
-			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
+#			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
+			diceFrom = "from the native randomizer"
 			while (len(diceBank) < 20):
 				diceBank.append(rnd(0,5))
 
@@ -180,7 +183,7 @@ def rollDice(group, x=0, y=0):
 		roll = int(diceBank.pop())
 		result[roll] += 1
 	debug("diceRoller result: {}".format(result))
-	notify("{} rolls {} attack dice".format(me,count))
+	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
 
 	damPiercing = result[4] + 2* result[5]
 	damNormal = result[2] + 2* result[3]
