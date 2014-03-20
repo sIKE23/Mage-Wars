@@ -1,4 +1,4 @@
-﻿//Version: 1.4.2.0
+﻿//Version: 1.4.2.1
 
 namespace Octgn.MageWarsValidator
 {
@@ -121,6 +121,7 @@ namespace Octgn.MageWarsValidator
                 string magename = "none in deck";
                 int spellpoints = 0;
                 string reporttxt = "";
+                bool Talos = false;
 
                 Dictionary<string, int> training = new Dictionary<string, int>()
                 {
@@ -182,6 +183,11 @@ namespace Octgn.MageWarsValidator
                             }
                         }
 
+                        if (card.Name.Contains("Talos"))
+                            Talos = true;
+                        else
+                            Talos = false;
+
                         if (HasProperty(card, "School") & HasProperty(card, "Level"))
                         {
                             var school = Property(card, "School");
@@ -194,43 +200,49 @@ namespace Octgn.MageWarsValidator
                             }
                             reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
 
-                            if (school.Contains("+")) //add all spell levels
+                            if (!Talos)
                             {
-                                var lev = Splitme(level, "+");
-                                int x = 0;
-                                foreach (var s in Splitme(school, "+"))
+                                if (school.Contains("+")) //add all spell levels
                                 {
-                                    levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
-                                    x++;
-                                }
-                            }
-                            else if (school.Contains("/")) //add just the cheapest of these
-                            {
-                                if (magename == "none in deck") //no mage found yet
-                                {
-                                    System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");
-                                }
-                                var lev = Splitme(level, "/")[0]; //just take the first value as each is the same
-                                var mincost = 3;
-                                string minschool = "";
-                                foreach (var s in Splitme(school, "/"))
-                                {
-                                    if (training[s] < mincost)
+                                    var lev = Splitme(level, "+");
+                                    int x = 0;
+                                    foreach (var s in Splitme(school, "+"))
                                     {
-                                        minschool = s;
-                                        mincost = training[s];
+                                        levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
+                                        x++;
                                     }
                                 }
-                                levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
-                            }
-                            else //Only one school in spell
-                            {
-                                if (training.ContainsKey(school))
+                                else if (school.Contains("/")) //add just the cheapest of these
                                 {
-                                    levels[school] += Convert.ToInt32(level) * card.Quantity;
+                                    if (magename == "none in deck") //no mage found yet
+                                    {
+                                        System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");
+                                    }
+                                    var lev = Splitme(level, "/")[0]; //just take the first value as each is the same
+                                    var mincost = 3;
+                                    string minschool = "";
+                                    foreach (var s in Splitme(school, "/"))
+                                    {
+                                        if (training[s] < mincost)
+                                        {
+                                            minschool = s;
+                                            mincost = training[s];
+                                        }
+                                    }
+                                    levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
+                                }
+                                else //Only one school in spell
+                                {
+                                    if (training.ContainsKey(school))
+                                    {
+                                        levels[school] += Convert.ToInt32(level) * card.Quantity;
+                                    }
                                 }
                             }
-                            if (magename == "Forcemaster" & "Creature" == Property(card, "Type")) //Forcemaster rule: Pay 3x for non-mind creatures
+
+
+                            //Forcemaster rule: Pay 3x for non-mind creatures
+                            if (magename == "Forcemaster" & "Creature" == Property(card, "Type"))
                             {
                                 if (!school.Contains("Mind")) //"Mind" not in schools
                                 {
@@ -249,12 +261,15 @@ namespace Octgn.MageWarsValidator
                                     }
                                 }
                             }
-                            if (magename == "Druid" && school.Contains("Water"))  //Druid pays double for Water spells 2 and up
+
+                            //Druid pays double for Water spells 2 and up
+                            if (magename == "Druid" && school.Contains("Water")) 
                             {
                                 string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
                                 var waterLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Water")]);  //whee
                                 if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
                             }
+
 
                             //check for multiples of Epic spells
                             if (Property(card, "Traits").Contains("Epic") && card.Quantity > 1)
@@ -263,6 +278,7 @@ namespace Octgn.MageWarsValidator
                                     card.Quantity + " copies found in spellbook.");
                                 return;
                             }
+
 
                             //check for illegal school- or mage-specific spells
                             if (Property(card, "Traits").Contains("Only"))
@@ -293,6 +309,18 @@ namespace Octgn.MageWarsValidator
                                         System.Windows.MessageBox.Show("Validation FAILED: The card " + card.Name + " is not legal in a " + magename + " deck.");
                                         return;
                                     }
+                                }
+                            }
+
+                            // Check for correct number of cards
+                            int l;
+                            if (int.TryParse(Property(card, "Level"), out l))
+                            {
+                                if ((l == 1 && card.Quantity > 6) ||
+                                   (l >= 2 && card.Quantity > 4))
+                                {
+                                    // too many
+                                    System.Windows.MessageBox.Show("Validation FAILED: There are too many cppies of " + card.Name + " in the deck.");
                                 }
                             }
 

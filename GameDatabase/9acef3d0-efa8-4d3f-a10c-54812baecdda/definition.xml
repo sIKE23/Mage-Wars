@@ -51,6 +51,7 @@
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns"/>
+			<groupaction menu="Toggle Auto-rolling Initiative" default="False" execute="toggleRollInitiative"/>
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt"/>
 		</groupactions>
 		<groupactions menu="Alternative Play">

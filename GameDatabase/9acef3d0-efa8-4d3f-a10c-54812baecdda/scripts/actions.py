@@ -142,6 +142,32 @@ def onLoadDeck(player, groups):
 def SetupForIni():
 	global hasRolledIni
 	hasRolledIni = False
+	
+	autoRollIni = getSetting("AutoRollIni", False)
+	if autoRollIni:
+		hasRolledIni = True
+		notify("Automatically rolling initiative for {}".format(me))
+		effect = rnd(1,12)
+		iniRoll(effect)
+			
+def iniRoll(effect):
+	notify("{} rolled a {} for initiative".format(me, effect))
+	oppRollStr = getGlobalVariable("OppIniRoll")
+	oppRoll = 0
+	if oppRollStr != "":
+		oppRoll = eval(oppRollStr)
+
+	if oppRoll == 0:	#they haven't rolled yet
+		setGlobalVariable("OppIniRoll", str(effect))
+	elif oppRoll == effect:	#tie!
+		notify("Tied initiative roll! Please roll again.")
+		for p in players:
+			remoteCall(p, "SetupForIni", [])
+		setGlobalVariable("OppIniRoll", "0")
+	elif effect > oppRoll:	#we won
+		AskInitiative()
+	else:	#they won
+		remoteCall(players[1], "AskInitiative", [])
 
 ############################################################################
 ######################		Group Actions			########################
@@ -199,23 +225,7 @@ def rollDice(group, x=0, y=0):
 		notify("{} rolled {} normal damage, {} critical damage and {} on effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
-		notify("{} rolled a {} for initiative".format(me, effect))
-		oppRollStr = getGlobalVariable("OppIniRoll")
-		oppRoll = 0
-		if oppRollStr != "":
-			oppRoll = eval(oppRollStr)
-
-		if oppRoll == 0:	#they haven't rolled yet
-			setGlobalVariable("OppIniRoll", str(effect))
-		elif oppRoll == effect:	#tie!
-			notify("Tied initiative roll! Please roll again.")
-			for p in players:
-				remoteCall(p, "SetupForIni", [])
-			setGlobalVariable("OppIniRoll", "0")
-		elif effect > oppRoll:	#we won
-			AskInitiative()
-		else:	#they won
-			remoteCall(players[1], "AskInitiative", [])
+		iniRoll(effect)
 
 def flipCoin(group, x = 0, y = 0):
     mute()
@@ -488,6 +498,14 @@ def toggleResolveBurns(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
+		
+def toggleRollInitiative(group, x=0, y=0):
+	autoRollIni = getSetting("AutoRollIni", False)
+	setSetting("AutoRollIni", not autoRollIni)
+	if autoRollIni:
+		whisper("You have disabled automatic initiative rolling.")
+	else:
+		whisper("You have enabled automatic initiative rolling.")
 
 def toggleEnchantRevealPrompt(group, x=0, y=0):
 	prompt = getSetting("EnchantPromptReveal", False)
@@ -858,6 +876,7 @@ def defaultAction(card, x = 0, y = 0):
 						return
 
 			flipcard(card, x, y)
+			castSpell(card, x, y)
 		else:
 			castSpell(card, x, y)
 
@@ -1056,40 +1075,39 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 def castSpell(card, x = 0, y = 0):
 	if card.Cost != "" and card.Cost != None:
 		notify("Printed casting cost of {} is {}".format(card,card.Cost))
+		castingcosts = card.Cost.split("+")
 		try:
 			castingcost = int(card.Cost)
 		except ValueError:
-			if "+" in card.Cost: #a x+y cost as in enchantments. We want the reveal cost
+			if "X" in card.Cost: #e.g. Dispel
+				castingcost = 0
+			elif "+" in card.Cost: #a x+y cost as in enchantments. We want the reveal cost
 				try:
-					castingcosts = card.Cost.split("+")
 					castingcost = int(castingcosts[1]) #reveal cost is the second one
 				except ValueError:
 					castingcost = 0
-			elif "X" in card.Cost: #e.g. Dispel
-				castingcost = 0
 				#target code
 			else:
 				castingcost = 0
 
-		if castingcost > 0:
-			#TODO Who is casting the spell?
-			infostr = "Printed casting cost is {}".format(castingcost)
-			# find any discounts from equipment(School, Type, Subtype, Targetbased?)
-			discount = 0
-			for c in table:
-				if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
-					discount += castingDiscount(card,c)
-					if discount > 0:
-						infostr += "\nCost reduced by {} due to {}".format(discount,c.name)
-			infostr += "\nTotal mana amount to subtract from mana pool?"
-			manacost = askInteger(infostr,castingcost-discount)
-			if manacost == None:
-				return
-			if me.Mana < manacost:
-				notify("{} has insufficient mana in pool".format(me))
-				return
-			me.Mana -= manacost
-			notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
+		#TODO Who is casting the spell?
+		infostr = "Printed casting cost is {}".format(castingcosts[1])
+		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
+		discount = 0
+		for c in table:
+			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
+				discount += castingDiscount(card,c)
+				if discount > 0:
+					infostr += "\nCost reduced by {} due to {}".format(discount,c.name)
+		infostr += "\nTotal mana amount to subtract from mana pool?"
+		manacost = askInteger(infostr,castingcost-discount)
+		if manacost == None:
+			return
+		if me.Mana < manacost:
+			notify("{} has insufficient mana in pool".format(me))
+			return
+		me.Mana -= manacost
+		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
