@@ -93,6 +93,7 @@ showDebug = False
 myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
+diceFrom = "Not Set"
 
 ############################################################################
 ############################		Events		############################
