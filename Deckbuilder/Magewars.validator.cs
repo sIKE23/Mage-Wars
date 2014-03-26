@@ -1,4 +1,4 @@
-﻿//Version: 1.4.2.1
+﻿//Version: 1.4.3.0
 
 namespace Octgn.MageWarsValidator
 {
@@ -313,15 +313,28 @@ namespace Octgn.MageWarsValidator
                             }
 
                             // Check for correct number of cards
-                            int l;
-                            if (int.TryParse(Property(card, "Level"), out l))
+                            int l = 0;
+                            if (level.Contains("+"))
                             {
-                                if ((l == 1 && card.Quantity > 6) ||
-                                   (l >= 2 && card.Quantity > 4))
-                                {
-                                    // too many
-                                    System.Windows.MessageBox.Show("Validation FAILED: There are too many cppies of " + card.Name + " in the deck.");
-                                }
+                                var levArr = Splitme(level, "+");
+                                foreach (string s in levArr)
+                                    l += Convert.ToInt32(s);
+                            }
+                            else if (level.Contains("/"))
+                            {
+                                var levArr = Splitme(level, "/");
+                                l = Convert.ToInt32(levArr[0]);
+                            }
+                            else
+                            {
+                                l = Convert.ToInt32(level);
+                            }
+                            if ((l == 1 && card.Quantity > 6) ||
+                                (l >= 2 && card.Quantity > 4))
+                            {
+                                // too many
+                                System.Windows.MessageBox.Show("Validation FAILED: There are too many copies of " + card.Name + " in the deck.");
+                                return;
                             }
 
                             cardcount += card.Quantity;

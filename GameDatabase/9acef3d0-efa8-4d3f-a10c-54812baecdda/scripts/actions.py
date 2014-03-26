@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.4.2.1    ##################################
+##########################    v1.4.3.0    ##################################
 ############################################################################
 import time
 import re
@@ -93,7 +93,6 @@ showDebug = False
 myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
-diceFrom = "Not Set"
 
 ############################################################################
 ############################		Events		############################
@@ -143,13 +142,6 @@ def onLoadDeck(player, groups):
 def SetupForIni():
 	global hasRolledIni
 	hasRolledIni = False
-	
-	autoRollIni = getSetting("AutoRollIni", False)
-	if autoRollIni:
-		hasRolledIni = True
-		notify("Automatically rolling initiative for {}".format(me))
-		effect = rnd(1,12)
-		iniRoll(effect)
 			
 def iniRoll(effect):
 	notify("{} rolled a {} for initiative".format(me, effect))
@@ -180,7 +172,6 @@ def playerDone(group, x=0, y=0):
 def rollDice(group, x=0, y=0):
 	mute()
 	global diceBank
-	global diceFrom
 	global hasRolledIni
 	global myIniRoll
 
@@ -193,6 +184,7 @@ def rollDice(group, x=0, y=0):
 	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
 
+	diceFrom = ""
 	if (len(diceBank) < count): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 		debug("Random.org response code: {}".format(random_org[1]))
@@ -499,14 +491,6 @@ def toggleResolveBurns(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
-		
-def toggleRollInitiative(group, x=0, y=0):
-	autoRollIni = getSetting("AutoRollIni", False)
-	setSetting("AutoRollIni", not autoRollIni)
-	if autoRollIni:
-		whisper("You have disabled automatic initiative rolling.")
-	else:
-		whisper("You have enabled automatic initiative rolling.")
 
 def toggleEnchantRevealPrompt(group, x=0, y=0):
 	prompt = getSetting("EnchantPromptReveal", False)
@@ -1165,10 +1149,13 @@ def validateDeck(deck):
 	levels = {}
 	booktotal = 0
 	epics = ["", "three"]
+	cardCounts = { }
 	for card in deck: #run through deck adding levels
 		if "Novice" in card.Traits: #Novice cards cost 1 spellpoint
 			debug("novice {}".format(card))
 			booktotal += 1
+		elif "Talos" in card.Name: #Talos costs nothing
+			debug("Talos")
 		elif "+" in card.School: #and clause
 			debug("and {}".format(card))
 			schools = card.School.split("+")
@@ -1244,7 +1231,6 @@ def validateDeck(deck):
 
 		if "Only" in card.Traits:	#check for school/mage restricted cards
 			ok = False
-
 			magename = c.Name
 			if "Beastmaster" in magename:
 				magename = "Beastmaster"
@@ -1252,13 +1238,30 @@ def validateDeck(deck):
 				magename = "Wizard"
 			if magename in card.Traits:	#mage restriction
 				ok = True
-
 			for s in [school for school in spellbook if spellbook[school] == 1]:
 				if s + " Mage" in card.Traits:
 					ok = True
-
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
+				return False
+		
+		l = 0	#check spell number restrictions
+		if card.Level != "":
+			if cardCounts.has_key(card.Name):
+				cardCounts.update({card.Name:cardCounts.get(card.Name)+1})
+			else:
+				cardCounts.update({card.Name:1})
+			if "+" in card.Level:
+				level = card.Level.split("+")
+				for s in level:
+					l += int(s)
+			elif "/" in card.Level:
+				level = card.Level.split("/")
+				l = int(level[0])
+			else:
+				l = int(card.Level)
+			if (l == 1 and cardCounts.get(card.Name) > 6) or (l >= 2 and cardCounts.get(card.Name) > 4):
+				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
 				return False
 
 	debug("levels {}".format(levels))

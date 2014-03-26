@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.4.2.1"
+	version="1.4.3.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -51,7 +51,6 @@
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug"/>
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns"/>
-			<groupaction menu="Toggle Auto-rolling Initiative" default="False" execute="toggleRollInitiative"/>
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt"/>
 		</groupactions>
 		<groupactions menu="Alternative Play">
