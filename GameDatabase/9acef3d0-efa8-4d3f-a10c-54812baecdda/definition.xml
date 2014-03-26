@@ -4,11 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-<<<<<<< HEAD
-	version="1.4.2.0"
-=======
 	version="1.4.3.0"
->>>>>>> April-Release
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"

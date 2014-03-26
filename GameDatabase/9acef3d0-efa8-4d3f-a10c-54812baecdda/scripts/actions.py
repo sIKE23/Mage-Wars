@@ -142,7 +142,7 @@ def onLoadDeck(player, groups):
 def SetupForIni():
 	global hasRolledIni
 	hasRolledIni = False
-			
+
 def iniRoll(effect):
 	notify("{} rolled a {} for initiative".format(me, effect))
 	oppRollStr = getGlobalVariable("OppIniRoll")
@@ -836,14 +836,13 @@ def discard(card, x=0, y=0):
 
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
-	
+
 def obliterate(card, x=0, y=0):
 	mute()
 	if card.controller != me:
 		whisper("{} does not control '{}' - card obliteration cancelled".format(me, card))
 		return
 	card.isFaceUp = True
-	
 	card.moveTo(me.piles['Obliterate Pile'])
 	notify("{} obliterates '{}'".format(me, card))
 
@@ -1244,7 +1243,6 @@ def validateDeck(deck):
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
 				return False
-		
 		l = 0	#check spell number restrictions
 		if card.Level != "":
 			if cardCounts.has_key(card.Name):
