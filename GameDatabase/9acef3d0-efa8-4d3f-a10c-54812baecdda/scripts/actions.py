@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.4.2.0    ##################################
+##########################    v1.4.3.0    ##################################
 ############################################################################
 import time
 import re
@@ -30,8 +30,9 @@ HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
 Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d")
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167")
 Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b")
-QuickBack = ("Quick back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd")
+QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
+ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
@@ -40,6 +41,7 @@ Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
 Turn = ("Turn", "e0a54bea-6e30-409d-82cd-44a944e591dc")
 Used = ("Used", "ab8708ac-9735-4803-ba4d-4932a787540d" )
+UsedII = ("Used II", "61bec951-ebb1-48f7-a2ab-0b6364d262e6" )
 Veteran = ("Veteran", "72ee460f-adc1-41ab-9231-765001f9e08e" )
 Visible = ("Visible", "b9b205a2-a998-44f5-97dc-c7f315afbbe2")
 VoltaricON = ("Voltaric ON", "a6e79926-db8d-4095-9aee-e3b46bf24a3f" )
@@ -52,6 +54,9 @@ Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28")
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8")
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805")
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
+EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
+LoadToken = ("Load Token","68d0cebd-3d57-4fd8-a01c-f8045ce82f57")
+MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb")
 
 ##########################		Dice-related			########################
 
@@ -87,6 +92,7 @@ boardFlipped = False
 showDebug = False
 myIniRoll = 0
 hasRolledIni = True
+deckLoaded = False
 
 ############################################################################
 ############################		Events		############################
@@ -107,8 +113,10 @@ def onGameStart():
 
 def onLoadDeck(player, groups):
 	mute()
+	global deckLoaded
 	if player == me:
 		if validateDeck(groups[0]):
+			deckLoaded = True
 			playerSetup()
 			if getGlobalVariable("SetupDone") == "": #we're the first done with setup
 				setGlobalVariable("SetupDone", "x")
@@ -117,14 +125,42 @@ def onLoadDeck(player, groups):
 					remoteCall(p, "SetupForIni", [])
 				notify("Both players have set up. Please roll for initiative.")
 		else:
-			notify("Validation of {}'s deck FAILED. Please choose another deck.".format(me.name))
+			#notify and delete deck
+			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
 			for group in groups:
 				for card in group:
-					card.delete()
+					if card.controller == me:
+						card.delete()
+			#if a deck was already loaded, clear player's chosen color
+			if deckLoaded:
+				deckLoaded = False
+				colorsChosen = getGlobalVariable("ColorsChosen")
+				colorChoice = PlayerColor.index(mycolor)
+				colorsChosen = colorsChosen.replace(str(colorChoice), '')
+				setGlobalVariable("ColorsChosen", colorsChosen)
 
 def SetupForIni():
 	global hasRolledIni
 	hasRolledIni = False
+			
+def iniRoll(effect):
+	notify("{} rolled a {} for initiative".format(me, effect))
+	oppRollStr = getGlobalVariable("OppIniRoll")
+	oppRoll = 0
+	if oppRollStr != "":
+		oppRoll = eval(oppRollStr)
+
+	if oppRoll == 0:	#they haven't rolled yet
+		setGlobalVariable("OppIniRoll", str(effect))
+	elif oppRoll == effect:	#tie!
+		notify("Tied initiative roll! Please roll again.")
+		for p in players:
+			remoteCall(p, "SetupForIni", [])
+		setGlobalVariable("OppIniRoll", "0")
+	elif effect > oppRoll:	#we won
+		AskInitiative()
+	else:	#they won
+		remoteCall(players[1], "AskInitiative", [])
 
 ############################################################################
 ######################		Group Actions			########################
@@ -148,13 +184,16 @@ def rollDice(group, x=0, y=0):
 	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
 
+	diceFrom = ""
 	if (len(diceBank) < count): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 		debug("Random.org response code: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
 			diceBank = random_org[0].splitlines()
+			diceFrom = "from Random.org"
 		else:
-			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
+#			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
+			diceFrom = "from the native randomizer"
 			while (len(diceBank) < 20):
 				diceBank.append(rnd(0,5))
 
@@ -163,7 +202,7 @@ def rollDice(group, x=0, y=0):
 		roll = int(diceBank.pop())
 		result[roll] += 1
 	debug("diceRoller result: {}".format(result))
-	notify("{} rolls {} attack dice".format(me,count))
+	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
 
 	damPiercing = result[4] + 2* result[5]
 	damNormal = result[2] + 2* result[3]
@@ -179,23 +218,7 @@ def rollDice(group, x=0, y=0):
 		notify("{} rolled {} normal damage, {} critical damage and {} on effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
-		notify("{} rolled a {} for initiative".format(me, effect))
-		oppRollStr = getGlobalVariable("OppIniRoll")
-		oppRoll = 0
-		if oppRollStr != "":
-			oppRoll = eval(oppRollStr)
-
-		if oppRoll == 0:	#they haven't rolled yet
-			setGlobalVariable("OppIniRoll", str(effect))
-		elif oppRoll == effect:	#tie!
-			notify("Tied initiative roll! Please roll again.")
-			for p in players:
-				remoteCall(p, "SetupForIni", [])
-			setGlobalVariable("OppIniRoll", "0")
-		elif effect > oppRoll:	#we won
-			AskInitiative()
-		else:	#they won
-			remoteCall(players[1], "AskInitiative", [])
+		iniRoll(effect)
 
 def flipCoin(group, x = 0, y = 0):
     mute()
@@ -311,7 +334,8 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"") == True: #Back to Upkeep
-			notify("Ready Stage: Performing Initiative, Reset, and Channeling Phases")
+			turn = turnNumber() + 1
+			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
@@ -359,6 +383,9 @@ def resetMarkers(c):
 	if c.markers[Used] == 1:
 		c.markers[Used] = 0
 		c.markers[Ready] = 1
+	if c.markers[UsedII] == 1:
+		c.markers[UsedII] = 0
+		c.markers[ReadyII] = 1
 	if c.markers[VoltaricON] == 1:
 		c.markers[VoltaricON] = 0
 		c.markers[VoltaricOFF] = 1
@@ -600,6 +627,19 @@ def toggleReady(card, x=0, y=0):
 		card.markers[Used] = 0
 		notify("'{}' becomes ready".format(card.Name))
 
+def toggleReadyII(card, x=0, y=0):
+	mute()
+	if not card.isFaceUp:
+		return
+	if card.markers[ReadyII] > 0:
+		card.markers[ReadyII] = 0
+		card.markers[UsedII] = 1
+		notify("'{}' becomes used".format(card.Name))
+	else:
+		card.markers[ReadyII] = 1
+		card.markers[UsedII] = 0
+		notify("'{}' becomes ready".format(card.Name))
+
 def togglePet(card, x=0, y=0):
 	toggleToken(card, Pet)
 
@@ -732,16 +772,24 @@ def flipcard(card, x = 0, y = 0):
 			if "Sosruko, Ferret Companion" == card.name:
 					card.markers[Taunt] = 1
 			if "Ichthellid" == card.name:
-					card.markers[("Egg Token","00000000-0000-0000-0000-000000000001")] = 1
+					card.markers[EggToken] = 1
 		if card.Type == "Conjuration":
 			if "Ballista" == card.name:
-  				card.markers[("Load Token","00000000-0000-0000-0000-000000000004")] = 1
+  				card.markers[LoadToken] = 1
 			if "Akiro's Hammer" == card.name:
-  				card.markers[("Load Token","00000000-0000-0000-0000-000000000004")] = 1
+  				card.markers[LoadToken] = 1
 			if "Corrosive Orchid" == card.name:
-  				card.markers[("Mist Token","00000000-0000-0000-0000-000000000002")] = 1
+  				card.markers[MistToken] = 1
 			if "Nightshade Lotus" == card.name:
-  				card.markers[("Mist Token","00000000-0000-0000-0000-000000000002")] = 1
+  				card.markers[MistToken] = 1
+		if "Defense" in card.Stats:
+			if "1x" in card.Stats:
+				card.markers[Ready] = 1
+			if "2x" in card.Stats:
+				card.markers[Ready] = 1
+				card.markers[ReadyII] = 1
+		if "[ReadyMarker]" in card.Text:
+			card.markers[Ready] = 1
   	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
 		colorsChosen = getGlobalVariable("ColorsChosen")
 		if "0" in colorsChosen and "1" in colorsChosen: #red and blue
@@ -788,6 +836,16 @@ def discard(card, x=0, y=0):
 
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
+	
+def obliterate(card, x=0, y=0):
+	mute()
+	if card.controller != me:
+		whisper("{} does not control '{}' - card obliteration cancelled".format(me, card))
+		return
+	card.isFaceUp = True
+	
+	card.moveTo(me.piles['Obliterate Pile'])
+	notify("{} obliterates '{}'".format(me, card))
 
 def defaultAction(card, x = 0, y = 0):
 	mute()
@@ -803,6 +861,7 @@ def defaultAction(card, x = 0, y = 0):
 						return
 
 			flipcard(card, x, y)
+			castSpell(card, x, y)
 		else:
 			castSpell(card, x, y)
 
@@ -1001,40 +1060,39 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 def castSpell(card, x = 0, y = 0):
 	if card.Cost != "" and card.Cost != None:
 		notify("Printed casting cost of {} is {}".format(card,card.Cost))
+		castingcosts = card.Cost.split("+")
 		try:
 			castingcost = int(card.Cost)
 		except ValueError:
-			if "+" in card.Cost: #a x+y cost as in enchantments. We want the reveal cost
+			if "X" in card.Cost: #e.g. Dispel
+				castingcost = 0
+			elif "+" in card.Cost: #a x+y cost as in enchantments. We want the reveal cost
 				try:
-					castingcosts = card.Cost.split("+")
 					castingcost = int(castingcosts[1]) #reveal cost is the second one
 				except ValueError:
 					castingcost = 0
-			elif "X" in card.Cost: #e.g. Dispel
-				castingcost = 0
 				#target code
 			else:
 				castingcost = 0
 
-		if castingcost > 0:
-			#TODO Who is casting the spell?
-			infostr = "Printed casting cost is {}".format(castingcost)
-			# find any discounts from equipment(School, Type, Subtype, Targetbased?)
-			discount = 0
-			for c in table:
-				if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
-					discount += castingDiscount(card,c)
-					if discount > 0:
-						infostr += "\nCost reduced by {} due to {}".format(discount,c.name)
-			infostr += "\nTotal mana amount to subtract from mana pool?"
-			manacost = askInteger(infostr,castingcost-discount)
-			if manacost == None:
-				return
-			if me.Mana < manacost:
-				notify("{} has insufficient mana in pool".format(me))
-				return
-			me.Mana -= manacost
-			notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
+		#TODO Who is casting the spell?
+		infostr = "Printed casting cost is {}".format(castingcosts[1])
+		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
+		discount = 0
+		for c in table:
+			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
+				discount += castingDiscount(card,c)
+				if discount > 0:
+					infostr += "\nCost reduced by {} due to {}".format(discount,c.name)
+		infostr += "\nTotal mana amount to subtract from mana pool?"
+		manacost = askInteger(infostr,castingcost-discount)
+		if manacost == None:
+			return
+		if me.Mana < manacost:
+			notify("{} has insufficient mana in pool".format(me))
+			return
+		me.Mana -= manacost
+		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
@@ -1091,10 +1149,13 @@ def validateDeck(deck):
 	levels = {}
 	booktotal = 0
 	epics = ["", "three"]
+	cardCounts = { }
 	for card in deck: #run through deck adding levels
 		if "Novice" in card.Traits: #Novice cards cost 1 spellpoint
 			debug("novice {}".format(card))
 			booktotal += 1
+		elif "Talos" in card.Name: #Talos costs nothing
+			debug("Talos")
 		elif "+" in card.School: #and clause
 			debug("and {}".format(card))
 			schools = card.School.split("+")
@@ -1170,7 +1231,6 @@ def validateDeck(deck):
 
 		if "Only" in card.Traits:	#check for school/mage restricted cards
 			ok = False
-
 			magename = c.Name
 			if "Beastmaster" in magename:
 				magename = "Beastmaster"
@@ -1178,13 +1238,30 @@ def validateDeck(deck):
 				magename = "Wizard"
 			if magename in card.Traits:	#mage restriction
 				ok = True
-
 			for s in [school for school in spellbook if spellbook[school] == 1]:
 				if s + " Mage" in card.Traits:
 					ok = True
-
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
+				return False
+		
+		l = 0	#check spell number restrictions
+		if card.Level != "":
+			if cardCounts.has_key(card.Name):
+				cardCounts.update({card.Name:cardCounts.get(card.Name)+1})
+			else:
+				cardCounts.update({card.Name:1})
+			if "+" in card.Level:
+				level = card.Level.split("+")
+				for s in level:
+					l += int(s)
+			elif "/" in card.Level:
+				level = card.Level.split("/")
+				l = int(level[0])
+			else:
+				l = int(card.Level)
+			if (l == 1 and cardCounts.get(card.Name) > 6) or (l >= 2 and cardCounts.get(card.Name) > 4):
+				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
 				return False
 
 	debug("levels {}".format(levels))

@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<<<<<<< HEAD
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.0.0" version="1.4.2.0">
+=======
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.4.2.1">
+>>>>>>> April-Release
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -8,11 +12,13 @@
 		<marker id="91ed27dc-294d-4732-ab71-37911f4011f2" name="Guard" />
 		<marker id="f4a2d3d3-4a95-4b9a-b899-81ea58293167" name="Pet" />
 		<marker id="aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" name="Ready" />
+		<marker id="73fffebd-a8f0-43bd-a118-6aebc366ecf6" name="Ready II" />
 		<marker id="81360faf-87d6-42a8-a719-c49386bd2ab5" name="Rot" />
 		<marker id="ad0e8e3c-c1af-47b7-866d-427f8908dea4" name="Sleep" />
 		<marker id="4bbac09e-a46c-42de-9272-422e8074533f" name="Stun" />
 		<marker id="16f03c44-5656-4e9d-9629-90c4ff1765a7" name="Taunt(Sosroku)" />
 		<marker id="ab8708ac-9735-4803-ba4d-4932a787540d" name="Used" />
+		<marker id="61bec951-ebb1-48f7-a2ab-0b6364d262e6" name="Used II" />		
 		<marker id="d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" name="Voltaric OFF" />
 		<marker id="a6e79926-db8d-4095-9aee-e3b46bf24a3f" name="Voltaric ON" />
 		<marker id="22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" name="Weak" />
@@ -32,6 +38,9 @@
 		<marker id="5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" name="Action Green Back" />
 		<marker id="2ec4ddea-9596-45cc-a084-23caa32511be" name="Action Yellow" />
 		<marker id="7c145c5d-54c3-4f5b-bf66-f4d52f240af6" name="Action Yellow Back" />
+		<marker id="874c7fbb-c566-4f17-b14e-ae367716dce5" name="Egg Token" />
+		<marker id="fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" name="Mist Token" />
+		<marker id="68d0cebd-3d57-4fd8-a01c-f8045ce82f57" name="Load Token" />
 	</markers>
 	<cards>
 		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
@@ -397,7 +406,7 @@
 			<property name="Stats" value="Armor=2, Life=5" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Unique" />
-			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may give a Living creature Armor +1 or the Melee +1 trait until the end of the round. or you may heal 1 damage from it. Use a ready marker to keep track of this ability." />
+			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may give a Living creature Armor +1 or the Melee +1 trait until the end of the round. or you may heal 1 damage from it. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J08" />
 			<alternate name="Hand of Bim-Shalla" type="B" />
 		</card>
@@ -413,7 +422,7 @@
 			<property name="Stats" value="Armor=3, Life=7" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive" />
-			<property name="Text" value="Once per round, you may choose and do one of these: Re-roll a Defense or Escape roll that you just rolled, or, if a friendly creature is the defender of an attack, you can re-roll the effect roll or all of the attack dice from that attack, Use a ready marker to keep track of this ability." />
+			<property name="Text" value="Once per round, you may choose and do one of these: Re-roll a Defense or Escape roll that you just rolled, or, if a friendly creature is the defender of an attack, you can re-roll the effect roll or all of the attack dice from that attack, Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J09" />
 		</card>
 		<card id="a6a69bf2-56a1-4f73-b62e-d1423983eddf" name="Lair">
@@ -638,7 +647,7 @@
 			<property name="Stats" value="Armor=3, Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Unique" />
-			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability." />
+			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J24" />
 			<alternate name="Temple of Light" type="B" />
 		</card>
@@ -865,7 +874,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Channeling=1, Defense=6+ 8, Armor=0, Life=6" />
+			<property name="Stats" value="Channeling=1, Defense=6+ ∞, Armor=0, Life=6" />
 			<property name="AttackBar" value="Ethereal Touch:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Ethereal]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Nature Mage Only" />
 			<property name="Text" value="" />
@@ -985,7 +994,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Channeling=1, Defense=6+ 8, Armor=0, Life=5" />
+			<property name="Stats" value="Channeling=1, Defense=6+ ∞, Armor=0, Life=5" />
 			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1] &#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Arcane Mage Only" />
 			<property name="Text" value="Huginn can cast only level 1-2 incantation spells." />
@@ -1075,7 +1084,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Defense=6+ 8, Armor=0, Life=5" />
+			<property name="Stats" value="Defense=6+ ∞, Armor=0, Life=5" />
 			<property name="AttackBar" value="Zap:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Ethereal] [+2 vs. Incorporeal]" />
 			<property name="Traits" value="Flying, Pest" />
 			<property name="Text" value="" />
@@ -1150,7 +1159,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Defense=5+ 8, Armor=0, Life=5" />
+			<property name="Stats" value="Defense=5+ ∞, Armor=0, Life=5" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [7+ = Taunt]" />
 			<property name="Traits" value="Elusive, Pest, Legendary, Beastmaster Only" />
 			<property name="Text" value="" />
@@ -1862,7 +1871,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Wizard Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a metamagic or mana spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Metamagic/Mana]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a metamagic or mana spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Metamagic/Mana]  [x1]" />
 			<property name="CardID" value="MW1Q01" />
 		</card>
 		<card id="12b4584c-1338-4155-8a7f-6ba27ced88ba" name="Bearskin">
@@ -1982,7 +1991,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an enchantment spell that targets a friendly creature. &#xD;&#xA;[Casting Discount] [1] [Enchantment]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an enchantment spell that targets a friendly creature. &#xD;&#xA;[Casting Discount] [1] [Enchantment] [x1]" />
 			<property name="CardID" value="MW1Q09" />
 		</card>
 		<card id="42f6de77-bab3-4be7-a0e1-567957dc37ba" name="Fireshaper Ring">
@@ -2192,7 +2201,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Priestess Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Holy] [Enchantment] [Incantation]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Holy] [x1]" />
 			<property name="CardID" value="MW1Q24" />
 		</card>
 		<card id="7900f68c-f781-48d1-9c96-74973d16530c" name="Ring of Beasts">
@@ -2207,7 +2216,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Beastmaster Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell. &#xD;&#xA;[Casting Discount] [1] [Animal]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell. &#xD;&#xA;[Casting Discount] [1] [Animal] [x1]" />
 			<property name="CardID" value="MW1Q25" />
 		</card>
 		<card id="35592eff-8121-45e0-9c1f-a52bf24469ae" name="Dawnbreaker Ring">
@@ -2237,7 +2246,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlock Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Curse]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Curse] [x1]" />
 			<property name="CardID" value="MW1Q28" />
 		</card>
 		<card id="d78f4233-edf8-4535-b3db-37ba3a69d0ab" name="Staff of Asyra">

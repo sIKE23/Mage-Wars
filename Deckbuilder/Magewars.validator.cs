@@ -1,4 +1,4 @@
-﻿//Version: 1.4.1.0
+﻿//Version: 1.4.3.0
 
 namespace Octgn.MageWarsValidator
 {
@@ -9,6 +9,7 @@ namespace Octgn.MageWarsValidator
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
@@ -29,13 +30,14 @@ namespace Octgn.MageWarsValidator
 
         public static bool deckValidated = false;
         public static int bookPoints = 0;
+        public static int totalCards = 0;
 
         public IEnumerable<IPluginMenuItem> MenuItems
         {
             get
             {
                 // Add your menu items here.
-                return new List<IPluginMenuItem> { new ValidatorMenuItem(), new ExportToForumMenuItem() };
+                return new List<IPluginMenuItem> { new ValidatorMenuItem(), new ExportToForumMenuItem(), new ExportToAWSBB() };
             }
         }
 
@@ -119,6 +121,7 @@ namespace Octgn.MageWarsValidator
                 string magename = "none in deck";
                 int spellpoints = 0;
                 string reporttxt = "";
+                bool Talos = false;
 
                 Dictionary<string, int> training = new Dictionary<string, int>()
                 {
@@ -180,6 +183,11 @@ namespace Octgn.MageWarsValidator
                             }
                         }
 
+                        if (card.Name.Contains("Talos"))
+                            Talos = true;
+                        else
+                            Talos = false;
+
                         if (HasProperty(card, "School") & HasProperty(card, "Level"))
                         {
                             var school = Property(card, "School");
@@ -192,43 +200,49 @@ namespace Octgn.MageWarsValidator
                             }
                             reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
 
-                            if (school.Contains("+")) //add all spell levels
+                            if (!Talos)
                             {
-                                var lev = Splitme(level, "+");
-                                int x = 0;
-                                foreach (var s in Splitme(school, "+"))
+                                if (school.Contains("+")) //add all spell levels
                                 {
-                                    levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
-                                    x++;
-                                }
-                            }
-                            else if (school.Contains("/")) //add just the cheapest of these
-                            {
-                                if (magename == "none in deck") //no mage found yet
-                                {
-                                    System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");
-                                }
-                                var lev = Splitme(level, "/")[0]; //just take the first value as each is the same
-                                var mincost = 3;
-                                string minschool = "";
-                                foreach (var s in Splitme(school, "/"))
-                                {
-                                    if (training[s] < mincost)
+                                    var lev = Splitme(level, "+");
+                                    int x = 0;
+                                    foreach (var s in Splitme(school, "+"))
                                     {
-                                        minschool = s;
-                                        mincost = training[s];
+                                        levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
+                                        x++;
                                     }
                                 }
-                                levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
-                            }
-                            else //Only one school in spell
-                            {
-                                if (training.ContainsKey(school))
+                                else if (school.Contains("/")) //add just the cheapest of these
                                 {
-                                    levels[school] += Convert.ToInt32(level) * card.Quantity;
+                                    if (magename == "none in deck") //no mage found yet
+                                    {
+                                        System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");
+                                    }
+                                    var lev = Splitme(level, "/")[0]; //just take the first value as each is the same
+                                    var mincost = 3;
+                                    string minschool = "";
+                                    foreach (var s in Splitme(school, "/"))
+                                    {
+                                        if (training[s] < mincost)
+                                        {
+                                            minschool = s;
+                                            mincost = training[s];
+                                        }
+                                    }
+                                    levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
+                                }
+                                else //Only one school in spell
+                                {
+                                    if (training.ContainsKey(school))
+                                    {
+                                        levels[school] += Convert.ToInt32(level) * card.Quantity;
+                                    }
                                 }
                             }
-                            if (magename == "Forcemaster" & "Creature" == Property(card, "Type")) //Forcemaster rule: Pay 3x for non-mind creatures
+
+
+                            //Forcemaster rule: Pay 3x for non-mind creatures
+                            if (magename == "Forcemaster" & "Creature" == Property(card, "Type"))
                             {
                                 if (!school.Contains("Mind")) //"Mind" not in schools
                                 {
@@ -247,12 +261,15 @@ namespace Octgn.MageWarsValidator
                                     }
                                 }
                             }
-                            if (magename == "Druid" && school.Contains("Water"))  //Druid pays double for Water spells 2 and up
+
+                            //Druid pays double for Water spells 2 and up
+                            if (magename == "Druid" && school.Contains("Water")) 
                             {
                                 string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
                                 var waterLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Water")]);  //whee
                                 if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
                             }
+
 
                             //check for multiples of Epic spells
                             if (Property(card, "Traits").Contains("Epic") && card.Quantity > 1)
@@ -261,6 +278,7 @@ namespace Octgn.MageWarsValidator
                                     card.Quantity + " copies found in spellbook.");
                                 return;
                             }
+
 
                             //check for illegal school- or mage-specific spells
                             if (Property(card, "Traits").Contains("Only"))
@@ -294,6 +312,31 @@ namespace Octgn.MageWarsValidator
                                 }
                             }
 
+                            // Check for correct number of cards
+                            int l = 0;
+                            if (level.Contains("+"))
+                            {
+                                var levArr = Splitme(level, "+");
+                                foreach (string s in levArr)
+                                    l += Convert.ToInt32(s);
+                            }
+                            else if (level.Contains("/"))
+                            {
+                                var levArr = Splitme(level, "/");
+                                l = Convert.ToInt32(levArr[0]);
+                            }
+                            else
+                            {
+                                l = Convert.ToInt32(level);
+                            }
+                            if ((l == 1 && card.Quantity > 6) ||
+                                (l >= 2 && card.Quantity > 4))
+                            {
+                                // too many
+                                System.Windows.MessageBox.Show("Validation FAILED: There are too many copies of " + card.Name + " in the deck.");
+                                return;
+                            }
+
                             cardcount += card.Quantity;
 
                         }   //card has school and level 
@@ -313,6 +356,7 @@ namespace Octgn.MageWarsValidator
                 {
                     MageWarsValidator.deckValidated = true;
                     MageWarsValidator.bookPoints = spellbook;
+                    MageWarsValidator.totalCards = cardcount;
                 }
             }
 
@@ -434,28 +478,7 @@ namespace Octgn.MageWarsValidator
                     System.Windows.MessageBox.Show("Promos found in deck. Be aware that promos are not supported by the forum preview system.");
                 System.Windows.MessageBox.Show("Forum post containing deck has been copied to clipboard.");
             }
-        }
-
-        public static class Prompt
-        {
-            public static string ShowDialog(string text, string caption)
-            {
-                Form prompt = new Form();
-                prompt.StartPosition = FormStartPosition.CenterScreen;
-                prompt.Width = 500;
-                prompt.Height = 120;
-                prompt.Text = caption;
-                Label textLabel = new Label() { Left = 50, Top = 20, Text = text, Height = 30, Width = 400 };
-                TextBox inputField = new TextBox() { Left = 50, Top = 50, Width = 400 };
-                Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 50 };
-                confirmation.Click += (sender, e) => { prompt.Close(); };
-                prompt.Controls.Add(confirmation);
-                prompt.Controls.Add(textLabel);
-                prompt.Controls.Add(inputField);
-                prompt.ShowDialog();
-                return inputField.Text;
-            }
-        }
+        }        
 
         private string Property(IMultiCard card, string p)
         {
@@ -474,4 +497,137 @@ namespace Octgn.MageWarsValidator
             return ret;
         }
     }
+
+
+    /*********************************************
+     * 
+     * 
+     *           Export to AW SBB
+     *                
+     * 
+     ********************************************/
+    public class ExportToAWSBB : IPluginMenuItem
+    {
+        public string Name
+        {
+            get { return "Export to Forum Spellbook Builder"; }
+        }
+
+        public void OnClick(IDeckBuilderPluginController controller)
+        {
+            //did they validate yet?
+            if (!MageWarsValidator.deckValidated)
+            {
+                System.Windows.MessageBox.Show("You must successfully validate a deck before exporting to a forum post.");
+                return;
+            }
+
+            var curDeck = controller.GetLoadedDeck();
+            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
+            {
+                var secArray = curDeck.Sections.ToArray();
+                StringBuilder text = new StringBuilder();
+
+                //ignore spell counts
+                text.AppendLine("1");
+
+                //ask for deck name
+                string deckName = Prompt.ShowDialog("What is the name of this deck?", "Deck Name");
+                if (string.IsNullOrEmpty(deckName))
+                {
+                    deckName = "OCTGN Deck";
+                }
+                text.AppendLine(deckName);
+
+                //get mage name
+                foreach (var section in secArray)
+                {
+                    foreach (var card in section.Cards)
+                    {
+                        if (Property(card, "Type") == "Mage")
+                        {
+                            text.AppendLine(card.Name);
+                        }
+                    }
+                }
+
+                //write spell set counts - one of each should be fine
+                text.AppendLine("1,1,1,1,1,1");
+
+                //spellbook cost
+                text.AppendLine(MageWarsValidator.bookPoints.ToString());
+
+                //cost per type - does this matter?
+                text.AppendLine("120,120,120,120,120,120");
+
+                //cards in deck
+                text.AppendLine(MageWarsValidator.totalCards.ToString());
+
+                //card ID and count
+                foreach (var section in secArray)
+                {
+                    foreach (var card in section.Cards)
+                    {
+                        if (section.Name.Contains("Mage")) continue;
+
+                        text.AppendLine(Property(card, "CardID") + "," + card.Quantity.ToString());
+
+                        //and lower case until AW SBB is fixed
+                        text.AppendLine(Property(card, "CardID").ToLower() + "," + card.Quantity.ToString());
+                    }
+                }
+
+                //all done, ask for file location
+                FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+                folderDialog.Description = "Choose where to save the spellbook file.";
+                if (folderDialog.ShowDialog() != DialogResult.OK) return;
+                string writePath = folderDialog.SelectedPath;
+
+                //write file
+                StreamWriter writer = new StreamWriter(new FileStream(writePath + "\\" + deckName + ".sbb", FileMode.Create));
+                writer.Write(text.ToString());
+                writer.Close();
+                System.Windows.MessageBox.Show("File has been written to the specified location.");
+            }
+        }
+        
+        private string Property(IMultiCard card, string p)
+        {
+            string ret;
+            try
+            {
+                ret =
+                card.PropertySet()
+                    .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
+                    .Value as string;
+            }
+            catch (Exception e)
+            {
+                ret = "";
+            }
+            return ret;
+        }
+    }
+
+    public static class Prompt
+    {
+        public static string ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form();
+            prompt.StartPosition = FormStartPosition.CenterScreen;
+            prompt.Width = 500;
+            prompt.Height = 120;
+            prompt.Text = caption;
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text, Height = 30, Width = 400 };
+            TextBox inputField = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 50 };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(inputField);
+            prompt.ShowDialog();
+            return inputField.Text;
+        }
+    }
+
 }

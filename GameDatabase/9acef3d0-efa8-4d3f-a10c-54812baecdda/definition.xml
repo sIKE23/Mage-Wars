@@ -4,7 +4,11 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
+<<<<<<< HEAD
 	version="1.4.2.0"
+=======
+	version="1.4.3.0"
+>>>>>>> April-Release
 	markersize="16"
 	tags="Mage Wars"
 	description="A cardgame of dueling mages. Each mage brings his spellbook and abilities in a fight to the death"
@@ -73,6 +77,7 @@
 			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction"/>
 			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
 			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady"/>
+			<cardaction menu="Toggle Ready II Marker" default="False" shortcut="Alt+Ctrl+R" execute="toggleReadyII"/>
 			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard"/>
 			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric"/>
 			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+D" execute="toggleDeflect" />
@@ -97,6 +102,7 @@
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard"/>
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
+			<cardaction menu="Obliterate Card" default="False" shortcut="Alt+Del" execute="obliterate"/>
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">
@@ -109,6 +115,8 @@
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
 		</hand>
 		<group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
+		</group>
+		<group name="Obliterate Pile" visibility="all" ordered="False" width="126" height="176" icon="groups/obliterate.png" collapsed="True">
 		</group>
 	</player>
 	<deck>

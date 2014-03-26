@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<<<<<<< HEAD
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.0.0" version="1.4.2.0">
+=======
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.4.2.1">
+>>>>>>> April-Release
 	<markers>
 		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
 		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
@@ -517,7 +521,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=0, Life=3, Defense=3+ ∞" />
+			<property name="Stats" value="Defense=3+ ∞, Armor=0, Life=3" />
 			<property name="AttackBar" value="Magical Burst:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal]" />
 			<property name="Traits" value="Flying, Legendary, Pest, Druid Only" />
 			<property name="Text" value="As a quick action, Tataree may choose and do one of the following to a plant object in its zone; Heal it 1 damage, or place 1 mana on it (if it has the Channel attribute)." />
@@ -704,7 +708,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Necromancer Only" />
-			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts or reveals a necro or undead spell. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts or reveals a necro or undead spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Necro/Undead] [x2]" />
 			<property name="CardID" value="DNQ02" />
 		</card>
 		<card id="84aeeb75-a297-4b94-a79d-f9068e19dcd9" name="Deathshroud Staff">
@@ -734,7 +738,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Druid Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Plant] [x1]" />
 			<property name="CardID" value="DNQ04" />
 		</card>
 		<card id="3eaae143-ac4b-4d8b-9396-83f8215aed51" name="Libro Mortuos">

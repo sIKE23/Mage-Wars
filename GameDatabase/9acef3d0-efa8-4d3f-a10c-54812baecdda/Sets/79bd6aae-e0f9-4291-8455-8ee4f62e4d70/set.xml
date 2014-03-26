@@ -262,7 +262,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="Once per round, if this creature makes a melee or ranged attack, you may re-roll all of the attack dice, or the effect die, for that attack. Or, if the attack has to roll to hit (such as with a Daze condition), you may re-roll that die roll instead. Use a ready marker to keep track of this ability" />
+			<property name="Text" value="Once per round, if this creature makes a melee or ranged attack, you may re-roll all of the attack dice, or the effect die, for that attack. Or, if the attack has to roll to hit (such as with a Daze condition), you may re-roll that die roll instead. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MWPROMO1" />
 		</card>
 		<card id="ccc78522-653a-443d-9c36-5be3eb96f1e1" name="Critical Strike">
