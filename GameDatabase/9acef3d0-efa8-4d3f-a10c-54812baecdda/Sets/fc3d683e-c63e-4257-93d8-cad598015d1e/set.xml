@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<<<<<<< HEAD
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.0.0" version="1.4.2.0">
-=======
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.4.2.1">
->>>>>>> April-Release
 	<markers>
 		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
 		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
