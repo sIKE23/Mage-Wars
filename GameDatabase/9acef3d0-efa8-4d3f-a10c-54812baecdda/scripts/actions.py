@@ -142,7 +142,7 @@ def onLoadDeck(player, groups):
 def SetupForIni():
 	global hasRolledIni
 	hasRolledIni = False
-
+			
 def iniRoll(effect):
 	notify("{} rolled a {} for initiative".format(me, effect))
 	oppRollStr = getGlobalVariable("OppIniRoll")
@@ -836,13 +836,14 @@ def discard(card, x=0, y=0):
 
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
-
+	
 def obliterate(card, x=0, y=0):
 	mute()
 	if card.controller != me:
 		whisper("{} does not control '{}' - card obliteration cancelled".format(me, card))
 		return
 	card.isFaceUp = True
+	
 	card.moveTo(me.piles['Obliterate Pile'])
 	notify("{} obliterates '{}'".format(me, card))
 
@@ -1036,11 +1037,13 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 
 	lines = cdiscount.Text.split("[Casting Discount]")
 	debug("lines: {}".format(lines))
-	if len(lines)>1: #line found - now proces it
-		cells = lines[1].split("][")
-		debug("cells: {}".format(cells))
+	if len(lines)>1: #line found - now process it
+		cells = lines[1].split(']')
+		for i in range(len(cells)):
+			cells[i] = cells[i].strip().strip("]").strip("[")
+			debug("cell entry: {}".format(cells[i]))
 		try:
-			discount = int(cells[0].strip("["))
+			discount = int(cells[0])
 		except ValueError:
 			debug("no discount value found")
 			return 0
@@ -1075,7 +1078,11 @@ def castSpell(card, x = 0, y = 0):
 				castingcost = 0
 
 		#TODO Who is casting the spell?
-		infostr = "Printed casting cost is {}".format(castingcosts[1])
+		infostr = ""
+		if "Enchantment" in card.Type:
+			infostr= "Printed casting cost is {}".format(castingcosts[1])
+		else:
+			infostr= "Printed casting cost is {}".format(card.Cost)
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
 		discount = 0
 		for c in table:
@@ -1243,6 +1250,7 @@ def validateDeck(deck):
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
 				return False
+		
 		l = 0	#check spell number restrictions
 		if card.Level != "":
 			if cardCounts.has_key(card.Name):
