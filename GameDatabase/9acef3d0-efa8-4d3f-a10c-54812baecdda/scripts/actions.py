@@ -1080,7 +1080,7 @@ def castSpell(card, x = 0, y = 0):
 		#TODO Who is casting the spell?
 		infostr = ""
 		if "Enchantment" in card.Type:
-			infostr= "Printed casting cost is {}".format(castingcosts[1])
+			infostr= "Printed reveal cost is {}".format(castingcosts[1])
 		else:
 			infostr= "Printed casting cost is {}".format(card.Cost)
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
