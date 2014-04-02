@@ -93,6 +93,7 @@ showDebug = False
 myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
+discountsUsed = [ ]
 
 ############################################################################
 ############################		Events		############################
@@ -334,6 +335,9 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"") == True: #Back to Upkeep
+			#reset discounts used
+			for tup in discountsUsed:
+				tup[2] = 0
 			turn = turnNumber() + 1
 			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
@@ -1033,8 +1037,12 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 	testlist = cspell.Type.split(",")
 	testlist += cspell.Subtype.split(",")
 	testlist += cspell.School.split(",")
+	for i in range(len(testlist)):
+		testlist[i] = testlist[i].strip().strip("]").strip("[")
 	debug("casting discount testlist: {}".format(testlist))
 
+	discount = 0
+	found = False
 	lines = cdiscount.Text.split("[Casting Discount]")
 	debug("lines: {}".format(lines))
 	if len(lines)>1: #line found - now process it
@@ -1047,16 +1055,35 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 		except ValueError:
 			debug("no discount value found")
 			return 0
-		reqstr = cells[1].strip("]") #discount requirements should be here
-		reqs = reqstr.split(",")
+		reqstr = cells[1] #discount requirements should be here
+		reqs = reqstr.split("/")
 		for req in reqs:
-			debug("testing req {}".format(req.split("/")))
-			found = False
+			debug("testing req {}".format(req))
 			for r in req.split("/"):
 				if r in testlist:
-					found = True
-			if not found:
-				return 0
+					#Ring of Asyra is enchants and incants only
+					if "Asyra" in cdiscount.Name:
+						if "Incantation" in cspell.Type or "Enchantment" in cspell.Type:
+							found = True
+					#Ring of Beasts is creatures only
+					elif "Beasts" in cdiscount.Name:
+						if "Creature" in cspell.Type:
+							found = True
+					else:
+						found = True
+						
+	if not found:
+		return 0
+	else:
+		tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
+		if len(tuplist) > 0:
+			if tuplist[0][2] < tuplist[0][1]:
+				tuplist[0][2] += 1
+			else:
+				return -1
+		else:
+			newtup = (cdiscount.Name,int(cells[2].strip("x")),1)
+			discountsUsed.append(newtup)
 	return discount
 
 def castSpell(card, x = 0, y = 0):
@@ -1080,16 +1107,19 @@ def castSpell(card, x = 0, y = 0):
 		#TODO Who is casting the spell?
 		infostr = ""
 		if "Enchantment" in card.Type:
-			infostr= "Printed reveal cost of {} is {}".format(card.Name,castingcosts[1])
+			infostr= "Printed casting cost is {}".format(castingcosts[1])
 		else:
-			infostr= "Printed casting cost of {} is {}".format(card.Name,card.Cost)
+			infostr= "Printed casting cost is {}".format(card.Cost)
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
 		discount = 0
 		for c in table:
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
-				discount += castingDiscount(card,c)
-				if discount > 0:
-					infostr += "\nCost reduced by {} due to {}".format(discount,c.name)
+				dc = castingDiscount(card,c)
+				if dc > 0:
+					infostr += "\nCost reduced by {} due to {}".format(dc,c.name)
+					discount += dc
+				elif dc < 0:
+					infostr += "\n{} already reached max uses this round.".format(c.name)
 		infostr += "\nTotal mana amount to subtract from mana pool?"
 		manacost = askInteger(infostr,castingcost-discount)
 		if manacost == None:
