@@ -335,9 +335,8 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"") == True: #Back to Upkeep
-			#reset discounts used
-			for tup in discountsUsed:
-				tup[2] = 0
+			for p in players:
+				remoteCall(p,"resetDiscounts",[])
 			turn = turnNumber() + 1
 			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
@@ -367,6 +366,12 @@ def nextPhase(group, x=-360, y=-150):
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
+def resetDiscounts():
+	#reset discounts used
+	for tup in discountsUsed:
+		discountsUsed.remove(tup)
+		discountsUsed.append((tup[0],tup[1],0))
+	
 def resetMarkers(c):
 	mute()
 	if c.markers[ActionRedUsed] == 1:
@@ -1078,7 +1083,8 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 		tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
 		if len(tuplist) > 0:
 			if tuplist[0][2] < tuplist[0][1]:
-				tuplist[0][2] += 1
+				discountsUsed.remove(tuplist[0])
+				discountsUsed.append((tuplist[0][0],tuplist[0][1],tuplist[0][2]+1))
 			else:
 				return -1
 		else:
