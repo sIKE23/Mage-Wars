@@ -511,9 +511,27 @@ def toggleEnchantRevealPrompt(group, x=0, y=0):
 		whisper("You have disabled the enchantment reveal prompt.")
 	else:
 		whisper("You have enabled the enchantment reveal prompt.")
+		
+############################################################################
+######################		Chat Actions			################################
+############################################################################
+def sayYes(group, x=0, y=0):
+	notify("{} says Yes".format(me.name))
+
+def sayNo(group, x=0, y=0):
+	notify("{} says No".format(me.name))
+
+def sayPass(group, x=0, y=0):
+	notify("{} says Pass".format(me.name))
+	
+def sayThinking(group, x=0, y=0):
+	notify("{} says I am thinking....".format(me.name))
+	
+def askThinking(group, x=0, y=0):
+	notify("{} are you thinking?".format(me.name))
 
 ############################################################################
-######################		Card Actions			########################
+######################		Card Actions			################################
 ############################################################################
 
 ##########################     Add Tokens     ##############################
