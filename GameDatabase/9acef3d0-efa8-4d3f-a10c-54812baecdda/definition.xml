@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.4.3.3"
+	version="1.4.3.6"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -42,7 +42,7 @@
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
 	</card>
-	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="background/gameboard.png" background="background/background.png" boardPosition="-437,-325,885,649" backgroundStyle="uniformToFill">
+	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="background/gameboard.png" background="background/background.png" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
