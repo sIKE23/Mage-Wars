@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.4.3.1"
+	version="1.4.3.3"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -24,7 +24,7 @@
 	<documents>
 		<document name="Instructions" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
 	</documents>
-	<card back="cards/card.jpg" front="cards/card.jpg" width="55" height="74" cornerRadius="3">
+	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
 		<property name="Subtype" type="String" hidden="False" ignoreText="False" />
 		<property name="Cost" type="String" hidden="False" ignoreText="False"/>
@@ -42,7 +42,7 @@
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
 	</card>
-	<table name="Table" visibility="undefined" ordered="False" width="600" height="450" board="background/gameboard.png" background="background/background.png" boardPosition="-300,-225,600,450" backgroundStyle="uniformToFill">
+	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="background/gameboard.png" background="background/background.png" boardPosition="-437,-325,885,649" backgroundStyle="uniformToFill">
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
