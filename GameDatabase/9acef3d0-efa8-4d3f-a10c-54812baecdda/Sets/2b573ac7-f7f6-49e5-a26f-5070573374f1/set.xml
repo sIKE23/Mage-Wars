@@ -383,7 +383,7 @@
 			<property name="Stats" value="Armor=2, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Flame +2" />
-			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Once per round, when a friendly soldier in this zone declares a ranged attack, Archer&apos;s Watchtower may give this solder the Ranged +1 and Indirect traits for that attack. Use a ready maker to keep track of this ability." />
+			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Once per round, when a friendly soldier in this zone declares a ranged attack, Archer&apos;s Watchtower may give this solder the Ranged +1 and Indirect traits for that attack. Use a ready maker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="FWJ02" />
 		</card>
 		<card id="22ea2891-f959-4d40-9123-def5bb2e3e23" name="Barracks">
