@@ -94,6 +94,7 @@ myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
 discountsUsed = [ ]
+turn = 0
 
 ############################################################################
 ############################		Events		############################
@@ -311,6 +312,7 @@ def CreateIniToken():
 	elif mycolor == PlayerColor[3]:
 		init.switchTo("D")
 	setGlobalVariable("IniAllDone", "x")
+	setGlobalVariable("RoundNumber", "1")
 	notify("Setup is complete, let the battle begin!")
 
 def nextPhase(group, x=-360, y=-150):
@@ -337,7 +339,8 @@ def nextPhase(group, x=-360, y=-150):
 		if switchPhase(card,"") == True: #Back to Upkeep
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
-			turn = turnNumber() + 1
+			turn = int(getGlobalVariable("RoundNumber")) + 1
+			setGlobalVariable("RoundNumber", str(turn))
 			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
