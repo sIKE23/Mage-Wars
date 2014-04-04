@@ -212,7 +212,7 @@ def rollDice(group, x=0, y=0):
 	dieCard.markers[attackDie[2]] = result[2] #1
 	dieCard.markers[attackDie[3]] = result[3] #2
 	dieCard2.markers[attackDie[4]] = result[4] #1*
-	dieCard2.markers[attackDie[5]] = result[5] #1*
+	dieCard2.markers[attackDie[5]] = result[5] #2*
 	effect = rnd(1,12)
 	dieCard2.markers[Died12] = effect
 
@@ -913,18 +913,22 @@ def toggleToken(card, tokenType):
 		else:
 			notify("{} added to face-down card.".format(tokenType[0]))
 
-def playCardFaceDown(card, x=-360, y=0):
+def playCardFaceDown(card, x=0, y=0):
 	global mycolor
 	offset=0
 	occupied = True
 	if mycolor == PlayerColor[0]:
-		y = -10
+		x = -595
+		y = -240
 	elif mycolor == PlayerColor[1]:
-		y = 40
+		x = 430
+		y = 120
 	elif mycolor == PlayerColor[2]:
-		y = 90
+		x = -595
+		y = 120
 	elif mycolor == PlayerColor[3]:
-		y = 140
+		x = 430
+		y = -240
 	while occupied:
 		occupied = False
 		for c in table:
@@ -935,7 +939,7 @@ def playCardFaceDown(card, x=-360, y=0):
 					occupied = True
 					break
 		if occupied:
-			offset -= 30
+			offset -=-70
 	card.moveToTable(x+offset, y, True)
 	mute()
 	card.peek()
