@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.4.3.7"
+	version="1.5.0.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -23,6 +23,7 @@
 	<proxygen definitionsrc="proxy/CardGenData.xml"/>
 	<documents>
 		<document name="Instructions" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
+		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
 	</documents>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
