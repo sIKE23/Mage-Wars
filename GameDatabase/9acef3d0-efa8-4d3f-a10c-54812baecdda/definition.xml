@@ -24,6 +24,7 @@
 	<documents>
 		<document name="Instructions" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
 		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
+		<document name="Mage Wars Complete Codex v1" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v1.html" />
 	</documents>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
