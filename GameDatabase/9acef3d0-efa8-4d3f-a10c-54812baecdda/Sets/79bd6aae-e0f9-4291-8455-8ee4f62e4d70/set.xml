@@ -46,6 +46,51 @@
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
 		</card>
+		<card id="d549a998-ff11-4568-b75c-d5442de3e9c6" name="Acid Blast">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Acid" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Acid] [Dice=2] [d12] [1-8 = Corrode; 9+ = 2 Corrode] [Sweeping] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO35" />
+		</card>
+		<card id="368402ba-aa65-462a-84c9-093a9f0ae808" name="Dragon&apos;s Breath">
+			<property name="Type" value="Attack" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="F" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Fire" />
+			<property name="Level" value="3" />
+			<property name="Subtype" value="Flame" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [3-9 = Burn; 10+ = 2 Burn] [Defrost]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="As part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
+			<property name="CardID" value="MWPROMO36" />
+		</card>
+		<card id="33c4fb08-fd7a-4428-aecd-2591723e3ed1" name="Windstorm">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Wind" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [6+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO50" />
+		</card>
 
 
 		<card id="0a4d7796-8763-4af6-b283-23d98582c5d0" name="Asyran Defender">
@@ -168,7 +213,66 @@
 			<property name="Text" value="When guarding, Temple High Guard gains Melee +2 and may counterstrike first (the Counterstrike Step is moved to just after the Declare Attack Step)." />
 			<property name="CardID" value="MWPROMO20" />
 		</card>
-
+		<card id="d7076396-cb62-44c5-b3ba-2d344f205fb5" name="Death&apos;s Head Scorpion">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=4, Life=6" />
+			<property name="AttackBar" value="Pinchers:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Deadly Stinger:&#xD;&#xA;[Full] [Melee]Dice=1] [d12] [8+ = 2 Tainted] [Piercing +2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO58" />
+		</card>
+		<card id="b54089c7-7d6b-46db-b5bc-83477eb9af07" name="Lightning Beetle">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect, Beetle" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Air" />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=4, Life=7" />
+			<property name="AttackBar" value="Electrifed Mandibles:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=3] [d12] [6-7 = Daze; 8+ = Stun] [Ethereal]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=2] [d12] [7-8 = Daze; 9+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Psychic Immunity, Lightning -2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO60" />
+		</card>
+		<card id="4c2baceb-b4bb-4118-869b-b9f3e6dc000d" name="Mountain Ram">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Bovid" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="AttackBar" value="Battering Horns:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Push] [+2 vs. Corporeal Conjurations]" />
+			<property name="Traits" value="Charge +2, Frost -2" />
+			<property name="Text" value="If Mountain Ram&apos;s Battering Horns attack gains a Charge bonus, then it also may add +3 to its effect die roll." />
+			<property name="CardID" value="MWPROMO63" />
+		</card>
+		<card id="485f6711-aae1-4408-8cc8-6ac421c541b7" name="Pharaoh&apos;s Cheetah">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Cat" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Defense 8+ 1x, Armor=1, Life=9" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [12+ = Slam]" />
+			<property name="Traits" value="Fast, Charge +2" />
+			<property name="Text" value="If Cheetah takes two move actions immediately before it makes its Claws attack, it may add +8 to the effect die roll for that attack. It does not recieve this bonus if it moves back and forth between 2 zone when it takes its move actions." />
+			<property name="CardID" value="MWPROMO65" />
+		</card>
 
 
 		<card id="5a6c0937-b7fb-4c68-a854-7e7d6dce4b3c" name="Altar of Peace">
@@ -237,16 +341,31 @@
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Q"  />
+			<property name="Action" value="Q" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone Border" />
-			<property name="School" value="Mind"  />
-			<property name="Level" value="1" />	
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=-, Life=3" />
 			<property name="AttackBar" value="[Passage Blocked][Line of Sight Blocked]" />
 			<property name="Traits" value="Incorporeal, Extendable" />
 			<property name="Text" value="During the Upkeep Phase you may pay mana to reinforce Wall of Force. For each mana spent remove 1 damage from it. The ability bypasses the Finite Life trait." />
 			<property name="CardID" value="MWPROMO24" />
+		</card>
+		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas">
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Subtype" value="Cloud, Poison" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone Border" />
+			<property name="School" value="Air" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=-, Life=8" />
+			<property name="AttackBar" value="Toxic Gas&#xD;&#xA;[Passage Attack] [Line of Sight Blocked] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Incorporeal, Wind +2, Extendable" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO54" />
 		</card>
 
 
@@ -369,6 +488,21 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Whenever your Mage summons a creature, he may place it in Summoning Circle&apos;s zone instead of his own zone, regardless of range or LoS." />
 			<property name="CardID" value="MWPROMO19" />
+		</card>		
+		<card id="29121772-6f18-41ec-9add-87712e5f86ec" name="Circle of Light">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Light, Barrier" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="Blinding Aura:&#xD;&#xA;[Damage Barrier] [Light] [Dice=1] [d12] [5-10 = Daze; 11+ = Stun] [Unavoidable] [Ethereal] [+2 vs. Nonliving]" />
+			<property name="Traits" value="Magebind +2" />
+			<property name="Text" value="This creature a Damage Barrier." />
+			<property name="CardID" value="MWPROMO42" />
 		</card>
 
 
@@ -507,6 +641,66 @@
 			<property name="Text" value="Once per round, this Mage may cast one of the 2 quick spells shown above." />
 			<property name="CardID" value="MWPROMO22" />
 		</card>
+		<card id="5adeed7f-a23f-46f9-9d3a-2d697a8b6855" name="Chitin Armor">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains Armor +2 and the Acid -3 trait.[Armor +2]" />
+			<property name="CardID" value="MWPROMO34" />
+		</card>
+		<card id="b037229d-3ab8-40c8-9c47-86e87a3e6372" name="Gale Force Ring">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains +2 to the effect die roll for all melee and ranged attacks he makes that deal wind damage. If he makes mutiple attacks in the same round, all of them receive this bonus.&#xD;&#xA;[Wind] [+2]" />
+			<property name="CardID" value="MWPROMO48" />
+		</card>
+		<card id="8fdefc7f-f6c8-4b63-98fe-76699d00c1e7" name="Gloves of Skill">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Gloves" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Once per round, this Mage may re-roll all of the attack dice (but not the effect die) of one ranged attack he makes (including attack spells). If the attack action makes mutiple attacks (such as a zone attack), he must choose just one attack to re-roll." />
+			<property name="CardID" value="MWPROMO53" />
+		</card>
+		<card id="e0a9c95c-c435-48d2-8c2f-235aefe82265" name="Heart of Gravikor">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="10" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War+Earth" />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="AttackBar" value="Mighty Bash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [+2 vs. Corporeal Conjurations]&#xD;&#xA;Returning Throw:&#xD;&#xA;[Full] [Ranged 0-1] [Dice=3] [d12] [8+ = Slam]" />
+			<property name="Traits" value="Legendary, War Mage Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO52" />
+		</card>
 
 
 		<card id="a1d0ef02-3e53-4a53-8dc5-6460c16b0021" name="Clear Mind">
@@ -568,6 +762,51 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Heal target creature the amount rolled on 5 attack dice." />
 			<property name="CardID" value="MWPRO2" />
+		</card>
+		<card id="5c78af5c-ddd6-4973-a5c2-d8bcfb48ba04" name="Bloodthirsty Strike">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Psychic, Curse" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Non-Mage Corporeal Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />			
+			<property name="Text" value="Target creature the Bloodthirsty +2 trait until the end of the round." />
+			<property name="CardID" value="MWPROMO38" />
+		</card>
+		<card id="6185f05c-1d3d-4f44-b7b5-88f05283a13a" name="Flame Strike">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Flame" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Fire" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Flame] [d12] [4-9 = Burn; 10+ = 2 Burn] [Defrost]" />
+			<property name="Traits" value="" />			
+			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristices above; the flame damage type, an effect roll, and the Defrost trait." />
+			<property name="CardID" value="MWPROMO39" />
+		</card>
+		<card id="861fed39-7c5e-4fd8-8ffa-8b27f5737043" name="Lightning Strike">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Lightning" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Lightning] [5-7 = Daze; 8+ = Stun]" />
+			<property name="Traits" value="" />			
+			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristices above; the lightning damage type, and an effect roll." />
+			<property name="CardID" value="MWPROMO40" />
 		</card>
 	</cards>
 </set>
