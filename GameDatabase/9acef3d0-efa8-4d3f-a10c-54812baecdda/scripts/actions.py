@@ -530,6 +530,12 @@ def sayThinking(group, x=0, y=0):
 def askThinking(group, x=0, y=0):
 	notify("{} are you thinking?".format(me.name))
 
+def askYourTurn(group, x=0, y=0):
+	notify("{} asks is it your turn?".format(me.name))
+
+def askMyTurn(group, x=0, y=0):
+	notify("{} asks is it my turn?".format(me.name))
+
 ############################################################################
 ######################		Card Actions			################################
 ############################################################################
