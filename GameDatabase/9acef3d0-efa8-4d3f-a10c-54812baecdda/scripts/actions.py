@@ -57,7 +57,13 @@ Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
 LoadToken = ("Load Token","68d0cebd-3d57-4fd8-a01c-f8045ce82f57")
 MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb")
-
+RuneofFortification = ("ae179c85-11ce-4be7-b9c9-352139d0c8f2")
+RuneofPower = ("b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07")
+RuneofPrecision = ("c2a265f9-ad97-4976-a83c-78891a224478")
+RuneofReforging = ("d10ada1f-c03b-4077-b6cb-c9667d6b2744")
+RuneofShielding = ("e0bb0e90-4831-43c6-966e-27c8dc2d2eef")
+Disable = ("f68b3b5b-0755-40f4-84db-bf3197a667cb")
+ 
 ##########################		Dice-related			########################
 
 Die = [ "DieBlank",
@@ -144,7 +150,7 @@ def onLoadDeck(player, groups):
 def SetupForIni():
 	global hasRolledIni
 	hasRolledIni = False
-			
+
 def iniRoll(effect):
 	notify("{} rolled a {} for initiative".format(me, effect))
 	oppRollStr = getGlobalVariable("OppIniRoll")
@@ -367,6 +373,10 @@ def nextPhase(group, x=-360, y=-150):
 			resolveBurns()
 			remoteCall(players[1], "resolveBurns", [])
 
+			#resolve rot
+			resolveRot()
+			remoteCall(players[1], "resolveRot", [])
+
 	update() #attempt to resolve phase indicator sometimes not switching
 
 def resetDiscounts():
@@ -374,7 +384,7 @@ def resetDiscounts():
 	for tup in discountsUsed:
 		discountsUsed.remove(tup)
 		discountsUsed.append((tup[0],tup[1],0))
-	
+
 def resetMarkers(c):
 	mute()
 	if c.markers[ActionRedUsed] == 1:
@@ -440,6 +450,26 @@ def resolveBurns():
 			notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
 		notify("Finished auto-resolving Burns for {}.".format(me))
 
+def resolveRot():
+	mute()
+
+	#is the setting on?
+	if not getSetting("AutoResolveRot", True):
+		return
+
+	cardsWithRot = [c for c in table if c.markers[Rot] and c.controller == me]
+	if len(cardsWithRot) > 0:
+		notify("Resolving Rot for {}...".format(me))	#found at least one
+		for card in cardsWithRot:
+			rotDamage = (card.markers[Rot])
+			 #apply damage
+			if card.Type == "Mage":
+				card.controller.Damage += rotDamage
+			elif card.Type == "Creature" or "Conjuration" in card.Type:
+				card.markers[Damage] += rotDamage
+			notify("{} damage added to {}.".format(rotDamage, card.Name))
+		notify("Finished auto-resolving Rot for {}.".format(me))
+
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -504,6 +534,14 @@ def toggleResolveBurns(group, x=0, y=0):
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
 
+def toggleResolveRot(group, x=0, y=0):
+	autoResolveRot = getSetting("AutoResolveRot", True)
+	setSetting("AutoResolveRot", not autoResolveRot)
+	if autoResolveRot:
+		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
+	else:
+		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
+
 def toggleEnchantRevealPrompt(group, x=0, y=0):
 	prompt = getSetting("EnchantPromptReveal", False)
 	setSetting("EnchantPromptReveal", not prompt)
@@ -511,7 +549,7 @@ def toggleEnchantRevealPrompt(group, x=0, y=0):
 		whisper("You have disabled the enchantment reveal prompt.")
 	else:
 		whisper("You have enabled the enchantment reveal prompt.")
-		
+
 ############################################################################
 ######################		Chat Actions			################################
 ############################################################################
@@ -523,10 +561,10 @@ def sayNo(group, x=0, y=0):
 
 def sayPass(group, x=0, y=0):
 	notify("{} says Pass".format(me.name))
-	
+
 def sayThinking(group, x=0, y=0):
 	notify("{} says I am thinking....".format(me.name))
-	
+
 def askThinking(group, x=0, y=0):
 	notify("{} are you thinking?".format(me.name))
 
@@ -553,6 +591,12 @@ def addCripple(card, x = 0, y = 0):
 
 def addCorrode(card, x = 0, y = 0):
     addToken(card, Corrode)
+    
+def addRot(card, x = 0, y = 0):
+    addToken(card, Rot)
+    
+def addDisable(card, x = 0, y = 0):
+    addToken(card, Disable)
 
 def addDaze(card, x=0, y=0):
 	addToken(card, Daze)
@@ -739,6 +783,12 @@ def subSlam(card, x = 0, y = 0):
 
 def subWeak(card, x = 0, y = 0):
     subToken(card, Weak)
+    
+def subRot(card, x = 0, y = 0):
+    subToken(card, Rot)
+    
+def subDisable(card, x = 0, y = 0):
+    subToken(card, Disable)
 
 def clearTokens(card, x = 0, y = 0):
 	mute()
@@ -872,14 +922,14 @@ def discard(card, x=0, y=0):
 
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
-	
+
 def obliterate(card, x=0, y=0):
 	mute()
 	if card.controller != me:
 		whisper("{} does not control '{}' - card obliteration cancelled".format(me, card))
 		return
 	card.isFaceUp = True
-	
+
 	card.moveTo(me.piles['Obliterate Pile'])
 	notify("{} obliterates '{}'".format(me, card))
 
@@ -1107,7 +1157,7 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 							found = True
 					else:
 						found = True
-						
+
 	if not found:
 		return 0
 	else:
@@ -1317,7 +1367,7 @@ def validateDeck(deck):
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
 				return False
-		
+
 		l = 0	#check spell number restrictions
 		if card.Level != "":
 			if cardCounts.has_key(card.Name):

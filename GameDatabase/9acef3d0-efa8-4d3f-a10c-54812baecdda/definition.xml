@@ -53,6 +53,7 @@
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
+			<groupaction menu="Toggle Auto-resolving Rot" default="False" execute="toggleResolveRot" />
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
@@ -78,6 +79,8 @@
 			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak" />
 			<cardaction menu="Add Cripple Token" default="False" shortcut="Ctrl+C" execute="addCripple" />
 			<cardaction menu="Add Corrode Token" default="False" shortcut="Alt+C" execute="addCorrode" />
+			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+Shift+T" execute="addRot" />
+			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+Shift+L" execute="addDisable" />
 			<cardaction menu="Add Other Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
 		<cardactions menu="Toggle Markers">
@@ -104,6 +107,8 @@
 			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
 			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
 			<cardaction menu="Remove Corrode Token" default="False" shortcut="Alt+Shift+C" execute="subCorrode" />
+			<cardaction menu="Remove Rot Token" default="False" shortcut="Ctrl+Shift+R" execute="subRot" />
+			<cardaction menu="Remove Disable Token" default="False" shortcut="Alt+Shift+D" execute="subDisable" />	
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
