@@ -1927,7 +1927,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="[Damage Barrier] [Dice=1] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Dark Mage Only" />
-			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier. &#xD;&#xA;Armor +2" />
+			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier. &#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MW1Q05" />
 		</card>
 		<card id="66582dca-63bc-4b49-bbcd-add00a57cf11" name="Dragonscale Hauberk">
@@ -1942,7 +1942,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;Armor +2" />
+			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MW1Q06" />
 		</card>
 		<card id="dda72c4a-8f33-42cf-9eed-bd52fb91af22" name="Elemental Cloak">
@@ -1957,7 +1957,7 @@
 			<property name="Stats" value="Location=Cloak" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +1, and the Flame -2, Frost -2, and Lightning -2 traits. &#xD;&#xA;Armor +1" />
+			<property name="Text" value="Mage gains Armor +1, and the Flame -2, Frost -2, and Lightning -2 traits. &#xD;&#xA;[Armor +1] [Flame -2] [Frost -2] [Lightning -2]" />
 			<property name="CardID" value="MW1Q07" />
 		</card>
 		<card id="469d4201-ec88-4f13-a8dc-f11b48e3df4b" name="Elemental Wand">
@@ -2167,7 +2167,7 @@
 			<property name="Stats" value="Location=Amulet" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Channel +1 trait. &#xD;&#xA;[Channel +1]" />
+			<property name="Text" value="Mage gains the Channel +1 trait. &#xD;&#xA;[Channeling +1]" />
 			<property name="CardID" value="MW1Q22" />
 		</card>
 		<card id="983a31d2-4e37-441d-a39e-3088f9b3d84c" name="Regrowth Belt">
@@ -2227,7 +2227,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal light damage." />
+			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal light damage.&#xD;&#xA;[Light] [Melee +1] [Ranged +1]" />
 			<property name="CardID" value="MW1Q27" />
 		</card>
 		<card id="91180ca9-e88e-4355-854a-49e78e2b4ec6" name="Ring of Curses">
@@ -2317,7 +2317,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait. &#xD;&#xA;[Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait. &#xD;&#xA;[Armor +2] [Wind -3]" />
 			<property name="CardID" value="MW1Q33" />
 		</card>
 		
