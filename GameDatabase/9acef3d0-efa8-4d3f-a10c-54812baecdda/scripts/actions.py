@@ -219,7 +219,16 @@ def rollDice(group, x=0, y=0):
 	dieCard.markers[attackDie[3]] = result[3] #2
 	dieCard2.markers[attackDie[4]] = result[4] #1*
 	dieCard2.markers[attackDie[5]] = result[5] #2*
-	effect = rnd(1,12)
+
+	d12 = webRead("http://www.random.org/integers/?num=1&min=0&max=11&col=1&base=10&format=plain&rnd=new")
+	debug("Random.org response code: {}".format(d12[1]))
+	if d12[1]==200: # OK code received:
+		d12diceBank = d12[0].splitlines()
+		d12Roll = int(d12diceBank.pop())
+		effect = d12Roll + 1 
+	else:
+		effect = rnd(1,12)		
+	
 	dieCard2.markers[Died12] = effect
 
 	if hasRolledIni:
