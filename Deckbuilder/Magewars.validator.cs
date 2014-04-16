@@ -31,6 +31,7 @@ namespace Octgn.MageWarsValidator
         public static bool deckValidated = false;
         public static int bookPoints = 0;
         public static int totalCards = 0;
+        public static int validatedDeckHash = 0;
 
         public IEnumerable<IPluginMenuItem> MenuItems
         {
@@ -357,6 +358,7 @@ namespace Octgn.MageWarsValidator
                     MageWarsValidator.deckValidated = true;
                     MageWarsValidator.bookPoints = spellbook;
                     MageWarsValidator.totalCards = cardcount;
+                    MageWarsValidator.validatedDeckHash = curDeck.GetHashCode();
                 }
             }
 
@@ -410,13 +412,13 @@ namespace Octgn.MageWarsValidator
         public void OnClick(IDeckBuilderPluginController controller)
         {
             //did they validate yet?
-            if (!MageWarsValidator.deckValidated)
+            var curDeck = controller.GetLoadedDeck();
+            if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != curDeck.GetHashCode())
             {
-                System.Windows.MessageBox.Show("You must successfully validate a deck before exporting to a forum post.");
+                System.Windows.MessageBox.Show("You must successfully validate the loaded deck before exporting it to a forum post.");
                 return;
             }
 
-            var curDeck = controller.GetLoadedDeck();
             if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
             {
                 //setup some stuff
@@ -516,13 +518,13 @@ namespace Octgn.MageWarsValidator
         public void OnClick(IDeckBuilderPluginController controller)
         {
             //did they validate yet?
-            if (!MageWarsValidator.deckValidated)
+            var curDeck = controller.GetLoadedDeck();
+            if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != curDeck.GetHashCode())
             {
-                System.Windows.MessageBox.Show("You must successfully validate a deck before exporting to a forum post.");
+                System.Windows.MessageBox.Show("You must successfully validate the loaded deck before exporting it to a forum post.");
                 return;
             }
 
-            var curDeck = controller.GetLoadedDeck();
             if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
             {
                 var secArray = curDeck.Sections.ToArray();
