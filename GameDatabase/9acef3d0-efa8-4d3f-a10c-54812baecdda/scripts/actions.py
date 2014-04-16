@@ -95,7 +95,7 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#f7d917"] 		# Yellow 	R=247 G=217 B=23
 mycolor = "#800080" # Purple
 boardFlipped = False
-showDebug = False
+debugMode = False
 myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
@@ -105,6 +105,13 @@ turn = 0
 ############################################################################
 ############################		Events		############################
 ############################################################################
+
+def onTableLoad():
+	global debugMode
+	#if there's only one player, go into debug mode
+	if len(players) == 1:
+		debugMode = True
+		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
 	#reset color picking
@@ -122,10 +129,14 @@ def onGameStart():
 def onLoadDeck(player, groups):
 	mute()
 	global deckLoaded
+	global debugMode
 	if player == me:
-		if validateDeck(groups[0]):
+		if debugMode or validateDeck(groups[0]):
 			deckLoaded = True
 			playerSetup()
+			if debugMode:
+				mycolor = PlayerColor[0]
+				CreateIniToken()
 			if getGlobalVariable("SetupDone") == "": #we're the first done with setup
 				setGlobalVariable("SetupDone", "x")
 			else:	#other guy is done too
@@ -378,13 +389,10 @@ def nextPhase(group, x=-360, y=-150):
 					else:
 						remoteCall(players[1], "resolveChanneling", [c])
 
-			#resolve burns
-			resolveBurns()
-			remoteCall(players[1], "resolveBurns", [])
-
-			#resolve rot
-			resolveRot()
-			remoteCall(players[1], "resolveRot", [])
+			#resolve burns and rot
+			for p in players:
+				remoteCall(p, "resolveBurns", [])
+				remoteCall(p, "resolveRot", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -528,9 +536,9 @@ def resolveChanneling(c):
 
 
 def toggleDebug(group, x=0, y=0):
-	global showDebug
-	showDebug = not showDebug
-	if showDebug:
+	global debugMode
+	debugMode = not debugMode
+	if debugMode:
 		notify("{} turns on debug".format(me))
 	else:
 		notify("{} turns off debug".format(me))
@@ -1029,8 +1037,8 @@ def playCardFaceDown(card, x=0, y=0):
 	card.highlight = mycolor
 
 def debug(str):
-	global showDebug
-	if showDebug:
+	global debugMode
+	if debugMode:
 		whisper(str)
 
 def moveCard(model, x, y):
@@ -1100,14 +1108,7 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 def switchPhase(card, phase):
 	global mycolor
 	mute()
-	if card.highlight == None: #other player not done yet
-		if card.controller == me:
-			card.highlight = mycolor
-		else:
-			remoteCall(card.controller, "remoteHighlight", [card, mycolor])
-		notify("{} is done with {} phase".format(me.name,card.name))
-		return False
-	elif card.highlight != mycolor or showDebug:
+	if debugMode or card.highlight != mycolor: #ready to go
 		if card.controller == me:
 			card.highlight = None
 			card.switchTo(phase)
@@ -1116,6 +1117,13 @@ def switchPhase(card, phase):
 			remoteCall(card.controller, "remoteSwitchPhase", [card, phase])
 		notify("Phase changed to {}".format(phase))
 		return True
+	elif card.highlight == None: #other player not done yet
+		if card.controller == me:
+			card.highlight = mycolor
+		else:
+			remoteCall(card.controller, "remoteHighlight", [card, mycolor])
+		notify("{} is done with {} phase".format(me.name,card.name))
+		return False
 
 def remoteHighlight(card, color):
 	card.highlight = color

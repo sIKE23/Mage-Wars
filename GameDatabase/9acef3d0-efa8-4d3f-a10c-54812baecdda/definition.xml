@@ -17,6 +17,7 @@
 		<script src="scripts/actions.py" />
 	</scripts>
 	<events>
+		<event name="OnTableLoad" action="onTableLoad" />
 		<event name="OnGameStart" action="onGameStart" />
 		<event name="OnLoadDeck" action="onLoadDeck" />
 	</events>
