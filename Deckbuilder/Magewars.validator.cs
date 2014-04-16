@@ -1,4 +1,4 @@
-﻿//Version: 1.5.0.0
+﻿//Version: 1.5.0.1
 
 namespace Octgn.MageWarsValidator
 {
@@ -347,7 +347,7 @@ namespace Octgn.MageWarsValidator
                 {
                     spellbook += t.Value * levels[t.Key];
                 }
-                string reporttmp = "Mage Wars deck (built using OCTGN deckbuilder) " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + "\n\n";
+                string reporttmp = "Mage Wars deck (built using OCTGN Spellbook Builder) " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + "\n\n";
                 reporttmp += string.Format("Spellbook points: {0} used of {0} allowed\n\n", spellbook, spellpoints);
                 reporttmp += reporttxt;
                 //System.Windows.MessageBox.Show(reporttmp);
