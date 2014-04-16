@@ -58,13 +58,13 @@
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
-			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+Y" execute="sayYes" />
-			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+N" execute="sayNo" />
-			<groupaction menu="Say Pass" default="False" shortcut="Ctrl+Shift+P" execute="sayPass" />
-			<groupaction menu="Say Thinking..." default="False" shortcut="Ctrl+Shift+T" execute="sayThinking" />
-			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+Q" execute="askThinking" />
-			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+J" execute="askYourTurn" />
-			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+K" execute="askMyTurn" />
+			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
+			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+2" execute="sayNo" />
+			<groupaction menu="Say Pass" default="False" shortcut="Ctrl+Shift+3" execute="sayPass" />
+			<groupaction menu="Say Thinking..." default="False" shortcut="Ctrl+Shift+4" execute="sayThinking" />
+			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking" />
+			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
+			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
 		</groupactions>
 		<groupactions menu="Alternative Play">
 			<groupaction menu="Flip Game Board" default="False" shortcut="Alt+F9" execute="invokeflipGameBoard" />
