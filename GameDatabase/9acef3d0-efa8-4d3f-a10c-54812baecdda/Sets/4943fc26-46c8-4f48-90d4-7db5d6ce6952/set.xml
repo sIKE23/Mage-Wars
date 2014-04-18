@@ -52,7 +52,7 @@
 
 		<card id="97a1bcd1-5702-4ad6-87f9-7977901b4d02" name="Bridge Troll">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Soldier,Troll" />
+			<property name="Subtype" value="Soldier, Troll" />
 			<property name="Cost" value="13" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
@@ -61,49 +61,49 @@
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=0,Life=16" />
 			<property name="AttackBar" value="Heavy Club:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
-			<property name="Traits" value="Regenerate 3,Flame +2" />
+			<property name="Traits" value="Regenerate 3, Flame +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC01" />
 		</card>
 		<card id="7add1431-cfce-4c3e-b7bc-88cf0c126e9a" name="Dire Wolf">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Animal,Canine" />
+			<property name="Subtype" value="Animal, Canine" />
 			<property name="Cost" value="12" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Armor=2,Life=11" />
+			<property name="Stats" value="Armor=2, Life=11" />
 			<property name="AttackBar" value="Savage Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [7+ = Bleed]" />
-			<property name="Traits" value="Frost -2,Bloodthirsty +2" />
+			<property name="Traits" value="Frost -2, Bloodthirsty +2" />
 			<property name="CardID" value="MWSTX1CKC02" />
 		</card>
 		<card id="6122329b-8107-4d1a-a322-52311bd11a60" name="Dwarf Panzergarde">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Soldier,Dwarf" />
+			<property name="Subtype" value="Soldier, Dwarf" />
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Defense=9+ 1x,Armor=3,Life=12" />
+			<property name="Stats" value="Defense=9+ 1x, Armor=3, Life=12" />
 			<property name="AttackBar" value="War Hammer:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="Traits" value="Intercept,Lightning +2" />
+			<property name="Traits" value="Intercept, Lightning +2" />
 			<property name="Text" value="While guarding, Dwarf Panzergarde may add +3 to his Defense roll shown above." />
 			<property name="CardID" value="MWSTX1CKC07" />
 		</card>
 		<card id="6ea8364e-2843-4649-af14-44ebedeeb41e" name="Galador, Protector of Straywood">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Animal,Cervine" />
+			<property name="Subtype" value="Animal, Cervine" />
 			<property name="Cost" value="16" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
-			<property name="Stats" value="Armor=2,Life=14" />
+			<property name="Stats" value="Armor=2, Life=14" />
 			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1] &#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -118,22 +118,22 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Armor=1,Life=14" />
+			<property name="Stats" value="Armor=1, Life=14" />
 			<property name="AttackBar" value="Stone Fists:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="Traits" value="Flying,Intercept" />
+			<property name="Traits" value="Flying, Intercept" />
 			<property name="Text" value="While guarding, Gargoyle Sentry gains Armor +3 and Tough -3" />
 			<property name="CardID" value="MWSTX1CKC08" />
 		</card>
 		<card id="b6003a5c-e5ec-46fe-921f-1b1d02b2e48e" name="Giant Wolf Spider">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Insect,Spider" />
+			<property name="Subtype" value="Insect, Spider" />
 			<property name="Cost" value="15" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
-			<property name="Stats" value="Life=13,Armor=2" />
+			<property name="Stats" value="Armor=2, Life=13" />
 			<property name="AttackBar" value="Poison Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Tainted] [If target is restrained add +4 to the Effect Die &#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=0] [d12] [5+ = Stuck] [Unavoidable] [No Damage]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="" />
@@ -148,22 +148,22 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Defense=8+ 1x,Armor=1,Life=12" />
+			<property name="Stats" value="Defense=8+ 1x, Armor=1, Life=12" />
 			<property name="AttackBar" value="Shortsword:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="Traits" value="Flying,Intercept,Aegis 1" />
+			<property name="Traits" value="Flying, Intercept, Aegis 1" />
 			<property name="Text" value="When Guardian Angel chooses the guard action she may heal up to 2 points of damage from herself." />
 			<property name="CardID" value="MWSTX1CKC06" />
 		</card>
 		<card id="a47455b5-caf0-42c0-9e3c-5945a108767d" name="Makunda">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Animal,Cat" />
+			<property name="Subtype" value="Animal, Cat" />
 			<property name="Cost" value="17" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
-			<property name="Stats" value="Defense=8+ 1x,Armor=1,Life=14" />
+			<property name="Stats" value="Defense=8+ 1x, Armor=1, Life=14" />
 			<property name="AttackBar" value="Great Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [7+ = Bleed] [Piercing +1]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="All other friendly cat creatures in the same zone as Makunda have their melee attacks gain the Piercing +1 trait" />
@@ -171,14 +171,14 @@
 		</card>
 		<card id="1f8f30b7-8d0c-4350-ae4f-0616df0abc88" name="Screech Harpy">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Bird,Harpy" />
+			<property name="Subtype" value="Bird, Harpy" />
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="2+1" />
-			<property name="Stats" value="Armor=1,Life=8" />
+			<property name="Stats" value="Armor=1, Life=8" />
 			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] &#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
@@ -188,16 +188,16 @@
 
 		<card id="c9fd02fd-f37f-4c1d-88f2-bf3a7bae0e8e" name="Enchanter&apos;s Wardstone">
 			<property name="Type" value="Conjuration" />
-			<property name="Subtype" value="Protection,Rune" />
+			<property name="Subtype" value="Protection, Rune" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=4,Life=4" />
+			<property name="Stats" value="Armor=4, Life=4" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Zone Exclusive,Flame Immunity" />
+			<property name="Traits" value="Zone Exclusive, Flame Immunity" />
 			<property name="Text" value="When an enchantment you control would be destroyed by a spell or ability an opponent controls, prevent that destruction unless that opponent pays 2 mana." />
 			<property name="CardID" value="MWSTX1CKJ01" />
 		</card>
@@ -210,9 +210,9 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Channeling=1,Armor=3,Life=7" />
+			<property name="Stats" value="Channeling=1, Armor=3, Life=7" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Spellbind,Familiar,Unique,Arcane Mage Only" />
+			<property name="Traits" value="Spellbind, Familiar, Unique, Arcane Mage Only" />
 			<property name="Text" value="You may bind a non-Epic quick attack spell from your spellbook to Wizard&apos;s Tower. Wizard&apos;s Tower may cast that spell once per round, before or after any friendly Action Phase. Use a ready marker to keep track of this ability. During the Planning Phase you may change the bound spell.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MWSTX1CKJ02" />
 		</card>
@@ -227,9 +227,9 @@
 			<property name="Target" value="Zone Border" />
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Armor=4,Life=13" />
+			<property name="Stats" value="Armor=4, Life=13" />
 			<property name="AttackBar" value="[Passage Blocked] [Blocks Line of Sight]" />
-			<property name="Traits" value="Extendable,Acid +2,Lightning +2" />
+			<property name="Traits" value="Extendable, Acid +2, Lightning +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKW01" />
 		</card>
@@ -238,7 +238,7 @@
 
 		<card id="97da4784-8449-434a-931e-32f3fc93af43" name="Armor Ward">
 			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Protection,Metamagic" />
+			<property name="Subtype" value="Protection, Metamagic" />
 			<property name="Cost" value="2+4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
@@ -283,7 +283,7 @@
 		</card>
 		<card id="f3974912-fc35-4007-98e0-14bdddfe3e0c" name="Healing Charm">
 			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Charm,Healing" />
+			<property name="Subtype" value="Charm, Healing" />
 			<property name="Cost" value="2+3" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
@@ -416,7 +416,7 @@
 			<property name="Level" value="4" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Epic,Warlord Only" />
+			<property name="Traits" value="Epic, Warlord Only" />
 			<property name="Text" value="All friendly soldier creatures in the arena gain the Fast and Charge +2 traits until the end of the round." />
 			<property name="CardID" value="MWSTX1CKI02" />
 		</card>
@@ -431,7 +431,7 @@
 			<property name="Level" value="4" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magecast,Dark Mage Only" />
+			<property name="Traits" value="Magecast, Dark Mage Only" />
 			<property name="Text" value="Place 2 Tainted condition markers on target creature. Then, caster gains Life +6" />
 			<property name="CardID" value="MWSTX1CKI01" />
 		</card>
