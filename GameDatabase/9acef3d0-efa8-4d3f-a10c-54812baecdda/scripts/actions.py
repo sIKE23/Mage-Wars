@@ -94,7 +94,7 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#01603e", 		# Green		R=1   G=96  B=62
 				"#f7d917"] 		# Yellow 	R=247 G=217 B=23
 mycolor = "#800080" # Purple
-boardFlipped = False
+boardSet = "GameBoard1.png"
 debugMode = False
 myIniRoll = 0
 hasRolledIni = True
@@ -298,20 +298,44 @@ def createVineMarker(group, x=0, y=0):
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 430, -40 )
 
-def invokeflipGameBoard(group, x=0, y=0):
+def setNoGameBoard(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard0.png"
 	mute()
 	for p in players:
-		remoteCall(p, "flipGameBoard", [])
+		remoteCall(p, "setGameBoard", [])
 
-def flipGameBoard():
+def setGameBoard1(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard1.png"
 	mute()
-	global boardFlipped
-	if not boardFlipped:
-		table.setBoardImage("background\\gameboard-alt-a.png")
-	else:
-		table.setBoardImage("background\\gameboard.png")
-	boardFlipped = not boardFlipped
+	for p in players:
+		remoteCall(p, "setGameBoard", [])
 
+def setGameBoard2(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard2.png"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [])
+
+def setGameBoard3(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard3.png"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [])
+
+# def invokesetGameBoard(group, x=0, y=0):
+#	mute()
+#	for p in players:
+#		remoteCall(p, "setGameBoard", [])
+
+def setGameBoard():
+	mute()
+	global boardSet
+	table.setBoardImage("GameBoards\\{}".format(boardSet))
+	
 def AskInitiative():
 	notify("{} is choosing whether or not to go first.".format(me))
 	choiceList = ['Yes', 'No']
