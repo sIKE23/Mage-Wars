@@ -577,17 +577,29 @@ namespace Octgn.MageWarsValidator
                 text.AppendLine(MageWarsValidator.totalCards.ToString());
 
                 //card ID and count
+                bool promoFound = false;
                 foreach (var section in secArray)
                 {
                     foreach (var card in section.Cards)
                     {
+                        //skip mage cards and promos
                         if (section.Name.Contains("Mage")) continue;
+                        if (Property(card, "CardID").Contains("MWPRO"))
+                        {
+                            promoFound = true;
+                            continue;
+                        } 
 
                         text.AppendLine(Property(card, "CardID") + "," + card.Quantity.ToString());
 
                         //and lower case until AW SBB is fixed
                         text.AppendLine(Property(card, "CardID").ToLower() + "," + card.Quantity.ToString());
                     }
+                }
+
+                if (promoFound)
+                {
+                    System.Windows.MessageBox.Show("There are one or more promos in this spellbook. They have been omitted from the export file because the AW SBB does not currently support them.");
                 }
 
                 //all done, ask for file location
