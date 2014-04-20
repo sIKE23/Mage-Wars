@@ -123,6 +123,7 @@ namespace Octgn.MageWarsValidator
                 int spellpoints = 0;
                 string reporttxt = "";
                 bool Talos = false;
+                int hashtotal = 0;
 
                 Dictionary<string, int> training = new Dictionary<string, int>()
                 {
@@ -138,6 +139,8 @@ namespace Octgn.MageWarsValidator
                 {
                     foreach (var card in section.Cards)
                     {
+                        hashtotal += card.GetHashCode();
+
                         //MessageBox.Show(String.Format("{0}", card.Name));
                         if ("Mage" == Property(card, "Type"))
                         {
@@ -358,7 +361,7 @@ namespace Octgn.MageWarsValidator
                     MageWarsValidator.deckValidated = true;
                     MageWarsValidator.bookPoints = spellbook;
                     MageWarsValidator.totalCards = cardcount;
-                    MageWarsValidator.validatedDeckHash = curDeck.GetHashCode();
+                    MageWarsValidator.validatedDeckHash = hashtotal;
                 }
             }
 
@@ -413,7 +416,11 @@ namespace Octgn.MageWarsValidator
         {
             //did they validate yet?
             var curDeck = controller.GetLoadedDeck();
-            if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != curDeck.GetHashCode())
+            int hashtotal = 0;
+            foreach (var section in curDeck.Sections)
+                foreach (var card in section.Cards)
+                    hashtotal += card.GetHashCode();
+            if (MageWarsValidator.validatedDeckHash != hashtotal)
             {
                 System.Windows.MessageBox.Show("You must successfully validate the loaded deck before exporting it to a forum post.");
                 return;
@@ -519,7 +526,11 @@ namespace Octgn.MageWarsValidator
         {
             //did they validate yet?
             var curDeck = controller.GetLoadedDeck();
-            if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != curDeck.GetHashCode())
+            int hashtotal = 0;
+            foreach (var section in curDeck.Sections)
+                foreach (var card in section.Cards)
+                    hashtotal += card.GetHashCode();
+            if (MageWarsValidator.validatedDeckHash != hashtotal)
             {
                 System.Windows.MessageBox.Show("You must successfully validate the loaded deck before exporting it to a forum post.");
                 return;
