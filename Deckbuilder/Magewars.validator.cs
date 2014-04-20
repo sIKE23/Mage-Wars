@@ -139,7 +139,7 @@ namespace Octgn.MageWarsValidator
                 {
                     foreach (var card in section.Cards)
                     {
-                        hashtotal += card.GetHashCode();
+                        hashtotal += card.GetHashCode() + card.Quantity;
 
                         //MessageBox.Show(String.Format("{0}", card.Name));
                         if ("Mage" == Property(card, "Type"))
@@ -419,10 +419,10 @@ namespace Octgn.MageWarsValidator
             int hashtotal = 0;
             foreach (var section in curDeck.Sections)
                 foreach (var card in section.Cards)
-                    hashtotal += card.GetHashCode();
-            if (MageWarsValidator.validatedDeckHash != hashtotal)
+                    hashtotal += card.GetHashCode() + card.Quantity;
+            if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != hashtotal)
             {
-                System.Windows.MessageBox.Show("You must successfully validate the loaded deck before exporting it to a forum post.");
+                System.Windows.MessageBox.Show("You must successfully validate the current deck before exporting it to a forum post.");
                 return;
             }
 
@@ -529,10 +529,10 @@ namespace Octgn.MageWarsValidator
             int hashtotal = 0;
             foreach (var section in curDeck.Sections)
                 foreach (var card in section.Cards)
-                    hashtotal += card.GetHashCode();
-            if (MageWarsValidator.validatedDeckHash != hashtotal)
+                    hashtotal += card.GetHashCode() + card.Quantity;
+            if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != hashtotal)
             {
-                System.Windows.MessageBox.Show("You must successfully validate the loaded deck before exporting it to a forum post.");
+                System.Windows.MessageBox.Show("You must successfully validate the current deck before exporting it to the AW SBB.");
                 return;
             }
 
