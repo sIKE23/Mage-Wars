@@ -47,6 +47,7 @@
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.png" background="background/background.png" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
+		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
@@ -66,6 +67,7 @@
 			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking" />
 			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
 			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
+			<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
 		</groupactions>
 		<groupactions menu="Alternative Play">
 			<groupaction menu="Set 4X3 Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard1" />

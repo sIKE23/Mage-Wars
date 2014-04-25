@@ -590,6 +590,14 @@ def toggleEnchantRevealPrompt(group, x=0, y=0):
 		whisper("You have disabled the enchantment reveal prompt.")
 	else:
 		whisper("You have enabled the enchantment reveal prompt.")
+		
+def concede(group=table,x=0,y=0):
+   mute()
+   if confirm("Are you sure you want to concede this game?"): 
+#     reportGame('Conceded')
+      notify("{} has conceded the game".format(me))
+   else: 
+      notify("{} was about to concede the game, but thought better of it...".format(me))
 
 ############################################################################
 ######################		Chat Actions			################################
