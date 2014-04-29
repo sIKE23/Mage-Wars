@@ -101,6 +101,7 @@ hasRolledIni = True
 deckLoaded = False
 discountsUsed = [ ]
 turn = 0
+playerNum = 0
 
 ############################################################################
 ############################		Events		############################
@@ -130,6 +131,7 @@ def onLoadDeck(player, groups):
 	mute()
 	global deckLoaded
 	global debugMode
+	global playerNum
 	if player == me:
 		if debugMode or validateDeck(groups[0]):
 			deckLoaded = True
@@ -138,8 +140,10 @@ def onLoadDeck(player, groups):
 				mycolor = PlayerColor[0]
 				CreateIniToken()
 			if getGlobalVariable("SetupDone") == "": #we're the first done with setup
+				playerNum = 1
 				setGlobalVariable("SetupDone", "x")
 			else:	#other guy is done too
+				playerNum = 2
 				for p in players:
 					remoteCall(p, "SetupForIni", [])
 				notify("Both players have set up. Please roll for initiative.")
@@ -159,8 +163,18 @@ def onLoadDeck(player, groups):
 				setGlobalVariable("ColorsChosen", colorsChosen)
 
 def SetupForIni():
+	mute()
 	global hasRolledIni
+	global playerNum
 	hasRolledIni = False
+	
+	if getSetting("AutoRollIni", False):
+		effect = 0
+		for i in range(playerNum * 2):
+			effect = rnd(1,12)
+		notify("Automatically rolling initiative for {}...".format(me))
+		hasRolledIni = True
+		iniRoll(effect)
 
 def iniRoll(effect):
 	notify("{} rolled a {} for initiative".format(me, effect))
@@ -303,40 +317,42 @@ def setNoGameBoard(group, x=0, y=0):
 	boardSet = "GameBoard0.png"
 	mute()
 	for p in players:
-		remoteCall(p, "setGameBoard", [])
+		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard1(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard1.png"
 	mute()
 	for p in players:
-		remoteCall(p, "setGameBoard", [])
+		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard2(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard2.png"
 	mute()
 	for p in players:
-		remoteCall(p, "setGameBoard", [])
+		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard3(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard3.png"
 	mute()
 	for p in players:
-		remoteCall(p, "setGameBoard", [])
+		remoteCall(p, "setGameBoard", [boardSet])
 
 # def invokesetGameBoard(group, x=0, y=0):
 #	mute()
 #	for p in players:
 #		remoteCall(p, "setGameBoard", [])
 
-def setGameBoard():
+def setGameBoard(bset):
 	mute()
 	global boardSet
+	boardSet = bset
 	table.setBoardImage("GameBoards\\{}".format(boardSet))
 	
 def AskInitiative():
+	mute()
 	notify("{} is choosing whether or not to go first.".format(me))
 	choiceList = ['Yes', 'No']
 	colorsList = ['#FF0000', '#0000FF']
@@ -590,6 +606,14 @@ def toggleEnchantRevealPrompt(group, x=0, y=0):
 		whisper("You have disabled the enchantment reveal prompt.")
 	else:
 		whisper("You have enabled the enchantment reveal prompt.")
+
+def toggleAutoRollInitiative(group, x=0, y=0):
+	autoRoll = getSetting("AutoRollIni", False)
+	setSetting("AutoRollIni", not autoRoll)
+	if autoRoll:
+		whisper("You have disabled automatically rolling initiative.")
+	else:
+		whisper("You have enabled automatically rolling initiative.")
 		
 def concede(group=table,x=0,y=0):
    mute()
