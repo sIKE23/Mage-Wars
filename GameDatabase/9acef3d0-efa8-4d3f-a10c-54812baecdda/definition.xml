@@ -74,7 +74,7 @@
 		<groupactions menu="Alternative Play">
 			<groupaction menu="Set 4X3 Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard1" />
 			<groupaction menu="Set 6X4 Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard2" />
-			<groupaction menu="Set 3rd Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard3" />
+			<groupaction menu="Set 4X5 Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard3" />
 			<groupaction menu="Set No Game Board" default="False" shortcut="Alt+F9" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F8" execute="createAltBoardCard" />
 		</groupactions>
