@@ -988,6 +988,7 @@ def flipcard(card, x = 0, y = 0):
 	elif card.isFaceUp:
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
+		card.peek()
 
 def discard(card, x=0, y=0):
 	mute()
