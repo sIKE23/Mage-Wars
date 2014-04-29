@@ -68,6 +68,7 @@
 			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking" />
 			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
 			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
+			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant" />
 			<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
 		</groupactions>
 		<groupactions menu="Alternative Play">
@@ -116,7 +117,7 @@
 			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
 			<cardaction menu="Remove Corrode Token" default="False" shortcut="Alt+Shift+C" execute="subCorrode" />
 			<cardaction menu="Remove Rot Token" default="False" shortcut="Ctrl+Shift+R" execute="subRot" />
-			<cardaction menu="Remove Disable Token" default="False" shortcut="Alt+Shift+D" execute="subDisable" />	
+			<cardaction menu="Remove Disable Token" default="False" shortcut="Alt+Shift+D" execute="subDisable" />
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />

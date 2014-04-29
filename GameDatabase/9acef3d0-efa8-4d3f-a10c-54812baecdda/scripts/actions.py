@@ -63,7 +63,7 @@ RuneofPrecision = ("c2a265f9-ad97-4976-a83c-78891a224478")
 RuneofReforging = ("d10ada1f-c03b-4077-b6cb-c9667d6b2744")
 RuneofShielding = ("e0bb0e90-4831-43c6-966e-27c8dc2d2eef")
 Disable = ("f68b3b5b-0755-40f4-84db-bf3197a667cb")
- 
+
 ##########################		Dice-related			########################
 
 Die = [ "DieBlank",
@@ -167,7 +167,7 @@ def SetupForIni():
 	global hasRolledIni
 	global playerNum
 	hasRolledIni = False
-	
+
 	if getSetting("AutoRollIni", False):
 		effect = 0
 		for i in range(playerNum * 2):
@@ -250,10 +250,10 @@ def rollDice(group, x=0, y=0):
 	if d12[1]==200: # OK code received:
 		d12diceBank = d12[0].splitlines()
 		d12Roll = int(d12diceBank.pop())
-		effect = d12Roll + 1 
+		effect = d12Roll + 1
 	else:
-		effect = rnd(1,12)		
-	
+		effect = rnd(1,12)
+
 	dieCard2.markers[Died12] = effect
 
 	if hasRolledIni:
@@ -350,7 +350,7 @@ def setGameBoard(bset):
 	global boardSet
 	boardSet = bset
 	table.setBoardImage("GameBoards\\{}".format(boardSet))
-	
+
 def AskInitiative():
 	mute()
 	notify("{} is choosing whether or not to go first.".format(me))
@@ -614,13 +614,13 @@ def toggleAutoRollInitiative(group, x=0, y=0):
 		whisper("You have disabled automatically rolling initiative.")
 	else:
 		whisper("You have enabled automatically rolling initiative.")
-		
+
 def concede(group=table,x=0,y=0):
    mute()
-   if confirm("Are you sure you want to concede this game?"): 
+   if confirm("Are you sure you want to concede this game?"):
 #     reportGame('Conceded')
       notify("{} has conceded the game".format(me))
-   else: 
+   else:
       notify("{} was about to concede the game, but thought better of it...".format(me))
 
 ############################################################################
@@ -647,6 +647,9 @@ def askYourTurn(group, x=0, y=0):
 def askMyTurn(group, x=0, y=0):
 	notify("{} asks is it my turn?".format(me.name))
 
+def askRevealEnchant(group, x=0, y=0):
+	notify("{} asks do you wish to Reveal your Enchantment?".format(me.name))
+
 ############################################################################
 ######################		Card Actions			################################
 ############################################################################
@@ -664,10 +667,10 @@ def addCripple(card, x = 0, y = 0):
 
 def addCorrode(card, x = 0, y = 0):
     addToken(card, Corrode)
-    
+
 def addRot(card, x = 0, y = 0):
     addToken(card, Rot)
-    
+
 def addDisable(card, x = 0, y = 0):
     addToken(card, Disable)
 
@@ -856,10 +859,10 @@ def subSlam(card, x = 0, y = 0):
 
 def subWeak(card, x = 0, y = 0):
     subToken(card, Weak)
-    
+
 def subRot(card, x = 0, y = 0):
     subToken(card, Rot)
-    
+
 def subDisable(card, x = 0, y = 0):
     subToken(card, Disable)
 
