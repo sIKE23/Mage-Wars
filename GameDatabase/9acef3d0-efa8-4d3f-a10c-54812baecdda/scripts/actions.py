@@ -171,7 +171,7 @@ def SetupForIni():
 	if getSetting("AutoRollIni", False):
 		effect = 0
 		for i in range(playerNum * 2):
-			effect = rnd(1,12)
+			effect = rnd(1, 12)
 		notify("Automatically rolling initiative for {}...".format(me))
 		hasRolledIni = True
 		iniRoll(effect)
@@ -228,7 +228,7 @@ def rollDice(group, x=0, y=0):
 #			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
 			diceFrom = "from the native randomizer"
 			while (len(diceBank) < 20):
-				diceBank.append(rnd(0,5))
+				diceBank.append(rnd(0, 5))
 
 	result = [0,0,0,0,0,0]
 	for x in range(count):
@@ -252,7 +252,7 @@ def rollDice(group, x=0, y=0):
 		d12Roll = int(d12diceBank.pop())
 		effect = d12Roll + 1
 	else:
-		effect = rnd(1,12)
+		effect = rnd(1, 12)
 
 	dieCard2.markers[Died12] = effect
 
@@ -368,7 +368,7 @@ def CreateIniToken():
 	mute()
 	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", -510, -150 ) #phase token
 	card.switchTo("Planning") #skips upkeep for first turn
-	init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", -570, -150 ) #initiative token
+	init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", -580, -150 ) #initiative token
 	if mycolor == PlayerColor[0]:
 		init.switchTo("")
 	elif mycolor == PlayerColor[1]:
@@ -379,7 +379,7 @@ def CreateIniToken():
 		init.switchTo("D")
 	setGlobalVariable("IniAllDone", "x")
 	setGlobalVariable("RoundNumber", "1")
-	notify("Setup is complete, let the battle begin!")
+	notify("Setup is complete!")
 
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
