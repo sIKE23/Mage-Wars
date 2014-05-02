@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- v1.5.0.0 -->
+<!-- v1.6.0.0 -->
 <html>
 <head>
 <title>How to Play Mage Wars on OCTGN</title>
+</head>
   <style type="text/css">
 .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Times New Roman, Times, serif; background: #fff; overflow: hidden; border: 1px solid #36752D; }.datagrid table td, .datagrid table th { padding: 2px 8px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #36752D), color-stop(1, #275420) );background:-moz-linear-gradient( center top, #36752D 5%, #275420 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');background-color:#36752D; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 9px solid #36752D; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #275420; border-left: 20Px solid #C6FFC2;font-size: 12px;font-weight: bold; }.datagrid table tbody .alt td { background: #DFFFDE; color: #275420; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }
 .head {font: bold 20px/150% Times New Roman, Times, serif; color: #36752D; background: #fff; overflow: hidden; }
@@ -14,7 +15,7 @@
     </p>
     <p align="center">
         <strong><u> </u></strong>
-    </p>
+    </p></div>
 <div class="body">
     <p>Players are free to ignore any automation but if you would like a little help with the book keeping follow the process below once the game has started:</p>
 
@@ -22,7 +23,7 @@
 
     <p>2. Once your Deck is validated you will be prompted to "Pick a color" your player is now automatically setup</p>
 
-    <p>3. Each player will need to the Roll Dice (F1) for Initiative - the winner will be prompted to select who will be the start player. 
+    <p>3. Initiative will be rolled automaticly and the winner of the roll will be prompted to select who will be the starting player.</p>
     	
     <p>4. The initative marker will automaticlly be flipped to the color of the starting player and the game is then advanced to the Planning Stage.</p>
 
@@ -32,18 +33,15 @@
 
     <p>When you are done with a creatures action you can use the Ctrl+Right Arrow to let the other player know that you are "Done" (when playing in OCTGN this is typically considered between action phases)</p>
 
-    <p>When you have completed all of your actions during a the Game Round (Upkeep, Planning, Deployment, First Quick Cast Phase, etc.) press the Ctrl+Down Arrow Key and once both players have signaled that they are done with this key combination, phase management automation will take care of the rest.</p>
+    <p>When you have completed all of your actions during a Game Round (Upkeep, Planning, Deployment, First Quick Cast Phase, etc.) press the Ctrl+Down Arrow Key and once both players have signaled that they are done with this key combination, phase management automation will take care of the rest.</p>
 
     <p>Place markers or tokens on cards by right clicking on the card and selecting the marker or token you want, or by using the associated keyboard shortcuts</p>
 
-    <p>When using the phase management automation the Initiative marker is flipped automatically, markers on cards are reset, Burn damage is calculated and applied (during the Upkeep Phase), and Channeling phases are handled by the computer</p>
+    <p>When using the phase management automation the Initiative marker is flipped automatically, markers on cards are reset, Burn and Rot damage is calculated and applied (during the Upkeep Phase), and Channeling phases are handled by the computer</p>
 
     <p>Have fun!</p>
 </div>
-<strong>
-    <br clear="all"/>
-</strong>
-
+  <br clear="all"/>
 <div class="datagrid">
 <table>
 	<tbody>
@@ -52,9 +50,19 @@
 			<tr><td>Roll Dice="F1"</td><td>Play Card Facedown="Ctrl+Shift+P"</td></tr>
 			<tr><td>Flip Card="Ctrl+F"</td><td>Rotate Card="Ctrl+E"</td></tr>
 			<tr><td>Discard="Del"</td><td>Obliterate Card="End"</td></tr>
-			<tr><td>Add a Vine Marker="F3"</td><td>Flip Game Board="F9"</td></tr>
+			<tr><td>Add a Vine Marker="F3"</td><td>Concede Game="Ctrl+End"</td></tr>
 			<tr><td>Bring Card to Front="Page Up"</td><td>Send Card to Back="Page Down"</td></tr>
 
+		<thead><tr><th>Chat Emotes</th><th>Play with Different Boards</th></tr></thead>
+			<tr><td>Say Yes="Ctrl+Shift+1"</td>><td>Set 4X3 Game Board="Alt+F1"</td></tr>
+			<tr><td>Say No="Ctrl+Shift+2"</td><td>Set 6X4 Game Board="Alt+F2"</td></tr>
+ 			<tr><td>Say Pass="Ctrl+Shift+3"</td><td>Set 4X5 Game Board="Alt+F3"</td></tr>
+			<tr><td>Say Thinking...="Ctrl+Shift+4"</td><td>Set No Game Board="Alt+F11"</td></tr>
+ 			<tr><td>Ask are you Thinking?="Ctrl+Shift+5"</td><td>Add Alt Board Card="Alt+F12"</td></tr>
+			<tr><td>Your Turn?="Ctrl+Shift+6"</td><td> </td></tr>
+ 			<tr><td>My Turn?="Ctrl+Shift+7"</td><td> </td></tr>
+ 			<tr><td>Do you wish to Reveal your Enchantment?="Ctrl+Shift+8"</td><td> </td></tr>
+		
 		<thead><tr><th>Add Markers/Tokens Action</th><th>Remove Markers/Tokens</th></tr></thead>
 			<tr><td>Add Damage="F2"</td><td>Remove Damage="F4"</td></tr>
 			<tr><td>Add Mana="Ctrl+M"</td><td>Remove Mana="Ctrl+Shift+M"</td></tr>
@@ -68,11 +76,12 @@
 			<tr><td>Add Other Token="Ctrl+O"</td><td>Remove All Tokens="Ctrl+Shift+A"</td></tr>
 
 		<thead><tr><th>Toggle Markers/Tokens</th><th>Toggle Markers/Tokens</th></tr></thead>
-			<tr><td>Toggle Action Marker="Ctrl+A"</td><td>Toggle Quick Cast Marker="Ctrl+Q"</td>
-			<tr><td>Toggle Ready Marker="Ctrl+R"</td><td>Toggle Ready Marker II="Alt+Ctrl+R"</td>
-			<tr><td>Toggle Voltaric Shield Marker="Ctrl+V"</td><td>Toggle Guard Marker="Ctrl+G"</td>
-			<tr><td>Toggle Blood Reaper Marker="Alt+A"</td><td>Toggle Deflect Marker="Alt+D"</td>
-			<tr><td>Toggle Pet Marker="Ctrl+P"</td><td>Toggle Invisible Marker="Ctrl+I"</td>
-			<tr><td>Toggle Taunt Marker (Sosruko)="Ctrl+T"</td><td>Toggle Taunt Marker (Thorg)="Alt+T"</td>
+			<tr><td>Toggle Action Marker="Ctrl+A"</td><td>Toggle Quick Cast Marker="Ctrl+Q"</td></tr>
+			<tr><td>Toggle Ready Marker="Ctrl+R"</td><td>Toggle Ready Marker II="Alt+Ctrl+R"</td></tr>
+			<tr><td>Toggle Voltaric Shield Marker="Ctrl+V"</td><td>Toggle Guard Marker="Ctrl+G"</td></tr>
+			<tr><td>Toggle Blood Reaper Marker="Alt+A"</td><td>Toggle Deflect Marker="Alt+D"</td></tr>
+			<tr><td>Toggle Pet Marker="Ctrl+P"</td><td>Toggle Invisible Marker="Ctrl+I"</td></tr>
+			<tr><td>Toggle Taunt Marker (Sosruko)="Ctrl+T"</td><td>Toggle Taunt Marker (Thorg)="Alt+T"</td></tr>
 	</tbody>
 </table></div>
+</html>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.5.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.6.0.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />

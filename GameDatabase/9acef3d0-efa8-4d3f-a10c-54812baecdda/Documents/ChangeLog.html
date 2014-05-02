@@ -1,19 +1,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- v1.5.0.0 -->
+<!-- v1.6.0.0 -->
 <html>
 <head>
 <title>Changelog for the Mage Wars module on OCTGN</title>
+</head>
   <style type="text/css">
 .head {font: bold 20px/150% Times New Roman, Times, serif; color: #36752D; background: #fff; overflow: hidden; }
 .section {font: bold 15px/150% Times New Roman, Times, serif; color: #36752D; background: #fff; overflow: hidden; }
 .body {font: bold 13px/100% Times New Roman, Times, serif; color: #36752D; background: #fff; overflow: hidden; }
 	</style>
+<body>
 <div class="head">
     <p align="left">Changelog for the Mage Wars module on OCTGN</p>
 </div>
 
 <div class="section">
+	1.6.0.0<br>
+</div>
+
+<ol><div class="section">
+	<strong>Spellbook Builder:</strong>
+</div>
+
+<div class="body"><ul>
+	<li> Promo Warning added to the Spellbook Builder Export to AW Format</li>
+	<li> Fixed an issue with Spellbook validation not be required after running once and then making a change</li>
+	<li> More clean up on output text, deck changed to spellbook etc.</li>
+</ul></div>
+
+<div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> When you flip a card face down you can now "peek" at it and see what card it is</li>
+	<li> There are now 8 pre-defined Chat emotes, refer to the Mage Wars help file for key combinations</li>
+	<li> Added two more alternate game boards: Forest 4X5 and Arena 6X4, more work on this front in the next release!</li>
+	<li> Automated Rot Tokens</li>
+	<li> Once both players spellbooks are Validated, intiative is automaticly resolved</li>
+	<li> If you start a game with only one mage, the game is placed in Debug mode. Deck Validation is turned off and you can advance the game to the next phase</li>
+	<li> HTML version of the Codex is avaialbe through the Game Documents | Mage Wars Complete Codex v1</li>
+</ul></div>
+
+
+<div class="section">
+	<strong>Image Pack:</strong>
+</div>
+<div class="body"><ul>
+	<li> Updated Promo art</li>
+	<li> Added Dice Tower Promo's</li>
+	<li> Updated o8c file is <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install/" title=Install>here</a>, the MW-NewCards.08c file contains only new cards added since the last expansion.</li>
+</ul></div></ol>
+
+<div class="section">
 	1.5.0.0<br>
+</div>
+
+<ol><div class="section">
 	<strong>Spellbook Builder:</strong>
 </div>
 <div class="body"><ul>
@@ -26,13 +68,13 @@
 	<strong>The Game:</strong>
 </div>
 <div class="body"><ul>
-	<li> The Board has been resized and you can now get more cards into a zone. The down side is the cards are smaller on the board, but you can read them fully when you hover over the card. Let us know what you think about it…</li>
+	<li> The Board has been re-sized and you can now get more cards into a zone. The down side is the cards are smaller on the board, but you can read them fully when you hover over the card. Let us know what you think about it…</li>
 	<li> More Multiplayer work: Player Color now determines where your cards are placed face down on the table when you are play them from your Spellbook. Red – Top Left, Blue – Bottom Right, Green – Lower Left, and Yellow – Upper Right</li>
 	<li> More work on improving how cards are handled. When you flip a card over to cast a spell you are now prompted to pay the spell cost automatically. Enchantments still prompt for reveal.</li>
 	<li> Casting Discounts from Rings and other Equipment should work now, note that spells with a cost of X is set to 0. You will have to manually adjust cost of the Casting Discount.</li>
 	<li> A pile has been created for cards that have been Obliterated, you can right click on the card and select Obliterate or use the “End” key as a shortcut</li>
 	<li> Ready Markers are automatically added cards that utilize them</li>
-	<li> Ready Marker II has been created and is placed automatically on cards that need it like Sir Corazin with his 2X Defense, its shortcut is Atl+Ctrl+R</li>
+	<li> Ready Marker II has been created and is placed automatically on cards that need it like Sir Corazin with his 2X Defense, its shortcut is Alt+Ctrl+R</li>
 	<li> In the Chat log the Round Number is noted during the Ready Stage</li>
 	<li> When the attack dice are rolled, it is noted in the chat log what source was utilized – Random.org or the randomizer from Python</li>
 	<li> Spell Level card count are now enforced i.e. 6 cards max for Level 1 and 4 cards max on Level 2 and up</li>
@@ -46,28 +88,150 @@
 </div>
 <div class="body"><ul>
 	<li> Four new Promo’s from OPKit 4: Updated o8c file is <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install/" title=Install>here</a>, the MW-NewCards.08c file has the new cards only.</li>
+</ul></div></ol>
+
+<div class="section">
+	1.4.2.0<br>
+</div>
+
+<ol><div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> One of our intrepid players reported that during the roll for initiative, if both players rolled the same number, a tie, automation broke and you basically had to reset the game and start over. lettucemode jumped right on the problem identified the issue and this release should fix the rare case when this happens.</li>
+</ul></div></ol>
+
+<div class="section">
+	1.4.1.0<br>
+</div>
+
+<ol><div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> lettucemode’s keen eyes figured out that when a spectator was joining the game it was breaking some of the automated scripts like flipping the initiative marker and changing phases.
+	He has done some work to resolve the issue for now. Please let us know if it resolves the problem or if you have any other issues</li>
+</ul></div></ol>
+
+<div class="section">
+	1.4.0.0<br>
+</div>
+
+<ol><div class="section">
+	<strong>Spellbook Builder:</strong>
+</div>
+<div class="body"><ul>
+	<li> Export your spellbook into Forum Code for the mage Wars forums</li>
+	<li> Card Proxies now work. F12 will turn on/off this feature in the Spellbook Builder</li>
 </ul></div>
 
+<div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> When you load you deck, if it is not Validated the cards are removed for the game, you will need to fix the issue with the deck and reload it or reset the game</li>
+	<li> More Automation at Game Start – Once your spellbook is validated and you have selected your color, you will be notified to roll for initiative, after the second player has done so, the rolls are automatically compared and the winner is prompted to select the start player and the initiative token is then set accordingly.</li>
+	<li> You can turn off the Burn Notification via the Automation | Toggle Auto-resolving Burns menu item</li>
+	<li> Started work on improving how cards are handled, especially Enchantments, you are now prompted Y/N when you reveal an Enchantment. This can be toggled on/off via the Automation | Toggle enchantment reveal prompt menu item (looking for feedback on this)</li>
+	<li> Fixed a situation for when you place a marker on an unrevealed Enchantment, it would reveal the card name to your opponent in the chat window</li>
+	<li> Added additional notifications in the chat window so you can easily trace what has transpired during the game, like when you flip the Action Marker</li>
+	<li> Corrode markers now have a shortcut: Alt+C</li>
+	<li> Burns work on Conjurations now</li>
+	<li> Attempt to resolve Initiative Marker not flipping</li>
+	<li> The Vine Marker can now be flipped for mirror matches</li>
+	<li> Walls (as well as all cards) can be rotated to the 4 cardinal directions (the pointy end faces out)</li>
+	<li> The Druid has her Treebond marker on her now when she is revealed</li>
+	<li> The Necromancer has his Eternal Servant marker on him when he is revealed</li>
+	<li> Cards that start with Generic Tokens (Load/Mist) have a that token on them when they are revealed</li>
+	<li> Invisible/Visible marker on the Invisible Stalker is now automated and is placed on the Invisible Stalker automatically when it is revealed</li>
+	<li> Taunt Markers are placed on Thorg and Sorsoksu when revealed</li>
+	<li> Card Proxies now work, you will note some new columns in the Spellbook Builder (SBB), and those are used for this purpose. The layout of the columns has changed as a result. Let me know if you would prefer a different order, I will try my best to accommodate any requests along these lines, but we retain final ruling on items such as this.</li>
+	<li> Alternate Play work has started. You can now flip the board over and use ACG’s Zone marker cards to layout your own board size. Many thanks goes out to ACG, he has made me several versions of the card with the Compass on it (flip the regular zone card to reveal the Compass card), multi-player (3+) does appear to work, though automation is not fully working when changing phases</li>
+	<li> Spectating has been released for OCTGN as a whole and it works very well with the Mage Wars OCTGN module – please let us know if you have problems when people spectate</li>
+</ul></div>
+
+<div class="section">
+	<strong>Image Pack:</strong>
+</div>
+<div class="body"><ul>
+	<li> There is an updated image pack which contains the cards for alternate play from ACG’s which can be found here.</li>
+	<li> You can also just down load a small image pack with just the cards for alternate play from also here.</li>
+</ul></div></ol>
+
+<div class="section">
+	1.3.0.0<br>
+</div>
+
+<ol><div class="section">
+	<strong>Spellbook Builder:</strong>
+</div>
+<div class="body"><ul>
+	<li> Epic, School, and Mage restrictions are now noted when you validate the deck</li>
+</ul></div>
+
+<div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li>Epic, School, and Mage restrictions are now noted when you load to deck and are noted along with the spell point restrictions. If your spellbook fails validation your player will not be setup, and you will be prompted to restart the game for both players in order to load a valid deck.</li>
+	<li>After your deck has been validated, you now select your Mages marker color, additionally, Green and  Yellow color markers are now available</li>
+	<li>Burns are automatically rolled and applied during the Upkeep phase</li>
+	<li>Use a two-sided table option is now “Unselected” by default</li>
+	<li>Lots and lots of data cleanup, Mort, IoP, Dissolve, etc</li>
+	<li>Added the Attack Bar Card Property which was separated out from the Text Card Property  (for future Proxy Card Generation)</li>
+	<li>Missing Promo art fixed</li>
+	<li>DvN art has been updated</li>
+	<li>The official Spellbooks are now included for the Druid and Necromancer</li>
+	<li>Slam markers now have a shortcut Alt+S</li>
+	<li>New smaller Vine Markers</li>
+	<li>Updated help document, should help those just starting out on the OCTGN system</li>
+</ul></div></ol>
 
 <div class="section"><ul><p align="left"> 
 1.2.9.0 Bug fix.<br>
- 1.2.8.0 Added promo cards from GenCon 2013<br>
- 1.2.7.0 Replaced 3 core cards with errata versions. New background<br>
- 1.2.6.0 Fixed some card typos, CoK official decks added<br>
- 1.2.5.0 bug fix for channeling, more promo cards, casting cost preview.<br>
- 1.2.4.0 Channeling automation increased, Card data expanded by sIKE, bugfixes<br>
- 1.2.3.0 Dice roller now uses www.random.org, Roll speed improved, More tokens are automated in reset phase (Ready, Voltaric shield, Deflect)<br>
- 1.2.2.0 Added promo cards. Updated deck builder plugin.<br>
- 1.2.1.1 Fixed in-game validator, Kumanjaro redundant card removed, Images reorganised<br>
- 1.2.0.0 Added Conquest of Kumanjaro and fixed errors<br>
- 1.1.0.0 Renamed all images to standard GUID’s.<br>
- 1.0.0.2 Changed GUID of beastmaster to resolve conflict with LotR game.
- Re-download the core image pack and install it. Old beastmaster builds are now invalid
- This can be fixed by doing search in 08d file for “6473? and replace with “6472?.
- 1.0.0.1 alternate wizards (earth/fire/water) now work<br>
- 1.0.0.0 Initial release<br>
-</p></div>
+1.2.8.0 Added promo cards from GenCon 2013<br>
+1.2.7.0 Replaced 3 core cards with errata versions. New background<br>
+1.2.6.0 Fixed some card typos, CoK official decks added<br>
+1.2.5.0 bug fix for channeling, more promo cards, casting cost preview.<br>
+1.2.4.0 Channeling automation increased, Card data expanded by sIKE, bugfixes<br>
+1.2.3.0 Dice roller now uses www.random.org, Roll speed improved, More tokens are automated in reset phase (Ready, Voltaric shield, Deflect)<br>
+1.2.2.0 Added promo cards. Updated deck builder plugin.<br>
+1.2.1.1 Fixed in-game validator, Kumanjaro redundant card removed, Images reorganised<br>
+1.2.0.0 Added Conquest of Kumanjaro and fixed errors<br>
+1.1.0.0 Renamed all images to standard GUID’s.<br> 1.0.0.2 Changed GUID of beastmaster to resolve conflict with LotR game. Re-download the core image pack and install it. Old beastmaster builds are now invalid. This can be fixed by doing search in 08d file for “6473? and replace with “6472?.
+1.0.0.1 alternate wizards (earth/fire/water) now work<br>
+1.0.0.0 Initial release<br>
+</p></ul></div>
 
 </body>
 
 </html>
+<!--<div class="section">
+	1.3.0.0<br>
+</div>
+<ol><div class="section">
+	<strong>Spellbook Builder:</strong>
+</div>
+<div class="body"><ul>
+	<li> </li>
+	<li> </li>
+	<li> </li>
+</ul></div>
+
+<div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> </li>
+	<li> </li>
+	<li> </li>
+</ul></div>
+
+<div class="section">
+	<strong>Image Pack:</strong>
+</div>
+<div class="body"><ul>
+	<li> </li>
+	<li> </li>
+	<li> </li>
+</ul></div></ol>-->
