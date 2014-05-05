@@ -906,7 +906,8 @@ def flipcard(card, x = 0, y = 0):
 	elif card.isFaceUp == False:
 		card.isFaceUp = True
 		notify("{} turns '{}' face up.".format(me, card.Name))
-		card.highlight = None
+		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
+			card.highlight = None
 		if card.Type == "Mage" or card.Type == "Creature": #places action marker on card
 			toggleAction(card)
 		if card.Type == "Mage": #once more to flip action to active side
