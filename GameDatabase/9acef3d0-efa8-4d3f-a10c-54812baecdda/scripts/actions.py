@@ -777,11 +777,11 @@ def toggleReady(card, x=0, y=0):
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
-		notify("'{}' becomes used".format(card.Name))
+		notify("The Ready Marker on '{}' was flipped and becomes Used".format(card.Name))
 	else:
 		card.markers[Ready] = 1
 		card.markers[Used] = 0
-		notify("'{}' becomes ready".format(card.Name))
+		notify("The Ready Marker on '{}' was flipped and becomes Ready".format(card.Name))
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
@@ -790,11 +790,11 @@ def toggleReadyII(card, x=0, y=0):
 	if card.markers[ReadyII] > 0:
 		card.markers[ReadyII] = 0
 		card.markers[UsedII] = 1
-		notify("'{}' becomes used".format(card.Name))
+		notify("The Ready Marker II on '{}' was flipped and becomes Used".format(card.Name))
 	else:
 		card.markers[ReadyII] = 1
 		card.markers[UsedII] = 0
-		notify("'{}' becomes ready".format(card.Name))
+		notify("The Ready Marker II on '{}' was flipped and becomes Ready".format(card.Name))
 
 def togglePet(card, x=0, y=0):
 	toggleToken(card, Pet)
