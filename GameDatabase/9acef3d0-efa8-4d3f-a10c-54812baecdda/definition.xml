@@ -23,9 +23,10 @@
 	</events>
 	<proxygen definitionsrc="proxy/CardGenData.xml" />
 	<documents>
-		<document name="Instructions" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
+		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
+		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v1.html" />
+		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html" />
 		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
-		<document name="Mage Wars Complete Codex v1" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v1.html" />
 		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
 	</documents>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
