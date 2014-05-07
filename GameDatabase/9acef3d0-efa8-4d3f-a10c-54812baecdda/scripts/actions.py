@@ -211,8 +211,8 @@ def rollDice(group, x=0, y=0):
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -570, -40 ) #dice field 1
-	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -510, -40 ) #dice field 2
+	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", -58, 330 ) #dice field 1
+	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", 0, 330 ) #dice field 2
 
 	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
@@ -307,10 +307,10 @@ def playerSetup():
 			whisper("Life set to {}".format(me.Life))
 
 def createVineMarker(group, x=0, y=0):
-	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 430, -40 )
+	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
 
 def createAltBoardCard(group, x=0, y=0):
-	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 430, -40 )
+	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
 
 def setNoGameBoard(group, x=0, y=0):
 	global boardSet
@@ -366,9 +366,9 @@ def AskInitiative():
 
 def CreateIniToken():
 	mute()
-	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", -510, -150 ) #phase token
+	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", 65, 330 ) #phase token
 	card.switchTo("Planning") #skips upkeep for first turn
-	init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", -580, -150 ) #initiative token
+	init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", -125, 330 ) #initiative token
 	if mycolor == PlayerColor[0]:
 		init.switchTo("")
 	elif mycolor == PlayerColor[1]:
@@ -1073,13 +1073,13 @@ def playCardFaceDown(card, x=0, y=0):
 		x = -595
 		y = -240
 	elif mycolor == PlayerColor[1]:
-		x = 430
+		x = 460
 		y = 120
 	elif mycolor == PlayerColor[2]:
 		x = -595
 		y = 120
 	elif mycolor == PlayerColor[3]:
-		x = 430
+		x = 460
 		y = -240
 	while occupied:
 		occupied = False
