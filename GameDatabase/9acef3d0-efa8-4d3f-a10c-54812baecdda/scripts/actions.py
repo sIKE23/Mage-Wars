@@ -1168,13 +1168,8 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 def switchPhase(card, phase):
 	global mycolor
 	mute()
-	if debugMode or card.highlight != mycolor: #ready to go
-		if card.controller == me:
-			card.highlight = None
-			card.switchTo(phase)
-		else:
-			remoteCall(card.controller, "remoteHighlight", [card, None])
-			remoteCall(card.controller, "remoteSwitchPhase", [card, phase])
+	if debugMode:	#debuggin'
+		card.switchTo(phase)
 		notify("Phase changed to {}".format(phase))
 		return True
 	elif card.highlight == None: #other player not done yet
@@ -1184,6 +1179,15 @@ def switchPhase(card, phase):
 			remoteCall(card.controller, "remoteHighlight", [card, mycolor])
 		notify("{} is done with {} phase".format(me.name,card.name))
 		return False
+	elif card.highlight != mycolor: #ready to go
+		if card.controller == me:
+			card.highlight = None
+			card.switchTo(phase)
+		else:
+			remoteCall(card.controller, "remoteHighlight", [card, None])
+			remoteCall(card.controller, "remoteSwitchPhase", [card, phase])
+		notify("Phase changed to {}".format(phase))
+		return True
 
 def remoteHighlight(card, color):
 	card.highlight = color
