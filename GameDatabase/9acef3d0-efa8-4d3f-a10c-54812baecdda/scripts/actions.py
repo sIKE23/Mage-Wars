@@ -1380,7 +1380,7 @@ def validateDeck(deck):
 			s_low = schools[0]
 			for s in schools:
 				i += 1
-				if spellbook[s] < 2: #if trained in one of the schools use that one
+				if spellbook[s] < spellbook[s_low]: #if trained in one of the schools use that one
 					s_low = s
 					break
 			try:
