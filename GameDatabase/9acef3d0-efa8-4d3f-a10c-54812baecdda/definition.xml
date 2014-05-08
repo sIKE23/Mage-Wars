@@ -59,6 +59,7 @@
 			<groupaction menu="Toggle Auto-resolving Rot" default="False" execute="toggleResolveRot" />
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
+			<groupaction menu="Version" default="False" execute="sayVer" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
 			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />

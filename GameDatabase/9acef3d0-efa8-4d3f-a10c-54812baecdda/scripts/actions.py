@@ -84,8 +84,9 @@ Die1 = ("Die1","8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165")
 Die2 = ("Die2","b881f652-9384-43e1-9758-e68b04583b3b")
 Die1s = ("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
 Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
-Died12 = ("Died12","3cdf4231-065d-400e-9c74-d0ae669e852c")
+DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 diceBank = [1]
+diceBankD12 = [0]
 
 ##########################		Other			############################
 
@@ -102,6 +103,7 @@ deckLoaded = False
 discountsUsed = [ ]
 turn = 0
 playerNum = 0
+ver = "1.6.0.0"
 
 ############################################################################
 ############################		Events		############################
@@ -109,6 +111,7 @@ playerNum = 0
 
 def onTableLoad():
 	global debugMode
+	sayVer()
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
@@ -205,6 +208,7 @@ def playerDone(group, x=0, y=0):
 def rollDice(group, x=0, y=0):
 	mute()
 	global diceBank
+	global diceBankD12
 	global hasRolledIni
 	global myIniRoll
 
@@ -245,19 +249,20 @@ def rollDice(group, x=0, y=0):
 	dieCard2.markers[attackDie[4]] = result[4] #1*
 	dieCard2.markers[attackDie[5]] = result[5] #2*
 
-	d12 = webRead("http://www.random.org/integers/?num=1&min=0&max=11&col=1&base=10&format=plain&rnd=new")
-	debug("Random.org response code: {}".format(d12[1]))
-	if d12[1]==200: # OK code received:
-		d12diceBank = d12[0].splitlines()
-		d12Roll = int(d12diceBank.pop())
-		effect = d12Roll + 1
-	else:
-		effect = rnd(1, 12)
-
-	dieCard2.markers[Died12] = effect
-
+	
+	if (len(diceBankD12) == 2): #diceBank running low - fetch more
+		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
+		debug("Random.org response code: {}".format(d12[1]))
+		if d12[1]==200: # OK code received:
+			diceBankD12 = d12[0].splitlines()
+		else:
+			while (len(diceBankD12) < 100):
+				diceBankD12.append(rnd(1, 12))
+	
+	effect = int(diceBankD12.pop()) + 1
+	dieCard2.markers[DieD12] = effect
 	if hasRolledIni:
-		notify("{} rolled {} normal damage, {} critical damage and {} on effect die".format(me,damNormal,damPiercing,effect))
+		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
 		iniRoll(effect)
@@ -344,6 +349,9 @@ def setGameBoard3(group, x=0, y=0):
 #	mute()
 #	for p in players:
 #		remoteCall(p, "setGameBoard", [])
+
+def sayVer():
+	notify("{} is running version: {} of the Mage Wars module.".format(me, ver))
 
 def setGameBoard(bset):
 	mute()
