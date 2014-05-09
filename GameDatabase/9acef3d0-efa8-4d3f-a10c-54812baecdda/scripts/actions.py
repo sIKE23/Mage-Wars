@@ -363,7 +363,7 @@ def setGameBoard5(group, x=0, y=0):
 
 
 def sayVer():
-	notify("{} is running version: {} of the Mage Wars module.".format(me, ver))
+	notify("{} is running v.{} of the Mage Wars module.".format(me, ver))
 
 def setGameBoard(bset):
 	mute()
@@ -412,17 +412,17 @@ def nextPhase(group, x=-360, y=-150):
 			card = c
 			break
 	if card.alternate == "":
-		switchPhase(card,"Planning")
+		switchPhase(card,"Planning","Planning Phase")
 	elif card.alternate == "Planning":
-		switchPhase(card,"Deploy")
+		switchPhase(card,"Deploy","Deploy Phase")
 	elif card.alternate == "Deploy":
-		switchPhase(card,"Quick")
+		switchPhase(card,"Quick","First Quickcast Phase")
 	elif card.alternate == "Quick":
-		switchPhase(card,"Actions")
+		switchPhase(card,"Actions","Actions Phase")
 	elif card.alternate == "Actions":
-		switchPhase(card,"Quick2")
+		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
-		if switchPhase(card,"") == True: #Back to Upkeep
+		if switchPhase(card,"","Upkeep Phase") == True: #Back to Upkeep
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
 			turn = int(getGlobalVariable("RoundNumber")) + 1
@@ -824,11 +824,11 @@ def toggleReady(card, x=0, y=0):
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
-		notify("The Ready Marker on '{}' was flipped and becomes Used".format(card.Name))
+		notify("'{}' spends the Ready Marker on '{}'".format(me, card.Name))
 	else:
 		card.markers[Ready] = 1
 		card.markers[Used] = 0
-		notify("The Ready Marker on '{}' was flipped and becomes Ready".format(card.Name))
+		notify("'{}' readies the Ready Marker on '{}'".format(me, card.Name))
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
@@ -837,11 +837,11 @@ def toggleReadyII(card, x=0, y=0):
 	if card.markers[ReadyII] > 0:
 		card.markers[ReadyII] = 0
 		card.markers[UsedII] = 1
-		notify("The Ready Marker II on '{}' was flipped and becomes Used".format(card.Name))
+		notify("'{}' spends the Ready Marker II on '{}'".format(me, card.Name))
 	else:
 		card.markers[ReadyII] = 1
 		card.markers[UsedII] = 0
-		notify("The Ready Marker II on '{}' was flipped and becomes Ready".format(card.Name))
+		notify("'{}' readies the Ready Marker II on '{}'".format(me, card.Name))
 
 def togglePet(card, x=0, y=0):
 	toggleToken(card, Pet)
@@ -1215,19 +1215,19 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 				return 0
 	return 0
 
-def switchPhase(card, phase):
+def switchPhase(card, phase, phrase):
 	global mycolor
 	mute()
 	if debugMode:	#debuggin'
 		card.switchTo(phase)
-		notify("Phase changed to {}".format(phase))
+		notify("Phase changed to the {}".format(phrase))
 		return True
 	elif card.highlight == None: #other player not done yet
 		if card.controller == me:
 			card.highlight = mycolor
 		else:
 			remoteCall(card.controller, "remoteHighlight", [card, mycolor])
-		notify("{} is done with {} phase".format(me.name,card.name))
+		notify("{} is done with the {}".format(me.name,card.name))
 		return False
 	elif card.highlight != mycolor: #ready to go
 		if card.controller == me:
@@ -1235,14 +1235,14 @@ def switchPhase(card, phase):
 			card.switchTo(phase)
 		else:
 			remoteCall(card.controller, "remoteHighlight", [card, None])
-			remoteCall(card.controller, "remoteSwitchPhase", [card, phase])
-		notify("Phase changed to {}".format(phase))
+			remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
+		notify("Phase changed to the {}".format(phrase))
 		return True
 
 def remoteHighlight(card, color):
 	card.highlight = color
 
-def remoteSwitchPhase(card, phase):
+def remoteSwitchPhase(card, phase, phrase):
 	card.switchTo(phase)
 
 #---------------------------------------------------------------------------
