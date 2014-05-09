@@ -57,6 +57,7 @@
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
 			<groupaction menu="Toggle Auto-resolving Rot" default="False" execute="toggleResolveRot" />
+			<groupaction menu="Toggle Auto-resolving Dissipate" default="False" execute="toggleResolveDissipate" />
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
 			<groupaction menu="Version" default="False" execute="sayVer" />
@@ -76,6 +77,8 @@
 			<groupaction menu="Set 4X3 Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
 			<groupaction menu="Set 6X4 Game Board" default="False" shortcut="Alt+F2" execute="setGameBoard2" />
 			<groupaction menu="Set 4X5 Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
+			<groupaction menu="Set 6X4 Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
+			<groupaction menu="Set 4X5 Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
 		</groupactions>

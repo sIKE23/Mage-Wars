@@ -57,12 +57,13 @@ Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
 LoadToken = ("Load Token","68d0cebd-3d57-4fd8-a01c-f8045ce82f57")
 MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb")
-RuneofFortification = ("ae179c85-11ce-4be7-b9c9-352139d0c8f2")
-RuneofPower = ("b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07")
-RuneofPrecision = ("c2a265f9-ad97-4976-a83c-78891a224478")
-RuneofReforging = ("d10ada1f-c03b-4077-b6cb-c9667d6b2744")
-RuneofShielding = ("e0bb0e90-4831-43c6-966e-27c8dc2d2eef")
-Disable = ("f68b3b5b-0755-40f4-84db-bf3197a667cb")
+DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f")
+RuneofFortification = ("Rune of Fortification","ae179c85-11ce-4be7-b9c9-352139d0c8f2")
+RuneofPower = ("Rune of Power","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07")
+RuneofPrecision = ("Rune of Precision","c2a265f9-ad97-4976-a83c-78891a224478")
+RuneofReforging = ("Rune of Reforging","d10ada1f-c03b-4077-b6cb-c9667d6b2744")
+RuneofShielding = ("Rune of Shielding","e0bb0e90-4831-43c6-966e-27c8dc2d2eef")
+Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb")
 
 ##########################		Dice-related			########################
 
@@ -346,10 +347,20 @@ def setGameBoard3(group, x=0, y=0):
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
-# def invokesetGameBoard(group, x=0, y=0):
-#	mute()
-#	for p in players:
-#		remoteCall(p, "setGameBoard", [])
+def setGameBoard4(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard4.png"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [boardSet])
+		
+def setGameBoard5(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard5.png"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [boardSet])
+
 
 def sayVer():
 	notify("{} is running version: {} of the Mage Wars module.".format(me, ver))
@@ -442,6 +453,7 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
+				remoteCall(p, "resolveDissipate", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -536,6 +548,24 @@ def resolveRot():
 			notify("{} damage added to {}.".format(rotDamage, card.Name))
 		notify("Finished auto-resolving Rot for {}.".format(me))
 
+def resolveDissipate():
+	mute()
+
+#is the setting on?
+	if not getSetting("AutoResolveDissipate", True):
+		return
+
+	cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
+	if len(cardsWithDissipate) > 0:
+		notify("Resolving Dissipate for {}...".format(me))	#found at least one
+		for card in cardsWithDissipate:
+			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
+			card.markers[DissipateToken] -= 1 # Remove Token
+			if card.markers[DissipateToken] == 0 and card.Name == "Rolling Fog": # Only discard Rolling Fog for now
+				notify("{} discards {} as it no longer has Dissipate Tokens".format(me, card.Name))
+				card.moveTo(me.piles['Discard'])
+			notify("Finished auto-resolving Dissipate for {}.".format(me))
+
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -607,6 +637,14 @@ def toggleResolveRot(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
+		
+def toggleResolveDissipate(group, x=0, y=0):
+	autoResolveDissipate = getSetting("AutoResolveDissipate", True)
+	setSetting("AutoResolveDissipate", not autoResolveDissipate)
+	if autoResolveDissipate:
+		whisper("You have disabled automatic resolution of Dissipate tokens on your cards.")
+	else:
+		whisper("You have enabled automatic resolution of Dissipate tokens on your cards.")
 
 def toggleEnchantRevealPrompt(group, x=0, y=0):
 	prompt = getSetting("EnchantPromptReveal", False)
@@ -954,6 +992,8 @@ def flipcard(card, x = 0, y = 0):
   				card.markers[MistToken] = 1
 			if "Nightshade Lotus" == card.name:
   				card.markers[MistToken] = 1
+			if "Rolling Fog" == card.name:
+  				card.markers[DissipateToken] = 3 
 		if "Defense" in card.Stats:
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1
