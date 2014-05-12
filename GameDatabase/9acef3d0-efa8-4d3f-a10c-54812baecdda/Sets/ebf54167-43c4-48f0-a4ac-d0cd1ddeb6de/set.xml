@@ -234,8 +234,8 @@
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Text" value="[Ranged] [Hydro] [Dice=3] [d12] [5+ = Daze] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [5+ = Daze] [Unavoidable]" />
+			<property name="Text" value="" />
 			<property name="Traits" value="" />
 			<property name="CardID" value="MW1A08" />
 		</card>
