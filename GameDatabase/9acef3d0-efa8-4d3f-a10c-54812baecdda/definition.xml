@@ -60,6 +60,7 @@
 			<groupaction menu="Toggle Auto-resolving Dissipate" default="False" execute="toggleResolveDissipate" />
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
+			<groupaction menu="Toggle Dice Rolling Area and  Table Config" default="False" execute="toggleConfigDRAIP" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
 			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
