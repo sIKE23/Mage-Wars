@@ -1,0 +1,71 @@
+	Zone1
+	TopLeft  XY = -450, -330
+	TopRight XY = -225, -330
+	LowLeft  XY = -450, -109
+	LowRight XY = -225, -109
+	
+	Zone2
+	TopLeft  XY = -226, -330
+	TopRight XY =   -1, -330 
+	LowLeft  XY = -226, -109
+	LowRight XY =   -1, -109
+	
+	Zone3
+	TopLeft  XY =   0, -330
+	TopRight XY = 225, -330
+	LowLeft  XY =   0, -109
+	LowRight XY = 225, -109
+		
+	Zone4
+	TopLeft  XY = 226, -330
+	TopRight XY = 450, -330
+	LowLeft  XY = 226, -109
+	LowRight XY = 450, -109
+		
+	Zone5
+	TopLeft  XY = -450, -110
+	TopRight XY = -225, -110
+	LowLeft  XY = -450,  109
+	LowRight XY = -225,  109
+		
+	Zone6
+	TopLeft  XY = -226, -110
+	TopRight XY =   -1, -110
+	LowLeft  XY = -226,  109
+	LowRight XY =   -1,  109
+		
+	Zone7
+	TopLeft  XY =   0, -110
+	TopRight XY = 225, -110
+	LowLeft  XY =   0,  109
+	LowRight XY = 225,  109
+		
+	Zone8
+	TopLeft  XY = 226, -110
+	TopRight XY = 450, -110
+	LowLeft  XY = 226,  109
+	LowRight XY = 450,  109
+		
+	Zone9
+	TopLeft  XY = -450, 110
+	TopRight XY = -225, 110
+	LowLeft  XY = -450, 330
+	LowRight XY = -225, 330
+		
+	Zone10
+	TopLeft  XY = -226, 110
+	TopRight XY =   -1, 110
+	LowLeft  XY = -226, 330
+	LowRight XY =   -1, 330
+		
+	Zone11
+	TopLeft  XY =   0, 110
+	TopRight XY = 225, 110
+	LowLeft  XY =   0, 330
+	LowRight XY = 225, 330
+		
+	Zone12
+	TopLeft  XY = 226, 110
+	TopRight XY = 450, 110
+	LowLeft  XY = 226, 330
+	LowRight XY = 450, 330

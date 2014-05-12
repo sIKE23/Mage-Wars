@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="3b8c0ce6-8b89-4f40-b60a-a1530507ca4f">Warlord Stats</card>
+    <card qty="1" id="5cf0be26-ce65-405f-9c4a-312f31bceedb">Warlord</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="2" id="18b08e7f-4d82-4bcf-8a0c-fdf83b4683ac">Ballista</card>
+    <card qty="1" id="d5a7e765-259d-449f-b38f-591990d0a24d">Archer's Watchtower</card>
+    <card qty="1" id="22ea2891-f959-4d40-9123-def5bb2e3e23">Barracks</card>
+    <card qty="1" id="7e359ecb-7ce3-46f0-a516-de5a5f589733">Battle Forge</card>
+    <card qty="4" id="a7287ca4-7c90-42aa-9c86-c8a6bedc286b">Wall of Steel</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="f40c4fc3-45c9-437c-b536-25b68c1a7a02">Grimson Deadeye, Sniper</card>
+    <card qty="1" id="2327f50e-53df-43d0-9d07-0b01d9c3bcb2">Ludwig Boltstorm</card>
+    <card qty="1" id="9f958d17-2f53-40b2-9b1a-5fa6c9b7d1e1">Sir Corazin, Blademaster</card>
+    <card qty="2" id="38380818-d4ca-45b4-a13e-d85d7683c25a">Royal Archer</card>
+    <card qty="2" id="12f32a67-eb37-4311-ab57-addb40573990">Knight of Westlock</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="b705917e-892a-41b4-9d04-62058197083e">Fortified Position</card>
+    <card qty="1" id="76b82cdc-fb4d-46e9-a4de-9fdac5ff41fc">Standard Bearer</card>
+    <card qty="2" id="ccc78522-653a-443d-9c36-5be3eb96f1e1">Critical Strike</card>
+    <card qty="3" id="24b63480-3272-4f93-b576-48710d5bedaa">Retaliate</card>
+    <card qty="1" id="97da4784-8449-434a-931e-32f3fc93af43">Armor Ward</card>
+    <card qty="2" id="8c9e5e56-a9a9-4077-92c1-f35123ee4c64">Hawkeye</card>
+    <card qty="2" id="8df84f88-e24a-4517-aae5-8595c09cc3cd">Bear Strength</card>
+    <card qty="2" id="901f4850-d501-4205-afa5-cdea2bb187f8">Lion Savagery</card>
+    <card qty="1" id="c738d5ed-d4a6-4695-9aa8-f41745da7257">Falcon Precision</card>
+    <card qty="2" id="76d440be-b82c-4a12-97ef-c2bad86fdc1a">Regrowth</card>
+    <card qty="1" id="f5d06493-1929-4d1f-9bcb-756339ccf23e">Harmonize</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="f0a799d6-3d47-4789-8873-bbb2cc2ff564">Ring of Command</card>
+    <card qty="1" id="43e7ffb8-e629-4629-b8ce-cb6ea5e4b268">Horn of Gothos</card>
+    <card qty="1" id="5a07689a-9edc-4366-9d70-6eecf5f4447d">Leather Boots</card>
+    <card qty="1" id="a6a267f1-a2ec-4264-aaff-85b40c0a68dd">Leather Gloves</card>
+    <card qty="1" id="86e3fd4a-e52d-4ccd-9b33-333a13126ac8">Ivarium Longbow</card>
+    <card qty="1" id="105b2ac7-86ac-42e3-9931-a40d39b28d3b">Vorpal Blade</card>
+    <card qty="1" id="5adeed7f-a23f-46f9-9d3a-2d697a8b6855">Chitin Armor</card>
+    <card qty="1" id="d2d9ee17-377b-453f-9772-e996076cece4">Enchanter's Ring</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="15d9b523-c6b1-4f5f-bbbe-0a555081b4e1">Sniper Shot</card>
+    <card qty="2" id="a1959fe8-780f-4720-a446-0c2f999e2df2">Battle Fury</card>
+    <card qty="2" id="78846d18-04ca-4fc8-b3e1-bc22003a92a8">Charge</card>
+    <card qty="1" id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2">Rouse the Beast</card>
+    <card qty="2" id="edbc1aee-7d92-439c-9eb7-7a22fcbf947d">Power Strike</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="a1de2c11-60ab-42b5-99d5-752f5cb85770">Surging Wave</card>
+    <card qty="2" id="effa9ea8-3cf2-4efe-a83f-6f920c8faa22">Jet Stream</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
