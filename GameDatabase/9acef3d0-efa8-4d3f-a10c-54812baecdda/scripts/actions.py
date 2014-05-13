@@ -55,7 +55,7 @@ Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8")
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805")
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
-LoadToken = ("Load Token","68d0cebd-3d57-4fd8-a01c-f8045ce82f57")
+LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942")
 MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb")
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f")
 RuneofFortification = ("Rune of Fortification","ae179c85-11ce-4be7-b9c9-352139d0c8f2")
@@ -456,12 +456,12 @@ def nextPhase(group, x=-360, y=-150):
 						resolveChanneling(c)
 					else:
 						remoteCall(players[1], "resolveChanneling", [c])
-
-			#resolve burns and rot
+			#resolve other autometed items
 			for p in players:
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveDissipate", [])
+@				remoteCall(p, "resolveLoadTokens", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -573,6 +573,19 @@ def resolveDissipate():
 				notify("{} discards {} as it no longer has Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
+
+#def resolveLoadTokens():
+## mute()
+# 	cardsWithLoadToken = [c for c in table if c.markers[LoadToken] and c.controller == me]
+#	if len(cardsWithLoadToken) > 0:
+#		for card in cardsWithLoadToken:
+#			if card.markers[LoadToken] < 2: 
+#				notify("Placing Load Token on {}...".format(card.Name)) #found at least one
+#				card.markers[LoadToken] += 1
+#	elif card.Name == "Ballista" or card.Name == "Akiro's Hammer" and card.markers[LoadToken] == 0: # Add a load token to a used Ballista or Hammer
+#		notify("Placing Load Token on {}...".format(card.Name)) #found at least one
+#		card.markers[LoadToken] += 1
+#	notify("Finished adding Load Tokens for {}.".format(me))
 
 def resolveChanneling(c):
 	mute()

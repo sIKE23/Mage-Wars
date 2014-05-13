@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.6.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.6.2.0">
  	<markers>
  	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
@@ -410,10 +410,10 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="Stats" value="Armor=2, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Flame +2" />
-			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Whenever your Mage summons a friendly soldier creature, you may choose to summon it to Garrison Posts zone instead of his own zone, regardless of range or LoS." />
+			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Whenever your Mage, or a War spawnpoint he controls, summons a friendly soldier creature, you may choose to summon it to Garrison Post's zone, regardless of range or LoS." />
 			<property name="CardID" value="FWJ04" />
 		</card>
 		<card id="efe46b3c-9175-4cf0-be0a-d2738a63748a" name="Mana Prism">
