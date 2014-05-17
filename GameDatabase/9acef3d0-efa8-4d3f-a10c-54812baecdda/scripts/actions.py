@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.6.0.0    ##################################
+##########################    v1.6.5.0    ##################################
 ############################################################################
 import time
 import re
@@ -102,17 +102,10 @@ myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
 discountsUsed = [ ]
+roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.6.1.0"
-dieCardX = -570
-dieCardY = -40
-dieCard2X = -510
-dieCard2Y = -40
-phaseX = -510
-phaseY = -150
-initX = -580
-initY = -150
+ver = "1.6.5.0"
 
 ############################################################################
 ############################		Events		############################
@@ -121,23 +114,23 @@ initY = -150
 def onTableLoad():
 	global debugMode
 	sayVer()
+	gameStartTime = time.time()
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
-	#reset color picking
-	#setGlobalVariable("ColorsChosen", "")
+# reset color picking
+	setGlobalVariable("ColorsChosen", "")
 
-	#reset initiative automation
-	#setGlobalVariable("SetupDone", "")
-	#setGlobalVariable("OppIniRoll", "")
-	#setGlobalVariable("IniAllDone", "")
+#	reset initiative automation
+	setGlobalVariable("SetupDone", "")
+	setGlobalVariable("OppIniRoll", "")
+	setGlobalVariable("IniAllDone", "")
 
-	#testing
-	#notify("game start {}".format(me))
-	five = 5
+# set Dice Rolling Area, Initative, and Phase Marker Card location 
+	setDRAIP()
 
 def onLoadDeck(player, groups):
 	mute()
@@ -206,6 +199,37 @@ def iniRoll(effect):
 		AskInitiative()
 	else:	#they won
 		remoteCall(players[1], "AskInitiative", [])
+		
+def setDRAIP():
+	global dieCardX
+	global dieCardY
+	global dieCard2X
+	global dieCard2Y		
+	global phaseX
+	global phaseY
+	global initX
+	global initY
+	
+	if not getSetting("AutoConfigDRAIP", True):
+		#option A
+		dieCardX = -570
+		dieCardY = -40
+		dieCard2X = -510
+		dieCard2Y = -40
+		phaseX = -510
+		phaseY = -150 
+		initX = -580
+		initY = -150
+	else:	
+		#option B
+		dieCardX = -58
+		dieCardY = 330
+		dieCard2X = 0 
+		dieCard2Y = 330
+		phaseX = 65
+		phaseY = 330
+		initX = -125
+		initY = 330		
 
 ############################################################################
 ######################		Group Actions			########################
@@ -233,7 +257,7 @@ def rollDice(group, x=0, y=0):
 	diceFrom = ""
 	if (len(diceBank) < count): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
-		debug("Random.org response code: {}".format(random_org[1]))
+		debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
 			diceBank = random_org[0].splitlines()
 			diceFrom = "from Random.org"
@@ -261,10 +285,12 @@ def rollDice(group, x=0, y=0):
 	d12DiceCount = 1
 	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
 		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
-		debug("Random.org response code: {}".format(d12[1]))
+		debug("Random.org response code for effect roll: {}".format(d12[1]))
 		if d12[1]==200: # OK code received:
 			diceBankD12 = d12[0].splitlines()
+			notify ("Using die from Random.org")
 		else:
+			notify ("Using die from the native randomizer")
 			while (len(diceBankD12) < 100):
 				diceBankD12.append(rnd(1, 12))
 	
@@ -411,6 +437,7 @@ def CreateIniToken():
 
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
+	global roundTimes
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
 		return
 	mute()
@@ -435,6 +462,9 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p,"resetDiscounts",[])
 			turn = int(getGlobalVariable("RoundNumber")) + 1
 			setGlobalVariable("RoundNumber", str(turn))
+			rTime = time.time()
+			roundTimes.append(rTime)
+			notify("Round {} Start Time: {}".format(time.ctime(roundTimes[-1])))
 			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
@@ -461,7 +491,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveDissipate", [])
-@				remoteCall(p, "resolveLoadTokens", [])
+#				remoteCall(p, "resolveLoadTokens", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -574,19 +604,6 @@ def resolveDissipate():
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
 
-#def resolveLoadTokens():
-## mute()
-# 	cardsWithLoadToken = [c for c in table if c.markers[LoadToken] and c.controller == me]
-#	if len(cardsWithLoadToken) > 0:
-#		for card in cardsWithLoadToken:
-#			if card.markers[LoadToken] < 2: 
-#				notify("Placing Load Token on {}...".format(card.Name)) #found at least one
-#				card.markers[LoadToken] += 1
-#	elif card.Name == "Ballista" or card.Name == "Akiro's Hammer" and card.markers[LoadToken] == 0: # Add a load token to a used Ballista or Hammer
-#		notify("Placing Load Token on {}...".format(card.Name)) #found at least one
-#		card.markers[LoadToken] += 1
-#	notify("Finished adding Load Tokens for {}.".format(me))
-
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -658,7 +675,7 @@ def toggleConfigDRAIP(group, x=0, y=0):
 		notify("Player 1 has configured the Dice Rolling Area, Initative, and Phase markers positions to the Left of the Board.")
 	else:
 		notify("Player 1 has configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
-#	setDRAIP()
+
 		
 def toggleResolveRot(group, x=0, y=0):
 	autoResolveRot = getSetting("AutoResolveRot", True)
@@ -693,12 +710,13 @@ def toggleAutoRollInitiative(group, x=0, y=0):
 		whisper("You have enabled automatically rolling initiative.")
 
 def concede(group=table,x=0,y=0):
-   mute()
-   if confirm("Are you sure you want to concede this game?"):
-#     reportGame('Conceded')
-      notify("{} has conceded the game".format(me))
-   else:
-      notify("{} was about to concede the game, but thought better of it...".format(me))
+	mute()
+	if confirm("Are you sure you want to concede this game?"):
+		gameEndTime = time.time()
+#		reportGame('Conceded')
+		notify("{} has conceded the game".format(me))
+	else:
+		notify("{} was about to concede the game, but thought better of it...".format(me))
 
 ############################################################################
 ######################		Chat Actions			################################
