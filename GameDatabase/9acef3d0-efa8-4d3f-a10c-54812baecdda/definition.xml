@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.6.1.0"
+	version="1.6.3.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -29,6 +29,10 @@
 		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
 		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
 	</documents>
+	<gameModes>
+		<gameMode name="1v1" shortDescripton="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
+		<gameMode name="2v2" shortDescripton="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
+	</gameModes>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
 		<property name="Subtype" type="String" hidden="False" ignoreText="False" />
@@ -60,7 +64,7 @@
 			<groupaction menu="Toggle Auto-resolving Dissipate" default="False" execute="toggleResolveDissipate" />
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
-			<groupaction menu="Toggle Dice Rolling Area and  Table Config" default="False" execute="toggleConfigDRAIP" />
+			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
 			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
@@ -74,11 +78,11 @@
 			<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
 		</groupactions>
 		<groupactions menu="Alternative Play">
-			<groupaction menu="Set 4X3 Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
-			<groupaction menu="Set 6X4 Game Board" default="False" shortcut="Alt+F2" execute="setGameBoard2" />
-			<groupaction menu="Set 4X5 Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
-			<groupaction menu="Set 6X4 Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
-			<groupaction menu="Set 4X5 Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
+			<groupaction menu="Set 4X3 Westlock Arena Selina Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
+			<groupaction menu="Set 6X4 Double Westlock Game Board" default="False" shortcut="Alt+F2" execute="setGameBoard2" />
+			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
+			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
+			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
 		</groupactions>
