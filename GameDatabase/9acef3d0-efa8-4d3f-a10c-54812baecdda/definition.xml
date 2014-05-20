@@ -51,7 +51,7 @@
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False" />
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
 	</card>
-	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.png" background="background/background.png" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
+	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.jpg" background="background/background.png" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />

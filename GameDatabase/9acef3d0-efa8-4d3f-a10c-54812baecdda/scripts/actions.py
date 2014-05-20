@@ -102,6 +102,8 @@ myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
 discountsUsed = [ ]
+gameStartTime = ""
+gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
@@ -114,7 +116,6 @@ ver = "1.6.5.0"
 def onTableLoad():
 	global debugMode
 	sayVer()
-	gameStartTime = time.time()
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
@@ -129,7 +130,7 @@ def onGameStart():
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", "")
 
-# set Dice Rolling Area, Initative, and Phase Marker Card location 
+# set Dice Rolling Area, Initative, and Phase Marker Card location
 	setDRAIP()
 
 def onLoadDeck(player, groups):
@@ -199,17 +200,17 @@ def iniRoll(effect):
 		AskInitiative()
 	else:	#they won
 		remoteCall(players[1], "AskInitiative", [])
-		
+
 def setDRAIP():
 	global dieCardX
 	global dieCardY
 	global dieCard2X
-	global dieCard2Y		
+	global dieCard2Y
 	global phaseX
 	global phaseY
 	global initX
 	global initY
-	
+
 	if not getSetting("AutoConfigDRAIP", True):
 		#option A
 		dieCardX = -570
@@ -217,19 +218,19 @@ def setDRAIP():
 		dieCard2X = -510
 		dieCard2Y = -40
 		phaseX = -510
-		phaseY = -150 
+		phaseY = -150
 		initX = -580
 		initY = -150
-	else:	
+	else:
 		#option B
 		dieCardX = -58
 		dieCardY = 330
-		dieCard2X = 0 
+		dieCard2X = 0
 		dieCard2Y = 330
 		phaseX = 65
 		phaseY = 330
 		initX = -125
-		initY = 330		
+		initY = 330
 
 ############################################################################
 ######################		Group Actions			########################
@@ -293,7 +294,7 @@ def rollDice(group, x=0, y=0):
 			notify ("Using die from the native randomizer")
 			while (len(diceBankD12) < 100):
 				diceBankD12.append(rnd(1, 12))
-	
+
 	effect = int(diceBankD12.pop()) + 1
 	dieCard2.markers[DieD12] = effect
 
@@ -362,35 +363,35 @@ def setNoGameBoard(group, x=0, y=0):
 
 def setGameBoard1(group, x=0, y=0):
 	global boardSet
-	boardSet = "GameBoard1.png"
+	boardSet = "GameBoard1.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard2(group, x=0, y=0):
 	global boardSet
-	boardSet = "GameBoard2.png"
+	boardSet = "GameBoard2.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard3(group, x=0, y=0):
 	global boardSet
-	boardSet = "GameBoard3.png"
+	boardSet = "GameBoard3.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard4(group, x=0, y=0):
 	global boardSet
-	boardSet = "GameBoard4.png"
+	boardSet = "GameBoard4.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
-		
+
 def setGameBoard5(group, x=0, y=0):
 	global boardSet
-	boardSet = "GameBoard5.png"
+	boardSet = "GameBoard5.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
@@ -419,6 +420,7 @@ def AskInitiative():
 		remoteCall(players[1], "CreateIniToken", [])
 
 def CreateIniToken():
+	global gameStartTime
 	mute()
 	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
 	card.switchTo("Planning") #skips upkeep for first turn
@@ -433,6 +435,7 @@ def CreateIniToken():
 		init.switchTo("D")
 	setGlobalVariable("IniAllDone", "x")
 	setGlobalVariable("RoundNumber", "1")
+	gameStartTime = time.time()
 	notify("Setup is complete!")
 
 def nextPhase(group, x=-360, y=-150):
@@ -464,7 +467,7 @@ def nextPhase(group, x=-360, y=-150):
 			setGlobalVariable("RoundNumber", str(turn))
 			rTime = time.time()
 			roundTimes.append(rTime)
-			notify("Round {} Start Time: {}".format(time.ctime(roundTimes[-1])))
+			notify("Round {} Start Time: {}".format(str(turn),time.ctime(roundTimes[-1])))
 			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
@@ -491,7 +494,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveDissipate", [])
-#				remoteCall(p, "resolveLoadTokens", [])
+				remoteCall(p, "resolveLoadTokens", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -600,9 +603,22 @@ def resolveDissipate():
 			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
 			card.markers[DissipateToken] -= 1 # Remove Token
 			if card.markers[DissipateToken] == 0 and card.Name == "Rolling Fog": # Only discard Rolling Fog for now
-				notify("{} discards {} as it no longer has Dissipate Tokens".format(me, card.Name))
+				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
+
+def resolveLoadTokens():
+	mute()
+	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp ]
+	for card in loadTokenCards:
+		notify("Resolving Load Tokens for {}...".format(me))	#found at least one
+		if card.markers[LoadToken] == 0:
+			notify("Placing the First Load Token on {}...".format(card.Name)) #found no load token on card
+			card.markers[LoadToken] = 1
+		elif card.markers[LoadToken] == 1:
+			notify("Placing the Second Load Token on {}...".format(card.Name)) #found one load token on card
+			card.markers[LoadToken] = 2
+		notify("Finished adding Load Tokens for {}.".format(me))
 
 def resolveChanneling(c):
 	mute()
@@ -667,7 +683,7 @@ def toggleResolveBurns(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
-		
+
 def toggleConfigDRAIP(group, x=0, y=0):
 	AutoConfigDRAIP = getSetting("AutoConfigDRAIP", True)
 	setSetting("AutoConfigDRAIP", not AutoConfigDRAIP)
@@ -676,7 +692,7 @@ def toggleConfigDRAIP(group, x=0, y=0):
 	else:
 		notify("Player 1 has configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
 
-		
+
 def toggleResolveRot(group, x=0, y=0):
 	autoResolveRot = getSetting("AutoResolveRot", True)
 	setSetting("AutoResolveRot", not autoResolveRot)
@@ -684,7 +700,7 @@ def toggleResolveRot(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
-		
+
 def toggleResolveDissipate(group, x=0, y=0):
 	autoResolveDissipate = getSetting("AutoResolveDissipate", True)
 	setSetting("AutoResolveDissipate", not autoResolveDissipate)
@@ -710,6 +726,7 @@ def toggleAutoRollInitiative(group, x=0, y=0):
 		whisper("You have enabled automatically rolling initiative.")
 
 def concede(group=table,x=0,y=0):
+	global gameEndTime
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
 		gameEndTime = time.time()
@@ -1041,7 +1058,7 @@ def flipcard(card, x = 0, y = 0):
 			if "Nightshade Lotus" == card.name:
   				card.markers[MistToken] = 1
 			if "Rolling Fog" == card.name:
-  				card.markers[DissipateToken] = 3 
+  				card.markers[DissipateToken] = 3
 		if "Defense" in card.Stats:
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1
