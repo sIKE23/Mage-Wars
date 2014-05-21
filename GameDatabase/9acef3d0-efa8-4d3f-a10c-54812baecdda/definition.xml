@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.6.3.0"
+	version="1.6.5.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -30,8 +30,7 @@
 		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
 	</documents>
 	<gameModes>
-		<gameMode name="1v1" shortDescripton="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
-		<gameMode name="2v2" shortDescripton="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
+
 	</gameModes>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
@@ -51,7 +50,7 @@
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False" />
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
 	</card>
-	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.jpg" background="background/background.png" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
+	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />

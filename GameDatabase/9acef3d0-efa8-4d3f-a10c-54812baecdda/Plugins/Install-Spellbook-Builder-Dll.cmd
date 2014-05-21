@@ -1,5 +1,5 @@
 @echo off
-rem v1.6.0.0
+rem v1.6.5.0
 cd /d %~dp0
 
 @echo Installing the Spellbook Builder DLL for the Mage Wars on OCTGN module!
