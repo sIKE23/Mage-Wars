@@ -30,7 +30,8 @@
 		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
 	</documents>
 	<gameModes>
-
+		<gameMode name="1v1" shortDescripton="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
+		<gameMode name="2v2" shortDescripton="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
 	</gameModes>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
