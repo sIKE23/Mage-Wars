@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="4208e1b0-b570-42de-9e62-5ce15b97b91e">Wizard(Air)</card>
+    <card qty="1" id="e27b8293-65cd-4479-b5e9-2616201ba512">Wizard Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="d9db82f3-e853-4281-8f24-1574f02912b9">Chain Lightning</card>
+    <card qty="1" id="96b996dd-50d6-4449-9ad5-3b7c52936738">Electrify</card>
+    <card qty="2" id="9217f8a0-e46d-401e-b8b6-477100eaba54">Lightning Bolt</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="2" id="64ac6979-be87-4a71-b840-c60fade56a13">Blue Gremlin</card>
+    <card qty="1" id="1b6c4df2-706b-440e-9f55-c6d3c0df93a7">Darkfenne Hydra</card>
+    <card qty="1" id="03d52691-75b2-42ec-a81c-ca2074f28002">Gorgon Archer</card>
+    <card qty="2" id="ad3b90cf-5a53-4541-903f-4b0cfe397f64">Mana Leech</card>
+    <card qty="1" id="031d394a-fafc-4e88-b1c9-1152b223b278">Stonegaze Basilisk</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="25d70640-eea1-4429-b146-4d176b493e41">Block</card>
+    <card qty="1" id="00cfd5d8-8fa8-4db5-b4df-6f5bae378d4b">Essence Drain</card>
+    <card qty="1" id="aeada61e-e636-4c46-b169-833162a13b93">Force Hold</card>
+    <card qty="1" id="77b5e9a1-9824-40a5-95e9-2f669a01a5c8">Force Sword</card>
+    <card qty="1" id="7bc882f8-d7d0-4c70-b40f-2cbc844e3579">Jinx</card>
+    <card qty="1" id="81c93236-8b3f-41fd-9210-89a9498ecfce">Nullify</card>
+    <card qty="1" id="732f4d7f-0cf6-4393-9446-b9360c8f18e3">Reverse Attack</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="66582dca-63bc-4b49-bbcd-add00a57cf11">Dragonscale Hauberk</card>
+    <card qty="1" id="469d4201-ec88-4f13-a8dc-f11b48e3df4b">Elemental Wand</card>
+    <card qty="1" id="5a07689a-9edc-4366-9d70-6eecf5f4447d">Leather Boots</card>
+    <card qty="1" id="4376c705-deea-45cd-9dc2-70d5bc1483a8">Staff of the Arcanum</card>
+    <card qty="1" id="b37baf19-da0b-40f6-8cb3-cf8205bfb04e">Suppression Cloak</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+    <card qty="2" id="96719b92-1dd5-4a7e-b7eb-574464feeca8">Minor Heal</card>
+    <card qty="1" id="be358e54-8996-43cb-8aad-6ed879bbdbb7">Steal Enchantment</card>
+    <card qty="1" id="d781b3a9-4c77-47c0-a899-0067fbafe856">Sleep</card>
+    <card qty="1" id="b969cb2f-6f0b-4d89-8839-511aab891c0d">Teleport</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <notes><![CDATA[]]></notes>
+</deck>

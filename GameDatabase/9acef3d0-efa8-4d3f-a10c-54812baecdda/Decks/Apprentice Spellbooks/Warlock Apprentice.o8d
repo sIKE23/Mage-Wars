@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="1a179a08-8c76-4583-a995-0037bd60a215">Warlock(Apprentice)</card>
+    <card qty="1" id="52fdb62d-59e3-4b5e-904e-d92ae2be7012">Warlock Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="d8562a1d-6a95-4ca4-99aa-91c5ca769a33">Fireball</card>
+    <card qty="1" id="aecb2a7e-5d16-48bd-8a82-67522fa1f96e">Firestorm</card>
+    <card qty="2" id="f47d8498-c367-44dd-98c8-e919a02e4b1d">Flameblast</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="a0eb52c1-e93d-40a5-aafe-3e4e0d5c6b3b">Dark Pact Slayer</card>
+    <card qty="1" id="bd1f7bbc-4a61-4006-a1d8-a5cbd78799db">Darkfenne Bat</card>
+    <card qty="2" id="d6769d21-6095-43b4-a5c3-cbfd6c5f9436">Firebrand Imp</card>
+    <card qty="2" id="4ed5ed50-3c2a-4513-ae98-c954766e5a79">Flaming Hellion</card>
+    <card qty="1" id="536cee06-aa95-4efc-a484-e4d19a3f2222">Goran, Werewolf Pet</card>
+    <card qty="2" id="0d9b07c9-5d2b-45fa-9e69-6f371293f883">Skeletal Sentry</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6">Agony</card>
+    <card qty="1" id="8df84f88-e24a-4517-aae5-8595c09cc3cd">Bear Strength</card>
+    <card qty="1" id="46b36e31-5dec-4a37-a39c-c2a5b6e0caee">Death Link</card>
+    <card qty="1" id="20b2deab-90f3-4a9b-83b4-ad83129ec14c">Enfeeble</card>
+    <card qty="1" id="660cd33f-8812-48bb-a513-2ada886a0320">Ghoul Rot</card>
+    <card qty="1" id="9fd89680-0bb1-442c-ad19-193ea556873e">Magebane</card>
+    <card qty="1" id="2d94d69e-5c08-4db2-89a0-5c811bfaca17">Marked for Death</card>
+    <card qty="1" id="b981c228-b1e5-4318-a7ec-444c647eed87">Vampirism</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="fc42efdc-0a85-4a45-a273-f5e403f1489c">Demonhide Armor</card>
+    <card qty="1" id="5d2f72e1-7aaf-4931-b0e0-f11cce928313">Lash of Hellfire</card>
+    <card qty="1" id="a6a267f1-a2ec-4264-aaff-85b40c0a68dd">Leather Gloves</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="ffda5f70-74ef-40d8-9da5-f848c2447615">Drain Life</card>
+    <card qty="1" id="90e866bf-64db-4199-ba5f-3364eecaf7ce">Explode</card>
+    <card qty="1" id="9455c697-f680-4d12-b5d6-72235c03f77c">Force Push</card>
+    <card qty="2" id="b0624cd4-8802-4e9f-8e1d-869638c3b861">Vampiric Strike</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <notes><![CDATA[]]></notes>
+</deck>
