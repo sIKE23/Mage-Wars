@@ -9,61 +9,64 @@ import re
 
 ##########################		Markers			##################################
 
-ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
-ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58")
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649")
-ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949")
-ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee")
-ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be")
-ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6")
-Mana = ("Mana", "00000000-0000-0000-0000-000000000002")
-Damage = ("Damage", "00000000-0000-0000-0000-000000000004")
-BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce")
-Burn = ("Burn", "f9eb0f3a-63de-49eb-832b-05912fc9ec64")
-Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5")
-Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20")
-DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55")
-DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205")
+ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
+ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" )
+ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
+ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
+ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be" )
+ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6" )
+Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
+BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
+Burn = ("Burn", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
+Corrode= ("Corrode", "c3de25bf-4845-4d2d-8a28-6c31ad12af46" )
+Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5" )
+Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
+Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20" )
+DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
+DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
+Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb")
+DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
+Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
+EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
+Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
 Guard = ("Guard", "91ed27dc-294d-4732-ab71-37911f4011f2" )
 HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
-Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d")
-Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167")
-Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b")
-QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd")
+Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28" )
+Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d" )
+Mana = ("Mana", "00000000-0000-0000-0000-000000000002" )
+MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
+LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942" )
+Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
+Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b" )
+QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" )
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
+RuneofFortification = ("Rune of Fortification","ae179c85-11ce-4be7-b9c9-352139d0c8f2" )
+RuneofPower = ("Rune of Power","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" )
+RuneofPrecision = ("Rune of Precision","c2a265f9-ad97-4976-a83c-78891a224478" )
+RuneofReforging = ("Rune of Reforging","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
+RuneofShielding = ("Rune of Shielding","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
+Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
+Taint = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f")
 Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
-Turn = ("Turn", "e0a54bea-6e30-409d-82cd-44a944e591dc")
+Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805" )
+Turn = ("Turn", "e0a54bea-6e30-409d-82cd-44a944e591dc" )
 Used = ("Used", "ab8708ac-9735-4803-ba4d-4932a787540d" )
 UsedII = ("Used II", "61bec951-ebb1-48f7-a2ab-0b6364d262e6" )
 Veteran = ("Veteran", "72ee460f-adc1-41ab-9231-765001f9e08e" )
-Visible = ("Visible", "b9b205a2-a998-44f5-97dc-c7f315afbbe2")
+Visible = ("Visible", "b9b205a2-a998-44f5-97dc-c7f315afbbe2" )
 VoltaricON = ("Voltaric ON", "a6e79926-db8d-4095-9aee-e3b46bf24a3f" )
-VoltaricOFF = ("Voltaric OFF", "d91aabe0-d9cd-4b7e-b994-4e1c7a51c027")
+VoltaricOFF = ("Voltaric OFF", "d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" )
 Weak = ("Weak", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
 WoundedPrey = ("Wounded Prey", "42f6cee3-3de4-4c90-a77c-9fb2c432d78d" )
-Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8")
-Corrode= ("Corrode", "c3de25bf-4845-4d2d-8a28-6c31ad12af46")
-Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28")
-Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8")
-Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805")
-Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
-EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
-LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942")
-MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb")
-DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f")
-RuneofFortification = ("Rune of Fortification","ae179c85-11ce-4be7-b9c9-352139d0c8f2")
-RuneofPower = ("Rune of Power","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07")
-RuneofPrecision = ("Rune of Precision","c2a265f9-ad97-4976-a83c-78891a224478")
-RuneofReforging = ("Rune of Reforging","d10ada1f-c03b-4077-b6cb-c9667d6b2744")
-RuneofShielding = ("Rune of Shielding","e0bb0e90-4831-43c6-966e-27c8dc2d2eef")
-Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb")
+Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
 
 ##########################		Dice-related			########################
 
@@ -299,6 +302,7 @@ def rollDice(group, x=0, y=0):
 	dieCard2.markers[DieD12] = effect
 
 	if hasRolledIni:
+		playSoundFX('Dice')
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
@@ -351,6 +355,9 @@ def playerSetup():
 def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
 
+def createCompassRose(group, x=0, y=0):
+	table.create("7ff8ed79-159c-46e5-9e87-649b3269a931", 450, -40 )
+
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
 
@@ -392,6 +399,13 @@ def setGameBoard4(group, x=0, y=0):
 def setGameBoard5(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard5.jpg"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [boardSet])
+		
+def setGameBoard10(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard10.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
@@ -493,6 +507,7 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
+				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
 
@@ -588,6 +603,26 @@ def resolveRot():
 				card.markers[Damage] += rotDamage
 			notify("{} damage added to {}.".format(rotDamage, card.Name))
 		notify("Finished auto-resolving Rot for {}.".format(me))
+		
+def resolveBleed():
+	mute()
+
+	#is the setting on?
+	if not getSetting("AutoResolveBleed", True):
+		return
+
+	cardsWithBleed = [c for c in table if c.markers[Bleed] and c.controller == me]
+	if len(cardsWithBleed) > 0:
+		notify("Resolving Bleed for {}...".format(me))	#found at least one
+		for card in cardsWithBleed:
+			bleedDamage = (card.markers[Bleed])
+			 #apply damage
+			if card.Type == "Mage":
+				card.controller.Damage += bleedDamage
+			elif card.Type == "Creature" or "Conjuration" in card.Type:
+				card.markers[Damage] += bleedDamage
+			notify("{} damage added to {}.".format(bleedDamage, card.Name))
+		notify("Finished auto-resolving Bleed for {}.".format(me))		
 
 def resolveDissipate():
 	mute()
@@ -688,10 +723,17 @@ def toggleConfigDRAIP(group, x=0, y=0):
 	AutoConfigDRAIP = getSetting("AutoConfigDRAIP", True)
 	setSetting("AutoConfigDRAIP", not AutoConfigDRAIP)
 	if AutoConfigDRAIP:
-		notify("Player 1 has configured the Dice Rolling Area, Initative, and Phase markers positions to the Left of the Board.")
+		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the Left of the Board.")
 	else:
-		notify("Player 1 has configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
+		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
 
+def toggleSoundFX(group, x=0, y=0):
+	AutoConfigSoundFX = getSetting("AutoConfigSoundFX", True)
+	setSetting("AutoConfigSoundFX", not AutoConfigSoundFX)
+	if AutoConfigSoundFX:
+		notify("You have turned Sound Efects off.")
+	else:
+		notify("You have turned Sound Efects on.")
 
 def toggleResolveRot(group, x=0, y=0):
 	autoResolveRot = getSetting("AutoResolveRot", True)
@@ -701,6 +743,14 @@ def toggleResolveRot(group, x=0, y=0):
 	else:
 		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
 
+def toggleResolveBleed(group, x=0, y=0):
+	autoResolveBleed = getSetting("AutoResolveBleed", True)
+	setSetting("AutoResolveBleed", not autoResolveBleed)
+	if autoResolveBleed:
+		whisper("You have disabled automatic resolution of Bleed markers on your cards.")
+	else:
+		whisper("You have enabled automatic resolution of Bleed markers on your cards.")
+		
 def toggleResolveDissipate(group, x=0, y=0):
 	autoResolveDissipate = getSetting("AutoResolveDissipate", True)
 	setSetting("AutoResolveDissipate", not autoResolveDissipate)
@@ -751,7 +801,7 @@ def sayThinking(group, x=0, y=0):
 	notify("{} says I am thinking....".format(me.name))
 
 def askThinking(group, x=0, y=0):
-	notify("{} are you thinking?".format(me.name))
+	notify("{} asks are you thinking?".format(me.name))
 
 def askYourTurn(group, x=0, y=0):
 	notify("{} asks is it your turn?".format(me.name))
@@ -768,11 +818,11 @@ def askRevealEnchant(group, x=0, y=0):
 
 ##########################     Add Tokens     ##############################
 
-def addDamage(card, x = 0, y = 0):
-    addToken(card, Damage)
-
 def addBurn(card, x = 0, y = 0):
 	addToken(card, Burn)
+
+def addBleed(card, x = 0, y = 0):
+	addToken(card, Bleed)
 
 def addCripple(card, x = 0, y = 0):
     addToken(card, Cripple)
@@ -780,8 +830,8 @@ def addCripple(card, x = 0, y = 0):
 def addCorrode(card, x = 0, y = 0):
     addToken(card, Corrode)
 
-def addRot(card, x = 0, y = 0):
-    addToken(card, Rot)
+def addDamage(card, x = 0, y = 0):
+    addToken(card, Damage)
 
 def addDisable(card, x = 0, y = 0):
     addToken(card, Disable)
@@ -789,17 +839,35 @@ def addDisable(card, x = 0, y = 0):
 def addDaze(card, x=0, y=0):
 	addToken(card, Daze)
 
+def addGrowth(card, x = 0, y = 0):
+    addToken(card, Growth)
+
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
 
-def addStun(card, x=0, y=0):
-	addToken(card, Stun)
+def addRot(card, x = 0, y = 0):
+    addToken(card, Rot)
 
 def addSlam(card, x=0, y=0):
 	addToken(card, Slam)
 
+def addStun(card, x=0, y=0):
+	addToken(card, Stun)
+
+def addStuck(card, x=0, y=0):
+	addToken(card, Stuck)
+
+def addTaint(card, x=0, y=0):
+	addToken(card, Taint)
+
+def addVet(card, x=0, y=0):
+	addToken(card, Veteran)
+
 def addWeak(card, x=0, y=0):
 	addToken(card, Weak)
+
+def addZombie(card, x=0, y=0):
+	addToken(card, Zombie)
 
 def addOther(card, x = 0, y = 0):
 	marker, qty = askMarker()
@@ -850,8 +918,8 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionYellowUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
 
-def toggleBloodReaper(card, x=0, y=0):
-	toggleToken(card, BloodReaper)
+#def toggleBloodReaper(card, x=0, y=0):
+#	toggleToken(card, BloodReaper)
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
@@ -908,15 +976,6 @@ def toggleReadyII(card, x=0, y=0):
 		card.markers[UsedII] = 0
 		notify("'{}' readies the Ready Marker II on '{}'".format(me, card.Name))
 
-def togglePet(card, x=0, y=0):
-	toggleToken(card, Pet)
-
-def toggleTaunt(card, x=0, y=0):
-	toggleToken(card, Taunt)
-
-def toggleTauntT(card, x=0, y=0):
-	toggleToken(card, TauntT)
-
 def toggleQuick(card, x=0, y=0):
 	mute()
 	if not card.isFaceUp:
@@ -945,46 +1004,63 @@ def toggleVoltaric(card, x=0, y=0):
 
 ######################     Remove Tokens     ###########################
 
-def subDamage(card, x = 0, y = 0):
-    subToken(card, Damage)
+
+def subBleed(card, x = 0, y = 0):
+ 	subToken(card, Bleed)
 
 def subBurn(card, x = 0, y = 0):
     subToken(card, Burn)
 
+def subCorrode(card, x = 0, y = 0):
+    subToken(card, Corrode)
+
 def subCripple(card, x = 0, y = 0):
     subToken(card, Cripple)
 
-def subCorrode(card, x = 0, y = 0):
-    subToken(card, Corrode)
+def subDamage(card, x = 0, y = 0):
+    subToken(card, Damage)
 
 def subDaze(card, x = 0, y = 0):
     subToken(card, Daze)
 
+def subDisable(card, x = 0, y = 0):
+    subToken(card, Disable)
+
+def subGrowth(card, x = 0, y = 0):
+    subToken(card, Growth)
+
 def subMana(card, x = 0, y = 0):
     subToken(card, Mana)
-
-def subStun(card, x = 0, y = 0):
-    subToken(card, Stun)
-
-def subSlam(card, x = 0, y = 0):
-	subToken(card, Slam)
-
-def subWeak(card, x = 0, y = 0):
-    subToken(card, Weak)
 
 def subRot(card, x = 0, y = 0):
     subToken(card, Rot)
 
-def subDisable(card, x = 0, y = 0):
-    subToken(card, Disable)
+def subSlam(card, x = 0, y = 0):
+    subToken(card, Slam)
+
+def subStun(card, x = 0, y = 0):
+    subToken(card, Stun)
+
+def subStuck(card, x = 0, y = 0):
+	subToken(card, Stuck)
+
+def subTaint(card, x = 0, y = 0):
+	subToken(card, Taint)
+
+def subVet(card, x = 0, y = 0):
+	subToken(card, Veteran)
+
+def subWeak(card, x = 0, y = 0):
+    subToken(card, Weak)
+
+def subZombie(card, x = 0, y = 0):
+    subToken(card, Zombie)
 
 def clearTokens(card, x = 0, y = 0):
 	mute()
 	for tokenType in card.markers:
 		card.markers[tokenType] = 0
 	notify("{} removes all tokens from '{}'".format(me, card.Name))
-
-
 
 
 ############################################################################
@@ -1158,11 +1234,12 @@ def addToken(card, tokenType):
 
 def subToken(card, tokenType):
 	mute()
-	card.markers[tokenType] -= 1
-	if card.isFaceUp:
-		notify("{} removed from '{}'".format(tokenType[0], card.Name))
-	else:
-		notify("{} removed from face-down card.".format(tokenType[0]))
+	if card.markers[tokenType] > 0:
+		card.markers[tokenType] -= 1
+		if card.isFaceUp:
+			notify("{} removed from '{}'".format(tokenType[0], card.Name))
+		else:
+			notify("{} removed from face-down card.".format(tokenType[0]))
 
 def toggleToken(card, tokenType):
 	mute()
@@ -1256,6 +1333,16 @@ def findCard(group, model):
 			return c
 	return None
 
+def showAltCard(card, x = 0, y = 0):
+	mute()
+	alt = card.alternates
+	if 'B' in alt:
+		if card.alternate == '':
+			notify("{} flips {} to the alternate version of the card.".format(me, card))
+			card.switchTo("B")
+		else:
+			notify("{} flips {} to the standard version of the card.".format(me, card))
+			card.switchTo()
 
 #------------------------------------------------------------
 # Global variable manipulations function
@@ -1264,6 +1351,15 @@ def findCard(group, model):
 #---------------------------------------------------------------------------
 # Workflow routines
 #---------------------------------------------------------------------------
+
+def playSoundFX(sound):
+	mute()
+
+	#is the setting on?
+	if not getSetting("AutoConfigSoundFX", True):
+		return
+	else:
+		playSound(sound)
 
 #---------------------------------------------------------------------------
 # Table group actions

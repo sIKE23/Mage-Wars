@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.6.5.0"
+	version="1.6.5.2"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -21,6 +21,9 @@
 		<event name="OnGameStart" action="onGameStart" />
 		<event name="OnLoadDeck" action="onLoadDeck" />
 	</events>
+	<sounds>
+    <sound name="Dice" src="Sounds/dice.wav" />
+	</sounds>
 	<proxygen definitionsrc="proxy/CardGenData.xml" />
 	<documents>
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
@@ -30,8 +33,8 @@
 		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
 	</documents>
 	<gameModes>
-		<gameMode name="1v1" shortDescripton="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
-		<gameMode name="2v2" shortDescripton="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
+		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
+		<gameMode name="2v2" shortDescription="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
 	</gameModes>
 	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
@@ -56,7 +59,8 @@
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
-		<groupaction menu="Add Vine Marker" default="False" shortcut="F3" execute="createVineMarker" />
+		<groupaction menu="Add Vine Marker" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
+		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
@@ -65,6 +69,8 @@
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
 			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
+			<groupaction menu="Enable/Disable Sounds" default="False" execute="toggleSoundFX" />
+			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
 			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
@@ -78,11 +84,12 @@
 			<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
 		</groupactions>
 		<groupactions menu="Alternative Play">
-			<groupaction menu="Set 4X3 Westlock Arena Selina Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
+			<groupaction menu="Set 4X3 Westlock Arena Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
 			<groupaction menu="Set 6X4 Double Westlock Game Board" default="False" shortcut="Alt+F2" execute="setGameBoard2" />
 			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
 			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
 			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
+			<groupaction menu="Set Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
 		</groupactions>
@@ -90,45 +97,54 @@
 			<cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage" />
 			<cardaction menu="Add Mana" default="False" shortcut="Ctrl+M" execute="addMana" />
 			<cardaction menu="Add Burn Token" default="False" shortcut="Ctrl+B" execute="addBurn" />
+			<cardaction menu="Add Bleed Token" default="False" shortcut="Alt+B" execute="addBleed" />
+			<cardaction menu="Add Corrode Token" default="False" shortcut="Ctrl+C" execute="addCorrode" />
+			<cardaction menu="Add Cripple Token" default="False" shortcut="Alt+C" execute="addCripple" />
 			<cardaction menu="Add Daze Token" default="False" shortcut="Ctrl+D" execute="addDaze" />
-			<cardaction menu="Add Stun Token" default="False" shortcut="Ctrl+S" execute="addStun" />
-			<cardaction menu="Add Slam Token" default="False" shortcut="Alt+S" execute="addSlam" />
+			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+D" execute="addDisable" />
+			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
+			<cardaction menu="Add Stuck Token" default="False" shortcut="Ctrl+K" execute="addStuck" />
+			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+R" execute="addRot" />	
+			<cardaction menu="Add Slam Token" default="False" shortcut="Ctrl+S" execute="addSlam" />
+			<cardaction menu="Add Stun Token" default="False" shortcut="Alt+S" execute="addStun" />
+			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTaint" />
+			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVet" />
 			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak" />
-			<cardaction menu="Add Cripple Token" default="False" shortcut="Ctrl+C" execute="addCripple" />
-			<cardaction menu="Add Corrode Token" default="False" shortcut="Alt+C" execute="addCorrode" />
-			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+Shift+T" execute="addRot" />
-			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+Shift+L" execute="addDisable" />
+			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
 			<cardaction menu="Add Other Token" default="False" shortcut="Ctrl+O" execute="addOther" />
-		</cardactions>
-		<cardactions menu="Toggle Markers">
-			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction" />
-			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
-			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady" />
-			<cardaction menu="Toggle Ready II Marker" default="False" shortcut="Alt+Ctrl+R" execute="toggleReadyII" />
-			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard" />
-			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric" />
-			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+D" execute="toggleDeflect" />
-			<cardaction menu="Toggle Blood Reaper Token" default="False" shortcut="Alt+B" execute="toggleBloodReaper" />
-			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
-			<cardaction menu="Toggle Pet Marker" default="False" shortcut="Ctrl+P" execute="togglePet" />
-			<cardaction menu="Toggle Taunt Marker (Sosruko)" default="False" shortcut="Ctrl+T" execute="toggleTaunt" />
-			<cardaction menu="Toggle Taunt Marker (Thorg)" default="False" shortcut="Alt+T" execute="toggleTauntT" />
 		</cardactions>
 		<cardactions menu="Remove Tokens">
 			<cardaction menu="Remove Damage" default="False" shortcut="F4" execute="subDamage" />
 			<cardaction menu="Remove Mana" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
 			<cardaction menu="Remove Burn Token" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
+			<cardaction menu="Remove Bleed Token" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
+			<cardaction menu="Remove Corrode Token" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
+			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
 			<cardaction menu="Remove Daze Token" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
-			<cardaction menu="Remove Stun Token" default="False" shortcut="Ctrl+Shift+S" execute="subStun" />
-			<cardaction menu="Remove Slam Token" default="False" shortcut="Alt+Shift+S" execute="subSlam" />
+			<cardaction menu="Remove Disable Token" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
+			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
+			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
+			<cardaction menu="Remove Rot Token" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
+			<cardaction menu="Remove Slam Token" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
+			<cardaction menu="Remove Stun Token" default="False" shortcut="Ctrl+Alt+S" execute="subStun" />
+			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint" />
+			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVet" />
 			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
-			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Shift+C" execute="subCripple" />
-			<cardaction menu="Remove Corrode Token" default="False" shortcut="Alt+Shift+C" execute="subCorrode" />
-			<cardaction menu="Remove Rot Token" default="False" shortcut="Ctrl+Shift+R" execute="subRot" />
-			<cardaction menu="Remove Disable Token" default="False" shortcut="Alt+Shift+D" execute="subDisable" />
+			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie" />
 			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
+		<cardactions menu="Toggle Markers">
+			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction" />
+			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
+			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady" />
+			<cardaction menu="Toggle Ready II Marker" default="False" shortcut="Ctrl+Shift+R" execute="toggleReadyII" />
+			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard" />
+			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric" />
+			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+Shift+D" execute="toggleDeflect" />
+			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
+		</cardactions>
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
+			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 			<cardaction menu="Obliterate Card" default="False" shortcut="Alt+Del" execute="obliterate" />
@@ -140,7 +156,7 @@
 		<counter name="Damage" default="0" reset="True" icon="counters/damage.png" />
 		<counter name="Life" default="0" reset="True" icon="counters/life.png" />
 		<hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
-			<cardaction menu="Play card facedown" default="True" shortcut="Alt+Shift+P" execute="playCardFaceDown" />
+			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 		</hand>
 		<group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
