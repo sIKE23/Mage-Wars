@@ -415,6 +415,7 @@
 			<property name="Traits" value="Zone Exclusive, Flame +2" />
 			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Whenever your Mage, or a War spawnpoint he controls, summons a friendly soldier creature, you may choose to summon it to Garrison Post's zone, regardless of range or LoS." />
 			<property name="CardID" value="FWJ04" />
+			<alternate name="Garrison Post" type="B" />
 		</card>
 		<card id="efe46b3c-9175-4cf0-be0a-d2738a63748a" name="Mana Prism">
 			<property name="Type" value="Conjuration" />
@@ -1051,6 +1052,23 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. If the target is Pushed through a wall with the Passage Attacks trait, you must pay an additional 3 mana. This has no effect on Unmovable creatures." />
 			<property name="CardID" value="FWI17" />
+		</card>
+		
+		
+		<card id="7ff8ed79-159c-46e5-9e87-649b3269a931" name="Compass Rose">			
+			<property name="Type" value="Internal" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="" />
+			<property name="Action" value="" />
+			<property name="Range" value="" />
+			<property name="Target" value="" />
+			<property name="School" value="" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="" />
 		</card>
 	</cards>
 </set>
