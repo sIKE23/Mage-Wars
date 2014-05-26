@@ -123,6 +123,36 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO5" />
 		</card>
+		<card id="58e2b7cb-33b8-40bc-9861-b2dc10ddb4ea" name="Bloodwave Greatbow">
+			<property name="Type" value="Creature" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="3" />
+			<property name="Subtype" value="Orc, Soldier" />
+			<property name="Stats" value="Armor=0, Life=11" />
+			<property name="AttackBar" value="Greatbow:&#xD;&#xA;[Ranged 1-2] [Dice=4]&#xD;&#xA;Dagger:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Bloodwave Greatbow is affected by a friendly command spell, his Greatbow attack gains Piercing +2 until the end of the round." />
+			<property name="CardID" value="MWPROMO59" />
+		</card>
+		<card id="4d68d973-aa67-448f-b244-8aee05089205" name="Fire Elemental">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Flame, Elemental" />
+			<property name="Cost" value="20" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="6" />
+			<property name="Stats" value="Armor=-, Life=15" />
+			<property name="AttackBar" value="Claws of Fire:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=5] [d12] [5-8 = Burn; 9+ = 2 Burn] [Defrost]&#xD;&#xA;Scorching Heat:&#xD;&#xA;[Damage Barrier] [Flame] [Dice=2] [d12] [5-8 = Burn; 9+ = 2 Burn &amp; Daze] [Unavoidable]" />
+			<property name="Traits" value="Upkeep +1, Hydro +2, Incorporeal, Nonliving, Flame Immunity" />
+			<property name="Text" value="Hydro attacks gain the Ethereal trait against Fire Elemental" />
+			<property name="CardID" value="MWPROMO41" />
+		</card>
 		<card id="019fbc44-d07c-4510-9cac-7c998613bb05" name="Galador, Protector of Straywood">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
@@ -335,6 +365,22 @@
 			<property name="Text" value="All creatures within 2 zones of Gravikor lose, and cannot gain, the Flying trait." />
 			<property name="CardID" value="MWPROMO8" />
 		</card>
+		<card id="e5381c8b-33ad-46c9-a416-dfa47d128e5c" name="Raincloud">
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Cloud, Weather" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=-, Life=5" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Incorporeal, Flying, Hydro Immunity" />
+			<property name="Text" value="All objects in Raincloud&apos;s zone gain the Flame -2, Acid -2, and Regenerate 1 traits. Each Upkeep Phase you may remove 1 Burn condition or 1 Corrode condition, from 1 object in Raincloud&apos;s zone by paying its removal cost. Once per round, immediately before or after any friendly Action Phase, you may pay 1 mana to move Raincloud 1 zone and attach it to that zone." />
+			<property name="CardID" value="MWPROMO33" />
+		</card>
+		
 
 
 		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force">
@@ -565,6 +611,21 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO15" />
+		</card>
+		<card id="a5170083-ad05-4e98-84a2-a14aecfdc463" name="Spiked Armor">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="AttackBar" value="Vicious Spikes:&#xD;&#xA;[Damage Barrier] [Dice=1] [d12] [9+ = Bleed] [Piercing +1] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains the Lighting +1 trait, a Damage Barrier, and Armor +2." />
+			<property name="CardID" value="MWPROMO51" />
 		</card>
 		<card id="79692c1d-4dc8-4c84-9c04-9ad47d797bd6" name="Spiked Buckler">
 			<property name="Type" value="Equipment" />
