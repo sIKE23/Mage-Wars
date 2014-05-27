@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.6.5.3    ##################################
+##########################    v1.6.5.4    ##################################
 ############################################################################
 import time
 import re
@@ -110,7 +110,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.6.5.3"
+ver = "1.6.5.4"
 
 ############################################################################
 ############################		Events		############################
@@ -1652,6 +1652,10 @@ def validateDeck(deck):
 				magename = "Beastmaster"
 			if "Wizard" in magename:
 				magename = "Wizard"
+			if "Warlock" in magename:
+				magename = "Warlock"
+			if "Priestess" in magename:
+				magename = "Priestess"				
 			if magename in card.Traits:	#mage restriction
 				ok = True
 			for s in [school for school in spellbook if spellbook[school] == 1]:

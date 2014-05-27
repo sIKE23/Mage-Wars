@@ -1,4 +1,4 @@
-﻿//Version: 1.6.0.0
+﻿//Version: 1.6.5.4
 
 namespace Octgn.MageWarsValidator
 {
@@ -298,6 +298,8 @@ namespace Octgn.MageWarsValidator
                                     string mname = magename;
                                     if (mname.Contains("Beastmaster")) mname = "Beastmaster";
                                     if (mname.Contains("Wizard")) mname = "Wizard";
+                                    if (mname.Contains("Warlock")) mname = "Warlock";
+                                    if (mname.Contains("Priestess")) mname = "Priestess";
                                     if (onlyPhrase.Contains(mname))
                                         legal = true;
 
