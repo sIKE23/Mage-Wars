@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.6.5.0    ##################################
+##########################    v1.6.5.3    ##################################
 ############################################################################
 import time
 import re
@@ -110,7 +110,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.6.5.0"
+ver = "1.6.5.3"
 
 ############################################################################
 ############################		Events		############################
@@ -303,6 +303,7 @@ def rollDice(group, x=0, y=0):
 
 	if hasRolledIni:
 		playSoundFX('Dice')
+		time.sleep(2)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
