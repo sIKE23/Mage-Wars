@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.6.5.4    ##################################
+##########################    v1.7.0.0    ##################################
 ############################################################################
 import time
 import re
@@ -104,13 +104,14 @@ debugMode = False
 myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
+iniTokenCreated = False
 discountsUsed = [ ]
 gameStartTime = ""
 gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.6.5.4"
+ver = "1.7.0.0"
 
 ############################################################################
 ############################		Events		############################
@@ -163,13 +164,10 @@ def onLoadDeck(player, groups):
 				for card in group:
 					if card.controller == me:
 						card.delete()
-			#if a deck was already loaded, clear player's chosen color
+			#if a deck was already loaded, reset the game       
 			if deckLoaded:
 				deckLoaded = False
-				colorsChosen = getGlobalVariable("ColorsChosen")
-				colorChoice = PlayerColor.index(mycolor)
-				colorsChosen = colorsChosen.replace(str(colorChoice), '')
-				setGlobalVariable("ColorsChosen", colorsChosen)
+				resetGame()
 
 def SetupForIni():
 	mute()
@@ -436,22 +434,25 @@ def AskInitiative():
 
 def CreateIniToken():
 	global gameStartTime
+	global iniTokenCreated
 	mute()
-	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
-	card.switchTo("Planning") #skips upkeep for first turn
-	init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", initX, initY ) #initiative token
-	if mycolor == PlayerColor[0]:
-		init.switchTo("")
-	elif mycolor == PlayerColor[1]:
-		init.switchTo("B")
-	elif mycolor == PlayerColor[2]:
-		init.switchTo("C")
-	elif mycolor == PlayerColor[3]:
-		init.switchTo("D")
-	setGlobalVariable("IniAllDone", "x")
-	setGlobalVariable("RoundNumber", "1")
-	gameStartTime = time.time()
-	notify("Setup is complete!")
+	if not iniTokenCreated:
+		iniTokenCreated = True
+		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
+		card.switchTo("Planning") #skips upkeep for first turn
+		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", initX, initY ) #initiative token
+		if mycolor == PlayerColor[0]:
+			init.switchTo("")
+		elif mycolor == PlayerColor[1]:
+			init.switchTo("B")
+		elif mycolor == PlayerColor[2]:
+			init.switchTo("C")
+		elif mycolor == PlayerColor[3]:
+			init.switchTo("D")
+		setGlobalVariable("IniAllDone", "x")
+		setGlobalVariable("RoundNumber", "1")
+		gameStartTime = time.time()
+		notify("Setup is complete!")
 
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
