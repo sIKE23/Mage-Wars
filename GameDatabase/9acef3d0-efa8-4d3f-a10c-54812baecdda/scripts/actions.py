@@ -111,7 +111,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.7.0.0"
+ver = "1.6.5.9"
 
 ############################################################################
 ############################		Events		############################
@@ -166,6 +166,7 @@ def onLoadDeck(player, groups):
 						card.delete()
 			#if a deck was already loaded, reset the game       
 			if deckLoaded:
+				notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 				deckLoaded = False
 				resetGame()
 
