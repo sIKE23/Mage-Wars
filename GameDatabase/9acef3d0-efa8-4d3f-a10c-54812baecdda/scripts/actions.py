@@ -142,6 +142,7 @@ def onLoadDeck(player, groups):
 	global deckLoaded
 	global debugMode
 	global playerNum
+	global iniTokenCreated
 	if player == me:
 		if debugMode or validateDeck(groups[0]):
 			deckLoaded = True
@@ -168,6 +169,7 @@ def onLoadDeck(player, groups):
 			if deckLoaded:
 				notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 				deckLoaded = False
+				iniTokenCreated = False
 				resetGame()
 
 def SetupForIni():
