@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="665fd551-678d-4b5c-94a3-347dd320f20a">Beastmaster Stats</card>
+    <card qty="1" id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f">Beastmaster</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="8ca4ca3f-2d9f-4828-bbfc-b106fb9b7b46">Geyser</card>
+    <card qty="1" id="effa9ea8-3cf2-4efe-a83f-6f920c8faa22">Jet Stream</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="2380dfaa-3339-4fd9-b927-91aa7a30019d">Tanglevine</card>
+    <card qty="1" id="a239d7aa-4e81-4a4e-b447-cc3202bb5bad">Tooth and Nail</card>
+    <card qty="1" id="b318bb77-75c5-4e7a-9347-dbdcbde55f33">Wall of Stone</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="87cb82db-2f99-4227-8447-72cffba636dc">Bitterwood Fox</card>
+    <card qty="1" id="1df603fc-3d5d-4a40-9942-640bca00e396">Cervere, The Forest Shadow</card>
+    <card qty="1" id="ddb64417-619b-49a4-a783-9bcf77f54c34">Emerald Tegu</card>
+    <card qty="2" id="acfc7da8-49f0-45f0-ab19-e7ccd124711f">Feral Bobcat</card>
+    <card qty="1" id="3a55bfaa-a96e-43fc-9a66-f8aff21701d5">Steelclaw Grizzly</card>
+    <card qty="1" id="434d1870-d8bb-4362-aa21-415d4843e839">Timber Wolf</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="8df84f88-e24a-4517-aae5-8595c09cc3cd">Bear Strength</card>
+    <card qty="1" id="25d70640-eea1-4429-b146-4d176b493e41">Block</card>
+    <card qty="1" id="746e5dba-4689-4ae5-831e-a844131c4824">Cobra Reflexes</card>
+    <card qty="2" id="76d440be-b82c-4a12-97ef-c2bad86fdc1a">Regrowth</card>
+    <card qty="1" id="24b63480-3272-4f93-b576-48710d5bedaa">Retaliate</card>
+    <card qty="2" id="afd1e927-92a2-4525-a33f-50fec7c9b382">Rhino Hide</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="12b4584c-1338-4155-8a7f-6ba27ced88ba">Bearskin</card>
+    <card qty="1" id="dda72c4a-8f33-42cf-9eed-bd52fb91af22">Elemental Cloak</card>
+    <card qty="1" id="e3375aac-6b2d-45b8-93a9-c8d0b316ee94">Staff of Beasts</card>
+    <card qty="1" id="7900f68c-f781-48d1-9c96-74973d16530c">Ring of Beasts</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="5d5025e2-8e1a-4694-9845-fd944cc37b92">Call of the Wild</card>
+    <card qty="1" id="78846d18-04ca-4fc8-b3e1-bc22003a92a8">Charge</card>
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+    <card qty="1" id="f3c06b0f-69ac-40ba-8d78-632c5f89505c">Group Heal</card>
+    <card qty="1" id="96719b92-1dd5-4a7e-b7eb-574464feeca8">Minor Heal</card>
+    <card qty="1" id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2">Rouse the Beast</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

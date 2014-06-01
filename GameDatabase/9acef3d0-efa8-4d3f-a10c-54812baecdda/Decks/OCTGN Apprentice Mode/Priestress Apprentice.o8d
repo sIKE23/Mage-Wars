@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="352e2f88-a99e-46f0-86f9-ab7b05d978cb">Priestess Stats</card>
+    <card qty="1" id="b5de32e7-8b57-44f2-a25a-b7bae56bffb7">Priestess</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="755727ff-55c8-417a-a376-958f1dbb8d99">Blinding Flash</card>
+    <card qty="2" id="d661f9e7-c9b5-4913-b809-e9fda8606c2b">Pillar of Light</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="2" id="8963689f-6703-417d-aeda-64cbb9dab440">Asyran Cleric</card>
+    <card qty="1" id="76d2e8e3-6414-488c-b866-20d91f6320db">Brogan Bloodstone</card>
+    <card qty="1" id="da91fdd3-73dd-418f-91cf-bf827ef40509">Highland Unicorn</card>
+    <card qty="2" id="12f32a67-eb37-4311-ab57-addb40573990">Knight of Westlock</card>
+    <card qty="1" id="38380818-d4ca-45b4-a13e-d85d7683c25a">Royal Archer</card>
+    <card qty="1" id="0a4d7796-8763-4af6-b283-23d98582c5d0">Asyran Defender</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="25d70640-eea1-4429-b146-4d176b493e41">Block</card>
+    <card qty="1" id="b4c5b374-da35-482f-9ef1-594a39de116e">Bull Endurance</card>
+    <card qty="1" id="81c93236-8b3f-41fd-9210-89a9498ecfce">Nullify</card>
+    <card qty="2" id="22a8931e-1c99-44dd-bfb1-ad56e91fb361">Pacify</card>
+    <card qty="1" id="afd1e927-92a2-4525-a33f-50fec7c9b382">Rhino Hide</card>
+    <card qty="2" id="58b52bf5-816a-4342-b1b8-a37f16daa49f">Divine Protection</card>
+    <card qty="1" id="f3974912-fc35-4007-98e0-14bdddfe3e0c">Healing Charm</card>
+    <card qty="1" id="39d0a0a1-154d-4e33-9af0-937f0b98465c">Sacred Ground</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="0c8d6e31-5e59-454c-a7e0-0d3118f0cead">Deflection Bracers</card>
+    <card qty="1" id="d78f4233-edf8-4535-b3db-37ba3a69d0ab">Staff of Asyra</card>
+    <card qty="1" id="9394929c-4773-4aa2-bd02-2a930cfa07a0">Wind Wyvern Hide</card>
+    <card qty="1" id="aa404428-c691-4c46-b11c-824158dfcf4d">Ring of Asyra</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+    <card qty="1" id="f3c06b0f-69ac-40ba-8d78-632c5f89505c">Group Heal</card>
+    <card qty="1" id="5c2d7a57-f15c-44a9-9dc8-9393056d9e55">Heal</card>
+    <card qty="2" id="96719b92-1dd5-4a7e-b7eb-574464feeca8">Minor Heal</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="b318bb77-75c5-4e7a-9347-dbdcbde55f33">Wall of Stone</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

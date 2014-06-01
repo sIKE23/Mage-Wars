@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.6.5.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.7.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Type" value="Attack" />

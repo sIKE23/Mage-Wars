@@ -17,6 +17,7 @@ ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
 ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
 ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be" )
 ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6" )
+Armor = ("Armor +1", "b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" )
 Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
 Burn = ("Burn", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
@@ -111,7 +112,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.6.5.9"
+ver = "1.7.0.0"
 
 ############################################################################
 ############################		Events		############################
@@ -133,9 +134,12 @@ def onGameStart():
 	setGlobalVariable("SetupDone", "")
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", "")
+	setGlobalVariable("GameReset", "")
 
 # set Dice Rolling Area, Initative, and Phase Marker Card location
 	setDRAIP()
+# bring up window to point to documentation
+	initializeGame()
 
 def onLoadDeck(player, groups):
 	mute()
@@ -144,7 +148,13 @@ def onLoadDeck(player, groups):
 	global playerNum
 	global iniTokenCreated
 	if player == me:
-		if debugMode or validateDeck(groups[0]):
+		#if a deck was already loaded, reset the game
+		if deckLoaded:
+			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
+			for p in players:
+				remoteCall(p, "setClearVars",[])
+			resetGame()
+		elif debugMode or validateDeck(groups[0]):
 			deckLoaded = True
 			playerSetup()
 			if debugMode:
@@ -165,12 +175,12 @@ def onLoadDeck(player, groups):
 				for card in group:
 					if card.controller == me:
 						card.delete()
-			#if a deck was already loaded, reset the game       
-			if deckLoaded:
-				notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
-				deckLoaded = False
-				iniTokenCreated = False
-				resetGame()
+
+def setClearVars():
+	global deckLoaded
+	global iniTokenCreated
+	deckLoaded = False
+	iniTokenCreated = False
 
 def SetupForIni():
 	mute()
@@ -404,6 +414,13 @@ def setGameBoard5(group, x=0, y=0):
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
+
+def setGameBoard9(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard9.jpg"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [boardSet])
 		
 def setGameBoard10(group, x=0, y=0):
 	global boardSet
@@ -411,7 +428,6 @@ def setGameBoard10(group, x=0, y=0):
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
-
 
 def sayVer():
 	notify("{} is running v.{} of the Mage Wars module.".format(me, ver))
@@ -608,7 +624,7 @@ def resolveRot():
 				card.markers[Damage] += rotDamage
 			notify("{} damage added to {}.".format(rotDamage, card.Name))
 		notify("Finished auto-resolving Rot for {}.".format(me))
-		
+
 def resolveBleed():
 	mute()
 
@@ -627,7 +643,7 @@ def resolveBleed():
 			elif card.Type == "Creature" or "Conjuration" in card.Type:
 				card.markers[Damage] += bleedDamage
 			notify("{} damage added to {}.".format(bleedDamage, card.Name))
-		notify("Finished auto-resolving Bleed for {}.".format(me))		
+		notify("Finished auto-resolving Bleed for {}.".format(me))
 
 def resolveDissipate():
 	mute()
@@ -755,7 +771,7 @@ def toggleResolveBleed(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Bleed markers on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Bleed markers on your cards.")
-		
+
 def toggleResolveDissipate(group, x=0, y=0):
 	autoResolveDissipate = getSetting("AutoResolveDissipate", True)
 	setSetting("AutoResolveDissipate", not autoResolveDissipate)
@@ -823,11 +839,14 @@ def askRevealEnchant(group, x=0, y=0):
 
 ##########################     Add Tokens     ##############################
 
-def addBurn(card, x = 0, y = 0):
-	addToken(card, Burn)
+def addArmor(card, x = 0, y = 0):
+	addToken(card, Armor)
 
 def addBleed(card, x = 0, y = 0):
 	addToken(card, Bleed)
+	
+def addBurn(card, x = 0, y = 0):
+	addToken(card, Burn)
 
 def addCripple(card, x = 0, y = 0):
     addToken(card, Cripple)
@@ -1009,6 +1028,8 @@ def toggleVoltaric(card, x=0, y=0):
 
 ######################     Remove Tokens     ###########################
 
+def subArmor(card, x = 0, y = 0):
+	subToken(card, Armor)
 
 def subBleed(card, x = 0, y = 0):
  	subToken(card, Bleed)
@@ -1366,6 +1387,24 @@ def playSoundFX(sound):
 	else:
 		playSound(sound)
 
+def initializeGame():
+    mute()
+    #### LOAD UPDATES
+    v1, v2, v3, v4 = gameVersion.split('.')  ## split apart the game's version number
+    v1 = int(v1) * 1000000
+    v2 = int(v2) * 10000
+    v3 = int(v3) * 100
+    v4 = int(v4)
+    currentVersion = v1 + v2 + v3 + v4  ## An integer interpretation of the version number, for comparisons later
+    lastVersion = getSetting("lastVersion", convertToString(currentVersion - 1))  ## -1 is for players experiencing the system for the first time
+    lastVersion = int(lastVersion)
+    for log in sorted(changelog):  ## Sort the dictionary numerically
+        if lastVersion < log:  ## Trigger a changelog for each update they haven't seen yet.
+            stringVersion, date, text = changelog[log]
+            updates = '\n-'.join(text)
+            confirm("Documentation available in v.{} ({}):\n-{}".format(stringVersion, date, updates))
+    setSetting("lastVersion", convertToString(currentVersion))  ## Store's the current version to a setting
+
 #---------------------------------------------------------------------------
 # Table group actions
 #---------------------------------------------------------------------------
@@ -1659,7 +1698,7 @@ def validateDeck(deck):
 			if "Warlock" in magename:
 				magename = "Warlock"
 			if "Priestess" in magename:
-				magename = "Priestess"				
+				magename = "Priestess"
 			if magename in card.Traits:	#mage restriction
 				ok = True
 			for s in [school for school in spellbook if spellbook[school] == 1]:

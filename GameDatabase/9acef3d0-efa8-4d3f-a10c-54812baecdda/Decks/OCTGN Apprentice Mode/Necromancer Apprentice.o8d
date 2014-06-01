@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="6b830552-8420-4797-bbb5-3ec5bb768265">Necromancer</card>
+    <card qty="1" id="682d3b40-7c08-437b-9c88-16e2f389773f">Necromancer Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="a5386a31-5786-4e70-9482-65657607d802">Acid Ball</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="352583ca-7fed-481b-9b8a-456b05e61501">Mort</card>
+    <card qty="1" id="310c13cd-b845-46c2-9ad7-94eda4626f1d">Skeletal Archer</card>
+    <card qty="2" id="d40817b6-6574-4d86-b0bf-0f32fb1e49cf">Skeletal Minion</card>
+    <card qty="1" id="b3ea6383-16dc-4786-92c5-e1498f2811c3">Skeletal Knight</card>
+    <card qty="1" id="9a1370a0-44cb-47ac-a736-807f96a51785">Acolyte of the Bog Queen</card>
+    <card qty="1" id="52b0f102-59d5-415c-9e5b-3d2192613155">Malacoda</card>
+    <card qty="1" id="0d9b07c9-5d2b-45fa-9e69-6f371293f883">Skeletal Sentry</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="2d94d69e-5c08-4db2-89a0-5c811bfaca17">Marked for Death</card>
+    <card qty="1" id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6">Agony</card>
+    <card qty="1" id="20b2deab-90f3-4a9b-83b4-ad83129ec14c">Enfeeble</card>
+    <card qty="1" id="660cd33f-8812-48bb-a513-2ada886a0320">Ghoul Rot</card>
+    <card qty="1" id="52758d34-ee4f-46cd-bb00-6f9bc5edd553">Poisoned Blood</card>
+    <card qty="1" id="46b36e31-5dec-4a37-a39c-c2a5b6e0caee">Death Link</card>
+    <card qty="1" id="775fd07c-63b3-48af-9a6d-061165fe5805">Chains of Agony</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="fc42efdc-0a85-4a45-a273-f5e403f1489c">Demonhide Armor</card>
+    <card qty="1" id="290f58ae-7089-4ddd-a7ad-3abdd129f9dc">Cloak of Shadows</card>
+    <card qty="1" id="84aeeb75-a297-4b94-a79d-f9068e19dcd9">Deathshroud Staff</card>
+    <card qty="1" id="5a07689a-9edc-4366-9d70-6eecf5f4447d">Leather Boots</card>
+    <card qty="1" id="70e1dca8-85ef-40f0-a18a-6904ed4539de">Death Ring</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="ee58773c-a3ea-42b9-b1ec-c0a4560f8cd6">Animate Dead</card>
+    <card qty="3" id="bdf3c1a5-2f4e-41bb-806f-b8db38ba7242">Reassemble</card>
+    <card qty="1" id="fed20306-b9fa-4351-acb0-126701a1bd8f">Unholy Resurgence</card>
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="ffda5f70-74ef-40d8-9da5-f848c2447615">Drain Life</card>
+    <card qty="1" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="b318bb77-75c5-4e7a-9347-dbdcbde55f33">Wall of Stone</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

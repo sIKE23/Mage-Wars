@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.6.5.9"
+	version="1.7.0.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -15,6 +15,7 @@
 	usetwosidedtable="False">
 	<scripts>
 		<script src="scripts/actions.py" />
+		<script src="scripts/changelog.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
@@ -27,6 +28,7 @@
 	<proxygen definitionsrc="proxy/CardGenData.xml" />
 	<documents>
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
+		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html" />
 		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html" />
 		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v1.html" />
 		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html" />
@@ -91,13 +93,15 @@
 			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
 			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
 			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
-			<groupaction menu="Set Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
+			<groupaction menu="Set 2x3 Apprentice Arena Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard9" />
+			<groupaction menu="Set 3x3 OCTGN Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
 		</groupactions>
 		<cardactions menu="Add Tokens">
-			<cardaction menu="Add Damage" default="False" shortcut="F2" execute="addDamage" />
-			<cardaction menu="Add Mana" default="False" shortcut="Ctrl+M" execute="addMana" />
+			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage" />
+			<cardaction menu="Add Mana Counter" default="False" shortcut="Ctrl+M" execute="addMana" />
+			<cardaction menu="Add Armor +1 Token" default="False" shortcut="Alt+A" execute="addArmor" />
 			<cardaction menu="Add Burn Token" default="False" shortcut="Ctrl+B" execute="addBurn" />
 			<cardaction menu="Add Bleed Token" default="False" shortcut="Alt+B" execute="addBleed" />
 			<cardaction menu="Add Corrode Token" default="False" shortcut="Ctrl+C" execute="addCorrode" />
@@ -106,18 +110,19 @@
 			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+D" execute="addDisable" />
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
 			<cardaction menu="Add Stuck Token" default="False" shortcut="Ctrl+K" execute="addStuck" />
-			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+R" execute="addRot" />	
+			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Token" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Stun Token" default="False" shortcut="Alt+S" execute="addStun" />
 			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTaint" />
 			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVet" />
 			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak" />
 			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
-			<cardaction menu="Add Other Token" default="False" shortcut="Ctrl+O" execute="addOther" />
+			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
 		<cardactions menu="Remove Tokens">
-			<cardaction menu="Remove Damage" default="False" shortcut="F4" execute="subDamage" />
-			<cardaction menu="Remove Mana" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
+			<cardaction menu="Remove Damage Counter" default="False" shortcut="F4" execute="subDamage" />
+			<cardaction menu="Remove Mana Counter" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
+			<cardaction menu="Remove Armor +1 Token" default="False" shortcut="Ctrl+Alt+A" execute="subArmor" />
 			<cardaction menu="Remove Burn Token" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
 			<cardaction menu="Remove Bleed Token" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
 			<cardaction menu="Remove Corrode Token" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
@@ -133,7 +138,7 @@
 			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVet" />
 			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
 			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie" />
-			<cardaction menu="Remove All Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
+			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
 		<cardactions menu="Toggle Markers">
 			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction" />
@@ -149,7 +154,7 @@
 			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
-			<cardaction menu="Obliterate Card" default="False" shortcut="Alt+Del" execute="obliterate" />
+			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">

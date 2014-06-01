@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="6d6362dc-1130-4bd0-ae5b-55ae2c59bc82">Forcemaster Stats</card>
+    <card qty="1" id="7f88625f-591b-41ef-861d-4a89a4a57f24">Forcemaster</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="590a9343-4aff-45e7-971d-43c1ec3c0e74">Force Hammer</card>
+    <card qty="2" id="c807e217-baed-484c-9599-aeb0a23507b7">Invisible Fist</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="c42f5b13-b348-440a-962e-40ed4fa48603">Invisible Stalker</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="47f96e37-5008-43d1-a7c7-6ff3bd841bd3">Charm</card>
+    <card qty="1" id="aa4cc3ff-7738-41c3-b5f6-f7b959ba71a5">Forcefield</card>
+    <card qty="2" id="25d70640-eea1-4429-b146-4d176b493e41">Block</card>
+    <card qty="1" id="aeada61e-e636-4c46-b169-833162a13b93">Force Hold</card>
+    <card qty="2" id="732f4d7f-0cf6-4393-9446-b9360c8f18e3">Reverse Attack</card>
+    <card qty="1" id="7b9de53a-a500-44b5-a510-19636528d89a">Cheetah Speed</card>
+    <card qty="1" id="ed610a8f-e3f2-4d3e-8db6-5d85c42afb4b">Decoy</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="1db6906f-12ec-4538-8d1e-534a7beb81d4">Dancing Scimitar</card>
+    <card qty="1" id="119cb255-4b1e-42b9-9eba-d41935b9ae8e">Force Ring</card>
+    <card qty="1" id="e723b930-1d54-406f-bf69-72f14c66f561">Galvitar, Force Blade</card>
+    <card qty="1" id="9481805e-d24d-41d8-b02e-5c5ae55c4add">Psi-Orb</card>
+    <card qty="1" id="848e5beb-778e-4d42-a393-3122fb2271ce">Defense Ring</card>
+    <card qty="1" id="983a31d2-4e37-441d-a39e-3088f9b3d84c">Regrowth Belt</card>
+    <card qty="1" id="9394929c-4773-4aa2-bd02-2a930cfa07a0">Wind Wyvern Hide</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="d781b3a9-4c77-47c0-a899-0067fbafe856">Sleep</card>
+    <card qty="1" id="70840eb1-9d97-4eff-bba2-1b23ef72d9db">Knockdown</card>
+    <card qty="1" id="9455c697-f680-4d12-b5d6-72235c03f77c">Force Push</card>
+    <card qty="1" id="36fc7953-da2b-4fb2-9708-d163ecc6853b">Steal Equipment</card>
+    <card qty="1" id="c2a84121-e36b-4b21-9715-32bd43a21b15">Repulse</card>
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="b969cb2f-6f0b-4d89-8839-511aab891c0d">Teleport</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="b318bb77-75c5-4e7a-9347-dbdcbde55f33">Wall of Stone</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

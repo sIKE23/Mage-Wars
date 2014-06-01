@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="d20c9d4a-65a7-4018-bffc-16ed0cb62912">Druid</card>
+    <card qty="1" id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260">Druid Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="a1de2c11-60ab-42b5-99d5-752f5cb85770">Surging Wave</card>
+    <card qty="1" id="8ca4ca3f-2d9f-4828-bbfc-b106fb9b7b46">Geyser</card>
+    <card qty="1" id="a5386a31-5786-4e70-9482-65657607d802">Acid Ball</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="2380dfaa-3339-4fd9-b927-91aa7a30019d">Tanglevine</card>
+    <card qty="1" id="b0993b6c-e604-4ba4-86d7-b45e53daae9b">Vine Tree</card>
+    <card qty="1" id="a3a04a1e-76e9-4043-a22c-d731ac2a103f">Corrosive Orchid</card>
+    <card qty="1" id="b318bb77-75c5-4e7a-9347-dbdcbde55f33">Wall of Stone</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="6ea8364e-2843-4649-af14-44ebedeeb41e">Galador, Protector of Straywood</card>
+    <card qty="1" id="e4fb0871-99e8-40c3-b744-828400701c36">Kralathor, The Devourer</card>
+    <card qty="2" id="1c7345af-d370-446b-8d71-ebb1e90b0db9">Raptor Vine</card>
+    <card qty="2" id="bc0190fc-cb97-47e5-aa19-a2d387a64b73">Vine Snapper</card>
+    <card qty="2" id="5065ae95-c3be-494f-ba68-afedb3b8c2d9">Thornlasher</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="8df84f88-e24a-4517-aae5-8595c09cc3cd">Bear Strength</card>
+    <card qty="1" id="746e5dba-4689-4ae5-831e-a844131c4824">Cobra Reflexes</card>
+    <card qty="1" id="afd1e927-92a2-4525-a33f-50fec7c9b382">Rhino Hide</card>
+    <card qty="2" id="b4c5b374-da35-482f-9ef1-594a39de116e">Bull Endurance</card>
+    <card qty="1" id="7b9de53a-a500-44b5-a510-19636528d89a">Cheetah Speed</card>
+    <card qty="1" id="8c9e5e56-a9a9-4077-92c1-f35123ee4c64">Hawkeye</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="5adeed7f-a23f-46f9-9d3a-2d697a8b6855">Chitin Armor</card>
+    <card qty="1" id="ceee5eaa-4aef-4b81-b272-b23d7e15380d">Druid's Leaf Ring</card>
+    <card qty="1" id="dda72c4a-8f33-42cf-9eed-bd52fb91af22">Elemental Cloak</card>
+    <card qty="1" id="d2d9ee17-377b-453f-9772-e996076cece4">Enchanter's Ring</card>
+    <card qty="1" id="fabfda9b-1168-4b3b-9f2b-c5ead9215b81">Mage Staff</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2">Rouse the Beast</card>
+    <card qty="2" id="7c50b8b4-149e-4636-8beb-88672929946b">Burst of Thorns</card>
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="8cdd0758-7dcb-4c58-9855-a1d852b86e33">Renewing Rain</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

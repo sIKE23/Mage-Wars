@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.6.5.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.7.0.0">
 	<markers>
 		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
 		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
