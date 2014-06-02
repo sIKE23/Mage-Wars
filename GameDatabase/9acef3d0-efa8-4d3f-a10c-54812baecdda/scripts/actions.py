@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.7.0.0    ##################################
+##########################    v1.7.0.1    ##################################
 ############################################################################
 import time
 import re
@@ -112,7 +112,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.7.0.0"
+ver = "1.7.0.1"
 
 ############################################################################
 ############################		Events		############################
@@ -1232,7 +1232,9 @@ def defaultAction(card, x = 0, y = 0):
 	if card.controller == me:
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
-			if card.Type == "Enchantment":
+			if "Mage" in card.Type:
+				flipcard(card, x, y)
+			elif card.Type == "Enchantment":
 				if getSetting("EnchantPromptReveal", False):
 					choiceList = ['Yes', 'No']
 					colorsList = ['#0000FF', '#FF0000']
@@ -1240,7 +1242,6 @@ def defaultAction(card, x = 0, y = 0):
 					if choice == 0 or choice == 2:
 						return
 
-			flipcard(card, x, y)
 			castSpell(card, x, y)
 		else:
 			castSpell(card, x, y)
@@ -1551,6 +1552,7 @@ def castSpell(card, x = 0, y = 0):
 			notify("{} has insufficient mana in pool".format(me))
 			return
 		me.Mana -= manacost
+		flipcard(card, x, y)
 		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
 
 def inspectCard(card, x = 0, y = 0):
