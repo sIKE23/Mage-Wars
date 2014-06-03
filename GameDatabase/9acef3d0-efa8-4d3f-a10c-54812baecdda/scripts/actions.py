@@ -13,14 +13,14 @@ ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
 ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" )
-ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
-ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
+ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d" )
+ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563" )
 ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be" )
 ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6" )
 ActionGrey = ("Action", "623f07fb-9cfb-4b4b-a350-6b208f0ef29e" )
 ActionGreyUsed = ("Action Used", "99bd454e-fab9-47c6-9f59-54a112eeb2da" )
 ActionPurple = ("Action", "edb61e00-a666-480a-81f3-20eb9944b0ea")
-ActionPurpleUsed = ("Action Used", "158f738b-6034-4c6d-b4ca-5abcf159ed9f")
+ActionPurpleUsed = ("Action Used", "158f738b-6034-4c6d-b4ca-5abcf159ed9f" )
 Armor = ("Armor +1", "b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" )
 Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
@@ -31,7 +31,7 @@ Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
 Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20" )
 DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
 DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
-Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb")
+Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
@@ -58,7 +58,7 @@ Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
 Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
-Taint = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f")
+Taint = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
 Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805" )
@@ -480,6 +480,7 @@ def CreateIniToken():
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	global roundTimes
+	mageStatus()
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
 		return
 	mute()
@@ -727,6 +728,11 @@ def resolveChanneling(c):
 					else:
 						whisper("Harmonize found but no Mana added")
 
+def mageStatus():
+	if not me.Damage >= me.Life:
+		return
+	notify("{} has fallen in the arena!".format(me))
+	#reportGame('MageDeath')
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
@@ -1556,8 +1562,8 @@ def castSpell(card, x = 0, y = 0):
 			notify("{} has insufficient mana in pool".format(me))
 			return
 		me.Mana -= manacost
-		flipcard(card, x, y)
 		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
+		flipcard(card, x, y)
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
