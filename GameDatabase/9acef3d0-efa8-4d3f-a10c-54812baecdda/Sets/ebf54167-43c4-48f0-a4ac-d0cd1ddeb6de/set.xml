@@ -34,6 +34,10 @@
 		<marker id="5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" name="Action Green Back" />
 		<marker id="2ec4ddea-9596-45cc-a084-23caa32511be" name="Action Yellow" />
 		<marker id="7c145c5d-54c3-4f5b-bf66-f4d52f240af6" name="Action Yellow Back" />
+		<marker id="edb61e00-a666-480a-81f3-20eb9944b0ea" name="Action Purple" />
+		<marker id="158f738b-6034-4c6d-b4ca-5abcf159ed9f" name="Action Purple Back" />
+		<marker id="623f07fb-9cfb-4b4b-a350-6b208f0ef29e" name="Action Grey" />
+		<marker id="99bd454e-fab9-47c6-9f59-54a112eeb2da" name="Action Grey Back" />
 		<marker id="874c7fbb-c566-4f17-b14e-ae367716dce5" name="Egg Token" />
 		<marker id="fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" name="Mist Token" />
 		<marker id="d32267be-f4c5-48c6-8396-83c0db406942" name="Load Token" />

@@ -9,14 +9,18 @@ import re
 
 ##########################		Markers			##################################
 
-ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58")
-ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649")
+ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
+ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
 ActionGreenUsed = ("Action Used", "5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" )
 ActionRed = ("Action", "4dd182d2-6e69-499c-b2ad-38701c0fb60d")
 ActionRedUsed = ("Action Used", "2e069a99-1696-4cbe-b6c6-13e1dda29563")
 ActionYellow = ("Action", "2ec4ddea-9596-45cc-a084-23caa32511be" )
 ActionYellowUsed = ("Action Used", "7c145c5d-54c3-4f5b-bf66-f4d52f240af6" )
+ActionGrey = ("Action", "623f07fb-9cfb-4b4b-a350-6b208f0ef29e" )
+ActionGreyUsed = ("Action Used", "99bd454e-fab9-47c6-9f59-54a112eeb2da" )
+ActionPurple = ("Action", "edb61e00-a666-480a-81f3-20eb9944b0ea")
+ActionPurpleUsed = ("Action Used", "158f738b-6034-4c6d-b4ca-5abcf159ed9f")
 Armor = ("Armor +1", "b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" )
 Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
