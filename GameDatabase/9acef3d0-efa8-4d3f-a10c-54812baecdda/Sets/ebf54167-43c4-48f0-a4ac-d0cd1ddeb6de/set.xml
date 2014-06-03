@@ -50,7 +50,7 @@
 			<property name="Traits" value="Melee +1" />
 			<alternate name="Beastmaster" type="B" />
 		</card>
-		<card id="608f34d9-e0dd-4ca4-9840-2ef90b742058" name="Beastmaster(Apprentice)">
+		<card id="608f34d9-e0dd-4ca4-9840-2ef90b742058" name="Beastmaster (Apprentice)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
 			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
@@ -72,7 +72,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal costs." />
 			<alternate name="Priestess" type="B" />
 		</card>
-		<card id="9b9af674-185b-4e60-9943-fa6f1c35d4b2" name="Priestess(Apprentice)">
+		<card id="9b9af674-185b-4e60-9943-fa6f1c35d4b2" name="Priestess (Apprentice)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
 			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
@@ -94,7 +94,7 @@
 			<property name="Traits" value="Melee +1" />
 			<alternate name="Warlock" type="B" />
 		</card>
-		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock(Apprentice)">
+		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
 			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
@@ -107,7 +107,7 @@
 		<card id="52fdb62d-59e3-4b5e-904e-d92ae2be7012" name="Warlock Stats">
 			<property name="Type" value="Magestats" />
 		</card>
-		<card id="4208e1b0-b570-42de-9e62-5ce15b97b91e" name="Wizard(Air)">
+		<card id="4208e1b0-b570-42de-9e62-5ce15b97b91e" name="Wizard (Air)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
@@ -116,7 +116,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Air)" type="B" />
 		</card>
-		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard(Earth)">
+		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard (Earth)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
@@ -125,7 +125,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Earth)" type="B" />
 		</card>
-		<card id="4f252cfc-75a7-42b8-9f4c-2fb4a40b227e" name="Wizard(Fire)">
+		<card id="4f252cfc-75a7-42b8-9f4c-2fb4a40b227e" name="Wizard (Fire)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
@@ -134,7 +134,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Fire)" type="B" />
 		</card>
-		<card id="7f276a4a-d18d-426f-890e-e50b143e7940" name="Wizard(Water)">
+		<card id="7f276a4a-d18d-426f-890e-e50b143e7940" name="Wizard (Water)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
@@ -143,7 +143,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Water)" type="B" />
 		</card>
-		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard(Apprentice)">
+		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard (Apprentice)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
