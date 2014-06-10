@@ -2804,6 +2804,8 @@
 			<alternate name="1st Player Token Blue" type="B" />
 			<alternate name="1st Player Token Green" type="C" />
 			<alternate name="1st Player Token Yellow" type="D" />
+			<alternate name="1st Player Token Purple" type="E" />
+			<alternate name="1st Player Token Gray" type="F" />
 		</card>
 		<card id="af14ca09-a83d-4185-afa0-bc38a31dbf82" name="Alt Zone Intersection">
 			<property name="Type" value="Internal" />

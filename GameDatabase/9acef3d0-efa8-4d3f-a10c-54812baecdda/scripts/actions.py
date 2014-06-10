@@ -102,8 +102,10 @@ diceBankD12 = [0]
 PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#171e78", 		# Blue		R=23  G=30  B=120
 				"#01603e", 		# Green		R=1   G=96  B=62
-				"#f7d917"] 		# Yellow 	R=247 G=217 B=23
-mycolor = "#800080" # Purple
+				"#f7d917", 		# Yellow 	R=247 G=217 B=23
+				"#c680b4",		# Purple
+				"#c0c0c0"]		# Grey
+mycolor = "#800080" # default
 boardSet = "GameBoard1.png"
 debugMode = False
 myIniRoll = 0
@@ -337,7 +339,7 @@ def playerSetup():
 
 	# Players select their color
 	global mycolor
-	choiceList = ["Red", "Blue", "Green", "Yellow"]
+	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
 	while (True):
 		choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
 		colorsChosen = getGlobalVariable("ColorsChosen")
@@ -472,6 +474,10 @@ def CreateIniToken():
 			init.switchTo("C")
 		elif mycolor == PlayerColor[3]:
 			init.switchTo("D")
+		elif mycolor == PlayerColor[4]:
+			init.switchTo("E")
+		elif mycolor == PlayerColor[5]:
+			init.switchTo("F")
 		setGlobalVariable("IniAllDone", "x")
 		setGlobalVariable("RoundNumber", "1")
 		gameStartTime = time.time()
@@ -951,6 +957,24 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
+	elif mycolor == PlayerColor[4]: #Purple
+		if card.markers[ActionPurpleUsed] > 0:
+			card.markers[ActionPurple] = 1
+			card.markers[ActionPurpleUsed] = 0
+			notify("'{}' readies Action Marker".format(card.Name))
+		else:
+			card.markers[ActionPurple] = 0
+			card.markers[ActionPurpleUsed] = 1
+			notify("'{}' spends Action Marker".format(card.Name))
+	elif mycolor == PlayerColor[5]: #Grey
+		if card.markers[ActionGreyUsed] > 0:
+			card.markers[ActionGrey] = 1
+			card.markers[ActionGreyUsed] = 0
+			notify("'{}' readies Action Marker".format(card.Name))
+		else:
+			card.markers[ActionGrey] = 0
+			card.markers[ActionGreyUsed] = 1
+			notify("'{}' spends Action Marker".format(card.Name))
 
 #def toggleBloodReaper(card, x=0, y=0):
 #	toggleToken(card, BloodReaper)
@@ -1307,6 +1331,12 @@ def playCardFaceDown(card, x=0, y=0):
 		x = -595
 		y = 120
 	elif mycolor == PlayerColor[3]:
+		x = 460
+		y = -240
+	elif mycolor == PlayerColor[4]:
+		x = 460
+		y = -240
+	elif mycolor == PlayerColor[5]:
 		x = 460
 		y = -240
 	while occupied:
