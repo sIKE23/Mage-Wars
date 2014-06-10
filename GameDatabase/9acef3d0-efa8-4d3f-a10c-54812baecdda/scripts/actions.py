@@ -427,7 +427,7 @@ def setGameBoard9(group, x=0, y=0):
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
-		
+
 def setGameBoard10(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard10.jpg"
@@ -453,9 +453,11 @@ def AskInitiative():
 	if choice == 1:
 		notify("{} has elected to go first!".format(me))
 		CreateIniToken()
+		players[0].setActivePlayer()
 	else:
 		notify("{} has elected NOT to go first! {} has first initiative.".format(me, players[1]))
 		remoteCall(players[1], "CreateIniToken", [])
+		players[1].setActivePlayer()
 
 def CreateIniToken():
 	global gameStartTime
@@ -509,12 +511,15 @@ def nextPhase(group, x=-360, y=-150):
 		if switchPhase(card,"","Upkeep Phase") == True: #Back to Upkeep
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
+#			advanceTurn()
 			turn = int(getGlobalVariable("RoundNumber")) + 1
+#			turntest = turnNumber() + 1
 			setGlobalVariable("RoundNumber", str(turn))
 			rTime = time.time()
 			roundTimes.append(rTime)
 			notify("Round {} Start Time: {}".format(str(turn),time.ctime(roundTimes[-1])))
 			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
+#			notify("***Ready Stage for Round #" + str(turntest) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
@@ -550,6 +555,12 @@ def resetDiscounts():
 	for tup in discountsUsed:
 		discountsUsed.remove(tup)
 		discountsUsed.append((tup[0],tup[1],0))
+
+#def advanceTurn():
+#	if not me.isActivePlayer:
+#		return
+#	else:
+#		players[1].setActivePlayer()
 
 def resetMarkers(c):
 	mute()
@@ -735,10 +746,24 @@ def resolveChanneling(c):
 						whisper("Harmonize found but no Mana added")
 
 def mageStatus():
+	global gameEndTime
+	mute()
 	if not me.Damage >= me.Life:
 		return
+	gameEndTime = time.time()
+#	playSoundFX('Winner')
 	notify("{} has fallen in the arena!".format(me))
 	#reportGame('MageDeath')
+
+def concede(group=table,x=0,y=0):
+	global gameEndTime
+	mute()
+	if confirm("Are you sure you want to concede this game?"):
+		gameEndTime = time.time()
+#		reportGame('Conceded')
+		notify("{} has conceded the game".format(me))
+	else:
+		notify("{} was about to concede the game, but thought better of it...".format(me))
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
@@ -812,16 +837,6 @@ def toggleAutoRollInitiative(group, x=0, y=0):
 	else:
 		whisper("You have enabled automatically rolling initiative.")
 
-def concede(group=table,x=0,y=0):
-	global gameEndTime
-	mute()
-	if confirm("Are you sure you want to concede this game?"):
-		gameEndTime = time.time()
-#		reportGame('Conceded')
-		notify("{} has conceded the game".format(me))
-	else:
-		notify("{} was about to concede the game, but thought better of it...".format(me))
-
 ############################################################################
 ######################		Chat Actions			################################
 ############################################################################
@@ -860,7 +875,7 @@ def addArmor(card, x = 0, y = 0):
 
 def addBleed(card, x = 0, y = 0):
 	addToken(card, Bleed)
-	
+
 def addBurn(card, x = 0, y = 0):
 	addToken(card, Burn)
 
