@@ -361,6 +361,7 @@ def playerSetup():
 			break
 	for stat in stats:
 		debug("stat {}".format(stat))
+		
 		statval = stat.split("=")
 		if "Channeling" in statval[0]:
 			me.Channeling = int(statval[1])
@@ -488,6 +489,7 @@ def CreateIniToken():
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	global roundTimes
+	global turn
 	mageStatus()
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
 		return
@@ -747,12 +749,21 @@ def resolveChanneling(c):
 
 def mageStatus():
 	global gameEndTime
+	global turn
 	mute()
 	if not me.Damage >= me.Life:
 		return
+	for c in table:
+		if c.Type == "Mage":
+			c.orientation = 1
 	gameEndTime = time.time()
 #	playSoundFX('Winner')
-	notify("{} has fallen in the arena!".format(me))
+	choiceList = ['OK']
+	colorsList = ['#800080']
+	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn),choiceList, colorsList)
+	if choice == 0:
+		magestatus()
+	notify("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn))
 	#reportGame('MageDeath')
 
 def concede(group=table,x=0,y=0):
@@ -1649,8 +1660,13 @@ def castSpell(card, x = 0, y = 0):
 		if manacost == None:
 			return
 		if me.Mana < manacost:
-			notify("{} has insufficient mana in pool".format(me))
-			return
+			if not debugMode:
+				notify("{} has insufficient mana in pool".format(me))
+				return
+			else:
+				notify("{} has insufficient mana in pool".format(me))
+				flipcard(card, x, y)
+				return
 		me.Mana -= manacost
 		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
 		flipcard(card, x, y)
