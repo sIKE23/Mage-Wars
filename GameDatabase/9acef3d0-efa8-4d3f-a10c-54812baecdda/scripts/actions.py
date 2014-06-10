@@ -1220,6 +1220,16 @@ def flipcard(card, x = 0, y = 0):
 				card.switchTo("")
 			else:
 				card.switchTo("D")
+		elif "0" in colorsChosen and "4" in colorsChosen: #red and purple
+			if card.alternate == "E":
+				card.switchTo("")
+			else:
+				card.switchTo("E")
+		elif "0" in colorsChosen and "5" in colorsChosen: #red and grey
+			if card.alternate == "F":
+				card.switchTo("")
+			else:
+				card.switchTo("F")
 		elif "1" in colorsChosen and "2" in colorsChosen: #blue and green
 			if card.alternate == "C":
 				card.switchTo("B")
@@ -1230,11 +1240,46 @@ def flipcard(card, x = 0, y = 0):
 				card.switchTo("B")
 			else:
 				card.switchTo("D")
+		elif "1" in colorsChosen and "4" in colorsChosen: #blue and purple
+			if card.alternate == "E":
+				card.switchTo("B")
+			else:
+				card.switchTo("E")
+		elif "1" in colorsChosen and "5" in colorsChosen: #blue and grey
+			if card.alternate == "F":
+				card.switchTo("B")
+			else:
+				card.switchTo("F")
 		elif "2" in colorsChosen and "3" in colorsChosen: #green and yellow
 			if card.alternate == "D":
 				card.switchTo("C")
 			else:
 				card.switchTo("D")
+		elif "2" in colorsChosen and "4" in colorsChosen: #green and purple
+			if card.alternate == "E":
+				card.switchTo("C")
+			else:
+				card.switchTo("E")
+		elif "2" in colorsChosen and "5" in colorsChosen: #green and grey
+			if card.alternate == "F":
+				card.switchTo("C")
+			else:
+				card.switchTo("F")
+		elif "3" in colorsChosen and "4" in colorsChosen: #yellow and purple
+			if card.alternate == "E":
+				card.switchTo("D")
+			else:
+				card.switchTo("E")
+		elif "3" in colorsChosen and "5" in colorsChosen: #yellow and grey
+			if card.alternate == "F":
+				card.switchTo("D")
+			else:
+				card.switchTo("F")
+		elif "4" in colorsChosen and "5" in colorsChosen: #purple and grey
+			if card.alternate == "F":
+				card.switchTo("E")
+			else:
+				card.switchTo("F")
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		notify("{} turns '{}' face down.".format(me, card.Name))
