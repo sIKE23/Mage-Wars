@@ -513,15 +513,15 @@ def nextPhase(group, x=-360, y=-150):
 		if switchPhase(card,"","Upkeep Phase") == True: #Back to Upkeep
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
-#			advanceTurn()
-			turn = int(getGlobalVariable("RoundNumber")) + 1
-#			turntest = turnNumber() + 1
+			advanceTurn()
+#			turn = int(getGlobalVariable("RoundNumber")) + 1
+			turn = turnNumber() + 1
 			setGlobalVariable("RoundNumber", str(turn))
 			rTime = time.time()
 			roundTimes.append(rTime)
 			notify("Round {} Start Time: {}".format(str(turn),time.ctime(roundTimes[-1])))
-			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
-#			notify("***Ready Stage for Round #" + str(turntest) + ":  Performing Initiative, Reset, and Channeling Phases")
+#			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
+			notify("***Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
@@ -558,11 +558,15 @@ def resetDiscounts():
 		discountsUsed.remove(tup)
 		discountsUsed.append((tup[0],tup[1],0))
 
-#def advanceTurn():
-#	if not me.isActivePlayer:
-#		return
-#	else:
-#		players[1].setActivePlayer()
+def advanceTurn():
+	if not me.isActivePlayer:
+		remoteCall(players[1], "remoteAdvanceTurn", [])
+	else:
+		players[1].setActivePlayer()
+
+def remoteAdvanceTurn():
+	advanceTurn()
+	
 
 def resetMarkers(c):
 	mute()
@@ -759,7 +763,7 @@ def mageStatus():
 	gameEndTime = time.time()
 #	playSoundFX('Winner')
 	choiceList = ['OK']
-	colorsList = ['#800080']
+	colorsList = ['#de2827']
 	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn),choiceList, colorsList)
 	if choice == 0:
 		magestatus()
