@@ -773,7 +773,7 @@ def mageStatus():
 	if not me.Damage >= me.Life:
 		return
 	for c in table:
-		if c.Type == "Mage":
+		if c.Type == "Mage" and c.controller == me:
 			c.orientation = 1
 	gameEndTime = time.time()
 #	playSoundFX('Winner')
