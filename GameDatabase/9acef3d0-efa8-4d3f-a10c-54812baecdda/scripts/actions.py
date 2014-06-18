@@ -142,8 +142,6 @@ def onGameStart():
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
 
-# set Dice Rolling Area, Initative, and Phase Marker Card location
-	setDRAIP()
 # bring up window to point to documentation
 	initializeGame()
 
@@ -221,7 +219,7 @@ def iniRoll(effect):
 	else:	#they won
 		remoteCall(players[1], "AskInitiative", [])
 
-def setDRAIP():
+def setDRAIP(location):
 	global dieCardX
 	global dieCardY
 	global dieCard2X
@@ -231,7 +229,7 @@ def setDRAIP():
 	global initX
 	global initY
 
-	if not getSetting("AutoConfigDRAIP", True):
+	if location == 1:
 		#option A
 		dieCardX = -570
 		dieCardY = -40
@@ -460,10 +458,27 @@ def AskInitiative():
 		remoteCall(players[1], "CreateIniToken", [])
 		players[1].setActivePlayer()
 
+def AskDiceRollArea():
+	mute()
+	notify("{} is choosing where the Dice Roll Area will be placed.".format(me))
+	choiceList = ['Side', 'Bottom']
+	colorsList = ['#FF0000', '#0000FF']
+	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Botton of the Gameboard?", choiceList, colorsList)
+	if choice == 1:
+		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
+	else:
+		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
+	setDRAIP(choice)
+	for p in players:
+		remoteCall(p, "setDRAIP", [choice])
+
+
 def CreateIniToken():
 	global gameStartTime
 	global iniTokenCreated
 	mute()
+	# set Dice Rolling Area, Initative, and Phase Marker Card location
+	AskDiceRollArea()
 	if not iniTokenCreated:
 		iniTokenCreated = True
 		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
@@ -796,13 +811,13 @@ def toggleResolveBurns(group, x=0, y=0):
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
 
-def toggleConfigDRAIP(group, x=0, y=0):
-	AutoConfigDRAIP = getSetting("AutoConfigDRAIP", True)
-	setSetting("AutoConfigDRAIP", not AutoConfigDRAIP)
-	if AutoConfigDRAIP:
-		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the Left of the Board.")
-	else:
-		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
+#def toggleConfigDRAIP(group, x=0, y=0):
+#	AutoConfigDRAIP = getSetting("AutoConfigDRAIP", True)
+#	setSetting("AutoConfigDRAIP", not AutoConfigDRAIP)
+#	if AutoConfigDRAIP:
+#		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the Left of the Board.")
+#	else:
+#		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
 
 def toggleSoundFX(group, x=0, y=0):
 	AutoConfigSoundFX = getSetting("AutoConfigSoundFX", True)
