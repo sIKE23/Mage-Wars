@@ -1424,11 +1424,11 @@ def playCardFaceDown(card, x=0, y=0):
 		x = 460
 		y = -240
 	elif mycolor == PlayerColor[4]:
-		x = 460
-		y = -240
+		x = -595
+		y = -40
 	elif mycolor == PlayerColor[5]:
 		x = 460
-		y = -240
+		y = -40
 	while occupied:
 		occupied = False
 		for c in table:
