@@ -781,7 +781,7 @@ def mageStatus():
 	colorsList = ['#de2827']
 	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn),choiceList, colorsList)
 	if choice == 0:
-		magestatus()
+		mageStatus()
 	notify("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn))
 	#reportGame('MageDeath')
 
@@ -794,6 +794,9 @@ def concede(group=table,x=0,y=0):
 		notify("{} has conceded the game".format(me))
 	else:
 		notify("{} was about to concede the game, but thought better of it...".format(me))
+		
+def checkMageDeath(player, counter, oldvalue):
+	mageStatus()
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode

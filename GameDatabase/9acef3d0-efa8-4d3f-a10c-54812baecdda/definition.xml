@@ -21,6 +21,7 @@
 		<event name="OnTableLoad" action="onTableLoad" />
 		<event name="OnGameStart" action="onGameStart" />
 		<event name="OnLoadDeck" action="onLoadDeck" />
+		<event name="OnChangeCounter" action="checkMageDeath" />
 	</events>
 	<sounds>
     <sound name="Dice" src="Sounds/dice.mp3" />
