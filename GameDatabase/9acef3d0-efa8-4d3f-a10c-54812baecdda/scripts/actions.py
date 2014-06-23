@@ -263,6 +263,10 @@ def rollDice(group, x=0, y=0):
 	global diceBankD12
 	global hasRolledIni
 	global myIniRoll
+	global dieCardX
+	global dieCardY
+	global dieCard2X
+	global dieCard2Y
 
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
@@ -464,7 +468,7 @@ def AskDiceRollArea():
 	choiceList = ['Side', 'Bottom']
 	colorsList = ['#FF0000', '#0000FF']
 	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Botton of the Gameboard?", choiceList, colorsList)
-	if choice == 1:
+	if choice == 0 or choice == 1:
 		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
 	else:
 		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
