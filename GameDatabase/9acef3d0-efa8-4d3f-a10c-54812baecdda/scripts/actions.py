@@ -112,6 +112,7 @@ myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
 iniTokenCreated = False
+gameIsOver = False
 discountsUsed = [ ]
 gameStartTime = ""
 gameEndTime = ""
@@ -510,8 +511,11 @@ def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	global roundTimes
 	global turn
+	global gameIsOver
 	mageStatus()
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
+		return
+	if gameIsOver:	#don't advance phase once the game is done
 		return
 	mute()
 	card = None
@@ -774,9 +778,11 @@ def resolveChanneling(c):
 def mageStatus():
 	global gameEndTime
 	global turn
+	global gameIsOver
 	mute()
 	if not me.Damage >= me.Life:
 		return
+	gameIsOver = True
 	for c in table:
 		if c.Type == "Mage" and c.controller == me:
 			c.orientation = 1
@@ -792,8 +798,10 @@ def mageStatus():
 
 def concede(group=table,x=0,y=0):
 	global gameEndTime
+	global gameIsOver
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
+		gameIsOver = True
 		gameEndTime = time.time()
 #		reportGame('Conceded')
 		notify("{} has conceded the game".format(me))
