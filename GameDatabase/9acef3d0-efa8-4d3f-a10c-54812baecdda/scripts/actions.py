@@ -256,6 +256,7 @@ def setDRAIP(location):
 
 def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
+	mageStatus()
 
 def rollDice(group, x=0, y=0):
 	mute()
@@ -800,7 +801,10 @@ def concede(group=table,x=0,y=0):
 		notify("{} was about to concede the game, but thought better of it...".format(me))
 		
 def checkMageDeath(player, counter, oldvalue):
-	mageStatus()
+	if counter == me.Damage or counter == me.Life:
+		if me.Damage >= me.Life:
+			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
+				mageStatus()
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
