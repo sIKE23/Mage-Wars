@@ -788,13 +788,17 @@ def mageStatus():
 			c.orientation = 1
 	gameEndTime = time.time()
 #	playSoundFX('Winner')
+	for p in players:
+		remoteCall(p, "reportDeath",[me])
+	notify("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn))
+#	reportGame('MageDeath')
+
+def reportDeath(deadmage):
 	choiceList = ['OK']
 	colorsList = ['#de2827']
-	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn),choiceList, colorsList)
-	if choice == 0:
-		mageStatus()
-	notify("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn))
-	#reportGame('MageDeath')
+	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(deadmage,time.ctime(gameEndTime),turn),choiceList, colorsList)
+	if choice == 0 or choice == 1:
+		return
 
 def concede(group=table,x=0,y=0):
 	global gameEndTime
