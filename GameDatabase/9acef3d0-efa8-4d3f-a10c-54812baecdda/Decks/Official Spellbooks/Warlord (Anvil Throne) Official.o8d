@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="b52ee3c1-ee9f-494c-8c45-55f2b1ff6313">Warlord</card>
+    <card qty="1" id="988facc7-debe-493b-95f0-95f0be0157cb">Warlord Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="f8e7349e-4779-447d-a4e7-ab0f2178392a">Hurl Boulder</card>
+    <card qty="4" id="8163ee1a-da88-4bbd-8eed-4f1ca3cdc0a2">Hurl Rock</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="e8ee7c9f-0438-4740-8507-b5f065495df9">Altar of Carnage</card>
+    <card qty="1" id="d5a7e765-259d-449f-b38f-591990d0a24d">Archer's Watchtower</card>
+    <card qty="1" id="0cea5239-b6a1-4826-a636-2fc213b5efcf">Armory</card>
+    <card qty="1" id="22ea2891-f959-4d40-9123-def5bb2e3e23">Barracks</card>
+    <card qty="1" id="7e359ecb-7ce3-46f0-a516-de5a5f589733">Battle Forge</card>
+    <card qty="1" id="6520a411-1553-4b09-baf1-d814ba92ad28">Construction Yard</card>
+    <card qty="1" id="5eca0e21-79c9-495b-b6ee-29f0a54ea894">Harshforge Monolith</card>
+    <card qty="2" id="a81df3d7-fcb9-4afb-8da8-6e24db0f064e">Wall of Earth</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="2" id="ac8580d2-641c-4917-a56d-4123ab1e43c9">Anvil Throne Crossbowman</card>
+    <card qty="1" id="b1f01ef5-7382-4254-8761-293fde18e240">Bloodcrag Minotaur</card>
+    <card qty="2" id="13788dfb-6de8-4a9a-b00b-7c8f68ab7ca7">Dwarf Kriegsbiel</card>
+    <card qty="2" id="c574c794-bfc6-487c-a1c2-477ff29f6d22">Goblin Alchemist</card>
+    <card qty="1" id="f40c4fc3-45c9-437c-b536-25b68c1a7a02">Grimson Deadeye, Sniper</card>
+    <card qty="1" id="eeb4e53a-b6e4-4f18-a8a7-1e6289830c11">Gurmash, Orc Sergeant</card>
+    <card qty="1" id="c29ba11c-7557-481d-b939-cf0d91a9b763">Otto Kronig, Master Engineer</card>
+    <card qty="1" id="9f958d17-2f53-40b2-9b1a-5fa6c9b7d1e1">Sir Corazin, Blademaster</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="3" id="7cebacd8-7bef-43b7-93ce-c071e34ca3ea">Brace Yourself</card>
+    <card qty="1" id="81c93236-8b3f-41fd-9210-89a9498ecfce">Nullify</card>
+    <card qty="1" id="76b82cdc-fb4d-46e9-a4de-9fdac5ff41fc">Standard Bearer</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="0c8d6e31-5e59-454c-a7e0-0d3118f0cead">Deflection Bracers</card>
+    <card qty="1" id="6e9de163-3737-4c51-88b1-11b26e7300d9">Eisenach's Forge Hammer</card>
+    <card qty="1" id="dda72c4a-8f33-42cf-9eed-bd52fb91af22">Elemental Cloak</card>
+    <card qty="1" id="469d4201-ec88-4f13-a8dc-f11b48e3df4b">Elemental Wand</card>
+    <card qty="1" id="0b900457-eae5-47f6-87f9-8a6fa213d9bc">General's Signet Ring</card>
+    <card qty="1" id="973a5e42-c3aa-45a2-8d0d-349e6219ff53">Harshforge Plate</card>
+    <card qty="1" id="dd34f61a-bace-4d62-b262-4554afd245e3">Helm of Command</card>
+    <card qty="1" id="43e7ffb8-e629-4629-b8ce-cb6ea5e4b268">Horn of Gothos</card>
+    <card qty="1" id="86e3fd4a-e52d-4ccd-9b33-333a13126ac8">Ivarium Longbow</card>
+    <card qty="1" id="82a0a369-821d-4f9f-bf27-17363de8e71d">Morning Star</card>
+    <card qty="1" id="983a31d2-4e37-441d-a39e-3088f9b3d84c">Regrowth Belt</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="a1959fe8-780f-4720-a446-0c2f999e2df2">Battle Fury</card>
+    <card qty="1" id="df73383f-4575-4db6-8084-9dbfe6b339d5">Conquer</card>
+    <card qty="3" id="04c9e8ae-8b36-4ea6-b8fb-9f01e1fc5dd6">Defend</card>
+    <card qty="3" id="b6ba6985-8bc2-4e41-9883-9b44fc8ddadf">Dispel</card>
+    <card qty="2" id="12a46022-4004-47d3-82ca-f78230814d67">Dissolve</card>
+    <card qty="2" id="6a108df8-8ca1-4bb5-8554-3b70bbfcc03d">Flank Attack</card>
+    <card qty="2" id="7575f333-31c4-4330-8a09-4a460543ec52">Force Push</card>
+    <card qty="1" id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2">Rouse the Beast</card>
+    <card qty="2" id="15d9b523-c6b1-4f5f-bbbe-0a555081b4e1">Sniper Shot</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
