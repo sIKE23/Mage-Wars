@@ -165,11 +165,11 @@ def onLoadDeck(player, groups):
 			if debugMode:
 				mycolor = PlayerColor[0]
 				CreateIniToken()
-			if getGlobalVariable("SetupDone") == "": #we're the first done with setup
-				playerNum = 1
-				setGlobalVariable("SetupDone", "x")
+			if len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
+				playerNum = len(getGlobalVariable("SetupDone")) + 1
+				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
 			else:	#other guy is done too
-				playerNum = 2
+				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				for p in players:
 					remoteCall(p, "SetupForIni", [])
 				notify("Both players have set up. Please roll for initiative.")
@@ -190,6 +190,7 @@ def setClearVars():
 def SetupForIni():
 	mute()
 	global hasRolledIni
+	global myIniRoll
 	global playerNum
 	hasRolledIni = False
 
@@ -202,23 +203,41 @@ def SetupForIni():
 		iniRoll(effect)
 
 def iniRoll(effect):
+	global playerNum
+	global myIniRoll
+	
+	myIniRoll = effect
 	notify("{} rolled a {} for initiative".format(me, effect))
-	oppRollStr = getGlobalVariable("OppIniRoll")
-	oppRoll = 0
-	if oppRollStr != "":
-		oppRoll = eval(oppRollStr)
-
-	if oppRoll == 0:	#they haven't rolled yet
-		setGlobalVariable("OppIniRoll", str(effect))
-	elif oppRoll == effect:	#tie!
-		notify("Tied initiative roll! Please roll again.")
+	myRollStr = str(playerNum + ":" + effect + ";")
+	setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
+	
+	if len(getGlobalVariable("OppIniRoll")) == len(players) * 4:
+		#all initiatives rolled, see who had highest
+		rollString = getGlobalVariable("OppIniRoll")
+		rollStringList = rollString.split(";")
+		max = 0
+		timesMaxRolled = 0
+		victoriousPlayerNum = 0
+		for roll in rollStringList:
+			temp = roll.split(":")
+			if int(temp[1]) > max:
+				max = int(temp[1])
+				timesMaxRolled = 1
+				victoriousPlayerNum = int(temp[0])
+			elif int(temp[1]) == max:
+				timesMaxRolled += 1
+			
+		if timesMaxRolled > 1:
+			# we got a tie in there somewhere. determine winner randomly from high rollers
+			highRollerPlayerNums = []
+			for roll in rollStringList:
+				temp = roll.split(":")
+				if int(temp[1]) == max:
+					highRollerPlayerNums.append(int(temp[0]))
+			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1]
+			
 		for p in players:
-			remoteCall(p, "SetupForIni", [])
-		setGlobalVariable("OppIniRoll", "0")
-	elif effect > oppRoll:	#we won
-		AskInitiative()
-	else:	#they won
-		remoteCall(players[1], "AskInitiative", [])
+			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
 
 def setDRAIP(location):
 	global dieCardX
@@ -449,7 +468,10 @@ def setGameBoard(bset):
 	boardSet = bset
 	table.setBoardImage("GameBoards\\{}".format(boardSet))
 
-def AskInitiative():
+def AskInitiative(pNum):
+	global playerNum
+	if playerNum != pNum:
+		return
 	mute()
 	notify("{} is choosing whether or not to go first.".format(me))
 	choiceList = ['Yes', 'No']
@@ -460,9 +482,11 @@ def AskInitiative():
 		CreateIniToken()
 		players[0].setActivePlayer()
 	else:
-		notify("{} has elected NOT to go first! {} has first initiative.".format(me, players[1]))
-		remoteCall(players[1], "CreateIniToken", [])
-		players[1].setActivePlayer()
+		#randomly determine who else should go first (in a 2 player game, this will always choose the other player)
+		pNum = rnd(1, len(players) - 1)
+		notify("{} has elected NOT to go first! {} has first initiative.".format(me, players[pNum]))
+		remoteCall(players[pNum], "CreateIniToken", [])
+		players[pNum].setActivePlayer()
 
 def AskDiceRollArea():
 	mute()
@@ -512,12 +536,12 @@ def nextPhase(group, x=-360, y=-150):
 	global roundTimes
 	global turn
 	global gameIsOver
-	mageStatus()
-	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
-		return
 	if gameIsOver:	#don't advance phase once the game is done
 		return
+	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
+		return
 	mute()
+	mageStatus()
 	card = None
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
@@ -806,10 +830,7 @@ def concede(group=table,x=0,y=0):
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
 		gameIsOver = True
-		for c in table:
-			if c.Type == "Mage" and c.controller == me:
-				c.orientation = 1
-	gameEndTime = time.time()
+		gameEndTime = time.time()
 #		reportGame('Conceded')
 		notify("{} has conceded the game".format(me))
 	else:
@@ -1275,88 +1296,33 @@ def flipcard(card, x = 0, y = 0):
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
   	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
-		colorsChosen = getGlobalVariable("ColorsChosen")
-		if "0" in colorsChosen and "1" in colorsChosen: #red and blue
-			if card.alternate == "B":
-				card.switchTo("")
-			else:
-				card.switchTo("B")
-		elif "0" in colorsChosen and "2" in colorsChosen: #red and green
-			if card.alternate == "C":
-				card.switchTo("")
-			else:
-				card.switchTo("C")
-		elif "0" in colorsChosen and "3" in colorsChosen: #red and yellow
-			if card.alternate == "D":
-				card.switchTo("")
-			else:
-				card.switchTo("D")
-		elif "0" in colorsChosen and "4" in colorsChosen: #red and purple
-			if card.alternate == "E":
-				card.switchTo("")
-			else:
-				card.switchTo("E")
-		elif "0" in colorsChosen and "5" in colorsChosen: #red and grey
-			if card.alternate == "F":
-				card.switchTo("")
-			else:
-				card.switchTo("F")
-		elif "1" in colorsChosen and "2" in colorsChosen: #blue and green
-			if card.alternate == "C":
-				card.switchTo("B")
-			else:
-				card.switchTo("C")
-		elif "1" in colorsChosen and "3" in colorsChosen: #blue and yellow
-			if card.alternate == "D":
-				card.switchTo("B")
-			else:
-				card.switchTo("D")
-		elif "1" in colorsChosen and "4" in colorsChosen: #blue and purple
-			if card.alternate == "E":
-				card.switchTo("B")
-			else:
-				card.switchTo("E")
-		elif "1" in colorsChosen and "5" in colorsChosen: #blue and grey
-			if card.alternate == "F":
-				card.switchTo("B")
-			else:
-				card.switchTo("F")
-		elif "2" in colorsChosen and "3" in colorsChosen: #green and yellow
-			if card.alternate == "D":
-				card.switchTo("C")
-			else:
-				card.switchTo("D")
-		elif "2" in colorsChosen and "4" in colorsChosen: #green and purple
-			if card.alternate == "E":
-				card.switchTo("C")
-			else:
-				card.switchTo("E")
-		elif "2" in colorsChosen and "5" in colorsChosen: #green and grey
-			if card.alternate == "F":
-				card.switchTo("C")
-			else:
-				card.switchTo("F")
-		elif "3" in colorsChosen and "4" in colorsChosen: #yellow and purple
-			if card.alternate == "E":
-				card.switchTo("D")
-			else:
-				card.switchTo("E")
-		elif "3" in colorsChosen and "5" in colorsChosen: #yellow and grey
-			if card.alternate == "F":
-				card.switchTo("D")
-			else:
-				card.switchTo("F")
-		elif "4" in colorsChosen and "5" in colorsChosen: #purple and grey
-			if card.alternate == "F":
-				card.switchTo("E")
-			else:
-				card.switchTo("F")
+		for p in players:
+			nextPlayer = playerNum + 1
+			if nextPlayer > len(players):
+				nextPlayer = 1
+			remoteCall(p, "changeIniColor", [nextPlayer])
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
 
+def changeIniColor(pNum):
+	global mycolor
+	if playerNum == pNum:
+		if mycolor == PlayerColor[0]:
+			card.switchTo("")
+		elif mycolor == PlayerColor[1]:
+			card.switchTo("B")
+		elif mycolor == PlayerColor[2]:
+			card.switchTo("C")
+		elif mycolor == PlayerColor[3]:
+			card.switchTo("D")
+		elif mycolor == PlayerColor[4]:
+			card.switchTo("E")
+		elif mycolor == PlayerColor[5]:
+			card.switchTo("F")
+		
 def discard(card, x=0, y=0):
 	mute()
 	if card.controller != me:
@@ -1579,27 +1545,36 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 
 def switchPhase(card, phase, phrase):
 	global mycolor
+	global playerNum
 	mute()
 	if debugMode:	#debuggin'
 		card.switchTo(phase)
 		notify("Phase changed to the {}".format(phrase))
 		return True
-	elif card.highlight == None: #other player not done yet
-		if card.controller == me:
-			card.highlight = mycolor
+	else:
+		doneWithPhase = getGlobalVariable("DoneWithPhase")
+		if str(playerNum) in doneWithPhase:
+			return
+			
+		doneWithPhase += str(playerNum)
+		if len(doneWithPhase) != len(players):		
+			setGlobalVariable("DoneWithPhase", doneWithPhase)
+			if card.controller == me:
+				card.highlight = mycolor
+			else:
+				remoteCall(card.controller, "remoteHighlight", [card, mycolor])
+			notify("{} is done with the {}".format(me.name,card.name))
+			return False
 		else:
-			remoteCall(card.controller, "remoteHighlight", [card, mycolor])
-		notify("{} is done with the {}".format(me.name,card.name))
-		return False
-	elif card.highlight != mycolor: #ready to go
-		if card.controller == me:
-			card.highlight = None
-			card.switchTo(phase)
-		else:
-			remoteCall(card.controller, "remoteHighlight", [card, None])
-			remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
-		notify("Phase changed to the {}".format(phrase))
-		return True
+			setGlobalVariable("DoneWithPhase", "")
+			if card.controller == me:
+				card.highlight = None
+				card.switchTo(phase)
+			else:
+				remoteCall(card.controller, "remoteHighlight", [card, None])
+				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
+			notify("Phase changed to the {}".format(phrase))
+			return True
 
 def remoteHighlight(card, color):
 	card.highlight = color
