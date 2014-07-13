@@ -208,7 +208,7 @@ def iniRoll(effect):
 	
 	myIniRoll = effect
 	notify("{} rolled a {} for initiative".format(me, effect))
-	myRollStr = str(playerNum + ":" + effect + ";")
+	myRollStr = (str(playerNum) + ":" + str(effect) + ";")
 	setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
 	
 	if len(getGlobalVariable("OppIniRoll")) == len(players) * 4:
@@ -830,6 +830,9 @@ def concede(group=table,x=0,y=0):
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
 		gameIsOver = True
+		for c in table:
+			if c.Type == "Mage" and c.controller == me:
+				c.orientation = 1
 		gameEndTime = time.time()
 #		reportGame('Conceded')
 		notify("{} has conceded the game".format(me))
