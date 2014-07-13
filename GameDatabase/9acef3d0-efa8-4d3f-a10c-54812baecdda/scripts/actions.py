@@ -94,8 +94,8 @@ Die2 = ("Die2","b881f652-9384-43e1-9758-e68b04583b3b")
 Die1s = ("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
 Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
 DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
-diceBank = [1]
-diceBankD12 = [0]
+diceBank = []
+diceBankD12 = []
 
 ##########################		Other			############################
 
@@ -119,7 +119,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.7.0.1"
+ver = "1.7.0.4"
 
 ############################################################################
 ############################		Events		############################
@@ -164,10 +164,15 @@ def onLoadDeck(player, groups):
 			playerSetup()
 			if debugMode:
 				mycolor = PlayerColor[0]
+				# set Dice Rolling Area, Initative, and Phase Marker Card location
+				setDRAIP(1)
 				CreateIniToken()
-			if len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
+			elif len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
+				if playerNum == 1:
+					# set Dice Rolling Area, Initative, and Phase Marker Card location
+					AskDiceRollArea()
 			else:	#other guy is done too
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				for p in players:
@@ -211,7 +216,7 @@ def iniRoll(effect):
 	myRollStr = (str(playerNum) + ":" + str(effect) + ";")
 	setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
 	
-	if len(getGlobalVariable("OppIniRoll")) == len(players) * 4:
+	if getGlobalVariable("OppIniRoll").count(";") == len(players):
 		#all initiatives rolled, see who had highest
 		rollString = getGlobalVariable("OppIniRoll")
 		rollStringList = rollString.split(";")
@@ -219,6 +224,8 @@ def iniRoll(effect):
 		timesMaxRolled = 0
 		victoriousPlayerNum = 0
 		for roll in rollStringList:
+			if roll == "":
+				continue
 			temp = roll.split(":")
 			if int(temp[1]) > max:
 				max = int(temp[1])
@@ -231,11 +238,15 @@ def iniRoll(effect):
 			# we got a tie in there somewhere. determine winner randomly from high rollers
 			highRollerPlayerNums = []
 			for roll in rollStringList:
+				if roll == "":
+					continue
 				temp = roll.split(":")
 				if int(temp[1]) == max:
 					highRollerPlayerNums.append(int(temp[0]))
 			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
+			debug(str(victoriousPlayerNum))
 			
+		notify("Victorious: {}".format(victoriousPlayerNum))
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
 
@@ -507,8 +518,6 @@ def CreateIniToken():
 	global gameStartTime
 	global iniTokenCreated
 	mute()
-	# set Dice Rolling Area, Initative, and Phase Marker Card location
-	AskDiceRollArea()
 	if not iniTokenCreated:
 		iniTokenCreated = True
 		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
@@ -840,7 +849,7 @@ def concede(group=table,x=0,y=0):
 		notify("{} was about to concede the game, but thought better of it...".format(me))
 		
 def checkMageDeath(player, counter, oldvalue):
-	if counter == me.Damage or counter == me.Life:
+	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
 		if me.Damage >= me.Life:
 			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
 				mageStatus()
@@ -1303,14 +1312,14 @@ def flipcard(card, x = 0, y = 0):
 			nextPlayer = playerNum + 1
 			if nextPlayer > len(players):
 				nextPlayer = 1
-			remoteCall(p, "changeIniColor", [nextPlayer])
+			remoteCall(p, "changeIniColor", [nextPlayer, card])
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
 
-def changeIniColor(pNum):
+def changeIniColor(pNum, card):
 	global mycolor
 	if playerNum == pNum:
 		if mycolor == PlayerColor[0]:
