@@ -234,7 +234,7 @@ def iniRoll(effect):
 				temp = roll.split(":")
 				if int(temp[1]) == max:
 					highRollerPlayerNums.append(int(temp[0]))
-			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1]
+			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
 			
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
