@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.7.0.1    ##################################
+##########################    v1.7.0.6    ##################################
 ############################################################################
 import time
 import re
@@ -119,7 +119,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.7.0.4"
+ver = "1.7.0.6"
 
 ############################################################################
 ############################		Events		############################
@@ -594,12 +594,14 @@ def nextPhase(group, x=-360, y=-150):
 					if c.controller == me:
 						resetMarkers(c)
 					else:
-						remoteCall(players[1], "resetMarkers", [c])
+						for p in players:
+							remoteCall(p, "resetMarkers", [c])
 					#resolve channeling cards (harmonize, spawnpoints, familiars)
 					if c.controller == me:
 						resolveChanneling(c)
 					else:
-						remoteCall(players[1], "resolveChanneling", [c])
+						for p in players:
+							remoteCall(p, "resolveChanneling", [c])
 			#resolve other autometed items
 			for p in players:
 				remoteCall(p, "resolveBurns", [])
