@@ -177,7 +177,7 @@ def onLoadDeck(player, groups):
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				for p in players:
 					remoteCall(p, "SetupForIni", [])
-				notify("Both players have set up. Please roll for initiative.")
+				notify("All players have set up. Please roll for initiative.")
 		else:
 			#notify and delete deck
 			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
@@ -236,6 +236,7 @@ def iniRoll(effect):
 			
 		if timesMaxRolled > 1:
 			# we got a tie in there somewhere. determine winner randomly from high rollers
+			notify("High roll tied! Randomly determining initiative...")
 			highRollerPlayerNums = []
 			for roll in rollStringList:
 				if roll == "":
@@ -246,7 +247,6 @@ def iniRoll(effect):
 			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
 			debug(str(victoriousPlayerNum))
 			
-		notify("Victorious: {}".format(victoriousPlayerNum))
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
 
@@ -537,6 +537,7 @@ def CreateIniToken():
 			init.switchTo("F")
 		setGlobalVariable("IniAllDone", "x")
 		setGlobalVariable("RoundNumber", "1")
+		setGlobalVariable("PlayerWithIni", str(playerNum))
 		gameStartTime = time.time()
 		notify("Setup is complete!")
 
@@ -616,6 +617,7 @@ def resetDiscounts():
 		discountsUsed.append((tup[0],tup[1],0))
 
 def advanceTurn():
+	mute()
 	if not me.isActivePlayer:
 		remoteCall(players[1], "remoteAdvanceTurn", [])
 	else:
@@ -1308,32 +1310,53 @@ def flipcard(card, x = 0, y = 0):
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
   	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
+		activePlayer = int(getGlobalVariable("PlayerWithIni"))
+		nextPlayer = activePlayer + 1
+		if nextPlayer > len(players):
+			nextPlayer = 1
+		setGlobalVariable("PlayerWithIni", str(nextPlayer))
 		for p in players:
-			nextPlayer = playerNum + 1
-			if nextPlayer > len(players):
-				nextPlayer = 1
-			remoteCall(p, "changeIniColor", [nextPlayer, card])
+			remoteCall(p, "changeIniColor", [card])
 		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
 
-def changeIniColor(pNum, card):
+def changeIniColor(card):
 	global mycolor
-	if playerNum == pNum:
+	mute()
+	if playerNum == int(getGlobalVariable("PlayerWithIni")):
 		if mycolor == PlayerColor[0]:
-			card.switchTo("")
+			if card.controller == me:
+				card.switchTo("")
+			else:
+				remoteCall(card.controller, "remoteSwitchPhase", [card, "", ""])
 		elif mycolor == PlayerColor[1]:
-			card.switchTo("B")
+			if card.controller == me:
+				card.switchTo("B")
+			else:
+				remoteCall(card.controller, "remoteSwitchPhase", [card, "B", ""])
 		elif mycolor == PlayerColor[2]:
-			card.switchTo("C")
+			if card.controller == me:
+				card.switchTo("C")
+			else:
+				remoteCall(card.controller, "remoteSwitchPhase", [card, "C", ""])
 		elif mycolor == PlayerColor[3]:
-			card.switchTo("D")
+			if card.controller == me:
+				card.switchTo("D")
+			else:
+				remoteCall(card.controller, "remoteSwitchPhase", [card, "D", ""])
 		elif mycolor == PlayerColor[4]:
-			card.switchTo("E")
+			if card.controller == me:
+				card.switchTo("E")
+			else:
+				remoteCall(card.controller, "remoteSwitchPhase", [card, "E", ""])
 		elif mycolor == PlayerColor[5]:
-			card.switchTo("F")
+			if card.controller == me:
+				card.switchTo("F")
+			else:
+				remoteCall(card.controller, "remoteSwitchPhase", [card, "F", ""])
 		
 def discard(card, x=0, y=0):
 	mute()
