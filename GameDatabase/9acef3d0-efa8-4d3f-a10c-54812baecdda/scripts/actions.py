@@ -169,12 +169,14 @@ def onLoadDeck(player, groups):
 				CreateIniToken()
 			elif len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
+				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
 				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
 				if playerNum == 1:
 					# set Dice Rolling Area, Initative, and Phase Marker Card location
 					AskDiceRollArea()
 			else:	#other guy is done too
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
+				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
 				for p in players:
 					remoteCall(p, "SetupForIni", [])
 				notify("All players have set up. Please roll for initiative.")
@@ -620,14 +622,11 @@ def resetDiscounts():
 
 def advanceTurn():
 	mute()
-	if not me.isActivePlayer:
-		remoteCall(players[1], "remoteAdvanceTurn", [])
-	else:
-		players[1].setActivePlayer()
-
-def remoteAdvanceTurn():
-	advanceTurn()
-	
+	nextPlayer = getNextPlayerNum()
+	nextPlayerName = getGlobalVariable("P" + str(nextPlayer) + "Name")
+	for p in players:
+		if p.name == nextPlayerName:
+			p.setActivePlayer()
 
 def resetMarkers(c):
 	mute()
@@ -1312,10 +1311,7 @@ def flipcard(card, x = 0, y = 0):
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
   	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
-		activePlayer = int(getGlobalVariable("PlayerWithIni"))
-		nextPlayer = activePlayer + 1
-		if nextPlayer > len(players):
-			nextPlayer = 1
+		nextPlayer = getNextPlayerNum()
 		setGlobalVariable("PlayerWithIni", str(nextPlayer))
 		for p in players:
 			remoteCall(p, "changeIniColor", [card])
@@ -1324,6 +1320,13 @@ def flipcard(card, x = 0, y = 0):
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
+		
+def getNextPlayerNum():
+	activePlayer = int(getGlobalVariable("PlayerWithIni"))
+	nextPlayer = activePlayer + 1
+	if nextPlayer > len(players):
+		nextPlayer = 1
+	return nextPlayer
 
 def changeIniColor(card):
 	global mycolor
