@@ -814,11 +814,9 @@ def resolveChanneling(c):
 def mageStatus():
 	global gameEndTime
 	global turn
-	global gameIsOver
 	mute()
 	if not me.Damage >= me.Life:
 		return
-	gameIsOver = True
 	for c in table:
 		if c.Type == "Mage" and c.controller == me:
 			c.orientation = 1
@@ -830,6 +828,10 @@ def mageStatus():
 #	reportGame('MageDeath')
 
 def reportDeath(deadmage):
+	global gameIsOver
+	global gameEndTime
+	gameIsOver = True
+	gameEndTime = time.time()
 	choiceList = ['OK']
 	colorsList = ['#de2827']
 	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(deadmage,time.ctime(gameEndTime),turn),choiceList, colorsList)
@@ -1443,22 +1445,22 @@ def playCardFaceDown(card, x=0, y=0):
 	global mycolor
 	offset=0
 	occupied = True
-	if mycolor == PlayerColor[0]:
+	if playerNum == 1:
 		x = -595
 		y = -240
-	elif mycolor == PlayerColor[1]:
+	elif playerNum == 2:
 		x = 460
 		y = 120
-	elif mycolor == PlayerColor[2]:
+	elif playerNum == 3:
 		x = -595
 		y = 120
-	elif mycolor == PlayerColor[3]:
+	elif playerNum == 4:
 		x = 460
 		y = -240
-	elif mycolor == PlayerColor[4]:
+	elif playerNum == 5:
 		x = -595
 		y = -40
-	elif mycolor == PlayerColor[5]:
+	elif playerNum == 6:
 		x = 460
 		y = -40
 	while occupied:
