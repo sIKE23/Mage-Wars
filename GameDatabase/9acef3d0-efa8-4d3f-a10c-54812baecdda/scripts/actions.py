@@ -117,7 +117,7 @@ discountsUsed = [ ]
 gameStartTime = ""
 gameEndTime = ""
 roundTimes = []
-turn = 0
+gameTurn = 0
 playerNum = 0
 ver = "1.8.0.0"
 
@@ -349,7 +349,7 @@ def rollDice(group, x=0, y=0):
 		else:
 			notify ("Using die from the native randomizer")
 			while (len(diceBankD12) < 100):
-				diceBankD12.append(rnd(1, 12))
+				diceBankD12.append(rnd(0, 11))
 
 	effect = int(diceBankD12.pop()) + 1
 	dieCard2.markers[DieD12] = effect
@@ -546,7 +546,7 @@ def CreateIniToken():
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	global roundTimes
-	global turn
+	global gameTurn
 	global gameIsOver
 	if gameIsOver:	#don't advance phase once the game is done
 		return
@@ -574,14 +574,14 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
 			advanceTurn()
-			turn = int(getGlobalVariable("RoundNumber")) + 1
-#			turn = turnNumber() + 1
-			setGlobalVariable("RoundNumber", str(turn))
+			gameTurn = int(getGlobalVariable("RoundNumber")) + 1
+#			gameTurn = turnNumber() + 1
+			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
-			notify("Round {} Start Time: {}".format(str(turn),time.ctime(roundTimes[-1])))
-			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
-#			notify("***Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
+			notify("Round {} Start Time: {}".format(str(gameTurn),time.ctime(roundTimes[-1])))
+			notify("Ready Stage for Round #" + str(gameTurn) + ":  Performing Initiative, Reset, and Channeling Phases")
+#			notify("***Ready Stage for Round #" + str(gameTurn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
@@ -813,7 +813,7 @@ def resolveChanneling(c):
 
 def mageStatus():
 	global gameEndTime
-	global turn
+	global gameTurn
 	mute()
 	if not me.Damage >= me.Life:
 		return
@@ -824,23 +824,25 @@ def mageStatus():
 #	playSoundFX('Winner')
 	for p in players:
 		remoteCall(p, "reportDeath",[me])
-	notify("{} has fallen in the arena! At {} after {} turns.".format(me,time.ctime(gameEndTime),turn))
 #	reportGame('MageDeath')
 
 def reportDeath(deadmage):
 	global gameIsOver
 	global gameEndTime
+	global gameTurn
 	gameIsOver = True
 	gameEndTime = time.time()
+	notify("{} has fallen in the arena! At {} after {} Rounds.".format(me,time.ctime(gameEndTime),str(gameTurn)))
 	choiceList = ['OK']
 	colorsList = ['#de2827']
-	choice = askChoice("{} has fallen in the arena! At {} after {} turns.".format(deadmage,time.ctime(gameEndTime),turn),choiceList, colorsList)
+	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage,time.ctime(gameEndTime),str(gameTurn)),choiceList, colorsList)
 	if choice == 0 or choice == 1:
 		return
 
 def concede(group=table,x=0,y=0):
 	global gameEndTime
 	global gameIsOver
+	global gameTurn
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
 		gameIsOver = True
