@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.7.0.6    ##################################
+##########################    v1.8.0.0    ##################################
 ############################################################################
 import time
 import re
@@ -119,7 +119,7 @@ gameEndTime = ""
 roundTimes = []
 turn = 0
 playerNum = 0
-ver = "1.7.0.6"
+ver = "1.8.0.0"
 
 ############################################################################
 ############################		Events		############################
@@ -574,14 +574,14 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
 			advanceTurn()
-#			turn = int(getGlobalVariable("RoundNumber")) + 1
-			turn = turnNumber() + 1
+			turn = int(getGlobalVariable("RoundNumber")) + 1
+#			turn = turnNumber() + 1
 			setGlobalVariable("RoundNumber", str(turn))
 			rTime = time.time()
 			roundTimes.append(rTime)
 			notify("Round {} Start Time: {}".format(str(turn),time.ctime(roundTimes[-1])))
-#			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
-			notify("***Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
+			notify("Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
+#			notify("***Ready Stage for Round #" + str(turn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
