@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.8.0.0    ##################################
+##########################    v1.8.1.0    ##################################
 ############################################################################
 import time
 import re
@@ -119,7 +119,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.8.0.0"
+ver = "1.8.1.0"
 
 ############################################################################
 ############################		Events		############################
@@ -642,6 +642,12 @@ def resetMarkers(c):
 	if c.markers[ActionYellowUsed] == 1:
 		c.markers[ActionYellowUsed] = 0
 		c.markers[ActionYellow] = 1
+	if c.markers[ActionPurpleUsed] == 1:
+		c.markers[ActionPurpleUsed] = 0
+		c.markers[ActionPurple] = 1
+	if c.markers[ActionGreyUsed] == 1:
+		c.markers[ActionGreyUsed] = 0
+		c.markers[ActionGrey] = 1
 	if c.markers[QuickBack] == 1:
 		c.markers[QuickBack] = 0
 		c.markers[Quick] = 1
