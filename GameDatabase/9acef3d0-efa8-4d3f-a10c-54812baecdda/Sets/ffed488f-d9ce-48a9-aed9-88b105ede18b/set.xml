@@ -537,7 +537,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlord Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts a soldier spell. &#xD;&#xA;[Casting Discount] [1] [Soldier]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts a soldier spell. &#xD;&#xA;[Casting Discount] [1] [Soldier] [x1]" />
 			<property name="CardID" value="MWSTX2FFQ04" />
 		</card>
 		<card id="973a5e42-c3aa-45a2-8d0d-349e6219ff53"  name="Harshforge Plate" >
