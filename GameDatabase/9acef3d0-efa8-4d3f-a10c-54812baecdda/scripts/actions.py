@@ -621,7 +621,11 @@ def advanceTurn():
 	nextPlayerName = getGlobalVariable("P" + str(nextPlayer) + "Name")
 	for p in players:
 		if p.name == nextPlayerName:
-			p.setActivePlayer()
+			for p2 in players:
+				remoteCall(p2, "setActiveP", [p])
+				
+def setActiveP(p):
+	p.setActivePlayer()
 
 def resetMarkers(c):
 	mute()
