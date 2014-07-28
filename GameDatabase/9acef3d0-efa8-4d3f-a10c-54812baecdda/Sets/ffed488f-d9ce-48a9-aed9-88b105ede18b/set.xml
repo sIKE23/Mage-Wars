@@ -522,7 +522,7 @@
 			<property name="Stats" value="Location=Weapon" />
 			<property name="AttackBar" value="Smash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8-10 = Daze; 11+ = Stun]" />
 			<property name="Traits" value="War Mage Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint or familiar he controls, casts an equipment spell." />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint or familiar he controls, casts an equipment spell.&#xD;&#xA;[Casting Discount] [1] [Equipment] [x1]" />
 			<property name="CardID" value="MWSTX2FFQ03" />
 		</card>
 		<card id="0b900457-eae5-47f6-87f9-8a6fa213d9bc"  name="General&apos;s Signet Ring" >
@@ -537,7 +537,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlord Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts a soldier spell. &#xD;&#xA;[Casting Discount] [1] [Soldier] [x1]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts a soldier spell.&#xD;&#xA;[Casting Discount] [1] [Soldier] [x1]" />
 			<property name="CardID" value="MWSTX2FFQ04" />
 		</card>
 		<card id="973a5e42-c3aa-45a2-8d0d-349e6219ff53"  name="Harshforge Plate" >

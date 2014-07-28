@@ -8,7 +8,6 @@ import re
 ############################################################################
 
 ##########################		Markers			##################################
-
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
@@ -212,12 +211,12 @@ def SetupForIni():
 def iniRoll(effect):
 	global playerNum
 	global myIniRoll
-	
+
 	myIniRoll = effect
 	notify("{} rolled a {} for initiative".format(me, effect))
 	myRollStr = (str(playerNum) + ":" + str(effect) + ";")
 	setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
-	
+
 	if getGlobalVariable("OppIniRoll").count(";") == len(players):
 		#all initiatives rolled, see who had highest
 		rollString = getGlobalVariable("OppIniRoll")
@@ -235,7 +234,7 @@ def iniRoll(effect):
 				victoriousPlayerNum = int(temp[0])
 			elif int(temp[1]) == max:
 				timesMaxRolled += 1
-			
+
 		if timesMaxRolled > 1:
 			# we got a tie in there somewhere. determine winner randomly from high rollers
 			notify("High roll tied! Randomly determining initiative...")
@@ -248,7 +247,7 @@ def iniRoll(effect):
 					highRollerPlayerNums.append(int(temp[0]))
 			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
 			debug(str(victoriousPlayerNum))
-			
+
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
 
@@ -397,7 +396,7 @@ def playerSetup():
 			break
 	for stat in stats:
 		debug("stat {}".format(stat))
-		
+
 		statval = stat.split("=")
 		if "Channeling" in statval[0]:
 			me.Channeling = int(statval[1])
@@ -562,7 +561,7 @@ def nextPhase(group, x=-360, y=-150):
 	if card.alternate == "":
 		switchPhase(card,"Planning","Planning Phase")
 	elif card.alternate == "Planning":
-		switchPhase(card,"Deploy","Deploy Phase")
+		switchPhase(card,"Deploy","Deployment Phase")
 	elif card.alternate == "Deploy":
 		switchPhase(card,"Quick","First Quickcast Phase")
 	elif card.alternate == "Quick":
@@ -593,18 +592,14 @@ def nextPhase(group, x=-360, y=-150):
 			for c in table:
 				if c.isFaceUp: #don't waste time on facedown cards
 					#reset markers
-					if c.controller == me:
-						resetMarkers(c)
-					else:
-						for p in players:
-							remoteCall(p, "resetMarkers", [c])
 					#resolve channeling cards (harmonize, spawnpoints, familiars)
 					if c.controller == me:
+						resetMarkers(c)
 						resolveChanneling(c)
 					else:
-						for p in players:
-							remoteCall(p, "resolveChanneling", [c])
-			#resolve other autometed items
+						remoteCall(c.controller, "resetMarkers", [c])
+						remoteCall(c.controller, "resolveChanneling", [c])
+					#resolve other automated items
 			for p in players:
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
@@ -674,7 +669,6 @@ def resolveBurns():
 	#is the setting on?
 	if not getSetting("AutoResolveBurns", True):
 		return
-
 	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
 	if len(cardsWithBurn) > 0:
 		notify("Resolving Burns for {}...".format(me))	#found at least one
@@ -705,7 +699,6 @@ def resolveRot():
 	#is the setting on?
 	if not getSetting("AutoResolveRot", True):
 		return
-
 	cardsWithRot = [c for c in table if c.markers[Rot] and c.controller == me]
 	if len(cardsWithRot) > 0:
 		notify("Resolving Rot for {}...".format(me))	#found at least one
@@ -725,7 +718,6 @@ def resolveBleed():
 	#is the setting on?
 	if not getSetting("AutoResolveBleed", True):
 		return
-
 	cardsWithBleed = [c for c in table if c.markers[Bleed] and c.controller == me]
 	if len(cardsWithBleed) > 0:
 		notify("Resolving Bleed for {}...".format(me))	#found at least one
@@ -860,7 +852,7 @@ def concede(group=table,x=0,y=0):
 		notify("{} has conceded the game".format(me))
 	else:
 		notify("{} was about to concede the game, but thought better of it...".format(me))
-		
+
 def checkMageDeath(player, counter, oldvalue):
 	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
 		if me.Damage >= me.Life:
@@ -1330,7 +1322,7 @@ def flipcard(card, x = 0, y = 0):
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
-		
+
 def getNextPlayerNum():
 	activePlayer = int(getGlobalVariable("PlayerWithIni"))
 	nextPlayer = activePlayer + 1
@@ -1372,7 +1364,7 @@ def changeIniColor(card):
 				card.switchTo("F")
 			else:
 				remoteCall(card.controller, "remoteSwitchPhase", [card, "F", ""])
-		
+
 def discard(card, x=0, y=0):
 	mute()
 	if card.controller != me:
@@ -1605,9 +1597,9 @@ def switchPhase(card, phase, phrase):
 		doneWithPhase = getGlobalVariable("DoneWithPhase")
 		if str(playerNum) in doneWithPhase:
 			return
-			
+
 		doneWithPhase += str(playerNum)
-		if len(doneWithPhase) != len(players):		
+		if len(doneWithPhase) != len(players):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if card.controller == me:
 				card.highlight = mycolor
