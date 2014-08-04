@@ -299,6 +299,7 @@ namespace Octgn.MageWarsValidator
                                     if (mname.Contains("Beastmaster")) mname = "Beastmaster";
                                     if (mname.Contains("Wizard")) mname = "Wizard";
                                     if (mname.Contains("Warlock")) mname = "Warlock";
+                                    if (mname.Contains("Warlord")) mname = "Warlord";
                                     if (mname.Contains("Priestess")) mname = "Priestess";
                                     if (onlyPhrase.Contains(mname))
                                         legal = true;

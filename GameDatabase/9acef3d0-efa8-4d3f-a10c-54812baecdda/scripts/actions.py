@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.8.1.1    ##################################
+##########################    v1.9.0.0    ##################################
 ############################################################################
 import time
 import re
@@ -111,6 +111,7 @@ myIniRoll = 0
 hasRolledIni = True
 deckLoaded = False
 iniTokenCreated = False
+currentPhase = ""
 gameIsOver = False
 discountsUsed = [ ]
 gameStartTime = ""
@@ -118,10 +119,10 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.8.1.1"
+ver = "1.9.0.0"
 
 ############################################################################
-############################		Events		############################
+############################		Events		##################################
 ############################################################################
 
 def onTableLoad():
@@ -518,6 +519,7 @@ def AskDiceRollArea():
 def CreateIniToken():
 	global gameStartTime
 	global iniTokenCreated
+	global currentPhase
 	mute()
 	if not iniTokenCreated:
 		iniTokenCreated = True
@@ -540,6 +542,7 @@ def CreateIniToken():
 		setGlobalVariable("RoundNumber", "1")
 		setGlobalVariable("PlayerWithIni", str(playerNum))
 		gameStartTime = time.time()
+		currentPhase = "Planning"
 		notify("Setup is complete!")
 
 def nextPhase(group, x=-360, y=-150):
@@ -858,8 +861,9 @@ def concede(group=table,x=0,y=0):
 		notify("{} was about to concede the game, but thought better of it...".format(me))
 
 def checkMageDeath(player, counter, oldvalue):
+	global currentPhase
 	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
-		if me.Damage >= me.Life:
+		if me.Damage >= me.Life and currentPhase == "Actions":
 			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
 				mageStatus()
 
@@ -1288,6 +1292,14 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[Treebond] = 1
 			if "Necromancer" == card.name:
 					card.markers[Eternal_Servant] = 1
+			if "Warlock" == card.name:
+					card.markers[BloodReaper] = 1
+		if "Anvil Throne Warlord Stats" == card.name:
+					card.markers[RuneofFortification] = 1
+					card.markers[RuneofPower] = 1
+					card.markers[RuneofPrecision] = 1
+					card.markers[RuneofReforging] = 1
+					card.markers[RuneofShielding] = 1
 		if card.Type == "Creature":
 			if "Invisible Stalker" == card.name:
 					card.markers[Invisible] = 1
@@ -1297,6 +1309,8 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[Taunt] = 1
 			if "Ichthellid" == card.name:
 					card.markers[EggToken] = 1
+			if "Talos" == card.name:
+					toggleAction(card)
 		if card.Type == "Conjuration":
 			if "Ballista" == card.name:
   				card.markers[LoadToken] = 1
@@ -1592,7 +1606,9 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 def switchPhase(card, phase, phrase):
 	global mycolor
 	global playerNum
+	global currentPhase
 	mute()
+	currentPhase = phase
 	if debugMode:	#debuggin'
 		card.switchTo(phase)
 		notify("Phase changed to the {}".format(phrase))
@@ -1620,6 +1636,7 @@ def switchPhase(card, phase, phrase):
 				remoteCall(card.controller, "remoteHighlight", [card, None])
 				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
 			notify("Phase changed to the {}".format(phrase))
+			
 			return True
 
 def remoteHighlight(card, color):
@@ -1881,6 +1898,8 @@ def validateDeck(deck):
 				magename = "Wizard"
 			if "Warlock" in magename:
 				magename = "Warlock"
+			if "Warlord" in magename:
+				magename = "Warlord"
 			if "Priestess" in magename:
 				magename = "Priestess"
 			if magename in card.Traits:	#mage restriction

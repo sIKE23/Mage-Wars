@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.8.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -25,19 +25,19 @@
 		<marker id="101976ea-ec22-4496-a762-6fbc0d1a41bb" name="Die2s" />
 		<marker id="3cdf4231-065d-400e-9c74-d0ae669e852c" name="Die12" />
 		<marker id="11370fe9-41a4-4f05-9249-29a179c0031b" name="Quick" />
-		<marker id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Quick Back" />
+		<marker id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Quick Used" />
 		<marker id="4dd182d2-6e69-499c-b2ad-38701c0fb60d" name="Action Red" />
-		<marker id="2e069a99-1696-4cbe-b6c6-13e1dda29563" name="Action Red Back" />
+		<marker id="2e069a99-1696-4cbe-b6c6-13e1dda29563" name="Action Red Used" />
 		<marker id="c980c190-448d-414f-9397-a5f17068ac58" name="Action Blue" />
-		<marker id="5926df42-919d-4c63-babb-5bfedd14f649" name="Action Blue Back" />
+		<marker id="5926df42-919d-4c63-babb-5bfedd14f649" name="Action Blue Used" />
 		<marker id="9cd83c4b-91b7-4386-9d9a-70719971f949" name="Action Green" />
-		<marker id="5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" name="Action Green Back" />
+		<marker id="5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" name="Action Green Used" />
 		<marker id="2ec4ddea-9596-45cc-a084-23caa32511be" name="Action Yellow" />
-		<marker id="7c145c5d-54c3-4f5b-bf66-f4d52f240af6" name="Action Yellow Back" />
+		<marker id="7c145c5d-54c3-4f5b-bf66-f4d52f240af6" name="Action Yellow Used" />
 		<marker id="edb61e00-a666-480a-81f3-20eb9944b0ea" name="Action Purple" />
-		<marker id="158f738b-6034-4c6d-b4ca-5abcf159ed9f" name="Action Purple Back" />
+		<marker id="158f738b-6034-4c6d-b4ca-5abcf159ed9f" name="Action Purple Used" />
 		<marker id="623f07fb-9cfb-4b4b-a350-6b208f0ef29e" name="Action Grey" />
-		<marker id="99bd454e-fab9-47c6-9f59-54a112eeb2da" name="Action Grey Back" />
+		<marker id="99bd454e-fab9-47c6-9f59-54a112eeb2da" name="Action Grey Used" />
 		<marker id="874c7fbb-c566-4f17-b14e-ae367716dce5" name="Egg Token" />
 		<marker id="fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" name="Mist Token" />
 		<marker id="d32267be-f4c5-48c6-8396-83c0db406942" name="Load Token" />
@@ -764,7 +764,7 @@
 			<property name="School" value="Dark+Fire" />
 			<property name="Level" value="4+2" />
 			<property name="Stats" value="Armor=3, Life=14" />
-			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Fire] [Dice=4] [d12] [5-9 = Burn;10+= 2 Burn] [Defrost] &#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Fire] [Dice=4] [d12] [7-10 = Burn;11+=2 Burn] [Sweeping] [Defrost]" />
+			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn;10+= 2 Burn] [Defrost] &#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn;11+=2 Burn] [Sweeping] [Defrost]" />
 			<property name="Traits" value="Flying, Flame Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C01" />

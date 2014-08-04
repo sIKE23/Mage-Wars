@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.8.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.0">
 	<markers>
 		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
 		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
@@ -8,7 +8,7 @@
 		<marker id="42f6cee3-3de4-4c90-a77c-9fb2c432d78d" name="Wounded Prey" />
 	</markers>
 	<cards>
-		<card id="e0a0b790-fbfb-4a08-a12e-77e415134391" name="Beastmaster (Johktari)">
+		<card id="e0a0b790-fbfb-4a08-a12e-77e415134391" name="Johktari Beastmaster">
 		<property name="Type" value="Mage" />
 		<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
 		<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
@@ -17,7 +17,7 @@
 		<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
 		</card>
-		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Beastmaster (Johktari) Stats">
+		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Johktari Beastmaster Stats">
 		 <property name="Type" value="Magestats" />
 		</card>
 		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
