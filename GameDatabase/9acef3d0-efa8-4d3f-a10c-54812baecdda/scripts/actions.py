@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.9.0.0    ##################################
+##########################    v2.8.0.0    ##################################
 ############################################################################
 import time
 import re
@@ -411,10 +411,8 @@ def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
 	
 def createOrbGuardian(group, x=0, y=0):
-	table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
-	for c in table:
-		if "Orb Guardian" == c.name:
-			c.markers[Guard] = 1
+	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
+	orbGuardian.markers[Guard] = 1
 
 def createPowerOrb(group, x=0, y=0):
 	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", 450, -40 )
