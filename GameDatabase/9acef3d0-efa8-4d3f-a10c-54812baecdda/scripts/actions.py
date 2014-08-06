@@ -409,6 +409,12 @@ def playerSetup():
 
 def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
+	
+def createOrbGuardian(group, x=0, y=0):
+	table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
+
+def createPowerOrb(group, x=0, y=0):
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", 450, -40 )
 
 def createCompassRose(group, x=0, y=0):
 	table.create("7ff8ed79-159c-46e5-9e87-649b3269a931", 450, -40 )
@@ -1294,6 +1300,8 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[Eternal_Servant] = 1
 			if "Warlock" == card.name:
 					card.markers[BloodReaper] = 1
+			if "Orb Guardian" == card.name:
+					card.markers[Ready] = 1
 		if "Anvil Throne Warlord Stats" == card.name:
 					card.markers[RuneofFortification] = 1
 					card.markers[RuneofPower] = 1

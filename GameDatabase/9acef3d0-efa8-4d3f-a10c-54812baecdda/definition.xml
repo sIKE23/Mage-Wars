@@ -65,6 +65,8 @@
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
 		<groupaction menu="Add Vine Marker" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
+		<groupaction menu="Add Orb Guardian" default="False" shortcut="Ctrl+F3" execute="createOrbGuardian" />
+		<groupaction menu="Add Power Orb" default="False" shortcut="Ctrl+F4" execute="createPowerOrb" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />

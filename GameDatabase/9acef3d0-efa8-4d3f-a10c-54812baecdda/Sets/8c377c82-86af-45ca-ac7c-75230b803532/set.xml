@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Domination Senerio" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.1">
+	<markers>
+		<!-- &apos;s -->
+	</markers>
+	<cards>
+		<card id="54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd" name="Orb Guardian">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Soldier" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="F"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=1" />
+			<property name="AttackBar" value="Claws:[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Rooted, Teleport Ward, En Garde" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWDOMCR01" />
+		</card>
+		<card id="690a2c72-4801-47b5-84bd-b9e2f5811cb5" name="Power Orb">
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Artifact" />
+			<property name="Cost" value="0" />
+			<property name="Action" value="F"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value=""  />
+			<property name="Level" value="5" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Indestructible" />
+			<property name="Text" value="The controller of the Power Orb adds +1 mana to his channeling each turn." />
+			<property name="CardID" value="MWDOMCJ01" />
+		</card>
+	</cards>
+</set>
