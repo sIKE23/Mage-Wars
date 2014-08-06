@@ -412,6 +412,9 @@ def createVineMarker(group, x=0, y=0):
 	
 def createOrbGuardian(group, x=0, y=0):
 	table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
+	for c in table:
+		if "Orb Guardian" == c.name:
+			c.markers[Guard] = 1
 
 def createPowerOrb(group, x=0, y=0):
 	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", 450, -40 )
@@ -674,6 +677,7 @@ def resetMarkers(c):
 	if c.markers[Visible] == 1:
 		c.markers[Visible] = 0
 		c.markers[Invisible] = 1
+
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
@@ -1099,9 +1103,6 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGreyUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
 
-#def toggleBloodReaper(card, x=0, y=0):
-#	toggleToken(card, BloodReaper)
-
 def toggleDeflect(card, x=0, y=0):
 	mute()
 	if not card.isFaceUp:
@@ -1300,8 +1301,6 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[Eternal_Servant] = 1
 			if "Warlock" == card.name:
 					card.markers[BloodReaper] = 1
-			if "Orb Guardian" == card.name:
-					card.markers[Ready] = 1
 		if "Anvil Throne Warlord Stats" == card.name:
 					card.markers[RuneofFortification] = 1
 					card.markers[RuneofPower] = 1
