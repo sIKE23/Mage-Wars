@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Type" value="Attack" />
@@ -93,6 +93,21 @@
 		</card>
 
 
+		<card id="57355673-ff5f-4ac6-8d78-2a89c8791ee5" name="Asto Vidatu, Angel Slayer">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Manticore" />
+			<property name="Cost" value="20" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane+Dark"  />
+			<property name="Level" value="3+2" />
+			<property name="Stats" value="Armor=2, Life=14" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5]&#xD;&#xA;Toxic Spines:&#xD;&#xA;[Full] [Ranged 0-1] [Dice=2] [d12] [8+ = Cripple] [Piercing +1]&#xD;&#xA;Poison Stinger:&#xD;&#xA;[Full] [Melee] [Dice=2] [d12] [5-8 = Weak; 9+ = 2 Weak] [Piercing +1]" />
+			<property name="Traits" value="Flying, Legendary, Tough -2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO56" />
+		</card>
 		<card id="0a4d7796-8763-4af6-b283-23d98582c5d0" name="Asyran Defender">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Knight, Soldier" />
@@ -137,6 +152,36 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="When Bloodwave Greatbow is affected by a friendly command spell, his Greatbow attack gains Piercing +2 until the end of the round." />
 			<property name="CardID" value="MWPROMO59" />
+		</card>
+		<card id="d7076396-cb62-44c5-b3ba-2d344f205fb5" name="Death&apos;s Head Scorpion">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=4, Life=6" />
+			<property name="AttackBar" value="Pinchers:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Deadly Stinger:&#xD;&#xA;[Full] [Melee] [Dice=1] [d12] [8+ = 2 Tainted] [Piercing +2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO58" />
+		</card>
+		<card id="d7236c40-8918-4391-b8ea-46dab8cac9d5" name="Dragonclaw Wolverine">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=2, Life=13" />
+			<property name="AttackBar" value="Ripping Claws:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [8+ = Bleed] [Piercing +1]" />
+			<property name="Traits" value="Rage +3, Frost -2" />
+			<property name="Text" value="For each Rage token on Dragonclaw Wolverine, he gains Armor +1. If he has 3+ Rage tokens, his Ripping Claws attack gains Counterstrike." />
+			<property name="CardID" value="MWPROMO57" />
 		</card>
 		<card id="4d68d973-aa67-448f-b244-8aee05089205" name="Fire Elemental">
 			<property name="Type" value="Creature" />
@@ -183,6 +228,36 @@
 			<property name="Text" value="Joseph Trublood gains Armor +2 against attacks from Nonliving or Dark creatures." />
 			<property name="CardID" value="MWPROMO11" />
 		</card>
+		<card id="b54089c7-7d6b-46db-b5bc-83477eb9af07" name="Lightning Beetle">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect, Beetle" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Air" />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=4, Life=7" />
+			<property name="AttackBar" value="Electrifed Mandibles:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=3] [d12] [6-7 = Daze; 8+ = Stun] [Ethereal]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=2] [d12] [7-8 = Daze; 9+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Psychic Immunity, Lightning -2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO60" />
+		</card>
+		<card id="4c2baceb-b4bb-4118-869b-b9f3e6dc000d" name="Mountain Ram">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Bovid" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="AttackBar" value="Battering Horns:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Push] [+2 vs. Corporeal Conjurations]" />
+			<property name="Traits" value="Charge +2, Frost -2" />
+			<property name="Text" value="If Mountain Ram&apos;s Battering Horns attack gains a Charge bonus, then it also may add +3 to its effect die roll." />
+			<property name="CardID" value="MWPROMO63" />
+		</card>
 		<card id="8ff009e0-eb99-49d3-86b4-5559e654abbe" name="Oscuda">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
@@ -197,6 +272,21 @@
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="Oscuda is immune to his Stink Cloud" />
 			<property name="CardID" value="MWPROMO16" />
+		</card>
+		<card id="485f6711-aae1-4408-8cc8-6ac421c541b7" name="Pharaoh&apos;s Cheetah">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Cat" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Defense 8+ 1x, Armor=1, Life=9" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [12+ = Slam]" />
+			<property name="Traits" value="Fast, Charge +2" />
+			<property name="Text" value="If Cheetah takes two move actions immediately before it makes its Claws attack, it may add +8 to the effect die roll for that attack. It does not recieve this bonus if it moves back and forth between 2 zone when it takes its move actions." />
+			<property name="CardID" value="MWPROMO65" />
 		</card>
 		<card id="b68954f6-3fd7-4558-ae90-73d28681d5de" name="Sersiryx, Imp Familiar">
 			<property name="Type" value="Creature" />
@@ -243,65 +333,20 @@
 			<property name="Text" value="When guarding, Temple High Guard gains Melee +2 and may counterstrike first (the Counterstrike Step is moved to just after the Declare Attack Step)." />
 			<property name="CardID" value="MWPROMO20" />
 		</card>
-		<card id="d7076396-cb62-44c5-b3ba-2d344f205fb5" name="Death&apos;s Head Scorpion">
+		<card id="6cbc50f5-d807-4f1c-984e-ece07ce6ebf9" name="Victorian Griffin">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Insect" />
-			<property name="Cost" value="9" />
-			<property name="Action" value="Full" />
+			<property name="Subtype" value="Griffin" />
+			<property name="Cost" value="17" />
+			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="School" value="Nature" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Armor=4, Life=6" />
-			<property name="AttackBar" value="Pinchers:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Deadly Stinger:&#xD;&#xA;[Full] [Melee] [Dice=1] [d12] [8+ = 2 Tainted] [Piercing +2]" />
-			<property name="Traits" value="" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWPROMO58" />
-		</card>
-		<card id="b54089c7-7d6b-46db-b5bc-83477eb9af07" name="Lightning Beetle">
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Insect, Beetle" />
-			<property name="Cost" value="13" />
-			<property name="Action" value="Full" />
-			<property name="Range" value="0-0" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Nature+Air" />
-			<property name="Level" value="2+1" />
-			<property name="Stats" value="Armor=4, Life=7" />
-			<property name="AttackBar" value="Electrifed Mandibles:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=3] [d12] [6-7 = Daze; 8+ = Stun] [Ethereal]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=2] [d12] [7-8 = Daze; 9+ = Stun] [Ethereal]" />
-			<property name="Traits" value="Psychic Immunity, Lightning -2" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWPROMO60" />
-		</card>
-		<card id="4c2baceb-b4bb-4118-869b-b9f3e6dc000d" name="Mountain Ram">
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Animal, Bovid" />
-			<property name="Cost" value="8" />
-			<property name="Action" value="Full" />
-			<property name="Range" value="0-0" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Nature" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Armor=1, Life=7" />
-			<property name="AttackBar" value="Battering Horns:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Push] [+2 vs. Corporeal Conjurations]" />
-			<property name="Traits" value="Charge +2, Frost -2" />
-			<property name="Text" value="If Mountain Ram&apos;s Battering Horns attack gains a Charge bonus, then it also may add +3 to its effect die roll." />
-			<property name="CardID" value="MWPROMO63" />
-		</card>
-		<card id="485f6711-aae1-4408-8cc8-6ac421c541b7" name="Pharaoh&apos;s Cheetah">
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Animal, Cat" />
-			<property name="Cost" value="12" />
-			<property name="Action" value="Full" />
-			<property name="Range" value="0-0" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Nature" />
-			<property name="Level" value="3" />
-			<property name="Stats" value="Defense 8+ 1x, Armor=1, Life=9" />
-			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [12+ = Slam]" />
-			<property name="Traits" value="Fast, Charge +2" />
-			<property name="Text" value="If Cheetah takes two move actions immediately before it makes its Claws attack, it may add +8 to the effect die roll for that attack. It does not recieve this bonus if it moves back and forth between 2 zone when it takes its move actions." />
-			<property name="CardID" value="MWPROMO65" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=2, Life=15" />
+			<property name="AttackBar" value="Razor Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="Text" value="While Victorian Griffin has the Flying trait, enemy cretures in its zone are hindered and the also lose and cannot gain the Elusive trait." />
+			<property name="Traits" value="Flying" />
+			<property name="CardID" value="MWPROMO62" />
 		</card>
 
 
@@ -380,7 +425,7 @@
 			<property name="Text" value="All objects in Raincloud&apos;s zone gain the Flame -2, Acid -2, and Regenerate 1 traits. Each Upkeep Phase you may remove 1 Burn condition or 1 Corrode condition, from 1 object in Raincloud&apos;s zone by paying its removal cost. Once per round, immediately before or after any friendly Action Phase, you may pay 1 mana to move Raincloud 1 zone and attach it to that zone." />
 			<property name="CardID" value="MWPROMO33" />
 		</card>
-		
+
 
 
 		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force">
@@ -429,6 +474,21 @@
 			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="Once per round, if this creature makes a melee or ranged attack, you may re-roll all of the attack dice, or the effect die, for that attack. Or, if the attack has to roll to hit (such as with a Daze condition), you may re-roll that die roll instead. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MWPROMO1" />
+		</card>
+		<card id="29121772-6f18-41ec-9add-87712e5f86ec" name="Circle of Light">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Light, Barrier" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Q" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="Blinding Aura:&#xD;&#xA;[Damage Barrier] [Light] [Dice=1] [d12] [5-10 = Daze; 11+ = Stun] [Unavoidable] [Ethereal] [+2 vs. Nonliving]" />
+			<property name="Traits" value="Magebind +2" />
+			<property name="Text" value="This creature a Damage Barrier." />
+			<property name="CardID" value="MWPROMO42" />
 		</card>
 		<card id="ccc78522-653a-443d-9c36-5be3eb96f1e1" name="Critical Strike">
 			<property name="Type" value="Enchantment" />
@@ -505,6 +565,21 @@
 			<property name="Text" value="Each Upkeep Phase, place a point of direct poison damage on each Living creature in this zone (including this creature)." />
 			<property name="CardID" value="MWPROMO30" />
 		</card>
+		<card id="ac38099d-6358-4295-a048-47293b4793c9" name="Rhino Hide">
+			<property name="Type" value="Enchantment" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Subtype" value="" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magebind +1" />
+			<property name="Text" value="This creature gains Armor +2." />
+			<property name="CardID" value="MWPROMO65" />
+		</card>
 		<card id="17b28bea-2fff-41c3-b0f6-a28bcbb14aa6" name="Stumble">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
@@ -534,21 +609,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Whenever your Mage summons a creature, he may place it in Summoning Circle&apos;s zone instead of his own zone, regardless of range or LoS." />
 			<property name="CardID" value="MWPROMO19" />
-		</card>		
-		<card id="29121772-6f18-41ec-9add-87712e5f86ec" name="Circle of Light">
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Light, Barrier" />
-			<property name="Cost" value="2+4" />
-			<property name="Action" value="Q" />
-			<property name="Range" value="0-2" />
-			<property name="Target" value="Corporeal Creature" />
-			<property name="School" value="Holy" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="" />
-			<property name="AttackBar" value="Blinding Aura:&#xD;&#xA;[Damage Barrier] [Light] [Dice=1] [d12] [5-10 = Daze; 11+ = Stun] [Unavoidable] [Ethereal] [+2 vs. Nonliving]" />
-			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="This creature a Damage Barrier." />
-			<property name="CardID" value="MWPROMO42" />
 		</card>
 
 
@@ -611,6 +671,21 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO15" />
+		</card>
+		<card id="da6a068d-ea92-4655-9095-7f9878df711f" name="Ring of Healing">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Q"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="AttackBar" value="" />
+			<property name="Text" value="Whenever a spell cast by this Mage, or an enchantment controlled by this Mage, provides healing for an object, other than the Regenerate trait, he may increase that amount of healing by one. He may use this ability once per round. If he heals mutiple objects (such as with a Group Heal), he only get the +1 bonus for one object of his choice." />
+			<property name="Traits" value="" />
+			<property name="CardID" value="MWPROMO49" />
 		</card>
 		<card id="a5170083-ad05-4e98-84a2-a14aecfdc463" name="Spiked Armor">
 			<property name="Type" value="Equipment" />
@@ -835,7 +910,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Novice" />			
+			<property name="Traits" value="Novice" />
 			<property name="Text" value="Target creature the Bloodthirsty +2 trait until the end of the round." />
 			<property name="CardID" value="MWPROMO38" />
 		</card>
@@ -850,7 +925,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Flame] [d12] [4-9 = Burn; 10+ = 2 Burn] [Defrost]" />
-			<property name="Traits" value="" />			
+			<property name="Traits" value="" />
 			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristices above; the flame damage type, an effect roll, and the Defrost trait." />
 			<property name="CardID" value="MWPROMO39" />
 		</card>
@@ -865,7 +940,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Lightning] [5-7 = Daze; 8+ = Stun]" />
-			<property name="Traits" value="" />			
+			<property name="Traits" value="" />
 			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristices above; the lightning damage type, and an effect roll." />
 			<property name="CardID" value="MWPROMO40" />
 		</card>
