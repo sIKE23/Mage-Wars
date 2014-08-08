@@ -6,18 +6,19 @@
 	<cards>
 		<card id="54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd" name="Orb Guardian">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Soldier" />
-			<property name="Cost" value="12" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="9" />
 			<property name="Action" value="F"  />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=8" />
-			<property name="AttackBar" value="Claws:[Quick] [Melee] [Dice=4]" />
+			<property name="AttackBar" value="Claws: [Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Rooted, Teleport Ward, En Garde, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWDOMCR01" />
+			<alternate name="Orb Guardian" type="B" />
 		</card>
 		<card id="690a2c72-4801-47b5-84bd-b9e2f5811cb5" name="Power Orb">
 			<property name="Type" value="Conjuration" />
