@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="2.8.0.0"
+	version="2.8.0.1"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -67,6 +67,7 @@
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupaction menu="Add Power Orb" default="False" shortcut="Ctrl+F3" execute="createPowerOrb" />
 		<groupaction menu="Add Orb Guardian" default="False" shortcut="Ctrl+F4" execute="createOrbGuardian" />
+		<groupaction menu="Add Orb Guardian" default="False" shortcut="Ctrl+F5" execute="createGOrbGuardian" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
@@ -111,6 +112,7 @@
 			<cardaction menu="Add Cripple Token" default="False" shortcut="Alt+C" execute="addCripple" />
 			<cardaction menu="Add Daze Token" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+D" execute="addDisable" />
+			<cardaction menu="Add Energy Token" default="False" shortcut="Ctrl+P" execute="addDisable" />			
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
 			<cardaction menu="Add Stuck Token" default="False" shortcut="Ctrl+K" execute="addStuck" />
 			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+R" execute="addRot" />

@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v2.8.0.0    ##################################
+##########################    v2.8.0.1    ##################################
 ############################################################################
 import time
 import re
@@ -30,8 +30,9 @@ Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
 Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20" )
 DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
 DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
-Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb" )
+Disable = ("Disable", "f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
+Energy = ("Energy", "d01f02e4-392f-409f-95f5-d2fa40f89882" ) 
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
 Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
@@ -119,7 +120,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "2.8.0.0"
+ver = "2.8.0.1"
 
 ############################################################################
 ############################		Events		##################################
@@ -409,8 +410,12 @@ def playerSetup():
 
 def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
-	
+
 def createOrbGuardian(group, x=0, y=0):
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 450, -40 )	
+	orbGuardian.markers[Guard] = 1
+	
+def createGOrbGuardian(group, x=0, y=0):
 	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
 	orbGuardian.markers[Guard] = 1
 
@@ -675,7 +680,7 @@ def resetMarkers(c):
 	if c.markers[Visible] == 1:
 		c.markers[Visible] = 0
 		c.markers[Invisible] = 1
-	if "Orb Guardian" == c.name:
+	if "Orb Guardian" in c.name:
 		c.markers[Guard] = 1
 
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
@@ -1011,6 +1016,9 @@ def addGrowth(card, x = 0, y = 0):
 
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
+	
+def addPower(card, x = 0, y = 0):
+    addToken(card, Power)
 
 def addRot(card, x = 0, y = 0):
     addToken(card, Rot)
