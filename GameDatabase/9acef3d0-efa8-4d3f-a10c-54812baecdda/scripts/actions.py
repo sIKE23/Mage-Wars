@@ -1017,8 +1017,8 @@ def addGrowth(card, x = 0, y = 0):
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
 	
-def addPower(card, x = 0, y = 0):
-    addToken(card, Power)
+def addEnergy(card, x = 0, y = 0):
+    addToken(card, Energy)
 
 def addRot(card, x = 0, y = 0):
     addToken(card, Rot)

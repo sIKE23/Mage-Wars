@@ -112,7 +112,7 @@
 			<cardaction menu="Add Cripple Token" default="False" shortcut="Alt+C" execute="addCripple" />
 			<cardaction menu="Add Daze Token" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+D" execute="addDisable" />
-			<cardaction menu="Add Energy Token" default="False" shortcut="Ctrl+P" execute="addDisable" />			
+			<cardaction menu="Add Energy Token" default="False" shortcut="Ctrl+P" execute="addEnergy" />			
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
 			<cardaction menu="Add Stuck Token" default="False" shortcut="Ctrl+K" execute="addStuck" />
 			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+R" execute="addRot" />
