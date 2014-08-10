@@ -145,6 +145,21 @@
 			<property name="Text" value="Reveal Dampening Field before the Upkeep Phase. This Upkeep Phase Orbs do not Function, then destroy Dampening Field." />
 			<property name="CardID" value="MWDOME02" />
 		</card>
+		<card id="fa23207a-afe0-4757-a7f0-fe38cd974c71" name="Orb Protector">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Once per round, this orb may push an enemy in it's zone one zone away. Use a ready marker to track this ability." />
+			<property name="CardID" value="MWDOME03" />
+		</card>
 		<card id="0aa2df43-143a-4412-8e35-50799e544771" name="Creature Link">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
