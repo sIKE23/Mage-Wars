@@ -1284,7 +1284,7 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[DeflectR] = 1
 			if "Beastmaster" == card.name:
 					card.markers[Pet] = 1
-			if "Beastmaster (Johktari)" == card.name:
+			if "Johktari Beastmaster ()" == card.name:
 					card.markers[WoundedPrey] = 1
 			if "Priest" == card.name:
 					card.markers[HolyAvenger] = 1
