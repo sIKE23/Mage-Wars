@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda" sleeveid="0">
+  <section name="Mage" shared="False">
+    <card qty="1" id="4f27a0aa-8ef2-42cc-ae24-1ae0bf0f8a64">Adramelech Warlock</card>
+    <card qty="1" id="8c17a03b-4800-4253-ac32-925581fdbbe0">Adramelech Warlock Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="675c07ff-cbe3-462b-bda2-81c95812f026">Devil's Trident</card>
+    <card qty="1" id="d8562a1d-6a95-4ca4-99aa-91c5ca769a33">Fireball</card>
+    <card qty="1" id="297f9d29-cedf-4d1a-970c-703a3f978907">Ring of Fire</card>
+    <card qty="3" id="f47d8498-c367-44dd-98c8-e919a02e4b1d">Flameblast</card>
+    <card qty="1" id="aecb2a7e-5d16-48bd-8a82-67522fa1f96e">Firestorm</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="4223e20b-75b1-4f21-938e-a4a8acf06195">Wall of Fire</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="2" id="d6769d21-6095-43b4-a5c3-cbfd6c5f9436">Firebrand Imp</card>
+    <card qty="2" id="4ed5ed50-3c2a-4513-ae98-c954766e5a79">Flaming Hellion</card>
+    <card qty="1" id="d3d74607-ebe1-4533-a7b6-e5a758e10e83">Wildfire Imp</card>
+    <card qty="1" id="4d68d973-aa67-448f-b244-8aee05089205">Fire Elemental</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="1ed8a709-4e3b-407f-bb43-426c3a8c06d9">Circle of Fire</card>
+    <card qty="2" id="fe74477b-1858-42a7-a5de-739f965944c3">Adramelech's Touch</card>
+    <card qty="1" id="2d94d69e-5c08-4db2-89a0-5c811bfaca17">Marked for Death</card>
+    <card qty="2" id="22fe0c48-f14e-4d31-b5ff-4013a4245071">Hellfire Trap</card>
+    <card qty="1" id="46b36e31-5dec-4a37-a39c-c2a5b6e0caee">Death Link</card>
+    <card qty="1" id="775fd07c-63b3-48af-9a6d-061165fe5805">Chains of Agony</card>
+    <card qty="1" id="7bc882f8-d7d0-4c70-b40f-2cbc844e3579">Jinx</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="66582dca-63bc-4b49-bbcd-add00a57cf11">Dragonscale Hauberk</card>
+    <card qty="1" id="42f6de77-bab3-4be7-a0e1-567957dc37ba">Fireshaper Ring</card>
+    <card qty="1" id="5d2f72e1-7aaf-4931-b0e0-f11cce928313">Lash of Hellfire</card>
+    <card qty="1" id="9e7cbef4-1ad9-46cf-95c0-1aafd656c85d">Adramelech's Torment</card>
+    <card qty="1" id="bd37ecb3-e239-4e72-a780-99927244e35c">Bloodfire Helmet</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="90e866bf-64db-4199-ba5f-3364eecaf7ce">Explode</card>
+    <card qty="2" id="0c8ccd8a-57c0-4189-86a3-e066174f19af">Combustion</card>
+    <card qty="2" id="6a8d90fb-8573-480c-8a0d-dabc460b5f45">Ignite</card>
+    <card qty="1" id="2753eeea-2130-4399-ae88-f96ed1ccf776">Dispel</card>
+    <card qty="1" id="04c9e8ae-8b36-4ea6-b8fb-9f01e1fc5dd6">Defend</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
