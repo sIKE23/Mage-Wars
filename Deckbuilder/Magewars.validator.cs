@@ -63,7 +63,7 @@ namespace Octgn.MageWarsValidator
             get
             {
                 // Display name of the plugin.
-                return "Mage Wars deck validator plugin";
+                 return "Mage Wars Spellbook Builder Plugin";
             }
         }
 
@@ -101,8 +101,7 @@ namespace Octgn.MageWarsValidator
         {
             get
             {
-                return "Mage Wars validator";
-            }
+                return "Validate Mage Wars Spellbook"; }
         }
 
         /// <summary>
@@ -391,7 +390,7 @@ namespace Octgn.MageWarsValidator
                     .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
                     .Value as string;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ret = "";
             }
@@ -502,7 +501,7 @@ namespace Octgn.MageWarsValidator
                     .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
                     .Value as string;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ret = "";
             }
@@ -629,7 +628,7 @@ namespace Octgn.MageWarsValidator
                     .First(x => x.Key.Name.Equals(p, StringComparison.InvariantCultureIgnoreCase))
                     .Value as string;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ret = "";
             }
