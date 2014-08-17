@@ -8,6 +8,7 @@
 *.dll.config
 *.cache
 *.suo
+!OCTGN-SBB-for-MageWars.exe
 ####################
 # VS Upgrade stuff #
 ####################
@@ -53,3 +54,4 @@ ehthumbs.db
 Icon?
 Thumbs.db
 *.bak
+Deckbuilder/Octgn.MagewarsPlugin.sln
