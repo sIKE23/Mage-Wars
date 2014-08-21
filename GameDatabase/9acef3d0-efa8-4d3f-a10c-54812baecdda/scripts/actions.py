@@ -32,7 +32,7 @@ DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
 DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
 Disable = ("Disable", "f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
-Energy = ("Energy", "d01f02e4-392f-409f-95f5-d2fa40f89882" ) 
+Energy = ("Energy", "d01f02e4-392f-409f-95f5-d2fa40f89882" )
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
 Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
@@ -121,6 +121,9 @@ roundTimes = []
 gameTurn = 0
 playerNum = 0
 ver = "2.8.0.1"
+Magebind = ""
+mageRevealCost = ""
+infostr = ""
 
 ############################################################################
 ############################		Events		##################################
@@ -412,11 +415,11 @@ def createVineMarker(group, x=0, y=0):
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
 
 def createOrbGuardian(group, x=0, y=0):
-	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 450, -40 )	
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 450, -40 )
 	orbGuardian.markers[Guard] = 1
-	
+
 def createGOrbGuardian(group, x=0, y=0):
-	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
+	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )
 	orbGuardian.markers[Guard] = 1
 
 def createPowerOrb(group, x=0, y=0):
@@ -638,7 +641,7 @@ def advanceTurn():
 		if p.name == nextPlayerName:
 			for p2 in players:
 				remoteCall(p2, "setActiveP", [p])
-				
+
 def setActiveP(p):
 	p.setActivePlayer()
 
@@ -1016,7 +1019,7 @@ def addGrowth(card, x = 0, y = 0):
 
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
-	
+
 def addEnergy(card, x = 0, y = 0):
     addToken(card, Energy)
 
@@ -1651,7 +1654,7 @@ def switchPhase(card, phase, phrase):
 				remoteCall(card.controller, "remoteHighlight", [card, None])
 				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
 			notify("Phase changed to the {}".format(phrase))
-			
+
 			return True
 
 def remoteHighlight(card, color):
@@ -1719,42 +1722,57 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 			discountsUsed.append(newtup)
 	return discount
 
-def castSpell(card, x = 0, y = 0):
-	if card.Cost != "" and card.Cost != None:
-		notify("Printed casting cost of {} is {}".format(card,card.Cost))
-		castingcosts = card.Cost.split("+")
-		try:
-			castingcost = int(card.Cost)
-		except ValueError:
-			if "X" in card.Cost: #e.g. Dispel
-				castingcost = 0
-			elif "+" in card.Cost: #a x+y cost as in enchantments. We want the reveal cost
-				try:
-					castingcost = int(castingcosts[1]) #reveal cost is the second one
-				except ValueError:
-					castingcost = 0
-				#target code
-			else:
-				castingcost = 0
 
-		#TODO Who is casting the spell?
-		infostr = ""
-		if "Enchantment" in card.Type:
-			infostr= "Printed casting cost is {}".format(castingcosts[1])
-		else:
-			infostr= "Printed casting cost is {}".format(card.Cost)
+def castSpell(card, x = 0, y = 0):
+	global infostr
+	global Magebind
+	castingCost = ""
+
+	if card.Cost != "" and card.Cost != None:
+		if not "Enchantment" in card.Type:  # Attack, Creature, Conjuration, Equipment, and Incantation spells
+			if "X" in card.Cost:  # e.g. Dispel
+				castingCost = 0
+			else:
+				castingCost = int(card.Cost)
+			infostr = "Printed casting cost of {} is {}".format(card.Name, str(castingCost))
+
+		else:  # Enchantment Spells
+			#  castingCost = 2	# when we get attaching enchantments down
+			revealCost = card.Cost.split("+")
+			debug("{} and {}".format(revealCost[0], revealCost[1]))
+			if "X" in card.Cost:  # e.g. Charm
+				mageRevealCost = 0
+			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
+				flipcard(card, x, y)
+				notify("{} revealed {} as it has a '0' reveal cost".format(me.name, card.name))
+				return
+			else:
+				mageRevealCost = int(revealCost[1])  # the second number (reveal cost)
+
+			# if card has the Magebind trait, how much does it add to the reveal cost?
+			if card.controller == me and "Magebind" in card.Traits:
+				TraitValue = getTraitValue(card, Magebind)
+				# Are we targeting a Mage with this Enchantment?
+				castingCost = int(chooseMagebind(card, mageRevealCost, TraitValue))
+			else:
+				castingCost = mageRevealCost
+				infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
+			notify("{}".format(infostr))
+
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
 		discount = 0
 		for c in table:
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
-				dc = castingDiscount(card,c)
+				dc = castingDiscount(card, c)
 				if dc > 0:
-					infostr += "\nCost reduced by {} due to {}".format(dc,c.name)
+					infostr += "\nCost reduced by {} due to {}".format(dc, c.name)
 					discount += dc
 				elif dc < 0:
 					infostr += "\n{} already reached max uses this round.".format(c.name)
 		infostr += "\nTotal mana amount to subtract from mana pool?"
-		manacost = askInteger(infostr,castingcost-discount)
+		manacost = askInteger(infostr, castingCost - discount)
+
+		# Do we have enough mana to pay for the spell?
 		if manacost == None:
 			return
 		if me.Mana < manacost:
@@ -1765,9 +1783,43 @@ def castSpell(card, x = 0, y = 0):
 				notify("{} has insufficient mana in pool".format(me))
 				flipcard(card, x, y)
 				return
+
+		# Pay casting/reveal costs, notify in chat window and flip the card face up
 		me.Mana -= manacost
-		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
+		notify("{} payed {} mana from pool for {}".format(me.name, manacost, card.name))
 		flipcard(card, x, y)
+
+
+def getTraitValue(card, getTraitCost):
+	listofTraits = ""
+	#debug("{} has the {} trait".format(card.Name, getTraitCost))
+	listofTraits = card.Traits.split(", ")
+	#debug("{} ".format(listofTraits))
+	if not len(listofTraits) > 1:
+		strTraits = ''.join(listofTraits)
+	else:
+		for traits in listofTraits:
+			if getTraitCost in traits:
+				strTraits = ''.join(traits)
+	STraitCost = strTraits.split("+")
+	TraitCost = int(STraitCost[1])
+	notify("{} has the {}+{} trait".format(card.Name, STraitCost[0], TraitCost))
+	return TraitCost
+
+
+def chooseMagebind(card, mageRevealCost, TraitCosts):
+	global infostr
+	choiceList = ['Yes', 'No']
+	colorsList = ['#0000FF', '#FF0000']
+	choice = askChoice("Is the target of this Enchantment a Mage?", choiceList, colorsList)
+	infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
+	if choice == 1:  # Enchantment is targeting a Mage
+		mcastingCost = int(mageRevealCost) + int(TraitCosts)
+		infostr += "\n+ {} to bind the spell to a Mage".format(TraitCosts)
+	else:  # Enchatment is not targeting a Mage
+		mcastingCost = int(mageRevealCost)
+	return mcastingCost
+
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
