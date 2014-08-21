@@ -1288,7 +1288,6 @@ def flipcard(card, x = 0, y = 0):
 		notify("{} Flips Zone Marker.".format(me))
 	elif card.isFaceUp == False:
 		card.isFaceUp = True
-		notify("{} turns '{}' face up.".format(me, card.Name))
 		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
 		if card.Type == "Mage" or card.Type == "Creature": #places action marker on card
@@ -1734,7 +1733,8 @@ def castSpell(card, x = 0, y = 0):
 				castingCost = 0
 			else:
 				castingCost = int(card.Cost)
-			infostr = "Printed casting cost of {} is {}".format(card.Name, str(castingCost))
+			infostr = "The printed casting cost of {} is {}".format(card.Name, castingCost)
+			notifyStr = "{} turns '{}' face up, it has a printed casting cost of  {}".format(me.name, card.Name, str(castingCost))
 
 		else:  # Enchantment Spells
 			#  castingCost = 2	# when we get attaching enchantments down
@@ -1757,7 +1757,7 @@ def castSpell(card, x = 0, y = 0):
 			else:
 				castingCost = mageRevealCost
 				infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
-			notify("{}".format(infostr))
+			notifyStr = "{} turns '{}' face up, it has a printed reveal cost of  {}".format(me.name, card.Name, str(mageRevealCost))
 
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
 		discount = 0
@@ -1765,10 +1765,10 @@ def castSpell(card, x = 0, y = 0):
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
 				dc = castingDiscount(card, c)
 				if dc > 0:
-					infostr += "\nCost reduced by {} due to {}".format(dc, c.name)
+					infostr = notifyStr + "\nCost reduced by {} due to {}".format(dc, c.name)
 					discount += dc
 				elif dc < 0:
-					infostr += "\n{} already reached max uses this round.".format(c.name)
+					infostr = notifyStr + "\n{} already reached max uses this round.".format(c.name)
 		infostr += "\nTotal mana amount to subtract from mana pool?"
 		manacost = askInteger(infostr, castingCost - discount)
 
@@ -1786,9 +1786,9 @@ def castSpell(card, x = 0, y = 0):
 
 		# Pay casting/reveal costs, notify in chat window and flip the card face up
 		me.Mana -= manacost
-		notify("{} payed {} mana from pool for {}".format(me.name, manacost, card.name))
 		flipcard(card, x, y)
-
+		notify("{}".format(notifyStr))
+		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
 
 def getTraitValue(card, getTraitCost):
 	listofTraits = ""
