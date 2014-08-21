@@ -1417,10 +1417,15 @@ def defaultAction(card, x = 0, y = 0):
 					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
 					if choice == 0 or choice == 2:
 						return
-
 			castSpell(card, x, y)
 		else:
-			castSpell(card, x, y)
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Did you wish to flip this card face down?", choiceList, colorsList)
+			if choice == 1:
+				flipcard(card, x, y)
+			else:
+				return
 
 
 ############################################################################
