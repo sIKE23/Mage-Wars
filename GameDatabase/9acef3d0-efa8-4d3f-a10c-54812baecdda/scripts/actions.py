@@ -1427,15 +1427,8 @@ def defaultAction(card, x = 0, y = 0):
 			#is this a face-down enchantment? if so, prompt before revealing
 			if "Mage" in card.Type:
 				flipcard(card, x, y)
-			elif card.Type == "Enchantment":
-				if getSetting("EnchantPromptReveal", False):
-					choiceList = ['Yes', 'No']
-					colorsList = ['#0000FF', '#FF0000']
-					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
-					if choice == 0 or choice == 2:
-						return
-
-			castSpell(card, x, y)
+			else:
+				castSpell(card, x, y)
 		else:
 			choiceList = ['Yes', 'No']
 			colorsList = ['#0000FF', '#FF0000']
@@ -1742,7 +1735,15 @@ def castSpell(card, x = 0, y = 0):
 			notifyStr = "{} turns '{}' face up, it has a printed casting cost of  {}".format(me.name, card.Name, str(castingCost))
 
 		else:  # Enchantment Spells
-			#  castingCost = 2	# when we get attaching enchantments down
+			#  Check to see if the player wants to reveal the Enchantment
+			if getSetting("EnchantPromptReveal", False):
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
+				if choice == 0 or choice == 2:
+					return
+			
+			#  castingCost = 2	# when we get attaching enchantments down			
 			revealCost = card.Cost.split("+")
 			debug("{} and {}".format(revealCost[0], revealCost[1]))
 			if "X" in card.Cost:  # e.g. Charm
