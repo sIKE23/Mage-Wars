@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v2.8.0.1    ##################################
+##########################    v2.8.0.3    ##################################
 ############################################################################
 import time
 import re
@@ -591,8 +591,8 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
 			advanceTurn()
-			gameTurn = int(getGlobalVariable("RoundNumber")) + 1
-#			gameTurn = turnNumber() + 1
+#			gameTurn = int(getGlobalVariable("RoundNumber")) + 1
+			gameTurn = turnNumber() + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
@@ -836,7 +836,6 @@ def resolveChanneling(c):
 
 def mageStatus():
 	global gameEndTime
-	global gameTurn
 	mute()
 	if not me.Damage >= me.Life:
 		return
@@ -844,7 +843,7 @@ def mageStatus():
 		if c.Type == "Mage" and c.controller == me:
 			c.orientation = 1
 	gameEndTime = time.time()
-#	playSoundFX('Winner')
+	#	playSoundFX('Winner')
 	for p in players:
 		remoteCall(p, "reportDeath",[me])
 #	reportGame('MageDeath')
@@ -852,17 +851,25 @@ def mageStatus():
 def reportDeath(deadmage):
 	global gameIsOver
 	global gameEndTime
-	global gameTurn
+	endofGameTurn = getGlobalVariable("RoundNumber")
 	gameIsOver = True
 	gameEndTime = time.time()
-	notify("{} has fallen in the arena! At {} after {} Rounds.".format(me,time.ctime(gameEndTime),str(gameTurn)))
 	choiceList = ['OK']
 	colorsList = ['#de2827']
-	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage,time.ctime(gameEndTime),str(gameTurn)),choiceList, colorsList)
+	whisper("'{}' has fallen in the arena! At {} after {} Rounds.".format(deadmage, time.ctime(gameEndTime), endofGameTurn))
+	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, time.ctime(gameEndTime), endofGameTurn), choiceList, colorsList)
 	if choice == 0 or choice == 1:
 		return
 
-def concede(group=table,x=0,y=0):
+def checkMageDeath(player, counter, oldvalue):
+	global currentPhase
+	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
+		whisper("{} - {}".format(me.name, currentPhase))
+		if me.Damage >= me.Life and currentPhase == "Actions":
+			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
+				mageStatus()
+
+def concede(group=table, x = 0, y = 0):
 	global gameEndTime
 	global gameIsOver
 	global gameTurn
@@ -874,17 +881,9 @@ def concede(group=table,x=0,y=0):
 				c.orientation = 1
 		gameEndTime = time.time()
 #		reportGame('Conceded')
-		notify("{} has conceded the game".format(me))
+		notify("'{}' has conceded the game".format(me))
 	else:
-		notify("{} was about to concede the game, but thought better of it...".format(me))
-
-def checkMageDeath(player, counter, oldvalue):
-	global currentPhase
-	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
-		notify("{}".format(currentPhase))
-		if me.Damage >= me.Life and currentPhase == "Actions":
-			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
-				mageStatus()
+		notify("'{}' was about to concede the game, but thought better of it...".format(me))
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
