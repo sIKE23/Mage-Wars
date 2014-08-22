@@ -120,7 +120,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "2.8.0.1"
+ver = "2.8.0.3"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -881,6 +881,7 @@ def concede(group=table,x=0,y=0):
 def checkMageDeath(player, counter, oldvalue):
 	global currentPhase
 	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
+		notify("{}".format(currentPhase))
 		if me.Damage >= me.Life and currentPhase == "Actions":
 			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
 				mageStatus()
@@ -1000,31 +1001,34 @@ def addBurn(card, x = 0, y = 0):
 	addToken(card, Burn)
 
 def addCripple(card, x = 0, y = 0):
-    addToken(card, Cripple)
+	addToken(card, Cripple)
 
 def addCorrode(card, x = 0, y = 0):
-    addToken(card, Corrode)
+	addToken(card, Corrode)
 
 def addDamage(card, x = 0, y = 0):
-    addToken(card, Damage)
-
+	if "Mage" in card.Type and card.controller == me:
+		me.Damage += 1
+	else:
+		addToken(card, Damage)
+			
 def addDisable(card, x = 0, y = 0):
-    addToken(card, Disable)
+	addToken(card, Disable)
 
 def addDaze(card, x=0, y=0):
 	addToken(card, Daze)
 
 def addGrowth(card, x = 0, y = 0):
-    addToken(card, Growth)
+	addToken(card, Growth)
 
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
 
 def addEnergy(card, x = 0, y = 0):
-    addToken(card, Energy)
+	addToken(card, Energy)
 
 def addRot(card, x = 0, y = 0):
-    addToken(card, Rot)
+	addToken(card, Rot)
 
 def addSlam(card, x=0, y=0):
 	addToken(card, Slam)
@@ -1049,7 +1053,8 @@ def addZombie(card, x=0, y=0):
 
 def addOther(card, x = 0, y = 0):
 	marker, qty = askMarker()
-	if qty == 0: return
+	if qty == 0: 
+		return
 	card.markers[marker] += qty
 
 ##########################     Toggle Actions/Tokens     ##############################
@@ -1201,40 +1206,44 @@ def subArmor(card, x = 0, y = 0):
 	subToken(card, Armor)
 
 def subBleed(card, x = 0, y = 0):
- 	subToken(card, Bleed)
+	subToken(card, Bleed)
 
 def subBurn(card, x = 0, y = 0):
-    subToken(card, Burn)
+	subToken(card, Burn)
 
 def subCorrode(card, x = 0, y = 0):
-    subToken(card, Corrode)
+	subToken(card, Corrode)
 
 def subCripple(card, x = 0, y = 0):
-    subToken(card, Cripple)
+	subToken(card, Cripple)
 
 def subDamage(card, x = 0, y = 0):
-    subToken(card, Damage)
+	if "Mage" in card.Type:
+		if card.controller == me:
+			me.Damage -= 1
+	else:
+		subToken(card, Damage)
 
 def subDaze(card, x = 0, y = 0):
-    subToken(card, Daze)
+	subToken(card, Daze)
 
 def subDisable(card, x = 0, y = 0):
-    subToken(card, Disable)
+	subToken(card, Disable)
 
 def subGrowth(card, x = 0, y = 0):
-    subToken(card, Growth)
+	subToken(card, Growth)
 
 def subMana(card, x = 0, y = 0):
-    subToken(card, Mana)
+	subToken(card, Mana)
 
 def subRot(card, x = 0, y = 0):
-    subToken(card, Rot)
+	subToken(card, Rot)
 
 def subSlam(card, x = 0, y = 0):
-    subToken(card, Slam)
+	subToken(card, Slam)
 
 def subStun(card, x = 0, y = 0):
-    subToken(card, Stun)
+	subToken(card, Stun)
 
 def subStuck(card, x = 0, y = 0):
 	subToken(card, Stuck)
@@ -1246,10 +1255,10 @@ def subVet(card, x = 0, y = 0):
 	subToken(card, Veteran)
 
 def subWeak(card, x = 0, y = 0):
-    subToken(card, Weak)
+	subToken(card, Weak)
 
 def subZombie(card, x = 0, y = 0):
-    subToken(card, Zombie)
+	subToken(card, Zombie)
 
 def clearTokens(card, x = 0, y = 0):
 	mute()
@@ -1444,35 +1453,38 @@ def defaultAction(card, x = 0, y = 0):
 
 def addToken(card, tokenType):
 	mute()
-	card.markers[tokenType] += 1
-	if card.isFaceUp:
-		notify("{} added to '{}'".format(tokenType[0], card.Name))
-	else:
-		notify("{} added to face-down card.".format(tokenType[0]))
+	if card.Type != "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+		card.markers[tokenType] += 1
+		if card.isFaceUp:
+			notify("{} added to '{}'".format(tokenType[0], card.Name))
+		else:
+			notify("{} added to face-down card.".format(tokenType[0]))
 
 def subToken(card, tokenType):
 	mute()
-	if card.markers[tokenType] > 0:
-		card.markers[tokenType] -= 1
-		if card.isFaceUp:
-			notify("{} removed from '{}'".format(tokenType[0], card.Name))
-		else:
-			notify("{} removed from face-down card.".format(tokenType[0]))
+	if card.Type != "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+		if card.markers[tokenType] > 0:
+			card.markers[tokenType] -= 1
+			if card.isFaceUp:
+				notify("{} removed from '{}'".format(tokenType[0], card.Name))
+			else:
+				notify("{} removed from face-down card.".format(tokenType[0]))
 
 def toggleToken(card, tokenType):
 	mute()
-	if card.markers[tokenType] > 0:
-		card.markers[tokenType] = 0
-		if card.isFaceUp:
-			notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
+	if card.Type != "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+		if card.markers[tokenType] > 0:
+			card.markers[tokenType] = 0
+			if card.isFaceUp:
+				notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
+			else:
+				notify("{} removed from face-down card.".format(tokenType[0]))
 		else:
-			notify("{} removed from face-down card.".format(tokenType[0]))
-	else:
-		card.markers[tokenType] = 1
-		if card.isFaceUp:
-			notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
-		else:
-			notify("{} added to face-down card.".format(tokenType[0]))
+			card.markers[tokenType] = 1
+			if card.isFaceUp:
+				notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
+			else:
+				notify("{} added to face-down card.".format(tokenType[0]))
 
 def playCardFaceDown(card, x=0, y=0):
 	global mycolor

@@ -2792,7 +2792,7 @@
  			<property name="Type" value="Internal" />
 		</card>
 		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Upkeep Phase">
-			<property name="Type" value="Phases" />
+			<property name="Type" value="Internal" />
 			<alternate name="Planning Phase" type="Planning" />
 			<alternate name="Deployment Phase" type="Deploy" />
 			<alternate name="First Quickcast Phase" type="Quick" />
