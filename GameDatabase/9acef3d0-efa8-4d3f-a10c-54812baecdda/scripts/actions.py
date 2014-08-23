@@ -1419,13 +1419,14 @@ def defaultAction(card, x = 0, y = 0):
 						return
 			castSpell(card, x, y)
 		else:
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("Did you wish to flip this card face down?", choiceList, colorsList)
-			if choice == 1:
-				flipcard(card, x, y)
-			else:
-				return
+			if card.Type == "Incantation" or card.Type == "Enchantment":
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("Did you wish to cast this spell?", choiceList, colorsList)
+				if choice == 1:
+					castSpell(card, x, y)
+				else:
+					return
 
 
 ############################################################################
