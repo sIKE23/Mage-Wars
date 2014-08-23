@@ -1760,7 +1760,7 @@ def castSpell(card, x = 0, y = 0):
 			
 			#  castingCost = 2	# when we get attaching enchantments down			
 			revealCost = card.Cost.split("+")
-			debug("{} and {}".format(revealCost[0], revealCost[1]))
+			debug("debug: {} and {}".format(revealCost[0], revealCost[1]))
 			if "X" in card.Cost:  # e.g. Charm
 				mageRevealCost = 0
 			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
@@ -1821,7 +1821,7 @@ def castSpell(card, x = 0, y = 0):
 			notify("{}".format(boundStr))
 		if not TraitStr == "":
 			notify("{}".format(TraitStr))
-		notify("'{}' payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
+		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
 
 def getTraitValue(card, getTraitCost):
 	listofTraits = ""
@@ -1836,7 +1836,7 @@ def getTraitValue(card, getTraitCost):
 				strTraits = ''.join(traits)
 	STraitCost = strTraits.split("+")
 	TraitCost = int(STraitCost[1])
-	TraitStr = "{} has the {}+{} trait".format(card.Name, STraitCost[0], TraitCost)
+	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
 	return (TraitCost, TraitStr)
 
 
