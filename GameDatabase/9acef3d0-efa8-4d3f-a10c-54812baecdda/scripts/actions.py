@@ -1438,7 +1438,7 @@ def defaultAction(card, x = 0, y = 0):
 			else:
 				castSpell(card, x, y)
 		else:
-			if card.Type == "Incantation" or card.Type == "Enchantment":
+			if card.Type == "Incantation" or card.Type == "Attack":
 				choiceList = ['Yes', 'No']
 				colorsList = ['#0000FF', '#FF0000']
 				choice = askChoice("Did you wish to cast this spell?", choiceList, colorsList)
@@ -1736,6 +1736,8 @@ def castSpell(card, x = 0, y = 0):
 	global infostr
 	global Magebind
 	castingCost = ""
+	TraitStr = ""
+	discountStr = ""
 
 	if card.Cost != "" and card.Cost != None:
 		if not "Enchantment" in card.Type:  # Attack, Creature, Conjuration, Equipment, and Incantation spells
@@ -1743,8 +1745,9 @@ def castSpell(card, x = 0, y = 0):
 				castingCost = 0
 			else:
 				castingCost = int(card.Cost)
+
 			infostr = "The printed casting cost of {} is {}".format(card.Name, castingCost)
-			notifyStr = "{} turns '{}' face up, it has a printed casting cost of  {}".format(me.name, card.Name, str(castingCost))
+			notifyStr = "{} turns '{}' face up, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
 
 		else:  # Enchantment Spells
 			#  Check to see if the player wants to reveal the Enchantment
@@ -1769,7 +1772,7 @@ def castSpell(card, x = 0, y = 0):
 
 			# if card has the Magebind trait, how much does it add to the reveal cost?
 			if card.controller == me and "Magebind" in card.Traits:
-				TraitValue = getTraitValue(card, Magebind)
+				TraitValue, TraitStr = getTraitValue(card, Magebind)
 				# Are we targeting a Mage with this Enchantment?
 				castingCost = int(chooseMagebind(card, mageRevealCost, TraitValue))
 			else:
@@ -1783,10 +1786,14 @@ def castSpell(card, x = 0, y = 0):
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
 				dc = castingDiscount(card, c)
 				if dc > 0:
-					infostr = notifyStr + "\nCost reduced by {} due to {}".format(dc, c.name)
+					discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
+					infostr = notifyStr + discountStr
+					notifyStr = notifyStr + discountStr
 					discount += dc
 				elif dc < 0:
-					infostr = notifyStr + "\n{} already reached max uses this round.".format(c.name)
+					discountStr = "\n{} already reached max uses this round.".format(c.name)
+					infostr = notifyStr + discountStr
+					notifyStr = notifyStr + discountStr
 		infostr += "\nTotal mana amount to subtract from mana pool?"
 		manacost = askInteger(infostr, castingCost - discount)
 
@@ -1804,9 +1811,17 @@ def castSpell(card, x = 0, y = 0):
 
 		# Pay casting/reveal costs, notify in chat window and flip the card face up
 		me.Mana -= manacost
-		flipcard(card, x, y)
-		notify("{}".format(notifyStr))
-		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
+		if not card.isFaceUp:
+			flipcard(card, x, y)
+			notify("{}".format(notifyStr))
+		else:
+			boundStr = "'{}' casts {} which is Spellbound, it has a printed casting cost of {}".format(me.name, card.name, str(castingCost))
+			if not discountStr == "":
+				boundStr = boundStr + discountStr
+			notify("{}".format(boundStr))
+		if not TraitStr == "":
+			notify("{}".format(TraitStr))
+		notify("'{}' payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
 
 def getTraitValue(card, getTraitCost):
 	listofTraits = ""
@@ -1821,8 +1836,8 @@ def getTraitValue(card, getTraitCost):
 				strTraits = ''.join(traits)
 	STraitCost = strTraits.split("+")
 	TraitCost = int(STraitCost[1])
-	notify("{} has the {}+{} trait".format(card.Name, STraitCost[0], TraitCost))
-	return TraitCost
+	TraitStr = "{} has the {}+{} trait".format(card.Name, STraitCost[0], TraitCost)
+	return (TraitCost, TraitStr)
 
 
 def chooseMagebind(card, mageRevealCost, TraitCosts):
