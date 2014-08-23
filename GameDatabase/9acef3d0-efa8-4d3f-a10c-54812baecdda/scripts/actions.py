@@ -1815,7 +1815,7 @@ def castSpell(card, x = 0, y = 0):
 			flipcard(card, x, y)
 			notify("{}".format(notifyStr))
 		else:
-			boundStr = "'{}' casts {} which is Spellbound, it has a printed casting cost of {}".format(me.name, card.name, str(castingCost))
+			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.name, str(castingCost))
 			if not discountStr == "":
 				boundStr = boundStr + discountStr
 			notify("{}".format(boundStr))
