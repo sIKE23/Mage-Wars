@@ -1453,7 +1453,7 @@ def defaultAction(card, x = 0, y = 0):
 
 def addToken(card, tokenType):
 	mute()
-	if card.Type != "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 		card.markers[tokenType] += 1
 		if card.isFaceUp:
 			notify("{} added to '{}'".format(tokenType[0], card.Name))
@@ -1462,7 +1462,7 @@ def addToken(card, tokenType):
 
 def subToken(card, tokenType):
 	mute()
-	if card.Type != "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 		if card.markers[tokenType] > 0:
 			card.markers[tokenType] -= 1
 			if card.isFaceUp:
@@ -1472,7 +1472,7 @@ def subToken(card, tokenType):
 
 def toggleToken(card, tokenType):
 	mute()
-	if card.Type != "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 		if card.markers[tokenType] > 0:
 			card.markers[tokenType] = 0
 			if card.isFaceUp:
