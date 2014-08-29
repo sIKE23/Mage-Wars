@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.9.0.0    ##################################
+##########################    v1.9.0.5    ##################################
 ############################################################################
 import time
 import re
@@ -30,7 +30,7 @@ Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
 Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20" )
 DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
 DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
-Disable = ("Disable","f68b3b5b-0755-40f4-84db-bf3197a667cb" )
+Disable = ("Disable", "f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
@@ -119,7 +119,10 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.9.0.0"
+ver = "1.9.0.5"
+Magebind = ""
+mageRevealCost = ""
+infostr = ""
 
 ############################################################################
 ############################		Events		##################################
@@ -576,14 +579,12 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
 			advanceTurn()
-			gameTurn = int(getGlobalVariable("RoundNumber")) + 1
-#			gameTurn = turnNumber() + 1
+			gameTurn = turnNumber() + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
 			notify("Round {} Start Time: {}".format(str(gameTurn),time.ctime(roundTimes[-1])))
 			notify("Ready Stage for Round #" + str(gameTurn) + ":  Performing Initiative, Reset, and Channeling Phases")
-#			notify("***Ready Stage for Round #" + str(gameTurn) + ":  Performing Initiative, Reset, and Channeling Phases")
 			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 			if init.controller == me:
 				flipcard(init)
@@ -626,7 +627,7 @@ def advanceTurn():
 		if p.name == nextPlayerName:
 			for p2 in players:
 				remoteCall(p2, "setActiveP", [p])
-				
+
 def setActiveP(p):
 	p.setActivePlayer()
 
@@ -668,6 +669,7 @@ def resetMarkers(c):
 	if c.markers[Visible] == 1:
 		c.markers[Visible] = 0
 		c.markers[Invisible] = 1
+
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
@@ -818,7 +820,6 @@ def resolveChanneling(c):
 
 def mageStatus():
 	global gameEndTime
-	global gameTurn
 	mute()
 	if not me.Damage >= me.Life:
 		return
@@ -826,7 +827,7 @@ def mageStatus():
 		if c.Type == "Mage" and c.controller == me:
 			c.orientation = 1
 	gameEndTime = time.time()
-#	playSoundFX('Winner')
+	#	playSoundFX('Winner')
 	for p in players:
 		remoteCall(p, "reportDeath",[me])
 #	reportGame('MageDeath')
@@ -834,17 +835,25 @@ def mageStatus():
 def reportDeath(deadmage):
 	global gameIsOver
 	global gameEndTime
-	global gameTurn
+	endofGameTurn = getGlobalVariable("RoundNumber")
 	gameIsOver = True
 	gameEndTime = time.time()
-	notify("{} has fallen in the arena! At {} after {} Rounds.".format(me,time.ctime(gameEndTime),str(gameTurn)))
 	choiceList = ['OK']
 	colorsList = ['#de2827']
-	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage,time.ctime(gameEndTime),str(gameTurn)),choiceList, colorsList)
+	whisper("'{}' has fallen in the arena! At {} after {} Rounds.".format(deadmage, time.ctime(gameEndTime), endofGameTurn))
+	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, time.ctime(gameEndTime), endofGameTurn), choiceList, colorsList)
 	if choice == 0 or choice == 1:
 		return
 
-def concede(group=table,x=0,y=0):
+def checkMageDeath(player, counter, oldvalue):
+	global currentPhase
+	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
+		whisper("{} - {}".format(me.name, currentPhase))
+		if me.Damage >= me.Life and currentPhase == "Actions":
+			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
+				mageStatus()
+
+def concede(group=table, x = 0, y = 0):
 	global gameEndTime
 	global gameIsOver
 	global gameTurn
@@ -856,16 +865,9 @@ def concede(group=table,x=0,y=0):
 				c.orientation = 1
 		gameEndTime = time.time()
 #		reportGame('Conceded')
-		notify("{} has conceded the game".format(me))
+		notify("'{}' has conceded the game".format(me))
 	else:
-		notify("{} was about to concede the game, but thought better of it...".format(me))
-
-def checkMageDeath(player, counter, oldvalue):
-	global currentPhase
-	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
-		if me.Damage >= me.Life and currentPhase == "Actions":
-			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
-				mageStatus()
+		notify("'{}' was about to concede the game, but thought better of it...".format(me))
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
@@ -982,28 +984,34 @@ def addBurn(card, x = 0, y = 0):
 	addToken(card, Burn)
 
 def addCripple(card, x = 0, y = 0):
-    addToken(card, Cripple)
+	addToken(card, Cripple)
 
 def addCorrode(card, x = 0, y = 0):
-    addToken(card, Corrode)
+	addToken(card, Corrode)
 
 def addDamage(card, x = 0, y = 0):
-    addToken(card, Damage)
-
+	if "Mage" in card.Type and card.controller == me:
+		me.Damage += 1
+	else:
+		addToken(card, Damage)
+			
 def addDisable(card, x = 0, y = 0):
-    addToken(card, Disable)
+	addToken(card, Disable)
 
 def addDaze(card, x=0, y=0):
 	addToken(card, Daze)
 
 def addGrowth(card, x = 0, y = 0):
-    addToken(card, Growth)
+	addToken(card, Growth)
 
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
 
+def addEnergy(card, x = 0, y = 0):
+	addToken(card, Energy)
+
 def addRot(card, x = 0, y = 0):
-    addToken(card, Rot)
+	addToken(card, Rot)
 
 def addSlam(card, x=0, y=0):
 	addToken(card, Slam)
@@ -1028,7 +1036,8 @@ def addZombie(card, x=0, y=0):
 
 def addOther(card, x = 0, y = 0):
 	marker, qty = askMarker()
-	if qty == 0: return
+	if qty == 0: 
+		return
 	card.markers[marker] += qty
 
 ##########################     Toggle Actions/Tokens     ##############################
@@ -1092,9 +1101,6 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGrey] = 0
 			card.markers[ActionGreyUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
-
-#def toggleBloodReaper(card, x=0, y=0):
-#	toggleToken(card, BloodReaper)
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
@@ -1183,40 +1189,44 @@ def subArmor(card, x = 0, y = 0):
 	subToken(card, Armor)
 
 def subBleed(card, x = 0, y = 0):
- 	subToken(card, Bleed)
+	subToken(card, Bleed)
 
 def subBurn(card, x = 0, y = 0):
-    subToken(card, Burn)
+	subToken(card, Burn)
 
 def subCorrode(card, x = 0, y = 0):
-    subToken(card, Corrode)
+	subToken(card, Corrode)
 
 def subCripple(card, x = 0, y = 0):
-    subToken(card, Cripple)
+	subToken(card, Cripple)
 
 def subDamage(card, x = 0, y = 0):
-    subToken(card, Damage)
+	if "Mage" in card.Type:
+		if card.controller == me:
+			me.Damage -= 1
+	else:
+		subToken(card, Damage)
 
 def subDaze(card, x = 0, y = 0):
-    subToken(card, Daze)
+	subToken(card, Daze)
 
 def subDisable(card, x = 0, y = 0):
-    subToken(card, Disable)
+	subToken(card, Disable)
 
 def subGrowth(card, x = 0, y = 0):
-    subToken(card, Growth)
+	subToken(card, Growth)
 
 def subMana(card, x = 0, y = 0):
-    subToken(card, Mana)
+	subToken(card, Mana)
 
 def subRot(card, x = 0, y = 0):
-    subToken(card, Rot)
+	subToken(card, Rot)
 
 def subSlam(card, x = 0, y = 0):
-    subToken(card, Slam)
+	subToken(card, Slam)
 
 def subStun(card, x = 0, y = 0):
-    subToken(card, Stun)
+	subToken(card, Stun)
 
 def subStuck(card, x = 0, y = 0):
 	subToken(card, Stuck)
@@ -1228,10 +1238,10 @@ def subVet(card, x = 0, y = 0):
 	subToken(card, Veteran)
 
 def subWeak(card, x = 0, y = 0):
-    subToken(card, Weak)
+	subToken(card, Weak)
 
 def subZombie(card, x = 0, y = 0):
-    subToken(card, Zombie)
+	subToken(card, Zombie)
 
 def clearTokens(card, x = 0, y = 0):
 	mute()
@@ -1270,7 +1280,6 @@ def flipcard(card, x = 0, y = 0):
 		notify("{} Flips Zone Marker.".format(me))
 	elif card.isFaceUp == False:
 		card.isFaceUp = True
-		notify("{} turns '{}' face up.".format(me, card.Name))
 		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
 		if card.Type == "Mage" or card.Type == "Creature": #places action marker on card
@@ -1284,7 +1293,7 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[DeflectR] = 1
 			if "Beastmaster" == card.name:
 					card.markers[Pet] = 1
-			if "Johktari Beastmaster ()" == card.name:
+			if "Johktari Beastmaster" == card.name:
 					card.markers[WoundedPrey] = 1
 			if "Priest" == card.name:
 					card.markers[HolyAvenger] = 1
@@ -1410,16 +1419,10 @@ def defaultAction(card, x = 0, y = 0):
 			#is this a face-down enchantment? if so, prompt before revealing
 			if "Mage" in card.Type:
 				flipcard(card, x, y)
-			elif card.Type == "Enchantment":
-				if getSetting("EnchantPromptReveal", False):
-					choiceList = ['Yes', 'No']
-					colorsList = ['#0000FF', '#FF0000']
-					choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
-					if choice == 0 or choice == 2:
-						return
-			castSpell(card, x, y)
+			else:
+				castSpell(card, x, y)
 		else:
-			if card.Type == "Incantation" or card.Type == "Enchantment":
+			if card.Type == "Incantation" or card.Type == "Attack":
 				choiceList = ['Yes', 'No']
 				colorsList = ['#0000FF', '#FF0000']
 				choice = askChoice("Did you wish to cast this spell?", choiceList, colorsList)
@@ -1427,7 +1430,6 @@ def defaultAction(card, x = 0, y = 0):
 					castSpell(card, x, y)
 				else:
 					return
-
 
 ############################################################################
 ######################		Utility Functions		########################
@@ -1462,13 +1464,11 @@ def toggleToken(card, tokenType):
 			else:
 				notify("{} removed from face-down card.".format(tokenType[0]))
 		else:
-			notify("{} removed from face-down card.".format(tokenType[0]))
-	else:
-		card.markers[tokenType] = 1
-		if card.isFaceUp:
-			notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
-		else:
-			notify("{} added to face-down card.".format(tokenType[0]))
+			card.markers[tokenType] = 1
+			if card.isFaceUp:
+				notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
+			else:
+				notify("{} added to face-down card.".format(tokenType[0]))
 
 def playCardFaceDown(card, x=0, y=0):
 	global mycolor
@@ -1647,7 +1647,7 @@ def switchPhase(card, phase, phrase):
 				remoteCall(card.controller, "remoteHighlight", [card, None])
 				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
 			notify("Phase changed to the {}".format(phrase))
-			
+
 			return True
 
 def remoteHighlight(card, color):
@@ -1715,42 +1715,73 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 			discountsUsed.append(newtup)
 	return discount
 
-def castSpell(card, x = 0, y = 0):
-	if card.Cost != "" and card.Cost != None:
-		notify("Printed casting cost of {} is {}".format(card,card.Cost))
-		castingcosts = card.Cost.split("+")
-		try:
-			castingcost = int(card.Cost)
-		except ValueError:
-			if "X" in card.Cost: #e.g. Dispel
-				castingcost = 0
-			elif "+" in card.Cost: #a x+y cost as in enchantments. We want the reveal cost
-				try:
-					castingcost = int(castingcosts[1]) #reveal cost is the second one
-				except ValueError:
-					castingcost = 0
-				#target code
-			else:
-				castingcost = 0
 
-		#TODO Who is casting the spell?
-		infostr = ""
-		if "Enchantment" in card.Type:
-			infostr= "Printed casting cost is {}".format(castingcosts[1])
-		else:
-			infostr= "Printed casting cost is {}".format(card.Cost)
+def castSpell(card, x = 0, y = 0):
+	global infostr
+	global Magebind
+	castingCost = ""
+	TraitStr = ""
+	discountStr = ""
+
+	if card.Cost != "" and card.Cost != None:
+		if not "Enchantment" in card.Type:  # Attack, Creature, Conjuration, Equipment, and Incantation spells
+			if "X" in card.Cost:  # e.g. Dispel
+				castingCost = 0
+			else:
+				castingCost = int(card.Cost)
+
+			infostr = "The printed casting cost of {} is {}".format(card.Name, castingCost)
+			notifyStr = "{} turns '{}' face up, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
+
+		else:  # Enchantment Spells
+			#  Check to see if the player wants to reveal the Enchantment
+			if getSetting("EnchantPromptReveal", False):
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
+				if choice == 0 or choice == 2:
+					return
+			
+			#  castingCost = 2	# when we get attaching enchantments down			
+			revealCost = card.Cost.split("+")
+			debug("debug: {} and {}".format(revealCost[0], revealCost[1]))
+			if "X" in card.Cost:  # e.g. Charm
+				mageRevealCost = 0
+			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
+				flipcard(card, x, y)
+				notify("{} revealed {} as it has a '0' reveal cost".format(me.name, card.name))
+				return
+			else:
+				mageRevealCost = int(revealCost[1])  # the second number (reveal cost)
+
+			# if card has the Magebind trait, how much does it add to the reveal cost?
+			if card.controller == me and "Magebind" in card.Traits:
+				TraitValue, TraitStr = getTraitValue(card, Magebind)
+				# Are we targeting a Mage with this Enchantment?
+				castingCost = int(chooseMagebind(card, mageRevealCost, TraitValue))
+			else:
+				castingCost = mageRevealCost
+				infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
+			notifyStr = "{} turns '{}' face up, it has a printed reveal cost of  {}".format(me.name, card.Name, str(mageRevealCost))
+
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
 		discount = 0
 		for c in table:
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
-				dc = castingDiscount(card,c)
+				dc = castingDiscount(card, c)
 				if dc > 0:
-					infostr += "\nCost reduced by {} due to {}".format(dc,c.name)
+					discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
+					infostr = notifyStr + discountStr
+					notifyStr = notifyStr + discountStr
 					discount += dc
 				elif dc < 0:
-					infostr += "\n{} already reached max uses this round.".format(c.name)
+					discountStr = "\n{} already reached max uses this round.".format(c.name)
+					infostr = notifyStr + discountStr
+					notifyStr = notifyStr + discountStr
 		infostr += "\nTotal mana amount to subtract from mana pool?"
-		manacost = askInteger(infostr,castingcost-discount)
+		manacost = askInteger(infostr, castingCost - discount)
+
+		# Do we have enough mana to pay for the spell?
 		if manacost == None:
 			return
 		if me.Mana < manacost:
@@ -1761,9 +1792,51 @@ def castSpell(card, x = 0, y = 0):
 				notify("{} has insufficient mana in pool".format(me))
 				flipcard(card, x, y)
 				return
+
+		# Pay casting/reveal costs, notify in chat window and flip the card face up
 		me.Mana -= manacost
-		notify("{} payed {} mana from pool for {}".format(me.name,manacost,card.name))
-		flipcard(card, x, y)
+		if not card.isFaceUp:
+			flipcard(card, x, y)
+			notify("{}".format(notifyStr))
+		else:
+			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.name, str(castingCost))
+			if not discountStr == "":
+				boundStr = boundStr + discountStr
+			notify("{}".format(boundStr))
+		if not TraitStr == "":
+			notify("{}".format(TraitStr))
+		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
+
+def getTraitValue(card, getTraitCost):
+	listofTraits = ""
+	#debug("{} has the {} trait".format(card.Name, getTraitCost))
+	listofTraits = card.Traits.split(", ")
+	#debug("{} ".format(listofTraits))
+	if not len(listofTraits) > 1:
+		strTraits = ''.join(listofTraits)
+	else:
+		for traits in listofTraits:
+			if getTraitCost in traits:
+				strTraits = ''.join(traits)
+	STraitCost = strTraits.split("+")
+	TraitCost = int(STraitCost[1])
+	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
+	return (TraitCost, TraitStr)
+
+
+def chooseMagebind(card, mageRevealCost, TraitCosts):
+	global infostr
+	choiceList = ['Yes', 'No']
+	colorsList = ['#0000FF', '#FF0000']
+	choice = askChoice("Is the target of this Enchantment a Mage?", choiceList, colorsList)
+	infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
+	if choice == 1:  # Enchantment is targeting a Mage
+		mcastingCost = int(mageRevealCost) + int(TraitCosts)
+		infostr += "\n+ {} to bind the spell to a Mage".format(TraitCosts)
+	else:  # Enchatment is not targeting a Mage
+		mcastingCost = int(mageRevealCost)
+	return mcastingCost
+
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
