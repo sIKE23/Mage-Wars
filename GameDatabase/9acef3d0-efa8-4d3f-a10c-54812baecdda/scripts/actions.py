@@ -1435,24 +1435,6 @@ def defaultAction(card, x = 0, y = 0):
 
 def addToken(card, tokenType):
 	mute()
-<<<<<<< HEAD
-	card.markers[tokenType] += 1
-	if card.isFaceUp:
-		notify("{} added to '{}'".format(tokenType[0], card.Name))
-	else:
-		notify("{} added to face-down card.".format(tokenType[0]))
-
-def subToken(card, tokenType):
-	mute()
-	if card.markers[tokenType] > 0:
-		card.markers[tokenType] -= 1
-		if card.isFaceUp:
-			notify("{} removed from '{}'".format(tokenType[0], card.Name))
-		else:
-			notify("{} removed from face-down card.".format(tokenType[0]))
-
-def toggleToken(card, tokenType):
-	mute()
 	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 		card.markers[tokenType] += 1
 		if card.isFaceUp:
