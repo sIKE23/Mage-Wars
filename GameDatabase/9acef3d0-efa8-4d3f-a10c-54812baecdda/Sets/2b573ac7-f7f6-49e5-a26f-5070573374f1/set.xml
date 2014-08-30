@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
  	<markers>
- 	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
  			<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
+			<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
 			<marker id="8d994fe9-2422-4a9d-963d-3ad10b2b823d" name="Invisible" />
-			<marker id="b9b205a2-a998-44f5-97dc-c7f315afbbe2" name="Visible" />
+ 			<marker id="e96b3791-fbcf-40a2-9c11-106342703db9" name="Melee +1" />
 			<marker id="f7379e4e-8120-4f1f-b734-51f1bd9fbab9" name="Slam" />
 			<marker id="8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" name="Taunt (Thorg)" />
 			<marker id="72ee460f-adc1-41ab-9231-765001f9e08e" name="Veteran" />
+			<marker id="b9b205a2-a998-44f5-97dc-c7f315afbbe2" name="Visible" />
 	</markers>
 
 	<cards>
@@ -20,7 +21,6 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Deflect: The Forcemaster uses telekinesis to deflect attacks. She has a Defense which can be used once per round, and avoids attacks on a roll of 7+. She must pay 1 mana each time she uses this Defense (before rolling for the Defense). This Defense uses its own unique ready marker &quot;Deflect&quot;.&#xD;&#xA;Force Pull: Once per round, she may cast this quick force spell. Target creature is Pushed 1 zone TOWARDS her. Will not Push a creature through a wall with the Passage Attacks trait." />
-			<property name="CardID" value="" />
 		</card>
 		<card id="6d6362dc-1130-4bd0-ae5b-55ae2c59bc82" name="Forcemaster Stats">
 			<property name="Type" value="Magestats" />

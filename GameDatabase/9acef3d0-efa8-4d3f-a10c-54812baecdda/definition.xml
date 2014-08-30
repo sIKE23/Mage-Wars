@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.9.0.0"
+	version="1.9.0.7"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -99,45 +99,47 @@
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
 		</groupactions>
-		<cardactions menu="Add Tokens">
+		<cardactions menu="Add Markers">
 			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage" />
 			<cardaction menu="Add Mana Counter" default="False" shortcut="Ctrl+M" execute="addMana" />
-			<cardaction menu="Add Armor +1 Token" default="False" shortcut="Alt+A" execute="addArmor" />
-			<cardaction menu="Add Burn Token" default="False" shortcut="Ctrl+B" execute="addBurn" />
-			<cardaction menu="Add Bleed Token" default="False" shortcut="Alt+B" execute="addBleed" />
-			<cardaction menu="Add Corrode Token" default="False" shortcut="Ctrl+C" execute="addCorrode" />
-			<cardaction menu="Add Cripple Token" default="False" shortcut="Alt+C" execute="addCripple" />
-			<cardaction menu="Add Daze Token" default="False" shortcut="Ctrl+D" execute="addDaze" />
-			<cardaction menu="Add Disable Token" default="False" shortcut="Alt+D" execute="addDisable" />
+			<cardaction menu="Add Armor +1 Marker" default="False" shortcut="Alt+A" execute="addArmor" />
+			<cardaction menu="Add Burn Marker" default="False" shortcut="Ctrl+B" execute="addBurn" />
+			<cardaction menu="Add Bleed Marker" default="False" shortcut="Alt+B" execute="addBleed" />
+			<cardaction menu="Add Corrode Marker" default="False" shortcut="Ctrl+C" execute="addCorrode" />
+			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple" />
+			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
+			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
-			<cardaction menu="Add Stuck Token" default="False" shortcut="Ctrl+K" execute="addStuck" />
-			<cardaction menu="Add Rot Token" default="False" shortcut="Alt+R" execute="addRot" />
-			<cardaction menu="Add Slam Token" default="False" shortcut="Ctrl+S" execute="addSlam" />
-			<cardaction menu="Add Stun Token" default="False" shortcut="Alt+S" execute="addStun" />
+			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
+			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
+			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
+			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
+			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
 			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTaint" />
 			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVet" />
-			<cardaction menu="Add Weak Token" default="False" shortcut="Ctrl+W" execute="addWeak" />
+			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak" />
 			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
 			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
-		<cardactions menu="Remove Tokens">
+		<cardactions menu="Remove Markers">
 			<cardaction menu="Remove Damage Counter" default="False" shortcut="F4" execute="subDamage" />
 			<cardaction menu="Remove Mana Counter" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
-			<cardaction menu="Remove Armor +1 Token" default="False" shortcut="Ctrl+Alt+A" execute="subArmor" />
-			<cardaction menu="Remove Burn Token" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
-			<cardaction menu="Remove Bleed Token" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
-			<cardaction menu="Remove Corrode Token" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
-			<cardaction menu="Remove Cripple Token" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
-			<cardaction menu="Remove Daze Token" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
-			<cardaction menu="Remove Disable Token" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
+			<cardaction menu="Remove Armor +1 Marker" default="False" shortcut="Ctrl+Alt+A" execute="subArmor" />
+			<cardaction menu="Remove Burn Marker" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
+			<cardaction menu="Remove Bleed Marker" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
+			<cardaction menu="Remove Corrode Marker" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
+			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
+			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
+			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
 			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
+			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
-			<cardaction menu="Remove Rot Token" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
-			<cardaction menu="Remove Slam Token" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
-			<cardaction menu="Remove Stun Token" default="False" shortcut="Ctrl+Alt+S" execute="subStun" />
+			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
+			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
+			<cardaction menu="Remove Stun Marker" default="False" shortcut="Ctrl+Alt+S" execute="subStun" />
 			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint" />
 			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVet" />
-			<cardaction menu="Remove Weak Token" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
+			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
 			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie" />
 			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>

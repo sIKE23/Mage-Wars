@@ -40,6 +40,7 @@ HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
 Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28" )
 Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d" )
 Mana = ("Mana", "00000000-0000-0000-0000-000000000002" )
+Melee = ("Melee +1", "e96b3791-fbcf-40a2-9c11-106342703db9" )
 MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
 LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942" )
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
@@ -1002,9 +1003,9 @@ def addGrowth(card, x = 0, y = 0):
 def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
 
-def addEnergy(card, x = 0, y = 0):
-	addToken(card, Energy)
-
+def addMelee(card, x = 0, y = 0):
+	addToken(card, Meleer)
+	
 def addRot(card, x = 0, y = 0):
 	addToken(card, Rot)
 
@@ -1230,6 +1231,9 @@ def subGrowth(card, x = 0, y = 0):
 
 def subMana(card, x = 0, y = 0):
 	subToken(card, Mana)
+
+def subMelee(card, x = 0, y = 0):
+	subToken(card, Melee)
 
 def subRot(card, x = 0, y = 0):
 	subToken(card, Rot)
