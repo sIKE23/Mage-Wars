@@ -1004,7 +1004,7 @@ def addMana(card, x = 0, y = 0):
 	addToken(card, Mana)
 
 def addMelee(card, x = 0, y = 0):
-	addToken(card, Meleer)
+	addToken(card, Melee)
 	
 def addRot(card, x = 0, y = 0):
 	addToken(card, Rot)
