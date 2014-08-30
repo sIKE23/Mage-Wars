@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -14,7 +14,7 @@
 		<marker id="4bbac09e-a46c-42de-9272-422e8074533f" name="Stun" />
 		<marker id="16f03c44-5656-4e9d-9629-90c4ff1765a7" name="Taunt(Sosroku)" />
 		<marker id="ab8708ac-9735-4803-ba4d-4932a787540d" name="Used" />
-		<marker id="61bec951-ebb1-48f7-a2ab-0b6364d262e6" name="Used II" />		
+		<marker id="61bec951-ebb1-48f7-a2ab-0b6364d262e6" name="Used II" />
 		<marker id="d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" name="Voltaric OFF" />
 		<marker id="a6e79926-db8d-4095-9aee-e3b46bf24a3f" name="Voltaric ON" />
 		<marker id="22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" name="Weak" />
@@ -752,7 +752,7 @@
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />
 		</card>
-		
+
 
 		<card id="5fe1c35e-e146-456c-bf66-73aefd29bb7f" name="Adramelech, Lord of Fire">
  			<property name="Type" value="Creature" />
@@ -1309,8 +1309,8 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C40" />
 		</card>
-		
-		
+
+
 		<card id="8df84f88-e24a-4517-aae5-8595c09cc3cd" name="Bear Strength">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
@@ -2363,8 +2363,8 @@
 			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait. &#xD;&#xA;[Armor +2] [Wind -3]" />
 			<property name="CardID" value="MW1Q33" />
 		</card>
-		
-	
+
+
 		<card id="4229008c-e836-49a4-94a6-220d04851ebb" name="Banish">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Teleport" />
@@ -2786,42 +2786,54 @@
 			<property name="Text" value="Target&apos;s next melee attack this round gains the Vampiric and Piercing +1 traits." />
 			<property name="CardID" value="MW1I29" />
 		</card>
-		
-					
+
+
 		<card id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Die roll area">
  			<property name="Type" value="Internal" />
 		</card>
 		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Upkeep Phase">
 			<property name="Type" value="Internal" />
-			<alternate name="Planning Phase" type="Planning" />
-			<alternate name="Deployment Phase" type="Deploy" />
-			<alternate name="First Quickcast Phase" type="Quick" />
-			<alternate name="Actions Phase" type="Actions" />
-			<alternate name="Final Quickcast Phase" type="Quick2" />
+				<alternate name="Planning Phase" type="Planning">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="Deployment Phase" type="Deploy">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="First Quickcast Phase" type="Quick">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="Action Phases" type="Actions">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="Final Quickcast Phase" type="Quick2">
+					<property name="Type" value="Internal" />
+				</alternate>
 		</card>
 		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="1st Player Token Red">
 			<property name="Type" value="Internal" />
-			<alternate name="1st Player Token Blue" type="B" />
-			<alternate name="1st Player Token Green" type="C" />
-			<alternate name="1st Player Token Yellow" type="D" />
-			<alternate name="1st Player Token Purple" type="E" />
-			<alternate name="1st Player Token Gray" type="F" />
+				<alternate name="1st Player Token Blue" type="B">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="1st Player Token Green" type="C">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="1st Player Token Yellow" type="D">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="1st Player Token Purple" type="E">
+					<property name="Type" value="Internal" />
+				</alternate>
+				<alternate name="1st Player Token Grey" type="F">
+					<property name="Type" value="Internal" />
+				</alternate>
 		</card>
 		<card id="af14ca09-a83d-4185-afa0-bc38a31dbf82" name="Alt Zone Intersection">
 			<property name="Type" value="Internal" />
-			<property name="Subtype" value="" />
-			<property name="Cost" value="" />
-			<property name="Action" value="" />
-			<property name="Range" value="" />
-			<property name="Target" value="" />
-			<property name="School" value="" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-			<property name="Text" value="" />
-			<property name="CardID" value="" />
-			<alternate name="Alt Zone Compass" type="B" />
+				<alternate name="Alt Zone Compass" type="B">
+					<property name="Type" value="Internal" />
+				</alternate>
 		</card>
+
+
 	</cards>
 </set>

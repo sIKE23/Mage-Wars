@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.9.0.5    ##################################
+##########################    v1.9.0.6    ##################################
 ############################################################################
 import time
 import re
@@ -119,7 +119,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.9.0.5"
+ver = "1.9.0.6"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -130,10 +130,12 @@ infostr = ""
 
 def onTableLoad():
 	global debugMode
+	global playerNum
 	sayVer()
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
+		playerNum = 2
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
@@ -850,7 +852,7 @@ def checkMageDeath(player, counter, oldvalue):
 	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
 		whisper("{} - {}".format(me.name, currentPhase))
 		if me.Damage >= me.Life and currentPhase == "Actions":
-			if not confirm("Your mage has died! Continue play until the end of the current phase?"):
+			if not confirm("                       Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?"):
 				mageStatus()
 
 def concede(group=table, x = 0, y = 0):
@@ -885,13 +887,6 @@ def toggleResolveBurns(group, x=0, y=0):
 	else:
 		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
 
-#def toggleConfigDRAIP(group, x=0, y=0):
-#	AutoConfigDRAIP = getSetting("AutoConfigDRAIP", True)
-#	setSetting("AutoConfigDRAIP", not AutoConfigDRAIP)
-#	if AutoConfigDRAIP:
-#		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the Left of the Board.")
-#	else:
-#		notify("You have configured the Dice Rolling Area, Initative, and Phase markers positions to the to the Bottom of the Board.")
 
 def toggleSoundFX(group, x=0, y=0):
 	AutoConfigSoundFX = getSetting("AutoConfigSoundFX", True)
@@ -1045,6 +1040,8 @@ def addOther(card, x = 0, y = 0):
 def toggleAction(card, x=0, y=0):
 	global mycolor
 	mute()
+	if card.Type == "Internal":
+		return 
 	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
 	elif mycolor == PlayerColor[0]: # Red
@@ -1104,6 +1101,8 @@ def toggleAction(card, x=0, y=0):
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
+	if card.Type == "Internal":
+		return 
 	if not card.isFaceUp:
 		return
 	if card.markers[DeflectR] > 0:
@@ -1116,10 +1115,15 @@ def toggleDeflect(card, x=0, y=0):
 		notify("'{}' readies deflect".format(card.Name))
 
 def toggleGuard(card, x=0, y=0):
+	mute()
+	if card.Type == "Internal":
+		return 
 	toggleToken(card, Guard)
 
 def toggleInvisible(card, x=0, y=0):
 	mute()
+	if card.Type == "Internal":
+		return 
 	if not card.isFaceUp:
 		return
 	if card.markers[Invisible] > 0:
@@ -1133,6 +1137,8 @@ def toggleInvisible(card, x=0, y=0):
 
 def toggleReady(card, x=0, y=0):
 	mute()
+	if card.Type == "Internal":
+		return 
 	if not card.isFaceUp:
 		return
 	if card.markers[Ready] > 0:
@@ -1146,6 +1152,8 @@ def toggleReady(card, x=0, y=0):
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
+	if card.Type == "Internal":
+		return 
 	if not card.isFaceUp:
 		return
 	if card.markers[ReadyII] > 0:
@@ -1159,6 +1167,8 @@ def toggleReadyII(card, x=0, y=0):
 
 def toggleQuick(card, x=0, y=0):
 	mute()
+	if card.Type == "Internal":
+		return 
 	if not card.isFaceUp:
 		return
 	if card.markers[Quick] > 0:
@@ -1172,6 +1182,8 @@ def toggleQuick(card, x=0, y=0):
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
+	if card.Type == "Internal":
+		return 
 	if not card.isFaceUp:
 		return
 	if card.markers[VoltaricON] > 0:
@@ -1437,38 +1449,41 @@ def defaultAction(card, x = 0, y = 0):
 
 def addToken(card, tokenType):
 	mute()
-	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
-		card.markers[tokenType] += 1
-		if card.isFaceUp:
-			notify("{} added to '{}'".format(tokenType[0], card.Name))
-		else:
-			notify("{} added to face-down card.".format(tokenType[0]))
+	if card.Type == "Internal":
+		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	card.markers[tokenType] += 1
+	if card.isFaceUp:
+		notify("{} added to '{}'".format(tokenType[0], card.Name))
+	else:
+		notify("{} added to face-down card.".format(tokenType[0]))
 
 def subToken(card, tokenType):
 	mute()
-	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
-		if card.markers[tokenType] > 0:
-			card.markers[tokenType] -= 1
-			if card.isFaceUp:
-				notify("{} removed from '{}'".format(tokenType[0], card.Name))
-			else:
-				notify("{} removed from face-down card.".format(tokenType[0]))
+	if card.Type == "Internal":
+		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.markers[tokenType] > 0:
+		card.markers[tokenType] -= 1
+		if card.isFaceUp:
+			notify("{} removed from '{}'".format(tokenType[0], card.Name))
+		else:
+			notify("{} removed from face-down card.".format(tokenType[0]))
 
 def toggleToken(card, tokenType):
 	mute()
-	if not card.Type == "Internal":  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
-		if card.markers[tokenType] > 0:
-			card.markers[tokenType] = 0
-			if card.isFaceUp:
-				notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
-			else:
-				notify("{} removed from face-down card.".format(tokenType[0]))
+	if card.Type == "Internal":
+		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.markers[tokenType] > 0:
+		card.markers[tokenType] = 0
+		if card.isFaceUp:
+			notify("{} removes a {} from '{}'".format(me, tokenType[0], card.Name))
 		else:
-			card.markers[tokenType] = 1
-			if card.isFaceUp:
-				notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
-			else:
-				notify("{} added to face-down card.".format(tokenType[0]))
+			notify("{} removed from face-down card.".format(tokenType[0]))
+	else:
+		card.markers[tokenType] = 1
+		if card.isFaceUp:
+			notify("{} adds a {} to '{}'".format(me, tokenType[0], card.Name))
+		else:
+			notify("{} added to face-down card.".format(tokenType[0]))
 
 def playCardFaceDown(card, x=0, y=0):
 	global mycolor

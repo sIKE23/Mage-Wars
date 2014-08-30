@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
  	<markers>
  	<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
  			<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" />
@@ -1058,18 +1058,6 @@
 		
 		<card id="7ff8ed79-159c-46e5-9e87-649b3269a931" name="Compass Rose">			
 			<property name="Type" value="Internal" />
-			<property name="Subtype" value="" />
-			<property name="Cost" value="" />
-			<property name="Action" value="" />
-			<property name="Range" value="" />
-			<property name="Target" value="" />
-			<property name="School" value="" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-			<property name="Text" value="" />
-			<property name="CardID" value="" />
 		</card>
 	</cards>
 </set>

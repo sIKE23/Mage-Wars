@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.9.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
 	<markers>
 		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
 		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
@@ -949,21 +949,15 @@
 			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost" />
 			<property name="CardID" value="DNI08" />
 		</card>
+
+
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">			
 			<property name="Type" value="Internal" />
-			<property name="Subtype" value="" />
-			<property name="Cost" value="" />
-			<property name="Action" value="" />
-			<property name="Range" value="" />
-			<property name="Target" value="" />
-			<property name="School" value="" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-			<property name="Text" value="" />
-			<property name="CardID" value="" />
-			<alternate name="Vine Marker Black" type="B" />
+				<alternate name="Vine Marker Black" type="B">
+					<property name="Type" value="Internal"/>
+				</alternate>
 		</card>
+
+
 	</cards>
 </set>
