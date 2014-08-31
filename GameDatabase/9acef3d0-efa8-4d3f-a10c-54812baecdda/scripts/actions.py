@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.9.0.6    ##################################
+##########################    v1.10.0.0    ##################################
 ############################################################################
 import time
 import re
@@ -120,7 +120,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.9.0.6"
+ver = "1.10.0.0"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -851,7 +851,6 @@ def reportDeath(deadmage):
 def checkMageDeath(player, counter, oldvalue):
 	global currentPhase
 	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
-		whisper("{} - {}".format(me.name, currentPhase))
 		if me.Damage >= me.Life and currentPhase == "Actions":
 			if not confirm("                       Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?"):
 				mageStatus()

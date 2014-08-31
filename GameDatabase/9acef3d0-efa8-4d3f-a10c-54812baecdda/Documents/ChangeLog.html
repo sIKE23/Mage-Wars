@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- v1.9.0.0 -->
+<!-- v1.10.0.0 -->
 <html>
 <head>
 <title>Changelog for the Mage Wars module on OCTGN</title>
@@ -17,13 +17,63 @@
 <!-- ################################################################################################################################################################ -->
 
 <div class="section">
+	1.10.0.0<br>
+</div>
+<ol><div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> Under the hood - re-worked the Castspell function - if you have any issues when casting spells please let me know. This will let us do more going forward and do things like the Magebind feature below.</li><ol>
+	<li> Magebind costs are now calculated when a spell with this trait is cast. You will be prompted if the target is a mage. This information is logged into the chat window now.</li>
+	<li> Now, when you double click on a face up card, if it is an attack spell or incantation you will be asked if you want to cast the spell again. Nothing happens on other types of cards.</li>
+	<li> If you wish to flip a Face-up card Face-down you will have to use the Flip Card function in the cards Right-Click menu or use Ctrl+F.</li></ol>
+	<li> You can no longer place markers or tokens on Game pieces the Vine Markers or Initiative Markers.</li>
+	<li> Johktari Beastmaster now starts with her Wounded Prey marker once again.</li>
+	<li> Added Melee +1 Markers from FvW.</li>
+	<li> Mage Death is working much better now.</li>
+	<li> F2 and F4 will now add and subtract damage to the Mages stats now instead of placing damage markers on his card.</li>
+	<li> An OCTGN exclusive! Added FiF Mages to the OCTGN Apprentice Mode. Please see the OCTGN Apprentice Mode document under the Game Documents menu for more details. - Thanks again Schwenkgott!</li>
+	<li> More clean up of card data.</li>
+	<li> Cleaned up and updated most of the game documents.</li>
+</ul></div>
+
+<div class="section">
+	<strong>Image Pack:</strong>
+</div>
+
+<div class="body"><ul>
+	<li> OP Kit 6 Promo Card art added</li>
+	<li> Gencon Promo Card art added</li>
+	<li> Updated some Promo card art that was fuzzy</li>
+	<li> Added <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/imagepacks/" title=Image Packs>MW-NewCards.o8c</a>, which contains the updated Promo card art.</li>
+</ul>
+</div>
+
+<div class="section">
+	<strong>Spellbook Builder:</strong>
+</div>
+<div class="body"><ul>
+	<li> Added OP Kit 6 Promo Cards.</li>
+	<li> Added Gencon Promo Cards.</li>
+	<li> There is now an installer for the Spellbook Builder. You can find the step by step process to update the plugin <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/" title=Install>here</a>.</li><ol>
+	<li> The exe file may trigger your AV as it is not signed, please let me know if you experice this issue</li></ol>
+	<li> Thanks to splatz, his <a href="http://octgn.gamersjudgement.com/wordpress/deckconverter">OCTGN Deck Converter Plugin</a> now supports Mage Wars. The Spellbook Builder will now import spellbooks in three ways and couple of different formats. <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/" title=Install>Click here</a> for more information on how to use it.</li><ol>
+	<li> Please note that this is beta release of this feature</li></ol>
+</ul></div></ol>
+
+<!-- ################################################################################################################################################################ -->
+
+
+<!-- ################################################################################################################################################################ -->
+
+<div class="section">
 	1.9.0.0<br>
 </div>
 <ol><div class="section">
 	<strong>The Game:</strong>
 </div>
 <div class="body"><ul>
-	<li> Forged in Fire improvements (thanks Schwenkgott for the suggetsions)</li><ol>
+	<li> Forged in Fire improvements (thanks Schwenkgott for the suggestions)</li><ol>
 	<li> The Dwarf Warlords Runes are automatically place on his Stats Card when it is revealed</li>
 	<li> When Talos is revealed his Action Marker is Active</li>
 	<li> The SBB should now export the FiF Mages in the proper format for the AW SBB</li></ol>
@@ -41,8 +91,8 @@
 	<li> The SBB should now export the FiF Mages in the proper format for the AW SBB, you will need to update your SBB Plugin, you can find the step by step process to update the plugin <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/" title=Install>here</a>.</li>
 </ul></div></ol>
 
-
 <!-- ################################################################################################################################################################ -->
+
 
 <!-- ################################################################################################################################################################ -->
 
@@ -55,10 +105,9 @@
 <div class="body"><ul>
 	<li> Fixed Purple and Grey Action markers not flipping</li>
 	<li> Fixed Inconsistent State Error Messages</li>
-	<li> Fixed issue with Generals Signet Ring Erroring and not giving casting discount</li>
+	<li> Fixed issue with the Generals Signet Ring throwing an error and not calculating its casting discount.</li>
 	<li> Fixed Eisenach's Forge Hammer not giving casting discount</li>
 	<li> Better handling of native turn management</li>
->>>>>>> origin/August
 </ul></div></ol>
 
 <!-- ################################################################################################################################################################ -->
@@ -119,7 +168,7 @@
 	<li> If a player loads in a second spellbook, the game will be reset. All choices will have to be made again, <u>please be careful!</u></li>
 	<li> At game start a prompt is provided about the available game documentation. By clicking Yes, it will save a setting so you will not see it again</li>
 	<li> Added Apprentice Play mode. The Official Apprentice spellbooks are located in the Decks | Apprentice Spellbooks folder. Alt+F9 will display the 2x3 Arena gameboard (thanks Schwenkgott!)</li>
-	<li> An OCTGN exclusive! - With Schwenkgott leading the way we have added an OCTGN Apprentice Mode. Please see the How-To - OCTGN Apprentice Mode under the documents menu for Morrie details.</li>
+	<li> An OCTGN exclusive! - With Schwenkgott leading the way we have added an OCTGN Apprentice Mode. Please see the How-To - OCTGN Apprentice Mode under the documents menu for more details.</li>
 	<li> Moved Official Spellbooks to their own folder. Now located in the Decks | Official Spellbooks folder</li>
 	<li> You can now view and play with the alternate mage cards in game, right click on card and select "Show Card Alternate"</li>
 	<li> The game will no longer create multiple Initiative Tokens, should help those 2v2 game a lot.</li>
