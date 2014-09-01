@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.10.0.0    ##################################
+##########################    v2.10.0.0    ##################################
 ############################################################################
 import time
 import re
@@ -32,6 +32,7 @@ DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
 DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
 Disable = ("Disable", "f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
+Energy = ("Energy", "d01f02e4-392f-409f-95f5-d2fa40f89882" )
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
 Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
@@ -421,6 +422,45 @@ def createCompassRose(group, x=0, y=0):
 
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
+	
+def createOrbGuardian(group, x=0, y=0):
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 450, -40 )	
+	orbGuardian.markers[Guard] = 1
+	
+def createGOrbGuardian(group, x=0, y=0):
+	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", 450, -40 )	
+	orbGuardian.markers[Guard] = 1
+
+def createPowerOrb(group, x=0, y=0):
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", 450, -40 )
+	
+def setupDom(group, x=0, y=0):
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286, -326 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  225, -326 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  -62,  -40 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",    1,  -40 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286,  247 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  225,  247 )
+	
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", -286, -192 )	
+	orbGuardian.markers[Guard] = 1
+
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d",  225, -192 )	
+	orbGuardian.markers[Guard] = 1
+
+	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", -128,  -40 )	
+	orbGuardian.markers[Guard] = 1
+
+	orbGuardian = table.create("54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",   64,  -40 )	
+	orbGuardian.markers[Guard] = 1
+
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", -286,  109 )	
+	orbGuardian.markers[Guard] = 1
+
+	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 225,  109 )	
+	orbGuardian.markers[Guard] = 1
+	
+	setGameBoard4(group, 0, 0)
 
 def setNoGameBoard(group, x=0, y=0):
 	global boardSet
@@ -1335,6 +1375,8 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[EggToken] = 1
 			if "Talos" == card.name:
 					toggleAction(card)
+			if "Orb Guardian" in card.name:
+					card.markers[Guard] = 1
 		if card.Type == "Conjuration":
 			if "Ballista" == card.name:
   				card.markers[LoadToken] = 1
