@@ -7,6 +7,6 @@ cd /d %~dp0
 @echo http://octgn.gamersjudgement.com/wordpress/magewars/sbb/
 @echo.
 
-.\OCTGN-SBB-for-MageWars.exe
+.\OCTGN-SBB-for-MageWars.msi
 
 pause
