@@ -118,7 +118,7 @@
 		<card id="5688957a-e243-4999-8301-b869be3f6fdb" name="Astral Anchor">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
-			<property name="Cost" value="2+2" />
+			<property name="Cost" value="2+4" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
@@ -157,7 +157,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Once per round, this orb may push an enemy in it's zone one zone away. Use a ready marker to track this ability." />
+			<property name="Text" value="Once per round, this orb may push an enemy in its zone one zone away. Use a ready marker to track this ability." />
 			<property name="CardID" value="MWDOME03" />
 		</card>
 		<card id="0aa2df43-143a-4412-8e35-50799e544771" name="Creature Link">
