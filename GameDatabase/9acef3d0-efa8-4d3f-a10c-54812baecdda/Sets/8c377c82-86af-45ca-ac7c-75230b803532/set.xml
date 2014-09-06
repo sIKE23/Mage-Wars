@@ -7,16 +7,16 @@
 		<card id="3f7a8262-09e1-40bd-8fb9-c7c6ac880ae0" name="Energy Wave">
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
-			<property name="Cost" value="12" />
+			<property name="Cost" value="10" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Arena" />
 			<property name="School" value="Air"  />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="Claws:[Zone] [Ranged] [Dice=5]" />
+			<property name="AttackBar" value="[Zone] [Ranged] [Dice=2]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Energy Wave Attacks all creatures in the arena. The attack rolls one die less for each Orb that the defender's controller controls." />
+			<property name="Text" value="Energy Wave rolls one extra die for each Orb your control. You must control at least one Orb to cast Energy Wave. After the attack resolves one Orb you control becomes Neutral." />
 			<property name="CardID" value="MWDOMA01" />
 		</card>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="Empowered Lighting Strike">
@@ -29,9 +29,9 @@
 			<property name="School" value="Air"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="Claws:[Ranged] [Dice=3] [d12] [6-7 = Daze &amp; 8+ = Stun] [Ethereal] " />
+			<property name="AttackBar" value="[Ranged] [Dice=3] [d12] [6-7 = Daze &amp; 8+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This attack gets Range +2 for each orb you control." />
+			<property name="Text" value="This attack gets Range +1 for each orb you control." />
 			<property name="CardID" value="MWDOMA02" />
 		</card>
 		
@@ -64,7 +64,52 @@
 			<property name="AttackBar" value="Claws:[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Rooted, Teleport Ward, En Garde, Psychic Immunity" />
 			<property name="Text" value="." />
-			<property name="CardID" value="MWDOMCR01" />
+			<property name="CardID" value="MWDOMCR02" />
+		</card>
+		<card id="3d7a5c24-1132-427c-956b-ce7033add6ec" name="Guard Dog A">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Canine, Soldier" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=7" />
+			<property name="AttackBar" value="Bite:[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If in the same zone as a friendly conjuration (including an Orb you control) Guard Dog gains Melee +2." />
+			<property name="CardID" value="MWDOMCR03A" />
+		</card>
+		<card id="c0dbf89b-5373-47b5-ab1f-979400ea69f8" name="Guard Dog B">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Canine, Soldier" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=3, Life=6" />
+			<property name="AttackBar" value="Bite:[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Gains Vigilant when in the same zone as a friendly conjuration (including an Orb you control)." />
+			<property name="CardID" value="MWDOMCR03B" />
+		</card>
+		<card id="58b0d4d5-69ed-417d-9f4f-4c5ad78d0eb7" name="Guard Dog C">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Canine, Soldier" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=7" />
+			<property name="AttackBar" value="Bite:[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If in the same zone as a friendly conjuration (including an Orb you control) and guarding, Guard Dog may attack a creature that enters his zone, then remove the guard counter." />
+			<property name="CardID" value="MWDOMCR03C" />
 		</card>
 
 
@@ -83,7 +128,7 @@
 			<property name="Text" value="During the Upkeep phase the Mage Controlling this Orb gains Energy +1" />
 			<property name="CardID" value="MWDOMJ01" />
 		</card>
-		<card id="811f2772-a2fa-4bf7-acd4-cb962e29f605" name="Power Portal">
+		<card id="811f2772-a2fa-4bf7-acd4-cb962e29f605" name="Orb Portal">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Teleport, Portal" />
 			<property name="Cost" value="8" />
@@ -101,7 +146,7 @@
 		<card id="80055594-f757-4d3c-ae32-13b1210cee28" name="Klatuu Artifact">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Klatuu, Artifact" />
-			<property name="Cost" value="6" />
+			<property name="Cost" value="8" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Zone" />
@@ -109,8 +154,8 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=7" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Epic" />
-			<property name="Text" value="Klatuu Artifact can only be played if you control 3 Orbs. Each upkeep phase you gain one energy." />
+			<property name="Traits" value="Epic, Zone Exclusive" />
+			<property name="Text" value="Klatuu Artifact can only be played if you control 3 or more Orbs. Each upkeep phase you gain one energy." />
 			<property name="CardID" value="MWDOMJ03" />
 		</card>
 
@@ -123,7 +168,7 @@
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane"  />
-			<property name="Level" value="2" />
+			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
@@ -133,7 +178,7 @@
 		<card id="721428d1-878a-457b-8885-4e5f9bb2e20c" name="Dampening Field">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Command" />
-			<property name="Cost" value="2+7" />
+			<property name="Cost" value="2+5" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Orb" />
@@ -142,7 +187,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Epic" />
-			<property name="Text" value="Reveal Dampening Field before the Upkeep Phase. This Upkeep Phase Orbs do not Function, then destroy Dampening Field." />
+			<property name="Text" value="Reveal Dampening Field before the Upkeep Phase. This Upkeep Phase Orbs do not Function (they do not score points or generate healing or mana), then destroy Dampening Field." />
 			<property name="CardID" value="MWDOME02" />
 		</card>
 		<card id="fa23207a-afe0-4757-a7f0-fe38cd974c71" name="Orb Protector">
@@ -157,10 +202,10 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Once per round, this orb may push an enemy in its zone one zone away. Use a ready marker to track this ability." />
+			<property name="Text" value="Once per round, before or after a friendly creature&apos;s action phase this orb may push an enemy in it&apos;s zone one zone away. Use a ready marker to track this ability." />
 			<property name="CardID" value="MWDOME03" />
 		</card>
-		<card id="0aa2df43-143a-4412-8e35-50799e544771" name="Creature Link">
+		<card id="0aa2df43-143a-4412-8e35-50799e544771" name="Creature Link - Removed">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+2" />
@@ -178,7 +223,7 @@
 		<card id="9b486167-9d34-424d-85c2-014d8772730a" name="Orb Defender">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
-			<property name="Cost" value="2+4" />
+			<property name="Cost" value="2+3" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />
@@ -187,9 +232,40 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Enchanted creature is considered an Orb Guardian. When in the same zone as an Orb it cannot be teleported and gains the Unmovable trait, and does not take a normal action phase and instead gain one guard marker durring each upkeep phase." />
+			<property name="Text" value="While in the same zone as an Orb you control, this creature gains Armor +2 and Melee +1 while guarding, and it is Unmovable and cannot be Teleported." />
 			<property name="CardID" value="MWDOME05" />
 		</card>
+		<card id="f508d822-021f-4c0d-87ec-76664dae2d13" name="Giant Size">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Transform" />
+			<property name="Cost" value="2+7" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Living Non-Mage Creature" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="Creature gains Melee +2, Life +8, Armor +2, and Unmovable." />
+			<property name="CardID" value="MWDOME06" />
+		</card>
+		<card id="570e1752-c500-4aa7-900b-434d51266db7" name="Mana Web">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Mana" />
+			<property name="Cost" value="2+6" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Creatures in this zone gain Upkeep +1. When a creature tries to move out of this zone roll the effect die. On a 7+they do not and their move action is lost. If there are no creatures in this zone destroy Mana Web." />
+			<property name="CardID" value="MWDOME07" />
+		</card>
+		
 
 
 		<card id="62a0b1ac-91d1-4dc5-9bcc-eb4209261388" name="Cascading Force Wave">
@@ -204,7 +280,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is pushed one zone in the direction of your choice. Then, you may pay 4 mana to push a creature in that zone, one zone in any direction, and repeat this process. A creature cannot be affected by Cascading Force Push more than once in the same casting." />
+			<property name="Text" value="Target creature is pushed one zone in the direction of your choice. Then, you may pay 3 mana to push a creature in that zone, one zone in any direction, and repeat this process. A creature cannot be affected by Cascading Force Push more than once in the same casting. These pushes will not push through walls with the passage attacks trait." />
 			<property name="CardID" value="MWDOMI01" />
 		</card>
 		<card id="58c33603-c7fa-400f-b0da-f7a114021fe1" name="Sabotage Orb">
@@ -219,7 +295,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="If you control a creature in the same zone as the targeted Orb, then place 2 Disable markers on the Orb. (Disabling the Orb means that Orb will not score points or generate healing.)" />
+			<property name="Text" value="If you control a creature in the same zone as the targeted Orb, then place 2 Disable markers on the Orb. (Disabling the Orb means that Orb will not score points or generate healing or mana.)" />
 			<property name="CardID" value="MWDOMI02" />
 		</card>
 		<card id="d44f62c7-0a73-4ac1-9b21-9b32638b205c" name="Empowered Mending">
@@ -234,7 +310,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is healed the ammount rolled on 3 dice, add an additional 2 dice to the roll for each Orb you control." />
+			<property name="Text" value="Target creature is healed the ammount rolled on 2 dice, add an additional 2 dice to the roll for each Orb you control." />
 			<property name="CardID" value="MWDOMI03" />
 		</card>
 	</cards>

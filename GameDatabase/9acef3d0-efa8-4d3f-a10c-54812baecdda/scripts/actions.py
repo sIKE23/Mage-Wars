@@ -435,12 +435,12 @@ def createPowerOrb(group, x=0, y=0):
 	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", 450, -40 )
 	
 def setupDom(group, x=0, y=0):
-	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286, -326 )
-	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  225, -326 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286, -300 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  225, -300 )
 	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  -62,  -40 )
 	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",    1,  -40 )
-	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286,  247 )
-	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  225,  247 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286,  220 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5",  225,  220 )
 	
 	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", -286, -192 )	
 	orbGuardian.markers[Guard] = 1
@@ -460,7 +460,7 @@ def setupDom(group, x=0, y=0):
 	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 225,  109 )	
 	orbGuardian.markers[Guard] = 1
 	
-	setGameBoard4(group, 0, 0)
+	setGameBoard6(group, 0, 0)
 
 def setNoGameBoard(group, x=0, y=0):
 	global boardSet
@@ -500,6 +500,13 @@ def setGameBoard4(group, x=0, y=0):
 def setGameBoard5(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard5.jpg"
+	mute()
+	for p in players:
+		remoteCall(p, "setGameBoard", [boardSet])
+
+def setGameBoard6(group, x=0, y=0):
+	global boardSet
+	boardSet = "GameBoard6.jpg"
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])

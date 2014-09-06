@@ -94,6 +94,7 @@
 			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
 			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
 			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
+			<groupaction menu="Set 4X3 Domination Arena Game Board" default="False" shortcut="Alt+F6" execute="setGameBoard6" />
 			<groupaction menu="Set 2x3 Apprentice Arena Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard9" />
 			<groupaction menu="Set 3x3 OCTGN Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
