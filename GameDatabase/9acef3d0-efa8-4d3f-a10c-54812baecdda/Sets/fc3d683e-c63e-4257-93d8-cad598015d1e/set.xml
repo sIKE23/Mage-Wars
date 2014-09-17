@@ -512,7 +512,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect" />
 			<property name="Cost" value="6" />
-			<property name="Action" value="Full" />
+			<property name="Action" value="Quick" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
