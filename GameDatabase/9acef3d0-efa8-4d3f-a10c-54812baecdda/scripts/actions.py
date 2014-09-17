@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.10.0.0    ##################################
+##########################    v1.10.0.1    ##################################
 ############################################################################
 import time
 import re
@@ -34,15 +34,16 @@ Disable = ("Disable", "f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
 Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
+FFToken = ("Forcefield Token", "fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" )
 Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
 Guard = ("Guard", "91ed27dc-294d-4732-ab71-37911f4011f2" )
 HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
 Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28" )
 Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d" )
+LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942" )
 Mana = ("Mana", "00000000-0000-0000-0000-000000000002" )
 Melee = ("Melee +1", "e96b3791-fbcf-40a2-9c11-106342703db9" )
 MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
-LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942" )
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
 Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b" )
 QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" )
@@ -613,6 +614,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
+				remoteCall(p, "resolveFFTokens", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -774,6 +776,41 @@ def resolveLoadTokens():
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
 
+def resolveFFTokens():
+	mute()
+	
+	#is the setting on?
+	if not getSetting("AutoResolveFFTokens", True):
+		return
+	
+	FFCard = [card for card in table if "Forcefield" in card.Name and card.controller == me and card.isFaceUp]
+	choiceList = ['Yes', 'No']
+	colorsList = ['#0000FF', '#FF0000']
+	choice = askChoice("Did you wish to pay Upkeep +2 on Forcefield?", choiceList, colorsList)
+	if choice == 1:
+		if me.Mana >= 2:
+			me.mana -= 2
+		else:
+			notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+			card.moveTo(me.piles['Discard'])
+			return
+	else:
+		notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
+		card.moveTo(me.piles['Discard'])
+		return	
+	for card in FFCard:
+		notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
+		if card.markers[FFToken] == 0:
+			notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+			card.markers[FFToken] = 1
+		elif card.markers[FFToken] == 1:
+			notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+			card.markers[FFToken] = 2
+		elif card.markers[FFToken] == 2:
+			notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+			card.markers[FFToken] = 3			
+		notify("Finished adding Forcefield Tokens for {}.".format(me))
+
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -903,6 +940,14 @@ def toggleResolveRot(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
+		
+def toggleFFTokens(group, x=0, y=0):
+	AutoResolveFFTokens = getSetting("AutoResolveFFTokens", True)
+	setSetting("AutoResolveFFTokens", not AutoResolveFFTokens)
+	if AutoResolveFFTokens:
+		whisper("You have disabled automatic resolution of Forcefield tokens on your cards.")
+	else:
+		whisper("You have enabled automatic Forcefield of Rot tokens on your cards.")
 
 def toggleResolveBleed(group, x=0, y=0):
 	autoResolveBleed = getSetting("AutoResolveBleed", True)
@@ -1281,13 +1326,13 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
-	if "Vine" in card.name and card.controller == me:
+	if "Vine" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
 		else:
 			card.switchTo("B")
 		notify("{} Flips Vine Marker.".format(me))
-	elif "Alt Zone" in card.name and card.controller == me:
+	elif "Alt Zone" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
 		else:
@@ -1302,49 +1347,49 @@ def flipcard(card, x = 0, y = 0):
 		if card.Type == "Mage": #once more to flip action to active side
 			toggleAction(card)
 			toggleQuick(card)
-			if "Wizard" in card.name:
+			if "Wizard" in card.Name:
 					card.markers[VoltaricOFF] = 1
-			if "Forcemaster" == card.name:
+			if "Forcemaster" == card.Name:
 					card.markers[DeflectR] = 1
-			if "Beastmaster" == card.name:
+			if "Beastmaster" == card.Name:
 					card.markers[Pet] = 1
-			if "Johktari Beastmaster" == card.name:
+			if "Johktari Beastmaster" == card.Name:
 					card.markers[WoundedPrey] = 1
-			if "Priest" == card.name:
+			if "Priest" == card.Name:
 					card.markers[HolyAvenger] = 1
-			if "Druid" == card.name:
+			if "Druid" == card.Name:
 					card.markers[Treebond] = 1
-			if "Necromancer" == card.name:
+			if "Necromancer" == card.Name:
 					card.markers[Eternal_Servant] = 1
-			if "Warlock" == card.name:
+			if "Warlock" == card.Name:
 					card.markers[BloodReaper] = 1
-		if "Anvil Throne Warlord Stats" == card.name:
+		if "Anvil Throne Warlord Stats" == card.Name:
 					card.markers[RuneofFortification] = 1
 					card.markers[RuneofPower] = 1
 					card.markers[RuneofPrecision] = 1
 					card.markers[RuneofReforging] = 1
 					card.markers[RuneofShielding] = 1
 		if card.Type == "Creature":
-			if "Invisible Stalker" == card.name:
+			if "Invisible Stalker" == card.Name:
 					card.markers[Invisible] = 1
-			if "Thorg, Chief Bodyguard" == card.name:
+			if "Thorg, Chief Bodyguard" == card.Name:
 					card.markers[TauntT] = 1
-			if "Sosruko, Ferret Companion" == card.name:
+			if "Sosruko, Ferret Companion" == card.Name:
 					card.markers[Taunt] = 1
-			if "Ichthellid" == card.name:
+			if "Ichthellid" == card.Name:
 					card.markers[EggToken] = 1
-			if "Talos" == card.name:
+			if "Talos" == card.Name:
 					toggleAction(card)
 		if card.Type == "Conjuration":
-			if "Ballista" == card.name:
+			if "Ballista" == card.Name:
   				card.markers[LoadToken] = 1
-			if "Akiro's Hammer" == card.name:
+			if "Akiro's Hammer" == card.Name:
   				card.markers[LoadToken] = 1
-			if "Corrosive Orchid" == card.name:
+			if "Corrosive Orchid" == card.Name:
   				card.markers[MistToken] = 1
-			if "Nightshade Lotus" == card.name:
+			if "Nightshade Lotus" == card.Name:
   				card.markers[MistToken] = 1
-			if "Rolling Fog" == card.name:
+			if "Rolling Fog" == card.Name:
   				card.markers[DissipateToken] = 3
 		if "Defense" in card.Stats:
 			if "1x" in card.Stats:
@@ -1352,6 +1397,8 @@ def flipcard(card, x = 0, y = 0):
 			if "2x" in card.Stats:
 				card.markers[Ready] = 1
 				card.markers[ReadyII] = 1
+		if "Forcefield" == card.Name:
+			card.markers[FFToken] = 3
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
   	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
@@ -1654,7 +1701,7 @@ def switchPhase(card, phase, phrase):
 				card.highlight = mycolor
 			else:
 				remoteCall(card.controller, "remoteHighlight", [card, mycolor])
-			notify("{} is done with the {}".format(me.name,card.name))
+			notify("{} is done with the {}".format(me.name,card.Name))
 			return False
 		else:
 			setGlobalVariable("DoneWithPhase", "")
@@ -1767,7 +1814,7 @@ def castSpell(card, x = 0, y = 0):
 				mageRevealCost = 0
 			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
 				flipcard(card, x, y)
-				notify("{} revealed {} as it has a '0' reveal cost".format(me.name, card.name))
+				notify("{} revealed {} as it has a '0' reveal cost".format(me.name, card.Name))
 				return
 			else:
 				mageRevealCost = int(revealCost[1])  # the second number (reveal cost)
@@ -1817,13 +1864,13 @@ def castSpell(card, x = 0, y = 0):
 			flipcard(card, x, y)
 			notify("{}".format(notifyStr))
 		else:
-			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.name, str(castingCost))
+			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
 			if not discountStr == "":
 				boundStr = boundStr + discountStr
 			notify("{}".format(boundStr))
 		if not TraitStr == "":
 			notify("{}".format(TraitStr))
-		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.name))
+		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.Name))
 
 def getTraitValue(card, getTraitCost):
 	listofTraits = ""
@@ -1966,7 +2013,7 @@ def validateDeck(deck):
 
 		if "Water" in card.School and c.name == "Druid": #check for the druid rule
 			if "1" in card.Level:
-				debug("Druid Water test: {}".format(card.name))
+				debug("Druid Water test: {}".format(card.Name))
 				if "+" in card.School:
 					schools = card.School.split("+")
 					level = card.Level.split("+")
