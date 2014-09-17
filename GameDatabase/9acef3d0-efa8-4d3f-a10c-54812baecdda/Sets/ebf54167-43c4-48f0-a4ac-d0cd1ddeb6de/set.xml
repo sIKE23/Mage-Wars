@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.1">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -42,6 +42,7 @@
 		<marker id="fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" name="Mist Token" />
 		<marker id="d32267be-f4c5-48c6-8396-83c0db406942" name="Load Token" />
 		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate Token" />
+		<marker id="fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" name="Forcefield Token" />
 	</markers>
 	<cards>
 		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
