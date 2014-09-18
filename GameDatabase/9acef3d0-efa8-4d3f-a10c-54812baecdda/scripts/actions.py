@@ -783,10 +783,11 @@ def resolveFFTokens():
 	if not getSetting("AutoResolveFFTokens", True):
 		return
 	
-	FFCard = [card for card in table if "Forcefield" in card.Name and card.controller == me and card.isFaceUp]
+	FFCard = [card for card in table if "Forcefield" == card.Name and card.controller == me and card.isFaceUp]
+	debug("FFCard: {}".format(FFCard))
 	choiceList = ['Yes', 'No']
 	colorsList = ['#0000FF', '#FF0000']
-	choice = askChoice("Did you wish to pay Upkeep +2 on Forcefield?", choiceList, colorsList)
+	choice = askChoice("Did you wish to pay the Upkeep +2 cost for Forcefield?", choiceList, colorsList)
 	if choice == 1:
 		if me.Mana >= 2:
 			me.mana -= 2
@@ -795,7 +796,7 @@ def resolveFFTokens():
 			card.moveTo(me.piles['Discard'])
 			return
 	else:
-		notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
+		notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
 		card.moveTo(me.piles['Discard'])
 		return	
 	for card in FFCard:
@@ -1848,10 +1849,12 @@ def castSpell(card, x = 0, y = 0):
 
 		# Do we have enough mana to pay for the spell?
 		if manacost == None:
+			# player closed the window and didn't cast the spell and therefore the casting discount is unused and needs to be reset
 			return
 		if me.Mana < manacost:
 			if not debugMode:
 				notify("{} has insufficient mana in pool".format(me))
+			# player is unable to pay for the spell and therefore the casting discount is unused and needs to be reset
 				return
 			else:
 				notify("{} has insufficient mana in pool".format(me))
