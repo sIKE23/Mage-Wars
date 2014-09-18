@@ -783,35 +783,26 @@ def resolveFFTokens():
 	if not getSetting("AutoResolveFFTokens", True):
 		return
 	
-	FFCard = [card for card in table if "Forcefield" == card.Name and card.controller == me and card.isFaceUp]
-	debug("FFCard: {}".format(FFCard))
-	choiceList = ['Yes', 'No']
-	colorsList = ['#0000FF', '#FF0000']
-	choice = askChoice("Did you wish to pay the Upkeep +2 cost for Forcefield?", choiceList, colorsList)
-	if choice == 1:
-		if me.Mana >= 2:
-			me.mana -= 2
-		else:
-			notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-			card.moveTo(me.piles['Discard'])
-			return
-	else:
-		notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-		card.moveTo(me.piles['Discard'])
-		return	
+	FFCard = [card for card in table if card.Name in ["Forcefield"] and card.controller == me and card.isFaceUp]
 	for card in FFCard:
-		notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
-		if card.markers[FFToken] == 0:
-			notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-			card.markers[FFToken] = 1
-		elif card.markers[FFToken] == 1:
-			notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-			card.markers[FFToken] = 2
-		elif card.markers[FFToken] == 2:
-			notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-			card.markers[FFToken] = 3			
-		notify("Finished adding Forcefield Tokens for {}.".format(me))
-
+		debug("FFCard: {}".format(FFCard))
+		TraitValue, TraitStr = getTraitValue(card, Upkeep)
+		paidforUpkeep = resolveUpkeep(card, TraitValue)
+		if paidforUpkeep == 1:
+			notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
+			if card.markers[FFToken] == 0:
+				notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+				card.markers[FFToken] = 1
+			elif card.markers[FFToken] == 1:
+				notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+				card.markers[FFToken] = 2
+			elif card.markers[FFToken] == 2:
+				notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+				card.markers[FFToken] = 3			
+			notify("Finished adding Forcefield Tokens for {}.".format(me))
+		else:
+			return
+			
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -850,7 +841,7 @@ def resolveChanneling(c):
 					debug("Overlap found (bottom left) {}".format(c2.name))
 					addMana(c2)
 					whisper("Harmonize found and Mana added to channeling card")
-				else:
+			else:
 					c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
 					if c2 != None and c2.Type !="Mage":
 						debug("Overlap found (top right) {}".format(c2.name))
@@ -858,6 +849,30 @@ def resolveChanneling(c):
 						whisper("Harmonize found and Mana added to channeling card")
 					else:
 						whisper("Harmonize found but no Mana added")
+
+def resolveUpkeep(card, TraitValue):
+	mute()
+	
+	#is the setting on?
+	if not getSetting("AutoResolveUpkeep", True):
+		return
+
+	choiceList = ['Yes', 'No']
+	colorsList = ['#0000FF', '#FF0000']
+	choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}".format(TraitValue, card), choiceList, colorsList)
+	if choice == 1:
+		if me.Mana >= TraitValue:
+			me.mana -= TraitValue
+			notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+			return 1
+		else:
+			notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+			card.moveTo(me.piles['Discard'])
+			return 0
+	else:
+		notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+		card.moveTo(me.piles['Discard'])
+		return 0
 
 def mageStatus():
 	global gameEndTime
@@ -981,6 +996,15 @@ def toggleAutoRollInitiative(group, x=0, y=0):
 		whisper("You have disabled automatically rolling initiative.")
 	else:
 		whisper("You have enabled automatically rolling initiative.")
+		
+def toggleAutoResolveUpkeep(group, x=0, y=0):
+	autoRoll = getSetting("ResolveUpkeep", False)
+	setSetting("ResolveUpkeep", not ResolveUpkeep)
+	if autoRoll:
+		whisper("You have disabled automatically caculating Upkeep costs.")
+	else:
+		whisper("You have enabled automatically caculating Upkeep costs..")
+
 
 ############################################################################
 ######################		Chat Actions			################################
