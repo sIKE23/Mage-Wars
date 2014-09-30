@@ -50,7 +50,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Water" />
@@ -95,7 +95,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Wind" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Air" />

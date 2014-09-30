@@ -48,7 +48,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] Lightning] [Dice=3] [d12] [7-8 = Daze; 9+ = Stun] [Ethereal] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=3] [d12] [7-8 = Daze; 9+ = Stun] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWA01" />
