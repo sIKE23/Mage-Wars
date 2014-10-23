@@ -614,6 +614,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
+				remoteCall(p, "checkForUpkeep", [])
 				remoteCall(p, "resolveFFTokens", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
@@ -776,33 +777,6 @@ def resolveLoadTokens():
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
 
-def resolveFFTokens():
-	mute()
-	
-	#is the setting on?
-	if not getSetting("AutoResolveFFTokens", True):
-		return
-	
-	FFCard = [card for card in table if card.Name in ["Forcefield"] and card.controller == me and card.isFaceUp]
-	for card in FFCard:
-		debug("FFCard: {}".format(FFCard))
-		TraitValue, TraitStr = getTraitValue(card, Upkeep)
-		paidforUpkeep = resolveUpkeep(card, TraitValue)
-		if paidforUpkeep == 1:
-			notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
-			if card.markers[FFToken] == 0:
-				notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-				card.markers[FFToken] = 1
-			elif card.markers[FFToken] == 1:
-				notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-				card.markers[FFToken] = 2
-			elif card.markers[FFToken] == 2:
-				notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-				card.markers[FFToken] = 3			
-			notify("Finished adding Forcefield Tokens for {}.".format(me))
-		else:
-			return
-			
 def resolveChanneling(c):
 	mute()
 	if c.Stats != None and c.Type != "Mage":
@@ -841,7 +815,7 @@ def resolveChanneling(c):
 					debug("Overlap found (bottom left) {}".format(c2.name))
 					addMana(c2)
 					whisper("Harmonize found and Mana added to channeling card")
-			else:
+				else:
 					c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
 					if c2 != None and c2.Type !="Mage":
 						debug("Overlap found (top right) {}".format(c2.name))
@@ -852,27 +826,78 @@ def resolveChanneling(c):
 
 def resolveUpkeep(card, TraitValue):
 	mute()
-	
+
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
 
-	choiceList = ['Yes', 'No']
-	colorsList = ['#0000FF', '#FF0000']
-	choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}".format(TraitValue, card), choiceList, colorsList)
-	if choice == 1:
-		if me.Mana >= TraitValue:
-			me.mana -= TraitValue
-			notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
-			return 1
+	if "Mordok's Obelisk" == card.Name and card.isFaceUp and card.controller == me:
+		for c in table:
+			if c.Type == "Creature" and c.isFaceUp and c.controller == me:
+				if me.mana < 1:
+					notify("Unable to pay Upkeep cost for {} from {} effect.".format(c.Name, card.Name))
+				else:
+					me.mana -= 1
+					notify("Paying Upkeep cost for {} from {} effect.".format(c.Name, card.Name))
+	elif "Forcefield" == card.Name and card.isFaceUp and card.controller == me:
+		return
+	else:
+		choiceList = ['Yes', 'No']
+		colorsList = ['#0000FF', '#FF0000']
+		choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}".format(TraitValue, card), choiceList, colorsList)
+		if choice == 1:
+			if me.Mana >= TraitValue:
+				me.mana -= TraitValue
+				notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+				return 1
+			else:
+				notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+				card.moveTo(me.piles['Discard'])
+				return 0
 		else:
-			notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+			notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
 			card.moveTo(me.piles['Discard'])
 			return 0
-	else:
-		notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-		card.moveTo(me.piles['Discard'])
-		return 0
+
+def resolveFFTokens():
+	mute()
+	Upkeep = ""
+	#is the setting on?
+	if not getSetting("AutoResolveFFTokens", True):
+		return
+
+	FFCard = [card for card in table if card.Name in ["Forcefield"] and card.controller == me and card.isFaceUp]
+	for card in FFCard:
+		debug("FFCard: {}".format(card.Name))
+		TraitValue, TraitStr = getTraitValue(card, Upkeep)
+		paidforUpkeep = resolveUpkeep(card, TraitValue)
+		if paidforUpkeep == 1:
+			notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
+			if card.markers[FFToken] == 0:
+				notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+				card.markers[FFToken] = 1
+			elif card.markers[FFToken] == 1:
+				notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+				card.markers[FFToken] = 2
+			elif card.markers[FFToken] == 2:
+				notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+				card.markers[FFToken] = 3
+			notify("Finished adding Forcefield Tokens for {}.".format(me))
+		else:
+			return
+			
+def checkForUpkeep():
+	mute()
+	Upkeep = ""
+	#is the setting on?
+	if not getSetting("AutoResolveUpkeep", True):
+		return
+
+	for card in table:
+		if card.controller == me and "Upkeep" in card.Traits:
+			TraitValue, TraitStr = getTraitValue(card, Upkeep)
+			if TraitValue >= 1:
+				resolveUpkeep(card, TraitValue)
 
 def mageStatus():
 	global gameEndTime
@@ -956,7 +981,7 @@ def toggleResolveRot(group, x=0, y=0):
 		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
 	else:
 		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
-		
+
 def toggleFFTokens(group, x=0, y=0):
 	AutoResolveFFTokens = getSetting("AutoResolveFFTokens", True)
 	setSetting("AutoResolveFFTokens", not AutoResolveFFTokens)
@@ -996,7 +1021,7 @@ def toggleAutoRollInitiative(group, x=0, y=0):
 		whisper("You have disabled automatically rolling initiative.")
 	else:
 		whisper("You have enabled automatically rolling initiative.")
-		
+
 def toggleAutoResolveUpkeep(group, x=0, y=0):
 	autoRoll = getSetting("ResolveUpkeep", False)
 	setSetting("ResolveUpkeep", not ResolveUpkeep)
@@ -1059,7 +1084,7 @@ def addDamage(card, x = 0, y = 0):
 		me.Damage += 1
 	else:
 		addToken(card, Damage)
-			
+
 def addDisable(card, x = 0, y = 0):
 	addToken(card, Disable)
 
@@ -1074,7 +1099,7 @@ def addMana(card, x = 0, y = 0):
 
 def addMelee(card, x = 0, y = 0):
 	addToken(card, Melee)
-	
+
 def addRot(card, x = 0, y = 0):
 	addToken(card, Rot)
 
@@ -1101,7 +1126,7 @@ def addZombie(card, x=0, y=0):
 
 def addOther(card, x = 0, y = 0):
 	marker, qty = askMarker()
-	if qty == 0: 
+	if qty == 0:
 		return
 	card.markers[marker] += qty
 
@@ -1111,7 +1136,7 @@ def toggleAction(card, x=0, y=0):
 	global mycolor
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
 	elif mycolor == PlayerColor[0]: # Red
@@ -1172,7 +1197,7 @@ def toggleAction(card, x=0, y=0):
 def toggleDeflect(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if not card.isFaceUp:
 		return
 	if card.markers[DeflectR] > 0:
@@ -1187,13 +1212,13 @@ def toggleDeflect(card, x=0, y=0):
 def toggleGuard(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	toggleToken(card, Guard)
 
 def toggleInvisible(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if not card.isFaceUp:
 		return
 	if card.markers[Invisible] > 0:
@@ -1208,7 +1233,7 @@ def toggleInvisible(card, x=0, y=0):
 def toggleReady(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if not card.isFaceUp:
 		return
 	if card.markers[Ready] > 0:
@@ -1223,7 +1248,7 @@ def toggleReady(card, x=0, y=0):
 def toggleReadyII(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if not card.isFaceUp:
 		return
 	if card.markers[ReadyII] > 0:
@@ -1238,7 +1263,7 @@ def toggleReadyII(card, x=0, y=0):
 def toggleQuick(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if not card.isFaceUp:
 		return
 	if card.markers[Quick] > 0:
@@ -1253,7 +1278,7 @@ def toggleQuick(card, x=0, y=0):
 def toggleVoltaric(card, x=0, y=0):
 	mute()
 	if card.Type == "Internal":
-		return 
+		return
 	if not card.isFaceUp:
 		return
 	if card.markers[VoltaricON] > 0:
@@ -1831,8 +1856,8 @@ def castSpell(card, x = 0, y = 0):
 				choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
 				if choice == 0 or choice == 2:
 					return
-			
-			#  castingCost = 2	# when we get attaching enchantments down			
+
+			#  castingCost = 2	# when we get attaching enchantments down
 			revealCost = card.Cost.split("+")
 			debug("debug: {} and {}".format(revealCost[0], revealCost[1]))
 			if "X" in card.Cost:  # e.g. Charm
@@ -1899,11 +1924,11 @@ def castSpell(card, x = 0, y = 0):
 			notify("{}".format(TraitStr))
 		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.Name))
 
-def getTraitValue(card, getTraitCost):
+def getTraitValue(card, TraitName):
 	listofTraits = ""
-	#debug("{} has the {} trait".format(card.Name, getTraitCost))
+	debug("{} has the {} trait".format(card.name, TraitName))
 	listofTraits = card.Traits.split(", ")
-	#debug("{} ".format(listofTraits))
+	debug("{} ".format(listofTraits))
 	if not len(listofTraits) > 1:
 		strTraits = ''.join(listofTraits)
 	else:
