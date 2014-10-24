@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Domination Scenario" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.10.0.0">
 	<markers>
-		<marker id="d01f02e4-392f-409f-95f5-d2fa40f89882" name="Energy" />
+		<marker id="3274d2dd-cabd-4f90-8845-18297d503b70" name="Energy" />
 	</markers>
 	<cards>
 		<card id="3f7a8262-09e1-40bd-8fb9-c7c6ac880ae0" name="Energy Wave">
@@ -44,7 +44,7 @@
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane"  />
-			<property name="Level" value=2" />
+			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=5" />
 			<property name="AttackBar" value="Claws:[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Psychic Immunity" />
@@ -204,7 +204,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is healed the ammount rolled on 2 dice, add an additional 2 dice to the roll for each Orb you control." />
+			<property name="Text" value="Target creature is healed the amount rolled on 2 dice, add an additional 2 dice to the roll for each Orb you control." />
 			<property name="CardID" value="MWDOMI02" />
 		</card>
 	</cards>
