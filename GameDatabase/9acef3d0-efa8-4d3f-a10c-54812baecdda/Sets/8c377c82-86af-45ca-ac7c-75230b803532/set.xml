@@ -68,7 +68,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Cost" value="12" />
 			<property name="Action" value="Full" />
-			<property name="Range" value="0-2" />
+			<property name="Range" value="0-3" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Fire" />
 			<property name="Level" value="3" />
@@ -76,7 +76,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [3-9 = Burn; 10+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="As part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
+			<property name="Text" value="Asthe end of the attack, as part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
 			<property name="CardID" value="MWDOMA05" />
 		</card>
 		<card id="6e4c7b12-9bc4-4c19-976f-840e40999a03" name="Windstorm">
@@ -218,7 +218,7 @@
 			<property name="Text" value="V&apos;tar Artifact can only be played adjacent to an Orb you control. Each Upkeep Phase you gain one V&apos;tar." />
 			<property name="CardID" value="MWDOMJ02" />
 		</card>
-		<card id="0468e485-cced-4a0e-bf79-af4c03f2abe5" name="Altar of the Iron Guard">
+		<card id="e3e77121-4a91-443b-ae3a-1d7c4241b0ee" name="Altar of the Iron Guard">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Statue, Artifact" />
 			<property name="Cost" value="4" />
@@ -233,7 +233,7 @@
 			<property name="Text" value="Whenever a creature comes into play, which you control, you may place a Guard marker on it." />
 			<property name="CardID" value="MWDOMJ03" />
 		</card>
-		<card id="90f01a26-1598-4df0-9fb3-5f40353bb6c9" name="Gravikor">
+		<card id="865954e9-4c67-4858-b3e0-484c66e19db9" name="Gravikor">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Obelisk, Artifact" />
 			<property name="Cost" value="8" />
@@ -248,7 +248,7 @@
 			<property name="Text" value="All creatures within 2 zones of Gravikor lose, and cannot gain, the Flying trait." />
 			<property name="CardID" value="MWDOMJ04" />
 		</card>
-		<card id="e5381c8b-33ad-46c9-a416-dfa47d128e5c" name="Raincloud">
+		<card id="f397a9b9-24dd-4f0b-a3a0-17337ec69d9f" name="Raincloud">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Cloud, Weather" />
 			<property name="Cost" value="8" />
