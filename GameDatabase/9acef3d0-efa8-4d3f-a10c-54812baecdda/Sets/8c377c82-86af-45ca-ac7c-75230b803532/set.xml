@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Domination Scenario" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.10.0.0">
 	<markers>
-		<marker id="3274d2dd-cabd-4f90-8845-18297d503b70" name="Energy" />
+		<marker id="3274d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;tar" />
 	</markers>
 	<cards>
 		<card id="3f7a8262-09e1-40bd-8fb9-c7c6ac880ae0" name="Energy Wave">
@@ -16,7 +16,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged] [Zone Attack] [Dice=2] [Ethereal]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Energy Wave rolls 1 extra die for each Orb your control." />
+			<property name="Text" value="This attack rolls 1 extra die for each Orb your control." />
 			<property name="CardID" value="MWDOMA01" />
 		</card>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="Empowered Lighting Strike">
@@ -29,57 +29,162 @@
 			<property name="School" value="Air"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Lighting] [Dice=3] [d12] [6-7 = Daze; 8+ Stun] [Ethereal]" />
+			<property name="AttackBar" value="[Ranged] [Lighting] [Dice=3] [d12] [6-7 = Daze; 8+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This attack gets Range +1 for each orb you control." />
+			<property name="Text" value="When making this attack your Mage gains the Ranged +X trait, where X is the number of Orbs you control." />
 			<property name="CardID" value="MWDOMA02" />
 		</card>
-		
-
-		<card id="bf217fd3-18c0-4b61-a33a-117167533f3d" name="Orb Guardian">
-			<property name="Type" value="Creature" />
+		<card id="6ffd7fe8-14ac-4bfa-8da4-aef87dbaa61a" name="Hurl Meteorite">
+			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
-			<property name="Cost" value="" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-3" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze;9+ = Stun]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWDOMA03" />
+		</card>
+		<card id="2bc9e256-d325-435a-81ea-e6ad31b3f56b" name="Sandstorm">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Earth" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1, +2 vs. Flying] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If Pushed, roll for random direction." />
+			<property name="CardID" value="MWDOMA04" />
+		</card>
+		<card id="4d8e3876-3c1d-4448-895e-4fc929625673" name="Dragon&apos;s Breath">
+			<property name="Type" value="Attack" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Fire" />
+			<property name="Level" value="3" />
+			<property name="Subtype" value="Flame" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [3-9 = Burn; 10+ = 2 Burn] [Defrost]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="As part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
+			<property name="CardID" value="MWDOMA05" />
+		</card>
+		<card id="6e4c7b12-9bc4-4c19-976f-840e40999a03" name="Windstorm">
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Wind" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [6+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWDOMA06" />
+		</card>
+
+
+		<card id="bf217fd3-18c0-4b61-a33a-117167533f3d" name="Sslak, Orb Guardian">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Outsider" />
+			<property name="Cost" value="5" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="School" value="Arcane"  />
-			<property name="Level" value="2" />
+			<property name="School" value="Arcane+Dark"  />
+			<property name="Level" value="1+1" />
 			<property name="Stats" value="Armor=1, Life=5" />
-			<property name="AttackBar" value="Claws:[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Claws: [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Psychic Immunity" />
-			<property name="Text" value="This creature has Unmovable and Cannot be teleported while in a zone with an Orb. This creature recieves a guard marker durring the Upkeep Phase. Players cannot gain control of Orbs in this zone." />
+			<property name="Text" value="Sslak gains the Unmovable trait and Cannot be Teleported while in a zone with an Orb. Sslak gains a guard marker during the Upkeep Phase. Orbs in this zone are immune to damage." />
 			<property name="CardID" value="MWDOMCR01" />
 		</card>
-		<card id="54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd" name="Greater Orb Guardian">
+		<card id="54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd" name="Usslak, Greater Orb Guardian">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="" />
-			<property name="Cost" value="" />
+			<property name="Subtype" value="Outsider" />
+			<property name="Cost" value="8" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
-			<property name="School" value="Arcane"  />
-			<property name="Level" value="2" />
+			<property name="School" value="Arcane+Dark"  />
+			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=2, Life=8" />
 			<property name="AttackBar" value="Claws:[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Psychic Immunity" />
-			<property name="Text" value="This creature has Unmovable and Cannot be teleported while in a zone with an Orb. This creature recieves a guard marker durring the Upkeep Phase. Players cannot gain control of Orbs in this zone." />
+			<property name="Text" value="Usslak gains the Unmovable trait and Cannot be Teleported while in a zone with an Orb. Usslak gains a guard marker during the Upkeep Phase. Orbs in this zone are immune to damage." />
 			<property name="CardID" value="MWDOMCR02" />
 		</card>
 		<card id="c0dbf89b-5373-47b5-ab1f-979400ea69f8" name="Guard Dog">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Canine, Soldier" />
+			<property name="Subtype" value="Animal, Canine, Soldier" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War"  />
-			<property name="Level" value="2" />
+			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=3, Life=6" />
-			<property name="AttackBar" value="Bite:[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Bite: [Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Gains Vigilant when in the same zone as a friendly conjuration (including an Orb you control)." />
+			<property name="Text" value="Gains the Vigilant trait while in the same zone as a friendly conjuration (including an Orb you control)." />
 			<property name="CardID" value="MWDOMCR03" />
+		</card>
+		<card id="5c22f66f-bbeb-4027-b20f-3e468d428111" name="Oscuda">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=10" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Stink Cloud:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Poison] [Dice=2] [d12] [7+ = Daze] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="Oscuda is immune to his Stink Cloud" />
+			<property name="CardID" value="MWDOMCR04" />
+		</card>
+		<card id="9153fc63-f781-443a-ab94-10c5acb50faa" name="Slaknir, Goblin Chieftain">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Goblin, Soldier" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="AttackBar" value="Tribal Staff:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Storm the Enemy!:&#xD;&#xA;[Quick] [Ranged:0-1] [Target goblin is Pushed 1 zone in the direction of your choice.] " />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="All friendly goblins gain the Elusive trait." />
+			<property name="CardID" value="MWDOMCR06" />
+		</card>
+		<card id="82ce9e6d-a218-488a-843c-46b85f3f393d" name="Skelax, Taunting Imp">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="11" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Defense=6+ 1x, Armor=1, Life=9" />
+			<property name="AttackBar" value="Trident:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [5+ = Taunt]" />
+			<property name="Traits" value="Flame -2, Legendary, Warlock Only" />
+			<property name="Text" value="During the Upkeep Phase, whlie Skelax is in the same zone as an object with a Burn condition, he gains the Regenerate 2 trait." />
+			<property name="CardID" value="MWDOMCR06" />
 		</card>
 
 
@@ -95,12 +200,12 @@
 			<property name="Stats" value="Armor=-, Life=5" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Incorporeal" />
-			<property name="Text" value="Friendly Creatures in zones with orbs may use a move action to teleport to the zone this portal occupies." />
+			<property name="Text" value="Friendly Creatures in zones with Orbs may use a move action to Teleport to the zone Orb Portal occupies." />
 			<property name="CardID" value="MWDOMJ01" />
 		</card>
-		<card id="80055594-f757-4d3c-ae32-13b1210cee28" name="Artifact">
-			<property name="Type" value="Conjuration" />
-			<property name="Subtype" value="Klatuu, Artifact" />
+		<card id="80055594-f757-4d3c-ae32-13b1210cee28" name="V&apos;tar Artifact">
+			<property name="Type" value="Conjuration" />a
+			<property name="Subtype" value="V&apos;Torrak, Artifact" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-1" />
@@ -109,9 +214,71 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=7" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Epic, Zone Exclusive" />
-			<property name="Text" value="Klatuu Artifact can only be played adjacent to an orb you control. Each upkeep phase you gain one energy." />
+			<property name="Traits" value="Zone Exclusive, Epic" />
+			<property name="Text" value="V&apos;tar Artifact can only be played adjacent to an Orb you control. Each Upkeep Phase you gain one V&apos;tar." />
 			<property name="CardID" value="MWDOMJ02" />
+		</card>
+		<card id="0468e485-cced-4a0e-bf79-af4c03f2abe5" name="Altar of the Iron Guard">
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Statue, Artifact" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=2, Life=5" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive, Legendary" />
+			<property name="Text" value="Whenever a creature comes into play, which you control, you may place a Guard marker on it." />
+			<property name="CardID" value="MWDOMJ03" />
+		</card>
+		<card id="90f01a26-1598-4df0-9fb3-5f40353bb6c9" name="Gravikor">
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Obelisk, Artifact" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=4, Life=6" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
+			<property name="Text" value="All creatures within 2 zones of Gravikor lose, and cannot gain, the Flying trait." />
+			<property name="CardID" value="MWDOMJ04" />
+		</card>
+		<card id="e5381c8b-33ad-46c9-a416-dfa47d128e5c" name="Raincloud">
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Cloud, Weather" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=-, Life=5" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Incorporeal, Flying, Hydro Immunity" />
+			<property name="Text" value="All objects in Raincloud&apos;s zone gain the Flame -2, Acid -2, and Regenerate 1 traits. Each Upkeep Phase you may remove 1 Burn condition or 1 Corrode condition, from 1 object in Raincloud&apos;s zone by paying its removal cost. Once per round, immediately before or after any friendly Action Phase, you may pay 1 mana to move Raincloud 1 zone and attach it to that zone." />
+			<property name="CardID" value="MWDOMJ05" />
+		</card>
+
+
+		<card id="42464e26-8982-4244-b06e-2aab60f88203" name="Wall of Force">
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="Target" value="Zone Border" />
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=-, Life=3" />
+			<property name="AttackBar" value="[Passage Blocked] [Line of Sight Blocked]" />
+			<property name="Traits" value="Incorporeal, Extendable" />
+			<property name="Text" value="During the Upkeep Phase you may pay mana to reinforce Wall of Force. For each mana spent remove 1 damage from it. The ability bypasses the Finite Life trait." />
+			<property name="CardID" value="MWPROMO24" />
 		</card>
 
 
@@ -127,7 +294,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Creatures cannot be teleported to or from this zone." />
+			<property name="Text" value="Creatures cannot be Teleported to or from this zone." />
 			<property name="CardID" value="MWDOME01" />
 		</card>
 		<card id="721428d1-878a-457b-8885-4e5f9bb2e20c" name="Dampening Field">
@@ -136,13 +303,13 @@
 			<property name="Cost" value="2+5" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Orb" />
+			<property name="Target" value="Zone with an Orb" />
 			<property name="School" value="Mind"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Epic" />
-			<property name="Text" value="Reveal Dampening Field before the Upkeep Phase. This Upkeep Phase Orbs do not Function (they do not score points or generate healing or mana), then destroy Dampening Field." />
+			<property name="Text" value="Reveal Dampening Field before the Upkeep Phase. This Upkeep Phase Orbs do not Function (players gaon no V&apos;tar or generate healing or mana), then destroy Dampening Field." />
 			<property name="CardID" value="MWDOME02" />
 		</card>
 		<card id="fa23207a-afe0-4757-a7f0-fe38cd974c71" name="Orb Protector">
@@ -151,13 +318,13 @@
 			<property name="Cost" value="2+3" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Orb" />
+			<property name="Target" value="Zone" />
 			<property name="School" value="Mind"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Once per round, before or after a friendly creature&apos;s action phase this orb may push an enemy up to one zone away, one zone away. This cannot push a target through a wall. Use a ready marker to track this ability.&#xD;&#xA;[ReadyMarker]" />
+			<property name="Text" value="Once per round, before or after a friendly creature&apos;s Action Phase an Orb in this zone may push an opposing creature within 1 zone, 1 zone away. This cannot push a creature through a wall with the Passage Attacks trait. Use a ready marker to track this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MWDOME03" />
 		</card>
 		<card id="9b486167-9d34-424d-85c2-014d8772730a" name="Orb Defender">
@@ -172,8 +339,23 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="While in the same zone as an Orb you control, this creature gains Armor +2 and Melee +1 while guarding, and it is Unmovable and cannot be Teleported." />
+			<property name="Text" value="While in the same zone as an Orb you control, this creature has the Unmovable trait, cannot be Teleported, and while guarding gains the Armor +2 and Melee +1 traits." />
 			<property name="CardID" value="MWDOME04" />
+		</card>
+		<card id="71e32301-4724-497d-9224-9f052fcf9808" name="Plagued">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse, Poison" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magebind +2" />
+			<property name="Text" value="Each Upkeep Phase, place a point of direct poison damage on each Living creature in this zone (including this creature)." />
+			<property name="CardID" value="MWDOME05" />
 		</card>
 
 
@@ -189,7 +371,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is pushed one zone in the direction of your choice. Then, you may pay 3 mana to push a creature in that zone, one zone in any direction, and repeat this process. A creature cannot be affected by Cascading Force Push more than once in the same casting. These pushes will not push through walls with the passage attacks trait." />
+			<property name="Text" value="Target creature is pushed one zone in the direction of your choice. Then, you may pay 3 mana to push a creature in that zone, one zone in any direction, and repeat this process. A creature cannot be affected by Cascading Force Push more than once in the same casting. These pushes will not push through walls with the Passage Attacks trait." />
 			<property name="CardID" value="MWDOMI01" />
 		</card>
 		<card id="d44f62c7-0a73-4ac1-9b21-9b32638b205c" name="Empowered Mending">
@@ -204,8 +386,25 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is healed the amount rolled on 2 dice, add an additional 2 dice to the roll for each Orb you control." />
+			<property name="Text" value="Heal target creature the amount rolled on 2 dice, add an additional 2 dice to the roll for each Orb you control." />
 			<property name="CardID" value="MWDOMI02" />
+		</card>
+
+
+		<card id="27dacd66-4f54-465e-a728-10358b0c7548" name="Gale Force Ring">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains +2 to the effect die roll for all melee and ranged attacks he makes that deal wind damage. If he makes mutiple attacks in the same round, all of them receive this bonus.&#xD;&#xA;[Wind] [+2]" />
+			<property name="CardID" value="MWPROMO48" />
 		</card>
 	</cards>
 </set>
