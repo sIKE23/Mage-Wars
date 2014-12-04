@@ -1859,7 +1859,7 @@ def castSpell(card, x = 0, y = 0):
 
 			#  castingCost = 2	# when we get attaching enchantments down
 			revealCost = card.Cost.split("+")
-			debug("debug: {} and {}".format(revealCost[0], revealCost[1]))
+			debug("debug: Casting Cost:{} and Reveal Cost:{}".format(revealCost[0], revealCost[1]))
 			if "X" in card.Cost:  # e.g. Charm
 				mageRevealCost = 0
 			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
