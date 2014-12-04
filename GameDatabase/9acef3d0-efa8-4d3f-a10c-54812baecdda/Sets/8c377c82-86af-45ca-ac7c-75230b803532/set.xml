@@ -204,7 +204,7 @@
 			<property name="CardID" value="MWDOMJ01" />
 		</card>
 		<card id="80055594-f757-4d3c-ae32-13b1210cee28" name="V&apos;tar Artifact">
-			<property name="Type" value="Conjuration" />a
+			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="V&apos;Torrak, Artifact" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Quick"  />
