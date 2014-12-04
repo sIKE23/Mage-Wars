@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Domination Scenario" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.10.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Domination Scenario" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.11.0.0">
 	<markers>
 		<marker id="3274d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;tar" />
 	</markers>
@@ -76,7 +76,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [3-9 = Burn; 10+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Asthe end of the attack, as part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
+			<property name="Text" value="At the end of the attack, as part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
 			<property name="CardID" value="MWDOMA05" />
 		</card>
 		<card id="6e4c7b12-9bc4-4c19-976f-840e40999a03" name="Windstorm">
