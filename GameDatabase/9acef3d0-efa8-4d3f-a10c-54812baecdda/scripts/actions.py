@@ -860,33 +860,28 @@ def resolveUpkeep(card):
 						me.mana -= TraitValue
 						notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
 						if "Forcefield" == card.Name:
-							FFCard = [card for card in table if card.Name in ["Forcefield"] and card.controller == me]
-							for card in FFCard:
-								debug("FFCard: {}".format(card.Name))
-								TraitValue, TraitStr = getTraitValue(card, Upkeep)
-								if paidforUpkeep == 1:
-									notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
-								if card.markers[FFToken] == 0:
-									notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-									card.markers[FFToken] = 1
-								elif card.markers[FFToken] == 1:
-									notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-									card.markers[FFToken] = 2
-								elif card.markers[FFToken] == 2:
-									notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-									card.markers[FFToken] = 3
-							notify("Finished adding Forcefield Tokens for {}.".format(me))
-						else:
-							return 1
+							notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
+							if card.markers[FFToken] == 0:
+								notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+								card.markers[FFToken] = 1
+							elif card.markers[FFToken] == 1:
+								notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+								card.markers[FFToken] = 2
+							elif card.markers[FFToken] == 2:
+								notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+								card.markers[FFToken] = 3
+						notify("Finished adding Forcefield Tokens for {}.".format(me))
 					else:
-						notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-						card.moveTo(me.piles['Discard'])
-						return 0
+						return 1
 				else:
-					notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+					notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
 					card.moveTo(me.piles['Discard'])
 					return 0
-		
+			else:
+				notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+				card.moveTo(me.piles['Discard'])
+				return 0
+
 def mageStatus():
 	global gameEndTime
 	mute()
