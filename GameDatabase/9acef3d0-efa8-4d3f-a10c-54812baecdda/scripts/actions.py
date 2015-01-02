@@ -616,15 +616,8 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
-#				remoteCall(p, "resolveFFTokens", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
-
-def resetDiscounts():
-	#reset discounts used
-	for tup in discountsUsed:
-		discountsUsed.remove(tup)
-		discountsUsed.append((tup[0],tup[1],0))
 
 def advanceTurn():
 	mute()
