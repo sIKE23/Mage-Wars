@@ -1774,7 +1774,9 @@ def remoteSwitchPhase(card, phase, phrase):
 # Table card actions
 #---------------------------------------------------------------------------
 
-def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of discount card
+def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of discount card
+	global discountsUsed
+	
 	#build test list from spell
 	testlist = cspell.Type.split(",")
 	testlist += cspell.Subtype.split(",")
@@ -1782,6 +1784,12 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 	for i in range(len(testlist)):
 		testlist[i] = testlist[i].strip().strip("]").strip("[")
 	debug("casting discount testlist: {}".format(testlist))
+	
+	#discount already used?
+	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
+	if len(tuplist) > 0:
+		if tuplist[0][2] >= tuplist[0][1]:
+			return -1
 
 	discount = 0
 	found = False
@@ -1816,19 +1824,26 @@ def castingDiscount(cspell,cdiscount): #test if spell satisfies requirements of 
 
 	if not found:
 		return 0
-	else:
-		tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
-		if len(tuplist) > 0:
-			if tuplist[0][2] < tuplist[0][1]:
-				discountsUsed.remove(tuplist[0])
-				discountsUsed.append((tuplist[0][0],tuplist[0][1],tuplist[0][2]+1))
-			else:
-				return -1
-		else:
-			newtup = (cdiscount.Name,int(cells[2].strip("x")),1)
-			discountsUsed.append(newtup)
-	return discount
+	else:		
+		return discount
 
+def doDiscount(cdiscount):
+	global discountsUsed
+	lines = cdiscount.Text.split("[Casting Discount]")
+	cells = lines[1].split(']')
+	for i in range(len(cells)):
+		cells[i] = cells[i].strip().strip("]").strip("[")
+		
+	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
+	if len(tuplist) > 0:
+		if tuplist[0][2] < tuplist[0][1]:
+			discountsUsed.remove(tuplist[0])
+			discountsUsed.append((tuplist[0][0],tuplist[0][1],tuplist[0][2]+1))
+		else:
+			return -1
+	else:
+		newtup = (cdiscount.Name,int(cells[2].strip("x")),1)
+		discountsUsed.append(newtup)
 
 def castSpell(card, x = 0, y = 0):
 	global infostr
@@ -1880,14 +1895,16 @@ def castSpell(card, x = 0, y = 0):
 
 		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
 		discount = 0
+		foundDiscounts = [ ]
 		for c in table:
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
-				dc = castingDiscount(card, c)
+				dc = findDiscount(card, c)
 				if dc > 0:
 					discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
 					infostr = notifyStr + discountStr
 					notifyStr = notifyStr + discountStr
 					discount += dc
+					foundDiscounts.append(c)
 				elif dc < 0:
 					discountStr = "\n{} already reached max uses this round.".format(c.name)
 					infostr = notifyStr + discountStr
@@ -1897,17 +1914,22 @@ def castSpell(card, x = 0, y = 0):
 
 		# Do we have enough mana to pay for the spell?
 		if manacost == None:
+
+			# player closed the window and didn't cast the spell
 			return
 		if me.Mana < manacost:
 			if not debugMode:
 				notify("{} has insufficient mana in pool".format(me))
+				# player is unable to pay for the spell
 				return
 			else:
 				notify("{} has insufficient mana in pool".format(me))
 				flipcard(card, x, y)
 				return
 
-		# Pay casting/reveal costs, notify in chat window and flip the card face up
+		# Pay casting/reveal costs, register discounts, notify in chat window and flip the card face up
+		for dc in foundDiscounts:
+			doDiscount(dc)
 		me.Mana -= manacost
 		if not card.isFaceUp:
 			flipcard(card, x, y)
