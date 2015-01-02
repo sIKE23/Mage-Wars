@@ -830,57 +830,59 @@ def resolveUpkeep(card):
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
+	for c in me.piles['Discard']:
+		 if c == card:
+		 	return
 	if "Mordok's Obelisk" == card.Name:
 		for c in table:
 			if c.Type == "Creature" and c.isFaceUp and c.controller == me:
 				if me.mana < 1:
 					c.moveTo(me.piles['Discard'])
 					notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
-					return 0
+					return
 				else:
 					choiceList = ['Yes', 'No']
 					colorsList = ['#0000FF', '#FF0000']
 					choice = askChoice("Did you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
 					if choice == 1:
 						me.mana -= 1
-						notify("{} pays the Upkeep cost for {} from {} effect.".format(me, c.Name, card.Name))
+						notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
 					else:
 						c.moveTo(me.piles['Discard'])
 						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
-						return 0
+						return
 	else:
 	 	if card.controller == me and "Upkeep" in card.Traits:
-	 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
-	 		if TraitValue >= 1:
-	 			choiceList = ['Yes', 'No']
-				colorsList = ['#0000FF', '#FF0000']
-				choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
-				if choice == 1:
-					if me.Mana >= TraitValue:
-						me.mana -= TraitValue
-						notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
-						if "Forcefield" == card.Name:
-							notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
-							if card.markers[FFToken] == 0:
-								notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-								card.markers[FFToken] = 1
-							elif card.markers[FFToken] == 1:
-								notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-								card.markers[FFToken] = 2
-							elif card.markers[FFToken] == 2:
-								notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-								card.markers[FFToken] = 3
-						notify("Finished adding Forcefield Tokens for {}.".format(me))
+		 	if me.mana < 1:
+		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+		 		card.moveTo(me.piles['Discard'])
+		 		return
+		 	else:
+		 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
+		 		if TraitValue >= 1:
+		 			choiceList = ['Yes', 'No']
+					colorsList = ['#0000FF', '#FF0000']
+					choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
+					if choice == 1:
+						if me.Mana >= TraitValue:
+							me.mana -= TraitValue
+							notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+							if "Forcefield" == card.Name:
+								notify("Resolving Forcefield Tokens for {}...".format(me))
+								if card.markers[FFToken] == 0:
+									notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+									card.markers[FFToken] = 1
+								elif card.markers[FFToken] == 1:
+									notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+									card.markers[FFToken] = 2
+								elif card.markers[FFToken] == 2:
+									notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+									card.markers[FFToken] = 3
+								notify("Finished adding Forcefield Tokens for {}.".format(me))
 					else:
-						return 1
-				else:
-					notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-					card.moveTo(me.piles['Discard'])
-					return 0
-			else:
-				notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-				card.moveTo(me.piles['Discard'])
-				return 0
+						notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+						card.moveTo(me.piles['Discard'])
+						return
 
 def mageStatus():
 	global gameEndTime
@@ -1760,7 +1762,7 @@ def remoteSwitchPhase(card, phase, phrase):
 
 def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of discount card
 	global discountsUsed
-	
+
 	#build test list from spell
 	testlist = cspell.Type.split(",")
 	testlist += cspell.Subtype.split(",")
@@ -1768,7 +1770,7 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 	for i in range(len(testlist)):
 		testlist[i] = testlist[i].strip().strip("]").strip("[")
 	debug("casting discount testlist: {}".format(testlist))
-	
+
 	#discount already used?
 	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
 	if len(tuplist) > 0:
@@ -1808,7 +1810,7 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 
 	if not found:
 		return 0
-	else:		
+	else:
 		return discount
 
 def doDiscount(cdiscount):
@@ -1817,7 +1819,7 @@ def doDiscount(cdiscount):
 	cells = lines[1].split(']')
 	for i in range(len(cells)):
 		cells[i] = cells[i].strip().strip("]").strip("[")
-		
+
 	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
 	if len(tuplist) > 0:
 		if tuplist[0][2] < tuplist[0][1]:
@@ -1938,7 +1940,11 @@ def getTraitValue(card, TraitName):
 			if TraitName in traits:
 				strTraits = ''.join(traits)
 	STraitCost = strTraits.split("+")
-	TraitCost = int(STraitCost[1])
+	if STraitCost[1] == "X":
+		infostr = "The spell {} has an Upkeep value of 'X' what is its value?".format(card.Name)
+		TraitCost = askInteger(infostr, 3)
+	else:
+		TraitCost = int(STraitCost[1])
 	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
 	return (TraitCost, TraitStr)
 
