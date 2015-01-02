@@ -234,7 +234,7 @@ namespace Octgn.MageWarsValidator
                                     int x = 0;
                                     foreach (var s in Splitme(school, "+"))
                                     {
-                                        cost += Convert.ToInt32(lev[x]);
+                                        cost += Convert.ToInt32(lev[x]) * training[s];
                                         levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
                                         x++;
                                     }
@@ -256,19 +256,18 @@ namespace Octgn.MageWarsValidator
                                             mincost = training[s];
                                         }
                                     }
-                                    cost += Convert.ToInt32(lev);
+                                    cost += Convert.ToInt32(lev) * training[minschool];
                                     levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
                                 }
                                 else //Only one school in spell
                                 {
                                     if (training.ContainsKey(school))
                                     {
-                                        cost += Convert.ToInt32(level);
+                                        cost += Convert.ToInt32(level) * training[school];
                                         levels[school] += Convert.ToInt32(level) * card.Quantity;
                                     }
                                 }
                             }
-                            reporttxt += string.Format("{0} - {1} - {2}\n", totalLevel.ToString(), cost.ToString(), (cost * card.Quantity).ToString());
 
                             //Paladin is trained in level 3 holy, level 2 war, and all holy creatures
                             //If the current card is in the paladin's trainings, it has already been correctly added (assuming paladin's trainings contains Holy=1 and War=1)
@@ -279,12 +278,20 @@ namespace Octgn.MageWarsValidator
                                 if (school.Contains("Holy"))
                                 {
                                     int holyLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Holy")]);
-                                    if (holyLevel > 3) spellbook += holyLevel * card.Quantity;
+                                    if (holyLevel > 3)
+                                    {
+                                        spellbook += holyLevel * card.Quantity;
+                                        cost += holyLevel;
+                                    }
                                 }
                                 if (school.Contains("War"))
                                 {
                                     int warLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("War")]);
-                                    if (warLevel > 2) spellbook += warLevel * card.Quantity;
+                                    if (warLevel > 2)
+                                    {
+                                        spellbook += warLevel * card.Quantity;
+                                        cost += warLevel;
+                                    }
                                 }
                             }
 
@@ -295,6 +302,7 @@ namespace Octgn.MageWarsValidator
                             {
                                 //subtract 1 per level per count as this card has been added x2 per non-trained school already
                                 spellbook -= totalLevel * card.Quantity;
+                                cost -= totalLevel;
                             }
 
                             //Forcemaster rule: Pay 3x for non-mind creatures
@@ -307,6 +315,7 @@ namespace Octgn.MageWarsValidator
                                         foreach (var lev in Splitme(level, "+"))
                                         {
                                             spellbook += Convert.ToInt32(lev) * card.Quantity; // we just add 1 point per spell level as 2 points already have been added
+                                            cost += Convert.ToInt32(lev);
                                         }
 
                                     }
@@ -314,6 +323,7 @@ namespace Octgn.MageWarsValidator
                                     {
                                         var lev = Splitme(level, "/");
                                         spellbook += Convert.ToInt32(lev[0]) * card.Quantity;
+                                        cost += Convert.ToInt32(lev[0]);
                                     }
                                 }
                             }
@@ -323,7 +333,11 @@ namespace Octgn.MageWarsValidator
                             {
                                 string delimin = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
                                 var waterLevel = Convert.ToInt32(Splitme(level, delimin)[Splitme(school, delimin).ToList().IndexOf("Water")]);  //whee
-                                if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
+                                if (waterLevel > 1)
+                                {
+                                    spellbook += waterLevel * card.Quantity;
+                                    cost += waterLevel;
+                                }
                             }
 
                             //check for multiples of Epic spells
@@ -395,6 +409,7 @@ namespace Octgn.MageWarsValidator
                             }
 
                             cardcount += card.Quantity;
+                            reporttxt += string.Format("{0} - {1} - {2}\n", totalLevel.ToString(), cost.ToString(), (cost * card.Quantity).ToString());
 
                         }   //card has school and level 
                     }   //foreach card
