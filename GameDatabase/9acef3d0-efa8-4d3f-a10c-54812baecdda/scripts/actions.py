@@ -1772,10 +1772,11 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 	debug("casting discount testlist: {}".format(testlist))
 
 	#discount already used?
+	discountUsed = 0
 	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
 	if len(tuplist) > 0:
 		if tuplist[0][2] >= tuplist[0][1]:
-			return -1
+			discountUsed += 1
 
 	discount = 0
 	found = False
@@ -1811,7 +1812,11 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 	if not found:
 		return 0
 	else:
-		return discount
+		if discountUsed == 0:
+			return discount
+		else:
+			return -1
+		
 
 def doDiscount(cdiscount):
 	global discountsUsed
@@ -1885,6 +1890,7 @@ def castSpell(card, x = 0, y = 0):
 		for c in table:
 			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
 				dc = findDiscount(card, c)
+				debug("Discount Count Returned from test: {} from card: {}".format(dc, c.Name))
 				if dc > 0:
 					discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
 					infostr = notifyStr + discountStr
