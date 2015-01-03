@@ -604,19 +604,17 @@ def nextPhase(group, x=-360, y=-150):
 					if c.controller == me:
 						resetMarkers(c)
 						resolveChanneling(c)
-						resolveUpkeep(c)
 					else:
 						remoteCall(c.controller, "resetMarkers", [c])
 						remoteCall(c.controller, "resolveChanneling", [c])
-						remoteCall(c.controller, "resolveUpkeep", [c])
-					#resolve other automated items
+			#resolve other automated items
 			for p in players:
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
-#				remoteCall(p, "resolveFFTokens", [])
+				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -780,6 +778,10 @@ def resolveLoadTokens():
 
 def resolveChanneling(c):
 	mute()
+	for c in me.piles['Discard']:
+		if c == card:
+			return
+			
 	if c.Stats != None and c.Type != "Mage":
 		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 			channel = getStat(c.Stats,"Channeling")
@@ -825,7 +827,7 @@ def resolveChanneling(c):
 					else:
 						whisper("Harmonize found but no Mana added")
 
-def resolveUpkeep(card):
+def resolveUpkeep():
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
@@ -833,56 +835,58 @@ def resolveUpkeep(card):
 	for c in me.piles['Discard']:
 		 if c == card:
 		 	return
-	if "Mordok's Obelisk" == card.Name:
-		for c in table:
-			if c.Type == "Creature" and c.isFaceUp and c.controller == me:
-				if me.mana < 1:
-					c.moveTo(me.piles['Discard'])
-					notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
-					return
-				else:
-					choiceList = ['Yes', 'No']
-					colorsList = ['#0000FF', '#FF0000']
-					choice = askChoice("Did you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
-					if choice == 1:
-						me.mana -= 1
-						notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
-					else:
+	
+	for card in table:
+		if "Mordok's Obelisk" == card.Name:
+			for c in table:
+				if c.Type == "Creature" and c.isFaceUp and c.controller == me:
+					if me.mana < 1:
 						c.moveTo(me.piles['Discard'])
-						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
+						notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
 						return
-	else:
-	 	if card.controller == me and "Upkeep" in card.Traits:
-		 	if me.mana < 1:
-		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-		 		card.moveTo(me.piles['Discard'])
-		 		return
-		 	else:
-		 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
-		 		if TraitValue >= 1:
-		 			choiceList = ['Yes', 'No']
-					colorsList = ['#0000FF', '#FF0000']
-					choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
-					if choice == 1:
-						if me.Mana >= TraitValue:
-							me.mana -= TraitValue
-							notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
-							if "Forcefield" == card.Name:
-								notify("Resolving Forcefield Tokens for {}...".format(me))
-								if card.markers[FFToken] == 0:
-									notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-									card.markers[FFToken] = 1
-								elif card.markers[FFToken] == 1:
-									notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-									card.markers[FFToken] = 2
-								elif card.markers[FFToken] == 2:
-									notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-									card.markers[FFToken] = 3
-								notify("Finished adding Forcefield Tokens for {}.".format(me))
 					else:
-						notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-						card.moveTo(me.piles['Discard'])
-						return
+						choiceList = ['Yes', 'No']
+						colorsList = ['#0000FF', '#FF0000']
+						choice = askChoice("Did you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
+						if choice == 1:
+							me.mana -= 1
+							notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
+						else:
+							c.moveTo(me.piles['Discard'])
+							notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
+							return
+		else:
+		 	if card.controller == me and "Upkeep" in card.Traits:
+			 	if me.mana < 1:
+			 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+			 		card.moveTo(me.piles['Discard'])
+			 		return
+			 	else:
+			 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
+			 		if TraitValue >= 1:
+			 			choiceList = ['Yes', 'No']
+						colorsList = ['#0000FF', '#FF0000']
+						choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
+						if choice == 1:
+							if me.Mana >= TraitValue:
+								me.mana -= TraitValue
+								notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+								if "Forcefield" == card.Name:
+									notify("Resolving Forcefield Tokens for {}...".format(me))
+									if card.markers[FFToken] == 0:
+										notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+										card.markers[FFToken] = 1
+									elif card.markers[FFToken] == 1:
+										notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+										card.markers[FFToken] = 2
+									elif card.markers[FFToken] == 2:
+										notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+										card.markers[FFToken] = 3
+									notify("Finished adding Forcefield Tokens for {}.".format(me))
+						else:
+							notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+							card.moveTo(me.piles['Discard'])
+							return
 
 def mageStatus():
 	global gameEndTime
