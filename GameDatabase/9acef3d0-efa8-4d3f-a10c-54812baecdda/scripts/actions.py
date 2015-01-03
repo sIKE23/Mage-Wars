@@ -170,7 +170,6 @@ def onLoadDeck(player, groups):
 			deckLoaded = True
 			playerSetup()
 			if debugMode:
-				mycolor = PlayerColor[0]
 				# set Dice Rolling Area, Initative, and Phase Marker Card location
 				setDRAIP(1)
 				CreateIniToken()
@@ -383,19 +382,21 @@ def playerSetup():
 	# Players select their color
 	global mycolor
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-	while (True):
-		choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
-		colorsChosen = getGlobalVariable("ColorsChosen")
-		if colorsChosen == "":	#we're the first to pick
-			setGlobalVariable("ColorsChosen", str(choice))
-			mycolor = PlayerColor[choice]
-			break
-		elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
-			setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-			mycolor = PlayerColor[choice]
-			break
-		else:	#someone else took our choice
-			askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+        if debugMode: mycolor = PlayerColor[0]
+        else:
+                while (True):
+                        choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
+                        colorsChosen = getGlobalVariable("ColorsChosen")
+                        if colorsChosen == "":	#we're the first to pick
+                                setGlobalVariable("ColorsChosen", str(choice))
+                                mycolor = PlayerColor[choice]
+                                break
+                        elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
+                                setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
+                                mycolor = PlayerColor[choice]
+                                break
+                        else:	#someone else took our choice
+                                askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
 	#set initial health and channeling values
 	for c in me.hand:
@@ -533,18 +534,14 @@ def CreateIniToken():
 		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
 		card.switchTo("Planning") #skips upkeep for first turn
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", initX, initY ) #initiative token
-		if mycolor == PlayerColor[0]:
-			init.switchTo("")
-		elif mycolor == PlayerColor[1]:
-			init.switchTo("B")
-		elif mycolor == PlayerColor[2]:
-			init.switchTo("C")
-		elif mycolor == PlayerColor[3]:
-			init.switchTo("D")
-		elif mycolor == PlayerColor[4]:
-			init.switchTo("E")
-		elif mycolor == PlayerColor[5]:
-			init.switchTo("F")
+		init.switchTo({
+                        PlayerColor[0]:"",
+                        PlayerColor[1]:"B",
+                        PlayerColor[2]:"C",
+                        PlayerColor[3]:"D",
+                        PlayerColor[4]:"E",
+                        PlayerColor[5]:"F"
+                        }[mycolor])
 		setGlobalVariable("IniAllDone", "x")
 		setGlobalVariable("RoundNumber", "1")
 		setGlobalVariable("PlayerWithIni", str(playerNum))
