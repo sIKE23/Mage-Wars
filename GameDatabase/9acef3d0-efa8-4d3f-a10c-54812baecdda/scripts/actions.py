@@ -721,6 +721,8 @@ def resetMarkers(c):
 	if c.markers[Visible] == 1:
 		c.markers[Visible] = 0
 		c.markers[Invisible] = 1
+	if "Orb Guardian" in c.name:
+		c.markers[Guard] = 1
 
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
