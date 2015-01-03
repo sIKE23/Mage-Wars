@@ -1362,7 +1362,7 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
-	if "Vine" in card.Name and card.controller == me:
+	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
 		else:
