@@ -1054,65 +1054,34 @@ def askRevealEnchant(group, x=0, y=0):
 
 ##########################     Add Tokens     ##############################
 
-def addArmor(card, x = 0, y = 0):
-	addToken(card, Armor)
+tokenList=['Armor',
+           'Bleed',
+           'Burn',
+           'Cripple',
+           'Corrode',
+           'Disable',
+           'Daze',
+           'Growth',
+           'Mana',
+           'Melee',
+           'Rot',
+           'Slam',
+           'Stun',
+           'Stuck',
+           'Taint',
+           'Vet',
+           'Weak',
+           'Zombie'
+           ]
 
-def addBleed(card, x = 0, y = 0):
-	addToken(card, Bleed)
-
-def addBurn(card, x = 0, y = 0):
-	addToken(card, Burn)
-
-def addCripple(card, x = 0, y = 0):
-	addToken(card, Cripple)
-
-def addCorrode(card, x = 0, y = 0):
-	addToken(card, Corrode)
+for foo in tokenList:
+        exec('def add'+foo+'(card, x = 0, y = 0):\n\taddToken(card,'+foo+')')
 
 def addDamage(card, x = 0, y = 0):
 	if "Mage" in card.Type and card.controller == me:
 		me.Damage += 1
 	else:
 		addToken(card, Damage)
-
-def addDisable(card, x = 0, y = 0):
-	addToken(card, Disable)
-
-def addDaze(card, x=0, y=0):
-	addToken(card, Daze)
-
-def addGrowth(card, x = 0, y = 0):
-	addToken(card, Growth)
-
-def addMana(card, x = 0, y = 0):
-	addToken(card, Mana)
-
-def addMelee(card, x = 0, y = 0):
-	addToken(card, Melee)
-
-def addRot(card, x = 0, y = 0):
-	addToken(card, Rot)
-
-def addSlam(card, x=0, y=0):
-	addToken(card, Slam)
-
-def addStun(card, x=0, y=0):
-	addToken(card, Stun)
-
-def addStuck(card, x=0, y=0):
-	addToken(card, Stuck)
-
-def addTaint(card, x=0, y=0):
-	addToken(card, Taint)
-
-def addVet(card, x=0, y=0):
-	addToken(card, Veteran)
-
-def addWeak(card, x=0, y=0):
-	addToken(card, Weak)
-
-def addZombie(card, x=0, y=0):
-	addToken(card, Zombie)
 
 def addOther(card, x = 0, y = 0):
 	marker, qty = askMarker()
