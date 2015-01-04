@@ -16,6 +16,7 @@
 	<scripts>
 		<script src="scripts/actions.py" />
 		<script src="scripts/changelog.py" />
+		<script src="scripts/probabilities.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />

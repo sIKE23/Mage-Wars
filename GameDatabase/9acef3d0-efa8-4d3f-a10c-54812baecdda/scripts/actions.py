@@ -313,11 +313,19 @@ def rollDice(group, x=0, y=0):
 			c.delete()
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
-	choices,colors = [str(i) for i in range(8)],['#de2827' for i in range(8)]
+#probability module here:
+	
+	choices,colors = [str(i+1) for i in range(7)],['#de2827' for i in range(7)]
+	target = [cards for cards in table if cards.targetedBy]
+	if len(target) == 1 and target[0].Type in ['Creature','Conjuration']:
+                armor,life = getStat(target[0].Stats,'Armor'),getRemainingLife(target[0])
+                if True:#life:
+                        debug(str(life))
+                        choices,colors = ['{} \n Expected damage : {} | Kill chance : {}%)'.format(str(i+1),round(expectedDamage(i+1,armor),1),round(chanceToKill(i+1,armor,life)*100,1)) for i in range(7)],['#de2827' for i in range(7)]
 	choices.append("Other Amount")
 	colors.append('#c0c0c0')
 	count = askChoice("Roll how many red dice?", choices, colors)-1
-	if count == 8:
+	if count == 7:
                 count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
 
@@ -366,7 +374,7 @@ def rollDice(group, x=0, y=0):
 
 	if hasRolledIni:
 		playSoundFX('Dice')
-		time.sleep(2)
+		time.sleep(1)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
 	else:
 		hasRolledIni = True
@@ -1668,7 +1676,7 @@ def initializeGame():
 #---------------------------------------------------------------------------
 
 def getStat(stats, stat): #searches stats string for stat and extract value
-	statlist = stats.split(",")
+	statlist = stats.split(", ")
 	for statitem in statlist:
 		statval = statitem.split("=")
 		if statval[0] == stat:
@@ -1677,6 +1685,11 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 			except:
 				return 0
 	return 0
+
+def getRemainingLife(card): 
+        life = getStat(card.Stats,'Life')
+        if life: return max(life - card.markers[Damage],0)
+        
 
 def switchPhase(card, phase, phrase):
 	global mycolor
