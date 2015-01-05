@@ -110,7 +110,7 @@ mycolor = "#800080" # default
 boardSet = "GameBoard1.png"
 debugMode = False
 myIniRoll = 0
-hasRolledIni = True
+hasRolledIni = False
 deckLoaded = False
 iniTokenCreated = False
 currentPhase = ""
@@ -308,6 +308,13 @@ def rollDice(group, x=0, y=0):
 	global dieCard2X
 	global dieCard2Y
 
+	if not deckLoaded == True:
+		notify("Please Load a Spellbook first.")
+		choiceList = ['OK']
+		colorsList = ['#FF0000']
+		choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
+		return
+		
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
