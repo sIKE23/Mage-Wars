@@ -320,12 +320,8 @@ def rollDice(group, x=0, y=0):
 			c.delete()
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
-	choices,colors = [str(i) for i in range(8)],['#de2827' for i in range(8)]
-	choices.append("Other Amount")
-	colors.append('#c0c0c0')
-	count = askChoice("Roll how many red dice?", choices, colors)-1
-	if count == 8:
-                count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
+
+	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
 
 	diceFrom = ""
@@ -1555,14 +1551,24 @@ def playCardFaceDown(card, x=0, y=0):
 	global mycolor
 	offset=0
 	occupied = True
-	x,y = {
-                1 : (-595,-240),
-                2 : (460,120),
-                3 : (-595,120),
-                4 : (460,-240),
-                5 : (-595,-40),
-                6 : (460,-40)
-                }[playerNum]
+	if playerNum == 1:
+		x = -595
+		y = -240
+	elif playerNum == 2:
+		x = 460
+		y = 120
+	elif playerNum == 3:
+		x = -595
+		y = 120
+	elif playerNum == 4:
+		x = 460
+		y = -240
+	elif playerNum == 5:
+		x = -595
+		y = -40
+	elif playerNum == 6:
+		x = 460
+		y = -40
 	while occupied:
 		occupied = False
 		for c in table:
