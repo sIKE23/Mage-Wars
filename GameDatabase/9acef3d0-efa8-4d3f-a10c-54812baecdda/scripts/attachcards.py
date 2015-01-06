@@ -113,6 +113,32 @@ def remoteAlign(alignData,alignedPlayers):
                 card.setIndex(c.getIndex)
                 break
 
+def detachAll(card):
+    """Removes all attachments from <card> and places them in front of their owners"""
+    mute()
+    attachments = getAttachments(card)
+    for c in attachments:
+        if c.controller == me:
+            detach(c)
+            returnCardToHome(c)
+        else:
+            remoteCall(c.controller,'detach',[c])
+            remoteCall(c.controller,'returnCardToHome',[c])
+        rnd(0,0)
+
+def returnCardToHome(card):
+    """This function returns a card to above the home position of its controller."""
+    mute()
+    global playerNum
+    x,y = {
+            1 : (-595, -240),
+            2 : (460, 120),
+            3 : (-595, 120),
+            4 : (460, -240),
+            5 : (-595, -40),
+            6 : (460, -40)}[playerNum]
+    card.moveToTable(x,y-card.height())
+    
 def isAttached(card):
     """Determines whether <card> is attached to anything."""
     mute()
@@ -154,13 +180,6 @@ def setGlobalDictEntry(dictionary,key,value):
     gDict = eval(getGlobalVariable(dictionary))
     gDict[key] = value
     setGlobalVariable(dictionary,str(gDict))
-
-def detachAll(card):
-    """Removes all attachments from <card>"""
-    mute()
-    attachments = getAttachments(card)
-    for c in attachments:
-        remoteCall(c.controller,'detach',[c])
 
 def canAttach(card,target):
     """Determines whether <card> may be attached to <target>"""

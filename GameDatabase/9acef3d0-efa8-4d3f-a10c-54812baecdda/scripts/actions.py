@@ -152,7 +152,7 @@ def onGameStart():
 
 # bring up window to point to documentation
 	initializeGame()
-	
+
 
 def onLoadDeck(player, groups):
 	mute()
@@ -194,6 +194,30 @@ def onLoadDeck(player, groups):
 				for card in group:
 					if card.controller == me:
 						card.delete()
+
+def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScriptMove):
+	"""This event triggers whenever a card is moved. Currently, it is only used with the attachCards module
+	to simplify the process of moving and attaching cards."""
+	mute()
+	if card.controller == me and fromGroup == table: #Does not trigger when	moving cards onto the table
+		if not isScriptMove:
+			c,t	=	detach(card)
+			actionType = None
+			if t:
+				actionType = ['detaches','from']
+			if getSetting('AutoAttach',True):
+				for a in table:
+					if canAttach(card,a) and (cardX(a)-x)**2 + (cardY(a)-y)**2 < 400:
+						c,t = attach(card,a)
+						if t:
+							actionType = ['attaches','to']
+							break
+			if actionType:
+				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+		if toGroup != table:
+			detachAll(card)
+		if not ((oldIndex != index and oldX==x and oldY==y) or isAttached(card) or toGroup != table): #Do not realign ifit is  only the index that is changing. Prevents recursions.
+			alignAttachments(card)
 
 def setClearVars():
 	global deckLoaded
@@ -308,7 +332,7 @@ def rollDice(group, x=0, y=0):
 	global dieCardY
 	global dieCard2X
 	global dieCard2Y
-	
+
 	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", -655, -330)
 
 	for c in table:
@@ -317,7 +341,7 @@ def rollDice(group, x=0, y=0):
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
 #probability module here:
-	
+
 	choices,colors = [str(i+1) for i in range(7)],['#de2827' for i in range(7)]
 	target = [cards for cards in table if cards.targetedBy]
 	if len(target) == 1 and target[0].Type in ['Creature','Conjuration']:
@@ -793,7 +817,7 @@ def resolveChanneling(c):
 	for c in me.piles['Discard']:
 		if c == card:
 			return
-			
+
 	if c.Stats != None and c.Type != "Mage":
 		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 			channel = getStat(c.Stats,"Channeling")
@@ -847,7 +871,7 @@ def resolveUpkeep():
 	for c in me.piles['Discard']:
 		 if c == card:
 		 	return
-	
+
 	for card in table:
 		if "Mordok's Obelisk" == card.Name:
 			for c in table:
@@ -1498,7 +1522,7 @@ def defaultAction(card, x = 0, y = 0):
 	mute()
 	if card.type == "Button":
 		rollDice(0, x, y)
-			
+
 	if card.controller == me:
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
@@ -1692,10 +1716,10 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 				return 0
 	return 0
 
-def getRemainingLife(card): 
+def getRemainingLife(card):
         life = getStat(card.Stats,'Life')
         if life: return max(life - card.markers[Damage],0)
-        
+
 
 def switchPhase(card, phase, phrase):
 	global mycolor
@@ -1799,7 +1823,7 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 			return discount
 		else:
 			return -1
-		
+
 
 def doDiscount(cdiscount):
 	global discountsUsed
