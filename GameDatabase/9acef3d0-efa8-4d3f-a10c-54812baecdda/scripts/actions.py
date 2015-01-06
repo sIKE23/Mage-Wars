@@ -297,22 +297,22 @@ def setDRAIP(location):
 		#option A
 		dieCardX = -570
 		dieCardY = -40
-		dieCard2X = -510
-		dieCard2Y = -40
-		phaseX = -510
+		dieCard2X = -510 # = dieCardX + 60
+		dieCard2Y = -40 # = dieCardY
+		phaseX = -510 # = dieCardX + 60
 		phaseY = -150
 		initX = -580
-		initY = -150
+		initY = -150 #= phaseY
 	else:
 		#option B
-		dieCardX = -58
-		dieCardY = 330
-		dieCard2X = 0
-		dieCard2Y = 330
-		phaseX = 65
-		phaseY = 330
-		initX = -125
-		initY = 330
+		dieCardX = -58 # -570 + 512
+		dieCardY = 330 # -40 + 370
+		dieCard2X = 0 # -510 + 510
+		dieCard2Y = 330 # -40 + 370
+		phaseX = 65 # -510 + 575
+		phaseY = 330 # -150 + 480
+		initX = -125 # -580 + 455
+		initY = 330 # -150 + 480
 
 ############################################################################
 ######################		Group Actions			########################
@@ -333,7 +333,7 @@ def rollDice(group, x=0, y=0):
 	global dieCard2X
 	global dieCard2Y
 
-	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", -655, -330)
+	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25))
 
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
@@ -348,13 +348,13 @@ def rollDice(group, x=0, y=0):
                 armor,life = getStat(target[0].Stats,'Armor'),getRemainingLife(target[0])
                 if True:#life:
                         debug(str(life))
-                        choices,colors = ['{} \n Expected damage : {} | Kill chance : {}%)'.format(str(i+1),round(expectedDamage(i+1,armor),1),round(chanceToKill(i+1,armor,life)*100,1)) for i in range(7)],['#de2827' for i in range(7)]
+                        choices,colors = ['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),round(expectedDamage(i+1,armor),1),round(chanceToKill(i+1,armor,life)*100,1)) for i in range(7)],['#de2827' for i in range(7)]
 	choices.append("Other Amount")
 	colors.append('#c0c0c0')
 	count = askChoice("Roll how many red dice?", choices, colors)
-	if count == 7:
+	if count == 8:
                 count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
-	if count == None: return
+	if count == 0: return
 
 	diceFrom = ""
 	if (len(diceBank) < count): #diceBank running low - fetch more
