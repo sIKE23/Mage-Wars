@@ -194,6 +194,30 @@ def onLoadDeck(player, groups):
 					if card.controller == me:
 						card.delete()
 
+def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScriptMove):
+	"""This event triggers whenever a card is moved. Currently, it is only used with the attachCards module
+	to simplify the process of moving and attaching cards."""
+	mute()
+	if card.controller == me and fromGroup == table: #Does not trigger when	moving cards onto the table
+		if not isScriptMove:
+			c,t	=	detach(card)
+			actionType = None
+			if t:
+				actionType = ['detaches','from']
+			if getSetting('AutoAttach',True):
+				for a in table:
+					if canAttach(card,a) and (cardX(a)-x)**2 + (cardY(a)-y)**2 < 400:
+						c,t = attach(card,a)
+						if t:
+							actionType = ['attaches','to']
+							break
+			if actionType:
+				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+		if toGroup != table:
+			detachAll(card)
+		if not ((oldIndex != index and oldX==x and oldY==y) or isAttached(card) or toGroup != table): #Do not realign ifit is  only the index that is changing. Prevents recursions.
+			alignAttachments(card)
+
 def setClearVars():
 	global deckLoaded
 	global iniTokenCreated
