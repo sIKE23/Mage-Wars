@@ -110,7 +110,7 @@ mycolor = "#800080" # default
 boardSet = "GameBoard1.png"
 debugMode = False
 myIniRoll = 0
-hasRolledIni = True
+hasRolledIni = False
 deckLoaded = False
 iniTokenCreated = False
 currentPhase = ""
@@ -335,11 +335,19 @@ def rollDice(group, x=0, y=0):
 
 	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25))
 
+	if not deckLoaded == True:
+		notify("Please Load a Spellbook first.")
+		choiceList = ['OK']
+		colorsList = ['#FF0000']
+		choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
+		return
+
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
+
 #probability module here:
 
 	choices,colors = [str(i+1) for i in range(7)],['#de2827' for i in range(7)]
@@ -355,7 +363,6 @@ def rollDice(group, x=0, y=0):
 	if count == 8:
                 count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == 0: return
-
 	diceFrom = ""
 	if (len(diceBank) < count): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
