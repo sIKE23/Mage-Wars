@@ -2834,6 +2834,9 @@
 					<property name="Type" value="Internal" />
 				</alternate>
 		</card>
+		<card id="d86b16a6-218a-4363-a408-599d3ef4a0b3" name="Roll the Dice">
+			<property name="Type" value="Button" />
+		</card>
 
 
 	</cards>

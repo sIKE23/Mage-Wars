@@ -152,6 +152,7 @@ def onGameStart():
 
 # bring up window to point to documentation
 	initializeGame()
+	
 
 def onLoadDeck(player, groups):
 	mute()
@@ -307,6 +308,8 @@ def rollDice(group, x=0, y=0):
 	global dieCardY
 	global dieCard2X
 	global dieCard2Y
+	
+	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", -655, -330)
 
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
@@ -324,7 +327,7 @@ def rollDice(group, x=0, y=0):
                         choices,colors = ['{} \n Expected damage : {} | Kill chance : {}%)'.format(str(i+1),round(expectedDamage(i+1,armor),1),round(chanceToKill(i+1,armor,life)*100,1)) for i in range(7)],['#de2827' for i in range(7)]
 	choices.append("Other Amount")
 	colors.append('#c0c0c0')
-	count = askChoice("Roll how many red dice?", choices, colors)-1
+	count = askChoice("Roll how many red dice?", choices, colors)
 	if count == 7:
                 count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
 	if count == None: return
@@ -1493,6 +1496,9 @@ def obliterate(card, x=0, y=0):
 
 def defaultAction(card, x = 0, y = 0):
 	mute()
+	if card.type == "Button":
+		rollDice(0, x, y)
+			
 	if card.controller == me:
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
