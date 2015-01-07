@@ -990,7 +990,7 @@ Format:
 [function name, setting name, message, default]
 """
 
-fGenToggleList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
+fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
                   ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
                   ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
                   ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
@@ -1004,12 +1004,13 @@ fGenToggleList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic reso
                   ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons",True]
                   ]
 
-for fGen in fGenToggleList:
-        exec('def toggle'+fGen[0]+'(group,x=0,y=0):\n\t'+
-                'state=getSetting("""'+fGen[1]+'""",'+str(fGen[3])+')\n\t'
-                'setSetting("""'+fGen[1]+'""", not state)\n\t'+
-                'if state:\n\t\twhisper("""'+fGen[2].format('disabled')+'""")\n\t'+
-                'else:\n\t\twhisper(""":'+fGen[2].format('enabled')+'""")')
+for fGen in fGenToggleSettingsList:
+        exec(
+'def toggle'+fGen[0]+'(group,x=0,y=0):\n\t'+
+        'state=getSetting("'+fGen[1]+'",'+str(fGen[3])+')\n\t'+
+        'setSetting("'+fGen[1]+'", not state)\n\t'+
+        'if state:\n\t\twhisper("'+fGen[2].format('disabled')+'")\n\t'+
+        'else:\n\t\twhisper(":'+fGen[2].format('enabled')+'")')
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
@@ -1072,8 +1073,8 @@ tokenList=['Armor',
            'Zombie'
            ]
 
-for foo in tokenList:
-        exec('def add'+foo+'(card, x = 0, y = 0):\n\taddToken(card,'+foo+')')
+for token in tokenList:
+        exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')
 
 def addDamage(card, x = 0, y = 0):
 	if "Mage" in card.Type and card.controller == me:
