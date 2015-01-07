@@ -16,12 +16,14 @@
 	<scripts>
 		<script src="scripts/actions.py" />
 		<script src="scripts/changelog.py" />
+		<script src="scripts/attachcards.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
 		<event name="OnGameStart" action="onGameStart" />
 		<event name="OnLoadDeck" action="onLoadDeck" />
 		<event name="OnChangeCounter" action="checkMageDeath" />
+		<event name="OnMoveCard" action="onMoveCard" />
 	</events>
 	<sounds>
     <sound name="Dice" src="Sounds/dice.mp3" />
@@ -75,6 +77,7 @@
 			<groupaction menu="Toggle Enchantment Reveal Prompt" default="False" execute="toggleEnchantRevealPrompt" />
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
 			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
+			<groupaction menu="Toggle Auto-Attaching Cards" default="False" execute="toggleAutoAttach" />
 			<groupaction menu="Enable/Disable Sounds" default="False" execute="toggleSoundFX" />
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
 		</groupactions>
@@ -157,6 +160,7 @@
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
 			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
+			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />

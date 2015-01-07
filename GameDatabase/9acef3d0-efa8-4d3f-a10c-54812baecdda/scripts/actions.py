@@ -150,6 +150,10 @@ def onGameStart():
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
 
+#create a dictionary of attachments and enable autoattachment
+	setGlobalVariable("attachDict",str({}))
+	setSetting("AutoAttach", True)
+
 # bring up window to point to documentation
 	initializeGame()
 
@@ -200,7 +204,7 @@ def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScri
 	mute()
 	if card.controller == me and fromGroup == table: #Does not trigger when	moving cards onto the table
 		if not isScriptMove:
-			c,t	=	detach(card)
+			c,t = detach(card)
 			actionType = None
 			if t:
 				actionType = ['detaches','from']
@@ -1047,7 +1051,13 @@ def toggleAutoResolveUpkeep(group, x=0, y=0):
 	else:
 		whisper("You have enabled automatically caculating Upkeep costs..")
 
-
+def toggleAutoAttach(group, x=0, y=0):
+	autoAttach = getSetting("AutoAttach", False)
+	setSetting("AutoAttach", not autoAttach)
+	if autoAttach:
+		whisper("You have disabled automatically attaching cards.")
+	else:
+		whisper("You have enabled automatically attaching cards.")
 ############################################################################
 ######################		Chat Actions			################################
 ############################################################################
