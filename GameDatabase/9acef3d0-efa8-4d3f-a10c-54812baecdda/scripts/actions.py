@@ -326,9 +326,77 @@ def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 	mageStatus()
 
-def rollDice(group, x=0, y=0):
-	mute()
-	global diceBank
+def attackTarget(card, x=0, y=0):
+        mute()
+        if card.controller == me:
+                attacker= card
+                target = [c for c in table if c.targetedBy==me]
+                if len(target) == 1:
+                        defender = target[0]
+                        choice = diceRollMenu(attacker,defender)
+                        if choice == -1:
+                                return
+                        getRollDice(choice)
+
+def diceRollMenu(attacker,defender):
+        armor,life = None, None
+        if defender and defender.Type in ['Creature','Conjuration']: #Will need to be adjust to account for incorporeal and indestructible
+                armor,life = getStat(defender.Stats,'Armor'),getRemainingLife(defender)
+        attackList = getAttackList(attacker) #need to cover case where there is no attack list, or is empty
+        choices = []
+        colors = []
+        choiceText = "Use which attack?"
+        if defender:
+                choices = [attack['Name']+' ('+str(attack['Dice'])+'):\n'+'Expected damage: {} | Kill chance: {}%'.format(
+                        round(expectedDamage(attack['Dice'],armor),1),
+                        round(chanceToKill(attack['Dice'],armor,life)*100,1))
+                        for attack in attackList]
+                choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
+        else:
+                choices = [attack['Name']+' ('+str(attack['Dice'])+')' for attack in attackList]
+        colors = ["#171e78" for i in range(len(choices))]
+        choices.extend(['Other Dice Amount','Cancel Attack'])
+        colors.extend(["#c0c0c0",'#de2827'])
+        count = askChoice(choiceText, choices, colors)
+        if count < len(attackList)+1:
+                return attackList[count-1]['Dice']
+        elif count == range(len(choices))[-2]:
+                
+                return #add generic dice menu here
+        elif count == range(len(choices))[-1]:
+                return -1#add cancel choice here
+
+def getAttackList(card):
+        rawData = card.AttackBar
+        if rawData == '': return
+        #First, split up the attacks:
+        rawAttackList = rawData.split(' \r\n') #[attack,attack] #&#xD;&#xA'
+        attackKeyList = [attack.split(':\r\n') for attack in rawAttackList] #[[name,attr],[name,attr]]
+        attackList = []
+        for attack in attackKeyList:
+                aDict = {'Name':attack[0],'Action':None,'Range':None,'Dice':0,'Type':None,'d12':[],'Traits':[]}
+                attributes = attack[1].split('] [')
+                attributes[0] = attributes[0][1:]
+                attributes[-1] = attributes[-1][:-1]
+                #Now we extract the attributes
+                effectSwitch = False
+                for attribute in attributes:
+                        if attribute in ['Quick','Full'] : aDict['Action'] = attribute
+                        elif attribute == 'Ranged' : aDict['Range'] = attribute.split(':')
+                        elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
+                        elif 'Dice' in attribute: aDict['Dice'] = int(attribute[-1])
+                        elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
+                        elif attribute =='d12' : effectSwitch = True
+                        elif effectSwitch:
+                                options = attribute.split('; ')
+                                aDict['d12'] = [o.split(' = ') for o in options]
+                                effectSwitch = False
+                        else: aDict['Traits'].append(attribute)
+                attackList.append(aDict)
+        return attackList
+
+def getRollDice(dice):
+        global diceBank
 	global diceBankD12
 	global hasRolledIni
 	global myIniRoll
@@ -336,7 +404,6 @@ def rollDice(group, x=0, y=0):
 	global dieCardY
 	global dieCard2X
 	global dieCard2Y
-
 	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25))
 
 	if not deckLoaded == True:
@@ -351,24 +418,9 @@ def rollDice(group, x=0, y=0):
 			c.delete()
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
-
-#probability module here:
-
-	choices,colors = [str(i+1) for i in range(7)],['#de2827' for i in range(7)]
-	target = [cards for cards in table if cards.targetedBy]
-	if len(target) == 1 and target[0].Type in ['Creature','Conjuration']:
-                armor,life = getStat(target[0].Stats,'Armor'),getRemainingLife(target[0])
-                if True:#life:
-                        debug(str(life))
-                        choices,colors = ['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),round(expectedDamage(i+1,armor),1),round(chanceToKill(i+1,armor,life)*100,1)) for i in range(7)],['#de2827' for i in range(7)]
-	choices.append("Other Amount")
-	colors.append('#c0c0c0')
-	count = askChoice("Roll how many red dice?", choices, colors)
-	if count == 8:
-                count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
-	if count == 0: return
 	diceFrom = ""
-	if (len(diceBank) < count): #diceBank running low - fetch more
+        count = dice
+        if (len(diceBank) < count): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 		debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
@@ -417,6 +469,24 @@ def rollDice(group, x=0, y=0):
 	else:
 		hasRolledIni = True
 		iniRoll(effect)
+
+def rollDice(group, x=0, y=0):
+#probability module here:
+
+	choices,colors = [str(i+1) for i in range(7)],['#de2827' for i in range(7)]
+	target = [cards for cards in table if cards.targetedBy==me]
+        if len(target) == 1 and target[0].Type in ['Creature','Conjuration']:
+                armor,life = getStat(target[0].Stats,'Armor'),getRemainingLife(target[0])
+                if life:
+                        debug(str(life))
+                        choices,colors = ['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),round(expectedDamage(i+1,armor),1),round(chanceToKill(i+1,armor,life)*100,1)) for i in range(7)],['#de2827' for i in range(7)]
+	choices.append("Other Amount")
+	colors.append('#c0c0c0')
+	count = askChoice("Roll how many red dice?", choices, colors)
+	if count == 8:
+                count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
+	if count == 0: return
+	getRollDice(count)
 
 def flipCoin(group, x = 0, y = 0):
     mute()
