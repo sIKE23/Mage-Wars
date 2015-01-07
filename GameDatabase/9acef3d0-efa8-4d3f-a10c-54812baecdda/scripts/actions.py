@@ -985,6 +985,32 @@ def concede(group=table, x = 0, y = 0):
 	else:
 		notify("'{}' was about to concede the game, but thought better of it...".format(me))
 
+"""
+Format:
+[function name, setting name, message, default]
+"""
+
+fGenToggleList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
+                  ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
+                  ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
+                  ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
+                  ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
+                  ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
+                  ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
+                  ["AutoRollInitiative","AutoRollIni","You have {} automatically rolling initiative.",False],
+                  ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
+                  ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
+                  ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
+                  ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons",True]
+                  ]
+
+for fGen in fGenToggleList:
+        exec('def toggle'+fGen[0]+'(group,x=0,y=0):\n\t'+
+                'state=getSetting("""'+fGen[1]+'""",'+str(fGen[3])+')\n\t'
+                'setSetting("""'+fGen[1]+'""", not state)\n\t'+
+                'if state:\n\t\twhisper("""'+fGen[2].format('disabled')+'""")\n\t'+
+                'else:\n\t\twhisper(""":'+fGen[2].format('enabled')+'""")')
+
 def toggleDebug(group, x=0, y=0):
 	global debugMode
 	debugMode = not debugMode
@@ -993,86 +1019,6 @@ def toggleDebug(group, x=0, y=0):
 	else:
 		notify("{} turns off debug".format(me))
 
-def toggleResolveBurns(group, x=0, y=0):
-	autoResolveBurns = getSetting("AutoResolveBurns", True)
-	setSetting("AutoResolveBurns", not autoResolveBurns)
-	if autoResolveBurns:
-		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
-
-
-def toggleSoundFX(group, x=0, y=0):
-	AutoConfigSoundFX = getSetting("AutoConfigSoundFX", True)
-	setSetting("AutoConfigSoundFX", not AutoConfigSoundFX)
-	if AutoConfigSoundFX:
-		notify("You have turned Sound Efects off.")
-	else:
-		notify("You have turned Sound Efects on.")
-
-def toggleResolveRot(group, x=0, y=0):
-	autoResolveRot = getSetting("AutoResolveRot", True)
-	setSetting("AutoResolveRot", not autoResolveRot)
-	if autoResolveRot:
-		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
-
-def toggleFFTokens(group, x=0, y=0):
-	AutoResolveFFTokens = getSetting("AutoResolveFFTokens", True)
-	setSetting("AutoResolveFFTokens", not AutoResolveFFTokens)
-	if AutoResolveFFTokens:
-		whisper("You have disabled automatic resolution of Forcefield tokens on your cards.")
-	else:
-		whisper("You have enabled automatic Forcefield of Rot tokens on your cards.")
-
-def toggleResolveBleed(group, x=0, y=0):
-	autoResolveBleed = getSetting("AutoResolveBleed", True)
-	setSetting("AutoResolveBleed", not autoResolveBleed)
-	if autoResolveBleed:
-		whisper("You have disabled automatic resolution of Bleed markers on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Bleed markers on your cards.")
-
-def toggleResolveDissipate(group, x=0, y=0):
-	autoResolveDissipate = getSetting("AutoResolveDissipate", True)
-	setSetting("AutoResolveDissipate", not autoResolveDissipate)
-	if autoResolveDissipate:
-		whisper("You have disabled automatic resolution of Dissipate tokens on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Dissipate tokens on your cards.")
-
-def toggleEnchantRevealPrompt(group, x=0, y=0):
-	prompt = getSetting("EnchantPromptReveal", False)
-	setSetting("EnchantPromptReveal", not prompt)
-	if prompt:
-		whisper("You have disabled the enchantment reveal prompt.")
-	else:
-		whisper("You have enabled the enchantment reveal prompt.")
-
-def toggleAutoRollInitiative(group, x=0, y=0):
-	autoRoll = getSetting("AutoRollIni", False)
-	setSetting("AutoRollIni", not autoRoll)
-	if autoRoll:
-		whisper("You have disabled automatically rolling initiative.")
-	else:
-		whisper("You have enabled automatically rolling initiative.")
-
-def toggleAutoResolveUpkeep(group, x=0, y=0):
-	prompt = getSetting("ResolveUpkeep", False)
-	setSetting("ResolveUpkeep", not ResolveUpkeep)
-	if prompt:
-		whisper("You have disabled automatically caculating Upkeep costs.")
-	else:
-		whisper("You have enabled automatically caculating Upkeep costs..")
-
-def toggleAutoAttach(group, x=0, y=0):
-	autoAttach = getSetting("AutoAttach", False)
-	setSetting("AutoAttach", not autoAttach)
-	if autoAttach:
-		whisper("You have disabled automatically attaching cards.")
-	else:
-		whisper("You have enabled automatically attaching cards.")
 ############################################################################
 ######################		Chat Actions			################################
 ############################################################################
