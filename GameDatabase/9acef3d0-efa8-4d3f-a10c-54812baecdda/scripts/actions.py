@@ -140,25 +140,29 @@ def onTableLoad():
 		debugMode = True
 		playerNum = 2
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
-	
+
 
 def onGameStart():
-# reset color picking
+	mute()
+	# reset color picking
 	setGlobalVariable("ColorsChosen", "")
 
-#	reset initiative automation
+	#	reset initiative automation
 	setGlobalVariable("SetupDone", "")
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
 
-#create a dictionary of attachments and enable autoattachment
+	# reset python Global Variables
+	for p in players:
+		remoteCall(p, "setClearVars",[])
+
+	#create a dictionary of attachments and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
 	setSetting("AutoAttach", True)
 
-# bring up window to point to documentation
+	# bring up window to point to documentation
 	initializeGame()
-
 
 def onLoadDeck(player, groups):
 	mute()
@@ -230,7 +234,6 @@ def setClearVars():
 	global iniTokenCreated
 	deckLoaded = False
 	iniTokenCreated = False
-	setGlobalVariable("GameReset", "")
 
 def SetupForIni():
 	mute()
@@ -337,7 +340,7 @@ def attackTarget(card, x=0, y=0):
                 if len(target) == 1:
                         defender = target[0]
                         dice = diceRollMenu(attacker,defender)
-                        if dice >= 0: getRollDice(dice)                        
+                        if dice >= 0: getRollDice(dice)
 
 def diceRollMenu(attacker = None,defender = None):
         armor,life = None, None
@@ -373,7 +376,7 @@ def diceRollMenu(attacker = None,defender = None):
                 if attacker: return diceRollMenu(None,defender)
                 else: return min(askInteger("Roll how many red dice?", 8),50) #max 50 dice rolled at once
         elif count == len(choices): return -1
-                
+
 
 def getAttackList(card):
         rawData = card.AttackBar
