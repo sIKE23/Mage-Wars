@@ -133,12 +133,14 @@ infostr = ""
 def onTableLoad():
 	global debugMode
 	global playerNum
-	sayVer()
+	#log in chat screen what version of the game definiton the player is using
+	notify("{} is running v.{} of the Mage Wars module.".format(me, ver))
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
 		playerNum = 2
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
+	
 
 def onGameStart():
 # reset color picking
@@ -228,6 +230,7 @@ def setClearVars():
 	global iniTokenCreated
 	deckLoaded = False
 	iniTokenCreated = False
+	setGlobalVariable("GameReset", "")
 
 def SetupForIni():
 	mute()
@@ -596,9 +599,6 @@ def setGameBoard10(group, x=0, y=0):
 	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
-
-def sayVer():
-	notify("{} is running v.{} of the Mage Wars module.".format(me, ver))
 
 def setGameBoard(bset):
 	mute()
