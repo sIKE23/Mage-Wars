@@ -335,16 +335,23 @@ def playerDone(group, x=0, y=0):
 def attackTarget(card, x=0, y=0):
         mute()
         if card.controller == me:
-                attacker= card
+                attacker = card
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
                         dice = diceRollMenu(attacker,defender)
-                        if dice >= 0: getRollDice(dice)
+                        if dice >= 0:
+                                roll = getRollDice(dice)
+                                if roll:
+                                        notify("{} attacks {} with {}".format(me,defender,attacker))
+                                        expectedDmg = expectedDamage(dice,getStat(defender.Stats,'Armor'))
+                                        norm,crit,eff = roll
+                                        actualDmg = crit + max(norm-getStat(defender.Stats,'Armor'),0)
+                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,actualDmg,defender,('an above' if actualDmg >= expectedDmg else 'a below')))
 
 def diceRollMenu(attacker = None,defender = None):
         armor,life = None, None
-        if defender and defender.Type in ['Creature','Conjuration']: #Will need to be adjust to account for incorporeal and indestructible
+        if defender and defender.Type in ['Creature','Conjuration','Mage']: #Will need to be adjust to account for incorporeal and indestructible
                 armor,life = getStat(defender.Stats,'Armor'),getRemainingLife(defender)
         choiceText,choices = "Roll how many red dice?",[str(i+1) for i in range(7)]
         #First, handle case with no attacker:
@@ -356,6 +363,9 @@ def diceRollMenu(attacker = None,defender = None):
         else:
                 attackList = getAttackList(attacker) #need to cover case where there is no attack list, or is empty
                 choiceText = "Use which attack?"
+                if attacker.type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
+                        for card in table:
+                                if (card.Type == 'Equipment' and card.controller == me): attackList.extend(getAttackList(card))
                 if defender:
                         choices = [attack['Name']+' ('+str(attack['Dice'])+'):\n'+'Expected damage: {} | Kill chance: {}%'.format(
                                 round(expectedDamage(attack['Dice'],armor),1),
@@ -478,6 +488,7 @@ def getRollDice(dice):
 		playSoundFX('Dice')
 		time.sleep(1)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
+                return (damNormal,damPiercing,effect)                 
 	else:
 		hasRolledIni = True
 		iniRoll(effect)
