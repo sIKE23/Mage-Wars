@@ -379,17 +379,17 @@ def getAttackList(card):
         rawData = card.AttackBar
         if rawData == '': return
         #First, split up the attacks:
-        rawAttackList = rawData.split(' \r\n') #[attack,attack] #&#xD;&#xA'
-        attackKeyList = [attack.split(':\r\n') for attack in rawAttackList] #[[name,attr],[name,attr]]
+        attackKeyList = [attack.split(':\r\n') for attack in rawData.split(' \r\n')]
+        isAttackSpell = (len(attackKeyList[0]) == 1)
         attackList = []
         for attack in attackKeyList:
-                aDict = {'Name':attack[0],'Action':None,'Range':None,'Dice':0,'Type':None,'d12':[],'Traits':[]}
-                attributes = attack[1].split('] [')
-                attributes[0] = attributes[0][1:]
-                attributes[-1] = attributes[-1][:-1]
+                name = (card.name if isAttackSpell else attack[0])
+                aDict = {'Name':name,'Action':None,'Range':None,'Dice':0,'Type':None,'d12':[],'Traits':[]}
+                attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 #Now we extract the attributes
                 effectSwitch = False
                 for attribute in attributes:
+                        attribute = attribute.strip('[]')
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
                         elif attribute == 'Ranged' : aDict['Range'] = attribute.split(':')
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
