@@ -261,7 +261,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Bottle of Flaming Oil:&#xD;&#xA;[Full] [Ranged:0-1] [Flame] [Dice=2] [d12] [5+ = Burn] [Defrost]&#xD;Flask of Ultimate Dissolver:[Full] [Ranged:0-1] [Acid] [Dice=3] [d12] [5+ = Corrode]&#xA;&#xD;Poison Dagger:&#xD;&#xA;[Quick] [Melee] [Poison] [Dice=2] [d12] [8+ = Rot]" />
+			<property name="AttackBar" value="Bottle of Flaming Oil:&#xD;&#xA;[Full] [Ranged:0-1] [Flame] [Dice=2] [d12] [5+ = Burn] [Defrost]&#xD;&#xA;Flask of Ultimate Dissolver:&#xD;&#xA;[Full] [Ranged:0-1] [Acid] [Dice=3] [d12] [5+ = Corrode]&#xD;&#xA;Poison Dagger:&#xD;&#xA;[Quick] [Melee] [Poison] [Dice=2] [d12] [8+ = Rot]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC06" />

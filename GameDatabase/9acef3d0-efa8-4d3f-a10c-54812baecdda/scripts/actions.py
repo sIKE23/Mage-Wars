@@ -433,7 +433,7 @@ def getAttackList(card):
         rawData = card.AttackBar
         if rawData == '': return
         #First, split up the attacks:
-        attackKeyList = [attack.split(':\r\n') for attack in rawData.split(' \r\n')]
+        attackKeyList = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
         isAttackSpell = (len(attackKeyList[0]) == 1)
         attackList = []
         for attack in attackKeyList:
