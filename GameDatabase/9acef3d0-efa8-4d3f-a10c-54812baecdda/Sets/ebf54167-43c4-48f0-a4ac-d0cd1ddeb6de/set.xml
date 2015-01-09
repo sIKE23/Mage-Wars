@@ -1354,7 +1354,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains Life +4.&#xD;&#xA;[Life +4]" />
+			<property name="Text" value="This creature gains Life +4. &#xD;&#xA;[Life +4]" />
 			<property name="CardID" value="MW1E03" />
 		</card>
 		<card id="775fd07c-63b3-48af-9a6d-061165fe5805" name="Chains of Agony">

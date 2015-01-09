@@ -332,6 +332,26 @@ def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 	mageStatus()
 
+def getAdjustedDice(attacker,attack,defender=None):
+        """Decides how many dice should be rolled for attack based on the attacker (and the defender, if any)."""
+        attackDice = attack['Dice']
+        if attack['Range'][0] == 'Melee':
+                meleePlusX = attacker.markers[Melee]
+                #First, deal with melee +X traits from enchants
+                for c in getAttachments(attacker):
+                        if c.isFaceUp: meleePlusX += {'Bear Strength' : 2,
+                                                      'Power Strike' : 2}.get(c.name,0)
+                meleePlusX += attacker.markers[Pet]
+                
+                attackDice += meleePlusX
+        if attack['Range'][0] == 'Ranged':
+                rangedPlusX = 0#attacker.markers[Ranged]
+                for c in getAttachments(attacker):
+                        if c.isFaceUp: rangedPlusX += {'Hawkeye' : 1}.get(c.name,0)
+                if attacker.name == "Johktari Beastmaster": rangedPlusX += 1
+                attackDice += rangedPlusX
+        return attackDice
+
 def getAdjustedArmor(card):
         baseDefense = getStat(card.Stats,'Armor')
         armorTokens = card.markers[Armor]
@@ -412,12 +432,12 @@ def diceRollMenu(attacker = None,defender = None):
                 if attacker.type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
                         for card in table:
                                 if (card.Type == 'Equipment' and card.controller == me): attackList.extend(getAttackList(card))
-                choices = [attack['Name']+' ('+str(attack['Dice'])+'):'+
+                choices = [attack['Name']+' ('+str(getAdjustedDice(attacker,attack,defender))+'):'+
                         '\n'+(', '.join(attack['Traits']) if attack['Traits'] else 'No Traits')+
                         '\n'+(' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else 'No Effects')+
                         ('\n'+'Expected damage: {} | Kill chance: {}%'.format(
-                        round(expectedDamage(attack['Dice'],armor),1),
-                        round(chanceToKill(attack['Dice'],armor,life)*100,1)) if defender else '')
+                        round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor),1),
+                        round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life)*100,1)) if defender else '')
                         for attack in attackList]
                 if defender: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         colors = ['#de2827' for i in range(len(choices))]
@@ -426,7 +446,7 @@ def diceRollMenu(attacker = None,defender = None):
         count = askChoice(choiceText, choices, colors)
         if count == 0: return -1,[]
         elif count < len(choices)-1:
-                if (attacker and getAttackList(attacker)): return attackList[count-1]['Dice'],attackList[count-1]['Traits']
+                if (attacker and getAttackList(attacker)): return getAdjustedDice(attacker,attackList[count-1],defender),attackList[count-1]['Traits']
                 else: return count,[]
         elif count == len(choices)-1:
                 if attacker: return diceRollMenu(None,defender)
