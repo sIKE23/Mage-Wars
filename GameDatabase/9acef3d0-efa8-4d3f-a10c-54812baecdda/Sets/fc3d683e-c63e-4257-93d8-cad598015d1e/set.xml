@@ -368,7 +368,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
-			<property name="AttackBar" value="Cursed Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Tainted]&#xD;&#xA;" />
+			<property name="AttackBar" value="Cursed Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Tainted]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Legendary" />
 			<property name="Text" value="Each Upkeep Phase, each friendly skeleton object, in or bordering Mort&apos;s zone, may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC07" />

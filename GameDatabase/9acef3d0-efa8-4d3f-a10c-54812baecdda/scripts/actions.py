@@ -359,10 +359,9 @@ def getAdjustedArmor(card):
                                                'Harshforge Plate' : 2}.get(c.name,0)
                                 equipBonus += c.markers[RuneofFortification]
         conditionBonus = -1*card.markers[Corrode]
-        abilityBonus = ((card.markers[Pet] +
-                        card.markers[Veteran] +
-                        card.markers[Treebond])
-                        if card.type != 'Mage' else 0)
+        abilityBonus = 0
+        abilityBonus += (((card.markers[Pet] + card.markers[Veteran] + card.markers[Treebond]) if card.type != 'Mage' else 0) +
+                        (3 if (card.name == 'Gargoyle Sentry' and card.markers[Guard]) else 0))
         armor = max(baseDefense +
                     armorTokens +
                     enchantBonus +
@@ -380,7 +379,7 @@ def attackTarget(card, x=0, y=0):
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
-                        dice = diceRollMenu(attacker,defender)
+                        dice,traits = diceRollMenu(attacker,defender)
                         if dice >= 0:
                                 roll = getRollDice(dice)
                                 if roll:
@@ -407,27 +406,35 @@ def diceRollMenu(attacker = None,defender = None):
                 if attacker.type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
                         for card in table:
                                 if (card.Type == 'Equipment' and card.controller == me): attackList.extend(getAttackList(card))
-                if defender:
-                        choices = [attack['Name']+' ('+str(attack['Dice'])+'):\n'+'Expected damage: {} | Kill chance: {}%'.format(
-                                round(expectedDamage(attack['Dice'],armor),1),
-                                round(chanceToKill(attack['Dice'],armor,life)*100,1))
-                                for attack in attackList]
-                        choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
-                else:
-                        choices = [attack['Name'] + ' (' + str(attack['Dice'])+')' for attack in attackList]
+                choices = [attack['Name']+' ('+str(attack['Dice'])+'):'+
+                        '\n'+(', '.join(attack['Traits']) if attack['Traits'] else 'No Traits')+
+                        '\n'+(' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else 'No Effects')+
+                        ('\n'+'Expected damage: {} | Kill chance: {}%'.format(
+                        round(expectedDamage(attack['Dice'],armor),1),
+                        round(chanceToKill(attack['Dice'],armor,life)*100,1)) if defender else '')
+                        for attack in attackList]
+                if defender: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         colors = ['#de2827' for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
         colors.extend(["#171e78","#c0c0c0"])
         count = askChoice(choiceText, choices, colors)
-        if count == 0: return -1
+        if count == 0: return -1,[]
         elif count < len(choices)-1:
-                if (attacker and getAttackList(attacker)): return attackList[count-1]['Dice']
-                else: return count
+                if (attacker and getAttackList(attacker)): return attackList[count-1]['Dice'],attackList[count-1]['Traits']
+                else: return count,[]
         elif count == len(choices)-1:
                 if attacker: return diceRollMenu(None,defender)
-                else: return min(askInteger("Roll how many red dice?", 8),50) #max 50 dice rolled at once
-        elif count == len(choices): return -1
+                else: return min(askInteger("Roll how many red dice?", 8),50),[] #max 50 dice rolled at once
+        elif count == len(choices): return -1,[]
 
+def getD12Probability(strRange,d12Bonus):
+        lowerBound, upperBound = 0,None
+        if '-' in strRange: lowerBound,upperBound = int(strRange.split('-')[0]),int(strRange.split('-')[1])
+        if '+' in strRange: lowerBound, upperBound = int(strRange.strip('+')),None
+        debug(str(lowerBound)+','+str(upperBound))
+        lowerBound,upperBound = max(lowerBound - d12Bonus,0),(max(upperBound - d12Bonus,0) if upperBound else None)
+        successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if upperBound else 12) - lowerBound + 1)
+        return min(successIncidence/float(12),float(1))
 
 def getAttackList(card):
         rawData = card.AttackBar
@@ -438,15 +445,21 @@ def getAttackList(card):
         attackList = []
         for attack in attackKeyList:
                 name = (card.name if isAttackSpell else attack[0])
-                aDict = {'Name':name,'Action':None,'Range':None,'Dice':0,'Type':None,'d12':[],'Traits':[]}
+                aDict = {'Name':name,
+                         'Action':None,
+                         'Range':None,
+                         'Dice':0,
+                         'Type':None,
+                         'd12':[],
+                         'Traits':[]
+                         }
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 #Now we extract the attributes
-                debug(card.name+' attributes = '+str(attributes))
                 effectSwitch = False
                 for attribute in attributes:
                         attribute = attribute.strip('[]')
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
-                        elif attribute == 'Ranged' : aDict['Range'] = attribute.split(':')
+                        elif 'Ranged' in attribute: aDict['Range'] = attribute.split(':')
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
                         elif 'Dice' in attribute: aDict['Dice'] = int(attribute[-1])
                         elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
