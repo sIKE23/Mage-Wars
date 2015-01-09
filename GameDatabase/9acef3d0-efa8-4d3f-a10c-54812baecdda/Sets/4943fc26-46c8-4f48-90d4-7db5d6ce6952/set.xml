@@ -134,7 +134,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=2, Life=13" />
-			<property name="AttackBar" value="Poison Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Tainted] [If target is restrained add +4 to the Effect Die &#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=0] [d12] [5+ = Stuck] [Unavoidable] [No Damage]" />
+			<property name="AttackBar" value="Poison Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Tainted] [If target is restrained add +4 to the Effect Die]&#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=0] [d12] [5+ = Stuck] [Unavoidable] [No Damage]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC09" />

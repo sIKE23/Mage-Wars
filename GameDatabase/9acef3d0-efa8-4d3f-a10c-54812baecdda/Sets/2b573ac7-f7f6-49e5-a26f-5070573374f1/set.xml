@@ -124,7 +124,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Life=3, Armor=9" />
+			<property name="Stats" value="Life=9, Armor=3" />
 			<property name="AttackBar" value="Chop:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Sweeping Attack:&#xD;&#xA;[Full] [Melee] [Dice=4] [Sweeping]" />
 			<property name="Traits" value="Lightning +2" />
 			<property name="Text" value="" />

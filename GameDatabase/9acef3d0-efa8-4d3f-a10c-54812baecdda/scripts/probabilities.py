@@ -50,7 +50,6 @@ def chanceToKill(dice,armor,life):
     else: return
     return sum([distrDict[key] for key in distrDict if computeDamage(eval(key)[0],eval(key)[1],armor) >= life])/float(6**dice)
 
-
 """
 Pre-generated damage frequency dictionaries should be stored below. Don't put anything else there; just data. This can be easily expanded
 as needed by using comboDistr() and copypasting, though I can't imagine anybody needs more than a 10 dice calculation (what would you really

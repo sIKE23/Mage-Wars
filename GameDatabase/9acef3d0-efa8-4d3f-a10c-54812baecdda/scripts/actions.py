@@ -332,20 +332,68 @@ def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 	mageStatus()
 
+def getAdjustedArmor(card):
+        baseDefense = getStat(card.Stats,'Armor')
+        armorTokens = card.markers[Armor]
+        enchantBonus = 0
+        for c in getAttachments(card):
+                if c.isFaceUp: enchantBonus += {'Rhino Hide' : 2,
+                                                'Barkskin' : 2,
+                                                'Brace Yourself' : 4,
+                                                'Rust' : -2}.get(c.name,0)
+        equipBonus = 0
+        if card.type == 'Mage':
+                for c in table:
+                        if c.type == 'Equipment' and c.isFaceUp and c.controller == card.controller:
+                                equipBonus += {'Storm Drake Hide' : 2,
+                                               'Spiked Armor' : 2,
+                                               'Chitin Armor' : 2,
+                                               'Leviathan Scale Armor' : 2,
+                                               'Bearskin' : 2,
+                                               'Demonhide Armor' : 2,
+                                               'Dragonscale Hauberk' : 2,
+                                               'Elemental Cloak' : 1,
+                                               'Leather Boots' : 1,
+                                               'Leather Gloves' : 1,
+                                               'Wind Wyvern Hide' : 2,
+                                               'Harshforge Plate' : 2}.get(c.name,0)
+                                equipBonus += c.markers[RuneofFortification]
+        conditionBonus = -1*card.markers[Corrode]
+        abilityBonus = ((card.markers[Pet] +
+                        card.markers[Veteran] +
+                        card.markers[Treebond])
+                        if card.type != 'Mage' else 0)
+        armor = max(baseDefense +
+                    armorTokens +
+                    enchantBonus +
+                    equipBonus +
+                    conditionBonus +
+                    abilityBonus,
+                    0)
+        debug(card.name+'\'s armor ='+str(armor))
+        return armor
+
 def attackTarget(card, x=0, y=0):
         mute()
         if card.controller == me:
-                attacker= card
+                attacker = card
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
                         dice = diceRollMenu(attacker,defender)
-                        if dice >= 0: getRollDice(dice)
+                        if dice >= 0:
+                                roll = getRollDice(dice)
+                                if roll:
+                                        notify("{} attacks {} with {}".format(me,defender,attacker))
+                                        expectedDmg = expectedDamage(dice,getStat(defender.Stats,'Armor'))
+                                        norm,crit,eff = roll
+                                        actualDmg = crit + max(norm-getAdjustedArmor(defender),0)
+                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,actualDmg,defender,('an above' if actualDmg >= expectedDmg else 'a below')))
 
 def diceRollMenu(attacker = None,defender = None):
         armor,life = None, None
-        if defender and defender.Type in ['Creature','Conjuration']: #Will need to be adjust to account for incorporeal and indestructible
-                armor,life = getStat(defender.Stats,'Armor'),getRemainingLife(defender)
+        if defender and defender.Type in ['Creature','Conjuration','Mage']: #Will need to be adjust to account for incorporeal and indestructible
+                armor,life = getAdjustedArmor(defender),getRemainingLife(defender)
         choiceText,choices = "Roll how many red dice?",[str(i+1) for i in range(7)]
         #First, handle case with no attacker:
         if not (attacker and getAttackList(attacker)):
@@ -356,6 +404,9 @@ def diceRollMenu(attacker = None,defender = None):
         else:
                 attackList = getAttackList(attacker) #need to cover case where there is no attack list, or is empty
                 choiceText = "Use which attack?"
+                if attacker.type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
+                        for card in table:
+                                if (card.Type == 'Equipment' and card.controller == me): attackList.extend(getAttackList(card))
                 if defender:
                         choices = [attack['Name']+' ('+str(attack['Dice'])+'):\n'+'Expected damage: {} | Kill chance: {}%'.format(
                                 round(expectedDamage(attack['Dice'],armor),1),
@@ -363,7 +414,7 @@ def diceRollMenu(attacker = None,defender = None):
                                 for attack in attackList]
                         choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
                 else:
-                        choices = [attack['Name']+' ('+str(attack['Dice'])+')' for attack in attackList]
+                        choices = [attack['Name'] + ' (' + str(attack['Dice'])+')' for attack in attackList]
         colors = ['#de2827' for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
         colors.extend(["#171e78","#c0c0c0"])
@@ -382,7 +433,7 @@ def getAttackList(card):
         rawData = card.AttackBar
         if rawData == '': return
         #First, split up the attacks:
-        attackKeyList = [attack.split(':\r\n') for attack in rawData.split(' \r\n')]
+        attackKeyList = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
         isAttackSpell = (len(attackKeyList[0]) == 1)
         attackList = []
         for attack in attackKeyList:
@@ -390,6 +441,7 @@ def getAttackList(card):
                 aDict = {'Name':name,'Action':None,'Range':None,'Dice':0,'Type':None,'d12':[],'Traits':[]}
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 #Now we extract the attributes
+                debug(card.name+' attributes = '+str(attributes))
                 effectSwitch = False
                 for attribute in attributes:
                         attribute = attribute.strip('[]')
@@ -478,6 +530,7 @@ def getRollDice(dice):
 		playSoundFX('Dice')
 		time.sleep(1)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
+                return (damNormal,damPiercing,effect)                 
 	else:
 		hasRolledIni = True
 		iniRoll(effect)
