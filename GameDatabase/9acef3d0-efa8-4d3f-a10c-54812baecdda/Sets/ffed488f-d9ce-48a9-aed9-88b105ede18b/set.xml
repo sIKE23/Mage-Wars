@@ -306,7 +306,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=11" />
-			<property name="AttackBar" value="Maul:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Reinforce: Place an Armor +1 token on, or Reconstruct 2 damage from, a Nonliving Corporeal conjuration in his zone (including walls bordering his zone)." />
+			<property name="AttackBar" value="Maul:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Reinforce:&#xD;&#xA;[Place an Armor +1 token on, or Reconstruct 2 damage from, a Nonliving Corporeal conjuration in his zone (including walls bordering his zone).]" />
 			<property name="Traits" value="Legendary, Lightning +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC09" />

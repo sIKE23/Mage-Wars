@@ -117,7 +117,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Air)" type="B" />
 		</card>
@@ -126,7 +126,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Earth=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Earth)" type="B" />
 		</card>
@@ -135,7 +135,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Fire=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Fire)" type="B" />
 		</card>
@@ -144,7 +144,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Water=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Water)" type="B" />
 		</card>
@@ -414,7 +414,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="6" />
 			<property name="Stats" value="Armor=3, Life=11" />
-			<property name="AttackBar" value="" />
+			<property name="AttackBar" value="Open the Gate:&#xD;&#xA;[Flame] [Dice=4] [d12] [5-10 = Burn; 11+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="Zone Exclusive, Flame Immunity, Hydro +3, Epic, Warlock Only" />
 			<property name="Text" value="All demon creatures gain Melee +1. Once per game, as a full action, you may pay 12 mana to &quot;Open the Gate&quot;, and make the above attack against each non-Flying creature up to 2 zones away from the Gate. Once open, whenever you summon a demon creature, you may place it in the Gate&apos;s zone, instead of your zone." />
 			<property name="CardID" value="MW1J06" />
@@ -507,7 +507,7 @@
 			<property name="Stats" value="Armor=2, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Flame Immunity" />
-			<property name="Text" value="Controller gains Channeling +1. &#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Controller gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
 			<property name="CardID" value="MW1J12" />
 		</card>
 		<card id="782de4d1-61aa-4efa-baf1-99df5688704e" name="Mana Flower">
@@ -522,7 +522,7 @@
 			<property name="Stats" value="Armor=0, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Regenerate 2, Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Controller gains Channeling +1. &#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Controller gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
 			<property name="CardID" value="MW1J13" />
 		</card>
 		<card id="cfbeb5ae-3c91-4b05-94e2-bbde8bec21f9" name="Mana Syphon">
@@ -567,7 +567,7 @@
 			<property name="Stats" value="Armor=3, Life=7" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
-			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait. &#xD;&#xA;[Upkeep +1]" />
+			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait.&#xD;&#xA;[Upkeep +1]" />
 			<property name="CardID" value="MW1J16" />
 		</card>
 		<card id="6a65ca7e-df13-4c27-90cb-44d4c86b2610" name="Pentagram">
@@ -657,7 +657,7 @@
 			<property name="Stats" value="Armor=0, Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Target is Restrained. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine." />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine." />
 			<property name="CardID" value="MW1J22" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">
@@ -685,7 +685,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=8" />
-			<property name="AttackBar" value="" />
+			<property name="AttackBar" value="Light Blast:&#xD;&#xA;[Ranged: 0-2] [Light] [X] [d12] [9-10 = Stun; 11+ = Daze] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="Zone Exclusive, Unique" />
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J24" />
@@ -733,9 +733,9 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=-, Life=8" />
-			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Attack]" />
+			<property name="AttackBar" value="Searing Flames:&#xD;&#xA;[Blocks Line of Sight] [Passage Attack] [Flame] [Dice=5] [d12] [5-9 = Burn; 10+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="Incorporeal, Extendable, Flame Immunity, Hydro +3" />
-			<property name="Text" value="" />
+			<property name="Text" value="Hydro attacks gain the Etheral trait when attacking Wall of Fire." />
 			<property name="CardID" value="MW1W03" />
 		</card>
 		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns">
@@ -748,7 +748,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Attack] [Dice=2] &#xD;&#xA;[Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked." />
+			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Blocks Line of Sight] [Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.]" />
 			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />
@@ -765,7 +765,7 @@
 			<property name="School" value="Dark+Fire" />
 			<property name="Level" value="4+2" />
 			<property name="Stats" value="Armor=3, Life=14" />
-			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn;10+= 2 Burn] [Defrost] &#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn;11+=2 Burn] [Sweeping] [Defrost]" />
+			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn;10+= 2 Burn] [Defrost]&#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn;11+=2 Burn] [Sweeping] [Defrost]" />
 			<property name="Traits" value="Flying, Flame Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C01" />
@@ -780,7 +780,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=1, Life=6" />
-			<property name="AttackBar" value="Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2] &#xD;&#xA;Healing Light:&#xD;&#xA;[Full] [Ranged:0-1] [Heal] [Dice=1] [Heal target Living Creature the amount rolled.]" />
+			<property name="AttackBar" value="Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Healing Light:&#xD;&#xA;[Full] [Ranged:0-1] [Heal] [Dice=1] [Heal target Living Creature the amount rolled.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C02" />
@@ -885,7 +885,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=15" />
-			<property name="AttackBar" value="Snapping Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Counterstrike] &#xD;&#xA;Triple Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Triplestrike]" />
+			<property name="AttackBar" value="Snapping Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Counterstrike]&#xD;&#xA;Triple Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Triplestrike]" />
 			<property name="Traits" value="Regenerate 2, Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C09" />
@@ -960,7 +960,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
-			<property name="AttackBar" value="Flameblast:&#xD;&#xA;[Full] [Ranged:1-1] [Flame] [Dice=3] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost] &#xD;&#xA;Hell Trident:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Defrost]" />
+			<property name="AttackBar" value="Flameblast:&#xD;&#xA;[Full] [Ranged:1-1] [Flame] [Dice=3] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost]&#xD;&#xA;Hell Trident:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="Flame Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C16" />
@@ -975,7 +975,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=3, Life=12" />
-			<property name="AttackBar" value="Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=4] &#xD;&#xA;Feral Claws:&#xD;&#xA;[Full] [Melee] [Dice=3] [Doublestrike]" />
+			<property name="AttackBar" value="Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Feral Claws:&#xD;&#xA;[Full] [Melee] [Dice=3] [Doublestrike]" />
 			<property name="Traits" value="Bloodthirsty +1, Legendary, Warlock Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C17" />
@@ -990,7 +990,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
-			<property name="AttackBar" value="Poison Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [d12] [4-9 = Weak; 10+ = 2 Weak] &#xD;&#xA;Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="AttackBar" value="Poison Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [d12] [4-9 = Weak; 10+ = 2 Weak]&#xD;&#xA;Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Regenerate 2, Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C18" />
@@ -1005,7 +1005,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
-			<property name="AttackBar" value="Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] &#xD;&#xA;Redeeming Sacrifice:&#xD;&#xA;[Full] [Heal] [Dice=6] [Heal any Living creature in the arena the amount rolled. Then, destroy Gray Angel]" />
+			<property name="AttackBar" value="Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Redeeming Sacrifice:&#xD;&#xA;[Full] [Heal] [Dice=6] [Heal any Living creature in the arena the amount rolled. Then, destroy Gray Angel]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C19" />
@@ -1035,7 +1035,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1, Defense=6+ ∞, Armor=0, Life=5" />
-			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1] &#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
+			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1]&#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Arcane Mage Only" />
 			<property name="Text" value="Huginn can cast only level 1-2 incantation spells." />
 			<property name="CardID" value="MW1C21" />
@@ -1080,7 +1080,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Leeching Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Mana Drain +1] &#xD;&#xA;Gorging Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Mana Drain +2]" />
+			<property name="AttackBar" value="Leeching Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Mana Drain +1]&#xD;&#xA;Gorging Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Mana Drain +2]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C24" />
@@ -1140,7 +1140,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=9" />
-			<property name="AttackBar" value="Longbow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1] &#xD;&#xA;Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="AttackBar" value="Longbow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1]&#xD;&#xA;Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C28" />
@@ -1215,7 +1215,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=3, Life=15" />
-			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5] [Piercing +1] &#xD;&#xA;Heavy Claw Strike:&#xD;&#xA;[Full] [Melee] [Dice=7] [Piercing +1]" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5] [Piercing +1]&#xD;&#xA;Heavy Claw Strike:&#xD;&#xA;[Full] [Melee] [Dice=7] [Piercing +1]" />
 			<property name="Traits" value="Frost -3" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C34" />
@@ -1230,7 +1230,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
-			<property name="AttackBar" value="Paralysis Beam:&#xD;&#xA;[Full] [Ranged:0-2] [Dice=2] [d12] [7+ = Cripple] &#xD;&#xA;Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="AttackBar" value="Paralysis Beam:&#xD;&#xA;[Full] [Ranged:0-2] [Dice=2] [d12] [7+ = Cripple]&#xD;&#xA;Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C35" />
@@ -1354,7 +1354,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains Life +4." />
+			<property name="Text" value="This creature gains Life +4.&#xD;&#xA;[Life +4]" />
 			<property name="CardID" value="MW1E03" />
 		</card>
 		<card id="775fd07c-63b3-48af-9a6d-061165fe5805" name="Chains of Agony">
@@ -1397,7 +1397,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Damage Barrier] [Lightning] [Dice=2] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal, Unavoidable]" />
+			<property name="AttackBar" value="[Damage Barrier] [Lightning] [Dice=2] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1E06" />
@@ -1714,7 +1714,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Elusive trait." />
+			<property name="Text" value="This creature gains the Elusive trait.&#xD;&#xA;[Elusive]" />
 			<property name="CardID" value="MW1E28" />
 		</card>
 		<card id="81c93236-8b3f-41fd-9210-89a9498ecfce" name="Nullify">
@@ -1759,7 +1759,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Finite Life trait." />
+			<property name="Text" value="This creature gains the Finite Life trait.&#xD;&#xA;[Finite Life]" />
 			<property name="CardID" value="MW1E31" />
 		</card>
 		<card id="76d440be-b82c-4a12-97ef-c2bad86fdc1a" name="Regrowth">
@@ -1774,7 +1774,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains the Regenerate 2 trait. /n [Regenerate 2]" />
+			<property name="Text" value="This creature gains the Regenerate 2 trait.&#xD;&#xA;[Regenerate 2]" />
 			<property name="CardID" value="MW1E32" />
 		</card>
 		<card id="24b63480-3272-4f93-b576-48710d5bedaa" name="Retaliate">
@@ -1834,7 +1834,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains Armor +2." />
+			<property name="Text" value="This creature gains Armor +2.&#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MW1E36" />
 		</card>
 		<card id="39d0a0a1-154d-4e33-9af0-937f0b98465c" name="Sacred Ground">
@@ -1849,7 +1849,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="All friendly Living creatures in this zone gain the Aegis 1 trait." />
+			<property name="Text" value="All friendly Living creatures in this zone gain the Aegis 1 trait.&#xD;&#xA;[Aegis 1]" />
 			<property name="CardID" value="MW1E37" />
 		</card>
 		<card id="f6a5cb45-a9ec-4e4a-858f-60a48d88b7ab" name="Teleport Trap">
@@ -2121,7 +2121,7 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Mage gains Armor +1. &#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MW1Q15" />
 		</card>
 		<card id="a6a267f1-a2ec-4264-aaff-85b40c0a68dd" name="Leather Gloves">
@@ -2136,7 +2136,7 @@
 			<property name="Stats" value="Location=Gloves" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Mage gains Armor +1. &#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MW1Q16" />
 		</card>
 		<card id="d2b981a2-18c0-450a-b4cf-4d1c3d412e63" name="Lightning Ring">
@@ -2151,7 +2151,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal lightning damage. &#xD;&#xA;[Lightning] [Melee +1] [Ranged +1]" />
+			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal lightning damage.&#xD;&#xA;[Lightning] [Melee +1] [Ranged +1]" />
 			<property name="CardID" value="MW1Q17" />
 		</card>
 		<card id="fabfda9b-1168-4b3b-9f2b-c5ead9215b81" name="Mage Staff">
@@ -2211,7 +2211,7 @@
 			<property name="Stats" value="Location=Amulet" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Channel +1 trait. &#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Mage gains the Channel +1 trait.&#xD;&#xA;[Channeling +1]" />
 			<property name="CardID" value="MW1Q22" />
 		</card>
 		<card id="983a31d2-4e37-441d-a39e-3088f9b3d84c" name="Regrowth Belt">
@@ -2226,7 +2226,7 @@
 			<property name="Stats" value="Location=Belt" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Regenerate 2 trait. &#xD;&#xA;[Regenerate 2]" />
+			<property name="Text" value="Mage gains the Regenerate 2 trait.&#xD;&#xA;[Regenerate 2]" />
 			<property name="CardID" value="MW1Q23" />
 		</card>
 		<card id="aa404428-c691-4c46-b11c-824158dfcf4d" name="Ring of Asyra">
@@ -2241,7 +2241,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Priestess Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Holy] [x1]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Holy] [x1]" />
 			<property name="CardID" value="MW1Q24" />
 		</card>
 		<card id="7900f68c-f781-48d1-9c96-74973d16530c" name="Ring of Beasts">
@@ -2256,7 +2256,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Beastmaster Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell. &#xD;&#xA;[Casting Discount] [1] [Animal] [x1]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell.&#xD;&#xA;[Casting Discount] [1] [Animal] [x1]" />
 			<property name="CardID" value="MW1Q25" />
 		</card>
 		<card id="35592eff-8121-45e0-9c1f-a52bf24469ae" name="Dawnbreaker Ring">
@@ -2286,7 +2286,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlock Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Curse] [x1]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Curse] [x1]" />
 			<property name="CardID" value="MW1Q28" />
 		</card>
 		<card id="d78f4233-edf8-4535-b3db-37ba3a69d0ab" name="Staff of Asyra">
@@ -2329,7 +2329,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Arcane Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Mana Drain 1] &#xD;&#xA;Arcane Blast:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Ethereal] [Mana Drain 1]" />
+			<property name="AttackBar" value="Arcane Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Mana Drain 1]&#xD;&#xA;Arcane Blast:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Ethereal] [Mana Drain 1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q31" />
@@ -2361,7 +2361,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait. &#xD;&#xA;[Armor +2] [Wind -3]" />
+			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait.&#xD;&#xA;[Armor +2] [Wind -3]" />
 			<property name="CardID" value="MW1Q33" />
 		</card>
 
@@ -2424,7 +2424,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target gains the Fast and Charge +1 traits until the end of the round." />
+			<property name="Text" value="Target gains the Fast and Charge +1 traits until the end of the round.&#xD;&#xA;[Fast] [Charge]" />
 			<property name="CardID" value="MW1I04" />
 		</card>
 		<card id="2753eeea-2130-4399-ae88-f96ed1ccf776" name="Dispel">
@@ -2499,7 +2499,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target gains the Elusive trait until the end of the round." />
+			<property name="Text" value="Target gains the Elusive trait until the end of the round.&#xD;&#xA;[Elusive]" />
 			<property name="CardID" value="MW1I10" />
 		</card>
 		<card id="90e866bf-64db-4199-ba5f-3364eecaf7ce" name="Explode">
@@ -2514,7 +2514,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="Fiery Blast:&#xD;&#xA;[Flame] [Dice=4] [d12] [6+ = Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="" />
+			<property name="Text" value="When you cast Explode, choose an equipment object attached to target Mage. X = 6 = the equipment&apos;s casting cost. Then, Explode mages the above flame attack agains the target Mage." />
 			<property name="CardID" value="MW1I11" />
 		</card>
 		<card id="9455c697-f680-4d12-b5d6-72235c03f77c" name="Force Push">
@@ -2619,7 +2619,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Target&apos;s next melee attack this round gains the Unavoidable trait." />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Unavoidable trait.&#xD;&#xA;[Unavoidable]" />
 			<property name="CardID" value="MW1I18" />
 		</card>
 		<card id="dc3cd8bd-9867-4dde-99a2-911d3ca69b67" name="Piercing Strike">
@@ -2634,7 +2634,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Target&apos;s next melee attack gains the Piercing +3 trait." />
+			<property name="Text" value="Target&apos;s next melee attack gains the Piercing +3 trait.&#xD;&#xA;[Piercing +3]" />
 			<property name="CardID" value="MW1I19" />
 		</card>
 		<card id="59cd1ea8-72d8-4ce8-90f9-1513ef6940ae" name="Purify">
