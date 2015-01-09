@@ -104,7 +104,7 @@
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
 			<property name="Stats" value="Armor=2, Life=14" />
-			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1] &#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
+			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC03" />
@@ -179,7 +179,7 @@
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] &#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC05" />
@@ -338,7 +338,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon/Shield" />
-			<property name="AttackBar" value="Disenchant:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Destroy target Level 1 revealed enchantment] &#xD;&#xA;Mage Sight:&#xD;&#xA;[Cost=0] [Quick] [Ranged:0-2] [Look at target hidden enchantment. Then leave it face down after looking]" />
+			<property name="AttackBar" value="Disenchant:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Destroy target Level 1 revealed enchantment]&#xD;&#xA;Mage Sight:&#xD;&#xA;[Cost=0] [Quick] [Ranged:0-2] [Look at target hidden enchantment. Then leave it face down after looking]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Dispel Wand&apos;s abilities can each be used once per round as a quick spell. X = target&apos;s casting and reveal cost." />
 			<property name="CardID" value="MWSTX1CKQ05" />

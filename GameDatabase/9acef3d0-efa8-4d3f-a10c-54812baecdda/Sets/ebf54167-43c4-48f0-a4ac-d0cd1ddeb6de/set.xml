@@ -117,7 +117,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Air)" type="B" />
 		</card>
@@ -126,7 +126,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Earth=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Earth)" type="B" />
 		</card>
@@ -135,7 +135,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Fire=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Fire)" type="B" />
 		</card>
@@ -144,7 +144,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Water=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.] &#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Water)" type="B" />
 		</card>
@@ -748,7 +748,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Attack] [Dice=2] &#xD;&#xA;[Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked." />
+			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Attack] [Dice=2]&#xD;&#xA;[Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked." />
 			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />
@@ -765,7 +765,7 @@
 			<property name="School" value="Dark+Fire" />
 			<property name="Level" value="4+2" />
 			<property name="Stats" value="Armor=3, Life=14" />
-			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn;10+= 2 Burn] [Defrost] &#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn;11+=2 Burn] [Sweeping] [Defrost]" />
+			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn;10+= 2 Burn] [Defrost]&#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn;11+=2 Burn] [Sweeping] [Defrost]" />
 			<property name="Traits" value="Flying, Flame Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C01" />
@@ -780,7 +780,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=1, Life=6" />
-			<property name="AttackBar" value="Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2] &#xD;&#xA;Healing Light:&#xD;&#xA;[Full] [Ranged:0-1] [Heal] [Dice=1] [Heal target Living Creature the amount rolled.]" />
+			<property name="AttackBar" value="Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Healing Light:&#xD;&#xA;[Full] [Ranged:0-1] [Heal] [Dice=1] [Heal target Living Creature the amount rolled.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C02" />
@@ -885,7 +885,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=15" />
-			<property name="AttackBar" value="Snapping Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Counterstrike] &#xD;&#xA;Triple Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Triplestrike]" />
+			<property name="AttackBar" value="Snapping Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Counterstrike]&#xD;&#xA;Triple Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Triplestrike]" />
 			<property name="Traits" value="Regenerate 2, Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C09" />
@@ -960,7 +960,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
-			<property name="AttackBar" value="Flameblast:&#xD;&#xA;[Full] [Ranged:1-1] [Flame] [Dice=3] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost] &#xD;&#xA;Hell Trident:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Defrost]" />
+			<property name="AttackBar" value="Flameblast:&#xD;&#xA;[Full] [Ranged:1-1] [Flame] [Dice=3] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost]&#xD;&#xA;Hell Trident:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="Flame Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C16" />
@@ -975,7 +975,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=3, Life=12" />
-			<property name="AttackBar" value="Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=4] &#xD;&#xA;Feral Claws:&#xD;&#xA;[Full] [Melee] [Dice=3] [Doublestrike]" />
+			<property name="AttackBar" value="Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Feral Claws:&#xD;&#xA;[Full] [Melee] [Dice=3] [Doublestrike]" />
 			<property name="Traits" value="Bloodthirsty +1, Legendary, Warlock Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C17" />
@@ -990,7 +990,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
-			<property name="AttackBar" value="Poison Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [d12] [4-9 = Weak; 10+ = 2 Weak] &#xD;&#xA;Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="AttackBar" value="Poison Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [d12] [4-9 = Weak; 10+ = 2 Weak]&#xD;&#xA;Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Regenerate 2, Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C18" />
@@ -1005,7 +1005,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
-			<property name="AttackBar" value="Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] &#xD;&#xA;Redeeming Sacrifice:&#xD;&#xA;[Full] [Heal] [Dice=6] [Heal any Living creature in the arena the amount rolled. Then, destroy Gray Angel]" />
+			<property name="AttackBar" value="Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Redeeming Sacrifice:&#xD;&#xA;[Full] [Heal] [Dice=6] [Heal any Living creature in the arena the amount rolled. Then, destroy Gray Angel]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C19" />
@@ -1035,7 +1035,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1, Defense=6+ ∞, Armor=0, Life=5" />
-			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1] &#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
+			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1]&#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Arcane Mage Only" />
 			<property name="Text" value="Huginn can cast only level 1-2 incantation spells." />
 			<property name="CardID" value="MW1C21" />
@@ -1080,7 +1080,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Leeching Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Mana Drain +1] &#xD;&#xA;Gorging Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Mana Drain +2]" />
+			<property name="AttackBar" value="Leeching Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Mana Drain +1]&#xD;&#xA;Gorging Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Mana Drain +2]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C24" />
@@ -1140,7 +1140,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=9" />
-			<property name="AttackBar" value="Longbow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1] &#xD;&#xA;Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="AttackBar" value="Longbow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1]&#xD;&#xA;Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C28" />
@@ -1215,7 +1215,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=3, Life=15" />
-			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5] [Piercing +1] &#xD;&#xA;Heavy Claw Strike:&#xD;&#xA;[Full] [Melee] [Dice=7] [Piercing +1]" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5] [Piercing +1]&#xD;&#xA;Heavy Claw Strike:&#xD;&#xA;[Full] [Melee] [Dice=7] [Piercing +1]" />
 			<property name="Traits" value="Frost -3" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C34" />
@@ -1230,7 +1230,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
-			<property name="AttackBar" value="Paralysis Beam:&#xD;&#xA;[Full] [Ranged:0-2] [Dice=2] [d12] [7+ = Cripple] &#xD;&#xA;Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="AttackBar" value="Paralysis Beam:&#xD;&#xA;[Full] [Ranged:0-2] [Dice=2] [d12] [7+ = Cripple]&#xD;&#xA;Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Slow" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C35" />
@@ -2329,7 +2329,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Arcane Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Mana Drain 1] &#xD;&#xA;Arcane Blast:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Ethereal] [Mana Drain 1]" />
+			<property name="AttackBar" value="Arcane Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Mana Drain 1]&#xD;&#xA;Arcane Blast:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Ethereal] [Mana Drain 1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q31" />
