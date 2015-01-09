@@ -1177,7 +1177,7 @@
 		</card>
 		<card id="0d9b07c9-5d2b-45fa-9e69-6f371293f883" name="Skeletal Sentry">
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Undead, Skeleton" />
+			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
