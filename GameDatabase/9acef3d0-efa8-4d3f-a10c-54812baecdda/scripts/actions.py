@@ -388,8 +388,14 @@ def attackTarget(card, x=0, y=0):
                                         norm,crit,eff = roll
                                         actualDmg = crit + max(norm-getAdjustedArmor(defender),0)
                                         notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,actualDmg,defender,('an above' if actualDmg >= expectedDmg else 'a below')))
+                elif len(target) == 0: #Untargeted attack
+                        dice,traits = diceRollMenu(attacker,None)
+                        if dice >= 0:
+                                roll = getRollDice(dice)
+                                if roll: notify("{} attacks with {}".format(me,attacker))
 
 def diceRollMenu(attacker = None,defender = None):
+        mute()
         armor,life = None, None
         if defender and defender.Type in ['Creature','Conjuration','Mage']: #Will need to be adjust to account for incorporeal and indestructible
                 armor,life = getAdjustedArmor(defender),getRemainingLife(defender)
@@ -473,6 +479,7 @@ def getAttackList(card):
         return attackList
 
 def getRollDice(dice):
+        mute()
         global diceBank
 	global diceBankD12
 	global hasRolledIni
@@ -554,7 +561,7 @@ def rollDice(group, x=0, y=0):
 	count = 0
 	dfn = None
         if len(target) == 1: dfn = target[0]
-        dice = diceRollMenu(None,dfn)
+        dice,traits = diceRollMenu(None,dfn)
         if dice >=0: getRollDice(dice)
 
 def flipCoin(group, x = 0, y = 0):
