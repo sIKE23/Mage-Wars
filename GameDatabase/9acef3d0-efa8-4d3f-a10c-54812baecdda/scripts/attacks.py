@@ -125,7 +125,10 @@ def diceRollMenu(attacker = None,defender = None):
                 else: return count,[]
         elif count == len(choices)-1:
                 if attacker: return diceRollMenu(None,defender)
-                else: return min(askInteger("Roll how many red dice?", 8),50),[] #max 50 dice rolled at once
+                else: #Revert to standard input menu. Default value is the last one you entered.
+                        dice = min(askInteger("Roll how many red dice?", getSetting('lastStandardDiceRollInput',8)),50)
+                        setSetting('lastStandardDiceRollInput',dice)
+                        return dice,[] #max 50 dice rolled at once
         elif count == len(choices): return -1,[]
 
 ############################################################################
