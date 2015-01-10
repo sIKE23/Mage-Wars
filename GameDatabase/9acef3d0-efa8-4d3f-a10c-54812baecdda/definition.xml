@@ -80,7 +80,6 @@
 			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
 			<groupaction menu="Toggle Auto-Attaching Cards" default="False" execute="toggleAutoAttach" />
 			<groupaction menu="Enable/Disable Sounds" default="False" execute="toggleSoundFX" />
-			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
 			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
@@ -103,6 +102,10 @@
 			<groupaction menu="Set 3x3 OCTGN Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
+		</groupactions>
+		<groupactions menu="Alternate Hotkeys">
+			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="rollDice" />
+			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
 		</groupactions>
 		<cardactions menu="Add Markers">
 			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage" />
