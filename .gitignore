@@ -20,6 +20,7 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
+InstallScript-cache/
 ###################
 # Web publish log #
 ###################
