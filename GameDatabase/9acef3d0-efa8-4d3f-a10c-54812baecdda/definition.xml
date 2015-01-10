@@ -16,7 +16,7 @@
 	<scripts>
 		<script src="scripts/actions.py" />
 		<script src="scripts/changelog.py" />
-		<script src="scripts/probabilities.py" />
+		<script src="scripts/attacks.py" />
 		<script src="scripts/attachcards.py" />
 	</scripts>
 	<events>
