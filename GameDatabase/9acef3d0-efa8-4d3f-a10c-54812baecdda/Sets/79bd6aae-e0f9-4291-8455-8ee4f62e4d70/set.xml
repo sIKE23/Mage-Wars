@@ -378,6 +378,36 @@
 			<property name="Traits" value="Flying" />
 			<property name="CardID" value="MWPROMO62" />
 		</card>
+		<card id="9c877bec-af74-4d95-8583-a8b814cc1a58" name="Eligor Larington">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=1, Life=15" />
+			<property name="AttackBar" value="Martial Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Counterstrike]" />
+			<property name="Text" value="Once per round, when making a counterstrike, Eligor gains the Melee +2 trait and Martial Strike gians the Piercing +1 trait." />
+			<property name="Traits" value="Aegis 1, Legendary" />
+			<property name="CardID" value="MWPROMO68" />
+		</card>
+		<card id="3b40edc6-c26b-4370-b6c5-ea52b748c0bb" name="Gerard Matranga">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Pirate" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War+Water"  />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="AttackBar" value="Avaricious Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1 per Gold token on Gerard]" />
+			<property name="Text" value="During the Upleep Phase, and when Gerard attacks and damages an enemy creature, he gains 1 Gold token. You Mage may spend Gold tokens as mana when summons Soldier or Pirate creatures." />
+			<property name="Traits" value="Legendary" />
+			<property name="CardID" value="MWPROMO69" />
+		</card>
 
 
 		<card id="5a6c0937-b7fb-4c68-a854-7e7d6dce4b3c" name="Altar of Peace">
