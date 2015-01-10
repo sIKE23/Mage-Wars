@@ -143,7 +143,7 @@ def onTableLoad():
 
 
 def onGameStart():
-	mute()
+        mute()
 	# reset color picking
 	setGlobalVariable("ColorsChosen", "")
 
@@ -159,7 +159,6 @@ def onGameStart():
 
 	#create a dictionary of attachments and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
-	setSetting("AutoAttach", True)
 
 	# bring up window to point to documentation
 	initializeGame()

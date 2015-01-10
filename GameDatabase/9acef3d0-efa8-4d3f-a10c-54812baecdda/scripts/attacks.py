@@ -107,10 +107,10 @@ def diceRollMenu(attacker = None,defender = None):
                 if attacker.type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
                         for card in table:
                                 if (card.Type == 'Equipment' and card.controller == me): attackList.extend(getAttackList(card))
-                choices = [attack['Name']+' ('+str(getAdjustedDice(attacker,attack,defender))+'):'+
-                        '\n'+(', '.join(attack['Traits']) if attack['Traits'] else 'No Traits')+
-                        '\n'+(' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else 'No Effects')+
-                        ('\n'+'Expected damage: {} | Kill chance: {}%'.format(
+                choices = [(attack['Name']+' ('+str(getAdjustedDice(attacker,attack,defender))+')').center(68,' ')+
+                        ('\n'+', '.join(attack['Traits']) if attack['Traits'] else '')+
+                        ('\n'+' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else '')+
+                        ('\n'+'Expected damage: {} | Kill chance: {}%\t'.format(
                         round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor),1),
                         round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life)*100,1)) if defender else '')
                         for attack in attackList]
