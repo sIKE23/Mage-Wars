@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.50.145"
-	version="1.10.0.1"
+	version="1.10.0.2"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -33,7 +33,7 @@
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
 		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html" />
 		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html" />
-		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v1.html" />
+		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v2.html" />
 		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html" />
 		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
 		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
