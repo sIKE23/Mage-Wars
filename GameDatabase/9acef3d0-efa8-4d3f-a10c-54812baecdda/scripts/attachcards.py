@@ -23,6 +23,12 @@ problem in itself, but perhaps a better location could be found...
 restrictions, however.
 """
 
+def menuDetachAction(card,x=0,y=0):
+    """This detaches <card> and returns it to its home location"""
+    mute()
+    if isAttached(card):
+        detach(card)
+        returnCardToHome(card)
 
 def attachToTarget(card,x=0,y=0):
     """This command is used to explicitly attach one card to the card currently being targeted."""
@@ -186,7 +192,8 @@ def canAttach(card,target):
     if (isAttached(target)
         or getAttachments(card)
         or card==target
-        or not target in table):
+        or not target in table
+        or not target.isFaceUp):
         return False
     if (card.Type in ['Enchantment','Equipment']
         or target.Type in ['Magestats']
