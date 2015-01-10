@@ -146,7 +146,7 @@ def getAttackList(card):
                 name = (card.name if isAttackSpell else attack[0])
                 aDict = {'Name':name,
                          'Action':None,
-                         'Range':None,
+                         'Range':[None,None],
                          'Dice':0,
                          'Type':None,
                          'd12':[],
@@ -155,12 +155,15 @@ def getAttackList(card):
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 #Now we extract the attributes
                 effectSwitch = False
+                hasDiceValue = False
                 for attribute in attributes:
                         attribute = attribute.strip('[]')
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
                         elif 'Ranged' in attribute: aDict['Range'] = attribute.split(':')
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
-                        elif 'Dice' in attribute: aDict['Dice'] = int(attribute[-1])
+                        elif 'Dice' in attribute:
+                                aDict['Dice'] = int(attribute[-1])
+                                hasDiceValue = True
                         elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
                         elif attribute =='d12' : effectSwitch = True
                         elif effectSwitch:
@@ -168,7 +171,7 @@ def getAttackList(card):
                                 aDict['d12'] = [o.split(' = ') for o in options]
                                 effectSwitch = False
                         else: aDict['Traits'].append(attribute)
-                attackList.append(aDict)
+                if hasDiceValue: attackList.append(aDict)
         return attackList
 
 """
