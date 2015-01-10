@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Octgn.Magewars</RootNamespace>
     <AssemblyName>Octgn.Magewars</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,13 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Octgn.Core">
-      <HintPath>..\..\..\OCTGN\OCTGN\Octgn.Core.dll</HintPath>
+      <HintPath>C:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Core.dll</HintPath>
     </Reference>
     <Reference Include="Octgn.DataNew">
-      <HintPath>..\..\..\OCTGN\OCTGN\Octgn.DataNew.dll</HintPath>
+      <HintPath>C:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.DataNew.dll</HintPath>
     </Reference>
     <Reference Include="Octgn.Library">
-      <HintPath>..\..\..\OCTGN\OCTGN\Octgn.Library.dll</HintPath>
+      <HintPath>C:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Library.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -58,10 +58,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo "Copy files to plugin folder..."
-xcopy "Octgn.Magewars.dll" "C:\Users\lettucemode\Documents\OCTGN\Plugins\mwPlugin" /y /q /c
-xcopy "Octgn.Magewars.dll" "D:\Repositories\MageWarsOCTGN\GameDatabase\9acef3d0-efa8-4d3f-a10c-54812baecdda\Plugins\Octgn.MagewarsPlugin" /y /q /c
-xcopy "..\..\Magewars.validator.cs" "D:\Repositories\MageWarsOCTGN\Deckbuilder" /y /q /c
-xcopy "..\..\Octgn.MagewarsPlugin.csproj" "D:\Repositories\MageWarsOCTGN\Deckbuilder" /y /q /c</PostBuildEvent>
+xcopy "Octgn.Magewars.dll" "D:\Users\fczajka\Documents\OCTGN\Plugins\mwPlugin" /y /q /c
+xcopy "Octgn.Magewars.dll" "D:\Dev\Github\Mage-Wars\GameDatabase\9acef3d0-efa8-4d3f-a10c-54812baecdda\Plugins\Octgn.MagewarsPlugin" /y /q /c
+	</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
