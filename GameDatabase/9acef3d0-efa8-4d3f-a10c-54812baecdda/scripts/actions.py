@@ -342,7 +342,7 @@ def rollDice(group, x=0, y=0):
 		colorsList = ['#FF0000']
 		choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
 		return
-		
+
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
@@ -557,7 +557,6 @@ def AskDiceRollArea():
 	setDRAIP(choice)
 	for p in players:
 		remoteCall(p, "setDRAIP", [choice])
-
 
 def CreateIniToken():
 	global gameStartTime
@@ -813,7 +812,7 @@ def resolveChanneling(c):
 	for card in me.piles['Discard']:
 		if c == card:
 			return
-			
+
 	if c.Stats != None and c.Type != "Mage":
 		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 			channel = getStat(c.Stats,"Channeling")
@@ -864,11 +863,11 @@ def resolveUpkeep():
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
-	for c in me.piles['Discard']:
-		 if c == card:
-		 	return
-	
+
 	for card in table:
+		for c in me.piles['Discard']:
+	 		if c == card:
+		 		return
 		if "Mordok's Obelisk" == card.Name:
 			for c in table:
 				if c.Type == "Creature" and c.isFaceUp and c.controller == me:
@@ -1858,7 +1857,6 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 			return discount
 		else:
 			return -1
-		
 
 def doDiscount(cdiscount):
 	global discountsUsed
@@ -1995,7 +1993,6 @@ def getTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1])
 	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
 	return (TraitCost, TraitStr)
-
 
 def chooseMagebind(card, mageRevealCost, TraitCosts):
 	global infostr
