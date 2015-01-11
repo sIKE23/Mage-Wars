@@ -17,8 +17,6 @@ card over the other (if autoAttach is enabled), using the moveToCard method in a
 Bugs/Missing Features:
 - Mass selecting a stack of cards and dragging it causes the cards to unattach and semi-randomly attach
 to each other
-- If a card leaves the table, the attachments are automatically sent to the middle of the board. Not a
-problem in itself, but perhaps a better location could be found...
 - Right now, the criteria for what may be attached to what are pretty loose. It will be easy to add
 restrictions, however.
 """
@@ -55,6 +53,7 @@ def attach(card,target):
     """Controller of <card> may attach it to <target>."""
     mute()
     if card.controller == me and canAttach(card,target):
+        if card.type == 'Enchantment' and not card.isFaceUp: enchantmentAttachCost(card,target) #Ask if controller would like to pay mana to attach it
         detachAll(card)
         consolidateAttachments(target)
         setGlobalDictEntry("attachDict",card._id,[target._id,len(getAttachments(target))+1])
@@ -62,6 +61,39 @@ def attach(card,target):
         return card,target
     return card,None
 
+def enchantmentAttachCost(card,target): #Target useful for when things like Harshforge Plate are integrated into this.
+    discountStr = ''
+    discount = 0
+    foundDiscounts = []
+    infostr = 'Enchantments cost 2 mana to cast.'
+    notifyStr = "{} casts a hidden enchantment on {}, with a base cost of 2 mana.".format(me,card)
+    for c in table:
+        if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
+            dc = findDiscount(card, c)
+            debug("Discount Count Returned from test: {} from card: {}".format(dc, c.Name))
+            if dc > 0:
+                discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
+                infostr = notifyStr + discountStr
+                notifyStr = notifyStr + discountStr
+                discount += dc
+                foundDiscounts.append(c)
+            elif dc < 0:
+                discountStr = "\n{} already reached max uses this round.".format(c.name)
+                infostr = notifyStr + discountStr
+                notifyStr = notifyStr + discountStr
+    choice = askChoice('Do you want to cast {} face-down on {}?'.format(card.name,target.name),['Yes, I am casting this as a spell','No, I want to attach it for other reasons'],["#01603e","#de2827"])
+    if choice == 1:
+        infostr += "\nTotal mana amount to subtract from mana pool?"
+	manacost = askInteger(infostr, 2 - discount)
+	if manacost == None: return # player closed the window and didn't cast the spell
+        elif me.Mana < manacost:
+                notify("{} has insufficient mana in pool".format(me))
+                return
+        for dc in foundDiscounts:
+	    doDiscount(dc)
+	me.Mana -= manacost 
+        notify(notifyStr)
+                
 def detach(card):
     """Removes <card> from its target, then consolidates remaining cards on target."""
     mute()
