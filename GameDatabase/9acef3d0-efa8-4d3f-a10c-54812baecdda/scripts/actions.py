@@ -147,7 +147,7 @@ def onGameStart():
 	# reset color picking
 	setGlobalVariable("ColorsChosen", "")
 
-	#	reset initiative automation
+	# reset initiative automation
 	setGlobalVariable("SetupDone", "")
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", "")
@@ -663,10 +663,7 @@ def resolveBurns():
 				if roll == 0:
 					card.markers[Burn] -= 1
 					burnsRemoved += 1
-				elif roll == 1:
-					burnDamage += 1
-				elif roll == 2:
-					burnDamage += 2
+				burnDamage += roll
 			#apply damage
 			if card.Type == "Mage":
 				card.controller.Damage += burnDamage
@@ -769,31 +766,11 @@ def resolveChanneling(c):
 			if x == 3: #max 3 outpost count.
 				break
 	if c.name == "Harmonize":
-		c2 = cardHere(cardX(c)-1,cardY(c)-1,"Channeling=")
-		if c2 != None and c2.Type != "Mage":
-			debug("Overlap found (top left) {}".format(c2.name))
-			addMana(c2)
-			whisper("Harmonize found and Mana added to channeling card")
-		else:
-			c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
-			if c2 != None and c2.Type !="Mage":
-				debug("Overlap found (bottom right) {}".format(c2.name))
-				addMana(c2)
-				whisper("Harmonize found and Mana added to channeling card")
-			else:
-				c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
-				if c2 != None and c2.Type !="Mage":
-					debug("Overlap found (bottom left) {}".format(c2.name))
-					addMana(c2)
-					whisper("Harmonize found and Mana added to channeling card")
-				else:
-					c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
-					if c2 != None and c2.Type !="Mage":
-						debug("Overlap found (top right) {}".format(c2.name))
-						addMana(c2)
-						whisper("Harmonize found and Mana added to channeling card")
-					else:
-						whisper("Harmonize found but no Mana added")
+                if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
+                        c2 = getAttachTarget(c)
+                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Exclude mages
+                                addMana(c2)
+                                whisper("Mana added to {} from {}".format(c2,c))
 
 def resolveUpkeep():
 	mute()

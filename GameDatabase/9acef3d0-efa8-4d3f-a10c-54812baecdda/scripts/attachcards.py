@@ -204,6 +204,11 @@ def getAttachments(card):
     attachList.sort(key=lambda k: aDict[k][1])
     return [Card(key) for key in attachList]
 
+def getAttachTarget(card):
+    mute()
+    result = getGlobalDictEntry('attachDict',card._id)
+    if result: return Card(result[0])
+
 def getGlobalDictEntry(dictionary,key):
     """Dictionary is input as a string. If the value is empty, returns False"""
     mute()
