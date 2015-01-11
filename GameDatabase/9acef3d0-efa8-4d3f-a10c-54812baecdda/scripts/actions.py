@@ -626,43 +626,23 @@ def setActiveP(p):
 
 def resetMarkers(c):
 	mute()
-	if c.markers[ActionRedUsed] == 1:
-		c.markers[ActionRedUsed] = 0
-		c.markers[ActionRed] = 1
-	if c.markers[ActionBlueUsed] == 1:
-		c.markers[ActionBlueUsed] = 0
-		c.markers[ActionBlue] = 1
-	if c.markers[ActionGreenUsed] == 1:
-		c.markers[ActionGreenUsed] = 0
-		c.markers[ActionGreen] = 1
-	if c.markers[ActionYellowUsed] == 1:
-		c.markers[ActionYellowUsed] = 0
-		c.markers[ActionYellow] = 1
-	if c.markers[ActionPurpleUsed] == 1:
-		c.markers[ActionPurpleUsed] = 0
-		c.markers[ActionPurple] = 1
-	if c.markers[ActionGreyUsed] == 1:
-		c.markers[ActionGreyUsed] = 0
-		c.markers[ActionGrey] = 1
-	if c.markers[QuickBack] == 1:
-		c.markers[QuickBack] = 0
-		c.markers[Quick] = 1
-	if c.markers[Used] == 1:
-		c.markers[Used] = 0
-		c.markers[Ready] = 1
-	if c.markers[UsedII] == 1:
-		c.markers[UsedII] = 0
-		c.markers[ReadyII] = 1
-	if c.markers[VoltaricON] == 1:
-		c.markers[VoltaricON] = 0
-		c.markers[VoltaricOFF] = 1
-	if c.markers[DeflectU] == 1:
-		c.markers[DeflectU] = 0
-		c.markers[DeflectR] = 1
-	if c.markers[Visible] == 1:
-		c.markers[Visible] = 0
-		c.markers[Invisible] = 1
-
+	mDict = {ActionRedUsed : ActionRed,
+                ActionBlueUsed : ActionBlue,
+                ActionGreenUsed : ActionGreen,
+                ActionYellowUsed : ActionYellow,
+                ActionPurpleUsed : ActionPurple,
+                ActionGreyUsed : ActionGrey,
+                QuickBack : Quick,
+                Used : Ready,
+                UsedII : ReadyII,
+                VoltaricON : VoltaricOFF,
+                DeflectU : DeflectR,
+                Visible : Invisible}
+	for key in mDict:
+                if c.markers[key] == 1:
+                        c.markers[key] = 0
+                        c.markers[mDict[key]] = 1
+                           
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
@@ -992,7 +972,7 @@ def askRevealEnchant(group, x=0, y=0):
 ######################		Card Actions			################################
 ############################################################################
 
-##########################     Add Tokens     ##############################
+##########################     Add/Subtract Tokens     ##############################
 
 tokenList=['Armor',
            'Bleed',
@@ -1009,13 +989,14 @@ tokenList=['Armor',
            'Stun',
            'Stuck',
            'Taint',
-           'Vet',
+           'Veteran',
            'Weak',
            'Zombie'
            ]
 
 for token in tokenList:
         exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')
+        exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
 
 def addDamage(card, x = 0, y = 0):
 	if "Mage" in card.Type and card.controller == me:
@@ -1028,6 +1009,19 @@ def addOther(card, x = 0, y = 0):
 	if qty == 0:
 		return
 	card.markers[marker] += qty
+
+def subDamage(card, x = 0, y = 0):
+	if "Mage" in card.Type:
+		if card.controller == me:
+			me.Damage -= 1
+	else:
+		subToken(card, Damage)
+
+def clearTokens(card, x = 0, y = 0):
+	mute()
+	for tokenType in card.markers:
+		card.markers[tokenType] = 0
+	notify("{} removes all tokens from '{}'".format(me, card.Name))
 
 ##########################     Toggle Actions/Tokens     ##############################
 
@@ -1188,76 +1182,6 @@ def toggleVoltaric(card, x=0, y=0):
 		card.markers[VoltaricON] = 1
 		card.markers[VoltaricOFF] = 0
 		notify("'{}' enables Voltaric shield".format(card.Name))
-
-######################     Remove Tokens     ###########################
-
-def subArmor(card, x = 0, y = 0):
-	subToken(card, Armor)
-
-def subBleed(card, x = 0, y = 0):
-	subToken(card, Bleed)
-
-def subBurn(card, x = 0, y = 0):
-	subToken(card, Burn)
-
-def subCorrode(card, x = 0, y = 0):
-	subToken(card, Corrode)
-
-def subCripple(card, x = 0, y = 0):
-	subToken(card, Cripple)
-
-def subDamage(card, x = 0, y = 0):
-	if "Mage" in card.Type:
-		if card.controller == me:
-			me.Damage -= 1
-	else:
-		subToken(card, Damage)
-
-def subDaze(card, x = 0, y = 0):
-	subToken(card, Daze)
-
-def subDisable(card, x = 0, y = 0):
-	subToken(card, Disable)
-
-def subGrowth(card, x = 0, y = 0):
-	subToken(card, Growth)
-
-def subMana(card, x = 0, y = 0):
-	subToken(card, Mana)
-
-def subMelee(card, x = 0, y = 0):
-	subToken(card, Melee)
-
-def subRot(card, x = 0, y = 0):
-	subToken(card, Rot)
-
-def subSlam(card, x = 0, y = 0):
-	subToken(card, Slam)
-
-def subStun(card, x = 0, y = 0):
-	subToken(card, Stun)
-
-def subStuck(card, x = 0, y = 0):
-	subToken(card, Stuck)
-
-def subTaint(card, x = 0, y = 0):
-	subToken(card, Taint)
-
-def subVet(card, x = 0, y = 0):
-	subToken(card, Veteran)
-
-def subWeak(card, x = 0, y = 0):
-	subToken(card, Weak)
-
-def subZombie(card, x = 0, y = 0):
-	subToken(card, Zombie)
-
-def clearTokens(card, x = 0, y = 0):
-	mute()
-	for tokenType in card.markers:
-		card.markers[tokenType] = 0
-	notify("{} removes all tokens from '{}'".format(me, card.Name))
-
 
 ############################################################################
 ######################		Other  Actions		################################

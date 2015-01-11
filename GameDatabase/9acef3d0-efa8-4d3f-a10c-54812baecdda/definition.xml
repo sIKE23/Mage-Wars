@@ -124,7 +124,7 @@
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
 			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTaint" />
-			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVet" />
+			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran" />
 			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak" />
 			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
 			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther" />
@@ -146,7 +146,7 @@
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
 			<cardaction menu="Remove Stun Marker" default="False" shortcut="Ctrl+Alt+S" execute="subStun" />
 			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint" />
-			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVet" />
+			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVeteran" />
 			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
 			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie" />
 			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
