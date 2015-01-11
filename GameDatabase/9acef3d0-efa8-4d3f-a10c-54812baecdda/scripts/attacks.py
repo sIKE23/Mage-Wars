@@ -211,19 +211,16 @@ def computeTraits(card):
                         else:
                                 traitsGranted = []
                 rawTraitsList.extend(traitsGranted)
-        debug(str(['Melee',card.markers[Melee]]))
         rawTraitsList.append('Melee +{}'.format(str(card.markers[Melee])))
         rawTraitsList.append('Ranged +{}'.format(str(card.markers[Ranged])))
         rawTraitsList.append('Armor +{}'.format(str(card.markers[Armor])))
-        if card.markers[Pet]: rawTraitsList.extend('Melee +1','Armor +1','Life +3')
-        #Blood Reaper
-        #Armor
-        #Corrode
-        #Eternal Servant
-        #Growth
-        #Treebond
-        #Veteran
-        debug('rawTraitsList='+str(rawTraitsList))
+        rawTraitsList.extend(['Life +{}'.format(str(3*card.markers[Growth])),'Melee +{}'.format(str(card.markers[Growth]))])
+        rawTraitsList.append('Armor -{}'.format(str(card.markers[Corrode])))
+        if card.markers[Pet]: rawTraitsList.extend(['Melee +1','Armor +1','Life +3'])
+        if card.markers[BloodReaper]: rawTraitsList.append('Bloodthirsty +2')
+        if card.markers[Eternal_Servant]: rawTraitsList.append('Piercing +1')
+        if card.markers[Treebond]: rawTraitsList.extend(['Innate Life +4','Armor +1','Lifebond +2'])
+        if card.markers[Veteran]: rawTraitsList.extend(['Armor +1','Melee +1'])
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)
                 if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + int(formTrait[1])
@@ -249,43 +246,8 @@ def getAdjustedDice(attacker,attack,defender=None):
 
 def getAdjustedArmor(card):
         baseDefense = getStat(card.Stats,'Armor')
-        armorTokens = card.markers[Armor]
-        enchantBonus = 0
-        for c in getAttachments(card):
-                if c.isFaceUp: enchantBonus += {'Rhino Hide' : 2,
-                                                'Barkskin' : 2,
-                                                'Brace Yourself' : 4,
-                                                'Rust' : -2}.get(c.name,0)
-        equipBonus = 0
-        if card.type == 'Mage':
-                for c in table:
-                        if c.type == 'Equipment' and c.isFaceUp and c.controller == card.controller:
-                                equipBonus += {'Storm Drake Hide' : 2,
-                                               'Spiked Armor' : 2,
-                                               'Chitin Armor' : 2,
-                                               'Leviathan Scale Armor' : 2,
-                                               'Bearskin' : 2,
-                                               'Demonhide Armor' : 2,
-                                               'Dragonscale Hauberk' : 2,
-                                               'Elemental Cloak' : 1,
-                                               'Leather Boots' : 1,
-                                               'Leather Gloves' : 1,
-                                               'Wind Wyvern Hide' : 2,
-                                               'Harshforge Plate' : 2}.get(c.name,0)
-                                equipBonus += c.markers[RuneofFortification]
-        conditionBonus = -1*card.markers[Corrode]
-        abilityBonus = 0
-        abilityBonus += (((card.markers[Pet] + card.markers[Veteran] + card.markers[Treebond]) if card.type != 'Mage' else 0) +
-                        (3 if (card.name == 'Gargoyle Sentry' and card.markers[Guard]) else 0))
-        armor = max(baseDefense +
-                    armorTokens +
-                    enchantBonus +
-                    equipBonus +
-                    conditionBonus +
-                    abilityBonus,
-                    0)
-        debug(card.name+'\'s armor ='+str(armor))
-        return armor
+        traitDict = computeTraits(card)
+        return max(baseDefense+traitDict.get('Armor',0),0)
 
 """
 Probability Distributions
@@ -295,6 +257,7 @@ Due to the recursive nature of the computation, computing <dice> values in exces
 However, this problem is solved by simply computing each dictionary before hand and then storing a list (or dictionary) of all
 that are likely to be used. In other words, functions should not refer to comboDistr; we will simply run it to compute each dictionary.
 """
+
 def comboDistr(dice):
     dieOutcomes = [[0,0],[1,0],[0,1],[2,0],[0,2]]
     distrDict = {'[0,0]': 1}
