@@ -744,7 +744,7 @@ def resolveLoadTokens():
 
 def resolveChanneling(c):
 	mute()
-	for c in me.piles['Discard']:
+	for card in me.piles['Discard']:
 		if c == card:
 			return
 
@@ -793,7 +793,7 @@ def resolveUpkeep():
 					else:
 						choiceList = ['Yes', 'No']
 						colorsList = ['#0000FF', '#FF0000']
-						choice = askChoice("Did you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
+						choice = askChoice("Do you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
 						if choice == 1:
 							me.mana -= 1
 							notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
@@ -812,7 +812,7 @@ def resolveUpkeep():
 			 		if TraitValue >= 1:
 			 			choiceList = ['Yes', 'No']
 						colorsList = ['#0000FF', '#FF0000']
-						choice = askChoice("Did you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
+						choice = askChoice("Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
 						if choice == 1:
 							if me.Mana >= TraitValue:
 								me.mana -= TraitValue
