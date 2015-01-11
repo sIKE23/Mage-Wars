@@ -174,6 +174,62 @@ def getAttackList(card):
                 if hasDiceValue: attackList.append(aDict)
         return attackList
 
+def traitParser(traitStr):
+        """Reads a single trait and returns it in a standardized, parsed form. Should be used for everything that needs to read traits as information.
+        Each trait is returned as a list with 1-2 values, with the first value being the identifier and the second being the value. The computeTraits
+        function will take this list and output a dictionary, which will be the standard format for readable traits."""
+        spaceSeparatedTraits = ["Regenerate ",
+                                "Aegis ",
+                                "Uproot "]
+        formattedTrait = [traitStr,None]
+        if " +" in traitStr: formattedTrait = traitStr.split(' +')
+        elif " -" in traitStr: formattedTrait = traitStr.split(' ')
+        elif " Immunity" in traitStr: formattedTrait = ["Immunity",traitStr.split(' ')[0]]
+        for s in spaceSeparatedTraits:
+                if s in traitStr: formattedTrait = traitStr.split(' ')
+        return formattedTrait
+
+def computeTraits(card):
+        """This is the centralized function that reads all traits possessed by a card. Do NOT compute traits anywhere else, ONLY compute them here.
+        It returns a dictionary of traits. This function will end up being quite long and complex.It works together with traitParser. Standard format
+        for traits is a dictionary."""
+        additiveTraits = ["Melee",
+                          "Ranged",
+                          "Charge",
+                          "Bloodthirsty",
+                          'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
+        superlativeTraits = ["Regenerate",
+                             "Aegis",
+                             "Uproot"]
+        traitDict = {}
+        rawTraitsList = card.Traits.split(', ')
+        for c in getAttachments(card): #Get bonuses from attached enchantments
+                if c.type == 'Enchantment':
+                        rawText = c.text.split('\n\t[')
+                        if len(rawText) == 2:
+                                traitsGranted = [t.strip('[]') for t in rawText[1].split('] [')]
+                        else:
+                                traitsGranted = []
+                rawTraitsList.extend(traitsGranted)
+        debug(str(['Melee',card.markers[Melee]]))
+        rawTraitsList.append('Melee +{}'.format(str(card.markers[Melee])))
+        rawTraitsList.append('Ranged +{}'.format(str(card.markers[Ranged])))
+        rawTraitsList.append('Armor +{}'.format(str(card.markers[Armor])))
+        if card.markers[Pet]: rawTraitsList.extend('Melee +1','Armor +1','Life +3')
+        #Blood Reaper
+        #Armor
+        #Corrode
+        #Eternal Servant
+        #Growth
+        #Treebond
+        #Veteran
+        debug('rawTraitsList='+str(rawTraitsList))
+        for rawTrait in rawTraitsList:
+                formTrait = traitParser(rawTrait)
+                if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + int(formTrait[1])
+                if formTrait[0] in superlativeTraits: traitDict[formTrait[0]] = max(traitDict.get(formTrait[0],0),int(formTrait[1]))
+        return traitDict
+
 """
 Trait and Attack Adjustments
 
@@ -183,21 +239,12 @@ state of the game and the cards attached to it.
 def getAdjustedDice(attacker,attack,defender=None):
         """Decides how many dice should be rolled for attack based on the attacker (and the defender, if any)."""
         attackDice = attack['Dice']
-        if attack['Range'][0] == 'Melee':
-                meleePlusX = attacker.markers[Melee]
-                #First, deal with melee +X traits from enchants
-                for c in getAttachments(attacker):
-                        if c.isFaceUp: meleePlusX += {'Bear Strength' : 2,
-                                                      'Power Strike' : 2}.get(c.name,0)
-                meleePlusX += attacker.markers[Pet]
-                
-                attackDice += meleePlusX
-        if attack['Range'][0] == 'Ranged':
-                rangedPlusX = 0#attacker.markers[Ranged]
-                for c in getAttachments(attacker):
-                        if c.isFaceUp: rangedPlusX += {'Hawkeye' : 1}.get(c.name,0)
-                if attacker.name == "Johktari Beastmaster": rangedPlusX += 1
-                attackDice += rangedPlusX
+        aTraitDict = computeTraits(attacker)
+        dTraitDict = (computeTraits(defender) if defender else None)
+        if attack['Range'][0] == 'Melee': attackDice += aTraitDict.get('Melee',0)
+        if attack['Range'][0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+        if defender:
+                attackDice -= dTraitDict.get('Aegis',0)
         return attackDice
 
 def getAdjustedArmor(card):
