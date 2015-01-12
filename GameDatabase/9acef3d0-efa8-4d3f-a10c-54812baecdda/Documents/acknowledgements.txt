@@ -1,5 +1,7 @@
-v1.10.0.0
+v1.11.0.0
 Thanks goes out to the following:
 
 freeSFX - http://www.freesfx.co.uk for sounds used in the game
-Arcane Wonders - they have graciously provided cusomer 1v1 and 2v2 images for Matchmaking. www.arcanewonders.com
+Arcane Wonders - they have graciously provided custom 1v1 and 2v2 images for Matchmaking. www.arcanewonders.com
+Brine - for being so paitent and helpful
+Kelly - for being so paitent and helpful
