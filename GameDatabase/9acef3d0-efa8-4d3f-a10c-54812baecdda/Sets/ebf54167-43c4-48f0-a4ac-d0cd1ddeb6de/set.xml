@@ -765,7 +765,7 @@
 			<property name="School" value="Dark+Fire" />
 			<property name="Level" value="4+2" />
 			<property name="Stats" value="Armor=3, Life=14" />
-			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn;10+ = 2 Burn] [Defrost]&#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn;11+ = 2 Burn] [Sweeping] [Defrost]" />
+			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost]&#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Sweeping] [Defrost]" />
 			<property name="Traits" value="Flying, Flame Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C01" />
@@ -977,7 +977,7 @@
 			<property name="Stats" value="Armor=3, Life=12" />
 			<property name="AttackBar" value="Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Feral Claws:&#xD;&#xA;[Full] [Melee] [Dice=3] [Doublestrike]" />
 			<property name="Traits" value="Bloodthirsty +1, Legendary, Warlock Only" />
-			<property name="Text" value="" />
+			<property name="Text" value="Goran gains an additional Bloodthirsty +1 trait while in the same zone as his controlling Mage." />
 			<property name="CardID" value="MW1C17" />
 		</card>
 		<card id="03d52691-75b2-42ec-a81c-ca2074f28002" name="Gorgon Archer">

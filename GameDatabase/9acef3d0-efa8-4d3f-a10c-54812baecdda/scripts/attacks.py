@@ -195,6 +195,7 @@ def computeTraits(card):
         for traits is a dictionary."""
         additiveTraits = ["Melee",
                           "Ranged",
+                          "Armor",
                           "Charge",
                           "Bloodthirsty",
                           'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
@@ -223,8 +224,9 @@ def computeTraits(card):
         if card.markers[Veteran]: rawTraitsList.extend(['Armor +1','Melee +1'])
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)
-                if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + int(formTrait[1])
-                if formTrait[0] in superlativeTraits: traitDict[formTrait[0]] = max(traitDict.get(formTrait[0],0),int(formTrait[1]))
+                if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + (0 if formTrait[1] == '-' else int(formTrait[1]))
+                elif formTrait[0] in superlativeTraits: traitDict[formTrait[0]] = max(traitDict.get(formTrait[0],0),int(formTrait[1]))
+                else: traitDict[formTrait[0]] = True
         return traitDict
 
 """
@@ -242,12 +244,16 @@ def getAdjustedDice(attacker,attack,defender=None):
         if attack['Range'][0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
+                attackDice += (aTraitDict.get('Bloodthirsty',0) if defender.markers[Damage] else 0)
+                attackDice += dTraitDict.get(attack.get('Type',None),0) #Elemental weaknesses/resistances
+                #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
+                #traits that are hard to autodetect.
         return attackDice
 
 def getAdjustedArmor(card):
-        baseDefense = getStat(card.Stats,'Armor')
+        baseArmor = getStat(card.Stats,'Armor')
         traitDict = computeTraits(card)
-        return max(baseDefense+traitDict.get('Armor',0),0)
+        return max(baseArmor+traitDict.get('Armor',0),0)
 
 """
 Probability Distributions
@@ -288,12 +294,12 @@ target.
 def computeDamage(normal,critical,armor):
     return max([normal-armor,0])+critical
     
-def expectedDamage(dice,armor):
+def expectedDamage(dice,armor,traitDict=None):
     if dice <= len(DamageDict)-1 : distrDict = DamageDict[dice]
     else: return
     return sum([computeDamage(eval(key)[0],eval(key)[1],armor)*distrDict[key] for key in distrDict])/float(6**dice)
 
-def chanceToKill(dice,armor,life):
+def chanceToKill(dice,armor,life,traitDict=None):
     if dice <= len(DamageDict)-1 : distrDict = DamageDict[dice]
     else: return
     return sum([distrDict[key] for key in distrDict if computeDamage(eval(key)[0],eval(key)[1],armor) >= life])/float(6**dice)
