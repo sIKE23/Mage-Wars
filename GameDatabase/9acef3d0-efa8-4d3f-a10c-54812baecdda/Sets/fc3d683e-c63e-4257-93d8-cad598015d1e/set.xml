@@ -398,7 +398,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=4" />
-			<property name="AttackBar" value="Diseased Strike:&#xD;&#xA;[Quick] [Melee] [Dice=1] [d12] [8+ = Rot]" />
+			<property name="AttackBar" value="Diseased Strike:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [8+ = Rot]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="When Plague Zombie is destroyed, place a Rot condition on each Living creature in its " />
 			<property name="CardID" value="DNC09" />
@@ -609,7 +609,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=4" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-			<property name="Traits" value="Bloodthirsty+1, Slow, Pest, Resilient, Psychic Immunity, Nonliving" />
+			<property name="Traits" value="Bloodthirsty +1, Slow, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC23" />
 		</card>

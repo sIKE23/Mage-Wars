@@ -1,3 +1,4 @@
+from math import factorial
 """
 Mage Wars Attacks Module
 
@@ -111,8 +112,8 @@ def diceRollMenu(attacker = None,defender = None):
                         ('\n'+', '.join(attack['Traits']) if attack['Traits'] else '')+
                         ('\n'+' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else '')+
                         ('\n'+'Expected damage: {} | Kill chance: {}%\t'.format(
-                        round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor),1),
-                        round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life)*100,1)) if defender else '')
+                        round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor,computeTraits(card)),1),
+                        round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life,computeTraits(card))*100,1)) if defender else '')
                         for attack in attackList]
                 if defender: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         colors = ['#de2827' for i in range(len(choices))]
@@ -294,15 +295,20 @@ target.
 def computeDamage(normal,critical,armor):
     return max([normal-armor,0])+critical
     
-def expectedDamage(dice,armor,traitDict=None):
-    if dice <= len(DamageDict)-1 : distrDict = DamageDict[dice]
+def expectedDamage(dice,armor,traitDict={}):
+    if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
     else: return
+    if traitDict.get('Incorporeal',False): return float(dice)/3 #Incorporeal objects require a different (but, thankfully, simpler) damage computation
     return sum([computeDamage(eval(key)[0],eval(key)[1],armor)*distrDict[key] for key in distrDict])/float(6**dice)
 
-def chanceToKill(dice,armor,life,traitDict=None):
-    if dice <= len(DamageDict)-1 : distrDict = DamageDict[dice]
+def chanceToKill(dice,armor,life,traitDict={}):
+    if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
     else: return
-    return sum([distrDict[key] for key in distrDict if computeDamage(eval(key)[0],eval(key)[1],armor) >= life])/float(6**dice)
+    if traitDict.get('Incorporeal',False): return sum([nCr(dice,r)*(2**r) for r in range(dice+1) if r >= life])/float(6**dice)
+    return sum([distrDict[key] for key in distrDict if computeDamage((0 if traitDict.get('Resilient') else eval(key)[0]),eval(key)[1],armor) >= life])/float(6**dice)
+
+def nCr(n,r):
+    return factorial(n) / factorial(r) / factorial(n-r)
 
 def getD12Probability(strRange,d12Bonus):
         lowerBound, upperBound = 0,None
@@ -312,6 +318,7 @@ def getD12Probability(strRange,d12Bonus):
         lowerBound,upperBound = max(lowerBound - d12Bonus,0),(max(upperBound - d12Bonus,0) if upperBound else None)
         successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if upperBound else 12) - lowerBound + 1)
         return min(successIncidence/float(12),float(1))
+
 """
 Pre-Generated Data
 
@@ -319,7 +326,7 @@ Pre-generated damage frequency dictionaries should be stored below. Don't put an
 as needed by using comboDistr() and copypasting, though I can't imagine anybody needs more than a 10 dice calculation (what would you really
 need to know besides *You're dead, ha ha ha*?)
 """
-DamageDict = {
+damageDict = {
     0 : {'[0,0]': 1},
     1 : {'[0, 1]': 1, '[2, 0]': 1, '[0, 2]': 1, '[0, 0]': 2, '[1, 0]': 1},
     2 : {'[1, 2]': 2, '[0, 4]': 1, '[0, 2]': 5, '[3, 0]': 2, '[2, 2]': 2, '[0, 3]': 2, '[1, 1]': 2, '[2, 0]': 5, '[2, 1]': 2, '[0, 1]': 4, '[4, 0]': 1, '[1, 0]': 4, '[0, 0]': 4},

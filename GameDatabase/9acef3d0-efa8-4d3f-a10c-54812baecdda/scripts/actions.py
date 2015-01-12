@@ -1516,10 +1516,7 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 	for statitem in statlist:
 		statval = statitem.split("=")
 		if statval[0] == stat:
-			try:
-				return int(statval[1])
-			except:
-				return 0
+                        return (0 if statval[1]=='-' else int(statval[1])) 
 	return 0
 
 def getRemainingLife(card):
