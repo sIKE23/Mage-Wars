@@ -515,7 +515,6 @@ def AskDiceRollArea():
 	for p in players:
 		remoteCall(p, "setDRAIP", [choice])
 
-
 def CreateIniToken():
 	global gameStartTime
 	global iniTokenCreated
@@ -778,11 +777,11 @@ def resolveUpkeep():
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
-	for c in me.piles['Discard']:
-		 if c == card:
-		 	return
 
 	for card in table:
+		for c in me.piles['Discard']:
+	 		if c == card:
+		 		return
 		if "Mordok's Obelisk" == card.Name:
 			for c in table:
 				if c.Type == "Creature" and c.isFaceUp and c.controller == me:
@@ -1631,7 +1630,6 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 		else:
 			return -1
 
-
 def doDiscount(cdiscount):
 	global discountsUsed
 	lines = cdiscount.Text.split("[Casting Discount]")
@@ -1767,7 +1765,6 @@ def getTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1])
 	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
 	return (TraitCost, TraitStr)
-
 
 def chooseMagebind(card, mageRevealCost, TraitCosts):
 	global infostr
