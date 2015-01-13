@@ -112,8 +112,8 @@ def diceRollMenu(attacker = None,defender = None):
                         ('\n'+', '.join(attack['Traits']) if attack['Traits'] else '')+
                         ('\n'+' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else '')+
                         ('\n'+'Expected damage: {} | Kill chance: {}%\t'.format(
-                        round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor,computeTraits(card)),1),
-                        round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life,computeTraits(card))*100,1)) if defender else '')
+                        round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor,computeTraits(defender)),1),
+                        round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life,computeTraits(defender))*100,1)) if defender else '')
                         for attack in attackList]
                 if defender: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         colors = ['#de2827' for i in range(len(choices))]
@@ -228,6 +228,7 @@ def computeTraits(card):
                 if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + (0 if formTrait[1] == '-' else int(formTrait[1]))
                 elif formTrait[0] in superlativeTraits: traitDict[formTrait[0]] = max(traitDict.get(formTrait[0],0),int(formTrait[1]))
                 else: traitDict[formTrait[0]] = True
+        debug(card.name+' traits = '+str(traitDict))
         return traitDict
 
 """
@@ -245,7 +246,7 @@ def getAdjustedDice(attacker,attack,defender=None):
         if attack['Range'][0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
-                attackDice += (aTraitDict.get('Bloodthirsty',0) if defender.markers[Damage] else 0)
+                attackDice += (aTraitDict.get('Bloodthirsty',0) if (defender.markers[Damage] and not 'Plant' in defender.subtype and defender.type == 'Creature' and not dTraitDict.get('Nonliving',False)) else 0)
                 attackDice += dTraitDict.get(attack.get('Type',None),0) #Elemental weaknesses/resistances
                 #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
                 #traits that are hard to autodetect.
@@ -299,12 +300,12 @@ def expectedDamage(dice,armor,traitDict={}):
     if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
     else: return
     if traitDict.get('Incorporeal',False): return float(dice)/3 #Incorporeal objects require a different (but, thankfully, simpler) damage computation
-    return sum([computeDamage(eval(key)[0],eval(key)[1],armor)*distrDict[key] for key in distrDict])/float(6**dice)
+    return sum([computeDamage((0 if traitDict.get('Resilient') else eval(key)[0]),eval(key)[1],armor)*distrDict[key] for key in distrDict])/float(6**dice)
 
 def chanceToKill(dice,armor,life,traitDict={}):
     if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
     else: return
-    if traitDict.get('Incorporeal',False): return sum([nCr(dice,r)*(2**r) for r in range(dice+1) if r >= life])/float(6**dice)
+    if traitDict.get('Incorporeal',False): return sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice)
     return sum([distrDict[key] for key in distrDict if computeDamage((0 if traitDict.get('Resilient') else eval(key)[0]),eval(key)[1],armor) >= life])/float(6**dice)
 
 def nCr(n,r):

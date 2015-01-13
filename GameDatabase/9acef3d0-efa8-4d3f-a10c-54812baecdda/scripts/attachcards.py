@@ -118,7 +118,7 @@ def alignAttachments(card):
         alignQueue = {}
         side = (-1 if table.isInverted(y) else 1)
         for c in attachments:
-            Y = y-(count*side)*8
+            Y = y-(count*side)*12
             #Please align your own cards first...
             if c.controller == me:
                 c.moveToTable(x,Y)
