@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.11.0.0    ##################################
+##########################    v1.11.1.0    ##################################
 ############################################################################
 import time
 import re
@@ -121,7 +121,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.11.0.0"
+ver = "1.11.1.0"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -613,8 +613,9 @@ def nextPhase(group, x=-360, y=-150):
 		if switchPhase(card,"","Upkeep Phase") == True: #Back to Upkeep
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
-			advanceTurn()
-			gameTurn = turnNumber() + 1
+			#advanceTurn()
+			gTurn = getGlobalVariable("RoundNumber")
+			gameTurn = int(gTurn) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
@@ -625,21 +626,12 @@ def nextPhase(group, x=-360, y=-150):
 				flipcard(init)
 			else:
 				remoteCall(init.controller, "flipcard", [init])
-			for p in players:
-				p.Mana += p.Channeling
-				notify("{} channels {}".format(p.name,p.Channeling))
-			for c in table:
-				if c.isFaceUp: #don't waste time on facedown cards
-					#reset markers
-					#resolve channeling cards (harmonize, spawnpoints, familiars)
-					if c.controller == me:
-						resetMarkers(c)
-						resolveChanneling(c)
-					else:
-						remoteCall(c.controller, "resetMarkers", [c])
-						remoteCall(c.controller, "resolveChanneling", [c])
+
 			#resolve other automated items
 			for p in players:
+				remoteCall(p, "playerChanneling", [])
+				remoteCall(p, "resetMarkers", [])
+				remoteCall(p, "resolveChanneling", [])
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveBleed", [])
@@ -648,6 +640,12 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
+
+def playerChanneling():
+	me.Mana += me.Channeling
+	notify("{} Channels {} into Mana supply: {} Total Mana.".format(me.name,me.Channeling,me.Mana))
+	debug("Debug2: {} Mana {}".format(me.name,me.Mana))
+	delay = rnd(1,1000)
 
 def resetDiscounts():
 	#reset discounts used
@@ -667,46 +665,49 @@ def advanceTurn():
 def setActiveP(p):
 	p.setActivePlayer()
 
-def resetMarkers(c):
+def resetMarkers():
 	mute()
-	if c.markers[ActionRedUsed] == 1:
-		c.markers[ActionRedUsed] = 0
-		c.markers[ActionRed] = 1
-	if c.markers[ActionBlueUsed] == 1:
-		c.markers[ActionBlueUsed] = 0
-		c.markers[ActionBlue] = 1
-	if c.markers[ActionGreenUsed] == 1:
-		c.markers[ActionGreenUsed] = 0
-		c.markers[ActionGreen] = 1
-	if c.markers[ActionYellowUsed] == 1:
-		c.markers[ActionYellowUsed] = 0
-		c.markers[ActionYellow] = 1
-	if c.markers[ActionPurpleUsed] == 1:
-		c.markers[ActionPurpleUsed] = 0
-		c.markers[ActionPurple] = 1
-	if c.markers[ActionGreyUsed] == 1:
-		c.markers[ActionGreyUsed] = 0
-		c.markers[ActionGrey] = 1
-	if c.markers[QuickBack] == 1:
-		c.markers[QuickBack] = 0
-		c.markers[Quick] = 1
-	if c.markers[Used] == 1:
-		c.markers[Used] = 0
-		c.markers[Ready] = 1
-	if c.markers[UsedII] == 1:
-		c.markers[UsedII] = 0
-		c.markers[ReadyII] = 1
-	if c.markers[VoltaricON] == 1:
-		c.markers[VoltaricON] = 0
-		c.markers[VoltaricOFF] = 1
-	if c.markers[DeflectU] == 1:
-		c.markers[DeflectU] = 0
-		c.markers[DeflectR] = 1
-	if c.markers[Visible] == 1:
-		c.markers[Visible] = 0
-		c.markers[Invisible] = 1
+	for c in table:
+		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
 
-	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
+			if c.markers[ActionRedUsed] == 1:
+				c.markers[ActionRedUsed] = 0
+				c.markers[ActionRed] = 1
+			if c.markers[ActionBlueUsed] == 1:
+				c.markers[ActionBlueUsed] = 0
+				c.markers[ActionBlue] = 1
+			if c.markers[ActionGreenUsed] == 1:
+				c.markers[ActionGreenUsed] = 0
+				c.markers[ActionGreen] = 1
+			if c.markers[ActionYellowUsed] == 1:
+				c.markers[ActionYellowUsed] = 0
+				c.markers[ActionYellow] = 1
+			if c.markers[ActionPurpleUsed] == 1:
+				c.markers[ActionPurpleUsed] = 0
+				c.markers[ActionPurple] = 1
+			if c.markers[ActionGreyUsed] == 1:
+				c.markers[ActionGreyUsed] = 0
+				c.markers[ActionGrey] = 1
+			if c.markers[QuickBack] == 1:
+				c.markers[QuickBack] = 0
+				c.markers[Quick] = 1
+			if c.markers[Used] == 1:
+				c.markers[Used] = 0
+				c.markers[Ready] = 1
+			if c.markers[UsedII] == 1:
+				c.markers[UsedII] = 0
+				c.markers[ReadyII] = 1
+			if c.markers[VoltaricON] == 1:
+				c.markers[VoltaricON] = 0
+				c.markers[VoltaricOFF] = 1
+			if c.markers[DeflectU] == 1:
+				c.markers[DeflectU] = 0
+				c.markers[DeflectR] = 1
+			if c.markers[Visible] == 1:
+				c.markers[Visible] = 0
+				c.markers[Invisible] = 1
+
+			debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
 	mute()
@@ -807,117 +808,134 @@ def resolveLoadTokens():
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
 
-def resolveChanneling(c):
+def resolveChanneling():
 	mute()
-	for card in me.piles['Discard']:
-		if c == card:
-			return
+	for c in table:
+		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
+			for card in me.piles['Discard']:
+				if c == card:
+					return
 
-	if c.Stats != None and c.Type != "Mage":
-		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
-			channel = getStat(c.Stats,"Channeling")
-			debug("Found Channeling stat {} in card {}".format(channel,c.name))
-			for x in range(channel):
-				addMana(c)
-	if c.name == "Barracks": #has the channeling=X stat
-		debug("Found Barracks")
-		x = 0
-		for c2 in table:
-			if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
-				#debug("owners {} {}".format(c.owner,c2.owner))
-				if "Outpost" in c2.Subtype and c.owner == c2.owner:
-					debug("Found Outpost")
-					addMana(c)
-					x += 1
-			if x == 3: #max 3 outpost count.
-				break
-	if c.name == "Harmonize":
-		c2 = cardHere(cardX(c)-1,cardY(c)-1,"Channeling=")
-		if c2 != None and c2.Type != "Mage":
-			debug("Overlap found (top left) {}".format(c2.name))
-			addMana(c2)
-			whisper("Harmonize found and Mana added to channeling card")
-		else:
-			c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
-			if c2 != None and c2.Type !="Mage":
-				debug("Overlap found (bottom right) {}".format(c2.name))
-				addMana(c2)
-				whisper("Harmonize found and Mana added to channeling card")
-			else:
-				c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
-				if c2 != None and c2.Type !="Mage":
-					debug("Overlap found (bottom left) {}".format(c2.name))
+			if c.Stats != None and c.Type != "Mage":
+				if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
+					channel = getStat(c.Stats,"Channeling")
+					debug("Found Channeling stat {} in card {}".format(channel,c.name))
+					for x in range(channel):
+						addMana(c)
+			if c.name == "Barracks": #has the channeling=X stat
+				debug("Found Barracks")
+				x = 0
+				for c2 in table:
+					if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
+						#debug("owners {} {}".format(c.owner,c2.owner))
+						if "Outpost" in c2.Subtype and c.owner == c2.owner:
+							debug("Found Outpost")
+							addMana(c)
+							x += 1
+					if x == 3: #max 3 outpost count.
+						break
+			if c.name == "Harmonize":
+				c2 = cardHere(cardX(c)-1,cardY(c)-1,"Channeling=")
+				if c2 != None and c2.Type != "Mage":
+					debug("Overlap found (top left) {}".format(c2.name))
 					addMana(c2)
 					whisper("Harmonize found and Mana added to channeling card")
 				else:
-					c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
+					c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
 					if c2 != None and c2.Type !="Mage":
-						debug("Overlap found (top right) {}".format(c2.name))
+						debug("Overlap found (bottom right) {}".format(c2.name))
 						addMana(c2)
 						whisper("Harmonize found and Mana added to channeling card")
 					else:
-						whisper("Harmonize found but no Mana added")
+						c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
+						if c2 != None and c2.Type !="Mage":
+							debug("Overlap found (bottom left) {}".format(c2.name))
+							addMana(c2)
+							whisper("Harmonize found and Mana added to channeling card")
+						else:
+							c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
+							if c2 != None and c2.Type !="Mage":
+								debug("Overlap found (top right) {}".format(c2.name))
+								addMana(c2)
+								whisper("Harmonize found and Mana added to channeling card")
+							else:
+								whisper("Harmonize found but no Mana added")
 
 def resolveUpkeep():
 	mute()
+	PsiOrbDisc = 0
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
 
 	for card in table:
-		for c in me.piles['Discard']:
+		if "Psi-Orb" == card.name and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
+		 	PsiOrbDisc = 3
+		 	debug("Psi-Orb Discount: {} ".format(str(PsiOrbDisc)))
+
+	for card in table:
+		for c in me.piles['Discard']: # if the card was discarded below we are done processing it
 	 		if c == card:
 		 		return
-		if "Mordok's Obelisk" == card.Name:
-			for c in table:
-				if c.Type == "Creature" and c.isFaceUp and c.controller == me:
-					if me.mana < 1:
-						c.moveTo(me.piles['Discard'])
-						notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
-						return
-					else:
-						choiceList = ['Yes', 'No']
-						colorsList = ['#0000FF', '#FF0000']
-						choice = askChoice("Do you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
-						if choice == 1:
-							me.mana -= 1
-							notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
-						else:
-							c.moveTo(me.piles['Discard'])
-							notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
-							return
-		else:
-		 	if card.controller == me and "Upkeep" in card.Traits:
-			 	if me.mana < 1:
-			 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-			 		card.moveTo(me.piles['Discard'])
-			 		return
-			 	else:
-			 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
-			 		if TraitValue >= 1:
-			 			choiceList = ['Yes', 'No']
-						colorsList = ['#0000FF', '#FF0000']
-						choice = askChoice("Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name), choiceList, colorsList)
-						if choice == 1:
-							if me.Mana >= TraitValue:
-								me.mana -= TraitValue
-								notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
-								if "Forcefield" == card.Name:
-									notify("Resolving Forcefield Tokens for {}...".format(me))
-									if card.markers[FFToken] == 0:
-										notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-										card.markers[FFToken] = 1
-									elif card.markers[FFToken] == 1:
-										notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-										card.markers[FFToken] = 2
-									elif card.markers[FFToken] == 2:
-										notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-										card.markers[FFToken] = 3
-									notify("Finished adding Forcefield Tokens for {}.".format(me))
-						else:
-							notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-							card.moveTo(me.piles['Discard'])
-							return
+	 	if "Mordok's Obelisk" == card.Name: # process players cards for Mordok's Upkeep on all non-Mage Creatures
+	 		for c in table:
+	 			if c.Type == "Creature" and c.isFaceUp and c.controller == me:
+	 				if me.Mana < 1:
+	 					c.moveTo(me.piles['Discard'])
+	 					notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
+	 					return
+	 				else:
+	 					choiceList = ['Yes', 'No']
+	 					colorsList = ['#0000FF', '#FF0000']
+	 					choice = askChoice("Do you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
+	 					if choice == 1:
+	 						me.Mana -= 1
+	 						notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
+	 					else:
+	 						c.moveTo(me.piles['Discard'])
+	 						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
+	 						return
+	 	else:
+	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp and card.type != "Internal":
+	 			debug("Debug3: {} me.Mana:{}".format(me.name,me.Mana))
+	 		 	if me.Mana < 1:
+	 		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+	 		 		card.moveTo(me.piles['Discard'])
+	 		 		return
+	 		 	else:
+	 		 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
+	 		 		notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name)
+	 		 		debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
+					if PsiOrbDisc > 0 and "Mind" == card.school:
+						PsiOrbDisc -= 1
+						notify("{} - Psi-Orb Discount was used to pay 1 Mana point towards the Upkeep cost for '{}', there are '{}' remaining Upkeep discounts left this Round.".format(me,card.name,PsiOrbDisc))
+						TraitValue = TraitValue - 1
+						notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(TraitValue, card.Name)
+
+	 		 		if TraitValue >= 1:
+	 		 			choiceList = ['Yes', 'No']
+	 					colorsList = ['#0000FF', '#FF0000']
+	 					choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+	 					if choice == 1:
+	 						if me.Mana >= TraitValue:
+	 							me.Mana -= TraitValue
+	 							notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+	 							if "Forcefield" == card.Name:
+	 								notify("Resolving Forcefield Tokens for {}...".format(me))
+	 								if card.markers[FFToken] == 0:
+	 									notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+	 									card.markers[FFToken] = 1
+	 								elif card.markers[FFToken] == 1:
+	 									notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+	 									card.markers[FFToken] = 2
+	 								elif card.markers[FFToken] == 2:
+	 									notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+	 									card.markers[FFToken] = 3
+	 								notify("Finished adding Forcefield Tokens for {}.".format(me))
+	 					else:
+	 						notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+	 						card.moveTo(me.piles['Discard'])
+	 						return
 
 def mageStatus():
 	global gameEndTime
@@ -2006,7 +2024,6 @@ def chooseMagebind(card, mageRevealCost, TraitCosts):
 	else:  # Enchatment is not targeting a Mage
 		mcastingCost = int(mageRevealCost)
 	return mcastingCost
-
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
