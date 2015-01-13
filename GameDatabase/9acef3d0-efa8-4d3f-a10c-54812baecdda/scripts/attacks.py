@@ -94,7 +94,7 @@ def diceRollMenu(attacker = None,defender = None):
         mute()
         armor,life = None, None
         if defender and defender.Type in ['Creature','Conjuration','Mage']: #Will need to be adjust to account for incorporeal and indestructible
-                armor,life = getAdjustedArmor(defender),getRemainingLife(defender)
+                armor,life = computeArmor(None,None,defender),getRemainingLife(defender)
         choiceText,choices = "Roll how many red dice?",[str(i+1) for i in range(7)]
         #First, handle case with no attacker:
         if not (attacker and getAttackList(attacker)):
@@ -108,13 +108,19 @@ def diceRollMenu(attacker = None,defender = None):
                 if attacker.type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
                         for card in table:
                                 if (card.Type == 'Equipment' and card.controller == me): attackList.extend(getAttackList(card))
-                choices = [(attack['Name']+' ('+str(getAdjustedDice(attacker,attack,defender))+')').center(68,' ')+
-                        ('\n'+', '.join(attack['Traits']) if attack['Traits'] else '')+
-                        ('\n'+' | '.join([effect[1]+' '+str(round(getD12Probability(effect[0],0)*100,1))+'%' for effect in attack['d12']]) if attack['d12'] else '')+
-                        ('\n'+'Expected damage: {} | Kill chance: {}%\t'.format(
-                        round(expectedDamage(getAdjustedDice(attacker,attack,defender),armor,computeTraits(defender)),1),
-                        round(chanceToKill(getAdjustedDice(attacker,attack,defender),armor,life,computeTraits(defender))*100,1)) if defender else '')
-                        for attack in attackList]
+                choices = []
+                for attack in attackList:
+                        modAttack = computeAttack(attacker,attack,defender)
+                        modDice = getAdjustedDice(attacker,attack,(defender if defender else None))
+                        traits = getAttackTraitStr(attack['Traits'])
+                        expDam = str(round(expectedDamage(modDice,computeArmor(attacker,attack,defender),computeTraits(defender)),1)) if defender else ''
+                        killCh = str(round(chanceToKill(modDice,computeArmor(attacker,attack,defender),life,computeTraits(defender))*100,1)) if defender else ''
+                        effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],0)*100,1))) for effect in modAttack['d12']] if modAttack['d12'] else ''
+                        choice = ("{} ({})".format(modAttack['Name'],str(modDice)).center(68,' ')+
+                                  ('\n'+', '.join(traits) if traits else '')+
+                                  ('\n'+', '.join(effectList) if effectList != '' else '')+
+                                  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if defender else ''))
+                        choices.append(choice)
                 if defender: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         colors = ['#de2827' for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
@@ -136,6 +142,19 @@ def diceRollMenu(attacker = None,defender = None):
 ######################		Data Retrieval		####################
 ############################################################################
 
+additiveTraits = ["Melee",
+                  "Ranged",
+                  "Armor",
+                  "Charge",
+                  "Bloodthirsty",
+                  "Piercing",
+                  "Mana Drain",
+                  "Mana Transfer",
+                  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
+superlativeTraits = ["Regenerate",
+                     "Aegis",
+                     "Uproot"]
+
 def getAttackList(card):
         rawData = card.AttackBar
         if rawData == '': return
@@ -151,7 +170,7 @@ def getAttackList(card):
                          'Dice':0,
                          'Type':None,
                          'd12':[],
-                         'Traits':[]
+                         'Traits': {}
                          }
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 #Now we extract the attributes
@@ -171,7 +190,11 @@ def getAttackList(card):
                                 options = attribute.split('; ')
                                 aDict['d12'] = [o.split(' = ') for o in options]
                                 effectSwitch = False
-                        else: aDict['Traits'].append(attribute)
+                        else:
+                                tPair = traitParser(attribute)
+                                if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
+                                elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
+                                else: aDict['Traits'][tPair[0]] = tPair[1]
                 if hasDiceValue: attackList.append(aDict)
         return attackList
 
@@ -179,14 +202,11 @@ def traitParser(traitStr):
         """Reads a single trait and returns it in a standardized, parsed form. Should be used for everything that needs to read traits as information.
         Each trait is returned as a list with 1-2 values, with the first value being the identifier and the second being the value. The computeTraits
         function will take this list and output a dictionary, which will be the standard format for readable traits."""
-        spaceSeparatedTraits = ["Regenerate ",
-                                "Aegis ",
-                                "Uproot "]
-        formattedTrait = [traitStr,None]
-        if " +" in traitStr: formattedTrait = traitStr.split(' +')
-        elif " -" in traitStr: formattedTrait = traitStr.split(' ')
+        formattedTrait = [traitStr,True]
+        if " +" in traitStr: formattedTrait = [traitStr.split(' +')[0], int(traitStr.split(' +')[1])]
+        elif " -" in traitStr: formattedTrait = [traitStr.split(' ')[0], int(traitStr.split(' ')[1])]
         elif " Immunity" in traitStr: formattedTrait = ["Immunity",traitStr.split(' ')[0]]
-        for s in spaceSeparatedTraits:
+        for s in superlativeTraits:
                 if s in traitStr: formattedTrait = traitStr.split(' ')
         return formattedTrait
 
@@ -194,15 +214,6 @@ def computeTraits(card):
         """This is the centralized function that reads all traits possessed by a card. Do NOT compute traits anywhere else, ONLY compute them here.
         It returns a dictionary of traits. This function will end up being quite long and complex.It works together with traitParser. Standard format
         for traits is a dictionary."""
-        additiveTraits = ["Melee",
-                          "Ranged",
-                          "Armor",
-                          "Charge",
-                          "Bloodthirsty",
-                          'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
-        superlativeTraits = ["Regenerate",
-                             "Aegis",
-                             "Uproot"]
         traitDict = {}
         rawTraitsList = card.Traits.split(', ')
         for c in getAttachments(card): #Get bonuses from attached enchantments
@@ -252,10 +263,27 @@ def getAdjustedDice(attacker,attack,defender=None):
                 #traits that are hard to autodetect.
         return attackDice
 
-def getAdjustedArmor(card):
-        baseArmor = getStat(card.Stats,'Armor')
-        traitDict = computeTraits(card)
-        return max(baseArmor+traitDict.get('Armor',0),0)
+def computeArmor(attacker,attack,defender):
+        baseArmor = getStat(defender.Stats,'Armor')
+        dTraitDict = computeTraits(defender)
+        attackDict = (computeAttack(attacker,attack,defender) if attack else {})
+        return max(baseArmor+dTraitDict.get('Armor',0)-attackDict.get('Traits',{}).get('Piercing',0),0)
+
+def computeAttack(attacker,attack,defender = None):
+        aTraitDict = computeTraits(attacker)
+        dTraitDict = (computeTraits(defender) if defender else {})
+        attackDict = attack
+        attackDict['Traits']['Piercing'] = attackDict['Traits'].get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
+        return attackDict
+
+def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and returns a clean, easy to read list of traits
+        attackList = []
+        for key in atkTraitDict:
+                text = key
+                if key in additiveTraits: text += ' +{}'.format(str(atkTraitDict[key]))
+                if key in superlativeTraits: text += ' {}'.format(str(atkTraitDict[key]))
+                if atkTraitDict[key]: attackList.append(text)
+        return attackList
 
 """
 Probability Distributions
