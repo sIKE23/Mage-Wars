@@ -1,5 +1,5 @@
 ############################################################################
-##########################    v1.11.1.0    ##################################
+##########################    v1.11.2.0    ##################################
 ############################################################################
 import time
 import re
@@ -122,7 +122,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.11.1.0"
+ver = "1.11.2.0"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -567,10 +567,7 @@ def nextPhase(group, x=-360, y=-150):
 	elif card.alternate == "Actions":
 		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
-		if switchPhase(card,"","Upkeep Phase") == True: #Back to Upkeep
-			for p in players:
-				remoteCall(p,"resetDiscounts",[])
-			#advanceTurn()
+		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
 			gTurn = getGlobalVariable("RoundNumber")
 			gameTurn = int(gTurn) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
@@ -586,7 +583,7 @@ def nextPhase(group, x=-360, y=-150):
 
 			#resolve other automated items
 			for p in players:
-				remoteCall(p, "playerChanneling", [])
+				remoteCall(p,"resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [])
 				remoteCall(p, "resolveBurns", [])
@@ -597,12 +594,6 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
-
-def playerChanneling():
-	me.Mana += me.Channeling
-	notify("{} Channels {} into Mana supply: {} Total Mana.".format(me.name,me.Channeling,me.Mana))
-	debug("Debug2: {} Mana {}".format(me.name,me.Mana))
-	delay = rnd(1,1000)
 
 def resetDiscounts():
 	#reset discounts used
@@ -641,7 +632,7 @@ def resetMarkers():
                 if c.markers[key] == 1:
                         c.markers[key] = 0
                         c.markers[mDict[key]] = 1
-
+	notify("{} reset's all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
@@ -742,6 +733,10 @@ def resolveLoadTokens():
 
 def resolveChanneling():
 	mute()
+	
+	me.Mana += me.Channeling # Mage channels his mana
+	notify("{} Channels {} Mana into the mages Mana supply.".format(me.name,me.Channeling))
+	
 	for c in table:
 		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
 			for card in me.piles['Discard']:
