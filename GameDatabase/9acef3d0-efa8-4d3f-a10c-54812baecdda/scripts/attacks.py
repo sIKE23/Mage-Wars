@@ -81,10 +81,11 @@ def getRollDice(dice):
 		playSoundFX('Dice')
 		time.sleep(1)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
-                return (damNormal,damPiercing,effect)                 
+                return (result,effect)                 
 	else:
 		hasRolledIni = True
 		iniRoll(effect)
+		return None,None
 
 ############################################################################
 ######################		    Menus		####################
@@ -94,7 +95,7 @@ def diceRollMenu(attacker = None,defender = None):
         mute()
         aTraitDict = (computeTraits(attacker) if attacker else {})
         dTraitDict = (computeTraits(defender) if defender else {})
-        attackList = getAttackList(attacker)
+        attackList = getAttackList(attacker) if attacker else []
         choiceText,choices = "Roll how many red dice?",[str(i+1) for i in range(7)]
         #Suppose there is an attacker with at least one attack:
         if (attacker and attackList):
@@ -122,24 +123,23 @@ def diceRollMenu(attacker = None,defender = None):
         choices.extend(['Other Dice Amount','Cancel Attack'])
         colors.extend(["#171e78","#c0c0c0"])
         count = askChoice(choiceText, choices, colors)
-        if count == 0 or count == len(choices): return -1,[]
+        if count == 0 or count == len(choices): return {}
         elif count < len(choices)-1:
-                if (attacker and attackList): return getAdjustedDice(aTraitDict,attackList[count-1],dTraitDict),attackList[count-1]['Traits']
-                else: return count,[]
+                if (attacker and attackList): return attackList[count-1]#getAdjustedDice(aTraitDict,attackList[count-1],dTraitDict),attackList[count-1]['Traits']
+                else: return {'Dice' : count}#count,[]
         elif count == len(choices)-1:
                 if attacker: return diceRollMenu(None,defender)
                 else: #Revert to standard input menu. Default value is the last one you entered.
                         dice = min(askInteger("Roll how many red dice?", getSetting('lastStandardDiceRollInput',8)),50)
                         setSetting('lastStandardDiceRollInput',dice)
-                        return dice,[] #max 50 dice rolled at once
+                        return {'Dice' : dice}#dice,[] #max 50 dice rolled at once
 
 ############################################################################
 ######################		Data Retrieval		####################
 ############################################################################
 
-additiveTraits = ["Melee",
-                  "Ranged",
-                  "Armor",
+additiveTraits = ["Melee","Ranged",
+                  "Armor","Life","Innate Life","Channeling",
                   "Charge",
                   "Bloodthirsty",
                   "Piercing",
@@ -151,9 +151,8 @@ superlativeTraits = ["Regenerate",
                      "Uproot"]
 
 def getAttackList(card):
-        if not card: return {} #Return an empty list if passed a blank argument
+        if not card or card.AttackBar == '': return {} #Return an empty list if passed a blank argument
         rawData = card.AttackBar
-        if rawData == '': return {}
         #First, split up the attacks:
         attackKeyList = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
         isAttackSpell = (len(attackKeyList[0]) == 1)
@@ -255,8 +254,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
         """Decides how many dice should be rolled for attack based on the attacker (and the defender, if any)."""
         attackDice = attack['Dice']
         defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
-        if attack['Range'][0] == 'Melee': attackDice += aTraitDict.get('Melee',0)
-        if attack['Range'][0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+        if attack.get('Range',[None,None])[0] == 'Melee': attackDice += aTraitDict.get('Melee',0)
+        if attack.get('Range',[None,None])[0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
                 attackDice += (aTraitDict.get('Bloodthirsty',0) if (defender.markers[Damage]
@@ -274,7 +273,8 @@ def computeArmor(aTraitDict,attack,dTraitDict):
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
         attack = attackDict
-        attack['Traits']['Piercing'] = attack['Traits'].get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
+        atkTraits = attack.get('Traits',{})
+        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         return attackDict
 
 def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and returns a clean, easy to read list of traits
@@ -326,6 +326,15 @@ Calculations
 The following functions are used to provide useful data to players; specifically, the expected damage inflicted and the chance to kill a
 target.
 """
+
+def computeRollDamage(roll,aTraitDict,attack,dTraitDict):
+        armor = computeArmor(aTraitDict,attack,dTraitDict)
+        atkTraits = attack.get('Traits',{})
+        if dTraitDict.get('Incorporeal',False): return roll[2] + roll[4] + (2*(roll[3]+roll[5]) if atkTraits.get('Ethereal',False) else 0)
+        normal = roll[2] + 2*roll[3]
+        critical = roll[4] + 2*roll[5]
+        return (max((0 if (dTraitDict.get('Resilient',False) or atkTraits.get('Critical Damage',False)) else normal) - armor,0) +
+                critical + (normal if atkTraits.get('Critical Damage',False) else 0))
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)

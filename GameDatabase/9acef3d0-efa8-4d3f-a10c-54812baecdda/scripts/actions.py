@@ -335,32 +335,32 @@ def playerDone(group, x=0, y=0):
 def attackTarget(card, x=0, y=0):
         mute()
         if card.controller == me:
-                attacker = card
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
-                        dice,traits = diceRollMenu(attacker,defender)
+                        attack = diceRollMenu(card,defender)
+                        dice = attack.get('Dice',-1)
                         if dice >= 0:
-                                roll = getRollDice(dice)
+                                notify("{} attacks {} with {}".format(me,defender,card))
+                                roll,effect = getRollDice(dice)
                                 if roll:
-                                        notify("{} attacks {} with {}".format(me,defender,attacker))
-                                        expectedDmg = expectedDamage(dice,getStat(defender.Stats,'Armor'))
-                                        norm,crit,eff = roll
-                                        actualDmg = crit + max(norm-getAdjustedArmor(defender),0)
-                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,actualDmg,defender,('an above' if actualDmg >= expectedDmg else 'a below')))
+                                        aTraitDict = computeTraits(card)
+                                        dTraitDict = (computeTraits(defender) if defender else {})
+                                        expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
+                                        actualDmg = computeRollDamage(roll,aTraitDict,attack,dTraitDict)
+                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,str(actualDmg),defender,('an above' if actualDmg >= expectedDmg else 'a below')))
                 elif len(target) == 0: #Untargeted attack
-                        dice,traits = diceRollMenu(attacker,None)
+                        attack = diceRollMenu(card,None)
+                        dice = attack.get('Dice',-1)
                         if dice >= 0:
-                                roll = getRollDice(dice)
-                                if roll: notify("{} attacks with {}".format(me,attacker))
+                                notify("{} attacks with {}".format(me,card))
+                                roll,effect = getRollDice(dice)
 
 def rollDice(group, x=0, y=0):
 #probability module here:
 	target = [cards for cards in table if cards.targetedBy==me]
-	count = 0
-	dfn = None
-        if len(target) == 1: dfn = target[0]
-        dice,traits = diceRollMenu(None,dfn)
+	defender = (target[0] if len(target) == 1 else None)
+        dice = diceRollMenu(None,defender).get('Dice',-1)
         if dice >=0: getRollDice(dice)
 
 def flipCoin(group, x = 0, y = 0):
