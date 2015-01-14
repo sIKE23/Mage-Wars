@@ -2089,7 +2089,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon+Shield" />
-			<property name="AttackBar" value="[Full] [Ranged:1-2] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Voltaric Strike:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q13" />

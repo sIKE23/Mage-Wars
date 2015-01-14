@@ -1519,11 +1519,6 @@ def getStat(stats, stat): #searches stats string for stat and extract value
                         return (0 if statval[1]=='-' else int(statval[1])) 
 	return 0
 
-def getRemainingLife(card):
-        life = getStat(card.Stats,'Life')
-        if life: return max(life - card.markers[Damage],0)
-
-
 def switchPhase(card, phase, phrase):
 	global mycolor
 	global playerNum
