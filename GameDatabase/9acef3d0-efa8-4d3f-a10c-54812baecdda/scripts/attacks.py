@@ -19,7 +19,7 @@ def getRollDice(dice):
 	global dieCardY
 	global dieCard2X
 	global dieCard2Y
-	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25))
+
 
 	if not deckLoaded == True:
 		notify("Please Load a Spellbook first.")

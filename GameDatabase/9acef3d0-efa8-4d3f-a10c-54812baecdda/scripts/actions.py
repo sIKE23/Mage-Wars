@@ -159,7 +159,30 @@ def onGameStart():
 
 	#create a dictionary of attachments and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
-
+	
+	dieCardX = -570
+	dieCardY = -40
+	card = table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
+	#card.anchor = (True)
+	card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+	#card.anchor = (True)
+	card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
+	#card.anchor = (True)
+	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 60), (dieCardY - 150)) #Phase token/Next Phase Button
+	card.switchTo("Planning") #skips upkeep for first turn
+	#card.anchor = (True)
+	
+#			#option A
+#		dieCardX = -570
+#		dieCardY = -40
+#		dieCard2X = -510 # = dieCardX + 60
+#		dieCard2Y = -40 # = dieCardY
+#		phaseX = -510 # = dieCardX + 60
+#		phaseY = -150
+#		initX = -580
+#		initY = -150 #= phaseY
+	
+	
 	# bring up window to point to documentation
 	initializeGame()
 
@@ -526,8 +549,6 @@ def CreateIniToken():
 	mute()
 	if not iniTokenCreated:
 		iniTokenCreated = True
-		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
-		card.switchTo("Planning") #skips upkeep for first turn
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", initX, initY ) #initiative token
 		init.switchTo({
                         PlayerColor[0]:"",
@@ -1341,8 +1362,11 @@ def obliterate(card, x=0, y=0):
 
 def defaultAction(card, x = 0, y = 0):
 	mute()
-	if card.type == "Button":
+	if card.type == "DiceRoll":
 		rollDice(0, x, y)
+	
+	if card.type =="Phase":
+		nextPhase(table,0,0)
 
 	if card.controller == me:
 		if not card.isFaceUp:
