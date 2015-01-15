@@ -742,7 +742,16 @@ def resolveDissipate():
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
-
+			
+	#use the logic for Dissipate for Disable Markers
+	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
+	if len(cardsWithDisable) > 0:
+		notify("Resolving Disable Markers for {}...".format(me))	#found at least one
+		for card in cardsWithDissipate:
+			notify("{} removes a Disable Marker from '{}'".format(me, c.name))	#found at least one
+			card.markers[Disable] -= 1 # Remove Marker
+			notify("Finished auto-resolving Disable Markers for {}.".format(me))
+			
 def resolveLoadTokens():
 	mute()
 	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp ]
