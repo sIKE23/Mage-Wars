@@ -66,7 +66,7 @@ def enchantmentAttachCost(card,target): #Target useful for when things like Hars
     discount = 0
     foundDiscounts = []
     infostr = 'Enchantments cost 2 mana to cast.'
-    notifyStr = "{} casts a hidden enchantment on {}, with a base cost of 2 mana.".format(me,card)
+    notifyStr = "{} attaches a hidden enchantment on {}, with a base cost of 2 mana.".format(me, target.name)
     for c in table:
         if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
             dc = findDiscount(card, c)
@@ -81,7 +81,7 @@ def enchantmentAttachCost(card,target): #Target useful for when things like Hars
                 discountStr = "\n{} already reached max uses this round.".format(c.name)
                 infostr = notifyStr + discountStr
                 notifyStr = notifyStr + discountStr
-    choice = askChoice('Do you want to cast {} face-down on {}?'.format(card.name,target.name),['Yes, I am casting this as a spell','No, I want to attach it for other reasons'],["#01603e","#de2827"])
+    choice = askChoice('Do you want to cast {} face-down on {}?'.format(card.name,target.name),['Yes, I am casting this as a spell','No, I want to attach it for other reasons'],["#171e78","#de2827"])
     if choice == 1:
         infostr += "\nTotal mana amount to subtract from mana pool?"
 	manacost = askInteger(infostr, 2 - discount)

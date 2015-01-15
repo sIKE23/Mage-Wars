@@ -1731,7 +1731,7 @@ def castSpell(card, x = 0, y = 0):
 		discount = 0
 		foundDiscounts = [ ]
 		for c in table:
-			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
+			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card and c.name != "Enchanter's Ring":
 				dc = findDiscount(card, c)
 				debug("Discount Count Returned from test: {} from card: {}".format(dc, c.Name))
 				if dc > 0:
