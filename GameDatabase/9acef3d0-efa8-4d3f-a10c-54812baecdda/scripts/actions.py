@@ -640,23 +640,24 @@ def setActiveP(p):
 
 def resetMarkers():
 	mute()
-
-	mDict = {ActionRedUsed : ActionRed,
-                ActionBlueUsed : ActionBlue,
-                ActionGreenUsed : ActionGreen,
-                ActionYellowUsed : ActionYellow,
-                ActionPurpleUsed : ActionPurple,
-                ActionGreyUsed : ActionGrey,
-                QuickBack : Quick,
-                Used : Ready,
-                UsedII : ReadyII,
-                VoltaricON : VoltaricOFF,
-                DeflectU : DeflectR,
-                Visible : Invisible}
-	for key in mDict:
-                if c.markers[key] == 1:
-                        c.markers[key] = 0
-                        c.markers[mDict[key]] = 1
+	for c in table:
+		if c.isFaceUp: #don't waste time on facedown cards
+			mDict = {ActionRedUsed : ActionRed,
+		                ActionBlueUsed : ActionBlue,
+		                ActionGreenUsed : ActionGreen,
+		                ActionYellowUsed : ActionYellow,
+		                ActionPurpleUsed : ActionPurple,
+		                ActionGreyUsed : ActionGrey,
+		                QuickBack : Quick,
+		                Used : Ready,
+		                UsedII : ReadyII,
+		                VoltaricON : VoltaricOFF,
+		                DeflectU : DeflectR,
+		                Visible : Invisible}
+			for key in mDict:
+		                if c.markers[key] == 1:
+		                        c.markers[key] = 0
+		                        c.markers[mDict[key]] = 1
 	notify("{} reset's all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
@@ -747,7 +748,7 @@ def resolveDissipate():
 	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
 	if len(cardsWithDisable) > 0:
 		notify("Resolving Disable Markers for {}...".format(me))	#found at least one
-		for card in cardsWithDissipate:
+		for card in cardsWithDisable:
 			notify("{} removes a Disable Marker from '{}'".format(me, c.name))	#found at least one
 			card.markers[Disable] -= 1 # Remove Marker
 			notify("Finished auto-resolving Disable Markers for {}.".format(me))
