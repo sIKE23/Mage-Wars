@@ -343,6 +343,7 @@ def attackTarget(card, x=0, y=0):
                                 notify("{} attacks {} with {}".format(me,defender,card))
                                 roll,effectRoll = getRollDice(dice)
                                 if roll:
+                                        revealAttachmentQuery(card,defender)
                                         aTraitDict = computeTraits(card)
                                         dTraitDict = (computeTraits(defender) if defender else {})
                                         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)

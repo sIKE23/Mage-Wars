@@ -135,8 +135,23 @@ def diceRollMenu(attacker = None,defender = None):
                         return {'Dice' : dice}#dice,[] #max 50 dice rolled at once
 
 def damageRecieptMenu(attacker,defender,damage,effect):
-        choices = None
+        choices = []
 
+def revealAttachmentQuery(attacker,defender):
+        recurText = ''
+        while True:
+                aList=[c for c in getAttachments(defender) if c.controller == me and not c.isFaceUp and c.Type == 'Enchantment']
+                aList.extend([c for c in getAttachments(attacker) if c.controller == me and not c.isFaceUp and c.Type == 'Enchantment'])
+                if not aList: return
+                options = ['{}\n{}\n{}'.format(c.Name.center(68,' '),(('('+getAttachTarget(c).Name+')').center(68,' ')),c.Text.split('\n\t')[0]) for c in aList]
+                colors = ['#CC6600' for i in options] #Orange
+                options.append('I would not like to reveal an enchantment.')
+                colors.append("#de2827")
+                choice = askChoice('Would you like to reveal an enchantment?',options,colors)
+                if choice == len(options): return
+                castSpell(aList[choice-1])
+                recurText = 'another '
+                        
 ############################################################################
 ######################		Data Retrieval		####################
 ############################################################################
