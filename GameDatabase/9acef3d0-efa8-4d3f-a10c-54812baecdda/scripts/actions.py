@@ -342,13 +342,17 @@ def attackTarget(card, x=0, y=0):
                         dice = attack.get('Dice',-1)
                         if dice >= 0:
                                 notify("{} attacks {} with {}".format(me,defender,card))
-                                roll,effect = getRollDice(dice)
+                                roll,effectRoll = getRollDice(dice)
                                 if roll:
                                         aTraitDict = computeTraits(card)
                                         dTraitDict = (computeTraits(defender) if defender else {})
                                         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
-                                        actualDmg = computeRollDamage(roll,aTraitDict,attack,dTraitDict)
-                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,str(actualDmg),defender,('an above' if actualDmg >= expectedDmg else 'a below')))
+                                        actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
+                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,
+                                                                                                               str(actualDmg),
+                                                                                                               defender,
+                                                                                                               ('an above' if actualDmg >= expectedDmg else 'a below'))
+                                               + ('It also inflicts {}.'.format(actualEffect) if actualEffect else ''))
                 elif len(target) == 0: #Untargeted attack
                         attack = diceRollMenu(card,None)
                         dice = attack.get('Dice',-1)

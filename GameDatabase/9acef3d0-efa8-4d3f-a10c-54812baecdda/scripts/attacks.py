@@ -107,7 +107,7 @@ def diceRollMenu(attacker = None,defender = None):
                         traits = getAttackTraitStr(attack['Traits'])
                         expDam = str(round(expectedDamage(aTraitDict,attack,dTraitDict),1)) if defender else ''
                         killCh = str(round(chanceToKill(aTraitDict,attack,dTraitDict)*100,1)) if defender else ''
-                        effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],0)*100,1))) for effect in modAttack['d12']] if modAttack['d12'] else ''
+                        effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],aTraitDict,attack,dTraitDict)*100,1))) for effect in modAttack['d12']] if modAttack['d12'] else ''
                         choice = ("{} ({})".format(modAttack['Name'],str(modDice)).center(68,' ')+
                                   ('\n'+', '.join(traits) if traits else '')+
                                   ('\n'+', '.join(effectList) if effectList != '' else '')+
@@ -134,12 +134,16 @@ def diceRollMenu(attacker = None,defender = None):
                         setSetting('lastStandardDiceRollInput',dice)
                         return {'Dice' : dice}#dice,[] #max 50 dice rolled at once
 
+def damageRecieptMenu(attacker,defender,damage,effect):
+        choices = None
+
 ############################################################################
 ######################		Data Retrieval		####################
 ############################################################################
 
 additiveTraits = ["Melee","Ranged",
                   "Armor","Life","Innate Life","Channeling",
+                  "Tough",
                   "Charge",
                   "Bloodthirsty",
                   "Piercing",
@@ -265,6 +269,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                 attackDice += dTraitDict.get(attack.get('Type',None),0) #Elemental weaknesses/resistances
                 #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
                 #traits that are hard to autodetect.
+        if attackDice == 0: attackDice = 1
+        if attack.get('Traits',{}).get('No Damage',False): attackDice = 0
         return attackDice
 
 def computeArmor(aTraitDict,attack,dTraitDict):
@@ -327,14 +333,29 @@ The following functions are used to provide useful data to players; specifically
 target.
 """
 
-def computeRollDamage(roll,aTraitDict,attack,dTraitDict):
+def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         atkTraits = attack.get('Traits',{})
         if dTraitDict.get('Incorporeal',False): return roll[2] + roll[4] + (2*(roll[3]+roll[5]) if atkTraits.get('Ethereal',False) else 0)
         normal = roll[2] + 2*roll[3]
         critical = roll[4] + 2*roll[5]
         return (max((0 if (dTraitDict.get('Resilient',False) or atkTraits.get('Critical Damage',False)) else normal) - armor,0) +
-                critical + (normal if atkTraits.get('Critical Damage',False) else 0))
+                critical + (normal if atkTraits.get('Critical Damage',False) else 0),
+                computeEffect(effectRoll,aTraitDict,attack,dTraitDict))
+
+def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
+        modRoll = effectRoll + dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type',None),0)
+        debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
+        effects = attack.get('d12',[])
+        if not effects: return None
+        for effect in effects:
+                rangeStr = effect[0]
+                lowerBound, upperBound = 0,None
+                if '-' in rangeStr: lowerBound,upperBound = int(rangeStr.split('-')[0]),int(rangeStr.split('-')[1])
+                if '+' in rangeStr: lowerBound, upperBound = int(rangeStr.strip('+')),None
+                if modRoll >= lowerBound and (modRoll <= upperBound if upperBound else True): return effect[1]
+        return None
+                
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
@@ -365,10 +386,11 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
 def nCr(n,r):
     return factorial(n) / factorial(r) / factorial(n-r)
 
-def getD12Probability(strRange,d12Bonus):
+def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be changed to take Tough/elemental into account
+        d12Bonus = dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type',None),0)
         lowerBound, upperBound = 0,None
-        if '-' in strRange: lowerBound,upperBound = int(strRange.split('-')[0]),int(strRange.split('-')[1])
-        if '+' in strRange: lowerBound, upperBound = int(strRange.strip('+')),None
+        if '-' in rangeStr: lowerBound,upperBound = int(rangeStr.split('-')[0]),int(rangeStr.split('-')[1])
+        if '+' in rangeStr: lowerBound, upperBound = int(rangeStr.strip('+')),None
         debug(str(lowerBound)+','+str(upperBound))
         lowerBound,upperBound = max(lowerBound - d12Bonus,0),(max(upperBound - d12Bonus,0) if upperBound else None)
         successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if upperBound else 12) - lowerBound + 1)
