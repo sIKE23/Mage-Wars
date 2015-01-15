@@ -122,7 +122,6 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "1.11.2.0"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -135,7 +134,7 @@ def onTableLoad():
 	global debugMode
 	global playerNum
 	#log in chat screen what version of the game definiton the player is using
-	notify("{} is running v.{} of the Mage Wars module.".format(me, ver))
+	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
