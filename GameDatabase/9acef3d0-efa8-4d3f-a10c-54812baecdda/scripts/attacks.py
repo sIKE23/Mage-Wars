@@ -224,6 +224,7 @@ def getAttackList(card):
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
                         elif 'Ranged' in attribute: aDict['Range'] = attribute.split(':')
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
+                        elif attribute == 'Damage Barrier' : aDict['Range'] = ['Damage Barrier','']
                         elif 'Dice' in attribute:
                                 aDict['Dice'] = int(attribute[-1])
                                 hasDiceValue = True
@@ -239,9 +240,17 @@ def getAttackList(card):
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
                 if hasDiceValue: attackList.append(aDict)
-        if card.Type == 'Mage': #find all attacks granted by equipment. Assume all controlled equipment is equipped to mage.
+        if card.Type == 'Mage':
                 for c in table:
-                        if (c.Type == 'Equipment' and card.controller == c.controller): attackList.extend(getAttackList(c))
+                        if ((c.Type == 'Equipment' and card.controller == c.controller and c.isFaceUp) or
+                            (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and
+                             (not isAttached(c) or
+                              getAttachTarget(c) == card or
+                              (not canDeclareAttack(getAttachTarget(c) if getAttachTarget(c) else True))))):
+                                attackList.extend(getAttackList(c))
+        if 'Familiar' or 'Spawnpoint' in card.Traits:
+                for c in table:
+                        if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getAttachTarget(c)==card): attackList.extend(getAttackList(c))
         return attackList
 
 def traitParser(traitStr):
@@ -291,6 +300,14 @@ def computeTraits(card):
         debug(card.name+' traits = '+str(traitDict))
         traitDict['OwnerID'] = card._id #Tag the dictionary with its owner's ID in case we need to extract it later (extracting the owner is MUCH faster than extracting the dictionary)
         return traitDict
+
+def canDeclareAttack(card):
+        if not card.isFaceUp: return False
+        if (card.Type in ['Creature','Mage'] or
+            (card.Type == 'Conjuration' and card.AttackBar != '') or
+            computeTraits(card).get('Autonomous',False) or
+            [1 for attack in getAttackList(card) if attack.get('Range',[''])[0]=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
+                return True
 
 """
 Trait and Attack Adjustments

@@ -360,7 +360,7 @@ def playerDone(group, x=0, y=0):
 
 def attackTarget(card, x=0, y=0):
         mute()
-        if card.controller == me:
+        if card.controller == me and canDeclareAttack(card):
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
