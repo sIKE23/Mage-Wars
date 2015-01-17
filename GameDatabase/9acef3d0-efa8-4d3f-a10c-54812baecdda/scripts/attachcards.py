@@ -180,7 +180,7 @@ def returnCardToHome(card):
 def isAttached(card):
     """Determines whether <card> is attached to anything."""
     mute()
-    if getGlobalDictEntry('attachDict',card._id):
+    if getGlobalDictEntry('attachDict',card._id) and card in table:
         return True
     return False
 
@@ -202,12 +202,12 @@ def getAttachments(card):
     aDict = eval(getGlobalVariable("attachDict"))
     attachList = [key for key in aDict if aDict[key] and int(aDict[key][0]) == card._id]
     attachList.sort(key=lambda k: aDict[k][1])
-    return [Card(key) for key in attachList]
+    return [Card(key) for key in attachList if Card(key) in table]
 
 def getAttachTarget(card):
     mute()
     result = getGlobalDictEntry('attachDict',card._id)
-    if result: return Card(result[0])
+    if result and card in table: return Card(result[0])
 
 def getGlobalDictEntry(dictionary,key):
     """Dictionary is input as a string. If the value is empty, returns False"""
@@ -230,6 +230,7 @@ def canAttach(card,target):
         or getAttachments(card)
         or card==target
         or not target in table
+        or not card in table
         or not target.isFaceUp):
         return False
     if (card.Type in ['Enchantment','Equipment']

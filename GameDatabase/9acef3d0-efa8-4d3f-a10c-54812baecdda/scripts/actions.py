@@ -1352,7 +1352,7 @@ def discard(card, x=0, y=0):
 		whisper("{} does not control '{}' - discard cancelled".format(me, card))
 		return
 	card.isFaceUp = True
-
+        detach(card)
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
 
