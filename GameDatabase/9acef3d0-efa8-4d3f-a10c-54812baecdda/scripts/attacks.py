@@ -159,7 +159,8 @@ def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
 def applyDamageAndEffects(card,damage,rawEffect):
         conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Taint','Weak']
         #effectsList = ['Push','Snatch'] (not needed yet. We do need some way to implement taunt, though. Not high priority)
-        card.markers[Damage] += damage
+        if card.Type == 'Mage': card.controller.Damage += damage
+        else: card.markers[Damage] += damage
         effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:
                 if e in conditionsList: card.markers[eval(e)]+=1
