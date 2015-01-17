@@ -134,7 +134,7 @@ def diceRollMenu(attacker = None,defender = None):
                         setSetting('lastStandardDiceRollInput',dice)
                         return {'Dice' : dice}#dice,[] #max 50 dice rolled at once
 
-def damageReceiptMenu(attacker,defender,roll,effectRoll):
+def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
         if attacker.controller != defender.controller: revealAttachmentQuery([defender,attacker])
         aTraitDict = computeTraits(attacker)
         dTraitDict = (computeTraits(defender) if defender else {})
@@ -142,7 +142,7 @@ def damageReceiptMenu(attacker,defender,roll,effectRoll):
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
         choice = askChoice('{}\' attack has inflicted {} damage {} on {}. Apply these results?'.format(attacker.Name,
                                                                                                    actualDmg,
-                                                                                                   ('and effect: '+actualEffect if actualEffect else ''),
+                                                                                                   ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
                                                                                                    defender.Name),
                            ['Yes','No'],
                            ["#01603e","#de2827"])
@@ -160,7 +160,7 @@ def applyDamageAndEffects(card,damage,rawEffect):
         conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Taint','Weak']
         #effectsList = ['Push','Snatch'] (not needed yet. We do need some way to implement taunt, though. Not high priority)
         card.markers[Damage] += damage
-        effects = ([effect[1],effect[1]] if '2' in rawEffect else rawEffect.split(' & '))
+        effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:
                 if e in conditionsList: card.markers[eval(e)]+=1
         notify
