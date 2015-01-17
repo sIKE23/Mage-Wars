@@ -131,6 +131,7 @@ infostr = ""
 ############################################################################
 
 def onTableLoad():
+	setGlobalVariable("TableSetup", False)
 	global debugMode
 	global playerNum
 	#log in chat screen what version of the game definiton the player is using
@@ -162,30 +163,21 @@ def onGameStart():
 	initializeGame()
 
 def setUpDiceAndPhaseCards():
-	dieCardX = -570
-	dieCardY = -40
-	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
-	#card.anchor = (True)
-	table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
-	#card.anchor = (True)
-	table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
-	#card.anchor = (True)
-	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 60), (dieCardY - 150)) #Phase token/Next Phase Button
-	card.switchTo("Planning") #skips upkeep for first turn
-	#card.anchor = (True)
-	
-#			#option A
-#		dieCardX = -570
-#		dieCardY = -40
-#		dieCard2X = -510 # = dieCardX + 60
-#		dieCard2Y = -40 # = dieCardY
-#		phaseX = -510 # = dieCardX + 60
-#		phaseY = -150
-#		initX = -580
-#		initY = -150 #= phaseY
-	
-
-	# bring up window to point to documentation
+	mute()
+	TableSetup = getGlobalVariable("TableSetup")
+	if TableSetup == "False":
+		dieCardX = -570
+		dieCardY = -40
+		table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
+		#card.anchor = (True)
+		table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+		#card.anchor = (True)
+		table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
+		#card.anchor = (True)
+		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 60), (dieCardY - 150)) #Phase token/Next Phase Button
+		card.switchTo("Planning") #skips upkeep for first turn
+		#card.anchor = (True)
+		setGlobalVariable("TableSetup", True)
 
 def onLoadDeck(player, groups):
 	mute()
