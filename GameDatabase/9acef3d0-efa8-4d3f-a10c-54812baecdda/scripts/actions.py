@@ -697,8 +697,9 @@ def resetMarkers():
 			if c.markers[Visible] == 1:
 				c.markers[Visible] = 0
 				c.markers[Invisible] = 1
-			notify("{} reset's all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side".format(me.name))
 			debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
+			
+	notify("{} reset's all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side".format(me.name))
 
 def resolveBurns():
 	mute()
