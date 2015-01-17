@@ -141,7 +141,6 @@ def onTableLoad():
 		playerNum = 2
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
-
 def onGameStart():
         mute()
 	# reset color picking
@@ -152,6 +151,7 @@ def onGameStart():
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
+	setGlobalVariable('DiceAndPhaseCardsDone','True')
 
 	# reset python Global Variables
 	for p in players:
@@ -159,14 +159,16 @@ def onGameStart():
 
 	#create a dictionary of attachments and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
-	
+	initializeGame()
+
+def setUpDiceAndPhaseCards():
 	dieCardX = -570
 	dieCardY = -40
-	card = table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
+	table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
 	#card.anchor = (True)
-	card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+	table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	#card.anchor = (True)
-	card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
+	table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
 	#card.anchor = (True)
 	card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 60), (dieCardY - 150)) #Phase token/Next Phase Button
 	card.switchTo("Planning") #skips upkeep for first turn
@@ -182,9 +184,8 @@ def onGameStart():
 #		initX = -580
 #		initY = -150 #= phaseY
 	
-	
+
 	# bring up window to point to documentation
-	initializeGame()
 
 def onLoadDeck(player, groups):
 	mute()
@@ -192,6 +193,9 @@ def onLoadDeck(player, groups):
 	global debugMode
 	global playerNum
 	global iniTokenCreated
+	if not bool(getGlobalVariable('diceAndPhaseCardsDone')):
+                setUpDiceAndPhaseCards()
+                setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
 		#if a deck was already loaded, reset the game
 		if deckLoaded:
@@ -366,16 +370,9 @@ def attackTarget(card, x=0, y=0):
                                 notify("{} attacks {} with {}".format(me,defender,card))
                                 roll,effectRoll = getRollDice(dice)
                                 if roll:
-                                        revealAttachmentQuery(card,defender)
-                                        aTraitDict = computeTraits(card)
-                                        dTraitDict = (computeTraits(defender) if defender else {})
-                                        expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
-                                        actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
-                                        notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(me,
-                                                                                                               str(actualDmg),
-                                                                                                               defender,
-                                                                                                               ('an above' if actualDmg >= expectedDmg else 'a below'))
-                                               + ('It also inflicts {}.'.format(actualEffect) if actualEffect else ''))
+                                        revealAttachmentQuery([card,defender])
+                                        if defender.controller != me: remoteCall(defender.controller,'damageReceiptMenu',[card,defender,roll,effectRoll])
+                                        else: damageReceiptMenu(card,defender,roll,effectRoll)
                 elif len(target) == 0: #Untargeted attack
                         attack = diceRollMenu(card,None)
                         dice = attack.get('Dice',-1)
@@ -384,7 +381,6 @@ def attackTarget(card, x=0, y=0):
                                 roll,effect = getRollDice(dice)
 
 def rollDice(group, x=0, y=0):
-#probability module here:
 	target = [cards for cards in table if cards.targetedBy==me]
 	defender = (target[0] if len(target) == 1 else None)
         dice = diceRollMenu(None,defender).get('Dice',-1)

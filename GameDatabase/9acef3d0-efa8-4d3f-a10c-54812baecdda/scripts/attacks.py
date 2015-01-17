@@ -134,21 +134,50 @@ def diceRollMenu(attacker = None,defender = None):
                         setSetting('lastStandardDiceRollInput',dice)
                         return {'Dice' : dice}#dice,[] #max 50 dice rolled at once
 
-def damageRecieptMenu(attacker,defender,damage,effect):
-        choices = []
+def damageReceiptMenu(attacker,defender,roll,effectRoll):
+        if attacker.controller != defender.controller: revealAttachmentQuery([defender,attacker])
+        aTraitDict = computeTraits(attacker)
+        dTraitDict = (computeTraits(defender) if defender else {})
+        expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
+        actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
+        choice = askChoice('{}\' attack has inflicted {} damage {} on {}. Apply these results?'.format(attacker.Name,
+                                                                                                   actualDmg,
+                                                                                                   ('and effect: '+actualEffect if actualEffect else ''),
+                                                                                                   defender.Name),
+                           ['Yes','No'],
+                           ["#01603e","#de2827"])
+        if choice == 1:
+                applyDamageAndEffects(defender,actualDmg,actualEffect)
+                notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(attacker,
+                                                                                       str(actualDmg),
+                                                                                       defender,
+                                                                                       ('an above' if actualDmg >= expectedDmg else 'a below')))
+        else:
+                notify('{} has elected not to apply auto-calculated battle results'.format(me))
+                whisper('Battle calculator not giving the right results? Report the bug to us so we can fix it!')
 
-def revealAttachmentQuery(attacker,defender):
+def applyDamageAndEffects(card,damage,rawEffect):
+        conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Taint','Weak']
+        #effectsList = ['Push','Snatch'] (not needed yet. We do need some way to implement taunt, though. Not high priority)
+        card.markers[Damage] += damage
+        effects = ([effect[1],effect[1]] if '2' in rawEffect else rawEffect.split(' & '))
+        for e in effects:
+                if e in conditionsList: card.markers[eval(e)]+=1
+        notify
+
+def revealAttachmentQuery(cardList): #Returns true if at least 1 attachment was revealed
         recurText = ''
         while True:
-                aList=[c for c in getAttachments(defender) if c.controller == me and not c.isFaceUp and c.Type == 'Enchantment']
-                aList.extend([c for c in getAttachments(attacker) if c.controller == me and not c.isFaceUp and c.Type == 'Enchantment'])
-                if not aList: return
+                aList = []
+                for card in cardList:
+                        aList.extend([c for c in getAttachments(card) if c.controller == me and not c.isFaceUp and c.Type == 'Enchantment'])
+                if not aList: return (False if recurText == '' else True)
                 options = ['{}\n{}\n{}'.format(c.Name.center(68,' '),(('('+getAttachTarget(c).Name+')').center(68,' ')),c.Text.split('\n\t')[0]) for c in aList]
                 colors = ['#CC6600' for i in options] #Orange
                 options.append('I would not like to reveal an enchantment.')
                 colors.append("#de2827")
                 choice = askChoice('Would you like to reveal an enchantment?',options,colors)
-                if choice == len(options): return
+                if choice == len(options): return (False if recurText == '' else True)
                 castSpell(aList[choice-1])
                 recurText = 'another '
                         
