@@ -1324,7 +1324,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Melee +2 trait. &#xD;&#xA;[Melee +2]" />
+			<property name="Text" value="This creature gains the Melee +2 trait.&#xD;&#xA;[Melee +2]" />
 			<property name="CardID" value="MW1E01" />
 		</card>
 		<card id="25d70640-eea1-4429-b146-4d176b493e41" name="Block">
@@ -1354,7 +1354,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains Life +4. &#xD;&#xA;[Life +4]" />
+			<property name="Text" value="This creature gains Life +4.&#xD;&#xA;[Life +4]" />
 			<property name="CardID" value="MW1E03" />
 		</card>
 		<card id="775fd07c-63b3-48af-9a6d-061165fe5805" name="Chains of Agony">
@@ -1384,7 +1384,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Fast trait. &#xD;&#xA;[Fast]" />
+			<property name="Text" value="This creature gains the Fast trait.&#xD;&#xA;[Fast]" />
 			<property name="CardID" value="MW1E05" />
 		</card>
 		<card id="0574a699-e012-4b4e-9c68-1b5f02f05c8a" name="Circle of Lightning">
@@ -1414,7 +1414,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains a Defense. &#xD;&#xA;[Defense 7+ 1x]" />
+			<property name="Text" value="This creature gains a Defense.&#xD;&#xA;[Defense 7+ 1x]" />
 			<property name="CardID" value="MW1E07" />
 		</card>
 		<card id="46b36e31-5dec-4a37-a39c-c2a5b6e0caee" name="Death Link">
@@ -1489,7 +1489,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="This creature gains the Aegis 1 trait. &#xD;&#xA;[Aegis 1]" />
+			<property name="Text" value="This creature gains the Aegis 1 trait.&#xD;&#xA;[Aegis 1]" />
 			<property name="CardID" value="MW1E12" />
 		</card>
 		<card id="f7fee204-8053-446d-b85d-c8d07e70d4fd" name="Eagle Wings">
@@ -1504,7 +1504,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Flying trait. &#xD;&#xA;[Flying]" />
+			<property name="Text" value="This creature gains the Flying trait.&#xD;&#xA;[Flying]" />
 			<property name="CardID" value="MW1E13" />
 		</card>
 		<card id="20b2deab-90f3-4a9b-83b4-ad83129ec14c" name="Enfeeble">
@@ -1519,7 +1519,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Slow trait. &#xD;&#xA;[Slow]" />
+			<property name="Text" value="This creature gains the Slow trait.&#xD;&#xA;[Slow]" />
 			<property name="CardID" value="MW1E14" />
 		</card>
 		<card id="00cfd5d8-8fa8-4db5-b4df-6f5bae378d4b" name="Essence Drain">
@@ -1534,7 +1534,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Upkeep +2 trait. &#xD;&#xA;[Upkeep +2]" />
+			<property name="Text" value="This creature gains the Upkeep +2 trait.&#xD;&#xA;[Upkeep +2]" />
 			<property name="CardID" value="MW1E15" />
 		</card>
 		<card id="aeada61e-e636-4c46-b169-833162a13b93" name="Force Hold">
@@ -1549,7 +1549,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +3" />
-			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait. &#xD;&#xA;[Unmovable]" />
+			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait.&#xD;&#xA;[Unmovable] [Restrained]" />
 			<property name="CardID" value="MW1E16" />
 		</card>
 		<card id="7fe6a6b2-4403-4a07-8048-4692d954898a" name="Force Orb">
@@ -1564,7 +1564,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze. &#xD;&#xA;[Defense 8+ 1x No Melee]" />
+			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze.&#xD;&#xA;[Defense 8+ 1x No Melee]" />
 			<property name="CardID" value="MW1E17" />
 		</card>
 		<card id="77b5e9a1-9824-40a5-95e9-2f669a01a5c8" name="Force Sword">
@@ -1609,7 +1609,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1. &#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
 			<property name="CardID" value="MW1E20" />
 		</card>
 		<card id="8c9e5e56-a9a9-4077-92c1-f35123ee4c64" name="Hawkeye">
@@ -1624,7 +1624,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Ranged +1 trait. &#xD;&#xA;[Ranged +1]" />
+			<property name="Text" value="This creature gains the Ranged +1 trait.&#xD;&#xA;[Ranged +1]" />
 			<property name="CardID" value="MW1E21" />
 		</card>
 		<card id="22fe0c48-f14e-4d31-b5ff-4013a4245071" name="Hellfire Trap">
@@ -1879,7 +1879,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +4" />
-			<property name="Text" value="This creature is Incapacitated, and gains Armor +6. You cannot reveal Turn to Stone during an action, such as an attack or spell." />
+			<property name="Text" value="This creature is Incapacitated, and gains Armor +6. You cannot reveal Turn to Stone during an action, such as an attack or spell.&#xD;&#xA;[Incapacitated] [Armor +6]" />
 			<property name="CardID" value="MW1E39" />
 		</card>
 		<card id="b981c228-b1e5-4318-a7ec-444c647eed87" name="Vampirism">
@@ -1926,7 +1926,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Frost -2 trait." />
+			<property name="Text" value="Mage gains Armor +2 and the Frost -2 trait.&#xD;&#xA;[Armor +2] [Frost -2]" />
 			<property name="CardID" value="MW1Q02" />
 		</card>
 		<card id="5d82d063-51bc-491f-a9eb-a72a6722d509" name="Crown of Protection">
@@ -1956,7 +1956,7 @@
 			<property name="Stats" value="Location=Gloves" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defense. &#xD;&#xA;Defense 7+ 1x No Ranged" />
+			<property name="Text" value="Mage gains a Defense.&#xD;&#xA;[Defense 7+ 1x No Ranged]" />
 			<property name="CardID" value="MW1Q04" />
 		</card>
 		<card id="fc42efdc-0a85-4a45-a273-f5e403f1489c" name="Demonhide Armor">
