@@ -157,7 +157,7 @@ def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
                 whisper('Battle calculator not giving the right results? Report the bug to us so we can fix it!')
 
 def applyDamageAndEffects(card,damage,rawEffect):
-        conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Taint','Weak']
+        conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Tainted','Weak']
         #effectsList = ['Push','Snatch'] (not needed yet. We do need some way to implement taunt, though. Not high priority)
         if card.Type == 'Mage': card.controller.Damage += damage
         else: card.markers[Damage] += damage
@@ -357,7 +357,7 @@ def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and retu
 def getRemainingLife(card):
         if not card: return 0
         life = getStat(card.Stats,'Life')
-        if life: return max(life - card.markers[Damage] - (card.markers[Taint]*3),0)
+        if life: return max(life - card.markers[Damage] - (card.markers[Tainted]*3),0)
 
 """
 Probability Distributions
