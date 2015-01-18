@@ -629,6 +629,8 @@ def setActiveP(p):
 def resetMarkers():
 	mute()
 	for c in table:
+		if c.targetedBy == me:
+			c.target(False)
 		if c.isFaceUp: #don't waste time on facedown cards
 			mDict = {ActionRedUsed : ActionRed,
 		                ActionBlueUsed : ActionBlue,
