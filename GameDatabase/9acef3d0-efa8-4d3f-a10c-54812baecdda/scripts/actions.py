@@ -363,8 +363,8 @@ def attackTarget(card, x=0, y=0):
                                 roll,effectRoll = getRollDice(dice)
                                 if roll:
                                         revealAttachmentQuery([card,defender])
-                                        if defender.controller != me: remoteCall(defender.controller,'damageReceiptMenu',[card,attack,defender,roll,effectRoll])
-                                        else: damageReceiptMenu(card,attack,defender,roll,effectRoll)
+                                        if defender.controller == me: damageReceiptMenu(card,attack,defender,roll,effectRoll)
+                                        else: remoteCall(defender.controller,'damageReceiptMenu',[card,attack,defender,roll,effectRoll])
                 elif len(target) == 0: #Untargeted attack
                         attack = diceRollMenu(card,None)
                         dice = attack.get('Dice',-1)

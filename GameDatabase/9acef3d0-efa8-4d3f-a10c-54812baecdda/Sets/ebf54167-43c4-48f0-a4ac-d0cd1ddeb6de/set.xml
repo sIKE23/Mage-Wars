@@ -1894,7 +1894,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature&apos;s melee attacks gain the Vampiric trait." />
+			<property name="Text" value="This creature&apos;s melee attacks gain the Vampiric trait.&#xD;&#xA;[Vampiric]" />
 			<property name="CardID" value="MW1E40" />
 		</card>
 
