@@ -114,9 +114,9 @@ def diceRollMenu(attacker = None,defender = None):
                                   ('\n'+', '.join(effectList) if effectList != '' else '')+
                                   ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if defender else ''))
                         choices.append(choice)
-                if defender and defender.Type in ['Creature','Conjuration','Mage']: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
+                if defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         #Then, suppose not (or suppose the indicated attacker has no attack list)
-        elif defender and defender.Type in ['Creature','Conjuration','Mage']:
+        elif defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                 choices = (['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),
                         round(expectedDamage({},{'Dice':i+1},dTraitDict),1),
                         round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])  
@@ -312,7 +312,17 @@ def computeTraits(card):
         It returns a dictionary of traits. This function will end up being quite long and complex.It works together with traitParser. Standard format
         for traits is a dictionary."""
         traitDict = {}
-        rawTraitsList = card.Traits.split(', ')
+        rawTraitsList = ({'Mage' : ['Living','Corporeal'],
+                          'Creature' : ['Living','Corporeal'],
+                          'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
+                          'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(card.Type,[])) #Get innate traits depending on card type
+        debug('rawtraits'+str(rawTraitsList))
+        listedTraits = card.Traits.split(', ')
+        if 'Living' in listedTraits and 'Nonliving' in rawTraitsList: rawTraitsList.remove('Nonliving')
+        elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: rawTraitsList.remove('Living')
+        if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: rawTraitsList.remove('Corporeal')
+        rawTraitsList.extend(listedTraits)
+        
         for c in getAttachments(card): #Get bonuses from attached enchantments
                 if c.type == 'Enchantment':
                         rawText = c.text.split('\r\n[')
@@ -325,21 +335,31 @@ def computeTraits(card):
                         if c.Type == 'Equipment' and c.controller == card.controller:
                                 rawText = c.text.split('\r\n[')
                                 traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
-                                rawTraitsList.extend(traitsGranted)                    
-        rawTraitsList.append('Melee +{}'.format(str(card.markers[Melee])))
-        rawTraitsList.append('Ranged +{}'.format(str(card.markers[Ranged])))
-        rawTraitsList.append('Armor +{}'.format(str(card.markers[Armor])))
-        rawTraitsList.extend(['Life +{}'.format(str(3*card.markers[Growth])),'Melee +{}'.format(str(card.markers[Growth]))])
-        rawTraitsList.append('Armor -{}'.format(str(card.markers[Corrode])))
+                                rawTraitsList.extend(traitsGranted)        
+        if card.markers[Melee]: rawTraitsList.append('Melee +{}'.format(str(card.markers[Melee])))
+        if card.markers[Ranged]: rawTraitsList.append('Ranged +{}'.format(str(card.markers[Ranged])))
+        if card.markers[Armor]: rawTraitsList.append('Armor +{}'.format(str(card.markers[Armor])))
+        if card.markers[Growth]: rawTraitsList.extend(['Life +{}'.format(str(3*card.markers[Growth])),'Melee +{}'.format(str(card.markers[Growth]))])
+        if card.markers[Corrode]: rawTraitsList.append('Armor -{}'.format(str(card.markers[Corrode])))
+        if card.markers[Guard]: rawTraitsList.append('Counterstrike')
+        if card.markers[Sleep] or card.markers[Stun]: rawTraitsList.append('Incapacitated')
+        
         if card.markers[Pet] and 'Animal' in card.Subtype: rawTraitsList.extend(['Melee +1','Armor +1','Life +3'])
         if card.markers[BloodReaper] and 'Demon' in card.Subtype: rawTraitsList.append('Bloodthirsty +2')
         if card.markers[Eternal_Servant] and 'Undead' in card.Subtype: rawTraitsList.append('Piercing +1')
         if card.markers[Treebond] and 'Tree' in card.Subtype: rawTraitsList.extend(['Innate Life +4','Armor +1','Lifebond +2'])
         if card.markers[Veteran] and 'Soldier' in card.Subtype: rawTraitsList.extend(['Armor +1','Melee +1'])
+
+        if 'Incorporeal' in rawTraitsList: rawTraitsList.extend(['Nonliving','Burnproof','Uncontainable'])
+        if 'Nonliving' in rawTraitsList: rawTraitsList.extend(['Poison Immunity','Finite Life'])
+
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)
                 if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + (0 if formTrait[1] == '-' else int(formTrait[1]))
                 elif formTrait[0] in superlativeTraits: traitDict[formTrait[0]] = max(traitDict.get(formTrait[0],0),int(formTrait[1]))
+                elif formTrait[0] == 'Immunity':
+                        if not traitDict.get('Immunity',False): traitDict['Immunity'] = {formTrait[1] : True}
+                        else: traitDict['Immunity'][formTrait[1]] = True
                 else: traitDict[formTrait[0]] = True
         debug(card.name+' traits = '+str(traitDict))
         traitDict['OwnerID'] = card._id #Tag the dictionary with its owner's ID in case we need to extract it later (extracting the owner is MUCH faster than extracting the dictionary)
@@ -348,7 +368,7 @@ def computeTraits(card):
 def canDeclareAttack(card):
         if not card.isFaceUp: return False
         if (card.Type in ['Creature','Mage'] or
-            (card.Type == 'Conjuration' and card.AttackBar != '') or
+            ('Conjuration' in card.Type and card.AttackBar != '') or
             computeTraits(card).get('Autonomous',False) or
             [1 for attack in getAttackList(card) if attack.get('Range',[''])[0]=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
                 return True
@@ -387,7 +407,8 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         atkTraits = attack.get('Traits',{})
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if attack.get('Range',[False,None])[0] == 'Melee' and aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
-        return attack
+        if attack.get('Range',[False,None])[0] == 'Melee' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
+        return attack #If attack has zone attack trait, then it gains unavoidable
 
 def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and returns a clean, easy to read list of traits
         attackList = []
