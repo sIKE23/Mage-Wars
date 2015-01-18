@@ -139,12 +139,16 @@ def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
         if attacker.controller != defender.controller: revealAttachmentQuery([defender,attacker])
         aTraitDict = computeTraits(attacker)
         dTraitDict = (computeTraits(defender) if defender else {})
+        atkTraits = attack.get('Traits',{})
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
-        choice = askChoice('{}\'s attack has inflicted {} damage {} on {}. Apply these results?'.format(attacker.Name,
-                                                                                                   actualDmg,
-                                                                                                   ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
-                                                                                                   defender.Name),
+        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),getStatusDict(defender).get('Mana',0)) if actualDmg else 0) #Prep for mana drain
+        choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
+                                                                                                          actualDmg,
+                                                                                                          ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
+                                                                                                          defender.Name,
+                                                                                                          (' It will also drain {} mana from {}.'.format(
+                                                                                                                  str(dManaDrain),defender.Name) if dManaDrain else '')),
                            ['Yes','No'],
                            ["#01603e","#de2827"])
         if choice == 1:
@@ -164,7 +168,6 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
         drainableHealth = int(round(min(getRemainingLife(defender)/float(2),damage/float(2),aDamage),0))
-        debug('drain ='+str(drainableHealth))
         
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
@@ -172,8 +175,12 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                                                                                str(damage),
                                                                                defender,
                                                                                ('an above' if damage >= expectedDmg else 'a below')))
-        #Now, special effects like vampirism or mana drain:
-        
+        #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
+        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),getStatusDict(defender).get('Mana',0)) if damage else 0)
+        if defender.Type == 'Mage': defender.controller.Mana -= dManaDrain
+        else: defender.markers[Mana] -= dManaDrain
+        if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender))
+        #Vampirism
         if (atkTraits.get('Vampiric',False) and drainableHealth and
             (dTraitDict.get('Living',False) or not dTraitDict.get('Nonliving',False)) and defender.Type in ['Creature','Mage'] > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
                 if attacker.controller == me: healingQuery(aTraitDict,
@@ -406,8 +413,9 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         attack = attackDict
         atkTraits = attack.get('Traits',{})
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
-        if attack.get('Range',[False,None])[0] == 'Melee' and aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
-        if attack.get('Range',[False,None])[0] == 'Melee' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
+        if attack.get('Range',[False,None])[0] == 'Melee':
+                if aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
+                if attack.get('Action',None) == 'Quick' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
         return attack #If attack has zone attack trait, then it gains unavoidable
 
 def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and returns a clean, easy to read list of traits
