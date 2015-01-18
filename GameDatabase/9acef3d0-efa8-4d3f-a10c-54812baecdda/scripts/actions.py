@@ -60,7 +60,7 @@ Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
 Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
-Taint = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
+Tainted = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
 Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805" )
@@ -999,7 +999,7 @@ tokenList=['Armor',
            'Slam',
            'Stun',
            'Stuck',
-           'Taint',
+           'Tainted',
            'Veteran',
            'Weak',
            'Zombie'
