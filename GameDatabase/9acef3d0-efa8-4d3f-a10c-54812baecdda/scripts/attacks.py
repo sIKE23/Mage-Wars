@@ -103,16 +103,16 @@ def diceRollMenu(attacker = None,defender = None):
                 choices = []
                 attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
                 for attack in attackList:
-                        atkTraits = attack.get('Traits',{})
+                        modAttack = attack# computeAttack(aTraitDict,attack,dTraitDict)
                         modDice = getAdjustedDice(aTraitDict,attack,dTraitDict)
                         traits = getAttackTraitStr(attack['Traits'])
                         expDam = str(round(expectedDamage(aTraitDict,attack,dTraitDict),1)) if defender else ''
                         killCh = str(round(chanceToKill(aTraitDict,attack,dTraitDict)*100,1)) if defender else ''
-                        effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],aTraitDict,attack,dTraitDict)*100,1))) for effect in attack['d12']] if attack['d12'] else ''
-                        choice = ("{} ({})".format(attack['Name'],str(modDice)).center(68,' ')+
+                        effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],aTraitDict,attack,dTraitDict)*100,1))) for effect in modAttack['d12']] if modAttack['d12'] else ''
+                        choice = ("{} ({})".format(modAttack['Name'],str(modDice)).center(68,' ')+
                                   ('\n'+', '.join(traits) if traits else '')+
                                   ('\n'+', '.join(effectList) if effectList != '' else '')+
-                                  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and not attack.get('Heal',False)) else ''))
+                                  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if defender else ''))
                         choices.append(choice)
                 if defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         #Then, suppose not (or suppose the indicated attacker has no attack list)
@@ -120,9 +120,9 @@ def diceRollMenu(attacker = None,defender = None):
                 choices = (['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),
                         round(expectedDamage({},{'Dice':i+1},dTraitDict),1),
                         round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])  
-        colors = [("#663300" if (attackList and attackList[i].get('Heal',False)) else '#CC0000') for i in range(len(choices))]
+        colors = ['#de2827' for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
-        colors.extend(["#666699","#000000"])
+        colors.extend(["#171e78","#c0c0c0"])
         count = askChoice(choiceText, choices, colors)
         if count == 0 or count == len(choices): return {}
         elif count < len(choices)-1:
@@ -133,23 +133,13 @@ def diceRollMenu(attacker = None,defender = None):
                 else: #Revert to standard input menu. Default value is the last one you entered.
                         dice = min(askInteger("Roll how many red dice?", getSetting('lastStandardDiceRollInput',8)),50)
                         setSetting('lastStandardDiceRollInput',dice)
-                        return {'Dice' : dice} #max 50 dice rolled at once
+                        return {'Dice' : dice}#dice,[] #max 50 dice rolled at once
 
 def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
         if attacker.controller != defender.controller: revealAttachmentQuery([defender,attacker])
         aTraitDict = computeTraits(attacker)
         dTraitDict = (computeTraits(defender) if defender else {})
         atkTraits = attack.get('Traits',{})
-        #If it is healing, we heal and then end the attack, since it is not an attack.
-        if attack.get('Heal',False):
-                healingAmt = min(sum([{0:0,1:0,2:1,3:2,4:1,5:2}.get(i,0)*roll[i] for i in range(len(roll))]),getStatusDict(defender).get('Damage',0))
-                if healingAmt > 0: healingQuery(dTraitDict,
-                                                'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
-                                                healingAmt,
-                                                "{} heals {} for {} damage!".format(attacker.name,defender.name,'{}'))
-                else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
-                return
-        
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
         dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),getStatusDict(defender).get('Mana',0)) if actualDmg else 0) #Prep for mana drain
@@ -167,18 +157,23 @@ def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
                 notify('{} has elected not to apply auto-calculated battle results'.format(me))
                 whisper('Battle calculator not giving the right results? Report the bug to us so we can fix it!')
 
+<<<<<<< HEAD
 def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In general, need to adjust functions to accomodate partially or fully untargeted attacks.
         attacker = Card(aTraitDict.get('OwnerID',''))
         defender = Card(dTraitDict.get('OwnerID',''))
         atkTraits = attack.get('Traits',{})
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Taint','Weak']
+=======
+def applyDamageAndEffects(card,damage,rawEffect):
+        conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Disable','Rot','Slam','Sleep','Stuck','Stun','Tainted','Weak']
+>>>>>>> origin/Q1---2015
         #effectsList = ['Push','Snatch'] (not needed yet. We do need some way to implement taunt, though. Not high priority)
 
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
         drainableHealth = int(round(min(getRemainingLife(defender)/float(2),damage/float(2),aDamage),0))
-
+        
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
         notify("{}'s attack inflicts {} damage on {}, {} average roll.".format(attacker,
@@ -258,11 +253,11 @@ superlativeTraits = ["Regenerate",
                      "Uproot"]
 
 def getAttackList(card):
-        if not card or card.AttackBar == '': return [] #Return an empty list if passed a blank argument
+        if not card or card.AttackBar == '': return {} #Return an empty list if passed a blank argument
         rawData = card.AttackBar
         #First, split up the attacks:
         attackKeyList = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
-        isAttackSpell = (card.Type == 'Attack')
+        isAttackSpell = (len(attackKeyList[0]) == 1)
         attackList = []
         for attack in attackKeyList:
                 name = (card.name if isAttackSpell else attack[0])
@@ -284,7 +279,6 @@ def getAttackList(card):
                         elif 'Ranged' in attribute: aDict['Range'] = attribute.split(':')
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
                         elif attribute == 'Damage Barrier' : aDict['Range'] = ['Damage Barrier','']
-                        elif attribute == 'Heal' : aDict['Heal'] = True
                         elif 'Dice' in attribute:
                                 aDict['Dice'] = int(attribute[-1])
                                 hasDiceValue = True
@@ -380,7 +374,7 @@ def computeTraits(card):
                         else: traitDict['Immunity'][formTrait[1]] = True
                 else: traitDict[formTrait[0]] = True
         debug(card.name+' traits = '+str(traitDict))
-        traitDict['OwnerID'] = card._id
+        traitDict['OwnerID'] = card._id #Tag the dictionary with its owner's ID in case we need to extract it later (extracting the owner is MUCH faster than extracting the dictionary)
         return traitDict
 
 def canDeclareAttack(card):
@@ -441,7 +435,7 @@ def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and retu
 def getRemainingLife(card):
         if not card: return 0
         life = getStat(card.Stats,'Life')
-        if life: return max(life - card.markers[Damage] - (card.markers[Taint]*3),0)
+        if life: return max(life - card.markers[Damage] - (card.markers[Tainted]*3),0)
 
 """
 Probability Distributions
@@ -502,6 +496,7 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
                 if modRoll >= lowerBound and (modRoll <= upperBound if upperBound else True): return effect[1]
         return None
                 
+
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         atkTraits = attack.get('Traits',{})
@@ -541,11 +536,13 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
         successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if upperBound else 12) - lowerBound + 1)
         return min(successIncidence/float(12),float(1))
 
+"""
+Pre-Generated Data
 
-############################################################################
-######################		Pregenerated Data	####################
-############################################################################
-
+Pre-generated damage frequency dictionaries should be stored below. Don't put anything else there; just data. This can be easily expanded
+as needed by using comboDistr() and copypasting, though I can't imagine anybody needs more than a 10 dice calculation (what would you really
+need to know besides *You're dead, ha ha ha*?)
+"""
 damageDict = {
     0 : {'[0,0]': 1},
     1 : {'[0, 1]': 1, '[2, 0]': 1, '[0, 2]': 1, '[0, 0]': 2, '[1, 0]': 1},
