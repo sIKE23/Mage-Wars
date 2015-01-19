@@ -807,7 +807,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon/Shield" />
-			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Cost=2] [Quick] [Ranged:0-1] [Heal] [Dice=2]&#xD;&#xA;[Heal target Living creature the amount rolled.]&#xD;&#xA;Cleansing Light:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 Condition marker from target Living creature. X = its removal cost.]" />
+			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Cost=2] [Quick] [Ranged:0-1] [Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Cleansing Light:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 Condition marker from target Living creature. X = its removal cost.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, this Mage may cast one of the 2 quick spells shown above." />
 			<property name="CardID" value="DNQ09" />
