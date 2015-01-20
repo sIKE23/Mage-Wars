@@ -174,7 +174,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                 attackDice += dTraitDict.get(attack.get('Type',None),0) #Elemental weaknesses/resistances
                 #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
                 #traits that are hard to autodetect.
-        if attackDice == 0: attackDice = 1
+        if attackDice <= 0: attackDice = 1
         if attack.get('Traits',{}).get('No Damage',False): attackDice = 0
         return attackDice
 
