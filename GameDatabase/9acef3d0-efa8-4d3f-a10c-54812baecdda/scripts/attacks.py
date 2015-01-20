@@ -102,6 +102,7 @@ def diceRollMenu(attacker = None,defender = None):
                 choiceText = "Use which attack?"
                 choices = []
                 attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
+                #Now, we pare down the attack list to attacks which can legally be made against the target
                 for attack in attackList:
                         atkTraits = attack.get('Traits',{})
                         modDice = getAdjustedDice(aTraitDict,attack,dTraitDict)
@@ -110,16 +111,17 @@ def diceRollMenu(attacker = None,defender = None):
                         killCh = str(round(chanceToKill(aTraitDict,attack,dTraitDict)*100,1)) if defender else ''
                         effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],aTraitDict,attack,dTraitDict)*100,1))) for effect in attack['d12']] if attack['d12'] else ''
                         choice = ("{} ({})".format(attack['Name'],str(modDice)).center(68,' ')+
+                                  ('\n{} Mana'.format(str(attack.get('Cost',0))) if attack.get('Cost',False) else '')+
                                   ('\n'+', '.join(traits) if traits else '')+
                                   ('\n'+', '.join(effectList) if effectList != '' else '')+
                                   ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and not attack.get('Heal',False)) else ''))
-                        choices.append(choice)
+                        if isLegalAttack(aTraitDict,attack,dTraitDict): choices.append(choice)
                 if defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         #Then, suppose not (or suppose the indicated attacker has no attack list)
         elif defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                 choices = (['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),
                         round(expectedDamage({},{'Dice':i+1},dTraitDict),1),
-                        round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])  
+                        round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])
         colors = [("#663300" if (attackList and attackList[i].get('Heal',False)) else '#CC0000') for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
         colors.extend(["#666699","#000000"])
@@ -134,6 +136,15 @@ def diceRollMenu(attacker = None,defender = None):
                         dice = min(askInteger("Roll how many red dice?", getSetting('lastStandardDiceRollInput',8)),50)
                         setSetting('lastStandardDiceRollInput',dice)
                         return {'Dice' : dice} #max 50 dice rolled at once
+
+def isLegalAttack(aTraitDict,attack,dTraitDict):
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
+        if attack.get('Type',None) in dTraitDict.get('Immunity',[]): return False
+        return True
+
+def getAvailableMana(card):
+        return card.markers[Mana] + card.controller.Mana
 
 def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
         if attacker.controller != defender.controller: revealAttachmentQuery([defender,attacker])
@@ -267,17 +278,12 @@ def getAttackList(card):
         for attack in attackKeyList:
                 name = (card.name if isAttackSpell else attack[0])
                 aDict = {'Name':name,
-                         'Action':None,
-                         'Range':[None,None],
-                         'Dice':0,
-                         'Type':None,
                          'd12':[],
                          'Traits': {}
                          }
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 #Now we extract the attributes
                 effectSwitch = False
-                hasDiceValue = False
                 for attribute in attributes:
                         attribute = attribute.strip('[]')
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
@@ -285,9 +291,8 @@ def getAttackList(card):
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
                         elif attribute == 'Damage Barrier' : aDict['Range'] = ['Damage Barrier','']
                         elif attribute == 'Heal' : aDict['Heal'] = True
-                        elif 'Dice' in attribute:
-                                aDict['Dice'] = int(attribute[-1])
-                                hasDiceValue = True
+                        elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
+                        elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
                         elif attribute =='d12' : effectSwitch = True
                         elif effectSwitch:
@@ -299,7 +304,7 @@ def getAttackList(card):
                                 if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
-                if hasDiceValue: attackList.append(aDict)
+                if aDict.get('Dice',False): attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
         if card.Type == 'Mage':
                 for c in table:
                         if ((c.Type == 'Equipment' and card.controller == c.controller and c.isFaceUp) or
@@ -376,8 +381,8 @@ def computeTraits(card):
                 if formTrait[0] in additiveTraits: traitDict[formTrait[0]] = traitDict.get(formTrait[0],0) + (0 if formTrait[1] == '-' else int(formTrait[1]))
                 elif formTrait[0] in superlativeTraits: traitDict[formTrait[0]] = max(traitDict.get(formTrait[0],0),int(formTrait[1]))
                 elif formTrait[0] == 'Immunity':
-                        if not traitDict.get('Immunity',False): traitDict['Immunity'] = {formTrait[1] : True}
-                        else: traitDict['Immunity'][formTrait[1]] = True
+                        if not traitDict.get('Immunity',False): traitDict['Immunity'] = [formTrait[1]]
+                        else: traitDict['Immunity'].append(formTrait[1])
                 else: traitDict[formTrait[0]] = True
         debug(card.name+' traits = '+str(traitDict))
         traitDict['OwnerID'] = card._id #Tag the dictionary with its owner's ID in case we need to extract it later (extracting the owner is MUCH faster than extracting the dictionary)
