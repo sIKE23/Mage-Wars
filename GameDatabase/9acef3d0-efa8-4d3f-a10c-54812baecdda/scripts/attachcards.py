@@ -233,10 +233,35 @@ def canAttach(card,target):
         or not card in table
         or not target.isFaceUp):
         return False
-    if (card.Type in ['Enchantment','Equipment']
-        or target.Type in ['Magestats']
-        or card.Name in ['Tanglevine','Stranglevine','Quicksand']
-        or set(['Spellbind','Familiar','Spawnpoint']) & set(target.Traits.split(', '))):
+    if (card.Type == 'Enchantment'
+        or (card.Type == 'Equipment' and target.Type == 'Mage')
+        or target.Type == 'Magestats'
+        or (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.Type == 'Creature')
+#Familiars
+        or (target.name == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+        or (target.name == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
+        #or sectarus, but enchants are already legal to attach to everything
+        or (target.name == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
+        or (target.name == 'Sersiryx, Imp Familiar' and card.Type == 'Attack' and 'Fire' in card.School and sum([int(i) for i in card.level.split('+')])<=2) #Again, enchantments are automatically legal
+        #fellella is covered
+        or (target.name == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
+        or (target.name == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
+#Spawnpoints
+        or (target.name == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype)
+        or (target.name == 'Battle Forge' and card.Type == 'Equipment')
+        or (target.name == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School)
+        or (target.name == 'Lair' and card.Type == 'Creature' and 'Animal' in card.School)
+        or (target.name == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (target.name == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School)
+        or (target.name == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (target.name == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Sybtype)
+        or (target.name == 'Samara Tree' and card.name == 'Seedling Pod')
+        or (target.name == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Sybtype)
+        or (target.name == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
+#Spellbind (only)
+        or (target.name == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
+        or (target.name == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
+        or (target.name == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
         return True
     return False
 
