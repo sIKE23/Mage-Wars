@@ -17,6 +17,7 @@ additiveTraits = ["Melee","Ranged",
                   "Piercing",
                   "Mana Drain",
                   "Mana Transfer",
+                  "Lifebond",
                   'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
 superlativeTraits = ["Regenerate",
                      "Aegis",
@@ -68,7 +69,7 @@ def diceRollMenu(attacker = None,defender = None):
         colors = [("#663300" if (attackList and attackList[i].get('Heal',False)) else '#CC0000') for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
         colors.extend(["#666699","#000000"])
-        count = askChoice(choiceText, choices, colors)
+        count = (askChoice("No legal attacks detected!", ['Roll anyway','Cancel'], colors) if len(choices) == 2 else askChoice(choiceText, choices, colors))
         if count == 0 or count == len(choices): return {}
         elif count < len(choices)-1:
                 if (attacker and attackList): return attackList[count-1]#computeAttack(aTraitDict,attackList[count-1],dTraitDict)
@@ -494,6 +495,7 @@ def computeTraits(card):
         if card.markers[Corrode]: rawTraitsList.append('Armor -{}'.format(str(card.markers[Corrode])))
         if card.markers[Guard]: rawTraitsList.append('Counterstrike')
         if card.markers[Sleep] or card.markers[Stun]: rawTraitsList.append('Incapacitated')
+        if card.markers[Zombie] : rawTraitsList.extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
         
         if card.markers[Pet] and 'Animal' in card.Subtype: rawTraitsList.extend(['Melee +1','Armor +1','Life +3'])
         if card.markers[BloodReaper] and 'Demon' in card.Subtype: rawTraitsList.append('Bloodthirsty +2')
