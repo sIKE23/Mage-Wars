@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Gameboards" id="a27a7cb8-7d98-46e4-bf71-a940b7350afe" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
+	<cards>
+		<card id="af14ca09-a83d-4185-afa0-bc38a31dbf82" name="Board1" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+	</cards>
+</set>
