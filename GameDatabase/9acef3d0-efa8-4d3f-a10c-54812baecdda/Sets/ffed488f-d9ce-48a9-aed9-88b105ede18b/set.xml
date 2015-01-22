@@ -28,7 +28,7 @@
 			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Fireweaving: Once per round, at the end of her Action Phase, the Warlock may target an object up to 2 zones away. She may move a Burn conditon from that object to another target object in that same zone.&#xD;&#xA;Smoldering Curses: Enemy creatures gain the Flame +1 trait if they have one or more revealed curse you control attached to them.&#xD;&#xA;Demonic Reward: If a friednly demon attacks and damages an enemy creature with a Burn condition, it may heal one damage. Each friendly demon may only trigger this ability once per round." />
-			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [5+ = Burn] [Defrost]" />
+			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [d12] [5+ = Burn] [Defrost]" />
 		</card>
 		<card id="8c17a03b-4800-4253-ac32-925581fdbbe0" name="Adramelech Warlock Stats">
 			<property name="Type" value="Magestats" />
@@ -201,7 +201,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=11" />
-			<property name="AttackBar" value="Gorging Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Vampiric] " />
+			<property name="AttackBar" value="Gorging Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Vampiric]" />
 			<property name="Traits" value="Bloodthirsty +1, Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC02" />

@@ -158,8 +158,31 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                 if aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
                 if attack.get('Action',None) == 'Quick' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
         attack['Dice'] = getAdjustedDice(aTraitDict,attack,dTraitDict)
+        attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
         return attack #If attack has zone attack trait, then it gains unavoidable
 
+def computeD12(dTraitDict,d12Pair):
+        effectText = d12Pair[1]
+        effects = []
+        if ' & ' in effectText: effects = effectText.split(' & ')
+        elif '2 ' in effectText: effects = [effectText.strip('2 '),effectText.strip('2 ')]
+        else: effects = [effectText]
+        conditionTypes = {'Flame' : ['Burn'],
+                          'Psychic' : ['Sleep'],
+                          'Acid' : ['Corrode'],
+                          'Poison' : ['Rot','Cripple','Tainted','Weak']}
+        for e in effects:
+                illegalEffect = False
+                for i in dTraitDict.get('Immunity',[]):
+                        if (e in conditionTypes.get(i,[])): illegalEffect = True
+                if ((e=='Burn' and dTraitDict.get('Burnproof',False))
+                    or (e in ['Snatch','Push'] and dTraitDict.get('Unmovable',False))): illegalEffect = True
+                if illegalEffect: effects.remove(e)
+        if not effects: return False
+        if len(effects) == 1: return [d12Pair[0],effects[0]]
+        if len(effects) == 2 and effects[0] == effects[1]: return [d12Pair[0],'2 '+effects[0]]
+        else: return [d12Pair[0],'{} & {}'.format(effects[0],effects[1])]
+                
 def getAdjustedDice(aTraitDict,attack,dTraitDict):
         """Decides how many dice should be rolled for attack based on the attacker (and the defender, if any)."""
         attackDice = attack['Dice']
@@ -381,18 +404,8 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         #Finally, apply conditions
         effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:
-                if not isImmuneToEffect(dTraitDict,e):
-                        if e in conditionsList: defender.markers[eval(e)]+=1
-                        notify('{} {}'.format(defender,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
-
-def isImmuneToEffect(dTraitDict,condition):
-        conditionTypes = {'Flame' : ['Burn'],
-                          'Psychic' : ['Sleep'],
-                          'Acid' : ['Corrode'],
-                          'Poison' : ['Rot','Cripple','Tainted','Weak']}
-        for i in dTraitDict.get('Immunity',[]):
-                if i in conditionTypes.get(i,[]) or (i=='Burn' and dTraitDict.get('Burnproof')): return True
-        return False
+                if e in conditionsList: defender.markers[eval(e)]+=1
+                notify('{} {}'.format(defender,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
 def revealAttachmentQuery(cardList): #Returns true if at least 1 attachment was revealed
         recurText = ''
@@ -505,6 +518,9 @@ def computeTraits(card):
 
         if 'Incorporeal' in rawTraitsList: rawTraitsList.extend(['Nonliving','Burnproof','Uncontainable'])
         if 'Nonliving' in rawTraitsList: rawTraitsList.extend(['Poison Immunity','Finite Life'])
+        if 'Rooted' in rawTraitsList:
+                rawTraitsList.append('Unmovable')
+                rawTraitsList = [t for t in rawTraitsList if t != 'Flying'] #Rooted creatures lose, and cannot gain, flying
 
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)
