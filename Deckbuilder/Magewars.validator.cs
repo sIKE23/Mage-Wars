@@ -461,6 +461,8 @@ namespace Octgn.MageWarsValidator
             {
                 ret = "";
             }
+            if (ret == String.Empty)
+            	ret = "0";
             return ret;
         }
 
