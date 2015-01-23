@@ -117,6 +117,7 @@ def getAttackList(card):
                          'Traits': {}
                          }
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
+                if isAttackSpell: attributes.append('Spell')
                 #Now we extract the attributes
                 effectSwitch = False
                 for attribute in attributes:
@@ -185,10 +186,14 @@ def computeD12(dTraitDict,d12Pair):
                 
 def getAdjustedDice(aTraitDict,attack,dTraitDict):
         """Decides how many dice should be rolled for attack based on the attacker (and the defender, if any)."""
-        attackDice = attack['Dice']
+        attackDice = attack.get('Dice',0)
+        atkTraits = attack.get('Traits',{})
+        attacker = (Card(aTraitDict['OwnerID']) if 'OwnerID' in aTraitDict else None)
         defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
-        if attack.get('Range',[None,None])[0] == 'Melee': attackDice += aTraitDict.get('Melee',0)
-        if attack.get('Range',[None,None])[0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+        if attacker:
+                if attack.get('Range',[None,None])[0] == 'Melee': attackDice += aTraitDict.get('Melee',0)
+                if attack.get('Range',[None,None])[0] == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+                if not atkTraits.get('Spell',False): attackDice -= attacker.markers[Weak]
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
                 attackDice += (aTraitDict.get('Bloodthirsty',0) if (defender.markers[Damage]
@@ -199,7 +204,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                 #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
                 #traits that are hard to autodetect.
         if attackDice <= 0: attackDice = 1
-        if attack.get('Traits',{}).get('No Damage',False): attackDice = 0
+        if atkTraits.get('No Damage',False): attackDice = 0
         return attackDice
 
 def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and returns a clean, easy to read list of traits
