@@ -155,17 +155,23 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID',None))
         attack = attackDict
         atkTraits = attack.get('Traits',{})
+        localADict = dict(aTraitDict)
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if attack.get('Range',[False,None])[0] == 'Melee':
-                if aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
-                if attack.get('Action',None) == 'Quick' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
+                if localADict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
+                if attack.get('Action',None) == 'Quick' and localADict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
         #Scan the board for cards than can provide a bonus to this attack
         for c in table:
-                if (c.name == 'Tooth and Nail' and
+                if (c.name == 'Tooth and Nail' and #Global effects
                     'Animal' in attacker.Subtype and
                     attack.get('Range',[False,None])[0] == 'Melee'): attack['Traits']['Piercing'] += 1
-        
-        attack['Dice'] = getAdjustedDice(aTraitDict,attack,dTraitDict)
+                if c.controller == attacker.controller: #Friendly effects
+                        if ((c.name == 'Dawnbreaker Ring' and attack.get('Type',None) == 'Light') or
+                            (c.name == 'Fireshaper Ring' and attack.get('Type',None) == 'Flame') or
+                            (c.name == 'Lightning Ring' and attack.get('Type',None) == 'Lightning')):
+                            localADict['Melee'] = localADict.get('Melee',0) + 1
+                            localADict['Ranged'] = localADict.get('Ranged',0) + 1
+        attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
         if dTraitDict.get('OwnerID',False): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
         debug(attack.get('Name','Unnamed')+': '+str(attack))
         return attack #If attack has zone attack trait, then it gains unavoidable

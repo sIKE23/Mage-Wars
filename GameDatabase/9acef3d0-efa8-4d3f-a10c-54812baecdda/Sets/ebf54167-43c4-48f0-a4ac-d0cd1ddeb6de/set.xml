@@ -2046,7 +2046,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal flame damage. &#xD;&#xA;[Flame] [Melee +1] [Ranged +1]" />
+			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal flame damage." />
 			<property name="CardID" value="MW1Q10" />
 		</card>
 		<card id="1257b363-d905-4ebe-94c8-cd220565b28c" name="Gauntlets of Strength">
@@ -2151,7 +2151,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal lightning damage.&#xD;&#xA;[Lightning] [Melee +1] [Ranged +1]" />
+			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal lightning damage." />
 			<property name="CardID" value="MW1Q17" />
 		</card>
 		<card id="fabfda9b-1168-4b3b-9f2b-c5ead9215b81" name="Mage Staff">
@@ -2271,7 +2271,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal light damage.&#xD;&#xA;[Light] [Melee +1] [Ranged +1]" />
+			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal light damage." />
 			<property name="CardID" value="MW1Q27" />
 		</card>
 		<card id="91180ca9-e88e-4355-854a-49e78e2b4ec6" name="Ring of Curses">
