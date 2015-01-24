@@ -159,10 +159,12 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                 if aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
                 if attack.get('Action',None) == 'Quick' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
         attack['Dice'] = getAdjustedDice(aTraitDict,attack,dTraitDict)
-        attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
+        if dTraitDict.get('OwnerID',False): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
+        debug(attack.get('Name','Unnamed')+': '+str(attack))
         return attack #If attack has zone attack trait, then it gains unavoidable
 
 def computeD12(dTraitDict,d12Pair):
+        defender = Card(dTraitDict.get('OwnerID',None))
         effectText = d12Pair[1]
         effects = []
         if ' & ' in effectText: effects = effectText.split(' & ')
@@ -177,7 +179,9 @@ def computeD12(dTraitDict,d12Pair):
                 for i in dTraitDict.get('Immunity',[]):
                         if (e in conditionTypes.get(i,[])): illegalEffect = True
                 if ((e=='Burn' and dTraitDict.get('Burnproof',False))
-                    or (e in ['Snatch','Push'] and dTraitDict.get('Unmovable',False))): illegalEffect = True
+                    or (e in ['Snatch','Push'] and dTraitDict.get('Unmovable',False))
+                    or (e == 'Bleed' and (dTraitDict.get('Nonliving',False) or 'Plant' in defender.Subtype))
+                    or (e in ['Bleed','Stuck','Stun','Daze','Cripple','Weak','Slam'] and defender.Type not in ['Creature','Mage'])): illegalEffect = True #not sure about weak; can it affect conjurations?
                 if illegalEffect: effects.remove(e)
         if not effects: return False
         if len(effects) == 1: return [d12Pair[0],effects[0]]
@@ -198,7 +202,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                 attackDice -= dTraitDict.get('Aegis',0)
                 attackDice += (aTraitDict.get('Bloodthirsty',0) if (defender.markers[Damage]
                                                                     and not 'Plant' in defender.subtype
-                                                                    and defender.type == 'Creature'
+                                                                    and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving',False)) else 0)
                 attackDice += dTraitDict.get(attack.get('Type',None),0) #Elemental weaknesses/resistances
                 #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
@@ -520,6 +524,7 @@ def computeTraits(card):
         if card.markers[Eternal_Servant] and 'Undead' in card.Subtype: rawTraitsList.append('Piercing +1')
         if card.markers[Treebond] and 'Tree' in card.Subtype: rawTraitsList.extend(['Innate Life +4','Armor +1','Lifebond +2'])
         if card.markers[Veteran] and 'Soldier' in card.Subtype: rawTraitsList.extend(['Armor +1','Melee +1'])
+        if card.markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: rawTraitsList.extend(['Life +5'])
 
         if 'Incorporeal' in rawTraitsList: rawTraitsList.extend(['Nonliving','Burnproof','Uncontainable'])
         if 'Nonliving' in rawTraitsList: rawTraitsList.extend(['Poison Immunity','Finite Life'])
