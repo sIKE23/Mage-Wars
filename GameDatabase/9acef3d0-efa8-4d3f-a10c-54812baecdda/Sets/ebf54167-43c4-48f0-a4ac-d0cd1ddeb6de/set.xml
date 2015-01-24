@@ -374,7 +374,7 @@
 			<property name="Text" value="As long as you control any of these animal creatures, your Mage gains these traits and abilities: Canine = Melee +1, Reptile = Armor +1, Bear = Tough -2, Ape = Climbing, Cat = Elusive." />
 			<property name="CardID" value="MW1J02" />
 		</card>
-		<card id="a239d7aa-4e81-4a4e-b447-cc3202bb5bad" name="Tooth and Nail">
+		<card id="a239d7aa-4e81-4a4e-b447-cc3202bb5bad" name="Tooth &amp; Nail">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Totem" />
 			<property name="Cost" value="7" />
