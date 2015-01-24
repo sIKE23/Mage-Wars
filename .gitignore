@@ -8,6 +8,7 @@
 *.dll.config
 *.cache
 *.suo
+*.back.aip
 !OCTGN-SBB-for-MageWars.exe
 ####################
 # VS Upgrade stuff #
@@ -20,6 +21,7 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
+Deckbuilder/Installer/InstallScript-cache
 ###################
 # Web publish log #
 ###################

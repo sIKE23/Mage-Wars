@@ -312,7 +312,7 @@
 			<property name="Text" value="Each Upkeep Phase, place a point of direct poison damage on each Living creature in this zone (including this creature)." />
 			<property name="CardID" value="MWBG1E02" />
 		</card>
-		<card id="9b486167-9d34-424d-85c2-014d8772730a" name="Sentinel of V&apos;Tar
+		<card id="9b486167-9d34-424d-85c2-014d8772730a" name="Sentinel of V&apos;Tar">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
