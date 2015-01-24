@@ -152,12 +152,19 @@ def getAttackList(card):
         return attackList
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
+        attacker = Card(aTraitDict.get('OwnerID',None))
         attack = attackDict
         atkTraits = attack.get('Traits',{})
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if attack.get('Range',[False,None])[0] == 'Melee':
                 if aTraitDict.get('Vampiric',False): attack['Traits']['Vampiric'] = True
                 if attack.get('Action',None) == 'Quick' and aTraitDict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
+        #Scan the board for cards than can provide a bonus to this attack
+        for c in table:
+                if (c.name == 'Tooth and Nail' and
+                    'Animal' in attacker.Subtype and
+                    attack.get('Range',[False,None])[0] == 'Melee'): attack['Traits']['Piercing'] += 1
+        
         attack['Dice'] = getAdjustedDice(aTraitDict,attack,dTraitDict)
         if dTraitDict.get('OwnerID',False): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
         debug(attack.get('Name','Unnamed')+': '+str(attack))
@@ -524,7 +531,23 @@ def computeTraits(card):
         if card.markers[Eternal_Servant] and 'Undead' in card.Subtype: rawTraitsList.append('Piercing +1')
         if card.markers[Treebond] and 'Tree' in card.Subtype: rawTraitsList.extend(['Innate Life +4','Armor +1','Lifebond +2'])
         if card.markers[Veteran] and 'Soldier' in card.Subtype: rawTraitsList.extend(['Armor +1','Melee +1'])
-        if card.markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: rawTraitsList.extend(['Life +5'])
+        if card.markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: rawTraitsList.append('Life +5')
+
+        #Global Effects
+        for c in table:
+                if (c.name == 'Armory' and c.controller == card.controller and 'Soldier' in card.Subtype): rawTraitsList.extend(['Armor +1','Piercing +1'])
+                if (c.name == 'Akiro\'s Battle Cry' and c.controller == card.controller and 'Soldier' in card.Subtype): rawTraitsList.extend(['Charge +2,Fast'])
+                if (c.name == 'Rajan\'s Fury' and 'Animal' in card.Subtype): rawTraitsList.append('Charge +1')
+                if (c.name == 'Gate to Hell' and c.controller == card.controller and 'Demon' in card.Subtype): rawTraitsList.append('Melee +1')
+                if (c.name == 'Mordok\'s Obelisk' and card.Type == 'Creature'): rawTraitsList.append('Upkeep +1')
+                if (c.name == 'Deathlock' and card.Type in ['Creature','Mage','Conjuration','Conjuration-Wall']): rawTraitsList.append('Finite Life')
+                if (c.name == 'Call of the Wild' and c.controller == card.controller and 'Animal' in card.Subtype): rawTraitsList.append('Melee +1')
+                #Altar of Skulls
+                if (c.name == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): rawTraitsList.append('Innate Life +2')
+                if (c.name == 'Zombie Frenzy' and 'Zombie' in card.Subtype):
+                        rawTraitsList = [t for t in rawTraitsList if t not in ['Lumbering','Pest','Slow']]
+                        rawTraitsList.extend(['Fast','Bloodthirsty +1'])
+                if (c.name == 'Rolling Fog'): rawTraitsList.append('Obscured')
 
         if 'Incorporeal' in rawTraitsList: rawTraitsList.extend(['Nonliving','Burnproof','Uncontainable'])
         if 'Nonliving' in rawTraitsList: rawTraitsList.extend(['Poison Immunity','Finite Life'])
