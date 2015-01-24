@@ -498,8 +498,8 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=-, Life=3" />
-			<property name="AttackBar" value="[Passage Blocked] [Line of Sight Blocked]" />
-			<property name="Traits" value="Incorporeal, Extendable" />
+			<property name="AttackBar" value="[] []" />
+			<property name="Traits" value="Blocks LOS, Passage Blocked, Incorporeal, Extendable" />
 			<property name="Text" value="During the Upkeep Phase you may pay mana to reinforce Wall of Force. For each mana spent remove 1 damage from it. The ability bypasses the Finite Life trait." />
 			<property name="CardID" value="MWPROMO24" />
 		</card>
@@ -513,8 +513,8 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=-, Life=8" />
-			<property name="AttackBar" value="Toxic Gas:&#xD;&#xA;[Passage Attack] [Line of Sight Blocked] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
-			<property name="Traits" value="Incorporeal, Wind +2, Extendable" />
+			<property name="AttackBar" value="Toxic Gas:&#xD;&#xA;[Passage Attack] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Blocks LOS, Passage Attacks, Incorporeal, Wind +2, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO54" />
 		</card>

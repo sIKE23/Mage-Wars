@@ -246,7 +246,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Impaling Thorns:&#xD;&#xA;[Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
+			<property name="AttackBar" value="Impaling Thorns:&#xD;&#xA;[Passage Attack] [Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
 			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Passage Attacks, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW01" />
@@ -261,8 +261,8 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=12" />
-			<property name="AttackBar" value="[Passage Blocked] [Blocks Line of Sight]" />
-			<property name="Traits" value="Extendable" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Passage Blocked, Blocks LOS, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW02" />
 		</card>

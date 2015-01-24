@@ -703,8 +703,8 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=-, Life=4" />
-			<property name="AttackBar" value="[Blocks Line of Sight]" />
-			<property name="Traits" value="Incorporeal, Extendable" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Blocks LOS, Incorporeal, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1W01" />
 		</card>
@@ -718,8 +718,8 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=10" />
-			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Blocked]" />
-			<property name="Traits" value="Extendable" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Blocks LOS, Passage Blocked, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1W02" />
 		</card>
@@ -733,8 +733,8 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=-, Life=8" />
-			<property name="AttackBar" value="Searing Flames:&#xD;&#xA;[Blocks Line of Sight] [Passage Attack] [Flame] [Dice=5] [d12] [5-9 = Burn; 10+ = 2 Burn] [Unavoidable] [Defrost]" />
-			<property name="Traits" value="Incorporeal, Extendable, Flame Immunity, Hydro +3" />
+			<property name="AttackBar" value="Searing Flames:&#xD;&#xA;[Passage Attack] [Flame] [Dice=5] [d12] [5-9 = Burn; 10+ = 2 Burn] [Unavoidable] [Defrost]" />
+			<property name="Traits" value="Blocks LOS, Passage Attacks, Incorporeal, Extendable, Flame Immunity, Hydro +3" />
 			<property name="Text" value="Hydro attacks gain the Etheral trait when attacking Wall of Fire." />
 			<property name="CardID" value="MW1W03" />
 		</card>
@@ -748,8 +748,8 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Blocks Line of Sight] [Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.]" />
-			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
+			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.]" />
+			<property name="Traits" value="Passage Attacks, Blocks LOS, Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />
 		</card>

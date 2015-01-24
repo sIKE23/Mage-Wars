@@ -169,8 +169,8 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=8" />
-			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Blocked]" />
-			<property name="Traits" value="Extendable, Lightning Immunity, Flame Immunity, Hydro +2" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Blocks LOS, Passage Blocked, Extendable, Lightning Immunity, Flame Immunity, Hydro +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFW01" />
 		</card>

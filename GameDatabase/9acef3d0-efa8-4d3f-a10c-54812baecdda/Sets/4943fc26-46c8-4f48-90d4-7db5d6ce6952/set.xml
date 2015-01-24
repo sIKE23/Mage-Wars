@@ -228,8 +228,8 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=4, Life=13" />
-			<property name="AttackBar" value="[Passage Blocked] [Blocks Line of Sight]" />
-			<property name="Traits" value="Extendable, Acid +2, Lightning +2" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Passage Blocked, Blocks LOS, Extendable, Acid +2, Lightning +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKW01" />
 		</card>
