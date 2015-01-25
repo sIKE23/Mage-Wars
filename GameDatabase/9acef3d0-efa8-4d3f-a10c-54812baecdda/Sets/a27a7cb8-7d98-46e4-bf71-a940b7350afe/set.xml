@@ -4,6 +4,9 @@
 		<card id="0f14ca09-a83d-4185-afa0-bc38a31dbf82" name="Board1" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>
+		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
 		<card id="5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64" name="Dropped Weapon" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>

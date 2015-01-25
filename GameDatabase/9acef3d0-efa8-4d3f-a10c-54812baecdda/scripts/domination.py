@@ -44,4 +44,4 @@ def setupDom(group, x=0, y=0):
 	orbGuardian = table.create("bf217fd3-18c0-4b61-a33a-117167533f3d", 225,  109 )	
 	orbGuardian.markers[Guard] = 1
 	
-	setGameBoard6(group, 0, 0)
+	setGameBoard0(group, 0, 0)
