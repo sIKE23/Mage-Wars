@@ -467,6 +467,18 @@ Since each attack step may be carried out by a different player, each step of th
 attack should lead into the next.
 """
 
+def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        if getSetting("BattleCalculator",True):
+                if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
+                else: remotecall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
+        else:
+                if attacker.controller == me: genericAttack(table)
+                else:
+                        remoteCall(attacker.controller,'whisper',['{} has disabled Battle Calculator, so generic dice menu will be used'])
+                        remoteCall(attacker.controller,'genericAttack',[table])
+
 def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID',None))
         defender = Card(dTraitDict.get('OwnerID',None))
@@ -727,7 +739,7 @@ def computeTraits(card):
         
         if card.markers[Pet] and 'Animal' in card.Subtype: rawTraitsList.extend(['Melee +1','Armor +1','Life +3'])
         if card.markers[BloodReaper] and 'Demon' in card.Subtype: rawTraitsList.append('Bloodthirsty +2')
-        if card.markers[Eternal_Servant] and 'Undead' in card.Subtype: rawTraitsList.append('Piercing +1')
+        if card.markers[EternalServant] and 'Undead' in card.Subtype: rawTraitsList.append('Piercing +1')
         if card.markers[Treebond] and 'Tree' in card.Subtype: rawTraitsList.extend(['Innate Life +4','Armor +1','Lifebond +2'])
         if card.markers[Veteran] and 'Soldier' in card.Subtype: rawTraitsList.extend(['Armor +1','Melee +1'])
         if card.markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: rawTraitsList.append('Life +5')

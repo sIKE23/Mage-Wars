@@ -80,6 +80,7 @@
 			<groupaction menu="Toggle Auto-Rolling Initiative" default="False" execute="toggleAutoRollInitiative" />
 			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
 			<groupaction menu="Toggle Auto-Attaching Cards" default="False" execute="toggleAutoAttach" />
+			<groupaction menu="Toggle Battle Calculator" default="False" execute="toggleBattleCalculator" />
 			<groupaction menu="Enable/Disable Sounds" default="False" execute="toggleSoundFX" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
