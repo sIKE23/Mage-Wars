@@ -1024,8 +1024,7 @@ def addOther(card, x = 0, y = 0):
 	card.markers[marker] += qty
 
 def subDamage(card, x = 0, y = 0):
-	if "Mage" in card.Type:
-		if card.controller == me:
+	if "Mage" in card.Type  card.controller == me:
 			me.Damage -= 1
 	else:
 		subToken(card, Damage)
@@ -1041,8 +1040,8 @@ def clearTokens(card, x = 0, y = 0):
 def toggleAction(card, x=0, y=0):
 	global mycolor
 	mute()
-	if card.Type == "Internal":
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
 	elif mycolor == PlayerColor[0]: # Red
@@ -1102,10 +1101,8 @@ def toggleAction(card, x=0, y=0):
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
-	if not card.isFaceUp:
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[DeflectR] > 0:
 		card.markers[DeflectR] = 0
 		card.markers[DeflectU] = 1
@@ -1117,16 +1114,14 @@ def toggleDeflect(card, x=0, y=0):
 
 def toggleGuard(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	toggleToken(card, Guard)
 
 def toggleInvisible(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
-	if not card.isFaceUp:
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Invisible] > 0:
 		card.markers[Invisible] = 0
 		card.markers[Visible] = 1
@@ -1138,10 +1133,8 @@ def toggleInvisible(card, x=0, y=0):
 
 def toggleReady(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
-	if not card.isFaceUp:
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
@@ -1153,10 +1146,8 @@ def toggleReady(card, x=0, y=0):
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
-	if not card.isFaceUp:
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[ReadyII] > 0:
 		card.markers[ReadyII] = 0
 		card.markers[UsedII] = 1
@@ -1168,10 +1159,8 @@ def toggleReadyII(card, x=0, y=0):
 
 def toggleQuick(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
-	if not card.isFaceUp:
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
@@ -1183,10 +1172,8 @@ def toggleQuick(card, x=0, y=0):
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return
-	if not card.isFaceUp:
-		return
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[VoltaricON] > 0:
 		card.markers[VoltaricON] = 0
 		card.markers[VoltaricOFF] = 1
@@ -1212,6 +1199,8 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
@@ -1391,8 +1380,8 @@ def defaultAction(card, x = 0, y = 0):
 
 def addToken(card, tokenType):
 	mute()
-	if card.Type == "Internal":
-		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:
 		notify("{} added to '{}'".format(tokenType[0], card.Name))
@@ -1401,8 +1390,8 @@ def addToken(card, tokenType):
 
 def subToken(card, tokenType):
 	mute()
-	if card.Type == "Internal":
-		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] -= 1
 		if card.isFaceUp:
@@ -1412,8 +1401,8 @@ def subToken(card, tokenType):
 
 def toggleToken(card, tokenType):
 	mute()
-	if card.Type == "Internal":
-		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	typeIgnoreList = ['Internal','Phases','Diceroll']
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] = 0
 		if card.isFaceUp:
