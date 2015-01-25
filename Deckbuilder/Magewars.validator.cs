@@ -146,7 +146,7 @@ namespace Octgn.MageWarsValidator
                             var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
                             var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
                             magename = card.Name;
-                            reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
+                            reporttxt += string.Format("{1}\n", card.Quantity.ToString(), card.Name);
                             foreach (var msc in mageschoolcost)
                             {
                                 foreach (var t in training.ToList())
@@ -179,9 +179,9 @@ namespace Octgn.MageWarsValidator
                                 if (typestr.Equals("Conjuration-Wall")) typestr = "Conjuration";
                                 if (!reporttxt.Contains(typestr)) // has this type been listed before??
                                 {
-                                    reporttxt += string.Format("\n---  {0}  ---\n", typestr);
+                                    reporttxt += string.Format("\n---  {0} ---\n", typestr);
                                 }
-                                reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
+                                reporttxt += string.Format("{0} - {1} - 1 - 1 - {0}\n", card.Quantity.ToString(), card.Name);
                                 continue;
                             }
                         }
@@ -201,8 +201,31 @@ namespace Octgn.MageWarsValidator
                             {
                                 reporttxt += string.Format("\n---  {0}  ---\n", typestr);
                             }
-                            reporttxt += string.Format("{0} {1}\n", card.Quantity.ToString(), card.Name);
+                            reporttxt += string.Format("{0} - {1} - ", card.Quantity.ToString(), card.Name);
+                            
+                            //Calculate card's spell level
+                            int totalLevel = 0;
+                            string deli = level.Contains("+") ? "+" : level.Contains("/") ? "/" : "";
+                            if (deli == "/")
+                            {
+                                string lev = level.Substring(0, 1);
+                                totalLevel = Convert.ToInt32(lev);
+                            }
+                            else if (deli == "+")
+                            {
+                                string[] levs = level.Split('+');
+                                string[] schs = school.Split('+');
+                                for (int i = 0; i < levs.Length; ++i)
+                                    if (schs[i] != "Water")
+                                        totalLevel += Convert.ToInt32(levs[i]);
+                            }
+                            else
+                            {
+                                totalLevel = Convert.ToInt32(level);
+                            }
 
+                            //calculate spell cost in book
+                            int cost = 0;
                             if (!Talos)
                             {
                                 if (school.Contains("+")) //add all spell levels
@@ -211,6 +234,7 @@ namespace Octgn.MageWarsValidator
                                     int x = 0;
                                     foreach (var s in Splitme(school, "+"))
                                     {
+                                        cost += Convert.ToInt32(lev[x]) * training[s];
                                         levels[s] += Convert.ToInt32(lev[x]) * card.Quantity;
                                         x++;
                                     }
@@ -232,17 +256,54 @@ namespace Octgn.MageWarsValidator
                                             mincost = training[s];
                                         }
                                     }
+                                    cost += Convert.ToInt32(lev) * training[minschool];
                                     levels[minschool] += Convert.ToInt32(lev) * card.Quantity;
                                 }
                                 else //Only one school in spell
                                 {
                                     if (training.ContainsKey(school))
                                     {
+                                        cost += Convert.ToInt32(level) * training[school];
                                         levels[school] += Convert.ToInt32(level) * card.Quantity;
                                     }
                                 }
                             }
 
+                            //Paladin is trained in level 3 holy, level 2 war, and all holy creatures
+                            //If the current card is in the paladin's trainings, it has already been correctly added (assuming paladin's trainings contains Holy=1 and War=1)
+                            //so we only need to check for the exceptions
+                            if (magename.Contains("Paladin") && Property(card, "Type") != "Creature")
+                            {
+                                string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
+                                if (school.Contains("Holy"))
+                                {
+                                    int holyLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Holy")]);
+                                    if (holyLevel > 3)
+                                    {
+                                        spellbook += holyLevel * card.Quantity;
+                                        cost += holyLevel;
+                                    }
+                                }
+                                if (school.Contains("War"))
+                                {
+                                    int warLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("War")]);
+                                    if (warLevel > 2)
+                                    {
+                                        spellbook += warLevel * card.Quantity;
+                                        cost += warLevel;
+                                    }
+                                }
+                            }
+
+                            //Siren is trained in Water and all spells with Curse or Drowned subtype.
+                            //By this point, Water has been correctly calculated, but the Curse/Drowned spells are overcosted if they are not Water
+                            if (magename.Contains("Siren") && !school.Contains("Water") &&
+                                (Property(card, "Subtype").Contains("Curse") || Property(card, "Subtype").Contains("Drowned")))
+                            {
+                                //subtract 1 per level per count as this card has been added x2 per non-trained school already
+                                spellbook -= totalLevel * card.Quantity;
+                                cost -= totalLevel;
+                            }
 
                             //Forcemaster rule: Pay 3x for non-mind creatures
                             if (magename == "Forcemaster" & "Creature" == Property(card, "Type"))
@@ -254,6 +315,7 @@ namespace Octgn.MageWarsValidator
                                         foreach (var lev in Splitme(level, "+"))
                                         {
                                             spellbook += Convert.ToInt32(lev) * card.Quantity; // we just add 1 point per spell level as 2 points already have been added
+                                            cost += Convert.ToInt32(lev);
                                         }
 
                                     }
@@ -261,6 +323,7 @@ namespace Octgn.MageWarsValidator
                                     {
                                         var lev = Splitme(level, "/");
                                         spellbook += Convert.ToInt32(lev[0]) * card.Quantity;
+                                        cost += Convert.ToInt32(lev[0]);
                                     }
                                 }
                             }
@@ -268,11 +331,14 @@ namespace Octgn.MageWarsValidator
                             //Druid pays double for Water spells 2 and up
                             if (magename == "Druid" && school.Contains("Water")) 
                             {
-                                string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
-                                var waterLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Water")]);  //whee
-                                if (waterLevel > 1) spellbook += waterLevel * card.Quantity;
+                                string delimin = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
+                                var waterLevel = Convert.ToInt32(Splitme(level, delimin)[Splitme(school, delimin).ToList().IndexOf("Water")]);  //whee
+                                if (waterLevel > 1)
+                                {
+                                    spellbook += waterLevel * card.Quantity;
+                                    cost += waterLevel;
+                                }
                             }
-
 
                             //check for multiples of Epic spells
                             if (Property(card, "Traits").Contains("Epic") && card.Quantity > 1)
@@ -281,7 +347,6 @@ namespace Octgn.MageWarsValidator
                                     card.Quantity + " copies found in spellbook.");
                                 return;
                             }
-
 
                             //check for illegal school- or mage-specific spells
                             if (Property(card, "Traits").Contains("Only"))
@@ -344,6 +409,7 @@ namespace Octgn.MageWarsValidator
                             }
 
                             cardcount += card.Quantity;
+                            reporttxt += string.Format("{0} - {1} - {2}\n", totalLevel.ToString(), cost.ToString(), (cost * card.Quantity).ToString());
 
                         }   //card has school and level 
                     }   //foreach card
@@ -354,6 +420,7 @@ namespace Octgn.MageWarsValidator
                 }
                 string reporttmp = "A Mage Wars Spellbook, built using the OCTGN SBB " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + "\n\n";
                 reporttmp += string.Format("Spellbook points: {0} used of {0} allowed\n\n", spellbook, spellpoints);
+                reporttmp += "Key: Quantity - Spell Name - Spell Level - Spellbook Cost - Total Spellbook Cost\n\n";
                 reporttmp += reporttxt;
                 //System.Windows.MessageBox.Show(reporttmp);
                 Clipboard.SetText(reporttmp);
@@ -394,6 +461,8 @@ namespace Octgn.MageWarsValidator
             {
                 ret = "";
             }
+            if (ret == String.Empty)
+            	ret = "0";
             return ret;
         }
 

@@ -1,13 +1,13 @@
-############################################################################
-##########################    v2.10.0.0   ##################################
-############################################################################
+#######################################################################
+##########################				v2.11.2.0			##############################
+#######################################################################
 import time
 import re
-############################################################################
-##########################    Constants   ##################################
-############################################################################
+#######################################################################
+##########################				Constants			##############################
+#######################################################################
 
-##########################     Marker     ##################################
+##########################     Markers     ####################################
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
@@ -33,7 +33,7 @@ DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
 Disable = ("Disable", "f68b3b5b-0755-40f4-84db-bf3197a667cb" )
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
 Energy = ("Energy", "d01f02e4-392f-409f-95f5-d2fa40f89882" )
-Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
+Eternal_Servant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" ) #Inconsistent formatting compared to Blood Reaper
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
 FFToken = ("Forcefield Token", "fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" )
 Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
@@ -48,6 +48,7 @@ MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
 Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b" )
 QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" )
+Ranged = ("Ranged","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
@@ -60,7 +61,7 @@ Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
 Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
-Taint = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
+Tainted = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
 Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805" )
@@ -111,7 +112,7 @@ mycolor = "#800080" # default
 boardSet = "GameBoard1.png"
 debugMode = False
 myIniRoll = 0
-hasRolledIni = True
+hasRolledIni = False
 deckLoaded = False
 iniTokenCreated = False
 currentPhase = ""
@@ -122,7 +123,6 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 playerNum = 0
-ver = "2.11.0.0"
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -132,9 +132,11 @@ infostr = ""
 ############################################################################
 
 def onTableLoad():
+	setGlobalVariable("TableSetup", False)
 	global debugMode
 	global playerNum
-	sayVer()
+	#log in chat screen what version of the game definiton the player is using
+	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
@@ -142,17 +144,46 @@ def onTableLoad():
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
-# reset color picking
+        mute()
+	# reset color picking
 	setGlobalVariable("ColorsChosen", "")
 
-#	reset initiative automation
+	# reset initiative automation
 	setGlobalVariable("SetupDone", "")
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
+	setGlobalVariable('DiceAndPhaseCardsDone','True')
 
-# bring up window to point to documentation
+	# reset python Global Variables
+	for p in players:
+		remoteCall(p, "setClearVars",[])
+
+	#create a dictionary of attachments
+	setGlobalVariable("attachDict",str({}))
+
+        #set global event lists for rounds and single actions
+	setGlobalVariable("roundEventList",str([]))
+	setGlobalVariable("turnEventList",str([]))
+
 	initializeGame()
+
+def setUpDiceAndPhaseCards():
+	mute()
+	TableSetup = getGlobalVariable("TableSetup")
+	if TableSetup == "False":
+		dieCardX = -570
+		dieCardY = -40
+		table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
+		#card.anchor = (True)
+		table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+		#card.anchor = (True)
+		table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
+		#card.anchor = (True)
+		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 60), (dieCardY - 150)) #Phase token/Next Phase Button
+		card.switchTo("Planning") #skips upkeep for first turn
+		#card.anchor = (True)
+		setGlobalVariable("TableSetup", True)
 
 def onLoadDeck(player, groups):
 	mute()
@@ -160,6 +191,9 @@ def onLoadDeck(player, groups):
 	global debugMode
 	global playerNum
 	global iniTokenCreated
+	if not bool(getGlobalVariable('diceAndPhaseCardsDone')):
+                setUpDiceAndPhaseCards()
+                setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
 		#if a deck was already loaded, reset the game
 		if deckLoaded:
@@ -171,7 +205,6 @@ def onLoadDeck(player, groups):
 			deckLoaded = True
 			playerSetup()
 			if debugMode:
-				mycolor = PlayerColor[0]
 				# set Dice Rolling Area, Initative, and Phase Marker Card location
 				setDRAIP(1)
 				CreateIniToken()
@@ -195,6 +228,30 @@ def onLoadDeck(player, groups):
 				for card in group:
 					if card.controller == me:
 						card.delete()
+
+def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScriptMove):
+	"""This event triggers whenever a card is moved. Currently, it is only used with the attachCards module
+	to simplify the process of moving and attaching cards."""
+	mute()
+	if card.controller == me and fromGroup == table: #Does not trigger when	moving cards onto the table
+		if not isScriptMove:
+			c,t = detach(card)
+			actionType = None
+			if t:
+				actionType = ['detaches','from']
+			if getSetting('AutoAttach',True):
+				for a in table:
+					if canAttach(card,a) and (cardX(a)-x)**2 + (cardY(a)-y)**2 < 400:
+						c,t = attach(card,a)
+						if t:
+							actionType = ['attaches','to']
+							break
+			if actionType:
+				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+		if toGroup != table:
+			detachAll(card)
+		if not ((oldIndex != index and oldX==x and oldY==y) or isAttached(card) or toGroup != table): #Do not realign ifit is  only the index that is changing. Prevents recursions.
+			alignAttachments(card)
 
 def setClearVars():
 	global deckLoaded
@@ -274,101 +331,54 @@ def setDRAIP(location):
 		#option A
 		dieCardX = -570
 		dieCardY = -40
-		dieCard2X = -510
-		dieCard2Y = -40
-		phaseX = -510
+		dieCard2X = -510 # = dieCardX + 60
+		dieCard2Y = -40 # = dieCardY
+		phaseX = -510 # = dieCardX + 60
 		phaseY = -150
 		initX = -580
-		initY = -150
+		initY = -150 #= phaseY
 	else:
 		#option B
-		dieCardX = -58
-		dieCardY = 330
-		dieCard2X = 0
-		dieCard2Y = 330
-		phaseX = 65
-		phaseY = 330
-		initX = -125
-		initY = 330
+		dieCardX = -58 # -570 + 512
+		dieCardY = 330 # -40 + 370
+		dieCard2X = 0 # -510 + 510
+		dieCard2Y = 330 # -40 + 370
+		phaseX = 65 # -510 + 575
+		phaseY = 330 # -150 + 480
+		initX = -125 # -580 + 455
+		initY = 330 # -150 + 480
 
 ############################################################################
 ######################		Group Actions			########################
 ############################################################################
 
 def playerDone(group, x=0, y=0):
+        clearLocalTurnEventList()
 	notify("{} is done".format(me.name))
 	mageStatus()
 
-def rollDice(group, x=0, y=0):
-	mute()
-	global diceBank
-	global diceBankD12
-	global hasRolledIni
-	global myIniRoll
-	global dieCardX
-	global dieCardY
-	global dieCard2X
-	global dieCard2Y
+def attackTarget(card, x=0, y=0):
+        mute()
+        if card.controller == me and canDeclareAttack(card):
+                target = [c for c in table if c.targetedBy==me]
+                if len(target) == 1:
+                        defender = target[0]
+                        aTraitDict = computeTraits(card)
+                        dTraitDict = computeTraits(defender)
+                        attack = diceRollMenu(card,defender)
+                        declareAttackStep(aTraitDict,attack,dTraitDict)
+                elif len(target) == 0: #Untargeted attack
+                        attack = diceRollMenu(card,None)
+                        dice = attack.get('Dice',-1)
+                        if dice >= 0:
+                                notify("{} attacks with {}".format(me,card))
+                                roll,effect = rollDice(dice)
 
-	for c in table:
-		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
-			c.delete()
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
-	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
-
-	count = min(askInteger("Roll how many red dice?", 3),50) #max 50 dice rolled at once
-	if count == None: return
-
-	diceFrom = ""
-	if (len(diceBank) < count): #diceBank running low - fetch more
-		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
-		debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
-		if random_org[1]==200: # OK code received:
-			diceBank = random_org[0].splitlines()
-			diceFrom = "from Random.org"
-		else:
-#			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
-			diceFrom = "from the native randomizer"
-			while (len(diceBank) < 20):
-				diceBank.append(rnd(0, 5))
-
-	result = [0,0,0,0,0,0]
-	for x in range(count):
-		roll = int(diceBank.pop())
-		result[roll] += 1
-	debug("diceRoller result: {}".format(result))
-	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
-
-	damPiercing = result[4] + 2* result[5]
-	damNormal = result[2] + 2* result[3]
-	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
-	dieCard.markers[attackDie[2]] = result[2] #1
-	dieCard.markers[attackDie[3]] = result[3] #2
-	dieCard2.markers[attackDie[4]] = result[4] #1*
-	dieCard2.markers[attackDie[5]] = result[5] #2*
-
-	d12DiceCount = 1
-	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
-		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
-		debug("Random.org response code for effect roll: {}".format(d12[1]))
-		if d12[1]==200: # OK code received:
-			diceBankD12 = d12[0].splitlines()
-			notify ("Using die from Random.org")
-		else:
-			notify ("Using die from the native randomizer")
-			while (len(diceBankD12) < 100):
-				diceBankD12.append(rnd(0, 11))
-
-	effect = int(diceBankD12.pop()) + 1
-	dieCard2.markers[DieD12] = effect
-
-	if hasRolledIni:
-		playSoundFX('Dice')
-		time.sleep(2)
-		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
-	else:
-		hasRolledIni = True
-		iniRoll(effect)
+def genericAttack(group, x=0, y=0):
+	target = [cards for cards in table if cards.targetedBy==me]
+	defender = (target[0] if len(target) == 1 else None)
+        dice = diceRollMenu(None,defender).get('Dice',-1)
+        if dice >=0: rollDice(dice)
 
 def flipCoin(group, x = 0, y = 0):
     mute()
@@ -384,19 +394,21 @@ def playerSetup():
 	# Players select their color
 	global mycolor
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-	while (True):
-		choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
-		colorsChosen = getGlobalVariable("ColorsChosen")
-		if colorsChosen == "":	#we're the first to pick
-			setGlobalVariable("ColorsChosen", str(choice))
-			mycolor = PlayerColor[choice]
-			break
-		elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
-			setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-			mycolor = PlayerColor[choice]
-			break
-		else:	#someone else took our choice
-			askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+        if debugMode: mycolor = PlayerColor[0]
+        else:
+                while (True):
+                        choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
+                        colorsChosen = getGlobalVariable("ColorsChosen")
+                        if colorsChosen == "":	#we're the first to pick
+                                setGlobalVariable("ColorsChosen", str(choice))
+                                mycolor = PlayerColor[choice]
+                                break
+                        elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
+                                setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
+                                mycolor = PlayerColor[choice]
+                                break
+                        else:	#someone else took our choice
+                                askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
 	#set initial health and channeling values
 	for c in me.hand:
@@ -423,7 +435,7 @@ def createCompassRose(group, x=0, y=0):
 
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
-	
+
 def setNoGameBoard(group, x=0, y=0):
 	global boardSet
 	boardSet = "GameBoard0.png"
@@ -487,9 +499,6 @@ def setGameBoard10(group, x=0, y=0):
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
-def sayVer():
-	notify("{} is running v.{} of the Mage Wars module.".format(me, ver))
-
 def setGameBoard(bset):
 	mute()
 	global boardSet
@@ -530,7 +539,6 @@ def AskDiceRollArea():
 	for p in players:
 		remoteCall(p, "setDRAIP", [choice])
 
-
 def CreateIniToken():
 	global gameStartTime
 	global iniTokenCreated
@@ -538,21 +546,15 @@ def CreateIniToken():
 	mute()
 	if not iniTokenCreated:
 		iniTokenCreated = True
-		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", phaseX, phaseY ) #phase token
-		card.switchTo("Planning") #skips upkeep for first turn
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", initX, initY ) #initiative token
-		if mycolor == PlayerColor[0]:
-			init.switchTo("")
-		elif mycolor == PlayerColor[1]:
-			init.switchTo("B")
-		elif mycolor == PlayerColor[2]:
-			init.switchTo("C")
-		elif mycolor == PlayerColor[3]:
-			init.switchTo("D")
-		elif mycolor == PlayerColor[4]:
-			init.switchTo("E")
-		elif mycolor == PlayerColor[5]:
-			init.switchTo("F")
+		init.switchTo({
+                        PlayerColor[0]:"",
+                        PlayerColor[1]:"B",
+                        PlayerColor[2]:"C",
+                        PlayerColor[3]:"D",
+                        PlayerColor[4]:"E",
+                        PlayerColor[5]:"F"
+                        }[mycolor])
 		setGlobalVariable("IniAllDone", "x")
 		setGlobalVariable("RoundNumber", "1")
 		setGlobalVariable("PlayerWithIni", str(playerNum))
@@ -587,11 +589,10 @@ def nextPhase(group, x=-360, y=-150):
 	elif card.alternate == "Actions":
 		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
-		if switchPhase(card,"","Upkeep Phase") == True: #Back to Upkeep
-			for p in players:
-				remoteCall(p,"resetDiscounts",[])
-			advanceTurn()
-			gameTurn = turnNumber() + 1
+		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
+                        setEventList('Round',[]) #Clear event list for new round
+			gTurn = getGlobalVariable("RoundNumber")
+			gameTurn = int(gTurn) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
@@ -602,27 +603,19 @@ def nextPhase(group, x=-360, y=-150):
 				flipcard(init)
 			else:
 				remoteCall(init.controller, "flipcard", [init])
+
+			#resolve other automated items
 			for p in players:
-				p.Mana += p.Channeling
-				notify("{} channels {}".format(p.name,p.Channeling))
-			for c in table:
-				if c.isFaceUp: #don't waste time on facedown cards
-					#reset markers
-					#resolve channeling cards (harmonize, spawnpoints, familiars)
-					if c.controller == me:
-						resetMarkers(c)
-						resolveChanneling(c)
-					else:
-						remoteCall(c.controller, "resetMarkers", [c])
-						remoteCall(c.controller, "resolveChanneling", [c])
-					#resolve other automated items
-			for p in players:
+				remoteCall(p,"resetDiscounts",[])
+				remoteCall(p, "resetMarkers", [])
+				remoteCall(p, "resolveChanneling", [])
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
-				remoteCall(p, "resolveFFTokens", [])
+				remoteCall(p, "resolveUpkeep", [])
+
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -644,49 +637,31 @@ def advanceTurn():
 def setActiveP(p):
 	p.setActivePlayer()
 
-def resetMarkers(c):
+def resetMarkers():
 	mute()
-	if c.markers[ActionRedUsed] == 1:
-		c.markers[ActionRedUsed] = 0
-		c.markers[ActionRed] = 1
-	if c.markers[ActionBlueUsed] == 1:
-		c.markers[ActionBlueUsed] = 0
-		c.markers[ActionBlue] = 1
-	if c.markers[ActionGreenUsed] == 1:
-		c.markers[ActionGreenUsed] = 0
-		c.markers[ActionGreen] = 1
-	if c.markers[ActionYellowUsed] == 1:
-		c.markers[ActionYellowUsed] = 0
-		c.markers[ActionYellow] = 1
-	if c.markers[ActionPurpleUsed] == 1:
-		c.markers[ActionPurpleUsed] = 0
-		c.markers[ActionPurple] = 1
-	if c.markers[ActionGreyUsed] == 1:
-		c.markers[ActionGreyUsed] = 0
-		c.markers[ActionGrey] = 1
-	if c.markers[QuickBack] == 1:
-		c.markers[QuickBack] = 0
-		c.markers[Quick] = 1
-	if c.markers[Used] == 1:
-		c.markers[Used] = 0
-		c.markers[Ready] = 1
-	if c.markers[UsedII] == 1:
-		c.markers[UsedII] = 0
-		c.markers[ReadyII] = 1
-	if c.markers[VoltaricON] == 1:
-		c.markers[VoltaricON] = 0
-		c.markers[VoltaricOFF] = 1
-	if c.markers[DeflectU] == 1:
-		c.markers[DeflectU] = 0
-		c.markers[DeflectR] = 1
-	if c.markers[Visible] == 1:
-		c.markers[Visible] = 0
-		c.markers[Invisible] = 1
-	if "Orb Guardian" in c.name:
-		c.markers[Guard] = 1
-
-	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
-
+	for c in table:
+		if c.targetedBy == me:
+			c.target(False)
+		if c.isFaceUp: #don't waste time on facedown cards
+			mDict = {ActionRedUsed : ActionRed,
+		                ActionBlueUsed : ActionBlue,
+		                ActionGreenUsed : ActionGreen,
+		                ActionYellowUsed : ActionYellow,
+		                ActionPurpleUsed : ActionPurple,
+		                ActionGreyUsed : ActionGrey,
+		                QuickBack : Quick,
+		                Used : Ready,
+		                UsedII : ReadyII,
+		                VoltaricON : VoltaricOFF,
+		                DeflectU : DeflectR,
+		                Visible : Invisible}
+			for key in mDict:
+		                if c.markers[key] == 1:
+		                        c.markers[key] = 0
+		                        c.markers[mDict[key]] = 1
+			debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))	
+	notify("{} reset's all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
+	
 def resolveBurns():
 	mute()
 
@@ -705,10 +680,7 @@ def resolveBurns():
 				if roll == 0:
 					card.markers[Burn] -= 1
 					burnsRemoved += 1
-				elif roll == 1:
-					burnDamage += 1
-				elif roll == 2:
-					burnDamage += 2
+				burnDamage += roll
 			#apply damage
 			if card.Type == "Mage":
 				card.controller.Damage += burnDamage
@@ -773,6 +745,15 @@ def resolveDissipate():
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
 
+	#use the logic for Dissipate for Disable Markers
+	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
+	if len(cardsWithDisable) > 0:
+		notify("Resolving Disable Markers for {}...".format(me))	#found at least one
+		for card in cardsWithDisable:
+			notify("{} removes a Disable Marker from '{}'".format(me, c.name))	#found at least one
+			card.markers[Disable] -= 1 # Remove Marker
+			notify("Finished auto-resolving Disable Markers for {}.".format(me))
+
 def resolveLoadTokens():
 	mute()
 	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp ]
@@ -786,87 +767,118 @@ def resolveLoadTokens():
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
 
-def resolveFFTokens():
+def resolveChanneling():
 	mute()
-	
-	#is the setting on?
-	if not getSetting("AutoResolveFFTokens", True):
-		return
-	
-	FFCard = [card for card in table if "Forcefield" in card.Name and card.controller == me and card.isFaceUp]
-	choiceList = ['Yes', 'No']
-	colorsList = ['#0000FF', '#FF0000']
-	choice = askChoice("Did you wish to pay Upkeep +2 on Forcefield?", choiceList, colorsList)
-	if choice == 1:
-		if me.Mana >= 2:
-			me.mana -= 2
-		else:
-			notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-			card.moveTo(me.piles['Discard'])
-			return
-	else:
-		notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
-		card.moveTo(me.piles['Discard'])
-		return	
-	for card in FFCard:
-		notify("Resolving Forcefield Tokens for {}...".format(me))	#found at least one
-		if card.markers[FFToken] == 0:
-			notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-			card.markers[FFToken] = 1
-		elif card.markers[FFToken] == 1:
-			notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-			card.markers[FFToken] = 2
-		elif card.markers[FFToken] == 2:
-			notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-			card.markers[FFToken] = 3			
-		notify("Finished adding Forcefield Tokens for {}.".format(me))
 
-def resolveChanneling(c):
-	mute()
-	if c.Stats != None and c.Type != "Mage":
-		if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
-			channel = getStat(c.Stats,"Channeling")
-			debug("Found Channeling stat {} in card {}".format(channel,c.name))
-			for x in range(channel):
-				addMana(c)
-	if c.name == "Barracks": #has the channeling=X stat
-		debug("Found Barracks")
-		x = 0
-		for c2 in table:
-			if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
-				#debug("owners {} {}".format(c.owner,c2.owner))
-				if "Outpost" in c2.Subtype and c.owner == c2.owner:
-					debug("Found Outpost")
+	me.Mana += me.Channeling # Mage channels his mana
+	notify("{} Channels {} Mana into the mages Mana supply.".format(me.name,me.Channeling))
+
+	for c in table:
+		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
+			for card in me.piles['Discard']:
+				if c == card:
+					return
+
+		if c.Stats != None and c.Type != "Mage":
+			if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
+				channel = getStat(c.Stats,"Channeling")
+				debug("Found Channeling stat {} in card {}".format(channel,c.name))
+				for x in range(channel):
 					addMana(c)
-					x += 1
-			if x == 3: #max 3 outpost count.
-				break
-	if c.name == "Harmonize":
-		c2 = cardHere(cardX(c)-1,cardY(c)-1,"Channeling=")
-		if c2 != None and c2.Type != "Mage":
-			debug("Overlap found (top left) {}".format(c2.name))
-			addMana(c2)
-			whisper("Harmonize found and Mana added to channeling card")
-		else:
-			c2 = cardHere(cardX(c)+c.width()+1,cardY(c)+c.height()+1,"Channeling=")
-			if c2 != None and c2.Type !="Mage":
-				debug("Overlap found (bottom right) {}".format(c2.name))
-				addMana(c2)
-				whisper("Harmonize found and Mana added to channeling card")
-			else:
-				c2 = cardHere(cardX(c)-1,cardY(c)+c.height(),"Channeling=")
-				if c2 != None and c2.Type !="Mage":
-					debug("Overlap found (bottom left) {}".format(c2.name))
-					addMana(c2)
-					whisper("Harmonize found and Mana added to channeling card")
-				else:
-					c2 = cardHere(cardX(c)+c.width()+1,cardY(c),"Channeling=")
-					if c2 != None and c2.Type !="Mage":
-						debug("Overlap found (top right) {}".format(c2.name))
-						addMana(c2)
-						whisper("Harmonize found and Mana added to channeling card")
-					else:
-						whisper("Harmonize found but no Mana added")
+		if c.name == "Barracks": #has the channeling=X stat
+			debug("Found Barracks")
+			x = 0
+			for c2 in table:
+				if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
+					#debug("owners {} {}".format(c.owner,c2.owner))
+					if "Outpost" in c2.Subtype and c.owner == c2.owner:
+						debug("Found Outpost")
+						addMana(c)
+						x += 1
+				if x == 3: #max 3 outpost count.
+					break
+		if c.name == "Harmonize":
+	                if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
+	                        c2 = getAttachTarget(c)
+	                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Exclude mages
+	                                addMana(c2)
+	                                whisper("Mana added to {} from {}".format(c2,c))
+
+
+def resolveUpkeep():
+	mute()
+	PsiOrbDisc = 0
+	#is the setting on?
+	if not getSetting("AutoResolveUpkeep", True):
+		return
+
+	for card in table:
+		if "Psi-Orb" == card.name and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
+		 	PsiOrbDisc = 3
+
+	for card in table:
+		for c in me.piles['Discard']: # if the card was discarded below we are done processing it
+	 		if c == card:
+		 		return
+	 	if "Mordok's Obelisk" == card.Name: # process players cards for Mordok's Upkeep on all non-Mage Creatures
+	 		for c in table:
+	 			if c.Type == "Creature" and c.isFaceUp and c.controller == me:
+	 				if me.Mana < 1:
+	 					c.moveTo(me.piles['Discard'])
+	 					notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
+	 					return
+	 				else:
+	 					choiceList = ['Yes', 'No']
+	 					colorsList = ['#0000FF', '#FF0000']
+	 					choice = askChoice("Do you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
+	 					if choice == 1:
+	 						me.Mana -= 1
+	 						notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
+	 					else:
+	 						c.moveTo(me.piles['Discard'])
+	 						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
+	 						return
+	 	else:
+	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp and card.type != "Internal":
+	 			debug("Debug3: {} me.Mana:{}".format(me.name,me.Mana))
+	 		 	if me.Mana < 1:
+	 		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+	 		 		card.moveTo(me.piles['Discard'])
+	 		 		return
+	 		 	else:
+	 		 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
+	 		 		notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name)
+	 		 		debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
+					if PsiOrbDisc > 0 and "Mind" == card.school:
+						PsiOrbDisc -= 1
+						notify("{} - Psi-Orb Discount was used to pay 1 Mana point towards the Upkeep cost for '{}', there are '{}' remaining Upkeep discounts left this Round.".format(me,card.name,PsiOrbDisc))
+						TraitValue = TraitValue - 1
+						notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(TraitValue, card.Name)
+
+	 		 		if TraitValue >= 1:
+	 		 			choiceList = ['Yes', 'No']
+	 					colorsList = ['#0000FF', '#FF0000']
+	 					choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+	 					if choice == 1:
+	 						if me.Mana >= TraitValue:
+	 							me.Mana -= TraitValue
+	 							notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+	 							if "Forcefield" == card.Name:
+	 								notify("Resolving Forcefield Tokens for {}...".format(me))
+	 								if card.markers[FFToken] == 0:
+	 									notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
+	 									card.markers[FFToken] = 1
+	 								elif card.markers[FFToken] == 1:
+	 									notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
+	 									card.markers[FFToken] = 2
+	 								elif card.markers[FFToken] == 2:
+	 									notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
+	 									card.markers[FFToken] = 3
+	 								notify("Finished adding Forcefield Tokens for {}.".format(me))
+	 					else:
+	 						notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+	 						card.moveTo(me.piles['Discard'])
+	 						return
 
 def mageStatus():
 	global gameEndTime
@@ -918,6 +930,33 @@ def concede(group=table, x = 0, y = 0):
 	else:
 		notify("'{}' was about to concede the game, but thought better of it...".format(me))
 
+"""
+Format:
+[function name, setting name, message, default]
+"""
+
+fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
+                  ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
+                  ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
+                  ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
+                  ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
+                  ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
+                  ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
+                  ["AutoRollInitiative","AutoRollIni","You have {} automatically rolling initiative.",False],
+                  ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
+                  ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
+                  ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
+                  ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons",True]
+                  ]
+
+for fGen in fGenToggleSettingsList:
+        exec(
+'def toggle'+fGen[0]+'(group,x=0,y=0):\n\t'+
+        'state=getSetting("'+fGen[1]+'",'+str(fGen[3])+')\n\t'+
+        'setSetting("'+fGen[1]+'", not state)\n\t'+
+        'if state:\n\t\twhisper("'+fGen[2].format('disabled')+'")\n\t'+
+        'else:\n\t\twhisper(":'+fGen[2].format('enabled')+'")')
+
 def toggleDebug(group, x=0, y=0):
 	global debugMode
 	debugMode = not debugMode
@@ -925,71 +964,6 @@ def toggleDebug(group, x=0, y=0):
 		notify("{} turns on debug".format(me))
 	else:
 		notify("{} turns off debug".format(me))
-
-def toggleResolveBurns(group, x=0, y=0):
-	autoResolveBurns = getSetting("AutoResolveBurns", True)
-	setSetting("AutoResolveBurns", not autoResolveBurns)
-	if autoResolveBurns:
-		whisper("You have disabled automatic resolution of Burn tokens on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Burn tokens on your cards.")
-
-
-def toggleSoundFX(group, x=0, y=0):
-	AutoConfigSoundFX = getSetting("AutoConfigSoundFX", True)
-	setSetting("AutoConfigSoundFX", not AutoConfigSoundFX)
-	if AutoConfigSoundFX:
-		notify("You have turned Sound Efects off.")
-	else:
-		notify("You have turned Sound Efects on.")
-
-def toggleResolveRot(group, x=0, y=0):
-	autoResolveRot = getSetting("AutoResolveRot", True)
-	setSetting("AutoResolveRot", not autoResolveRot)
-	if autoResolveRot:
-		whisper("You have disabled automatic resolution of Rot tokens on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Rot tokens on your cards.")
-		
-def toggleFFTokens(group, x=0, y=0):
-	AutoResolveFFTokens = getSetting("AutoResolveFFTokens", True)
-	setSetting("AutoResolveFFTokens", not AutoResolveFFTokens)
-	if AutoResolveFFTokens:
-		whisper("You have disabled automatic resolution of Forcefield tokens on your cards.")
-	else:
-		whisper("You have enabled automatic Forcefield of Rot tokens on your cards.")
-
-def toggleResolveBleed(group, x=0, y=0):
-	autoResolveBleed = getSetting("AutoResolveBleed", True)
-	setSetting("AutoResolveBleed", not autoResolveBleed)
-	if autoResolveBleed:
-		whisper("You have disabled automatic resolution of Bleed markers on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Bleed markers on your cards.")
-
-def toggleResolveDissipate(group, x=0, y=0):
-	autoResolveDissipate = getSetting("AutoResolveDissipate", True)
-	setSetting("AutoResolveDissipate", not autoResolveDissipate)
-	if autoResolveDissipate:
-		whisper("You have disabled automatic resolution of Dissipate tokens on your cards.")
-	else:
-		whisper("You have enabled automatic resolution of Dissipate tokens on your cards.")
-
-def toggleEnchantRevealPrompt(group, x=0, y=0):
-	prompt = getSetting("EnchantPromptReveal", False)
-	setSetting("EnchantPromptReveal", not prompt)
-	if prompt:
-		whisper("You have disabled the enchantment reveal prompt.")
-	else:
-		whisper("You have enabled the enchantment reveal prompt.")
-
-def toggleAutoRollInitiative(group, x=0, y=0):
-	autoRoll = getSetting("AutoRollIni", False)
-	setSetting("AutoRollIni", not autoRoll)
-	if autoRoll:
-		whisper("You have disabled automatically rolling initiative.")
-	else:
-		whisper("You have enabled automatically rolling initiative.")
 
 ############################################################################
 ######################		Chat Actions			################################
@@ -1022,81 +996,63 @@ def askRevealEnchant(group, x=0, y=0):
 ######################		Card Actions			################################
 ############################################################################
 
-##########################     Add Tokens     ##############################
+##########################     Add/Subtract Tokens     ##############################
 
-def addArmor(card, x = 0, y = 0):
-	addToken(card, Armor)
+tokenList=['Armor',
+           'Bleed',
+           'Burn',
+           'Cripple',
+           'Corrode',
+           'Disable',
+           'Daze',
+           'Growth',
+           'Mana',
+           'Melee',
+           'Rot',
+           'Slam',
+           'Stun',
+           'Stuck',
+           'Tainted',
+           'Veteran',
+           'Weak',
+           'Zombie'
+           ]
 
-def addBleed(card, x = 0, y = 0):
-	addToken(card, Bleed)
-
-def addBurn(card, x = 0, y = 0):
-	addToken(card, Burn)
-
-def addCripple(card, x = 0, y = 0):
-	addToken(card, Cripple)
-
-def addCorrode(card, x = 0, y = 0):
-	addToken(card, Corrode)
+for token in tokenList:
+        exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')
+        exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
 
 def addDamage(card, x = 0, y = 0):
 	if "Mage" in card.Type and card.controller == me:
 		me.Damage += 1
 	else:
 		addToken(card, Damage)
-			
-def addDisable(card, x = 0, y = 0):
-	addToken(card, Disable)
-
-def addDaze(card, x=0, y=0):
-	addToken(card, Daze)
-
-def addGrowth(card, x = 0, y = 0):
-	addToken(card, Growth)
-
-def addMana(card, x = 0, y = 0):
-	addToken(card, Mana)
-
-def addMelee(card, x = 0, y = 0):
-	addToken(card, Melee)
-	
-def addRot(card, x = 0, y = 0):
-	addToken(card, Rot)
-
-def addSlam(card, x=0, y=0):
-	addToken(card, Slam)
-
-def addStun(card, x=0, y=0):
-	addToken(card, Stun)
-
-def addStuck(card, x=0, y=0):
-	addToken(card, Stuck)
-
-def addTaint(card, x=0, y=0):
-	addToken(card, Taint)
-
-def addVet(card, x=0, y=0):
-	addToken(card, Veteran)
-
-def addWeak(card, x=0, y=0):
-	addToken(card, Weak)
-
-def addZombie(card, x=0, y=0):
-	addToken(card, Zombie)
 
 def addOther(card, x = 0, y = 0):
 	marker, qty = askMarker()
-	if qty == 0: 
+	if qty == 0:
 		return
 	card.markers[marker] += qty
 
+def subDamage(card, x = 0, y = 0):
+	if "Mage" in card.Type  and card.controller == me:
+			me.Damage -= 1
+	else:
+		subToken(card, Damage)
+
+def clearTokens(card, x = 0, y = 0):
+	mute()
+	for tokenType in card.markers:
+		card.markers[tokenType] = 0
+	notify("{} removes all tokens from '{}'".format(me, card.Name))
+
 ##########################     Toggle Actions/Tokens     ##############################
+typeIgnoreList = ['Internal','Phases','Diceroll']
 
 def toggleAction(card, x=0, y=0):
 	global mycolor
 	mute()
-	if card.Type == "Internal":
-		return 
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if mycolor == "#800080":
 		whisper("Please perform player setup to initialize player color")
 	elif mycolor == PlayerColor[0]: # Red
@@ -1156,10 +1112,7 @@ def toggleAction(card, x=0, y=0):
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
-	if not card.isFaceUp:
-		return
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[DeflectR] > 0:
 		card.markers[DeflectR] = 0
 		card.markers[DeflectU] = 1
@@ -1171,16 +1124,12 @@ def toggleDeflect(card, x=0, y=0):
 
 def toggleGuard(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	toggleToken(card, Guard)
 
 def toggleInvisible(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
-	if not card.isFaceUp:
-		return
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Invisible] > 0:
 		card.markers[Invisible] = 0
 		card.markers[Visible] = 1
@@ -1192,10 +1141,7 @@ def toggleInvisible(card, x=0, y=0):
 
 def toggleReady(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
-	if not card.isFaceUp:
-		return
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
@@ -1207,10 +1153,7 @@ def toggleReady(card, x=0, y=0):
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
-	if not card.isFaceUp:
-		return
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[ReadyII] > 0:
 		card.markers[ReadyII] = 0
 		card.markers[UsedII] = 1
@@ -1222,10 +1165,7 @@ def toggleReadyII(card, x=0, y=0):
 
 def toggleQuick(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
-	if not card.isFaceUp:
-		return
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
@@ -1237,10 +1177,7 @@ def toggleQuick(card, x=0, y=0):
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
-	if card.Type == "Internal":
-		return 
-	if not card.isFaceUp:
-		return
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[VoltaricON] > 0:
 		card.markers[VoltaricON] = 0
 		card.markers[VoltaricOFF] = 1
@@ -1249,76 +1186,6 @@ def toggleVoltaric(card, x=0, y=0):
 		card.markers[VoltaricON] = 1
 		card.markers[VoltaricOFF] = 0
 		notify("'{}' enables Voltaric shield".format(card.Name))
-
-######################     Remove Tokens     ###########################
-
-def subArmor(card, x = 0, y = 0):
-	subToken(card, Armor)
-
-def subBleed(card, x = 0, y = 0):
-	subToken(card, Bleed)
-
-def subBurn(card, x = 0, y = 0):
-	subToken(card, Burn)
-
-def subCorrode(card, x = 0, y = 0):
-	subToken(card, Corrode)
-
-def subCripple(card, x = 0, y = 0):
-	subToken(card, Cripple)
-
-def subDamage(card, x = 0, y = 0):
-	if "Mage" in card.Type:
-		if card.controller == me:
-			me.Damage -= 1
-	else:
-		subToken(card, Damage)
-
-def subDaze(card, x = 0, y = 0):
-	subToken(card, Daze)
-
-def subDisable(card, x = 0, y = 0):
-	subToken(card, Disable)
-
-def subGrowth(card, x = 0, y = 0):
-	subToken(card, Growth)
-
-def subMana(card, x = 0, y = 0):
-	subToken(card, Mana)
-
-def subMelee(card, x = 0, y = 0):
-	subToken(card, Melee)
-
-def subRot(card, x = 0, y = 0):
-	subToken(card, Rot)
-
-def subSlam(card, x = 0, y = 0):
-	subToken(card, Slam)
-
-def subStun(card, x = 0, y = 0):
-	subToken(card, Stun)
-
-def subStuck(card, x = 0, y = 0):
-	subToken(card, Stuck)
-
-def subTaint(card, x = 0, y = 0):
-	subToken(card, Taint)
-
-def subVet(card, x = 0, y = 0):
-	subToken(card, Veteran)
-
-def subWeak(card, x = 0, y = 0):
-	subToken(card, Weak)
-
-def subZombie(card, x = 0, y = 0):
-	subToken(card, Zombie)
-
-def clearTokens(card, x = 0, y = 0):
-	mute()
-	for tokenType in card.markers:
-		card.markers[tokenType] = 0
-	notify("{} removes all tokens from '{}'".format(me, card.Name))
-
 
 ############################################################################
 ######################		Other  Actions		################################
@@ -1336,7 +1203,8 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
-	if "Vine" in card.Name and card.controller == me:
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
 		else:
@@ -1472,7 +1340,7 @@ def discard(card, x=0, y=0):
 		whisper("{} does not control '{}' - discard cancelled".format(me, card))
 		return
 	card.isFaceUp = True
-
+        detach(card)
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards '{}'".format(me, card))
 
@@ -1488,6 +1356,12 @@ def obliterate(card, x=0, y=0):
 
 def defaultAction(card, x = 0, y = 0):
 	mute()
+	if card.type == "DiceRoll":
+		genericAttack(0, x, y)
+
+	if card.type =="Phase":
+		nextPhase(table,0,0)
+
 	if card.controller == me:
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
@@ -1511,8 +1385,7 @@ def defaultAction(card, x = 0, y = 0):
 
 def addToken(card, tokenType):
 	mute()
-	if card.Type == "Internal":
-		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:
 		notify("{} added to '{}'".format(tokenType[0], card.Name))
@@ -1521,8 +1394,7 @@ def addToken(card, tokenType):
 
 def subToken(card, tokenType):
 	mute()
-	if card.Type == "Internal":
-		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] -= 1
 		if card.isFaceUp:
@@ -1532,8 +1404,7 @@ def subToken(card, tokenType):
 
 def toggleToken(card, tokenType):
 	mute()
-	if card.Type == "Internal":
-		return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] = 0
 		if card.isFaceUp:
@@ -1551,24 +1422,14 @@ def playCardFaceDown(card, x=0, y=0):
 	global mycolor
 	offset=0
 	occupied = True
-	if playerNum == 1:
-		x = -595
-		y = -240
-	elif playerNum == 2:
-		x = 460
-		y = 120
-	elif playerNum == 3:
-		x = -595
-		y = 120
-	elif playerNum == 4:
-		x = 460
-		y = -240
-	elif playerNum == 5:
-		x = -595
-		y = -40
-	elif playerNum == 6:
-		x = 460
-		y = -40
+	x,y = {
+                1 : (-595,-240),
+                2 : (460,120),
+                3 : (-595,120),
+                4 : (460,-240),
+                5 : (-595,-40),
+                6 : (460,-40)
+                }[playerNum]
 	while occupied:
 		occupied = False
 		for c in table:
@@ -1681,14 +1542,11 @@ def initializeGame():
 #---------------------------------------------------------------------------
 
 def getStat(stats, stat): #searches stats string for stat and extract value
-	statlist = stats.split(",")
+	statlist = stats.split(", ")
 	for statitem in statlist:
 		statval = statitem.split("=")
 		if statval[0] == stat:
-			try:
-				return int(statval[1])
-			except:
-				return 0
+                        return (0 if statval[1]=='-' else int(statval[1]))
 	return 0
 
 def switchPhase(card, phase, phrase):
@@ -1739,7 +1597,6 @@ def remoteSwitchPhase(card, phase, phrase):
 
 def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of discount card
 	global discountsUsed
-	
 	#build test list from spell
 	testlist = cspell.Type.split(",")
 	testlist += cspell.Subtype.split(",")
@@ -1747,12 +1604,19 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 	for i in range(len(testlist)):
 		testlist[i] = testlist[i].strip().strip("]").strip("[")
 	debug("casting discount testlist: {}".format(testlist))
-	
+
 	#discount already used?
 	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
 	if len(tuplist) > 0:
 		if tuplist[0][2] >= tuplist[0][1]:
 			return -1
+
+	#discount already used?
+	discountUsed = 0
+	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
+	if len(tuplist) > 0:
+		if tuplist[0][2] >= tuplist[0][1]:
+			discountUsed += 1
 
 	discount = 0
 	found = False
@@ -1787,8 +1651,11 @@ def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of dis
 
 	if not found:
 		return 0
-	else:		
-		return discount
+	else:
+		if discountUsed == 0:
+			return discount
+		else:
+			return -1
 
 def doDiscount(cdiscount):
 	global discountsUsed
@@ -1796,7 +1663,6 @@ def doDiscount(cdiscount):
 	cells = lines[1].split(']')
 	for i in range(len(cells)):
 		cells[i] = cells[i].strip().strip("]").strip("[")
-		
 	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
 	if len(tuplist) > 0:
 		if tuplist[0][2] < tuplist[0][1]:
@@ -1833,10 +1699,10 @@ def castSpell(card, x = 0, y = 0):
 				choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
 				if choice == 0 or choice == 2:
 					return
-			
-			#  castingCost = 2	# when we get attaching enchantments down			
+
+			#  castingCost = 2	# when we get attaching enchantments down
 			revealCost = card.Cost.split("+")
-			debug("debug: {} and {}".format(revealCost[0], revealCost[1]))
+			debug("debug: Casting Cost:{} and Reveal Cost:{}".format(revealCost[0], revealCost[1]))
 			if "X" in card.Cost:  # e.g. Charm
 				mageRevealCost = 0
 			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
@@ -1860,8 +1726,9 @@ def castSpell(card, x = 0, y = 0):
 		discount = 0
 		foundDiscounts = [ ]
 		for c in table:
-			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
+			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card and c.name != "Enchanter's Ring":
 				dc = findDiscount(card, c)
+				debug("Discount Count Returned from test: {} from card: {}".format(dc, c.Name))
 				if dc > 0:
 					discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
 					infostr = notifyStr + discountStr
@@ -1877,7 +1744,6 @@ def castSpell(card, x = 0, y = 0):
 
 		# Do we have enough mana to pay for the spell?
 		if manacost == None:
-
 			# player closed the window and didn't cast the spell
 			return
 		if me.Mana < manacost:
@@ -1906,22 +1772,25 @@ def castSpell(card, x = 0, y = 0):
 			notify("{}".format(TraitStr))
 		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.Name))
 
-def getTraitValue(card, getTraitCost):
+def getTraitValue(card, TraitName):
 	listofTraits = ""
-	#debug("{} has the {} trait".format(card.Name, getTraitCost))
+	debug("{} has the {} trait".format(card.name, TraitName))
 	listofTraits = card.Traits.split(", ")
-	#debug("{} ".format(listofTraits))
+	debug("{} ".format(listofTraits))
 	if not len(listofTraits) > 1:
 		strTraits = ''.join(listofTraits)
 	else:
 		for traits in listofTraits:
-			if getTraitCost in traits:
+			if TraitName in traits:
 				strTraits = ''.join(traits)
 	STraitCost = strTraits.split("+")
-	TraitCost = int(STraitCost[1])
+	if STraitCost[1] == "X":
+		infostr = "The spell {} has an Upkeep value of 'X' what is its value?".format(card.Name)
+		TraitCost = askInteger(infostr, 3)
+	else:
+		TraitCost = int(STraitCost[1])
 	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
 	return (TraitCost, TraitStr)
-
 
 def chooseMagebind(card, mageRevealCost, TraitCosts):
 	global infostr
@@ -1935,7 +1804,6 @@ def chooseMagebind(card, mageRevealCost, TraitCosts):
 	else:  # Enchatment is not targeting a Mage
 		mcastingCost = int(mageRevealCost)
 	return mcastingCost
-
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))

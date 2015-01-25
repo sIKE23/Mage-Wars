@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Promo" id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Type" value="Attack" />
@@ -35,13 +35,13 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1, +2 vs. Flying] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
@@ -50,7 +50,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Water" />
@@ -95,7 +95,7 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Wind" />
 			<property name="Cost" value="4" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-1" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Air" />
@@ -373,10 +373,40 @@
 			<property name="School" value="Holy"  />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=2, Life=15" />
-			<property name="AttackBar" value="Razor Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Razor Talons:[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Text" value="While Victorian Griffin has the Flying trait, enemy cretures in its zone are hindered and the also lose and cannot gain the Elusive trait." />
 			<property name="Traits" value="Flying" />
 			<property name="CardID" value="MWPROMO62" />
+		</card>
+		<card id="9c877bec-af74-4d95-8583-a8b814cc1a58" name="Eligor Larington">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=1, Life=15" />
+			<property name="AttackBar" value="Martial Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Counterstrike]" />
+			<property name="Text" value="Once per round, when making a counterstrike, Eligor gains the Melee +2 trait and Martial Strike gians the Piercing +1 trait." />
+			<property name="Traits" value="Aegis 1, Legendary" />
+			<property name="CardID" value="MWPROMO68" />
+		</card>
+		<card id="3b40edc6-c26b-4370-b6c5-ea52b748c0bb" name="Gerard Matranga">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Pirate" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War+Water"  />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="AttackBar" value="Avaricious Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1 per Gold token on Gerard]" />
+			<property name="Text" value="During the Upleep Phase, and when Gerard attacks and damages an enemy creature, he gains 1 Gold token. You Mage may spend Gold tokens as mana when summons Soldier or Pirate creatures." />
+			<property name="Traits" value="Legendary" />
+			<property name="CardID" value="MWPROMO69" />
 		</card>
 
 
@@ -468,8 +498,8 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=-, Life=3" />
-			<property name="AttackBar" value="[Passage Blocked] [Line of Sight Blocked]" />
-			<property name="Traits" value="Incorporeal, Extendable" />
+			<property name="AttackBar" value="[] []" />
+			<property name="Traits" value="Blocks LOS, Passage Blocked, Incorporeal, Extendable" />
 			<property name="Text" value="During the Upkeep Phase you may pay mana to reinforce Wall of Force. For each mana spent remove 1 damage from it. The ability bypasses the Finite Life trait." />
 			<property name="CardID" value="MWPROMO24" />
 		</card>
@@ -483,8 +513,8 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=-, Life=8" />
-			<property name="AttackBar" value="Toxic Gas&#xD;&#xA;[Passage Attack] [Line of Sight Blocked] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
-			<property name="Traits" value="Incorporeal, Wind +2, Extendable" />
+			<property name="AttackBar" value="Toxic Gas:&#xD;&#xA;[Passage Attack] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Blocks LOS, Passage Attacks, Incorporeal, Wind +2, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO54" />
 		</card>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forged in Fire"  id="ffed488f-d9ce-48a9-aed9-88b105ede18b" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.10.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forged in Fire"  id="ffed488f-d9ce-48a9-aed9-88b105ede18b" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
 	<markers>
 		<marker id="ae179c85-11ce-4be7-b9c9-352139d0c8f2" name="Rune of Fortification" />
 		<marker id="b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" name="Rune of Power" />
@@ -28,7 +28,7 @@
 			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Fireweaving: Once per round, at the end of her Action Phase, the Warlock may target an object up to 2 zones away. She may move a Burn conditon from that object to another target object in that same zone.&#xD;&#xA;Smoldering Curses: Enemy creatures gain the Flame +1 trait if they have one or more revealed curse you control attached to them.&#xD;&#xA;Demonic Reward: If a friednly demon attacks and damages an enemy creature with a Burn condition, it may heal one damage. Each friendly demon may only trigger this ability once per round." />
-			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [5+ = Burn] [Defrost]" />
+			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [d12] [5+ = Burn] [Defrost]" />
 		</card>
 		<card id="8c17a03b-4800-4253-ac32-925581fdbbe0" name="Adramelech Warlock Stats">
 			<property name="Type" value="Magestats" />
@@ -169,8 +169,8 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=8" />
-			<property name="AttackBar" value="[Blocks Line of Sight] [Passage Blocked]" />
-			<property name="Traits" value="Extendable, Lightning Immunity, Flame Immunity, Hydro +2" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Blocks LOS, Passage Blocked, Extendable, Lightning Immunity, Flame Immunity, Hydro +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFW01" />
 		</card>
@@ -201,7 +201,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=11" />
-			<property name="AttackBar" value="Gorging Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Vampiric] " />
+			<property name="AttackBar" value="Gorging Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Vampiric]" />
 			<property name="Traits" value="Bloodthirsty +1, Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC02" />
@@ -261,7 +261,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Bottle of Flaming Oil:&#xD;&#xA;[Full] [Ranged:0-1] [Flame] [Dice=2] [d12] [5+ = Burn] [Defrost]&#xD;Flask of Ultimate Dissolver:[Full] [Ranged:0-1] [Acid] [Dice=3] [d12] [5+ = Corrode]&#xA;&#xD;Poison Dagger:&#xD;&#xA;[Quick] [Melee] [Poison] [Dice=2] [d12] [8+ = Rot]" />
+			<property name="AttackBar" value="Bottle of Flaming Oil:&#xD;&#xA;[Full] [Ranged:0-1] [Flame] [Dice=2] [d12] [5+ = Burn] [Defrost]&#xD;&#xA;Flask of Ultimate Dissolver:&#xD;&#xA;[Full] [Ranged:0-1] [Acid] [Dice=3] [d12] [5+ = Corrode]&#xD;&#xA;Poison Dagger:&#xD;&#xA;[Quick] [Melee] [Poison] [Dice=2] [d12] [8+ = Rot]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC06" />
@@ -306,7 +306,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=11" />
-			<property name="AttackBar" value="Maul:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Reinforce: Place an Armor +1 token on, or Reconstruct 2 damage from, a Nonliving Corporeal conjuration in his zone (including walls bordering his zone)." />
+			<property name="AttackBar" value="Maul:&#xD;&#xA;[Quick] [Melee] [Dice=3]&#xD;&#xA;Reinforce:&#xD;&#xA;[Place an Armor +1 token on, or Reconstruct 2 damage from, a Nonliving Corporeal conjuration in his zone (including walls bordering his zone).]" />
 			<property name="Traits" value="Legendary, Lightning +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC09" />
@@ -549,7 +549,7 @@
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Location=Chest" />
+			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="War Mage Only" />
 			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast. [Armor +2]" />
