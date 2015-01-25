@@ -43,7 +43,7 @@
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [3-7 = Stun; 8+ = Push &amp; Slam] [Extinguish] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [3-7 = Slam; 8+ = Push &amp; Slam] [Extinguish] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKA01" />
@@ -369,7 +369,7 @@
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon+Shield" />
 			<property name="Traits" value="" />
-			<property name="AttackBar" value="[Full] [Range:1-2] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Talonhead Arrow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1]" />
 			<property name="Text" value="If Hunting Bow is used to attack an enemy creature that was attacked and damaged by a friendly animal creature this round, this attack gains an additional Piercing +1 and this effect roll:&#xD;&#xA;[d12] [7+ = Bleed]" />
 			<property name="CardID" value="MWSTX1CKQ02" />
 		</card>

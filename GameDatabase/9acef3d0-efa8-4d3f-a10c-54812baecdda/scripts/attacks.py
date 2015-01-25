@@ -66,7 +66,9 @@ def diceRollMenu(attacker = None,defender = None):
                 choices = (['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),
                         round(expectedDamage({},{'Dice':i+1},dTraitDict),1),
                         round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])
-        colors = [("#663300" if (attackList and attackList[i].get('Heal',False)) else '#CC0000') for i in range(len(choices))]
+        colors = [("#663300" if (attackList and attackList[i].get('Heal',False)) else
+                   ('#0f3706' if attackList and attackList[i].get('Range',[None,None])[0] == 'Ranged' else
+                    '#CC0000')) for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
         colors.extend(["#666699","#000000"])
         count = (askChoice("No legal attacks detected!", ['Roll anyway','Cancel'], colors) if len(choices) == 2 else askChoice(choiceText, choices, colors))
@@ -140,7 +142,7 @@ def getAttackList(card):
                                 if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
-                if aDict.get('Dice',False): attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
+                if aDict.get('Dice',None)!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
         if card.Type == 'Mage':
                 for c in table:
                         if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and c.isFaceUp and
@@ -162,7 +164,7 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                 if attack.get('Action',None) == 'Quick' and localADict.get('Counterstrike',False): attack['Traits']['Counterstrike'] = True
         #Scan the board for cards than can provide a bonus to this attack
         for c in table:
-                if (c.name == 'Tooth and Nail' and #Global effects
+                if (c.name == 'Tooth & Nail' and #Global effects
                     'Animal' in attacker.Subtype and
                     attack.get('Range',[False,None])[0] == 'Melee'): attack['Traits']['Piercing'] += 1
                 if c.controller == attacker.controller: #Friendly effects
@@ -531,6 +533,7 @@ def computeTraits(card):
         if card.markers[Guard]: rawTraitsList.append('Counterstrike')
         if card.markers[Sleep] or card.markers[Stun]: rawTraitsList.append('Incapacitated')
         if card.markers[Zombie] : rawTraitsList.extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
+        if card.markers[Stuck] : rawTraitsList.extend(['Restrained','Unmovable'])
         
         if card.markers[Pet] and 'Animal' in card.Subtype: rawTraitsList.extend(['Melee +1','Armor +1','Life +3'])
         if card.markers[BloodReaper] and 'Demon' in card.Subtype: rawTraitsList.append('Bloodthirsty +2')
