@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from math import factorial
 """
 Mage Wars Attacks Module
@@ -10,7 +11,7 @@ This module contains the functions relating to dice rolling and battle computati
 ############################################################################
 
 additiveTraits = ["Melee","Ranged",
-                  "Armor","Life","Innate Life","Channeling",
+                  "Armor","Life","Innate Life","Channeling","Defense",
                   "Tough",
                   "Charge",
                   "Bloodthirsty",
@@ -58,7 +59,7 @@ def diceRollMenu(attacker = None,defender = None):
                                   ('\n{} Mana'.format(str(attack.get('Cost',0))) if attack.get('Cost',False) else '')+
                                   ('\n'+', '.join(traits) if traits else '')+
                                   ('\n'+', '.join(effectList) if effectList != '' else '')+
-                                  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and not attack.get('Heal',False)) else ''))
+                                  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and attack.get('EffectType','Attack')=='Attack') else ''))
                         if isLegalAttack(aTraitDict,attack,dTraitDict): choices.append(choice)
                 if defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
         #Then, suppose not (or suppose the indicated attacker has no attack list)
@@ -66,7 +67,7 @@ def diceRollMenu(attacker = None,defender = None):
                 choices = (['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),
                         round(expectedDamage({},{'Dice':i+1},dTraitDict),1),
                         round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])
-        colors = [("#663300" if (attackList and attackList[i].get('Heal',False)) else
+        colors = [("#663300" if (attackList and attackList[i].get('EffectType','Attack')=='Heal') else
                    ('#0f3706' if attackList and attackList[i].get('Range',[None,None])[0] == 'Ranged' else
                     '#CC0000')) for i in range(len(choices))]
         choices.extend(['Other Dice Amount','Cancel Attack'])
@@ -116,7 +117,8 @@ def getAttackList(card):
                 name = (card.name if isAttackSpell else attack[0])
                 aDict = {'Name':name,
                          'd12':[],
-                         'Traits': {}
+                         'Traits': {},
+                         'EffectType': 'Attack'
                          }
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 if isAttackSpell: attributes.append('Spell')
@@ -128,11 +130,11 @@ def getAttackList(card):
                         elif 'Ranged' in attribute: aDict['Range'] = attribute.split(':')
                         elif attribute == 'Melee' : aDict['Range'] = ['Melee','0-0']
                         elif attribute == 'Damage Barrier' : aDict['Range'] = ['Damage Barrier','']
-                        elif attribute == 'Heal' : aDict['Heal'] = True
+                        elif attribute == 'Heal' : aDict['EffectType'] = 'Heal'
                         elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
-                        elif attribute =='d12' : effectSwitch = True
+                        elif attribute == 'd12' : effectSwitch = True
                         elif effectSwitch:
                                 options = attribute.split('; ')
                                 aDict['d12'] = [o.split(' = ') for o in options]
@@ -243,11 +245,12 @@ def canDeclareAttack(card):
             computeTraits(card).get('Autonomous',False) or
             [1 for attack in getAttackList(card) if attack.get('Range',[''])[0]=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
                 return True
+
 ############################################################################
 ######################		Dice Rolling		####################
 ############################################################################
 
-def getRollDice(dice):
+def rollDice(dice):
         mute()
         global diceBank
 	global diceBankD12
@@ -326,7 +329,196 @@ def getRollDice(dice):
 		return None,None
 
 ############################################################################
-######################  Applying Damage and Effects     ####################
+######################            Event Memory          ####################
+############################################################################
+"""
+Events shall be formatted thus:
+
+<A,cardID> attacks <B,cardID> with attack <C,attackDict> : [Attack,[A,B,C]]
+<A,cardID> used defense <B,defenseDict> : [Defense, [A,B]]
+"""
+
+
+def getEventList(roundOrTurn):
+        return (eval(getGlobalVariable("roundEventList")) if roundOrTurn =='Round' else eval(getGlobalVariable("turnEventList")))
+
+def setEventList(roundOrTurn,eventList):
+        if roundOrTurn =='Round': setGlobalVariable("roundEventList",str(eventList))
+        else: setGlobalVariable("turnEventList",str(eventList))
+
+def appendEventList(roundOrTurn,event):
+        eventList = getEventList(roundOrTurn)
+        eventList.append(event)
+        setEventList(roundOrTurn,str(eventList))
+
+def clearLocalTurnEventList(): #Clears the part of the turnList pertaining to the local player
+        eventList = getEventList('Turn')
+        for e in eventList:
+                if (e[0] in ('Attack','Defense') and Card(e[1][0]).controller == me): eventList.remove(e)
+        setEventList('Turn',eventList)
+
+def hasAttackedThisTurn(card):
+        eventList = getEventList('Turn')
+        for e in eventList:
+                if e[0] == 'Attack' and e[1][0]._id == card._id: return True
+
+def timesHasUsedDefense(card,defenseDict): # if it has multiple defenses from 
+        eventList = getEventList('Round')
+        count = 0
+        for e in eventList:
+                if e[0] == 'Defense' and e[1][1] == defenseDict: count += 1
+        return count
+
+def rememberDefenseUse(card,defense):
+        appendEventList('Round',['Defense', [card._id,defense]])
+        appendEventList('Turn',['Defense', [card._id,defense]])
+
+############################################################################
+######################            Defenses              ####################
+############################################################################
+"""
+Each defenseDict should have the following entries:
+Source (id of the card that provides defense)
+Minimum (e.g. 7+)
+Uses (e.g. 1,2,inf)
+Restrictions (e.g. melee only)
+"""
+
+def defenseParser(sourceID,rawDefenseStr):
+        #For now, assume that the only restrictions are melee and ranged and that they are mutually exclusive
+        defenseStr = str(rawDefenseStr).split('Defense')[1].strip('=') #Ugh...defenses are formatted inconsistendly in the XML files. But this should pick up both variants until we can standardize.
+        debug('defstr0 '+str(defenseStr))
+        defenseDict = {'Source' : sourceID}
+        if 'No Melee' in rawDefenseStr:
+                defenseDict['Restrictions'] = 'No Melee'
+                defenseStr = (defenseStr.split('No Melee')[0]).strip(' ')
+        elif 'No Ranged' in rawDefenseStr:
+                defenseDict['Restrictions'] = 'No Ranged'
+                defenseStr = (defenseStr.split('No Ranged')[0]).strip(' ')
+        debug('defstr '+str(defenseStr))
+        defTraitList = defenseStr.split(' ')
+        debug('deftrlist '+str(defTraitList))
+        for d in defTraitList:
+                if '+' in d: defenseDict['Minimum'] = int(d.strip('+'))
+                if 'x' in d: defenseDict['Uses'] = int(d.strip('x'))
+                if d=='inf': defenseDict['Uses'] = 'inf'
+        debug('initial dd: '+str(defenseDict))
+        return defenseDict
+
+def getDefenseList(aTraitDict,attack,dTraitDict):
+        #For now, just find all defenses on the creature that have not been used completely.
+        #Later, we'll be more selective, and will find defenses from other sources as well
+        defender = Card(dTraitDict.get('OwnerID',None))
+        statList = defender.Stats.split(', ')
+        defenseList = []
+        for s in statList:
+                if 'Defense' in s:
+                        dCandidate = defenseParser(defender._id,s)
+                        #Probably should actually separate so we first find the defenses, and iterate through them separately, but this will do for now.
+                        if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
+                                defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
+        #Here is where we would search for other defense sources, but won't yet.
+        #We should also search for enchantment pseudo-defenses, like block.
+        return defenseList
+
+def computeDefense(aTraitDict,attack,dTraitDict,defense):
+        modDefense = dict(defense)
+        modDefense['Minimum'] = max(modDefense.get('Minimum',13)-dTraitDict.get('Defense',0),1)
+        return modDefense
+
+def defenseQuery(aTraitDict,attack,dTraitDict):
+        """Returns the defense if the attack was evaded and false if it was not"""
+        defender = Card(dTraitDict.get('OwnerID',None))
+        atkTraits = attack.get('Traits',{})
+        defenseList = getDefenseList(aTraitDict,attack,dTraitDict)
+        debug(str(defenseList))
+        if atkTraits.get('Unavoidable',False) or not defenseList: return False
+        modDefenseList = [computeDefense(aTraitDict,attack,dTraitDict,d) for d in defenseList]
+        queryList = ['{}\nSuccess Rate {}% | Uses Remaining: {}'.format(Card(d.get('Source',None)).name.center(68,' '),
+                                                                       str(round(((13-d.get('Minimum'))/12.0)*100,1)),
+                                                                       ("Infinite" if d.get('Uses',0) == "inf" else
+                                                                        str(d.get('Uses',0) - timesHasUsedDefense(defender,d))))
+                     for d in modDefenseList]
+        colors = ["#996600" for d in queryList]
+        queryList.append('I won\'t roll defense')
+        colors.append("#000000")
+        choice = askChoice('Would you like to use a defense?',queryList,colors)
+        if choice == 0 or choice == len(queryList): return False
+        defense = defenseList[choice-1]
+        rememberDefenseUse(defender,defense)
+        defense = computeDefense(aTraitDict,attack,dTraitDict,defense) #NOW we modify the defense
+        defSource = Card(defense.get('Source',None))
+        notify("{} attempts to avoid the attack using {}!".format(defender,
+                                                                 ('its innate defense' if defSource == defender else 'its defense from {}'.format(defSource))))
+        
+        damageRoll,effectRoll = rollDice(0)
+        if effectRoll >= defense.get('Minimum',13):
+               notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
+               return defense
+        else:
+               notify("{} fails to defend itself...".format(defender))
+               return False
+
+############################################################################
+######################      Seven Steps of an Attack    ####################
+############################################################################
+"""
+Since each attack step may be carried out by a different player, each step of the
+attack should lead into the next.
+"""
+
+def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        #Declare Attack - done. That was calling this function.
+        notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
+        if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
+        else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
+
+def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        if attack.get('EffectType','Attack')=='Attack':
+               if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
+                       #Spiked buckler code here, perhaps?
+                       if attacker.controller == me: additionalStrikesStep(aTraitDict,attack,dTraitDict)
+                       else: remotecall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
+                       return
+        if attacker.controller == me: rollDiceStep(aTraitDict,attack,dTraitDict)
+        else: remotecall(attacker.controller,'rollDiceStep',[aTraitDict,attack,dTraitDict])
+
+def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        dice = attack.get('Dice',-1)
+        if dice < 0:
+                notify('Error: invalid attack format - no dice found')
+                return
+        damageRoll,effectRoll = rollDice(dice)
+        if defender.controller == me: damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+        else: remotecall(defender.controller,'damageAndEffectsStep',[aTraitDict,attack,dTraitDict,damageRoll,effectRoll])
+
+def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #Executed by defender
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+        if attacker.controller == me: additionalStrikesStep(aTraitDict,attack,dTraitDict)
+        else: remotecall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
+
+def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        pass
+
+def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
+        pass
+
+def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
+        pass
+
+def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        pass
+
+############################################################################
+######################    Applying Damage and Effects   ####################
 ############################################################################
 """
 Once an attack has been chosen, the code in this section determines what happens,
@@ -341,16 +533,15 @@ damageReceiptMenu:
                 computeEffect
 healingQuery
 
-"""
+"""       
 
-
-def damageReceiptMenu(attacker,attack,defender,roll,effectRoll):
+def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
         if attacker.controller != defender.controller: revealAttachmentQuery([defender,attacker])
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = (computeTraits(defender) if defender else {})
         atkTraits = attack.get('Traits',{})
         #If it is healing, we heal and then end the attack, since it is not an attack.
-        if attack.get('Heal',False):
+        if attack.get('EffectType','Attack')=='Heal':
                 healingAmt = min(sum([{0:0,1:0,2:1,3:2,4:1,5:2}.get(i,0)*roll[i] for i in range(len(roll))]),getStatusDict(defender).get('Damage',0))
                 if healingAmt > 0: healingQuery(dTraitDict,
                                                 'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
@@ -382,21 +573,21 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         atkTraits = attack.get('Traits',{})
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Rot','Slam','Sleep','Stuck','Stun','Tainted','Weak']
-        effectsInflictDict = {'Bleed' : 'bleeds from its wounds!',
-                                 'Burn' : 'is set ablaze!',
-                                 'Corrode' : 'corrodes!',
-                                 'Cripple' : 'is crippled!',
-                                 'Daze' : 'is dazed!',
-                                 'Rot' : 'rots!',
-                                 'Slam' : 'is slammed to the ground!',
-                                 'Sleep' : 'falls fast alseep!',
-                                 'Stuck' : 'is stuck fast!',
-                                 'Stun' : 'is stunned!',
-                                 'Tainted' : 'screams as its tainted wounds fester!',
-                                 'Weak' : 'is weakened!',
-                                 'Snatch' : 'is snatched toward {}!'.format(attacker),
-                                 'Push' : 'is pushed away from {}!'.format(attacker),
-                                 'Taunt' : 'wants to attack {}!'.format(attacker)}
+        effectsInflictDict = {'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
+                                 'Burn' : 'is set ablaze! (+1 Burn)',
+                                 'Corrode' : 'corrodes! (+1 Corrode)',
+                                 'Cripple' : 'is crippled! (+1 Cripple)',
+                                 'Daze' : 'is dazed! (Daze)',
+                                 'Rot' : 'rots! (+1 Rot)',
+                                 'Slam' : 'is slammed to the ground! (Slam)',
+                                 'Sleep' : 'falls fast alseep! (Sleep)',
+                                 'Stuck' : 'is stuck fast! (+1 Stuck)',
+                                 'Stun' : 'is stunned! (Stun)',
+                                 'Tainted' : 'writhes in agony as its wounds fester! (+1 Tainted)',
+                                 'Weak' : 'is weakened! (+1 Weak)',
+                                 'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
+                                 'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
+                                 'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
 
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
@@ -404,11 +595,10 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
-        notify("{} attacks {}{}, inflicting {} damage. ({} average roll)".format(attacker,
-                                                                                defender,
-                                                                                (' with {}'.format(attack.get('Name')) if attack.get('Name',False) else ''),
-                                                                                str(damage),
-                                                                                ('an above' if damage >= expectedDmg else 'a below')))
+        notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
+                                                                    str(damage),
+                                                                    defender,
+                                                                    ('! (an above' if damage > expectedDmg else '... (a below')))
         #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
         dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),getStatusDict(defender).get('Mana',0)) if damage else 0)
         if defender.Type == 'Mage': defender.controller.Mana -= dManaDrain

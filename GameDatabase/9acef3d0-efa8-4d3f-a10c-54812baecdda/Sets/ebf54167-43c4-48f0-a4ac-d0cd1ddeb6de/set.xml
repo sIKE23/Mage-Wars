@@ -914,7 +914,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Channeling=1, Defense=6+ ∞, Armor=0, Life=6" />
+			<property name="Stats" value="Channeling=1, Defense=6+ inf, Armor=0, Life=6" />
 			<property name="AttackBar" value="Ethereal Touch:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Ethereal]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Nature Mage Only" />
 			<property name="Text" value="" />
@@ -929,7 +929,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Defense= 8+ 1x No Ranged, Armor=0, Life=4" />
+			<property name="Stats" value="Defense=8+ 1x No Ranged, Armor=0, Life=4" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Charge +2" />
 			<property name="Text" value="" />
@@ -1034,7 +1034,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Channeling=1, Defense=6+ ∞, Armor=0, Life=5" />
+			<property name="Stats" value="Channeling=1, Defense=6+ inf, Armor=0, Life=5" />
 			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1]&#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Arcane Mage Only" />
 			<property name="Text" value="Huginn can cast only level 1-2 incantation spells." />
@@ -1199,7 +1199,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Defense=5+ ∞, Armor=0, Life=5" />
+			<property name="Stats" value="Defense=5+ inf, Armor=0, Life=5" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [7+ = Taunt]" />
 			<property name="Traits" value="Elusive, Pest, Legendary, Beastmaster Only" />
 			<property name="Text" value="" />

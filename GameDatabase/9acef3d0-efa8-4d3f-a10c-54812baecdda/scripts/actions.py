@@ -158,9 +158,16 @@ def onGameStart():
 	for p in players:
 		remoteCall(p, "setClearVars",[])
 
-	#create a dictionary of attachments and enable autoattachment
+	#create a dictionary of attachments
 	setGlobalVariable("attachDict",str({}))
+
+        #set global event lists for rounds and single actions
+	setGlobalVariable("roundEventList",str([]))
+	setGlobalVariable("turnEventList",str([]))
+	
 	initializeGame()
+
+        
 
 def setUpDiceAndPhaseCards():
 	mute()
@@ -347,6 +354,7 @@ def setDRAIP(location):
 ############################################################################
 
 def playerDone(group, x=0, y=0):
+        clearLocalTurnEventList()
 	notify("{} is done".format(me.name))
 	mageStatus()
 
@@ -356,27 +364,22 @@ def attackTarget(card, x=0, y=0):
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
+                        aTraitDict = computeTraits(card)
+                        dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(card,defender)
-                        dice = attack.get('Dice',-1)
-                        if dice >= 0:
-                                notify("{} attacks {} with {}".format(me,defender,card))
-                                roll,effectRoll = getRollDice(dice)
-                                if roll:
-                                        revealAttachmentQuery([card,defender])
-                                        if defender.controller == me: damageReceiptMenu(card,attack,defender,roll,effectRoll)
-                                        else: remoteCall(defender.controller,'damageReceiptMenu',[card,attack,defender,roll,effectRoll])
+                        declareAttackStep(aTraitDict,attack,dTraitDict)
                 elif len(target) == 0: #Untargeted attack
                         attack = diceRollMenu(card,None)
                         dice = attack.get('Dice',-1)
                         if dice >= 0:
                                 notify("{} attacks with {}".format(me,card))
-                                roll,effect = getRollDice(dice)
+                                roll,effect = rollDice(dice)
 
-def rollDice(group, x=0, y=0):
+def genericAttack(group, x=0, y=0):
 	target = [cards for cards in table if cards.targetedBy==me]
 	defender = (target[0] if len(target) == 1 else None)
         dice = diceRollMenu(None,defender).get('Dice',-1)
-        if dice >=0: getRollDice(dice)
+        if dice >=0: rollDice(dice)
 
 def flipCoin(group, x = 0, y = 0):
     mute()
@@ -581,6 +584,7 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
+                        setEventList('Round',[]) #Clear event list for new round
 			gTurn = getGlobalVariable("RoundNumber")
 			gameTurn = int(gTurn) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
@@ -1352,7 +1356,7 @@ def obliterate(card, x=0, y=0):
 def defaultAction(card, x = 0, y = 0):
 	mute()
 	if card.type == "DiceRoll":
-		rollDice(0, x, y)
+		genericAttack(0, x, y)
 	
 	if card.type =="Phase":
 		nextPhase(table,0,0)
