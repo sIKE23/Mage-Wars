@@ -362,16 +362,29 @@ def hasAttackedThisTurn(card):
         for e in eventList:
                 if e[0] == 'Attack' and e[1][0]._id == card._id: return True
 
-def timesHasUsedDefense(card,defenseDict): # if it has multiple defenses from 
+def timesHasUsedDefense(card,defenseDict):
+        """Counts how many times defense has been used this ROUND"""
         eventList = getEventList('Round')
         count = 0
         for e in eventList:
-                if e[0] == 'Defense' and e[1][1] == defenseDict: count += 1
+                if e[0] == 'Defense' and e[1][0] == card._id and e[1][1] == defenseDict: count += 1
+        return count
+
+def timesHasUsedAttack(card,attack):
+        """Counts how many times attack has been used this TURN"""
+        eventList = getEventList('Turn')
+        count = 0
+        for e in eventList:
+                if e[0] == 'Attack' and e[1][0] == card._id and e[1][2] == attack: count += 1
         return count
 
 def rememberDefenseUse(card,defense):
         appendEventList('Round',['Defense', [card._id,defense]])
         appendEventList('Turn',['Defense', [card._id,defense]])
+
+def rememberAttackUse(attacker,defender,attack):
+        appendEventList('Round',['Attack', [attacker._id,defender._id,attack]])
+        appendEventList('Turn',['Attack', [attacker._id,attacker._id,attack]])
 
 ############################################################################
 ######################            Defenses              ####################
@@ -518,7 +531,17 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
         else: remotecall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
-        pass
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        rememberAttackUse(attacker,defender,attack)
+        strikes = 1
+        atkTraits = attack.get('Traits',{})
+        if atkTraits.get('Doublestrike',False) or atkTraits.get('Doublestrike OR Sweeping',False): strikes = 2
+        if atkTraits.get('Triplestrike',False) or atkTraits.get('Triplestrike OR Zone Attack',False): strikes = 3 #Temp soln; really, we want them to declare which option they are using.
+        if timesHasUsedAttack(attacker,attack) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
+        else:
+                if defender.controller == me: damageBarrierStep(aTraitDict,attack,dTraitDict)
+                else: remotecall(defender.controller,'damageBarrierStep',[aTraitDict,attack,dTraitDict])
 
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
         pass

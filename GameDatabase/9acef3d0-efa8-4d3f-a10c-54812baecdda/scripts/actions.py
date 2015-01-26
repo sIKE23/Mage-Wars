@@ -362,8 +362,9 @@ def attackTarget(card, x=0, y=0):
                         aTraitDict = computeTraits(card)
                         dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(card,defender)
-                        if defender.controller = me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
-                        else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
+                        if attack:
+                                if defender.controller == me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
+                                else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                 elif len(target) == 0: #Untargeted attack
                         attack = diceRollMenu(card,None)
                         dice = attack.get('Dice',-1)
@@ -591,7 +592,8 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
-                        setEventList('Round',[]) #Clear event list for new round
+                        setEventList('Round',[])
+                        setEventList('Turn',[])#Clear event list for new round
 			gTurn = getGlobalVariable("RoundNumber")
 			gameTurn = int(gTurn) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
