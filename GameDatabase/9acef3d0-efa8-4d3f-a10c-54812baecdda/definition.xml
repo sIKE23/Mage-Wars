@@ -62,6 +62,7 @@
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False" />
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
 		<size name="ModularBoardPieces" width="250" height="250" back="cards/mGameBoardBack.jpg" front="cards/mGameBoardBack.jpg" cornerRadius="0" />
+		<size name="MarkersAsCards" width="200" height="200" back="cards/card.jpg" front="cards/card.jpg" cornerRadius="0" />
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />

@@ -409,7 +409,7 @@
 		</card>
 
 
-		<card id="690a2c72-4801-47b5-84bd-b9e2f5811cb5" name="V&apos;tar Orb">
+		<card id="690a2c72-4801-47b5-84bd-b9e2f5811cb5" name="V&apos;tar Orb" size="MarkersAsCards">
 			<property name="Type" value="Internal" />
 		</card>
 
