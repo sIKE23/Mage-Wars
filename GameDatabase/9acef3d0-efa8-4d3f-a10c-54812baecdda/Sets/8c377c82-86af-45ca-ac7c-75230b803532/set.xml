@@ -2,6 +2,7 @@
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Mage Wars Battlegrounds: Domination" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.12.0.0">
 	<markers>
 		<marker id="3274d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />
+		<marker id="8731f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap" />
 	</markers>
 	<cards>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="Bolt of V&apos;Tar">
