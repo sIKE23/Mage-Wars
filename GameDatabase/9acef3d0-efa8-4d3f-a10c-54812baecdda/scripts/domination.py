@@ -11,7 +11,7 @@ def createGOrbGuardian(group, x=0, y=0):
 	orbGuardian.markers[Guard] = 1
 
 def createPowerOrb(group, x=0, y=0):
-	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", 450, -40 )
+	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -75, -75 )
 
 def setupDom(group, x=0, y=0):
 	table.create("690a2c72-4801-47b5-84bd-b9e2f5811cb5", -286, -300 )
