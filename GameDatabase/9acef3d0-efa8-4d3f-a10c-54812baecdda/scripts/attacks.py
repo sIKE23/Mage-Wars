@@ -42,7 +42,7 @@ def diceRollMenu(attacker = None,defender = None):
         aTraitDict = (computeTraits(attacker) if attacker else {})
         dTraitDict = (computeTraits(defender) if defender else {})
         attackList = getAttackList(attacker) if attacker else []
-        choiceText,choices = "Roll how many red dice?",[str(i+1) for i in range(7)]
+        choiceText,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
         #Suppose there is an attacker with at least one attack:
         if (attacker and attackList):
                 choiceText = "Use which attack?"
@@ -273,7 +273,7 @@ def rollDice(dice):
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
-	dieCard2 = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCard2X, dieCard2Y) #dice field 2
+	dieCard.anchor = (True)
 	diceFrom = ""
         count = dice
         if (len(diceBank) < count): #diceBank running low - fetch more
@@ -300,8 +300,8 @@ def rollDice(dice):
 	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
 	dieCard.markers[attackDie[2]] = result[2] #1
 	dieCard.markers[attackDie[3]] = result[3] #2
-	dieCard2.markers[attackDie[4]] = result[4] #1*
-	dieCard2.markers[attackDie[5]] = result[5] #2*
+	dieCard.markers[attackDie[4]] = result[4] #1*
+	dieCard.markers[attackDie[5]] = result[5] #2*
 
 	d12DiceCount = 1
 	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
@@ -316,7 +316,7 @@ def rollDice(dice):
 				diceBankD12.append(rnd(0, 11))
 
 	effect = int(diceBankD12.pop()) + 1
-	dieCard2.markers[DieD12] = effect
+	dieCard.markers[DieD12] = effect
 
 	if hasRolledIni:
 		playSoundFX('Dice')

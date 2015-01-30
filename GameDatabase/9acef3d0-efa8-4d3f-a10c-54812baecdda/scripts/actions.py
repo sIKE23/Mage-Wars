@@ -47,7 +47,7 @@ MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
 Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b" )
 QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" )
-Ranged = ("Ranged","cfb394b2-8571-439a-8833-476122a9eaa5")
+Ranged = ("Ranged +1","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
@@ -173,17 +173,13 @@ def setUpDiceAndPhaseCards():
 	mute()
 	TableSetup = getGlobalVariable("TableSetup")
 	if TableSetup == "False":
-		dieCardX = -570
+		dieCardX = -580
 		dieCardY = -40
-		table.create("d86b16a6-218a-4363-a408-599d3ef4a0b3", (dieCardX + -60), (dieCardY + -25)) # DiceRolling Button
-		#card.anchor = (True)
-		table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
-		#card.anchor = (True)
-		table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", (dieCardX + 60), dieCardY) #dice field 2
-		#card.anchor = (True)
-		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 60), (dieCardY - 150)) #Phase token/Next Phase Button
+		card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field
+		card.anchor = (True)
+		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 75), (dieCardY - 55)) #Phase token/Next Phase Button
 		card.switchTo("Planning") #skips upkeep for first turn
-		#card.anchor = (True)
+		card.anchor = (True)
 		setGlobalVariable("TableSetup", True)
 
 def onLoadDeck(player, groups):
@@ -330,7 +326,7 @@ def setDRAIP(location):
 
 	if location == 1:
 		#option A
-		dieCardX = -570
+		dieCardX = -580
 		dieCardY = -40
 		dieCard2X = -510 # = dieCardX + 60
 		dieCard2Y = -40 # = dieCardY
@@ -541,9 +537,12 @@ def CreateIniToken():
 	global iniTokenCreated
 	global currentPhase
 	mute()
+	dieCardX = -570
+	dieCardY = -40
 	if not iniTokenCreated:
 		iniTokenCreated = True
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", initX, initY ) #initiative token
+		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", (dieCardX + 5) , (dieCardY - 75 ) ) #initiative token
+		init.anchor = (True)
 		init.switchTo({
                         PlayerColor[0]:"",
                         PlayerColor[1]:"B",
