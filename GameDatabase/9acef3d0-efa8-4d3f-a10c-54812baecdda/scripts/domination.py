@@ -40,3 +40,4 @@ def setupDom(group, x=0, y=0):
 	orbGuardian.markers[Guard] = 1
 
 	setGameBoard0(group, 0, 0)
+
