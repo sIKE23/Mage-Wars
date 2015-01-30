@@ -355,20 +355,22 @@ def playerDone(group, x=0, y=0):
 
 def attackTarget(card, x=0, y=0):
         mute()
-        if card.controller == me and canDeclareAttack(card):
+        if card.controller == me and canDeclareAttack(card) and getSetting('BattleCalculator',True):
                 target = [c for c in table if c.targetedBy==me]
                 if len(target) == 1:
                         defender = target[0]
                         aTraitDict = computeTraits(card)
                         dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(card,defender)
-                        declareAttackStep(aTraitDict,attack,dTraitDict)
+                        if defender.controller = me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
+                        else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                 elif len(target) == 0: #Untargeted attack
                         attack = diceRollMenu(card,None)
                         dice = attack.get('Dice',-1)
                         if dice >= 0:
                                 notify("{} attacks with {}".format(me,card))
                                 roll,effect = rollDice(dice)
+        else: genericAttack(table) #If the card you are targeting cannot attack, or the battle calculator is off, just go to the generic attack menu
 
 def genericAttack(group, x=0, y=0):
 	target = [cards for cards in table if cards.targetedBy==me]
@@ -935,18 +937,18 @@ Format:
 """
 
 fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
-                  ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
-                  ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
-                  ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
-                  ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
-                  ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
-                  ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
-                  ["AutoRollInitiative","AutoRollIni","You have {} automatically rolling initiative.",False],
-                  ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
-                  ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
-                  ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
-                  ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons",True]
-                  ]
+                          ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
+                          ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
+                          ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
+                          ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
+                          ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
+                          ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
+                          ["AutoRollInitiative","AutoRollIni","You have {} automatically rolling initiative.",False],
+                          ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
+                          ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
+                          ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
+                          ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons.",True],
+                          ["BattleCalculator","BattleCalculator","You have {} the battle calculator.",True]]
 
 for fGen in fGenToggleSettingsList:
         exec(
@@ -1034,7 +1036,7 @@ def addOther(card, x = 0, y = 0):
 	card.markers[marker] += qty
 
 def subDamage(card, x = 0, y = 0):
-	if "Mage" in card.Type  and card.controller == me:
+	if "Mage" in card.Type and card.controller == me:
 			me.Damage -= 1
 	else:
 		subToken(card, Damage)
