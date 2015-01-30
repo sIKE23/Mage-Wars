@@ -2792,7 +2792,7 @@
 		<card id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Die roll area">
  			<property name="Type" value="Internal" />
 		</card>
-		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Upkeep Phase">
+		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Upkeep Phase" size="PhaseMarkers">
 			<property name="Type" value="Phase" />
 				<alternate name="Planning Phase" type="Planning">
 					<property name="Type" value="Phase" />
@@ -2810,7 +2810,7 @@
 					<property name="Type" value="Phase" />
 				</alternate>
 		</card>
-		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="1st Player Token Red">
+		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="1st Player Token Red" size="InitativeMarkers">
 			<property name="Type" value="Phase" />
 				<alternate name="1st Player Token Blue" type="B">
 					<property name="Type" value="Phase" />
@@ -2834,7 +2834,7 @@
 					<property name="Type" value="Internal" />
 				</alternate>
 		</card>
-		<card id="d86b16a6-218a-4363-a408-599d3ef4a0b3" name="Roll the Dice">
+		<card id="d86b16a6-218a-4363-a408-599d3ef4a0b3" name="Roll the Dice" size="Buttons">
 			<property name="Type" value="DiceRoll" />
 		</card>
 
