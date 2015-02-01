@@ -44,7 +44,7 @@
 		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
 		<gameMode name="2v2" shortDescription="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
 	</gameModes>
-	<card back="cards/card.jpg" front="cards/card.jpg" width="60" height="80" cornerRadius="3">
+	<card back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
 		<property name="Subtype" type="String" hidden="False" ignoreText="False" />
 		<property name="Cost" type="String" hidden="False" ignoreText="False" />
@@ -61,12 +61,12 @@
 		<property name="MageTraining" type="String" hidden="False" ignoreText="False" />
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False" />
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
-		<size name="ModularBoardPieces" width="250" height="250" back="cards/mGameBoardBack.jpg" front="cards/mGameBoardBack.jpg" cornerRadius="0" />
-		<size name="MarkersAsCards" width="70" height="70" back="cards/card.jpg" front="cards/card.jpg" cornerRadius="0" />
-		<size name="InitativeMarkers" width="50" height="50" back="cards/card.jpg" front="cards/card.jpg" cornerRadius="0" />
-		<size name="PhaseMarkers" width="50" height="13" back="cards/card.jpg" front="cards/card.jpg" cornerRadius="0" />
-		<size name="Buttons" width="72" height="36" back="cards/card.jpg" front="cards/card.jpg" cornerRadius="0" />
-		<size name="Dice Roll Area" width="130" height="80" back="cards/mGameBoardBack.jpg" front="cards/mGameBoardBack.jpg" cornerRadius="3" />
+		<size name="ModularBoardPieces" width="250" height="250" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="0" />
+		<size name="MarkersAsCards" width="70" height="70" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="InitativeMarkers" width="50" height="50" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="PhaseMarkers" width="50" height="13" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="Buttons" width="72" height="36" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="900" height="660" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-450,-330,900,660" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />

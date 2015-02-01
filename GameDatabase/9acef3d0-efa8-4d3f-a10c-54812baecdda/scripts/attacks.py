@@ -252,7 +252,7 @@ def canDeclareAttack(card):
 
 def rollDice(dice):
         mute()
-        global diceBank
+    global diceBank
 	global diceBankD12
 	global hasRolledIni
 	global myIniRoll
