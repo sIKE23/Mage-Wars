@@ -172,7 +172,7 @@ def onGameStart():
 def setUpDiceAndPhaseCards():
 	mute()
 	TableSetup = getGlobalVariable("TableSetup")
-	if TableSetup == "False":
+	if TableSetup == "False" and me.name == Player(1).name:
 		dieCardX = -580
 		dieCardY = -40
 		card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field
