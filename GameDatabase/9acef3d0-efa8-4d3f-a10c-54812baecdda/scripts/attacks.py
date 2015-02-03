@@ -134,7 +134,6 @@ def getAttackList(card):
         for attack in attackKeyList1:
                 name = attack[0]
                 attributes = attack[1]
-                debug('attributes')
                 aDict = {'Name':name,
                          'd12':[],
                          'Traits': {},
@@ -372,7 +371,7 @@ def appendEventList(roundOrTurn,event):
 
 def clearLocalTurnEventList(): #Clears the part of the turnList pertaining to the local player
         eventList = getEventList('Turn')
-        for e in eventList:
+        for e in list(eventList):
                 if (e[0] in ('Attack','Defense') and Card(e[1][0]).controller == me): eventList.remove(e)
         setEventList('Turn',eventList)
 
@@ -419,7 +418,6 @@ Restrictions (e.g. melee only)
 def defenseParser(sourceID,rawDefenseStr):
         #For now, assume that the only restrictions are melee and ranged and that they are mutually exclusive
         defenseStr = str(rawDefenseStr).split('Defense')[1].strip('=') #Ugh...defenses are formatted inconsistendly in the XML files. But this should pick up both variants until we can standardize.
-        debug('defstr0 '+str(defenseStr))
         defenseDict = {'Source' : sourceID}
         if 'No Melee' in rawDefenseStr:
                 defenseDict['Restrictions'] = 'No Melee'
@@ -427,14 +425,11 @@ def defenseParser(sourceID,rawDefenseStr):
         elif 'No Ranged' in rawDefenseStr:
                 defenseDict['Restrictions'] = 'No Ranged'
                 defenseStr = (defenseStr.split('No Ranged')[0]).strip(' ')
-        debug('defstr '+str(defenseStr))
         defTraitList = defenseStr.split(' ')
-        debug('deftrlist '+str(defTraitList))
         for d in defTraitList:
                 if '+' in d: defenseDict['Minimum'] = int(d.strip('+'))
                 if 'x' in d: defenseDict['Uses'] = int(d.strip('x'))
                 if d=='inf': defenseDict['Uses'] = 'inf'
-        debug('initial dd: '+str(defenseDict))
         return defenseDict
 
 def getDefenseList(aTraitDict,attack,dTraitDict):
@@ -463,7 +458,6 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
         defender = Card(dTraitDict.get('OwnerID',None))
         atkTraits = attack.get('Traits',{})
         defenseList = getDefenseList(aTraitDict,attack,dTraitDict)
-        debug(str(defenseList))
         if atkTraits.get('Unavoidable',False) or not defenseList: return False
         modDefenseList = [computeDefense(aTraitDict,attack,dTraitDict,d) for d in defenseList]
         queryList = ['{}\nSuccess Rate {}% | Uses Remaining: {}'.format(Card(d.get('Source',None)).name.center(68,' '),
