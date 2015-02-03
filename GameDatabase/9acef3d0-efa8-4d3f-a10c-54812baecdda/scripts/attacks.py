@@ -109,19 +109,38 @@ def getAttackList(card):
         """This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
         if not card or card.AttackBar == '': return [] #Return an empty list if passed a blank argument
         rawData = card.AttackBar
-        #First, split up the attacks:
-        attackKeyList = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
+        #Split up the attacks:
+        attackKeyList0 = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
         isAttackSpell = (card.Type == 'Attack')
         attackList = []
-        for attack in attackKeyList:
+        #Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
+        attackKeyList1 = []
+        for attack in attackKeyList0:
                 name = (card.name if isAttackSpell else attack[0])
+                attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
+                if isAttackSpell: attributes.append('Spell')
+                options = []
+                tempAttributes = attributes
+                for a in tempAttributes:
+                        if ' OR ' in a:
+                                attributes.remove(a)
+                                options = a.split(' OR ')
+                if options:
+                        for o in options:
+                                attackKeyList1.append([name,attributes+[o]])
+                else:
+                        attackKeyList1.append([name,attributes])
+        #Create attack dictionaries
+        for attack in attackKeyList1:
+                name = attack[0]
+                attributes = attack[1]
+                debug('attributes')
                 aDict = {'Name':name,
                          'd12':[],
                          'Traits': {},
-                         'EffectType': 'Attack'
+                         'EffectType': 'Attack'         #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
-                attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
-                if isAttackSpell: attributes.append('Spell')
+                
                 #Now we extract the attributes
                 effectSwitch = False
                 for attribute in attributes:
