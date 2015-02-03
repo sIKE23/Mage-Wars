@@ -261,7 +261,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
-			<property name="AttackBar" value="Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Triplestrike or Zone Attack] [Unavoidable]&#xD;&#xA;Wristblade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Triplestrike OR Zone Attack] [Unavoidable]&#xD;&#xA;Wristblade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC10" />
