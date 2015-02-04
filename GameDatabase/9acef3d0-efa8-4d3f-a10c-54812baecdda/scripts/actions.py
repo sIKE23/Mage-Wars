@@ -1985,3 +1985,48 @@ def validateDeck(deck):
 
 	#all good!
 	return True
+
+############################################################################
+############################	Events	####################################
+############################################################################
+
+def importArray(filename):
+    """Takes a txt character array and outputs a set of columns (an array, though not the python object). To get an entry from the array, use array[x][y]"""
+    #Open the file
+    directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
+    try: raw = open('{}\{}{}'.format(directory,filename,'.txt'),'r')
+    except: return #Bad practice, I know. I'll try to find a better way later.
+    #Create an empty array.
+    #Because of the order in which data are read, we will need to transpose it.
+    transpose_array = []
+    rownumber = 0
+    #Fill up the transposed array, as a set of rows.
+    for line in raw:
+        row = []
+        for char in range(len(line)):
+            if line[char] != '\n':
+                row.append(line[char])
+        transpose_array.append(row)
+        rownumber +=1
+    #Get array dimensions
+    X0 = len(transpose_array[0])
+    X1 = len(transpose_array)
+    #Untranspose array to get the array
+    array = [[transpose_array[x1][x0] for x1 in range(X1)] for x0 in range(X0)]
+    return array
+
+def loadMapFile(group, x=0, y=0):
+        directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
+        fileList = [f.split('.')[0] for f in os.listdir(directory) if (os.path.isfile(os.path.join(directory,f)) and f.split('.')[1]=='txt')]
+        choices = fileList+['Cancel']
+        colors = ['#6600CC' for f in fileList] + ['#FF0000']
+        choice = askChoice('Load which map?',choices,colors)
+        if choice == 0 or choice == len(choices): return
+        filename = fileList[choice-1]
+        mapArray = importArray(filename)
+        if mapArray:
+                #For now, just proof of concept to show that importing works
+                X0 = len(mapArray[0])
+                X1 = len(mapArray)
+                transposeMapArray = [[mapArray[x1][x0] for x1 in range(X1)] for x0 in range(X0)]
+                whisper('\n'.join([''.join(row) for row in transposeMapArray]))
