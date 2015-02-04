@@ -75,6 +75,7 @@
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
 		<groupaction menu="Add Vine Marker" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
+		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
