@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Playtesting Promo&apos;s"  id="087604d3-d11e-4250-b3b9-59bd96d7c73e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.0" version="2.0.3.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Playtesting Promo&apos;s"  id="aaa10320-9e95-464a-ba92-59a5c725ca78" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.0" version="2.0.3.0">
 	<markers>
 		<!-- <marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" /> -->
 	</markers>
@@ -144,6 +144,21 @@
 			<property name="Text" value="This conjuration gains Armor +1 and Innate Life +4." />
 			<property name="CardID" value="MWPROMO85" />
 		</card>
+		<card id="beae6c78-39c7-4485-b3c9-f0f76905a27b" name="Blur">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Illusion" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Conjuration" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magebind +2" />			
+			<property name="Text" value="This creature gains the Obscured trait. When this creature is attacked and damaged, destroy Blur unless your Mage pays 1 mana. Blur cannot be revealed during an Action Phase or Quickcast Action." />
+			<property name="CardID" value="MWPROMO79" />
+		</card>
 
 
 		<card id="810a99dc-31e7-4b89-8245-43a36e69ccde" name="Leather Belt">
@@ -190,6 +205,21 @@
 			<property name="Traits" value="Novice" />
 			<property name="Text" value="Mage gains Armor +1." />
 			<property name="CardID" value="MWPROMO46" />
+		</card>
+		<card id="6aed6f7f-595a-4280-ba38-5ca0da679427" name="Ankh of Asyra">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Light" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Friendly Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Amulet" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When a Nonliving creature enter this Mage&apos;s zone deal it 1 direct light damage. At the end of this Mage&apos;s Action Phase deal 1 direct light damage to each Nonliving creature its zone." />
+			<property name="CardID" value="MWPROMO78" />
 		</card>
 
 
