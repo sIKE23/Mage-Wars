@@ -236,7 +236,7 @@
 		</card>
 
 
-		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall">
+		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="4" />
@@ -251,7 +251,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW01" />
 		</card>
-		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones">
+		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Skeleton" />
 			<property name="Cost" value="6" />

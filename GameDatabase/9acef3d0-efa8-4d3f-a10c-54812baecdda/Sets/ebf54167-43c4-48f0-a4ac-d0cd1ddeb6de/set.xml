@@ -693,7 +693,7 @@
 		</card>
 
 
-		<card id="ca4dc7c2-6172-46fe-9a2d-a22a66214615" name="Fog Bank">
+		<card id="ca4dc7c2-6172-46fe-9a2d-a22a66214615" name="Fog Bank" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Cloud" />
 			<property name="Cost" value="4" />
@@ -708,7 +708,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1W01" />
 		</card>
-		<card id="b318bb77-75c5-4e7a-9347-dbdcbde55f33" name="Wall of Stone">
+		<card id="b318bb77-75c5-4e7a-9347-dbdcbde55f33" name="Wall of Stone" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="7" />
@@ -723,7 +723,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1W02" />
 		</card>
-		<card id="4223e20b-75b1-4f21-938e-a4a8acf06195" name="Wall of Fire">
+		<card id="4223e20b-75b1-4f21-938e-a4a8acf06195" name="Wall of Fire" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="7" />
@@ -738,7 +738,7 @@
 			<property name="Text" value="Hydro attacks gain the Etheral trait when attacking Wall of Fire." />
 			<property name="CardID" value="MW1W03" />
 		</card>
-		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns">
+		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />

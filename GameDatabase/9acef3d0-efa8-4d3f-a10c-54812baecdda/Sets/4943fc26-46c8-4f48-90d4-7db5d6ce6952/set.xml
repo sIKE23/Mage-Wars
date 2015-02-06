@@ -218,7 +218,7 @@
 		</card>
 
 
-		<card id="a7287ca4-7c90-42aa-9c86-c8a6bedc286b" name="Wall of Steel">
+		<card id="a7287ca4-7c90-42aa-9c86-c8a6bedc286b" name="Wall of Steel" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Metal" />
 			<property name="Cost" value="8" />

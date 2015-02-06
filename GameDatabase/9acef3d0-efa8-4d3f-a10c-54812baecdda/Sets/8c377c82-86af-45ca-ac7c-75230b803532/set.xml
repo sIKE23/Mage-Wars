@@ -174,7 +174,7 @@
 		</card>
 
 
-		<card id="42464e26-8982-4244-b06e-2aab60f88203" name="Wall of Force">
+		<card id="42464e26-8982-4244-b06e-2aab60f88203" name="Wall of Force" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
