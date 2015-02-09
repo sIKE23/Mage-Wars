@@ -1,9 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Gameboards" id="a27a7cb8-7d98-46e4-bf71-a940b7350afe" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
 	<cards>
-		<card id="0f14ca09-a83d-4185-afa0-bc38a31dbf82" name="Board1" size="ModularBoardPieces" >
+		<card id="0011a67e-df97-42f0-bdd2-1fe7f733b702" name="Westlock1" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>
+		<card id="0191ddc0-ef8d-499a-b6a4-f9e0f01da219" name="Westlock2" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="023336ec-9969-4832-bbb7-b071b0b55906" name="Westlock3" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="035c27ba-d619-43dd-99f7-ecec7852913d" name="Westlock4" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="06a26b95-1821-411f-818c-359122845731" name="Westlock5" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="07cbfb65-3469-4aad-91c9-bcdd6bf4433c" name="Westlock6" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="0843b7ef-fdfb-411d-a1dd-d36e752d94d0" name="Westlock7" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="0908af74-c087-4624-ae23-4807cdce2727" name="Westlock8" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="0af23def-171a-4adb-bf05-0d958d824d5d" name="Westlock9" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="0b43f1c1-21c7-4083-a46f-e8a50f8035d7" name="Westlock10" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="0c14ca09-a83d-4185-afa0-bc38a31dbf82" name="Westlock11" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="0f14ca09-a83d-4185-afa0-bc38a31dbf82" name="Westlock12" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		
+		
 		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>

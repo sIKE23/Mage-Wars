@@ -2094,7 +2094,8 @@ mapMultipleObjectOffset = -100
 mapCreatureOffset = 0
 mapMultipleCreatureOffset = 62
 
-mapTileDict =  {"1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #Dropped Weapon
+mapTileDict =  {
+                "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #Dropped Weapon
                 "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Mist
                 "3" : "8972d2d1-348c-4c4b-8c9d-a1d235fe482e", #Altar of Oblivion
                 "4" : "a21d1889-acf1-4121-b1d1-991f3f294f1d", #Secret Passage
@@ -2106,7 +2107,20 @@ mapTileDict =  {"1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #Dropped Weapon
                 "A" : "edca7d45-53e0-468d-83a5-7a446c81f070", #Samandriel's Circle
                 "B" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
                 "C" : "f8794ef9-e78f-412b-95d4-37dc055be158", #Debris
-                "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
+                "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1", #Generic Tile
+                "D" : "0011a67e-df97-42f0-bdd2-1fe7f733b702", #Westlock 1
+                "E" : "0191ddc0-ef8d-499a-b6a4-f9e0f01da219", #Westlock 2
+                "F" : "023336ec-9969-4832-bbb7-b071b0b55906", #Westlock 3
+                "G" : "035c27ba-d619-43dd-99f7-ecec7852913d", #Westlock 4
+                "H" : "06a26b95-1821-411f-818c-359122845731", #Westlock 5
+                "I" : "07cbfb65-3469-4aad-91c9-bcdd6bf4433c", #Westlock 6
+                "J" : "0843b7ef-fdfb-411d-a1dd-d36e752d94d0", #Westlock 7
+                "K" : "0908af74-c087-4624-ae23-4807cdce2727", #Westlock 8
+                "L" : "0af23def-171a-4adb-bf05-0d958d824d5d", #Westlock 9
+                "M" : "0b43f1c1-21c7-4083-a46f-e8a50f8035d7", #Westlock 10
+                "N" : "0c14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 11
+                "O" : "0f14ca09-a83d-4185-afa0-bc38a31dbf82" #Westlock 12
+                } 
 
 mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
                   "O" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5"}	# 2 V'Tar Orbs
