@@ -358,23 +358,23 @@ def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 	mageStatus()
 
-def attackTarget(card, x=0, y=0):
+def attackTarget(attacker, x=0, y=0):
         mute()
-        if card.controller == me and canDeclareAttack(card) and getSetting('BattleCalculator',True):
+        if attacker.controller == me and canDeclareAttack(attacker) and getSetting('BattleCalculator',True):
                 target = [c for c in table if c.targetedBy==me]
+                aTraitDict = computeTraits(attacker)
                 if len(target) == 1:
                         defender = target[0]
-                        aTraitDict = computeTraits(card)
                         dTraitDict = computeTraits(defender)
-                        attack = diceRollMenu(card,defender)
+                        attack = diceRollMenu(attacker,defender)
                         if attack:
                                 if defender.controller == me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
                                 else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                 elif len(target) == 0: #Untargeted attack
-                        attack = diceRollMenu(card,None)
+                        attack = computeAttack(aTraitDict,diceRollMenu(attacker,None),{})
                         dice = attack.get('Dice',-1)
                         if dice >= 0:
-                                notify("{} attacks with {}".format(me,card))
+                                notify("{} attacks with {}".format(me,attacker))
                                 roll,effect = rollDice(dice)
         else: genericAttack(table) #If the card you are targeting cannot attack, or the battle calculator is off, just go to the generic attack menu
 

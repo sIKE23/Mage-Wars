@@ -41,37 +41,31 @@ def diceRollMenu(attacker = None,defender = None):
         mute()
         aTraitDict = (computeTraits(attacker) if attacker else {})
         dTraitDict = (computeTraits(defender) if defender else {})
-        attackList = getAttackList(attacker) if attacker else []
-        choiceText,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
+        attackChoiceList = attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
+        choiceText = "Roll how many Attack Dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
         #Suppose there is an attacker with at least one attack:
-        if (attacker and attackList):
+        if aTraitDict:
+                attackChoiceList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
                 choiceText = "Use which attack?"
-                choices = []
-                attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
-                #Now, we pare down the attack list to attacks which can legally be made against the target
-                for attack in attackList:
-                        atkTraits = attack.get('Traits',{})
-                        traits = getAttackTraitStr(attack['Traits'])
-                        expDam = str(round(expectedDamage(aTraitDict,attack,dTraitDict),1)) if defender else ''
-                        killCh = str(round(chanceToKill(aTraitDict,attack,dTraitDict)*100,1)) if defender else ''
-                        effectList = ['{} ({}%)'.format(effect[1], str(round(getD12Probability(effect[0],aTraitDict,attack,dTraitDict)*100,1))) for effect in attack['d12']] if attack['d12'] else ''
-                        choice = ("{} ({})".format(attack['Name'],str(attack.get('Dice',0))).center(68,' ')+
-                                  ('\n{} Mana'.format(str(attack.get('Cost',0))) if attack.get('Cost',False) else '')+
-                                  ('\n'+', '.join(traits) if traits else '')+
-                                  ('\n'+', '.join(effectList) if effectList != '' else '')+
-                                  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and attack.get('EffectType','Attack')=='Attack') else ''))
-                        if isLegalAttack(aTraitDict,attack,dTraitDict): choices.append(choice)
-                if defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']: choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
-        #Then, suppose not (or suppose the indicated attacker has no attack list)
-        elif defender and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
-                choices = (['{}: Expected damage: {} | Kill chance: {}%'.format(str(i+1),
-                        round(expectedDamage({},{'Dice':i+1},dTraitDict),1),
-                        round(chanceToKill({},{'Dice':i+1},dTraitDict)*100,1)) for i in range(7)])
-        colors = [("#663300" if (attackList and attackList[i].get('EffectType','Attack')=='Heal') else
-                   ('#0f3706' if attackList and attackList[i].get('Range',[None,None])[0] == 'Ranged' else
-                    '#CC0000')) for i in range(len(choices))]
+        choices = []
+        for a in attackChoiceList:
+                atkTraits = a.get('Traits',{})
+                traits = getAttackTraitStr(atkTraits)
+                expDam = str(round(expectedDamage(aTraitDict,a,dTraitDict),1)) if defender else ''
+                killCh = str(round(chanceToKill(aTraitDict,a,dTraitDict)*100,1)) if defender else ''
+                effectList = (['{} ({}%)'.format(e[1],
+                                                str(round(getD12Probability(e[0],aTraitDict,a,dTraitDict)*100,1))) for e in a.get('d12',[])]
+                              if a.get('d12',False) else '')
+                choice = (("{} ({})".format(a.get('Name',None),str(a.get('Dice',0))).center(68,' ') if a.get('Name',False) else str(a.get('Dice',0)).center(68,' '))+
+                          ('\n{} Mana'.format(str(a.get('Cost',0))) if a.get('Cost',False) else '')+
+                          ('\n'+', '.join(traits) if traits else '')+
+                          ('\n'+', '.join(effectList) if effectList != '' else '')+
+                          ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and a.get('EffectType','Attack')=='Attack') else ''))
+                if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
+        if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
+                choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
+        colors = [getActionColor(attackList[i]) for i in range(len(choices))] + ["#666699","#000000"]
         choices.extend(['Other Dice Amount','Cancel Attack'])
-        colors.extend(["#666699","#000000"])
         count = (askChoice("No legal attacks detected!", ['Roll anyway','Cancel'], colors) if len(choices) == 2 else askChoice(choiceText, choices, colors))
         if count == 0 or count == len(choices): return {}
         elif count < len(choices)-1:
@@ -83,6 +77,13 @@ def diceRollMenu(attacker = None,defender = None):
                         dice = min(askInteger("Roll how many red dice?", getSetting('lastStandardDiceRollInput',8)),50) #max 50 dice rolled at once
                         setSetting('lastStandardDiceRollInput',dice)
                         return {'Dice' : dice} 
+
+def getActionColor(action):
+        if action.get('EffectType','Attack') == 'Heal': return "#663300"        #Heal is always in orange
+        #Assume is an attack
+        if action.get('Traits',{}).get('Spell',False): return "#9900FF"         #Spell attacks are purple
+        if action.get('Range',[None,None])[0] == 'Ranged': return '#0f3706'     #Nonspell ranged attacks are green
+        return '#CC0000'                                                        #Default to red
 
 def isLegalAttack(aTraitDict,attack,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID',None))
@@ -120,8 +121,7 @@ def getAttackList(card):
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 if isAttackSpell: attributes.append('Spell')
                 options = []
-                tempAttributes = attributes
-                for a in tempAttributes:
+                for a in list(attributes):
                         if ' OR ' in a:
                                 attributes.remove(a)
                                 options = a.split(' OR ')
@@ -175,7 +175,7 @@ def getAttackList(card):
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID',None))
-        attack = attackDict
+        attack = dict(attackDict)
         atkTraits = attack.get('Traits',{})
         localADict = dict(aTraitDict)
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
@@ -508,10 +508,12 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID',None))
         defender = Card(dTraitDict.get('OwnerID',None))
+        rememberAttackUse(attacker,defender,attack) #Record that the attack was declared
+        modAttack = computeAttack(aTraitDict,attack,dTraitDict) #Now that attack has been declared, compute its actual properties
         #Declare Attack - done. That was calling this function.
-        notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
-        if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
-        else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
+        notify("{} attacks {} with {}!".format(attacker,defender,modAttack.get('Name','a nameless attack')))
+        if defender.controller == me: avoidAttackStep(aTraitDict,modAttack,dTraitDict)
+        else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,modAttack,dTraitDict])
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         attacker = Card(aTraitDict.get('OwnerID',None))
