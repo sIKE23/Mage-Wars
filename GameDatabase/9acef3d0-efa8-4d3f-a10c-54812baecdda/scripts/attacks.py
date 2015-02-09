@@ -33,6 +33,7 @@ The entire module is called through this function. All definitions of data shoul
 ---Code Structure---
 
 diceRollMenu:
+        getActionColor
         isLegalAttack
 
 """
@@ -41,14 +42,14 @@ def diceRollMenu(attacker = None,defender = None):
         mute()
         aTraitDict = (computeTraits(attacker) if attacker else {})
         dTraitDict = (computeTraits(defender) if defender else {})
-        attackChoiceList = attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
+        attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
         choiceText = "Roll how many Attack Dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
         #Suppose there is an attacker with at least one attack:
         if aTraitDict:
-                attackChoiceList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
+                attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
                 choiceText = "Use which attack?"
         choices = []
-        for a in attackChoiceList:
+        for a in attackList:
                 atkTraits = a.get('Traits',{})
                 traits = getAttackTraitStr(atkTraits)
                 expDam = str(round(expectedDamage(aTraitDict,a,dTraitDict),1)) if defender else ''
@@ -87,6 +88,7 @@ def getActionColor(action):
 
 def isLegalAttack(aTraitDict,attack,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID',None))
+        atkTraits = attack.get('Traits',{})
         if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
         if attack.get('Type',None) in dTraitDict.get('Immunity',[]): return False
         return True
@@ -109,9 +111,8 @@ getAttackList:
 def getAttackList(card):
         """This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
         if not card or card.AttackBar == '': return [] #Return an empty list if passed a blank argument
-        rawData = card.AttackBar
         #Split up the attacks:
-        attackKeyList0 = [attack.split(':\r\n') for attack in rawData.split(']\r\n')]
+        attackKeyList0 = [attack.split(':\r\n') for attack in card.AttackBar.split(']\r\n')]
         isAttackSpell = (card.Type == 'Attack')
         attackList = []
         #Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
@@ -196,6 +197,7 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
         if dTraitDict.get('OwnerID',False): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
         debug(attack.get('Name','Unnamed')+': '+str(attack))
+        if not attack.get('OriginalAttack'): attack['OriginalAttack'] = attackDict #Store the original attack if one is not stored.
         return attack #If attack has zone attack trait, then it gains unavoidable
 
 def computeD12(dTraitDict,d12Pair):
@@ -508,12 +510,10 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID',None))
         defender = Card(dTraitDict.get('OwnerID',None))
-        rememberAttackUse(attacker,defender,attack) #Record that the attack was declared
-        modAttack = computeAttack(aTraitDict,attack,dTraitDict) #Now that attack has been declared, compute its actual properties
         #Declare Attack - done. That was calling this function.
-        notify("{} attacks {} with {}!".format(attacker,defender,modAttack.get('Name','a nameless attack')))
-        if defender.controller == me: avoidAttackStep(aTraitDict,modAttack,dTraitDict)
-        else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,modAttack,dTraitDict])
+        notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
+        if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
+        else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         attacker = Card(aTraitDict.get('OwnerID',None))
@@ -548,23 +548,29 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID',None))
         defender = Card(dTraitDict.get('OwnerID',None))
-        rememberAttackUse(attacker,defender,attack)
+        rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack)) #Record that the attack was declared, using the original attack as an identifier
         strikes = 1
         atkTraits = attack.get('Traits',{})
-        if atkTraits.get('Doublestrike',False) or atkTraits.get('Doublestrike OR Sweeping',False): strikes = 2
-        if atkTraits.get('Triplestrike',False) or atkTraits.get('Triplestrike OR Zone Attack',False): strikes = 3 #Temp soln; really, we want them to declare which option they are using.
-        if timesHasUsedAttack(attacker,attack) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
+        if atkTraits.get('Doublestrike',False): strikes = 2
+        if atkTraits.get('Triplestrike',False): strikes = 3
+        if timesHasUsedAttack(attacker,attack.get('OriginalAttack',attack)) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
         else:
                 if defender.controller == me: damageBarrierStep(aTraitDict,attack,dTraitDict)
                 else: remotecall(defender.controller,'damageBarrierStep',[aTraitDict,attack,dTraitDict])
 
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
-        pass
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        counterstrikeStep(aTraitDict,attack,dTraitDict)
 
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
-        pass
+        attacker = Card(aTraitDict.get('OwnerID',None))
+        defender = Card(dTraitDict.get('OwnerID',None))
+        if attacker.controller == me: attackEndsStep(aTraitDict,attack,dTraitDict)
+        else: remotecall(attacker.controller,'attackEndsStep',[aTraitDict,attack,dTraitDict])
 
 def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        setEventList('Turn',[]) #Clear the turn event list
         pass
 
 ############################################################################

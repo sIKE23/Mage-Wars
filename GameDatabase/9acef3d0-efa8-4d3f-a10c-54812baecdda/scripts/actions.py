@@ -354,7 +354,6 @@ def setDRAIP(location):
 ############################################################################
 
 def playerDone(group, x=0, y=0):
-        clearLocalTurnEventList()
 	notify("{} is done".format(me.name))
 	mageStatus()
 
@@ -371,7 +370,7 @@ def attackTarget(attacker, x=0, y=0):
                                 if defender.controller == me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
                                 else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                 elif len(target) == 0: #Untargeted attack
-                        attack = computeAttack(aTraitDict,diceRollMenu(attacker,None),{})
+                        attack = diceRollMenu(attacker,None)
                         dice = attack.get('Dice',-1)
                         if dice >= 0:
                                 notify("{} attacks with {}".format(me,attacker))
