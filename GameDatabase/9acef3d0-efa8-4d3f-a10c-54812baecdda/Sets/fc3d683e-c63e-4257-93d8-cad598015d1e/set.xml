@@ -236,7 +236,7 @@
 		</card>
 
 
-		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall">
+		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="4" />
@@ -246,12 +246,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Impaling Thorns:&#xD;&#xA;[Passage Blocked] [Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
-			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
+			<property name="AttackBar" value="Impaling Thorns:&#xD;&#xA;[Passage Attack] [Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
+			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Passage Attacks, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW01" />
 		</card>
-		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones">
+		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Skeleton" />
 			<property name="Cost" value="6" />
@@ -261,8 +261,8 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=12" />
-			<property name="AttackBar" value="[Passage Blocked] [Blocks Line of Sight]" />
-			<property name="Traits" value="Extendable" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Passage Blocked, Blocks LOS, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW02" />
 		</card>
@@ -278,7 +278,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=7" />
-			<property name="AttackBar" value="Sacrificial Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2] &#xD;&#xA;Repair Bones:&#xD;&#xA;[Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.] &#xD;&#xA;Vigor of the Grave:&#xD;&#xA;[Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
+			<property name="AttackBar" value="Sacrificial Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Repair Bones:&#xD;&#xA;[Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.]&#xD;&#xA;Vigor of the Grave:&#xD;&#xA;[Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC01" />
@@ -338,7 +338,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=5" />
-			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] &#xD;&#xA;" />
+			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Climbing" />
 			<property name="Text" value="Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
@@ -368,7 +368,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
-			<property name="AttackBar" value="Cursed Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Tainted] &#xD;&#xA;" />
+			<property name="AttackBar" value="Cursed Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Tainted]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Legendary" />
 			<property name="Text" value="Each Upkeep Phase, each friendly skeleton object, in or bordering Mort&apos;s zone, may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC07" />
@@ -398,7 +398,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=4" />
-			<property name="AttackBar" value="Diseased Strike:&#xD;&#xA;[Quick] [Melee] [Dice=1] [d12] [8+ = Rot]" />
+			<property name="AttackBar" value="Diseased Strike:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [8+ = Rot]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="When Plague Zombie is destroyed, place a Rot condition on each Living creature in its " />
 			<property name="CardID" value="DNC09" />
@@ -458,7 +458,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=9" />
-			<property name="AttackBar" value="Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] &#xD;&#xA;Fist:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="AttackBar" value="Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4]&#xD;&#xA;Fist:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC13" />
@@ -503,7 +503,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
-			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1] &#xD;&#xA;Spitting Acid:&#xD;&#xA;[Full] [Acid] [Ranged:0-1] [Dice=3] [d12] [5+ = Corrode]" />
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Spitting Acid:&#xD;&#xA;[Full] [Acid] [Ranged:0-1] [Dice=3] [d12] [5+ = Corrode]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC16" />
@@ -517,7 +517,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Defense=3+ ∞, Armor=0, Life=3" />
+			<property name="Stats" value="Defense=3+ inf, Armor=0, Life=3" />
 			<property name="AttackBar" value="Magical Burst:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal]" />
 			<property name="Traits" value="Flying, Legendary, Pest, Druid Only" />
 			<property name="Text" value="As a quick action, Tataree may choose and do one of the following to a plant object in its zone; Heal it 1 damage, or place 1 mana on it (if it has the Channel attribute)." />
@@ -563,7 +563,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=10" />
-			<property name="AttackBar" value="Headbutt:&#xD;&#xA;[Quick] [Melee] [Dice=4] &#xD;&#xA;Cavernous Maw:&#xD;&#xA;[Full] [Melee] [Dice=5] [Piercing +1] [Devour]" />
+			<property name="AttackBar" value="Headbutt:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Cavernous Maw:&#xD;&#xA;[Full] [Melee] [Dice=5] [Piercing +1] [Devour]" />
 			<property name="Traits" value="Rooted, Regenerate 1, Flame +2, Hydro Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC20" />
@@ -609,7 +609,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=4" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-			<property name="Traits" value="Bloodthirsty+1, Slow, Pest, Resilient, Psychic Immunity, Nonliving" />
+			<property name="Traits" value="Bloodthirsty +1, Slow, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC23" />
 		</card>
@@ -807,7 +807,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon/Shield" />
-			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Cost=2] [Quick] [Ranged:0-1] [Heal] [Dice=2]&#xD;&#xA;[Heal target Living creature the amount rolled.]&#xD;&#xA;Cleansing Light:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 Condition marker from target Living creature. X = its removal cost.]" />
+			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Cost=2] [Quick] [Ranged:0-1] [Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Cleansing Light:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 Condition marker from target Living creature. X = its removal cost.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, this Mage may cast one of the 2 quick spells shown above." />
 			<property name="CardID" value="DNQ09" />

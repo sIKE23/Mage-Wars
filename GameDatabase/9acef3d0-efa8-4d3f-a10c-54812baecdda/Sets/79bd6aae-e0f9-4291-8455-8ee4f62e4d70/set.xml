@@ -35,13 +35,13 @@
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="8" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1, +2 vs. Flying] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
@@ -373,7 +373,7 @@
 			<property name="School" value="Holy"  />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=2, Life=15" />
-			<property name="AttackBar" value="Razor Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Razor Talons:[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Text" value="While Victorian Griffin has the Flying trait, enemy cretures in its zone are hindered and the also lose and cannot gain the Elusive trait." />
 			<property name="Traits" value="Flying" />
 			<property name="CardID" value="MWPROMO62" />
@@ -488,7 +488,7 @@
 
 
 
-		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force">
+		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
@@ -498,12 +498,12 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=-, Life=3" />
-			<property name="AttackBar" value="[Passage Blocked] [Line of Sight Blocked]" />
-			<property name="Traits" value="Incorporeal, Extendable" />
+			<property name="AttackBar" value="[] []" />
+			<property name="Traits" value="Blocks LOS, Passage Blocked, Incorporeal, Extendable" />
 			<property name="Text" value="During the Upkeep Phase you may pay mana to reinforce Wall of Force. For each mana spent remove 1 damage from it. The ability bypasses the Finite Life trait." />
 			<property name="CardID" value="MWPROMO24" />
 		</card>
-		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas">
+		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Cloud, Poison" />
 			<property name="Cost" value="7" />
@@ -513,8 +513,8 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=-, Life=8" />
-			<property name="AttackBar" value="Toxic Gas&#xD;&#xA;[Passage Attack] [Line of Sight Blocked] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
-			<property name="Traits" value="Incorporeal, Wind +2, Extendable" />
+			<property name="AttackBar" value="Toxic Gas:&#xD;&#xA;[Passage Attack] [Poison] [Dice=3] [d12] [5-9 = Daze; 10+ = Criple] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Blocks LOS, Passage Attacks, Incorporeal, Wind +2, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO54" />
 		</card>

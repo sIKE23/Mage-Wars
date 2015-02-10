@@ -43,7 +43,7 @@
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [3-7 = Stun; 8+ = Push &amp; Slam] [Extinguish] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [3-7 = Slam; 8+ = Push &amp; Slam] [Extinguish] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKA01" />
@@ -104,7 +104,7 @@
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
 			<property name="Stats" value="Armor=2, Life=14" />
-			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1] &#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
+			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC03" />
@@ -134,7 +134,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=2, Life=13" />
-			<property name="AttackBar" value="Poison Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Tainted] [If target is restrained add +4 to the Effect Die &#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=0] [d12] [5+ = Stuck] [Unavoidable] [No Damage]" />
+			<property name="AttackBar" value="Poison Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Tainted] [If target is restrained add +4 to the Effect Die]&#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=0] [d12] [5+ = Stuck] [Unavoidable] [No Damage]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC09" />
@@ -179,7 +179,7 @@
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] &#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC05" />
@@ -218,7 +218,7 @@
 		</card>
 
 
-		<card id="a7287ca4-7c90-42aa-9c86-c8a6bedc286b" name="Wall of Steel">
+		<card id="a7287ca4-7c90-42aa-9c86-c8a6bedc286b" name="Wall of Steel" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Metal" />
 			<property name="Cost" value="8" />
@@ -228,8 +228,8 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=4, Life=13" />
-			<property name="AttackBar" value="[Passage Blocked] [Blocks Line of Sight]" />
-			<property name="Traits" value="Extendable, Acid +2, Lightning +2" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Passage Blocked, Blocks LOS, Extendable, Acid +2, Lightning +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKW01" />
 		</card>
@@ -338,7 +338,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon/Shield" />
-			<property name="AttackBar" value="Disenchant:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Destroy target Level 1 revealed enchantment] &#xD;&#xA;Mage Sight:&#xD;&#xA;[Cost=0] [Quick] [Ranged:0-2] [Look at target hidden enchantment. Then leave it face down after looking]" />
+			<property name="AttackBar" value="Disenchant:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Destroy target Level 1 revealed enchantment]&#xD;&#xA;Mage Sight:&#xD;&#xA;[Cost=0] [Quick] [Ranged:0-2] [Look at target hidden enchantment. Then leave it face down after looking]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Dispel Wand&apos;s abilities can each be used once per round as a quick spell. X = target&apos;s casting and reveal cost." />
 			<property name="CardID" value="MWSTX1CKQ05" />
@@ -369,7 +369,7 @@
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon+Shield" />
 			<property name="Traits" value="" />
-			<property name="AttackBar" value="[Full] [Range:1-2] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Talonhead Arrow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1]" />
 			<property name="Text" value="If Hunting Bow is used to attack an enemy creature that was attacked and damaged by a friendly animal creature this round, this attack gains an additional Piercing +1 and this effect roll:&#xD;&#xA;[d12] [7+ = Bleed]" />
 			<property name="CardID" value="MWSTX1CKQ02" />
 		</card>

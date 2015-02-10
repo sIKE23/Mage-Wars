@@ -6,7 +6,8 @@
 			<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" />
 			<marker id="8d994fe9-2422-4a9d-963d-3ad10b2b823d" name="Invisible" />
  			<marker id="e96b3791-fbcf-40a2-9c11-106342703db9" name="Melee +1" />
-			<marker id="f7379e4e-8120-4f1f-b734-51f1bd9fbab9" name="Slam" />
+ 			<marker id="cfb394b2-8571-439a-8833-476122a9eaa5" name="Ranged +1" />
+ 			<marker id="f7379e4e-8120-4f1f-b734-51f1bd9fbab9" name="Slam" />
 			<marker id="8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" name="Taunt (Thorg)" />
 			<marker id="72ee460f-adc1-41ab-9231-765001f9e08e" name="Veteran" />
 			<marker id="b9b205a2-a998-44f5-97dc-c7f315afbbe2" name="Visible" />
@@ -124,7 +125,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
-			<property name="Stats" value="Life=3, Armor=9" />
+			<property name="Stats" value="Life=9, Armor=3" />
 			<property name="AttackBar" value="Chop:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Sweeping Attack:&#xD;&#xA;[Full] [Melee] [Dice=4] [Sweeping]" />
 			<property name="Traits" value="Lightning +2" />
 			<property name="Text" value="" />
@@ -170,7 +171,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Hammer:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;[Quick] [Remove 1 damage from a Corporeal Conjuration in his zone.]" />
+			<property name="AttackBar" value="Hammer:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Repair:&#xD;&#xA;[Quick] [Remove 1 damage from a Corporeal Conjuration in his zone.]" />
 			<property name="Traits" value="Pest, Familiar" />
 			<property name="Text" value="Can cast only Corporeal conjurations which are not attached to an object. He casts those spells as a full action with a range of 0-0" />
 			<property name="CardID" value="FWC04" />
@@ -260,7 +261,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
-			<property name="AttackBar" value="Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Triplestrike] or [Zone Attack] [Unavoidable]&#xD;&#xA;Wristblade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Triplestrike OR Zone Attack] [Unavoidable]&#xD;&#xA;Wristblade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC10" />
@@ -478,7 +479,7 @@
 			<property name="Text" value="As a quick action, friendly Living creatures in this zone may drink; Roll 3 attack dice and heal that much damage from that creature. Additionally, you I may remove 1 condition from that creature by paying its removal cost." />
 			<property name="CardID" value="FWJ08" />
 		</card>
-		<card id="61dd52be-2c3b-420c-937a-dd1bdf44dd80" name="Wall of Pikes">
+		<card id="61dd52be-2c3b-420c-937a-dd1bdf44dd80" name="Wall of Pikes" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
@@ -489,7 +490,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=1, Life=7" />
 			<property name="AttackBar" value="Sharpened Pikes:&#xD;&#xA;[Passage Attack] [Dice=5] [This attack is only made against creatures which pass through this wall from the direction the top of the card is facing.]" />
-			<property name="Traits" value="Extendable, Lightning +2" />
+			<property name="Traits" value="Passage Attacks, Extendable, Lightning +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWW01" />
 		</card>
@@ -659,7 +660,7 @@
 			<property name="Stats" value="Location=Ring" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage may add +1 to the d12 roll each time he uses a Defense to avoid an attack&#xD;&#xA;[+1 Defense]" />
+			<property name="Text" value="Mage may add +1 to the d12 roll each time he uses a Defense to avoid an attack&#xD;&#xA;[Defense +1]" />
 			<property name="CardID" value="FWQ02" />
 		</card>
 		<card id="119cb255-4b1e-42b9-9eba-d41935b9ae8e" name="Force Ring">

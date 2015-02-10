@@ -17,12 +17,16 @@ card over the other (if autoAttach is enabled), using the moveToCard method in a
 Bugs/Missing Features:
 - Mass selecting a stack of cards and dragging it causes the cards to unattach and semi-randomly attach
 to each other
-- If a card leaves the table, the attachments are automatically sent to the middle of the board. Not a
-problem in itself, but perhaps a better location could be found...
 - Right now, the criteria for what may be attached to what are pretty loose. It will be easy to add
 restrictions, however.
 """
 
+def menuDetachAction(card,x=0,y=0):
+    """This detaches <card> and returns it to its home location"""
+    mute()
+    if isAttached(card):
+        detach(card)
+        returnCardToHome(card)
 
 def attachToTarget(card,x=0,y=0):
     """This command is used to explicitly attach one card to the card currently being targeted."""
@@ -49,6 +53,7 @@ def attach(card,target):
     """Controller of <card> may attach it to <target>."""
     mute()
     if card.controller == me and canAttach(card,target):
+        if card.type == 'Enchantment' and not card.isFaceUp: enchantmentAttachCost(card,target) #Ask if controller would like to pay mana to attach it
         detachAll(card)
         consolidateAttachments(target)
         setGlobalDictEntry("attachDict",card._id,[target._id,len(getAttachments(target))+1])
@@ -56,6 +61,39 @@ def attach(card,target):
         return card,target
     return card,None
 
+def enchantmentAttachCost(card,target): #Target useful for when things like Harshforge Plate are integrated into this.
+    discountStr = ''
+    discount = 0
+    foundDiscounts = []
+    infostr = 'Enchantments cost 2 mana to cast.'
+    notifyStr = "{} attaches a hidden enchantment on {}, with a base cost of 2 mana.".format(me, target.name)
+    for c in table:
+        if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
+            dc = findDiscount(card, c)
+            debug("Discount Count Returned from test: {} from card: {}".format(dc, c.Name))
+            if dc > 0:
+                discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
+                infostr = notifyStr + discountStr
+                notifyStr = notifyStr + discountStr
+                discount += dc
+                foundDiscounts.append(c)
+            elif dc < 0:
+                discountStr = "\n{} already reached max uses this round.".format(c.name)
+                infostr = notifyStr + discountStr
+                notifyStr = notifyStr + discountStr
+    choice = askChoice('Do you want to cast {} face-down on {}?'.format(card.name,target.name),['Yes, I am casting this as a spell','No, I want to attach it for other reasons'],["#171e78","#de2827"])
+    if choice == 1:
+        infostr += "\nTotal mana amount to subtract from mana pool?"
+	manacost = askInteger(infostr, 2 - discount)
+	if manacost == None: return # player closed the window and didn't cast the spell
+        elif me.Mana < manacost:
+                notify("{} has insufficient mana in pool".format(me))
+                return
+        for dc in foundDiscounts:
+	    doDiscount(dc)
+	me.Mana -= manacost 
+        notify(notifyStr)
+                
 def detach(card):
     """Removes <card> from its target, then consolidates remaining cards on target."""
     mute()
@@ -80,7 +118,7 @@ def alignAttachments(card):
         alignQueue = {}
         side = (-1 if table.isInverted(y) else 1)
         for c in attachments:
-            Y = y-(count*side)*8
+            Y = y-(count*side)*12
             #Please align your own cards first...
             if c.controller == me:
                 c.moveToTable(x,Y)
@@ -166,6 +204,11 @@ def getAttachments(card):
     attachList.sort(key=lambda k: aDict[k][1])
     return [Card(key) for key in attachList if Card(key) in table]
 
+def getAttachTarget(card):
+    mute()
+    result = getGlobalDictEntry('attachDict',card._id)
+    if result and card in table: return Card(result[0])
+
 def getGlobalDictEntry(dictionary,key):
     """Dictionary is input as a string. If the value is empty, returns False"""
     mute()
@@ -187,12 +230,38 @@ def canAttach(card,target):
         or getAttachments(card)
         or card==target
         or not target in table
-        or not card in table):
+        or not card in table
+        or not target.isFaceUp):
         return False
-    if (card.Type in ['Enchantment','Equipment']
-        or target.Type in ['Magestats']
-        or card.Name in ['Tanglevine','Stranglevine','Quicksand']
-        or set(['Spellbind','Familiar','Spawnpoint']) & set(target.Traits.split(', '))):
+    if (card.Type == 'Enchantment'
+        or (card.Type == 'Equipment' and target.Type == 'Mage')
+        or target.Type == 'Magestats'
+        or (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.Type == 'Creature')
+#Familiars
+        or (target.name == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+        or (target.name == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
+        #or sectarus, but enchants are already legal to attach to everything
+        or (target.name == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
+        or (target.name == 'Sersiryx, Imp Familiar' and card.Type == 'Attack' and 'Fire' in card.School and sum([int(i) for i in card.level.split('+')])<=2) #Again, enchantments are automatically legal
+        #fellella is covered
+        or (target.name == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
+        or (target.name == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
+#Spawnpoints
+        or (target.name == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype)
+        or (target.name == 'Battle Forge' and card.Type == 'Equipment')
+        or (target.name == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School)
+        or (target.name == 'Lair' and card.Type == 'Creature' and 'Animal' in card.School)
+        or (target.name == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (target.name == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School)
+        or (target.name == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (target.name == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Sybtype)
+        or (target.name == 'Samara Tree' and card.name == 'Seedling Pod')
+        or (target.name == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Sybtype)
+        or (target.name == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
+#Spellbind (only)
+        or (target.name == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
+        or (target.name == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
+        or (target.name == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
         return True
     return False
 
