@@ -38,6 +38,43 @@
 			<property name="Type" value="Internal" />
 		</card>
 		
+		<card id="24ae46c1-dd54-427b-bb4c-9e24aead34f5" name="Salenia1" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="12bd0a8a-2eec-4cf3-b14e-6861de1d7a19" name="Salenia2" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="3ead8317-1867-4ccc-850d-dae7590137af" name="Salenia3" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="92e1afc0-d7de-434e-94ae-d7fb4fdbd744" name="Salenia4" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="17b4d74b-2bcd-476c-b3e7-2adb83c6c20f" name="Salenia5" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="8dd2393e-8fc8-4611-82de-d67aee5c2cbb" name="Salenia6" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="94908e50-bb5b-49fb-b3ba-94b467e9ea5a" name="Salenia7" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="e21d2461-8021-4b19-8eed-9bfd8e247b20" name="Salenia8" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="20313020-24ce-4149-9c30-775794d80a1e" name="Salenia9" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="bcfe0daa-a4aa-4de1-868f-9132010f026c" name="Salenia10" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="ec03ac8c-7ffb-4d36-8d8e-189fa83a776f" name="Salenia11" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826" name="Salenia12" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		
 		
 		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />

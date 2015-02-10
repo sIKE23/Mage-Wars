@@ -2118,7 +2118,19 @@ mapTileDict =  {
                 "L" : "0af23def-171a-4adb-bf05-0d958d824d5d", #Westlock 9
                 "M" : "0b43f1c1-21c7-4083-a46f-e8a50f8035d7", #Westlock 10
                 "N" : "0c14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 11
-                "O" : "0f14ca09-a83d-4185-afa0-bc38a31dbf82" #Westlock 12
+                "O" : "0f14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 12
+                "P" : "24ae46c1-dd54-427b-bb4c-9e24aead34f5", #Salenia 1
+                "Q" : "12bd0a8a-2eec-4cf3-b14e-6861de1d7a19", #Salenia 2
+                "R" : "3ead8317-1867-4ccc-850d-dae7590137af", #Salenia 3
+                "S" : "92e1afc0-d7de-434e-94ae-d7fb4fdbd744", #Salenia 4
+                "T" : "17b4d74b-2bcd-476c-b3e7-2adb83c6c20f", #Salenia 5
+                "U" : "8dd2393e-8fc8-4611-82de-d67aee5c2cbb", #Salenia 6
+                "V" : "94908e50-bb5b-49fb-b3ba-94b467e9ea5a", #Salenia 7
+                "W" : "e21d2461-8021-4b19-8eed-9bfd8e247b20", #Salenia 8
+                "X" : "20313020-24ce-4149-9c30-775794d80a1e", #Salenia 9
+                "Y" : "bcfe0daa-a4aa-4de1-868f-9132010f026c", #Salenia 10
+                "Z" : "ec03ac8c-7ffb-4d36-8d8e-189fa83a776f", #Salenia 11
+                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826" #Salenia 12
                 } 
 
 mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
