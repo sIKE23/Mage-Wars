@@ -488,7 +488,7 @@
 
 
 
-		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force">
+		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
@@ -503,7 +503,7 @@
 			<property name="Text" value="During the Upkeep Phase you may pay mana to reinforce Wall of Force. For each mana spent remove 1 damage from it. The ability bypasses the Finite Life trait." />
 			<property name="CardID" value="MWPROMO24" />
 		</card>
-		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas">
+		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Cloud, Poison" />
 			<property name="Cost" value="7" />

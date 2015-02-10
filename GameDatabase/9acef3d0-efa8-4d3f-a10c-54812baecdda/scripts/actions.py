@@ -6,11 +6,12 @@ import re
 import sys
 sys.path.append(wd("lib"))
 import os
-########################################################################
-##########################			Constants			################################
-########################################################################
+############################################################################
+##########################		Constants		##################################
+############################################################################
 
-##########################     Markers     ####################################
+##########################		Markers			##################################
+
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
@@ -78,6 +79,7 @@ VTar = ("V'tar", "d01f02e4-392f-409f-95f5-d2fa40f89882" )
 Weak = ("Weak", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
 WoundedPrey = ("Wounded Prey", "42f6cee3-3de4-4c90-a77c-9fb2c432d78d" )
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
+SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
 
 ##########################		Dice-related			########################
 
@@ -352,27 +354,28 @@ def setDRAIP(location):
 ############################################################################
 
 def playerDone(group, x=0, y=0):
-        clearLocalTurnEventList()
 	notify("{} is done".format(me.name))
 	mageStatus()
 
-def attackTarget(card, x=0, y=0):
+def attackTarget(attacker, x=0, y=0):
         mute()
-        if card.controller == me and canDeclareAttack(card) and getSetting('BattleCalculator',True):
+        if attacker.controller == me and canDeclareAttack(attacker) and getSetting('BattleCalculator',True):
+
                 target = [c for c in table if c.targetedBy==me]
+                aTraitDict = computeTraits(attacker)
                 if len(target) == 1:
                         defender = target[0]
-                        aTraitDict = computeTraits(card)
                         dTraitDict = computeTraits(defender)
-                        attack = diceRollMenu(card,defender)
+                        attack = diceRollMenu(attacker,defender)
+
                         if attack:
                                 if defender.controller == me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
                                 else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                 elif len(target) == 0: #Untargeted attack
-                        attack = diceRollMenu(card,None)
+                        attack = diceRollMenu(attacker,None)
                         dice = attack.get('Dice',-1)
                         if dice >= 0:
-                                notify("{} attacks with {}".format(me,card))
+                                notify("{} attacks with {}".format(me,attacker))
                                 roll,effect = rollDice(dice)
         else: genericAttack(table) #If the card you are targeting cannot attack, or the battle calculator is off, just go to the generic attack menu
 
@@ -2000,46 +2003,156 @@ def validateDeck(deck):
 	return True
 
 ############################################################################
-############################	Events	####################################
+############################	   Map Construction     ####################
 ############################################################################
 
 def importArray(filename):
-    """Takes a txt character array and outputs a set of columns (an array, though not the python object). To get an entry from the array, use array[x][y]"""
-    #Open the file
-    directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
-    try: raw = open('{}\{}{}'.format(directory,filename,'.txt'),'r')
-    except: return #Bad practice, I know. I'll try to find a better way later.
-    #Create an empty array.
-    #Because of the order in which data are read, we will need to transpose it.
-    transpose_array = []
-    rownumber = 0
-    #Fill up the transposed array, as a set of rows.
-    for line in raw:
-        row = []
-        for char in range(len(line)):
-            if line[char] != '\n':
-                row.append(line[char])
-        transpose_array.append(row)
-        rownumber +=1
-    #Get array dimensions
-    X0 = len(transpose_array[0])
-    X1 = len(transpose_array)
-    #Untranspose array to get the array
-    array = [[transpose_array[x1][x0] for x1 in range(X1)] for x0 in range(X0)]
-    return array
+        """Takes a txt character array and outputs a dictionary of arrays (sets of columns). To get an entry from an array, use array[x][y]"""
+        #Open the file
+        directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
+        try: raw = open('{}\{}{}'.format(directory,filename,'.txt'),'r')
+        except: return #Bad practice, I know. I'll try to find a better way later.
+        #Create an empty array.
+        #Because of the order in which data are read, we will need to transpose it.
+        transposeArray = []
+        #Fill up the transposed array, as a set of rows.
+        scenarioDict = {}
+        dictKey = None
+        for line in raw:
+                if line == '\n': pass #ignore blank lines
+                elif line[0] != '#':
+                        row = []
+                        for char in range(len(line)):
+                            if line[char] != '\n':
+                                row.append(line[char])
+                        transposeArray.append(row)
+                else:
+                        dictKey = line.replace('\n','').strip('#')
+                        X0 = len(transposeArray[0])
+                        X1 = len(transposeArray)
+                        array = [[transposeArray[x1][x0] for x1 in range(X1)] for x0 in range(X0)]
+                        transposeArray = []
+                        scenarioDict[dictKey] = array
+        return scenarioDict
 
 def loadMapFile(group, x=0, y=0):
+        mute()
         directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
         fileList = [f.split('.')[0] for f in os.listdir(directory) if (os.path.isfile(os.path.join(directory,f)) and f.split('.')[1]=='txt')]
         choices = fileList+['Cancel']
         colors = ['#6600CC' for f in fileList] + ['#FF0000']
         choice = askChoice('Load which map?',choices,colors)
         if choice == 0 or choice == len(choices): return
-        filename = fileList[choice-1]
-        mapArray = importArray(filename)
-        if mapArray:
-                #For now, just proof of concept to show that importing works
-                X0 = len(mapArray[0])
-                X1 = len(mapArray)
-                transposeMapArray = [[mapArray[x1][x0] for x1 in range(X1)] for x0 in range(X0)]
-                whisper('\n'.join([''.join(row) for row in transposeMapArray]))
+        notify('{} loads {}.'.format(me,fileList[choice-1]))
+        
+        mapArray = scenario.get('Map',False)
+        objectsArray = scenario.get('Objects',False)
+        creaturesArray= scenario.get('Creatures',False)
+
+        for card in table:
+                if (card.type == "Internal" or
+                    card.name in ["Sslak, Orb Guardian","Usslak, Greater Orb Guardian"]): card.delete() #We need a way to distinguish between scenario guardians and those in spellbooks
+	setNoGameBoard(table)
+
+        #iterate over elements, top to bottom then left to right.
+        I,J = len(mapArray),len(mapArray[0])
+        X,Y = I*mapTileSize,J*mapTileSize
+        x,y = (-X/2,-Y/2) #Do we want 0,0 to be the center, or the upper corner? Currently set as center.
+        
+        for i in range(I):
+                for j in range(J): #Might as well add support for non-rectangular maps now. Though this won't help with the rows.
+                        if mapArray:
+                                tile = mapTileDict.get(mapArray[i][j],None)
+                                SPT = (True if tile == "c3e970f7-1eeb-432b-ac3f-7dbcd4f45492" else False) #Spiked Pit Trap
+                                if tile:
+                                        tile = table.create(tile,x,y)
+                                        tile.anchor = True
+                                        if SPT: table.create("8731f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2,y+mapTileSize/2) #Add trap marker
+                                        #It doesn't look like this is the correct identifier for trap markers.
+                        y += mapTileSize
+                x += mapTileSize
+                y = -Y/2
+        x = -X/2
+        for i in range(I): #For some reason, I can't get the map tiles to be sent to the back successfully. So we'll do this in two parts.
+                for j in range(J):
+                        if objectsArray:
+                                obj = mapObjectsDict.get(objectsArray[i][j],None)
+                                if obj:
+                                        duplicate = objectsArray[i][j].istitle()
+                                        table.create(obj,
+                                                     x+mapObjectOffset,
+                                                     y+mapObjectOffset)
+                                        if duplicate:
+                                                table.create(obj,
+                                                                   x+mapObjectOffset+mapMultipleObjectOffset,
+                                                                   y+mapObjectOffset)
+                        if creaturesArray:
+                                cre = mapCreaturesDict.get(creaturesArray[i][j],None)
+                                if cre:
+                                        duplicate = creaturesArray[i][j].istitle()
+                                        table.create(cre,
+                                                     x+mapCreatureOffset,
+                                                     y+mapCreatureOffset)
+                                        if duplicate: table.create(cre,
+                                                                   x+mapCreatureOffset+mapMultipleCreatureOffset,
+                                                                   y+mapCreatureOffset)
+                        y += mapTileSize
+                x += mapTileSize
+                y = -Y/2
+       
+### Map Definitions ###
+
+mapTileSize = 250
+mapObjectOffset = 175
+mapMultipleObjectOffset = -100
+mapCreatureOffset = 0
+mapMultipleCreatureOffset = 62
+
+mapTileDict =  {
+                "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #Dropped Weapon
+                "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Mist
+                "3" : "8972d2d1-348c-4c4b-8c9d-a1d235fe482e", #Altar of Oblivion
+                "4" : "a21d1889-acf1-4121-b1d1-991f3f294f1d", #Secret Passage
+                "5" : "a47fa32e-ac83-4ced-8f6a-23906ee38880", #Septagram
+                "6" : "bf833552-8ee4-4c62-abd2-83da233da4ce", #Molten Rock
+                "7" : "c3e970f7-1eeb-432b-ac3f-7dbcd4f45492", #Spiked Pit
+                "8" : "cc063a84-2ba4-4f18-8a09-6e5a4e57ab5b", #Muddy Tile
+                "9" : "dda1f46d-2e0a-4be8-b85a-2d25bbc40a12", #Boneyard
+                "A" : "edca7d45-53e0-468d-83a5-7a446c81f070", #Samandriel's Circle
+                "B" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
+                "C" : "f8794ef9-e78f-412b-95d4-37dc055be158", #Debris
+                "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1", #Generic Tile
+                "D" : "0011a67e-df97-42f0-bdd2-1fe7f733b702", #Westlock 1
+                "E" : "0191ddc0-ef8d-499a-b6a4-f9e0f01da219", #Westlock 2
+                "F" : "023336ec-9969-4832-bbb7-b071b0b55906", #Westlock 3
+                "G" : "035c27ba-d619-43dd-99f7-ecec7852913d", #Westlock 4
+                "H" : "06a26b95-1821-411f-818c-359122845731", #Westlock 5
+                "I" : "07cbfb65-3469-4aad-91c9-bcdd6bf4433c", #Westlock 6
+                "J" : "0843b7ef-fdfb-411d-a1dd-d36e752d94d0", #Westlock 7
+                "K" : "0908af74-c087-4624-ae23-4807cdce2727", #Westlock 8
+                "L" : "0af23def-171a-4adb-bf05-0d958d824d5d", #Westlock 9
+                "M" : "0b43f1c1-21c7-4083-a46f-e8a50f8035d7", #Westlock 10
+                "N" : "0c14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 11
+                "O" : "0f14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 12
+                "P" : "24ae46c1-dd54-427b-bb4c-9e24aead34f5", #Salenia 1
+                "Q" : "12bd0a8a-2eec-4cf3-b14e-6861de1d7a19", #Salenia 2
+                "R" : "3ead8317-1867-4ccc-850d-dae7590137af", #Salenia 3
+                "S" : "92e1afc0-d7de-434e-94ae-d7fb4fdbd744", #Salenia 4
+                "T" : "17b4d74b-2bcd-476c-b3e7-2adb83c6c20f", #Salenia 5
+                "U" : "8dd2393e-8fc8-4611-82de-d67aee5c2cbb", #Salenia 6
+                "V" : "94908e50-bb5b-49fb-b3ba-94b467e9ea5a", #Salenia 7
+                "W" : "e21d2461-8021-4b19-8eed-9bfd8e247b20", #Salenia 8
+                "X" : "20313020-24ce-4149-9c30-775794d80a1e", #Salenia 9
+                "Y" : "bcfe0daa-a4aa-4de1-868f-9132010f026c", #Salenia 10
+                "Z" : "ec03ac8c-7ffb-4d36-8d8e-189fa83a776f", #Salenia 11
+                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826" #Salenia 12
+                } 
+
+mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
+                  "O" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5"}	# 2 V'Tar Orbs
+        
+mapCreaturesDict =     {"s" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# Orb Guardian
+                        "S" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# 2 Orb Guardians
+                        "u" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",	# Greater Orb Guardian
+                        "U" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd"}	# 2 Greater Orb Guardians
+>>>>>>> origin/Q1---2015
