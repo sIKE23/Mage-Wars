@@ -75,7 +75,27 @@
 			<property name="Type" value="Internal" />
 		</card>
 		
-		
+
+		<card id="43dc59fa-dd87-47ac-a4d6-574f7cec609c" name="Apprentice1" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="62846feb-893c-40c5-8138-0777a24c8c73" name="Apprentice2" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="f88b4ac6-b2da-48da-86a1-5213fe9e34be" name="Apprentice3" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="3421bf20-a06f-4fc0-aac0-35a053e3c799" name="Apprentice4" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="707e1095-18df-491a-afca-b32b0cfce67c" name="Apprentice5" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="485fa227-2f6a-42b8-a112-0b97a9cf6317" name="Apprentice6" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+			
+				
 		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>

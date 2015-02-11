@@ -2144,7 +2144,13 @@ mapTileDict =  {
                 "X" : "20313020-24ce-4149-9c30-775794d80a1e", #Salenia 9
                 "Y" : "bcfe0daa-a4aa-4de1-868f-9132010f026c", #Salenia 10
                 "Z" : "ec03ac8c-7ffb-4d36-8d8e-189fa83a776f", #Salenia 11
-                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826" #Salenia 12
+                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826", #Salenia 12
+                "b" : "43dc59fa-dd87-47ac-a4d6-574f7cec609c", #Apprentice Mode 1
+                "c" : "62846feb-893c-40c5-8138-0777a24c8c73", #Apprentice Mode 2
+                "d" : "f88b4ac6-b2da-48da-86a1-5213fe9e34be", #Apprentice Mode 3
+                "e" : "3421bf20-a06f-4fc0-aac0-35a053e3c799", #Apprentice Mode 4
+                "f" : "707e1095-18df-491a-afca-b32b0cfce67c", #Apprentice Mode 5
+                "g" : "485fa227-2f6a-42b8-a112-0b97a9cf6317" #Apprentice Mode 6      	
                 } 
 
 mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
