@@ -61,6 +61,8 @@ RuneofReforging = ("Rune of Reforging","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
 RuneofShielding = ("Rune of Shielding","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
+SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
+StormToken = ("Storm Token", "6383011a-c544-443d-b039-9f7ba8de4c6b")
 Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
 Tainted = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
@@ -77,7 +79,6 @@ VoltaricOFF = ("Voltaric OFF", "d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" )
 Weak = ("Weak", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
 WoundedPrey = ("Wounded Prey", "42f6cee3-3de4-4c90-a77c-9fb2c432d78d" )
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
-SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
 
 ##########################		Dice-related			########################
 
@@ -614,6 +615,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
+				remoteCall(p, "resolveStormTokens", [])
 				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
@@ -765,6 +767,18 @@ def resolveLoadTokens():
 			notify("Placing the Second Load Token on {}...".format(card.Name)) #found one load token on card
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
+		
+def resolveStormTokens():
+	mute()
+	stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
+	for card in stormTokenCards:
+		if card.markers[StormToken] ==4:
+			return
+		notify("Resolving Storm Tokens for {}...".format(me))	#found at least one
+		if card.markers[StormToken] == 0 or card.markers[StormToken] < 4:
+			notify("Placing a Storm Token on the '{}'...".format(card.Name)) #Card needs a load token
+			card.markers[StormToken] += 1
+		notify("Finished adding Storm Tokens for {}.".format(me))
 
 def resolveChanneling():
 	mute()
