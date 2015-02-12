@@ -19,6 +19,7 @@ additiveTraits = ["Melee","Ranged",
                   "Mana Drain",
                   "Mana Transfer",
                   "Lifebond",
+                  "Upkeep",
                   'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
 superlativeTraits = ["Regenerate",
                      "Aegis",
