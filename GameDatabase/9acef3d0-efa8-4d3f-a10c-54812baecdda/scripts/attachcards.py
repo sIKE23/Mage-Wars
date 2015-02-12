@@ -268,3 +268,96 @@ def canAttach(card,target):
 def isAttachCardsEnabled():
     """Checks whether the attachCards module is turned on."""
     return getSetting("attachCards", "True")
+
+############################################################################
+##########################    Zones       ##################################
+############################################################################
+
+def createMap(I,J,zoneArray,tileSize):
+    mapDict = {'I' : I,
+               'J' : J,
+               'tileSize' : tileSize,
+               'x' : -tileSize*I/2,
+               'y' : -tileSize*J/2}
+    array = list(zoneArray)
+    zoneList = []
+    for i in range(len(zoneArray)):
+        for j in range(len(zoneArray[0])):
+            z = (createZone(i,j,mapDict['x'],mapDict['y'],mapDict['tileSize']) if zoneArray[i][j] else None)
+            if z:
+                array[i][j] = z 
+                zoneList.append(z)
+    mapDict['zoneArray'] = array
+    mapDict['zoneList'] = zoneList
+    return mapDict
+
+def createZone(i,j,mapX,mapY,size):
+    return  {'i' : i,
+             'j' : j,
+             'x' : mapX+i*size,
+             'y' : mapY+j*size,
+             'size' : size}
+
+def zoneContains(zone,card): #returns whether an object is inside the zone
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    if ((zone.get('x') < x < zone.get('x') + zone.get('size') - X) and
+        (zone.get('y') < y < zone.get('y') + zone.get('size') - Y)): return True
+    return False
+
+def zoneBorders(zone,card): #returns whether an object overlaps the zone border
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    if (zoneContains(zone,card) or
+        (x > zone.get('x') + zone.get('size')) or (x < zone.get('x') - X) or
+        (y > zone.get('y') + zone.get('size')) or (y < zone.get('y') - Y)): return False
+    return True
+
+def zoneClosest(zoneList,card): #finds closest zone from a list. If border is enabled, returns
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    x += X/2
+    y += Y/2
+    zone = zoneList[0]
+    for z in zoneList:
+        zX, zY = z.get('x')+z.get('size')/2,z.get('y')+z.get('size')/2
+        zoneX, zoneY = zone.get('x')+zone.get('size')/2,zone.get('y')+zone.get('size')/2
+        if abs(zX-x)+abs(zY-y) < abs(zoneX-x)+abs(zoneY-y): zone = z
+    return zone
+
+def zoneGetContain(zone,card): # Finds the closest straight-line place to move the object so it is contained.
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    coordinates = [x,y]
+    if (x <= zone.get('x')): coordinates[0] = zone.get('x') + 1
+    if (x + X >= zone.get('x')+zone.get('size')): coordinates[0] = zone.get('x') + zone.get('size') - X - 1
+    if (y <= zone.get('y')): coordinates[1] = zone.get('y') + 1
+    if (y + Y >= zone.get('y')+zone.get('size')): coordinates[1] = zone.get('y') + zone.get('size') - Y - 1
+    return (coordinates[0],coordinates[1])
+
+def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the nearest border.
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    borders = [[(zone['x']),(zone['y'] + zone['size']/2)],
+               [(zone['x'] + zone['size']/2),(zone['y'])],
+               [(zone['x'] + zone['size']),(zone['y'] + zone['size']/2)],
+               [(zone['x'] + zone['size']/2),(zone['y'] + zone['size'])]]
+    c = [x+X/2,y+Y/2]
+    border = borders[0]
+    for b in list(borders):
+        if (abs(b[0]-c[0]) + abs(b[1]-c[1])) < (abs(border[0]-c[0]) + abs(border[1]-c[1])): border = b
+    return (border[0]-X/2,border[1]-Y/2)
+
+def getZoneContaining(card): #returns the zone occupied by the card
+    if not getGlobalVariable("Map"): return
+    mapDict = eval(getGlobalVariable("Map"))
+    for z in list(mapDict.get('zoneList',[])):
+        if zoneContains(z,card): return z
+
+def getZonesBordering(card): #returns list of zones bordered by card
+    if not getGlobalVariable("Map"): return
+    mapDict = eval(getGlobalVariable("Map"))
+    zoneList = []
+    for z in list(mapDict.get('zoneList',[])):
+        if zoneBorders(z,card): zoneList.append(z)
+    return zoneList

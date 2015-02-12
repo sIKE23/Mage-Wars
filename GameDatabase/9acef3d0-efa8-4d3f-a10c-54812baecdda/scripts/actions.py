@@ -166,6 +166,7 @@ def onGameStart():
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
+	setGlobalVariable('Map',"")
 
 	# reset python Global Variables
 	for p in players:
@@ -249,13 +250,24 @@ def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScri
 			actionType = None
 			if t:
 				actionType = ['detaches','from']
-			if getSetting('AutoAttach',True):
-				for a in table:
-					if canAttach(card,a) and (cardX(a)-x)**2 + (cardY(a)-y)**2 < 400:
-						c,t = attach(card,a)
-						if t:
-							actionType = ['attaches','to']
-							break
+			hasAttached = False
+                        for a in table:
+                                if getSetting('AutoAttach',True) and canAttach(card,a) and (cardX(a)-x)**2 + (cardY(a)-y)**2 < 400:
+                                        c,t = attach(card,a)
+                                        if t:
+                                                actionType = ['attaches','to']
+                                                hasAttached = True
+                                                break
+                        if not hasAttached: #snap to zone
+                                zoneList = getZonesBordering(card)
+                                if zoneList:
+                                        zone = zoneClosest(zoneList,card)
+                                        if card.type in ['Mage','Creature','Conjuration']: #snap to zone
+                                                snapX,snapY = zoneGetContain(zone,card)
+                                                card.moveToTable(snapX,snapY)
+                                        elif card.type == 'Conjuration-Wall': #snap to zone border
+                                                snapX,snapY = zoneGetBorder(zone,card)
+                                                card.moveToTable(snapX,snapY)
 			if actionType:
 				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
 		if toGroup != table:
@@ -2076,12 +2088,15 @@ def loadMapFile(group, x=0, y=0):
         I,J = len(mapArray),len(mapArray[0])
         X,Y = I*mapTileSize,J*mapTileSize
         x,y = (-X/2,-Y/2) #Do we want 0,0 to be the center, or the upper corner? Currently set as center.
+
+        zoneArray = mapArray
         
         for i in range(I):
                 for j in range(J): #Might as well add support for non-rectangular maps now. Though this won't help with the rows.
                         if mapArray:
                                 tile = mapTileDict.get(mapArray[i][j],None)
                                 SPT = (True if tile == "c3e970f7-1eeb-432b-ac3f-7dbcd4f45492" else False) #Spiked Pit Trap
+                                zoneArray[i][j] = (1 if tile else 0)
                                 if tile:
                                         tile = table.create(tile,x,y)
                                         tile.anchor = True
@@ -2091,6 +2106,9 @@ def loadMapFile(group, x=0, y=0):
                 x += mapTileSize
                 y = -Y/2
         x = -X/2
+
+        mapDict = createMap(I,J,zoneArray,mapTileSize)
+                        
         for i in range(I): #For some reason, I can't get the map tiles to be sent to the back successfully. So we'll do this in two parts.
                 for j in range(J):
                         if objectsArray:
@@ -2105,6 +2123,7 @@ def loadMapFile(group, x=0, y=0):
                                                                    x+mapObjectOffset+mapMultipleObjectOffset,
                                                                    y+mapObjectOffset)
                         if creaturesArray:
+                                if creaturesArray[i][j] in ['1','2','3','4','5','6']: mapDict.get('zoneArray')[i][j]['startLocation'] = creaturesArray[i][j]
                                 cre = mapCreaturesDict.get(creaturesArray[i][j],None)
                                 if cre:
                                         duplicate = creaturesArray[i][j].istitle()
@@ -2117,6 +2136,8 @@ def loadMapFile(group, x=0, y=0):
                         y += mapTileSize
                 x += mapTileSize
                 y = -Y/2
+
+        setGlobalVariable("Map",str(mapDict))
        
 ### Map Definitions ###
 
