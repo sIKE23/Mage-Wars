@@ -62,6 +62,8 @@ RuneofReforging = ("Rune of Reforging","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
 RuneofShielding = ("Rune of Shielding","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
+SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
+StormToken = ("Storm Token", "6383011a-c544-443d-b039-9f7ba8de4c6b")
 Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
 Tainted = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
@@ -79,7 +81,6 @@ VTar = ("V'tar", "d01f02e4-392f-409f-95f5-d2fa40f89882" )
 Weak = ("Weak", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
 WoundedPrey = ("Wounded Prey", "42f6cee3-3de4-4c90-a77c-9fb2c432d78d" )
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
-SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
 
 ##########################		Dice-related			########################
 
@@ -140,12 +141,20 @@ def onTableLoad():
 	setGlobalVariable("TableSetup", False)
 	global debugMode
 	global playerNum
+	global hasRolledIni
+	global mycolor
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
 		playerNum = 2
+		mycolor = PlayerColor[0]
+		CreateIniToken()
+		players[0].setActivePlayer()
+		hasRolledIni = True
+		setGlobalVariable("IniAllDone", "x")
+		notify("No need to roll for initative for {}...".format(me))
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
@@ -263,8 +272,10 @@ def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScri
 def setClearVars():
 	global deckLoaded
 	global iniTokenCreated
+	global hasRolledIni
 	deckLoaded = False
 	iniTokenCreated = False
+	hasRolledIni = False
 
 def SetupForIni():
 	mute()
@@ -405,21 +416,20 @@ def playerSetup():
 	# Players select their color
 	global mycolor
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-        if debugMode: mycolor = PlayerColor[0]
-        else:
-                while (True):
-                        choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
-                        colorsChosen = getGlobalVariable("ColorsChosen")
-                        if colorsChosen == "":	#we're the first to pick
-                                setGlobalVariable("ColorsChosen", str(choice))
-                                mycolor = PlayerColor[choice]
-                                break
-                        elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
-                                setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-                                mycolor = PlayerColor[choice]
-                                break
-                        else:	#someone else took our choice
-                                askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+	if not debugMode:
+		while (True):
+			choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
+			colorsChosen = getGlobalVariable("ColorsChosen")
+			if colorsChosen == "":	#we're the first to pick
+				setGlobalVariable("ColorsChosen", str(choice))
+				mycolor = PlayerColor[choice]
+				break
+			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
+				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
+				mycolor = PlayerColor[choice]
+				break
+			else:	#someone else took our choice
+				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
 	#set initial health and channeling values
 	for c in me.hand:
@@ -629,6 +639,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveBleed", [])
 				remoteCall(p, "resolveDissipate", [])
 				remoteCall(p, "resolveLoadTokens", [])
+				remoteCall(p, "resolveStormTokens", [])
 				remoteCall(p, "resolveUpkeep", [])
 
 
@@ -781,6 +792,18 @@ def resolveLoadTokens():
 			notify("Placing the Second Load Token on {}...".format(card.Name)) #found one load token on card
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
+		
+def resolveStormTokens():
+	mute()
+	stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
+	for card in stormTokenCards:
+		if card.markers[StormToken] ==4:
+			return
+		notify("Resolving Storm Tokens for {}...".format(me))	#found at least one
+		if card.markers[StormToken] == 0 or card.markers[StormToken] < 4:
+			notify("Placing a Storm Token on the '{}'...".format(card.Name)) #Card needs a load token
+			card.markers[StormToken] += 1
+		notify("Finished adding Storm Tokens for {}.".format(me))
 
 def resolveChanneling():
 	mute()
@@ -2151,7 +2174,13 @@ mapTileDict =  {
                 "X" : "20313020-24ce-4149-9c30-775794d80a1e", #Salenia 9
                 "Y" : "bcfe0daa-a4aa-4de1-868f-9132010f026c", #Salenia 10
                 "Z" : "ec03ac8c-7ffb-4d36-8d8e-189fa83a776f", #Salenia 11
-                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826" #Salenia 12
+                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826", #Salenia 12
+                "b" : "43dc59fa-dd87-47ac-a4d6-574f7cec609c", #Apprentice Mode 1
+                "c" : "62846feb-893c-40c5-8138-0777a24c8c73", #Apprentice Mode 2
+                "d" : "f88b4ac6-b2da-48da-86a1-5213fe9e34be", #Apprentice Mode 3
+                "e" : "3421bf20-a06f-4fc0-aac0-35a053e3c799", #Apprentice Mode 4
+                "f" : "707e1095-18df-491a-afca-b32b0cfce67c", #Apprentice Mode 5
+                "g" : "485fa227-2f6a-42b8-a112-0b97a9cf6317" #Apprentice Mode 6      	
                 } 
 
 mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
