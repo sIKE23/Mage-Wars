@@ -792,15 +792,23 @@ def resolveStormTokens():
 def resolveChanneling():
 	mute()
 	
-	me.Mana += me.Channeling # Mage channels his mana
-	notify("{} Channels {} Mana into the mages Mana supply.".format(me.name,me.Channeling))
-	
+	channelExtraMana4Mage = 0
 	for c in table:
 		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
 			for card in me.piles['Discard']:
 				if c == card:
 					return
-
+			
+		if c.isFaceUp and c.controller == me:
+			if c.name == "Mana Flower" or c.name == "Mana Crystal":
+				channelExtraMana4Mage +=1
+				whisper("Mana added to {} from {}".format(me,c))
+			elif c.name == "Harmonize":
+				c2 = getAttachTarget(c)
+				if c2 and c2.Type in ['Mage','Magestats'] and c.controller == me: #Mages
+					channelExtraMana4Mage +=1
+					whisper("Mana added to {} from {}".format(me,c))
+		
 		if c.Stats != None and c.Type != "Mage":
 			if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 				channel = getStat(c.Stats,"Channeling")
@@ -822,10 +830,12 @@ def resolveChanneling():
 		if c.name == "Harmonize":
 	                if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
 	                        c2 = getAttachTarget(c)
-	                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Exclude mages
+	                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Not Mages
 	                                addMana(c2)
 	                                whisper("Mana added to {} from {}".format(c2,c))
 
+	me.Mana += me.Channeling + channelExtraMana4Mage # Mage channels his mana
+	notify("{} Channels {} Mana into the mages Mana supply.".format(me.name,me.Channeling + channelExtraMana4Mage))
 
 def resolveUpkeep():
 	mute()
