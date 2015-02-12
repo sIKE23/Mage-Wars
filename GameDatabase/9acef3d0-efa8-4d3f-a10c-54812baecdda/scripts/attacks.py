@@ -47,7 +47,7 @@ def diceRollMenu(attacker = None,defender = None):
         #Suppose there is an attacker with at least one attack:
         if aTraitDict:
                 attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
-                choiceText = "Use which attack?"
+                choiceText = "Use which Attack?"
         choices = []
         for a in attackList:
                 atkTraits = a.get('Traits',{})
@@ -64,7 +64,7 @@ def diceRollMenu(attacker = None,defender = None):
                           ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and a.get('EffectType','Attack')=='Attack') else ''))
                 if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
         if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
-                choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
+                choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
         colors = [getActionColor(attackList[i]) for i in range(len(choices))] + ["#666699","#000000"]
         choices.extend(['Other Dice Amount','Cancel Attack'])
         count = (askChoice("No legal attacks detected!", ['Roll anyway','Cancel'], colors) if len(choices) == 2 else askChoice(choiceText, choices, colors))
@@ -75,7 +75,7 @@ def diceRollMenu(attacker = None,defender = None):
         elif count == len(choices)-1:
                 if attacker: return diceRollMenu(None,defender)
                 else: #Revert to standard input menu. Default value is the last one you entered.
-                        dice = min(askInteger("Roll how many red dice?", getSetting('lastStandardDiceRollInput',8)),50) #max 50 dice rolled at once
+                        dice = min(askInteger("Roll how many Attack Dice?", getSetting('lastStandardDiceRollInput',8)),50) #max 50 dice rolled at once
                         setSetting('lastStandardDiceRollInput',dice)
                         return {'Dice' : dice} 
 

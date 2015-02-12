@@ -139,12 +139,20 @@ def onTableLoad():
 	setGlobalVariable("TableSetup", False)
 	global debugMode
 	global playerNum
+	global hasRolledIni
+	global mycolor
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
 		playerNum = 2
+		mycolor = PlayerColor[0]
+		CreateIniToken()
+		players[0].setActivePlayer()
+		hasRolledIni = True
+		setGlobalVariable("IniAllDone", "x")
+		notify("No need to roll for initative for {}...".format(me))
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
@@ -258,8 +266,10 @@ def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScri
 def setClearVars():
 	global deckLoaded
 	global iniTokenCreated
+	global hasRolledIni
 	deckLoaded = False
 	iniTokenCreated = False
+	hasRolledIni = False
 
 def SetupForIni():
 	mute()
@@ -398,21 +408,20 @@ def playerSetup():
 	# Players select their color
 	global mycolor
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-        if debugMode: mycolor = PlayerColor[0]
-        else:
-                while (True):
-                        choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
-                        colorsChosen = getGlobalVariable("ColorsChosen")
-                        if colorsChosen == "":	#we're the first to pick
-                                setGlobalVariable("ColorsChosen", str(choice))
-                                mycolor = PlayerColor[choice]
-                                break
-                        elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
-                                setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-                                mycolor = PlayerColor[choice]
-                                break
-                        else:	#someone else took our choice
-                                askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+	if not debugMode:
+		while (True):
+			choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
+			colorsChosen = getGlobalVariable("ColorsChosen")
+			if colorsChosen == "":	#we're the first to pick
+				setGlobalVariable("ColorsChosen", str(choice))
+				mycolor = PlayerColor[choice]
+				break
+			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
+				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
+				mycolor = PlayerColor[choice]
+				break
+			else:	#someone else took our choice
+				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
 	#set initial health and channeling values
 	for c in me.hand:
