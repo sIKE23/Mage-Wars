@@ -95,9 +95,19 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
         if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
         if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
         aZone = getZoneContaining(attacker)
-        dZone = getZoneContaining(defender)
-        distance = zoneGetDistance(aZone,dZone)
-        if attack.get('Range') and not (attack.get('Range')[0] <= distance <= attack.get('Range')[1]): return False
+        if attack.get('Range'):
+                if defender.Type == 'Conjuration-Wall':
+                        dZones = getZonesBordering(defender)
+                        debug(str(dZones))
+                        inRange = False
+                        for z in dZones:
+                                distance = zoneGetDistance(aZone,z)
+                                if (attack.get('Range')[0] <= distance <= attack.get('Range')[1]): inRange = True
+                        if not inRange: return False
+                else:
+                        dZone = getZoneContaining(defender)
+                        distance = zoneGetDistance(aZone,dZone)
+                        if not (attack.get('Range')[0] <= distance <= attack.get('Range')[1]): return False
         return True
 
 ############################################################################
@@ -148,7 +158,7 @@ def getAttackList(card):
                          'EffectType': 'Attack'         #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
                 if isAttackSpell:
-                        aDict['Range'] = card.Range.split('-')
+                        aDict['Range'] = [int(r) for r in card.Range.split('-')]
                 #Now we extract the attributes
                 effectSwitch = False
                 for attribute in attributes:
@@ -156,11 +166,12 @@ def getAttackList(card):
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
                         elif 'Ranged' in attribute:
                                 aDict['RangeType'] = attribute.split(':')[0]
-                                aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
+                                if not isAttackSpell: aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
                         elif 'Melee' in attribute:
                                 aDict['RangeType'] = 'Melee'
                                 aDict['Range'] = [0,0]
-                        elif attribute == 'Damage Barrier' : aDict['RangeType'] = 'Damage Barrier'
+                        
+                        elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
                         elif attribute == 'Heal' : aDict['EffectType'] = 'Heal'
                         elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)

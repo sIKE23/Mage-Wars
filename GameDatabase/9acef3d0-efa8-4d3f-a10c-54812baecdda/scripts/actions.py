@@ -258,16 +258,8 @@ def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScri
                                                 actionType = ['attaches','to']
                                                 hasAttached = True
                                                 break
-                        if not hasAttached: #snap to zone
-                                zoneList = getZonesBordering(card)
-                                if zoneList:
-                                        zone = zoneClosest(zoneList,card)
-                                        if card.type in ['Mage','Creature','Conjuration']: #snap to zone
-                                                snapX,snapY = zoneGetContain(zone,card)
-                                                card.moveToTable(snapX,snapY)
-                                        elif card.type == 'Conjuration-Wall': #snap to zone border
-                                                snapX,snapY = zoneGetBorder(zone,card)
-                                                card.moveToTable(snapX,snapY)
+                        if not hasAttached: snapToZone(card) #snap to zone
+                                
 			if actionType:
 				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
 		if toGroup != table:
@@ -383,10 +375,13 @@ def playerDone(group, x=0, y=0):
 def attackTarget(attacker, x=0, y=0):
         mute()
         if attacker.controller == me and canDeclareAttack(attacker) and getSetting('BattleCalculator',True):
+                snapToZone(attacker)
                 target = [c for c in table if c.targetedBy==me]
                 aTraitDict = computeTraits(attacker)
                 if len(target) == 1:
                         defender = target[0]
+                        if defender.controller == me: snapToZone(defender)
+                        else: remoteCall(defender.controller,'snapToZone',[defender])
                         dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(attacker,defender)
                         if attack:

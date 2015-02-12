@@ -372,3 +372,15 @@ def getCardsInZone(zone): #returns a list of cards in the zone
     for c in table:
         if zoneContains(zone,c): cardList.append(c)
     return cardList
+
+def snapToZone(card):
+    zoneList = getZonesBordering(card)
+    if zoneList:
+            zone = zoneClosest(zoneList,card)
+            if card.type in ['Mage','Creature','Conjuration']: #snap to zone
+                    snapX,snapY = zoneGetContain(zone,card)
+                    card.moveToTable(snapX,snapY)
+            elif card.type == 'Conjuration-Wall': #snap to zone border
+                    snapX,snapY = zoneGetBorder(zone,card)
+                    card.moveToTable(snapX,snapY)
+
