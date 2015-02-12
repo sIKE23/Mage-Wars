@@ -1461,10 +1461,11 @@ def toggleToken(card, tokenType):
 			notify("{} added to face-down card.".format(tokenType[0]))
 
 def playCardFaceDown(card, x=0, y=0):
+        mute()
 	global mycolor
-	offset=0
 	occupied = True
-	x,y = {
+	mapDict = eval(getGlobalVariable('Map'))
+        x,y = {
                 1 : (-595,-240),
                 2 : (460,120),
                 3 : (-595,120),
@@ -1472,18 +1473,39 @@ def playCardFaceDown(card, x=0, y=0):
                 5 : (-595,-40),
                 6 : (460,-40)
                 }[playerNum]
-	while occupied:
-		occupied = False
-		for c in table:
-			if c.controller == me:
-				posx, posy = c.position
-				debug("c.position {}".format(c.position))
-				if posx == x+offset and posy == y:
-					occupied = True
-					break
-		if occupied:
-			offset -=-70
-	card.moveToTable(x+offset, y, True)
+	if mapDict:
+                for i in range(len(mapDict.get('zoneArray'))):
+                        for j in range(len(mapDict.get('zoneArray')[0])):
+                                if mapDict.get('zoneArray')[i][j].get('startLocation') == str(playerNum): #It is our starting zone! Now to figure out where it is...
+                                        zoneX,zoneY = mapDict.get('zoneArray')[i][j].get('x'),mapDict.get('zoneArray')[i][j].get('y')
+                                        mapX,mapW = mapDict.get('x'),mapDict.get('X')
+                                        zoneS = mapDict.get('zoneArray')[i][j].get('size')
+                                        cardW,cardH = card.size.Width,card.size.Height
+                                        if card.type == 'Mage':
+                                                x = (zoneX if i < mapDict.get('I')/2 else mapX + mapW - cardW)
+                                                y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
+                                        elif card.type == 'Magestats':
+                                                x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
+                                                y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
+                                        else:
+                                                x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
+                                                y = (zoneY + cardH if j < mapDict.get('J')/2 else zoneY+zoneS-2*cardH)
+                                                xOffset = 0
+                                                while True:
+                                                        occupied = False
+                                                        for c in table:
+                                                                if c.controller == me:
+                                                                        posx, posy = c.position
+                                                                        debug("c.position {}".format(c.position))
+                                                                        if posx == x+xOffset and posy == y:
+                                                                                occupied = True
+                                                                                break
+                                                        if occupied:
+                                                                xOffset += cardW*(-1 if i < mapDict.get('I')/2 else 1)
+                                                        else: break
+                                                x += xOffset
+                                                
+	card.moveToTable(x,y,True)
 	mute()
 	card.peek()
 	card.highlight = mycolor

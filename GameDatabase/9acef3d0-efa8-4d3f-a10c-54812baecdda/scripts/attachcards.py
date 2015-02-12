@@ -278,7 +278,9 @@ def createMap(I,J,zoneArray,tileSize):
                'J' : J,
                'tileSize' : tileSize,
                'x' : -tileSize*I/2,
-               'y' : -tileSize*J/2}
+               'y' : -tileSize*J/2,
+               'X' : tileSize*I,
+               'Y' : tileSize*J}
     array = list(zoneArray)
     zoneList = []
     for i in range(len(zoneArray)):
