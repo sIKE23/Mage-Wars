@@ -350,6 +350,9 @@ def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the ne
         if (abs(b[0]-c[0]) + abs(b[1]-c[1])) < (abs(border[0]-c[0]) + abs(border[1]-c[1])): border = b
     return (border[0]-X/2,border[1]-Y/2)
 
+def zoneGetDistance(zone1,zone2):
+    return abs(zone1['i']-zone2['i']) + abs(zone1['j']-zone2['j'])
+
 def getZoneContaining(card): #returns the zone occupied by the card
     if not getGlobalVariable("Map"): return
     mapDict = eval(getGlobalVariable("Map"))
@@ -363,3 +366,9 @@ def getZonesBordering(card): #returns list of zones bordered by card
     for z in list(mapDict.get('zoneList',[])):
         if zoneBorders(z,card): zoneList.append(z)
     return zoneList
+
+def getCardsInZone(zone): #returns a list of cards in the zone
+    cardList = []
+    for c in table:
+        if zoneContains(zone,c): cardList.append(c)
+    return cardList

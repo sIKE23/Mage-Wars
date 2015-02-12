@@ -50,7 +50,7 @@ def diceRollMenu(attacker = None,defender = None):
                 attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
                 choiceText = "Use which Attack?"
         choices = []
-        for a in attackList:
+        for a in list(attackList):
                 atkTraits = a.get('Traits',{})
                 traits = getAttackTraitStr(atkTraits)
                 expDam = str(round(expectedDamage(aTraitDict,a,dTraitDict),1)) if defender else ''
@@ -64,6 +64,7 @@ def diceRollMenu(attacker = None,defender = None):
                           ('\n'+', '.join(effectList) if effectList != '' else '')+
                           ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and a.get('EffectType','Attack')=='Attack') else ''))
                 if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
+                else: attackList.remove(a)
         if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                 choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
         colors = [getActionColor(attackList[i]) for i in range(len(choices))] + ["#666699","#000000"]
@@ -89,9 +90,14 @@ def getActionColor(action):
 
 def isLegalAttack(aTraitDict,attack,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID'))
+        defender = Card(dTraitDict.get('OwnerID'))
         atkTraits = attack.get('Traits',{})
         if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
         if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
+        aZone = getZoneContaining(attacker)
+        dZone = getZoneContaining(defender)
+        distance = zoneGetDistance(aZone,dZone)
+        if attack.get('Range') and not (attack.get('Range')[0] <= distance <= attack.get('Range')[1]): return False
         return True
 
 ############################################################################
@@ -141,7 +147,8 @@ def getAttackList(card):
                          'Traits': {},
                          'EffectType': 'Attack'         #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
-                
+                if isAttackSpell:
+                        aDict['Range'] = card.Range.split('-')
                 #Now we extract the attributes
                 effectSwitch = False
                 for attribute in attributes:
