@@ -130,6 +130,7 @@ playerNum = 0
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
+gameNum = ""
 
 ############################################################################
 ############################		Events		##################################
@@ -141,6 +142,8 @@ def onTableLoad():
 	global playerNum
 	global hasRolledIni
 	global mycolor
+	global gameNum
+	gameNum = 1
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
@@ -211,6 +214,7 @@ def onLoadDeck(player, groups):
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			for p in players:
 				remoteCall(p, "setClearVars",[])
+			gameNum += 1
 			resetGame()
 		elif debugMode or validateDeck(groups[0]):
 			deckLoaded = True
@@ -271,6 +275,8 @@ def setClearVars():
 	global deckLoaded
 	global iniTokenCreated
 	global hasRolledIni
+	global gameNum
+	if gameNum == 1: return
 	deckLoaded = False
 	iniTokenCreated = False
 	hasRolledIni = False
