@@ -67,13 +67,16 @@ def diceRollMenu(attacker = None,defender = None):
                 else: attackList.remove(a)
         if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                 choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
-        colors = [getActionColor(attackList[i]) for i in range(len(choices))] + ["#666699","#000000"]
-        choices.extend(['Other Dice Amount','Cancel Attack'])
+        colors = ([] if attacker else ['#0033CC']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
+        attackList = ([] if attacker else [{'Dice':0}]) + list(attackList)
+        choices = ([] if attacker else ['Roll Effect Die']) + list(choices) + ['Other Dice Amount','Cancel Attack']
+        
         count = (askChoice("No legal attacks detected!", ['Roll anyway','Cancel'], colors) if len(choices) == 2 else askChoice(choiceText, choices, colors))
         if count == 0 or count == len(choices): return {}
         elif count < len(choices)-1:
-                if (attacker and attackList): return attackList[count-1]#computeAttack(aTraitDict,attackList[count-1],dTraitDict)
-                else: return {'Dice' : count}
+                return attackList[count-1]
+                #if (attacker and attackList): return attackList[count-1]#computeAttack(aTraitDict,attackList[count-1],dTraitDict)
+                #else: return {'Dice' : count}
         elif count == len(choices)-1:
                 if attacker: return diceRollMenu(None,defender)
                 else: #Revert to standard input menu. Default value is the last one you entered.
@@ -89,6 +92,7 @@ def getActionColor(action):
         return '#CC0000'                                                        #Default to red
 
 def isLegalAttack(aTraitDict,attack,dTraitDict):
+        if not (aTraitDict.get('OwnerID') and dTraitDict.get('OwnerID')): return True
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         atkTraits = attack.get('Traits',{})
