@@ -67,7 +67,7 @@ def diceRollMenu(attacker = None,defender = None):
                 else: attackList.remove(a)
         if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                 choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
-        colors = ([] if attacker else ['#0033CC']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
+        colors = ([] if attacker else ['#E0B525']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
         attackList = ([] if attacker else [{'Dice':0}]) + list(attackList)
         choices = ([] if attacker else ['Roll Effect Die']) + list(choices) + ['Other Dice Amount','Cancel Attack']
         
