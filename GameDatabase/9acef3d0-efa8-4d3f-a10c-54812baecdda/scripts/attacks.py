@@ -102,7 +102,6 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
         if attack.get('Range'):
                 if defender.Type == 'Conjuration-Wall':
                         dZones = getZonesBordering(defender)
-                        debug(str(dZones))
                         inRange = False
                         for z in dZones:
                                 distance = zoneGetDistance(aZone,z)
@@ -785,26 +784,41 @@ def computeTraits(card):
                           'Creature' : ['Living','Corporeal'],
                           'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
                           'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(card.Type,[])) #Get innate traits depending on card type
-        debug('rawtraits'+str(rawTraitsList))
         listedTraits = card.Traits.split(', ')
         if 'Living' in listedTraits and 'Nonliving' in rawTraitsList: rawTraitsList.remove('Nonliving')
         elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: rawTraitsList.remove('Living')
         if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: rawTraitsList.remove('Corporeal')
         rawTraitsList.extend(listedTraits)
-        
-        for c in getAttachments(card): #Get bonuses from attached enchantments
-                if c.type == 'Enchantment':
-                        rawText = c.text.split('\r\n[')
-                        debug('rawText = '+str(rawText))
-                        traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')])# if len(rawText) == 2 else [])
-                        debug('traitsGranted '+str(traitsGranted))
-                        rawTraitsList.extend(traitsGranted)       
-        if card.Type == 'Mage':
-                for c in table:
-                        if c.Type == 'Equipment' and c.controller == card.controller:
-                                rawText = c.text.split('\r\n[')
-                                traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
-                                rawTraitsList.extend(traitsGranted)        
+        for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
+                if c.isFaceUp: #only look at face-up cards
+                        if getAttachTarget(c) == card: #Get traits from attachments to this card:
+                                if c.type in ['Enchantment','Conjuration']:
+                                        rawText = c.text.split('\r\n[')
+                                        traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
+                                        rawTraitsList.extend(traitsGranted)
+                        if c.Target == 'Zone':
+                                if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
+                                        #Enchantments
+                                        if (c.name == 'Fortified Position' and
+                                            card.type == 'Creature' and
+                                            'Corporeal' in rawTraitsList): rawTraitsList.append('Armor +2')
+                                        elif (c.name == 'Sacred Ground' and
+                                            c.controller == card.controller and
+                                            card.type == 'Creature' and
+                                            'Living' in rawTraitsList): rawTraitsList.append('Aegis 1')
+                                        elif (c.name == 'Astral Anchor' and
+                                            card.type == 'Creature'): rawTraitsList.append('Anchored')
+                                        elif (c.name == 'Standard Bearer' and
+                                            c.controller == card.controller and
+                                            c != card and
+                                            card.type == 'Creature'): rawTraitsList.extend(['Melee +1','Armor +1'])
+                        if card.Type == 'Mage':
+                                if c.Type == 'Equipment' and (c.controller == card.controller or getAttachTarget(c) == card):
+                                        rawText = c.text.split('\r\n[')
+                                        traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
+                                        rawTraitsList.extend(traitsGranted)
+                                if c.Name in ['Mana Crystal','Mana Flower']: rawTraitsList.append('Channeling +1')
+ 
         if card.markers[Melee]: rawTraitsList.append('Melee +{}'.format(str(card.markers[Melee])))
         if card.markers[Ranged]: rawTraitsList.append('Ranged +{}'.format(str(card.markers[Ranged])))
         if card.markers[Armor]: rawTraitsList.append('Armor +{}'.format(str(card.markers[Armor])))
@@ -852,7 +866,6 @@ def computeTraits(card):
                         if not traitDict.get('Immunity'): traitDict['Immunity'] = [formTrait[1]]
                         else: traitDict['Immunity'].append(formTrait[1])
                 else: traitDict[formTrait[0]] = True
-        debug(card.name+' traits = '+str(traitDict))
         traitDict['OwnerID'] = card._id #Tag the dictionary with its owner's ID in case we need to extract it later (extracting the owner is MUCH faster than extracting the dictionary)
         return traitDict
 

@@ -302,8 +302,11 @@ def createZone(i,j,mapX,mapY,size):
 def zoneContains(zone,card): #returns whether an object is inside the zone
     x,y = card.position
     X,Y = card.size.Width,card.size.Height
-    if ((zone.get('x') < x < zone.get('x') + zone.get('size') - X) and
-        (zone.get('y') < y < zone.get('y') + zone.get('size') - Y)): return True
+    if getAttachTarget(card):
+        return zoneContains(zone,getAttachTarget(card))
+    else:
+        if ((zone.get('x') < x < zone.get('x') + zone.get('size') - X) and
+            (zone.get('y') < y < zone.get('y') + zone.get('size') - Y)): return True
     return False
 
 def zoneBorders(zone,card): #returns whether an object overlaps the zone border
@@ -376,7 +379,7 @@ def snapToZone(card):
     zoneList = getZonesBordering(card)
     if zoneList:
             zone = zoneClosest(zoneList,card)
-            if card.type in ['Mage','Creature','Conjuration']: #snap to zone
+            if card.Target == 'Zone' or card.Type == 'Mage' or not card.isFaceUp: #snap to zone
                     snapX,snapY = zoneGetContain(zone,card)
                     card.moveToTable(snapX,snapY)
             elif card.type == 'Conjuration-Wall': #snap to zone border
