@@ -18,6 +18,7 @@
 		<script src="scripts/changelog.py" />
 		<script src="scripts/attacks.py" />
 		<script src="scripts/attachcards.py" />
+		<script src="scripts/help.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
@@ -76,6 +77,7 @@
 		<groupaction menu="Add Vine Marker" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
+		<groupaction menu="Search Codex" default="False" shortcut="" execute="searchCodex" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
