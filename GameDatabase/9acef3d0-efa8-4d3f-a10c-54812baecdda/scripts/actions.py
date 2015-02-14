@@ -169,7 +169,12 @@ def onGameStart():
 	setGlobalVariable("IniAllDone", "")
 	setGlobalVariable("GameReset", "")
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
-	setGlobalVariable('Map',"")
+
+	#Set default map
+	mapDict = createMap(4,3,[[1 for j in range(3)] for i in range(4)],250)
+	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
+	mapDict.get('zoneArray')[3][2]['startLocation'] = '2'
+	setGlobalVariable('Map',str(mapDict))
 
 	# reset python Global Variables
 	for p in players:
@@ -262,8 +267,7 @@ def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScri
                                                 actionType = ['attaches','to']
                                                 hasAttached = True
                                                 break
-                        if not hasAttached: snapToZone(card) #snap to zone
-                                
+                        if not hasAttached and toGroup == table: snapToZone(card) #snap to zone
 			if actionType:
 				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
 		if toGroup != table:
@@ -1466,18 +1470,11 @@ def playCardFaceDown(card, x=0, y=0):
 	global mycolor
 	occupied = True
 	mapDict = eval(getGlobalVariable('Map'))
-        x,y = {
-                1 : (-595,-240),
-                2 : (460,120),
-                3 : (-595,120),
-                4 : (460,-240),
-                5 : (-595,-40),
-                6 : (460,-40)
-                }[playerNum]
+        x,y = 0,0
 	if mapDict:
                 for i in range(len(mapDict.get('zoneArray'))):
                         for j in range(len(mapDict.get('zoneArray')[0])):
-                                if mapDict.get('zoneArray')[i][j].get('startLocation') == str(playerNum): #It is our starting zone! Now to figure out where it is...
+                                if mapDict.get('zoneArray')[i][j] and mapDict.get('zoneArray')[i][j].get('startLocation') == str(playerNum):
                                         zoneX,zoneY = mapDict.get('zoneArray')[i][j].get('x'),mapDict.get('zoneArray')[i][j].get('y')
                                         mapX,mapW = mapDict.get('x'),mapDict.get('X')
                                         zoneS = mapDict.get('zoneArray')[i][j].get('size')

@@ -285,10 +285,9 @@ def createMap(I,J,zoneArray,tileSize):
     zoneList = []
     for i in range(len(zoneArray)):
         for j in range(len(zoneArray[0])):
-            z = (createZone(i,j,mapDict['x'],mapDict['y'],mapDict['tileSize']) if zoneArray[i][j] else None)
-            if z:
-                array[i][j] = z 
-                zoneList.append(z)
+            z = (createZone(i,j,mapDict['x'],mapDict['y'],mapDict['tileSize']) if zoneArray[i][j] else {})
+            array[i][j] = z 
+            if z: zoneList.append(z)
     mapDict['zoneArray'] = array
     mapDict['zoneList'] = zoneList
     return mapDict
