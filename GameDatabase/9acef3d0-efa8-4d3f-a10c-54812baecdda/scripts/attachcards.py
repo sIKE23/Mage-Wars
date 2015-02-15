@@ -355,11 +355,18 @@ def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the ne
 def zoneGetDistance(zone1,zone2):
     return abs(zone1['i']-zone2['i']) + abs(zone1['j']-zone2['j'])
 
-def getZoneContaining(card): #returns the zone occupied by the card
+def getZoneContaining(card): #returns the zone occupied by the card. If attached, will return zone occupied by attachee.
     if not getGlobalVariable("Map"): return
+    if getAttachTarget(card): return getZoneContaining(getAttachTarget(card))
     mapDict = eval(getGlobalVariable("Map"))
-    for z in list(mapDict.get('zoneList',[])):
-        if zoneContains(z,card): return z
+    x,X,y,Y = mapDict.get('x'),mapDict.get('X'),mapDict.get('y'),mapDict.get('Y')
+    tileSize = mapDict.get('tileSize')
+    zoneArray = mapDict.get('zoneArray')
+    cx,cy = card.position
+    cX,cY = (card.size.Width,card.size.Height)
+    if not (x<cx+cX/2<x+X and y<cy+cY/2<y+Y): return None
+    i,j = int(float(cx+cX/2-x)/tileSize),int(float(cy+cY/2-y)/tileSize)
+    if zoneArray[i][j]: return zoneArray[i][j]
 
 def getZonesBordering(card): #returns list of zones bordered by card
     if not getGlobalVariable("Map"): return

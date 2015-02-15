@@ -206,6 +206,7 @@ def setUpDiceAndPhaseCards():
 
 def onLoadDeck(player, groups):
 	mute()
+	global gameNum
 	global deckLoaded
 	global debugMode
 	global playerNum

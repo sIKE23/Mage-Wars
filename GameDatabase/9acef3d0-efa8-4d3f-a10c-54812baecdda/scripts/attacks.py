@@ -768,11 +768,6 @@ def healingQuery(traitDict,queryText,healingAmt,notifyText):
 ############################################################################
 """
 This section contains functions that figure out exactly which traits a card has.
-
----Code Structure---
-
-computeTraits:
-        traitParser <- getAttackList
 """
 
 def computeTraits(card):
@@ -789,6 +784,7 @@ def computeTraits(card):
         elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: rawTraitsList.remove('Living')
         if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: rawTraitsList.remove('Corporeal')
         rawTraitsList.extend(listedTraits)
+        
         for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
                 if c.isFaceUp: #only look at face-up cards
                         if getAttachTarget(c) == card: #Get traits from attachments to this card:
@@ -796,9 +792,10 @@ def computeTraits(card):
                                         rawText = c.text.split('\r\n[')
                                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
                                         rawTraitsList.extend(traitsGranted)
-                        if c.Target == 'Zone':
-                                if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
-                                        #Enchantments
+                        # Get traits from cards in this zone
+                        if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
+                                #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
+                                if c.type == 'Enchantment':
                                         if (c.name == 'Fortified Position' and
                                             card.type == 'Creature' and
                                             'Corporeal' in rawTraitsList): rawTraitsList.append('Armor +2')
@@ -810,15 +807,17 @@ def computeTraits(card):
                                             card.type == 'Creature'): rawTraitsList.append('Anchored')
                                         elif (c.name == 'Standard Bearer' and
                                             c.controller == card.controller and
-                                            c != card and
+                                            getAttachTarget(c) != card and
                                             card.type == 'Creature'): rawTraitsList.extend(['Melee +1','Armor +1'])
+                                elif c.type == 'Conjuration': pass
+                                elif c.type == 'Creature' : pass
                         if card.Type == 'Mage':
                                 if c.Type == 'Equipment' and (c.controller == card.controller or getAttachTarget(c) == card):
                                         rawText = c.text.split('\r\n[')
                                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
                                         rawTraitsList.extend(traitsGranted)
                                 if c.Name in ['Mana Crystal','Mana Flower']: rawTraitsList.append('Channeling +1')
- 
+        
         if card.markers[Melee]: rawTraitsList.append('Melee +{}'.format(str(card.markers[Melee])))
         if card.markers[Ranged]: rawTraitsList.append('Ranged +{}'.format(str(card.markers[Ranged])))
         if card.markers[Armor]: rawTraitsList.append('Armor +{}'.format(str(card.markers[Armor])))

@@ -484,7 +484,7 @@
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
-			<property name="Target" value="Zone" />
+			<property name="Target" value="Zone Border" />
 			<property name="Subtype" value="" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
