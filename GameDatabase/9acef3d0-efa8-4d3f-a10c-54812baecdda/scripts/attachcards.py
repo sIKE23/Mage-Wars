@@ -352,6 +352,11 @@ def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the ne
         if (abs(b[0]-c[0]) + abs(b[1]-c[1])) < (abs(border[0]-c[0]) + abs(border[1]-c[1])): border = b
     return (border[0]-X/2,border[1]-Y/2)
 
+def cardGetDistance(card1,card2):
+    zone1 = getZoneContaining(card1)
+    zone2 = getZoneContaining(card2)
+    return zoneGetDistance(zone1,zone2)
+
 def zoneGetDistance(zone1,zone2):
     return abs(zone1['i']-zone2['i']) + abs(zone1['j']-zone2['j'])
 
@@ -379,7 +384,7 @@ def getZonesBordering(card): #returns list of zones bordered by card
 def getCardsInZone(zone): #returns a list of cards in the zone
     cardList = []
     for c in table:
-        if zoneContains(zone,c): cardList.append(c)
+        if getZoneContaining(c) == zone: cardList.append(c)
     return cardList
 
 def snapToZone(card):
