@@ -47,7 +47,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
         choiceText = "Roll how many attack dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
         #Suppose there is an attacker with at least one attack:
         if aTraitDict:
-                attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
+                attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList if attack.get('RangeType') != 'Damage Barrier']
                 choiceText = "Use which attack?"
         if specialCase == 'Counterstrike':
                 for a in list(attackList):
@@ -171,6 +171,7 @@ def getAttackList(card):
                 aDict = {'Name':name,
                          'd12':[],
                          'Traits': {},
+                         'SourceID': card._id,
                          'EffectType': 'Attack'         #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
                 if isAttackSpell:
@@ -203,11 +204,15 @@ def getAttackList(card):
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
                 if aDict.get('Dice'): attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
-        if card.Type == 'Mage':
-                for c in table:
+        
+        for c in table:
+                if card.Type == 'Mage':
                         if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and c.isFaceUp and
                             (getAttachTarget(c) == card or (not canDeclareAttack(getAttachTarget(c)) if getAttachTarget(c) else True))):
                                 attackList.extend(getAttackList(c))
+                if c.Type == 'Enchantment' and getAttachTarget(c) == card and c.AttackBar:
+                        attackList.extend(getAttackList(c))
+        
         if 'Familiar' or 'Spawnpoint' in card.Traits:
                 for c in table:
                         if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getAttachTarget(c)==card): attackList.extend(getAttackList(c))
@@ -551,6 +556,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         defender = Card(dTraitDict.get('OwnerID'))
         #Declare Attack - done. That was calling this function.
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
+        elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
         else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
@@ -601,6 +607,16 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        if attack.get('RangeType') == 'Melee': #Need to add: and attack *was 'successful'*
+                attackList = getAttackList(defender)
+                dBarrier = None
+                for a in attackList:
+                        if a.get('RangeType') == 'Damage Barrier':
+                                dBarrier = a
+                                break
+                if dBarrier:
+                        bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
+                        declareAttackStep(bTraitDict,dBarrier,aTraitDict)
         counterstrikeStep(aTraitDict,attack,dTraitDict)
 
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
