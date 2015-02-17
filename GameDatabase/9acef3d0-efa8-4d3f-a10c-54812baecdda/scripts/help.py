@@ -13,7 +13,7 @@ def searchCodex(group, x=0, y=0):
         for line in rawCodex:
                 if line[0] == '#':
                         if len(entry) >= 2:
-                                entry[1] = ' '.join(entry[1:])
+                                entry[1] = ' \n'.join(entry[1:])
                                 codexDict[entry[0]] = entry[1]
                         entry = []
                 else: entry.append(line.replace('\n','').strip(' '))

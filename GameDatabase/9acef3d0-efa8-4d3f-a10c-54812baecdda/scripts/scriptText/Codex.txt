@@ -19,6 +19,7 @@ time.
 #
 Armor +/- X
 Modifies an Armor attribute by +/- X. Armor cannot be reduced below 0.
+#
 Attack Action
 An attack action is a creature's action (quick or full) used to make an attack.
 An attack action might make multiple separate attacks against the same
@@ -832,149 +833,115 @@ dealt by the attack.
 ######## DvN #######
 ####################
 Corrode
-Corrode is an acid condition which wears away
-armor. For each Corrode condition marker on a
-creature or conjuration, it receives Armor -1.
-Objects can never have Corrode markers on
-them which would reduce their armor to below
-zero (any extra markers are immediately destroyed). If an object
-would receive Corrode condition markers that would reduce its
-armor to less than zero, instead it receives only enough Corrode
-markers to reduce its armor to zero, and takes one point of direct acid damage for each excess marker. Corrode has no effect on
-Incorporeal objects. The marker has a removal cost of 2.
-Example: A Druid has 2 Corrode markers on her, and a Bearskin. Her
-current armor value is 0. If she would receive another Corrode condition, she
-instead receives 1 direct acid damage. She decides to cast Wind Wyvern
-Hide (which has the same location as Bearskin, and thus will replace it.)
-When the Bearskin is removed, the Druid has zero armor and thus both
-Corrode markers are destroyed. Then, the Wind Wyvern Hide comes into
-play, and the Druid now has an armor value of 2.
+Corrode is an acid condition which wears away armor. For each Corrode condition marker on a creature or conjuration, it receives Armor -1. 
+
+- Objects can never have Corrode markers on them which would reduce their armor to below zero (any extra markers are immediately destroyed). 
+
+- If an object would receive Corrode condition markers that would reduce its armor to less than zero, instead it receives only enough Corrode markers to reduce its armor to zero, and takes one point of direct acid damage for each excess marker. 
+
+- Corrode has no effect on Incorporeal objects. 
+
+- The marker has a removal cost of 2.
+
+Example: 
+A Druid has 2 Corrode markers on her, and a Bearskin. Her current armor value is 0. If she would receive another Corrode condition, she instead receives 1 direct acid damage. She decides to cast Wind Wyvern Hide (which has the same location as Bearskin, and thus will replace it.) When the Bearskin is removed, the Druid has zero armor and thus both Corrode markers are destroyed. Then, the Wind Wyvern Hide comes into play, and the Druid now has an armor value of 2.
 #
 Devour
-This creature eats other creatures! If an attack with Devour would
-destroy a Corporeal creature, Obliterate that creature instead.
-Growth (Condition Marker)
-A creature with a Growth condition marker has
-grown in size. Each Growth marker provides Melee
-+1 and Innate Life +3. This marker has no removal
-cost, and cannot be removed by spells or effects
-which remove condition markers.
+This creature eats other creatures! If an attack with Devour would destroy a Corporeal creature, Obliterate that creature instead.
+#
+Growth
+A creature with a Growth condition marker has grown in size. Each Growth marker provides Melee +1 and Innate Life +3. 
+
+- This marker has no removal cost, and cannot be removed by spells or effects which remove condition markers.
 #
 Ichthellid Larva
-A creature with this condition marker has been
-impregnated with an Ichthellid Larva. Ichthellid
-Larva is a poison condition with a removal cost of
-5. The Ichthellid Larva marker is controlled by the
-controller of the Ichthellid that placed the marker. A
-creature can have only one Ichthellid Larva marker on it. When this
-creature is destroyed, the controller of the Ichthellid Larva marker
-may choose an Ichthellid creature from his spellbook or discard pile,
-and place it face down in the zone the creature was in when it was
-destroyed. This Ichthellid comes into play at the end of the round for
-no mana cost, similar to how the Reanimate effect works.
+A creature with this condition marker has been impregnated with an Ichthellid Larva. When this creature is destroyed, the controller of the Ichthellid Larva marker may choose an Ichthellid creature from his spellbook or discard pile, and place it face down in the zone the creature was in when it was destroyed. This Ichthellid comes into play at the end of the round for no mana cost, similar to how the Reanimate effect works.
+
+- Ichthellid Larva is a poison condition with a removal cost of 5.
+
+- The Ichthellid Larva marker is controlled by the controller of the Ichthellid that placed the marker. A creature can have only one Ichthellid Larva marker on it. 
 #
 Innate Life +X
-This creature has an increase to its Life, which usually represents an
-increase to size or mass, and bypasses the Finite Life trait.
+This creature has an increase to its Life, which usually represents an increase to size or mass, and bypasses the Finite Life trait.
 #
 Lifebond +X
-During the Upkeep Phase, choose one: you may transfer up to X
-damage from your Mage onto this object, or you may transfer up to
-X damage from this object to your Mage, regardless of range or LoS.
-This ability is not affected by the Finite Life trait.
+During the Upkeep Phase, choose one: you may transfer up to X damage from your Mage onto this object, or you may transfer up to X damage from this object to your Mage, regardless of range or LoS. 
+
+- Bypasses the Finite Life trait.
 #
 Lumbering
-This creature is clumsy and/or hobbled. It is always hindered, and
-thus it can only take up to 1 move action during its Action Phase,
-even if it gains the Fast trait.
+This creature is clumsy and/or hobbled. It is always hindered, and thus it can only take up to 1 move action during its Action Phase, even if it gains the Fast trait.
 #
 Obliterate
-When you obliterate an object, it is utterly destroyed, leaving no
-trace. The object is destroyed, then it is removed from the game.
-It does not become discarded or get returned to a spellbook. Any
-ability or effect printed on that object, or attached to it (such as a
-marker or enchantment), which triggers on destruction, is canceled.
-Other destruction effects, not attached to or part of the Obliterated
-object, can still occur.
-Examples: When you obliterate a Goblin Bomber it will not explode. When
-you obliterate a creature with an Ichthellid Larva marker, the Larva will not
-hatch. If you obliterate an opponent's creature, their Valshalla still gains a
-Wrath token.
+When you obliterate an object, it is utterly destroyed, leaving no trace. The object is destroyed, then it is removed from the game. It does not become discarded or get returned to a spellbook. 
+
+- Any ability or effect printed on that object or attached to it (such as a marker or enchantment) which triggers on destruction, is canceled.
+
+- Other destruction effects, not attached to or part of the Obliterated object, can still occur.
+
+Examples:
+
+- When you obliterate a Goblin Bomber it will not explode.
+ 
+- When you obliterate a creature with an Ichthellid Larva marker, the Larva will not hatch. 
+
+- If you obliterate an opponent's creature, their Valshalla still gains a Wrath token.
 #
 Obscured
-This object is difficult to see. It cannot be targeted from more than
-one zone away (this is for all purposes - ranged attacks, spells,
-abilities, etc.). Any enchantments or equipment attached to the
-object also gain the Obscured trait, but attached conjurations do not.
+This object is difficult to see. It cannot be targeted from more than one zone away (this is for all purposes - ranged attacks, spells, abilities, etc.).
+
+- Enchantments and equipment attached to the object also gain the Obscured trait (but attached conjurations do not).
 #
 Reanimate
-This creature reanimates upon death. If this creature is destroyed, it
-is moved from the discard pile to the zone it was just destroyed in,
-and placed face down in that zone, with a face-down action marker
-on it. This creature is considered temporarily out of play. At the end
-of the round, the creature card is flipped face up and is Summoned
-into play. Reanimate does not occur if the creature is removed from the game when it is destroyed. See “Obliterate.”
+This creature reanimates upon death. If this creature is destroyed, it is moved from the discard pile to the zone it was just destroyed in, and placed face down in that zone, with a face-down action marker on it. This creature is considered temporarily out of play. At the end of the round, the creature card is flipped face up and is Summoned into play. 
+
+- Reanimate does not occur if the creature is removed from the game when it is destroyed. See “Obliterate.”
 #
 Reconstruct
-Reconstruct is an effect which removes damage from Nonliving
-objects. It is not Regeneration or Healing, and is not affected by the
-Finite Life trait.
+Reconstruct is an effect which removes damage from Nonliving objects. It is not Regeneration or Healing, and is not affected by the Finite Life trait.
 #
 Resilient
-This object is incredibly resistant to damage. This object ignores
-all non-critical damage from attacks. Direct damage and attack
-effects occur normally.
+This object is incredibly resistant to damage. This object ignores all non-critical damage from attacks. 
+
+- Direct damage and attack effects occur normally.
 #
 Rooted
-This creature is rooted to the ground. It cannot take move actions,
-and it has the Unmovable trait. It is not Restrained, so it can still
-guard, hinder, and Intercept as normal. A Rooted creature loses,
-and cannot gain, the Flying trait.
+This creature is rooted to the ground. It cannot take move actions, and it has the Unmovable trait. 
+
+- It is not Restrained, so it can still guard, hinder, and Intercept as normal. 
+
+- A Rooted creature loses, and cannot gain, the Flying trait.
 #
 Snatch
-This attack can grab and pull creatures into its zone. Snatch is a
-Push effect, where the object is Pushed one zone closer towards
-the source of the Push. Snatch has no effect on Uncontainable or
-Unmovable creatures.
+This attack can grab and pull creatures into its zone. Snatch is a Push effect, where the object is Pushed one zone closer towards the source of the Push. 
+- Snatch has no effect on Uncontainable or Unmovable creatures.
 #
 Uproot X
-This creature can uproot itself from the ground and move freely.
-When this creature is activated, you may pay X mana. If you do, it
-loses the Rooted trait until the end of its Action Phase.
+This creature can uproot itself from the ground and move freely. When this creature is activated, you may pay X mana. If you do, it loses the Rooted trait until the end of its Action Phase.
 #
 Vigilant
-This creature is constantly guarding, protecting, or sheltering
-friendly objects. At the end of its Action Phase you may place a
-Guard marker on this creature, if it does not already have one.
+This creature is constantly guarding, protecting, or sheltering friendly objects. At the end of its Action Phase you may place a Guard marker on this creature, if it does not already have one.
 #
 Vine Markers
-Vine markers are a Living conjuration with 1
-life, no armor, and they cannot gain armor.
-Vine markers hinder enemy non-Flying
-creatures. Any amount of damage will destroy
-a Vine Marker, regardless of its total life.
-They can't be targeted by ranged attacks. Any
-number of Vine markers can occupy a zone.
-As the Druid, or a familiar or tree spawnpoint
-she controls, casts a vine spell, you can destroy a
-target Vine marker she controls as an additional
-cost to cast that spell. If you do, you may ignore the range of
-that spell to target that Vine marker's zone, an object in that Vine
-marker's zone, or a border of that Vine marker's zone. That vine
-spell must have a legal target. If two or more Druids are playing,
-each should use a different side of the Vine marker to distinguish
-ownership.
+Vine markers are a Living conjuration with 1 life, no armor, and they cannot gain armor. As the Druid, or a familiar or tree spawnpoint she controls, casts a vine spell, you can destroy a target Vine marker she controls as an additional cost to cast that spell. If you do, you may ignore the range of that spell to target that Vine marker's zone, an object in that Vine marker's zone, or a border of that Vine marker's zone.
+
+- Vine markers hinder enemy non-Flying
+creatures.
+
+- Any amount of damage will destroy a Vine Marker, regardless of its total life. 
+
+- Can't be targeted by ranged attacks. 
+
+- Any number of Vine markers can occupy a zone. 
 #
 Zombie
-This creature has been raised from the dead. It
-gains the undead and zombie subtypes. It gains
-the Psychic Immunity, Slow, Nonliving, and
-Bloodthirsty +0 traits. The Zombie marker
-has no removal cost and cannot be removed
-by spells or effects which remove condition
-markers. If this creature would be destroyed, Obliterate it. If
-a creature already has the Slow trait at the time it received this
-marker, then it also receives a Stun condition marker.
+This creature has been raised from the dead. It gains the undead and zombie subtypes. It gains the Psychic Immunity, Slow, Nonliving, and Bloodthirsty +0 traits. 
+
+- The Zombie marker has no removal cost and cannot be removed by spells or effects which remove condition markers. 
+
+- If this creature would be destroyed, Obliterate it. 
+
+- If a creature already has the Slow trait at the time it received this marker, then it also receives a Stun condition marker.
 ####################
 ######## FiF #######
 ####################
