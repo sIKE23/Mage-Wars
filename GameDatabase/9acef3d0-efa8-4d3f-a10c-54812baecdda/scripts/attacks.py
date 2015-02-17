@@ -39,16 +39,20 @@ diceRollMenu:
 
 """
 
-def diceRollMenu(attacker = None,defender = None):
+def diceRollMenu(attacker = None,defender = None,specialCase = None):
         mute()
         aTraitDict = (computeTraits(attacker) if attacker else {})
         dTraitDict = (computeTraits(defender) if defender else {})
         attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
-        choiceText = "Roll how many Attack Dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
+        choiceText = "Roll how many attack dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
         #Suppose there is an attacker with at least one attack:
         if aTraitDict:
                 attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList]
-                choiceText = "Use which Attack?"
+                choiceText = "Use which attack?"
+        if specialCase == 'Counterstrike':
+                for a in list(attackList):
+                        if a.get('Traits',{}).get('Counterstrike'): a['RangeType'] = 'Counterstrike'
+                        else: attackList.remove(a)
         choices = []
         for a in list(attackList):
                 atkTraits = a.get('Traits',{})
@@ -63,14 +67,16 @@ def diceRollMenu(attacker = None,defender = None):
                           ('\n'+', '.join(traits) if traits else '')+
                           ('\n'+', '.join(effectList) if effectList != '' else '')+
                           ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and a.get('EffectType','Attack')=='Attack') else ''))
+                if specialCase == 'Counterstrike' and a.get('RangeType') != 'Counterstrike': continue
                 if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
                 else: attackList.remove(a)
         if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                 choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
+        if specialCase == 'Counterstrike': choiceText = "{} can counterstrike! Use which attack?".format(attacker.name)
         colors = ([] if attacker else ['#E0B525']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
         attackList = ([] if attacker else [{'Dice':0}]) + list(attackList)
         choices = ([] if attacker else ['Roll Effect Die']) + list(choices) + ['Other Dice Amount','Cancel Attack']
-        
+        if specialCase == 'Counterstrike' and not attackList: return {}
         count = (askChoice("No legal attacks detected!", ['Roll anyway','Cancel'], colors) if len(choices) == 2 else askChoice(choiceText, choices, colors))
         if count == 0 or count == len(choices): return {}
         elif count < len(choices)-1:
@@ -229,7 +235,7 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                             localADict['Ranged'] = localADict.get('Ranged',0) + 1
         attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
         if dTraitDict.get('OwnerID'): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
-        debug(attack.get('Name','Unnamed')+': '+str(attack))
+        #debug(attack.get('Name','Unnamed')+': '+str(attack))
         if not attack.get('OriginalAttack'): attack['OriginalAttack'] = attackDict #Store the original attack if one is not stored.
         return attack #If attack has zone attack trait, then it gains unavoidable
 
@@ -331,7 +337,7 @@ def rollDice(dice):
         count = dice
         if (len(diceBank) < count): #diceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
-		debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
+		#debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
 			diceBank = random_org[0].splitlines()
 			diceFrom = "from Random.org"
@@ -345,7 +351,7 @@ def rollDice(dice):
 	for x in range(count):
 		roll = int(diceBank.pop())
 		result[roll] += 1
-	debug("diceRoller result: {}".format(result))
+	#debug("diceRoller result: {}".format(result))
 	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
 
 	damPiercing = result[4] + 2* result[5]
@@ -359,7 +365,7 @@ def rollDice(dice):
 	d12DiceCount = 1
 	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
 		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
-		debug("Random.org response code for effect roll: {}".format(d12[1]))
+		#debug("Random.org response code for effect roll: {}".format(d12[1]))
 		if d12[1]==200: # OK code received:
 			diceBankD12 = d12[0].splitlines()
 			notify ("Using die from Random.org")
@@ -544,7 +550,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         #Declare Attack - done. That was calling this function.
-        notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
+        if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
+        else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
         else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
 
@@ -599,6 +606,11 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        if attack.get('RangeType') == 'Melee':
+                counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
+                if counterAttack:
+                        declareAttackStep(dTraitDict,counterAttack,aTraitDict)
+        defender.markers[Guard] = 0
         if attacker.controller == me: attackEndsStep(aTraitDict,attack,dTraitDict)
         else: remotecall(attacker.controller,'attackEndsStep',[aTraitDict,attack,dTraitDict])
 
@@ -738,7 +750,7 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 
 def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
         modRoll = effectRoll + dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
-        debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
+        #debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
         effects = attack.get('d12',[])
         if not effects: return None
         for effect in effects:
@@ -1032,7 +1044,7 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
         lowerBound, upperBound = 0,None
         if '-' in rangeStr: lowerBound,upperBound = int(rangeStr.split('-')[0]),int(rangeStr.split('-')[1])
         if '+' in rangeStr: lowerBound, upperBound = int(rangeStr.strip('+')),None
-        debug(str(lowerBound)+','+str(upperBound))
+        #debug(str(lowerBound)+','+str(upperBound))
         lowerBound,upperBound = max(lowerBound - d12Bonus,0),(max(upperBound - d12Bonus,0) if upperBound else None)
         successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if upperBound else 12) - lowerBound + 1)
         return min(successIncidence/float(12),float(1))
