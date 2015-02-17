@@ -249,32 +249,36 @@ def onLoadDeck(player, groups):
 				for card in group:
 					if card.controller == me:
 						card.delete()
-
-def onMoveCard(player,card,fromGroup,toGroup,oldIndex,index,oldX,oldY,x,y,isScriptMove):
-	"""This event triggers whenever a card is moved. Currently, it is only used with the attachCards module
-	to simplify the process of moving and attaching cards."""
-	mute()
-	if card.controller == me and fromGroup == table: #Does not trigger when	moving cards onto the table
-		if not isScriptMove:
-			c,t = detach(card)
-			actionType = None
-			if t:
-				actionType = ['detaches','from']
-			hasAttached = False
-                        for a in table:
-                                if getSetting('AutoAttach',True) and canAttach(card,a) and (cardX(a)-x)**2 + (cardY(a)-y)**2 < 400:
-                                        c,t = attach(card,a)
+def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,isScriptMove):
+        mute()
+        for i in range(len(cards)):
+                card = cards[i]
+                if card.controller == me and fromGroups[i]==table:
+                        if not isScriptMove:
+                                if not (getAttachTarget(card) in cards): #Only check for detach if the attachtarget was not moved
+                                        c,t = detach(card)
+                                        card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
+                                        actionType = None
                                         if t:
-                                                actionType = ['attaches','to']
-                                                hasAttached = True
-                                                break
-                        if not hasAttached and toGroup == table: snapToZone(card) #snap to zone
-			if actionType:
-				notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
-		if toGroup != table:
-			detachAll(card)
-		if not ((oldIndex != index and oldX==x and oldY==y) or isAttached(card) or toGroup != table): #Do not realign ifit is  only the index that is changing. Prevents recursions.
-			alignAttachments(card)
+                                                actionType = ['detaches','from']
+                                        hasAttached = False
+                                        if len(cards) == 1: #Only check for autoattach if this is the only card moved
+                                                for a in table:
+                                                        if getSetting('AutoAttach',True) and canAttach(card,a) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400:
+                                                                c,t = attach(card,a)
+                                                                if t:
+                                                                        actionType = ['attaches','to']
+                                                                        hasAttached = True
+                                                                        break
+                                        if not hasAttached and toGroups[i] == table: snapToZone(card)
+                                        if actionType:
+                                                notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+                        if toGroups[i] != table: detachAll(card)
+                        if not ((oldIndices[i] != indices[i] and
+                                 oldXs[i]==xs[i] and
+                                 oldYs[i]==ys[i]) or
+                                isAttached(card) or
+                                toGroups[i] != table): alignAttachments(card)#Do not realign ifit is  only the index that is changing. Prevents recursions.
 
 def setClearVars():
 	global deckLoaded

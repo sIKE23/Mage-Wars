@@ -5,22 +5,6 @@
 # Card Attachment and Alignment
 ############################
 
-"""
-This module contains the bulk of the attachment code.
-Features:
-- The attachments of each card are preserved in the order in which they were attached to that card.
-- Removing a card from the table detaches everything that was attached to it.
-- Two methods of attaching a card; explicitly, using targeting and alt+q, and by simply dragging one
-card over the other (if autoAttach is enabled), using the moveToCard method in actions.py
-- Detaching a card is as easy as dragging it away from the card to which it was attached
-
-Bugs/Missing Features:
-- Mass selecting a stack of cards and dragging it causes the cards to unattach and semi-randomly attach
-to each other
-- Right now, the criteria for what may be attached to what are pretty loose. It will be easy to add
-restrictions, however.
-"""
-
 def menuDetachAction(card,x=0,y=0):
     """This detaches <card> and returns it to its home location"""
     mute()
@@ -103,7 +87,8 @@ def detach(card):
         if target:
             target = Card(target[0])
             consolidateAttachments(target)
-            remoteCall(target.controller,'alignAttachments',[target])
+            if card.controller == me: alignAttachments(target)
+            else: remoteCall(target.controller,'alignAttachments',[target])
         return card,target
     return card,None
 

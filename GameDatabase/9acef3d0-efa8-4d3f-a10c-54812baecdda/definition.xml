@@ -25,7 +25,7 @@
 		<event name="OnGameStart" action="onGameStart" />
 		<event name="OnLoadDeck" action="onLoadDeck" />
 		<event name="OnChangeCounter" action="checkMageDeath" />
-		<event name="OnMoveCard" action="onMoveCard" />
+		<event name="OnMoveCards" action="onMoveCards" />
 	</events>
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />
