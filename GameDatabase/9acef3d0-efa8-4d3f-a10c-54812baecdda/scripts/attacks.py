@@ -215,7 +215,7 @@ def getAttackList(card):
         
         if 'Familiar' or 'Spawnpoint' in card.Traits:
                 for c in table:
-                        if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getAttachTarget(c)==card): attackList.extend(getAttackList(c))
+                        if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getBindTarget(c)==card): attackList.extend(getAttackList(c))
         return attackList
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
@@ -540,11 +540,12 @@ attack should lead into the next.
 """
 
 def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         if getSetting("BattleCalculator",True):
                 if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
-                else: remotecall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
+                else: remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
         else:
                 if attacker.controller == me: genericAttack(table)
                 else:
@@ -552,6 +553,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
                         remoteCall(attacker.controller,'genericAttack',[table])
 
 def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         #Declare Attack - done. That was calling this function.
@@ -559,21 +561,23 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
-        else: remotecall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
+        else: remoteCall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
                        if attacker.controller == me: additionalStrikesStep(aTraitDict,attack,dTraitDict)
-                       else: remotecall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
+                       else: remoteCall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
                        return
         if attacker.controller == me: rollDiceStep(aTraitDict,attack,dTraitDict)
-        else: remotecall(attacker.controller,'rollDiceStep',[aTraitDict,attack,dTraitDict])
+        else: remoteCall(attacker.controller,'rollDiceStep',[aTraitDict,attack,dTraitDict])
 
 def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         dice = attack.get('Dice',-1)
@@ -582,16 +586,18 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 return
         damageRoll,effectRoll = rollDice(dice)
         if defender.controller == me: damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-        else: remotecall(defender.controller,'damageAndEffectsStep',[aTraitDict,attack,dTraitDict,damageRoll,effectRoll])
+        else: remoteCall(defender.controller,'damageAndEffectsStep',[aTraitDict,attack,dTraitDict,damageRoll,effectRoll])
 
 def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #Executed by defender
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
         if attacker.controller == me: additionalStrikesStep(aTraitDict,attack,dTraitDict)
-        else: remotecall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
+        else: remoteCall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack)) #Record that the attack was declared, using the original attack as an identifier
@@ -602,9 +608,10 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         if timesHasUsedAttack(attacker,attack.get('OriginalAttack',attack)) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
         else:
                 if defender.controller == me: damageBarrierStep(aTraitDict,attack,dTraitDict)
-                else: remotecall(defender.controller,'damageBarrierStep',[aTraitDict,attack,dTraitDict])
+                else: remoteCall(defender.controller,'damageBarrierStep',[aTraitDict,attack,dTraitDict])
 
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         if attack.get('RangeType') == 'Melee': #Need to add: and attack *was 'successful'*
@@ -620,6 +627,7 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
         counterstrikeStep(aTraitDict,attack,dTraitDict)
 
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
+        mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         if attack.get('RangeType') == 'Melee':
@@ -628,9 +636,10 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
                         declareAttackStep(dTraitDict,counterAttack,aTraitDict)
         defender.markers[Guard] = 0
         if attacker.controller == me: attackEndsStep(aTraitDict,attack,dTraitDict)
-        else: remotecall(attacker.controller,'attackEndsStep',[aTraitDict,attack,dTraitDict])
+        else: remoteCall(attacker.controller,'attackEndsStep',[aTraitDict,attack,dTraitDict])
 
 def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+        mute()
         setEventList('Turn',[]) #Clear the turn event list
         pass
 

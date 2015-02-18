@@ -36,6 +36,7 @@ def attachToTarget(card,x=0,y=0):
 def attach(card,target):
     """Controller of <card> may attach it to <target>."""
     mute()
+    unbind(card)
     if card.controller == me and canAttach(card,target):
         if card.type == 'Enchantment' and not card.isFaceUp: enchantmentAttachCost(card,target) #Ask if controller would like to pay mana to attach it
         detachAll(card)
@@ -220,15 +221,87 @@ def canAttach(card,target):
         return False
     if (card.Type == 'Enchantment'
         or (card.Type == 'Equipment' and target.Type == 'Mage')
-        or target.Type == 'Magestats'
-        or (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.Type == 'Creature')
+        or (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.Type == 'Creature')): return True
+    return False
+
+def isAttachCardsEnabled():
+    """Checks whether the attachCards module is turned on."""
+    return getSetting("attachCards", "True")
+
+############################################################################
+##########################  Bound Spells  ##################################
+############################################################################
+"""We will make a distinction between attached cards and bound cards (for familiars,
+spawnpoints, and spellbind objects"""
+
+def bind(card,target):
+    """Controller of <card> may attach it to <target>."""
+    mute()
+    detach(card)
+    if card.controller == me and canBind(card,target):
+        detachAll(card)
+        setGlobalDictEntry("bindDict",card._id,target._id)
+        remoteCall(target.controller,'alignBound',[target])
+        return card,target
+    return card,None
+
+def unbind(card):
+    """Unbinds <card> from its target."""
+    mute()
+    if getBindTarget(card) and card.controller == me:
+        target = getGlobalDictEntry('bindDict',card._id)
+        setGlobalDictEntry('bindDict',card._id,None)
+        return card,target
+    return card,None
+
+def getBound(card):
+    """Returns the card bound to <card>"""
+    mute()
+    bDict = eval(getGlobalVariable("bindDict"))
+    for key in bDict:
+        if bDict[key]==card._id: return Card(key)
+
+def getBindTarget(card):
+    mute()
+    result = getGlobalDictEntry('bindDict',card._id)
+    if result and card in table: return Card(result)
+
+def alignBound(card):
+    mute()
+    bound = getBound(card)
+    if not bound: return
+    x,y = card.position
+    x -= 0
+    y += 30
+    z = card.getIndex
+    if bound.controller == me: moveAndSetIndex(bound,x,y,z)
+    else: remoteCall(bound.controller,'moveAndSetIndex',[bound,x,y,z])
+    card.setIndex(z+1) #Assumes I control <card>. Not sure why I need this when alignAttachments works without, but it seems that moving a card brings it to the front.
+
+def moveAndSetIndex(card,x,y,z):
+    mute()
+    card.moveToTable(x,y)
+    card.setIndex(z)
+
+def canBind(card,target):
+    global currentPhase
+    """Determines whether <card> may be attached to <target>"""
+    if (isAttached(target)
+        or currentPhase != 'Planning'
+        or getAttachments(card)
+        or getBound(card)
+        or card==target
+        or not target in table
+        or not card in table
+        or not target.isFaceUp):
+        return False
 #Familiars
-        or (target.name == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+    if ((target.name == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
         or (target.name == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
-        #or sectarus, but enchants are already legal to attach to everything
+        #or sectarus, but I haven't got around to it yet.
         or (target.name == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
-        or (target.name == 'Sersiryx, Imp Familiar' and card.Type == 'Attack' and 'Fire' in card.School and sum([int(i) for i in card.level.split('+')])<=2) #Again, enchantments are automatically legal
-        #fellella is covered
+        or (target.name == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.School)) and sum([int(i) for i in card.level.split('+')])<=2)
+        or (target.name == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
         or (target.name == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
         or (target.name == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
 #Spawnpoints
@@ -249,10 +322,6 @@ def canAttach(card,target):
         or (target.name == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
         return True
     return False
-
-def isAttachCardsEnabled():
-    """Checks whether the attachCards module is turned on."""
-    return getSetting("attachCards", "True")
 
 ############################################################################
 ##########################    Zones       ##################################

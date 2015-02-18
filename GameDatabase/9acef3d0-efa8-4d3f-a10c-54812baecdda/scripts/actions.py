@@ -137,6 +137,7 @@ gameNum = ""
 ############################################################################
 
 def onTableLoad():
+        debug('a')
 	setGlobalVariable("TableSetup", False)
 	global debugMode
 	global playerNum
@@ -154,7 +155,6 @@ def onTableLoad():
 		CreateIniToken()
 		players[0].setActivePlayer()
 		hasRolledIni = True
-		setGlobalVariable("IniAllDone", "x")
 		notify("No need to roll for initative for {}...".format(me))
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
@@ -166,7 +166,7 @@ def onGameStart():
 	# reset initiative automation
 	setGlobalVariable("SetupDone", "")
 	setGlobalVariable("OppIniRoll", "")
-	setGlobalVariable("IniAllDone", "")
+	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
 	setGlobalVariable("GameReset", "")
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
 
@@ -180,8 +180,9 @@ def onGameStart():
 	for p in players:
 		remoteCall(p, "setClearVars",[])
 
-	#create a dictionary of attachments
+	#create a dictionary of attachments and bound spells
 	setGlobalVariable("attachDict",str({}))
+	setGlobalVariable("bindDict",str({}))
 
         #set global event lists for rounds and single actions
 	setGlobalVariable("roundEventList",str([]))
@@ -255,30 +256,38 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                 card = cards[i]
                 if card.controller == me and fromGroups[i]==table:
                         if not isScriptMove:
-                                if not (getAttachTarget(card) in cards): #Only check for detach if the attachtarget was not moved
+                                if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
+                                        unbind(card)
                                         c,t = detach(card)
-                                        card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
+                                        if toGroups[i] == table: card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
                                         actionType = None
                                         if t:
                                                 actionType = ['detaches','from']
                                         hasAttached = False
-                                        if len(cards) == 1: #Only check for autoattach if this is the only card moved
+                                        if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
                                                 for a in table:
-                                                        if getSetting('AutoAttach',True) and canAttach(card,a) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400:
+                                                        if (canBind(card,a) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400):
+                                                                c,t = bind(card,a)
+                                                                if t:
+                                                                        actionType = ['binds','to']
+                                                                        hasAttached = True
+                                                                        break
+                                                        elif getSetting('AutoAttach',True) and canAttach(card,a) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400:
                                                                 c,t = attach(card,a)
                                                                 if t:
                                                                         actionType = ['attaches','to']
                                                                         hasAttached = True
                                                                         break
-                                        if not hasAttached and toGroups[i] == table: snapToZone(card)
+                                        if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
                                         if actionType:
                                                 notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
                         if toGroups[i] != table: detachAll(card)
-                        if not ((oldIndices[i] != indices[i] and
-                                 oldXs[i]==xs[i] and
-                                 oldYs[i]==ys[i]) or
+                        if not ((oldIndices[i] != indices[i] and oldXs[i]==xs[i] and oldYs[i]==ys[i]) or
                                 isAttached(card) or
-                                toGroups[i] != table): alignAttachments(card)#Do not realign ifit is  only the index that is changing. Prevents recursions.
+                                getBindTarget(card) or
+                                toGroups[i] != table):
+                                alignAttachments(card)
+                                alignBound(card)#Do not realign ifit is  only the index that is changing. Prevents recursions.
 
 def setClearVars():
 	global deckLoaded
