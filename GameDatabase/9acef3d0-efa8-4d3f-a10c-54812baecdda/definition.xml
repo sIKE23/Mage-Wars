@@ -78,6 +78,7 @@
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
 		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
+		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />

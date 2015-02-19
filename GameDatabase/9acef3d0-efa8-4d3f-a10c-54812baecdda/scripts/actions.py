@@ -1532,6 +1532,14 @@ def debug(str):
 	if debugMode:
 		whisper(str)
 
+def createCard(group,x=0,y=0):
+        mute()
+        guid,quantity = askCard({},title="Create which card?")
+        if guid and quantity:
+                card = table.create(guid,0,0,quantity,True)
+                card.isFaceUp = False
+                notify("{} created a card.".format(me))
+
 def moveCard(model, x, y):
 	for c in table:
 		if c.model == model:
