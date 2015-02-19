@@ -250,6 +250,7 @@ def onLoadDeck(player, groups):
 				for card in group:
 					if card.controller == me:
 						card.delete()
+
 def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,isScriptMove):
         mute()
         for i in range(len(cards)):
@@ -613,6 +614,9 @@ def nextPhase(group, x=-360, y=-150):
 		return
 	mute()
 	mageStatus()
+#	if game == "Academy":
+#		passTurn()
+#		return
 	card = None
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":

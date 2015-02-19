@@ -1,0 +1,11 @@
+.
+.
+#Map#
+
+.
+.
+#Objects#
+
+1
+2
+#Creatures#
