@@ -23,3 +23,15 @@ def searchCodex(group, x=0, y=0):
                 if (codexDict.get(term) and askChoice("{}:\n{}".format(term,codexDict.get(term)),
                                                       ['Search for another term','Thanks, I\'m done'],
                                                       ['#666699','#000000']) != 1): break
+
+def getEnchantRecommendationList(step):
+        """Returns a list of names of recommended enchantments to reveal"""
+        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+        rawData = list(open('{}\{}{}'.format(textDirectory,'EnchantmentTiming','.txt'),'r'))
+        recommendationList = []
+        for line in rawData:
+                if line[0] == '#':
+                        if len(recommendationList) >= 2 and recommendationList[0] == step: return recommendationList[1:]
+                        recommendationList = []
+                else: recommendationList.append(line.replace('\n','').strip(' '))
+        return []

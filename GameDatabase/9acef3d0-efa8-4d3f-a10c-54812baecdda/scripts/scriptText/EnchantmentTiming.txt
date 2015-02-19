@@ -1,0 +1,66 @@
+## Recommendations are to reveal enchantment at end of given phase.
+#Where to put Akiro's favor?
+#Divine Intervention?
+Declare Attack
+Bear Strength
+Block
+Cobra Reflexes
+Decoy
+Enchantment Transfusion
+Falcon Precision
+Force Crush
+Force Hold
+Force Orb
+Force Sword
+Forcefield
+Fumble
+Mind Shield
+Reverse Attack
+#
+Avoid Attack
+Agony
+Bear Strength
+Decoy
+Divine Protection
+Enchantment Transfusion
+Hawkeye
+Lion Savagery
+Marked for Death
+Sacred Ground
+Standard Bearer
+#
+Roll Dice
+Barkskin
+Brace Yourself
+Bull Endurance
+Decoy
+Enchantment Transfusion
+Fortified Position
+Healing Charm
+Lion Savagery
+Rhino Hide
+Rise Again
+Rust
+Standard Bearer
+Vampirism
+#
+Damage and Effects
+Decoy
+Divine Might
+Enchantment Transfusion
+#
+Additional Strikes
+Circle of Fire
+Decoy
+Enchantment Transfusion
+#
+Damage Barrier
+Decoy
+Enchantment Transfusion
+Retaliate
+#
+Counterstrike
+Decoy
+Enchantment Transfusion
+#
+Attack Ends
