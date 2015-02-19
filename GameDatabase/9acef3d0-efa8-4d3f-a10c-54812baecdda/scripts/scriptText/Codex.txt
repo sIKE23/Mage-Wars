@@ -2,203 +2,203 @@
 ##### Core Set #####
 ####################
 Activate
-When you choose to take an Action Phase with a creature you activate it.
-Flip its action marker over, and remove any guard marker on it.
+When you choose to take an Action Phase with a creature you activate it. Flip its action marker over, and remove any guard marker on it.
 #
 Aegis X
-All attacks made against this object subtract X attack dice before rolling.
-Attacks cannot be reduced below 1 die. The Aegis trait does not stack. This
-trait cannot reduce an attack below one die.
+All attacks made against this object subtract X attack dice before rolling. 
+
+- Attacks cannot be reduced below 1 die. 
+
+- Does not stack.
 #
 Armor
-During an attack, Armor is subtracted from the normal
-damage rolled on the attack dice. It does not reduce
-critical damage. If an object's Armor icon has a red
-slash across it, that object cannot have armor at any
-time.
+During an attack, Armor is subtracted from the normal damage rolled on the attack dice. It does not reduce critical damage. 
+
+- If an object's Armor icon has a red slash across it, that object cannot have armor at any time.
 #
 Armor +/- X
-Modifies an Armor attribute by +/- X. Armor cannot be reduced below 0.
+Modifies an Armor attribute by +/- X. 
+
+- Armor cannot be reduced below 0.
 #
 Attack Action
-An attack action is a creature's action (quick or full) used to make an attack.
-An attack action might make multiple separate attacks against the same
-defender (see “Doublestrike” and “Triplestrike” in the Codex) or against
-different defenders (see “Sweeping” and “Zone Attacks” in the Codex). All
-of these multiple attacks are still considered one attack action.
+An attack action is a creature's action (quick or full) used to make an attack. 
+
+- An attack action might make multiple separate attacks against the same
+defender (see Doublestrike and Triplestrike) or against different defenders (see Sweeping and Zone Attacks). All of these multiple attacks are considered one attack action.
 #
 Bashed
-When a creature is Pushed into a wall with the Passage Blocked trait it
-is Bashed. It receives an Unavoidable attack of 3 attack dice of damage.
-The walls around the outside of the arena have the Passage Blocked trait.
+When a creature is Pushed into a wall with the Passage Blocked trait it is Bashed. It receives an Unavoidable attack of 3 attack dice of damage. 
+
+- The walls around the outside of the arena have the Passage Blocked trait.
+#
 Blocks LoS
-This Wall blocks Line of Sight. You cannot target an object
-or a zone if the Line of Sight is blocked. See “LoS” on
-page 17.
+This Wall blocks Line of Sight. You cannot target an object or a zone if the Line of Sight is blocked.
 #
 Bloodthirsty +X
-This creature is a savage predator with a lust for blood. This creature gains
-+X attack dice when it makes a melee attack against a Living creature
-with 1 or more damage. If the attack makes multiple attacks during the
-same attack action, it gains this bonus only for the first attack it can make
-with this bonus. If there is a damaged Living enemy creature in the
-Bloodthirsty creature's zone during its Action Phase, it must melee attack
-that creature (if possible). If there is more than one choice, or it has also
-been Taunted, it can choose which creature to attack.
+This creature is a savage predator with a lust for blood. It gains +X attack dice when it makes a melee attack against a Living creature
+with 1 or more damage. If there is a damaged Living enemy creature in the Bloodthirsty creature's zone during its Action Phase, it must melee attack that creature (if possible).
+
+- If the attack makes multiple attacks during the same attack action, it gains this bonus only for the first attack it can make with this bonus. 
+
+- If there is more than one damaged creature, or this creature has also been Taunted, it can choose which creature to attack.
 #
 Burn
-Object is on fire. This is a flame condition. Each
-Upkeep Phase, roll 1 attack die of direct damage
-for each Burn marker on each object. On a roll of
-“0,” remove that Burn marker. Burn markers have a
-removal cost of 2.
+Object is on fire. Each Upkeep Phase, roll 1 attack die of direct damage for each Burn marker on each object. On a 0, remove that Burn marker. 
+
+- A flame condition.
+
+- Removal cost of 2.
 #
 Burnproof
-Cannot have the Burn condition. May be vulnerable to flame damage, but
-cannot “burn”. All Incorporeal objects are Burnproof.
+Cannot have the Burn condition. 
+
+- May still be vulnerable to flame damage. 
+
+- All Incorporeal objects are Burnproof.
 #
 Cancel
 If a spell, attack, or effect is canceled, it stops and has no further effect.
+#
 Channeling
-Some objects have a Channeling attribute, which is
-how much mana they collect each round during the
-Channeling Phase.
+Some objects have a Channeling attribute, which is how much mana they collect each round during the Channeling Phase.
 #
 Channeling +/- X
-Modifies a creature's Channeling attribute by +/- X. Channeling cannot be
-reduced below 0. Modifies only existing Channeling, it has no effect an
-object without a Channeling attribute.
+Modifies a creature's Channeling attribute by +/- X. Channeling cannot be reduced below 0. Modifies only existing Channeling, it has no effect an object without a Channeling attribute.
+
+- Mana Flower/Mana Crystal do not have the channeling attribute, and hence are unaffected by cards such as harmonize that grant Channeling +/- X.
 #
 Charge +X
-Creature gains +X attack dice for its very next melee attack, if it makes that
-attack immediately after it takes a move action, and moves at least 1 zone.
+Creature gains +X attack dice for its very next melee attack, if it makes that attack immediately after it takes a move action, and moves at least 1 zone.
 #
 Climbing
-Creature may take a special full action to climb over any Corporeal wall
-and move into the adjacent zone. If the wall has the Passage Attacks trait,
-it attacks the creature before it moves.
+As a full action, this creature may climb over a Corporeal wall and move into the adjacent zone. 
+
+- If the wall has the Passage Attacks trait, it attacks the creature before it moves.
 #
 Condition
-Conditions are various states that can occur for objects, and are indicated
-with markers placed on the object. All conditions stack and their effects are
-cumulative. See “Effects & Conditions” on page 25.
+Conditions are various states that can occur for objects, and are indicated with markers placed on the object.
 #
 Conjuration
-All conjurations have these traits; Nonliving, Pyschic Immunity, and
-Unmovable. See “Conjurations” on page 16.
+All conjurations have these traits by default; Nonliving, Pyschic Immunity, and Unmovable.
 #
 Controller
-Each spell or object in the game is controlled by the player who cast it.
-The controller may use and act with that object, and makes all decisions
-and choices for that spell or any abilities that object may have. Exception:
-Equipment is controlled by the Mage it is attached to.
+Each spell or object in the game is controlled by the player who cast it. The controller may use and act with that object, and makes all decisions and choices for that spell or any abilities that object may have. 
+
+- Exception: Equipment is controlled by the Mage it is attached to.
 #
 Corporeal
-Corporeal objects are normal, physical objects. All creatures and
-conjurations are Corporeal, unless they have the Incorporeal trait.
+Corporeal objects are normal, physical objects. All creatures and conjurations are Corporeal by default.
 #
 Counter
-A spell which has been countered does not resolve. It is destroyed and
-goes to the discard pile. All costs and actions spent to cast the spell are lost,
-unless otherwise noted.
+A spell which has been countered does not resolve. It is destroyed and goes to the discard pile.
+
+- All costs and actions spent to cast the spell are lost, unless otherwise noted.
+
+- If the source or target of a spell changes during the counter spell step (for example by Divine Intervention), then the spell is countered.
+
+- A spell with the cantrip trait that is countered still returns to its owner's spellbook.
 #
 Counterstrike
-If a creature is the defender of a melee attack, and it has a quick action
-melee attack with the Counterstrike trait, it may use that attack against
-the attacker during the Counterstrike Step of the attack. See “Counterstrike”
-on page 28.
+If a creature is the defender of a melee attack, and it has a quick action melee attack with the Counterstrike trait, it may use that attack against the attacker during the Counterstrike Step of the attack.
+
+- You cannot counterstrike against an attack that was made as a counterstrike. No counterception.
+
+- The quick action melee attacks of a creature with a Guard marker gain the counterstrike trait.
 #
 Creature
-A creature is an object in the game which can take actions and has an action
-marker. All creatures are Living (unless they have the Nonliving trait). See
-“Creatures” on page 14.
+A creature is an object in the game which can take actions and has an action marker. All creatures are Living by default.
 #
 Cripple
-This is a poison condition. Creature is Restrained. At
-the end of each of its Action Phases, Crippled creature
-may attempt an escape roll: on a roll of 7 or higher,
-remove Cripple. Cripple has a removal cost of 4.
-Cannot affect conjurations.
+Creature is Restrained. At the end of each of its Action Phases, Crippled creature may attempt a separate escape roll for each Cripple marker: on a roll of 7 or higher, remove that marker.
+
+- A poison condition.
+
+- Removal cost of 4.
+
+- Cannot affect conjurations.
 #
 Critical Damage
-Critical damage bypasses Armor (Armor does not reduce the damage dealt).
-Critical damage is shown as numbers inside a starburst on the attack dice.
+Critical damage bypasses Armor (Armor does not reduce the damage dealt). Critical damage is shown as numbers inside a starburst on the attack dice.
 #
 Damage Barrier
-A damage barrier surrounds an object and makes an
-automatic attack against each enemy which makes
-a melee attack against the object it surrounds. See
-“Damage Barriers” on page 27.
+A damage barrier surrounds an object and makes an automatic attack against each enemy which makes a successful melee attack against the object it surrounds.
+
+- A melee attack is considered successful if it did not "miss" (for example, due to a daze condition or a defense). 
+
+- Rolling no damage does not count as missing.
 #
 Damage Type
-Damage can belong to a certain type - such as flame or
-lightning. See “Damage Types” on page 26.
+Damage can belong to a certain type - such as flame or lightning.
 #
 Damage Type +/- X
-Attacks against this object, which match this damage type, modify the
-number of attack dice rolled by X, and modify the effect die roll by X.
-Damage type modifiers are cumulative. An attack cannot be reduced below
-1 die. See “Damage Modifiers” on page 26.
+Attacks against this object that match this damage type modify the number of attack dice rolled by X and modify the effect die roll by X. 
+
+- Note that - indicates a resistance and + indicates a weakness. (contrary to what you may expect from other games)
+
+- Damage type modifiers are cumulative. 
+
+- An attack cannot be reduced below 1 die.
 #
 Daze
-Creature is disoriented and/or blinded. Whenever this
-creature makes an attack, roll the effect die at the end
-of the Declare Attack Step. If the attack skips that step,
-then roll as soon as the attack starts. If the result is 7 or
-higher, the attack is resolved normally. If the result is 6
-or less, the attack “misses” its target and is considered
-to have been avoided (even if the attack is Unavoidable). If it makes a
-Zone Attack, only check once: the entire attack either fails or succeeds. If
-a creature has more than one Daze on it, roll only one time to see if the
-creature misses. In addition, the Dazed creature suffers a -2 penalty to all
-Defense rolls for each Daze marker it has. All Daze markers are removed
-at the end of the creature's Action Phase. Daze has a removal cost of 2.
-Conjurations cannot be Dazed.
+Creature is disoriented and/or blinded. When it makes an attack, roll the effect die at the end of the Declare Attack Step. If the attack skips that step, then roll as soon as the attack starts. If the result is 6 or less, the attack "misses" its target and is considered to have been avoided (even if it is Unavoidable).  In addition, the Dazed creature suffers a -2 penalty to all Defense rolls for each Daze marker it has.  
+
+- All Daze markers are removed at the end of the creature's Action Phase, except for those acquired during the action phase (for example as a result of a counterstrike).
+
+- If creature has more than one Daze on it, roll only once to see if it misses.
+
+- Removal cost of 2.
+
+- If making a Zone Attack, check only once; the entire attack either fails or succeeds.
+
+- Conjurations cannot be Dazed.
 #
 Defender
-A creature or conjuration which is being attacked. They may not necessarily
-be the target of that attack (see “Zone Attack” in the Codex).
+A creature or conjuration which is being attacked. They may not necessarily be the target of that attack (see "Zone Attack").
 #
 Defense
-Some objects have a Defense attribute, which
-represents an ability to avoid an attack. The number
-on the Defense is what you must roll, or higher, on
-1d12, to successfully avoid an attack. See “Defenses” on
-page 24.
+Some objects have a Defense attribute, which represents an ability to avoid an attack. During the Avoid Attack step, a creature may roll one of its defenses against the attack, and avoids the attack if its roll is equal to or greater than the number printed on the defense.
+
+- Some defenses may only be used a limited number of times per round, denoted by 1x or 2x.
+
+- Some defenses may not be used against certain types of attacks (melee/ranged), as indicated by the icon above the defense.
+
+- A defender may only use 1 defense per attack, no matter how many it has left.
+
+- Defenses may not be used against Unavoidable attacks.
 #
 Defrost
-This is a trait of flame attacks. It will be defined in a future expansion of the
-game in which frost damage is introduced.
+This is a trait of flame attacks. It will be defined in a future expansion of the game in which frost damage is introduced. For now, it's just there for flavor.
 #
 Destroyed
-A destroyed object is removed from play and is placed in the owner's
-discard pile. Creatures and conjurations are destroyed when the amount
-of damage on them is equal to or greater than their Life total. Objects can
-also be destroyed when a specific spell or effect destroys them.
+A destroyed object is removed from play and is placed in the owner's discard pile. Creatures and conjurations are destroyed when the amount of damage on them is equal to or greater than their Life total. Objects can also be destroyed when a specific spell or effect destroys them.
 #
 Direct Damage
-Damage that is put directly on a creature. The damage is critical (bypasses
-armor). It is not considered an attack, and the creature cannot use a Defense
-to avoid the damage. See “Direct Damage” on page 26.
+Damage that is put directly on a creature. The damage is critical (bypasses armor). 
+
+- Not considered to be an attack.
 #
 Discard Pile
-Each player has his own discard pile where he places destroyed objects
-or discarded spells after they are cast. See “Discarding Spells” on page 13.
+Each player has his own discard pile where he places destroyed objects or discarded spells after they are cast.
+
+- When a card is destroyed or discarded, it always goes to the discard pile of its owner, not (necessarily) its current controller.
 #
 Doublestrike
-This attack makes a second attack against the same target as part of the
-same attack action. The additional attack occurs during the Additional
-Strikes Step.
+This attack makes a second attack against the same target as part of the same attack action. 
+
+- Remember; many buffs only apply to the first attack in a sequence, so check to be sure!
+
+- The additional attack occurs during the Additional Strikes Step.
 #
 Effect Die
-The 12-sided die is called the effect die, and it is used to
-roll for additional effects for attacks, as well as escape
-rolls, or other rolls.
+The 12-sided die is called the effect die, and it is used to roll for additional effects for attacks, as well as escape rolls, or other rolls.
 #
 Elusive
-This creature is quick and slippery. This creature ignores enemy
-creatures. Enemy creatures cannot hinder its movement. It is not required
-to attack enemy guards when making a melee attack.
+This creature is quick and slippery, ignoring enemy creatures. 
+
+- Enemy creatures cannot hinder its movement. 
+
+- It is not required to attack enemy guards when making a melee attack.
 #
 Enemy
 An enemy object is one which is currently controlled by your opponent(s).
@@ -207,99 +207,122 @@ Epic
 Only 1 copy of this spell can be in a Mage's spellbook.
 #
 Escape Roll
-Some conditions or enchantments require an escape roll, using the effect
-die, to see if you can remove them from the creature they are attached to.
+Some conditions or enchantments require an escape roll, using the effect die, to see if you can remove them from the creature they are attached to.
 #
 Ethereal
-This attack is magically enhanced. It deals full damage to Incorporeal
-objects (count all the numbers on the dice, not just the 1's). Incorporeal
-objects can receive effects and conditions from this attack.
+This attack is magically enhanced. It deals full damage to Incorporeal objects (count all the numbers on the dice, not just the 1's). 
+
+- Incorporeal objects can receive effects and conditions from this attack.
 #
 Extendable
-When you cast this wall, you may pay an additional cost equal to the mana
-cost of the wall, plus the wall's Level, as part of the cost of casting the
-spell. If you do, when this spell resolves, you may take an additional wall
-of the same name out of your spellbook and place it on any zone border
-connected to the first wall. The second wall must be placed within LoS, but
-does not have to be in range. See “Walls” on page 17.
+When you cast this wall, you may pay an additional cost equal to the mana cost of the wall, plus the wall's Level, as part of the cost of casting the spell. If you do, when this spell resolves, you may take an additional wall of the same name out of your spellbook and place it on any zone border connected to the first wall. 
+
+- You may place a maximum of two walls, total, in this way (Extendable does not trigger on the second wall).
+
+- The second wall must be placed within LoS, but does not have to be in range.
 #
 Familiar
-This object can cast spells. See “Familiars” on page 16.
+This object can cast spells. During the planning phase, you may prepare a spell for it to cast (unless otherwise specified; some familiars with the spellbind trait work a little differently)
+
+- Generally, there are restrictions to what types of spells it may cast.
+
+- The spell prepared for the familiar is IN ADDITION to the two spells prepared for you mage. However, your mage will not be able to cast the spell prepared by the familiar (and, likewise, your familiar will not be able to cast a spell prepared by your mage).
+
+- If your familiar dies with a prepared spell, that spell is discarded. (tough luck...)
 #
 Fast
-This creature may take 2 move actions before taking a quick action.
-It may take a maximum of 2 move actions during its Action Phase. If a
-Fast creature gains the Slow trait, both traits are cancelled out. See “Fast
-Creatures” on page 14.
+This creature may take 2 move actions before taking a quick action. 
+
+- It may not take more than 2 actions during a single Action Phase.
+
+- If it gains the Slow trait, ignore both traits (having multiple sources of Fast or Slow does not "stack").
 #
 Finite Life
-This creature cannot heal, regenerate, or gain Life. If the creature gained
-Life before it gained this trait, it keeps that Life but cannot gain additional
-Life. All Nonliving objects have Finite Life.
+This creature cannot heal, regenerate, or gain Life. If the creature gained Life before it gained this trait, it keeps that Life but cannot gain additional
+Life. 
+
+- All Nonliving objects have Finite Life.
 #
 Flying
-See “Flying Creatures” on page 15.
+Flying objects can fly! Unfortunately, due to realism, there is rather a lot to remember; the general principle is 'ignore non-flying stuff'.
+
+- Flying and non-Flying creatures do not hinder each others movement.
+
+- A non-Flying object cannot declare a melee attack against a Flying objectunless that attack has the Reach trait.
+
+- Ranged attacks can always target a Flying object in the same zone, regardless of minimum range.
+
+- When a Flying object makes a melee attack against a non-Flying object, it loses the Flying trait until the end of that attack action. This includes attacks with multiple strikes, such as the Sweeping trait, so you cannot melee attack a non-Flying object and then use the second part of the attack to attack a Flying object.
+
+- An object cannot lose or gain the Flying trait in the middle of an attack action (as the attacker or the defender)
+
+- A Flying creature is only affected by guards when attempting to make a melee attack against a non-Flying object in the guard's zone.
+
+- A creature that is guarding loses and cannot gain the Flying trait as long as it guards.
+
+- Creatures always have LoS to flying creatures, and vice-versa.
 #
 Friendly
-A friendly object is one which is currently controlled by the player, or
-players on his team (in a multiplayer game).
+A friendly object is one which is currently controlled by the player, or players on his team (in a multiplayer game).
 #
 Full Action
-During their Action Phase, if a creature does not take
-a move action, it can take a full action. Full actions
-include casting full spells, or making full action
-attacks (which are marked on the creature card with a
-special full action (hourglass) icon). See “Full Actions”
-on page 11.
+During their Action Phase, if a creature does not take a move action, it can take a full action. 
+
+- Marked with a special full action (hourglass) icon
 #
 Full Spell
-A full spell requires a full action to cast it. It has the full action (hourglass)
-icon on its casting line, just to the right of its casting cost.
+A full spell requires a full action to cast it. It has the full action (hourglass) icon on its casting line, just to the right of its casting cost.
 #
 Guarding
-As a quick action a creature can choose to guard,
-to protect his zone and gain Counterstrike. See
-“Guarding” on page 29.
+As a quick action a creature can choose to guard, to protect his zone and gain Counterstrike.
+
+- While a creature is guarding, its quick action melee attacks gain Counterstrike.
+
+- If there is an enemy guard in a zone, then your creatures in that zone cannot melee attack objects in that zone other than that enemy guard. 
+
+- Overrides effects such as Bloodthirsty and Taunt that force a creature to attack a particular creature.
 #
 Heal
-Healing removes damage from Living creatures and
-conjurations. See “Removing Damage” on page 26.
+Healing removes damage from Living creatures and conjurations.
+
+- No effect on objects with Finite Life.
 #
 Hidden Enchantment
-All enchantments are cast face-down and are kept hidden
-from your opponent. Enchantments all have a casting
-cost of 2 mana, printed next to the hidden (closed eye)
-icon on their spell card. When they are revealed (turned
-face-up), their controller pays their reveal cost. See
-“Enchantments” on page 18.
+All enchantments are cast face-down and are kept hidden from your opponent. Enchantments all have a casting cost of 2 mana, printed next to the hidden (closed eye) icon on their spell card. When they are revealed (turned face-up), their controller pays their reveal cost.
+
+- Face-down enchantments do not have the traits printed on their cards, but effects that happen when the spell is discarded (such as Cantrip) still apply.
 #
 Hinder
-If a creature moves out of a zone with enemy creatures in it, or if it moves
-into a zone with enemy creatures in it, it is hindered. A hindered creature
-must stop moving and cannot take any more move actions this Action Phase.
-Incapacitated, Restrained, or Pest creatures cannot hinder movement. Flying
-creatures cannot hinder the movement of non-Flying creatures, and visaversa.
-Elusive creatures cannot be hindered by other creatures.
+If a creature moves out of a zone with enemy creatures in it, or if it moves into a zone with enemy creatures in it, it is hindered. A hindered creature must stop moving and cannot take any more move actions this Action Phase. 
+
+- Incapacitated, Restrained, or Pest creatures cannot hinder movement. 
+
+
+- Flying creatures cannot hinder the movement of non-Flying creatures, and vise-versa.
+
+- Elusive creatures cannot be hindered by other creatures.
+
+- Lumbering creatures are always considered to be hindered.
 #
 Ignore
-An ignored enemy creature cannot hinder movement of friendly creatures.
-An ignored enemy creature that is guarding does not have to be attacked
-when making a melee attack.
+An ignored enemy creature cannot hinder movement of friendly creatures. An ignored enemy creature that is guarding does not have to be attacked when making a melee attack.
 #
 Immunity
-This object is immune to all attacks, damage, conditions, and effects of the
-specified damage type, including critical damage and direct damage.
-It cannot be targeted or affected by spells or attacks of the specified type.
+This object is immune to all attacks, damage, conditions, and effects of the specified damage type, including critical damage and direct damage. It cannot be targeted or affected by spells or attacks of the specified type.
+
+- Exception: Objects with hydro immunity <explain here>
 #
 Incapacitated
-An Incapacitated creature cannot take any actions, including moving,
-attacking, guarding, or casting spells. It cannot make a counterstrike. It
-cannot use any Defenses, except for mandatory-reveal enchantments
-that count as a Defense. It cannot guard; remove any guard marker on
-it. A Flying creature loses, and cannot gain, the Flying trait as long as it is
-Incapacitated. Any damage barrier on an Incapacitated creature continues
-to function normally.
-Other creatures may ignore an Incapacitated creature, and it cannot hinder
+An Incapacitated creature cannot take any actions, including moving, attacking, guarding, or casting spells. It cannot use any Defenses, except for mandatory-reveal enchantments that count as a Defense.
+
+- It cannot make a counterstrike.  
+
+-It cannot guard; remove any guard marker on it. 
+
+- A Flying creature loses, and cannot gain, the Flying trait as long as it is Incapacitated. 
+
+- Any damage barrier on an Incapacitated creature continues
+to function normally. Other creatures may ignore an Incapacitated creature, and it cannot hinder
 the movement of enemies.
 An Incapacitated creature still takes an Action Phase during the round, but
 it cannot perform any actions during its Action Phase (normally, the action
