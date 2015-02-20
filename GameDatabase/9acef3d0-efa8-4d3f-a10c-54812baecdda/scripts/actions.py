@@ -1534,11 +1534,13 @@ def debug(str):
 
 def createCard(group,x=0,y=0):
         mute()
-        guid,quantity = askCard({},title="Create which card?")
+        cardName = askString("Create which card?","Enter card name here")
+        guid,quantity = askCard({'Name':cardName},title="Select card version and quantity")
         if guid and quantity:
-                card = table.create(guid,0,0,quantity,True)
-                card.isFaceUp = False
-                notify("{} created a card.".format(me))
+                cards = ([table.create(guid,0,0,1,True)] if quantity == 1 else table.create(guid,0,0,quantity,True))
+                for card in cards:
+                        card.isFaceUp = False
+                        notify("{} created a card.".format(me))
 
 def moveCard(model, x, y):
 	for c in table:
