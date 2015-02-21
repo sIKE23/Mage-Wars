@@ -1790,7 +1790,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature&apos;s quick action melee attacks gain the Counterstrike trait. The first time it makes a Counterstrike attack, destroy Retaliate." />
+			<property name="Text" value="This creature&apos;s quick action melee attacks gain the Counterstrike trait. The first time it makes a Counterstrike attack, destroy Retaliate.&#xD;&#xA;[Counterstrike]" />
 			<property name="CardID" value="MW1E33" />
 		</card>
 		<card id="732f4d7f-0cf6-4393-9446-b9360c8f18e3" name="Reverse Attack">

@@ -203,6 +203,7 @@ def getAttackList(card):
                                 if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
+                aDict['OriginalAttack'] = dict(aDict)
                 if aDict.get('Dice'): attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
         
         for c in table:
@@ -241,7 +242,7 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
         if dTraitDict.get('OwnerID'): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
         #debug(attack.get('Name','Unnamed')+': '+str(attack))
-        if not attack.get('OriginalAttack'): attack['OriginalAttack'] = attackDict #Store the original attack if one is not stored.
+        if not attack.get('OriginalAttack'): attack['OriginalAttack'] = dict(attackDict) #Store the original attack if one is not stored.
         return attack #If attack has zone attack trait, then it gains unavoidable
 
 def computeD12(dTraitDict,d12Pair):
@@ -276,12 +277,15 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
         attacker = (Card(aTraitDict['OwnerID']) if 'OwnerID' in aTraitDict else None)
         defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
         if attacker:
-                if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0)
-                if attack.get('RangeType') == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+                if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
+                        if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0)
+                        if attack.get('RangeType') == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+                #No restriction on how many times may be applied
                 if not atkTraits.get('Spell'): attackDice -= attacker.markers[Weak]
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
                 attackDice += (aTraitDict.get('Bloodthirsty',0) if (defender.markers[Damage]
+                                                                    and (attacker and not hasAttackedThisTurn(attacker))
                                                                     and not 'Plant' in defender.subtype
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
@@ -425,7 +429,7 @@ def clearLocalTurnEventList(): #Clears the part of the turnList pertaining to th
 def hasAttackedThisTurn(card):
         eventList = getEventList('Turn')
         for e in eventList:
-                if e[0] == 'Attack' and e[1][0]._id == card._id: return True
+                if e[0] == 'Attack' and e[1][0] == card._id: return True
 
 def timesHasUsedDefense(card,defenseDict):
         """Counts how many times defense has been used this ROUND"""
@@ -477,7 +481,6 @@ def defenseParser(sourceID,rawDefenseStr):
                 if '+' in d: defenseDict['Minimum'] = int(d.strip('+'))
                 if 'x' in d: defenseDict['Uses'] = int(d.strip('x'))
                 if d=='inf': defenseDict['Uses'] = 'inf'
-        debug(str(defenseDict))
         return defenseDict
 
 def getDefenseList(aTraitDict,attack,dTraitDict):
@@ -583,12 +586,12 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
                 aTraitDict = computeTraits(attacker)
                 dTraitDict = computeTraits(defender)
                 attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
-                nextPlayer = {'avoidAttackStep' : defender.controller,
+                nextPlayer = {'declareAttackStep': attacker.controller,
+                              'avoidAttackStep' : defender.controller,
                               'rollDiceStep' : attacker.controller,
                               'damageAndEffectsStep' : defender.controller,
                               'additionalStrikesStep' : attacker.controller,
                               'damageBarrierStep' : defender.controller,
-                              'counterstrikeStep' : defender.controller,
                               'counterstrikeStep' : defender.controller,
                               'attackEndsStep' : attacker.controller}[nextStepFunction]
                 remoteCall(nextPlayer,nextStepFunction,[aTraitDict,attack,dTraitDict]+([damageRoll,effectRoll] if (damageRoll != None and effectRoll != None) else []))
@@ -668,7 +671,10 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
         if attack.get('RangeType') == 'Melee':
                 counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
                 if counterAttack:
-                        declareAttackStep(dTraitDict,counterAttack,aTraitDict)
+                        counterAttack = dict(counterAttack['OriginalAttack'])
+                        counterAttack['RangeType'] = 'Counterstrike'
+                        counterAttack['OriginalAttack'] = dict(counterAttack)
+                        interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
         defender.markers[Guard] = 0
         interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')
 
@@ -712,13 +718,13 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
         
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
-        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),getStatusDict(defender).get('Mana',0)) if actualDmg else 0) #Prep for mana drain
+        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
         choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
                                                                                                           actualDmg,
                                                                                                           ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
                                                                                                           defender.Name,
                                                                                                           (' It will also drain {} mana from {}.'.format(
-                                                                                                                  str(dManaDrain),defender.Name) if dManaDrain else '')),
+                                                                                                                  str(dManaDrain),defender.controller.name) if dManaDrain else '')),
                            ['Yes','No'],
                            ["#01603e","#de2827"])
         if choice == 1:
@@ -760,10 +766,9 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                                                                     defender,
                                                                     ('! (an above' if damage > expectedDmg else '... (a below')))
         #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
-        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),getStatusDict(defender).get('Mana',0)) if damage else 0)
-        if defender.Type == 'Mage': defender.controller.Mana -= dManaDrain
-        else: defender.markers[Mana] -= dManaDrain
-        if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender))
+        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
+        defender.controller.Mana -= dManaDrain
+        if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.name))
         #Vampirism
         if (atkTraits.get('Vampiric') and drainableHealth and
             (dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type in ['Creature','Mage'] > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
