@@ -552,6 +552,30 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
                         remoteCall(attacker.controller,'whisper',['{} has disabled Battle Calculator, so generic dice menu will be used'])
                         remoteCall(attacker.controller,'genericAttack',[table])
 
+def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refusedReveal = False,damageRoll = None,effectRoll = None): #The time between steps during which attachments may be revealed. After both players pass, play proceeds to the next step.
+        mute()
+        attacker = Card(aTraitDict.get('OwnerID'))
+        defender = Card(dTraitDict.get('OwnerID'))
+        playersList = [attacker.controller,defender.controller]
+        otherPlayer = me
+        for p in playersList:
+                if p != me: otherPlayer = p
+        selfAttached = revealAttachmentQuery([attacker,defender],prevStepName)
+        if (otherPlayer == me) or (not selfAttached and refusedReveal):
+                aTraitDict = computeTraits(attacker)
+                dTraitDict = computeTraits(defender)
+                attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
+                nextPlayer = {'avoidAttackStep' : defender.controller,
+                              'rollDiceStep' : attacker.controller,
+                              'damageAndEffectsStep' : defender.controller,
+                              'additionalStrikesStep' : attacker.controller,
+                              'damageBarrierStep' : defender.controller,
+                              'counterstrikeStep' : defender.controller,
+                              'counterstrikeStep' : defender.controller,
+                              'attackEndsStep' : attacker.controller}[nextStepFunction]
+                remoteCall(nextPlayer,nextStepFunction,[aTraitDict,attack,dTraitDict]+([damageRoll,effectRoll] if (damageRoll != None and effectRoll != None) else []))
+        else: remoteCall(otherPlayer,'interimStep',[aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,(not selfAttached),damageRoll,effectRoll])
+
 def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
@@ -560,86 +584,53 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
-        revealAttachmentQuery([attacker,defender],'Declare Attack')
-        if defender.controller == me: avoidAttackStep(aTraitDict,attack,dTraitDict)
-        else: remoteCall(defender.controller,'avoidAttackStep',[aTraitDict,attack,dTraitDict])
+        interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.controller != defender.controller: revealAttachmentQuery([attacker,defender],'Declare Attack')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
-                       revealAttachmentQuery([attacker,defender],'Avoid Attack')
-                       if attacker.controller == me: additionalStrikesStep(aTraitDict,attack,dTraitDict)
-                       else: remoteCall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
+                       interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
                        return
-        revealAttachmentQuery([attacker,defender],'Avoid Attack')
-        if attacker.controller == me: rollDiceStep(aTraitDict,attack,dTraitDict)
-        else: remoteCall(attacker.controller,'rollDiceStep',[aTraitDict,attack,dTraitDict])
+        interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
 
 def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.controller != defender.controller: revealAttachmentQuery([attacker,defender],'Avoid Attack')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
         dice = attack.get('Dice',-1)
         if dice < 0:
                 notify('Error: invalid attack format - no dice found')
                 return
         damageRoll,effectRoll = rollDice(dice)
-        revealAttachmentQuery([attacker,defender],'Roll Dice')
-        if defender.controller == me: damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-        else: remoteCall(defender.controller,'damageAndEffectsStep',[aTraitDict,attack,dTraitDict,damageRoll,effectRoll])
+        interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
 
 def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #Executed by defender
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.controller != defender.controller: revealAttachmentQuery([attacker,defender],'Roll Dice')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
         damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-        revealAttachmentQuery([attacker,defender],'Damage and Effects')
-        if attacker.controller == me: additionalStrikesStep(aTraitDict,attack,dTraitDict)
-        else: remoteCall(attacker.controller,'additionalStrikesStep',[aTraitDict,attack,dTraitDict])
+        interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.controller != defender.controller: revealAttachmentQuery([attacker,defender],'Damage and Effects')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
         rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack)) #Record that the attack was declared, using the original attack as an identifier
         strikes = 1
         atkTraits = attack.get('Traits',{})
         if atkTraits.get('Doublestrike'): strikes = 2
         if atkTraits.get('Triplestrike'): strikes = 3
         if timesHasUsedAttack(attacker,attack.get('OriginalAttack',attack)) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
-        else:
-                revealAttachmentQuery([attacker,defender],'Additional Strikes')
-                if defender.controller == me: damageBarrierStep(aTraitDict,attack,dTraitDict)
-                else: remoteCall(defender.controller,'damageBarrierStep',[aTraitDict,attack,dTraitDict])
+        else: interimStep(aTraitDict,attack,dTraitDict,'Additional Strikes','damageBarrierStep')
 
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.controller != defender.controller: revealAttachmentQuery([attacker,defender],'Additional Strikes')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
         if attack.get('RangeType') == 'Melee': #Need to add: and attack *was 'successful'*
                 attackList = getAttackList(defender)
                 dBarrier = None
@@ -650,11 +641,7 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
                 if dBarrier:
                         bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
                         declareAttackStep(bTraitDict,dBarrier,aTraitDict)
-        revealAttachmentQuery([attacker,defender],'Damage Barrier')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
-        counterstrikeStep(aTraitDict,attack,dTraitDict)
+        interimStep(aTraitDict,attack,dTraitDict,'Damage Barrier','counterstrikeStep')
 
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
         mute()
@@ -665,20 +652,13 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
                 if counterAttack:
                         declareAttackStep(dTraitDict,counterAttack,aTraitDict)
         defender.markers[Guard] = 0
-        revealAttachmentQuery([attacker,defender],'Counterstrike')
-        if attacker.controller == me: attackEndsStep(aTraitDict,attack,dTraitDict)
-        else: remoteCall(attacker.controller,'attackEndsStep',[aTraitDict,attack,dTraitDict])
+        interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')
 
 def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.controller != defender.controller: revealAttachmentQuery([attacker,defender],'Counterstrike')
-        aTraitDict = computeTraits(attacker)
-        dTraitDict = computeTraits(defender)
-        attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
         setEventList('Turn',[]) #Clear the turn event list
-        pass
 
 ############################################################################
 ######################    Applying Damage and Effects   ####################
