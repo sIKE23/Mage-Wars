@@ -1248,7 +1248,7 @@
 			<property name="Stats" value="Defense=7+ 1x No Ranged, Armor=2, Life=9" />
 			<property name="AttackBar" value="Beak &amp; Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] [+2 vs. Flying]" />
 			<property name="Traits" value="Flying, Legendary" />
-			<property name="Text" value="" />
+			<property name="Text" value="Tarok&apos;s defense only works against Melee attacks from Flying creatures." />
 			<property name="CardID" value="MW1C36" />
 		</card>
 		<card id="d83c084a-1757-4402-98cb-443958e22f54" name="Thunderift Falcon">

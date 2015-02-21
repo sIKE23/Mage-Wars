@@ -400,6 +400,7 @@ Events shall be formatted thus:
 
 <A,cardID> attacks <B,cardID> with attack <C,attackDict> : [Attack,[A,B,C]]
 <A,cardID> used defense <B,defenseDict> : [Defense, [A,B]]
+<A,cardID> uses special ability number <B,int> on target <C,cardID or NoneType> : [Special, [A,B,C]]
 """
 
 
@@ -476,11 +477,13 @@ def defenseParser(sourceID,rawDefenseStr):
                 if '+' in d: defenseDict['Minimum'] = int(d.strip('+'))
                 if 'x' in d: defenseDict['Uses'] = int(d.strip('x'))
                 if d=='inf': defenseDict['Uses'] = 'inf'
+        debug(str(defenseDict))
         return defenseDict
 
 def getDefenseList(aTraitDict,attack,dTraitDict):
         #For now, just find all defenses on the creature that have not been used completely.
         #Later, we'll be more selective, and will find defenses from other sources as well
+        attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         statList = defender.Stats.split(', ')
         defenseList = []
@@ -490,7 +493,22 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
                         #Probably should actually separate so we first find the defenses, and iterate through them separately, but this will do for now.
                         if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
                                 defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
-        #Here is where we would search for other defense sources, but won't yet.
+        for c in table:
+                if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone')):
+                        rawText = c.text.split('\r\n[')
+                        traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
+                        if traitsGranted:
+                                for d in traitsGranted:
+                                        dCandidate = defenseParser(c._id,d)
+                                        if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0): defenseList.append(dCandidate)
+        #Filter out unusable defenses
+        for d in list(defenseList):
+                if (d.get('Restrictions') == 'No Melee' and attack.get('RangeType') in ['Melee','Counterstrike'] or
+                    d.get('Restrictions') == 'No Ranged' and attack.get('RangeType') == 'Ranged' or
+                    (Card(d.get('Source')).name == 'Tarok, the Skyhunter' and
+                     not (attacker.type in ['Creature','Mage'] and
+                          aTraitDict.get('Flying') and
+                          attack.get('RangeType') in ['Melee','Counterstrike']))): defenseList.remove(d)
         #We should also search for enchantment pseudo-defenses, like block.
         return defenseList
 
