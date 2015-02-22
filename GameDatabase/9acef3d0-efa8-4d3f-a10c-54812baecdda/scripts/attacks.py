@@ -328,12 +328,15 @@ def rollDice(dice):
 	global dieCard2X
 	global dieCard2Y
 
-
 	if not deckLoaded == True:
-		notify("Please Load a Spellbook first.")
-		choiceList = ['OK']
-		colorsList = ['#FF0000']
+		notify("Please Load a Spellbook first. (Ctrl+L)")
+		choiceList = ['OK','Load Blank Spellbook (not recommended)']
+		colorsList = ['#FF0000','#0000FF']
 		choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
+		if choice == 2:
+                        global blankSpellbook
+                        blankSpellbook = True
+                        onLoadDeck(me,[me.hand,table])
 		return
 
 	for c in table:
@@ -574,8 +577,12 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 
 def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refusedReveal = False,damageRoll = None,effectRoll = None): #The time between steps during which attachments may be revealed. After both players pass, play proceeds to the next step.
         mute()
+        #First, check if the attacker or defender is dead. If it is, this attack needs to end now.
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        if getRemainingLife(aTraitDict) == 0: remoteCall(attacker.controller,'deathPrompt',[aTraitDict,attack])
+        if getRemainingLife(dTraitDict) == 0: remoteCall(defender.controller,'deathPrompt',[dTraitDict,attack])
+        if getRemainingLife(aTraitDict) == 0 or getRemainingLife(dTraitDict) == 0: return
         playersList = [attacker.controller,defender.controller]
         otherPlayer = me
         for p in playersList:
@@ -756,7 +763,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
-        drainableHealth = int(round(min(getRemainingLife(defender)/float(2),damage/float(2),aDamage),0))
+        drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
@@ -784,6 +791,23 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         for e in effects:
                 if e in conditionsList: defender.markers[eval(e)]+=1
                 notify('{} {}'.format(defender,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
+
+def deathPrompt(cardTraitsDict,attack={}):
+        card = Card(cardTraitsDict.get('OwnerID'))
+        choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
+                           ["Yes","No"],
+                           ["#01603e","#de2827"])
+        if choice == 1:
+                if attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type in ['Creature','Mage']:
+                        notify('{} is messily devoured by {}!'.format(card,Card(attack.get('SourceID'))))
+                        obliterate(card)
+                elif card.markers[Zombie]:
+                        notify('Zombie {} disintgrates into a puddle of putrid flesh!'.format(card))
+                        obliterate(card)
+                else:
+                        deathMessage(cardTraitsDict,attack)
+                        discard(card)
+        else: notify("{} does not accept the destruction of {}.".format(me,card))
 
 def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment was revealed
         recommendList = getEnchantRecommendationList(step)
@@ -829,7 +853,7 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
                 
 def healingQuery(traitDict,queryText,healingAmt,notifyText):
         card = (Card(traitDict.get('OwnerID')) if traitDict.get('OwnerID') else None)
-        if not card or traitDict.get('Finite Life') or getRemainingLife(card) == 0: return
+        if not card or traitDict.get('Finite Life') or getRemainingLife(traitDict) == 0: return
         choice = askChoice(queryText,['Yes','No'],["#01603e","#de2827"])
         if choice == 1:
                 healed = 0
@@ -1039,9 +1063,10 @@ def computeArmor(aTraitDict,attack,dTraitDict):
         baseArmor = (getStat(Card(dTraitDict['OwnerID']).Stats,'Armor') if 'OwnerID' in dTraitDict else 0)
         return max(baseArmor+dTraitDict.get('Armor',0)-attack.get('Traits',{}).get('Piercing',0),0)
 
-def getRemainingLife(card):
+def getRemainingLife(cTraitDict):
+        card = Card(cTraitDict.get('OwnerID')) if cTraitDict.get('OwnerID') else None
         if not card: return 0
-        life = getStat(card.Stats,'Life')
+        life = getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0) #Preventing life gain is handled when traits are computed, not here
         if life: return max(life - card.markers[Damage] - (card.markers[Tainted]*3),0)
 
 ############################################################################
@@ -1089,7 +1114,7 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
         dice = attack.get('Dice',0)
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         defender = Card(dTraitDict['OwnerID'])
-        life = getRemainingLife(defender)# if 'OwnerID' in dTraitDict else None))
+        life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
         atkTraits = attack.get('Traits',{})
         if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
         else: return

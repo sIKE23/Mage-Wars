@@ -18,7 +18,7 @@
 		<script src="scripts/changelog.py" />
 		<script src="scripts/attacks.py" />
 		<script src="scripts/attachcards.py" />
-		<script src="scripts/help.py" />
+		<script src="scripts/textfunctions.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />

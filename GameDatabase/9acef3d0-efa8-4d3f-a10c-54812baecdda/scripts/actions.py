@@ -119,6 +119,7 @@ myIniRoll = 0
 hasRolledIni = False
 deckLoaded = False
 iniTokenCreated = False
+blankSpellbook = False
 currentPhase = ""
 gameIsOver = False
 discountsUsed = [ ]
@@ -212,6 +213,7 @@ def onLoadDeck(player, groups):
 	global debugMode
 	global playerNum
 	global iniTokenCreated
+	global blankSpellbook
 	if not bool(getGlobalVariable('diceAndPhaseCardsDone')):
                 setUpDiceAndPhaseCards()
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
@@ -223,7 +225,7 @@ def onLoadDeck(player, groups):
 				remoteCall(p, "setClearVars",[])
 			gameNum += 1
 			resetGame()
-		elif debugMode or validateDeck(groups[0]):
+		elif debugMode or blankSpellbook or validateDeck(groups[0]):
 			deckLoaded = True
 			playerSetup()
 			if debugMode:
@@ -456,6 +458,8 @@ def playerSetup():
 				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
 	#set initial health and channeling values
+	global blankSpellbook
+	if blankSpellbook: return
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
@@ -1539,8 +1543,8 @@ def createCard(group,x=0,y=0):
         if guid and quantity:
                 cards = ([table.create(guid,0,0,1,True)] if quantity == 1 else table.create(guid,0,0,quantity,True))
                 for card in cards:
-                        card.isFaceUp = False
-                        notify("{} created a card.".format(me))
+                        card.moveTo(me.hand)
+                        notify("{} created a card. Card placed in {}'s spellbook.".format(me,me))
 
 def moveCard(model, x, y):
 	for c in table:
