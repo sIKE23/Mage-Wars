@@ -305,7 +305,6 @@ def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and retu
                 if atkTraitDict[key]: attackList.append(text)
         return attackList
 
-
 def canDeclareAttack(card):
         if not card.isFaceUp: return False
         if (card.Type in ['Creature','Mage'] or
@@ -808,7 +807,7 @@ def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment
 def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         atkTraits = attack.get('Traits',{})
-        if dTraitDict.get('Incorporeal'): return roll[2] + roll[4] + (2*(roll[3]+roll[5]) if atkTraits.get('Ethereal') else 0)
+        if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + (2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
         normal = roll[2] + 2*roll[3]
         critical = roll[4] + 2*roll[5]
         return (max((0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal) - armor,0) +
@@ -819,7 +818,7 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
         modRoll = effectRoll + dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
         #debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
         effects = attack.get('d12',[])
-        if not effects: return None
+        if not effects or (dTraitDict.get('Incorporeal') and not attack.get('Traits',{}).get('Ethereal')): return None
         for effect in effects:
                 rangeStr = effect[0]
                 lowerBound, upperBound = 0,None
@@ -1094,8 +1093,8 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
         atkTraits = attack.get('Traits',{})
         if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
         else: return
-        if dTraitDict.get('Incorporeal'): return sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice)
-        return sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice)
+        if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
+        return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
