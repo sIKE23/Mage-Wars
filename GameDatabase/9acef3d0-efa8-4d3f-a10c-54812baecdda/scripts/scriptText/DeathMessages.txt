@@ -23,3 +23,4 @@ You hear the faint sound of a heavenly choir as {} passes from this world.@Type=
 {} is demolished!@Type=Conjuration,Trait=Corporeal
 {} is felled!@Type=Conjuration,Subtype=Tree
 {}'s bones crumble, eaten away to nothing by the acid!@Type=Creature,Subtype=Skeleton,DamageType=Acid
+The ethereal force of the attack rips {}'s essence apart!@Type=Creature,AttackTrait=Ethereal,Trait=Incorporeal

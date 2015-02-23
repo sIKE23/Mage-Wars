@@ -54,9 +54,10 @@ def deathMessage(traitDict,attack={}):
         Example:
         {} dies...@Type=Creature,Subtype=Guy,Trait=Living
         where
-        criteria in [DamageType,Trait,Subtype,Type,Name]
+        criteria in [DamageType,Trait,Subtype,Type,Name,AttackTrait]
         """
         card = Card(traitDict.get('OwnerID'))
+        atkTraits = attack.get('Traits',{})
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
         rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
         deathMessages = []
@@ -70,47 +71,11 @@ def deathMessage(traitDict,attack={}):
                                 (C[0] == 'Trait' and traitDict.get(C[1])) or
                                 (C[0] == 'Subtype' and C[1] in card.Subtype) or
                                 (C[0] == 'Type' and C[1] in card.Type) or
-                                (C[0] == 'Name' and C[1] == card.Name)):
+                                (C[0] == 'Name' and C[1] == card.Name) or
+                                (C[0] == 'AttackTrait' and atkTraits.get(C[1]))):
                                 violation = True
                                 break
                 if not violation: deathMessages.append(splitLine[0])
         if not deathMessages: return
         deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].format(card)
         notify(deathMessage)
-        """
-        if 'Undead' in card.Subtype:
-                deathMessages = ["{} seems almost relieved as the peace of death greets it once more.",
-                                 "The unholy magic binding {} together unravels, and it collapses to the floor!",
-                                 "The room dims briefly as dark powers flee from {}'s corpse!"]
-        elif 'Plant' in card.Subtype:
-                deathMessages = ["{} wilts and shrivels away!",
-                                 "{} collapses, its damage too extensive to regrow!"]
-        elif 'Demon' in card.Subtype:
-                deathMessages = ["{} exhales a cloud of sulfur and brimstone as it collapses!",
-                                 "{} sneers mockingly at you as the life leaves its body!",
-                                 "{} screams in exhilaration, its soul joyfully returning to the infernian depths whence it came!"]
-        elif 'Soldier' in card.Subtype and not 'Goblin' in card.Subtype:
-                deathMessages = ["{} salutes its commander with its dying breath!"
-                                 "{} dies as it lived - with honor!",
-                                 "{} screams a fearsome battle cry before succumbing to its injuries!"]
-        elif 'Canine' in card.Subtype:
-                deathMessages = ["{} whimpers and collapses!",
-                                 "{} seems to have finally mastered 'Play Dead'...",
-                                 "{} dies with a snarl upon its lips!"]
-        elif 'Angel' in card.Subtype:
-                deathMessages = ["{} falls, a beatific smile upon its lips.",
-                                 "The radiant glow fades from {} as its eyes close forever.",
-                                 "You hear the faint sound of a heavenly choir as {} passes from this world."]
-        elif traitDict.get('Incorporeal'):
-                deathMessages = ["{} dissipates into nothingness!"
-                                 "{} fades away like mist!"]
-        elif card.Type == 'Creature':
-                deathMessages = ["{} has perished in battle!",
-                                 "{} falls in combat!"]
-        elif card.Type == 'Conjuration':
-                deathMessages = ["{} crumbles to the ground!",
-                                 "{} is demolished!"]
-
-        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].format(card)
-        notify(deathMessage)
-        """
