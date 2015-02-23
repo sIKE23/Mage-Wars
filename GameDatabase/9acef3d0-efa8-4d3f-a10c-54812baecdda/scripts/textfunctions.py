@@ -14,15 +14,27 @@ def searchCodex(group, x=0, y=0):
                 if line[0] == '#':
                         if len(entry) >= 2:
                                 entry[1] = ' \n'.join(entry[1:])
-                                codexDict[entry[0]] = entry[1]
+                                keys = entry[0].split(',')
+                                for k in keys: codexDict[k] = entry[1]
                         entry = []
                 else: entry.append(line.replace('\n','').strip(' '))
         while True:
                 term = askString('What would you like to know more about?','Enter codex term here')
+                #Parse numbers into X
+                numReplaced = False
                 if not (term): break
+                for c in str(term):
+                        if isNumber(c): term = term.replace(c,'') if numReplaced else term.replace(c,'X')
                 if (codexDict.get(term) and askChoice("{}:\n{}".format(term,codexDict.get(term)),
                                                       ['Search for another term','Thanks, I\'m done'],
                                                       ['#666699','#000000']) != 1): break
+
+def isNumber(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 def getEnchantRecommendationList(step):
         """Returns a list of names of recommended enchantments to reveal"""
