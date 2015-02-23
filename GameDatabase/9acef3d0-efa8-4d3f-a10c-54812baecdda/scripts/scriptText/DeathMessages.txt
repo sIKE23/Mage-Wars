@@ -1,0 +1,25 @@
+{} seems almost relieved as the peace of death greets it once more.@Type=Creature,Subtype=Undead,Trait=Nonliving
+The unholy magic binding {} together unravels, and it collapses to the floor!@Type=Creature,Subtype=Undead
+The room dims briefly as dark powers flee from {}'s remains!@Type=Creature,Subtype=Undead
+{} wilts and shrivels away!@Type=Creature,Subtype=Plant
+{} collapses, its damage too extensive to regrow!@Type=Creature,Subtype=Plant,Trait=Living
+{} exhales a cloud of sulfur and brimstone as it collapses!@Type=Creature,Subtype=Demon
+{} sneers mockingly at you as the life leaves its body!@Type=Creature,Subtype=Demon,Trait=Living
+{} screams in exhilaration, its soul joyfully returning to the infernian depths whence it came!@Type=Creature,Subtype=Demon
+{} salutes its commander with its dying breath!@Type=Creature,Subtype=Soldier,Trait=Living
+{} dies as it lived - with honor!@Type=Creature,Subtype=Knight,Trait=Living
+{} screams a fearsome battle cry before succumbing to its injuries!@Type=Creature,Subtype=Soldier,Trait=Living
+{} whimpers and collapses!@Type=Creature,Subtype=Canine,Trait=Living
+{} seems to have finally mastered 'Play Dead'...@Type=Creature,Subtype=Canine,Trait=Living
+{} dies with a snarl upon its lips!@Type=Creature,Subtype=Canine,Trait=Living
+{} floats gently to the ground, a beatific smile upon its lips.@Type=Creature,Subtype=Angel,Trait=Flying,Trait=Living
+The radiant glow fades from {} as its eyes close forever.@Type=Creature,Subtype=Angel,Trait=Living
+You hear the faint sound of a heavenly choir as {} passes from this world.@Type=Creature,Subtype=Angel,Trait=Living
+{} dissipates into nothingness!@Trait=Incorporeal
+{} fades away like mist!@Trait=Incorporeal
+{} has perished in battle!@Type=Creature
+{} falls in combat!@Type=Creature
+{} crumbles to the ground!@Type=Conjuration,Trait=Nonliving,Trait=Corporeal
+{} is demolished!@Type=Conjuration,Trait=Corporeal
+{} is felled!@Type=Conjuration,Subtype=Tree
+{}'s bones crumble, eaten away to nothing by the acid!@Type=Creature,Subtype=Skeleton,DamageType=Acid

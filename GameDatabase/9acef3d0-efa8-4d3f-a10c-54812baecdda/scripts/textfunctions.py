@@ -48,10 +48,36 @@ def getEnchantRecommendationList(step):
                 else: recommendationList.append(line.replace('\n','').strip(' '))
         return []
 
-def deathMessage(traitDict,attack={}):#For now, we'll hardcode this here. Long term, we should move phrases to a text file.
+def deathMessage(traitDict,attack={}):
+        """
+        Format: <death message>@criterion1=value1,criterion2=value2
+        Example:
+        {} dies...@Type=Creature,Subtype=Guy,Trait=Living
+        where
+        criteria in [DamageType,Trait,Subtype,Type,Name]
+        """
         card = Card(traitDict.get('OwnerID'))
-        #Now we define sets of death phrases
+        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+        rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
         deathMessages = []
+        for line in rawData:
+                splitLine = line.replace('\n','').split('@')
+                criteriaList = splitLine[1].split(',')
+                violation = False
+                for c in criteriaList:
+                        C=c.split('=')
+                        if not ((C[0] == 'DamageType' and C[1]==attack.get('Type')) or
+                                (C[0] == 'Trait' and traitDict.get(C[1])) or
+                                (C[0] == 'Subtype' and C[1] in card.Subtype) or
+                                (C[0] == 'Type' and C[1] in card.Type) or
+                                (C[0] == 'Name' and C[1] == card.Name)):
+                                violation = True
+                                break
+                if not violation: deathMessages.append(splitLine[0])
+        if not deathMessages: return
+        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].format(card)
+        notify(deathMessage)
+        """
         if 'Undead' in card.Subtype:
                 deathMessages = ["{} seems almost relieved as the peace of death greets it once more.",
                                  "The unholy magic binding {} together unravels, and it collapses to the floor!",
@@ -84,5 +110,7 @@ def deathMessage(traitDict,attack={}):#For now, we'll hardcode this here. Long t
         elif card.Type == 'Conjuration':
                 deathMessages = ["{} crumbles to the ground!",
                                  "{} is demolished!"]
+
         deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].format(card)
         notify(deathMessage)
+        """
