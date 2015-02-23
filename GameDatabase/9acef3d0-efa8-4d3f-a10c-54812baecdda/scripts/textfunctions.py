@@ -67,12 +67,18 @@ def deathMessage(traitDict,attack={}):
                 violation = False
                 for c in criteriaList:
                         C=c.split('=')
-                        if not ((C[0] == 'DamageType' and C[1]==attack.get('Type')) or
-                                (C[0] == 'Trait' and traitDict.get(C[1])) or
-                                (C[0] == 'Subtype' and C[1] in card.Subtype) or
-                                (C[0] == 'Type' and C[1] in card.Type) or
-                                (C[0] == 'Name' and C[1] == card.Name) or
-                                (C[0] == 'AttackTrait' and atkTraits.get(C[1]))):
+                        if ((C[0] == 'DamageType' and C[1]!=attack.get('Type')) or
+                            (C[0] == 'Trait' and not traitDict.get(C[1])) or
+                            (C[0] == 'Subtype' and not C[1] in card.Subtype) or
+                            (C[0] == 'Type' and not C[1] in card.Type) or
+                            (C[0] == 'Name' and C[1] != card.Name) or
+                            (C[0] == 'AttackTrait' and not atkTraits.get(C[1])) or
+                            (C[0] == 'DamageType!' and C[1]==attack.get('Type')) or
+                            (C[0] == 'Trait!' and traitDict.get(C[1])) or
+                            (C[0] == 'Subtype!' and C[1] in card.Subtype) or
+                            (C[0] == 'Type!' and C[1] in card.Type) or
+                            (C[0] == 'Name!' and C[1] == card.Name) or
+                            (C[0] == 'AttackTrait!' and atkTraits.get(C[1]))):
                                 violation = True
                                 break
                 if not violation: deathMessages.append(splitLine[0])
