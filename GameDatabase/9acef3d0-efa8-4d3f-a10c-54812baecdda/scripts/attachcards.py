@@ -213,15 +213,33 @@ def setGlobalDictEntry(dictionary,key,value):
 def canAttach(card,target):
     """Determines whether <card> may be attached to <target>"""
     if (isAttached(target)
+        or target.type not in ['Conjuration','Creature','Conjuration-Wall','Equipment','Mage']
         or getAttachments(card)
         or card==target
         or not target in table
         or not card in table
-        or not target.isFaceUp):
-        return False
-    if (card.Type == 'Enchantment'
-        or (card.Type == 'Equipment' and target.Type == 'Mage')
-        or (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.Type == 'Creature')): return True
+        or not target.isFaceUp): return False
+    traits = computeTraits(target)
+    if card.type == 'Enchantment':
+        if ((card.Name == 'Harmonize' and 'Channeling' in target.Stats) or
+            (card.Name == 'Barkskin' and target.Name == 'Druid') or
+            (card.Name == 'Forcefield' and target.Name == 'Forcemaster') or
+            (card.Target == 'Corporeal Creature' and target.type in ['Creature','Mage'] and traits.get('Corporeal')) or
+            (card.Target == 'Creature' and target.type in ['Creature','Mage']) or
+            (card.Target == 'Friendly Living Creature' and target.type in ['Creature','Mage'] and traits.get('Living') and target.controller == card.controller) or
+            (card.Target == 'Friendly, Soldier Creature' and target.type in ['Creature','Mage'] and 'Soldier' in target.Subtype and target.controller == card.controller) or
+            (card.Target == 'Incorporeal Creature' and target.type in ['Creature','Mage'] and traits.get('Incorporeal')) or
+            (card.Target == 'Living Creature' and target.type in ['Creature','Mage'] and traits.get('Living')) or
+            (card.Target == 'Living Non-Mage Creature' and target.type == 'Creature' and traits.get('Living')) or #Ugh...
+            (card.Target == 'Mage' and target.type == 'Mage') or
+            (card.Target == 'Non-Flying Creature' and target.type in ['Creature','Mage'] and not traits.get('Flying')) or
+            (card.Target == 'Nonliving Corporeal Conjuration' and 'Conjuration' in target.type and traits.get('Corporeal')) or
+            (card.Target == 'Non-Mage Corporeal Creature' and target.type=='Creature' and traits.get('Corporeal')) or
+            (card.Target == 'Non-Mage Creature' and target.type=='Creature') or
+            (card.Target == 'Non-Mage Living Creature' and target.type=='Creature' and traits.get('Living')) or
+            (card.Target == 'Non-Mage, Non-Epic Living Creature' and target.type=='Creature' and traits.get('Living') and not traits.get('Epic'))): return True
+    if ((card.Type == 'Equipment' and target.Type == 'Mage') or
+        (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.type in ['Creature','Mage'] and traits.get('Corporeal') and not traits.get('Flying'))): return True
     return False
 
 def isAttachCardsEnabled():

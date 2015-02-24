@@ -376,7 +376,7 @@
 			<property name="CardID" value="MWBG1I02" />
 		</card>	
 		<card id="721428d1-878a-457b-8885-4e5f9bb2e20c" name="V&apos;Tar Suppression">
-			<property name="Type" value="Enchantment" />
+			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="V&apos;Tar, Curse" />
 			<property name="Cost" value="6" />
 			<property name="Action" value="Quick"  />

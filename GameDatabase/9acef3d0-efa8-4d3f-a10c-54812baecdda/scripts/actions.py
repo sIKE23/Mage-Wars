@@ -269,13 +269,13 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                                         hasAttached = False
                                         if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
                                                 for a in table:
-                                                        if (canBind(card,a) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400):
+                                                        if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
                                                                 c,t = bind(card,a)
                                                                 if t:
                                                                         actionType = ['binds','to']
                                                                         hasAttached = True
                                                                         break
-                                                        elif getSetting('AutoAttach',True) and canAttach(card,a) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400:
+                                                        elif getSetting('AutoAttach',True) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canAttach(card,a):
                                                                 c,t = attach(card,a)
                                                                 if t:
                                                                         actionType = ['attaches','to']

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Playtesting Promo&apos;s"  id="aaa10320-9e95-464a-ba92-59a5c725ca78" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.0" version="2.0.3.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Playtesting Promos"  id="aaa10320-9e95-464a-ba92-59a5c725ca78" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.0" version="2.0.3.0">
 	<markers>
 		<!-- <marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" /> -->
 	</markers>
@@ -120,7 +120,7 @@
 			<property name="Cost" value="2+2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Incorporeal Creature" />
+			<property name="Target" value="Non-Mage Living Creature" />
 			<property name="School" value="Holy"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
@@ -150,7 +150,7 @@
 			<property name="Cost" value="2+1" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Corporeal Conjuration" />
+			<property name="Target" value="Corporeal Creature" />
 			<property name="School" value="Mind"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
