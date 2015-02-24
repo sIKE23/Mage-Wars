@@ -374,7 +374,7 @@
 
 
 		<card id="fe74477b-1858-42a7-a5de-739f965944c3"  name="Adramelech&apos;s Touch">
-			<property name="Type" value="Enchantment " />
+			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Flame" />
 			<property name="Cost" value="2+1" />
 			<property name="Action" value="Quick" />

@@ -42,6 +42,7 @@ diceRollMenu:
 def diceRollMenu(attacker = None,defender = None,specialCase = None):
         mute()
         aTraitDict = (computeTraits(attacker) if attacker else {})
+        if not attacker: defender = None
         dTraitDict = (computeTraits(defender) if defender else {})
         attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
         choiceText = "Roll how many attack dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
@@ -84,7 +85,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
                 #if (attacker and attackList): return attackList[count-1]#computeAttack(aTraitDict,attackList[count-1],dTraitDict)
                 #else: return {'Dice' : count}
         elif count == len(choices)-1:
-                if attacker: return diceRollMenu(None,defender)
+                if attacker: return diceRollMenu()
                 else: #Revert to standard input menu. Default value is the last one you entered.
                         dice = min(askInteger("Roll how many Attack Dice?", getSetting('lastStandardDiceRollInput',8)),50) #max 50 dice rolled at once
                         setSetting('lastStandardDiceRollInput',dice)
@@ -580,9 +581,9 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
         #First, check if the attacker or defender is dead. If it is, this attack needs to end now.
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if getRemainingLife(aTraitDict) == 0: remoteCall(attacker.controller,'deathPrompt',[aTraitDict,attack])
-        if getRemainingLife(dTraitDict) == 0: remoteCall(defender.controller,'deathPrompt',[dTraitDict,attack])
-        if getRemainingLife(aTraitDict) == 0 or getRemainingLife(dTraitDict) == 0: return
+        if getRemainingLife(dTraitDict) == 0:
+                remoteCall(defender.controller,'deathPrompt',[dTraitDict,attack])
+                return
         playersList = [attacker.controller,defender.controller]
         otherPlayer = me
         for p in playersList:
@@ -811,22 +812,22 @@ def deathPrompt(cardTraitsDict,attack={}):
 
 def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment was revealed
         recommendList = getEnchantRecommendationList(step)
-        recurText = ''
+        recurText = 'an'
         while True:
                 aList = []
                 for card in cardList:
                         aList.extend([c for c in getAttachments(card) if (c.controller == me and
                                                                           not c.isFaceUp and
                                                                           c.Name in recommendList)])
-                if not aList: return (False if recurText == '' else True)
+                if not aList: return (False if recurText == 'an' else True)
                 options = ['{}\n{}\n{}'.format(c.Name.center(68,' '),(('('+getAttachTarget(c).Name+')').center(68,' ')),c.Text.split('\r\n')[0]) for c in aList]
                 colors = ['#CC6600' for i in options] #Orange
                 options.append('I would not like to reveal an enchantment.')
                 colors.append("#de2827")
-                choice = askChoice('Would you like to reveal an enchantment?',options,colors)
-                if choice == len(options): return (False if recurText == '' else True)
+                choice = askChoice('Would you like to reveal {} enchantment?'.format(recurText),options,colors)
+                if choice == len(options): return (False if recurText == 'an' else True)
                 castSpell(aList[choice-1])
-                recurText = 'another '
+                recurText = 'another'
 
 def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
@@ -888,6 +889,7 @@ def computeTraits(card):
         rawTraitsList.extend(listedTraits)
 
         if (card.name == 'Sentry Gargoyle' and card.markers[Guard]): rawTraitsList.extend(['Armor +3','Tough -3'])
+        elif (card.name == 'Dwarf Panzergarde' and card.markers[Guard]): rawTraitsList.extend(['Defense +3'])
         #Dragonclaw wolverine, but we need rage markers for its ability.
         
         for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
@@ -910,7 +912,7 @@ def computeTraits(card):
                                 #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
                                 if (card.name == 'Skeelax, Taunting Imp'
                                     and c.markers[Burn]): rawTraitsList.append('Regenerate 2') #and phase = upkeep, but I don't think this matters for now.
-                                if (card.name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and
+                                elif (card.name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and
                                     c.name == "V'tar Orb"): rawTraitsList.extend(['Unmovable','Anchored'])
                                 if c.type == 'Enchantment':
                                         if (c.name == 'Fortified Position' and

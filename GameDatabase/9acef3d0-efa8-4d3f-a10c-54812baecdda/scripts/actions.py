@@ -402,24 +402,24 @@ def playerDone(group, x=0, y=0):
 def attackTarget(attacker, x=0, y=0):
         mute()
         if attacker.controller == me and canDeclareAttack(attacker) and getSetting('BattleCalculator',True):
-                snapToZone(attacker)
+                #snapToZone(attacker)
                 target = [c for c in table if c.targetedBy==me]
                 aTraitDict = computeTraits(attacker)
                 if len(target) == 1:
                         defender = target[0]
-                        if defender.controller == me: snapToZone(defender)
-                        else: remoteCall(defender.controller,'snapToZone',[defender])
+                        #if defender.controller == me: snapToZone(defender)
+                        #else: remoteCall(defender.controller,'snapToZone',[defender])
                         dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(attacker,defender)
-                        if attack:
-                                if defender.controller == me: initializeAttackSequence(aTraitDict,attack,dTraitDict)
-                                else: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
-                elif len(target) == 0: #Untargeted attack
-                        attack = diceRollMenu(attacker,None)
-                        dice = attack.get('Dice',-1)
-                        if dice >= 0:
-                                notify("{} attacks with {}".format(me,attacker))
-                                roll,effect = rollDice(dice)
+                        if attack and attack.get('SourceID')==attacker._id: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
+                        else: rollDice(attack.get('Dice',0))
+                        return
+                #Untargeted attack
+                attack = diceRollMenu(attacker,None)
+                dice = attack.get('Dice',-1)
+                if dice >= 0:
+                        notify("{} attacks with {}".format(me,attacker))
+                        roll,effect = rollDice(dice)
         else: genericAttack(table) #If the card you are targeting cannot attack, or the battle calculator is off, just go to the generic attack menu
 
 def genericAttack(group, x=0, y=0):

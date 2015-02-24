@@ -308,7 +308,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=-, Life=9" />
-			<property name="AttackBar" value="Corrosive Juices:&#xD;&#xA;[Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode 9+ = 2 Corrode] [Devour]" />
+			<property name="AttackBar" value="Corrosive Juices:&#xD;&#xA;[Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode; 9+ = 2 Corrode] [Devour]" />
 			<property name="Traits" value="Resilient, Uncontainable, Nonliving, Slow, Psychic Immunity, Acid Immunity" />
 			<property name="Text" value="Whenever Devouring Jelly attacks and damages a Corporeal creature, it may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC03" />

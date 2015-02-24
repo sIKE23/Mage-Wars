@@ -219,7 +219,12 @@ def canAttach(card,target):
         or not target in table
         or not card in table
         or not target.isFaceUp): return False
+    attachments = getAttachments(target)
+    for a in attachments:
+        if (a.isFaceUp or a.controller == me) and a.Name == card.Name: return False
     traits = computeTraits(target)
+    for s in card.Subtype.split(', '):
+        if s in traits.get('Immunity',[]): return False
     if card.type == 'Enchantment':
         if ((card.Name == 'Harmonize' and 'Channeling' in target.Stats) or
             (card.Name == 'Barkskin' and target.Name == 'Druid') or
