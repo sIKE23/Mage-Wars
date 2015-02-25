@@ -32,12 +32,14 @@ Sticky sap flies everywhere as {} bursts apart!@Type=Creature,Trait=Living,Subty
 {}'s bones crumble, eaten away to nothing by the acid!@Type=Creature,Subtype=Skeleton,DamageType=Acid
 The ethereal force of the attack rips {}'s essence apart!@Type=Creature,AttackTrait=Ethereal,Trait=Incorporeal
 {} gurgles as its life-blood spills upon the arena floor!@Type=Creature,Trait=Living,Subtype!=Plant
+It's super effective!@Type=Creature,DamageType=Flame,Subtype=Plant
+{} does not go gentle into that good night.@Type=Creature,Trait=Living
 
 #Lukard
 {} should never have returned from the dead to begin with.@Subtype=Undead
 {} served its purpose.@Type=Creature
-Did you forget to water {}?@Subtype=Plant,Subtype=Vine
+Did somebody forget to water {}?@Subtype=Plant,Subtype=Vine
 
 
-#AWF 1
+#AWF 2
 #BGG 0

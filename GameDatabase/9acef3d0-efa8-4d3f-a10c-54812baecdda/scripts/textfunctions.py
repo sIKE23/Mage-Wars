@@ -84,5 +84,5 @@ def deathMessage(traitDict,attack={}):
                                 break
                 if not violation: deathMessages.append(splitLine[0])
         if not deathMessages: return
-        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].format(card)
+        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('{}',card.name)
         notify(deathMessage)

@@ -170,7 +170,6 @@ def getAttackList(card):
                 aDict = {'Name':name,
                          'd12':[],
                          'Traits': {},
-                         'SourceID': card._id,
                          'EffectType': 'Attack'         #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
                 if isAttackSpell:
@@ -216,6 +215,8 @@ def getAttackList(card):
         if 'Familiar' or 'Spawnpoint' in card.Traits:
                 for c in table:
                         if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getBindTarget(c)==card): attackList.extend(getAttackList(c))
+        for a in attackList:
+                a['SourceID'] = card._id
         return attackList
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
