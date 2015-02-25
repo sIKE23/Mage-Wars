@@ -63,6 +63,7 @@ def deathMessage(traitDict,attack={}):
         deathMessages = []
         for line in rawData:
                 splitLine = line.replace('\n','').split('@')
+                if len(splitLine)!=2: continue
                 criteriaList = splitLine[1].split(',')
                 violation = False
                 for c in criteriaList:
