@@ -212,39 +212,46 @@ def setGlobalDictEntry(dictionary,key,value):
 
 def canAttach(card,target):
     """Determines whether <card> may be attached to <target>"""
-    if (isAttached(target)
-        or target.type not in ['Conjuration','Creature','Conjuration-Wall','Equipment','Mage']
-        or getAttachments(card)
-        or card==target
+    tType = target.Type
+    if (card==target
         or not target in table
         or not card in table
-        or not target.isFaceUp): return False
+        or tType not in ['Conjuration','Creature','Conjuration-Wall','Equipment','Mage']
+        or not target.isFaceUp
+        or isAttached(target)
+        or getAttachments(card)): return False
+    cName = card.Name
+    tName = target.Name
+    cTargetBar = card.Target
+    cType = card.Type
     attachments = getAttachments(target)
+    cController = card.controller
+    tController = target.controller
     for a in attachments:
-        if (a.isFaceUp or a.controller == me) and a.Name == card.Name: return False
+        if (a.isFaceUp or a.controller == me) and a.Name == cName: return False
     traits = computeTraits(target)
     for s in card.Subtype.split(', '):
         if s in traits.get('Immunity',[]): return False
-    if card.type == 'Enchantment':
-        if ((card.Name == 'Harmonize' and 'Channeling' in target.Stats) or
-            (card.Name == 'Barkskin' and target.Name == 'Druid') or
-            (card.Name == 'Forcefield' and target.Name == 'Forcemaster') or
-            (card.Target == 'Corporeal Creature' and target.type in ['Creature','Mage'] and traits.get('Corporeal')) or
-            (card.Target == 'Creature' and target.type in ['Creature','Mage']) or
-            (card.Target == 'Friendly Living Creature' and target.type in ['Creature','Mage'] and traits.get('Living') and target.controller == card.controller) or
-            (card.Target == 'Friendly, Soldier Creature' and target.type in ['Creature','Mage'] and 'Soldier' in target.Subtype and target.controller == card.controller) or
-            (card.Target == 'Incorporeal Creature' and target.type in ['Creature','Mage'] and traits.get('Incorporeal')) or
-            (card.Target == 'Living Creature' and target.type in ['Creature','Mage'] and traits.get('Living')) or
-            (card.Target == 'Living Non-Mage Creature' and target.type == 'Creature' and traits.get('Living')) or #Ugh...
-            (card.Target == 'Mage' and target.type == 'Mage') or
-            (card.Target == 'Non-Flying Creature' and target.type in ['Creature','Mage'] and not traits.get('Flying')) or
-            (card.Target == 'Nonliving Corporeal Conjuration' and 'Conjuration' in target.type and traits.get('Corporeal')) or
-            (card.Target == 'Non-Mage Corporeal Creature' and target.type=='Creature' and traits.get('Corporeal')) or
-            (card.Target == 'Non-Mage Creature' and target.type=='Creature') or
-            (card.Target == 'Non-Mage Living Creature' and target.type=='Creature' and traits.get('Living')) or
-            (card.Target == 'Non-Mage, Non-Epic Living Creature' and target.type=='Creature' and traits.get('Living') and not traits.get('Epic'))): return True
-    if ((card.Type == 'Equipment' and target.Type == 'Mage') or
-        (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.type in ['Creature','Mage'] and traits.get('Corporeal') and not traits.get('Flying'))): return True
+    if cType == 'Enchantment':
+        if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
+            (cName == 'Barkskin' and tName == 'Druid') or
+            (cName == 'Forcefield' and tName == 'Forcemaster') or
+            (cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
+            (cTargetBar == 'Creature' and tType in ['Creature','Mage']) or
+            (cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
+            (cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in target.Subtype and tController == cController) or
+            (cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
+            (cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
+            (cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or #Ugh...
+            (cTargetBar == 'Mage' and tType == 'Mage') or
+            (cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
+            (cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
+            (cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
+            (cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
+            (cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
+            (cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic'))): return True
+    elif ((cType == 'Equipment' and tType == 'Mage') or
+        (cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and traits.get('Corporeal') and not traits.get('Flying'))): return True
     return False
 
 def isAttachCardsEnabled():
@@ -261,7 +268,9 @@ def bind(card,target):
     """Controller of <card> may attach it to <target>."""
     mute()
     detach(card)
-    if card.controller == me and canBind(card,target):
+    if card.controller == me:
+        b = getBound(target)
+        if b: unbind(b)
         detachAll(card)
         setGlobalDictEntry("bindDict",card._id,target._id)
         remoteCall(target.controller,'alignBound',[target])
@@ -281,8 +290,8 @@ def getBound(card):
     """Returns the card bound to <card>"""
     mute()
     bDict = eval(getGlobalVariable("bindDict"))
-    for key in bDict:
-        if bDict[key]==card._id: return Card(key)
+    bound = map(lambda key: Card(key),[k for k in bDict if bDict[k]==card._id])
+    if bound: return bound[0]
 
 def getBindTarget(card):
     mute()
@@ -307,42 +316,41 @@ def moveAndSetIndex(card,x,y,z):
     card.setIndex(z)
 
 def canBind(card,target):
-    global currentPhase
     """Determines whether <card> may be attached to <target>"""
-    if (isAttached(target)
-        or currentPhase != 'Planning'
-        or getAttachments(card)
-        or getBound(card)
-        or card==target
+    if (card==target
         or not target in table
         or not card in table
-        or not target.isFaceUp):
-        return False
+        or isAttached(target)
+        or getAttachments(card)
+        or getBound(card)
+        or getBound(target)
+        or not target.isFaceUp): return False
+    tName = target.Name
 #Familiars
-    if ((target.name == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
-        or (target.name == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
+    if ((tName == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+        or (tName == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
         #or sectarus, but I haven't got around to it yet.
-        or (target.name == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
-        or (target.name == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.School)) and sum([int(i) for i in card.level.split('+')])<=2)
-        or (target.name == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
-        or (target.name == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
-        or (target.name == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
+        or (tName == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
+        or (tName == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.Subtype)) and sum([int(i) for i in card.level.split('+')])<=2)
+        or (tName == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
+        or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
+        or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
 #Spawnpoints
-        or (target.name == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype)
-        or (target.name == 'Battle Forge' and card.Type == 'Equipment')
-        or (target.name == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School)
-        or (target.name == 'Lair' and card.Type == 'Creature' and 'Animal' in card.School)
-        or (target.name == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-        or (target.name == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School)
-        or (target.name == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-        or (target.name == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Sybtype)
-        or (target.name == 'Samara Tree' and card.name == 'Seedling Pod')
-        or (target.name == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Sybtype)
-        or (target.name == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
+        or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype)
+        or (tName == 'Battle Forge' and card.Type == 'Equipment')
+        or (tName == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School)
+        or (tName == 'Lair' and card.Type == 'Creature' and 'Animal' in card.Subtype)
+        or (tName == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (tName == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School)
+        or (tName == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Sybtype)
+        or (tName == 'Samara Tree' and card.name == 'Seedling Pod')
+        or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Sybtype)
+        or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
 #Spellbind (only)
-        or (target.name == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
-        or (target.name == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
-        or (target.name == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
+        or (tName == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
+        or (tName == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
+        or (tName == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
         return True
     return False
 
