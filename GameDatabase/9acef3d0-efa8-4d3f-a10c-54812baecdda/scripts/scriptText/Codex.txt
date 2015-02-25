@@ -775,55 +775,63 @@ to take.
 ####################
 ######## CoK #######
 ####################
-Bleed
-This creature has suffered a deep bleeding wound. Bleed only
-affects Living non-plant creatures. Each Upkeep Phase, place one
-direct damage on this creature. Whenever this creature heals or
-regenerates, you may remove 1 Bleed condition for
-each point of healing you cancel. Finite Life prevents
-healing and regeneration. As such, Bleed markers
-cannot be removed through healing. Effects that allow
-you to remove conditions can still remove Bleed
-markers. The marker has a removal cost of 2.
+Bleed,Bleeding
+Each Upkeep Phase, place one direct damage on this creature.
+
+- Only affects Living non-Plant creatures. 
+
+- Whenever this creature heals or regenerates (even if it has no damage), you may cancel any amount of that healing to remove 1 Bleed condition for each point of healing cancelled.
+
+- Finite Life prevents healing and regeneration, and thus the removal of Bleed markers by those means.
+
+- Removal cost of 2.
 #
 Extinguish
-This attack will extinguish fires. During the Roll Dice Step of this attack, reduce the number of attack dice rolled
-by X (to a minimum of 1), and subtract X from the effect die roll, where X = the # of Burn conditions on the
-Defender. Then, remove all Burn conditions on the Defender.
+This attack will extinguish fires. During the Roll Dice Step of this attack, reduce the number of attack dice rolled by X (to a minimum of 1), and subtract X from the effect die roll, where X = the # of Burn conditions on the Defender. Then, remove all Burn conditions on the Defender.
+
+- Hydro attacks with the Extinguish trait may target creatures with Hydro Immunity, but do no damage or effects (they just remove burns). So yes, you may 'water your plants'.
 #
 Intercept
-If this creature is guarding, and if a ranged attack targets a non-flying
-object in the same zone, this creature may redirect that ranged
-attack to itself, as long as it can be a legal target for that attack. The
-Intercept is announced and occurs immediately after the Declare
-Attack Step (and before the Avoid Attack Step). It loses its guard
-marker at the end of the attack which it intercepts. Cannot Intercept
-a zone attack. Cannot Intercept if Restrained or Incapacitated.
+If this creature is guarding, and if a ranged attack targets a non-flying object in the same zone, this creature may redirect that ranged attack to itself, as long as it can be a legal target for that attack. 
+
+- Intercept is announced and occurs immediately after the Declare Attack Step (and before the Avoid Attack Step). 
+
+- Loses guard marker at the end of the attack.
+
+- Cannot Intercept a zone attack. 
+
+- Cannot Intercept if Restrained or Incapacitated.
 #
 Prevention Effects
-Some spells may prevent an event from taking place unless a cost is paid. Examples are Armor Ward
-and Enchanter's Wardstone. This cost must be paid for each object that would be affected, or the
-effect is canceled for that object. You can choose which objects to pay the cost for.
+Some spells may prevent an event from taking place unless a cost is paid. This cost must be paid for each object that would be affected, or the
+effect is canceled for that object. 
+
+- You can choose which objects to pay the cost for.
+
+- Examples are Armor Ward and Enchanter's Wardstone.
 #
 Stuck
-Creature is Restrained and Unmovable. At the
-end of each of its Action Phases, a Stuck creature
-may attempt an escape roll: on a roll of 7 or
-higher, remove Stuck. If this creature is Teleported,
-destroy all Stuck conditions on it. Stuck has no
-effect on Conjurations and Uncontainable objects. Stuck has a
-removal cost of 4.
+Creature is Restrained and Unmovable. At the end of each of its Action Phases, a Stuck creature may attempt an escape roll: on a roll of 7 or
+higher, remove Stuck. 
+
+- Each Stuck condition must be removed separately, but you may roll for each one.
+
+- If this creature is Teleported, destroy all Stuck conditions on it. 
+
+- Stuck has no effect on Conjurations and Uncontainable objects. 
+
+- Removal cost of 4.
 #
-Tainted
-This cursed or venomous attack creates a tainted
-or infected wound that will not heal. Tainted is
-a poison condition. The marker counts as three
-damage, and this damage cannot be healed or
-regenerated. The marker has a removal cost of 3,
-and can be removed normally by spells or abilities which remove
-conditions, even if the Tainted object has the Finite Life trait. A
-Tainted marker placed by an attack does not count as damage
-dealt by the attack.
+Tainted,Taint
+A wound that will not heal. The marker counts as three damage, and this damage cannot be healed or regenerated.
+
+- Poison condition.  
+
+- Removal cost of 3,
+
+- Can be removed normally by spells or abilities which remove conditions even if the Tainted object has Finite Life.
+
+- A Tainted marker placed by an attack does not count as damage dealt by the attack.
 ####################
 ######## DvN #######
 ####################
@@ -907,7 +915,7 @@ This creature is rooted to the ground. It cannot take move actions, and it has t
 
 - A Rooted creature loses, and cannot gain, the Flying trait.
 #
-Snatch
+Snatch,Snatched
 This attack can grab and pull creatures into its zone. Snatch is a Push effect, where the object is Pushed one zone closer towards the source of the Push. 
 - Snatch has no effect on Uncontainable or Unmovable creatures.
 #
@@ -915,9 +923,9 @@ Uproot X,Uproot
 This creature can uproot itself from the ground and move freely. When this creature is activated, you may pay X mana. If you do, it loses the Rooted trait until the end of its Action Phase.
 #
 Vigilant
-This creature is constantly guarding, protecting, or sheltering friendly objects. At the end of its Action Phase you may place a Guard marker on this creature, if it does not already have one.
+This creature is constantly protecting friendly objects. At the end of its Action Phase you may place a Guard marker on this creature, if it does not already have one.
 #
-Vine Markers
+Vine Markers,Vine,Vines
 Vine markers are a Living conjuration with 1 life, no armor, and they cannot gain armor. As the Druid, or a familiar or tree spawnpoint she controls, casts a vine spell, you can destroy a target Vine marker she controls as an additional cost to cast that spell. If you do, you may ignore the range of that spell to target that Vine marker's zone, an object in that Vine marker's zone, or a border of that Vine marker's zone.
 
 - Vine markers hinder enemy non-Flying
@@ -932,6 +940,8 @@ creatures.
 Zombie,Zombie Marker,Zombie Token
 This creature has been raised from the dead. It gains the undead and zombie subtypes. It gains the Psychic Immunity, Slow, Nonliving, and Bloodthirsty +0 traits. 
 
+- Not to be confused with creatures that naturally have the zombie subtype.
+
 - The Zombie marker has no removal cost and cannot be removed by spells or effects which remove condition markers. 
 
 - If this creature would be destroyed, Obliterate it. 
@@ -940,34 +950,22 @@ This creature has been raised from the dead. It gains the undead and zombie subt
 ####################
 ######## FiF #######
 ####################
-Disable
-Disable is a condition that temporarily
-prevents an object from functioning. If an
-object has one or more Disable markers
-on it, it is Disabled. Disabled objects lose
-all attack bars, action bars, and non-trait
-abilities. (An ability is anything in the card's text box,
-except what defines “X” for cards that have an attribute
-or mana cost dependent on X.) It does not lose any of
-its attributes or its subtypes (attributes include Life,
-Armor, Defenses and Channeling). Each Reset Phase,
-remove one Disable marker from each object, unless
-that Disable marker was placed during that Ready
-Phase. For objects with multiple Disable markers on
-them, remove only one each Reset Phase. Disable does
-not have a removal cost and cannot be removed by
-spells or abilities which remove condition markers.
+Disable,Disabled
+Temporarily prevents an object from functioning. If an object has one or more Disable markers on it, it loses all attack bars, action bars, and non-trait
+abilities.
+
+- An ability is anything in the card's text box, except what defines "X" for cards that have an attribute or mana cost dependent on X. 
+
+- It does not lose any of its attributes or its subtypes
+
+- Attributes include Life, Armor, Defenses and Channeling. 
+
+- Each Reset Phase, remove one Disable marker from each object, unless that Disable marker was placed during that Ready Phase. 
+
+- Cannot be removed by spells or abilities which remove condition markers.
 #
 Dissipate X
-Objects with Dissipate X only last a short while before
-dispersing. When an object with Dissipate X comes
-into play, it gets “X” Dissipate tokens. Each Upkeep
-Phase, remove one Dissipate token. When the last
-token is removed, destroy this object.
+When an object with Dissipate X comes into play, it gets X Dissipate tokens. Each Upkeep Phase, remove one Dissipate token. When the last token is removed, destroy this object.
 #
 Unstoppable
-This creature is exceptionally large, heavy, and/or
-strong, possibly animated by powerful magics. It is
-virtually impossible to hold or push. This creature
-cannot be hindered. It also has both the Unmovable
-and Uncontainable traits.
+This creature is exceptionally large, heavy, and/or strong, possibly animated by powerful magics. It cannot be hindered and gains the Unmovable and Uncontainable traits.
