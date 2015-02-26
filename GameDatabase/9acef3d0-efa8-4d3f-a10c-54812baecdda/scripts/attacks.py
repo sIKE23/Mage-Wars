@@ -207,7 +207,8 @@ def getAttackList(card):
         for c in table:
                 if card.Type == 'Mage':
                         if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and c.isFaceUp and
-                            (getAttachTarget(c) == card or (not canDeclareAttack(getAttachTarget(c)) if getAttachTarget(c) else True))):
+                            (getAttachTarget(c) == card or (not canDeclareAttack(getAttachTarget(c)) if getAttachTarget(c) else True)) and
+                            not c.markers[Disable]):
                                 attackList.extend(getAttackList(c))
                 if c.Type == 'Enchantment' and getAttachTarget(c) == card and c.AttackBar:
                         attackList.extend(getAttackList(c))
@@ -511,7 +512,7 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
                         if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
                                 defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
         for c in table:
-                if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone')):
+                if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone') and not c.markers[Disable]):
                         rawText = c.text.split('\r\n[')
                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
                         if traitsGranted:
@@ -623,10 +624,17 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         defender = Card(dTraitDict.get('OwnerID'))
         #Ask whether charging, if applicable
         if aTraitDict.get('Charge') and attack.get('RangeType') == 'Melee' and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker)
-        #Declare Attack - done. That was calling this function.
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
+        #Check for daze
+        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier':
+                damageRoll,effectRoll = rollDice(0)
+                if effectRoll < 7:
+                        notify("{} is so dazed that it completely misses!".format(attacker))
+                        interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
+                        return
+                else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker))
         interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
@@ -987,7 +995,7 @@ def computeTraits(card):
                                         #Victorian Gryffin, but I don't feel like adding it right now
                                 elif cType == 'Incantation': pass
                         if cardType == 'Mage':
-                                if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card):
+                                if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
                                         rawText = c.text.split('\r\n[')
                                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
                                         extend(traitsGranted)
@@ -1037,6 +1045,7 @@ def computeTraits(card):
         if markers[Sleep] or markers[Stun]: append('Incapacitated')
         if markers[Zombie] : extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
         if markers[Stuck] : extend(['Restrained','Unmovable'])
+        if markers[Daze]: append('Defense -{}'.format(str(markers[Daze])))
         
         if markers[Pet] and 'Animal' in subtype: extend(['Melee +1','Armor +1','Life +3'])
         if markers[BloodReaper] and 'Demon' in subtype: append('Bloodthirsty +2')
