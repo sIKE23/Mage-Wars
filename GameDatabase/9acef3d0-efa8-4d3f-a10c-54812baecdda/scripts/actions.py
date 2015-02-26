@@ -2202,7 +2202,7 @@ mapMultipleCreatureOffset = 62
 
 mapTileDict =  {
                 "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #Dropped Weapon
-                "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Mist
+                "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Pool
                 "3" : "8972d2d1-348c-4c4b-8c9d-a1d235fe482e", #Altar of Oblivion
                 "4" : "a21d1889-acf1-4121-b1d1-991f3f294f1d", #Secret Passage
                 "5" : "a47fa32e-ac83-4ced-8f6a-23906ee38880", #Septagram

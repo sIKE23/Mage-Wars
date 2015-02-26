@@ -1,0 +1,14 @@
+...*
+6..2
+*...
+#Map#
+
+..o.
+.oo.
+.o..
+#Objects#
+
+1.s.
+.ss.
+.s.2
+#Creatures#

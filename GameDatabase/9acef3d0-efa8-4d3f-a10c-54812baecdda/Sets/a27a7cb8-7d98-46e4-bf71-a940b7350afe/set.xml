@@ -102,7 +102,7 @@
 		<card id="5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64" name="Dropped Weapon" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>
-		<card id="6136ff26-d2d9-44d2-b972-1e26214675b5" name="Corrosive Mist" size="ModularBoardPieces" >
+		<card id="6136ff26-d2d9-44d2-b972-1e26214675b5" name="Corrosive Pool" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>
 		<card id="8972d2d1-348c-4c4b-8c9d-a1d235fe482e" name="Altar of Oblivion" size="ModularBoardPieces" >

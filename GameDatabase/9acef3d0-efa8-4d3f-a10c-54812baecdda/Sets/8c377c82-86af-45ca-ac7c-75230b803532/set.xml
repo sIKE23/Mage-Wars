@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Mage Wars Battlegrounds: Domination" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.12.0.0">
 	<markers>
-		<marker id="3274d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />
+		<marker id="a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage" />
 		<marker id="8731f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap" />
+		<marker id="3c74d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />
+		<marker id="3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb On" />
+		<marker id="3f056a2d-3045-4f38-ae8b-f2155250f4dc" name="V&apos;Tar Orb Off" />
+		<marker id="c56839d2-46f4-49a8-85e4-3838e7f09cc2" name=Control Marker Red"" />
+		<marker id="da724182-3695-4124-becc-928eb870c5dc" name="Control Marker Blue" />
+		<marker id="e97408e7-985b-46d9-a5e7-98ffb4a3f587" name="Control Marker Green" />
+		<marker id="fe2adfab-4cda-4a1d-843a-84865747ff98" name="Control Marker Yellow" />
+		<marker id="4a5ae073-693a-48d4-9c43-0c220668f585" name="3 V&apos;Tar" />
+		<marker id="5018cced-2d6b-4aaa-9bde-12e9b10740b5" name="5 V&apos;Tar" />
 	</markers>
 	<cards>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="Bolt of V&apos;Tar">
