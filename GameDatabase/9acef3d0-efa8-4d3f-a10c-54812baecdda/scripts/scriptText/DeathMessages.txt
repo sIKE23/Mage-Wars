@@ -1,4 +1,3 @@
-#ACG
 {} seems almost relieved as the peace of death greets it once more.@Type=Creature,Subtype=Undead,Trait=Nonliving
 The unholy magic binding {} together unravels, and it collapses to the floor!@Type=Creature,Subtype=Undead
 The room dims briefly as dark powers flee from {}'s remains!@Type=Creature,Subtype=Undead
@@ -34,8 +33,6 @@ The ethereal force of the attack rips {}'s essence apart!@Type=Creature,AttackTr
 {} gurgles as its life-blood spills upon the arena floor!@Type=Creature,Trait=Living,Subtype!=Plant
 It's super effective!@Type=Creature,DamageType=Flame,Subtype=Plant
 {} does not go gentle into that good night.@Type=Creature,Trait=Living
-
-#Lukard
 {} should never have returned from the dead to begin with.@Subtype=Undead
 {} served its purpose.@Type=Creature
 Did somebody forget to water {}?@Subtype=Plant,Subtype=Vine

@@ -29,6 +29,27 @@ def searchCodex(group, x=0, y=0):
                                                       ['Search for another term','Thanks, I\'m done'],
                                                       ['#666699','#000000']) != 1): break
 
+def getRulingsAndClarifications(card, x=0, y=0):
+        if not (card.isFaceUp or card.controller == me):
+                whisper('You do not have permission to view that card')
+                return
+        name = card.name
+        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+        rawList = list(open('{}\{}{}'.format(textDirectory,'RulingsAndClarifications','.txt'),'r'))
+        entry = []
+        for line in rawList:
+                if line and line[0] == '#':
+                        if len(entry) >= 2:
+                                entry[1] = ' \n'.join(entry[1:])
+                                if entry[0].replace('\n','') == name:
+                                        askChoice("{}:\n{}".format(name,entry[1]),['Done'],['#000000'])
+                                        return
+                                entry = []
+                else: entry.append(line.replace('\n','').strip(' '))
+        askChoice("This spell does not appear to have any rulings or clarifications. Let us know if there is a clarfication or ruling that you would like to see added!"
+                  ,['Done']
+                  ,['#000000'])
+
 def isNumber(s):
     try:
         float(s)

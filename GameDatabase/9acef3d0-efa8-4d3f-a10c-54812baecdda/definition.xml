@@ -184,6 +184,7 @@
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">
 		<counter name="Channeling" default="0" reset="True" icon="counters/channeling.png" />
@@ -192,6 +193,7 @@
 		<counter name="Life" default="0" reset="True" icon="counters/life.png" />
 		<hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
 			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 		</hand>
 		<group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
