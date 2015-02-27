@@ -171,11 +171,13 @@ def getAttackList(card):
                          'd12':[],
                          'Traits': {},
                          'EffectType': 'Attack',
-                         'SourceID': card._id
+                         'SourceID': card._id,
+                         'OriginalSourceID': card._id
                          #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
                 if isAttackSpell:
                         aDict['Range'] = [int(r) for r in card.Range.split('-')]
+                        aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
                 #Now we extract the attributes
                 effectSwitch = False
                 for attribute in attributes:
@@ -187,7 +189,6 @@ def getAttackList(card):
                         elif 'Melee' in attribute:
                                 aDict['RangeType'] = 'Melee'
                                 aDict['Range'] = [0,0]
-                        
                         elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
                         elif attribute == 'Heal' : aDict['EffectType'] = 'Heal'
                         elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
@@ -261,8 +262,14 @@ def computeD12(dTraitDict,d12Pair):
                           'Psychic' : ['Sleep'],
                           'Acid' : ['Corrode'],
                           'Poison' : ['Rot','Cripple','Tainted','Weak']}
+        #First, make replacements for slamming unmovable creatures
+        if dTraitDict.get('Unmovable'):
+                for n,i in enumerate(effects):
+                        if i == 'Slam': effects[n] = 'Daze'
+        #Then make removals
         for e in effects:
                 illegalEffect = False
+
                 for i in dTraitDict.get('Immunity',[]):
                         if (e in conditionTypes.get(i,[])): illegalEffect = True
                 if ((e=='Burn' and dTraitDict.get('Burnproof'))
@@ -924,10 +931,6 @@ def computeTraits(card):
         elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: remove('Living')
         if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: remove('Corporeal')
         extend(listedTraits)
-
-        if (name == 'Sentry Gargoyle' and markers[Guard]): extend(['Armor +3','Tough -3'])
-        elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
-        #Dragonclaw wolverine, but we need rage markers for its ability.
         
         for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
                 cName = c.name
@@ -948,6 +951,7 @@ def computeTraits(card):
                                                 if isWithOrb:
                                                         extend(['Unmovable','Anchored'])
                                                         if markers[Guard]: extend(['Armor +2','Melee +1'])
+                                elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
                         # Get traits from cards in this zone
                         if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
                                 #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
@@ -1033,7 +1037,7 @@ def computeTraits(card):
                         elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
                         elif (cName == 'Rolling Fog'): append('Obscured')
                         elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
-                        elif (cName == 'Gravikor' and cardType == 'Creature' and cardGetDistance(c,card)<=2): rawTraitsList = [t for t in rawTraitsList if t != 'Flying']
+                        elif (cName == 'Gravikor' and cardType == 'Creature' and cardGetDistance(c,card)<=2): append('Non-Flying')
                         #>>Altar of Skulls<<
                         #Incantations
                         elif (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])
@@ -1047,7 +1051,7 @@ def computeTraits(card):
         if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))
         if markers[Growth]: extend(['Life +{}'.format(str(3*markers[Growth])),'Melee +{}'.format(str(markers[Growth]))])
         if markers[Corrode]: append('Armor -{}'.format(str(markers[Corrode])))
-        if markers[Guard]: append('Counterstrike')
+        if markers[Guard]: extend(['Counterstrike','Non-Flying'])
         if markers[Sleep] or markers[Stun]: append('Incapacitated')
         if markers[Zombie] : extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
         if markers[Stuck] : extend(['Restrained','Unmovable'])
@@ -1062,11 +1066,16 @@ def computeTraits(card):
 
                 #Harshforge monolith
 
+        if 'Unstoppable' in rawTraitsList: extend(['Unmovable','Uncontainable'])
         if 'Incorporeal' in rawTraitsList: extend(['Nonliving','Burnproof','Uncontainable'])
         if 'Nonliving' in rawTraitsList: extend(['Poison Immunity','Finite Life'])
-        if 'Rooted' in rawTraitsList:
-                append('Unmovable')
-                rawTraitsList = [t for t in rawTraitsList if t != 'Flying'] #Rooted creatures lose, and cannot gain, flying
+        if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
+
+        if (name == 'Sentry Gargoyle' and markers[Guard]): extend(['Armor +3','Tough -3'])
+        elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
+        #Dragonclaw wolverine, but we need rage markers for its ability.
+
+        if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
 
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)

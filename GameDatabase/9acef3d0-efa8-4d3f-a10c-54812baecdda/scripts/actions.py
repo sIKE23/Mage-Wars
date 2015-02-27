@@ -411,6 +411,17 @@ def attackTarget(attacker, x=0, y=0):
                         #else: remoteCall(defender.controller,'snapToZone',[defender])
                         dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(attacker,defender)
+                        #Pay costs for spells
+                        if attack.get('Cost'):
+                                originalSource = Card(attack.get('OriginalSourceID'))
+                                if originalSource.type == 'Attack': castSpell(originalSource)
+                                else:
+                                        cost = attack.get('Cost')
+                                        realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
+                                        if realCost <= me.Mana: me.Mana -= realCost
+                                        else:
+                                                notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
+                                                return
                         if attack and attack.get('SourceID')==attacker._id: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                         elif attack.get('Dice'): rollDice(attack.get('Dice'))
                         return
@@ -1435,12 +1446,17 @@ def defaultAction(card, x = 0, y = 0):
 	if card.controller == me:
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
-			if "Mage" in card.Type:
+                        payForAttack = not (getSetting('BattleCalculator',True) and card.Type=='Attack')
+			if "Mage" in card.Type or not payForAttack: #Attack spells will now be paid for through the battlecalculator
 				flipcard(card, x, y)
+	
+				if not getSetting('attackChangeNotified',False) and not payForAttack:
+                                        whisper('Note: Mana for {} will be paid when you declare an attack using the Battle Calculator, or if you double-click on {} again.'.format(card,card))
+                                        setSetting('attackChangeNotified',True)
 			else:
 				castSpell(card, x, y)
 		else:
-			if card.Type == "Incantation" or card.Type == "Attack":
+			if card.Type == "Incantation" or card.Type == "Attack": 
 				choiceList = ['Yes', 'No']
 				colorsList = ['#0000FF', '#FF0000']
 				choice = askChoice("Did you wish to cast this spell?", choiceList, colorsList)
@@ -1844,7 +1860,7 @@ def castSpell(card, x = 0, y = 0):
 				return
 			else:
 				notify("{} has insufficient mana in pool".format(me))
-				flipcard(card, x, y)
+				if not card.isFaceUp: flipcard(card, x, y)
 				return
 
 		# Pay casting/reveal costs, register discounts, notify in chat window and flip the card face up
@@ -1861,7 +1877,7 @@ def castSpell(card, x = 0, y = 0):
 			notify("{}".format(boundStr))
 		if not TraitStr == "":
 			notify("{}".format(TraitStr))
-		notify("{} payed {} mana from pool for '{}'".format(me.name, manacost, card.Name))
+		notify("{} pays {} mana from pool for '{}'".format(me.name, manacost, card.Name))
 
 def getTraitValue(card, TraitName):
 	listofTraits = ""
