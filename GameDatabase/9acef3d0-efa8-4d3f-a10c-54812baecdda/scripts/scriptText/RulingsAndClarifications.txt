@@ -93,6 +93,7 @@ If the Corrosive Orchid's ranged attack is redirected, then the final target can
 Example: Corrosive Orchid attacks an opposing Wizard, but there is a guarding Gargoyle Sentry. The Gargoyle Sentry uses its Intercept trait to redirect the Corrosive Orchid's attack to itself. When the attack gets to the Damage & Effects Step, the Corrosive Orchid does not use its Mist counter, because the Gargoyle Sentry has no equipment which can be destroyed.
 
 Likewise, if the attack targets a non-Mage object, but is then redirected to a Mage, you will be able to use the Mist token ability to destroy an equipment on that Mage.
+#
 Dancing Scimitar
 Dancing Scimitar can make its attack or use its Defense in one round, not both. Since the Dancing Scimitar is Autonomous, the attack is made by the Scimitar, not by the Mage. If you equip (attach) the Dancing Scimitar to another player's Mage, that player will be able to control how it attacks and uses its Defense.
 
@@ -166,6 +167,11 @@ Earthquake
 Earthquake itself is making the attacks against the Conjurations, not the Mage casting it. 
 
 The ability to roll the effect die and give creatures the Slam condition is not an attack. Resolve all of the attacks against conjurations first, then all the effect die rolls against creatures. Earthquake's controller decides in what order to resolve the attacks, and in what order to resolve the effect die rolls.
+#
+Elemental Wand
+Changing the spell on an Elemental Wand results in a hidden bound spell. 
+
+You cannot rebind the spell on the wand to hide what it is. You first attach a new spell, then the original spell goes back into your book. You may still bring out a copy of that spell to bind to the wand, provided you have another in your book.
 #
 Enchanter's Wardstone
 If the opponent casts a Dispel to attempt to destroy your Bear Strength, he will pay the normal 5 mana to cast the Dispel. Then, when the Dispel resolves, he will have to pay an additional 2 mana to destroy the Bear Strength.
@@ -359,6 +365,11 @@ Magebane deals its damage after the spell that triggered it has been resolved. F
 If the Mage destroys Magebane with a Dispel, it will still do a point of damage to him for casting the Dispel.
 
 In a duel, if a Mage casts a spell that kills the opposing Mage, and then dies due to Magebane damage, the game is a draw.
+#
+Mage Wand
+Changing the spell on a Mage Wand results in a hidden bound spell. 
+
+You cannot rebind the spell on the wand to hide what it is. You first attach a new spell, then the original spell goes back into your book. You may still bring out a copy of that spell to bind to the wand, provided you have another in your book.
 #
 Mana Prism
 This only affects abilities that say "lose", "pay", or "transfer" (such as Suppression Orb, Mana Drain, and

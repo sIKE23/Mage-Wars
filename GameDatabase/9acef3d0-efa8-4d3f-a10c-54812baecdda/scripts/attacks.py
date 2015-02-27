@@ -170,7 +170,9 @@ def getAttackList(card):
                 aDict = {'Name':name,
                          'd12':[],
                          'Traits': {},
-                         'EffectType': 'Attack'         #Later, when functionality is expanded to include non-attack effects, this will be modified
+                         'EffectType': 'Attack',
+                         'SourceID': card._id
+                         #Later, when functionality is expanded to include non-attack effects, this will be modified
                          }
                 if isAttackSpell:
                         aDict['Range'] = [int(r) for r in card.Range.split('-')]
@@ -217,7 +219,7 @@ def getAttackList(card):
                 for c in table:
                         if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getBindTarget(c)==card): attackList.extend(getAttackList(c))
         for a in attackList:
-                a['SourceID'] = card._id
+                if a.get('RangeType')!='Damage Barrier': a['SourceID'] = card._id
         return attackList
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
@@ -595,9 +597,6 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
         defender = Card(dTraitDict.get('OwnerID'))
         aController = attacker.controller
         dController = defender.controller
-        if getRemainingLife(dTraitDict) == 0:
-                remoteCall(dController,'deathPrompt',[dTraitDict,attack])
-                return
         playersList = [aController,dController]
         otherPlayer = me
         for p in playersList:
@@ -682,6 +681,12 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        deathFlag = False
+        #Check for death here
+        if getRemainingLife(dTraitDict) == 0:
+                deathPrompt(dTraitDict,attack)
+                deathFlag = True
+        #But damage barriers can still happen after death!
         if attack.get('RangeType') == 'Melee': #Need to add: and attack *was 'successful'*
                 attackList = getAttackList(defender)
                 dBarrier = None
@@ -692,6 +697,7 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
                 if dBarrier:
                         bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
                         declareAttackStep(bTraitDict,dBarrier,aTraitDict)
+        if deathFlag: return
         interimStep(aTraitDict,attack,dTraitDict,'Damage Barrier','counterstrikeStep')
 
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
@@ -855,7 +861,7 @@ def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment
 def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         atkTraits = attack.get('Traits',{})
-        if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + (2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
+        if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + ((2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0)),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
         normal = roll[2] + 2*roll[3]
         critical = roll[4] + 2*roll[5]
         return (max((0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal) - armor,0) +
