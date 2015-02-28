@@ -10,7 +10,7 @@ def menuDetachAction(card,x=0,y=0):
     mute()
     if isAttached(card):
         detach(card)
-        returnCardToHome(card)
+        moveCardToDefaultLocation(card,True)
 
 def attachToTarget(card,x=0,y=0):
     """This command is used to explicitly attach one card to the card currently being targeted."""
@@ -144,24 +144,11 @@ def detachAll(card):
     for c in attachments:
         if c.controller == me:
             detach(c)
-            returnCardToHome(c)
+            moveCardToDefaultLocation(c,True)
         else:
             remoteCall(c.controller,'detach',[c])
-            remoteCall(c.controller,'returnCardToHome',[c])
+            remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
         rnd(0,0)
-
-def returnCardToHome(card):
-    """This function returns a card to above the home position of its controller."""
-    mute()
-    global playerNum
-    x,y = {
-            1 : (-595, -240),
-            2 : (460, 120),
-            3 : (-595, 120),
-            4 : (460, -240),
-            5 : (-595, -40),
-            6 : (460, -40)}[playerNum]
-    card.moveToTable(x,y-card.height())
     
 def isAttached(card):
     """Determines whether <card> is attached to anything."""

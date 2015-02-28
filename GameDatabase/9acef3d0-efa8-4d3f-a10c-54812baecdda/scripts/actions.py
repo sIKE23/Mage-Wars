@@ -172,6 +172,7 @@ def onGameStart():
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
 
 	#Set default map
+	setGlobalVariable("DiceRollAreaPlacement", "Side")
 	mapDict = createMap(4,3,[[1 for j in range(3)] for i in range(4)],250)
 	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
 	mapDict.get('zoneArray')[3][2]['startLocation'] = '2'
@@ -197,13 +198,13 @@ def setUpDiceAndPhaseCards():
 	mute()
 	TableSetup = getGlobalVariable("TableSetup")
 	if TableSetup == "False" and me.name == Player(1).name:
-		dieCardX = -580
-		dieCardY = -40
-		card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field
-		card.anchor = (True)
-		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48", (dieCardX + 75), (dieCardY - 55)) #Phase token/Next Phase Button
+		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
 		card.switchTo("Planning") #skips upkeep for first turn
 		card.anchor = (True)
+		moveCardToDefaultLocation(card)
+		card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
+		card.anchor = (True)
+		moveCardToDefaultLocation(card)
 		setGlobalVariable("TableSetup", True)
 
 def onLoadDeck(player, groups):
@@ -580,6 +581,7 @@ def AskInitiative(pNum):
 
 def AskDiceRollArea():
 	mute()
+	global bottomDiceRollArea
 	notify("{} is choosing where the Dice Roll Area will be placed.".format(me))
 	choiceList = ['Side', 'Bottom']
 	colorsList = ['#FF0000', '#0000FF']
@@ -588,7 +590,8 @@ def AskDiceRollArea():
 		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
 	else:
 		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
-	setDRAIP(choice)
+                setGlobalVariable("DiceRollAreaPlacement", "Bottom")
+	#setDRAIP(choice)
 	for p in players:
 		remoteCall(p, "setDRAIP", [choice])
 
@@ -616,6 +619,8 @@ def CreateIniToken():
 		setGlobalVariable("PlayerWithIni", str(playerNum))
 		gameStartTime = time.time()
 		currentPhase = "Planning"
+		for c in table:
+                        remoteCall(c.controller,'moveCardToDefaultLocation',[c])
 		notify("Setup is complete!")
 
 def nextPhase(group, x=-360, y=-150):
@@ -1435,13 +1440,14 @@ def obliterate(card, x=0, y=0):
 	card.moveTo(me.piles['Obliterate Pile'])
 	notify("{} obliterates '{}'".format(me, card))
 
-def defaultAction(card, x = 0, y = 0):
+def defaultAction(card,x=0,y=0):
 	mute()
+	debug(card.type)
 	if card.type == "DiceRoll":
-		genericAttack(0, x, y)
+		genericAttack(0)
 	
 	if card.type =="Phase":
-		nextPhase(table,0,0)
+		nextPhase(table)
 
 	if card.controller == me:
 		if not card.isFaceUp:
@@ -1507,33 +1513,67 @@ def toggleToken(card, tokenType):
 def playCardFaceDown(card, x=0, y=0):
         mute()
 	global mycolor
-	occupied = True
-	mapDict = eval(getGlobalVariable('Map'))
+	moveCardToDefaultLocation(card)
+	card.peek()
+	card.highlight = mycolor
+
+def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
+        mute()
+        mapDict = eval(getGlobalVariable('Map'))
         x,y = 0,0
-	if mapDict:
-                for i in range(len(mapDict.get('zoneArray'))):
-                        for j in range(len(mapDict.get('zoneArray')[0])):
-                                if mapDict.get('zoneArray')[i][j] and mapDict.get('zoneArray')[i][j].get('startLocation') == str(playerNum):
-                                        zoneX,zoneY = mapDict.get('zoneArray')[i][j].get('x'),mapDict.get('zoneArray')[i][j].get('y')
-                                        mapX,mapW = mapDict.get('x'),mapDict.get('X')
-                                        zoneS = mapDict.get('zoneArray')[i][j].get('size')
-                                        cardW,cardH = card.size.Width,card.size.Height
-                                        if card.type == 'Mage':
+        if mapDict:
+                zoneArray = mapDict.get('zoneArray')
+                cardType = card.type
+                if cardType == 'Internal': return
+                cardW,cardH = card.size.Width,card.size.Height
+                mapX,mapW = mapDict.get('x'),mapDict.get('X')
+                debug(card.name+str(cardW))
+                if cardType == 'DiceRoll':
+                        diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
+                        zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
+                                [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
+                        zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
+                        x=zoneX-(cardW if diceBoxSetup=='Side' else 0)
+                        y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)
+                        card.moveToTable(x,y,True)
+                        #except: notify('Error! Maps must be at least 2 zones tall!')
+                        return
+                if cardType == 'Phase':
+                        diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
+                        zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
+                                [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
+                        zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
+                        x=zoneX-(130 if diceBoxSetup=='Side' else 0)
+                        y=zoneY+zoneS-(80 if diceBoxSetup=='Side' else 0)
+                        if '1st Player Token' in card.name:
+                                x-=5
+                                y+=(-75 if diceBoxSetup=='Side' else 80+75-cardH)
+                        elif cardType=='Phase' and 'Phase' in card.name:
+                                x+=75
+                                y+=(-55 if diceBoxSetup=='Side' else 80+55-cardH)
+                        card.moveToTable(x,y,True)
+                        return
+                for i in range(len(zoneArray)):
+                        for j in range(len(zoneArray[0])):
+                                zone = zoneArray[i][j]
+                                if zone and zone.get('startLocation') == str(playerNum):
+                                        zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
+                                        if cardType == 'Mage':
                                                 x = (zoneX if i < mapDict.get('I')/2 else mapX + mapW - cardW)
                                                 y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
-                                        elif card.type == 'Magestats':
+                                        elif cardType == 'Magestats':
                                                 x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
                                                 y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
                                         else:
                                                 x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
-                                                y = (zoneY + cardH if j < mapDict.get('J')/2 else zoneY+zoneS-2*cardH)
+                                                y = (zoneY+cardH+cardH*int(returning) if j < mapDict.get('J')/2 else zoneY+zoneS-2*cardH-cardH*int(returning))
                                                 xOffset = 0
                                                 while True:
                                                         occupied = False
                                                         for c in table:
                                                                 if c.controller == me:
                                                                         posx, posy = c.position
-                                                                        debug("c.position {}".format(c.position))
+                                                                        #debug("c.position {}".format(c.position))
                                                                         if posx == x+xOffset and posy == y:
                                                                                 occupied = True
                                                                                 break
@@ -1541,12 +1581,8 @@ def playCardFaceDown(card, x=0, y=0):
                                                                 xOffset += cardW*(-1 if i < mapDict.get('I')/2 else 1)
                                                         else: break
                                                 x += xOffset
-                                                
-	card.moveToTable(x,y,True)
-	mute()
-	card.peek()
-	card.highlight = mycolor
-
+        card.moveToTable(x,y,True)
+        #setUpDiceAndPhaseCards,CreateIniToken
 def debug(str):
 	global debugMode
 	if debugMode:
@@ -2148,9 +2184,9 @@ def loadMapFile(group, x=0, y=0):
         objectsArray = scenario.get('Objects',False)
         creaturesArray= scenario.get('Creatures',False)
 
-        for card in table:
-                if (card.type == "Internal" or
-                    card.name in ["Sslak, Orb Guardian","Usslak, Greater Orb Guardian"]): card.delete() #We need a way to distinguish between scenario guardians and those in spellbooks
+        for c in table:
+                if c.type == "Internal": c.delete()# or
+                   # card.name in ["Sslak, Orb Guardian","Usslak, Greater Orb Guardian"]): card.delete() #We need a way to distinguish between scenario guardians and those in spellbooks
 	setNoGameBoard(table)
 
         #iterate over elements, top to bottom then left to right.
@@ -2207,7 +2243,9 @@ def loadMapFile(group, x=0, y=0):
                 y = -Y/2
 
         setGlobalVariable("Map",str(mapDict))
-       
+        for c in table:
+                remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
+
 ### Map Definitions ###
 
 mapTileSize = 250
