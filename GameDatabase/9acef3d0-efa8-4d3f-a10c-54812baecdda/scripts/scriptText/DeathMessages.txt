@@ -6,7 +6,7 @@ The room dims briefly as dark powers flee from {}'s remains!@Type=Creature,Subty
 {} exhales a cloud of sulfur and brimstone as it collapses!@Type=Creature,Subtype=Demon
 {} sneers mockingly at you as the life leaves its body!@Type=Creature,Subtype=Demon,Trait=Living
 {} screams in exhilaration, its soul joyfully returning to the infernian depths whence it came!@Type=Creature,Subtype=Demon
-{} salutes its commander with its dying breath!@Type=Creature,Subtype=Soldier,Trait=Living
+{} salutes its commander with its dying breath!@Type=Creature,Subtype=Soldier,Trait=Living,Subtype!=Goblin
 {} dies as it lived - with honor!@Type=Creature,Subtype=Knight,Trait=Living
 {} screams a fearsome battle cry before succumbing to its injuries!@Type=Creature,Subtype=Soldier,Trait=Living
 {} whimpers and collapses!@Type=Creature,Subtype=Canine,Trait=Living
@@ -36,7 +36,29 @@ It's super effective!@Type=Creature,DamageType=Flame,Subtype=Plant
 {} should never have returned from the dead to begin with.@Subtype=Undead
 {} served its purpose.@Type=Creature
 Did somebody forget to water {}?@Subtype=Plant,Subtype=Vine
-
+{} dissolves into a puddle!@Type=Creature,Subtype=Ooze
+A sweet odor emanates from the charred,slimy remains of {}. Is that...flan?@Type=Creature,Subtype=Ooze,DamageType=Flame
+{} melts into a pool of slime!@Type=Creature,Subtype=Ooze
+You hear a sickening crunch as {}'s exoskeleton implodes!@Type=Creature,Subtype=Insect,DamageType!=Poison,DamageType!=Psychic
+{} screams as its mind is destroyed!@Type=Creature,Trait=Living,DamageType=Psychic
+{} explodes into fragments! The gods will not be pleased...@Type=Conjuration,Subtype=Altar
+The {} clears.@Type=Conjuration,Subtype=Cloud,Trait!=Epic,Trait!=Legendary
+{} is somehow destroyed by electricity. In a parallel universe, Georg Ohm rolls over in his grave.@Type=Conjuration,Subtype=Metal,AttackType=Lightning
+{} is desecrated!@Type=Conjuration,Subtype=Temple
+The animal spirits cry out as {} is annihilated!@Type=Conjuration,Subtype=Totem
+The gods are furious at the destruction of {}!@Type=Conjuration,Subtype=Temple
+Reality breathes a sigh of relief as a rip in its fabric is forever closed!@Type=Conjuration,Subtype=Portal
+You smell something very much like roast chicken.@Type=Creature,Subtype=Bird,DamageType=Flame
+{} goes down hissing!@Type=Creature,Subtype=Serpent,Trait=Living
+A wave of psychic energy washes over you as {} dies!@Type=Creature,Subtype=Psyoculus
+{} falls to the ground with a tremendous crash!@Type=Creature,Subtype=Golem
+Looks like somebody doesn't believe in faeries...@Type=Creature,Subtype=Faerie
+{} gives a piteous yowl before collapsing!@Type=Creature,Trait=Living,Subtype=Cat
+{} did not land on its feet.@Type=Creature,Trait=Living,Subtype=Cat
+{} just couldn't regenerate fast enough.@Type=Creature,Trait=Regenerate,Trait!=Finite Life,Subtype=Troll
+{} crumbles, releasing a small flood of mana into the ground!@Type=Conjuration,Subtype=Mana
+{} meets its death with stoic resolve.@Type=Creature,Trait=Living,Subtype=Dwarf
+{} dies with a snarl, a proud orcish warrior to the end!@Type=Creature,Subtype=Orc,Subtype=Soldier,Subtype=Living
 
 #AWF 2
 #BGG 0
