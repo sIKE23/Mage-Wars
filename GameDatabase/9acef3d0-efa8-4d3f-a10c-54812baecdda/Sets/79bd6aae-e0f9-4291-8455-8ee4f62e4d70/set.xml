@@ -208,7 +208,7 @@
 			<property name="School" value="Fire"  />
 			<property name="Level" value="6" />
 			<property name="Stats" value="Armor=-, Life=15" />
-			<property name="AttackBar" value="Claws of Fire:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=5] [d12] [5-8 = Burn; 9+ = 2 Burn] [Defrost]&#xD;&#xA;Scorching Heat:&#xD;&#xA;[Damage Barrier] [Flame] [Dice=2] [d12] [5-8 = Burn; 9+ = Burn &amp Daze] [Unavoidable]" />
+			<property name="AttackBar" value="Claws of Fire:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=5] [d12] [5-8 = Burn; 9+ = 2 Burn] [Defrost]&#xD;&#xA;Scorching Heat:&#xD;&#xA;[Damage Barrier] [Flame] [Dice=2] [d12] [5-8 = Burn; 9+ = Burn &amp; Daze] [Unavoidable]" />
 			<property name="Traits" value="Upkeep +1, Hydro +2, Incorporeal, Nonliving, Flame Immunity" />
 			<property name="Text" value="Hydro attacks gain the Ethereal trait against Fire Elemental" />
 			<property name="CardID" value="MWPROMO41" />
