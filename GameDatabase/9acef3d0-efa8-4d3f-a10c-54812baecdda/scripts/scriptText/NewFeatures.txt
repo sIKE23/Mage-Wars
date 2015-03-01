@@ -14,6 +14,9 @@ The Dice Rolling prompt now allows you to select the number of dice that you wan
 
 There are now multiple ways to roll the dice. You can press *F1*, as before; you can also press the more-accessible *TAB* button, and you can also double click on the Dice-Rolling box. Use whichever method you find most convinient.
 #
+Phase Buttons and Phase Shortcuts
+There are mutiple ways to advance the Phase for each player. You can press *CTRL+Enter*, as before and you can also double click on the Phase and Initative Markers. (You can also use the old shortcut, *CTRL+Down*).
+#
 Searchable Codex and Rulings/Clarifications
 Tired of obnoxious rules disputes that require you to open your browser and head to the forums, or search through the rules supplement? We have now implemented (and will be constantly adding to) two related tools that should make resolving rule ambiguities much easier.
 
