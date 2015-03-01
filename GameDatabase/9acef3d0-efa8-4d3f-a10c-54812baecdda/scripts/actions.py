@@ -192,8 +192,6 @@ def onGameStart():
 	
 	initializeGame()
 
-        
-
 def setUpDiceAndPhaseCards():
 	mute()
 	TableSetup = getGlobalVariable("TableSetup")
@@ -292,6 +290,30 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                                 toGroups[i] != table):
                                 alignAttachments(card)
                                 alignBound(card)#Do not realign ifit is  only the index that is changing. Prevents recursions.
+
+
+def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
+        if player == me == fromCard.controller and isTargeted:
+                debug(str(getSetting("DeclareAttackWithArrow",True)))
+                if getSetting("DeclareAttackWithArrow",True) and canDeclareAttack(fromCard) and toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
+                        attacker,defender = fromCard,toCard #Should probably make an attack declaration function, rather than copypasting from attackTarget(). Eventually.
+                        aTraitDict = computeTraits(attacker)
+                        dTraitDict = computeTraits(defender)
+                        attack = diceRollMenu(attacker,defender)
+                        #Pay costs for spells
+                        if attack.get('Cost'):
+                                originalSource = Card(attack.get('OriginalSourceID'))
+                                if originalSource.type == 'Attack': castSpell(originalSource)
+                                else:
+                                        cost = attack.get('Cost')
+                                        realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
+                                        if realCost <= me.Mana: me.Mana -= realCost
+                                        else:
+                                                notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
+                                                return
+                        if attack and attack.get('SourceID')==attacker._id:
+                                remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
+                                attacker.arrow(defender,False)
 
 def setClearVars():
 	global deckLoaded
@@ -1034,7 +1056,8 @@ fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automa
                           ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
                           ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
                           ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons.",True],
-                          ["BattleCalculator","BattleCalculator","You have {} the battle calculator.",True]]
+                          ["BattleCalculator","BattleCalculator","You have {} the battle calculator.",True],
+                          ["DeclareAttackWithArrow","DeclareAttackWithArrow","You have {} declaring attacks with the targeting arrow.",True]]
 
 for fGen in fGenToggleSettingsList:
         exec(

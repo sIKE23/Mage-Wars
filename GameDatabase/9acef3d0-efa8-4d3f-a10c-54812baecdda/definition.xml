@@ -26,6 +26,7 @@
 		<event name="OnLoadDeck" action="onLoadDeck" />
 		<event name="OnChangeCounter" action="checkMageDeath" />
 		<event name="OnMoveCards" action="onMoveCards" />
+		<event name="OnTargetCardArrow" action="onTargetCardArrow" />
 	</events>
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />
@@ -92,6 +93,7 @@
 			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
 			<groupaction menu="Toggle Auto-Attaching Cards" default="False" execute="toggleAutoAttach" />
 			<groupaction menu="Toggle Battle Calculator" default="False" execute="toggleBattleCalculator" />
+			<groupaction menu="Toggle Declaring Attacks with Targeting Arrow" default="False" execute="toggleDeclareAttackWithArrow" />
 			<groupaction menu="Enable/Disable Sounds" default="False" execute="toggleSoundFX" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">

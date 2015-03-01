@@ -105,7 +105,7 @@ def deathMessage(traitDict,attack={}):
                                 break
                 if not violation: deathMessages.append(splitLine[0])
         if not deathMessages: return
-        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('{}',card.name)
+        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('{}',card.name.split(',')[0])
         notify(deathMessage)
 
 def getNewFeaturesList(table, x=0, y=0):

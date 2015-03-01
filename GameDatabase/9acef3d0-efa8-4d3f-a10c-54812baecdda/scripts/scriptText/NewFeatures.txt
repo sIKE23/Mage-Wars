@@ -1,13 +1,17 @@
 Battle Calculator
 The battle calculator is an exciting new feature that automates most of attacks and also predicts the outcome of the attack using statistics.
 
-To initiate an attack using the battle calculator, hold down *SHIFT* and left-click on the card you wish to target with the attack to create the targeting icon. Then hover your mouse over the card that you wish to declare the attack, and press *TAB*. The menu that appears will guide you through the rest. It really is that easy!
+To initiate an attack using the battle calculator, hold down *SHIFT* and left-click-drag an arrow from the object doing the attacking to the object being attacked. The menu that appears will guide you through the rest. It really is that easy!
+
+Alternately, you can hold down *SHIFT* and left-click on the card you wish to target with the attack to create the targeting icon. Then hover your mouse over the card that you wish to declare the attack, and press *TAB*.
 
 The game will only display attacks that are legal; for instance, attacks on targets that are not in range will not appear, nor will attacks to which the target is immune.
 
 In addition to automating a large part of the attack, each attack button will also tell you the expected damage that the attack will deal, and the probability that the attack will kill the target.
 
 Of course, you are not required to use the Battle Calculator. You can always roll dice the normal way by pressing *TAB* while the mouse is not over a card. (You can also use the old shortcut, *F1*).
+
+Note: If you want to draw a target arrow without making an attack, you can simply click 'Cancel Attack' and the target arrow will remain. You can also disable 'Declare Attack With Targeting Arrow' in the automation options menu.
 #
 Dice Buttons and Dice Shortcuts
 The Dice Rolling prompt now allows you to select the number of dice that you want to roll from a list, 1-7. This is significantly faster than the previous method of entering a number. In the event that you want to roll more than 7 dice, the "Other Dice Amount" button will let you enter a number, as before, and will default to the last number you entered.
@@ -15,7 +19,7 @@ The Dice Rolling prompt now allows you to select the number of dice that you wan
 There are now multiple ways to roll the dice. You can press *F1*, as before; you can also press the more-accessible *TAB* button, and you can also double click on the Dice-Rolling box. Use whichever method you find most convinient.
 #
 Phase Buttons and Phase Shortcuts
-There are mutiple ways to advance the Phase for each player. You can press *CTRL+Enter*, as before and you can also double click on the Phase and Initative Markers. (You can also use the old shortcut, *CTRL+Down*).
+There are mutiple ways to advance the Phase for each player. You can press *CTRL+ENTER*, as before and you can also double click on the Phase and Initative Markers. (You can also use the old shortcut, *CTRL+DOWN*).
 #
 Searchable Codex and Rulings/Clarifications
 Tired of obnoxious rules disputes that require you to open your browser and head to the forums, or search through the rules supplement? We have now implemented (and will be constantly adding to) two related tools that should make resolving rule ambiguities much easier.
