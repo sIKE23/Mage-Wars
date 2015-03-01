@@ -107,3 +107,24 @@ def deathMessage(traitDict,attack={}):
         if not deathMessages: return
         deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('{}',card.name)
         notify(deathMessage)
+
+def getNewFeaturesList(table, x=0, y=0):
+        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+        rawFeatures = list(open('{}\{}{}'.format(textDirectory,'NewFeatures','.txt'),'r'))
+        featuresList = []
+        entry = []
+        for l in rawFeatures:
+                line = l.replace('\n','')
+                if line and line[0] == '#':
+                        if len(entry) >= 2:
+                                name = entry[0]
+                                text = ' \n'.join(entry[1:])
+                                featuresList.append([name,text])
+                        entry = []
+                else: entry.append(line.strip(' '))
+        choices = [f[0] for f in featuresList] + ["Thanks, that's enough for now"]
+        colors = ['#666699' for f in featuresList] + ['#000000']
+        while True:
+                f = askChoice("Which new feature interests you?",choices,colors)
+                if f in [0,len(choices)]: return
+                elif askChoice(featuresList[f-1][1],['Tell me about something else','Thanks, I\'m done'],['#666699','#000000'])!=1: return
