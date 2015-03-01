@@ -1071,7 +1071,7 @@ def computeTraits(card):
         if 'Nonliving' in rawTraitsList: extend(['Poison Immunity','Finite Life'])
         if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
 
-        if (name == 'Sentry Gargoyle' and markers[Guard]): extend(['Armor +3','Tough -3'])
+        if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
         elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
         #Dragonclaw wolverine, but we need rage markers for its ability.
 
