@@ -749,7 +749,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.]" />
+			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.] [Unavoidable]" />
 			<property name="Traits" value="Passage Attacks, Blocks LOS, Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />

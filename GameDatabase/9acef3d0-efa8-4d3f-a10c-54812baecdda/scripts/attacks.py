@@ -681,6 +681,9 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         atkTraits = attack.get('Traits',{})
         if atkTraits.get('Doublestrike'): strikes = 2
         if atkTraits.get('Triplestrike'): strikes = 3
+        if attacker.Name == 'Wall of Thorns':
+                level = (6 if defender.type == 'Mage' else int(defender.Level)) #Mages really should have level in their xml. But we don't need to worry about this; the spellDictionary will render this moot.
+                strikes = (level - 1 if level > 1 else 1)
         if timesHasUsedAttack(attacker,attack.get('OriginalAttack',attack)) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
         else: interimStep(aTraitDict,attack,dTraitDict,'Additional Strikes','damageBarrierStep')
 

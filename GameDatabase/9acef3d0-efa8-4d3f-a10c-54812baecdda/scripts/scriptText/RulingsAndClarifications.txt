@@ -1,3 +1,4 @@
+##### A Section #####
 Agony
 If the creature makes multiple attacks in one attack action, each of the attacks will get the penalty.
 #
@@ -15,7 +16,7 @@ Armor Ward
 For example, if the opponent casts a Dissolve spell to attempt to destroy your Hunting Bow, he will pay the normal 11 mana to cast the Dissolve. Then, when the Dissolve spell resolves, he will have to pay an additional 4 mana to destroy the Hunting Bow.
 
 If you reveal Armor Ward at the end of the Counter Spell Step of a Dissolve, then the opponent will have to pay the extra 4 mana to destroy it. (Thus, the spell will be wasted if the opponent does not have the 4 mana to pay.)
-#
+##### B Section #####
 Barkskin
 Players are allowed to choose the order of Upkeep Effects which affect their own objects. Thus, you are allowed to resolve the regeneration ability first to remove 2 damage, then in the same Upkeep Phase choose not to pay the upkeep cost so the Barkskin is destroyed (and as a Cantrip it returns to your Spellbook).
 #
@@ -63,7 +64,7 @@ Burst of Thorns
 Burst of Thorns causes a Vine marker to explode in shower of sharp thorns. The Vine marker is the source of the attack, not your Mage. Thus, Burst of Thorns is not affected by any traits or conditions on your Mage. For example, if your Mage has the Ranged +2 trait, it does not affect or increase the dice of his Burst of Thorns attack.
 
 If Reverse Attack is revealed against an attack from Burst of Thorns, the Reverse Attack acts to avoid the attack, but has no other effect. Since the Vine marker is the source of the attack (not the Mage), the Vine marker would "attack itself" which has no effect.
-#
+##### C Section #####
 Chains of Agony
 The damage is taken immediately when the move is declared, and before it actually takes its move. After the creature declares a move action, there is no opportunity to reveal Chains of Agony and have it trigger on that move action. The latest you could reveal it and still have it take effect is at the beginning of the creature's activation, or immediately after the previous action.
 #
@@ -93,11 +94,13 @@ If the Corrosive Orchid's ranged attack is redirected, then the final target can
 Example: Corrosive Orchid attacks an opposing Wizard, but there is a guarding Gargoyle Sentry. The Gargoyle Sentry uses its Intercept trait to redirect the Corrosive Orchid's attack to itself. When the attack gets to the Damage & Effects Step, the Corrosive Orchid does not use its Mist counter, because the Gargoyle Sentry has no equipment which can be destroyed.
 
 Likewise, if the attack targets a non-Mage object, but is then redirected to a Mage, you will be able to use the Mist token ability to destroy an equipment on that Mage.
-#
+##### D Section #####
 Dancing Scimitar
 Dancing Scimitar can make its attack or use its Defense in one round, not both. Since the Dancing Scimitar is Autonomous, the attack is made by the Scimitar, not by the Mage. If you equip (attach) the Dancing Scimitar to another player's Mage, that player will be able to control how it attacks and uses its Defense.
 
 If Reverse Attack is revealed against an attack from Dancing Scimitar, the Reverse Attack acts to avoid the attack, but has no other effect. Since the Dancing Scimitar is autonomous, it is the source of the attack (not the Mage). The Sword would "attack itself" which has no effect.
+
+Rune of Shielding will give a bonus to Dancing Scimitar, but Defense Ring will not.
 #
 Deathshroud Staff
 Creatures affected by Deathshroud Staff's quick necro spell keep the Melee +1 even if they leave the zone it was cast into. The set of creatures that it affects is determined when the spell resolves. It does not change if creatures are Summoned or moved later in the round. 
@@ -167,7 +170,7 @@ Earthquake
 Earthquake itself is making the attacks against the Conjurations, not the Mage casting it. 
 
 The ability to roll the effect die and give creatures the Slam condition is not an attack. Resolve all of the attacks against conjurations first, then all the effect die rolls against creatures. Earthquake's controller decides in what order to resolve the attacks, and in what order to resolve the effect die rolls.
-#
+##### E Section #####
 Elemental Wand
 Changing the spell on an Elemental Wand results in a hidden bound spell. 
 
@@ -208,7 +211,7 @@ This isn't a melee attack or a ranged attack.
 This targets the Mage, not the chosen equipment. (For instance a Nullify on the target Mage can counter Explode).
 
 Explode itself makes the attack, not the caster. (Thus, traits on the caster that affect attacks the caster makes will not affect this attack.)
-#
+##### F Section #####
 Fellella, Pixie Familiar
 You may only use mana from Fellella's mana supply to pay for the casting cost of enchantments, not the reveal cost. (Once the enchantment is cast, it behaves just like a normal enchantment, and your Mage must pay the reveal cost if you want to reveal it.)
 #
@@ -267,7 +270,7 @@ If the attack is canceled with Forcefield, skip the remaining Steps of that atta
 Note: The Forcefield only cancels one attack, not the entire attack action. If the attack action makes multiple attacks, proceed with those additional attacks as normal. Unless the Forcefield cancels one of those attacks, they could trigger the Steps above as normal.
 
 If Forcefield has no more tokens on it, it remains in play attached to the Mage, it just won't be able to cancel any more attacks (until it gets another Forcefield token next Upkeep Phase).
-#
+##### G Section #####
 Garrison Post
 The choice to place the creature in Garrison Post's zone, or in your own zone, is made when the creature spell resolves.
 #
@@ -324,11 +327,17 @@ Example: Grey Wraith begins in a zone bordered by a Wall of Stone. For its move 
 
 If a mandatory action effect (such as a Taunt) would force Grey Wraith to move, and this move can only be performed using the Teleport ability, then Grey Wraith must use that ability if mana is available.
 #
+Guardian Angel
+Guardian Angel's ability only triggers when she uses her action to guard. Acquiring a guard marker from another source, such as Defend, does not count.
+##### H Section #####
 Hail of Stones
 The attack bar should have the Unavoidable trait. Of course, Zone attacks have the Unavoidable trait anyway, so this is redundant.
 #
 Harmonize
 Harmonize cannot be cast on an object such as Mana Crystal or Mana Flower, because those cards do not have their own Channeling attributes.
+#
+Harshforge Plate
+The additional cost imposed by Harshforge plate is not subject to the effect of Mana Prism, since it is an increase to the innate cost of the spell (as opposed to an effect that forces the mage to pay mana).
 #
 Helm of Fear
 Example: An attacker with a Sweeping attack is in a zone with an enemy Warlock, Firebrand Imp, and Flaming Hellion. The Warlock has a Helm of Fear, and the attacker chooses the Warlock as his first target. The Warlock rolls a 9+ on the roll, and the attacker chooses to make his attack against the Imp instead. On the second attack of the Sweeping attack, the Hellion is the only legal target (he cannot attack the Warlock because of the Helm's effect, and cannot attack the Imp because that was the target of the first part of the Sweeping attack.)
@@ -582,7 +591,7 @@ You choose the value of X each time you use the ability. (For example, you could
 Temple of Light can attack the round that it comes into play.
 
 The effect die results, 9-10=stun, 11+=daze, are correct as printed. (As X increases, the chance to Daze increases, but not the chance to Stun.)
-#
+##### V Section #####
 Valshalla, Lightning Angel
 Only triggers off of attacks made by creatures, so it does not trigger off of attacks made by Walls, Conjurations, Damage Barriers, Autonomous equipment (Dancing Scimitar), etc.
 
@@ -590,6 +599,9 @@ A spell attack is considered to be made by the object that casts the attack spel
 #
 Vampiric Strike
 This only affects the next attack, not the entire next attack action.
+#
+Vine Tree
+If Vine Tree is deployed during the Deployment Phase (for instance by a Seedling Pod), you may still use its ability to place a Vine Marker during that same Deployment Phase.
 #
 Wall of Fire
 Its attack is Unavoidable.
