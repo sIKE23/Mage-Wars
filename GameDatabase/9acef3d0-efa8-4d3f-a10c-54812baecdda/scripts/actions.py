@@ -189,7 +189,7 @@ def onGameStart():
         #set global event lists for rounds and single actions
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
-	
+
 	initializeGame()
 
 def setUpDiceAndPhaseCards():
@@ -831,7 +831,7 @@ def resolveDissipate():
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
-			
+
 	#use the logic for Dissipate for Disable Markers
 	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
 	if len(cardsWithDisable) > 0:
@@ -840,7 +840,7 @@ def resolveDissipate():
 			notify("{} removes a Disable Marker from '{}'".format(me, c.name))	#found at least one
 			card.markers[Disable] -= 1 # Remove Marker
 			notify("Finished auto-resolving Disable Markers for {}.".format(me))
-			
+
 def resolveLoadTokens():
 	mute()
 	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp ]
@@ -853,7 +853,7 @@ def resolveLoadTokens():
 			notify("Placing the Second Load Token on {}...".format(card.Name)) #found one load token on card
 			card.markers[LoadToken] = 2
 		notify("Finished adding Load Tokens for {}.".format(me))
-		
+
 def resolveStormTokens():
 	mute()
 	stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
@@ -868,14 +868,14 @@ def resolveStormTokens():
 
 def resolveChanneling():
 	mute()
-	
+
 	channelExtraMana4Mage = 0
 	for c in table:
 		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
 			for card in me.piles['Discard']:
 				if c == card:
 					return
-			
+
 		if c.isFaceUp and c.controller == me:
 			if c.name == "Mana Flower" or c.name == "Mana Crystal":
 				channelExtraMana4Mage +=1
@@ -885,7 +885,7 @@ def resolveChanneling():
 				if c2 and c2.Type in ['Mage','Magestats'] and c.controller == me: #Mages
 					channelExtraMana4Mage +=1
 					whisper("Mana added to {} from {}".format(me,c))
-		
+
 		if c.Stats != None and c.Type != "Mage":
 			if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 				channel = getStat(c.Stats,"Channeling")
@@ -920,7 +920,6 @@ def resolveUpkeep():
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
-
 	for card in table:
 		if "Psi-Orb" == card.name and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
 		 	PsiOrbDisc = 3
@@ -948,46 +947,43 @@ def resolveUpkeep():
 	 						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
 	 						return
 	 	else:
-	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp and card.type != "Internal":
-	 			debug("Debug3: {} me.Mana:{}".format(me.name,me.Mana))
-	 		 	if me.Mana < 1:
-	 		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
-	 		 		card.moveTo(me.piles['Discard'])
-	 		 		return
-	 		 	else:
-	 		 		TraitValue, TraitStr = getTraitValue(card, "Upkeep")
-	 		 		notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name)
-	 		 		debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
-					if PsiOrbDisc > 0 and "Mind" == card.school:
-						PsiOrbDisc -= 1
-						notify("{} - Psi-Orb Discount was used to pay 1 Mana point towards the Upkeep cost for '{}', there are '{}' remaining Upkeep discounts left this Round.".format(me,card.name,PsiOrbDisc))
-						TraitValue = TraitValue - 1
-						notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(TraitValue, card.Name)
+	 		TraitValue = -1
+	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp:
+	 			TraitValue, TraitStr = getTraitValue(card, "Upkeep")
+	 			debug("TraitValue:{} TraitStr:{}".format(TraitValue, TraitStr))
+	 		elif card.controller == me and "[Upkeep" in card.text and card.isFaceUp:
+	 			TraitValue, TraitStr = getTextTraitValue(card, "Upkeep") 		 	
+ 		 	if me.Mana < 1:
+ 		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
+ 		 		card.moveTo(me.piles['Discard'])
+ 		 		return
+ 		 	elif TraitValue > 0:
+		 		notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name)
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
+				PsiOrbDisc -= 1
+				notify("{} - Psi-Orb Discount was used to pay 1 Mana point towards the Upkeep cost for '{}', there are '{}' remaining Upkeep discounts left this Round.".format(me,card.name,PsiOrbDisc))
+				TraitValue = TraitValue - 1
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(TraitValue, card.Name)
 
-	 		 		if TraitValue >= 1:
-	 		 			choiceList = ['Yes', 'No']
-	 					colorsList = ['#0000FF', '#FF0000']
-	 					choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-	 					if choice == 1:
-	 						if me.Mana >= TraitValue:
-	 							me.Mana -= TraitValue
-	 							notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
-	 							if "Forcefield" == card.Name:
-	 								notify("Resolving Forcefield Tokens for {}...".format(me))
-	 								if card.markers[FFToken] == 0:
-	 									notify("Placing the First Forcefield Token on {}...".format(card.Name)) #found no token on card
-	 									card.markers[FFToken] = 1
-	 								elif card.markers[FFToken] == 1:
-	 									notify("Placing the Second Forcefield Token on {}...".format(card.Name)) #found one token on card
-	 									card.markers[FFToken] = 2
-	 								elif card.markers[FFToken] == 2:
-	 									notify("Placing the Third Forcefield Token on {}...".format(card.Name)) #found two tokens on card
-	 									card.markers[FFToken] = 3
-	 								notify("Finished adding Forcefield Tokens for {}.".format(me))
-	 					else:
-	 						notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-	 						card.moveTo(me.piles['Discard'])
-	 						return
+		 	if TraitValue >= 1:
+		 		choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1:
+					if me.Mana >= TraitValue:
+						me.Mana -= TraitValue
+						notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
+						if "Forcefield" == card.Name:
+							notify("Resolving Forcefield Tokens for {}...".format(me))
+							if card.markers[FFToken] == 0 or card.markers[FFToken] <4 :
+								notify("Placing the Forcefield Token on {}...".format(card.Name)) 
+								card.markers[FFToken] += 1
+							notify("{} has finished adding Forcefield Tokens.".format(me))
+				else:
+					notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
+					card.moveTo(me.piles['Discard'])
+					return
 
 def mageStatus():
 	global gameEndTime
@@ -1468,7 +1464,7 @@ def defaultAction(card,x=0,y=0):
 	debug(card.type)
 	if card.type == "DiceRoll":
 		genericAttack(0)
-	
+
 	if card.type =="Phase":
 		nextPhase(table)
 
@@ -1478,14 +1474,14 @@ def defaultAction(card,x=0,y=0):
                         payForAttack = not (getSetting('BattleCalculator',True) and card.Type=='Attack')
 			if "Mage" in card.Type or not payForAttack: #Attack spells will now be paid for through the battlecalculator
 				flipcard(card, x, y)
-	
+
 				if not getSetting('attackChangeNotified',False) and not payForAttack:
                                         whisper('Note: Mana for {} will be paid when you declare an attack using the Battle Calculator, or if you double-click on {} again.'.format(card,card))
                                         setSetting('attackChangeNotified',True)
 			else:
 				castSpell(card, x, y)
 		else:
-			if card.Type == "Incantation" or card.Type == "Attack": 
+			if card.Type == "Incantation" or card.Type == "Attack":
 				choiceList = ['Yes', 'No']
 				colorsList = ['#0000FF', '#FF0000']
 				choice = askChoice("Did you wish to cast this spell?", choiceList, colorsList)
@@ -1951,11 +1947,33 @@ def getTraitValue(card, TraitName):
 				strTraits = ''.join(traits)
 	STraitCost = strTraits.split("+")
 	if STraitCost[1] == "X":
-		infostr = "The spell {} has an Upkeep value of 'X' what is its value?".format(card.Name)
+		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
 		TraitCost = askInteger(infostr, 3)
 	else:
 		TraitCost = int(STraitCost[1])
-	TraitStr = "{} '{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
+	TraitStr = "'{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
+	return (TraitCost, TraitStr)
+
+def getTextTraitValue(card, TraitName):
+	listofTraits = ""
+	debug("{} has the {} trait in its card text.".format(card.name, TraitName))
+	cardText = card.Text.split("\r\n")
+	strofTraits = cardText[1]
+	debug("{} ".format(strofTraits))
+	if "] [" in strofTraits:
+			listofTraits = strofTraits.split("] [")
+			for traits in listofTraits:
+					if TraitName in traits:
+							strTrait = ''.join(traits)
+	else:
+			strTrait = strofTraits
+	STraitCost = strTrait.split("+")
+	if STraitCost[1] == "X":
+		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
+		TraitCost = askInteger(infostr, 3)
+	else:
+		TraitCost = int(STraitCost[1])
+	TraitStr = "'{}' has the {}+{} trait".format(card.Name, TraitName, TraitCost)
 	return (TraitCost, TraitStr)
 
 def chooseMagebind(card, mageRevealCost, TraitCosts):
@@ -2202,7 +2220,7 @@ def loadMapFile(group, x=0, y=0):
         if choice == 0 or choice == len(choices): return
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
-        
+
         mapArray = scenario.get('Map',False)
         objectsArray = scenario.get('Objects',False)
         creaturesArray= scenario.get('Creatures',False)
@@ -2218,7 +2236,7 @@ def loadMapFile(group, x=0, y=0):
         x,y = (-X/2,-Y/2) #Do we want 0,0 to be the center, or the upper corner? Currently set as center.
 
         zoneArray = mapArray
-        
+
         for i in range(I):
                 for j in range(J): #Might as well add support for non-rectangular maps now. Though this won't help with the rows.
                         if mapArray:
@@ -2236,7 +2254,7 @@ def loadMapFile(group, x=0, y=0):
         x = -X/2
 
         mapDict = createMap(I,J,zoneArray,mapTileSize)
-                        
+
         for i in range(I): #For some reason, I can't get the map tiles to be sent to the back successfully. So we'll do this in two parts.
                 for j in range(J):
                         if objectsArray:
@@ -2320,12 +2338,12 @@ mapTileDict =  {
                 "d" : "f88b4ac6-b2da-48da-86a1-5213fe9e34be", #Apprentice Mode 3
                 "e" : "3421bf20-a06f-4fc0-aac0-35a053e3c799", #Apprentice Mode 4
                 "f" : "707e1095-18df-491a-afca-b32b0cfce67c", #Apprentice Mode 5
-                "g" : "485fa227-2f6a-42b8-a112-0b97a9cf6317" #Apprentice Mode 6      	
-                } 
+                "g" : "485fa227-2f6a-42b8-a112-0b97a9cf6317" #Apprentice Mode 6
+                }
 
 mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
                   "O" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5"}	# 2 V'Tar Orbs
-        
+
 mapCreaturesDict =     {"s" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# Orb Guardian
                         "S" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# 2 Orb Guardians
                         "u" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",	# Greater Orb Guardian

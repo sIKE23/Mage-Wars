@@ -121,7 +121,7 @@
 			<property name="Stats" value="Armor=1, Life=14" />
 			<property name="AttackBar" value="Stone Fists:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Flying, Intercept" />
-			<property name="Text" value="While guarding, Gargoyle Sentry gains Armor +3 and Tough -3&#xD;&#xA;[Armor +3] [Tough -3]" />
+			<property name="Text" value="While guarding, Gargoyle Sentry gains Armor +3 and Tough -3" />
 			<property name="CardID" value="MWSTX1CKC08" />
 		</card>
 		<card id="b6003a5c-e5ec-46fe-921f-1b1d02b2e48e" name="Giant Wolf Spider">
