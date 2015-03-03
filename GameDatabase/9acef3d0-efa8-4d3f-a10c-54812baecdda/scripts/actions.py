@@ -295,7 +295,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
         if player == me == fromCard.controller and isTargeted:
                 debug(str(getSetting("DeclareAttackWithArrow",True)))
-                if getSetting("DeclareAttackWithArrow",True) and canDeclareAttack(fromCard) and toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
+                if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                         attacker,defender = fromCard,toCard #Should probably make an attack declaration function, rather than copypasting from attackTarget(). Eventually.
                         aTraitDict = computeTraits(attacker)
                         dTraitDict = computeTraits(defender)
@@ -303,6 +303,7 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         #Pay costs for spells
                         if attack.get('Cost'):
                                 originalSource = Card(attack.get('OriginalSourceID'))
+                                if not originalSource.isFaceUp: flipcard(originalSource)
                                 if originalSource.type == 'Attack': castSpell(originalSource)
                                 else:
                                         cost = attack.get('Cost')
@@ -437,6 +438,7 @@ def attackTarget(attacker, x=0, y=0):
                         #Pay costs for spells
                         if attack.get('Cost'):
                                 originalSource = Card(attack.get('OriginalSourceID'))
+                                if not originalSource.isFaceUp: flipcard(originalSource)
                                 if originalSource.type == 'Attack': castSpell(originalSource)
                                 else:
                                         cost = attack.get('Cost')
@@ -2006,8 +2008,8 @@ def getTraitValue(card, TraitName):
 		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
 		TraitCost = askInteger(infostr, 3)
 	else:
-		TraitCost = int(STraitCost[1])
-	TraitStr = "'{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0], TraitCost)
+		TraitCost = int(STraitCost[1].strip('[]'))
+	TraitStr = "'{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0])#, TraitCost)
 	return (TraitCost, TraitStr)
 
 def getTextTraitValue(card, TraitName):
@@ -2024,11 +2026,11 @@ def getTextTraitValue(card, TraitName):
 	else:
 			strTrait = strofTraits
 	STraitCost = strTrait.split("+")
-	if STraitCost[1] == "X":
+	if STraitCost[1].strip('[]') == "X":
 		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
 		TraitCost = askInteger(infostr, 3)
 	else:
-		TraitCost = int(STraitCost[1])
+		TraitCost = int(STraitCost[1].strip('[]'))
 	TraitStr = "'{}' has the {}+{} trait".format(card.Name, TraitName, TraitCost)
 	return (TraitCost, TraitStr)
 

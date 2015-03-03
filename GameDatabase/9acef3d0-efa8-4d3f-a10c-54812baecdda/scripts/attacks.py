@@ -150,7 +150,7 @@ def getAttackList(card):
         #Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
         attackKeyList1 = []
         for attack in attackKeyList0:
-                name = (card.name if isAttackSpell else attack[0])
+                name = (card.Name if isAttackSpell else attack[0])
                 attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
                 if isAttackSpell: attributes.append('Spell')
                 options = []
@@ -209,16 +209,14 @@ def getAttackList(card):
         
         for c in table:
                 if card.Type == 'Mage':
-                        if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and c.isFaceUp and
+                        if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack') and
                             (getAttachTarget(c) == card or (not canDeclareAttack(getAttachTarget(c)) if getAttachTarget(c) else True)) and
-                            not c.markers[Disable]):
-                                attackList.extend(getAttackList(c))
-                if c.Type == 'Enchantment' and getAttachTarget(c) == card and c.AttackBar:
-                        attackList.extend(getAttackList(c))
+                            not c.markers[Disable]): attackList.extend(getAttackList(c))
+                if c.Type == 'Enchantment' and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
         
         if 'Familiar' or 'Spawnpoint' in card.Traits:
                 for c in table:
-                        if (c.Type == 'Attack' and card.controller == c.controller and c.isFaceUp and getBindTarget(c)==card): attackList.extend(getAttackList(c))
+                        if (c.Type == 'Attack' and card.controller == c.controller and getBindTarget(c)==card): attackList.extend(getAttackList(c))
         for a in attackList:
                 if a.get('RangeType')!='Damage Barrier': a['SourceID'] = card._id
         return attackList
