@@ -447,6 +447,7 @@ def attackTarget(attacker, x=0, y=0):
                                                 return
                         if attack and attack.get('SourceID')==attacker._id: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                         elif attack.get('Dice'): rollDice(attack.get('Dice'))
+                        defender.target(False)
                         return
                 #Untargeted attack
                 attack = diceRollMenu(attacker,None)
