@@ -2002,7 +2002,7 @@ def getTraitValue(card, TraitName):
 			if TraitName in traits:
 				strTraits = ''.join(traits)
 	STraitCost = strTraits.split("+")
-	if STraitCost[1] == "X":
+	if STraitCost[1].strip('[]') == "X":
 		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
 		TraitCost = askInteger(infostr, 3)
 	else:
