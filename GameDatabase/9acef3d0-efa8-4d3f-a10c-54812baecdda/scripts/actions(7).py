@@ -447,6 +447,7 @@ def attackTarget(attacker, x=0, y=0):
                                                 return
                         if attack and attack.get('SourceID')==attacker._id: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                         elif attack.get('Dice'): rollDice(attack.get('Dice'))
+                        defender.target(False)
                         return
                 #Untargeted attack
                 attack = diceRollMenu(attacker,None)
@@ -954,7 +955,7 @@ def resolveUpkeep():
 	 						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
 	 						return
 		for card in table:
-			if card.name == "Harshforge Monolith" and card.isFaceUp:
+			if card.name == "Harshforge Monolith" and card.isFaceUp: # process players Enchantment for Upkeep 
 				aZone = getZoneContaining(card)
 				for c in table:
 					if c.Type == "Enchantment" and c.controller == me:
@@ -975,12 +976,20 @@ def resolveUpkeep():
 	 								if ManaPrismInPlay == 1:
 	 									addToken(ManaPrism, Mana)
 	 							else:
+	 								c.moveTo(me.piles['Discard'])
+	 								notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
+	 								return
+	 		EssenceDrain = 0
 	 		TraitValue = -1
 	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp:
 	 			TraitValue, TraitStr = getTraitValue(card, "Upkeep")
 	 			debug("TraitValue:{} TraitStr:{}".format(TraitValue, TraitStr))
-	 		elif card.controller == me and "[Upkeep" in card.text and card.isFaceUp:
-	 			TraitValue, TraitStr = getTextTraitValue(card, "Upkeep") 		 	
+	 		if card.Name == "Essence Drain" and card.controller != me	and isAttached(card) == True:# handle Essence Drain
+	 				attachedToCard = getAttachTarget(card)
+	 				if attachedToCard.controller == me:
+	 					TraitValue, TraitStr = getTextTraitValue(card, "Upkeep")
+	 					EssenceDrain = 1
+	 				
  		 	if me.Mana < 1:
  		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
  		 		card.moveTo(me.piles['Discard'])
@@ -1003,7 +1012,9 @@ def resolveUpkeep():
 						me.Mana -= TraitValue
 						notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
 						#if isAttached(forcefield), put the markers on getAttachTarget(forcefield) else put them on forcefield
-						if "Forcefield" == card.Name:
+						if  EssenceDrain == 1 and ManaPrismInPlay == 1:
+							addToken(ManaPrism, Mana)
+						elif "Forcefield" == card.Name:
 							notify("Resolving Forcefield Tokens for {}...".format(me))
 							if card.markers[FFToken] == 0 or card.markers[FFToken] <4 :
 								notify("Placing the Forcefield Token on {}...".format(card.Name)) 
@@ -1568,6 +1579,7 @@ def playCardFaceDown(card, x=0, y=0):
 	moveCardToDefaultLocation(card)
 	card.peek()
 	card.highlight = mycolor
+	notify("{} prepares a card face down on the table.".format(me))
 
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
         mute()
@@ -1959,7 +1971,16 @@ def castSpell(card, x = 0, y = 0):
 			flipcard(card, x, y)
 			notify("{}".format(notifyStr))
 		else:
-			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
+                        #Get the card object that is casting the spell
+                        bindTarget = getBindTarget(card)
+                        caster = me
+                        if bindTarget and ('Familiar' in bindTarget.Traits or 'Spawnpoint' in bindTarget.Traits): caster = bindTarget
+                        else: #Mage is the caster by default
+                                for c in table:
+                                        if c.Type == 'Mage':
+                                                caster = c
+                                                break
+			boundStr = "{} casts '{}', with a printed casting cost of {}".format(caster, card, str(castingCost))
 			if not discountStr == "":
 				boundStr = boundStr + discountStr
 			notify("{}".format(boundStr))
