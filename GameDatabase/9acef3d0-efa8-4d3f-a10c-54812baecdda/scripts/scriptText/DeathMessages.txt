@@ -69,6 +69,5 @@ Fragments of {} scatter everywhere!@Type=Creature,Subtype=Skeleton
 {} enters the hibernation of eternity.@Type=Creature,Subtype=Bear,Trait=Living
 {} squawks weakly, then collapses.@Type=Creature,Subtype=Bird,Trait=Living
 {} is slain. Will anybody even remember its name?@Type=Creature,Subtype=Goblin,Trait!=Legendary,Trait=Living
-
-#AWF 2
-#BGG 0
+<A> grunts, "I pick my teeth with your bones".@Type=Creature,AttackerType=Creature,AttackerTrait=Living,AttackerSubtype=Troll,Subtype=Skeleton
+<A> found {}'s lack of faith disturbing.@AttackerName=Forcemaster,Type=Creature

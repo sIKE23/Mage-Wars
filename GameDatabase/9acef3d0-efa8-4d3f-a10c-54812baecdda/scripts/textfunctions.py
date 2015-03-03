@@ -69,7 +69,7 @@ def getEnchantRecommendationList(step):
                 else: recommendationList.append(line.replace('\n','').strip(' '))
         return []
 
-def deathMessage(traitDict,attack={}):
+def deathMessage(traitDict,attack={},aTraitDict={}):
         """
         Format: <death message>@criterion1=value1,criterion2=value2
         Example:
@@ -78,6 +78,10 @@ def deathMessage(traitDict,attack={}):
         criteria in [DamageType,Trait,Subtype,Type,Name,AttackTrait]
         """
         card = Card(traitDict.get('OwnerID'))
+        attacker = Card(aTraitDict.get('OwnerID')) if aTraitDict else None
+        debug(attacker.name)
+        debug(attacker.subtype)
+        debug(attacker.type)
         atkTraits = attack.get('Traits',{})
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
         rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
@@ -95,17 +99,25 @@ def deathMessage(traitDict,attack={}):
                             (C[0] == 'Type' and not C[1] in card.Type) or
                             (C[0] == 'Name' and C[1] != card.Name) or
                             (C[0] == 'AttackTrait' and not atkTraits.get(C[1])) or
+                            (C[0] == 'AttackerType' and (not attacker or not C[1] in attacker.Type)) or
+                            (C[0] == 'AttackerName' and (not attacker or C[1]!=attacker.Name)) or
+                            (C[0] == 'AttackerSubtype' and (not attacker or not C[1] in attacker.Subtype)) or
+                            (C[0] == 'AttackerTrait' and (not attacker or not aTraitDict.get(C[1]))) or
                             (C[0] == 'DamageType!' and C[1]==attack.get('Type')) or
                             (C[0] == 'Trait!' and traitDict.get(C[1])) or
                             (C[0] == 'Subtype!' and C[1] in card.Subtype) or
                             (C[0] == 'Type!' and C[1] in card.Type) or
                             (C[0] == 'Name!' and C[1] == card.Name) or
-                            (C[0] == 'AttackTrait!' and atkTraits.get(C[1]))):
+                            (C[0] == 'AttackTrait!' and atkTraits.get(C[1])) or
+                            (C[0] == 'AttackerType!' and (not attacker or C[1] in attacker.Type)) or
+                            (C[0] == 'AttackerName!' and (not attacker or C[1]==attacker.Name)) or
+                            (C[0] == 'AttackerSubtype!' and (not attacker or C[1] in attacker.Subtype)) or
+                            (C[0] == 'AttackerTrait!' and (not attacker or aTraitDict.get(C[1])))):
                                 violation = True
                                 break
                 if not violation: deathMessages.append(splitLine[0])
         if not deathMessages: return
-        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('{}',card.name.split(',')[0])
+        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('<A>',attacker.name.split(',')[0]).replace('{}',card.name.split(',')[0])
         notify(deathMessage)
 
 def getNewFeaturesList(table, x=0, y=0):

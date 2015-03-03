@@ -300,8 +300,16 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
                 attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
-                #Charge, but not sure how best to implement yet. Probably just add a prompt menu. Actually, we could do this for a lot of
-                #traits that are hard to autodetect.
+                vs = atkTraits.get('VS')
+                if vs: #We'll assume each attack has only one vs+ trait
+                        if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
+                            (vs[0] == "Flying" and 'Flying' in dTraitDict) or
+                            (vs[0] == "Nonliving Creatures" and 'Creature'==defender.Type and 'Nonliving' in dTraitDict) or
+                            (vs[0] == "Nonliving and Dark creatures" and 'Creature'==defender.Type and ('Nonliving' in dTraitDict or 'Dark' in defender.School)) or
+                            (vs[0] == "Nonliving or Dark Creatures" and 'Creature'==defender.Type and ('Nonliving' in dTraitDict or 'Dark' in defender.School)) or #Curse AW's inconsistent formatting...
+                            (vs[0] == "Nonliving" and 'Nonliving' in dTraitDict) or
+                            (vs[0] == "Incorporeal" and "Incorporeal" in dTraitDict) or
+                            (vs[0] == "Undead" and "Undead" in defender.Subtype)): attackDice += vs[1]
         if attackDice <= 0: attackDice = 1
         if atkTraits.get('No Damage'): attackDice = 0
         return attackDice
@@ -312,6 +320,7 @@ def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and retu
                 text = key
                 if key in additiveTraits: text += ' +{}'.format(str(atkTraitDict[key]))
                 if key in superlativeTraits: text += ' {}'.format(str(atkTraitDict[key]))
+                if key == 'VS': text = ('+' if atkTraitDict[key][1]>=0 else '') + str(atkTraitDict[key][1]) + ' vs. ' + atkTraitDict[key][0]
                 if atkTraitDict[key]: attackList.append(text)
         return attackList
 
@@ -692,7 +701,7 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
         deathFlag = False
         #Check for death here
         if getRemainingLife(dTraitDict) == 0:
-                deathPrompt(dTraitDict,attack)
+                deathPrompt(dTraitDict,attack,aTraitDict)
                 deathFlag = True
         #But damage barriers can still happen after death!
         if attack.get('RangeType') == 'Melee': #Need to add: and attack *was 'successful'*
@@ -830,7 +839,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                 if e in conditionsList: defender.markers[eval(e)]+=1
                 notify('{} {}'.format(defender,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
-def deathPrompt(cardTraitsDict,attack={}):
+def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
         card = Card(cardTraitsDict.get('OwnerID'))
         choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
                            ["Yes","No"],
@@ -843,7 +852,7 @@ def deathPrompt(cardTraitsDict,attack={}):
                         notify('Zombie {} disintgrates into a puddle of putrid flesh!'.format(card))
                         obliterate(card)
                 else:
-                        deathMessage(cardTraitsDict,attack)
+                        deathMessage(cardTraitsDict,attack,aTraitDict)
                         discard(card)
         else: notify("{} does not accept the destruction of {}.".format(me,card))
 
@@ -878,7 +887,18 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 
 def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
         modRoll = effectRoll + dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
-        #debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
+        defender = Card(dTraitDict['OwnerID'])
+        vs = attack.get('Traits',{}).get('VS')
+        if vs: #We'll assume each attack has only one vs+ trait
+                        if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
+                            (vs[0] == "Flying" and 'Flying' in dTraitDict) or
+                            (vs[0] == "Nonliving Creatures" and 'Creature'==defender.Type and 'Nonliving' in dTraitDict) or
+                            (vs[0] == "Nonliving and Dark creatures" and 'Creature'==defender.Type and ('Nonliving' in dTraitDict or 'Dark' in defender.School)) or
+                            (vs[0] == "Nonliving or Dark Creatures" and 'Creature'==defender.Type and ('Nonliving' in dTraitDict or 'Dark' in defender.School)) or #Curse AW's inconsistent formatting...
+                            (vs[0] == "Nonliving" and 'Nonliving' in dTraitDict) or
+                            (vs[0] == "Incorporeal" and "Incorporeal" in dTraitDict) or
+                            (vs[0] == "Undead" and "Undead" in defender.Subtype)): modRoll += vs[1]
+        debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
         effects = attack.get('d12',[])
         if not effects or (dTraitDict.get('Incorporeal') and not attack.get('Traits',{}).get('Ethereal')): return None
         for effect in effects:
@@ -1094,7 +1114,13 @@ def traitParser(traitStr):
         Each trait is returned as a list with 1-2 values, with the first value being the identifier and the second being the value. The computeTraits
         function will take this list and output a dictionary, which will be the standard format for readable traits."""
         formattedTrait = [traitStr,True]
-        if " +" in traitStr and traitStr.split(' +')[0] in additiveTraits: formattedTrait = [traitStr.split(' +')[0], int(traitStr.split(' +')[1])]
+        if ' vs. ' in traitStr:
+                vsList = traitStr.split(' vs. ')
+                vsList.reverse()
+                vsList[1] = int(vsList[1].replace('+',''))
+                debug(str(vsList))
+                formattedTrait = ['VS',vsList]
+        elif " +" in traitStr and traitStr.split(' +')[0] in additiveTraits: formattedTrait = [traitStr.split(' +')[0], int(traitStr.split(' +')[1])]
         elif " -" in traitStr and traitStr.split(' -')[0] in additiveTraits: formattedTrait = [traitStr.split(' ')[0], int(traitStr.split(' ')[1])]
         elif " Immunity" in traitStr: formattedTrait = ["Immunity",traitStr.split(' ')[0]]
         for s in superlativeTraits:
@@ -1185,6 +1211,17 @@ def nCr(n,r):
 
 def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be changed to take Tough/elemental into account
         d12Bonus = dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
+        defender = Card(dTraitDict['OwnerID'])
+        vs = attack.get('Traits',{}).get('VS')
+        if vs: #We'll assume each attack has only one vs+ trait
+                        if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
+                            (vs[0] == "Flying" and 'Flying' in dTraitDict) or
+                            (vs[0] == "Nonliving Creatures" and 'Creature'==defender.Type and 'Nonliving' in dTraitDict) or
+                            (vs[0] == "Nonliving and Dark creatures" and 'Creature'==defender.Type and ('Nonliving' in dTraitDict or 'Dark' in defender.School)) or
+                            (vs[0] == "Nonliving or Dark Creatures" and 'Creature'==defender.Type and ('Nonliving' in dTraitDict or 'Dark' in defender.School)) or #Curse AW's inconsistent formatting...
+                            (vs[0] == "Nonliving" and 'Nonliving' in dTraitDict) or
+                            (vs[0] == "Incorporeal" and "Incorporeal" in dTraitDict) or
+                            (vs[0] == "Undead" and "Undead" in defender.Subtype)): d12Bonus += vs[1]
         lowerBound, upperBound = 0,None
         if '-' in rangeStr: lowerBound,upperBound = int(rangeStr.split('-')[0]),int(rangeStr.split('-')[1])
         if '+' in rangeStr: lowerBound, upperBound = int(rangeStr.strip('+')),None

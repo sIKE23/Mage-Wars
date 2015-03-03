@@ -293,7 +293,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [4-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs Flying]" />
+			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [4-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs. Flying]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A09" />
@@ -1306,7 +1306,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=-, Life=13" />
-			<property name="AttackBar" value="Windstorm:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [7-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs Incorporeal]" />
+			<property name="AttackBar" value="Windstorm:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [7-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs. Incorporeal]" />
 			<property name="Traits" value="Upkeep +1, Incorporeal, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C40" />

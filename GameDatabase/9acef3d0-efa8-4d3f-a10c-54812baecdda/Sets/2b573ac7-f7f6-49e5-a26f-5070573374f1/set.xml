@@ -688,7 +688,7 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Piercing +2]&#xD;&#xA;Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Sweeping or Doublestrike]" />
+			<property name="AttackBar" value="Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Piercing +2]&#xD;&#xA;Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Sweeping OR Doublestrike]" />
 			<property name="Traits" value="Cantrip, Forcemaster Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWQ04" />
