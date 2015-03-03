@@ -1190,9 +1190,8 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
         lowerBound, upperBound = 0,None
         if '-' in rangeStr: lowerBound,upperBound = int(rangeStr.split('-')[0]),int(rangeStr.split('-')[1])
         if '+' in rangeStr: lowerBound, upperBound = int(rangeStr.strip('+')),None
-        #debug(str(lowerBound)+','+str(upperBound))
         lowerBound,upperBound = max(lowerBound - d12Bonus,0),(max(upperBound - d12Bonus,0) if upperBound else None)
-        successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if upperBound else 12) - lowerBound + 1)
+        successIncidence = 0 if (upperBound == 0 or lowerBound > 12) else ((upperBound if (upperBound and upperBound<12) else 12) - lowerBound + 1)
         return min(successIncidence/float(12),float(1))
 
 """
