@@ -447,7 +447,6 @@ def attackTarget(attacker, x=0, y=0):
                                                 return
                         if attack and attack.get('SourceID')==attacker._id: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                         elif attack.get('Dice'): rollDice(attack.get('Dice'))
-                        defender.target(False)
                         return
                 #Untargeted attack
                 attack = diceRollMenu(attacker,None)
@@ -976,19 +975,12 @@ def resolveUpkeep():
 	 								if ManaPrismInPlay == 1:
 	 									addToken(ManaPrism, Mana)
 	 							else:
-	 								c.moveTo(me.piles['Discard'])
-	 								notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
-	 								return
-	 		
 	 		TraitValue = -1
 	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp:
 	 			TraitValue, TraitStr = getTraitValue(card, "Upkeep")
 	 			debug("TraitValue:{} TraitStr:{}".format(TraitValue, TraitStr))
 	 		elif card.controller == me and "[Upkeep" in card.text and card.isFaceUp:
-	 			TraitValue, TraitStr = getTextTraitValue(card, "Upkeep")
-	 		if card.Name == "Essence Drain" and card.controller != me	
-	 			if isAttached(card) == True:
-	 				getAttachTarget(card)
+	 			TraitValue, TraitStr = getTextTraitValue(card, "Upkeep") 		 	
  		 	if me.Mana < 1:
  		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
  		 		card.moveTo(me.piles['Discard'])
@@ -1967,16 +1959,7 @@ def castSpell(card, x = 0, y = 0):
 			flipcard(card, x, y)
 			notify("{}".format(notifyStr))
 		else:
-                        #Get the card object that is casting the spell
-                        bindTarget = getBindTarget(card)
-                        caster = me
-                        if bindTarget and ('Familiar' in bindTarget.Traits or 'Spawnpoint' in bindTarget.Traits): caster = bindTarget
-                        else: #Mage is the caster by default
-                                for c in table:
-                                        if c.Type == 'Mage':
-                                                caster = c
-                                                break
-			boundStr = "{} casts '{}', with a printed casting cost of {}".format(caster, card, str(castingCost))
+			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
 			if not discountStr == "":
 				boundStr = boundStr + discountStr
 			notify("{}".format(boundStr))
