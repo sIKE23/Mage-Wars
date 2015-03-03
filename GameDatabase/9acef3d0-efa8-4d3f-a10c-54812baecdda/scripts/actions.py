@@ -1926,7 +1926,16 @@ def castSpell(card, x = 0, y = 0):
 			flipcard(card, x, y)
 			notify("{}".format(notifyStr))
 		else:
-			boundStr = "{} casts '{}' which is Spellbound, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
+                        #Get the card object that is casting the spell
+                        bindTarget = getBindTarget(card)
+                        caster = me
+                        if bindTarget and ('Familiar' in bindTarget.Traits or 'Spawnpoint' in bindTarget.Traits): caster = bindTarget
+                        else: #Mage is the caster by default
+                                for c in table:
+                                        if c.Type == 'Mage':
+                                                caster = c
+                                                break
+			boundStr = "{} casts '{}', with a printed casting cost of {}".format(caster, card, str(castingCost))
 			if not discountStr == "":
 				boundStr = boundStr + discountStr
 			notify("{}".format(boundStr))

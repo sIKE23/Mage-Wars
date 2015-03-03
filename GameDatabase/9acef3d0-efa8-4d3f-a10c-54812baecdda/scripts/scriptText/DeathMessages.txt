@@ -43,7 +43,7 @@ You hear a sickening crunch as {}'s exoskeleton implodes!@Type=Creature,Subtype=
 {} screams as its mind is destroyed!@Type=Creature,Trait=Living,DamageType=Psychic
 {} explodes into fragments! The gods will not be pleased...@Type=Conjuration,Subtype=Altar
 The {} clears.@Type=Conjuration,Subtype=Cloud,Trait!=Epic,Trait!=Legendary
-{} is destroyed - by electricity. Georg Ohm is turning in his grave...@Type=Conjuration,Subtype=Metal,AttackType=Lightning
+{} is destroyed by...electicity? That isn't how physics works.@Type=Conjuration,Subtype=Metal,AttackType=Lightning
 {} is desecrated!@Type=Conjuration,Subtype=Temple
 The animal spirits cry out as {} is annihilated!@Type=Conjuration,Subtype=Totem
 The gods are furious at the destruction of {}!@Type=Conjuration,Subtype=Temple
@@ -66,6 +66,9 @@ Fragments of {} scatter everywhere!@Type=Creature,Subtype=Skeleton
 {} has gone home.@Type=Creature,Subtype=Angel,Trait=Living
 "I! WILL! BE! AVENGED!" roars {} in deathly fury.@Type=Creature,Trait=Living,Subtype=Orc
 {} is graceful, even in death.@Type=Creature,Trait=Living,Subtype=Angel
+{} enters the hibernation of eternity.@Type=Creature,Subtype=Bear,Trait=Living
+{} squawks weakly, then collapses.@Type=Creature,Subtype=Bird,Trait=Living
+{} is slain. Will anybody even remember its name?@Type=Creature,Subtype=Goblin,Trait!=Legendary,Trait=Living
 
 #AWF 2
 #BGG 0
