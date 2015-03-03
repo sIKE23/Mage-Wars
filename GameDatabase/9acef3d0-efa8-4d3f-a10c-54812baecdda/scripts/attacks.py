@@ -807,7 +807,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
-        notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
+        notify("{} inflicts {} damage on the {}{} average roll)".format(attacker,
                                                                     str(damage),
                                                                     defender,
                                                                     ('! (an above' if damage > expectedDmg else '... (a below')))
