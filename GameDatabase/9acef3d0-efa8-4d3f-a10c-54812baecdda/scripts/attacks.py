@@ -1120,8 +1120,12 @@ def traitParser(traitStr):
                 vsList[1] = int(vsList[1].replace('+',''))
                 debug(str(vsList))
                 formattedTrait = ['VS',vsList]
-        elif " +" in traitStr and traitStr.split(' +')[0] in additiveTraits: formattedTrait = [traitStr.split(' +')[0], int(traitStr.split(' +')[1])]
-        elif " -" in traitStr and traitStr.split(' -')[0] in additiveTraits: formattedTrait = [traitStr.split(' ')[0], int(traitStr.split(' ')[1])]
+        elif " +" in traitStr and traitStr.split(' +')[0] in additiveTraits:
+                try: formattedTrait = [traitStr.split(' +')[0], int(traitStr.split(' +')[1])]
+                except: formattedTrait = [traitStr.split(' +')[0], 0]
+        elif " -" in traitStr and traitStr.split(' -')[0] in additiveTraits:
+                try: formattedTrait = [traitStr.split(' ')[0], int(traitStr.split(' ')[1])]
+                except: [traitStr.split(' ')[0], 0]
         elif " Immunity" in traitStr: formattedTrait = ["Immunity",traitStr.split(' ')[0]]
         for s in superlativeTraits:
                 if s in traitStr: formattedTrait = traitStr.split(' ')

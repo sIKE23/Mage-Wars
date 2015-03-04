@@ -270,6 +270,8 @@ If the attack is canceled with Forcefield, skip the remaining Steps of that atta
 Note: The Forcefield only cancels one attack, not the entire attack action. If the attack action makes multiple attacks, proceed with those additional attacks as normal. Unless the Forcefield cancels one of those attacks, they could trigger the Steps above as normal.
 
 If Forcefield has no more tokens on it, it remains in play attached to the Mage, it just won't be able to cancel any more attacks (until it gets another Forcefield token next Upkeep Phase).
+
+Since damage barriers only perform the Roll Dice and Apply Damage and Effects steps, a damage barrier will not trigger Forcefield.
 ##### G Section #####
 Garrison Post
 The choice to place the creature in Garrison Post's zone, or in your own zone, is made when the creature spell resolves.

@@ -71,3 +71,8 @@ Fragments of {} scatter everywhere!@Type=Creature,Subtype=Skeleton
 {} is slain. Will anybody even remember its name?@Type=Creature,Subtype=Goblin,Trait!=Legendary,Trait=Living
 <A> grunts, "I pick my teeth with your bones".@Type=Creature,AttackerType=Creature,AttackerTrait=Living,AttackerSubtype=Troll,Subtype=Skeleton
 <A> found {}'s lack of faith disturbing.@AttackerName=Forcemaster,Type=Creature
+Shun the nonbelievers! Shun! SHUN!@AttackerName=Highland Unicorn,Type=Creature
+They stole my frickin' kidney!@Name=Highland Unicorn,AttackerType=Creature
+What does the fox say?@Name=Bitterwood Fox
+Good Gods! Is that {}'s head floating inside there?@Type=Creature,Trait=Corporeal,AttackerName=Devouring Jelly
+"I welcome death's cold embrace."@Name=Necromancer
