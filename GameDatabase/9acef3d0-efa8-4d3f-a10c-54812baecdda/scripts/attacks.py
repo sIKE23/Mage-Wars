@@ -227,7 +227,16 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         attack = dict(attackDict)
         atkTraits = attack.get('Traits',{})
         localADict = dict(aTraitDict)
-        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + aTraitDict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
+        if attacker.markers[HolyAvenger] and 'Holy' in attacker.School and not 'Legendary' in aTraitDict and not hasAttackedThisRound(attacker): #Holy avenger code
+                eventList = getEventList('Round')
+                for e in eventList:
+                        if e[0] == 'Attack' and e[1][0] == dTraitDict.get('OwnerID'):
+                                victim = Card(e[1][1]) if e[1][1] else None
+                                if victim and victim.controller==attacker.controller and (victim.Type in ['Creature','Mage'] or ('Conjuration' in victim.Type and 'Holy' in victim.School)):
+                                        localADict['Melee'] = localADict.get('Melee',0) + 2
+                                        localADict['Piercing'] = localADict.get('Piercing',0) + 1
+                                        break
+        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
         if attack.get('RangeType') == 'Melee':
                 if localADict.get('Vampiric'): attack['Traits']['Vampiric'] = True
@@ -456,6 +465,11 @@ def clearLocalTurnEventList(): #Clears the part of the turnList pertaining to th
 
 def hasAttackedThisTurn(card):
         eventList = getEventList('Turn')
+        for e in eventList:
+                if e[0] == 'Attack' and e[1][0] == card._id: return True
+
+def hasAttackedThisRound(card):
+        eventList = getEventList('Round')
         for e in eventList:
                 if e[0] == 'Attack' and e[1][0] == card._id: return True
 
@@ -1013,9 +1027,9 @@ def computeTraits(card):
                                               cardType in ['Creature','Mage','Conjuration']): extend(['Regenerate 1','Flame -2','Acid -2'])
                                 elif cType == 'Creature':
                                         if (cName == 'Highland Unicorn' and
-                                            cController == controller and
-                                            cardType in ['Creature','Mage'] and
-                                            'Living' in rawTraitsList): append('Regenerate 1')
+                                              cController == controller and
+                                              cardType in ['Creature','Mage'] and
+                                              'Living' in rawTraitsList): append('Regenerate 1')
                                         elif (cName == 'Makunda' and
                                               cController == controller and
                                               c != card and
@@ -1031,6 +1045,9 @@ def computeTraits(card):
                                               'Living' in rawTraitsList): append('Finite Life')
                                         #Victorian Gryffin, but I don't feel like adding it right now
                                 elif cType == 'Incantation': pass
+                                elif (cType == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
+                                        if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
+                                        if markers[Pet] and 'Animal' in subtype: append('Melee +1')
                         if cardType == 'Mage':
                                 if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
                                         rawText = c.text.split('\r\n[')
