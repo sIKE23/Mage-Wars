@@ -619,6 +619,7 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
         if (otherPlayer == me) or (not selfAttached and refusedReveal):
                 aTraitDict = computeTraits(attacker)
                 dTraitDict = computeTraits(defender)
+                if not dTraitDict.get('Flying') or not aTraitDict.get('Flying'): aTraitDict['Flying']=False
                 attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
                 nextPlayer = {'declareAttackStep': aController,
                               'avoidAttackStep' : dController,
@@ -635,6 +636,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        #If the defender is not flying, the attacker should lose the flying trait
         #Ask whether charging, if applicable
         if aTraitDict.get('Charge') and attack.get('RangeType') == 'Melee' and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker)
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
@@ -677,6 +679,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+        debug('Is flying? '+str(aTraitDict.get('Flying')))
         interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
@@ -845,15 +848,10 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
                            ["Yes","No"],
                            ["#01603e","#de2827"])
         if choice == 1:
-                if attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type in ['Creature','Mage']:
-                        notify('{} is messily devoured by {}!'.format(card,Card(attack.get('SourceID'))))
-                        obliterate(card)
-                elif card.markers[Zombie]:
-                        notify('Zombie {} disintgrates into a puddle of putrid flesh!'.format(card))
-                        obliterate(card)
-                else:
-                        deathMessage(cardTraitsDict,attack,aTraitDict)
-                        discard(card)
+                deathMessage(cardTraitsDict,attack,aTraitDict)
+                if ((attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type in ['Creature','Mage']) or
+                    card.markers[Zombie]): obliterate(card)
+                else: discard(card)
         else: notify("{} does not accept the destruction of {}.".format(me,card))
 
 def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment was revealed
@@ -958,6 +956,7 @@ def computeTraits(card):
                 cController = c.controller
                 cSubtype = c.subtype
                 cType = c.type
+                if cType == 'Mage': traitDict['MageID'] = c._id #Each card knows which mage controls it.
                 if c.isFaceUp: #only look at face-up cards
                         if getAttachTarget(c) == card: #Get traits from attachments to this card:
                                 if cType in ['Enchantment','Conjuration']:

@@ -74,14 +74,11 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
         Format: <death message>@criterion1=value1,criterion2=value2
         Example:
         {} dies...@Type=Creature,Subtype=Guy,Trait=Living
-        where
-        criteria in [DamageType,Trait,Subtype,Type,Name,AttackTrait]
         """
         card = Card(traitDict.get('OwnerID'))
         attacker = Card(aTraitDict.get('OwnerID')) if aTraitDict else None
-        debug(attacker.name)
-        debug(attacker.subtype)
-        debug(attacker.type)
+        mage = Card(traitDict.get('MageID')) if traitDict.get('MageID') else None
+        attackerMage = Card(aTraitDict.get('MageID')) if aTraitDict.get('MageID') else None
         atkTraits = attack.get('Traits',{})
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
         rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
@@ -93,31 +90,41 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
                 violation = False
                 for c in criteriaList:
                         C=c.split('=')
-                        if ((C[0] == 'DamageType' and C[1]!=attack.get('Type')) or
-                            (C[0] == 'Trait' and not traitDict.get(C[1])) or
-                            (C[0] == 'Subtype' and not C[1] in card.Subtype) or
-                            (C[0] == 'Type' and not C[1] in card.Type) or
-                            (C[0] == 'Name' and C[1] != card.Name) or
-                            (C[0] == 'AttackTrait' and not atkTraits.get(C[1])) or
-                            (C[0] == 'AttackerType' and (not attacker or not C[1] in attacker.Type)) or
-                            (C[0] == 'AttackerName' and (not attacker or C[1]!=attacker.Name)) or
-                            (C[0] == 'AttackerSubtype' and (not attacker or not C[1] in attacker.Subtype)) or
-                            (C[0] == 'AttackerTrait' and (not attacker or not aTraitDict.get(C[1]))) or
-                            (C[0] == 'DamageType!' and C[1]==attack.get('Type')) or
-                            (C[0] == 'Trait!' and traitDict.get(C[1])) or
-                            (C[0] == 'Subtype!' and C[1] in card.Subtype) or
-                            (C[0] == 'Type!' and C[1] in card.Type) or
-                            (C[0] == 'Name!' and C[1] == card.Name) or
-                            (C[0] == 'AttackTrait!' and atkTraits.get(C[1])) or
-                            (C[0] == 'AttackerType!' and (not attacker or C[1] in attacker.Type)) or
-                            (C[0] == 'AttackerName!' and (not attacker or C[1]==attacker.Name)) or
-                            (C[0] == 'AttackerSubtype!' and (not attacker or C[1] in attacker.Subtype)) or
-                            (C[0] == 'AttackerTrait!' and (not attacker or aTraitDict.get(C[1])))):
+                        if not ((C[0] == 'DamageType' and (attack and C[1]==attack.get('Type'))) or
+                                (C[0] == 'Range' and (attack and C[1]==attack.get('RangeType'))) or
+                                (C[0] == 'Trait' and traitDict.get(C[1])) or
+                                (C[0] == 'Subtype' and C[1] in card.Subtype) or
+                                (C[0] == 'Type' and C[1] in card.Type) or
+                                (C[0] == 'Name' and C[1] == card.Name) or
+                                (C[0] == 'Mage' and (mage and C[1] in mage.Name)) or
+                                (C[0] == 'AttackerMage' and (attackerMage and C[1] in attackerMage.Name)) or
+                                (C[0] == 'AttackTrait' and atkTraits.get(C[1])) or
+                                (C[0] == 'AttackerType' and (attacker and C[1] in attacker.Type)) or
+                                (C[0] == 'AttackerName' and (attacker and C[1]==attacker.Name)) or
+                                (C[0] == 'AttackerSubtype' and (not attacker or not C[1] in attacker.Subtype)) or
+                                (C[0] == 'AttackerTrait' and (attacker and aTraitDict.get(C[1]))) or
+                                (C[0] == 'DamageType!' and (attack and C[1]!=attack.get('Type'))) or
+                                (C[0] == 'Range!' and (attack and C[1]!=attack.get('RangeType'))) or
+                                (C[0] == 'Trait!' and not traitDict.get(C[1])) or
+                                (C[0] == 'Subtype!' and C[1] not in card.Subtype) or
+                                (C[0] == 'Type!' and C[1] not in card.Type) or
+                                (C[0] == 'Name!' and C[1] != card.Name) or
+                                (C[0] == 'Mage!' and (mage and C[1] not in mage.Name)) or
+                                (C[0] == 'AttackerMage!' and (attackerMage and C[1] not in attackerMage.Name)) or
+                                (C[0] == 'AttackTrait!' and (attack and not atkTraits.get(C[1]))) or
+                                (C[0] == 'AttackerType!' and (attacker and not C[1] in attacker.Type)) or
+                                (C[0] == 'AttackerName!' and (attacker and C[1]!=attacker.Name)) or
+                                (C[0] == 'AttackerSubtype!' and (attacker and not C[1] in attacker.Subtype)) or
+                                (C[0] == 'AttackerTrait!' and (attacker and not aTraitDict.get(C[1])))):
                                 violation = True
                                 break
                 if not violation: deathMessages.append(splitLine[0])
         if not deathMessages: return
-        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)].replace('<A>',attacker.name.split(',')[0]).replace('{}',card.name.split(',')[0])
+        deathMessage = deathMessages[rnd(0,len(deathMessages)-1)]
+        deathMessage = deathMessage.replace('<A>',attacker.name.split(',')[0])
+        deathMessage = deathMessage.replace('<D>',card.name.split(',')[0])
+        if mage: deathMessage = deathMessage.replace('<AM>',mage.name)
+        if attackerMage: deathMessage = deathMessage.replace('<DM>',attackerMage.name)
         notify(deathMessage)
 
 def getNewFeaturesList(table, x=0, y=0):

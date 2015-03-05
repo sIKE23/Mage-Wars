@@ -1,78 +1,84 @@
-{} seems almost relieved as the peace of death greets it once more.@Type=Creature,Subtype=Undead,Trait=Nonliving
-The unholy magic binding {} together unravels, and it collapses to the floor!@Type=Creature,Subtype=Undead
-The room dims briefly as dark powers flee from {}'s remains!@Type=Creature,Subtype=Undead
-{} wilts and shrivels away!@Type=Creature,Subtype=Plant
-{} collapses, its damage too extensive to regrow!@Type=Creature,Subtype=Plant,Trait=Living
-{} exhales a cloud of sulfur and brimstone as it collapses!@Type=Creature,Subtype=Demon
-{} sneers mockingly at you as the life leaves its body!@Type=Creature,Subtype=Demon,Trait=Living
-{} screams in exhilaration, its soul joyfully returning to the infernian depths whence it came!@Type=Creature,Subtype=Demon
-{} salutes its commander with its dying breath!@Type=Creature,Subtype=Soldier,Trait=Living,Subtype!=Goblin
-{} dies as it lived - with honor!@Type=Creature,Subtype=Knight,Trait=Living
-{} screams a fearsome battle cry before succumbing to its injuries!@Type=Creature,Subtype=Soldier,Trait=Living
-{} whimpers and collapses!@Type=Creature,Subtype=Canine,Trait=Living
-{} seems to have finally mastered 'Play Dead'...@Type=Creature,Subtype=Canine,Trait=Living
-{} dies with a snarl upon its lips!@Type=Creature,Subtype=Canine,Trait=Living
-{} floats gently to the ground, a beatific smile upon its lips.@Type=Creature,Subtype=Angel,Trait=Flying,Trait=Living
-The radiant glow fades from {} as its eyes close forever.@Type=Creature,Subtype=Angel,Trait=Living
-You hear the faint sound of a heavenly choir as {} passes from this world.@Type=Creature,Subtype=Angel,Trait=Living
-{} dissipates into nothingness!@Trait=Incorporeal
-{} fades away like mist!@Trait=Incorporeal
-{} has perished in battle!@Type=Creature
-{} falls in combat!@Type=Creature
-{} dies with a snarl, as wretched in death as it was in life.@Type=Creature,Subtype=Lycanthrope
-{} contorts horribly, its foul curse partially lifted in death.@Type=Creature,Subtype=Lycanthrope
-{} twitches its legs grotesquely for a few seconds, then is still.@Type=Creature,Subtype=Insect
-{} has gone to the halls of its forefathers.@Type=Creature,Subtype=Dwarf
-{}'s scaly eyes close forevermore.@Type=Creature,Subtype=Reptile
-{} crumbles to the ground!@Type=Conjuration,Trait=Nonliving,Trait=Corporeal
-{} is demolished!@Type=Conjuration,Trait=Corporeal
-{} is felled!@Type=Conjuration,Subtype=Tree
-Sticky sap flies everywhere as {} bursts apart!@Type=Creature,Trait=Living,Subtype=Plant
-{}'s bones crumble, eaten away to nothing by the acid!@Type=Creature,Subtype=Skeleton,DamageType=Acid
-The ethereal force of the attack rips {}'s essence apart!@Type=Creature,AttackTrait=Ethereal,Trait=Incorporeal
-{} gurgles as its life-blood spills upon the arena floor!@Type=Creature,Trait=Living,Subtype!=Plant
+<D> seems almost relieved as the peace of death greets it once more.@Type=Creature,Subtype=Undead,Trait=Nonliving
+The unholy magic binding <D> together unravels, and it collapses to the floor!@Type=Creature,Subtype=Undead
+The room dims briefly as dark powers flee from <D>'s remains!@Type=Creature,Subtype=Undead
+<D> wilts and shrivels away!@Type=Creature,Subtype=Plant
+<D> collapses, its damage too extensive to regrow!@Type=Creature,Subtype=Plant,Trait=Living
+<D> exhales a cloud of sulfur and brimstone as it collapses!@Type=Creature,Subtype=Demon
+<D> sneers mockingly at you as the life leaves its body!@Type=Creature,Subtype=Demon,Trait=Living
+<D> screams in exhilaration, its soul joyfully returning to the infernian depths whence it came!@Type=Creature,Subtype=Demon
+<D> salutes its commander with its dying breath!@Type=Creature,Subtype=Soldier,Trait=Living,Subtype!=Goblin
+<D> dies as it lived - with honor!@Type=Creature,Subtype=Knight,Trait=Living
+<D> screams a fearsome battle cry before succumbing to its injuries!@Type=Creature,Subtype=Soldier,Trait=Living
+<D> whimpers and collapses!@Type=Creature,Subtype=Canine,Trait=Living
+<D> seems to have finally mastered 'Play Dead'...@Type=Creature,Subtype=Canine,Trait=Living
+<D> dies with a snarl upon its lips!@Type=Creature,Subtype=Canine,Trait=Living
+<D> floats gently to the ground, a beatific smile upon its lips.@Type=Creature,Subtype=Angel,Trait=Flying,Trait=Living
+The radiant glow fades from <D> as its eyes close forever.@Type=Creature,Subtype=Angel,Trait=Living
+You hear the faint sound of a heavenly choir as <D> passes from this world.@Type=Creature,Subtype=Angel,Trait=Living
+<D> dissipates into nothingness!@Trait=Incorporeal
+<D> fades away like mist!@Trait=Incorporeal
+<D> has perished in battle!@Type=Creature
+<D> falls in combat!@Type=Creature
+<D> dies with a snarl, as wretched in death as it was in life.@Type=Creature,Subtype=Lycanthrope
+<D> contorts horribly, its foul curse partially lifted in death.@Type=Creature,Subtype=Lycanthrope
+<D> twitches its legs grotesquely for a few seconds, then is still.@Type=Creature,Subtype=Insect
+<D> has gone to the halls of its forefathers.@Type=Creature,Subtype=Dwarf
+<D>'s scaly eyes close forevermore.@Type=Creature,Subtype=Reptile
+<D> crumbles to the ground!@Type=Conjuration,Trait=Nonliving,Trait=Corporeal
+<D> is demolished!@Type=Conjuration,Trait=Corporeal
+<D> is felled!@Type=Conjuration,Subtype=Tree
+Sticky sap flies everywhere as <D> bursts apart!@Type=Creature,Trait=Living,Subtype=Plant
+<D>'s bones crumble, eaten away to nothing by the acid!@Type=Creature,Subtype=Skeleton,DamageType=Acid
+The ethereal force of the attack rips <D>'s essence apart!@Type=Creature,AttackTrait=Ethereal,Trait=Incorporeal
+<D> gurgles as its life-blood spills upon the arena floor!@Type=Creature,Trait=Living,Subtype!=Plant
 It's super effective!@Type=Creature,DamageType=Flame,Subtype=Plant
-{} does not go gentle into that good night.@Type=Creature,Trait=Living
-{} should never have returned from the dead to begin with.@Subtype=Undead
-{} served its purpose.@Type=Creature
-Did somebody forget to water {}?@Subtype=Plant,Subtype=Vine
-{} dissolves into a puddle!@Type=Creature,Subtype=Ooze
-A sweet odor emanates from the charred,slimy remains of {}. Is that...flan?@Type=Creature,Subtype=Ooze,DamageType=Flame
-{} melts into a pool of slime!@Type=Creature,Subtype=Ooze
-You hear a sickening crunch as {}'s exoskeleton implodes!@Type=Creature,Subtype=Insect,DamageType!=Poison,DamageType!=Psychic
-{} screams as its mind is destroyed!@Type=Creature,Trait=Living,DamageType=Psychic
-{} explodes into fragments! The gods will not be pleased...@Type=Conjuration,Subtype=Altar
-The {} clears.@Type=Conjuration,Subtype=Cloud,Trait!=Epic,Trait!=Legendary
-{} is destroyed by...electicity? That isn't how physics works.@Type=Conjuration,Subtype=Metal,AttackType=Lightning
-{} is desecrated!@Type=Conjuration,Subtype=Temple
-The animal spirits cry out as {} is annihilated!@Type=Conjuration,Subtype=Totem
-The gods are furious at the destruction of {}!@Type=Conjuration,Subtype=Temple
+<D> does not go gentle into that good night.@Type=Creature,Trait=Living
+<D> should never have returned from the dead to begin with.@Subtype=Undead
+<D> served its purpose.@Type=Creature
+Did somebody forget to water <D>?@Subtype=Plant,Subtype=Vine
+<D> dissolves into a puddle!@Type=Creature,Subtype=Ooze
+A sweet odor emanates from the charred,slimy remains of <D>. Is that...flan?@Type=Creature,Subtype=Ooze,DamageType=Flame
+<D> melts into a pool of slime!@Type=Creature,Subtype=Ooze
+You hear a sickening crunch as <D>'s exoskeleton implodes!@Type=Creature,Subtype=Insect,DamageType!=Poison,DamageType!=Psychic
+<D> screams as its mind is destroyed!@Type=Creature,Trait=Living,DamageType=Psychic
+<D> explodes into fragments! The gods will not be pleased...@Type=Conjuration,Subtype=Altar
+The <D> clears.@Type=Conjuration,Subtype=Cloud,Trait!=Epic,Trait!=Legendary
+<D> is destroyed by...electicity? That isn't how physics works.@Type=Conjuration,Subtype=Metal,AttackType=Lightning
+<D> is desecrated!@Type=Conjuration,Subtype=Temple
+The animal spirits cry out as <D> is annihilated!@Type=Conjuration,Subtype=Totem
+The gods are furious at the destruction of <D>!@Type=Conjuration,Subtype=Temple
 Reality breathes a sigh of relief as a rip in its fabric is forever closed!@Type=Conjuration,Subtype=Portal
 You smell something very much like roast chicken.@Type=Creature,Subtype=Bird,DamageType=Flame
-{} goes down hissing!@Type=Creature,Subtype=Serpent,Trait=Living
-A wave of psychic energy washes over you as {} dies!@Type=Creature,Subtype=Psyoculus
-{} falls to the ground with a tremendous crash!@Type=Creature,Subtype=Golem
+<D> goes down hissing!@Type=Creature,Subtype=Serpent,Trait=Living
+A wave of psychic energy washes over you as <D> dies!@Type=Creature,Subtype=Psyoculus
+<D> falls to the ground with a tremendous crash!@Type=Creature,Subtype=Golem
 Looks like somebody doesn't believe in faeries...@Type=Creature,Subtype=Faerie
-{} gives a piteous yowl before collapsing!@Type=Creature,Trait=Living,Subtype=Cat
-{} did not land on its feet.@Type=Creature,Trait=Living,Subtype=Cat
-{} just couldn't regenerate fast enough.@Type=Creature,Trait=Regenerate,Trait!=Finite Life,Subtype=Troll
-{} crumbles, releasing a small flood of mana into the ground!@Type=Conjuration,Subtype=Mana
-{} meets its death with stoic resolve.@Type=Creature,Trait=Living,Subtype=Dwarf
-{} dies with a snarl, a proud orcish warrior to the end!@Type=Creature,Subtype=Orc,Subtype=Soldier,Subtype=Living
-"Rosebud!" gasps {} with its dying breath.@Type=Creature,Trait=Living,Subtype=Dwarf
+<D> gives a piteous yowl before collapsing!@Type=Creature,Trait=Living,Subtype=Cat
+<D> did not land on its feet.@Type=Creature,Trait=Living,Subtype=Cat
+<D> just couldn't regenerate fast enough.@Type=Creature,Trait=Regenerate,Trait!=Finite Life,Subtype=Troll
+<D> crumbles, releasing a small flood of mana into the ground!@Type=Conjuration,Subtype=Mana
+<D> meets its death with stoic resolve.@Type=Creature,Trait=Living,Subtype=Dwarf
+<D> dies with a snarl, a proud orcish warrior to the end!@Type=Creature,Subtype=Orc,Subtype=Soldier,Subtype=Living
+"Rosebud!" gasps <D> with its dying breath.@Type=Creature,Trait=Living,Subtype=Dwarf
 Headshot!@Type=Creature,Subtype=Zombie
-{}'s bones clatter to the floor, the magic that bound them destroyed.@Type=Creature,Subtype=Skeleton
-Fragments of {} scatter everywhere!@Type=Creature,Subtype=Skeleton
-{} has gone home.@Type=Creature,Subtype=Angel,Trait=Living
-"I! WILL! BE! AVENGED!" roars {} in deathly fury.@Type=Creature,Trait=Living,Subtype=Orc
-{} is graceful, even in death.@Type=Creature,Trait=Living,Subtype=Angel
-{} enters the hibernation of eternity.@Type=Creature,Subtype=Bear,Trait=Living
-{} squawks weakly, then collapses.@Type=Creature,Subtype=Bird,Trait=Living
-{} is slain. Will anybody even remember its name?@Type=Creature,Subtype=Goblin,Trait!=Legendary,Trait=Living
+<D>'s bones clatter to the floor, the magic that bound them destroyed.@Type=Creature,Subtype=Skeleton
+Fragments of <D> scatter everywhere!@Type=Creature,Subtype=Skeleton
+<D> has gone home.@Type=Creature,Subtype=Angel,Trait=Living
+"I! WILL! BE! AVENGED!" roars <D> in deathly fury.@Type=Creature,Trait=Living,Subtype=Orc
+<D> is graceful, even in death.@Type=Creature,Trait=Living,Subtype=Angel
+<D> enters the hibernation of eternity.@Type=Creature,Subtype=Bear,Trait=Living
+<D> squawks weakly, then collapses.@Type=Creature,Subtype=Bird,Trait=Living
+<D> is slain. Will anybody even remember its name?@Type=Creature,Subtype=Goblin,Trait!=Legendary,Trait=Living
 <A> grunts, "I pick my teeth with your bones".@Type=Creature,AttackerType=Creature,AttackerTrait=Living,AttackerSubtype=Troll,Subtype=Skeleton
-<A> found {}'s lack of faith disturbing.@AttackerName=Forcemaster,Type=Creature
+<A> found <D>'s lack of faith disturbing.@AttackerName=Forcemaster,Type=Creature
 Shun the nonbelievers! Shun! SHUN!@AttackerName=Highland Unicorn,Type=Creature
 They stole my frickin' kidney!@Name=Highland Unicorn,AttackerType=Creature
 What does the fox say?@Name=Bitterwood Fox
-Good Gods! Is that {}'s head floating inside there?@Type=Creature,Trait=Corporeal,AttackerName=Devouring Jelly
+Good Gods! Is that <D>'s head floating inside there?@Type=Creature,Trait=Corporeal,AttackerName=Devouring Jelly
 "I welcome death's cold embrace."@Name=Necromancer
+As the old Sortilege proverb goes, "Five heads are better than one."@AttackerName=Darkfenne Hydra,AttackTrait=Triplestrike,Name!=Darkfenne Hydra,Name!=Cerberus,AttackerMage=Wizard
+The cold night's silence is shattered by the shrill scream of <D> as it plummets towards the hard stone of the arena floor.@Type=Creature,Trait=Flying
+Life has become intolerable for <D> due to the incessant pummeling from <A>.@Type=Creature,AttackerName=Darkfenne Hydra,Trait=Living,AttackTrait=Triplestrike
+<AM> applauds <A> on a swift, merciless kill.@AttackerType=Creature,AttackerMage=Wizard,Type=Creature
+<D> is messily devoured by <A>!@Type!=Conjuration,@Trait=Corporeal,@AttackTrait=Devour,@AttackerType=Creature
+<D> is now one with Asyra's Light!@Type=Creature,Subtype=Knight,Mage=Priestess

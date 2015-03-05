@@ -219,6 +219,7 @@ def canAttach(card,target):
     traits = computeTraits(target)
     for s in card.Subtype.split(', '):
         if s in traits.get('Immunity',[]): return False
+    if cName in ['Force Hold','Force Crush','Tanglevine','Stranglevine'] and traits.get('Uncontainable'): return False
     if cType == 'Enchantment':
         if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
             (cName == 'Barkskin' and tName == 'Druid') or
@@ -238,7 +239,7 @@ def canAttach(card,target):
             (cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
             (cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic'))): return True
     elif ((cType == 'Equipment' and tType == 'Mage') or
-        (cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and traits.get('Corporeal') and not traits.get('Flying'))): return True
+        (cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and not traits.get('Flying'))): return True
     return False
 
 def isAttachCardsEnabled():
