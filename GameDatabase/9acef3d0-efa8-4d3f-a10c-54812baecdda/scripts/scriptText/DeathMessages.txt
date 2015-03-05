@@ -80,5 +80,5 @@ As the old Sortilege proverb goes, "Five heads are better than one."@AttackerNam
 The cold night's silence is shattered by the shrill scream of <D> as it plummets towards the hard stone of the arena floor.@Type=Creature,Trait=Flying
 Life has become intolerable for <D> due to the incessant pummeling from <A>.@Type=Creature,AttackerName=Darkfenne Hydra,Trait=Living,AttackTrait=Triplestrike
 <AM> applauds <A> on a swift, merciless kill.@AttackerType=Creature,AttackerMage=Wizard,Type=Creature
-<D> is messily devoured by <A>!@Type!=Conjuration,@Trait=Corporeal,@AttackTrait=Devour,@AttackerType=Creature
+<D> is messily devoured by <A>!@Type!=Conjuration,Trait=Corporeal,AttackTrait=Devour,AttackerType=Creature
 <D> is now one with Asyra's Light!@Type=Creature,Subtype=Knight,Mage=Priestess

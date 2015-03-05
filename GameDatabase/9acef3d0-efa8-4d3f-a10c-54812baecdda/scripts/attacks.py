@@ -41,6 +41,7 @@ diceRollMenu:
 
 def diceRollMenu(attacker = None,defender = None,specialCase = None):
         mute()
+        setEventList('Turn',[]) #Clear the turn event list. Will need to be changed when we implement sweeping/zone attacks properly
         aTraitDict = (computeTraits(attacker) if attacker else {})
         if not attacker: defender = None
         dTraitDict = (computeTraits(defender) if defender else {})
@@ -310,6 +311,11 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                             (vs[0] == "Nonliving" and 'Nonliving' in dTraitDict) or
                             (vs[0] == "Incorporeal" and "Incorporeal" in dTraitDict) or
                             (vs[0] == "Undead" and "Undead" in defender.Subtype)): attackDice += vs[1]
+                if attacker and attack.get('Name') == 'Thundergun' and attacker.Name == "Grimson Deadeye, Sniper": #Deadeye's ability
+                        aZone = getZoneContaining(attacker)
+                        dZone = getZoneContaining(defender)
+                        distance = zoneGetDistance(aZone,dZone)
+                        attackDice -= max((distance-1),0)
         if attackDice <= 0: attackDice = 1
         if atkTraits.get('No Damage'): attackDice = 0
         return attackDice
@@ -679,7 +685,6 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-        debug('Is flying? '+str(aTraitDict.get('Flying')))
         interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
@@ -717,7 +722,9 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
                 if dBarrier:
                         bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
                         declareAttackStep(bTraitDict,dBarrier,aTraitDict)
-        if deathFlag: return
+        if deathFlag:
+                setEventList('Turn',[]) #Clear the turn event list
+                return
         interimStep(aTraitDict,attack,dTraitDict,'Damage Barrier','counterstrikeStep')
 
 def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
@@ -1073,7 +1080,10 @@ def computeTraits(card):
         if markers[Corrode]: append('Armor -{}'.format(str(markers[Corrode])))
         if markers[Guard]: extend(['Counterstrike','Non-Flying'])
         if markers[Sleep] or markers[Stun]: append('Incapacitated')
-        if markers[Zombie] : extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
+        if markers[Zombie] :
+                extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
+                remove('Living')
+                #Also should add undead,zombie subtypes, but no way to do that without the spellDictionary.
         if markers[Stuck] : extend(['Restrained','Unmovable'])
         if markers[Daze]: append('Defense -{}'.format(str(markers[Daze])))
         
@@ -1117,7 +1127,6 @@ def traitParser(traitStr):
                 vsList = traitStr.split(' vs. ')
                 vsList.reverse()
                 vsList[1] = int(vsList[1].replace('+',''))
-                debug(str(vsList))
                 formattedTrait = ['VS',vsList]
         elif " +" in traitStr and traitStr.split(' +')[0] in additiveTraits:
                 try: formattedTrait = [traitStr.split(' +')[0], int(traitStr.split(' +')[1])]

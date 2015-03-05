@@ -1509,7 +1509,6 @@ def obliterate(card, x=0, y=0):
 
 def defaultAction(card,x=0,y=0):
 	mute()
-	debug(card.type)
 	if card.type == "DiceRoll":
 		genericAttack(0)
 
@@ -1595,7 +1594,6 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                 if cardType == 'Internal': return
                 cardW,cardH = card.size.Width,card.size.Height
                 mapX,mapW = mapDict.get('x'),mapDict.get('X')
-                debug(card.name+str(cardW))
                 if cardType == 'DiceRoll':
                         diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
                         zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else

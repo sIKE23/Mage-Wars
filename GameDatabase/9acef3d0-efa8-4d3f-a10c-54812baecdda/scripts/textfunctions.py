@@ -82,6 +82,7 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
         atkTraits = attack.get('Traits',{})
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
         rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
+        debug(str(atkTraits))
         deathMessages = []
         for line in rawData:
                 splitLine = line.replace('\n','').split('@')
@@ -98,7 +99,7 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
                                 (C[0] == 'Name' and C[1] == card.Name) or
                                 (C[0] == 'Mage' and (mage and C[1] in mage.Name)) or
                                 (C[0] == 'AttackerMage' and (attackerMage and C[1] in attackerMage.Name)) or
-                                (C[0] == 'AttackTrait' and atkTraits.get(C[1])) or
+                                (C[0] == 'AttackTrait' and (attack and atkTraits.get(C[1]))) or
                                 (C[0] == 'AttackerType' and (attacker and C[1] in attacker.Type)) or
                                 (C[0] == 'AttackerName' and (attacker and C[1]==attacker.Name)) or
                                 (C[0] == 'AttackerSubtype' and (not attacker or not C[1] in attacker.Subtype)) or
