@@ -928,7 +928,7 @@ def resolveUpkeep():
 	HarshforgeMonolithInPlay = 0
 	ManaPrismInPlay = 0
 	PsiOrbDisc = 0
-	upKeepIgnoreList = ["Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb"]
+	upKeepIgnoreList = ["Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb", "Mana Prism"]
 	for card in table:
 		if card.Name == "Mordok's Obelisk" and card.isFaceUp:
 			MordoksObeliskInPlay = 1
@@ -943,11 +943,11 @@ def resolveUpkeep():
 		 	PsiOrbDisc = 3
 		 	if PsiOrbDisc == 3: notify("{}".format(PsiOrbDisc))
 
-		 	
 	for card in table:
 		upKeepCost = 0
 		obeliskUpKeepCost = 0
 		monolithUpKeepCost = 0
+		# Process Upkeep for Harshforge Monolith
 		if card.Type == "Enchantment" and card.controller == me and HarshforgeMonolithInPlay == 1:
 			monolithUpKeepCost = 1
 			aZone = getZoneContaining(card)
@@ -970,7 +970,6 @@ def resolveUpkeep():
 				addToken(ManaPrism, Mana)
 		 # Process Upkeep for Cards with the Upkeep Card Trait
 		if not card.Name in upKeepIgnoreList and "Upkeep" in card.Traits and card.controller == me and card.isFaceUp:
-
 			upKeepCost = getTraitValue(card, "Upkeep")
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
@@ -991,12 +990,14 @@ def resolveUpkeep():
 		# Process Upkeep for Essence Drain
 		elif card.Name == "Essence Drain" and card.controller != me and card.isFaceUp:
 			upKeepCost = getTextTraitValue(card, "Upkeep")
-			if ManaPrismInPlay == "True":
-				addToken(ManaPrism, Mana)
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+				processUpKeep(upKeepCost, card, Upkeep, notifystr)
+				if ManaPrismInPlay == 1:
+					addToken(ManaPrism, Mana)
+				upKeepCost = 0
 		# Process Upkeep for Mind Control
 		elif card.Name == "Mind Control" and card.controller == me and card.isFaceUp and isAttached(card) == True:
 			attatchedTo = getAttachTarget(card)
@@ -1017,7 +1018,6 @@ def resolveUpkeep():
 		if upKeepCost >= 1:
 			processUpKeep(upKeepCost, card, Upkeep, notifystr)
 
-
 def processPsiOrb(card, PsiOrbDisc, upKeepCost):
 	mute()
 	debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
@@ -1027,14 +1027,13 @@ def processPsiOrb(card, PsiOrbDisc, upKeepCost):
 	notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(upKeepCost, card.Name)
 	return PsiOrbDisc, notifystr, upKeepCost
 
-			
-def processUpKeep(upKeepCost, card1, card2, notifystr):			
+def processUpKeep(upKeepCost, card1, card2, notifystr):
 	mute()
 	upKeepCost = upKeepCost
 	card1 = card1
 	card2 = card2
 	notifystr = notifystr
-	
+
 	if me.Mana < upKeepCost:
 		card1.moveTo(me.piles['Discard'])
 		notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, card1, card2, card1))
@@ -1091,8 +1090,6 @@ def getTextTraitValue(card, TraitName):
 	else:
 		TraitCost = int(STraitCost[1].strip('[]'))
 	return (TraitCost)
-
-
 
 def mageStatus():
 	global gameEndTime
