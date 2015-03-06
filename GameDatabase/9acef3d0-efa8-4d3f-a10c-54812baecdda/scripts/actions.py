@@ -27,8 +27,9 @@ Armor = ("Armor +1", "b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" )
 Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
 Burn = ("Burn", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
-Corrode= ("Corrode", "c3de25bf-4845-4d2d-8a28-6c31ad12af46" )
+Corrode = ("Corrode", "c3de25bf-4845-4d2d-8a28-6c31ad12af46" )
 Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5" )
+CrushToken = ("Crush Token", "d7472637-7c6d-4593-bc16-5975155c2926" )
 Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
 Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20" )
 DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
@@ -919,119 +920,179 @@ def resolveChanneling():
 
 def resolveUpkeep():
 	mute()
-	PsiOrbDisc = 0
-	ManaPrisimInPlay = 0
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
 		return
+	Upkeep = "Upkeep"
+	MordoksObeliskInPlay = 0
+	HarshforgeMonolithInPlay = 0
+	ManaPrismInPlay = 0
+	PsiOrbDisc = 0
+	upKeepIgnoreList = ["Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb"]
 	for card in table:
-		if "Psi-Orb" == card.name and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
+		if card.Name == "Mordok's Obelisk" and card.isFaceUp:
+			MordoksObeliskInPlay = 1
+			MordoksObelisk = card
+		if card.Name == "Harshforge Monolith" and card.isFaceUp:
+			HarshforgeMonolithInPlay = 1
+			HarshforgeMonolith = card
+		if card.name == "Mana Prism" and card.isFaceUp and card.controller == me:
+			ManaPrismInPlay = 1
+			ManaPrism = card
+		if card.Name == "Psi-Orb" and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
 		 	PsiOrbDisc = 3
-		if "Mana Prism" == card.name and card.isFaceUp and card.controller == me:
-			if "Mordok's Obelisk" == card.Name and card.controller != me:
-				ManaPrismInPlay = 1
-				ManaPrism = card
+		 	if PsiOrbDisc == 3: notify("{}".format(PsiOrbDisc))
 
+		 	
 	for card in table:
-		for c in me.piles['Discard']: # if the card was discarded below we are done processing it
-	 		if c == card:
-		 		return
-	 	if "Mordok's Obelisk" == card.Name: # process players cards for Mordok's Upkeep on all non-Mage Creatures
-	 		for c in table:
-	 			if c.Type == "Creature" and c.isFaceUp and c.controller == me:
-	 				if me.Mana < 1:
-	 					c.moveTo(me.piles['Discard'])
-	 					notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
-	 					return
-	 				else:
-	 					choiceList = ['Yes', 'No']
-	 					colorsList = ['#0000FF', '#FF0000']
-	 					choice = askChoice("Do you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
-	 					if choice == 1:
-	 						me.Mana -= 1
-	 						notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
-	 						if ManaPrismInPlay == 1:
-	 							addToken(ManaPrism, Mana)
-	 					else:
-	 						c.moveTo(me.piles['Discard'])
-	 						notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
-	 						return
-		for card in table:
-			if card.name == "Harshforge Monolith" and card.isFaceUp: # process players Enchantment for Upkeep 
-				aZone = getZoneContaining(card)
-				for c in table:
-					if c.Type == "Enchantment" and c.controller == me:
-						dZone = getZoneContaining(card)
-						distance = zoneGetDistance(aZone,dZone)
-						if distance <= 1:
-							if me.Mana < 1:
-	 							c.moveTo(me.piles['Discard'])
-	 							notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, c.Name, card.Name, c.Name))
-	 							return
-							else:
-	 							choiceList = ['Yes', 'No']
-	 							colorsList = ['#0000FF', '#FF0000']
-	 							choice = askChoice("Do you wish to pay the Upkeep +1 cost for {} from {} effect?".format(c.Name, card.Name), choiceList, colorsList)
-	 							if choice == 1:
-	 								me.Mana -= 1
-	 								notify("{} pays the Upkeep cost of 1 for {} from {} effect.".format(me, c.Name, card.Name))
-	 								if ManaPrismInPlay == 1:
-	 									addToken(ManaPrism, Mana)
-	 							else:
-	 								c.moveTo(me.piles['Discard'])
-	 								notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card.Name, c.Name, c.Name))
-	 								return
-	 		EssenceDrain = 0
-	 		TraitValue = -1
-	 		if card.controller == me and "Upkeep" in card.Traits and card.isFaceUp:
-	 			TraitValue, TraitStr = getTraitValue(card, "Upkeep")
-	 			debug("TraitValue:{} TraitStr:{}".format(TraitValue, TraitStr))
-	 		
-	 		if card.Name == "Essence Drain" and isAttached(card) == True:# handle Essence Drain
-	 				attachedToCard = getAttachTarget(card)
-	 				if attachedToCard.controller == me:
-	 					TraitValue, TraitStr = getTextTraitValue(card, "Upkeep")
-	 					EssenceDrain = 1
-	 				
- 		 	if me.Mana < 1:
- 		 		notify("{} discards {} as you do not have sufficent mana to pay for the Upkeep costs.".format(me, card.Name))
- 		 		card.moveTo(me.piles['Discard'])
- 		 		return
- 		 	elif TraitValue > 0:
-		 		notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(TraitValue, card.Name)
-			if PsiOrbDisc > 0 and "Mind" in card.school:
-				debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
-				PsiOrbDisc -= 1
-				notify("{} - Psi-Orb Discount was used to pay 1 Mana point towards the Upkeep cost for '{}', there are '{}' remaining Upkeep discounts left this Round.".format(me,card.name,PsiOrbDisc))
-				TraitValue = TraitValue - 1
-				notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(TraitValue, card.Name)
+		upKeepCost = 0
+		obeliskUpKeepCost = 0
+		monolithUpKeepCost = 0
+		if card.Type == "Enchantment" and card.controller == me and HarshforgeMonolithInPlay == 1:
+			monolithUpKeepCost = 1
+			aZone = getZoneContaining(card)
+			bZone = getZoneContaining(HarshforgeMonolith)
+			distance = zoneGetDistance(aZone,bZone)
+			if card.isFaceUp:
+				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Up {} from Harshforge Monolith's effect?".format(card.Name)
+			else:
+				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Down Enchantment from Harshforge Monolith's effect?"
+			if distance < 2:
+				processUpKeep(monolithUpKeepCost, card.Name, HarshforgeMonolith, notifystr)
+				if ManaPrismInPlay == 1:
+					addToken(ManaPrism, Mana)
+		# Process Upkeep for Mordok's Obelisk's
+		if card.Type == "Creature" and card.controller == me and MordoksObeliskInPlay == 1:
+			obeliskUpKeepCost = 1
+			notifystr = "Do you wish to pay the Upkeep +1 cost for {} from Mordok's Obelisk's effect?".format(card.Name)
+			processUpKeep(obeliskUpKeepCost, card, MordoksObelisk, notifystr)
+			if ManaPrismInPlay == 1:
+				addToken(ManaPrism, Mana)
+		 # Process Upkeep for Cards with the Upkeep Card Trait
+		if not card.Name in upKeepIgnoreList and "Upkeep" in card.Traits and card.controller == me and card.isFaceUp:
 
-		 	if TraitValue >= 1:
-		 		choiceList = ['Yes', 'No']
-				colorsList = ['#0000FF', '#FF0000']
-				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-				if choice == 1:
-					if me.Mana >= TraitValue:
-						me.Mana -= TraitValue
-						notify("{} pays the Upkeep cost of {} for {}.".format(me, TraitValue, card.Name))
-						#if isAttached(forcefield), put the markers on getAttachTarget(forcefield) else put them on forcefield
-						if  EssenceDrain == 1 and ManaPrismInPlay == 1:
-							addToken(ManaPrism, Mana)
-							notify("Mana Prism gains a Mana")
-						elif "Forcefield" == card.Name:
-							notify("Resolving Forcefield Tokens for {}...".format(me))
-							if card.markers[FFToken] == 0 or card.markers[FFToken] <4 :
-								notify("Placing the Forcefield Token on {}...".format(card.Name)) 
-								if isAttached(Forcefield):
-									attachTarget = getAttachTarget(Forcefield)
-									addToken(attachTarget, FFToken)
-								else:
-									card.markers[FFToken] += 1
-							notify("{} has finished adding Forcefield Tokens.".format(me))
+			upKeepCost = getTraitValue(card, "Upkeep")
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
+			else:
+				if isAttached(card) == True:
+					attatchedTo = getAttachTarget(card)
+					notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 				else:
-					notify("{} has chosen not to pay the Upkeep cost for {} and has discarded it.".format(me, card.Name))
-					card.moveTo(me.piles['Discard'])
-					return
+					notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+		# Process Upkeep for Cards with the Upkeep Trait in the Card Text that is attached to Objects (Creatures)
+		elif not card.Name in upKeepIgnoreList and "[Upkeep" in card.Text and card.controller == me and card.isFaceUp and isAttached(card) == True:
+			attatchedTo = getAttachTarget(card)
+			upKeepCost = getTextTraitValue(card, "Upkeep")
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
+			else:
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+		# Process Upkeep for Essence Drain
+		elif card.Name == "Essence Drain" and card.controller != me and card.isFaceUp:
+			upKeepCost = getTextTraitValue(card, "Upkeep")
+			if ManaPrismInPlay == "True":
+				addToken(ManaPrism, Mana)
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
+			else:
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+		# Process Upkeep for Mind Control
+		elif card.Name == "Mind Control" and card.controller == me and card.isFaceUp and isAttached(card) == True:
+			attatchedTo = getAttachTarget(card)
+			upKeepCost = int(attatchedTo.level)
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
+			else:
+				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+		# Process Upkeep for Stanglevine
+		else:
+			if card.Name == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
+				notify("{} is placing a Crush Token on '{}'...".format(me, card.Name))
+				card.markers[CrushToken] += 1
+				upKeepCost = card.markers[CrushToken]
+				attatchedTo = getAttachTarget(card)
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+
+		if upKeepCost >= 1:
+			processUpKeep(upKeepCost, card, Upkeep, notifystr)
+
+
+def processPsiOrb(card, PsiOrbDisc, upKeepCost):
+	mute()
+	debug("Psi-Orb Discount: {} and Card Name: {} Card School: {}".format(str(PsiOrbDisc),card.name, card.school))
+	PsiOrbDisc -= 1
+	notify("{} uses the Psi-Orb to pay 1 less Upkeep for '{}', there are {} remaining Upkeep discounts left for this Round.".format(me,card.name,PsiOrbDisc))
+	upKeepCost = upKeepCost - 1
+	notifystr = "Do you wish to pay the Upkeep +{} cost for {} after the 1 Mana Discount from the Psi-Orb?".format(upKeepCost, card.Name)
+	return PsiOrbDisc, notifystr, upKeepCost
+
+			
+def processUpKeep(upKeepCost, card1, card2, notifystr):			
+	mute()
+	upKeepCost = upKeepCost
+	card1 = card1
+	card2 = card2
+	notifystr = notifystr
+	
+	if me.Mana < upKeepCost:
+		card1.moveTo(me.piles['Discard'])
+		notify("{} was unable to pay Upkeep cost for {} from {} effect and has placed {} in the discard pile.".format(me, card1, card2, card1))
+		return
+	else:
+		choiceList = ['Yes', 'No']
+		colorsList = ['#0000FF', '#FF0000']
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+		notify("{} {}".format(me, notifystr))
+		if choice == 1:
+			me.Mana -= upKeepCost
+			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
+			return
+		else:
+			card1.moveTo(me.piles['Discard'])
+			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card1, card2, card1))
+			return
+
+def getTraitValue(card, TraitName):
+	listofTraits = ""
+	debug("{} has the {} trait".format(card.name, TraitName))
+	listofTraits = card.Traits.split(", ")
+	debug("List of Traits: {} ".format(listofTraits))
+	if not len(listofTraits) > 1:
+		strTraits = ''.join(listofTraits)
+	else:
+		for traits in listofTraits:
+			if TraitName in traits:
+				strTraits = ''.join(traits)
+	STraitCost = strTraits.split("+")
+	if STraitCost[1].strip('[]') == "X":
+		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
+		TraitCost = askInteger(infostr, 3)
+	else:
+		TraitCost = int(STraitCost[1].strip('[]'))
+	return (TraitCost)
+
+def getTextTraitValue(card, TraitName):
+	listofTraits = ""
+	debug("{} has the {} trait in its card text.".format(card.name, TraitName))
+	cardText = card.Text.split("\r\n")
+	strofTraits = cardText[1]
+	debug("{}".format(strofTraits))
+	if "] [" in strofTraits:
+			listofTraits = strofTraits.split("] [")
+			for traits in listofTraits:
+					if TraitName in traits:
+							strTrait = ''.join(traits)
+	else:
+			strTrait = strofTraits
+	STraitCost = strTrait.split("+")
+	if STraitCost[1].strip('[]') == "X":
+		TraitCost = 0
+	else:
+		TraitCost = int(STraitCost[1].strip('[]'))
+	return (TraitCost)
+
+
 
 def mageStatus():
 	global gameEndTime
@@ -1045,7 +1106,7 @@ def mageStatus():
 	#	playSoundFX('Winner')
 	for p in players:
 		remoteCall(p, "reportDeath",[me])
-#	reportGame('MageDeath')
+	#reportGame('MageDeath')
 
 def reportDeath(deadmage):
 	global gameIsOver
@@ -1652,7 +1713,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 def debug(str):
 	global debugMode
 	if debugMode:
-		whisper(str)
+		whisper("Debug Msg: {}".format(str))
 
 def createCard(group,x=0,y=0):
         mute()
@@ -1923,7 +1984,8 @@ def castSpell(card, x = 0, y = 0):
 
 			# if card has the Magebind trait, how much does it add to the reveal cost?
 			if card.controller == me and "Magebind" in card.Traits:
-				TraitValue, TraitStr = getTraitValue(card, Magebind)
+				TraitValue = getTraitValue(card, Magebind)
+				notifystr ="{} has the Magebind +{} trait".format(card, TraitValue)
 				# Are we targeting a Mage with this Enchantment?
 				castingCost = int(chooseMagebind(card, mageRevealCost, TraitValue))
 			else:
@@ -1990,47 +2052,7 @@ def castSpell(card, x = 0, y = 0):
 			notify("{}".format(TraitStr))
 		notify("{} pays {} mana from pool for '{}'".format(me.name, manacost, card.Name))
 
-def getTraitValue(card, TraitName):
-	listofTraits = ""
-	debug("{} has the {} trait".format(card.name, TraitName))
-	listofTraits = card.Traits.split(", ")
-	debug("{} ".format(listofTraits))
-	if not len(listofTraits) > 1:
-		strTraits = ''.join(listofTraits)
-	else:
-		for traits in listofTraits:
-			if TraitName in traits:
-				strTraits = ''.join(traits)
-	STraitCost = strTraits.split("+")
-	if STraitCost[1].strip('[]') == "X":
-		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
-		TraitCost = askInteger(infostr, 3)
-	else:
-		TraitCost = int(STraitCost[1].strip('[]'))
-	TraitStr = "'{}' has the {}+{} trait".format(me.name, card.Name, STraitCost[0])#, TraitCost)
-	return (TraitCost, TraitStr)
 
-def getTextTraitValue(card, TraitName):
-	listofTraits = ""
-	debug("{} has the {} trait in its card text.".format(card.name, TraitName))
-	cardText = card.Text.split("\r\n")
-	strofTraits = cardText[1]
-	debug("{} ".format(strofTraits))
-	if "] [" in strofTraits:
-			listofTraits = strofTraits.split("] [")
-			for traits in listofTraits:
-					if TraitName in traits:
-							strTrait = ''.join(traits)
-	else:
-			strTrait = strofTraits
-	STraitCost = strTrait.split("+")
-	if STraitCost[1].strip('[]') == "X":
-		infostr = "The spell {} has an Upkeep value of 'X' what is the value of X?".format(card.Name)
-		TraitCost = askInteger(infostr, 3)
-	else:
-		TraitCost = int(STraitCost[1].strip('[]'))
-	TraitStr = "'{}' has the {}+{} trait".format(card.Name, TraitName, TraitCost)
-	return (TraitCost, TraitStr)
 
 def chooseMagebind(card, mageRevealCost, TraitCosts):
 	global infostr
