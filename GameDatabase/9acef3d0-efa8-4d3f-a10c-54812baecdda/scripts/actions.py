@@ -659,9 +659,6 @@ def nextPhase(group, x=-360, y=-150):
 		return
 	mute()
 	mageStatus()
-#	if game == "Academy":
-#		passTurn()
-#		return
 	card = None
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
@@ -1564,7 +1561,7 @@ def obliterate(card, x=0, y=0):
 	card.moveTo(me.piles['Obliterate Pile'])
 	notify("{} obliterates '{}'".format(me, card))
 
-def defaultAction(card,x=0,y=0):
+def OnCardDoubleClick(card, mouseButton, keysDown):
 	mute()
 	if card.type == "DiceRoll":
 		genericAttack(0)
@@ -1572,6 +1569,8 @@ def defaultAction(card,x=0,y=0):
 	if card.type =="Phase":
 		nextPhase(table)
 
+def defaultAction(card,x=0,y=0):
+	mute()
 	if card.controller == me:
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
@@ -1639,7 +1638,7 @@ def playCardFaceDown(card, x=0, y=0):
 	moveCardToDefaultLocation(card)
 	card.peek()
 	card.highlight = mycolor
-	notify("{} prepares a card face down on the table.".format(me))
+	notify("{} prepares a Spell from their Spellbook by placing a card face down on the table.".format(me))
 
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
         mute()
