@@ -1,4 +1,5 @@
 Male
+Acolyte of the Bog Queen
 Adramelech, Lord of Fire
 Anvil Throne Crossbowman
 Asyran Cleric
@@ -50,5 +51,3 @@ Screech Harpy
 Selesius, the East Wind
 Valshalla, Lightning Angel
 #
-Either
-Acolyte of the Bog Queen

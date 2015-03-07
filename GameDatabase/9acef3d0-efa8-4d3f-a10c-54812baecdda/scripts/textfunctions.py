@@ -82,7 +82,8 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
         atkTraits = attack.get('Traits',{})
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
         rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
-        debug(str(atkTraits))
+        gender = getGender(card)
+        attackerGender = getGender(attacker) if attacker else None
         deathMessages = []
         for line in rawData:
                 splitLine = line.replace('\n','').split('@')
@@ -126,7 +127,29 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
         deathMessage = deathMessage.replace('<D>',card.name.split(',')[0])
         if mage: deathMessage = deathMessage.replace('<AM>',mage.name)
         if attackerMage: deathMessage = deathMessage.replace('<DM>',attackerMage.name)
+        #Pronouns
+        subjectDict = {'Male' : 'he', 'Female' : 'she'}
+        objectDict = {'Male' : 'him', 'Female' : 'her'}
+        possessiveDict = {'Male' : 'his', 'Female' : 'her'}
+        if attacker:
+                deathMessage = deathMessage.replace('<as>',subjectDict.get(attackerGender,'it'))
+                deathMessage = deathMessage.replace('<ao>',objectDict.get(attackerGender,'it'))
+                deathMessage = deathMessage.replace('<ap>',possessiveDict.get(attackerGender,'its'))
+        deathMessage = deathMessage.replace('<ds>',subjectDict.get(gender,'it'))
+        deathMessage = deathMessage.replace('<do>',objectDict.get(gender,'it'))
+        deathMessage = deathMessage.replace('<dp>',possessiveDict.get(gender,'its'))
         notify(deathMessage)
+
+def getGender(card):
+        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+        genders = list(open('{}\{}{}'.format(textDirectory,'Genders','.txt'),'r'))
+        name = card.Name
+        gender = None
+        for l in genders:
+                line = l.replace('\n','')
+                if line in ['Male','Female']:
+                        gender = line
+                elif line == name: return gender
 
 def getNewFeaturesList(table, x=0, y=0):
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
