@@ -201,9 +201,9 @@ def setUpDiceAndPhaseCards():
 		card.switchTo("Planning") #skips upkeep for first turn
 		card.anchor = (True)
 		moveCardToDefaultLocation(card)
-		card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
-		card.anchor = (True)
-		moveCardToDefaultLocation(card)
+                card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
+                card.anchor = (True)
+                moveCardToDefaultLocation(card)
 		setGlobalVariable("TableSetup", True)
 
 def onLoadDeck(player, groups):
@@ -230,7 +230,7 @@ def onLoadDeck(player, groups):
 			playerSetup()
 			if debugMode:
 				# set Dice Rolling Area, Initative, and Phase Marker Card location
-				setDRAIP(1)
+				#setDRAIP(1)
 				CreateIniToken()
 			elif len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
@@ -607,19 +607,18 @@ def AskInitiative(pNum):
 
 def AskDiceRollArea():
 	mute()
-	global bottomDiceRollArea
 	notify("{} is choosing where the Dice Roll Area will be placed.".format(me))
 	choiceList = ['Side', 'Bottom']
 	colorsList = ['#FF0000', '#0000FF']
-	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Botton of the Gameboard?", choiceList, colorsList)
+	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Bottom of the Gameboard?", choiceList, colorsList)
 	if choice == 0 or choice == 1:
 		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
 	else:
 		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
                 setGlobalVariable("DiceRollAreaPlacement", "Bottom")
 	#setDRAIP(choice)
-	for p in players:
-		remoteCall(p, "setDRAIP", [choice])
+	#for p in players:
+		#remoteCall(p, "setDRAIP", [choice])
 
 def CreateIniToken():
 	global gameStartTime
@@ -1660,6 +1659,8 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                         x=zoneX-(cardW if diceBoxSetup=='Side' else 0)
                         y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)
                         card.moveToTable(x,y,True)
+                        mapDict['DiceBoxLocation'] = (x,y)
+                        setGlobalVariable("Map",str(mapDict))
                         #except: notify('Error! Maps must be at least 2 zones tall!')
                         return
                 if cardType == 'Phase':

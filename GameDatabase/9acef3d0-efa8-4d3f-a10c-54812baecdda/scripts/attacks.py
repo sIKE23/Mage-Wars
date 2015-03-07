@@ -357,11 +357,7 @@ def rollDice(dice):
 	global diceBankD12
 	global hasRolledIni
 	global myIniRoll
-	global dieCardX
-	global dieCardY
-	global dieCard2X
-	global dieCard2Y
-
+        mapDict = eval(getGlobalVariable('Map'))
 	if not deckLoaded == True:
 		notify("Please Load a Spellbook first. (Ctrl+L)")
 		choiceList = ['OK','Load Blank Spellbook (not recommended)']
@@ -376,8 +372,10 @@ def rollDice(dice):
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
 			c.delete()
+	dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard.anchor = (True)
+	rnd(0,0)
 	diceFrom = ""
         count = dice
         if (len(diceBank) < count): #diceBank running low - fetch more
