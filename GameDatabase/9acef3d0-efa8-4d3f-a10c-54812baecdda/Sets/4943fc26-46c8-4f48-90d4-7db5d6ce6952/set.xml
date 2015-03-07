@@ -164,7 +164,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Defense=8+ 1x, Armor=1, Life=14" />
-			<property name="AttackBar" value="Great Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [7+ = Bleed] [Piercing +1]" />
+			<property name="AttackBar" value="Great Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [7+ = Bleed] [Piercing +1]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="All other friendly cat creatures in the same zone as Makunda have their melee attacks gain the Piercing +1 trait" />
 			<property name="CardID" value="MWSTX1CKC04" />

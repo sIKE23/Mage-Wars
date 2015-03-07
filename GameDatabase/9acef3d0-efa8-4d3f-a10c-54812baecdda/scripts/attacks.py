@@ -224,18 +224,20 @@ def getAttackList(card):
 
 def computeAttack(aTraitDict,attackDict,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID'))
+        defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
         attack = dict(attackDict)
         atkTraits = attack.get('Traits',{})
         localADict = dict(aTraitDict)
         if attacker.markers[HolyAvenger] and 'Holy' in attacker.School and not 'Legendary' in aTraitDict and not hasAttackedThisRound(attacker): #Holy avenger code
                 eventList = getEventList('Round')
                 for e in eventList:
-                        if e[0] == 'Attack' and e[1][0] == dTraitDict.get('OwnerID'):
+                        if e[0] == 'Attack' and e[1][0] == dTraitDict.get('OwnerID') and e[1][3] > 0:
                                 victim = Card(e[1][1]) if e[1][1] else None
                                 if victim and victim.controller==attacker.controller and (victim.Type in ['Creature','Mage'] or ('Conjuration' in victim.Type and 'Holy' in victim.School)):
                                         localADict['Melee'] = localADict.get('Melee',0) + 2
                                         localADict['Piercing'] = localADict.get('Piercing',0) + 1
                                         break
+        if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and attacker.type in ['Mage','Creature'] and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
         if attack.get('RangeType') == 'Melee':
@@ -496,9 +498,9 @@ def rememberDefenseUse(card,defense):
         appendEventList('Round',['Defense', [card._id,defense]])
         appendEventList('Turn',['Defense', [card._id,defense]])
 
-def rememberAttackUse(attacker,defender,attack):
-        appendEventList('Round',['Attack', [attacker._id,defender._id,attack]])
-        appendEventList('Turn',['Attack', [attacker._id,attacker._id,attack]])
+def rememberAttackUse(attacker,defender,attack,damage=0):
+        appendEventList('Round',['Attack', [attacker._id,defender._id,attack,damage]])
+        appendEventList('Turn',['Attack', [attacker._id,attacker._id,attack,damage]])
 
 def rememberCharge(attacker):
         appendEventList('Round',['Charge', [attacker._id]])
@@ -696,14 +698,14 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+        damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+        rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack),damage) #Record that the attack was declared, using the original attack as an identifier
         interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack)) #Record that the attack was declared, using the original attack as an identifier
         strikes = 1
         atkTraits = attack.get('Traits',{})
         if atkTraits.get('Doublestrike'): strikes = 2
@@ -804,6 +806,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                            ["#01603e","#de2827"])
         if choice == 1:
                 applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
+                return actualDmg #for remembering damage. Pretty crude; We'll come up with a better alternative in Q2
         else:
                 notify('{} has elected not to apply auto-calculated battle results'.format(me))
                 whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
