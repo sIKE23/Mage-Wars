@@ -385,7 +385,7 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defense &#xD;&#xA;Defense 7+ 1x" />
+			<property name="Text" value="Mage gains a Defense &#xD;&#xA;[Defense 7+ 1x]" />
 			<property name="CardID" value="MWSTX1CKQ04" />
 		</card>
 		<card id="0f9291dd-f242-47e7-8053-e8382dc614b8" name="Sunfire Amulet">

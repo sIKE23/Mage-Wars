@@ -226,8 +226,12 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
         attack = dict(attackDict)
-        atkTraits = attack.get('Traits',{})
+        atkTraits = dict(attack.get('Traits',{}))
         localADict = dict(aTraitDict)
+        #Runesmithing
+        atkOS = Card(attack['OriginalSourceID'])
+        if atkOS.markers[RuneofPrecision] and atkOS.type == 'Equipment' and not atkTraits.get('Spell'): atkTraits['Piercing'] = atkTraits.get('Piercing',0) + 1
+        #Holy Avenger
         if attacker.markers[HolyAvenger] and 'Holy' in attacker.School and not 'Legendary' in aTraitDict and not hasAttackedThisRound(attacker): #Holy avenger code
                 eventList = getEventList('Round')
                 for e in eventList:
@@ -237,6 +241,7 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                                         localADict['Melee'] = localADict.get('Melee',0) + 2
                                         localADict['Piercing'] = localADict.get('Piercing',0) + 1
                                         break
+        #Wounded prey
         if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and attacker.type in ['Mage','Creature'] and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
@@ -554,6 +559,8 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
                         if traitsGranted:
                                 for d in traitsGranted:
                                         dCandidate = defenseParser(c._id,d)
+                                        #Runesmithing
+                                        if c.markers[RuneofShielding]: dCandidate['Minimum'] = dCandidate['Minimum'] - 2
                                         if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0): defenseList.append(dCandidate)
         #Filter out unusable defenses
         for d in list(defenseList):
@@ -791,10 +798,15 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                                                 healingAmt,
                                                 "{} heals {} for {} damage!".format(attacker.name,defender.name,'{}'))
                 else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
-                return
+                return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
         
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
+        if defender.markers[VoltaricON] and actualDmg:#Voltaric Shield
+                notify("The Voltaric Shield absorbs {} points of damage!".format(str(min(actualDmg,3))))
+                actualDmg = max(actualDmg-3,0)
+                defender.markers[VoltaricON] = 0
+                defender.markers[VoltaricOFF] = 1
         dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
         choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
                                                                                                           actualDmg,
@@ -842,7 +854,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
                                                                     str(damage),
                                                                     defender,
-                                                                    ('! (an above' if damage > expectedDmg else '... (a below')))
+                                                                    ('! (an above' if damage >= expectedDmg else '... (a below')))
         #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
         dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
         defender.controller.Mana -= dManaDrain
@@ -1054,6 +1066,8 @@ def computeTraits(card):
                                         rawText = c.text.split('\r\n[')
                                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
                                         extend(traitsGranted)
+                                        #Runesmithing
+                                        if c.markers[RuneofFortification] and 'Armor +' in ', '.join(rawText): append('Armor +1')
                                 if cName in ['Mana Crystal','Mana Flower']: append('Channeling +1')
                                 if cName == 'Animal Kinship':
                                         canine = reptile = bear = ape = cat = False

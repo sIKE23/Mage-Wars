@@ -552,7 +552,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="War Mage Only" />
-			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast. [Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast.&#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MWSTX2FFQ05" />
 		</card>
 		<card id="82a0a369-821d-4f9f-bf27-17363de8e71d"  name="Morning Star">
