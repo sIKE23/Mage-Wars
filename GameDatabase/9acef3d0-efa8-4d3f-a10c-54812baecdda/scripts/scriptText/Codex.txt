@@ -312,10 +312,11 @@ If a creature moves out of a zone with enemy creatures in it, or if it moves int
 Ignore,Ignores,Ignored
 An ignored enemy creature cannot hinder movement of friendly creatures. An ignored enemy creature that is guarding does not have to be attacked when making a melee attack.
 #
-Immunity,Immune
+Immunity,Immune,Hydro Immunity,Flame Immunity,Acid Immunity,Psychic Immunity,Wind Immunity,Poison Immunity,Light Immunity,Lightning Immunity
 This object is immune to all attacks, damage, conditions, and effects of the specified damage type, including critical damage and direct damage. It cannot be targeted or affected by spells or attacks of the specified type.
 
-- Exception: Objects with hydro immunity <explain here>
+- Exception: Objects with Hydro Immunity: A hydro attack (or attack spell) which has the Extinguish trait, may target an object with the Hydro Immunity trait. If it does, the attack deals no damage or effects to the object, other than to remove all Burn conditions. This is an exception to the normal immunity rules. In this manner, a Hydro attack can be used to extinguish the fires of a burning plant object, even though the attack cannot actually damage or harm that plant
+- Execption: The Geyser attack spell may target an object with the Hydro Immunity trait. If it does, the attack deals no damage or effects to the object, other than to remove all Burn conditions. In this manner, a Geyser attack can be used to extinguish the fires of a burning plant object.
 #
 Incapacitated,Incapacitate
 An Incapacitated creature cannot take any actions, including moving, attacking, guarding, or casting spells. It cannot use any Defenses, except for mandatory-reveal enchantments that count as a Defense.
