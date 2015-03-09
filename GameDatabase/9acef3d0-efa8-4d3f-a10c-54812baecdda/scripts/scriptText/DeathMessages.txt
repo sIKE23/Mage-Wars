@@ -81,5 +81,5 @@ Life has become intolerable for <D> due to the incessant pummeling from <A>.@Typ
 <AM> applauds <A> on a swift, merciless kill.@AttackerType=Creature,AttackerMage=Wizard,Type=Creature
 <D> is messily devoured by <A>!@Type!=Conjuration,Trait=Corporeal,AttackTrait=Devour,AttackerType=Creature
 <D> is now one with Asyra's Light!@Type=Creature,Subtype=Cleric,Mage=Priestess
-Yes pumpkin, All dogs go to heaven.@Subtype=Canine,Trait=Living
+Yes pumpkin, All dogs go to heaven.@Subtype=Canine,Subtype!=Demon,Trait=Living
 Straight to Hell with you, unholy beast!@SubType=Demon,AttackerMage=Priest
