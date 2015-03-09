@@ -18,6 +18,7 @@ additiveTraits = ["Melee","Ranged",
                   "Piercing",
                   "Mana Drain",
                   "Mana Transfer",
+                  "Magebind",
                   "Lifebond",
                   "Upkeep",
                   'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
@@ -446,7 +447,7 @@ Events shall be formatted thus:
 <A,cardID> attacks <B,cardID> with attack <C,attackDict> : [Attack,[A,B,C]]
 <A,cardID> used defense <B,defenseDict> : [Defense, [A,B]]
 <A,cardID> used charge: [Charge, [A]]
-<A,cardID> uses special ability number <B,int> on target <C,cardID or NoneType> : [Special, [A,B,C]]
+<A,cardID> uses ability number <B,int>: [Untargeted Ability, [A,B]]
 """
 
 
@@ -494,6 +495,14 @@ def timesHasUsedAttack(card,attack):
                 if e[0] == 'Attack' and e[1][0] == card._id and e[1][2] == attack: count += 1
         return count
 
+def timesHasUsedAbility(card,number=0):
+        """Counts how many times untargeted ability has been used this ROUND"""
+        eventList = getEventList('Round')
+        count = 0
+        for e in eventList:
+                if e[0] == 'Ability' and e[1][0] == card._id and e[1][1] == number: count += 1
+        return count
+
 def hasCharged(card):
         """returns whether this card has charged this TURN"""
         eventList = getEventList('Turn')
@@ -510,6 +519,11 @@ def rememberAttackUse(attacker,defender,attack,damage=0):
 def rememberCharge(attacker):
         appendEventList('Round',['Charge', [attacker._id]])
         appendEventList('Turn',['Charge', [attacker._id]])
+
+def rememberAbilityUse(card,number=0): #We can call the targeted version 'rememberTargetAbility use', or some such. This one is for untargeted abilities
+        appendEventList('Round',['Ability', [card._id,number]])
+        appendEventList('Turn',['Ability', [card._id,number]])
+
 
 ############################################################################
 ######################            Defenses              ####################
@@ -663,6 +677,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        if attacker.Name == 'Invisible Stalker': attacker.markers[Invisible] = 0 #Invisible stalker loses invisible marker when declaring attack
         #If the defender is not flying, the attacker should lose the flying trait
         #Ask whether charging, if applicable
         if aTraitDict.get('Charge') and attack.get('RangeType') == 'Melee' and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker)
@@ -686,6 +701,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
+                       rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack),0)
                        interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
                        return
         interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
@@ -904,7 +920,7 @@ def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment
                 colors.append("#de2827")
                 choice = askChoice('Would you like to reveal {} enchantment?'.format(recurText),options,colors)
                 if choice == len(options): return (False if recurText == 'an' else True)
-                castSpell(aList[choice-1])
+                revealEnchantment(aList[choice-1])
                 recurText = 'another'
 
 def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):

@@ -38,7 +38,7 @@ def attach(card,target):
     mute()
     unbind(card)
     if card.controller == me and canAttach(card,target):
-        if card.type == 'Enchantment' and not card.isFaceUp: enchantmentAttachCost(card,target) #Ask if controller would like to pay mana to attach it
+        if not card.isFaceUp: castSpell(card,target)
         detachAll(card)
         consolidateAttachments(target)
         setGlobalDictEntry("attachDict",card._id,[target._id,len(getAttachments(target))+1])

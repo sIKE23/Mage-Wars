@@ -176,7 +176,7 @@ def onGameStart():
 	setGlobalVariable("DiceRollAreaPlacement", "Side")
 	mapDict = createMap(4,3,[[1 for j in range(3)] for i in range(4)],250)
 	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
-	mapDict.get('zoneArray')[3][2]['startLocation'] = '2'
+	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
 	setGlobalVariable('Map',str(mapDict))
 
 	# reset python Global Variables
@@ -295,7 +295,6 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
         if player == me == fromCard.controller and isTargeted:
-                debug(str(getSetting("DeclareAttackWithArrow",True)))
                 if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
                         attacker,defender = fromCard,toCard #Should probably make an attack declaration function, rather than copypasting from attackTarget(). Eventually.
                         aTraitDict = computeTraits(attacker)
@@ -316,6 +315,7 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         if attack and attack.get('SourceID')==attacker._id:
                                 remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                                 attacker.arrow(defender,False)
+                elif not fromCard.isFaceUp: castSpell(fromCard,toCard) #Assume that player wants to cast card on target
 
 def setClearVars():
 	global deckLoaded
@@ -1577,21 +1577,14 @@ def defaultAction(card,x=0,y=0):
                         payForAttack = not (getSetting('BattleCalculator',True) and card.Type=='Attack')
 			if "Mage" in card.Type or not payForAttack: #Attack spells will now be paid for through the battlecalculator
 				flipcard(card, x, y)
-
 				if not getSetting('attackChangeNotified',False) and not payForAttack:
                                         whisper('Note: Mana for {} will be paid when you declare an attack using the Battle Calculator, or if you double-click on {} again.'.format(card,card))
                                         setSetting('attackChangeNotified',True)
-			else:
-				castSpell(card, x, y)
+			elif card.Type == "Enchantment": revealEnchantment(card)
+			else: castSpell(card)
+				
 		else:
-			if card.Type == "Incantation" or card.Type == "Attack":
-				choiceList = ['Yes', 'No']
-				colorsList = ['#0000FF', '#FF0000']
-				choice = askChoice("Did you wish to cast this spell?", choiceList, colorsList)
-				if choice == 1:
-					castSpell(card, x, y)
-				else:
-					return
+			if card.Type == "Incantation" or card.Type == "Attack": castSpell(card) #They can cancel in the castSpell prompt; no need to add another menu
 
 ############################################################################
 ######################		Utility Functions		########################
@@ -1866,203 +1859,200 @@ def remoteSwitchPhase(card, phase, phrase):
 # Table card actions
 #---------------------------------------------------------------------------
 
-def findDiscount(cspell,cdiscount): #test if spell satisfies requirements of discount card
-	global discountsUsed
+def castSpell(card,target=None):
+        costStr = card.Cost
+        if not target and card.Target not in ['Zone','Zone Border','Arena'] and card.Type in ["Incantation","Conjuration"]:
+                targets = [c for c in table if c.targetedBy==me]
+                if targets and len(targets) == 1: target = targets[0]
+                else: whisper("No single target for {} detected. Cost calculation is more effective if you select a target.".format(card))
+        #Long term, invalid targets will result in spell cancellation. Won't enforce that for now, though.
+	if costStr:
+                cardType = card.Type
+                #First, determine the base cost
+                cost = computeCastCost(card,target)
+                if cost == None:
+                        costQuery = askInteger("Non-standard cost detected. Please enter base cost of this spell.\n(Close this menu to cancel)",0)
+                        if costQuery!=None: cost = costQuery
+                        else: return
+                #Next, figure out who is casting the spell
+                caster = getBindTarget(card)
+                if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits): caster = [c for c in table if (c.Type == 'Mage' and c.controller == me)][0]
+                casterMana = caster.markers[Mana]
+                ownerMana = me.Mana
+                discountList = filter(lambda d: d[1]>0, map(lambda c: (c,getCastDiscount(c,card,target)),table)) #Find all discounts. It would be better to pass a list, but this isn't a bottleneck, so we'll make do for now.
+                #Reduce printed cost by sum of discounts
+                usedDiscounts = []
+                discountAppend = usedDiscounts.append
+                for c,d in discountList:
+                        if cost > 0: #Right now, all discounts are for 1. If there is ever a 2-mana discount, we will need to adjust this to optimize discount use. Come to think of it, some discounts overlap, and we might want to optimize for those...well, we can cross that bridge when we reach it.
+                                cost = max(cost-d,0)
+                                discountAppend((c,d)) #Keep track of which discounts we are applying
+                        else: break #Stop if the cost of the spell reaches 0; we don't need any more discounts.
+                #Ask the player how much mana they want to pay
+                discountSourceNames = '\n'.join(map(lambda t: t[0].Name,usedDiscounts))
+                discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
+                casterString = "Mana will be deducted first from {} and then from your main supply.\n\n".format(caster.Name) if caster.Type != "Mage" else ""
+                cost = askInteger("This spell has a calculated cost of {}.\n\n".format(str(cost))+
+                                     discountString+
+                                     casterString+
+                                     "How much mana, in total, would you like to pay?\n(Close this menu to cancel)",cost)
+                if cost == None: return
+                if cost > casterMana + ownerMana:
+                        whisper('You do not have enough mana to cast {}!'.format(card.Name))
+                        return
+                casterCost = min(casterMana,cost)
+                caster.markers[Mana] -= casterCost #Hmmm... is casterMana mutable? Will need to experiment; not high priority
+                if casterCost: notify("{} pays {} mana.".format(caster,str(casterCost)))
+                cost -= casterCost
+                me.Mana = max(me.Mana-cost,0)
+                notify("{} pays {} mana.".format(me,str(cost)))
+                for c,d in usedDiscounts: #track discount usage
+                        rememberAbilityUse(c)
+                if card.Type == "Enchantment": notify("{} enchants {}!".format(caster,target) if target else "{} casts an enchantment!".format(caster))
+                elif card.Type == "Creature": notify("{} summons {}!".format(caster,card.Name))
+                elif "Conjuration" in card.Type: notify("{} conjures {}!".format(caster,card.Name))
+                else: notify("{} casts {}!".format(caster,card.Name))
+                if card.Type != "Enchantment" and not card.isFaceUp: flipcard(card)
 
-	#build test list from spell
-	testlist = cspell.Type.split(",")
-	testlist += cspell.Subtype.split(",")
-	testlist += cspell.School.split(",")
-	for i in range(len(testlist)):
-		testlist[i] = testlist[i].strip().strip("]").strip("[")
-	debug("casting discount testlist: {}".format(testlist))
+def revealEnchantment(card):
+	if card.Type == "Enchantment" and not card.isFaceUp:
+                cardType = card.Type
+                target = getAttachTarget(card)
+                if not target and card.Target not in ['Zone','Zone Border','Arena'] and not confirm("This enchantment is not attached to anything. Are you sure you want to reveal it?"): return
+                #First, determine the base cost
+                cost = computeRevealCost(card)
+                if cost == None:
+                        costQuery = askInteger("Non-standard cost detected. Please enter the base cost of revealing this enchantment.",0)
+                        if costQuery!=None: cost = costQuery
+                        else: return
+                ownerMana = me.Mana
+                discountList = filter(lambda d: d[1]>0, map(lambda c: (c,getRevealDiscount(c,card)),table)) #Find all discounts. It would be better to pass a list, but this isn't a bottleneck, so we'll make do for now.
+                #Reduce printed cost by sum of discounts
+                usedDiscounts = []
+                discountAppend = usedDiscounts.append
+                for c,d in discountList:
+                        if cost > 0: #Right now, all discounts are for 1. If there is ever a 2-mana discount, we will need to adjust this to optimize discount use. Come to think of it, some discounts overlap, and we might want to optimize for those...well, we can cross that bridge when we reach it.
+                                cost = max(cost-d,0)
+                                discountAppend((c,d)) #Keep track of which discounts we are applying
+                        else: break #Stop if the cost of the spell reaches 0; we don't need any more discounts.
+                #Ask the player how much mana they want to pay
+                discountSourceNames = '\n'.join(map(lambda t: t[0].Name,usedDiscounts))
+                discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
+                cost = askInteger("This enchantment has a calculated reveal cost of {}.\n\n".format(str(cost))+
+                                     discountString+
+                                     "How much mana, in total, would you like to pay?\n(Close this menu to cancel)",cost)
+                if cost == None: return
+                #Do we have enough mana?
+                if cost > ownerMana:
+                        whisper('You do not have enough mana to reveal {}!'.format(card.Name))
+                        return
+                me.Mana = max(me.Mana-cost,0)
+                notify("{} pays {} mana.".format(me,str(cost)))
+                for c,d in usedDiscounts: #track discount usage
+                        rememberAbilityUse(c)
+                notify("{} reveals {}!".format(me,card.Name))
+                flipcard(card)
+                                
+def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
+        if card.controller != spell.controller or not card.isFaceUp or card==spell: return 0 #No discounts from other players' cards or facedown cards!
+        caster = getBindTarget(spell)
+        mageCast = not(caster and ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits))
+        spawnpointCast = (caster and "Spawnpoint" in caster.Traits)
+        cName = card.Name
+        sSubtype = spell.Subtype
+        sType = spell.Type
+        sName = spell.Name
+        sSchool = spell.School
+        timesUsed = timesHasUsedAbility(card)
+        if timesUsed < 1: #Once-per-round discounts
+                #Discounts that only apply when your mage casts the spell
+                if (mageCast and
+                    ((cName == "Arcane Ring" and sType != "Enchantment" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
+                     (cName == "Enchanter's Ring" and target and target.controller == card.controller and sType == "Enchantment") or
+                     (cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
+                     (cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
+                     (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
+                     (cName == "Druid's Leaf Ring" and sType != "Enchantment" and ("Plant" in sSubtype)) or
+                     (cName == "Force Ring" and sType != "Enchantment" and ("Force" in sSubtype)) or
+                     (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)))):
+                        return 1
+                #Discounts that apply no matter who casts the spell
+                if ((cName == "General's Signet Ring" and ("Soldier" in sSubtype)) or
+                    (cName == "Eisenach's Forge Hammer" and (sType == "Equipment"))):
+                        return 1
+        if timesUsed <2: #Twice-per-round discounts
+                if cName == "Death Ring" and (mageCast or spawnpointCast) and sType != "Enchantment" and ("Necro" in sSubtype or "Undead" in sSubtype):
+                        return 1
+        return 0
+        #Returns discount as integer (0, if no discount)
 
-	#discount already used?
-	discountUsed = 0
-	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
-	if len(tuplist) > 0:
-		if tuplist[0][2] >= tuplist[0][1]:
-			discountUsed += 1
+def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY used for revealing enchantments (don't call for casting spells!)
+        if card.controller != spell.controller or not card.isFaceUp or card==spell: return 0 #No discounts from other players' cards or facedown cards, or from itself!
+        target = getAttachTarget(spell)
+        cName = card.Name
+        sSubtype = spell.Subtype
+        sType = spell.Type
+        sName = spell.Name
+        sSchool = spell.School
+        timesUsed = timesHasUsedAbility(card)
+        if timesUsed < 1 and ((cName == "Arcane Ring" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
+                              (cName == "Ring of Asyra" and ("Holy" in sSchool)) or
+                              (cName == "Ring of Curses" and ("Curse" in sSubtype)) or
+                              (cName == "Druid's Leaf Ring" and ("Plant" in sSubtype)) or
+                              (cName == "Force Ring" and ("Force" in sSubtype)) or
+                              (cName == "Ring of Command" and ("Command" in sSubtype))): return 1
+        if timesUsed <2 and cName == "Death Ring" and ("Necro" in sSubtype or "Undead" in sSubtype): return 1
+        return 0
+        #Returns discount as integer (0, if no discount)
 
-	discount = 0
-	found = False
-	lines = cdiscount.Text.split("[Casting Discount]")
-	debug("lines: {}".format(lines))
-	if len(lines)>1: #line found - now process it
-		cells = lines[1].split(']')
-		for i in range(len(cells)):
-			cells[i] = cells[i].strip().strip("]").strip("[")
-			debug("cell entry: {}".format(cells[i]))
-		try:
-			discount = int(cells[0])
-		except ValueError:
-			debug("no discount value found")
-			return 0
-		reqstr = cells[1] #discount requirements should be here
-		reqs = reqstr.split("/")
-		for req in reqs:
-			debug("testing req {}".format(req))
-			for r in req.split("/"):
-				if r in testlist:
-					#Ring of Asyra is enchants and incants only
-					if "Asyra" in cdiscount.Name:
-						if "Incantation" in cspell.Type or "Enchantment" in cspell.Type:
-							found = True
-					#Ring of Beasts is creatures only
-					elif "Beasts" in cdiscount.Name:
-						if "Creature" in cspell.Type:
-							found = True
-					else:
-						found = True
+def computeRevealCost(card): #For enchantment reveals
+        target = getAttachTarget(card) #To what is it attached?
+        cost = None
+        try: cost = int(card.Cost.split('+')[1])
+        except: pass
+        if not target: return cost
+        #Exceptions
+        name = card.Name
+        tLevel = 6 if target.Type == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+')))) #And...this is why mages NEED to have a level field in the XML file.
+        if name == "Mind Control":
+                cost = 2*tLevel
+        elif name in ["Charm","Fumble"]:
+                cost = tLevel-1
+        if cost == None: return #If it doesn't fit an exception, the player will have to handle it.
+        traits = computeTraits(card)
+        if target.Type=="Mage":
+                cost += traits.get("Magebind",0)
+        return cost
 
-	if not found:
-		return 0
-	else:
-		if discountUsed == 0:
-			return discount
-		else:
-			return -1
-
-def doDiscount(cdiscount):
-	global discountsUsed
-	lines = cdiscount.Text.split("[Casting Discount]")
-	cells = lines[1].split(']')
-	for i in range(len(cells)):
-		cells[i] = cells[i].strip().strip("]").strip("[")
-
-	tuplist = [tup for tup in discountsUsed if tup[0] == cdiscount.Name]
-	if len(tuplist) > 0:
-		if tuplist[0][2] < tuplist[0][1]:
-			discountsUsed.remove(tuplist[0])
-			discountsUsed.append((tuplist[0][0],tuplist[0][1],tuplist[0][2]+1))
-		else:
-			return -1
-	else:
-		newtup = (cdiscount.Name,int(cells[2].strip("x")),1)
-		discountsUsed.append(newtup)
-
-def castSpell(card, x = 0, y = 0):
-	global infostr
-	global Magebind
-	castingCost = ""
-	TraitStr = ""
-	discountStr = ""
-
-	if card.Cost != "" and card.Cost != None:
-		if not "Enchantment" in card.Type:  # Attack, Creature, Conjuration, Equipment, and Incantation spells
-			if "X" in card.Cost:  # e.g. Dispel
-				castingCost = 0
-			else:
-				castingCost = int(card.Cost)
-
-			infostr = "The printed casting cost of {} is {}".format(card.Name, castingCost)
-			notifyStr = "{} turns '{}' face up, it has a printed casting cost of {}".format(me.name, card.Name, str(castingCost))
-
-		else:  # Enchantment Spells
-			#  Check to see if the player wants to reveal the Enchantment
-			if getSetting("EnchantPromptReveal", False):
-				choiceList = ['Yes', 'No']
-				colorsList = ['#0000FF', '#FF0000']
-				choice = askChoice("Would you like to reveal this hidden enchantment?", choiceList, colorsList)
-				if choice == 0 or choice == 2:
-					return
-
-			#  castingCost = 2	# when we get attaching enchantments down
-			revealCost = card.Cost.split("+")
-			debug("debug: Casting Cost:{} and Reveal Cost:{}".format(revealCost[0], revealCost[1]))
-			if "X" in card.Cost:  # e.g. Charm
-				mageRevealCost = 0
-			elif int(revealCost[1]) == 0:  #e.g. Brace Yourself
-				flipcard(card, x, y)
-				notify("{} revealed {} as it has a '0' reveal cost".format(me.name, card.Name))
-				return
-			else:
-				mageRevealCost = int(revealCost[1])  # the second number (reveal cost)
-
-			# if card has the Magebind trait, how much does it add to the reveal cost?
-			if card.controller == me and "Magebind" in card.Traits:
-				TraitValue = getTraitValue(card, Magebind)
-				notifystr ="{} has the Magebind +{} trait".format(card, TraitValue)
-				# Are we targeting a Mage with this Enchantment?
-				castingCost = int(chooseMagebind(card, mageRevealCost, TraitValue))
-			else:
-				castingCost = mageRevealCost
-				infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
-			notifyStr = "{} turns '{}' face up, it has a printed reveal cost of  {}".format(me.name, card.Name, str(mageRevealCost))
-
-		# find any discounts from equipment(School, Type, Subtype, Targetbased?)
-		discount = 0
-		foundDiscounts = [ ]
-		for c in table:
-			if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card and c.name != "Enchanter's Ring":
-				dc = findDiscount(card, c)
-				debug("Discount Count Returned from test: {} from card: {}".format(dc, c.Name))
-				if dc > 0:
-					discountStr = "\nCost reduced by {} due to {}".format(dc, c.name)
-					infostr = notifyStr + discountStr
-					notifyStr = notifyStr + discountStr
-					discount += dc
-					foundDiscounts.append(c)
-				elif dc < 0:
-					discountStr = "\n{} already reached max uses this round.".format(c.name)
-					infostr = notifyStr + discountStr
-					notifyStr = notifyStr + discountStr
-		infostr += "\nTotal mana amount to subtract from mana pool?"
-		manacost = askInteger(infostr, castingCost - discount)
-
-		# Do we have enough mana to pay for the spell?
-		if manacost == None:
-			# player closed the window and didn't cast the spell
-			return
-		if me.Mana < manacost:
-			if not debugMode:
-				notify("{} has insufficient mana in pool".format(me))
-				# player is unable to pay for the spell
-				return
-			else:
-				notify("{} has insufficient mana in pool".format(me))
-				if not card.isFaceUp: flipcard(card, x, y)
-				return
-
-		# Pay casting/reveal costs, register discounts, notify in chat window and flip the card face up
-		for dc in foundDiscounts:
-			doDiscount(dc)
-		me.Mana -= manacost
-		if not card.isFaceUp:
-			flipcard(card, x, y)
-			notify("{}".format(notifyStr))
-		else:
-                        #Get the card object that is casting the spell
-                        bindTarget = getBindTarget(card)
-                        caster = me
-                        if bindTarget and ('Familiar' in bindTarget.Traits or 'Spawnpoint' in bindTarget.Traits): caster = bindTarget
-                        else: #Mage is the caster by default
-                                for c in table:
-                                        if c.Type == 'Mage':
-                                                caster = c
-                                                break
-			boundStr = "{} casts '{}', with a printed casting cost of {}".format(caster, card, str(castingCost))
-			if not discountStr == "":
-				boundStr = boundStr + discountStr
-			notify("{}".format(boundStr))
-		if not TraitStr == "":
-			notify("{}".format(TraitStr))
-		notify("{} pays {} mana from pool for '{}'".format(me.name, manacost, card.Name))
-
-
-
-def chooseMagebind(card, mageRevealCost, TraitCosts):
-	global infostr
-	choiceList = ['Yes', 'No']
-	colorsList = ['#0000FF', '#FF0000']
-	choice = askChoice("Is the target of this Enchantment a Mage?", choiceList, colorsList)
-	infostr = "The printed reveal cost of {} is {}".format(card.Name, mageRevealCost)
-	if choice == 1:  # Enchantment is targeting a Mage
-		mcastingCost = int(mageRevealCost) + int(TraitCosts)
-		infostr += "\n+ {} to bind the spell to a Mage".format(TraitCosts)
-	else:  # Enchatment is not targeting a Mage
-		mcastingCost = int(mageRevealCost)
-	return mcastingCost
+def computeCastCost(card,target=None): #Does NOT take discounts into consideration. Just computes base casting cost of the card. NOT reveal cost.
+        cost = 2 if card.Type == 'Enchantment' else None
+        try: cost = int(card.Cost)
+        except: pass
+        if target: #Compute exact cost based on target. For now, cards like dissolve will have to target the spell they want to destroy. Does not check for target legality.
+                name = card.Name
+                tLevel = 6 if target.Type == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+'))))
+                if name in ["Dissolve", "Conquer"]:
+                        cost = int(target.Cost)
+                elif name in ["Dispel","Steal Enchantment"]:
+                        revealCost = computeRevealCost(target)
+                        if revealCost!=None: cost = 2 + revealCost
+                elif name in ["Steal Equipment"]:
+                        cost = 2*int(target.Cost)
+                elif name in ["Rouse the Beast","Disarm"]:
+                        cost = tLevel
+                elif name in ["Quicksand"]:
+                        cost = 2*tLevel
+                elif name == "Explode":
+                        cost = 6+int(target.Cost)
+                elif name == "Shift Enchantment":
+                        if not card.isFaceUp: cost = 1
+                        else: cost = tLevel
+                elif name == "Sleep":
+                        cost = {1:4,2:5,3:6}.get(tLevel,2*tLevel)
+                elif name == "Defend":
+                        cost = {1:1,2:1,3:2,4:2}.get(tLevel,3)
+                #For now, we won't consider things like harshforge plate. We could, but it is not necessary at the moment. We will add that when we implement the 3 stages of casting a spell. (Q2)
+        return cost
 
 def inspectCard(card, x = 0, y = 0):
     whisper("{}".format(card))
