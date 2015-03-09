@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda" sleeveid="0">
   <section name="Mage" shared="False">
-    <card qty="1" id="4208e1b0-b570-42de-9e62-5ce15b97b91e">Wizard(Air)</card>
+    <card qty="1" id="2563e3d8-8f45-482a-9009-d80a51fdf377">Wizard (Apprentice)</card>
     <card qty="1" id="e27b8293-65cd-4479-b5e9-2616201ba512">Wizard Stats</card>
   </section>
   <section name="Attack" shared="False">
