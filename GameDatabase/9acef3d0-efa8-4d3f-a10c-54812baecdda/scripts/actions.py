@@ -174,10 +174,7 @@ def onGameStart():
 
 	#Set default map
 	setGlobalVariable("DiceRollAreaPlacement", "Side")
-	mapDict = createMap(4,3,[[1 for j in range(3)] for i in range(4)],250)
-	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
-	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
-	setGlobalVariable('Map',str(mapDict))
+	defineRectangularMap(4,3,250)
 
 	# reset python Global Variables
 	for p in players:
@@ -192,6 +189,12 @@ def onGameStart():
 	setGlobalVariable("turnEventList",str([]))
 
 	initializeGame()
+
+def defineRectangularMap(I,J,tilesize):
+        mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
+	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
+	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
+	setGlobalVariable('Map',str(mapDict))
 
 def setUpDiceAndPhaseCards():
 	mute()
@@ -1860,6 +1863,14 @@ def remoteSwitchPhase(card, phase, phrase):
 #---------------------------------------------------------------------------
 
 def castSpell(card,target=None):
+        #Figure out who is casting the spell
+        caster = getBindTarget(card)
+        if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
+                casters = filter(lambda d: (d.Type == "Mage" and d.isFaceUp),table)
+                if casters: caster = casters[0]
+                else:
+                        whisper("And just who do you expect to cast that? You need to play a mage first.")
+                        return
         costStr = card.Cost
         if not target and card.Target not in ['Zone','Zone Border','Arena'] and card.Type in ["Incantation","Conjuration"]:
                 targets = [c for c in table if c.targetedBy==me]
@@ -1874,9 +1885,6 @@ def castSpell(card,target=None):
                         costQuery = askInteger("Non-standard cost detected. Please enter base cost of this spell.\n(Close this menu to cancel)",0)
                         if costQuery!=None: cost = costQuery
                         else: return
-                #Next, figure out who is casting the spell
-                caster = getBindTarget(card)
-                if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits): caster = [c for c in table if (c.Type == 'Mage' and c.controller == me)][0]
                 casterMana = caster.markers[Mana]
                 ownerMana = me.Mana
                 discountList = filter(lambda d: d[1]>0, map(lambda c: (c,getCastDiscount(c,card,target)),table)) #Find all discounts. It would be better to pass a list, but this isn't a bottleneck, so we'll make do for now.
