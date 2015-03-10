@@ -312,7 +312,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                 if not atkTraits.get('Spell'): attackDice -= attacker.markers[Weak]
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
-                attackDice += (aTraitDict.get('Bloodthirsty',0) if (defender.markers[Damage]
+                attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or (defender.Type=="Mage" and defender.controller.Damage))
                                                                     and (attacker and not hasAttackedThisTurn(attacker))
                                                                     and not 'Plant' in defender.subtype
                                                                     and defender.type in ['Creature','Mage']

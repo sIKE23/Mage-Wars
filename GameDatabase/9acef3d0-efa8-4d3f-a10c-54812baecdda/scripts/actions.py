@@ -300,7 +300,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
         if player == me == fromCard.controller and isTargeted:
                 if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
-                        attacker,defender = fromCard,toCard #Should probably make an attack declaration function, rather than copypasting from attackTarget(). Eventually.
+                        attacker,defender = fromCard,toCard #Should probably make an attack declaration function. Eventually.
                         aTraitDict = computeTraits(attacker)
                         dTraitDict = computeTraits(defender)
                         attack = diceRollMenu(attacker,defender)
@@ -434,41 +434,9 @@ def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 	mageStatus()
 
-def attackTarget(attacker, x=0, y=0):
+def useUntargetedAbility(attacker, x=0, y=0):
         mute()
-        if attacker.controller == me and canDeclareAttack(attacker) and getSetting('BattleCalculator',True):
-                #snapToZone(attacker)
-                target = [c for c in table if c.targetedBy==me]
-                aTraitDict = computeTraits(attacker)
-                if len(target) == 1:
-                        defender = target[0]
-                        #if defender.controller == me: snapToZone(defender)
-                        #else: remoteCall(defender.controller,'snapToZone',[defender])
-                        dTraitDict = computeTraits(defender)
-                        attack = diceRollMenu(attacker,defender)
-                        #Pay costs for spells
-                        if attack.get('Cost'):
-                                originalSource = Card(attack.get('OriginalSourceID'))
-                                if not originalSource.isFaceUp: flipcard(originalSource)
-                                if originalSource.type == 'Attack': castSpell(originalSource)
-                                else:
-                                        cost = attack.get('Cost')
-                                        realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
-                                        if realCost <= me.Mana: me.Mana -= realCost
-                                        else:
-                                                notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
-                                                return
-                        if attack and attack.get('SourceID')==attacker._id: remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
-                        elif attack.get('Dice'): rollDice(attack.get('Dice'))
-                        defender.target(False)
-                        return
-                #Untargeted attack
-                attack = diceRollMenu(attacker,None)
-                dice = attack.get('Dice',-1)
-                if dice >= 0:
-                        notify("{} attacks with {}".format(me,attacker))
-                        roll,effect = rollDice(dice)
-        else: genericAttack(table) #If the card you are targeting cannot attack, or the battle calculator is off, just go to the generic attack menu
+        pass
 
 def genericAttack(group, x=0, y=0):
 	target = [cards for cards in table if cards.targetedBy==me]
