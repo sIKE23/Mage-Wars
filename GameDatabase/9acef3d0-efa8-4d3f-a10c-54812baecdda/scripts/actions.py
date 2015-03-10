@@ -2369,50 +2369,16 @@ mapCreatureOffset = 0
 mapMultipleCreatureOffset = 62
 
 mapTileDict =  {
-                "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #Dropped Weapon
+                "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #V'Torrak
                 "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Pool
                 "3" : "8972d2d1-348c-4c4b-8c9d-a1d235fe482e", #Altar of Oblivion
-                "4" : "a21d1889-acf1-4121-b1d1-991f3f294f1d", #Secret Passage
-                "5" : "a47fa32e-ac83-4ced-8f6a-23906ee38880", #Septagram
-                "6" : "bf833552-8ee4-4c62-abd2-83da233da4ce", #Molten Rock
-                "7" : "c3e970f7-1eeb-432b-ac3f-7dbcd4f45492", #Spiked Pit
-                "8" : "cc063a84-2ba4-4f18-8a09-6e5a4e57ab5b", #Muddy Tile
-                "9" : "dda1f46d-2e0a-4be8-b85a-2d25bbc40a12", #Boneyard
-                "A" : "edca7d45-53e0-468d-83a5-7a446c81f070", #Samandriel's Circle
-                "B" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
-                "C" : "f8794ef9-e78f-412b-95d4-37dc055be158", #Debris
-                "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1", #Generic Tile
-                "D" : "0011a67e-df97-42f0-bdd2-1fe7f733b702", #Westlock 1
-                "E" : "0191ddc0-ef8d-499a-b6a4-f9e0f01da219", #Westlock 2
-                "F" : "023336ec-9969-4832-bbb7-b071b0b55906", #Westlock 3
-                "G" : "035c27ba-d619-43dd-99f7-ecec7852913d", #Westlock 4
-                "H" : "06a26b95-1821-411f-818c-359122845731", #Westlock 5
-                "I" : "07cbfb65-3469-4aad-91c9-bcdd6bf4433c", #Westlock 6
-                "J" : "0843b7ef-fdfb-411d-a1dd-d36e752d94d0", #Westlock 7
-                "K" : "0908af74-c087-4624-ae23-4807cdce2727", #Westlock 8
-                "L" : "0af23def-171a-4adb-bf05-0d958d824d5d", #Westlock 9
-                "M" : "0b43f1c1-21c7-4083-a46f-e8a50f8035d7", #Westlock 10
-                "N" : "0c14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 11
-                "O" : "0f14ca09-a83d-4185-afa0-bc38a31dbf82", #Westlock 12
-                "P" : "24ae46c1-dd54-427b-bb4c-9e24aead34f5", #Salenia 1
-                "Q" : "12bd0a8a-2eec-4cf3-b14e-6861de1d7a19", #Salenia 2
-                "R" : "3ead8317-1867-4ccc-850d-dae7590137af", #Salenia 3
-                "S" : "92e1afc0-d7de-434e-94ae-d7fb4fdbd744", #Salenia 4
-                "T" : "17b4d74b-2bcd-476c-b3e7-2adb83c6c20f", #Salenia 5
-                "U" : "8dd2393e-8fc8-4611-82de-d67aee5c2cbb", #Salenia 6
-                "V" : "94908e50-bb5b-49fb-b3ba-94b467e9ea5a", #Salenia 7
-                "W" : "e21d2461-8021-4b19-8eed-9bfd8e247b20", #Salenia 8
-                "X" : "20313020-24ce-4149-9c30-775794d80a1e", #Salenia 9
-                "Y" : "bcfe0daa-a4aa-4de1-868f-9132010f026c", #Salenia 10
-                "Z" : "ec03ac8c-7ffb-4d36-8d8e-189fa83a776f", #Salenia 11
-                "a" : "2d4a47ee-81e0-48f0-acb6-ec8e8d2a5826", #Salenia 12
-                "b" : "43dc59fa-dd87-47ac-a4d6-574f7cec609c", #Apprentice Mode 1
-                "c" : "62846feb-893c-40c5-8138-0777a24c8c73", #Apprentice Mode 2
-                "d" : "f88b4ac6-b2da-48da-86a1-5213fe9e34be", #Apprentice Mode 3
-                "e" : "3421bf20-a06f-4fc0-aac0-35a053e3c799", #Apprentice Mode 4
-                "f" : "707e1095-18df-491a-afca-b32b0cfce67c", #Apprentice Mode 5
-                "g" : "485fa227-2f6a-42b8-a112-0b97a9cf6317" #Apprentice Mode 6
-                }
+                "4" : "a47fa32e-ac83-4ced-8f6a-23906ee38880", #Septagram
+                "5" : "bf833552-8ee4-4c62-abd2-83da233da4ce", #Molten Rock
+                "6" : "c3e970f7-1eeb-432b-ac3f-7dbcd4f45492", #Spiked Pit
+                "7" : "edca7d45-53e0-468d-83a5-7a446c81f070", #Samandriel's Circle
+                "8" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
+                "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
+                
 
 mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
                   "O" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5"}	# 2 V'Tar Orbs
