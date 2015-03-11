@@ -2353,6 +2353,8 @@ mapObjectOffset = 175
 mapMultipleObjectOffset = -100
 mapCreatureOffset = 0
 mapMultipleCreatureOffset = 62
+mapMarkersOffset = 275 # Since these Markers are the same size and shape as the 
+mapMultipleMarkersOffset = -100
 
 mapTileDict =  {
                 "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #V'Torrak
@@ -2365,11 +2367,13 @@ mapTileDict =  {
                 "8" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
                 "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
                 
+mapObjectsDict = {"o" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f",	# A V'Tar Orb
+                  		"O" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f"}	# 2 V'Tar Orbs
 
-mapObjectsDict = {"o" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5",	# A V'Tar Orb
-                  "O" : "690a2c72-4801-47b5-84bd-b9e2f5811cb5"}	# 2 V'Tar Orbs
-
-mapCreaturesDict =     {"s" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# Orb Guardian
+mapCreaturesDict = {"s" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# Orb Guardian
                         "S" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# 2 Orb Guardians
                         "u" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",	# Greater Orb Guardian
                         "U" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd"}	# 2 Greater Orb Guardians
+
+mapMarkersDict = {"s" : "a4b3bb92-b597-441e-b2eb-d18ef6b8cc77"} # Secret Passage
+	

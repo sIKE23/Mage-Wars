@@ -1,7 +1,0 @@
-bcd
-efg
-#Map#
-
-1..
-..2
-#Creatures#

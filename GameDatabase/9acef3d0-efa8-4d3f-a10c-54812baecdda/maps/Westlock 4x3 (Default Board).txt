@@ -1,9 +1,0 @@
-DEFG
-HIJK
-LMNO
-#Map#
-
-1...
-....
-...2
-#Creatures#
