@@ -331,6 +331,9 @@ If a mandatory action effect (such as a Taunt) would force Grey Wraith to move, 
 #
 Guardian Angel
 Guardian Angel's ability only triggers when she uses her action to guard. Acquiring a guard marker from another source, such as Defend, does not count.
+#
+Gurmash, Orc Sergeant
+Gurmash's use of his commanding Warlord's Battle Orders does not count as the one use per round for that Warlord. Thus, Gurmash and his controller may both cast Battle Orders during the same round, and the orders will stack.
 ##### H Section #####
 Hail of Stones
 The attack bar should have the Unavoidable trait. Of course, Zone attacks have the Unavoidable trait anyway, so this is redundant.
