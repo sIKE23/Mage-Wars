@@ -625,7 +625,7 @@ def CreateIniToken():
 def nextPhase(group, x=-360, y=-150):
 	global roundTimes
 	global gameTurn
-	gameIsover = getGlobalVariable("GameIsOver")
+	gameIsOver = getGlobalVariable("GameIsOver")
 	if gameIsOver:	#don't advance phase once the game is done
 		return
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
