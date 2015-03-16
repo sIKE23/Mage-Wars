@@ -84,3 +84,4 @@ Life has become intolerable for <D> due to the incessant pummeling from <A>.@Typ
 Yes pumpkin, All dogs go to heaven.@Subtype=Canine,Subtype!=Demon,Trait=Living
 Straight to Hell with you, unholy beast!@SubType=Demon,AttackerMage=Priest
 Toasty!@DamageType=Flame
+Frosty!@DamageType=Frost

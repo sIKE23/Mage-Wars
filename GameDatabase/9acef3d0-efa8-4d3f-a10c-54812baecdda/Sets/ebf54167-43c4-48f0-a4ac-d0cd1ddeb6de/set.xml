@@ -1982,8 +1982,8 @@
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Level" value="1" />
 			<property name="School" value="Fire" />
+			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />

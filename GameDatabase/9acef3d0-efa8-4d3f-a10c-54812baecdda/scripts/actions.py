@@ -139,13 +139,15 @@ gameNum = ""
 ############################################################################
 
 def onTableLoad():
-        debug('a')
 	setGlobalVariable("TableSetup", False)
 	global debugMode
 	global playerNum
 	global hasRolledIni
 	global mycolor
 	global gameNum
+	#Set default map
+	setGlobalVariable("DiceRollAreaPlacement", "Side")
+	defineRectangularMap(4,3,250)
 	gameNum = 1
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
@@ -163,7 +165,7 @@ def onTableLoad():
 def onGameStart():
         mute()
 	# reset color picking
-	setGlobalVariable("ColorsChosen", "")
+        setGlobalVariable("ColorsChosen", "")
 
 	# reset initiative automation
 	setGlobalVariable("SetupDone", "")
@@ -171,10 +173,6 @@ def onGameStart():
 	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
 	setGlobalVariable("GameReset", "")
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
-
-	#Set default map
-	setGlobalVariable("DiceRollAreaPlacement", "Side")
-	defineRectangularMap(4,3,250)
 
 	# reset python Global Variables
 	for p in players:
@@ -200,10 +198,6 @@ def setUpDiceAndPhaseCards():
 	mute()
 	TableSetup = getGlobalVariable("TableSetup")
 	if TableSetup == "False" and me.name == Player(1).name:
-		card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-		card.switchTo("Planning") #skips upkeep for first turn
-		card.anchor = (True)
-		moveCardToDefaultLocation(card)
                 card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
                 card.anchor = (True)
                 moveCardToDefaultLocation(card)
@@ -294,7 +288,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                                 getBindTarget(card) or
                                 toGroups[i] != table):
                                 alignAttachments(card)
-                                alignBound(card)#Do not realign ifit is  only the index that is changing. Prevents recursions.
+                                alignBound(card)#Do not realign if it is  only the index that is changing. Prevents recursions.
 
 
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
@@ -394,7 +388,7 @@ def iniRoll(effect):
 
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
-
+"""
 def setDRAIP(location):
 	global dieCardX
 	global dieCardY
@@ -425,7 +419,7 @@ def setDRAIP(location):
 		phaseY = 330 # -150 + 480
 		initX = -125 # -580 + 455
 		initY = 330 # -150 + 480
-
+"""
 ############################################################################
 ######################		Group Actions			########################
 ############################################################################
@@ -607,7 +601,7 @@ def CreateIniToken():
 	dieCardY = -40
 	if not iniTokenCreated:
 		iniTokenCreated = True
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", (dieCardX + 5) , (dieCardY - 75 ) ) #initiative token
+		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", (dieCardX + 5) , (dieCardY - 75 ) ) #initiative token # Obsolete dieCard definitions, not high priority.
 		init.anchor = (True)
 		init.switchTo({
                         PlayerColor[0]:"",
@@ -622,10 +616,16 @@ def CreateIniToken():
 		setGlobalVariable("PlayerWithIni", str(playerNum))
 		gameStartTime = time.time()
 		currentPhase = "Planning"
+                card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
+                card.switchTo("Planning") #skips upkeep for first turn
+                card.anchor = (True)
 		for c in table:
                         remoteCall(c.controller,'moveCardToDefaultLocation',[c])
 		notify("Setup is complete!")
+		#Create the phase button here. Ensures that only one is created. Bookmark
 
+                #moveCardToDefaultLocation(card)
+#Bookmark
 def nextPhase(group, x=-360, y=-150):
 	global mycolor
 	global roundTimes
@@ -642,6 +642,9 @@ def nextPhase(group, x=-360, y=-150):
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
 			card = c
 			break
+	if not card:
+                whisper("You must roll initiative first!")
+                return
 	if card.alternate == "":
 		switchPhase(card,"Planning","Planning Phase")
 	elif card.alternate == "Planning":
@@ -1633,7 +1636,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                         setGlobalVariable("Map",str(mapDict))
                         #except: notify('Error! Maps must be at least 2 zones tall!')
                         return
-                if cardType == 'Phase':
+                if cardType == 'Phase':#Bookmark
                         diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
                         zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
                                 [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]

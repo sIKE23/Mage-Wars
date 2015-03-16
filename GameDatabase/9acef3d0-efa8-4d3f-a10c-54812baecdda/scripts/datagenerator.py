@@ -1,0 +1,153 @@
+"""
+This file contains functions for generating data to be used in other functions.
+The functions in this file are NOT used by the module, and should not be included
+in its definition.
+"""
+
+def cardParser(filePath):
+    """
+    - Formats the contents of an xml file as spell dictionary entries.
+    - Put r (no quotes) before filepath to prevent backslash errors.
+    - Can use SHIFT+RCLICK on file, then select 'copy file as path' to make obtaining the filepath easy.
+    """
+    #First, we create a list of cards in the set.
+    rawFile = list(open(filePath,'r'))
+    rawCardList = []
+    append = rawCardList.append
+    startReadCard = False
+    tempCard = []
+    tAppend = tempCard.append
+    for line in rawFile:
+        line = line.replace("&apos;","\\'")
+        replace = line.replace
+        strip = line.strip
+        if "<card id=" in line:
+            startReadCard = True
+            line = replace('\n','')
+            line = line.strip()
+            line = line.replace("\" name","\"SPLITHERE!!!name")
+            line = line.strip('<>')
+            line = line.replace(" /","")
+            line = line.split('SPLITHERE!!!')
+            tAppend(line)
+        elif "</card>" in line:
+            startReadCard = False
+            append(list(tempCard))
+            tempCard = []
+            tAppend = tempCard.append
+        elif "<property name=" in line and startReadCard:
+            line = replace('\n','')
+            line = line.strip()
+            line = line.replace("\" value","\"SPLITHERE!!!value")
+            line = line.strip('<>')
+            line = line.replace(" /","")
+            line = line.split('SPLITHERE!!!')
+            tAppend(line)
+    #Now we have a list of cards. Let's reformat them as a copy-pastable dictionary:
+    processedCardList = []
+    append = processedCardList.append
+    for c in rawCardList:
+        name = ""
+        pCard = []
+        app = pCard.append
+        specialSubtypes = []
+        cSubtypes = []
+        cType = None
+        cAction = None
+        for l in c:
+            pType = l[0].split("=")[1].strip("\"")
+            pValue = l[1].split("value=")[1].strip("\"") if 'property name' in l[0] else l[1].split("name=")[1].strip("\"")
+            if "card id" in l[0]: #It is the first line.
+                name = pValue
+                app("'Name' : '{}'".format(name))
+                app("'GUID' : '{}'".format(pType))
+            elif "property name" in l[0]:
+                if pType == "Type": #Mages and Walls will be treated as subtypes
+                    if pValue == "Conjuration-Wall":
+                        app("'Type' : 'Conjuration'")
+                        cType = "Conjuration"
+                        specialSubtypes.append("Wall")
+                    elif pValue == "Mage": #Does not take level 4 apprentice mages into account. We can just do those manually, though.
+                        app("'Type' : 'Creature'")
+                        app("'Level' : 6")
+                        cType = "Creature"
+                        specialSubtypes.append("Mage")
+                    else:
+                        cType = pValue
+                        app("'Type' : '{}'".format(pValue))
+                elif pType == "Subtype":
+                    cSubtypes = pValue.split(', ') + specialSubtypes
+                    if cSubtypes and cSubtypes != ['']:
+                        app("'Subtypes' : {}".format(str(cSubtypes))) #Note the plural
+                elif pType == "Cost":
+                    if cType == "Enchantment":
+                        app("'Cast Cost' : 2")
+                        reveal  = pValue.split('+')[1]
+                        try: app("'Reveal Cost' : {}".format(str(int(reveal))))
+                        except: app("'Reveal Cost' : 0") 
+                    else:    
+                        try: app("'Cast Cost' : {}".format(str(int(pValue)))) 
+                        except: app("'Cast Cost' : 0")
+                elif pType == "Action":
+                    cAction = pValue
+                    app("'Action' : '{}'".format(pValue))
+                elif pType == "Range":
+                    app("'Minimum Range' : {}".format(pValue.split('-')[0]))
+                    app("'Maximum Range' : {}".format(pValue.split('-')[1]))
+                elif pType == "Target": #Note: does NOT use final target format, just distinguishes between basic target types. Use onComputeLegality functions to take care of special restrictions.
+                    tList = []
+                    if "Creature" in pValue or "Object" in pValue or pValue == "Mage": tList.append("Creature")
+                    if "Conjuration" in pValue or "Object" in pValue: tList.append("Conjuration")
+                    if "Enchantment" in pValue or "Object" in pValue: tList.append("Enchantment")
+                    if "Equipment" in pValue or "Object" in pValue: tList.append("Equipment")
+                    if "Zone" == pValue or "Zone Border"==pValue: tList.append(pValue)
+                    app("'Targets' : {}".format(str(tList)))
+                elif pType == "School": #Want to give school as dictionaries, with levels indexed by school
+                    if "+" in pValue: app("'Schools' : {}".format(str(pValue.split("+"))))
+                    elif "/" in pValue: app("'Schools' : {}".format(str(pValue.split("/"))))
+                    else: app("'Schools' : {}".format(str([pValue])))
+                elif pType == "Level":
+                    if "+" in pValue:
+                        levels = pValue.split("+")
+                        level = sum(map(lambda x: int(x),levels))
+                        app("'Level' : {}".format(str(level)))
+                    elif "/" in pValue:
+                        level = pValue.split("/")[0] #Let's assume we will will never have AND and OR on the same card.
+                        app("'Level' : {}".format(str(level)))
+                    else:
+                        app("'Level' : {}".format(pValue))
+                elif pType == "Stats" and pValue:
+                    args = pValue.split(', ')
+                    for a in args:
+                        pair = a.split('=')
+                        p0,p1 = pair[0],pair[1]
+                        if p0 in ["Armor","Life","Channeling"]:
+                            try: int(p1)
+                            except: p1 = '0' #Non-integer values default to 0
+                            app("'{}' : {}".format(p0,p1))
+                        if p0 == "Defense":
+                            defenseStr = p1
+                            defDict = {}
+                            if 'No Melee' in defenseStr: defDict['Restrictions'] = 'Melee'
+                            elif 'No Ranged' in defenseStr: defDict['Restrictions'] = 'Ranged'
+                            defTraitList = defenseStr.split(' ')
+                            for d in defTraitList:
+                                if '+' in d: defDict['Minimum'] = int(d.strip('+'))
+                                if 'x' in d: defDict['Uses'] = int(d.strip('x'))
+                            app("'Defenses' : [{"+
+                                "\n\t'Minimum Roll' : {}".format(defDict['Minimum'])+
+                                ("\n\t'Maximum Uses' : {}".format(defDict['Uses']) if defDict.get('Uses') else '')+
+                                ("\n\t'Weakness' : '{}'".format(defDict['Restrictions']) if defDict.get('Restrictions') else '')+
+                                "\n\t}]")
+                elif pType == "AttackBar": pass #I'll come back to this later. Most complicated part.
+                elif pType == "Traits": pass
+                elif pType == "Text": app("'Text' : \"{}\"".format(pValue.replace("&#xD;&#xA;","\n").replace("&amp;","&")))
+                #Card IDs are useless in-game.
+                            
+                    
+        if cType in ["Enchantment","Creature","Conjuration","Equipment","Attack","Incantation"]: append((name,pCard))
+    #Finally, print the results so we can copypaste them.
+    for n,c in processedCardList:
+        print "spellDictionary['"+n+"'] = {"
+        print ",\n".join(c)
+        print "}\n\n"
