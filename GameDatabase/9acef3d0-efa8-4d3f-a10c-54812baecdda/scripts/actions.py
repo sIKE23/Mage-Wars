@@ -142,6 +142,9 @@ def onTableLoad():
 	global debugMode
 	global playerNum
 	global gameNum
+	#Set default map
+ 	setGlobalVariable("DiceRollAreaPlacement", "Side")
+ 	defineRectangularMap(4,3,250)
 	gameNum = 1
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
@@ -170,7 +173,7 @@ def onGameStart():
 
 	# set new game
 	setGlobalVariable("GameIsOver", False)
-	
+
 	# reset python Global Variables
 	for p in players:
 		remoteCall(p, "setClearVars",[])
@@ -208,7 +211,6 @@ def onLoadDeck(player, groups):
 	global playerNum
 	global iniTokenCreated
 	global blankSpellbook
-	me.setGlobalVariable("PhaseDone", False)
 	if not bool(getGlobalVariable('diceAndPhaseCardsDone')):
                 setUpDiceAndPhaseCards()
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
