@@ -113,16 +113,13 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#f7d917", 		# Yellow 	R=247 G=217 B=23
 				"#c680b4",		# Purple
 				"#c0c0c0"]		# Grey
-mycolor = "#800080" # default
 boardSet = "GameBoard1.png"
 debugMode = False
 myIniRoll = 0
-hasRolledIni = False
 deckLoaded = False
 iniTokenCreated = False
 blankSpellbook = False
 currentPhase = ""
-gameIsOver = False
 discountsUsed = [ ]
 gameStartTime = ""
 gameEndTime = ""
@@ -140,14 +137,11 @@ gameNum = ""
 
 def onTableLoad():
 	setGlobalVariable("TableSetup", False)
+	setGlobalVariable("InitiativeDone", "False")
+	me.setGlobalVariable("MyColor", "#800080")
 	global debugMode
 	global playerNum
-	global hasRolledIni
-	global mycolor
 	global gameNum
-	#Set default map
-	setGlobalVariable("DiceRollAreaPlacement", "Side")
-	defineRectangularMap(4,3,250)
 	gameNum = 1
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
@@ -155,17 +149,17 @@ def onTableLoad():
 	if len(players) == 1:
 		debugMode = True
 		playerNum = 2
-		mycolor = PlayerColor[0]
+		me.setGlobalVariable("MyColor", PlayerColor[0])
 		CreateIniToken()
 		players[0].setActivePlayer()
-		hasRolledIni = True
+		setGlobalVariable("InitiativeDone", "True")
 		notify("No need to roll for initative for {}...".format(me))
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
         mute()
 	# reset color picking
-        setGlobalVariable("ColorsChosen", "")
+	setGlobalVariable("ColorsChosen", "")
 
 	# reset initiative automation
 	setGlobalVariable("SetupDone", "")
@@ -174,6 +168,9 @@ def onGameStart():
 	setGlobalVariable("GameReset", "")
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
 
+	# set new game
+	setGlobalVariable("GameIsOver", False)
+	
 	# reset python Global Variables
 	for p in players:
 		remoteCall(p, "setClearVars",[])
@@ -182,14 +179,14 @@ def onGameStart():
 	setGlobalVariable("attachDict",str({}))
 	setGlobalVariable("bindDict",str({}))
 
-        #set global event lists for rounds and single actions
+	#set global event lists for rounds and single actions
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
 
 	initializeGame()
 
 def defineRectangularMap(I,J,tilesize):
-        mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
+	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
 	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
 	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
 	setGlobalVariable('Map',str(mapDict))
@@ -211,6 +208,7 @@ def onLoadDeck(player, groups):
 	global playerNum
 	global iniTokenCreated
 	global blankSpellbook
+	me.setGlobalVariable("PhaseDone", False)
 	if not bool(getGlobalVariable('diceAndPhaseCardsDone')):
                 setUpDiceAndPhaseCards()
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
@@ -319,31 +317,27 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                 fromCard.arrow(toCard,False)
                         elif fromCard.Type !="Enchantment":
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
-                                fromCard.arrow(toCard,False) 
+                                fromCard.arrow(toCard,False)
 
 def setClearVars():
 	global deckLoaded
 	global iniTokenCreated
-	global hasRolledIni
 	global gameNum
 	if gameNum == 1: return
 	deckLoaded = False
 	iniTokenCreated = False
-	hasRolledIni = False
 
 def SetupForIni():
 	mute()
-	global hasRolledIni
 	global myIniRoll
 	global playerNum
-	hasRolledIni = False
 
 	if getSetting("AutoRollIni", False):
 		effect = 0
 		for i in range(playerNum * 2):
 			effect = rnd(1, 12)
 		notify("Automatically rolling initiative for {}...".format(me))
-		hasRolledIni = True
+		setGlobalVariable("InitiativeDone", "True")
 		iniRoll(effect)
 
 def iniRoll(effect):
@@ -450,7 +444,6 @@ def playerSetup():
 	mute()
 
 	# Players select their color
-	global mycolor
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
 	if not debugMode:
 		while (True):
@@ -458,11 +451,11 @@ def playerSetup():
 			colorsChosen = getGlobalVariable("ColorsChosen")
 			if colorsChosen == "":	#we're the first to pick
 				setGlobalVariable("ColorsChosen", str(choice))
-				mycolor = PlayerColor[choice]
+				me.setGlobalVariable("MyColor", PlayerColor[choice])
 				break
 			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
 				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-				mycolor = PlayerColor[choice]
+				me.setGlobalVariable("MyColor", PlayerColor[choice])
 				break
 			else:	#someone else took our choice
 				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
@@ -596,6 +589,7 @@ def CreateIniToken():
 	global gameStartTime
 	global iniTokenCreated
 	global currentPhase
+	myColor = me.getGlobalVariable("MyColor")
 	mute()
 	dieCardX = -570
 	dieCardY = -40
@@ -610,7 +604,7 @@ def CreateIniToken():
                         PlayerColor[3]:"D",
                         PlayerColor[4]:"E",
                         PlayerColor[5]:"F"
-                        }[mycolor])
+                        }[myColor])
 		setGlobalVariable("IniAllDone", "x")
 		setGlobalVariable("RoundNumber", "1")
 		setGlobalVariable("PlayerWithIni", str(playerNum))
@@ -627,10 +621,9 @@ def CreateIniToken():
                 #moveCardToDefaultLocation(card)
 #Bookmark
 def nextPhase(group, x=-360, y=-150):
-	global mycolor
 	global roundTimes
 	global gameTurn
-	global gameIsOver
+	gameIsover = getGlobalVariable("GameIsOver")
 	if gameIsOver:	#don't advance phase once the game is done
 		return
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
@@ -1069,29 +1062,24 @@ def getTextTraitValue(card, TraitName):
 	return (TraitCost)
 
 def mageStatus():
-	global gameEndTime
 	mute()
 	if not me.Damage >= me.Life:
 		return
 	for c in table:
 		if c.Type == "Mage" and c.controller == me:
 			c.orientation = 1
-	gameEndTime = time.time()
 	#	playSoundFX('Winner')
 	for p in players:
 		remoteCall(p, "reportDeath",[me])
 	#reportGame('MageDeath')
 
 def reportDeath(deadmage):
-	global gameIsOver
-	global gameEndTime
-	endofGameTurn = getGlobalVariable("RoundNumber")
-	gameIsOver = True
-	gameEndTime = time.time()
+	setGlobalVariable("GameIsOver", True)
+	setGlobalVariable("GameEndTime", str(time.ctime()))
 	choiceList = ['OK']
 	colorsList = ['#de2827']
-	whisper("'{}' has fallen in the arena! At {} after {} Rounds.".format(deadmage, time.ctime(gameEndTime), endofGameTurn))
-	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, time.ctime(gameEndTime), endofGameTurn), choiceList, colorsList)
+	whisper("'{}' has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
+	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
 	if choice == 0 or choice == 1:
 		return
 
@@ -1103,16 +1091,14 @@ def checkMageDeath(player, counter, oldvalue):
 				mageStatus()
 
 def concede(group=table, x = 0, y = 0):
-	global gameEndTime
-	global gameIsOver
 	global gameTurn
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
-		gameIsOver = True
+		setGlobalVariable("GameIsOver", True)
 		for c in table:
 			if c.Type == "Mage" and c.controller == me:
 				c.orientation = 1
-		gameEndTime = time.time()
+		setGlobalVariable("GameEndTime", str(time.time()))
 #		reportGame('Conceded')
 		notify("'{}' has conceded the game".format(me))
 	else:
@@ -1240,12 +1226,12 @@ def clearTokens(card, x = 0, y = 0):
 typeIgnoreList = ['Internal','Phases','Diceroll']
 
 def toggleAction(card, x=0, y=0):
-	global mycolor
 	mute()
+	myColor = me.getGlobalVariable("MyColor")
 	if card.Type in typeIgnoreList or not card.isFaceUp: return
-	if mycolor == "#800080":
+	if myColor == "#800080":
 		whisper("Please perform player setup to initialize player color")
-	elif mycolor == PlayerColor[0]: # Red
+	elif myColor == PlayerColor[0]: # Red
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
@@ -1254,7 +1240,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
-	elif mycolor == PlayerColor[1]: # Blue
+	elif myColor == PlayerColor[1]: # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
@@ -1263,7 +1249,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
-	elif mycolor == PlayerColor[2]: #Green
+	elif myColor == PlayerColor[2]: #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
@@ -1272,7 +1258,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
-	elif mycolor == PlayerColor[3]: #Yellow
+	elif myColor == PlayerColor[3]: #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
@@ -1281,7 +1267,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
-	elif mycolor == PlayerColor[4]: #Purple
+	elif myColor == PlayerColor[4]: #Purple
 		if card.markers[ActionPurpleUsed] > 0:
 			card.markers[ActionPurple] = 1
 			card.markers[ActionPurpleUsed] = 0
@@ -1290,7 +1276,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
 			notify("'{}' spends Action Marker".format(card.Name))
-	elif mycolor == PlayerColor[5]: #Grey
+	elif myColor == PlayerColor[5]: #Grey
 		if card.markers[ActionGreyUsed] > 0:
 			card.markers[ActionGrey] = 1
 			card.markers[ActionGreyUsed] = 0
@@ -1488,35 +1474,36 @@ def getNextPlayerNum():
 	return nextPlayer
 
 def changeIniColor(card):
-	global mycolor
 	mute()
+	myColor = me.getGlobalVariable("MyColor")
+
 	if playerNum == int(getGlobalVariable("PlayerWithIni")):
-		if mycolor == PlayerColor[0]:
+		if myColor == PlayerColor[0]:
 			if card.controller == me:
 				card.switchTo("")
 			else:
 				remoteCall(card.controller, "remoteSwitchPhase", [card, "", ""])
-		elif mycolor == PlayerColor[1]:
+		elif myColor == PlayerColor[1]:
 			if card.controller == me:
 				card.switchTo("B")
 			else:
 				remoteCall(card.controller, "remoteSwitchPhase", [card, "B", ""])
-		elif mycolor == PlayerColor[2]:
+		elif myColor == PlayerColor[2]:
 			if card.controller == me:
 				card.switchTo("C")
 			else:
 				remoteCall(card.controller, "remoteSwitchPhase", [card, "C", ""])
-		elif mycolor == PlayerColor[3]:
+		elif myColor == PlayerColor[3]:
 			if card.controller == me:
 				card.switchTo("D")
 			else:
 				remoteCall(card.controller, "remoteSwitchPhase", [card, "D", ""])
-		elif mycolor == PlayerColor[4]:
+		elif myColor == PlayerColor[4]:
 			if card.controller == me:
 				card.switchTo("E")
 			else:
 				remoteCall(card.controller, "remoteSwitchPhase", [card, "E", ""])
-		elif mycolor == PlayerColor[5]:
+		elif myColor == PlayerColor[5]:
 			if card.controller == me:
 				card.switchTo("F")
 			else:
@@ -1558,12 +1545,13 @@ def defaultAction(card,x=0,y=0):
                         payForAttack = not (getSetting('BattleCalculator',True) and card.Type=='Attack')
 			if "Mage" in card.Type or not payForAttack: #Attack spells will now be paid for through the battlecalculator
 				flipcard(card, x, y)
+
 				if not getSetting('attackChangeNotified',False) and not payForAttack:
                                         whisper('Note: Mana for {} will be paid when you declare an attack using the Battle Calculator, or if you double-click on {} again.'.format(card,card))
                                         setSetting('attackChangeNotified',True)
 			elif card.Type == "Enchantment": revealEnchantment(card)
 			else: castSpell(card)
-				
+
 		else:
 			if card.Type == "Incantation" or card.Type == "Attack": castSpell(card) #They can cancel in the castSpell prompt; no need to add another menu
 
@@ -1608,10 +1596,10 @@ def toggleToken(card, tokenType):
 
 def playCardFaceDown(card, x=0, y=0):
         mute()
-	global mycolor
+	myColor = me.getGlobalVariable("MyColor")
 	moveCardToDefaultLocation(card)
 	card.peek()
-	card.highlight = mycolor
+	card.highlight = myColor
 	notify("{} prepares a Spell from their Spellbook by placing a card face down on the table.".format(me))
 
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
@@ -1795,7 +1783,7 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 	return 0
 
 def switchPhase(card, phase, phrase):
-	global mycolor
+	myColor = me.getGlobalVariable("MyColor")
 	global playerNum
 	global currentPhase
 	mute()
@@ -1813,9 +1801,9 @@ def switchPhase(card, phase, phrase):
 		if len(doneWithPhase) != len(players):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if card.controller == me:
-				card.highlight = mycolor
+				card.highlight = myColor
 			else:
-				remoteCall(card.controller, "remoteHighlight", [card, mycolor])
+				remoteCall(card.controller, "remoteHighlight", [card, myColor])
 			notify("{} is done with the {}".format(me.name,card.Name))
 			return False
 		else:
@@ -1945,7 +1933,7 @@ def revealEnchantment(card):
                 notify("{} reveals {}!".format(me,card.Name))
                 flipcard(card)
                 return True
-                                
+
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
         if card.controller != spell.controller or not card.isFaceUp or card==spell: return 0 #No discounts from other players' cards or facedown cards!
         caster = getBindTarget(spell)
@@ -2356,7 +2344,7 @@ mapObjectOffset = 175
 mapMultipleObjectOffset = -100
 mapCreatureOffset = 0
 mapMultipleCreatureOffset = 62
-mapMarkersOffset = 275 # Since these Markers are the same size and shape as the 
+mapMarkersOffset = 275 # Since these Markers are the same size and shape as the Object Markers we can use the same offset.
 mapMultipleMarkersOffset = -100
 
 mapTileDict =  {
@@ -2369,7 +2357,7 @@ mapTileDict =  {
                 "7" : "edca7d45-53e0-468d-83a5-7a446c81f070", #Samandriel's Circle
                 "8" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
                 "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
-                
+
 mapObjectsDict = {"o" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f",	# A V'Tar Orb
                   		"O" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f"}	# 2 V'Tar Orbs
 
@@ -2379,4 +2367,3 @@ mapCreaturesDict = {"s" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# Orb Guardian
                         "U" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd"}	# 2 Greater Orb Guardians
 
 mapMarkersDict = {"s" : "a4b3bb92-b597-441e-b2eb-d18ef6b8cc77"} # Secret Passage
-	
