@@ -1834,7 +1834,7 @@ def castSpell(card,target=None):
         #Figure out who is casting the spell
         caster = getBindTarget(card)
         if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
-                casters = filter(lambda d: (d.Type == "Mage" and d.isFaceUp),table)
+                casters = [d for d in table if d.Type == "Mage" and d.isFaceUp and d.controller == me]
                 if casters: caster = casters[0]
                 else:
                         whisper("And just who do you expect to cast that? You need to play a mage first.")
