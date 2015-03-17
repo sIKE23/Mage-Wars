@@ -363,8 +363,6 @@ def rollDice(dice):
         mute()
         global diceBank
 	global diceBankD12
-	#global hasRolledIni
-	#global myIniRoll
         mapDict = eval(getGlobalVariable('Map'))
 	if not deckLoaded == True:
 		notify("Please Load a Spellbook first. (Ctrl+L)")
@@ -427,16 +425,16 @@ def rollDice(dice):
 
 	effect = int(diceBankD12.pop()) + 1
 	dieCard.markers[DieD12] = effect
-
-	if True:#hasRolledIni:
+	initiativeDone = getGlobalVariable("InitiativeDone")
+	if initiativeDone:
 		playSoundFX('Dice')
 		time.sleep(1)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
                 return (result,effect)                 
-	#else:
-		#hasRolledIni = True
-		#iniRoll(effect)
-		#return None,None
+	else:
+		setGlobalVariable("InitiativeDone", "True")
+		iniRoll(effect)
+		return None,None
 
 ############################################################################
 ######################            Event Memory          ####################
