@@ -1416,7 +1416,7 @@ def flipcard(card, x = 0, y = 0):
 			if "Druid" == card.Name:
 					card.markers[Treebond] = 1
 			if "Necromancer" == card.Name:
-					card.markers[Eternal_Servant] = 1
+					card.markers[EternalServant] = 1
 			if "Warlock" == card.Name:
 					card.markers[BloodReaper] = 1
 		if "Anvil Throne Warlord Stats" == card.Name:
