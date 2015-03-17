@@ -172,7 +172,7 @@ def onGameStart():
 	setGlobalVariable('DiceAndPhaseCardsDone','True')
 
 	# set new game
-	setGlobalVariable("GameIsOver", False)
+	setGlobalVariable("GameIsOver", "")
 
 	# reset python Global Variables
 	for p in players:
@@ -627,7 +627,7 @@ def nextPhase(group, x=-360, y=-150):
         mute()
 	global roundTimes
 	global gameTurn
-	gameIsOver = eval(getGlobalVariable("GameIsOver"))
+	gameIsOver = getGlobalVariable("GameIsOver")
 	if gameIsOver:	#don't advance phase once the game is done
 		return
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
