@@ -142,6 +142,9 @@ def onTableLoad():
 	global debugMode
 	global playerNum
 	global gameNum
+	#Set default map
+	setGlobalVariable("DiceRollAreaPlacement", "Side")
+	defineRectangularMap(4,3,250)
 	gameNum = 1
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))

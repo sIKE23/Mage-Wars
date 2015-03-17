@@ -363,8 +363,8 @@ def rollDice(dice):
         mute()
         global diceBank
 	global diceBankD12
-	global hasRolledIni
-	global myIniRoll
+	#global hasRolledIni
+	#global myIniRoll
         mapDict = eval(getGlobalVariable('Map'))
 	if not deckLoaded == True:
 		notify("Please Load a Spellbook first. (Ctrl+L)")
@@ -428,15 +428,15 @@ def rollDice(dice):
 	effect = int(diceBankD12.pop()) + 1
 	dieCard.markers[DieD12] = effect
 
-	if hasRolledIni:
+	if True:#hasRolledIni:
 		playSoundFX('Dice')
 		time.sleep(1)
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
                 return (result,effect)                 
-	else:
-		hasRolledIni = True
-		iniRoll(effect)
-		return None,None
+	#else:
+		#hasRolledIni = True
+		#iniRoll(effect)
+		#return None,None
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -1000,19 +1000,26 @@ def computeTraits(card):
         elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: remove('Living')
         if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: remove('Corporeal')
         extend(listedTraits)
-        
+        adraAbility = True
+        adraEnemy = bool([c for c in table if c.name=="Adramelech Warlock" and c.controller != controller])
         for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
                 cName = c.name
                 cController = c.controller
                 cSubtype = c.subtype
                 cType = c.type
-                if cType == 'Mage': traitDict['MageID'] = c._id #Each card knows which mage controls it.
+                if cType == 'Mage' and cController == controller: traitDict['MageID'] = c._id #Each card knows which mage controls it.
                 if c.isFaceUp: #only look at face-up cards
                         if getAttachTarget(c) == card: #Get traits from attachments to this card:
                                 if cType in ['Enchantment','Conjuration']:
                                         rawText = c.text.split('\r\n[')
                                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
                                         extend(traitsGranted)
+                                if adraEnemy and "Curse" in cSubtype and cController != controller:
+                                        adra = bool([k for k in table if k.name=="Adramelech Warlock" and k.controller == cController])
+                                        if adra and adraAbility:
+                                                append('Flame +1')
+                                                adraAbility = False
+                                                debug('Triggered')
                                 if cName == "Sentinel of V'tar":
                                         for o in table:
                                                 isWithOrb = False
@@ -1022,6 +1029,8 @@ def computeTraits(card):
                                                         extend(['Unmovable','Anchored'])
                                                         if markers[Guard]: extend(['Armor +2','Melee +1'])
                                 elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
+                                
+                                        
                         # Get traits from cards in this zone
                         if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
                                 #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
