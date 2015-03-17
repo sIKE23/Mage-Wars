@@ -313,6 +313,7 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         if attack and attack.get('SourceID')==attacker._id:
                                 remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                                 attacker.arrow(defender,False)
+                        elif attack.get("Dice"): rollDice(attack.get("Dice"))
                 else:
                         if fromCard.Type == "Enchantment" and not fromCard.isFaceUp and castSpell(fromCard,toCard):
                                 attach(fromCard,toCard)
@@ -623,14 +624,14 @@ def CreateIniToken():
                 #moveCardToDefaultLocation(card)
 #Bookmark
 def nextPhase(group, x=-360, y=-150):
+        mute()
 	global roundTimes
 	global gameTurn
-	gameIsOver = getGlobalVariable("GameIsOver")
+	gameIsOver = eval(getGlobalVariable("GameIsOver"))
 	if gameIsOver:	#don't advance phase once the game is done
 		return
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
 		return
-	mute()
 	mageStatus()
 	card = None
 	for c in table: #find phase card
