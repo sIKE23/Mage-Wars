@@ -619,10 +619,10 @@ def CreateIniToken():
 		for c in table:
                         remoteCall(c.controller,'moveCardToDefaultLocation',[c])
 		notify("Setup is complete!")
-		#Create the phase button here. Ensures that only one is created. Bookmark
+		#Create the phase button here. Ensures that only one is created.
 
                 #moveCardToDefaultLocation(card)
-#Bookmark
+
 def nextPhase(group, x=-360, y=-150):
         mute()
 	global roundTimes
@@ -723,7 +723,7 @@ def resetMarkers():
 		                if c.markers[key] == 1:
 		                        c.markers[key] = 0
 		                        c.markers[mDict[key]] = 1
-	notify("{} reset's all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
+	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
@@ -846,50 +846,52 @@ def resolveStormTokens():
 def resolveChanneling():
 	mute()
 
-	channelExtraMana4Mage = 0
+	#channelExtraMana4Mage = 0
 	for c in table:
-		if c.isFaceUp and c.controller == me: #don't waste time on facedown cards
-			for card in me.piles['Discard']:
-				if c == card:
-					return
+                if c.controller==me and c.isFaceUp:
+                        #What is the function of this code? Cards in table are not in the discard, and if they were it would cancel all channeling resolution
+                        #for card in me.piles['Discard']:
+                         #       if c == card:
+                          #              return
+                                        
+                #Players might adjust their channeling stat themselves, resulting in double counting. We should ignore these for now, and let the player handle them. We can implement them with creation/destruction functions in Q2.
+                #	if c.isFaceUp and c.controller == me: 
+                #		if c.name == "Mana Flower" or c.name == "Mana Crystal":
+                #			channelExtraMana4Mage +=1
+                #			whisper("Mana added to {} from {}".format(me,c))
+                #		elif c.name == "Harmonize":
+                #			c2 = getAttachTarget(c)
+                #			if c2 and c2.Type in ['Mage','Magestats'] and c.controller == me: #Mages
+                #				channelExtraMana4Mage +=1
+                #				whisper("Mana added to {} from {}".format(me,c))
 
-		if c.isFaceUp and c.controller == me:
-			if c.name == "Mana Flower" or c.name == "Mana Crystal":
-				channelExtraMana4Mage +=1
-				whisper("Mana added to {} from {}".format(me,c))
-			elif c.name == "Harmonize":
-				c2 = getAttachTarget(c)
-				if c2 and c2.Type in ['Mage','Magestats'] and c.controller == me: #Mages
-					channelExtraMana4Mage +=1
-					whisper("Mana added to {} from {}".format(me,c))
+                        if c.Stats != None and c.Type != "Mage":
+                                if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
+                                        channel = getStat(c.Stats,"Channeling")
+                                        debug("Found Channeling stat {} in card {}".format(channel,c.name))
+                                        for x in range(channel):
+                                                addMana(c)
+                        if c.name == "Barracks": #has the channeling=X stat
+                                debug("Found Barracks")
+                                x = 0
+                                for c2 in table:
+                                        if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
+                                                #debug("owners {} {}".format(c.owner,c2.owner))
+                                                if "Outpost" in c2.Subtype and c.owner == c2.owner:
+                                                        debug("Found Outpost")
+                                                        addMana(c)
+                                                        x += 1
+                                        if x == 3: #max 3 outpost count.
+                                                break
+                        if c.name == "Harmonize":
+                                if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
+                                        c2 = getAttachTarget(c)
+                                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Not Mages
+                                                addMana(c2)
+                                                whisper("Mana added to {} from {}".format(c2,c))
 
-		if c.Stats != None and c.Type != "Mage":
-			if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
-				channel = getStat(c.Stats,"Channeling")
-				debug("Found Channeling stat {} in card {}".format(channel,c.name))
-				for x in range(channel):
-					addMana(c)
-		if c.name == "Barracks": #has the channeling=X stat
-			debug("Found Barracks")
-			x = 0
-			for c2 in table:
-				if c2.isFaceUp and c2.Subtype != "" and c2.Subtype != None:
-					#debug("owners {} {}".format(c.owner,c2.owner))
-					if "Outpost" in c2.Subtype and c.owner == c2.owner:
-						debug("Found Outpost")
-						addMana(c)
-						x += 1
-				if x == 3: #max 3 outpost count.
-					break
-		if c.name == "Harmonize":
-	                if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
-	                        c2 = getAttachTarget(c)
-	                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Not Mages
-	                                addMana(c2)
-	                                whisper("Mana added to {} from {}".format(c2,c))
-
-	me.Mana += me.Channeling + channelExtraMana4Mage # Mage channels his mana
-	notify("{} Channels {} Mana into the mages Mana supply.".format(me.name,me.Channeling + channelExtraMana4Mage))
+	me.Mana += me.Channeling# + channelExtraMana4Mage # Mage channels his mana
+	notify("{} channels {} mana.".format(me.name,me.Channeling))# + channelExtraMana4Mage))
 
 def resolveUpkeep():
 	mute()
@@ -979,7 +981,7 @@ def resolveUpkeep():
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
-		# Process Upkeep for Stanglevine
+		# Process Upkeep for Stranglevine
 		else:
 			if card.Name == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
 				notify("{} is placing a Crush Token on '{}'...".format(me, card.Name))
@@ -1627,7 +1629,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                         setGlobalVariable("Map",str(mapDict))
                         #except: notify('Error! Maps must be at least 2 zones tall!')
                         return
-                if cardType == 'Phase':#Bookmark
+                if cardType == 'Phase':
                         diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
                         zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
                                 [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
@@ -1845,6 +1847,7 @@ def castSpell(card,target=None):
                 targets = [c for c in table if c.targetedBy==me]
                 if targets and len(targets) == 1: target = targets[0]
                 else: whisper("No single target for {} detected. Cost calculation is more effective if you select a target.".format(card))
+        if card.Type == "Enchantment" and not canAttach(card,target): return
         #Long term, invalid targets will result in spell cancellation. Won't enforce that for now, though.
 	if costStr:
                 cardType = card.Type
