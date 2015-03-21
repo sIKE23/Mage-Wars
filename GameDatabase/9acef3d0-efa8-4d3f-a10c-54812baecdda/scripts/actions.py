@@ -845,26 +845,8 @@ def resolveStormTokens():
 
 def resolveChanneling():
 	mute()
-
-	#channelExtraMana4Mage = 0
 	for c in table:
                 if c.controller==me and c.isFaceUp:
-                        #What is the function of this code? Cards in table are not in the discard, and if they were it would cancel all channeling resolution
-                        #for card in me.piles['Discard']:
-                         #       if c == card:
-                          #              return
-                                        
-                #Players might adjust their channeling stat themselves, resulting in double counting. We should ignore these for now, and let the player handle them. We can implement them with creation/destruction functions in Q2.
-                #	if c.isFaceUp and c.controller == me: 
-                #		if c.name == "Mana Flower" or c.name == "Mana Crystal":
-                #			channelExtraMana4Mage +=1
-                #			whisper("Mana added to {} from {}".format(me,c))
-                #		elif c.name == "Harmonize":
-                #			c2 = getAttachTarget(c)
-                #			if c2 and c2.Type in ['Mage','Magestats'] and c.controller == me: #Mages
-                #				channelExtraMana4Mage +=1
-                #				whisper("Mana added to {} from {}".format(me,c))
-
                         if c.Stats != None and c.Type != "Mage":
                                 if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
                                         channel = getStat(c.Stats,"Channeling")
@@ -890,8 +872,8 @@ def resolveChanneling():
                                                 addMana(c2)
                                                 whisper("Mana added to {} from {}".format(c2,c))
 
-	me.Mana += me.Channeling# + channelExtraMana4Mage # Mage channels his mana
-	notify("{} channels {} mana.".format(me.name,me.Channeling))# + channelExtraMana4Mage))
+	me.Mana += me.Channeling
+	notify("{} channels {} mana.".format(me.name,me.Channeling))
 
 def resolveUpkeep():
 	mute()
@@ -1371,6 +1353,7 @@ def toggleVoltaric(card, x=0, y=0):
 ############################################################################
 ######################		Other  Actions		################################
 ############################################################################
+typeChannelingList = ['Mana Flower','Mana Crystal','Moonglow Amulet']
 
 def rotateCard(card, x = 0, y = 0):
 	# Rot90, Rot180, etc. are just aliases for the numbers 0-3
@@ -1428,6 +1411,14 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[RuneofPrecision] = 1
 					card.markers[RuneofReforging] = 1
 					card.markers[RuneofShielding] = 1
+		if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
+			notify("{} increases the Channeling stat by 1 as a result of '{}' being revealed".format(me, card))
+			me.Channeling += 1
+		if "Harmonize" == card.Name and card.controller == me and isAttached(card) and card.isFaceUp == True:
+			magecard = getAttachTarget(card)
+			if magecard.Type == "Mage":
+				notify("{} increases the Channeling stat by 1 as a result of '{}' being revealed".format(me, card))
+				me.Channeling += 1			
 		if card.Type == "Creature":
 			if "Invisible Stalker" == card.Name:
 					card.markers[Invisible] = 1
@@ -1519,20 +1510,38 @@ def discard(card, x=0, y=0):
 	if card.controller != me:
 		whisper("{} does not control '{}' - discard cancelled".format(me, card))
 		return
+	if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
+			notify("{} decreases the Channeling stat by 1 because '{}' is being discarded".format(me, card))
+			me.Channeling -= 1
+	elif "Harmonize" == card.Name and card.controller == me:
+		discardedCard = getAttachTarget(card)
+		if magecard.Type == "Mage":
+			notify("{} decreases the Channeling stat by 1 because '{}' is being discarded".format(me, card))
+			me.Channeling -= 1
+	else:
+			notify("{} discards '{}'".format(me, card))
 	card.isFaceUp = True
-        detach(card)
+	detach(card)
 	card.moveTo(me.piles['Discard'])
-	notify("{} discards '{}'".format(me, card))
 
 def obliterate(card, x=0, y=0):
 	mute()
 	if card.controller != me:
 		whisper("{} does not control '{}' - card obliteration cancelled".format(me, card))
 		return
+	if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
+			notify("{} decreases the Channeling stat by 1 because '{}' has been obliterated".format(me, card))
+			me.Channeling -= 1
+	elif "Harmonize" == card.Name and card.controller == me:
+		discardedCard = getAttachTarget(card)
+		if magecard.Type == "Mage":
+			notify("{} decreases the Channeling stat by 1 because '{}' has been obliterated".format(me, card))
+			me.Channeling -= 1
+	else:
+			notify("{} obliterates '{}'".format(me, card))
 	card.isFaceUp = True
-
+	detach(card)
 	card.moveTo(me.piles['Obliterate Pile'])
-	notify("{} obliterates '{}'".format(me, card))
 
 def OnCardDoubleClick(card, mouseButton, keysDown):
 	mute()
