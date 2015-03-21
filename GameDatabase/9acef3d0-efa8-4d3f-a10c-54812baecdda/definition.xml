@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
-	version="9999.11.3.4"
+	version="9999.11.3.8"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -66,7 +66,7 @@
 		<size name="ModularBoardPieces" width="250" height="250" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="0" />
 		<size name="MarkersAsCards" width="70" height="70" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="InitativeMarkers" width="50" height="50" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="PhaseMarkers" width="50" height="13" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="PhaseMarkers" width="60" height="13" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Buttons" width="72" height="36" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
 		<size name="Horizontal Cards" width="80" height="60" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />

@@ -629,6 +629,7 @@ def nextPhase(group, x=-360, y=-150):
 	global gameTurn
 	gameIsOver = getGlobalVariable("GameIsOver")
 	if gameIsOver:	#don't advance phase once the game is done
+		notify("Game is Over!")
 		return
 	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
 		return
@@ -1649,7 +1650,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                                 x-=5
                                 y+=(-75 if diceBoxSetup=='Side' else 80+75-cardH)
                         elif cardType=='Phase' and 'Phase' in card.name:
-                                x+=75
+                                x+=65
                                 y+=(-55 if diceBoxSetup=='Side' else 80+55-cardH)
                         card.moveToTable(x,y,True)
                         return
