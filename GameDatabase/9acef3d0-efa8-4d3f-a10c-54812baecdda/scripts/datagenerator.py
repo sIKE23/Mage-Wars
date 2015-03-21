@@ -4,6 +4,25 @@ The functions in this file are NOT used by the module, and should not be include
 in its definition.
 """
 
+additiveTraits = ["Melee","Ranged",
+                  "Armor","Life","Innate Life","Channeling","Defense",
+                  "Tough",
+                  "Charge",
+                  "Bloodthirsty",
+                  "Piercing",
+                  "Mana Drain",
+                  "Mana Transfer",
+                  "Magebind",
+                  "Lifebond",
+                  "Upkeep",
+                  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
+superlativeTraits = ["Regenerate",
+                     "Aegis",
+                     "Uproot",
+                     "Dissipate"]
+
+damageTypes = ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
+
 def cardParser(filePath):
     """
     - Formats the contents of an xml file as spell dictionary entries.
@@ -18,7 +37,7 @@ def cardParser(filePath):
     tempCard = []
     tAppend = tempCard.append
     for line in rawFile:
-        line = line.replace("&apos;","\\'")
+        line = line.replace("&apos;","\\'").replace("&amp;","&")
         replace = line.replace
         strip = line.strip
         if "<card id=" in line:
@@ -139,7 +158,56 @@ def cardParser(filePath):
                                 ("\n\t'Maximum Uses' : {}".format(defDict['Uses']) if defDict.get('Uses') else '')+
                                 ("\n\t'Weakness' : '{}'".format(defDict['Restrictions']) if defDict.get('Restrictions') else '')+
                                 "\n\t}]")
-                elif pType == "AttackBar": pass #I'll come back to this later. Most complicated part.
+                elif pType == "AttackBar" and pValue:
+                    attackKeyList = [attack.split(':&#xD;&#xA;') for attack in pValue.split(']&#xD;&#xA;')]
+                    for a in attackKeyList:
+                        if len(a)==1:
+                            a.append(name)
+                            a.reverse()
+                        a[1] = [t.strip('[]') for t in a[1].split('] [')]
+                        d12 = False
+                        for n,t in enumerate(list(a[1])):
+                            if ' +' in t:
+                                tSplit = t.split(' +')
+                                try: a[1][n] = "'{} +X': {}".format(tSplit[0],str(int(tSplit[1])))
+                                except: a[1][n] = "'{} +X': {}".format(tSplit[0],"0")
+                            elif ' -' in t:
+                                tSplit = t.split(' -')
+                                try: a[1][n] = "'{} -X': -{}".format(tSplit[0],str(int(tSplit[1])))
+                                except: a[1][n] = "'{} -X': -{}".format(tSplit[0],"0")
+                            elif "Dice" in t:
+                                tSplit = t.split('=')
+                                try: a[1][n] = "'Dice': {}".format(str(int(tSplit[1])))
+                                except: a[1][n] = "'Dice': 0"
+                            elif "d12"==t:
+                                d12 = True
+                                a[1][n]==None
+                            elif d12:
+                                tSplit = a[1][n].split("; ")
+                                for i,s in enumerate(tSplit):
+                                    sSplit = s.split(" = ")
+                                    #!!!Convert effects into lists rather than strings
+                                    tSplit[i] = "{}: '{}'".format(sSplit[0].split('+')[0].split('-')[0],sSplit[1])
+                                a[1][n] = "'d12': {"+', '.join(tSplit)+"}"
+                                d12 = False
+                            elif t in damageTypes: a[1][n] = "'Damage Type': '{}'".format(t)
+                            elif t in ["Quick","Full"]: a[1][n] = "'Action': '{}'".format(t)
+                            elif t=="Melee":
+                                a[1][n] = "'Range Type': 'Melee'"
+                                a[1].append("'Minimum Range': 0")
+                                a[1].append("'Maximum Range': 0")
+                            elif "Ranged:" in t:
+                                a[1][n] = "'Range Type': 'Ranged'"
+                                tSplit = t.split(":")[1].split("-")
+                                a[1].append("'Minimum Range': {}".format(tSplit[0]))
+                                a[1].append("'Maximum Range': {}".format(tSplit[1]))
+                            elif "." in t and not "vs" in t: a[1][n] = "'Text': '{}'".format(t)
+                            else: a[1][n] = "'{}': True".format(t)
+                        a[1] = [e for e in a[1] if e!="d12"]
+                    if attackKeyList:
+                        attackList = ["'Name': '" + a[0] + "',\n\t" + ",\n\t".join(a[1]) for a in attackKeyList]
+                        app("'Attacks' : [{\n\t"+
+                                "\n\t},{\n\t".join(attackList)+"\n\t}]")
                 elif pType == "Traits": pass
                 elif pType == "Text": app("'Text' : \"{}\"".format(pValue.replace("&#xD;&#xA;","\n").replace("&amp;","&")))
                 #Card IDs are useless in-game.
@@ -148,6 +216,7 @@ def cardParser(filePath):
         if cType in ["Enchantment","Creature","Conjuration","Equipment","Attack","Incantation"]: append((name,pCard))
     #Finally, print the results so we can copypaste them.
     for n,c in processedCardList:
+        pass
         print "spellDictionary['"+n+"'] = {"
         print ",\n".join(c)
         print "}\n\n"

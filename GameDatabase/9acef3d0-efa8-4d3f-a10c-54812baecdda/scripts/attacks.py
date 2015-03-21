@@ -24,7 +24,8 @@ additiveTraits = ["Melee","Ranged",
                   'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
 superlativeTraits = ["Regenerate",
                      "Aegis",
-                     "Uproot"]
+                     "Uproot",
+                     "Dissipate"]
 
 ############################################################################
 ######################		Dice Roll Menu		####################

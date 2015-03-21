@@ -188,7 +188,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=5] [d12] [5-7 = Daze; 8+ Stun] [Ethereal]" />
+			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=5] [d12] [5-7 = Daze; 8+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Each time Chain Lightning damages a target, it may attack another target. That target must be in LoS of the last target, and may be up to 1 zone away from that target. Each successive attack rolls 1 fewer attack dice, and subtracts 1 more from the effect die roll. Chain Lightning can&apos;t attack the same target twice." />
 			<property name="CardID" value="MW1A02" />
