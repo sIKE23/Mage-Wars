@@ -258,9 +258,10 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                     attack.get('RangeType') == 'Melee'): attack['Traits']['Piercing'] += 1
                 if c.controller == attacker.controller: #Friendly effects
                         aType = attack.get('Type')
-                        if ((cName == 'Dawnbreaker Ring' and aType == 'Light') or
-                            (cName == 'Fireshaper Ring' and aType == 'Flame') or
-                            (cName == 'Lightning Ring' and aType == 'Lightning')):
+                        if (attacker.Type == "Mage" and
+                            ((cName == 'Dawnbreaker Ring' and aType == 'Light') or
+                             (cName == 'Fireshaper Ring' and aType == 'Flame') or
+                             (cName == 'Lightning Ring' and aType == 'Lightning'))):
                             localADict['Melee'] = localADict.get('Melee',0) + 1
                             localADict['Ranged'] = localADict.get('Ranged',0) + 1
         attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)

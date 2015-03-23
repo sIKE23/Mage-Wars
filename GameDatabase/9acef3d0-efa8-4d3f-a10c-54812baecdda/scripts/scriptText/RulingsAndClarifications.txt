@@ -518,8 +518,11 @@ If an opponent casts a Heal spell on this creature, and you reveal Poisoned Bloo
 #
 Ravenous Ghoul
 Ravenous Ghoul must be in the zone that the creature was destroyed in at the time it uses its quick action ability to gain a Growth marker. Because it has the Fast trait, Ravenous Ghoul could move 2 zones first to reach the zone the creature was destroyed in, then use its quick action to gain a Growth marker.
+#
 Quicksand
 The roll to escape from Quicksand is an "escape roll" for the purpose of other rules or effects that refer to "escape rolls".
+
+Quicksand may not target an Uncontainable creature.
 #
 Renewing Rain
 The Burn condition removal applies to all objects in the Arena, while the healing applies only to friendly objects. This is intentional; the rain is extinguishing fires, while the healing is a holy magic effect.
