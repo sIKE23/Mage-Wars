@@ -1,4 +1,9 @@
 ##### A Section #####
+Adramelech Warlock
+You cannot move burn markers onto Burnproof creatures or creatures with Flame Immunity.
+
+The Adramelech Warlock chooses the order in which Adramelech's Torment and Fireweaving take place.
+#
 Agony
 If the creature makes multiple attacks in one attack action, each of the attacks will get the penalty.
 #
@@ -11,6 +16,13 @@ Each time a creature declares a melee or ranged attack, it must pay 1 mana as an
 The cost is paid once for each attack action taken. If there is no Declare Attack Step, you do not have to pay the mana cost. So, doublestrike or triplestrike attack action only has to pay this cost once, and the additional attacks against the same target will not have an additional cost. A Zone attack will require only a payment of 1 mana.
 
 This will force mana payments for spell attacks. The mana payment is made at the time the attack is declared, which is at the time the attack spell resolves. (If the caster can't pay the 1 mana, the attack cannot be declared, so the spell will have been wasted.)
+#
+Akiro's Favor
+May be revealed after the roll that you want to re-roll.
+
+Cannot be used to re-roll an enemy defense.
+
+If this and Temple of the Dawnbreaker are both in play, players decide whether to re-roll in initiative order.
 #
 Armor Ward
 For example, if the opponent casts a Dissolve spell to attempt to destroy your Hunting Bow, he will pay the normal 11 mana to cast the Dissolve. Then, when the Dissolve spell resolves, he will have to pay an additional 4 mana to destroy the Hunting Bow.
@@ -42,6 +54,9 @@ The effect "Only one Battle Fury spell may be cast per round on the same creatur
 Block
 This still works even if the creature is Incapacitated.
 #
+Bloodfire Helmet
+If a demon makes multiple attacks against the same (burn-free) object and a burn is applied before the last attack, the next attack after applying the burn still gets the bonus.
+#
 Blue Gremlin
 When this creature is activated, you may pay 1 mana. If you do, Gremlin gains the Fast trait until end of round, and until end of round he can't take normal move actions but can Teleport to an adjacent zone instead of a move action.
 
@@ -53,6 +68,8 @@ Blue Gremlin can Teleport even if Unmovable or Restrained.
 
 If a mandatory action effect would force Blue Gremlin to move, and this move could only be performed by using the Teleport ability, Blue Gremlin would not be forced to use that ability. (This is because the mandatory action effect only applies at the moment Blue Gremlin would be choosing an action, which is after the time that
 the Blue Gremlin's ability is used. If Blue Gremlin did choose to use the Teleport ability, it would then be bound by the effect.)
+
+Charge bonuses do not apply to movement through teleportation.
 #
 Bull Endurance
 
@@ -87,6 +104,13 @@ Since an attack cannot be reduced below 1 die, Chain Lightning can keep going as
 If Chain Lightning destroys a target, it can still continue with the next target. 
 
 If Chain Lightning is reversed by a Reverse Attack enchantment, the attack is redirected to the last target of Chain Lightning, not to the caster. Even though the source of the attack (for purposes of Reverse Attack) is the last target damaged by Chain Lightning, the attacker is still the original attacker.
+#
+Conquer
+You may not Conquer a wall, however you may cast a wall using the free action provided by Conquer.
+
+By conquering an Epic conjuration, it is possible to have two copies of that conjuration in play at a time. Controlling an Epic conjuration does not prevent you from playing a second copy of that conjuration.
+
+You may not gain a second copy of a Unique spell by conquering your opponent's copy, since it is illegal to cast a Unique spell if you already have a copy in play.
 #
 Corrosive Orchid
 If the Corrosive Orchid's ranged attack is redirected, then the final target can be subjected to its Mist token ability, but the original target cannot. 
@@ -125,6 +149,9 @@ If Decoy is countered (e.g. by Nullify), its controller does not gain the 2 mana
 
 If Decoy is discarded from somewhere other than play, such as if it had been planned to be cast with a familiar which then is destroyed, it does not gain its owner 2 mana.
 #
+Defend
+This does not count as a guard action, so abilities like that of Guardian Angel do not trigger.
+#
 Defense Ring
 Defense Ring does not, by itself, give your Mage a Defense. It only improves Defenses that your Mage already has.
 
@@ -137,6 +164,9 @@ Damage caused by Corrode markers does not count as damage dealt by an attack, an
 
 Example: A Devouring Jelly attacks a Zombie Minion. The Jelly rolls no critical damage on its attack dice, but gets a 9 on its effect die. Two Corrode markers would be placed on the Zombie Minion, but since it has no armor the Zombie Minion is instead dealt 2 direct acid damage. Since this damage was from the Condition marker and
 not the attack, the Devouring Jelly will not reconstruct 2 damage.
+#
+Disarm
+Disabling equipment removes things that affect your mage (Attack bars, armor, defenses, etc.), but leaves things that affect the equipment itself (Cantrip, Upkeep +X, etc.)
 #
 Dispel
 This targets an enchantment, not the object to which it is attached. Thus, a Nullify enchantment on that object cannot counter Dispel.
@@ -232,7 +262,7 @@ So, if another creature was Force Bashed into an Iron Golem, the Iron Golem woul
 
 If instead the Force Bash tries to first Push an Iron Golem, that part fails. The Iron Golem would remain in its zone, would not receive a Slam condition, and you would not be able to Slam a second target.
 #
-Force Crush (Forcemaster vs. Warlord)
+Force Crush
 You cannot reveal this after a creature declares a move action to cancel the move action. The latest you can reveal this to prevent a move action would be when the creature is activated and starts its action phase, but before it has declared a move action.
 
 However, there is an exception: If a creature has already declared a move action, and is moving through a wall with the Passage Attacks trait, you can reveal Force Crush after any Step of that attack. If this should occur, the wall attack is canceled immediately at the point in which Force Crush is revealed (which means it may not have yet received any damage or other effects), and the creature does not move into the new zone.
@@ -286,6 +316,11 @@ The comes-into-play ability on this does not target the chosen Mage. (It has no 
 
 This will trigger off of the enemy Mage casting a spell off a Wand, or using an ability that can be used "as a quick spell" or "as a full spell".
 #
+General's Signet Ring
+If cast during Deployment, you may still apply the discount to a creature summoned during the same deplayment phase.
+
+You still receive the discount even if your mage did not contribute any mana (for instance, if your Barracks paid the entire cost of the creature).
+#
 Geyser
 The ability to cancel the attack to remove Burn conditions is not optional. If the target has any Burn conditions, the effect must occur.
 
@@ -307,6 +342,8 @@ Goblin Builder
 While Goblin Builder is a Familiar, it has no Channeling attribute. Thus, for example, it cannot be enchanted with Harmonize.
 
 The Goblin Builder's ability to remove damage is not considered healing. It is unaffected by the Finite Life trait.
+
+Goblin Builder cannot repair walls.
 #
 Graveyard
 The opportunity to place mana on the Graveyard occurs just once per round, the first time a creature is destroyed. If you choose not to put mana on the Graveyard when that occurs, then you cannot put mana on the Graveyard later in the round if another creature is destroyed. Thus, you cannot "save" the once-per-round effect in hopes of a higher level creature dying later.
@@ -342,7 +379,11 @@ Harmonize
 Harmonize cannot be cast on an object such as Mana Crystal or Mana Flower, because those cards do not have their own Channeling attributes.
 #
 Harshforge Plate
-The additional cost imposed by Harshforge plate is not subject to the effect of Mana Prism, since it is an increase to the innate cost of the spell (as opposed to an effect that forces the mage to pay mana).
+The additional mana cost is not subject to the effect of Mana Prism, since it is an increase to the innate cost of the spell (as opposed to an effect that forces the mage to pay mana).
+
+If a dissolve is nullified, the additional cost imposed by Harshforge Plate  must still be paid (since it is an increase to the innate cost). This is different than other spells like Enchanter's Wardstone that require a separate payment to avoid cancelling the spell.
+
+The 2 extra mana is paid when an enchantment is cast on the wearer, but not when it is revealed.
 #
 Helm of Fear
 Example: An attacker with a Sweeping attack is in a zone with an enemy Warlock, Firebrand Imp, and Flaming Hellion. The Warlock has a Helm of Fear, and the attacker chooses the Warlock as his first target. The Warlock rolls a 9+ on the roll, and the attacker chooses to make his attack against the Imp instead. On the second attack of the Sweeping attack, the Hellion is the only legal target (he cannot attack the Warlock because of the Helm's effect, and cannot attack the Imp because that was the target of the first part of the Sweeping attack.)
@@ -519,7 +560,7 @@ Warlocks can use their Curseweaving ability to return a curse enchantment they c
 #
 Rouse the Beast
 If Rouse the Beast is cast during the Final Quickcast Phase, it will still flip the target's Action Marker to the active side, but since it is after the end of the Action Stage, the target creature will still not be able to activate this round.
-#
+##### S Section #####
 Sacrificial Altar
 This does not target either the creature destroyed or the creature it gives the bonus to.
 #
@@ -529,9 +570,17 @@ You may only use mana from Sectarus' mana supply to pay for the casting cost of 
 If Sectarus is cast on another Mage, the Mage that Sectarus is attached to controls Sectarus (just like any other equipment), including preparing and casting curse spells.
 
 If Sectarus destroys a creature, that creature is removed before Sectarus can cast an enchantment on it. For example, you cannot cast Rise Again on a creature which Sectarus just destroyed.
+
+Sectarus counts as a curse (though not an enchantment) attached to your mage for abilities like Adramelech's Torment.
+#
+Sardonyx, Blight of the Living
+Life loss from Sardonyx MEANS life loss - NOT damage.
 #
 Seeking Dispel
 This targets an enchantment, not the object to which it is attached. Thus, a Nullify enchantment on that object cannot counter Seeking Dispel.
+#
+Sersiryx, Imp Familiar
+Sersiryx may cast Level 1-2 spells like Devil's Trident that have multiple schools. This is because these spells count as both schools, independent of level (so Devil's Trident is a Level 2 spell that counts as a Fire spell and a Dark spell).
 #
 Steal Enchantment
 Steal Enchantment cannot be used to take control of an enchantment you are restricted from. For example, the Wizard cannot take control of a Forcemaster's Forcefield. You can still move the spell, you just cannot take control of it.
@@ -587,6 +636,8 @@ Temple High Guard has a "first strike" ability. The "first strike" ability means
 #
 Temple of the Dawnbreaker
 Reroll abilities are always resolved before any other effects that occur during the Roll Dice Step.
+
+If this and Akiro's Favor are both in play, players decide whether to re-roll in initiative order.
 #
 Temple of Light
 For example, if you control 4 temples, you may pay either 1, 2, 3, or 4 mana. If you choose 3, you pay 3 mana, then make the above attack rolling 3 attack dice and adding 3 to the effect die roll.
@@ -607,6 +658,8 @@ This only affects the next attack, not the entire next attack action.
 #
 Vine Tree
 If Vine Tree is deployed during the Deployment Phase (for instance by a Seedling Pod), you may still use its ability to place a Vine Marker during that same Deployment Phase.
+#
+##### W Section #####
 #
 Wall of Fire
 Its attack is Unavoidable.
@@ -636,3 +689,6 @@ Whirling Strike
 The additional targets work in the same manner as the Sweeping trait, except there are 2 additional targets instead of 1 additional target.
 
 If an attack with additional strikes (such as a "Doublestrike" or "Triplestrike" attack) is made using Whirling Strike, the additional strikes will only be applied to the first target; the subsequent targets will only receive one strike each.
+#
+Wildfire Imp
+Unlike other teleporting creatures, the teleport requires line of sight to the zone and has no range limitation. Burn markers on walls can't be used for this teleport.
