@@ -619,9 +619,6 @@ def CreateIniToken():
 		for c in table:
                         remoteCall(c.controller,'moveCardToDefaultLocation',[c])
 		notify("Setup is complete!")
-		#Create the phase button here. Ensures that only one is created.
-
-                #moveCardToDefaultLocation(card)
 
 def nextPhase(group, x=-360, y=-150):
         mute()
@@ -851,8 +848,9 @@ def resolveChanneling():
                         if c.Stats != None and c.Type != "Mage":
                                 if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
                                         channel = getStat(c.Stats,"Channeling")
+                                        channelBoost = len([k for k in table if k.isFaceUp and k.name == "Harmonize" and c == getAttachTarget(k)]) #Well, you can't really attach more than 1 harmonize anyway. But if there were another spell that boosted channeling, we could add it to this list.
                                         debug("Found Channeling stat {} in card {}".format(channel,c.name))
-                                        for x in range(channel):
+                                        for x in range(channel+channelBoost):
                                                 addMana(c)
                         if c.name == "Barracks": #has the channeling=X stat
                                 debug("Found Barracks")
@@ -866,12 +864,13 @@ def resolveChanneling():
                                                         x += 1
                                         if x == 3: #max 3 outpost count.
                                                 break
-                        if c.name == "Harmonize":
-                                if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
-                                        c2 = getAttachTarget(c)
-                                        if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Not Mages
-                                                addMana(c2)
-                                                whisper("Mana added to {} from {}".format(c2,c))
+                        #Obsolete, due to above re-implementation of Harmonize
+        #                if c.name == "Harmonize":
+         #                       if c.isFaceUp and isAttached(c): #Harmonize is attached to something; add mana to that thing
+          #                              c2 = getAttachTarget(c)
+           #                             if c2 and 'Channeling' in c2.Stats and not c2.Type in ['Mage','Magestats']: #Not Mages
+            #                                    addMana(c2)
+             #                                   whisper("Mana added to {} from {}".format(c2,c))
 
 	me.Mana += me.Channeling
 	notify("{} channels {} mana.".format(me.name,me.Channeling))
