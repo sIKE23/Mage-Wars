@@ -1646,11 +1646,11 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                         x=zoneX-(130 if diceBoxSetup=='Side' else 0)
                         y=zoneY+zoneS-(80 if diceBoxSetup=='Side' else 0)
                         if '1st Player Token' in card.name:
-                                x-=(5  if diceBoxSetup=='Side' else -105-cardH)
+                                x-=(18  if diceBoxSetup=='Side' else -105-cardH)
                                 y+=(-75 if diceBoxSetup=='Side' else 80-cardH)
                         elif cardType=='Phase' and 'Phase' in card.name:
-                                x+=(65 if diceBoxSetup=='Side' else 155-cardH)
-                                y+=(-55 if diceBoxSetup=='Side' else 23-cardH)
+                                x+=(39 if diceBoxSetup=='Side' else 155-cardH)
+                                y+=(-63 if diceBoxSetup=='Side' else 23-cardH)
                         card.moveToTable(x,y,True)
                         return
                 for i in range(len(zoneArray)):
