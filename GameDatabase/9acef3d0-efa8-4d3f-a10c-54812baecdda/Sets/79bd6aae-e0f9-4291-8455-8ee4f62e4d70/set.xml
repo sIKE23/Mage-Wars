@@ -223,8 +223,8 @@
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
 			<property name="Stats" value="Armor=2, Life=14" />
-			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
-			<property name="Traits" value="Legendary" />
+			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Legendary, Charge +1" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPRO3" />
 		</card>

@@ -23,7 +23,6 @@ Decoy
 Divine Protection
 Enchantment Transfusion
 Hawkeye
-Lion Savagery
 Marked for Death
 Sacred Ground
 Standard Bearer
@@ -32,6 +31,7 @@ Roll Dice
 Barkskin
 Brace Yourself
 Bull Endurance
+Critical Strike
 Decoy
 Enchantment Transfusion
 Fortified Position

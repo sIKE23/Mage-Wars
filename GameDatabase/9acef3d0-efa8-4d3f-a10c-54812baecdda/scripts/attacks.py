@@ -45,6 +45,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
         mute()
         setEventList('Turn',[]) #Clear the turn event list. Will need to be changed when we implement sweeping/zone attacks properly
         aTraitDict = (computeTraits(attacker) if attacker else {})
+        if attacker and aTraitDict.get('Charge') and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
         if not attacker: defender = None
         dTraitDict = (computeTraits(defender) if defender else {})
         attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
@@ -253,9 +254,18 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
         #Scan the board for cards than can provide a bonus to this attack
         for c in table:
                 cName = c.name
+                if (cName == "Critical Strike"
+                    and attacker == getAttachTarget(c)
+                    and not hasAttackedThisTurn(attacker)
+                    and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
+                        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0)+3
+                if (cName == "Lion Savagery"
+                    and attacker == getAttachTarget(c)
+                    and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
+                        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0)+1
                 if (cName == 'Tooth & Nail' and #Global effects
                     'Animal' in attacker.Subtype and
-                    attack.get('RangeType') == 'Melee'): attack['Traits']['Piercing'] += 1
+                    attack.get('RangeType') in ['Melee','Counterstrike']): attack['Traits']['Piercing'] += 1
                 if c.controller == attacker.controller: #Friendly effects
                         aType = attack.get('Type')
                         if (attacker.Type == "Mage" and
@@ -679,8 +689,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         defender = Card(dTraitDict.get('OwnerID'))
         if attacker.Name == 'Invisible Stalker': attacker.markers[Invisible] = 0 #Invisible stalker loses invisible marker when declaring attack
         #If the defender is not flying, the attacker should lose the flying trait
-        #Ask whether charging, if applicable
-        if aTraitDict.get('Charge') and attack.get('RangeType') == 'Melee' and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker)
+        #Ask whether charging, if applicable. Edit: let's try prompting for charges before opening attack menu, and see how that works.
+        #if aTraitDict.get('Charge') and attack.get('RangeType') == 'Melee' and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker)
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
