@@ -28,7 +28,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature"  />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Defense=5+ 1x, Armor=0, Life=6" />
+			<property name="Stats" value="Defense=5+ inf, Armor=0, Life=6" />
 			<property name="AttackBar" value="Dashing Rapier:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [8+ = Bleed] [Piercing +1]" />
 			<property name="Traits" value="Elusive, Legendary, Pest" />
 			<property name="Text" value="" />
