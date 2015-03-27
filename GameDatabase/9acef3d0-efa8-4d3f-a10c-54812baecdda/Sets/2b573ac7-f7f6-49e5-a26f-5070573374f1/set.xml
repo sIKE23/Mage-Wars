@@ -780,7 +780,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Lightning -2 trait" />
+			<property name="Text" value="Mage gains Armor +2 and the Lightning -2 trait.&#xD;&#xA;[Armor +2] [Lightning -2]" />
 			<property name="CardID" value="FWQ10" />
 		</card>
 		<card id="6883436a-f838-4fc6-ae53-a6b1fdb9ef72" name="War Sledge">
