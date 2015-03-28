@@ -194,7 +194,7 @@ def getAttackList(card):
                                 aDict['RangeType'] = 'Melee'
                                 aDict['Range'] = [0,0]
                         elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
-                        elif attribute == 'Heal' : aDict['EffectType'] = 'Heal'
+                        elif attribute == 'Heal' : continue #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
                         elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
@@ -209,6 +209,7 @@ def getAttackList(card):
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
                 aDict['OriginalAttack'] = dict(aDict)
+                aDict['OriginalAttack']['Traits'] = dict(aDict['Traits'])
                 if aDict.get('Dice'): attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
         
         for c in table:
@@ -225,11 +226,16 @@ def getAttackList(card):
                 if a.get('RangeType')!='Damage Barrier': a['SourceID'] = card._id
         return attackList
 
-def computeAttack(aTraitDict,attackDict,dTraitDict):
+def computeAttack(aTraitDict,attack,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
-        attack = dict(attackDict)
-        atkTraits = dict(attack.get('Traits',{}))
+        originalAttack = dict(attack["OriginalAttack"])
+        originalAttack["Traits"] = dict(attack["OriginalAttack"]["Traits"])
+        if originalAttack.get("OriginalAttack"): del originalAttack["OriginalAttack"]
+        atkTraits = dict(attack["OriginalAttack"]["Traits"])
+        attack = dict(attack["OriginalAttack"])
+        attack["Traits"] = atkTraits
+        attack["OriginalAttack"] = originalAttack
         localADict = dict(aTraitDict)
         #Runesmithing
         atkOS = Card(attack['OriginalSourceID'])
@@ -258,15 +264,15 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                     and attacker == getAttachTarget(c)
                     and not hasAttackedThisTurn(attacker)
                     and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
-                        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0)+3
-                if (cName == "Lion Savagery"
-                    and attacker == getAttachTarget(c)
-                    and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
-                        attack['Traits']['Piercing'] = atkTraits.get('Piercing',0)+1
-                if (cName == 'Tooth & Nail' and #Global effects
+                        attack['Traits']['Piercing'] += 3
+                elif (cName == "Lion Savagery"
+                      and attacker == getAttachTarget(c)
+                      and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
+                        attack['Traits']['Piercing'] += 1
+                elif (cName == 'Tooth & Nail' and #Global effects
                     'Animal' in attacker.Subtype and
                     attack.get('RangeType') in ['Melee','Counterstrike']): attack['Traits']['Piercing'] += 1
-                if c.controller == attacker.controller: #Friendly effects
+                elif c.controller == attacker.controller: #Friendly effects
                         aType = attack.get('Type')
                         if (attacker.Type == "Mage" and
                             ((cName == 'Dawnbreaker Ring' and aType == 'Light') or
@@ -276,7 +282,6 @@ def computeAttack(aTraitDict,attackDict,dTraitDict):
                             localADict['Ranged'] = localADict.get('Ranged',0) + 1
         attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
         if dTraitDict.get('OwnerID'): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
-        if not attack.get('OriginalAttack'): attack['OriginalAttack'] = dict(attackDict) #Store the original attack if one is not stored.
         return attack #If attack has zone attack trait, then it gains unavoidable
 
 def computeD12(dTraitDict,d12Pair):
@@ -671,7 +676,7 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
                 aTraitDict = computeTraits(attacker)
                 dTraitDict = computeTraits(defender)
                 if not dTraitDict.get('Flying') or not aTraitDict.get('Flying'): aTraitDict['Flying']=False
-                attack = computeAttack(aTraitDict,dict(attack['OriginalAttack']),dTraitDict)
+                computeAttack(aTraitDict,attack,dTraitDict)
                 nextPlayer = {'declareAttackStep': aController,
                               'avoidAttackStep' : dController,
                               'rollDiceStep' : aController,
@@ -711,7 +716,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
-                       rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack),0)
+                       rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
                        interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
                        return
         interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
@@ -732,7 +737,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-        rememberAttackUse(attacker,defender,attack.get('OriginalAttack',attack),damage) #Record that the attack was declared, using the original attack as an identifier
+        rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
         interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
@@ -746,7 +751,7 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         if attacker.Name == 'Wall of Thorns':
                 level = (6 if defender.type == 'Mage' else int(defender.Level)) #Mages really should have level in their xml. But we don't need to worry about this; the spellDictionary will render this moot.
                 strikes = (level - 1 if level > 1 else 1)
-        if timesHasUsedAttack(attacker,attack.get('OriginalAttack',attack)) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
+        if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
         else: interimStep(aTraitDict,attack,dTraitDict,'Additional Strikes','damageBarrierStep')
 
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
@@ -781,9 +786,7 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
         if attack.get('RangeType') == 'Melee':
                 counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
                 if counterAttack:
-                        counterAttack = dict(counterAttack['OriginalAttack'])
                         counterAttack['RangeType'] = 'Counterstrike'
-                        counterAttack['OriginalAttack'] = dict(counterAttack)
                         interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
         defender.markers[Guard] = 0
         interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')

@@ -460,7 +460,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait.&#xD;&#xA;[Charge +2] [Melee Piercing +2]" />
+			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait.&#xD;&#xA;[Charge +2]" />
 			<property name="CardID" value="MWSTX2FFE06" />
 		</card>
 		<card id="09e11b3e-3129-4a87-8f8e-b3c18045389a"  name="Rust">
