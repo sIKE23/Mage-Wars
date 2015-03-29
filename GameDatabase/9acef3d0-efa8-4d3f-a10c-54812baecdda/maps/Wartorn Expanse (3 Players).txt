@@ -1,0 +1,17 @@
+@Scenario=[Domination,9]
+
+3..*
+.5.7
+..1.
+*8..
+#Map#
+
+@Orb=[(2,3),(3,2),(3,3),(3,3)]
+
+@Sslak=[(2,3),(3,2)]
+
+@Usslak=[(3,3)]
+
+@StartPosition1=(1,3)
+@StartPosition2=(3,1)
+@StartPosition3=(3,4)

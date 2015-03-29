@@ -60,6 +60,7 @@ RuneofPower = ("Rune of Power","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" )
 RuneofPrecision = ("Rune of Precision","c2a265f9-ad97-4976-a83c-78891a224478" )
 RuneofReforging = ("Rune of Reforging","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
 RuneofShielding = ("Rune of Shielding","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
+SecretPassage = ("Secret Passage","a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
 SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
@@ -2311,8 +2312,7 @@ def loadMapFile(group, x=0, y=0):
                                 if tile:
                                         tile = table.create(tile,x,y)
                                         tile.anchor = True
-                                        if SPT: table.create("8731f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2,y+mapTileSize/2) #Add trap marker
-                                        #It doesn't look like this is the correct identifier for trap markers.
+                                        if SPT: table.create("a4b3bb92-b597-441e-b2eb-d18ef6b8cc77",x+mapTileSize/2,y+mapTileSize/2) #Add trap marker
                         y += mapTileSize
                 x += mapTileSize
                 y = -Y/2
@@ -2359,10 +2359,9 @@ mapObjectOffset = 175
 mapMultipleObjectOffset = -100
 mapCreatureOffset = 0
 mapMultipleCreatureOffset = 62
-mapMarkersOffset = 275 # Since these Markers are the same size and shape as the Object Markers we can use the same offset.
-mapMultipleMarkersOffset = -100
 
-mapTileDict =  {
+
+mapTileDict = {
                 "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #V'Torrak
                 "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Pool
                 "3" : "8972d2d1-348c-4c4b-8c9d-a1d235fe482e", #Altar of Oblivion
@@ -2373,12 +2372,8 @@ mapTileDict =  {
                 "8" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
                 "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
 
-mapObjectsDict = {"o" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f",	# A V'Tar Orb
-                  		"O" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f"}	# 2 V'Tar Orbs
-
-mapCreaturesDict = {"s" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# Orb Guardian
-                        "S" : "bf217fd3-18c0-4b61-a33a-117167533f3d",	# 2 Orb Guardians
-                        "u" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",	# Greater Orb Guardian
-                        "U" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd"}	# 2 Greater Orb Guardians
-
-mapMarkersDict = {"s" : "a4b3bb92-b597-441e-b2eb-d18ef6b8cc77"} # Secret Passage
+mapObjectsDict = {
+                "Orb" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f",
+                "Sslak" : "bf217fd3-18c0-4b61-a33a-117167533f3d", 
+                "Usslak" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",
+                "SecretPassage" : "a4b3bb92-b597-441e-b2eb-d18ef6b8cc77"}
