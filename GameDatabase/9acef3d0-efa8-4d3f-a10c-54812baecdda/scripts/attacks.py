@@ -300,7 +300,7 @@ def computeD12(dTraitDict,d12Pair):
                 for n,i in enumerate(effects):
                         if i == 'Slam': effects[n] = 'Daze'
         #Then make removals
-        for e in effects:
+        for e in list(effects):
                 illegalEffect = False
 
                 for i in dTraitDict.get('Immunity',[]):
