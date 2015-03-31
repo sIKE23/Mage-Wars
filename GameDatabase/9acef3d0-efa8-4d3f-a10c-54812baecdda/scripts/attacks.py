@@ -210,7 +210,7 @@ def getAttackList(card):
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
                 aDict['OriginalAttack'] = dict(aDict)
                 aDict['OriginalAttack']['Traits'] = dict(aDict['Traits'])
-                if aDict.get('Dice'): attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
+                if aDict.get('Dice')!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
         
         for c in table:
                 if card.Type == 'Mage':
@@ -951,6 +951,9 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
         modRoll = effectRoll + dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
         defender = Card(dTraitDict['OwnerID'])
+        attacker = Card(aTraitDict['OwnerID'])
+        #Giant Wolf Spider's attack
+        if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): modRoll += 4
         vs = attack.get('Traits',{}).get('VS')
         if vs: #We'll assume each attack has only one vs+ trait
                         if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
@@ -1296,6 +1299,9 @@ def nCr(n,r):
 def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be changed to take Tough/elemental into account
         d12Bonus = dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
         defender = Card(dTraitDict['OwnerID'])
+        attacker = Card(aTraitDict['OwnerID'])
+        #Giant Wolf Spider's attack
+        if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): d12Bonus += 4
         vs = attack.get('Traits',{}).get('VS')
         if vs: #We'll assume each attack has only one vs+ trait
                         if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
