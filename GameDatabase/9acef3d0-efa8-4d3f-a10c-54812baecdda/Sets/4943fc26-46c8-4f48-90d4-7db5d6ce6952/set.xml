@@ -179,7 +179,7 @@
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Maddening Shriek:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC05" />

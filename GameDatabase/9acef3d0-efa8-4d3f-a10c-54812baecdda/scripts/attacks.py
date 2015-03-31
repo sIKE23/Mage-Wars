@@ -184,7 +184,8 @@ def getAttackList(card):
                         aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
                 #Now we extract the attributes
                 effectSwitch = False
-                for attribute in attributes:
+                if "Heal" in attributes: continue
+                for attribute in attributes: #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
                         attribute = attribute.strip('[]')
                         if attribute in ['Quick','Full'] : aDict['Action'] = attribute
                         elif 'Ranged' in attribute:
@@ -194,7 +195,6 @@ def getAttackList(card):
                                 aDict['RangeType'] = 'Melee'
                                 aDict['Range'] = [0,0]
                         elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
-                        elif attribute == 'Heal' : continue #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
                         elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
                         elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
@@ -223,7 +223,9 @@ def getAttackList(card):
                 for c in table:
                         if (c.Type == 'Attack' and card.controller == c.controller and getBindTarget(c)==card): attackList.extend(getAttackList(c))
         for a in attackList:
-                if a.get('RangeType')!='Damage Barrier': a['SourceID'] = card._id
+                if a.get('RangeType')!='Damage Barrier':
+                        a['SourceID'] = card._id
+                        a['OriginalAttack']['SourceID'] = card._id
         return attackList
 
 def computeAttack(aTraitDict,attack,dTraitDict):
@@ -820,7 +822,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
         defender = Card(dTraitDict.get('OwnerID'))
         atkTraits = attack.get('Traits',{})
         #If it is healing, we heal and then end the attack, since it is not an attack.
-        if attack.get('EffectType','Attack')=='Heal':
+        if False and attack.get('EffectType','Attack')=='Heal':
                 healingAmt = min(sum([{0:0,1:0,2:1,3:2,4:1,5:2}.get(i,0)*roll[i] for i in range(len(roll))]),getStatusDict(defender).get('Damage',0))
                 if healingAmt > 0: healingQuery(dTraitDict,
                                                 'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
