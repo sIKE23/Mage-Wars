@@ -643,9 +643,9 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Defense=8+ 1x No Ranged" />
-			<property name="AttackBar" value="Flaying Slash:&#xD;&#xA;[Melee] [Dice=3]" />
+			<property name="AttackBar" value="Flying Slash:&#xD;&#xA;[Melee] [Dice=3]" />
 			<property name="Traits" value="Upkeep +1, Autonomous" />
-			<property name="Text" value="Once per round, you can use Dancing Scimitar as a Defense, or it can make its attack. Use a ready marker to keep track of its use." />
+			<property name="Text" value="Once per round, you can use Dancing Scimitar as a Defense, or it can make its attack. Use a ready marker to keep track of its use.&#xD;&#xA;[Defense 8+ 1x No Ranged]" />
 			<property name="CardID" value="FWQ01" />
 		</card>
 		<card id="848e5beb-778e-4d42-a393-3122fb2271ce" name="Defense Ring">

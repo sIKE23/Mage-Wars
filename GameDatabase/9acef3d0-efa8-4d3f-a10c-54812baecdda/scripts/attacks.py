@@ -228,7 +228,7 @@ def getAttackList(card):
                         a['OriginalAttack']['SourceID'] = card._id
         return attackList
 
-def computeAttack(aTraitDict,attack,dTraitDict):
+def computeAttack(aTraitDict,attack,dTraitDict): 
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
         originalAttack = dict(attack["OriginalAttack"])
@@ -259,7 +259,6 @@ def computeAttack(aTraitDict,attack,dTraitDict):
         if attack.get('RangeType') == 'Melee':
                 if localADict.get('Vampiric'): attack['Traits']['Vampiric'] = True
                 if attack.get('Action') == 'Quick' and localADict.get('Counterstrike'): attack['Traits']['Counterstrike'] = True
-        #Scan the board for cards than can provide a bonus to this attack
         for c in table:
                 cName = c.name
                 if (cName == "Critical Strike"
@@ -577,13 +576,15 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
         defender = Card(dTraitDict.get('OwnerID'))
         statList = defender.Stats.split(', ')
         defenseList = []
-        for s in statList:
-                if 'Defense' in s:
-                        dCandidate = defenseParser(defender._id,s)
-                        #Probably should actually separate so we first find the defenses, and iterate through them separately, but this will do for now.
-                        if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
-                                defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
+        if not dTraitDict.get("Incapacitated"):
+                for s in statList:
+                        if 'Defense' in s:
+                                dCandidate = defenseParser(defender._id,s)
+                                #Probably should actually separate so we first find the defenses, and iterate through them separately, but this will do for now.
+                                if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
+                                        defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
         for c in table:
+                if (dTraitDict.get("Incapacitated") and not "Autonomous" in c.Traits): continue
                 if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone') and not c.markers[Disable]):
                         rawText = c.text.split('\r\n[')
                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
@@ -605,6 +606,8 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
         return defenseList
 
 def computeDefense(aTraitDict,attack,dTraitDict,defense):
+        source = Card(defense.get("Source"))
+        if "Autonomous" in source.Traits: return dict(defense) #Autonomous equipment is not modified by anything
         modDefense = dict(defense)
         modDefense['Minimum'] = max(modDefense.get('Minimum',13)-dTraitDict.get('Defense',0),1)
         return modDefense
@@ -953,7 +956,7 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
         defender = Card(dTraitDict['OwnerID'])
         attacker = Card(aTraitDict['OwnerID'])
         #Giant Wolf Spider's attack
-        if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): modRoll += 4
+        if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and (dTraitDict.get("Restrained") or dTraitDict.get("Incapacitated")): modRoll += 4
         vs = attack.get('Traits',{}).get('VS')
         if vs: #We'll assume each attack has only one vs+ trait
                         if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
@@ -1175,6 +1178,7 @@ def computeTraits(card):
         if 'Incorporeal' in rawTraitsList: extend(['Nonliving','Burnproof','Uncontainable'])
         if 'Nonliving' in rawTraitsList: extend(['Poison Immunity','Finite Life'])
         if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
+        if 'Restrained' in rawTraitsList: append('Defense -2')
 
         if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
         elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
