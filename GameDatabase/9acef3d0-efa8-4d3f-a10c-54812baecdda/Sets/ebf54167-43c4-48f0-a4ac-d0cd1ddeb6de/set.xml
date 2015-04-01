@@ -568,7 +568,7 @@
 			<property name="Stats" value="Armor=3, Life=7" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
-			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait.&#xD;&#xA;[Upkeep +1]" />
+			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait." />
 			<property name="CardID" value="MW1J16" />
 		</card>
 		<card id="6a65ca7e-df13-4c27-90cb-44d4c86b2610" name="Pentagram">
@@ -658,7 +658,7 @@
 			<property name="Stats" value="Armor=0, Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine." />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="MW1J22" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">

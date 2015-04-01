@@ -461,7 +461,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Indestructible" />
-			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases. Place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level." />
+			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases. Place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="FWJ07" />
 		</card>
 		<card id="c8373d7e-a8be-47cf-a1e0-5e5e90d271e8" name="Renewing Spring">
