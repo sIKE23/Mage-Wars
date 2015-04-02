@@ -671,7 +671,7 @@ def nextPhase(group, x=-360, y=-150):
 			for p in players:
 				remoteCall(p,"resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
-				remoteCall(p, "resolveChanneling", [])
+				remoteCall(p, "resolveChanneling", [p])
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveBleed", [])
@@ -842,7 +842,7 @@ def resolveStormTokens():
 			card.markers[StormToken] += 1
 		notify("Finished adding Storm Tokens for {}.".format(me))
 
-def resolveChanneling():
+def resolveChanneling(p):
 	mute()
 	for c in table:
                 if c.controller==me and c.isFaceUp:
@@ -873,8 +873,9 @@ def resolveChanneling():
             #                                    addMana(c2)
              #                                   whisper("Mana added to {} from {}".format(c2,c))
 
-	me.Mana += me.Channeling
-	notify("{} channels {} mana.".format(me.name,me.Channeling))
+	if p == me:
+		me.Mana += me.Channeling
+		notify("{} channels {} mana.".format(me.name,me.Channeling))
 
 def resolveUpkeep():
 	mute()
@@ -2279,6 +2280,8 @@ def importArray(filename):
 
 def loadMapFile(group, x=0, y=0):
         mute()
+        notify("This feature coming to your Mage Wars game here soon!")
+        return
         directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
         fileList = [f.split('.')[0] for f in os.listdir(directory) if (os.path.isfile(os.path.join(directory,f)) and f.split('.')[1]=='txt')]
         choices = fileList+['Cancel']
