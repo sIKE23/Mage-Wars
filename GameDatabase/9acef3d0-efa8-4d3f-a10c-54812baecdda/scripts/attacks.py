@@ -311,6 +311,12 @@ def computeD12(dTraitDict,d12Pair):
                     or (e == 'Bleed' and (dTraitDict.get('Nonliving') or 'Plant' in defender.Subtype))
                     or (e in ['Bleed','Stuck','Stun','Daze','Cripple','Weak','Slam'] and defender.Type not in ['Creature','Mage'])): illegalEffect = True #not sure about weak; can it affect conjurations?
                 if illegalEffect: effects.remove(e)
+        #Finally, replace corrode with damage if neccessary
+        currentArmor = getStat(Card(dTraitDict['OwnerID']).Stats,'Armor') + dTraitDict.get("Armor",0)
+        for n,i in enumerate(effects):
+                if i == "Corrode":
+                        if currentArmor == 0: effects[n] = "Damage"
+                        else: currentArmor -= 1
         if not effects: return False
         if len(effects) == 1: return [d12Pair[0],effects[0]]
         if len(effects) == 2 and effects[0] == effects[1]: return [d12Pair[0],'2 '+effects[0]]
@@ -862,22 +868,23 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         defender = Card(dTraitDict.get('OwnerID',''))
         atkTraits = attack.get('Traits',{})
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
-        conditionsList = ['Bleed','Burn','Corrode','Cripple','Daze','Rot','Slam','Sleep','Stuck','Stun','Tainted','Weak']
-        effectsInflictDict = {'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
-                                 'Burn' : 'is set ablaze! (+1 Burn)',
-                                 'Corrode' : 'corrodes! (+1 Corrode)',
-                                 'Cripple' : 'is crippled! (+1 Cripple)',
-                                 'Daze' : 'is dazed! (Daze)',
-                                 'Rot' : 'rots! (+1 Rot)',
-                                 'Slam' : 'is slammed to the ground! (Slam)',
-                                 'Sleep' : 'falls fast alseep! (Sleep)',
-                                 'Stuck' : 'is stuck fast! (+1 Stuck)',
-                                 'Stun' : 'is stunned! (Stun)',
-                                 'Tainted' : 'writhes in agony as its wounds fester! (+1 Tainted)',
-                                 'Weak' : 'is weakened! (+1 Weak)',
-                                 'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
-                                 'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
-                                 'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
+        conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Rot','Slam','Sleep','Stuck','Stun','Tainted','Weak']
+        effectsInflictDict = {'Damage' : "suffers 1 point of direct damage! (+1 Damage)",
+                              'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
+                              'Burn' : 'is set ablaze! (+1 Burn)',
+                              'Corrode' : 'corrodes! (+1 Corrode)',
+                              'Cripple' : 'is crippled! (+1 Cripple)',
+                              'Daze' : 'is dazed! (+1 Daze)',
+                              'Rot' : 'rots! (+1 Rot)',
+                              'Slam' : 'is slammed to the ground! (+1 Slam)',
+                              'Sleep' : 'falls fast alseep! (+1 Sleep)',
+                              'Stuck' : 'is stuck fast! (+1 Stuck)',
+                              'Stun' : 'is stunned! (Stun)',
+                              'Tainted' : "'s wounds fester! (+1 Tainted)",
+                              'Weak' : 'is weakened! (+1 Weak)',
+                              'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
+                              'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
+                              'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
 
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
@@ -907,8 +914,10 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         #Finally, apply conditions
         effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:
-                if e in conditionsList: defender.markers[eval(e)]+=1
-                notify('{} {}'.format(defender,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
+                if e in conditionsList:
+                        if e=="Damage" and defender.Type == "Mage": defender.controller.damage += 1
+                        else: defender.markers[eval(e)]+=1
+                notify('{} {}'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
         card = Card(cardTraitsDict.get('OwnerID'))
