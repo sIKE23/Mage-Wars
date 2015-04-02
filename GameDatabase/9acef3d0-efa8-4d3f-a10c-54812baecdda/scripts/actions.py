@@ -705,7 +705,7 @@ def resetMarkers():
 	for c in table:
 		if c.targetedBy == me:
 			c.target(False)
-		if c.isFaceUp: #don't waste time on facedown cards
+		if c.controller == me and c.isFaceUp: #don't waste time on facedown cards and only reset the markers on my cards. 
 			mDict = {ActionRedUsed : ActionRed,
 		                ActionBlueUsed : ActionBlue,
 		                ActionGreenUsed : ActionGreen,
