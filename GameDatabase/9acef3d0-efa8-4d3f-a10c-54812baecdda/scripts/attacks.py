@@ -330,7 +330,9 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                         if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)
                         if attack.get('RangeType') == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
                 #No restriction on how many times may be applied
-                if not atkTraits.get('Spell'): attackDice -= attacker.markers[Weak]
+                if not atkTraits.get('Spell'):
+                        attackDice -= attacker.markers[Weak]
+                        if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Agony"]: attackDice -= 2
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
                 attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or (defender.Type=="Mage" and defender.controller.Damage))
@@ -522,6 +524,13 @@ def timesHasUsedAbility(card,number=0):
                 if e[0] == 'Ability' and e[1][0] == card._id and e[1][1] == number: count += 1
         return count
 
+def timesHasOccured(event,player=me):
+        eventList = getEventList('Round')
+        count = 0
+        for e in eventList:
+                if e[0] == 'Event' and e[1][0] == player._id: count += 1
+        return count
+
 def hasCharged(card):
         """returns whether this card has charged this TURN"""
         eventList = getEventList('Turn')
@@ -542,6 +551,10 @@ def rememberCharge(attacker):
 def rememberAbilityUse(card,number=0): #We can call the targeted version 'rememberTargetAbility use', or some such. This one is for untargeted abilities
         appendEventList('Round',['Ability', [card._id,number]])
         appendEventList('Turn',['Ability', [card._id,number]])
+
+def rememberPlayerEvent(event,player=me): #For misc. string events associated with a player. Useful for 'the first time per round...' effects.
+        appendEventList('Round',['Event', [player._id,event]])
+        appendEventList('Turn',['Event', [player._id,event]])
 
 
 ############################################################################
@@ -709,6 +722,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll < 7:
                         notify("{} is so dazed that it completely misses!".format(attacker))
+                        rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
                         interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
                         return
                 else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker))
@@ -857,6 +871,9 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                 notify('{} has elected not to apply auto-calculated battle results'.format(me))
                 whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
 
+def remotePlayerHeal(amount):
+        me.damage -= amount
+
 def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In general, need to adjust functions to accomodate partially or fully untargeted attacks.
         attacker = Card(aTraitDict.get('OwnerID',''))
         defender = Card(dTraitDict.get('OwnerID',''))
@@ -890,6 +907,16 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                                                                     str(damage),
                                                                     defender,
                                                                     ('! (an above' if damage >= expectedDmg else '... (a below')))
+
+        #Bloodreaper health drain
+        if attacker.markers[BloodReaper] and not timesHasOccured("Blood Reaper",attacker.controller) and defender.Type in ["Creature","Mage"] and dTraitDict.get("Living") and 'Demon' in attacker.Subtype and damage:
+                mage = Card(aTraitDict.get('MageID'))
+                healing = min(2,mage.controller.damage)
+                if healing and not computeTraits(mage).get("Finite Life"):
+                        rememberPlayerEvent("Blood Reaper",attacker.controller)
+                        notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)".format(mage,str(healing)))
+                        remoteCall(mage.controller, "remotePlayerHeal", [healing])
+        
         #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
         dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
         defender.controller.Mana -= dManaDrain
@@ -912,13 +939,22 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                         if e=="Damage" and defender.Type == "Mage": defender.controller.damage += 1
                         else: defender.markers[eval(e)]+=1
                 notify('{} {}'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
-
+#mage ID
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
         card = Card(cardTraitsDict.get('OwnerID'))
+        
         choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
                            ["Yes","No"],
                            ["#01603e","#de2827"])
         if choice == 1:
+                reusableAbilityTokens = [BloodReaper,
+                                         EternalServant,
+                                         HolyAvenger,
+                                         Pet,
+                                         WoundedPrey]
+                mage = Card(cardTraitsDict.get('MageID'))
+                for t in reusableAbilityTokens:
+                        if card.markers[t]: mage.markers[t] = 1 #Return mage ability markers to their owner.
                 deathMessage(cardTraitsDict,attack,aTraitDict)
                 if ((attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type in ['Creature','Mage']) or
                     card.markers[Zombie]): obliterate(card)

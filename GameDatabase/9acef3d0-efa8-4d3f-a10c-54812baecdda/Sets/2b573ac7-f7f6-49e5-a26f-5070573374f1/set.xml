@@ -763,7 +763,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1, Location=Weapon" />
-			<property name="AttackBar" value="[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Cursed Edge:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Familiar, Legendary, Dark Mage Only" />
 			<property name="Text" value="Sectarus is a non-creature familiar, which can be used to cast only curse enchantments. If Sectarus is used to attack and damage a creature, it may immediately cast the spell on that creature as a free action" />
 			<property name="CardID" value="FWQ09" />

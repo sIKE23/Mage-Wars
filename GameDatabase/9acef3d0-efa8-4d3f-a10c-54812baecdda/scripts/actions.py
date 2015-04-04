@@ -1915,6 +1915,9 @@ def revealEnchantment(card):
 	if card.Type == "Enchantment" and not card.isFaceUp:
                 cardType = card.Type
                 target = getAttachTarget(card)
+                if target and [True for c in getAttachments(target) if c.Name == card.Name and c.isFaceUp]:
+                        whisper("There is already a copy of {} attached to {}!".format(card.Name, target.Name))
+                        return
                 if not target and card.Target not in ['Zone','Zone Border','Arena'] and not confirm("This enchantment is not attached to anything. Are you sure you want to reveal it?"): return
                 #First, determine the base cost
                 cost = computeRevealCost(card)
