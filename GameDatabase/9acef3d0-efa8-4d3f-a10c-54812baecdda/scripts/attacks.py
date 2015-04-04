@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from math import factorial
+from copy import deepcopy
 """
 Mage Wars Attacks Module
 
@@ -49,7 +50,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
         if not attacker: defender = None
         dTraitDict = (computeTraits(defender) if defender else {})
         attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
-        choiceText = "Roll how many attack dice?" #,choices = "Roll how many Attack Dice?",[str(i+1) for i in range(7)]
+        choiceText = "Roll how many attack dice?"
         #Suppose there is an attacker with at least one attack:
         if aTraitDict:
                 attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList if attack.get('RangeType') != 'Damage Barrier']
@@ -208,8 +209,7 @@ def getAttackList(card):
                                 if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
                                 elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
                                 else: aDict['Traits'][tPair[0]] = tPair[1]
-                aDict['OriginalAttack'] = dict(aDict)
-                aDict['OriginalAttack']['Traits'] = dict(aDict['Traits'])
+                aDict['OriginalAttack'] = deepcopy(aDict)
                 if aDict.get('Dice')!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
         
         for c in table:
@@ -231,13 +231,10 @@ def getAttackList(card):
 def computeAttack(aTraitDict,attack,dTraitDict): 
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
-        originalAttack = dict(attack["OriginalAttack"])
-        originalAttack["Traits"] = dict(attack["OriginalAttack"]["Traits"])
-        if originalAttack.get("OriginalAttack"): del originalAttack["OriginalAttack"]
-        atkTraits = dict(attack["OriginalAttack"]["Traits"])
-        attack = dict(attack["OriginalAttack"])
-        attack["Traits"] = atkTraits
+        originalAttack = attack["OriginalAttack"]
+        attack = deepcopy(attack["OriginalAttack"])
         attack["OriginalAttack"] = originalAttack
+        atkTraits = attack["Traits"]
         localADict = dict(aTraitDict)
         #Runesmithing
         atkOS = Card(attack['OriginalSourceID'])
@@ -687,7 +684,7 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
                 aTraitDict = computeTraits(attacker)
                 dTraitDict = computeTraits(defender)
                 if not dTraitDict.get('Flying') or not aTraitDict.get('Flying'): aTraitDict['Flying']=False
-                computeAttack(aTraitDict,attack,dTraitDict)
+                attack = computeAttack(aTraitDict,attack,dTraitDict)
                 nextPlayer = {'declareAttackStep': aController,
                               'avoidAttackStep' : dController,
                               'rollDiceStep' : aController,
@@ -703,10 +700,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        if attacker.Name == 'Invisible Stalker': attacker.markers[Invisible] = 0 #Invisible stalker loses invisible marker when declaring attack
         #If the defender is not flying, the attacker should lose the flying trait
-        #Ask whether charging, if applicable. Edit: let's try prompting for charges before opening attack menu, and see how that works.
-        #if aTraitDict.get('Charge') and attack.get('RangeType') == 'Melee' and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker)
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
@@ -1243,8 +1237,7 @@ def computeArmor(aTraitDict,attack,dTraitDict):
         return max(baseArmor+dTraitDict.get('Armor',0)-attack.get('Traits',{}).get('Piercing',0),0)
 
 def getRemainingLife(cTraitDict):
-        card = Card(cTraitDict.get('OwnerID')) if cTraitDict.get('OwnerID') else None
-        if not card: return 0
+        card = Card(cTraitDict.get('OwnerID'))
         life = getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0) #Preventing life gain is handled when traits are computed, not here
         if life: return max(life - card.markers[Damage] - (card.markers[Tainted]*3),0)
 
