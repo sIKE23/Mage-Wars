@@ -186,8 +186,8 @@ def cardParser(filePath):
                                 tSplit = a[1][n].split("; ")
                                 for i,s in enumerate(tSplit):
                                     sSplit = s.split(" = ")
-                                    #!!!Convert effects into lists rather than strings
-                                    tSplit[i] = "{}: '{}'".format(sSplit[0].split('+')[0].split('-')[0],sSplit[1])
+                                    sSplit[1] = [sSplit[1].split('2 ')[1],sSplit[1].split('2 ')[1]] if '2' in sSplit[1] else sSplit[1].split(' & ')
+                                    tSplit[i] = "{}: {}".format(sSplit[0].split('+')[0].split('-')[0],sSplit[1])
                                 a[1][n] = "'d12': {"+', '.join(tSplit)+"}"
                                 d12 = False
                             elif t in damageTypes: a[1][n] = "'Damage Type': '{}'".format(t)
@@ -201,6 +201,7 @@ def cardParser(filePath):
                                 tSplit = t.split(":")[1].split("-")
                                 a[1].append("'Minimum Range': {}".format(tSplit[0]))
                                 a[1].append("'Maximum Range': {}".format(tSplit[1]))
+                            elif t in ["Passage Attack","Damage Barrier"]: a[1][n] = "'Range Type': '{}'".format(t)
                             elif "." in t and not "vs" in t: a[1][n] = "'Text': '{}'".format(t)
                             else: a[1][n] = "'{}': True".format(t)
                         a[1] = [e for e in a[1] if e!="d12"]
@@ -208,7 +209,30 @@ def cardParser(filePath):
                         attackList = ["'Name': '" + a[0] + "',\n\t" + ",\n\t".join(a[1]) for a in attackKeyList]
                         app("'Attacks' : [{\n\t"+
                                 "\n\t},{\n\t".join(attackList)+"\n\t}]")
-                elif pType == "Traits": pass
+                elif pType == "Traits":
+                    if not pValue: continue
+                    tList = pValue.split(", ")
+                    dList = []
+                    for t in tList:
+                        done = False
+                        for a in additiveTraits:
+                            if a in t and not "Immunity" in t:
+                                try: t,v = (t.split(" +")[0],int(t.split(" +")[1])) if " +" in t else (t.split(" -")[0],int(t.split(" -")[1])+1)
+                                except ValueError: (t.split(" +")[0],0) if " +" in t else (t.split(" -")[0],0)
+                                t = t + " +X"
+                                dList.append([t,v])
+                                done = True
+                        if not done:
+                            for s in superlativeTraits:
+                                if s in t:
+                                    try: t,v = s + " X",t.replace(s+" ","")
+                                    except ValueError: t,v = s + " X",0
+                                    dList.append([t,v])
+                                    done = True
+                        if not done: dList.append([t,True])
+                    app("'Traits' : {\n\t"+
+                                    ",\n\t".join(["'"+t[0]+"': "+str(t[1]) for t in dList])+
+                                    "\n\t}")
                 elif pType == "Text": app("'Text' : \"{}\"".format(pValue.replace("&#xD;&#xA;","\n").replace("&amp;","&")))
                 #Card IDs are useless in-game.
                             
