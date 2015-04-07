@@ -1987,7 +1987,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;[Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;[Armor +2] [Flame -2]" />
 			<property name="CardID" value="MW1Q06" />
 		</card>
 		<card id="dda72c4a-8f33-42cf-9eed-bd52fb91af22" name="Elemental Cloak">

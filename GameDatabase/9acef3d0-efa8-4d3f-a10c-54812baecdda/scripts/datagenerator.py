@@ -213,15 +213,16 @@ def cardParser(filePath):
                     if not pValue: continue
                     tList = pValue.split(", ")
                     dList = []
-                    for t in tList:
+                    for T in list(tList):
+                        t = T
                         done = False
                         for a in additiveTraits:
                             if a in t and not "Immunity" in t:
-                                try: t,v = (t.split(" +")[0],int(t.split(" +")[1])) if " +" in t else (t.split(" -")[0],int(t.split(" -")[1])+1)
-                                except ValueError: (t.split(" +")[0],0) if " +" in t else (t.split(" -")[0],0)
-                                t = t + " +X"
-                                dList.append([t,v])
+                                try: t,v = (t.split(" +")[0],int(t.split(" +")[1])) if " +" in t else (t.split(" -")[0],int(t.split(" -")[1])*(-1))
+                                except ValueError: t,v = (t.split(" +")[0],0) if " +" in t else (t.split(" -")[0],0)
+                                dList.append([t+" +X",v])
                                 done = True
+                                break
                         if not done:
                             for s in superlativeTraits:
                                 if s in t:
@@ -229,11 +230,12 @@ def cardParser(filePath):
                                     except ValueError: t,v = s + " X",0
                                     dList.append([t,v])
                                     done = True
+                                    break
                         if not done: dList.append([t,True])
                     app("'Traits' : {\n\t"+
                                     ",\n\t".join(["'"+t[0]+"': "+str(t[1]) for t in dList])+
                                     "\n\t}")
-                elif pType == "Text": app("'Text' : \"{}\"".format(pValue.replace("&#xD;&#xA;","\n").replace("&amp;","&")))
+                elif pType == "Text" and pValue: app("'Text' : \"{}\"".format(pValue.replace("&#xD;&#xA;","\n").replace("&amp;","&")))
                 #Card IDs are useless in-game.
                             
                     
