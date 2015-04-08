@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Mage Wars Battlegrounds: Domination" id="8c377c82-86af-45ca-ac7c-75230b803532" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="2.12.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Mage Wars Battlegrounds: Domination" 
+	id="8c377c82-86af-45ca-ac7c-75230b803532" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
 	<markers>
 		<marker id="a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage" />
 		<marker id="8731f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap" />

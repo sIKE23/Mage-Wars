@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Playtesting Promos"  id="aaa10320-9e95-464a-ba92-59a5c725ca78" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.2.1.0" version="2.0.3.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Playtesting Promos"  
+	id="aaa10320-9e95-464a-ba92-59a5c725ca78" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.0.12.0">
 	<markers>
 		<!-- <marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" /> -->
 	</markers>
