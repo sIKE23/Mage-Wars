@@ -241,8 +241,18 @@ def cardParser(filePath):
                     
         if cType in ["Enchantment","Creature","Conjuration","Equipment","Attack","Incantation"]: append((name,pCard))
     #Finally, print the results so we can copypaste them.
+    output = ""
     for n,c in processedCardList:
         pass
         print "spellDictionary['"+n+"'] = {"
         print ",\n".join(c)
         print "}\n\n"
+        output += "spellDictionary['"+n+"'] = {\n"+",\n".join(c)+"\n}\n\n"
+    return output
+
+try:
+    output = cardParser("set.xml")
+    textFile = open("parsedCards.txt","w")
+    textFile.write(output)
+    textFile.close()
+except: pass
