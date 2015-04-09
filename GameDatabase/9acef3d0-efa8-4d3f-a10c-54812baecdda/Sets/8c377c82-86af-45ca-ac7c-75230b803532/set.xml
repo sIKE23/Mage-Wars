@@ -215,7 +215,7 @@
 			<property name="School" value="War"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=3, Life=6" />
-			<property name="AttackBar" value="Bite: [Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Gains the Vigilant trait while in the same zone as a friendly conjuration (including an V&apos;Tar Orb you control), which is not attached to any object in the zone." />
 			<property name="CardID" value="MWBG1C01" />

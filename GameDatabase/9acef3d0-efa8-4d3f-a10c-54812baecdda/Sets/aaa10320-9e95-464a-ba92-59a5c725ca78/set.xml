@@ -19,7 +19,7 @@
 			<property name="School" value="Dark"  />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;[Full] [Ranged 0-1] [Psychic] [Dice=2] [d12] [8+ = Daze] [Ethereal] [Sweeping] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Unholy Scream:&#xD;&#xA;[Full] [Ranged 0-1] [Psychic] [Dice=2] [d12] [8+ = Daze] [Ethereal] [Sweeping] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Bloodthirsty +0, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO61" />

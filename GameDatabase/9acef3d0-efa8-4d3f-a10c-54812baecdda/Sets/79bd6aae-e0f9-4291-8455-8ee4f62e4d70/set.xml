@@ -468,7 +468,7 @@
 			<property name="School" value="Holy"  />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=2, Life=15" />
-			<property name="AttackBar" value="Razor Talons:[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Razor Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Text" value="While Victorian Griffin has the Flying trait, enemy creatures in its zone are hindered and the also lose and cannot gain the Elusive trait." />
 			<property name="Traits" value="Flying" />
 			<property name="CardID" value="MWPROMO62" />
