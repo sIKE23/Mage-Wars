@@ -40,7 +40,7 @@
 		</card>
 
 
-		<card id="675c07ff-cbe3-462b-bda2-81c95812f026"  name="Devil&apos;s Trident">
+		<card id="675c07ff-cbe3-462b-bda2-81c95812f026" name="Devil&apos;s Trident">
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Flame" />
 			<property name="Cost" value="7" />
@@ -55,7 +55,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFA01" />
 		</card>
-		<card id="8163ee1a-da88-4bbd-8eed-4f1ca3cdc0a2"  name="Hurl Rock">
+		<card id="8163ee1a-da88-4bbd-8eed-4f1ca3cdc0a2" name="Hurl Rock">
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
@@ -72,7 +72,7 @@
 		</card>
 
 
-		<card id="5eca0e21-79c9-495b-b6ee-29f0a54ea894"  name="Harshforge Monolith">
+		<card id="5eca0e21-79c9-495b-b6ee-29f0a54ea894" name="Harshforge Monolith">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Artifact, Obelisk" />
 			<property name="Cost" value="6" />
@@ -87,7 +87,7 @@
 			<property name="Text" value="All enchantments (hidden and revealed), within 1 zone of Harshforge Monolith, gain the Upkeep +1 trait." />
 			<property name="CardID" value="MWSTX2FFJ01" />
 		</card>
-		<card id="e8ee7c9f-0438-4740-8507-b5f065495df9"  name="Altar of Carnage">
+		<card id="e8ee7c9f-0438-4740-8507-b5f065495df9" name="Altar of Carnage">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Altar, Artifact" />
 			<property name="Cost" value="8" />
@@ -102,7 +102,7 @@
 			<property name="Text" value="Whenever a friendly soldier attacks and damages an enemy creature, you may place a place 1 mana on a friendly Spawnpoint or Familiar. Each friendly soldier may only trigger this ability once per round." />
 			<property name="CardID" value="MWSTX2FFJ02" />
 		</card>
-		<card id="de856909-14ae-4a6c-910a-88d1c33b86eb"  name="Altar of Domination">
+		<card id="de856909-14ae-4a6c-910a-88d1c33b86eb" name="Altar of Domination">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Altar, Artifact" />
 			<property name="Cost" value="9" />
@@ -117,7 +117,7 @@
 			<property name="Text" value="During the Upkeep Phase, if you control 3 or more outposts, place a Domination token on Altar of Domination. During the Deployment Phase, if there are 4 or more Domination tokens on Altar, you may retrieve Talos from your spellbook and Summon it to this zone at no mana cost. Then, destroy Altar. " />
 			<property name="CardID" value="MWSTX2FFJ03" />
 		</card>
-		<card id="0cea5239-b6a1-4826-a636-2fc213b5efcf"  name="Armory">
+		<card id="0cea5239-b6a1-4826-a636-2fc213b5efcf" name="Armory">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Outpost" />
 			<property name="Cost" value="10" />
@@ -132,7 +132,7 @@
 			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. All friendly soldiers gain Armor +1 and their attacks gain the Piercing +1 trait." />
 			<property name="CardID" value="MWSTX2FFJ04" />
 		</card>
-		<card id="6520a411-1553-4b09-baf1-d814ba92ad28"  name="Construction Yard">
+		<card id="6520a411-1553-4b09-baf1-d814ba92ad28" name="Construction Yard">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Outpost" />
 			<property name="Cost" value="7" />
@@ -147,7 +147,7 @@
 			<property name="Text" value="May not be placed in a zone adjacent to another friendly outpost. Whenever a Nonliving Corporeal conjuration is destroyed, place an amount of mana equal to its Level on Construction Yard. Once per round, if you, or a friendly spawnpoint or familiar, casts a Nonliving Corporeal War Conjuration or an Earth wall, you may use any mana on Construction Yard to pay towards the casting cost for that spell." />
 			<property name="CardID" value="MWSTX2FFJ05" />
 		</card>
-		<card id="d7130cee-5fc4-4922-b10e-51c977b5d581"  name="Rolling Fog">
+		<card id="d7130cee-5fc4-4922-b10e-51c977b5d581" name="Rolling Fog">
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Cloud" />
 			<property name="Cost" value="7" />
@@ -164,7 +164,7 @@
 		</card>
 
 
-		<card id="a81df3d7-fcb9-4afb-8da8-6e24db0f064e"  name="Wall of Earth" size="Horizontal Cards">
+		<card id="a81df3d7-fcb9-4afb-8da8-6e24db0f064e" name="Wall of Earth" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -181,7 +181,7 @@
 		</card>
 
 
-		<card id="47e4c2d3-8eb3-4040-bd5e-e289253ef60e"  name="Asyran Defender">
+		<card id="47e4c2d3-8eb3-4040-bd5e-e289253ef60e" name="Asyran Defender">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Knight, Soldier" />
 			<property name="Cost" value="8" />
@@ -196,7 +196,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC01" />
 		</card>
-		<card id="2bb70070-7b6e-4bdf-b75a-e739810ff3ac"  name="Blood Demon">
+		<card id="2bb70070-7b6e-4bdf-b75a-e739810ff3ac" name="Blood Demon">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Vampire, Demon" />
 			<property name="Cost" value="12" />
@@ -211,7 +211,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC02" />
 		</card>
-		<card id="b1f01ef5-7382-4254-8761-293fde18e240"  name="Bloodcrag Minotaur">
+		<card id="b1f01ef5-7382-4254-8761-293fde18e240" name="Bloodcrag Minotaur">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Minotaur, Soldier" />
 			<property name="Cost" value="15" />
@@ -226,7 +226,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC03" />
 		</card>
-		<card id="14b02bf9-1492-44c8-9a51-f8ef280dd08b"  name="Cerberus">
+		<card id="14b02bf9-1492-44c8-9a51-f8ef280dd08b" name="Cerberus">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon, Canine" />
 			<property name="Cost" value="17" />
@@ -241,7 +241,7 @@
 			<property name="Text" value="While Cerberus is guarding in a zone with a friendly Dark conjuration, he gains the Unmovable trait and his attack gains Triplestrike trait." />
 			<property name="CardID" value="MWSTX2FFC04" />
 		</card>
-		<card id="ac8580d2-641c-4917-a56d-4123ab1e43c9"  name="Anvil Throne Crossbowman">
+		<card id="ac8580d2-641c-4917-a56d-4123ab1e43c9" name="Anvil Throne Crossbowman">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Dwarf, Soldier" />
 			<property name="Cost" value="11" />
@@ -256,7 +256,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC05" />
 		</card>
-		<card id="c574c794-bfc6-487c-a1c2-477ff29f6d22"  name="Goblin Alchemist">
+		<card id="c574c794-bfc6-487c-a1c2-477ff29f6d22" name="Goblin Alchemist">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Goblin, Soldier" />
 			<property name="Cost" value="9" />
@@ -271,7 +271,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC06" />
 		</card>
-		<card id="eeb4e53a-b6e4-4f18-a8a7-1e6289830c11"  name="Gurmash, Orc Sergeant">
+		<card id="eeb4e53a-b6e4-4f18-a8a7-1e6289830c11" name="Gurmash, Orc Sergeant">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Orc, Soldier" />
 			<property name="Cost" value="11" />
@@ -286,7 +286,7 @@
 			<property name="Text" value="Gurmash can cast only command spells, including the Battle Orders of his controlling Warlord." />
 			<property name="CardID" value="MWSTX2FFC07" />
 		</card>
-		<card id="a79cacbc-183e-4d91-9157-b47c7eac8d41"  name="Infernian Scourger">
+		<card id="a79cacbc-183e-4d91-9157-b47c7eac8d41" name="Infernian Scourger">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="9" />
@@ -301,7 +301,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC08" />
 		</card>
-		<card id="c29ba11c-7557-481d-b939-cf0d91a9b763"  name="Otto Kronig, Master Engineer">
+		<card id="c29ba11c-7557-481d-b939-cf0d91a9b763" name="Otto Kronig, Master Engineer">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Dwarf, Soldier" />
 			<property name="Cost" value="11" />
@@ -316,7 +316,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX2FFC09" />
 		</card>
-		<card id="860a3d47-949a-4205-aa3b-05a746d0ec6b"  name="Sardonyx, Blight of the Living">
+		<card id="860a3d47-949a-4205-aa3b-05a746d0ec6b" name="Sardonyx, Blight of the Living">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Dragon" />
 			<property name="Cost" value="24" />
@@ -331,7 +331,7 @@
 			<property name="Text" value="Each Upkeep Phase Sardonyx&apos;s controller loses 2 Life. Living creatures in the same zone as Sardonyx gain the Finite Life trait." />
 			<property name="CardID" value="MWSTX2FFC10" />
 		</card>
-		<card id="8c26f3e9-2124-4fc0-b752-a68ad740b088"  name="Sersiryx, Imp Familiar">
+		<card id="8c26f3e9-2124-4fc0-b752-a68ad740b088" name="Sersiryx, Imp Familiar">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="12" />
@@ -346,7 +346,7 @@
 			<property name="Text" value="Sersiryx can cast only Level 1-2 Fire attack spells, or Level 1-2 curse enchantments." />
 			<property name="CardID" value="MWSTX2FFC11" />
 		</card>
-		<card id="c1a636f3-a019-4202-a629-1d00fa91efe1"  name="Talos">
+		<card id="c1a636f3-a019-4202-a629-1d00fa91efe1" name="Talos">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Statue" />
 			<property name="Cost" value="28" />
@@ -361,7 +361,7 @@
 			<property name="Text" value="Talos comes into play with his action marker ready. Talos may only be brought into play through the Altar of Domination. It costs no spellpoints to include Talos in your spellbook." />
 			<property name="CardID" value="MWSTX2FFC12" />
 		</card>
-		<card id="d3d74607-ebe1-4533-a7b6-e5a758e10e83"  name="Wildfire Imp">
+		<card id="d3d74607-ebe1-4533-a7b6-e5a758e10e83" name="Wildfire Imp">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="5" />
@@ -378,7 +378,7 @@
 		</card>
 
 
-		<card id="fe74477b-1858-42a7-a5de-739f965944c3"  name="Adramelech&apos;s Touch">
+		<card id="fe74477b-1858-42a7-a5de-739f965944c3" name="Adramelech&apos;s Touch">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Flame" />
 			<property name="Cost" value="2+1" />
@@ -393,7 +393,7 @@
 			<property name="Text" value="Whenever a Burn condition on this creature rolls a zero, you may pay 1 mana to prevent its removal." />
 			<property name="CardID" value="MWSTX2FFE01" />
 		</card>
-		<card id="38829558-8804-4804-a16d-e3491fdeebe1"  name="Akiro&apos;s Favor">
+		<card id="38829558-8804-4804-a16d-e3491fdeebe1" name="Akiro&apos;s Favor">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+1" />
@@ -408,7 +408,7 @@
 			<property name="Text" value="Once per round, if this creature makes a melee or ranged attack, you may re-roll all of the attack dice, or the effect die, for that attack. Or, if the attack has to roll to hit (such as with a Daze condition), you may re-roll that die roll instead. Use a ready marker to keep track of this ability" />
 			<property name="CardID" value="MWSTX2FFE02" />
 		</card>
-		<card id="065fff7f-3189-4965-ab62-0e8f95db1e0c"  name="Arcane Corruption">
+		<card id="065fff7f-3189-4965-ab62-0e8f95db1e0c" name="Arcane Corruption">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse" />
 			<property name="Cost" value="2+5" />
@@ -423,7 +423,7 @@
 			<property name="Text" value="Each Upkeep Phase, deal 1 direct damage to this creature for each enchantment (hidden and revealed ) attached to it that your opponent controls." />
 			<property name="CardID" value="MWSTX2FFE03" />
 		</card>
-		<card id="7cebacd8-7bef-43b7-93ce-c071e34ca3ea"  name="Brace Yourself">
+		<card id="7cebacd8-7bef-43b7-93ce-c071e34ca3ea" name="Brace Yourself">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="2+0" />
@@ -438,7 +438,7 @@
 			<property name="Text" value="This creature gains Armor +4. At the end of the round, destroy Brace Yourself." />
 			<property name="CardID" value="MWSTX2FFE04" />
 		</card>
-		<card id="931f7873-015c-47d2-8f92-3a1426b001b5"  name="Fumble">
+		<card id="931f7873-015c-47d2-8f92-3a1426b001b5" name="Fumble">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="2+X" />
@@ -453,7 +453,7 @@
 			<property name="Text" value="When this creature makes a non-spell, non-zone, attack, you may reveal Fumble immediately after the Declare Attack Step. The attack misses and does not affect the target object. Then, destroy Fumble. X = the creature&apos;s Level -1. Fumble has no effect on Unmovable creatures." />
 			<property name="CardID" value="MWSTX2FFE05" />
 		</card>
-		<card id="b8f44b5f-29f5-4e47-84d1-122349187585"  name="Lion Savagery">
+		<card id="b8f44b5f-29f5-4e47-84d1-122349187585" name="Lion Savagery">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
@@ -468,7 +468,7 @@
 			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait.&#xD;&#xA;[Charge +2]" />
 			<property name="CardID" value="MWSTX2FFE06" />
 		</card>
-		<card id="09e11b3e-3129-4a87-8f8e-b3c18045389a"  name="Rust">
+		<card id="09e11b3e-3129-4a87-8f8e-b3c18045389a" name="Rust">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse" />
 			<property name="Cost" value="2+2" />
@@ -485,7 +485,7 @@
 		</card>
 
 
-		<card id="9e7cbef4-1ad9-46cf-95c0-1aafd656c85d"  name="Adramelech&apos;s Torment">
+		<card id="9e7cbef4-1ad9-46cf-95c0-1aafd656c85d" name="Adramelech&apos;s Torment">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
@@ -500,7 +500,7 @@
 			<property name="Text" value="At the end of this Mage&apos;s Action Phase, they may pay 2 mana to place a Burn condition on target creature. That creature must have no Burn conditions, and at least one revealed curse you control attached to it." />
 			<property name="CardID" value="MWSTX2FFQ01" />
 		</card>
-		<card id="bd37ecb3-e239-4e72-a780-99927244e35c"  name="Bloodfire Helmet">
+		<card id="bd37ecb3-e239-4e72-a780-99927244e35c" name="Bloodfire Helmet">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -515,7 +515,7 @@
 			<property name="Text" value="Demons you control gain Melee +1 while in attacking an object with a Burn condition." />
 			<property name="CardID" value="MWSTX2FFQ02" />
 		</card>
-		<card id="6e9de163-3737-4c51-88b1-11b26e7300d9"  name="Eisenach&apos;s Forge Hammer">
+		<card id="6e9de163-3737-4c51-88b1-11b26e7300d9" name="Eisenach&apos;s Forge Hammer">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="8" />
@@ -530,7 +530,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint or familiar he controls, casts an equipment spell.&#xD;&#xA;[Casting Discount] [1] [Equipment] [x1]" />
 			<property name="CardID" value="MWSTX2FFQ03" />
 		</card>
-		<card id="0b900457-eae5-47f6-87f9-8a6fa213d9bc"  name="General&apos;s Signet Ring">
+		<card id="0b900457-eae5-47f6-87f9-8a6fa213d9bc" name="General&apos;s Signet Ring">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="3" />
@@ -545,7 +545,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts a soldier spell.&#xD;&#xA;[Casting Discount] [1] [Soldier] [x1]" />
 			<property name="CardID" value="MWSTX2FFQ04" />
 		</card>
-		<card id="973a5e42-c3aa-45a2-8d0d-349e6219ff53"  name="Harshforge Plate">
+		<card id="973a5e42-c3aa-45a2-8d0d-349e6219ff53" name="Harshforge Plate">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="8" />
@@ -560,7 +560,7 @@
 			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast.&#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MWSTX2FFQ05" />
 		</card>
-		<card id="82a0a369-821d-4f9f-bf27-17363de8e71d"  name="Morning Star">
+		<card id="82a0a369-821d-4f9f-bf27-17363de8e71d" name="Morning Star">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -577,7 +577,7 @@
 		</card>
 
 
-		<card id="0c8ccd8a-57c0-4189-86a3-e066174f19af"  name="Combustion">
+		<card id="0c8ccd8a-57c0-4189-86a3-e066174f19af" name="Combustion">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Flame" />
 			<property name="Cost" value="5" />
@@ -592,7 +592,7 @@
 			<property name="Text" value="Remove all Burn conditions from the target. Then, Combustion makes the above attack to the target where X is twice the number of Burn markers removed." />
 			<property name="CardID" value="MWSTX2FFI01" />
 		</card>
-		<card id="df73383f-4575-4db6-8084-9dbfe6b339d5"  name="Conquer">
+		<card id="df73383f-4575-4db6-8084-9dbfe6b339d5" name="Conquer">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="X" />
@@ -607,7 +607,7 @@
 			<property name="Text" value="Target must not be attached to another object. If you control the target&apos;s zone,  and have a friendly soldier in that zone, destroy the target. Then, as a free action, you may immediately cast the destroyed conjuration, or a non-Terrain conjuration spell from your spellbook, targeting this zone. X = the casting cost of the target. " />
 			<property name="CardID" value="MWSTX2FFI02" />
 		</card>
-		<card id="0f4224ca-81f7-46fa-babd-1856dd8724ec"  name="Disarm">
+		<card id="0f4224ca-81f7-46fa-babd-1856dd8724ec" name="Disarm">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="X" />
@@ -622,7 +622,7 @@
 			<property name="Text" value="When you cast Disarm, choose an equipment object attached to target Mage. Place a Disable marker on it. X = the object&apos;s Level." />
 			<property name="CardID" value="MWSTX2FFI03" />
 		</card>
-		<card id="6a108df8-8ca1-4bb5-8554-3b70bbfcc03d"  name="Flank Attack">
+		<card id="6a108df8-8ca1-4bb5-8554-3b70bbfcc03d" name="Flank Attack">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="3" />
@@ -637,7 +637,7 @@
 			<property name="Text" value="If target&apos;s next melee attack this round, attacks an enemy creature that was attacked and damaged by anther friendly soldier this round, then that attack gains the Piercing +2 trait, and target gains the Melee +2 trait, for that attack." />
 			<property name="CardID" value="MWSTX2FFI04" />
 		</card>
-		<card id="6a8d90fb-8573-480c-8a0d-dabc460b5f45"  name="Ignite">
+		<card id="6a8d90fb-8573-480c-8a0d-dabc460b5f45" name="Ignite">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Flame" />
 			<property name="Cost" value="2" />
@@ -652,7 +652,7 @@
 			<property name="Text" value="If target does not already have a burn condition, it recives a Burn condition." />
 			<property name="CardID" value="MWSTX2FFI05" />
 		</card>
-		<card id="04c9e8ae-8b36-4ea6-b8fb-9f01e1fc5dd6"  name="Defend">
+		<card id="04c9e8ae-8b36-4ea6-b8fb-9f01e1fc5dd6" name="Defend">
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="X" />

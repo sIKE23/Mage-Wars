@@ -1643,7 +1643,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Flame] [Dice=4] [d12] [5-8 = Burn; 9+ = 2 Burn] [Unavoidable] [Defrost]" />
+			<property name="AttackBar" value="Trap Attack:&#xD;&#xA;[Flame] [Dice=4] [d12] [5-8 = Burn; 9+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Hellfire Trap can only target a zone without enemy creatures. When an enemy creature enters the zone, you must reveal Hellfire Trap. Hellfire Trap immediately attacks that creature. Then, destroy Hellfire Trap." />
 			<property name="CardID" value="MW1E22" />
