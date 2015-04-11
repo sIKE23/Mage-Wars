@@ -1,32 +1,16 @@
-############################################################################
-##########################    v1.11.0.0    ##################################
-############################################################################
+###########################################################################
+##########################    v1.12.0.0     #######################################
+###########################################################################
 ############################
 # Card Attachment and Alignment
 ############################
-
-"""
-This module contains the bulk of the attachment code.
-Features:
-- The attachments of each card are preserved in the order in which they were attached to that card.
-- Removing a card from the table detaches everything that was attached to it.
-- Two methods of attaching a card; explicitly, using targeting and alt+q, and by simply dragging one
-card over the other (if autoAttach is enabled), using the moveToCard method in actions.py
-- Detaching a card is as easy as dragging it away from the card to which it was attached
-
-Bugs/Missing Features:
-- Mass selecting a stack of cards and dragging it causes the cards to unattach and semi-randomly attach
-to each other
-- Right now, the criteria for what may be attached to what are pretty loose. It will be easy to add
-restrictions, however.
-"""
 
 def menuDetachAction(card,x=0,y=0):
     """This detaches <card> and returns it to its home location"""
     mute()
     if isAttached(card):
         detach(card)
-        returnCardToHome(card)
+        moveCardToDefaultLocation(card,True)
 
 def attachToTarget(card,x=0,y=0):
     """This command is used to explicitly attach one card to the card currently being targeted."""
@@ -52,8 +36,8 @@ def attachToTarget(card,x=0,y=0):
 def attach(card,target):
     """Controller of <card> may attach it to <target>."""
     mute()
+    unbind(card)
     if card.controller == me and canAttach(card,target):
-        if card.type == 'Enchantment' and not card.isFaceUp: enchantmentAttachCost(card,target) #Ask if controller would like to pay mana to attach it
         detachAll(card)
         consolidateAttachments(target)
         setGlobalDictEntry("attachDict",card._id,[target._id,len(getAttachments(target))+1])
@@ -103,7 +87,8 @@ def detach(card):
         if target:
             target = Card(target[0])
             consolidateAttachments(target)
-            remoteCall(target.controller,'alignAttachments',[target])
+            if card.controller == me: alignAttachments(target)
+            else: remoteCall(target.controller,'alignAttachments',[target])
         return card,target
     return card,None
 
@@ -158,24 +143,11 @@ def detachAll(card):
     for c in attachments:
         if c.controller == me:
             detach(c)
-            returnCardToHome(c)
+            moveCardToDefaultLocation(c,True)
         else:
             remoteCall(c.controller,'detach',[c])
-            remoteCall(c.controller,'returnCardToHome',[c])
+            remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
         rnd(0,0)
-
-def returnCardToHome(card):
-    """This function returns a card to above the home position of its controller."""
-    mute()
-    global playerNum
-    x,y = {
-            1 : (-595, -240),
-            2 : (460, 120),
-            3 : (-595, 120),
-            4 : (460, -240),
-            5 : (-595, -40),
-            6 : (460, -40)}[playerNum]
-    card.moveToTable(x,y-card.height())
     
 def isAttached(card):
     """Determines whether <card> is attached to anything."""
@@ -226,45 +198,275 @@ def setGlobalDictEntry(dictionary,key,value):
 
 def canAttach(card,target):
     """Determines whether <card> may be attached to <target>"""
-    if (isAttached(target)
-        or getAttachments(card)
-        or card==target
+    tType = target.Type
+    if (card==target
         or not target in table
         or not card in table
-        or not target.isFaceUp):
-        return False
-    if (card.Type == 'Enchantment'
-        or (card.Type == 'Equipment' and target.Type == 'Mage')
-        or target.Type == 'Magestats'
-        or (card.Name in ['Tanglevine','Stranglevine','Quicksand'] and target.Type == 'Creature')
-#Familiars
-        or (target.name == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
-        or (target.name == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
-        #or sectarus, but enchants are already legal to attach to everything
-        or (target.name == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
-        or (target.name == 'Sersiryx, Imp Familiar' and card.Type == 'Attack' and 'Fire' in card.School and sum([int(i) for i in card.level.split('+')])<=2) #Again, enchantments are automatically legal
-        #fellella is covered
-        or (target.name == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
-        or (target.name == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
-#Spawnpoints
-        or (target.name == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype)
-        or (target.name == 'Battle Forge' and card.Type == 'Equipment')
-        or (target.name == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School)
-        or (target.name == 'Lair' and card.Type == 'Creature' and 'Animal' in card.School)
-        or (target.name == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-        or (target.name == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School)
-        or (target.name == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-        or (target.name == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Sybtype)
-        or (target.name == 'Samara Tree' and card.name == 'Seedling Pod')
-        or (target.name == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Sybtype)
-        or (target.name == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
-#Spellbind (only)
-        or (target.name == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
-        or (target.name == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
-        or (target.name == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
-        return True
+        or tType not in ['Conjuration','Creature','Conjuration-Wall','Equipment','Mage']
+        or not target.isFaceUp
+        or isAttached(target)
+        or getAttachments(card)): return False
+    cName = card.Name
+    tName = target.Name
+    cTargetBar = card.Target
+    cType = card.Type
+    attachments = getAttachments(target)
+    cController = card.controller
+    tController = target.controller
+    for a in attachments:
+        if (a.isFaceUp or a.controller == me) and a.Name == cName: return False
+    traits = computeTraits(target)
+    for s in card.Subtype.split(', '):
+        if s in traits.get('Immunity',[]): return False
+    if cName in ['Force Hold','Force Crush','Tanglevine','Stranglevine'] and traits.get('Uncontainable'): return False
+    if cType == 'Enchantment':
+        if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
+            (cName == 'Barkskin' and tName == 'Druid') or
+            (cName == 'Forcefield' and tName == 'Forcemaster') or
+            (cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
+            (cTargetBar == 'Creature' and tType in ['Creature','Mage']) or
+            (cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
+            (cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in target.Subtype and tController == cController) or
+            (cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
+            (cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
+            (cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or #Ugh...
+            (cTargetBar == 'Mage' and tType == 'Mage') or
+            (cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
+            (cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
+            (cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
+            (cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
+            (cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
+            (cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic'))): return True
+    elif ((cType == 'Equipment' and tType == 'Mage') or
+        (cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and not traits.get('Flying'))): return True
     return False
 
 def isAttachCardsEnabled():
     """Checks whether the attachCards module is turned on."""
     return getSetting("attachCards", "True")
+
+############################################################################
+##########################  Bound Spells  ##################################
+############################################################################
+"""We will make a distinction between attached cards and bound cards (for familiars,
+spawnpoints, and spellbind objects"""
+
+def bind(card,target):
+    """Controller of <card> may attach it to <target>."""
+    mute()
+    detach(card)
+    if card.controller == me:
+        b = getBound(target)
+        if b: unbind(b)
+        detachAll(card)
+        setGlobalDictEntry("bindDict",card._id,target._id)
+        remoteCall(target.controller,'alignBound',[target])
+        return card,target
+    return card,None
+
+def unbind(card):
+    """Unbinds <card> from its target."""
+    mute()
+    if getBindTarget(card) and card.controller == me:
+        target = getGlobalDictEntry('bindDict',card._id)
+        setGlobalDictEntry('bindDict',card._id,None)
+        return card,target
+    return card,None
+
+def getBound(card):
+    """Returns the card bound to <card>"""
+    mute()
+    bDict = eval(getGlobalVariable("bindDict"))
+    bound = map(lambda key: Card(key),[k for k in bDict if bDict[k]==card._id])
+    if bound: return bound[0]
+
+def getBindTarget(card):
+    mute()
+    result = getGlobalDictEntry('bindDict',card._id)
+    if result and card in table: return Card(result)
+
+def alignBound(card):
+    mute()
+    bound = getBound(card)
+    if not bound: return
+    x,y = card.position
+    x -= 0
+    y += 30
+    z = card.getIndex
+    if bound.controller == me: moveAndSetIndex(bound,x,y,z)
+    else: remoteCall(bound.controller,'moveAndSetIndex',[bound,x,y,z])
+    card.setIndex(z+1) #Assumes I control <card>. Not sure why I need this when alignAttachments works without, but it seems that moving a card brings it to the front.
+
+def moveAndSetIndex(card,x,y,z):
+    mute()
+    card.moveToTable(x,y)
+    card.setIndex(z)
+
+def canBind(card,target):
+    """Determines whether <card> may be attached to <target>"""
+    if (card==target
+        or not target in table
+        or not card in table
+        or isAttached(target)
+        or getAttachments(card)
+        or getBound(card)
+        or getBound(target)
+        or not target.isFaceUp): return False
+    tName = target.Name
+#Familiars
+    if ((tName == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+        or (tName == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
+        #or sectarus, but I haven't got around to it yet.
+        or (tName == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
+        or (tName == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.Subtype)) and sum([int(i) for i in card.level.split('+')])<=2)
+        or (tName == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
+        or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
+        or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
+#Spawnpoints
+        or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype and target.markers[Mana] >= 2)
+        or (tName == 'Battle Forge' and card.Type == 'Equipment')
+        or (tName == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School and not ("Incorporeal" in card.Traits) and target.markers[Mana] >= 3)
+        or (tName == 'Lair' and card.Type == 'Creature' and 'Animal' in card.Subtype)
+        or (tName == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits) and target.markers[Mana] >= 2)
+        or (tName == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
+        or (tName == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+        or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Sybtype and target.markers[Mana] >= 3)
+        or (tName == 'Samara Tree' and card.name == 'Seedling Pod')
+        or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Sybtype)
+        or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
+#Spellbind (only)
+        or (tName == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
+        or (tName == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
+        or (tName == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
+        return True
+    return False
+
+############################################################################
+##########################    Zones       ##################################
+############################################################################
+
+def createMap(I,J,zoneArray,tileSize):
+    mapDict = {'I' : I,
+               'J' : J,
+               'tileSize' : tileSize,
+               'x' : -tileSize*I/2,
+               'y' : -tileSize*J/2,
+               'X' : tileSize*I,
+               'Y' : tileSize*J}
+    array = list(zoneArray)
+    zoneList = []
+    for i in range(len(zoneArray)):
+        for j in range(len(zoneArray[0])):
+            z = (createZone(i,j,mapDict['x'],mapDict['y'],mapDict['tileSize']) if zoneArray[i][j] else {})
+            array[i][j] = z 
+            if z: zoneList.append(z)
+    mapDict['zoneArray'] = array
+    mapDict['zoneList'] = zoneList
+    return mapDict
+
+def createZone(i,j,mapX,mapY,size):
+    return  {'i' : i,
+             'j' : j,
+             'x' : mapX+i*size,
+             'y' : mapY+j*size,
+             'size' : size}
+
+def zoneContains(zone,card): #returns whether an object is inside the zone
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    if getAttachTarget(card):
+        return zoneContains(zone,getAttachTarget(card))
+    else:
+        if ((zone.get('x') < x < zone.get('x') + zone.get('size') - X) and
+            (zone.get('y') < y < zone.get('y') + zone.get('size') - Y)): return True
+    return False
+
+def zoneBorders(zone,card): #returns whether an object overlaps the zone border
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    if (zoneContains(zone,card) or
+        (x > zone.get('x') + zone.get('size')) or (x < zone.get('x') - X) or
+        (y > zone.get('y') + zone.get('size')) or (y < zone.get('y') - Y)): return False
+    return True
+
+def zoneClosest(zoneList,card): #finds closest zone from a list. If border is enabled, returns
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    x += X/2
+    y += Y/2
+    zone = zoneList[0]
+    for z in zoneList:
+        zX, zY = z.get('x')+z.get('size')/2,z.get('y')+z.get('size')/2
+        zoneX, zoneY = zone.get('x')+zone.get('size')/2,zone.get('y')+zone.get('size')/2
+        if abs(zX-x)+abs(zY-y) < abs(zoneX-x)+abs(zoneY-y): zone = z
+    return zone
+
+def zoneGetContain(zone,card): # Finds the closest straight-line place to move the object so it is contained.
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    coordinates = [x,y]
+    if (x <= zone.get('x')): coordinates[0] = zone.get('x') + 1
+    if (x + X >= zone.get('x')+zone.get('size')): coordinates[0] = zone.get('x') + zone.get('size') - X - 1
+    if (y <= zone.get('y')): coordinates[1] = zone.get('y') + 1
+    if (y + Y >= zone.get('y')+zone.get('size')): coordinates[1] = zone.get('y') + zone.get('size') - Y - 1
+    return (coordinates[0],coordinates[1])
+
+def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the nearest border.
+    x,y = card.position
+    X,Y = card.size.Width,card.size.Height
+    borders = [[(zone['x']),(zone['y'] + zone['size']/2)],
+               [(zone['x'] + zone['size']/2),(zone['y'])],
+               [(zone['x'] + zone['size']),(zone['y'] + zone['size']/2)],
+               [(zone['x'] + zone['size']/2),(zone['y'] + zone['size'])]]
+    c = [x+X/2,y+Y/2]
+    border = borders[0]
+    for b in list(borders):
+        if (abs(b[0]-c[0]) + abs(b[1]-c[1])) < (abs(border[0]-c[0]) + abs(border[1]-c[1])): border = b
+    return (border[0]-X/2,border[1]-Y/2)
+
+def cardGetDistance(card1,card2):
+    zone1 = getZoneContaining(card1)
+    zone2 = getZoneContaining(card2)
+    return zoneGetDistance(zone1,zone2)
+
+def zoneGetDistance(zone1,zone2):
+    return abs(zone1['i']-zone2['i']) + abs(zone1['j']-zone2['j'])
+
+def getZoneContaining(card): #returns the zone occupied by the card. If attached, will return zone occupied by attachee.
+    if not getGlobalVariable("Map"): return
+    if getAttachTarget(card): return getZoneContaining(getAttachTarget(card))
+    mapDict = eval(getGlobalVariable("Map"))
+    x,X,y,Y = mapDict.get('x'),mapDict.get('X'),mapDict.get('y'),mapDict.get('Y')
+    tileSize = mapDict.get('tileSize')
+    zoneArray = mapDict.get('zoneArray')
+    cx,cy = card.position
+    cX,cY = (card.size.Width,card.size.Height)
+    if not (x<cx+cX/2<x+X and y<cy+cY/2<y+Y): return None
+    i,j = int(float(cx+cX/2-x)/tileSize),int(float(cy+cY/2-y)/tileSize)
+    if zoneArray[i][j]: return zoneArray[i][j]
+
+def getZonesBordering(card): #returns list of zones bordered by card
+    if not getGlobalVariable("Map"): return
+    mapDict = eval(getGlobalVariable("Map"))
+    zoneList = []
+    for z in list(mapDict.get('zoneList',[])):
+        if zoneBorders(z,card): zoneList.append(z)
+    return zoneList
+
+def getCardsInZone(zone): #returns a list of cards in the zone
+    cardList = []
+    for c in table:
+        if getZoneContaining(c) == zone: cardList.append(c)
+    return cardList
+
+def snapToZone(card):
+    zoneList = getZonesBordering(card)
+    if zoneList:
+            zone = zoneClosest(zoneList,card)
+            if card.Target == 'Zone' or card.Type == 'Mage' or not card.isFaceUp: #snap to zone
+                    snapX,snapY = zoneGetContain(zone,card)
+                    card.moveToTable(snapX,snapY)
+            elif card.type == 'Conjuration-Wall': #snap to zone border
+                    snapX,snapY = zoneGetBorder(zone,card)
+                    card.moveToTable(snapX,snapY)
+

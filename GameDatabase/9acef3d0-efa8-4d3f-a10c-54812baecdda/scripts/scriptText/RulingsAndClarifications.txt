@@ -1,0 +1,697 @@
+##### A Section #####
+Adramelech Warlock
+You cannot move burn markers onto Burnproof creatures or creatures with Flame Immunity.
+
+The Adramelech Warlock chooses the order in which Adramelech's Torment and Fireweaving take place.
+#
+Agony
+If the creature makes multiple attacks in one attack action, each of the attacks will get the penalty.
+#
+Altar of Skulls
+Altar of Skulls only limits the Skull tokens placed by friendly clerics. It will still gain a skull token for every enemy creature that is destroyed.
+#
+Altar of Peace
+Each time a creature declares a melee or ranged attack, it must pay 1 mana as an additional cost to declare that attack.
+
+The cost is paid once for each attack action taken. If there is no Declare Attack Step, you do not have to pay the mana cost. So, doublestrike or triplestrike attack action only has to pay this cost once, and the additional attacks against the same target will not have an additional cost. A Zone attack will require only a payment of 1 mana.
+
+This will force mana payments for spell attacks. The mana payment is made at the time the attack is declared, which is at the time the attack spell resolves. (If the caster can't pay the 1 mana, the attack cannot be declared, so the spell will have been wasted.)
+#
+Akiro's Favor
+May be revealed after the roll that you want to re-roll.
+
+Cannot be used to re-roll an enemy defense.
+
+If this and Temple of the Dawnbreaker are both in play, players decide whether to re-roll in initiative order.
+#
+Armor Ward
+For example, if the opponent casts a Dissolve spell to attempt to destroy your Hunting Bow, he will pay the normal 11 mana to cast the Dissolve. Then, when the Dissolve spell resolves, he will have to pay an additional 4 mana to destroy the Hunting Bow.
+
+If you reveal Armor Ward at the end of the Counter Spell Step of a Dissolve, then the opponent will have to pay the extra 4 mana to destroy it. (Thus, the spell will be wasted if the opponent does not have the 4 mana to pay.)
+##### B Section #####
+Barkskin
+Players are allowed to choose the order of Upkeep Effects which affect their own objects. Thus, you are allowed to resolve the regeneration ability first to remove 2 damage, then in the same Upkeep Phase choose not to pay the upkeep cost so the Barkskin is destroyed (and as a Cantrip it returns to your Spellbook).
+#
+Banish
+While the creature is outside of the Arena, it is still considered "in play".
+
+It is out of range and LoS of all other objects, even other objects that are outside of the Arena.
+
+It can still be affected by its own traits and abilities, and by cards attached to it.
+
+Abilities which look for things happening in play, but don't have a specific range or require LoS, still work. (For instance, a banished Valshalla, Lightning Angel can still gain Wrath tokens.) Since its action marker's status can't change, it won't reset its action marker during the Reset Phase. Thus, it will return to the Arena with its action marker in the same state that it was in when Banish first resolved.
+#
+Battle Fury
+The extra attack can be made against the same or a different legal target.
+- If the extra attack is made against a different Defender it is treated like a Sweeping Attack, and starts a new attack sequence (with all of the normal steps, including a damage barrier and counterstrike).
+
+- If the extra is made against the same defender, it will not trigger an additional Counterstrike or Damage Barrier. If the attacking creature becomes affected by a condition acquired from the counterstrike or damage barrier (such as being stunned or dazed), its extra attack will be affected, and the condition marker will remain on the creature until end of the next round (if it has an "end of action phase" effect, as per rules for conditions acquired from a damage barrier or counterstrike). Since the extra attack is still part of the same attack action (it occurs during the Attack Ends Step of the original attack action), attack bonuses such as Melee +X do not apply to the extra attack.
+
+If you cast Battle Fury on a creature, and the next melee attack that creature makes is a counterstrike attack, Battle Fury will be wasted. (It will not have its effect on a later melee attack that round.) 
+
+The effect "Only one Battle Fury spell may be cast per round on the same creature." is part of the spell's effect. Thus, if Battle Fury is countered, this effect will not occur, and you would be able to cast a second Battle Fury on this creature this round.
+#
+Block
+This still works even if the creature is Incapacitated.
+#
+Bloodfire Helmet
+If a demon makes multiple attacks against the same (burn-free) object and a burn is applied before the last attack, the next attack after applying the burn still gets the bonus.
+#
+Blue Gremlin
+When this creature is activated, you may pay 1 mana. If you do, Gremlin gains the Fast trait until end of round, and until end of round he can't take normal move actions but can Teleport to an adjacent zone instead of a move action.
+
+He does not need to have LoS to the zones he Teleports to.
+
+Teleporting to a zone counts the same as a move action for the purpose of the number of actions you can perform in a round, but are not "move actions" for any other purpose. Thus, by paying the 1 mana, Blue Gremlin could teleport twice, and then take a quick action. He can do this even if hindered (hindering has no effect on Teleporting).
+
+Blue Gremlin can Teleport even if Unmovable or Restrained.
+
+If a mandatory action effect would force Blue Gremlin to move, and this move could only be performed by using the Teleport ability, Blue Gremlin would not be forced to use that ability. (This is because the mandatory action effect only applies at the moment Blue Gremlin would be choosing an action, which is after the time that
+the Blue Gremlin's ability is used. If Blue Gremlin did choose to use the Teleport ability, it would then be bound by the effect.)
+
+Charge bonuses do not apply to movement through teleportation.
+#
+Bull Endurance
+
+If an enemy is attacking this creature and rolled enough damage to destroy your creature, you can reveal Bull Endurance at the end of the Roll Dice Step before the damage is applied, which may be enough to save your creature.
+
+If Bull Endurance is destroyed, its life bonus will stop applying. If this causes the creature's damage to be equal to or greater than its Life, the creature will immediately be destroyed. (This doesn't count as being destroyed by damage or being destroyed by a particular attack.)
+#
+Burst of Thorns
+Burst of Thorns causes a Vine marker to explode in shower of sharp thorns. The Vine marker is the source of the attack, not your Mage. Thus, Burst of Thorns is not affected by any traits or conditions on your Mage. For example, if your Mage has the Ranged +2 trait, it does not affect or increase the dice of his Burst of Thorns attack.
+
+If Reverse Attack is revealed against an attack from Burst of Thorns, the Reverse Attack acts to avoid the attack, but has no other effect. Since the Vine marker is the source of the attack (not the Mage), the Vine marker would "attack itself" which has no effect.
+##### C Section #####
+Chains of Agony
+The damage is taken immediately when the move is declared, and before it actually takes its move. After the creature declares a move action, there is no opportunity to reveal Chains of Agony and have it trigger on that move action. The latest you could reveal it and still have it take effect is at the beginning of the creature's activation, or immediately after the previous action.
+#
+Charm
+The charmed creature cannot target a zone with a zone attack where the Mage who controls Charm is. However, if the charmed creature targets a zone, which the Mage is not in, and then after the target is declared the Mage moves into that zone (such as with Divine Intervention), the zone attack continues unaffected. 
+
+If the controlling Mage makes a zone attack which targets the zone where the charmed creature is and damages the creature, this will destroy Charm. 
+
+Attacks from damage barriers, autonomous equipment, etc. do not count as the Mage making the attack.
+#
+Chain Lightning
+Any modifiers that apply to one attack do not affect the number of dice rolled during subsequent attacks.
+
+Example: The first target of a Chain Lightning has Lightning +2, the second has no traits, and the third has Lightning +1. The first target would be hit for 5+2=7 dice, the second would be hit for (5-1)=4 dice, and the third would be hit for (5-2)+1 = 4 dice.
+
+Since range is always counted from the source, the subsequent targets must be within range 0-1 and LoS of the previous target, not within range and LoS of the caster.
+
+Since an attack cannot be reduced below 1 die, Chain Lightning can keep going as long as it deals damage and has available legal targets.
+
+If Chain Lightning destroys a target, it can still continue with the next target. 
+
+If Chain Lightning is reversed by a Reverse Attack enchantment, the attack is redirected to the last target of Chain Lightning, not to the caster. Even though the source of the attack (for purposes of Reverse Attack) is the last target damaged by Chain Lightning, the attacker is still the original attacker.
+#
+Conquer
+You may not Conquer a wall, however you may cast a wall using the free action provided by Conquer.
+
+By conquering an Epic conjuration, it is possible to have two copies of that conjuration in play at a time. Controlling an Epic conjuration does not prevent you from playing a second copy of that conjuration.
+
+You may not gain a second copy of a Unique spell by conquering your opponent's copy, since it is illegal to cast a Unique spell if you already have a copy in play.
+#
+Corrosive Orchid
+If the Corrosive Orchid's ranged attack is redirected, then the final target can be subjected to its Mist token ability, but the original target cannot. 
+
+Example: Corrosive Orchid attacks an opposing Wizard, but there is a guarding Gargoyle Sentry. The Gargoyle Sentry uses its Intercept trait to redirect the Corrosive Orchid's attack to itself. When the attack gets to the Damage & Effects Step, the Corrosive Orchid does not use its Mist counter, because the Gargoyle Sentry has no equipment which can be destroyed.
+
+Likewise, if the attack targets a non-Mage object, but is then redirected to a Mage, you will be able to use the Mist token ability to destroy an equipment on that Mage.
+##### D Section #####
+Dancing Scimitar
+Dancing Scimitar can make its attack or use its Defense in one round, not both. Since the Dancing Scimitar is Autonomous, the attack is made by the Scimitar, not by the Mage. If you equip (attach) the Dancing Scimitar to another player's Mage, that player will be able to control how it attacks and uses its Defense.
+
+If Reverse Attack is revealed against an attack from Dancing Scimitar, the Reverse Attack acts to avoid the attack, but has no other effect. Since the Dancing Scimitar is autonomous, it is the source of the attack (not the Mage). The Sword would "attack itself" which has no effect.
+
+Rune of Shielding will give a bonus to Dancing Scimitar, but Defense Ring will not.
+#
+Deathshroud Staff
+Creatures affected by Deathshroud Staff's quick necro spell keep the Melee +1 even if they leave the zone it was cast into. The set of creatures that it affects is determined when the spell resolves. It does not change if creatures are Summoned or moved later in the round. 
+
+Example: The Necromancer uses Deathshroud Staff's quick necro spell to give a Zombie Minion and Zombie Crawler in his zone Melee +1. Later that round the Zombie Minion moves to an adjacent zone and attacks. It is still under the effects of the Deathshroud Staff and will get Melee +1 on its first attack this round. Any new zombies Summoned into the Necromancer's zone later this round do not receive the Melee +1 effect of the Staff. For example, later this round, the Necromancer
+moves a Zombie Brute into his zone and it does not receive the Melee +1 effect of the Staff.
+#
+Death Link
+The amount of damage dealt is equal to the amount actually healed from Death Link's ability. If Death Link's controlling Mage didn't heal (such as because it had Finite Life), no damage is dealt. If the healing effect from Death Link was increased somehow, then the amount of damage dealt would also increase. Death Link's controlling Mage can heal more damage than the enchanted creature's remaining health. 
+
+Preventing direct damage from being placed on the enchanted creature will not prevent Death Link's controlling Mage from healing.
+#
+Death Ring
+Death Ring can only reduce a spell's mana cost by 1 mana. It can be used on two separate spells, but not twice on the same spell. 
+
+Example: Graveyard casts a Zombie Minion during the Deployment Phase. Death Ring decreases the Minion's mana cost by 1, to just 6 mana. Then, the Necromancer casts a Zombie Crawler. He uses Death Ring, a second time, to decrease the Crawler's cost by 1, to just 3 mana.
+#
+Decoy
+If Decoy is destroyed while still unrevealed (e.g. by a Seeking Dispel), its controller still gains the 2 mana.
+
+If Decoy is countered (e.g. by Nullify), its controller does not gain the 2 mana, because the enchantment never resolved to have its effect.
+
+If Decoy is discarded from somewhere other than play, such as if it had been planned to be cast with a familiar which then is destroyed, it does not gain its owner 2 mana.
+#
+Defend
+This does not count as a guard action, so abilities like that of Guardian Angel do not trigger.
+#
+Defense Ring
+Defense Ring does not, by itself, give your Mage a Defense. It only improves Defenses that your Mage already has.
+
+Defense Ring's ability can be used any number of times per round (but only once on each roll).
+
+Defense Ring does not affect Dancing Scimitar, or other Autonomous Equipment which provides a Defense.
+#
+Devouring Jelly
+Damage caused by Corrode markers does not count as damage dealt by an attack, and will not cause the Devouring Jelly to Reconstruct damage.
+
+Example: A Devouring Jelly attacks a Zombie Minion. The Jelly rolls no critical damage on its attack dice, but gets a 9 on its effect die. Two Corrode markers would be placed on the Zombie Minion, but since it has no armor the Zombie Minion is instead dealt 2 direct acid damage. Since this damage was from the Condition marker and
+not the attack, the Devouring Jelly will not reconstruct 2 damage.
+#
+Disarm
+Disabling equipment removes things that affect your mage (Attack bars, armor, defenses, etc.), but leaves things that affect the equipment itself (Cantrip, Upkeep +X, etc.)
+#
+Dispel
+This targets an enchantment, not the object to which it is attached. Thus, a Nullify enchantment on that object cannot counter Dispel.
+#
+Divine Intervention
+A spell fails and is canceled, if, before the Resolve Spell Step the caster or target of the spell moves (e.g. by being Pushed or Teleported away), even if the move was to a location where the spell was still in range. (In the case of a Teleport, this applies even if the teleport was into the same zone).
+
+Similarly, an attack fails and is canceled, if, before the Apply Damage and Effects step of an attack, the source or target of the attack moves (e.g. by being Pushed or Teleported away), even if the move was to a location where the spell was still in range. (In the case of a Teleport, this applies even if the teleport was into the same zone).
+
+Example: A Wizard attempts to cast a creature spell, and targets the zone he is in. During the Counter Spell Step, the enemy reveals a Divine Intervention on the Wizard, teleporting him to a different zone. The zone he was targeting has changed, so the spell fails and is canceled. The Wizard will have spent (and lost!) the mana and creature card for that spell.
+#
+Drain Life
+This is not an attack.
+
+You can only heal up to as much damage as the amount you deal to the target. Drain Life can't deal more damage to the target than what it takes to destroy that target. For example, if the target has 12 Life and 9 damage on it, Drain Life can only deal a maximum of 3 damage (and then it would destroy the target). In this case, you could heal up to 3 damage.
+
+The roll is made as part of the resolution of the spell. There is no opportunity to reveal enchantments between when the roll is made and when the damage is dealt.
+#
+Drain Power
+The target can't lose more mana than he has in his mana supply, and the caster cannot gain more mana than the target loses.
+
+The roll is made as part of the resolution of the spell. There is no opportunity to reveal enchantments between when the roll is made and when the mana is transferred.
+Drain Soul
+The Life gain is conditional on placing the Tainted markers on the enemy. If the Tainted markers are unable to be placed somehow, such as if the creature has Poison Immunity, the Life is not gained. If placing the markers destroys the creature the caster will still gain the 6 Life.
+
+This spell is not an attack. Placing the Tainted markers is not considered an attack, and is not considered dealing damage to the creature.
+Earth Elemental
+Earth Elemental is only immune to its own Quake Stomp attack, not to the Quake Stomp attack of another Earth Elemental.
+#
+Earthquake
+Earthquake itself is making the attacks against the Conjurations, not the Mage casting it. 
+
+The ability to roll the effect die and give creatures the Slam condition is not an attack. Resolve all of the attacks against conjurations first, then all the effect die rolls against creatures. Earthquake's controller decides in what order to resolve the attacks, and in what order to resolve the effect die rolls.
+##### E Section #####
+Elemental Wand
+Changing the spell on an Elemental Wand results in a hidden bound spell. 
+
+You cannot rebind the spell on the wand to hide what it is. You first attach a new spell, then the original spell goes back into your book. You may still bring out a copy of that spell to bind to the wand, provided you have another in your book.
+#
+Enchanter's Wardstone
+If the opponent casts a Dispel to attempt to destroy your Bear Strength, he will pay the normal 5 mana to cast the Dispel. Then, when the Dispel resolves, he will have to pay an additional 2 mana to destroy the Bear Strength.
+
+If the opponent casts a spell that would destroy multiple enchantments, like a Destroy Magic, he will have to pay the extra separately for each of your enchantments that is destroyed. He may choose which enchantments he will pay the extra mana for to destroy. He may choose to only destroy particular enchantments, and not spend mana to destroy others.
+
+If you control multiple Enchanter's Wardstones in the Arena, then an opponent will have to pay 2 mana for each of them in order to destroy your enchantment.
+#
+Enchantment Transfusion
+You may move any number of enchantments you control. X is the sum of the costs for all the enchantments
+moved.
+
+The Enchantment Transfusion's when-revealed ability targets the creature the enchantments are being moved to; the Enchantment Transfusion spell itself does not. Thus, for instance, a Nullify on the creature the enchantments are being moved to will not be triggered.
+
+If a creature is being attacked, you can (for example) move a Block enchantment to that creature with Enchantment Transfusion at the end of the Declare Attack Step; the Block will then trigger during the Avoid Attack Step as normal.
+
+If a Dispel or other spell is targeting an enchantment, and that enchantment is moved with Enchantment Transfusion, the Dispel will be canceled (even if the move was to another creature in the same zone).
+
+The enchantments must be moved to a legal target creature (a target you could cast the enchantments on as if you were casting each enchantment again on the new target). 
+
+The enchantments must be moved to a different creature (they cannot be moved to the same creature they are already on).
+#
+Enfeeble
+After this creature takes a move action, you could immediately reveal Enfeeble to give it Slow, thus preventing it from taking another action.
+
+If you wait until after this creature declares a second action (such as an attack or a second move action) and then reveal Enfeeble in the middle of that action, it will not cancel the action.
+#
+Etherian Lifetree
+This affects both friendly and enemy creatures and conjurations.
+#
+Explode
+This isn't a melee attack or a ranged attack.
+
+This targets the Mage, not the chosen equipment. (For instance a Nullify on the target Mage can counter Explode).
+
+Explode itself makes the attack, not the caster. (Thus, traits on the caster that affect attacks the caster makes will not affect this attack.)
+##### F Section #####
+Fellella, Pixie Familiar
+You may only use mana from Fellella's mana supply to pay for the casting cost of enchantments, not the reveal cost. (Once the enchantment is cast, it behaves just like a normal enchantment, and your Mage must pay the reveal cost if you want to reveal it.)
+#
+Force Bash
+The spell can target a flying creature and Slam him into a non-flying creature, or visa-versa. This occurs after the first creature is Pushed. For example, a non-flying creature is first Pushed one zone, then is "raised" and slammed into a flying creature (or visa-versa).
+
+In order to receive the Slam condition, the target must be Pushed one zone away. It cannot be slammed right into another creature in its same zone, nor be slammed after a failed Push. It requires some momentum to do a proper Slamming!
+
+If you use Force Bash to Push the creature into a wall with the Passage Blocked trait, it will be Bashed (receives an unavoidable attack of 3 dice damage). Afterwards the creature will not receive the Slam condition, because it was not Pushed one zone.
+
+You must be able to target the second creature in the new zone in order to give that creature a Slam condition. If you cannot target that creature, you cannot give them the Slam condition. For example, if you cast Force Bash on a creature and Push them one zone into a zone with the Invisible Stalker, you cannot Slam the Stalker while it is Invisible because it cannot be targeted.
+
+The spell will not trigger a Nullify or similar spell on the secondary target.
+
+Force Bash vs. Unmovable: You cannot Push an Unmovable creature, so you cannot Push an Iron Golem into another creature with Force Bash.
+However, even an Unmovable creature can feel some force from a heavy blow. The rule for Slam says: "Unmovable creatures receive a Daze condition instead of Slam."
+So, if another creature was Force Bashed into an Iron Golem, the Iron Golem would be Dazed.
+
+If instead the Force Bash tries to first Push an Iron Golem, that part fails. The Iron Golem would remain in its zone, would not receive a Slam condition, and you would not be able to Slam a second target.
+#
+Force Crush
+You cannot reveal this after a creature declares a move action to cancel the move action. The latest you can reveal this to prevent a move action would be when the creature is activated and starts its action phase, but before it has declared a move action.
+
+However, there is an exception: If a creature has already declared a move action, and is moving through a wall with the Passage Attacks trait, you can reveal Force Crush after any Step of that attack. If this should occur, the wall attack is canceled immediately at the point in which Force Crush is revealed (which means it may not have yet received any damage or other effects), and the creature does not move into the new zone.
+#
+Force Hold
+You cannot reveal this after a creature declares a move action to cancel the move action. The latest you can reveal this to prevent a move action would be when the creature is activated and starts its action phase, but before it has declared a move action.
+
+However, there is an exception: If a creature has already declared a move action, and is moving through a wall with the Passage Attacks trait, you can reveal Force Hold after any Step of that attack. If this should occur, the wall attack is canceled immediately at the point in which Force Hold is revealed (which means it may not have yet received any damage or other effects), and the creature does not move into the new zone.
+#
+Force Push
+If the additional mana is not paid, the creature cannot be Pushed through a wall with the Passage Attacks trait. If there is a wall with the Passage Attacks trait in its path, the creature is not Pushed through it, and it is also not Bashed into that same wall. Instead it is not Pushed at all.
+
+If the creature cannot be Pushed (for example, during the Counter Spell Step of Force Push, a player reveals a Force Hold on the creature which makes it Unmovable), any extra mana spent on Force Push is lost.
+
+When a Flying creature is Pushed it ignores walls, and cannot be Bashed or attacked by a wall with the Passage attacks trait. Exception: If Pushed into the walls around the outside of the arena, it is Bashed.
+#
+Force Wave
+The controller of Force Wave decides what order the creatures are pushed in. Completely resolve one Push
+before going on to the next.
+#
+Forcefield
+If this Mage is the defender of an attack, before the Avoid Attack Step, you must remove a Forcefield token. If you do, cancel that attack.
+
+Forcefield will work even against Unavoidable attacks, including Zone attacks. Since a Zone attack makes separate attacks against each attackable object in the zone, Forcefield will only protect the Mage from a Zone attack; it will not protect any other objects in that zone.
+
+If you roll to hit with a Daze, and "miss", that attack has missed and a Forcefield token will not be removed.
+
+If the attack action makes multiple attacks against this Forcemaster, Forcefield will trigger (and potentially remove a token) for each attack.
+
+If the attack is canceled with Forcefield, skip the remaining Steps of that attack;
+- Skip the Avoid Attack Step (a Block enchantment will not be forced to be revealed)
+- Skip the Roll Dice Step, and Assign Damage and Effects Steps. No damage or effects will occur.
+- Skip the Damage Barrier and Counterstrike Steps. However a Guard marker is still removed.
+
+Note: The Forcefield only cancels one attack, not the entire attack action. If the attack action makes multiple attacks, proceed with those additional attacks as normal. Unless the Forcefield cancels one of those attacks, they could trigger the Steps above as normal.
+
+If Forcefield has no more tokens on it, it remains in play attached to the Mage, it just won't be able to cancel any more attacks (until it gets another Forcefield token next Upkeep Phase).
+
+Since damage barriers only perform the Roll Dice and Apply Damage and Effects steps, a damage barrier will not trigger Forcefield.
+##### G Section #####
+Garrison Post
+The choice to place the creature in Garrison Post's zone, or in your own zone, is made when the creature spell resolves.
+#
+Gate to Hell
+The action to "Open the Gate" must be performed by the controlling Mage, and may be performed from anywhere in the Arena.
+
+When the gate is opened, the controller decides the order for each attack to be resolved. Resolve the attacks one at a time, fully resolving the first one before going onto the next.
+#
+Gate to Voltari
+The comes-into-play ability on this does not target the chosen Mage. (It has no range or LoS restrictions.)
+
+This will trigger off of the enemy Mage casting a spell off a Wand, or using an ability that can be used "as a quick spell" or "as a full spell".
+#
+General's Signet Ring
+If cast during Deployment, you may still apply the discount to a creature summoned during the same deplayment phase.
+
+You still receive the discount even if your mage did not contribute any mana (for instance, if your Barracks paid the entire cost of the creature).
+#
+Geyser
+The ability to cancel the attack to remove Burn conditions is not optional. If the target has any Burn conditions, the effect must occur.
+
+The Geyser attack spell may target an object with the Hydro Immunity trait. If it does, the attack deals no damage or effects to the object, other than to remove all Burn conditions. In this manner, a Geyser attack can be used to extinguish the fires of a burning plant object.
+#
+Ghoul Rot
+#
+Giant Wolf Spider
+Its Poison Fangs attack gains the +4 effect die bonus if the defender is Restrained or Incapacitated.
+#
+Goblin Bomber
+Daze has no effect on the Goblin Bomber's Detonate attack. This is because he is destroyed before he would have to make a Daze roll, and therefore his attack cannot "miss".
+
+If Goblin Bomber is Obliterated, his bomb attack will not trigger.
+
+If Goblin Bomber receives a Tainted condition, the 3 damage from which is enough to destroy him, this counts as being "destroyed by damage". This is just the same as if he is destroyed by the damage from a Burn condition or damage from the Idol of Pestilence.
+#
+Goblin Builder
+While Goblin Builder is a Familiar, it has no Channeling attribute. Thus, for example, it cannot be enchanted with Harmonize.
+
+The Goblin Builder's ability to remove damage is not considered healing. It is unaffected by the Finite Life trait.
+
+Goblin Builder cannot repair walls.
+#
+Graveyard
+The opportunity to place mana on the Graveyard occurs just once per round, the first time a creature is destroyed. If you choose not to put mana on the Graveyard when that occurs, then you cannot put mana on the Graveyard later in the round if another creature is destroyed. Thus, you cannot "save" the once-per-round effect in hopes of a higher level creature dying later.
+#
+Gravikor
+If a Flying creature moves from a zone inside Gravikor's area of effect to a zone outside of its area of effect, it will not bypass any walls, but will be Flying as it enters the new zone (so will not trigger a Spiked Pit trap, for example.)
+
+If a Flying creature moves from a zone outside Gravikor's area of effect to a zone inside of its area of effect, it will bypass walls, but will not be Flying as it enters the new zone (so it will trigger a Spiked Pit trap, for example.)
+#
+Grey Wraith
+Note that when it says "Grey Wraith may pay 1 mana", it means "Grey Wraith's controller may pay 1 mana".
+
+Grey Wraith does not need LoS to zones he Teleports to.
+
+Grey Wraith uses its Teleport ability in place of a move action, and is still limited to the normal number of actions, regardless of if it Teleports or not.
+
+Grey Wraith must pay 1 mana each time he Teleports 1 zone.
+
+Example: Grey Wraith begins in a zone bordered by a Wall of Stone. For its move action, Grey Wraith's controller pays one mana to allow it to Teleport and it moves to the other side of the wall. That zone has an enemy creature in it, hindering normal movement. The Grey Wraith's controller pays one mana to allow it to Teleport as another move action (creatures may take a second move action as their quick action). The Grey Wraith moves another zone over, ignoring hindering because it is Teleporting, and ends its Action Phase.
+
+If a mandatory action effect (such as a Taunt) would force Grey Wraith to move, and this move can only be performed using the Teleport ability, then Grey Wraith must use that ability if mana is available.
+#
+Guardian Angel
+Guardian Angel's ability only triggers when she uses her action to guard. Acquiring a guard marker from another source, such as Defend, does not count.
+#
+Gurmash, Orc Sergeant
+Gurmash's use of his commanding Warlord's Battle Orders does not count as the one use per round for that Warlord. Thus, Gurmash and his controller may both cast Battle Orders during the same round, and the orders will stack.
+##### H Section #####
+Hail of Stones
+The attack bar should have the Unavoidable trait. Of course, Zone attacks have the Unavoidable trait anyway, so this is redundant.
+#
+Harmonize
+Harmonize cannot be cast on an object such as Mana Crystal or Mana Flower, because those cards do not have their own Channeling attributes.
+#
+Harshforge Plate
+The additional mana cost is not subject to the effect of Mana Prism, since it is an increase to the innate cost of the spell (as opposed to an effect that forces the mage to pay mana).
+
+If a dissolve is nullified, the additional cost imposed by Harshforge Plate  must still be paid (since it is an increase to the innate cost). This is different than other spells like Enchanter's Wardstone that require a separate payment to avoid cancelling the spell.
+
+The 2 extra mana is paid when an enchantment is cast on the wearer, but not when it is revealed.
+#
+Helm of Fear
+Example: An attacker with a Sweeping attack is in a zone with an enemy Warlock, Firebrand Imp, and Flaming Hellion. The Warlock has a Helm of Fear, and the attacker chooses the Warlock as his first target. The Warlock rolls a 9+ on the roll, and the attacker chooses to make his attack against the Imp instead. On the second attack of the Sweeping attack, the Hellion is the only legal target (he cannot attack the Warlock because of the Helm's effect, and cannot attack the Imp because that was the target of the first part of the Sweeping attack.)
+
+Example: Same as the first example, except that the attacker chooses to Guard instead. In this case, the entire attack action is canceled (not just the first attack) so the attacker does not get to make any attacks. 
+
+Example: Same as the first example, except that the attacker attacks the Imp first, and then attacks the Warlock as the second attack of the Sweeping attack. The Warlock rolls a 9+ on the roll, and the attacker cannot choose to Guard instead, and the only legal target for the "replacement" attack is the Hellion.
+
+Example: Same as the first example, except the attack is Triplestrike instead of Sweeping. The attacker attacks the Warlock, the Helm of Fear rolls a 9+, and the attacker chooses to attack the Hellion instead. Then the Hellion would get attacked with all three Triplestrike attacks (because the second and third Triplestrike attacks are made against the same target as the target of the first attack, which is now the Hellion.)
+#
+Invisible Stalker
+As soon as the Invisible Stalker declares an attack, he loses the Invisible trait. This means he will have lost the Elusive trait (which is part of the Invisible trait). He does not have to attack any guards in the zone though, even though he is no longer Elusive, because he has already bypassed guards. Whether or not you must attack a guard is only checked for once at the time you declare an attack.
+#
+Jinx
+Refunds the amount actually spent to cast the spell, after applying any cost reductions or additional costs. For example, if you cast a Force Push, and paid the extra 3 mana, and reduced the cost by 1 with a Force Ring, you would have spent a total of 5 mana to cast the spell, and 5 mana would be the amount refunded.
+
+This will trigger off of abilities that are performed "as a quick spell", like the Wizard's Arcane Zap. If used to counter a familiars spell, the mana is refunded back to the original sources. For example, if the familiar spent 4 mana and the Mage spent 1 mana, then the familiar is refunded 4 mana and the Mage is refunded 1 mana.
+
+If Jinx is used to counter a Spellbound spell, the spell card stays on the equipment to which it was Spellbound, as per the rules of Spellbind.
+#
+Joseph Trublood, High Cleric
+The "Armor +2 against attacks from Nonliving or Dark creatures" applies only for the purposes of calculating damage to Joseph Trublood from those attacks. He gains the armor during the Damage and Effects Step of that attack, only to reduce non-critical damage that the attack would deal. It does not apply for any other purpose (such as resolving Corrode marker effects).
+#
+Knockdown
+Since the Incapacitated effect ends at the beginning of the creature's next Action Phase, that creature will get to act normally during that Action Phase. 
+
+Knockdown is useful for removing a Guard marker, or to cause the target to temporarily lose Defenses or Flying - all of which occur while the creature is temporarily incapacitated.
+
+Designer note: The knockdown spell was the precursor to the later Slam condition.
+#
+Magebane
+Magebane deals its damage after the spell that triggered it has been resolved. For example, when this creature casts a spell, you could reveal this at the end of the Counter Spell Step, and then at the end of Resolve Spell Step, after the spell resolves, this creature will take 1 direct damage.
+
+If the Mage destroys Magebane with a Dispel, it will still do a point of damage to him for casting the Dispel.
+
+In a duel, if a Mage casts a spell that kills the opposing Mage, and then dies due to Magebane damage, the game is a draw.
+#
+Mage Wand
+Changing the spell on a Mage Wand results in a hidden bound spell. 
+
+You cannot rebind the spell on the wand to hide what it is. You first attach a new spell, then the original spell goes back into your book. You may still bring out a copy of that spell to bind to the wand, provided you have another in your book.
+#
+Mana Prism
+This only affects abilities that say "lose", "pay", or "transfer" (such as Suppression Orb, Mana Drain, and
+Mana Transfer), as well as "Upkeep +X" traits granted by effects your opponents control (such as Essence
+Drain and Mordok's Obelisk). For example, having a spell countered by Nullify does not count as "losing the
+mana you spent on the spell" for the purpose of Mana Prism.
+
+If the mana was being transferred to your opponent, since Mana Prism replaces that effect with being transferred to Mana Prism, your opponent does not gain any mana.
+
+In order to pay costs, you still have to have enough mana to pay the cost. For example, if you have a Pacify controlled by the opponent on your creature and only 1 mana in your mana supply, you still can't declare a melee attack with that creature. (If you had 2 mana, you could declare a melee attack, and the 2 mana for the cost would be transferred to Mana Prism rather than going away.)
+#
+Mana Siphon
+The selection of the target occurs when the Mana Siphon comes into play (i.e., when the spell resolves), and is not optional. For instance, if the Mage casting the spell is the only one within range when Mana Siphon resolves (e.g. because the opponent somehow teleported away during the Counter Spell Step) the caster will be forced to target himself.
+
+The range and LoS is determined from Mana Siphon, not from the controlling Mage.
+
+If there are no legal targets for Mana Siphon's enters-play ability when Mana Siphon comes into play, it will come into play with no effect.
+
+If Mana Siphon leaves play and then returns somehow, a new target will be selected. (This may be the same as the previous target, if legal.)
+#
+Mangler Caltrops
+Zone attacks targeting Mangler Caltrop's zone can still affect and damage Mangler Caltrops, because Zone attacks do not target the Mangler Caltrops.
+
+The Mangler Caltrops only attacks creatures that enter into the zone. This is by any means - Pushing, teleporting, or just walking right in. It does not attack creatures who are in the zone when it is cast, or who remain in the zone. It does not attack creatures when they exit the zone. If they leave the zone and come back in, it will attack them when they enter the zone again. If a Flying creature enters the zone, and later loses Flying while remaining in the zone, Mangler Caltrops does not attack it.
+
+Note that Summoning a creature into a zone does not count as a creature entering the zone, and the Mangler Caltrops will not attack that creature.
+#
+Marked for Death
+Marked for Death affects only attacks made by creatures. It does not affect attacks made by things other than creatures, such as attacks made by conjurations, walls, equipment with the Autonomous trait, or Damage Barriers. 
+
+A spell attack is considered to be made by the object that casts the attack spell. 
+
+Marked for Death affects Zone attacks. (It will only give the attacking creature an extra attack die against this creature, not against any others in the Zone.)
+#
+Mind Control
+The requirement "the controller must be within 1 zone of Mind Control" applies only when the Mind Control is revealed. After that, the controller can move away from the Mind Control with no ill effects.
+
+The restriction that "Mind Control cannot be moved to a new target" means that it cannot be moved through spells such as Shift Enchantment and Steal Enchantment.
+
+You cannot take control of creatures which your Mage is restricted from. For example, the Forcemaster cannot cast Mind Control on Huginn, Raven Familiar, which has the Arcane Mage Only trait.
+
+If you take control of a familiar you are legally allowed to control, you take control of any spell which was planned for it to cast (unless that spell is restricted from your Mage class or school, in which case it is immediately returned to the owner's spellbook instead). You can use the familiar to cast that spell, and you will have control of that spell after it is cast. Alternately, you can change out the spell on a future planning phase, at which time it is returned to its owner's spellbook.
+
+During the Upkeep Phase, the upkeep cost for Mind Control must always be paid first, before any and all of the enchanted creature's upkeep costs. If you cannot pay, or choose not to pay, the upkeep cost for Mind Control, then Mind Control is immediately destroyed and the enchanted creature's control reverts to its owner, and any upkeep costs for that creature (if any) can be paid by the new controller.
+#
+Mind Shield
+This only cancels the effect of one attack, not the entire attack action. Mind Shield will cancel a psychic attack against the creature it is attached to; it will not cancel additional attacks against other targets. For example, if this creature is the defender in a psychic zone attack, Mind Shield can be revealed to cancel the one attack made against this creature, and the rest of the zone attack will still occur and affect other targets in that zone.
+
+Mind Shield will cancel the effect of a psychic spell affecting the creature it is attached to; it will not cancel additional effects against other targets. For example, if this creature is in the target zone for a Mass Sleep spell, Mind Shield can be revealed during the Counter Spell Step to cancel the effect of that spell on this creature, and the rest of the Mass Sleep spell will still occur and affect other targets in that zone.
+#
+Mohktari's Branch
+The targeted plant object only heals 1 damage if you remove a condition marker from it. If the target plant object does not have a condition marker to remove, or you cannot remove a marker (do not have the mana required, the marker is not removable, etc.), then no healing can take place.
+#
+Mort
+The phrase "bordering Mort's zone" means a wall that is on a zone border of Mort's zone. An object in an adjacent zone is not "bordering" Mort's zone.
+#
+Necropian Vampiress
+If you use her ability to give her the Flying trait in a zone with only enemy non-Flying creatures, she will not be hindered when she starts her Action Phase.
+#
+Nightshade Lotus
+If Nightshade Lotus' ranged attack is redirected, then the final target can be subjected to its Mist token ability, but the original target cannot.
+#
+Nullify
+Even if the spell has multiple targets, a Nullify revealed on any of the targets will counter the entire spell. 
+
+This only counters spells, not other abilities (unless the ability says it counts as a spell)
+#
+Pacify
+The payment of 2 mana is part of the cost of making the attack. Thus, you cannot declare the attack if you don't have the 2 mana to pay.
+
+You cannot reveal Pacify "in response" to the declaration of an attack in order to force the opponent to pay 2 extra mana. Pacify can be revealed before the Declare Attack Step, or after it, but not during it. (Once an attack is declared, the earliest opportunity you could reveal Pacify is at the end of the Declare Attack Step, which is after costs are calculated and paid.)
+
+Pacify will work against spell attacks. On a spell attack, since the attack is actually made when the spell resolves, the additional 2 mana is paid when the spell resolves. (For example, if a Familiar is casting an attack spell, his opponent could reveal a Pacify at the end of the Counter Spell Step. During the Resolve Spell Step, the spell would resolve and the attack sequence begins, at which point the Familiar's controller would have to pay 2 mana if able; if not, then the attack would not happen and the spell would be wasted.)
+#
+Pentagram
+The wording "the creatures must be different" applies only within each round.For instance, if you damage an enemy Firebrand Imp and Flaming Hellion, you will get one mana on the Pentagram each time, for a total of two. If you damage the same Imp and Hellion again next round, you would get another two mana for that next round.
+#
+Perfect Strike
+This only affects the next attack, not the entire next attack action.
+#
+Piercing Strike
+This only affects the next attack, not the entire next attack action.
+#
+Plagued
+The damage is done to each creature in the zone, one at a time, in an order chosen by the controller of Plagued. If the creature is destroyed by its own Plagued enchantment, it will still deal damage to the other creatures in the zone (similar to how a Zone attack affects all the objects in the zone, even if one of them is the source of the attack and is destroyed by the attack).
+
+This may not be played on a creature with Poison Immunity, as nice as that would be.
+#
+Poisoned Blood
+If an opponent casts a Heal spell on this creature, and you reveal Poisoned Blood at the end of the Counter Spell Step, then the Heal spell will still resolve, but will not provide any healing to this creature.
+#
+Ravenous Ghoul
+Ravenous Ghoul must be in the zone that the creature was destroyed in at the time it uses its quick action ability to gain a Growth marker. Because it has the Fast trait, Ravenous Ghoul could move 2 zones first to reach the zone the creature was destroyed in, then use its quick action to gain a Growth marker.
+#
+Quicksand
+The roll to escape from Quicksand is an "escape roll" for the purpose of other rules or effects that refer to "escape rolls".
+
+Quicksand may not target an Uncontainable creature.
+#
+Renewing Rain
+The Burn condition removal applies to all objects in the Arena, while the healing applies only to friendly objects. This is intentional; the rain is extinguishing fires, while the healing is a holy magic effect.
+#
+Repulse
+Unlike similar spells, Repulse does not require an additional payment to push through a wall with the Passage Attacks trait.
+
+Completely resolve one Push before going on to the next.
+
+The controller of Repulse decides what order the creatures are pushed in.
+#
+Reverse Attack
+For clarification, consider the case where a Warlock is attacking a Wizard, and the Wizard reveals Reverse Attack. Then we have the Warlock attacking himself. Thus, for instance, if the Warlock's attack has Vampiric and he hits himself for 6 points of damage, he will take 6 damage and then heal 3, so he will end up with 3 more damage on him than when he started. Note that if the 6 damage were enough to destroy him, he will die before the healing could take place.
+
+The Wizard is considered the "source" of the attack; this generally only matters in cases where the effect of the attack depends on the range.
+
+If the Warlock's attack action had additional attacks, the Warlock may make these additional attacks now. For instance, if the Warlock's attack was a Doublestrike, the second attack of the Doublestrike would be made against the Wizard, because the second Doublestrike attack is made against the same target as the target of the first attack, which at this time is again considered to be the Wizard.
+
+For the Damage Barrier and Counterstrike steps, the attack continues as originally intended, with the Wizard as the defender. Thus, the Wizard will not get to use a Damage Barrier (since the attack was avoided), unless there was another attack against the Wizard in the same attack action that was not avoided. The Wizard may still use a Counterstrike.
+
+Suppose that a Chain Lightning attack is made by an attacker X, and the first target is A, and the second target is B. A Reverse Attack revealed on target B will redirect the attack to target A (even though Target A was already attacked before; this is the reason for the wording about "even if the original source would not normally be a legal target"). Then after that attack, the chain could continue; it would still be controlled by the attacker X, and the attacker would have to choose a different target (other than A or B).
+
+Reverse Attack still functions even if the creature is Incapacitated.
+#
+Reverse Magic
+If the spell has secondary targets you can choose new secondary targets.
+
+If a hidden enchantment is Reversed, the new controller of the enchantment may look at it. However, you may not look at it before deciding whether or not to pay the reveal cost of Reverse Magic.
+
+If you cannot or do not want to pay the difference after recalculating the mana cost, you may cancel the spell instead.
+
+Only one of the targets of the reversed spell needs to be the original spell's caster. The caster of the reversed spell is free to select any other targets, as well as any other choices made "when you cast this."
+
+If a spell has multiple targets, a Reverse Magic on any of the targets will cancel (and reverse) the whole spell.
+#
+Rise Again
+Warlocks can use their Curseweaving ability to return a curse enchantment they control to their spellbook after the creature it is attached to is destroyed (limit one per round). Thus, a Warlock could return Rise Again to his spellbook after the attached creature is destroyed, and the destroyed creature can still be Reanimated as normal.
+#
+Rouse the Beast
+If Rouse the Beast is cast during the Final Quickcast Phase, it will still flip the target's Action Marker to the active side, but since it is after the end of the Action Stage, the target creature will still not be able to activate this round.
+##### S Section #####
+Sacrificial Altar
+This does not target either the creature destroyed or the creature it gives the bonus to.
+#
+Sectarus, Dark Rune Sword
+You may only use mana from Sectarus' mana supply to pay for the casting cost of enchantments, not the reveal cost. Once the enchantment is cast, it behaves just like a normal enchantment, and your Mage must pay the reveal cost if you want to reveal it.
+
+If Sectarus is cast on another Mage, the Mage that Sectarus is attached to controls Sectarus (just like any other equipment), including preparing and casting curse spells.
+
+If Sectarus destroys a creature, that creature is removed before Sectarus can cast an enchantment on it. For example, you cannot cast Rise Again on a creature which Sectarus just destroyed.
+
+Sectarus counts as a curse (though not an enchantment) attached to your mage for abilities like Adramelech's Torment.
+#
+Sardonyx, Blight of the Living
+Life loss from Sardonyx MEANS life loss - NOT damage.
+#
+Seeking Dispel
+This targets an enchantment, not the object to which it is attached. Thus, a Nullify enchantment on that object cannot counter Seeking Dispel.
+#
+Sersiryx, Imp Familiar
+Sersiryx may cast Level 1-2 spells like Devil's Trident that have multiple schools. This is because these spells count as both schools, independent of level (so Devil's Trident is a Level 2 spell that counts as a Fire spell and a Dark spell).
+#
+Steal Enchantment
+Steal Enchantment cannot be used to take control of an enchantment you are restricted from. For example, the Wizard cannot take control of a Forcemaster's Forcefield. You can still move the spell, you just cannot take control of it.
+
+When you cast Steal Enchantment, you can re-target the same target the enchantment is currently attached to. For example, you may want to take control of a Charm spell, and put it back on the current target creature. You must pay the casting cost for Charm to be placed on that same target again (as described on the Steal Enchantment spell).
+#
+Steal Equipment
+To equip the equipment, you first return any equipment already taking up the equipment slot to your spellbook, then attach the new equipment to yourself.
+
+Steal Equipment cannot be used to take control of an equipment item you are restricted from.
+
+Example: If the Forcemaster casts Steal Equipment, she can target a Warlock's Lash of Hellfire, which has the Warlock Only trait. However, since she cannot use or equip this spell, it is destroyed instead.
+
+Example: If the Priestess steals a Mage Wand with a Drain Life spell bound to it, she cannot use cast that spell, because it is Dark Mage Only. She can steal the wand, but the wand would be of no use to her unless she chooses to bind a new spell to it.
+#
+Stumble
+Even though the creature cannot take move actions, it can still Teleport or be Pushed.
+
+Stumble is destroyed immediately after being revealed, not at the end of the creature's Action Phase.
+
+Stumble has no effect on creatures with the Uncontainable or Unmovable traits, if the creature has these traits at the time Stumble is revealed. If the creature gains the Uncontainable or Unmovable trait after Stumble is revealed, those traits do not affect Stumble, and the creature is still prevented from taking move actions.
+#
+Summoning Circle
+The choice to place the creature in Summoning Circle's zone, or in your own zone, is made when the creature spell resolves.
+#
+Suppression Cloak
+Does not affect Counterstrikes.
+
+You cannot declare the attack if you do not have the 2 mana to spend. If a Mage with Suppression Cloak is Guarding, and the attacker doesn't have the 2 mana to spend, he can't attack the Mage or any of the other non-Guards in the zone (because of the Guarding restrictions).
+#
+Suppression Orb
+The mana payment is a cost to make the movement, and is paid first before the move is taken. Thus, while Suppression Orb is on the field, if a non-Mage creature's controller has no mana, that creature cannot take a move action. It could, however, Teleport or be Pushed.
+
+Suppression Orb affects each move action a creature takes; if a creature takes 2 move actions during its Action Phase, its controller must pay 1 mana for each one.
+#
+Tanglevine
+A creature may attack Tanglevine, if it is attached to itself, ignoring any guards in the zone. 
+
+Attacking Tanglevine will not trigger a Damage Barrier or Counterstrike from yourself.
+
+Zone attacks targeting Tanglevine's zone can still affect and damage Tanglevine, because Zone attacks do not target the Tanglevine.
+#
+Teleport
+You can teleport a creature into the same zone as it was in. (This costs 3 mana.)
+
+Both the target creature and target zone it is being moved to must be within the range 0-2 from the caster. 
+#
+Teleport Trap
+This does not target the zone you Teleport the enemy to. (Thus, you don't need LoS to it.)
+#
+Temple High Guard
+Temple High Guard has a "first strike" ability. The "first strike" ability means that if the Temple High Guard has a guard marker at the time the Declare Attack Step is completed, and is being attacked with a melee attack, proceed first with the Counterstrike Step immediately after the Declare Attack Step. The Temple High Guard may make its counterstrike at this time (even though he hasn't actually been attacked yet). If this kills the attacker, the attacker cannot proceed with the attack. Otherwise, continue the attack sequence as normal, except skip the Counterstrike Step when it would normally occur.
+#
+Temple of the Dawnbreaker
+Reroll abilities are always resolved before any other effects that occur during the Roll Dice Step.
+
+If this and Akiro's Favor are both in play, players decide whether to re-roll in initiative order.
+#
+Temple of Light
+For example, if you control 4 temples, you may pay either 1, 2, 3, or 4 mana. If you choose 3, you pay 3 mana, then make the above attack rolling 3 attack dice and adding 3 to the effect die roll.
+
+You choose the value of X each time you use the ability. (For example, you could choose X=3 while using the ability one round, and X=1 while using the ability on a different round.)
+
+Temple of Light can attack the round that it comes into play.
+
+The effect die results, 9-10=stun, 11+=daze, are correct as printed. (As X increases, the chance to Daze increases, but not the chance to Stun.)
+##### V Section #####
+Valshalla, Lightning Angel
+Only triggers off of attacks made by creatures, so it does not trigger off of attacks made by Walls, Conjurations, Damage Barriers, Autonomous equipment (Dancing Scimitar), etc.
+
+A spell attack is considered to be made by the object that casts the attack spell.
+#
+Vampiric Strike
+This only affects the next attack, not the entire next attack action.
+#
+Vine Tree
+If Vine Tree is deployed during the Deployment Phase (for instance by a Seedling Pod), you may still use its ability to place a Vine Marker during that same Deployment Phase.
+#
+##### W Section #####
+#
+Wall of Fire
+Its attack is Unavoidable.
+#
+Wall of Pikes
+This wall is unusual in that it only attacks creatures who try to pass through from one direction. It attacks creatures passing through from the top side of the card (the side the pikes are pointing towards). It is considered to have the Passage Attacks trait only from that direction.
+
+Whenever a card references "Pushing or passing through a wall with the Passage Attack trait", it only refers to the direction of Wall of Pikes which would attack the object. For example, when deciding if you should pay extra mana for Push effects like Force Push, Force Bash, and Force Wave, you need to only pay the extra mana if Pushing creatures through from the side which would attack them.
+
+Creatures can move freely through Wall of Pikes from the other side. This side does not have the Passage Attacks or Passage Blocked trait.
+
+Note that Wall of Pikes's attack is not Unavoidable.
+#
+Wall of Thorns
+Its attack is Unavoidable.
+
+Mages are level 6, so this will attack a Mage 5 times.
+
+This will not attack a level 1 creature at all. No attack sequence will be performed.
+
+Each attack is resolved separately, using the rules for additional strikes in the attack sequence.
+#
+Whirling Spirit
+If the attack Pushes its target out of the Whirling Spirit's zone, the target will not get a Counterstrike, but will still lose its Guard marker (if it has one). Whirling Spirit will still be attacked by a Damage Barrier on the target (if it has one).
+#
+Whirling Strike
+The additional targets work in the same manner as the Sweeping trait, except there are 2 additional targets instead of 1 additional target.
+
+If an attack with additional strikes (such as a "Doublestrike" or "Triplestrike" attack) is made using Whirling Strike, the additional strikes will only be applied to the first target; the subsequent targets will only receive one strike each.
+#
+Wildfire Imp
+Unlike other teleporting creatures, the teleport requires line of sight to the zone and has no range limitation. Burn markers on walls can't be used for this teleport.

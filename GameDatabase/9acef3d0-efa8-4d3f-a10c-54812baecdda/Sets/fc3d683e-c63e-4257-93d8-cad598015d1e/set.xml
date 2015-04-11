@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Druid vs Necromancer" id="fc3d683e-c63e-4257-93d8-cad598015d1e" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Druid vs Necromancer" 
+	id="fc3d683e-c63e-4257-93d8-cad598015d1e" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
 	<markers>
 		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
 		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
@@ -7,6 +12,7 @@
 		<marker id="de101060-a4b4-4387-a7f8-aab82ecff2c8" name="Zombie" />
 		<marker id="ced2ce11-5e69-46a9-9fbb-887e96bdf805" name="Treebond" />
 		<marker id="86a71cf6-35ce-4728-a2f8-6701b1e29aa4" name="Eternal Servant" />
+		<marker id="d7472637-7c6d-4593-bc16-5975155c2926" name="Crush Token" />
 	</markers>
 	<cards>
 		<card id="d20c9d4a-65a7-4018-bffc-16ed0cb62912" name="Druid">
@@ -186,7 +192,7 @@
 			<property name="Stats" value="Armor=0, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +X, Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine." />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="DNJ10" />
 		</card>
 		<card id="a7f900e4-64ac-4c1b-8905-90607feb7d1a" name="Tanglevine">
@@ -308,7 +314,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=-, Life=9" />
-			<property name="AttackBar" value="Corrosive Juices:&#xD;&#xA;[Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode 9+ = 2 Corrode] [Devour]" />
+			<property name="AttackBar" value="Corrosive Juices:&#xD;&#xA;[Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode; 9+ = 2 Corrode] [Devour]" />
 			<property name="Traits" value="Resilient, Uncontainable, Nonliving, Slow, Psychic Immunity, Acid Immunity" />
 			<property name="Text" value="Whenever Devouring Jelly attacks and damages a Corporeal creature, it may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC03" />

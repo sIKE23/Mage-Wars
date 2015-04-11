@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Core" id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Core" 
+	id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -118,7 +123,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Air)" type="B" />
 		</card>
@@ -127,7 +132,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Earth=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Earth)" type="B" />
 		</card>
@@ -136,7 +141,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Fire=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Fire)" type="B" />
 		</card>
@@ -145,7 +150,7 @@
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="MageSchoolCost" value="Arcane=1, Water=1" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Mana Cost = 1] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Water)" type="B" />
 		</card>
@@ -153,7 +158,7 @@
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
-			<property name="MageSchoolCost" value="Arcane=1, Water=1" />
+			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 			<alternate name="Wizard(Water)" type="B" />
@@ -188,7 +193,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=5] [d12] [5-7 = Daze; 8+ Stun] [Ethereal]" />
+			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=5] [d12] [5-7 = Daze; 8+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Each time Chain Lightning damages a target, it may attack another target. That target must be in LoS of the last target, and may be up to 1 zone away from that target. Each successive attack rolls 1 fewer attack dice, and subtracts 1 more from the effect die roll. Chain Lightning can&apos;t attack the same target twice." />
 			<property name="CardID" value="MW1A02" />
@@ -293,7 +298,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [4-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs Flying]" />
+			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [4-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs. Flying]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A09" />
@@ -568,7 +573,7 @@
 			<property name="Stats" value="Armor=3, Life=7" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
-			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait.&#xD;&#xA;[Upkeep +1]" />
+			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait." />
 			<property name="CardID" value="MW1J16" />
 		</card>
 		<card id="6a65ca7e-df13-4c27-90cb-44d4c86b2610" name="Pentagram">
@@ -658,7 +663,7 @@
 			<property name="Stats" value="Armor=0, Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine." />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="MW1J22" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">
@@ -749,7 +754,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.]" />
+			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.] [Unavoidable]" />
 			<property name="Traits" value="Passage Attacks, Blocks LOS, Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />
@@ -1248,7 +1253,7 @@
 			<property name="Stats" value="Defense=7+ 1x No Ranged, Armor=2, Life=9" />
 			<property name="AttackBar" value="Beak &amp; Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] [+2 vs. Flying]" />
 			<property name="Traits" value="Flying, Legendary" />
-			<property name="Text" value="" />
+			<property name="Text" value="Tarok&apos;s defense only works against Melee attacks from Flying creatures." />
 			<property name="CardID" value="MW1C36" />
 		</card>
 		<card id="d83c084a-1757-4402-98cb-443958e22f54" name="Thunderift Falcon">
@@ -1306,7 +1311,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=-, Life=13" />
-			<property name="AttackBar" value="Windstorm:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [7-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs Incorporeal]" />
+			<property name="AttackBar" value="Windstorm:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [7-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs. Incorporeal]" />
 			<property name="Traits" value="Upkeep +1, Incorporeal, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C40" />
@@ -1398,7 +1403,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Damage Barrier] [Lightning] [Dice=2] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal] [Unavoidable]" />
+			<property name="AttackBar" value="Electric Surge:&#xD;&#xA;[Damage Barrier] [Lightning] [Dice=2] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1E06" />
@@ -1790,7 +1795,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature&apos;s quick action melee attacks gain the Counterstrike trait. The first time it makes a Counterstrike attack, destroy Retaliate." />
+			<property name="Text" value="This creature&apos;s quick action melee attacks gain the Counterstrike trait. The first time it makes a Counterstrike attack, destroy Retaliate.&#xD;&#xA;[Counterstrike]" />
 			<property name="CardID" value="MW1E33" />
 		</card>
 		<card id="732f4d7f-0cf6-4393-9446-b9360c8f18e3" name="Reverse Attack">
@@ -1970,7 +1975,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Chest Piece" />
-			<property name="AttackBar" value="[Damage Barrier] [Dice=1] [Ethereal] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Demonic Presence:&#xD;&#xA;[Damage Barrier] [Dice=1] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Dark Mage Only" />
 			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier. &#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MW1Q05" />
@@ -1982,12 +1987,12 @@
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Mage" />
-			<property name="Level" value="1" />
 			<property name="School" value="Fire" />
+			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;[Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;[Armor +2] [Flame -2]" />
 			<property name="CardID" value="MW1Q06" />
 		</card>
 		<card id="dda72c4a-8f33-42cf-9eed-bd52fb91af22" name="Elemental Cloak">

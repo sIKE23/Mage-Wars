@@ -1,4 +1,0 @@
-DEFG
-HIJK
-LMNO
-#Map#

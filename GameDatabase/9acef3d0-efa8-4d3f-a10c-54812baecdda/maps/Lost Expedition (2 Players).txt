@@ -1,0 +1,15 @@
+@Scenario=[Domination,11]
+
+.5..*
+..1..
+*..2.
+#Map#
+
+@Orb=[(1,3),(2,2),(2,4),(3,3)]
+
+@Sslak=[(1,3),(2,2),(2,4),(3,3)]
+
+@SecretPassage=[(1,4),(3,2)]
+
+@StartPosition1=(1,1)
+@StartPosition2=(3,5)

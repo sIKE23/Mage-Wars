@@ -1,0 +1,35 @@
+Battle Calculator
+The battle calculator is an exciting new feature that automates most of attacks and also predicts the outcome of the attack using statistics.
+
+To initiate an attack using the battle calculator, hold down *SHIFT* and left-click-drag an arrow from the object doing the attacking to the object being attacked. The menu that appears will guide you through the rest. It really is that easy!
+
+The game will only display attacks that are legal; for instance, attacks on targets that are not in range will not appear, nor will attacks to which the target is immune.
+
+In addition to automating a large part of the attack, each attack button will also tell you the expected damage that the attack will deal, and the probability that the attack will kill the target.
+
+Of course, you are not required to use the Battle Calculator. You can always roll dice the normal way by pressing *TAB* while the mouse is not over a card. (You can also use the old shortcut, *F1*).
+
+Note: If you want to draw a target arrow without making an attack, you can simply click 'Cancel Attack' and the target arrow will remain. You can also disable 'Declare Attack With Targeting Arrow' in the automation options menu.
+#
+Dice Buttons
+The Dice Rolling prompt now allows you to select the number of dice that you want to roll from a list, 1-7. This is significantly faster than the previous method of entering a number. In the event that you want to roll more than 7 dice, the "Other Dice Amount" button will let you enter a number, as before, and will default to the last number you entered.
+
+There are now multiple ways to roll the dice. You can press *F1*, as before; you can also press the more-accessible *TAB* button, and you can also double click on the Dice-Rolling box. Use whichever method you find most convinient.
+#
+Phase Buttons
+There are mutiple ways to advance the Phase for each player. You can press *CTRL+ENTER*, as before and you can also double click on the Phase and Initative Markers. (You can also use the old shortcut, *CTRL+DOWN*).
+#
+Searchable Codex
+Tired of obnoxious rules disputes that require you to open your browser and head to the forums, or search through the rules supplement? We have now implemented (and will be constantly adding to) two related tools that should make resolving rule ambiguities much easier.
+
+The first is the Seachable Codex. Press *CTRL+H* while the cursor is not above a card to open up a box into which you may type any term in the codex. The game will then bring up a box with all relevant information for that codex term. Make sure you type in the term correctly, with proper capitalization and spacing, or the game might not recognize what you mean (if it is a term that appears on a card, it is best to type it in exactly as it appears on that card)
+
+If you find that there is information missing from from the Codex that you would like to see added, please let us know on the Arcane Wonders forums and we will do our best to include it in the next release.
+#
+Rulings/Clarifications
+Tired of obnoxious rules disputes that require you to open your browser and head to the forums, or search through the rules supplement? We have now implemented (and will be constantly adding to) two related tools that should make resolving rule ambiguities much easier.
+
+The second is a Rulings/Clarifications module for spells. To activate it, just press *CTRL+H* while the cursor is over a spell, and the game will bring up a box containing all rulings and clarifications pertaining to that spell.
+
+If you find that there is information missing from Rulings/Clarifications that you would like to see added, please let us know on the Arcane Wonders forums and we will do our best to include it in the next release.
+#

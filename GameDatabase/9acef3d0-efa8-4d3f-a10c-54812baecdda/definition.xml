@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
-	version="9999.11.3.0"
+	version="1.11.4.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -18,14 +18,16 @@
 		<script src="scripts/changelog.py" />
 		<script src="scripts/attacks.py" />
 		<script src="scripts/attachcards.py" />
-		<script src="scripts/domination.py" />
+		<script src="scripts/textfunctions.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
 		<event name="OnGameStart" action="onGameStart" />
 		<event name="OnLoadDeck" action="onLoadDeck" />
 		<event name="OnChangeCounter" action="checkMageDeath" />
-		<event name="OnMoveCard" action="onMoveCard" />
+		<event name="OnMoveCards" action="onMoveCards" />
+		<event name="OnTargetCardArrow" action="onTargetCardArrow" />
+		<event name="OnCardDoubleClick" action="OnCardDoubleClick" />
 	</events>
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />
@@ -64,12 +66,12 @@
 		<size name="ModularBoardPieces" width="250" height="250" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="0" />
 		<size name="MarkersAsCards" width="70" height="70" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="InitativeMarkers" width="50" height="50" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="PhaseMarkers" width="50" height="13" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="PhaseMarkers" width="90" height="20" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Buttons" width="72" height="36" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
-		<size name="Horizontal Cards" width="80" height="60" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
+		<size name="Horizontal Cards" width="60" height="80" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
 	</card>
-	<table name="Table" visibility="undefined" ordered="False" width="1050" height="800" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-530,-330,1050,800" backgroundStyle="uniformToFill">
+	<table name="Table" visibility="undefined" ordered="False" width="1000" height="750" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-500,-375,1000,750" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack" />
@@ -77,6 +79,9 @@
 		<groupaction menu="Add Vine Marker" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
+		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
+		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
+		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
 			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
@@ -89,6 +94,7 @@
 			<groupaction menu="Toggle Dice Rolling Area and Table Config" default="False" execute="toggleConfigDRAIP" />
 			<groupaction menu="Toggle Auto-Attaching Cards" default="False" execute="toggleAutoAttach" />
 			<groupaction menu="Toggle Battle Calculator" default="False" execute="toggleBattleCalculator" />
+			<groupaction menu="Toggle Declaring Attacks with Targeting Arrow" default="False" execute="toggleDeclareAttackWithArrow" />
 			<groupaction menu="Enable/Disable Sounds" default="False" execute="toggleSoundFX" />
 		</groupactions>
 		<groupactions menu="Chat Shortcuts">
@@ -135,8 +141,9 @@
 			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
-			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
+			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
+			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Ctrl+N" execute="addRanged" />
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
@@ -158,6 +165,7 @@
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
 			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
+			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Shift+N" execute="subRanged" />
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
@@ -182,11 +190,12 @@
 			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
-			<cardaction menu="Attack Targeted Card" shortcut="TAB" execute="attackTarget" />
+			<cardaction menu="Use Untargeted Ability" shortcut="TAB" execute="useUntargetedAbility" />
 			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
 			<cardaction menu="Double Click" default="True" execute="defaultAction" />
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">
 		<counter name="Channeling" default="0" reset="True" icon="counters/channeling.png" />
@@ -195,6 +204,7 @@
 		<counter name="Life" default="0" reset="True" icon="counters/life.png" />
 		<hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
 			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 		</hand>
 		<group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">

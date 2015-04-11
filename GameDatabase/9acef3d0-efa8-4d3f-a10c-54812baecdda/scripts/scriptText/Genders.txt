@@ -1,0 +1,49 @@
+Male
+Acolyte of the Bog Queen
+Adramelech, Lord of Fire
+Anvil Throne Crossbowman
+Asyran Cleric
+Bridge Troll
+Brogan Bloodstone
+Cerberus
+Cervere, The Forest Shadow
+Dwarf Kriegsbiel
+Dwarf Panzergarde
+Galador, Protector of Straywood
+Goblin Alchemist
+Goblin Bomber
+Goblin Builder
+Goblin Grunt
+Goblin Slinger
+Goran, Werewolf Pet
+Gray Angel
+Grimson Deadeye, Sniper
+Gurmash, Orc Sergeant
+Knight of Westlock
+Ludwig Boltstorm
+Makunda
+Malacoda
+Mort
+Orc Butcher
+Otto Kronig, Master Engineer
+Redclaw, Alpha Male
+Sersiryx, Imp Familiar
+Sir Corazin, Blademaster
+Sosruko, Ferret Companion
+Talos
+Tarok, the Skyhunter
+Thorg, Chief Bodyguard
+Togorah, Forest Sentinel
+#
+Female
+Fellella, Pixie Familiar
+Gorgon Archer
+Guardian Angel
+Moonglow Faerie
+Necropian Vampiress
+Royal Archer
+Samandriel, Angel of Light
+Screech Harpy
+Selesius, the East Wind
+Valshalla, Lightning Angel
+#

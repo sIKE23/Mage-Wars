@@ -1,0 +1,972 @@
+####################
+##### Core Set #####
+####################
+Activate
+When you choose to take an Action Phase with a creature you activate it. Flip its action marker over, and remove any guard marker on it.
+#
+Aegis X,Aegis
+All attacks made against this object subtract X attack dice before rolling. 
+
+- Attacks cannot be reduced below 1 die. 
+
+- Does not stack.
+#
+Armor
+During an attack, Armor is subtracted from the normal damage rolled on the attack dice. It does not reduce critical damage. 
+
+- If an object's Armor icon has a red slash across it, that object cannot have armor at any time.
+
+- An object cannot have less than 0 armor.
+#
+Armor +/-X,Armor +X,Armor -X
+Modifies an Armor attribute by +/- X. 
+
+- Armor cannot be reduced below 0.
+#
+Attack Action
+An attack action is a creature's action (quick or full) used to make an attack. 
+
+- An attack action might make multiple separate attacks against the same
+defender (see Doublestrike and Triplestrike) or against different defenders (see Sweeping and Zone Attacks). All of these multiple attacks are considered one attack action.
+#
+Bashed,Bash
+When a creature is Pushed into a wall with the Passage Blocked trait it is Bashed. It receives an Unavoidable attack of 3 attack dice of damage. 
+
+- The walls around the outside of the arena have the Passage Blocked trait.
+#
+Blocks LoS,Blocks Line of Sight
+This Wall blocks Line of Sight. You cannot target an object or a zone if the Line of Sight is blocked.
+#
+Bloodthirsty +X,Bloodthirsty
+This creature is a savage predator with a lust for blood. It gains +X attack dice when it makes a melee attack against a Living creature with 1 or more damage. If there is a damaged Living enemy creature in the Bloodthirsty creature's zone during its Action Phase, it must melee attack that creature (if possible).
+
+- If the attack makes multiple attacks during the same attack action, it gains this bonus only for the first attack it can make with this bonus. 
+
+- If there is more than one damaged creature, or this creature has also been Taunted, it can choose which creature to attack.
+#
+Burn
+Object is on fire. Each Upkeep Phase, roll 1 attack die of direct damage for each Burn marker on each object. On a 0, remove that Burn marker. 
+
+- A flame condition.
+
+- Removal cost of 2.
+#
+Burnproof
+Cannot have the Burn condition. 
+
+- May still be vulnerable to flame damage. 
+
+- All Incorporeal objects are Burnproof.
+#
+Cancel
+If a spell, attack, or effect is canceled, it stops and has no further effect.
+#
+Channeling,Channeling Attribute
+Some objects have a Channeling attribute, which is how much mana they collect each round during the Channeling Phase.
+#
+Channeling +/-X,Channeling +X,Channeling -X
+Modifies a creature's Channeling attribute by +/- X. Channeling cannot be reduced below 0. Modifies only existing Channeling, it has no effect an object without a Channeling attribute.
+
+- Mana Flower/Mana Crystal do not have the channeling attribute, and hence are unaffected by cards such as harmonize that grant Channeling +/- X.
+#
+Charge +X,Charge
+Creature gains +X attack dice for its very next melee attack, if it makes that attack immediately after it takes a move action, and moves at least 1 zone.
+#
+Climbing,Climb
+As a full action, creatures with the Climbing trait may climb over a Corporeal wall and move into the adjacent zone. 
+
+- If the wall has the Passage Attacks trait, it attacks the creature before it moves.
+#
+Condition,Conditions
+Conditions are various states that can occur for objects, and are indicated with markers placed on the object.
+#
+Conjuration
+All conjurations have these traits by default; Nonliving, Pyschic Immunity, and Unmovable.
+
+- No player may control two conjurations of the same name in the same zone.
+#
+Controller
+Each spell or object in the game is controlled by the player who cast it. The controller may use and act with that object, and makes all decisions and choices for that spell or any abilities that object may have. 
+
+- Exception: Equipment is controlled by the Mage it is attached to.
+#
+Corporeal
+Corporeal objects are normal, physical objects. All creatures and conjurations are Corporeal by default.
+#
+Counter
+A spell which has been countered does not resolve. It is destroyed and goes to the discard pile.
+
+- All costs and actions spent to cast the spell are lost, unless otherwise noted.
+
+- If the source or target of a spell changes during the counter spell step (for example by Divine Intervention), then the spell is countered.
+
+- A spell with the cantrip trait that is countered still returns to its owner's spellbook.
+#
+Counterstrike
+If a creature is the defender of a melee attack, and it has a quick action melee attack with the Counterstrike trait, it may use that attack against the attacker during the Counterstrike Step of the attack.
+
+- You cannot counterstrike against an attack that was made as a counterstrike. No counterception.
+
+- The quick action melee attacks of a creature with a Guard marker gain the counterstrike trait.
+#
+Creature
+A creature is an object in the game which can take actions and has an action marker. All creatures are Living by default.
+#
+Cripple
+Creature is Restrained. At the end of each of its Action Phases, Crippled creature may attempt a separate escape roll for each Cripple marker: on a roll of 7 or higher, remove that marker.
+
+- A poison condition.
+
+- Removal cost of 4.
+
+- Cannot affect conjurations.
+#
+Critical Damage
+Critical damage bypasses Armor (Armor does not reduce the damage dealt). Critical damage is shown as numbers inside a starburst on the attack dice.
+#
+Damage Barrier,Damage Barriers
+A damage barrier surrounds an object and makes an automatic attack against each enemy which makes a successful melee attack against the object it surrounds.
+
+- A melee attack is considered successful if it did not "miss" (for example, due to a daze condition or a defense). 
+
+- Rolling no damage does not count as missing.
+#
+Damage Type
+Damage can belong to a certain type - such as flame or lightning.
+#
+Damage Type +/-X,Damage Type +X,Damage Type -X
+Attacks against this object that match this damage type modify the number of attack dice rolled by X and modify the effect die roll by X. 
+
+- Note that - indicates a resistance and + indicates a weakness. (contrary to what you may expect from other games)
+
+- Damage type modifiers are cumulative. 
+
+- An attack cannot be reduced below 1 die.
+#
+Daze,Dazed
+Creature is disoriented and/or blinded. When it makes an attack, roll the effect die at the end of the Declare Attack Step. If the attack skips that step, then roll as soon as the attack starts. If the result is 6 or less, the attack "misses" its target and is considered to have been avoided (even if it is Unavoidable).  In addition, the Dazed creature suffers a -2 penalty to all Defense rolls for each Daze marker it has.  
+
+- All Daze markers are removed at the end of the creature's Action Phase, except for those acquired during the action phase (for example as a result of a counterstrike).
+
+- If creature has more than one Daze on it, roll only once to see if it misses.
+
+- Removal cost of 2.
+
+- If making a Zone Attack, check only once; the entire attack either fails or succeeds.
+
+- Conjurations cannot be Dazed.
+#
+Defender
+A creature or conjuration which is being attacked. They may not necessarily be the target of that attack (see "Zone Attack").
+#
+Defense
+Some objects have a Defense attribute, which represents an ability to avoid an attack. During the Avoid Attack step, a creature may roll one of its defenses against the attack, and avoids the attack if its roll is equal to or greater than the number printed on the defense.
+
+- Some defenses may only be used a limited number of times per round, denoted by 1x or 2x.
+
+- Some defenses may not be used against certain types of attacks (melee/ranged), as indicated by the icon above the defense.
+
+- A defender may only use 1 defense per attack, no matter how many it has left.
+
+- Defenses may not be used against Unavoidable attacks.
+#
+Defrost
+This is a trait of flame attacks. It will be defined in a future expansion of the game in which frost damage is introduced. For now, it's just there for flavor.
+#
+Destroyed,Destroy
+A destroyed object is removed from play and is placed in the owner's discard pile. Creatures and conjurations are destroyed when the amount of damage on them is equal to or greater than their Life total. Objects can also be destroyed when a specific spell or effect destroys them.
+#
+Direct Damage
+Damage that is put directly on a creature. The damage is critical (bypasses armor). 
+
+- Not considered to be an attack.
+#
+Discard Pile,Discard,Discarded
+Each player has his own discard pile where he places destroyed objects or discarded spells after they are cast.
+
+- When a card is destroyed or discarded, it always goes to the discard pile of its owner, not (necessarily) its current controller.
+#
+Doublestrike
+This attack makes a second attack against the same target as part of the same attack action. 
+
+- Remember; many buffs only apply to the first attack in a sequence, so check to be sure!
+
+- The additional attack occurs during the Additional Strikes Step.
+#
+Effect Die,d12,D12
+The 12-sided die is called the effect die, and it is used to roll for additional effects for attacks, as well as escape rolls, or other rolls.
+#
+Elusive
+This creature is quick and slippery, ignoring enemy creatures. 
+
+- Enemy creatures cannot hinder its movement. 
+
+- It is not required to attack enemy guards when making a melee attack.
+#
+Enemy
+An enemy object is one which is currently controlled by an opponent.
+#
+Epic
+Only 1 copy of this spell can be in a Mage's spellbook.
+#
+Escape Roll
+Some conditions or enchantments require an escape roll, using the effect die, to see if you can remove them from the creature they are attached to.
+#
+Ethereal
+This attack is magically enhanced. It deals full damage to Incorporeal objects (count all the numbers on the dice, not just the 1's). 
+
+- Incorporeal objects can receive effects and conditions from this attack.
+#
+Extendable
+When you cast this wall, you may pay an additional cost equal to the mana cost of the wall, plus the wall's Level, as part of the cost of casting the spell. If you do, when this spell resolves, you may take an additional wall of the same name out of your spellbook and place it on any zone border connected to the first wall. 
+
+- Don't forget the additional cost on top of the cost of the second wall!
+
+- You may place a maximum of two walls, total, in this way (Extendable does not trigger on the second wall; no Ex-ception).
+
+- The second wall must be placed within LoS, but does not have to be in range.
+#
+Familiar
+This object can cast spells. During the planning phase, you may prepare a spell for it to cast (unless otherwise specified; some familiars with the spellbind trait work a little differently)
+
+- Generally, there are restrictions to what types of spells it may cast.
+
+- The spell prepared for the familiar is IN ADDITION to the two spells prepared for you mage. However, your mage will not be able to cast the spell prepared by the familiar (and, likewise, your familiar will not be able to cast a spell prepared by your mage).
+
+- If your familiar dies with a prepared spell, that spell is discarded. (tough luck...)
+#
+Fast
+This creature may take 2 move actions before taking a quick action. 
+
+- It may not take more than 2 actions during a single Action Phase.
+
+- If it gains the Slow trait, ignore both traits (having multiple sources of Fast or Slow does not "stack").
+#
+Finite Life
+This creature cannot heal, regenerate, or gain Life. If the creature gained Life before it gained this trait, it keeps that Life but cannot gain additional
+Life. 
+
+- All Nonliving objects have Finite Life.
+#
+Flying,Fly,Flight
+Flying objects can fly! Unfortunately, due to realism, there is rather a lot to remember:
+
+- Flying and non-Flying creatures do not hinder each others movement.
+
+- A non-Flying object cannot declare a melee attack against a Flying objectunless that attack has the Reach trait.
+
+- Ranged attacks can always target a Flying object in the same zone, regardless of minimum range. Flying creatures with ranged attacks can always target non-Flying objects in the same zone, regardless of minimum range.
+
+- When a Flying object makes a melee attack against a non-Flying object, it loses the Flying trait until the end of that attack action. This includes attacks with multiple strikes, such as the Sweeping trait, so you cannot melee attack a non-Flying object and then use the second part of the attack to attack a Flying object.
+
+- An object cannot lose or gain the Flying trait in the middle of an attack action (as the attacker or the defender)
+
+- A Flying creature is only affected by guards when attempting to make a melee attack against a non-Flying object in the guard's zone.
+
+- A creature that is guarding loses and cannot gain the Flying trait as long as it guards.
+
+- Creatures always have LoS to flying creatures, and vice-versa.
+#
+Friendly
+A friendly object is one which is currently controlled by the player, or players on his team (in a multiplayer game).
+#
+Full Action
+During their Action Phase, if a creature does not take a move action, it can take a full action. 
+
+- Marked with a special full action (hourglass) icon
+#
+Full Spell
+A full spell requires a full action to cast it. It has the full action (hourglass) icon on its casting line, just to the right of its casting cost.
+#
+Guarding,Guard,Guards
+As a quick action a creature can choose to guard, to protect his zone and gain Counterstrike.
+
+- While a creature is guarding, its quick action melee attacks gain Counterstrike.
+
+- If there is an enemy guard in a zone, then your creatures in that zone cannot melee attack objects in that zone other than that enemy guard. 
+
+- Overrides effects such as Bloodthirsty and Taunt that force a creature to attack a particular creature.
+#
+Heal,Heals,Healed,Healing
+Healing removes damage from Living creatures and conjurations.
+
+- No effect on objects with Finite Life.
+#
+Hidden Enchantment,Hidden
+All enchantments are cast face-down and are kept hidden from your opponent. Enchantments all have a casting cost of 2 mana, printed next to the hidden (closed eye) icon on their spell card. When they are revealed (turned face-up), their controller pays their reveal cost.
+
+- Face-down enchantments do not have the traits printed on their cards, but effects that happen when the spell is discarded (such as Cantrip) still apply.
+#
+Hinder,Hindered,Hindering,Hinders
+If a creature moves out of a zone with enemy creatures in it, or if it moves into a zone with enemy creatures in it, it is hindered. A hindered creature must stop moving and cannot take any more move actions this Action Phase. 
+
+- Incapacitated, Restrained, or Pest creatures cannot hinder movement. 
+
+
+- Flying creatures cannot hinder the movement of non-Flying creatures, and vise-versa.
+
+- Elusive creatures cannot be hindered by other creatures.
+
+- Lumbering creatures are always considered to be hindered.
+#
+Ignore,Ignores,Ignored
+An ignored enemy creature cannot hinder movement of friendly creatures. An ignored enemy creature that is guarding does not have to be attacked when making a melee attack.
+#
+Immunity,Immune,Hydro Immunity,Flame Immunity,Acid Immunity,Psychic Immunity,Wind Immunity,Poison Immunity,Light Immunity,Lightning Immunity
+This object is immune to all attacks, damage, conditions, and effects of the specified damage type, including critical damage and direct damage. It cannot be targeted or affected by spells or attacks of the specified type.
+
+- Exception: Objects with Hydro Immunity: A hydro attack (or attack spell) which has the Extinguish trait, may target an object with the Hydro Immunity trait. If it does, the attack deals no damage or effects to the object, other than to remove all Burn conditions. This is an exception to the normal immunity rules. In this manner, a Hydro attack can be used to extinguish the fires of a burning plant object, even though the attack cannot actually damage or harm that plant
+- Execption: The Geyser attack spell may target an object with the Hydro Immunity trait. If it does, the attack deals no damage or effects to the object, other than to remove all Burn conditions. In this manner, a Geyser attack can be used to extinguish the fires of a burning plant object.
+#
+Incapacitated,Incapacitate
+An Incapacitated creature cannot take any actions, including moving, attacking, guarding, or casting spells. It cannot use any Defenses, except for mandatory-reveal enchantments that count as a Defense.
+
+- It cannot make a counterstrike.  
+
+-It cannot guard; remove any guard marker on it. 
+
+- A Flying creature loses, and cannot gain, the Flying trait as long as it is Incapacitated. 
+
+- Any damage barrier on an Incapacitated creature continues to function normally. 
+
+- Other creatures may ignore an Incapacitated creature, and it cannot hinder the movement of enemies.
+
+- An Incapacitated creature still takes an Action Phase during the round, but it cannot perform any actions during its Action Phase (normally, the action
+marker is simply flipped over). 
+
+- Conjurations cannot be Incapacitated.
+
+- Mages are affected by Incapacitation differently. An Incapacitated Mage can still use actions to cast non-attack quick spells.
+#
+Incorporeal
+An insubstantial or amorphous object that is very resistant to damage. All attack dice rolled to damage this object only count the 1s on the dice
+(ignore all 2s), unless the attack has the Ethereal trait. 
+
+- Cannot receive effects or conditions from attacks that are not Ethereal. 
+
+- All Incorporeal objects have the Nonliving, Burnproof, and Uncontainable traits.
+
+- Incorporeal objects do not have an Armor attribute, and cannot gain armor.
+#
+Initiative
+Players take turns having the initiative, which is noted with an initiative marker. Whoever has the initiative gets to use their quickcast action first during a Quickcast Phase, and gets to take the first Action Phase during the Action Stage. 
+
+- Used to resolve any timing issues.
+#
+Legendary
+Only 1 copy of this object can be in play at a time. You may not cast a Legendary spell if an object with the same name is already in play, until the
+first copy is destroyed. 
+
+- Legendary objects cannot be brought back into play from the discard pile if another copy is already in play.
+#
+Level,Spell Level
+All spells have a Level, printed as a small number next to the spell school it belongs to. The Level is sometimes used as a way to determine the cost of a spell, and is also important when building a spellbook.
+#
+Life
+Creatures and conjurations have a Life attribute. Life is the maximum damage they can receive before being destroyed.
+#
+Life +/-X,Life +X,Life -X
+Object gains or loses X Life. Adjustments to Life is adjusting the maximum amount of damage an object can receive before being destroyed.
+
+- Gaining Life is not healing; and losing Life is not taking damage. 
+#
+LoS,Line of Sight
+You cannot target an object or zone if Line of Sight is blocked. Some walls have the Blocks LoS trait.
+#
+Living
+Living objects may heal, regenerate, and gain life. 
+
+- All creatures are Living, unless they have the Nonliving trait. 
+
+- All conjurations are Nonliving, unless they have the Living trait.
+#
+Mage
+This creature is a Mage, and represents the player in the game. The Mage can channel, cast spells, and has a special quickcast action each round. If your Mage is destroyed, you lose!
+
+- The Mage is a Level 6 creature. 
+#
+Magebind +X,Magebind
+If this enchantment is attached to a Mage, the reveal cost is increased by X. 
+
+- This adjusted reveal cost is used for all purposes in spells, abilities, or effects which refer to the reveal cost of this spell.
+#
+Magecast
+This spell can only be cast by a Mage.
+#
+Mage Only
+Some spells are restricted to particular Mage classes. For example, a spell may have the "Warlock Only" or "Holy Mage Only" trait.
+#
+Mana Drain +X,Mana Drain
+If this attack damages an enemy creature, that creature's controller loses X mana from his mana supply (if he has any).
+
+- If the attack makes multiple attacks during the same attack action, it gains this bonus only for the first attack it can make with this bonus.
+#
+Mana Transfer +X,Mana Transfer
+Exactly as Mana Drain +X, with this change: The controller of this attack gains mana equal to the amount of mana lost.
+#
+Melee +X
+This creature gains +X attack dice when it makes a melee attack. 
+
+- If the attack makes multiple attacks during the same attack action, it gains this bonus only for the first attack it can make with this bonus. 
+
+- Does not grant a melee attack if this creature does not have one. 
+
+- Does not affect ranged attacks, damage barriers, or other non-melee attacks.
+#
+Melee Attack
+This is a close-in attack which can only attack targets in the same zone. 
+
+- It can trigger a damage barrier or a counterstrike. 
+
+- When making a melee attack you must attack an enemy guard if there is one in your zone. 
+
+- A melee attack will remove a guard marker from a guarding creature.
+#
+Move Action
+During its Action Phase a creature can take a move action, which allows it to move one zone to an adjacent zone. Afterwards it may take a quick action.
+
+- If a creature is Hindered, it may only take 1 move action during its Action Phase.
+
+- A creature may not take more than 2 move actions during the same Action Phase, even if it has the fast trait.
+#
+Multiple Attacks
+Some attack actions consist of multiple separate attacks against the same or different targets. Multiple attacks include those with the Doublestrike, Triplestrike, or Sweeping traits.
+
+- Some traits, such as Melee +X or Charge +X, only affect the first attack in an attack action that makes multiple attacks.
+#
+Nonliving
+All Nonliving objects have the Poison Immunity and Finite Life traits. 
+
+- All creatures are Living, unless they have the Nonliving trait. 
+
+- All conjurations are Nonliving, unless they have the Living trait. 
+
+- Incorporeal objects are always Nonliving.
+#
+Novice
+Basic apprentice spells. All Mages may add Novice spells to their spellbooks for 1 Spell Point, even if they are not trained in, or are opposed to, that spell's school of magic.
+#
+Object
+Enchantments, equipment, creatures, and conjurations are spells which become objects in the game, remaining in play after they are cast. The Mage is also considered an object. 
+
+- Incantation and attack spells do not become objects.
+#
+Owner
+The owner of a spell is the player who started with that spell in his spellbook at the beginning of the game.
+#
+Passage Attacks
+All Creatures that move through this wall are automatically attacked by the wall. 
+
+- The attack occurs before the creature moves.
+#
+Passage Blocked
+Creatures may not move through this wall. If a creature is Pushed into this wall, it is Bashed. 
+
+- The walls around the outside of the arena all have the Passage Blocked trait, and affect Flying creatures.
+#
+Pest
+A small nuisance creature that cannot hinder enemies. Enemy creatures may ignore a Pest that is guarding to attack a different target.
+#
+Piercing +X,Piercing
+This attack subtracts X from the target's armor when determining the amount of damage dealt. 
+
+- It cannot reduce the target's armor below 0.
+#
+Poison
+Some attacks may have the poison damage type. Note that many attacks, while not having the poison damage type, may still cause poison conditions.
+#
+Poison Immunity
+Nonliving objects have Poison Immunity. See "Immunity".
+#
+Psychic Immunity
+This object has a very powerful mind, or no mind at all. All conjurations have Psychic Immunity. See "Immunity".
+#
+Push
+Push is an effect caused by some spells and attacks that moves the target into an adjacent zone. 
+
+- Unless the effect says otherwise, the Pushed creature must move one zone away in the opposite direction from the source of the Push. 
+
+- If there is a choice of direction (such as pushing a creature diagonally opposite, or if the source of the Push is in the same zone as the target), the source of the Push chooses the direction.
+
+- Some spells may Push in a random direction. Roll the Effect Die: a 1-3 Pushes the creature North, 4-6 = East, 7-9 = South and 10-12 = West.
+
+- A creature may be Pushed through a wall, but only if the wall does not have the Passage Blocked trait. The Pushed creature suffers any attack from the
+wall if the wall has the Passage Attacks trait. 
+
+- If a creature is Pushed into a wall with the Passage Blocked trait, it is Bashed against the wall and suffers an Unavoidable attack of 3 attack dice. 
+- Some creatures and all conjurations have the Unmovable trait. They cannot be Pushed and ignore all Push effects.
+#
+Quick Action
+During their Action Phase, creatures can take a move action, followed by a quick action. Quick actions include guarding, casting a quick spell, taking a second move action, or making a quick action attack.
+#
+
+- Creatures cannot take more than 2 move actions during their turn, even if they have the fast trait.
+#
+Quickcast Action,Quickcast
+Each Mage can take a special additional action each round called the quickcast action. This allows him to cast one quick spell, in addition to any other actions he may choose to take that round. 
+
+- The quickcast action can be used before or after any friendly Action Phase, or during a Quickcast Phase.
+#
+Quickcast Phase,First Quickcast Phase,Final Quickcast Phase
+There is a Quickcast Phase at the beginning and end of each Action Stage. This is an opportunity for either player to use their quickcast action to
+cast one quick spell, in order of initiative.
+#
+Quick Spell
+A quick spell requires a quick action to cast it. It has the quick action (lightning bolt) icon on its casting line, just to the right of its casting cost.
+#
+Rage +X,Rage
+When wounded, this creature becomes extremely vicious and aggressive. Each time it is attacked and damaged by an enemy creature, place a Rage
+token on it. It gains the Melee +1 trait for each Rage token on it. 
+
+- Each time it heals or regenerates, remove 1 Rage token. 
+
+- If it has no damage on it, remove all Rage tokens.
+
+- It cannot have more than X Rage tokens.
+#
+Ranged +X
+This creature gains + X attack dice when it makes a ranged attack. 
+
+- If the attack makes multiple attacks during the same attack action, it gains this bonus only for the first attack it can make with this bonus.
+
+- Has no effect on Zone Attacks or Damage Barriers. 
+
+- Does not grant a ranged attack if this creature does not have one.
+
+- Does not affect the Range of an attack, just the number of dice rolled.
+#
+Ranged Attack
+This attack can be used on targets between its minimum and maximum range, and within Line of Sight. 
+
+- A ranged attack can always be made against a Flying creature in the same zone, even below its minimum range. 
+
+- Ranged attacks do not trigger damage barriers or counterstrikes. 
+
+- Ranged attacks ignore guards, and do not remove guard markers from guarding creatures.
+#
+Reach
+This melee attack can target and attack Flying creatures in the same zone.
+#
+Ready Marker
+Ready markers are used to keep track of when abilities are used. For example, if a creature has a Defense, it will use a ready marker to keep track of when it is used (flip marker to the gray "used" side), and when the defense is ready again (flip marker to the green "ready" side).
+
+- Ready markers all reset to their green "ready" side during the Reset Phase.
+#
+Regenerate X,Regenerate
+This object heals (removes) X damage each Upkeep Phase. 
+
+- If an object acquires more than one Regenerate trait, use only the highest one. 
+
+- The Finite Life trait prevents regeneration.
+#
+Removal Cost
+Most conditions have a removal cost, printed on the condition as a small number in a gray circle. Certain spells or abilities may permit you to remove the condition by paying this cost in mana.
+
+- You may NOT remove a condition unless the ability on a card specifically allows you to, even if you are willing to pay the removal cost.
+#
+Restrained
+If a creature is Restrained, it cannot take any move actions. Aside from movement, a Restrained creature may
+take any quick or full actions during its Action Phase. 
+
+- Cannot hinder the movement of enemies. 
+
+- May guard, but attacking creatures may ignore it (they do not have to attack it).
+
+- Suffers a -2 penalty to all defense rolls.
+
+- Can still be Pushed or Teleported. 
+
+- Flying creatures lose, and cannot gain, the Flying trait for as long as they are Restrained. 
+
+- Uncontainable creatures and all conjurations cannot be Restrained.
+
+#
+Reveal Cost,Reveal
+When you reveal a hidden enchantment, turn it face up. The controller pays the reveal mana cost, if any (noted on the open eye symbol on the card), or else the enchantment is destroyed.
+
+- If the reveal cost is displayed in red, it means there are conditions under which the card MUST be revealed. Read the text on the card to find out what those conditions are.
+#
+Rot
+This object receives 1 direct damage during the Upkeep Phase each round. 
+
+- A poison condition.
+
+- Removal cost of 2.
+#
+Sleep
+This creature is in a deep sleep and is Incapacitated. If this creature receives any damage (such as an attack from a friendly creature), remove Sleep and replace it with a Daze marker. 
+
+- A psychic condition. 
+
+- Removal cost is equal to the sleeping creature's Level.
+#
+Slow
+This creature is very slow. If this creature takes a move action, its Action Phase immediately ends. It does not get to take a quick action after moving.
+
+- If a Slow creature gains the Fast trait, both traits are canceled out.
+#
+Spawnpoint
+This object can cast spells during the Deployment Phase.
+#
+Spellbind
+This object can have a spell bound to it, which you can cast once per round.
+
+- If this object is destroyed, any spell bound to it is also destroyed.
+#
+Stun,Stunned
+Creature is Incapacitated. All Stun markers are removed at the end of the creature's Action Phase. 
+
+- Removal cost of 4. 
+
+- Cannot affect conjurations.
+#
+Successful
+An attack is considered successful, and to have "hit" its target, if it did not "miss" due to a Daze condition, nor was avoided by a Defense.
+
+- Damage Barriers are only triggered if an attack is successful.
+
+- Counterstrikes may be used regardless of whether tha attack was successful.
+#
+Summon,Summoned,Summoning
+When a creature comes into play and is placed in the arena it is Summoned. Usually this occurs when a creature spell has been cast and successfully resolves.
+
+- Creatures are summoned with their action marker face-down; they will not be able to act until the following round.
+#
+Sweeping
+This attack has a wide sweeping arc. A Sweeping attack is one attack action, which comprises 2 attacks against different targets in the same zone. After the first attack, start a new attack sequence (beginning with the Declare Attack Step) targeting a different object in the same zone.
+
+- You are not required to make a second attack.
+
+- The second attack counts as part of the same attack action, so some traits such as Melee +X that only trigger on the first attack in a sequence may not take effect.
+#
+Sosruko's Taunt,Taunt
+Place a Taunt marker on the creature. Taunted creature must make a melee attack against Sosruko during its next action phase, if able, and if Sosruko is in its zone. If it is required to make an attack on a different target from a competing effect (such as Bloodthirsty), the controller may choose which target to attack. Remove Taunt at end of its Action Phase or whenever Sosruko is activated.
+
+- Unlike Thorg's Taunt, Sosruko's Taunt affects Mages and Psychic Immune creatures. It is a great way to make your opponent waste actions.
+#
+Teleport,Teleported
+An effect that moves an object directly to another zone, bypassing walls and objects.
+#
+Token
+A token is a small marker used to keep track of something.
+#
+Tough -X,Tough
+This creature is tough and resistant to effects from attacks. Whenever the effect die is rolled for additional effects from an attack made against this creature, subtract X from the roll.
+#
+Traps
+An enchantment subtype that triggers when an enemy enters the zone.
+#
+Triplestrike
+This attack makes two additional attacks against the same target as part of the same attack action. The additional attacks occur during the Additional Strikes Step.
+#
+Unavoidable
+Defenses cannot be used to avoid this attack.
+#
+Uncontainable
+This creature has a slippery and/or amorphous body, making it difficult to hold in place. Some spells, conditions, and effects will not work against an Uncontainable creature. 
+
+- All Incorporeal creatures have the Uncontainable trait.
+#
+Unique
+Each player may only have 1 copy of this object in play at a time. Similar to Legendary, but each player is allowed to have his own copy in play.
+#
+Unmovable
+Object cannot be Pushed. All conjurations are Unmovable.
+#
+Upkeep +X,Upkeep
+This object's controller must pay X mana during each Upkeep Phase or else this object is destroyed.
+#
+Vampiric
+When this attack causes damage to a Living creature, the attacker heals (removes) up to half the damage caused (round up). 
+
+- If the attack does more damage than the target's Life total, the excess damage does not count for healing. 
+
+- If the attack makes multiple attacks during the same attack action, it gains this bonus only for the first attack it makes. 
+
+- The Vampiric trait does not stack.
+#
+Wall,Conjuration-Wall
+A wall is a subtype of a conjuration spell. It is placed on a zone border (the line between 2 zones).
+#
+Weak
+For each Weak condition on it, this creature loses 1 attack die from all non-spell attacks it makes.
+
+- Poison condition
+
+- Cannot reduce an attack to zero dice. 
+
+- No effect on damage barriers or attack spells. 
+
+- Removal cost of 2.
+#
+Zone
+A zone is a square region on the arena game board, used to regulate movement, the placement of objects, and for counting range.
+#
+Zone Attack,Zone Spell,Zone Attack or Spell
+This attack or spell affects all creatures and conjurations in the target zone, without actually targeting them individually. 
+
+- Does not affect walls on the zone's border. 
+
+- Zone attacks have the Unavoidable trait and make a separate attack against each object in the zone.
+#
+Zone Exclusive
+There can be only one...Zone Exclusive conjuration at a time in each zone.
+
+- It doesn't matter who controls it; if your opponent puts a Zone Exclusive conjuration in a zone, niether player may play another Zone Exclusive conjuration in that zone.
+#
+Zone Border
+This is the line or intersection between two adjacent zones. Walls are always placed on zone borders.
+####################
+######## FvW #######
+####################
+Autonomous
+This equipment is attached to a creature, and functions independently from that creature. It does not take up an equipment location. It is unaffected by, and cannot be modified by; traits, abilities, or conditions of the creature it is attached to. However, it can be affected by other sources and objects.
+
+- If the equipment provides an attack, that attack may be used once per round, as a free action, at the end of the creature's Action Phase. 
+
+- If the attack is a melee attack, it must follow the normal rules for guarding.
+
+- It will not trigger a counterstrike or damage barrier, and will not remove a guard marker from its target.
+#
+Cantrip
+Whenever this spell is destroyed, return it to the owner's spellbook instead of their discard pile.
+
+- If this spell is obliterated, the Cantrip trait will not save it.
+#
+Indestructible
+This object cannot be damaged, and cannot be destroyed by damage. 
+
+- It can be destroyed by other effects or abilities which may destroy it without dealing damage.
+#
+Indirect
+This ranged attack does not have its Line of Sight (LoS) blocked by any walls.
+#
+Invisible
+This object is invisible and cannot be targeted (there is no LoS to it). 
+
+- It can be affected by attacks, spells, or abilities which do not target it directly, such as zone attacks and zone spells. 
+
+- It can also be attacked by damage barriers and counterstrikes. 
+
+- As long as it has the Invisible trait, it also gains the Pest and Elusive traits.
+#
+OR Attacks,OR
+Some attacks have an "OR" in their attack bar. When the attack is declared, the controller decides which of these alternatives will apply for the attack.
+
+- You cannot change your mind once the attack has started. For instance, if the attack has Doublestrike OR Sweeping, and you choose Doublestrike and kill your target on the first attack, you cannot decide to switch to Sweeping instead.
+#
+Slam,Slammed
+Creature is Incapacitated. When this creature is activated, remove Slam and replace with a Daze condition. 
+
+- Unmovable creatures receive a Daze condition instead of Slam. 
+
+- Removal cost of 3.
+#
+Thorg's Taunt
+Thorg, Chief Bodyguard can Taunt his enemies. If the Taunted creature is in a zone adjacent to Thorg, then it must either move into Thorg's zone, or make a ranged attack which targets Thorg, if able. If it is in Thorg's zone, or moves into Thorg's zone, then it must make an attack which targets Thorg' if able.
+
+- Thorg's Taunt does not work on Mages, or creatures with Psychic Immunity. 
+
+- Thorg's taunt will not force a creature to move through a Wall with the Passage Attacks trait. 
+
+- If the Taunted creature is required to take a competing action from another effect (such as Bloodthirsty), then it may choose which of those actions
+to take.
+
+- Remove Thorg's taunt at the end of the Taunted creature's Action Phase, or when Thorg is activated, whichever comes first.
+####################
+######## CoK #######
+####################
+Bleed,Bleeding
+Each Upkeep Phase, place one direct damage on this creature.
+
+- Only affects Living non-Plant creatures. 
+
+- Whenever this creature heals or regenerates (even if it has no damage), you may cancel any amount of that healing to remove 1 Bleed condition for each point of healing cancelled.
+
+- Finite Life prevents healing and regeneration, and thus the removal of Bleed markers by those means.
+
+- Removal cost of 2.
+#
+Extinguish
+This attack will extinguish fires. During the Roll Dice Step of this attack, reduce the number of attack dice rolled by X (to a minimum of 1), and subtract X from the effect die roll, where X = the # of Burn conditions on the Defender. Then, remove all Burn conditions on the Defender.
+
+- Hydro attacks with the Extinguish trait may target creatures with Hydro Immunity, but do no damage or effects (they just remove burns). So yes, you may 'water your plants'.
+#
+Intercept
+If this creature is guarding, and if a ranged attack targets a non-flying object in the same zone, this creature may redirect that ranged attack to itself, as long as it can be a legal target for that attack. 
+
+- Intercept is announced and occurs immediately after the Declare Attack Step (and before the Avoid Attack Step). 
+
+- Loses guard marker at the end of the attack.
+
+- Cannot Intercept a zone attack. 
+
+- Cannot Intercept if Restrained or Incapacitated.
+#
+Prevention Effects
+Some spells may prevent an event from taking place unless a cost is paid. This cost must be paid for each object that would be affected, or the
+effect is canceled for that object. 
+
+- You can choose which objects to pay the cost for.
+
+- Examples are Armor Ward and Enchanter's Wardstone.
+#
+Stuck
+Creature is Restrained and Unmovable. At the end of each of its Action Phases, a Stuck creature may attempt an escape roll: on a roll of 7 or
+higher, remove Stuck. 
+
+- Each Stuck condition must be removed separately, but you may roll for each one.
+
+- If this creature is Teleported, destroy all Stuck conditions on it. 
+
+- Stuck has no effect on Conjurations and Uncontainable objects. 
+
+- Removal cost of 4.
+#
+Tainted,Taint
+A wound that will not heal. The marker counts as three damage, and this damage cannot be healed or regenerated.
+
+- Poison condition.  
+
+- Removal cost of 3,
+
+- Can be removed normally by spells or abilities which remove conditions even if the Tainted object has Finite Life.
+
+- A Tainted marker placed by an attack does not count as damage dealt by the attack.
+####################
+######## DvN #######
+####################
+Corrode
+Corrode is an acid condition which wears away armor. For each Corrode condition marker on a creature or conjuration, it receives Armor -1. 
+
+- Objects can never have Corrode markers on them which would reduce their armor to below zero (any extra markers are immediately destroyed). 
+
+- If an object would receive Corrode condition markers that would reduce its armor to less than zero, instead it receives only enough Corrode markers to reduce its armor to zero, and takes one point of direct acid damage for each excess marker. 
+
+- Corrode has no effect on Incorporeal objects. 
+
+- The marker has a removal cost of 2.
+
+Example: 
+A Druid has 2 Corrode markers on her, and a Bearskin. Her current armor value is 0. If she would receive another Corrode condition, she instead receives 1 direct acid damage. She decides to cast Wind Wyvern Hide (which has the same location as Bearskin, and thus will replace it.) When the Bearskin is removed, the Druid has zero armor and thus both Corrode markers are destroyed. Then, the Wind Wyvern Hide comes into play, and the Druid now has an armor value of 2.
+#
+Devour
+This creature eats other creatures! If an attack with Devour would destroy a Corporeal creature, Obliterate that creature instead.
+#
+Growth
+A creature with a Growth condition marker has grown in size. Each Growth marker provides Melee +1 and Innate Life +3. 
+
+- This marker has no removal cost, and cannot be removed by spells or effects which remove condition markers.
+#
+Ichthellid Larva
+A creature with this condition marker has been impregnated with an Ichthellid Larva. When this creature is destroyed, the controller of the Ichthellid Larva marker may choose an Ichthellid creature from his spellbook or discard pile, and place it face down in the zone the creature was in when it was destroyed. This Ichthellid comes into play at the end of the round for no mana cost, similar to how the Reanimate effect works.
+
+- Ichthellid Larva is a poison condition with a removal cost of 5.
+
+- The Ichthellid Larva marker is controlled by the controller of the Ichthellid that placed the marker. A creature can have only one Ichthellid Larva marker on it. 
+#
+Innate Life +X,Innate Life
+This creature has an increase to its Life, which usually represents an increase to size or mass, and bypasses the Finite Life trait.
+#
+Lifebond +X,Lifebond
+During the Upkeep Phase, choose one: you may transfer up to X damage from your Mage onto this object, or you may transfer up to X damage from this object to your Mage, regardless of range or LoS. 
+
+- Bypasses the Finite Life trait.
+#
+Lumbering
+This creature is clumsy and/or hobbled. It is always hindered, and thus it can only take up to 1 move action during its Action Phase, even if it gains the Fast trait.
+#
+Obliterate,Obliterated
+When you obliterate an object, it is utterly destroyed, leaving no trace. The object is destroyed, then it is removed from the game. It does not become discarded or get returned to a spellbook. 
+
+- Any ability or effect printed on that object or attached to it (such as a marker or enchantment) which triggers on destruction, is canceled.
+
+- Other destruction effects, not attached to or part of the Obliterated object, can still occur.
+
+Examples:
+
+- When you obliterate a Goblin Bomber it will not explode.
+ 
+- When you obliterate a creature with an Ichthellid Larva marker, the Larva will not hatch. 
+
+- If you obliterate an opponent's creature, their Valshalla still gains a Wrath token.
+#
+Obscured
+This object is difficult to see. It cannot be targeted from more than one zone away (this is for all purposes - ranged attacks, spells, abilities, etc.).
+
+- Enchantments and equipment attached to the object also gain the Obscured trait (but attached conjurations do not).
+#
+Reanimate,Reanimates
+This creature reanimates upon death. If this creature is destroyed, it is moved from the discard pile to the zone it was just destroyed in, and placed face down in that zone, with a face-down action marker on it. This creature is considered temporarily out of play. At the end of the round, the creature card is flipped face up and is Summoned into play. 
+
+- Reanimate does not occur if the creature is removed from the game when it is destroyed. See “Obliterate.”
+#
+Reconstruct,Reconstructs
+Reconstruct is an effect which removes damage from Nonliving objects. It is not Regeneration or Healing, and is not affected by the Finite Life trait.
+#
+Resilient
+This object is incredibly resistant to damage. This object ignores all non-critical damage from attacks. 
+
+- Direct damage and attack effects occur normally.
+#
+Rooted
+This creature is rooted to the ground. It cannot take move actions, and it has the Unmovable trait. 
+
+- It is not Restrained, so it can still guard, hinder, and Intercept as normal. 
+
+- A Rooted creature loses, and cannot gain, the Flying trait.
+#
+Snatch,Snatched
+This attack can grab and pull creatures into its zone. Snatch is a Push effect, where the object is Pushed one zone closer towards the source of the Push. 
+- Snatch has no effect on Uncontainable or Unmovable creatures.
+#
+Uproot X,Uproot
+This creature can uproot itself from the ground and move freely. When this creature is activated, you may pay X mana. If you do, it loses the Rooted trait until the end of its Action Phase.
+#
+Vigilant
+This creature is constantly protecting friendly objects. At the end of its Action Phase you may place a Guard marker on this creature, if it does not already have one.
+#
+Vine Markers,Vine,Vines
+Vine markers are a Living conjuration with 1 life, no armor, and they cannot gain armor. As the Druid, or a familiar or tree spawnpoint she controls, casts a vine spell, you can destroy a target Vine marker she controls as an additional cost to cast that spell. If you do, you may ignore the range of that spell to target that Vine marker's zone, an object in that Vine marker's zone, or a border of that Vine marker's zone.
+
+- Vine markers hinder enemy non-Flying
+creatures.
+
+- Any amount of damage will destroy a Vine Marker, regardless of its total life. 
+
+- Can't be targeted by ranged attacks. 
+
+- Any number of Vine markers can occupy a zone. 
+#
+Zombie,Zombie Marker,Zombie Token
+This creature has been raised from the dead. It gains the undead and zombie subtypes. It gains the Psychic Immunity, Slow, Nonliving, and Bloodthirsty +0 traits. 
+
+- Not to be confused with creatures that naturally have the zombie subtype.
+
+- The Zombie marker has no removal cost and cannot be removed by spells or effects which remove condition markers. 
+
+- If this creature would be destroyed, Obliterate it. 
+
+- If a creature already has the Slow trait at the time it received this marker, then it also receives a Stun condition marker.
+####################
+######## FiF #######
+####################
+Disable,Disabled
+Temporarily prevents an object from functioning. If an object has one or more Disable markers on it, it loses all attack bars, action bars, and non-trait
+abilities.
+
+- An ability is anything in the card's text box, except what defines "X" for cards that have an attribute or mana cost dependent on X. 
+
+- It does not lose any of its attributes or its subtypes
+
+- Attributes include Life, Armor, Defenses and Channeling. 
+
+- Each Reset Phase, remove one Disable marker from each object, unless that Disable marker was placed during that Ready Phase. 
+
+- Cannot be removed by spells or abilities which remove condition markers.
+#
+Dissipate X
+When an object with Dissipate X comes into play, it gets X Dissipate tokens. Each Upkeep Phase, remove one Dissipate token. When the last token is removed, destroy this object.
+#
+Unstoppable
+This creature is exceptionally large, heavy, and/or strong, possibly animated by powerful magics. It cannot be hindered and gains the Unmovable and Uncontainable traits.

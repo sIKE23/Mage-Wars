@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forged in Fire"  id="ffed488f-d9ce-48a9-aed9-88b105ede18b" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Forged in Fire"  
+	id="ffed488f-d9ce-48a9-aed9-88b105ede18b" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
 	<markers>
 		<marker id="ae179c85-11ce-4be7-b9c9-352139d0c8f2" name="Rune of Fortification" />
 		<marker id="b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" name="Rune of Power" />
@@ -374,7 +379,7 @@
 
 
 		<card id="fe74477b-1858-42a7-a5de-739f965944c3"  name="Adramelech&apos;s Touch">
-			<property name="Type" value="Enchantment " />
+			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Flame" />
 			<property name="Cost" value="2+1" />
 			<property name="Action" value="Quick" />
@@ -460,7 +465,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait." />
+			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait.&#xD;&#xA;[Charge +2]" />
 			<property name="CardID" value="MWSTX2FFE06" />
 		</card>
 		<card id="09e11b3e-3129-4a87-8f8e-b3c18045389a"  name="Rust">
@@ -475,7 +480,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains Armor -2. [Armor -2]" />
+			<property name="Text" value="This creature gains Armor -2.&#xD;&#xA;[Armor -2]" />
 			<property name="CardID" value="MWSTX2FFE07" />
 		</card>
 
@@ -552,7 +557,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="War Mage Only" />
-			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast. [Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast.&#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MWSTX2FFQ05" />
 		</card>
 		<card id="82a0a369-821d-4f9f-bf27-17363de8e71d"  name="Morning Star">

@@ -1,0 +1,16 @@
+@Scenario=[Domination,7]
+
+.36.
+5..7
+4..2
+.68.
+#Map#
+
+@Orb=[(2,2),(2,3),(3,2),(3,3)]
+
+@Sslak=[(2,2),(2,3),(3,2),(3,3)]
+
+@StartPosition1=(1,1)
+@StartPosition2=(4,1)
+@StartPosition3=(1,4)
+@StartPosition4=(4,4)

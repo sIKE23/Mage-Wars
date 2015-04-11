@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Forcemaster vs Warlord" id="2b573ac7-f7f6-49e5-a26f-5070573374f1" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Forcemaster vs Warlord" 
+	id="2b573ac7-f7f6-49e5-a26f-5070573374f1" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
  	<markers>
  			<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
@@ -306,7 +311,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=1, Life=13" />
-			<property name="AttackBar" value="Halberd:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Great Winged Wind Blast:[Full] [Ranged:0-1] [Wind] [Dice=2] [d12] [7+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
+			<property name="AttackBar" value="Halberd:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Great Winged Wind Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Wind] [Dice=2] [d12] [7+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
 			<property name="Traits" value="Aegis 1, Flying, Wind Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC13" />
@@ -368,7 +373,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=11" />
-			<property name="AttackBar" value="Boulder:&#xD;&#xA;[Ranged:2-3] [Dice=8] [Can only target Corporeal Conjurations]&#xD;&#xA;Rock Storm:[Ranged:2-3] [Zone Attack] [Dice=8] [Unavoidable]" />
+			<property name="AttackBar" value="Boulder:&#xD;&#xA;[Ranged:2-3] [Dice=8] [Can only target Corporeal Conjurations]&#xD;&#xA;Rock Storm:&#xD;&#xA;[Ranged:2-3] [Zone Attack] [Dice=8] [Unavoidable]" />
 			<property name="Traits" value="Zone Exclusive, Flame +2, Legendary, Warlord Only" />
 			<property name="Text" value="Akiro&apos;s starts with 1 Load token on it. Each Upkeep Phase place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make 1 of its 2 attacks listed above." />
 			<property name="CardID" value="FWJ01" />
@@ -461,7 +466,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Indestructible" />
-			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases. Place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level." />
+			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases. Place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="FWJ07" />
 		</card>
 		<card id="c8373d7e-a8be-47cf-a1e0-5e5e90d271e8" name="Renewing Spring">
@@ -484,7 +489,7 @@
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
-			<property name="Target" value="Zone" />
+			<property name="Target" value="Zone Border" />
 			<property name="Subtype" value="" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
@@ -643,9 +648,9 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Defense=8+ 1x No Ranged" />
-			<property name="AttackBar" value="Flaying Slash:&#xD;&#xA;[Melee] [Dice=3]" />
+			<property name="AttackBar" value="Flying Slash:&#xD;&#xA;[Melee] [Dice=3]" />
 			<property name="Traits" value="Upkeep +1, Autonomous" />
-			<property name="Text" value="Once per round, you can use Dancing Scimitar as a Defense, or it can make its attack. Use a ready marker to keep track of its use." />
+			<property name="Text" value="Once per round, you can use Dancing Scimitar as a Defense, or it can make its attack. Use a ready marker to keep track of its use.&#xD;&#xA;[Defense 8+ 1x No Ranged]" />
 			<property name="CardID" value="FWQ01" />
 		</card>
 		<card id="848e5beb-778e-4d42-a393-3122fb2271ce" name="Defense Ring">
@@ -688,7 +693,7 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Piercing +2]&#xD;&#xA;Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Sweeping or Doublestrike]" />
+			<property name="AttackBar" value="Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Piercing +2]&#xD;&#xA;Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Sweeping OR Doublestrike]" />
 			<property name="Traits" value="Cantrip, Forcemaster Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWQ04" />
@@ -763,7 +768,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1, Location=Weapon" />
-			<property name="AttackBar" value="[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="AttackBar" value="Cursed Edge:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Familiar, Legendary, Dark Mage Only" />
 			<property name="Text" value="Sectarus is a non-creature familiar, which can be used to cast only curse enchantments. If Sectarus is used to attack and damage a creature, it may immediately cast the spell on that creature as a free action" />
 			<property name="CardID" value="FWQ09" />
@@ -780,7 +785,7 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Lightning -2 trait" />
+			<property name="Text" value="Mage gains Armor +2 and the Lightning -2 trait.&#xD;&#xA;[Armor +2] [Lightning -2]" />
 			<property name="CardID" value="FWQ10" />
 		</card>
 		<card id="6883436a-f838-4fc6-ae53-a6b1fdb9ef72" name="War Sledge">

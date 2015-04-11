@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" name="Conquest of Kumanjaro" id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" gameVersion="1.4.2.1" version="1.11.0.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Conquest of Kumanjaro" 
+	id="4943fc26-46c8-4f48-90d4-7db5d6ce6952" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
 	<markers>
 		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
 		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
@@ -104,8 +109,8 @@
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
 			<property name="Stats" value="Armor=2, Life=14" />
-			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Charge +1] [Piercing +1]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
-			<property name="Traits" value="" />
+			<property name="AttackBar" value="Antlers:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Lightning Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Lightning] [Dice=4] [d12] [7-9 = Daze; 10+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Charge +1, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC03" />
 		</card>
@@ -164,7 +169,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Defense=8+ 1x, Armor=1, Life=14" />
-			<property name="AttackBar" value="Great Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [7+ = Bleed] [Piercing +1]" />
+			<property name="AttackBar" value="Great Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [7+ = Bleed] [Piercing +1]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="All other friendly cat creatures in the same zone as Makunda have their melee attacks gain the Piercing +1 trait" />
 			<property name="CardID" value="MWSTX1CKC04" />
@@ -179,7 +184,7 @@
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=1, Life=8" />
-			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Web:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
+			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Maddening Shriek:&#xD;&#xA;[Full] [Ranged:0-0] [Psychic] [Dice=1] [d12] [4+ = Daze] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWSTX1CKC05" />
@@ -385,7 +390,7 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defense &#xD;&#xA;Defense 7+ 1x" />
+			<property name="Text" value="Mage gains a Defense &#xD;&#xA;[Defense 7+ 1x]" />
 			<property name="CardID" value="MWSTX1CKQ04" />
 		</card>
 		<card id="0f9291dd-f242-47e7-8053-e8382dc614b8" name="Sunfire Amulet">
