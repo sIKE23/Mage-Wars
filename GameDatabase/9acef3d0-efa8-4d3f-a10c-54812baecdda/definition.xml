@@ -147,7 +147,7 @@
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
-			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTaint" />
+			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTainted" />
 			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran" />
 			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak" />
 			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
