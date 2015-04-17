@@ -691,7 +691,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=8" />
-			<property name="AttackBar" value="Light Blast:&#xD;&#xA;[Ranged: 0-2] [Light] [X] [d12] [9-10 = Stun; 11+ = Daze] [Ethereal] [+2 vs. Nonliving Creatures]" />
+			<property name="AttackBar" value="Light Blast:&#xD;&#xA;[Ranged:0-2] [Light] [X] [d12] [9-10 = Stun; 11+ = Daze] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="Zone Exclusive, Unique" />
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J24" />

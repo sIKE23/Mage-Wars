@@ -16,7 +16,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze;9+ = Stun]" />
+			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze; 9+ = Stun]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO09" />
@@ -46,7 +46,7 @@
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push;7-9=Daze;10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Air] [Dice=2] [d12] [4-6=Push; 7-9=Daze; 10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWPROMO25" />
@@ -123,7 +123,7 @@
 			<property name="School" value="Arcane+Dark"  />
 			<property name="Level" value="3+2" />
 			<property name="Stats" value="Armor=2, Life=14" />
-			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5]&#xD;&#xA;Toxic Spines:&#xD;&#xA;[Full] [Ranged 0-1] [Dice=2] [d12] [8+ = Cripple] [Piercing +1]&#xD;&#xA;Poison Stinger:&#xD;&#xA;[Full] [Melee] [Dice=2] [d12] [5-8 = Weak; 9+ = 2 Weak] [Piercing +1]" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5]&#xD;&#xA;Toxic Spines:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=2] [d12] [8+ = Cripple] [Piercing +1]&#xD;&#xA;Poison Stinger:&#xD;&#xA;[Full] [Melee] [Dice=2] [d12] [5-8 = Weak; 9+ = 2 Weak] [Piercing +1]" />
 			<property name="Traits" value="Flying, Legendary, Tough -2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO56" />
@@ -168,7 +168,7 @@
 			<property name="Level" value="3" />
 			<property name="Subtype" value="Orc, Soldier" />
 			<property name="Stats" value="Armor=0, Life=11" />
-			<property name="AttackBar" value="Greatbow:&#xD;&#xA;[Ranged 1-2] [Dice=4]&#xD;&#xA;Dagger:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="AttackBar" value="Greatbow:&#xD;&#xA;[Ranged:1-2] [Dice=4]&#xD;&#xA;Dagger:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When Bloodwave Greatbow is affected by a friendly command spell, his Greatbow attack gains Piercing +2 until the end of the round." />
 			<property name="CardID" value="MWPROMO59" />
@@ -882,7 +882,7 @@
 			<property name="School" value="War+Earth" />
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Mighty Bash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [+2 vs. Corporeal Conjurations]&#xD;&#xA;Returning Throw:&#xD;&#xA;[Full] [Ranged 0-1] [Dice=3] [d12] [8+ = Slam]" />
+			<property name="AttackBar" value="Mighty Bash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [+2 vs. Corporeal Conjurations]&#xD;&#xA;Returning Throw:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=3] [d12] [8+ = Slam]" />
 			<property name="Traits" value="Legendary, War Mage Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO52" />
