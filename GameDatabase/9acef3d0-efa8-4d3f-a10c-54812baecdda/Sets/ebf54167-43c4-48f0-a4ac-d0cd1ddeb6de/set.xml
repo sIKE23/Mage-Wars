@@ -846,7 +846,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=4, Life=11" />
-			<property name="AttackBar" value="[Quick] [Melee] [Dice=4] [Unavoidable] [Piercing +3]" />
+			<property name="AttackBar" value="Vorpal Blade:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Unavoidable] [Piercing +3]" />
 			<property name="Traits" value="Lightning +2, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C06" />
