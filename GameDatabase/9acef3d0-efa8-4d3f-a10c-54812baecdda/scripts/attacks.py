@@ -1010,7 +1010,8 @@ def malakaisFireReceiptPrompt(heathen):
                                "...FOR I AM THE CANDLE IN THE DARK. THE FEAR IN THE EYES OF THE UNJUST. THE BANE OF THE IMPURE.\n-The book of Malakai, 8:9",
                                "...ALL WHO KNEEL BEFORE EVIL SHALL CLAIM THE FIRE OF WRATH AS THEIR REWARD. AS WILL THE EVIL THEMSELVES. REALLY, THOU SHOULDST NOT DISCRIMINATE IN ITS DISTRIBUTION.\n-The book of Malakai, 3:19",
                                "...AND MALAKAI GESTURED AT THE LADDINITES, AND LO! EACH BECAME A PILLAR OF FLAME, THEIR WICKEDNESS BURNING BRIGHTER THAN THE SUN.\n-The book of Malakai, 2:4",
-                               "...AND MALAKAI DID SEE THAT THEY HAD VERILY REPENTED. AND PROCLAIMING THAT SOME CRIMES ARE FORGIVEN BUT THROUGH FLAME, HE SEARED THEIR WICKEDNESS FROM THEIR BONES.\n-The book of Malakai, 8:7"]
+                               "...AND MALAKAI DID SEE THAT THEY HAD VERILY REPENTED. AND PROCLAIMING THAT SOME CRIMES ARE FORGIVEN BUT THROUGH FLAME, HE SEARED THEIR WICKEDNESS FROM THEIR BONES.\n-The book of Malakai, 8:7",
+                               "... AND I WILL STRIKE DOWN UPON THEE WITH GREAT VENGEANCE AND FURIOUS ANGER THOSE WHO ATTEMPT TO POISON AND DESTROY MY BROTHERS. AND YOU WILL KNOW MY NAME IS MALAKAI WHEN I LAY MY LIGHT UPON THEE \n-The book of Malakai, 25:17"]
                 passage=rnd(0,len(bookOfMalakai)-1)
                 notify(bookOfMalakai[passage])
                 notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
