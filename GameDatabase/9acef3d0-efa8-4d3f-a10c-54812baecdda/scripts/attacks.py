@@ -49,6 +49,9 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
         mute()
         setEventList('Turn',[]) #Clear the turn event list. Will need to be changed when we implement sweeping/zone attacks properly
         aTraitDict = (computeTraits(attacker) if attacker else {})
+        if aTraitDict.get("Incapacitated"):
+                if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.name.split(',')[0]))
+                return {}
         if attacker and aTraitDict.get('Charge') and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
         if not attacker: defender = None
         dTraitDict = (computeTraits(defender) if defender else {})
@@ -346,6 +349,11 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
                 attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
+                #bookmark
+                if [True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
+                        eventList = getEventList('Round')
+                        if not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id]:
+                                attackDice += 1
                 vs = atkTraits.get('VS')
                 if vs: #We'll assume each attack has only one vs+ trait
                         if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
@@ -547,7 +555,7 @@ def rememberDefenseUse(card,defense):
 
 def rememberAttackUse(attacker,defender,attack,damage=0):
         appendEventList('Round',['Attack', [attacker._id,defender._id,attack,damage]])
-        appendEventList('Turn',['Attack', [attacker._id,attacker._id,attack,damage]])
+        appendEventList('Turn',['Attack', [attacker._id,defender._id,attack,damage]])
 
 def rememberCharge(attacker):
         appendEventList('Round',['Charge', [attacker._id]])
@@ -605,7 +613,7 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
                                 if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
                                         defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
         for c in table:
-                if (dTraitDict.get("Incapacitated") and not "Autonomous" in c.Traits): continue
+                if (dTraitDict.get("Incapacitated") and not ("Autonomous" in c.Traits or c.Name in ["Force Orb","Force Sword"])): continue
                 if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone') and not c.markers[Disable]):
                         rawText = c.text.split('\r\n[')
                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
@@ -628,7 +636,7 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
 
 def computeDefense(aTraitDict,attack,dTraitDict,defense):
         source = Card(defense.get("Source"))
-        if "Autonomous" in source.Traits: return dict(defense) #Autonomous equipment is not modified by anything
+        if "Autonomous" in source.Traits or source.Name in ["Force Orb","Force Sword"]: return dict(defense) #Autonomous equipment is not modified by anything
         modDefense = dict(defense)
         modDefense['Minimum'] = max(modDefense.get('Minimum',13)-dTraitDict.get('Defense',0),1)
         return modDefense
@@ -651,13 +659,31 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
         choice = askChoice('Would you like to use a defense?',queryList,colors)
         if choice == 0 or choice == len(queryList): return False
         defense = defenseList[choice-1]
+        defSource = Card(defense.get('Source'))
+        if defSource.Name == "Forcemaster": #Forcemaster's special defense
+                if me.mana == 0:
+                        whisper("You cannot use that defense - you have no mana!")
+                        return False
+                payManaChoice = askChoice("Pay 1 mana to use your innate defense?",["Yes","No"],["#01603e","#de2827"])
+                if payManaChoice == 1:
+                        me.mana -= 1
+                        notify("{} pays 1 mana.".format(me))
+                else: return False
         rememberDefenseUse(defender,defense)
         defense = computeDefense(aTraitDict,attack,dTraitDict,defense) #NOW we modify the defense
-        defSource = Card(defense.get('Source'))
         notify("{} attempts to avoid the attack using {}!".format(defender,
                                                                  ('its innate defense' if defSource == defender else 'its defense from {}'.format(defSource))))
         
         damageRoll,effectRoll = rollDice(0)
+        if defense.get('Uses',0)>=1 and defSource.markers[Ready]: #Flip the defense marker
+                defSource.markers[Ready]=0
+                defSource.markers[Used]=1
+        if defense.get('Uses',0)==2 and timesHasUsedDefense(defender,defense) >= 2 and defSource.markers[ReadyII]: #Flip the defenseII marker
+                defSource.markers[ReadyII]=0
+                defSource.markers[UsedII]=1
+        if defSource.Name == "Forcemaster": #Flip forcemaster's deflect marker
+                defSource.markers[DeflectR]=0
+                defSource.markers[DeflectU]=1
         if effectRoll >= defense.get('Minimum',13):
                notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
                return defense
@@ -737,6 +763,12 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        #Check for fumble
+        if [True for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble"] and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
+                notify("{} fumbles the attack!".format(attacker.name.split(',')[0]))
+                rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+                interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+                return
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
@@ -921,6 +953,10 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                         rememberPlayerEvent("Blood Reaper",attacker.controller)
                         notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)".format(mage,str(healing)))
                         remoteCall(mage.controller, "remotePlayerHeal", [healing])
+
+        #Malakai's Fire
+        if (attacker.Name=="Priest" and attack.get("Type")=="Light" and damage and not timesHasOccured("Malakai's Fire",attacker.controller) and "Flame" not in dTraitDict.get("Immunity",[])):
+                remoteCall(attacker.controller,"malakaisFirePrompt",[defender])
         
         #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
         dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
@@ -944,7 +980,28 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                         if e=="Damage" and defender.Type == "Mage": defender.controller.damage += 1
                         else: defender.markers[eval(e)]+=1
                 notify('{} {}'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
-#mage ID
+
+def malakaisFirePrompt(heathen):
+        mute()
+        if me.mana >= 1 and askChoice("Smite the heathen with Malakai's Fire?",["Yes (1 mana)","No"],["#01603e","#de2827"])==1:
+                me.mana -= 1
+                rememberPlayerEvent("Malakai's Fire")
+                remoteCall(heathen.controller,"malakaisFireReceiptPrompt",[heathen])
+
+def malakaisFireReceiptPrompt(heathen):
+        mute()
+        if askChoice("Malakai smites {}! Apply Burn condition?".format(heathen.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
+                heathen.markers[Burn]+=1
+                bookOfMalakai=["...AND THE HEATHENS IN THEIR TREACHERY DOTH BURN LIKE CANDLES, SPAKE MALAKAI. AND LO, SO THEY DID BURN.\n- The book of Malakai, 16:3",
+                               "...AND HE LIT A THOUSAND FIRES BENEATH THE FOUL. AND MALAKAI SAW THAT IT WAS JUST.\n- The book of Malakai, 19:25",
+                               "...LET HE WHO JUDGETH WITH NO CAUSE BE JUDGED FIRST. AND THEN BURN HIM.\n-The book of Malakai, 4:22",
+                               "...BEHOLD YE, FOR THIS IS THE FLAME OF RIGHTEOUSNESS. SEE THAT IT BURNETH EVERMORE IN YOUR HEART. AND ALSO IN THE HEARTS OF THE UNBELIEVERS, BUT IN A MORE LITERAL SENSE.\n-The book of Malakai, 5:18",
+                               "...FOR I AM THE CANDLE IN THE DARK. THE FEAR IN THE EYES OF THE UNJUST. THE BANE OF THE IMPURE.\n-The book of Malakai, 8:9",
+                               "...ALL WHO KNEEL BEFORE EVIL SHALL CLAIM THE FIRE OF WRATH AS THEIR REWARD. AS WILL THE EVIL THEMSELVES. REALLY, THOU SHOULDST NOT DISCRIMINATE IN ITS DISTRIBUTION.\n-The book of Malakai, 3:19",
+                               "...AND MALAKAI GESTURED AT THE LADDINITES, AND LO! EACH BECAME A PILLAR OF FLAME, THEIR WICKEDNESS BURNING BRIGHTER THAN THE SUN.\n-The book of Malakai, 2:4"]
+                passage=rnd(0,len(bookOfMalakai)-1)
+                notify(bookOfMalakai[passage])
+                notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
         card = Card(cardTraitsDict.get('OwnerID'))
         
@@ -1192,7 +1249,7 @@ def computeTraits(card):
         
         if markers[Pet] and 'Animal' in subtype: extend(['Melee +1','Armor +1','Life +3'])
         if markers[BloodReaper] and 'Demon' in subtype: append('Bloodthirsty +2')
-        if markers[EternalServant] and 'Undead' in subtype: append('Piercing +1')
+        if markers[EternalServant] and 'Undead' in subtype and not "Legendary" in card.Traits: append('Piercing +1')
         if markers[Treebond] and 'Tree' in subtype: extend(['Innate Life +4','Armor +1','Lifebond +2'])
         if markers[Veteran] and 'Soldier' in subtype: extend(['Armor +1','Melee +1'])
         if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')

@@ -146,6 +146,7 @@
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Ctrl+N" execute="addRanged" />
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
+			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+S" execute="addSleep" />
 			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
 			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTainted" />
 			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran" />
@@ -169,6 +170,7 @@
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
+			<cardaction menu="Remove Sleep Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSleep" />
 			<cardaction menu="Remove Stun Marker" default="False" shortcut="Ctrl+Alt+S" execute="subStun" />
 			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint" />
 			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVeteran" />

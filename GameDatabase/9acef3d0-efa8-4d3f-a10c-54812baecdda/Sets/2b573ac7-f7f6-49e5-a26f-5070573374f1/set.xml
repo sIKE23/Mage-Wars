@@ -22,7 +22,7 @@
 		<card id="7f88625f-591b-41ef-861d-4a89a4a57f24" name="Forcemaster">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Mind school of Magic. Non-Mind creature spells cost triple during spellbook construction." />
-			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Defense=7+ 1x" />
 			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />

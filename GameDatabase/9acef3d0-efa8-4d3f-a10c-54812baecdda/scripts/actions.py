@@ -1185,6 +1185,7 @@ tokenList=['Armor',
            'Slam',
            'Stun',
            'Stuck',
+           'Sleep',
            'Tainted',
            'Veteran',
            'Weak',
@@ -1453,7 +1454,7 @@ def flipcard(card, x = 0, y = 0):
   				card.markers[MistToken] = 1
 			if "Rolling Fog" == card.Name:
   				card.markers[DissipateToken] = 3
-		if "Defense" in card.Stats:
+		if "Defense" in card.Stats and not card.Name=="Forcemaster":
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1
 			if "2x" in card.Stats:
