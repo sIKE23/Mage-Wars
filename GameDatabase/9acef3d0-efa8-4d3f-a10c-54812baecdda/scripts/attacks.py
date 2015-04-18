@@ -764,10 +764,21 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         #Check for fumble
-        if [True for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble"] and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
+        if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
                 notify("{} fumbles the attack!".format(attacker.name.split(',')[0]))
                 rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
                 interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+                return
+        #Check for block
+        if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+                notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
+                rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+                interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+                return
+        #Check for reverse attack
+        if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+                notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
+                interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
                 return
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
@@ -998,7 +1009,8 @@ def malakaisFireReceiptPrompt(heathen):
                                "...BEHOLD YE, FOR THIS IS THE FLAME OF RIGHTEOUSNESS. SEE THAT IT BURNETH EVERMORE IN YOUR HEART. AND ALSO IN THE HEARTS OF THE UNBELIEVERS, BUT IN A MORE LITERAL SENSE.\n-The book of Malakai, 5:18",
                                "...FOR I AM THE CANDLE IN THE DARK. THE FEAR IN THE EYES OF THE UNJUST. THE BANE OF THE IMPURE.\n-The book of Malakai, 8:9",
                                "...ALL WHO KNEEL BEFORE EVIL SHALL CLAIM THE FIRE OF WRATH AS THEIR REWARD. AS WILL THE EVIL THEMSELVES. REALLY, THOU SHOULDST NOT DISCRIMINATE IN ITS DISTRIBUTION.\n-The book of Malakai, 3:19",
-                               "...AND MALAKAI GESTURED AT THE LADDINITES, AND LO! EACH BECAME A PILLAR OF FLAME, THEIR WICKEDNESS BURNING BRIGHTER THAN THE SUN.\n-The book of Malakai, 2:4"]
+                               "...AND MALAKAI GESTURED AT THE LADDINITES, AND LO! EACH BECAME A PILLAR OF FLAME, THEIR WICKEDNESS BURNING BRIGHTER THAN THE SUN.\n-The book of Malakai, 2:4",
+                               "...AND MALAKAI DID SEE THAT THEY HAD VERILY REPENTED. AND PROCLAIMING THAT SOME CRIMES ARE FORGIVEN BUT THROUGH FLAME, HE SEARED THEIR WICKEDNESS FROM THEIR BONES.\n-The book of Malakai, 8:7"]
                 passage=rnd(0,len(bookOfMalakai)-1)
                 notify(bookOfMalakai[passage])
                 notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
