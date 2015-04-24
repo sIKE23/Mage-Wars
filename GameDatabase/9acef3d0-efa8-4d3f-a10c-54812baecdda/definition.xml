@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
-	version="1.11.5.0"
+	version="1.11.6.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -166,7 +166,7 @@
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
 			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
-			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Shift+N" execute="subRanged" />
+			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged" />
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
