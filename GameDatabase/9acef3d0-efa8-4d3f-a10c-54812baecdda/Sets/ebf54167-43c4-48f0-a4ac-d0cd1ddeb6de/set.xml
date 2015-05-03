@@ -771,7 +771,7 @@
 			<property name="School" value="Dark+Fire" />
 			<property name="Level" value="4+2" />
 			<property name="Stats" value="Armor=3, Life=14" />
-			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost]&#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Sweeping] [Defrost]" />
+			<property name="AttackBar" value="Hellfire Scythe:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=6] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost]&#xD;&#xA;Hellfire Sweep:&#xD;&#xA;[Full] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Sweeping] [Defrost]" />
 			<property name="Traits" value="Flying, Flame Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C01" />
