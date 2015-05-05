@@ -1,4 +1,4 @@
-﻿//Version: 1.9.0.0
+﻿//Version: 1.12.0.0
 
 namespace Octgn.MageWarsValidator
 {

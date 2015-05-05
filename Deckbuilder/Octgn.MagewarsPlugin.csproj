@@ -32,13 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Octgn.Core">
-      <HintPath>C:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Core.dll</HintPath>
+      <HintPath>D:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Core.dll</HintPath>
     </Reference>
     <Reference Include="Octgn.DataNew">
-      <HintPath>C:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.DataNew.dll</HintPath>
+      <HintPath>D:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.DataNew.dll</HintPath>
     </Reference>
     <Reference Include="Octgn.Library">
-      <HintPath>C:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Library.dll</HintPath>
+      <HintPath>D:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Library.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -59,7 +59,7 @@
   <PropertyGroup>
     <PostBuildEvent>echo "Copy files to plugin folder..."
 xcopy "Octgn.Magewars.dll" "D:\Users\fczajka\Documents\OCTGN\Plugins\mwPlugin" /y /q /c
-xcopy "Octgn.Magewars.dll" "D:\Dev\Github\Mage-Wars\GameDatabase\9acef3d0-efa8-4d3f-a10c-54812baecdda\Plugins\Octgn.MagewarsPlugin" /y /q /c
+xcopy "Octgn.Magewars.dll" "D:\Github\Mage-Wars\GameDatabase\9acef3d0-efa8-4d3f-a10c-54812baecdda\Plugins\Octgn.MagewarsPlugin" /y /q /c
 	</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

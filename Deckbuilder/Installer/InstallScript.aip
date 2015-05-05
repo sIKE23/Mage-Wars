@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="11.4.1" version="11.7.1" Modules="simple" RootPath="." Language="en" Id="{3B84AAD9-7B0B-456D-A8CD-4550C473B8E2}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="11.4.1" version="12.0" Modules="simple" RootPath="." Language="en" Id="{3B84AAD9-7B0B-456D-A8CD-4550C473B8E2}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:"/>
+    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:3"/>
     <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPNOREPAIR" Value="1"/>
     <ROW Property="ARPURLINFOABOUT" Value="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/"/>
@@ -13,8 +13,8 @@
     <ROW Property="Manufacturer" Value="Mage Wars for OCTGN"/>
     <ROW Property="ProductCode" Value="1033:{E3D988B6-8DE9-4874-A3D6-503F981D8941} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="Mage Wars for OCTGN DeckBuilder Plugin Install v1.11.1.3"/>
-    <ROW Property="ProductVersion" Value="1.11.1.3" Type="32"/>
+    <ROW Property="ProductName" Value="Mage Wars for OCTGN DeckBuilder Plugin Install v1.12.0.0"/>
+    <ROW Property="ProductVersion" Value="1.12.0.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{C5C5B0E2-F8B4-4F5F-B6BB-879C69F7F5FE}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -40,8 +40,8 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="OCTGNDeckConverter.dll" Component_="OCTGNDeckConverter.dll" FileName="OCTGND~1.DLL|OCTGNDeckConverter.dll" Attributes="0" SourcePath="C:\Users\fczajka\Documents\OCTGN\Plugins\MWPlugIn\OCTGNDeckConverter.dll" SelfReg="false"/>
-    <ROW File="Octgn.Magewars.dll" Component_="Octgn.Magewars.dll" FileName="OCTGNM~1.DLL|Octgn.Magewars.dll" Attributes="0" SourcePath="C:\Users\fczajka\Documents\OCTGN\Plugins\MWPlugIn\Octgn.Magewars.dll" SelfReg="false" NextFile="OCTGNDeckConverter.dll"/>
+    <ROW File="OCTGNDeckConverter.dll" Component_="OCTGNDeckConverter.dll" FileName="OCTGND~1.DLL|OCTGNDeckConverter.dll" Attributes="0" SourcePath="..\bin\OCTGNDeckConverter\OCTGNDeckConverter.dll" SelfReg="false"/>
+    <ROW File="Octgn.Magewars.dll" Component_="Octgn.Magewars.dll" FileName="OCTGNM~1.DLL|Octgn.Magewars.dll" Attributes="0" SourcePath="..\bin\Release\Octgn.Magewars.dll" SelfReg="false" NextFile="OCTGNDeckConverter.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="..\bin\Release" PackageFileName="OCTGN-SBB-for-MageWars" Languages="en" InstallationType="4" UseLargeSchema="true"/>

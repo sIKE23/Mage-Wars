@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- v1.11.0.0 -->
+<!-- v1.12.0.0 -->
 <html>
 <head>
 <title>Changelog for the Mage Wars module on OCTGN</title>
@@ -13,6 +13,70 @@
 <div class="head">
     <p align="left">Changelog for the Mage Wars module on OCTGN</p>
 </div>
+
+<!-- ################################################################################################################################################################ -->
+
+<div class="section">
+	1.12.0.0<br>
+</div>
+<ol><div class="section">
+	<strong>The Game:</strong>
+</div>
+<div class="body"><ul>
+	<li> Very exciting news! With this release we introduce the Battle Calculator!</li>
+	<li> Just create an Arrow from the card you want to attack with and drag it to the target card</li><ol>
+	<li> Automated Mana usage off of a Spawnpoint</li>
+	<li> Moved the Roll Dice to the TAB key, the F1 key still works for legacy purposes for now</li>
+	<li> When you bring up the Roll Dice window it is now a menu to select the number of Dice you wish to roll</li>
+	<li> Zone Attacks will still have to be manually processed</li></ol>
+	<li> Added Ranged+1 Markers - Alt+N and Ctrl+Alt+N to Add/Remove</li>
+	<li> Search-able E-Codex Added - Ctrl+H</li>
+	<li> Flavored Death Messages! Thanks to all of those who contributed the many death messages!</li>
+	<li> New Features Introduction - The first time you start a new game with the release you will see a windows introduction new features!</li>
+	<li> Upkeep has been further automated, you will be prompted during the Upkeep Phase if you want to pay the Upkeep for a creature with the Upkeep trait.</li><ol>
+	<li> Essence Drain is now automated properly</li>
+	<li> Storm tokens are automated with Upkeep for the Staff of Storms.</li>
+	<li> Crush Tokens from Stanglevine are added when Upkeep is paid.</li>
+	<li> Upkeep from Mana Prism is now handled</li>
+	<li> Psy Orb and Mana Syphon are now included in the Upkeep automation.</li></ol>
+	<li> Fixed - When you disconnect from the game, your player color is now preserved</li>
+	<li> Fixed - Support for differ net card sizes was introduced with with the last OCTGN release. This resulted in distorted images, the module now takes advantage of this feature.</li>
+	<li> Fixed - Better spacing on Attached Cards</li>
+	<li> Fixed - Refined Attachment restrictions</li>
+	<li> Fixed - Game should prompt for enchantment reveals in initiative order</li>
+	<li> Fixed - More clean up of card data. If you find incorrect card data in the Spellbook builder, please let us know, the Battle Calculator uses this data so the more accurate it is the better the BC will be!</li>
+	<li> Fixed - When a game is reset Phase and Initiative Markers are not re-created</li>
+	<li> Fixed - The Apprentice Wizard Stats and Spellbook are not correct</li>
+	<li> Fixed - The Targeting Reticule from Objects is now removed from all objects during the Reset Phase</li>
+	<li> Fixed - Tainted is no longer known as both Taint and Tainted</li>
+	<li> Fixed - A Disable Marker will automatically be removed from a during the Upkeep phase(yes the BC knows how to handle these markers!)</li>
+</ul>
+</div>
+
+<div class="section">
+	<strong>Image Pack:</strong>
+</div>
+
+<div class="body"><ul>
+	<li> </li>
+	<li><strike> Added the Vasel Promo's</strike> Coming Soon!</li>
+	<li> Updated <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/imagepacks/" title=Image Packs>MW-NewCards.o8c</a>, which contains the updated Promo card art.</li>
+</ul>
+</div>
+
+<div class="section">
+	<strong>Spellbook Builder:</strong>
+</div>
+<div class="body">
+	<ul>
+		<li> Fixed - System.FormatException: Input string was not in a correct format at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal) at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info) at Octgn.MageWarsValidator.ValidatorMenuItem.OnClick(IDeckBuilderPluginController con)  at Octgn.DeckBuilder.DeckBuilderWindow.c__DisplayClass6.b__1(Object sender, RoutedEventArgs args) in c:\Program Files (x86)\Jenkins\workspace\OCTGN-Release\octgnFX\Octgn\DeckBuilder\DeckBuilderWindow.xaml.cs:line 123</li>
+		<li> You may have to uninstall the old version before you can install the new version. Still working on resolving this....</li>
+		<li><strike> Added the Vasel Promo's</strike> Coming Soon! - thank the dock workers on the West Coast....</li>
+		<li> The installer for the Spellbook Builder has been updated with the new DLL. You can find the step by step process to update the plug-in <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/" title=Install>here</a>.</li>
+	</ul>
+</div></ol>
+<!-- ################################################################################################################################################################ -->
+
 
 <!-- ################################################################################################################################################################ -->
 
@@ -57,7 +121,7 @@
 		<li> Added L99 Promo's</li>
 		<li> When you validate your spellbook, the format of the card data copied to your clipboard has been changed, it is now formatted to help with spellbook construction.</li><ol>
 		<li> Quantity - Spell Name - Spell Level - Spellbook Cost - Total Spellbook Cost is now the format output for each card</li></ol>
-		<li> The installer for the Spellbook Builder has been updated with the new DLL. You can find the step by step process to update the plugin <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/" title=Install>here</a>.</li>
+		<li> The installer for the Spellbook Builder has been updated with the new DLL. You can find the step by step process to update the plug-in <a href="http://octgn.gamersjudgement.com/wordpress/magewars/install-2/sbb/" title=Install>here</a>.</li>
 	</ul>
 </div></ol>
 <!-- ################################################################################################################################################################ -->
