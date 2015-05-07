@@ -773,7 +773,7 @@
 			<property name="Text" value="Once per round, this Mage may cast the above quick spell." />
 			<property name="CardID" value="DNQ06" />
 		</card>
-		<card id="94757213-e96f-44b3-a520-7528fa098d74" name="Veterans Belt">
+		<card id="94757213-e96f-44b3-a520-7528fa098d74" name="Veteran&apos;s Belt">
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />

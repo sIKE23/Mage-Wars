@@ -148,7 +148,20 @@ def detachAll(card):
             remoteCall(c.controller,'detach',[c])
             remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
         rnd(0,0)
-    
+
+def unbindAll(card):
+    """Like detachAll, but for bound spells"""
+    mute()
+    c = getBound(card)
+    if c:
+        if c.controller == me:
+            unbind(c)
+            moveCardToDefaultLocation(c,True)
+        else:
+            remoteCall(c.controller,'unbind',[c])
+            remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
+        rnd(0,0)
+
 def isAttached(card):
     """Determines whether <card> is attached to anything."""
     mute()

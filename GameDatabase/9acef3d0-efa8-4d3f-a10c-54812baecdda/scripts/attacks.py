@@ -910,11 +910,15 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                                                                                                           defender.Name,
                                                                                                           (' It will also drain {} mana from {}.'.format(
                                                                                                                   str(dManaDrain),defender.controller.name) if dManaDrain else '')),
-                           ['Yes','No'],
-                           ["#01603e","#de2827"])
+                           ['Yes',"Other Damage Amount",'No'],
+                           ["#01603e","#FF6600","#de2827"])
         if choice == 1:
                 applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
                 return actualDmg #for remembering damage. Pretty crude; We'll come up with a better alternative in Q2
+        elif choice == 2:
+                actualDmg = askInteger("Apply how much damage?",actualDmg)
+                applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
+                return actualDmg
         else:
                 notify('{} has elected not to apply auto-calculated battle results'.format(me))
                 whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
@@ -1056,11 +1060,16 @@ def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment
                 recurText = 'another'
 
 def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
+        defender = Card(dTraitDict["OwnerID"])
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         atkTraits = attack.get('Traits',{})
         if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + ((2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0)),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
         normal = roll[2] + 2*roll[3]
         critical = roll[4] + 2*roll[5]
+        if defender.Type == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt
+                reduction = min(critical,2)
+                critical -= reduction
+                normal += reduction
         return (max((0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal) - armor,0) +
                 critical + (normal if atkTraits.get('Critical Damage') else 0),
                 computeEffect(effectRoll,aTraitDict,attack,dTraitDict))
@@ -1386,6 +1395,11 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
         return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
+        defender = Card(dTraitDict["OwnerID"])
+        if defender.Type == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt in damage prediction
+                reduction = min(critical,2)
+                critical -= reduction
+                normal += reduction
         armor = computeArmor(aTraitDict,attack,dTraitDict)
         atkTraits = attack.get('Traits',{})
         return (max((0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal) - armor,0) +
