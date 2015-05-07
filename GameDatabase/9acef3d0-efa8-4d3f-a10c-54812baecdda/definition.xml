@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
-	version="1.12.0.0"
+	version="1.12.1.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -114,17 +114,10 @@
 			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
 			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
 			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
-			<groupaction menu="Set 4X3 Domination Arena Game Board" default="False" shortcut="Alt+F6" execute="setGameBoard6" />
 			<groupaction menu="Set 2x3 Apprentice Arena Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard9" />
 			<groupaction menu="Set 3x3 OCTGN Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
 			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
-		</groupactions>
-		<groupactions menu="Domination Mode">
-			<groupaction menu="Setup for Domination - Board Configuration 1" default="False" execute="setupDom" />
-			<groupaction menu="Create Power Orb" default="False" execute="createPowerOrb" />
-			<groupaction menu="Create Orb Guardian" default="False" execute="createOrbGuardian" />
-			<groupaction menu="Create Orb Greater Guardian" default="False" execute="createGOrbGuardian" />
 		</groupactions>
 		<groupactions menu="Alternate Hotkeys">
 			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack" />

@@ -192,6 +192,9 @@ def onGameStart():
 	#create a dictionary of attachments and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
 	setSetting("AutoAttach", True)
+	
+	#enable AutoRoll of Initative for now....
+	setSetting("AutoRollIni", True)
 
 # bring up window to point to documentation
 	initializeGame()

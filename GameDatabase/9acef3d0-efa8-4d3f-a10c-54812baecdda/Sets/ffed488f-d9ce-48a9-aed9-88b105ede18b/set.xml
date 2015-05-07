@@ -435,7 +435,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="This creature gains Armor +4. At the end of the round, destroy Brace Yourself." />
+			<property name="Text" value="This creature gains Armor +4. At the end of the round, destroy Brace Yourself.&#xD;&#xA;[Armor +4]" />
 			<property name="CardID" value="MWSTX2FFE04" />
 		</card>
 		<card id="931f7873-015c-47d2-8f92-3a1426b001b5" name="Fumble">
