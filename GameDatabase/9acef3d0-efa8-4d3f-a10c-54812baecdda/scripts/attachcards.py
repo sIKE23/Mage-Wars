@@ -249,7 +249,8 @@ def canAttach(card,target):
             (cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
             (cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
             (cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
-            (cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic'))): return True
+            (cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic')) or
+            (cTargetBar == 'Zone or Object')): return True
     elif ((cType == 'Equipment' and tType == 'Mage') or
         (cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and not traits.get('Flying'))): return True
     return False
