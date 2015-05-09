@@ -153,81 +153,82 @@ getAttackList:
 
 def getAttackList(card):
         """This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
-        if not card or card.AttackBar == '': return [] #Return an empty list if passed a blank argument
-        rawData = card.AttackBar
-        #Split up the attacks:
-        attackKeyList0 = [attack.split(':\r\n') for attack in card.AttackBar.split(']\r\n')]
-        isAttackSpell = (card.Type == 'Attack')
+        if not card: return [] #Return an empty list if passed a blank argument
         attackList = []
-        #Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
-        attackKeyList1 = []
-        for attack in attackKeyList0:
-                name = (card.Name if isAttackSpell else attack[0])
-                attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
-                if isAttackSpell: attributes.append('Spell')
-                options = []
-                tempAttributes = attributes
-                for a in list(attributes):
-                        if ' OR ' in a:
-                                attributes.remove(a)
-                                options = a.split(' OR ')
-                if options:
-                        for o in options:
-                                attackKeyList1.append([name,attributes+[o]])
-                else:
-                        attackKeyList1.append([name,attributes])
-        #Create attack dictionaries
-        for attack in attackKeyList1:
-                name = attack[0]
-                attributes = attack[1]
-                aDict = {'Name':name,
-                         'd12':[],
-                         'Traits': {},
-                         'EffectType': 'Attack',
-                         'SourceID': card._id,
-                         'OriginalSourceID': card._id
-                         #Later, when functionality is expanded to include non-attack effects, this will be modified
-                         }
-                if isAttackSpell:
-                        aDict['Range'] = [int(r) for r in card.Range.split('-')]
-                        aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
-                #Now we extract the attributes
-                effectSwitch = False
-                if "Heal" in attributes: continue
-                for attribute in attributes: #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
-                        attribute = attribute.strip('[]')
-                        if attribute in ['Quick','Full'] : aDict['Action'] = attribute
-                        elif 'Ranged' in attribute:
-                                aDict['RangeType'] = attribute.split(':')[0]
-                                if not isAttackSpell: aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
-                        elif 'Melee' in attribute:
-                                aDict['RangeType'] = 'Melee'
-                                aDict['Range'] = [0,0]
-                        elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
-                        elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
-                        elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
-                        elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
-                        elif attribute == 'd12' : effectSwitch = True
-                        elif effectSwitch:
-                                options = attribute.split('; ')
-                                aDict['d12'] = [o.split(' = ') for o in options]
-                                effectSwitch = False
+        if card.AttackBar != "":
+                rawData = card.AttackBar
+                #Split up the attacks:
+                attackKeyList0 = [attack.split(':\r\n') for attack in card.AttackBar.split(']\r\n')]
+                isAttackSpell = (card.Type == 'Attack')
+                #Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
+                attackKeyList1 = []
+                for attack in attackKeyList0:
+                        name = (card.Name if isAttackSpell else attack[0])
+                        attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
+                        if isAttackSpell: attributes.append('Spell')
+                        options = []
+                        tempAttributes = attributes
+                        for a in list(attributes):
+                                if ' OR ' in a:
+                                        attributes.remove(a)
+                                        options = a.split(' OR ')
+                        if options:
+                                for o in options:
+                                        attackKeyList1.append([name,attributes+[o]])
                         else:
-                                tPair = traitParser(attribute)
-                                if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
-                                elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
-                                else: aDict['Traits'][tPair[0]] = tPair[1]
-                aDict['OriginalAttack'] = deepcopy(aDict)
-                if aDict.get('Dice')!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
-        
+                                attackKeyList1.append([name,attributes])
+                #Create attack dictionaries
+                for attack in attackKeyList1:
+                        name = attack[0]
+                        attributes = attack[1]
+                        aDict = {'Name':name,
+                                 'd12':[],
+                                 'Traits': {},
+                                 'EffectType': 'Attack',
+                                 'SourceID': card._id,
+                                 'OriginalSourceID': card._id
+                                 #Later, when functionality is expanded to include non-attack effects, this will be modified
+                                 }
+                        if isAttackSpell:
+                                aDict['Range'] = [int(r) for r in card.Range.split('-')]
+                                aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
+                        #Now we extract the attributes
+                        effectSwitch = False
+                        if "Heal" in attributes: continue
+                        for attribute in attributes: #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
+                                attribute = attribute.strip('[]')
+                                if attribute in ['Quick','Full'] : aDict['Action'] = attribute
+                                elif 'Ranged' in attribute:
+                                        aDict['RangeType'] = attribute.split(':')[0]
+                                        if not isAttackSpell: aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
+                                elif 'Melee' in attribute:
+                                        aDict['RangeType'] = 'Melee'
+                                        aDict['Range'] = [0,0]
+                                elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
+                                elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
+                                elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
+                                elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
+                                elif attribute == 'd12' : effectSwitch = True
+                                elif effectSwitch:
+                                        options = attribute.split('; ')
+                                        aDict['d12'] = [o.split(' = ') for o in options]
+                                        effectSwitch = False
+                                else:
+                                        tPair = traitParser(attribute)
+                                        if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
+                                        elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
+                                        else: aDict['Traits'][tPair[0]] = tPair[1]
+                        aDict['OriginalAttack'] = deepcopy(aDict)
+                        if aDict.get('Dice')!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
+                
         for c in table:
                 if card.Type == 'Mage':
                         if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack') and
-                            (getAttachTarget(c) == card or (not canDeclareAttack(getAttachTarget(c)) if getAttachTarget(c) else True)) and
+                            (getBindTarget(c) == card or (not canDeclareAttack(getBindTarget(c)) if getBindTarget(c) else True)) and
                             not c.markers[Disable]): attackList.extend(getAttackList(c))
                 if c.Type == 'Enchantment' and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
         
-        if 'Familiar' or 'Spawnpoint' in card.Traits:
+        if 'Familiar' in card.Traits or 'Spawnpoint' in card.Traits:
                 for c in table:
                         if (c.Type == 'Attack' and card.controller == c.controller and getBindTarget(c)==card): attackList.extend(getAttackList(c))
         for a in attackList:
@@ -387,6 +388,7 @@ def canDeclareAttack(card):
         if not card.isFaceUp: return False
         if (card.Type in ['Creature','Mage'] or
             ('Conjuration' in card.Type and card.AttackBar != '') or
+            (("Familiar" in card.Traits or "Spawnpoint" in card.Traits) and [True for c in [getBound(card)] if c and c.Type == "Attack"]) or
             computeTraits(card).get('Autonomous') or
             [1 for attack in getAttackList(card) if attack.get('RangeType')=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
                 return True
