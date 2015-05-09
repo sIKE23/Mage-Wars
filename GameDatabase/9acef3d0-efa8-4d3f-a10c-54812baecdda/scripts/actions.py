@@ -980,10 +980,10 @@ def resolveUpkeep():
 		# Process Upkeep for Stranglevine
 		else:
 			if card.Name == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
-				notify("{} is placing a Crush Token on '{}'...".format(me, card.Name))
+				attatchedTo = getAttachTarget(card)
+				notify("{} has a Stranglevine attached to it adding a Crush token...".format(attatchedTo.name))
 				card.markers[CrushToken] += 1
 				upKeepCost = card.markers[CrushToken]
-				attatchedTo = getAttachTarget(card)
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 
 		if upKeepCost >= 1:
@@ -1017,6 +1017,9 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 		if choice == 1 and card.isFaceUp:
 			me.Mana -= upKeepCost
 			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
+			if card2 == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
+				attatchedTo = getAttachTarget(card)
+				notify("This is where I would like the message to go and then apply the damage to the creature/mage")
 			return
 		if choice == 1 and not card.isFaceUp:
 			me.Mana -= upKeepCost
