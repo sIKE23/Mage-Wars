@@ -927,7 +927,7 @@ def resolveUpkeep():
 			if card.isFaceUp:
 				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Up {} from Harshforge Monolith's effect?".format(card.Name)
 			else:
-				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Down Enchantment from Harshforge Monolith's effect?"
+				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Down {} from Harshforge Monolith's effect?".format(card.Name)
 			if distance < 2:
 				processUpKeep(monolithUpKeepCost, card.Name, HarshforgeMonolith, notifystr)
 				if ManaPrismInPlay == 1:
@@ -1013,10 +1013,14 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 		choiceList = ['Yes', 'No']
 		colorsList = ['#0000FF', '#FF0000']
 		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-		notify("{} {}".format(me, notifystr))
-		if choice == 1:
+		whisper("{} {}".format(me, notifystr))
+		if choice == 1 and card.isFaceUp:
 			me.Mana -= upKeepCost
 			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
+			return
+		if choice == 1 and not card.isFaceUp:
+			me.Mana -= upKeepCost
+			notify("{} pays the Upkeep cost of {} for the mage's Face Down Enchantment".format(me, upKeepCost, card1))
 			return
 		else:
 			card1.moveTo(me.piles['Discard'])
