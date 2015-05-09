@@ -1021,6 +1021,7 @@ def malakaisFireReceiptPrompt(heathen):
                 passage=rnd(0,len(bookOfMalakai)-1)
                 notify(bookOfMalakai[passage])
                 notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
+
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
         card = Card(cardTraitsDict.get('OwnerID'))
         

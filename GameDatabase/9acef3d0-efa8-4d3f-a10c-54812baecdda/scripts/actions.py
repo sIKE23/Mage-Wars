@@ -1012,23 +1012,39 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 	else:
 		choiceList = ['Yes', 'No']
 		colorsList = ['#0000FF', '#FF0000']
-		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-		whisper("{} {}".format(me, notifystr))
-		if choice == 1 and card.isFaceUp:
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)#Bookmark
+		#whisper("{} {}".format(me, notifystr))
+		if choice == 1 and card1.isFaceUp:
 			me.Mana -= upKeepCost
 			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
-			if card2 == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
-				attatchedTo = getAttachTarget(card)
-				notify("This is where I would like the message to go and then apply the damage to the creature/mage")
+			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
+				attatchedTo = getAttachTarget(card1)
+				damage = card1.markers[CrushToken]
+				remoteCall(attatchedTo.controller,"stranglevineReceiptPrompt",[attatchedTo,damage])
 			return
-		if choice == 1 and not card.isFaceUp:
+		if choice == 1 and not card1.isFaceUp:
 			me.Mana -= upKeepCost
 			notify("{} pays the Upkeep cost of {} for the mage's Face Down Enchantment".format(me, upKeepCost, card1))
 			return
 		else:
 			card1.moveTo(me.piles['Discard'])
-			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card1, card2, card1))
+			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
 			return
+
+def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
+        mute()
+        if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
+                if card.Type == "Mage": card.controller.damage += damage
+                else: card.markers[Damage] += damage
+                strangleMessages=["Stranglevine tightens its hold on {}! ({} damage)",
+                                  "As Stranglevine grows, its hold on {} tightens! ({} damage)",
+                                  "{} is constricted by Stranglevine! ({} damage)",
+                                  "Stranglevine crushes {}! ({} damage)",
+                                  "Stranglevine writhes and constricts {}! ({} damage)"]
+                message=rnd(0,len(strangleMessages)-1)
+                notify(strangleMessages[message].format(card,str(damage)))
+                traitsDict = computeTraits(card)
+                if getRemainingLife(traitsDict) == 0: deathPrompt(traitsDict)
 
 def getTraitValue(card, TraitName):
 	listofTraits = ""

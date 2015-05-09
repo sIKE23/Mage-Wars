@@ -127,7 +127,7 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
                 if not violation: deathMessages.append(splitLine[0])
         if not deathMessages: return
         deathMessage = deathMessages[rnd(0,len(deathMessages)-1)]
-        deathMessage = deathMessage.replace('<A>',attacker.name.split(',')[0])
+        if attacker: deathMessage = deathMessage.replace('<A>',attacker.name.split(',')[0])
         deathMessage = deathMessage.replace('<D>',card.name.split(',')[0])
         if mage: deathMessage = deathMessage.replace('<AM>',mage.name)
         if attackerMage: deathMessage = deathMessage.replace('<DM>',attackerMage.name)
