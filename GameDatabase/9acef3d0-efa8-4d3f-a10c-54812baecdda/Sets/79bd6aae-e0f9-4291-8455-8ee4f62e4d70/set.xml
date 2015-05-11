@@ -657,7 +657,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains Armor +2." />
+			<property name="Text" value="This creature gains Armor +2.&#xD;&#xA;[Armor +2]" />
 			<property name="CardID" value="MWPROMO65" />
 		</card>
 		<card id="17b28bea-2fff-41c3-b0f6-a28bcbb14aa6" name="Stumble">
