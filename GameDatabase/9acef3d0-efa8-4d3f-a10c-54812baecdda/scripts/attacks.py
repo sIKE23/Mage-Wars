@@ -258,6 +258,8 @@ def computeAttack(aTraitDict,attack,dTraitDict):
                                         localADict['Melee'] = localADict.get('Melee',0) + 2
                                         localADict['Piercing'] = localADict.get('Piercing',0) + 1
                                         break
+        #BM Conditional Ranged +1
+        if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
         #Wounded prey
         if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and attacker.type in ['Mage','Creature'] and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict

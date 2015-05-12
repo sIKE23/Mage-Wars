@@ -18,7 +18,7 @@
 		<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
 		<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
 		<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-		<property name="Traits" value="Fast, Ranged +1" />
+		<property name="Traits" value="Fast" />
 		<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
 		</card>
