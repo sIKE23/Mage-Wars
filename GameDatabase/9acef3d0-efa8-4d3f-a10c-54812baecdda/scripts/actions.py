@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.0.0     #######################################
+##########################    v1.12.2.0     #######################################
 ###########################################################################
 import time
 import re
@@ -139,7 +139,7 @@ gameNum = ""
 ############################################################################
 
 def onTableLoad():
-	setGlobalVariable("TableSetup", False)
+	setGlobalVariable("TableSetup", "False")
 	setGlobalVariable("InitiativeDone", "False")
 	me.setGlobalVariable("MyColor", "#800080")
 	global debugMode
@@ -172,7 +172,7 @@ def onGameStart():
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
 	setGlobalVariable("GameReset", "")
-	setGlobalVariable('DiceAndPhaseCardsDone','True')
+	setGlobalVariable("DiceAndPhaseCardsDone","True")
 
 	# set new game
 	setGlobalVariable("GameIsOver", "")
@@ -203,7 +203,7 @@ def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
 	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
 	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
-	setGlobalVariable('Map',str(mapDict))
+	setGlobalVariable("Map", str(mapDict))
 
 def setUpDiceAndPhaseCards():
 	mute()
@@ -1665,15 +1665,15 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                 zoneArray = mapDict.get('zoneArray')
                 cardType = card.type
                 if cardType == 'Internal': return
-                cardW,cardH = card.size.Width,card.size.Height
+                cardW,cardH = card.width(),card.height()
                 mapX,mapW = mapDict.get('x'),mapDict.get('X')
                 if cardType == 'DiceRoll':
                         diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
                         zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
                                 [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
                         zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-                        x=zoneX-(cardW if diceBoxSetup=='Side' else 0)
-                        y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)
+                        x=zoneX-(cardW if diceBoxSetup=='Side' else 0)-64
+                        y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)-5
                         card.moveToTable(x,y,True)
                         mapDict['DiceBoxLocation'] = (x,y)
                         setGlobalVariable("Map",str(mapDict))

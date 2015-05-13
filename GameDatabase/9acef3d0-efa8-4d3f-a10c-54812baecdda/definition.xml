@@ -4,7 +4,8 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
-	version="1.12.1.0"
+	scriptVersion ="3.1.0.1"
+	version="1.12.2.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -46,6 +47,25 @@
 		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
 		<gameMode name="2v2" shortDescription="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
 	</gameModes>
+	<globalvariables>
+		<globalvariable name="TableSetup" value="False"/>
+		<globalvariable name="InitiativeDone" value="False"/>
+		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
+		<globalvariable name="ColorsChosen" value=""/>
+		<globalvariable name="SetupDone" value=""/>
+		<globalvariable name="OppIniRoll" value=""/>
+		<globalvariable name="IniAllDone" value=""/>
+		<globalvariable name="GameReset" value=""/>
+		<globalvariable name="DiceAndPhaseCardsDone" value="True"/>
+		<globalvariable name="GameIsOver" value=""/>
+		<globalvariable name="attachDict" value=""/>
+		<globalvariable name="bindDict" value=""/>
+		<globalvariable name="roundEventList" value=""/>
+		<globalvariable name="turnEventList" value=""/>
+		<globalvariable name="Map" value=""/>
+		<globalvariable name="RoundNumber" value=""/>
+		<globalvariable name="PlayerWithIni" value=""/>
+	</globalvariables>
 	<card back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
 		<property name="Subtype" type="String" hidden="False" ignoreText="False" />
@@ -69,7 +89,7 @@
 		<size name="PhaseMarkers" width="90" height="20" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Buttons" width="72" height="36" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
-		<size name="Horizontal Cards" width="60" height="80" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
+		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
 	</card>
 	<table name="Table" visibility="undefined" ordered="False" width="1000" height="750" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-500,-375,1000,750" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
@@ -196,7 +216,8 @@
 		<counter name="Channeling" default="0" reset="True" icon="counters/channeling.png" />
 		<counter name="Mana" default="0" reset="True" icon="counters/mana.png" />
 		<counter name="Damage" default="0" reset="True" icon="counters/damage.png" />
-		<counter name="Life" default="0" reset="True" icon="counters/life.png" />
+		<counter name="Life" default="0" reset="True" icon="counters/life.png" />		
+		<globalvariable name="MyColor" value="#800080"/>
 		<hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
 			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
 			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
