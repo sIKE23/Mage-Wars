@@ -222,7 +222,7 @@ def onLoadDeck(player, groups):
 	global playerNum
 	global iniTokenCreated
 	global blankSpellbook
-	if not bool(getGlobalVariable('diceAndPhaseCardsDone')):
+	if not bool(getGlobalVariable('DiceAndPhaseCardsDone')):
                 setUpDiceAndPhaseCards()
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
