@@ -552,7 +552,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Melee +2 trait." />
+			<property name="Text" value="This creature gains the Melee +2 trait.&#xD;&#xA;[Melee +2]" />
 			<property name="CardID" value="MWPROMO64" />
 		</card>
 		<card id="29121772-6f18-41ec-9add-87712e5f86ec" name="Circle of Light">
@@ -612,7 +612,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait." />
+			<property name="Text" value="This creature gains the Charge +2 trait. Its melee attacks gain the Piercing +1 trait.&#xD;&#xA;[Charge +2]" />
 			<property name="CardID" value="MWPROMO12" />
 		</card>
 		<card id="c710760d-6f2e-4b59-a349-2792f2af02b6" name="Mana Vampirism">
