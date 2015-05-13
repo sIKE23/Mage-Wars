@@ -1404,8 +1404,8 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="Electric Surge:&#xD;&#xA;[Damage Barrier] [Lightning] [Dice=2] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal] [Unavoidable]" />
-			<property name="Traits" value="" />
-			<property name="Text" value="" />
+			<property name="Traits" value="Magebind +2" />
+			<property name="Text" value="This creature gains a Damage Barrier." />
 			<property name="CardID" value="MW1E06" />
 		</card>
 		<card id="746e5dba-4689-4ae5-831e-a844131c4824" name="Cobra Reflexes">
