@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.2.0     #######################################
+##########################    v1.12.3.0     #######################################
 ###########################################################################
 import time
 import re
@@ -133,6 +133,7 @@ Magebind = ""
 mageRevealCost = ""
 infostr = ""
 gameNum = ""
+passOnClick = ""
 
 ############################################################################
 ############################		Events		##################################
@@ -261,38 +262,37 @@ def onLoadDeck(player, groups):
 					if card.controller == me:
 						card.delete()
 
-def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,isScriptMove):
+def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,faceup):
         mute()
         for i in range(len(cards)):
                 card = cards[i]
                 if card.controller == me and fromGroups[i]==table:
-                        if not isScriptMove:
-                                if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
-                                        unbind(card)
-                                        c,t = detach(card)
-                                        if toGroups[i] == table: card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
-                                        actionType = None
-                                        if t:
-                                                actionType = ['detaches','from']
-                                        hasAttached = False
-                                        if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
-                                                for a in table:
-                                                        if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
-                                                                c,t = bind(card,a)
-                                                                if t:
-                                                                        actionType = ['binds','to']
-                                                                        hasAttached = True
-                                                                        break
-                                                        elif getSetting('AutoAttach',True) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canAttach(card,a):
-                                                                if card.Type == "Enchantment" and not card.isFaceUp and not castSpell(card,a): break
-                                                                c,t = attach(card,a)
-                                                                if t:
-                                                                        actionType = ['attaches','to']
-                                                                        hasAttached = True
-                                                                        break
-                                        if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
-                                        if actionType:
-                                                notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+                        if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
+                                unbind(card)
+                                c,t = detach(card)
+                                if toGroups[i] == table: card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
+                                actionType = None
+                                if t:
+                                        actionType = ['detaches','from']
+                                hasAttached = False
+                                if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
+                                        for a in table:
+                                                if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
+                                                        c,t = bind(card,a)
+                                                        if t:
+                                                                actionType = ['binds','to']
+                                                                hasAttached = True
+                                                                break
+                                                elif getSetting('AutoAttach',True) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canAttach(card,a):
+                                                        if card.Type == "Enchantment" and not card.isFaceUp and not castSpell(card,a): break
+                                                        c,t = attach(card,a)
+                                                        if t:
+                                                                actionType = ['attaches','to']
+                                                                hasAttached = True
+                                                                break
+                                if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
+                                if actionType:
+                                        notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
                         if toGroups[i] != table:
                                 detachAll(card)
                                 unbindAll(card)
