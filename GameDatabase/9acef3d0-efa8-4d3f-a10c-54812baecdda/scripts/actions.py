@@ -1672,8 +1672,8 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                         zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
                                 [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
                         zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-                        x=zoneX-(cardW if diceBoxSetup=='Side' else 0)-64
-                        y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)-5
+                        x=zoneX-(cardW if diceBoxSetup=='Side' else 0)
+                        y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)
                         card.moveToTable(x,y,True)
                         mapDict['DiceBoxLocation'] = (x,y)
                         setGlobalVariable("Map",str(mapDict))

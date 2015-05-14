@@ -85,3 +85,5 @@ Yes pumpkin, All dogs go to heaven.@Subtype=Canine,Subtype!=Demon,Trait=Living
 Straight to Hell with you, unholy beast!@SubType=Demon,AttackerMage=Priest
 Toasty!@DamageType=Flame
 Frosty!@DamageType=Frost
+<A> chokes the life out of <D>!@AttackerName=Stranglevine,Type=Creature,Trait=Living
+<D>'s skull pops off as its bones are crushed by the powerful contractions of the <A>!!@AttackerName=Stranglevine@Type=Creature,Subtype=Skeleton
