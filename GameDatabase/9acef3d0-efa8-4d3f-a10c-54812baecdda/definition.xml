@@ -57,6 +57,7 @@
 		<globalvariable name="IniAllDone" value=""/>
 		<globalvariable name="GameReset" value=""/>
 		<globalvariable name="DiceAndPhaseCardsDone" value="True"/>
+		<globalvariable name="DoneWithPhase" value=""/>
 		<globalvariable name="GameIsOver" value=""/>
 		<globalvariable name="attachDict" value=""/>
 		<globalvariable name="bindDict" value=""/>

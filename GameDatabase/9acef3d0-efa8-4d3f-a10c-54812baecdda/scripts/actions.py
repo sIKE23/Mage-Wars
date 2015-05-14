@@ -173,7 +173,7 @@ def onGameStart():
 	setGlobalVariable("OppIniRoll", "")
 	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
 	setGlobalVariable("GameReset", "")
-	setGlobalVariable("DiceAndPhaseCardsDone","True")
+	setGlobalVariable("DiceAndPhaseCardsDone","False")
 
 	# set new game
 	setGlobalVariable("GameIsOver", "")
@@ -223,7 +223,7 @@ def onLoadDeck(player, groups):
 	global playerNum
 	global iniTokenCreated
 	global blankSpellbook
-	if not bool(getGlobalVariable('DiceAndPhaseCardsDone')):
+	if bool(getGlobalVariable('DiceAndPhaseCardsDone')):
                 setUpDiceAndPhaseCards()
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
