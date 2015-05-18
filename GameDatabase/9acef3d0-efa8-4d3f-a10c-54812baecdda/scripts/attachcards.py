@@ -281,7 +281,7 @@ def bind(card,target):
 def unbind(card):
     """Unbinds <card> from its target."""
     mute()
-    if getBindTarget(card) and card.controller == me:
+    if card.controller == me:
         target = getGlobalDictEntry('bindDict',card._id)
         setGlobalDictEntry('bindDict',card._id,None)
         return card,target

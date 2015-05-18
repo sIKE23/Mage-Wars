@@ -296,7 +296,6 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                         if toGroups[i] != table:
                                 unbind(card)
                                 detach(card)
-                                debug(str(getBindTarget(card)))
                                 detachAll(card)
                                 unbindAll(card)
                         if not ((oldIndices[i] != indices[i] and oldXs[i]==xs[i] and oldYs[i]==ys[i]) or
