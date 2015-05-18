@@ -24,6 +24,18 @@ Cannot be used to re-roll an enemy defense.
 
 If this and Temple of the Dawnbreaker are both in play, players decide whether to re-roll in initiative order.
 #
+Anvil Throne Warlord Stats
+
+- Rune of Fortification: If this equipment gives an Armor +X bonus to the Mage, it gives an additional Armor +1.
+
+- Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound to this equipment or using a spell action provided by this equipment.
+
+- Rune of Precision: This equipment’s non-spell attacks gain the Piercing +1 trait.
+
+- Rune of Reforging: This equipment gains the Cantrip trait.
+
+- Rune of Shielding:  If this equipment gives your Mage a Defense, the first time each round that defense is used, add +2 to the Defense roll.
+#
 Armor Ward
 For example, if the opponent casts a Dissolve spell to attempt to destroy your Hunting Bow, he will pay the normal 11 mana to cast the Dissolve. Then, when the Dissolve spell resolves, he will have to pay an additional 4 mana to destroy the Hunting Bow.
 

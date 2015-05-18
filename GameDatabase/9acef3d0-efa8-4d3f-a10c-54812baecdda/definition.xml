@@ -54,9 +54,9 @@
 		<globalvariable name="ColorsChosen" value=""/>
 		<globalvariable name="SetupDone" value=""/>
 		<globalvariable name="OppIniRoll" value=""/>
-		<globalvariable name="IniAllDone" value=""/>
+		<globalvariable name="IniAllDone" value="x"/>
 		<globalvariable name="GameReset" value=""/>
-		<globalvariable name="DiceAndPhaseCardsDone" value="True"/>
+		<globalvariable name="DiceAndPhaseCardsDone" value="False"/>
 		<globalvariable name="DoneWithPhase" value=""/>
 		<globalvariable name="GameIsOver" value=""/>
 		<globalvariable name="attachDict" value=""/>

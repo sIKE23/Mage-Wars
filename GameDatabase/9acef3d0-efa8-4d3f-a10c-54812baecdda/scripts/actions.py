@@ -128,11 +128,11 @@ gameStartTime = ""
 gameEndTime = ""
 roundTimes = []
 gameTurn = 0
+gameNum = 1
 playerNum = 0
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
-gameNum = ""
 passOnClick = ""
 
 ############################################################################
@@ -140,65 +140,47 @@ passOnClick = ""
 ############################################################################
 
 def onTableLoad():
-	setGlobalVariable("TableSetup", "False")
-	setGlobalVariable("InitiativeDone", "False")
-	me.setGlobalVariable("MyColor", "#800080")
-	global debugMode
-	global playerNum
-	global gameNum
-	#Set default map
- 	setGlobalVariable("DiceRollAreaPlacement", "Side")
- 	defineRectangularMap(4,3,250)
-	gameNum = 1
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
-	if len(players) == 1:
-		debugMode = True
-		playerNum = 2
-		me.setGlobalVariable("MyColor", PlayerColor[0])
-		CreateIniToken()
-		players[0].setActivePlayer()
-		setGlobalVariable("InitiativeDone", "True")
-		notify("No need to roll for initative for {}...".format(me))
-		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 
 def onGameStart():
-        mute()
-	# reset color picking
-	setGlobalVariable("ColorsChosen", "")
-
-	# reset initiative automation
-	setGlobalVariable("SetupDone", "")
-	setGlobalVariable("OppIniRoll", "")
-	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
-	setGlobalVariable("GameReset", "")
-	setGlobalVariable("DiceAndPhaseCardsDone","False")
-
-	# set new game
-	setGlobalVariable("GameIsOver", "")
+	mute()
+	global playerNum
+	global debugMode
+	#Set default map
+	defineRectangularMap(4,3,250)
 
 	# reset python Global Variables
 	for p in players:
 		remoteCall(p, "setClearVars",[])
 
-	#create a dictionary of attachments and bound spells
+	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
 	setGlobalVariable("bindDict",str({}))
+	setSetting("AutoAttach", True)
 
 	#set global event lists for rounds and single actions
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
 
-	#create a dictionary of attachments and enable autoattachment
-	setGlobalVariable("attachDict",str({}))
-	setSetting("AutoAttach", True)
-	
 	#enable AutoRoll of Initative for now....
 	setSetting("AutoRollIni", True)
 
-# bring up window to point to documentation
+	# bring up window to point to documentation
 	initializeGame()
+
+	#if there's only one player, go into debug mode	
+	if len(players) == 1:
+		debugMode = True
+		playerNum = 2
+		me.setGlobalVariable("MyColor", PlayerColor[0])
+		CreateIniToken()
+		#	players[0].setActivePlayer()
+		setGlobalVariable("InitiativeDone", "True")
+		notify("There is only one player, so there is no need to roll for initative.")
+		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
+	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
 
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
@@ -399,38 +381,7 @@ def iniRoll(effect):
 
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
-"""
-def setDRAIP(location):
-	global dieCardX
-	global dieCardY
-	global dieCard2X
-	global dieCard2Y
-	global phaseX
-	global phaseY
-	global initX
-	global initY
 
-	if location == 1:
-		#option A
-		dieCardX = -580
-		dieCardY = -40
-		dieCard2X = -510 # = dieCardX + 60
-		dieCard2Y = -40 # = dieCardY
-		phaseX = -510 # = dieCardX + 60
-		phaseY = -150
-		initX = -580
-		initY = -150 #= phaseY
-	else:
-		#option B
-		dieCardX = -58 # -570 + 512
-		dieCardY = 330 # -40 + 370
-		dieCard2X = 0 # -510 + 510
-		dieCard2Y = 330 # -40 + 370
-		phaseX = 65 # -510 + 575
-		phaseY = 330 # -150 + 480
-		initX = -125 # -580 + 455
-		initY = 330 # -150 + 480
-"""
 ############################################################################
 ######################		Group Actions			########################
 ############################################################################
