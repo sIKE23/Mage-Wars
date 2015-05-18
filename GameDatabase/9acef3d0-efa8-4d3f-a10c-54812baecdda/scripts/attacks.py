@@ -261,7 +261,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
         #BM Conditional Ranged +1
         if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
         #Wounded prey
-        if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and attacker.type in ['Mage','Creature'] and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+        if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.type == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
         if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
         if attack.get('RangeType') == 'Melee':
@@ -1034,11 +1034,15 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
                 reusableAbilityTokens = [BloodReaper,
                                          EternalServant,
                                          HolyAvenger,
-                                         Pet,
-                                         WoundedPrey]
+                                         Pet]
                 mage = Card(cardTraitsDict.get('MageID'))
                 for t in reusableAbilityTokens:
                         if card.markers[t]: mage.markers[t] = 1 #Return mage ability markers to their owner.
+                if card.markers[WoundedPrey]:
+                        mages = [m for m in table if m.Name == "Johktari Beastmaster" and not m.markers[WoundedPrey]] #WARNING: This may identify the wrong JBM if there are more than 1 in the match. Unfortunately, markers cannot be associated with players, so it is difficult to correctly reassign the marker (not impossible, just not worth the effort)
+                        if mages:
+                                mage = mages[0]
+                                mage.markers[WoundedPrey] = 1
                 deathMessage(cardTraitsDict,attack,aTraitDict)
                 if ((attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type in ['Creature','Mage']) or
                     card.markers[Zombie]): obliterate(card)
