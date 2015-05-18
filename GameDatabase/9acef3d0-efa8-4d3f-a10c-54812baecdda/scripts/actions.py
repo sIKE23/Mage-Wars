@@ -1953,7 +1953,8 @@ def castSpell(card,target=None):
                 if card.Type != "Enchantment" and not card.isFaceUp: flipcard(card)
                 if not binder or not "Spellbind" in binder.Traits:
                         unbind(card) #If it is not bound, unbind it from its card
-                        moveCardToDefaultLocation(card,True)
+                        if card.Type in ["Attack","Incantation"]: moveCardToDefaultLocation(card,True)
+                        else: card.sendToFront()
                 return True
 
 def revealEnchantment(card):
