@@ -422,7 +422,7 @@
 			<property name="Stats" value="Armor=3, Life=11" />
 			<property name="AttackBar" value="Open the Gate:&#xD;&#xA;[Flame] [Dice=4] [d12] [5-10 = Burn; 11+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="Zone Exclusive, Flame Immunity, Hydro +3, Epic, Warlock Only" />
-			<property name="Text" value="All demon creatures gain Melee +1. Once per game, as a full action, you may pay 12 mana to &quot;Open the Gate&quot;, and make the above attack against each non-Flying creature up to 2 zones away from the Gate. Once open, whenever you summon a demon creature, you may place it in the Gate&apos;s zone, instead of your zone." />
+			<property name="Text" value="All demon creatures gain Melee +1. Gate to Hell enters play with a &apos;Closed&apos; token. Once per game, as a full action, you may pay 12 mana to flip the token to the &quot;Opened&quot; side, and make the above attack against each non-flying creature in the arena. Once opened, whenever you, or a spawnpoint or familiar you control, Summon a demon creature, you may place it in the Gate&apos;s zone." />
 			<property name="CardID" value="MW1J06" />
 		</card>
 		<card id="ee196806-7dc0-4de8-af56-50b3b76c2206" name="Gate to Voltari">
@@ -741,7 +741,7 @@
 			<property name="Stats" value="Armor=-, Life=8" />
 			<property name="AttackBar" value="Searing Flames:&#xD;&#xA;[Passage Attack] [Flame] [Dice=5] [d12] [5-9 = Burn; 10+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="Blocks LOS, Passage Attacks, Incorporeal, Extendable, Flame Immunity, Hydro +3" />
-			<property name="Text" value="Hydro attacks gain the Etheral trait when attacking Wall of Fire." />
+			<property name="Text" value="Hydro attacks gain the Ethereal trait when attacking Wall of Fire." />
 			<property name="CardID" value="MW1W03" />
 		</card>
 		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns" size="Horizontal Cards">
@@ -1130,7 +1130,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Defense=6+ ∞, Armor=0, Life=5" />
+			<property name="Stats" value="Defense=6+ inf, Armor=0, Life=5" />
 			<property name="AttackBar" value="Zap:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Ethereal] [+2 vs. Incorporeal]" />
 			<property name="Traits" value="Flying, Pest" />
 			<property name="Text" value="" />
@@ -1419,7 +1419,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
+			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="This creature gains a Defense.&#xD;&#xA;[Defense 7+ 1x]" />
 			<property name="CardID" value="MW1E07" />
 		</card>
@@ -1434,7 +1434,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magecast, Dark Mage Only, Unique" />
+			<property name="Traits" value="Magecast, Unique, Dark Mage Only" />
 			<property name="Text" value="Each Upkeep Phase, the controller of Death Link may heal up to 2 damage from his Mage and place it on this creature as direct damage, regardless of distance or LoS." />
 			<property name="CardID" value="MW1E08" />
 		</card>
@@ -1465,7 +1465,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="When Decoy is revealed, destroy it. When this spell is destroyed its controller gains 2 mana." />
+			<property name="Text" value="When Decoy is revealed, destroy it. If this spell is destroyed, even if it has not been revealed, its controller gains 2 mana." />
 			<property name="CardID" value="MW1E10" />
 		</card>
 		<card id="d7ad20c5-f185-4e32-beec-f6e120e05719" name="Divine Intervention">
@@ -1810,7 +1810,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When this creature is attacked, you must reveal Reverse Attack during the Avoid Attack Step. Redirect the attack back to the attacker, who now becomes the target of that attack. You become the controller of that attack. Then, destroy Reverse Attack. If the attack is Unavoidable, destroy Reverse Attack without effect." />
+			<property name="Text" value="When this creature is attacked, you must reveal Reverse Attack during the Avoid Attack Step.  The attack is avoided and then redirected back to the attacker, who now becomes the target of that attack for the next 2 steps (Roll Dice and Damage and Effects). Then, destroy Reverse Attack. If the attack is Unavoidable, destroy Reverse Attack without effect." />
 			<property name="CardID" value="MW1E34" />
 		</card>
 		<card id="5f318366-9c85-4304-b7b1-3c60daf0edde" name="Reverse Magic">
@@ -1825,7 +1825,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When this creature is targeted by an incantation or enchantment spell controlled by an opponent, you must reveal Reverse Magic during the Counter Spell Step. You take control of that spell. Redirect it back to the caster, who now becomes the target of the spell. If the spell cannot target the caster, it is countered. Then, destroy Reverse Magic." />
+			<property name="Text" value="When this creature is targeted by an incantation or enchantment spell controlled by an opponent, you must reveal Reverse Magic during the Counter 
+				Spell Step. You take control of that spell. Redirect it back to the caster, who now becomes the target of the spell. You control that spell, and may make new choices, paying additional
+				 mana costs if any. Then, destroy Reverse Magic." />
 			<property name="CardID" value="MW1E35" />
 		</card>
 		<card id="afd1e927-92a2-4525-a33f-50fec7c9b382" name="Rhino Hide">
@@ -2027,7 +2029,7 @@
 		</card>
 		<card id="d2d9ee17-377b-453f-9772-e996076cece4" name="Enchanter&apos;s Ring">
 			<property name="Type" value="Equipment" />
-			<property name="Subtype" value="Mana" />
+			<property name="Subtype" value="" />
 			<property name="Cost" value="2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
@@ -2082,7 +2084,7 @@
 			<property name="Stats" value="Location=Helmet" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlock Only" />
-			<property name="Text" value="Whenever this Mage is targeted by a melee attack (except a Counterstrike), at the beginning of the Declare Attack Step, roll the effect die. On a 9+ the attack is canceled. The attacker may choose to attack a different target instead. This does not affect creatures with the Nonliving or Psychic Immunity traits." />
+			<property name="Text" value="Whenever this Mage is targeted by a melee attack (except a Counterstrike), at the beginning of the Declare Attack Step, roll the effect die. On a 9+ the attack is canceled and the attacker may choose to attack a different attack action instead, but cannot melee attack theis Mage for the rest of the Action Phase. Has no affect creatures with the Nonliving or Psychic Immunity traits." />
 			<property name="CardID" value="MW1Q12" />
 		</card>
 		<card id="86e3fd4a-e52d-4ccd-9b33-333a13126ac8" name="Ivarium Longbow">
@@ -2352,7 +2354,7 @@
 			<property name="Stats" value="Location=Cloak" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Wizard Only" />
-			<property name="Text" value="The first time each round that each creature makes a melee attack against this Mage, its controller must pay 2 mana during the Declare Attack Step, as an additional cost of making that attack." />
+			<property name="Text" value="The first time each round that each creature makes a melee attack against this Mage, its controller must pay 2 mana during the Declare Attack Step, as an additional cost of making that attack. Has no effect on counterstrikes." />
 			<property name="CardID" value="MW1Q32" />
 		</card>
 		<card id="9394929c-4773-4aa2-bd02-2a930cfa07a0" name="Wind Wyvern Hide">
@@ -2384,7 +2386,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Teleport target creature out of the arena. Place 3 Banish tokens on it. Remove 1 Banish token each Upkeep Phase. When the final token is removed, return the creature to the last zone that it occupied. While out of the arena, this creature cannot take any action, its action marker remains unchanged, and it can only be affected by attacked spells, conditions, or its own traits." />
+			<property name="Text" value="Teleport target creature out of the arena. Place 3 Banish tokens on it. Remove 1 Banish token each Upkeep Phase. When the final token is removed, return the creature to the last zone it was in. While out of the arena, this creature cannot take any action, its action marker remains unchanged, and it can only be affected by attached spells, conditions, or its own traits and abilities." />
 			<property name="CardID" value="MW1I01" />
 		</card>
 		<card id="a1959fe8-780f-4720-a446-0c2f999e2df2" name="Battle Fury">
@@ -2399,7 +2401,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="The next time this round the target creature makes a melee attack, if that attack is not a Counterstrike, at the end of that action it may immediately make another quick action melee attack. This extra attack counts as part of the same attack action. Only one Battle Fury spell may be cast per round on hate same creature" />
+			<property name="Text" value="The next time this round the target creature makes a non-countrstrike melee attack, at the end of that action it may immediately make a quick action melee attack. This extra attack counts as part of the same attack action. Only one Battle Fury spell may be cast per round on the same creature." />
 			<property name="CardID" value="MW1I02" />
 			<alternate name="Battle Fury" type="B" />
 		</card>
@@ -2445,7 +2447,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Destroy the target. X = total mana cost of target enchantment (hidden plus reveal cost)." />
+			<property name="Text" value="Destroy the target. X = total mana cost of target enchantment (casting plus reveal cost)." />
 			<property name="CardID" value="MW1I06" />
 		</card>
 		<card id="87fb7a11-c77d-4503-a66c-659ddd6ad100" name="Dissolve">
@@ -2520,7 +2522,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="Fiery Blast:&#xD;&#xA;[Flame] [Dice=4] [d12] [6+ = Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When you cast Explode, choose an equipment object attached to target Mage. X = 6 = the equipment&apos;s casting cost. Then, Explode mages the above flame attack agains the target Mage." />
+			<property name="Text" value="When you cast Explode, choose an equipment object attached to target Mage. X = 6 + the equipment&apos;s casting cost. Destroy the choosen equipment. Then, Explode makes the above flame attack against the target Mage." />
 			<property name="CardID" value="MW1I11" />
 		</card>
 		<card id="9455c697-f680-4d12-b5d6-72235c03f77c" name="Force Push">
@@ -2535,7 +2537,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. If the target is Pushed through a wall with the Passage Attacks trait, you must pay an additional 3 mana. This has no effect on Unmovable creatures." />
+			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. This will not Push it through a wall with the Passage Attacks trait, unless you pay an additional 3 mana when this spell is cast." />
 			<property name="CardID" value="MW1I12" />
 		</card>
 		<card id="f3c06b0f-69ac-40ba-8d78-632c5f89505c" name="Group Heal">
@@ -2640,7 +2642,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Target&apos;s next melee attack gains the Piercing +3 trait.&#xD;&#xA;[Piercing +3]" />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Piercing +3 trait.&#xD;&#xA;[Piercing +3]" />
 			<property name="CardID" value="MW1I19" />
 		</card>
 		<card id="59cd1ea8-72d8-4ce8-90f9-1513ef6940ae" name="Purify">
@@ -2655,7 +2657,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Remove as many poison conditions as you wish from the target, paying the removal cost for each one. Then, destroy as many revealed poison enchantments from the target as you wish, paying the total mana cost (hidden and reveal cost) for each one." />
+			<property name="Text" value="Remove as many poison conditions as you wish from the target, paying the removal cost for each one. Then, destroy as many revealed poison enchantments from the target as you wish, paying the total mana cost (casting and reveal cost) for each one." />
 			<property name="CardID" value="MW1I20" />
 		</card>
 		<card id="d40a8aa6-93d7-434b-b855-94e960a3553f" name="Purge Magic">
@@ -2775,7 +2777,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is Teleported to the target zone. X = 3 mana per zone moved away from its current zone. You must pay at least 3 mana even if the target is teleported to the same zone. This does not count as a move action for the creature." />
+			<property name="Text" value="Target creature is Teleported to the target zone. X = 3 mana per zone moved away from its current zone. You must pay at least 3 mana even if the target is teleported into the same zone. This does not count as a move action for the creature." />
 			<property name="CardID" value="MW1I28" />
 		</card>
 		<card id="b0624cd4-8802-4e9f-8e1d-869638c3b861" name="Vampiric Strike">
