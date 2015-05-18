@@ -292,7 +292,7 @@ def getBound(card):
     mute()
     bDict = eval(getGlobalVariable("bindDict"))
     bound = map(lambda key: Card(key),[k for k in bDict if bDict[k]==card._id])
-    if bound: return bound[0]
+    if bound and bound[0] in table: return bound[0]
 
 def getBindTarget(card):
     mute()

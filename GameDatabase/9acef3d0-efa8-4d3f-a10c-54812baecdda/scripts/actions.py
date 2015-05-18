@@ -294,6 +294,9 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                                 if actionType:
                                         notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
                         if toGroups[i] != table:
+                                unbind(card)
+                                detach(card)
+                                debug(str(getBindTarget(card)))
                                 detachAll(card)
                                 unbindAll(card)
                         if not ((oldIndices[i] != indices[i] and oldXs[i]==xs[i] and oldYs[i]==ys[i]) or
@@ -302,7 +305,6 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                                 toGroups[i] != table):
                                 alignAttachments(card)
                                 alignBound(card)#Do not realign if it is  only the index that is changing. Prevents recursions.
-
 
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
         if player == me == fromCard.controller and isTargeted:
@@ -1886,8 +1888,8 @@ def remoteSwitchPhase(card, phase, phrase):
 
 def castSpell(card,target=None):
         #Figure out who is casting the spell
+        binder = getBindTarget(card)
         caster = getBindTarget(card)
-        if caster and not "Spellbind" in caster.Traits: unbind(card) #If it is not bound, unbind it from its card
         if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
                 casters = [d for d in table if d.Type == "Mage" and d.isFaceUp and d.controller == me]
                 if casters: caster = casters[0]
@@ -1949,6 +1951,9 @@ def castSpell(card,target=None):
                 elif "Conjuration" in card.Type: notify("{} conjures {}!".format(caster,card.Name))
                 else: notify("{} casts {}!".format(caster,card.Name))
                 if card.Type != "Enchantment" and not card.isFaceUp: flipcard(card)
+                if not binder or not "Spellbind" in binder.Traits:
+                        unbind(card) #If it is not bound, unbind it from its card
+                        moveCardToDefaultLocation(card,True)
                 return True
 
 def revealEnchantment(card):
