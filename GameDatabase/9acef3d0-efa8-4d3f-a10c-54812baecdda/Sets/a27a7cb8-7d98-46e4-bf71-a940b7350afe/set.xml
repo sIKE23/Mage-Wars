@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
+	name="Gameboards" 
+	id="a27a7cb8-7d98-46e4-bf71-a940b7350afe" 
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
+	gameVersion="1.4.2.1" 
+	version="1.12.0.0">
+	<cards>
+		<card id="5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64" name="V&apos;Torrak" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="6136ff26-d2d9-44d2-b972-1e26214675b5" name="Corrosive Pool" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="8972d2d1-348c-4c4b-8c9d-a1d235fe482e" name="Altar of Oblivion" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="a47fa32e-ac83-4ced-8f6a-23906ee38880" name="Septagram" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="bf833552-8ee4-4c62-abd2-83da233da4ce" name="Molten Rock" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="c3e970f7-1eeb-432b-ac3f-7dbcd4f45492" name="Spiked Pit" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="edca7d45-53e0-468d-83a5-7a446c81f070" name="Samandriel&apos;s Circle" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+		<card id="f8d70e09-2734-4de8-8351-66fa98ae0171" name="Ethereal Mist" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>			
+		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
+			<property name="Type" value="Internal" />
+		</card>
+	</cards>
+</set>
