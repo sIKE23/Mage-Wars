@@ -1177,12 +1177,14 @@ for token in tokenList:
         exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
 
 def addDamage(card, x = 0, y = 0):
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	if "Mage" in card.Type and card.controller == me:
 		me.Damage += 1
 	else:
 		addToken(card, Damage)
 
 def addOther(card, x = 0, y = 0):
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
 	marker, qty = askMarker()
 	if qty == 0:
 		return
@@ -1201,7 +1203,7 @@ def clearTokens(card, x = 0, y = 0):
 	notify("{} removes all tokens from '{}'".format(me, card.Name))
 
 ##########################     Toggle Actions/Tokens     ##############################
-typeIgnoreList = ['Internal','Phases','Diceroll']
+typeIgnoreList = ['Internal','Phase','DiceRoll']
 
 def toggleAction(card, x=0, y=0):
 	mute()
@@ -1358,7 +1360,7 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
-	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
@@ -1371,7 +1373,10 @@ def flipcard(card, x = 0, y = 0):
 		else:
 			card.switchTo("B")
 		notify("{} Flips Zone Marker.".format(me))
-	elif card.isFaceUp == False:
+	# do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList: return  
+	# normal card flipping processing starts here
+	if card.isFaceUp == False:
 		card.isFaceUp = True
 		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
