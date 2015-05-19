@@ -1173,10 +1173,22 @@ def computeTraits(card):
                                                 append('Flame +1')
                                                 adraAbility = False
                                                 debug('Triggered')
+                                if cName == "Sentinel of V'tar":
+                                        for o in table:
+                                                isWithOrb = False
+                                                if (o.name == "V'tar Orb" and
+                                                    getZoneContaining(c) == getZoneContaining(card)): isWithOrb = True
+                                                if isWithOrb:
+                                                        extend(['Unmovable','Anchored'])
+                                                        if markers[Guard]: extend(['Armor +2','Melee +1'])
                                 elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
                         # Get traits from cards in this zone
                         if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
                                 #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
+                                if (name == 'Skeelax, Taunting Imp'
+                                    and c.markers[Burn]): append('Regenerate 2') #and phase = upkeep, but I don't think this matters for now.
+                                elif (name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and
+                                    cName == "V'tar Orb"): extend(['Unmovable','Anchored'])
                                 if cType == 'Enchantment':
                                         if (cName == 'Fortified Position' and
                                             cardType in ['Creature','Mage'] and
@@ -1185,11 +1197,16 @@ def computeTraits(card):
                                             cController == controller and
                                             cardType in ['Creature','Mage'] and
                                             'Living' in rawTraitsList): append('Aegis 1')
+                                        elif (cName == 'Astral Anchor' and
+                                            cardType in ['Creature','Mage']): append('Anchored')
                                         elif (cName == 'Standard Bearer' and
                                             cController == controller and
                                             getAttachTarget(c) != card and
                                             cardType in ['Creature','Mage']): extend(['Melee +1','Armor +1'])
                                 elif cType == 'Conjuration':
+                                        if (name == 'Guard Dog'
+                                            and cController == controller
+                                            and not getAttachTarget(c)): append('Vigilant')
                                         if (cName == 'Mohktari, Great Tree of Life' and
                                             cController == controller and
                                             cardType in ['Creature','Mage'] and
