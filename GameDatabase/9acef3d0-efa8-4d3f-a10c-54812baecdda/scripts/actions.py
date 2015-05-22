@@ -409,7 +409,7 @@ def playerSetup():
 
 	# Players select their color
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-	if not debugMode or debugMode == True and len(players) > 1:
+	if not debugMode or len(players) > 1:
 		while (True):
 			choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
 			colorsChosen = getGlobalVariable("ColorsChosen")
