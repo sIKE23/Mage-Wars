@@ -50,6 +50,8 @@ Enchantment Transfusion
 #
 Additional Strikes
 Circle of Fire
+Circle of Light
+Circle of Lightning
 Decoy
 Enchantment Transfusion
 #
