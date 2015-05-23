@@ -226,7 +226,7 @@ def getAttackList(card):
                         if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack') and
                             (getBindTarget(c) == card or (not canDeclareAttack(getBindTarget(c)) if getBindTarget(c) else True)) and
                             not c.markers[Disable]): attackList.extend(getAttackList(c))
-                if c.Type == 'Enchantment' and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
+                if c.Type == 'Enchantment' and c.isFaceUp and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
         
         if 'Familiar' in card.Traits or 'Spawnpoint' in card.Traits:
                 for c in table:
@@ -859,7 +859,7 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
                 if counterAttack:
                         counterAttack['RangeType'] = 'Counterstrike'
                         interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
-        defender.markers[Guard] = 0
+                defender.markers[Guard] = 0
         interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')
 
 def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
@@ -1287,7 +1287,7 @@ def computeTraits(card):
         if markers[Growth]: extend(['Life +{}'.format(str(3*markers[Growth])),'Melee +{}'.format(str(markers[Growth]))])
         if markers[Corrode]: append('Armor -{}'.format(str(markers[Corrode])))
         if markers[Guard]: extend(['Counterstrike','Non-Flying'])
-        if markers[Sleep] or markers[Stun]: append('Incapacitated')
+        if markers[Sleep] or markers[Stun] or markers[Slam]: append('Incapacitated')
         if markers[Zombie] :
                 extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
                 remove('Living')
@@ -1303,18 +1303,19 @@ def computeTraits(card):
         if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
 
                 #Harshforge monolith
-
+        
         if 'Unstoppable' in rawTraitsList: extend(['Unmovable','Uncontainable'])
         if 'Incorporeal' in rawTraitsList: extend(['Nonliving','Burnproof','Uncontainable'])
         if 'Nonliving' in rawTraitsList: extend(['Poison Immunity','Finite Life'])
         if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
-        if 'Restrained' in rawTraitsList: append('Defense -2')
+        if 'Restrained' in rawTraitsList: extend(['Defense -2','Non-Flying'])
+        if 'Incapacitated' in rawTraitsList: append('Non-Flying')
 
         if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
         elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
         #Dragonclaw wolverine, but we need rage markers for its ability.
 
-        if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
+        if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying' and t!='Non-Flying']
 
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)
