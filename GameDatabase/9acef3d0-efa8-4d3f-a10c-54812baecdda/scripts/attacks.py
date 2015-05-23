@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.0.0     #######################################
+##########################    v1.12.5.0     #######################################
 ###########################################################################
 # -*- coding: utf-8 -*-
 from math import factorial
@@ -1315,7 +1315,7 @@ def computeTraits(card):
         elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
         #Dragonclaw wolverine, but we need rage markers for its ability.
 
-        if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying' and t!='Non-Flying']
+        if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying' and t != 'Non-Flying']
 
         for rawTrait in rawTraitsList:
                 formTrait = traitParser(rawTrait)
