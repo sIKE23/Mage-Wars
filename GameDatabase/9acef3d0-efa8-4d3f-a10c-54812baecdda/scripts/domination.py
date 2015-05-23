@@ -20,9 +20,19 @@ def importArray(filename):
         dictKey = None
         for line in raw:
                 if line == '\n': pass #ignore blank lines
+                elif "@Scenario" in line:
+                        raw = line.replace('\n','').strip('@')
+                        split = raw.split("=")
+                        scenarioDict["Scenario"] = {"Type":split[0],"Goal":split[1]}
+                elif "@" in line:
+                        raw = line.replace('\n','').strip('@')
+                        split = raw.split("=")
+                        key = split[0]
+                        locations = eval(split[1])
+                        scenarioDict[key] = locations
                 elif line[0] != '#':
                         row = []
-                        for char in range(len(line)):
+                        for char in range(len(line.replace('\n',''))):
                             if line[char] != '\n':
                                 row.append(line[char])
                         transposeArray.append(row)
@@ -31,14 +41,12 @@ def importArray(filename):
                         X0 = len(transposeArray[0])
                         X1 = len(transposeArray)
                         array = [[transposeArray[x1][x0] for x1 in range(X1)] for x0 in range(X0)]
-                        transposeArray = []
+                        #transposeArray = []
                         scenarioDict[dictKey] = array
         return scenarioDict
 
 def loadMapFile(group, x=0, y=0):
         mute()
-        notify("This feature coming to your Mage Wars game here soon!")
-        return
         directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
         fileList = [f.split('.')[0] for f in os.listdir(directory) if (os.path.isfile(os.path.join(directory,f)) and f.split('.')[1]=='txt')]
         choices = fileList+['Cancel']
@@ -49,8 +57,13 @@ def loadMapFile(group, x=0, y=0):
         notify('{} loads {}.'.format(me,fileList[choice-1]))
 
         mapArray = scenario.get('Map',False)
-        objectsArray = scenario.get('Objects',False)
-        creaturesArray= scenario.get('Creatures',False)
+        mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
+        #orbLocations = scenario.get('Orbs',[])
+        #sslakLocations = scenario.get('Sslaks',[])
+        #usslakLocations = scenario.get('Usslaks',[])
+        #passageLocations = scenario.get('Secret Passages',[])
+        #objectsArray = scenario.get('Objects',False)
+        #creaturesArray= scenario.get('Creatures',False)
 
         for c in table:
                 if c.type == "Internal": c.delete()# or
@@ -73,46 +86,54 @@ def loadMapFile(group, x=0, y=0):
                                 if tile:
                                         tile = table.create(tile,x,y)
                                         tile.anchor = True
-                                        if SPT: table.create("a4b3bb92-b597-441e-b2eb-d18ef6b8cc77",x+mapTileSize/2,y+mapTileSize/2) #Add trap marker
+                                        if SPT: table.create("8731f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2,y+mapTileSize/2) #Add trap marker
+                                        #It doesn't look like this is the correct identifier for trap markers.
                         y += mapTileSize
                 x += mapTileSize
                 y = -Y/2
         x = -X/2
 
         mapDict = createMap(I,J,zoneArray,mapTileSize)
-
-        for i in range(I): #For some reason, I can't get the map tiles to be sent to the back successfully. So we'll do this in two parts.
-                for j in range(J):
-                        if objectsArray:
-                                obj = mapObjectsDict.get(objectsArray[i][j],None)
-                                if obj:
-                                        duplicate = objectsArray[i][j].istitle()
-                                        table.create(obj,
-                                                     x+mapObjectOffset,
-                                                     y+mapObjectOffset)
-                                        if duplicate:
-                                                table.create(obj,
-                                                                   x+mapObjectOffset+mapMultipleObjectOffset,
-                                                                   y+mapObjectOffset)
-                        if creaturesArray:
-                                if creaturesArray[i][j] in ['1','2','3','4','5','6']: mapDict.get('zoneArray')[i][j]['startLocation'] = creaturesArray[i][j]
-                                cre = mapCreaturesDict.get(creaturesArray[i][j],None)
-                                if cre:
-                                        duplicate = creaturesArray[i][j].istitle()
-                                        table.create(cre,
-                                                     x+mapCreatureOffset,
-                                                     y+mapCreatureOffset)
-                                        if duplicate: table.create(cre,
-                                                                   x+mapCreatureOffset+mapMultipleCreatureOffset,
-                                                                   y+mapCreatureOffset)
-                        y += mapTileSize
-                x += mapTileSize
-                y = -Y/2
-
         setGlobalVariable("Map",str(mapDict))
-        for c in table:
-                remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
+        
+        for obj,locations in mapObjects:
+                for L in locations:
+                        i,j = L
+                        mapPlace(obj,(i-1,j-1))
+        #for c in table:
+         #       remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
 
+def mapPlace(key,coords): #We'll assume hardcoded map definitions for now.
+        mapDict = eval(getGlobalVariable("Map"))
+        i,j = coords
+        x,y = i*mapTileSize-mapDict["x"],j*mapTileSize-mapDict["y"]
+        GUID=mapObjectsDict[key]#,offset,mOffset,objType = mapObjectsDict[key]
+        if key in ["Sslak","Usslak"]:
+                x += mapCreatureOffset
+                y += mapCreatureOffset
+                while True:
+                        finished = True
+                        for c in table:
+                                cx,cy = c.position
+                                if c.Type == "Creature" and cx==x and cy == y:
+                                        x += mapMultipleCreatureOffset
+                                        finished = False
+                                        break
+                        if finished: break
+        elif key == "Orb":
+                x += mapCreatureOffset
+                y += mapCreatureOffset
+                while True:
+                        finished = True
+                        for c in table:
+                                cx,cy = c.position
+                                if c.Type == "Creature" and cx==x and cy == y:
+                                        x += mapMultipleCreatureOffset
+                                        finished = False
+                                        break
+                        if finished: break
+        table.create(GUID,x,y)
+        
 ### Map Definitions ###
 
 mapTileSize = 250

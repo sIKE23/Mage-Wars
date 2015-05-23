@@ -11,8 +11,8 @@ import os
 ############################################################################
 
 ##########################		Markers			##################################
-3VTar = ("3 V'Tar", "4a5ae073-693a-48d4-9c43-0c220668f585")
-5VTar = ("5 V'Tar", "5018cced-2d6b-4aaa-9bde-12e9b10740b5")
+VTar3 = ("3 V'Tar", "4a5ae073-693a-48d4-9c43-0c220668f585")
+VTar5 = ("5 V'Tar", "5018cced-2d6b-4aaa-9bde-12e9b10740b5")
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
