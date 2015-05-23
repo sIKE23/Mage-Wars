@@ -262,7 +262,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
                                                                 hasAttached = True
                                                                 break
                                                 elif getSetting('AutoAttach',True) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canAttach(card,a):
-                                                        if card.Type == "Enchantment" and not card.isFaceUp and not castSpell(card,a): break
+                                                        if (card.Type == "Enchantment" or card.Name in ["Tanglevine","Stranglevine","Quicksand"]) and not card.isFaceUp and not castSpell(card,a): break
                                                         c,t = attach(card,a)
                                                         if t:
                                                                 actionType = ['attaches','to']
