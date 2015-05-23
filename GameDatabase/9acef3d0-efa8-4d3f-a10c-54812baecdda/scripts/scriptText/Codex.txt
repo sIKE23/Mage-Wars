@@ -152,6 +152,8 @@ Creature is disoriented and/or blinded. When it makes an attack, roll the effect
 
 - Removal cost of 2.
 
+- A Dazed creature must still roll for each attack it makes, including all 3 strikes of a Triplestrike attack, or both attacks of a Sweeping/Doublestrike attack.
+
 - If making a Zone Attack, check only once; the entire attack either fails or succeeds.
 
 - Conjurations cannot be Dazed.

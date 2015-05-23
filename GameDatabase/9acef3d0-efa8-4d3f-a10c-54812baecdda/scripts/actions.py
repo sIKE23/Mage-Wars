@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.4.0     #######################################
+##########################    v1.12.5.0     #######################################
 ###########################################################################
 import time
 import re
@@ -178,7 +178,7 @@ def onGameStart():
 	# bring up window to point to documentation
 	initializeGame()
 
-	#if there's only one player, go into debug mode	
+	#if there's only one player, go into debug mode
 	if len(players) == 1:
 		debugMode = True
 		playerNum = 2
@@ -227,11 +227,7 @@ def onLoadDeck(player, groups):
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
 			deckLoaded = True
 			playerSetup()
-			if debugMode:
-				# set Dice Rolling Area, Initative, and Phase Marker Card location
-				#setDRAIP(1)
-				CreateIniToken()
-			elif len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
+			if len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
 				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
@@ -421,7 +417,7 @@ def playerSetup():
 
 	# Players select their color
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-	if not debugMode:
+	if not debugMode or len(players) > 1:
 		while (True):
 			choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
 			colorsChosen = getGlobalVariable("ColorsChosen")
@@ -1381,8 +1377,14 @@ def flipcard(card, x = 0, y = 0):
 		else:
 			card.switchTo("B")
 		notify("{} Flips Zone Marker.".format(me))
+	elif "1st Player Token" in card.Name:
+		nextPlayer = getNextPlayerNum()
+		setGlobalVariable("PlayerWithIni", str(nextPlayer))
+		for p in players:
+			remoteCall(p, "changeIniColor", [card])
+
 	# do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
-	if card.Type in typeIgnoreList: return  
+	if card.Type in typeIgnoreList: return
 	# normal card flipping processing starts here
 	if card.isFaceUp == False:
 		card.isFaceUp = True
@@ -1457,12 +1459,6 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[FFToken] = 3
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
-  	elif card.alternates is not None and "B" in card.alternates: #flip the initiative card
-		nextPlayer = getNextPlayerNum()
-		setGlobalVariable("PlayerWithIni", str(nextPlayer))
-		for p in players:
-			remoteCall(p, "changeIniColor", [card])
-		#notify("{} turns '{}' face up.".format(me, card.Name))
 	elif card.isFaceUp:
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
