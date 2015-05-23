@@ -480,7 +480,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
-			<property name="Stats" value="Channeling=2, Armor=3, Life=10" />
+			<property name="Stats" value="Channeling=2, Armor=3, Life=13" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Zone Exclusive, Epic, Beastmaster Only" />
 			<property name="Text" value="During The Deployment Phase, Lair may summon 1 animal creature" />
