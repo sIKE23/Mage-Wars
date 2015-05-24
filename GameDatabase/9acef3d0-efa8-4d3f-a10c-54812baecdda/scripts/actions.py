@@ -881,7 +881,7 @@ def resolveUpkeep():
 				if ManaPrismInPlay == 1:
 					addToken(ManaPrism, Mana)
 		# Process Upkeep for Mordok's Obelisk's
-		if card.Type == "Creature" and card.controller == me and MordoksObeliskInPlay == 1:
+		if card.Type == "Creature" and card.controller == me and MordoksObeliskInPlay == 1 and card.isFaceUp:
 			obeliskUpKeepCost = 1
 			notifystr = "Do you wish to pay the Upkeep +1 cost for {} from Mordok's Obelisk's effect?".format(card.Name)
 			processUpKeep(obeliskUpKeepCost, card, MordoksObelisk, notifystr)
