@@ -46,7 +46,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [3-9 = Burn; 10+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="At the end of the attack, as part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second taget must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
+			<property name="Text" value="At the end of the attack, as part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second target must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
 			<property name="CardID" value="MWBG1A02" />
 		</card>
 		<card id="6ffd7fe8-14ac-4bfa-8da4-aef87dbaa61a" name="Hurl Meteorite">
@@ -235,7 +235,7 @@
 			<property name="Text" value="Oscuda is immune to his Stink Cloud" />
 			<property name="CardID" value="MWBG1C02" />
 		</card>
-		<card id="82ce9e6d-a218-488a-843c-46b85f3f393d" name="Skelax, Taunting Imp">
+		<card id="82ce9e6d-a218-488a-843c-46b85f3f393d" name="Skeelax, Taunting Imp">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="11" />
@@ -247,7 +247,7 @@
 			<property name="Stats" value="Defense=6+ 1x, Armor=1, Life=9" />
 			<property name="AttackBar" value="Trident:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [5+ = Taunt]" />
 			<property name="Traits" value="Flame -2, Legendary, Warlock Only" />
-			<property name="Text" value="During the Upkeep Phase, whlie Skelax is in the same zone as an object with a Burn condition, he gains the Regenerate 2 trait." />
+			<property name="Text" value="During the Upkeep Phase, while Skeelax is in the same zone as an object with a Burn condition, he gains the Regenerate 2 trait." />
 			<property name="CardID" value="MWBG1C03" />
 		</card>
 		<card id="9153fc63-f781-443a-ab94-10c5acb50faa" name="Slaknir, Goblin Chieftain">
@@ -386,7 +386,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target must be in a zone with a V'Tar Orb you control. Heal target creature the amount rolled on 2 attack dice, add an additional 2 attack dice to the roll for each V&apos;Tar Orb you control." />
+			<property name="Text" value="Target must be in a zone with a V&apos;Tar Orb you control. Heal target creature the amount rolled on 2 attack dice, add an additional 2 attack dice to the roll for each V&apos;Tar Orb you control." />
 			<property name="CardID" value="MWBG1I02" />
 		</card>	
 		<card id="721428d1-878a-457b-8885-4e5f9bb2e20c" name="V&apos;Tar Suppression">
