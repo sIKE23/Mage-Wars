@@ -58,12 +58,6 @@ def loadMapFile(group, x=0, y=0):
 
         mapArray = scenario.get('Map',False)
         mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
-        #orbLocations = scenario.get('Orbs',[])
-        #sslakLocations = scenario.get('Sslaks',[])
-        #usslakLocations = scenario.get('Usslaks',[])
-        #passageLocations = scenario.get('Secret Passages',[])
-        #objectsArray = scenario.get('Objects',False)
-        #creaturesArray= scenario.get('Creatures',False)
 
         for c in table:
                 if c.type == "Internal": c.delete()# or
@@ -100,13 +94,11 @@ def loadMapFile(group, x=0, y=0):
                 for L in locations:
                         i,j = L
                         mapPlace(obj,(i-1,j-1))
-        #for c in table:
-         #       remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
 
 def mapPlace(key,coords): #We'll assume hardcoded map definitions for now.
         mapDict = eval(getGlobalVariable("Map"))
         i,j = coords
-        x,y = i*mapTileSize-mapDict["x"],j*mapTileSize-mapDict["y"]
+        x,y = i*mapTileSize+mapDict["x"],j*mapTileSize+mapDict["y"]
         GUID=mapObjectsDict[key]#,offset,mOffset,objType = mapObjectsDict[key]
         if key in ["Sslak","Usslak"]:
                 x += mapCreatureOffset
@@ -120,19 +112,6 @@ def mapPlace(key,coords): #We'll assume hardcoded map definitions for now.
                                         finished = False
                                         break
                         if finished: break
-        elif key == "Orb":
-                x += mapCreatureOffset
-                y += mapCreatureOffset
-                while True:
-                        finished = True
-                        for c in table:
-                                cx,cy = c.position
-                                if c.Type == "Creature" and cx==x and cy == y:
-                                        x += mapMultipleCreatureOffset
-                                        finished = False
-                                        break
-                        if finished: break
-        table.create(GUID,x,y)
         
 ### Map Definitions ###
 
