@@ -1517,7 +1517,7 @@ def discard(card, x=0, y=0):
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
-		if magecard.Type == "Mage":
+		if card.Type == "Mage":
 			notify("{} decreases the Channeling stat by 1 because '{}' is being discarded".format(me, card))
 			me.Channeling -= 1
 	else:
