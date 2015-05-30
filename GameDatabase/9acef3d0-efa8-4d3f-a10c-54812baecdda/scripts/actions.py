@@ -298,7 +298,9 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                 else:
                                         cost = attack.get('Cost')
                                         realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
-                                        if realCost <= me.Mana: me.Mana -= realCost
+                                        if realCost <= me.Mana: 
+                                        	me.Mana -= realCost
+                                        	notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))   	
                                         else:
                                                 notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
                                                 return
