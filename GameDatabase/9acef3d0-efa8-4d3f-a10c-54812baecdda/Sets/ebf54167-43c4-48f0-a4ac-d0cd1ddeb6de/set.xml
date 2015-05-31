@@ -746,7 +746,7 @@
 		</card>
 		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns" size="Horizontal Cards">
 			<property name="Type" value="Conjuration-Wall" />
-			<property name="Subtype" value="" />
+			<property name="Subtype" value="Plant" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
