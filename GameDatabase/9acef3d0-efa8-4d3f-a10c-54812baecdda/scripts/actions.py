@@ -2035,6 +2035,7 @@ def computeCastCost(card,target=None): #Does NOT take discounts into considerati
         except: pass
         if target: #Compute exact cost based on target. For now, cards like dissolve will have to target the spell they want to destroy. Does not check for target legality.
                 name = card.Name
+                if "Vine Marker" in target.Name and card.Name == "Burst of Thorns": return int(card.Cost)
                 tLevel = 6 if target.Type == "Mage" else (int(target.Level.split("/")[0]) if "/" in target.Level else int(sum(map(lambda x: int(x), target.Level.split('+')))))
                 if name in ["Dissolve", "Conquer"]:
                         cost = int(target.Cost)
