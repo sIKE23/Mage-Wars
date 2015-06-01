@@ -1515,12 +1515,11 @@ def discard(card, x=0, y=0):
 		if card.Type == "Mage":
 			notify("{} decreases the Channeling stat by 1 because '{}' is being discarded".format(me, card))
 			me.Channeling -= 1
-	else:
-			notify("{} discards '{}'".format(me, card))
 	card.isFaceUp = True
 	detach(card)
 	card.moveTo(me.piles['Discard'])
-
+	notify("{} discards '{}'".format(me, card))
+	
 def obliterate(card, x=0, y=0):
 	mute()
 	if card.controller != me:
