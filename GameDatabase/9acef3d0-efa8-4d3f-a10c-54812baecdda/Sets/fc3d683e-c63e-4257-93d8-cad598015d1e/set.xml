@@ -207,7 +207,7 @@
 			<property name="Stats" value="Armor=0, Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine." />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="DNJ11" />
 		</card>
 		<card id="b0993b6c-e604-4ba4-86d7-b45e53daae9b" name="Vine Tree">
