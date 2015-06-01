@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.5.0     #######################################
+##########################    v1.12.6.0     #######################################
 ###########################################################################
 import time
 import re
@@ -286,7 +286,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
         if player == me == fromCard.controller and isTargeted:
-                if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage']:
+                if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and (toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage'] or "Vine Marker" in toCard.Name):
                         attacker,defender = fromCard,toCard #Should probably make an attack declaration function. Eventually.
                         aTraitDict = computeTraits(attacker)
                         dTraitDict = computeTraits(defender)
