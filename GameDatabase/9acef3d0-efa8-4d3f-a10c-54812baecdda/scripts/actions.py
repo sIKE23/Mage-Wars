@@ -237,9 +237,10 @@ def onLoadDeck(player, groups):
 			else:	#other guy is done too
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
-				for p in players:
-					remoteCall(p, "SetupForIni", [])
-				notify("All players have set up. Please roll for initiative.")
+				if not getGlobalVariable("IniAllDone") == 'x':
+					for p in players:
+						remoteCall(p, "SetupForIni", [])
+					notify("All players have set up. Please roll for initiative.")
 		else:
 			#notify and delete deck
 			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
