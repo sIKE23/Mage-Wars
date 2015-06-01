@@ -112,6 +112,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         atkTraits = attack.get('Traits',{})
+        if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
         if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
         if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
         aZone = getZoneContaining(attacker)
@@ -336,7 +337,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
         atkTraits = attack.get('Traits',{})
         attacker = (Card(aTraitDict['OwnerID']) if 'OwnerID' in aTraitDict else None)
         defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
-        if attacker:
+        atkOS = Card(attack['OriginalSourceID'])
+        if attacker and not "Autonomous" in atkOS.traits:
                 if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
                         if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)
                         if attack.get('RangeType') == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
@@ -748,6 +750,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        #Remember arcane zap
+        if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
         #If the defender is not flying, the attacker should lose the flying trait
         if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
@@ -767,23 +771,29 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        #Check for fumble
-        if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
-                notify("{} fumbles the attack!".format(attacker.name.split(',')[0]))
-                rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-                interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-                return
-        #Check for block
-        if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-                notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
-                rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-                interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-                return
-        #Check for reverse attack
-        if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-                notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
-                interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
-                return
+        if not attack.get('RangeType') == 'Damage Barrier':
+                #Check for forcefield
+                if len([reduceFF(c) for c in getAttachments(defender) if c.isFaceUp and c.name == "Forcefield" and c.markers[FFToken]]):
+                        notify("The forcefield absorbs the attack!".format(attacker.name.split(',')[0]))
+                        rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+                        return
+                #Check for fumble
+                if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
+                        notify("{} fumbles the attack!".format(attacker.name.split(',')[0]))
+                        rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+                        interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+                        return
+                #Check for block
+                if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+                        notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
+                        rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+                        interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+                        return
+                #Check for reverse attack
+                if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+                        notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
+                        interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
+                        return
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
@@ -791,6 +801,10 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
                        interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
                        return
         interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
+
+def reduceFF(card):
+        card.markers[FFToken] = max(0, card.markers[FFToken]-1)
+        return 1
 
 def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
