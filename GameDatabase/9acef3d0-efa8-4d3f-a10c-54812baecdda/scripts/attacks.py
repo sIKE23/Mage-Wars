@@ -923,12 +923,8 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                 actualDmg = max(actualDmg-3,0)
                 defender.markers[VoltaricON] = 0
                 defender.markers[VoltaricOFF] = 1
-        if defender.type == "Creature" or defender.type == "Mage":
-                dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
-                notify("Checkpoint 1")
-        else:
-                dManaDrain = ""
-                notify("Checkpoint 2")
+        if defender.type == "Creature" or defender.type == "Mage": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
+        else: dManaDrain = ""
                 
         choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
                                                                                                           actualDmg,
@@ -978,9 +974,8 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
         notify("Checkpoint 3: {}".format(defender.Name))
-        if "Vine Marker" in defender.Name: drainableHealth = 0#"" # Round up......
+        if "Vine Marker" in defender.Name: drainableHealth = 0#""
         else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
-        #drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
