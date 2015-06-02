@@ -146,7 +146,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=-, Life=35" />
-			<property name="AttackBar" value="Two-Fisted Power Smash:&#xD;&#xA;[Full] [Melee] [Dice=7] [d12] [7-10 = Daze; 11+ = Stun]&#xD;&#xA;Quake Stomp:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Atack]  [Dice=3] [d12] [7+ = Slam] [Unavoidable]" />
+			<property name="AttackBar" value="Two-Fisted Power Smash:&#xD;&#xA;[Full] [Melee] [Dice=7] [d12] [7-10 = Daze; 11+ = Stun]&#xD;&#xA;Quake Stomp:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Dice=3] [d12] [7+ = Slam] [Unavoidable]" />
 			<property name="Traits" value="Slow, Burnproof, Lightning -2, Tough -2, Nonliving, Unmovable" />
 			<property name="Text" value="Earth Elemental is immune to his Quake Stomp attack." />
 			<property name="CardID" value="FWC02" />

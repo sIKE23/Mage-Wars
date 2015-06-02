@@ -709,6 +709,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        setGlobalVariable("avoidAttackTempStorage","Miss")
         if getSetting("BattleCalculator",True):
                 if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
                 else: remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
@@ -815,6 +816,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 notify('Error: invalid attack format - no dice found')
                 return
         damageRoll,effectRoll = rollDice(dice)
+        setGlobalVariable("avoidAttackTempStorage","Hit")
         interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
 
 def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #Executed by defender
@@ -849,7 +851,7 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
                 deathPrompt(dTraitDict,attack,aTraitDict)
                 deathFlag = True
         #But damage barriers can still happen after death!
-        if attack.get('RangeType') == 'Melee': #Need to add: and attack *was 'successful'*
+        if attack.get('RangeType') == 'Melee' and getGlobalVariable("avoidAttackTempStorage")=="Hit":
                 attackList = getAttackList(defender)
                 dBarrier = None
                 for a in attackList:
@@ -976,10 +978,8 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
         notify("Checkpoint 3: {}".format(defender.Name))
-        if "Vine Marker" in defender.Name:
-                drainableHealth = "" # Round up......
-        else:
-                drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
+        if "Vine Marker" in defender.Name: drainableHealth = 0#"" # Round up......
+        else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
         #drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
