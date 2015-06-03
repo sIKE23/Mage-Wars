@@ -158,7 +158,10 @@ def onGameStart():
 	global debugMode
 	#Set default map
 	defineRectangularMap(4,3,250)
-
+	
+	#set the Game Host (this player will be the owner of the Initative and Phase Markers)
+	setGlobalVariable("GameHostID", str((sorted([x._id for x in getPlayers()])[0])))
+	
 	# reset python Global Variables
 	for p in players:
 		remoteCall(p, "setClearVars",[])
@@ -179,7 +182,7 @@ def onGameStart():
 	initializeGame()
 
 	#if there's only one player, go into debug mode
-	if len(players) == 1:
+	if len(getPlayers()) == 1:
 		debugMode = True
 		playerNum = 2
 		me.setGlobalVariable("MyColor", PlayerColor[0])
@@ -188,7 +191,7 @@ def onGameStart():
 		setGlobalVariable("InitiativeDone", "True")
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
-	setGlobalVariable("IniAllDone", ("x" if len(players) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
+	setGlobalVariable("IniAllDone", ("x" if len(getPlayers()) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
 
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
@@ -198,8 +201,11 @@ def defineRectangularMap(I,J,tilesize):
 
 def setUpDiceAndPhaseCards():
 	mute()
-	TableSetup = getGlobalVariable("TableSetup")
-	if TableSetup == "False" and me.name == Player(1).name:
+	tableSetup = getGlobalVariable("TableSetup")
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	if tableSetup == "False" and me.name == gameHost.name:
+                # set Dice Rolling Area, Initative, and Phase Marker Card location
+                AskDiceRollArea()
                 card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
                 card.anchor = (True)
                 moveCardToDefaultLocation(card)
@@ -227,13 +233,10 @@ def onLoadDeck(player, groups):
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
 			deckLoaded = True
 			playerSetup()
-			if len(getGlobalVariable("SetupDone")) != len(players) - 1: #we're not the last done with setup
+			if len(getGlobalVariable("SetupDone")) != len(getPlayers()) - 1: #we're not the last done with setup
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
 				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
-				if playerNum == 1:
-					# set Dice Rolling Area, Initative, and Phase Marker Card location
-					AskDiceRollArea()
 			else:	#other guy is done too
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
@@ -349,13 +352,11 @@ def SetupForIni():
 def iniRoll(effect):
 	global playerNum
 	global myIniRoll
-
 	myIniRoll = effect
 	notify("{} rolled a {} for initiative".format(me, effect))
 	myRollStr = (str(playerNum) + ":" + str(effect) + ";")
 	setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
-
-	if getGlobalVariable("OppIniRoll").count(";") == len(players):
+	if getGlobalVariable("OppIniRoll").count(";") == len(getPlayers()):
 		#all initiatives rolled, see who had highest
 		rollString = getGlobalVariable("OppIniRoll")
 		rollStringList = rollString.split(";")
@@ -420,7 +421,7 @@ def playerSetup():
 
 	# Players select their color
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-	if not debugMode or len(players) > 1:
+	if not debugMode or len(getPlayers()) > 1:
 		while (True):
 			choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
 			colorsChosen = getGlobalVariable("ColorsChosen")
@@ -455,7 +456,9 @@ def playerSetup():
 			whisper("Life set to {}".format(me.Life))
 
 def createVineMarker(group, x=0, y=0):
+	mute()
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
+	notify("{} creates a Vine Marker.".format(me))
 
 def createCompassRose(group, x=0, y=0):
 	table.create("7ff8ed79-159c-46e5-9e87-649b3269a931", 450, -40 )
@@ -547,7 +550,7 @@ def AskInitiative(pNum):
 		players[0].setActivePlayer()
 	else:
 		#randomly determine who else should go first (in a 2 player game, this will always choose the other player)
-		pNum = rnd(1, len(players) - 1)
+		pNum = rnd(1, len(getPlayers()) - 1)
 		notify("{} has elected NOT to go first! {} has first initiative.".format(me, players[pNum]))
 		remoteCall(players[pNum], "CreateIniToken", [])
 		players[pNum].setActivePlayer()
@@ -1470,7 +1473,7 @@ def flipcard(card, x = 0, y = 0):
 def getNextPlayerNum():
 	activePlayer = int(getGlobalVariable("PlayerWithIni"))
 	nextPlayer = activePlayer + 1
-	if nextPlayer > len(players):
+	if nextPlayer > len(getPlayers()):
 		nextPlayer = 1
 	return nextPlayer
 
@@ -1687,20 +1690,25 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                                                 x += xOffset
         card.moveToTable(x,y,True)
         #setUpDiceAndPhaseCards,CreateIniToken
+
 def debug(str):
+	mute()
 	global debugMode
 	if debugMode:
 		whisper("Debug Msg: {}".format(str))
 
 def createCard(group,x=0,y=0):
         mute()
+        global debugMode
         cardName = askString("Create which card?","Enter card name here")
         guid,quantity = askCard({'Name':cardName},title="Select card version and quantity")
         if guid and quantity:
                 cards = ([table.create(guid,0,0,1,True)] if quantity == 1 else table.create(guid,0,0,quantity,True))
                 for card in cards:
                         card.moveTo(me.hand)
-                        notify("{} created a card. Card placed in {}'s spellbook.".format(me,me))
+                        if not debugMode:
+                        	notify("*** ILLEGAL *** - Spellbook is no longer valid")
+                        notify("A card was created and was placed into {}'s spellbook.".format(me))
 
 def moveCard(model, x, y):
 	for c in table:
@@ -1817,7 +1825,7 @@ def switchPhase(card, phase, phrase):
 			return
 
 		doneWithPhase += str(playerNum)
-		if len(doneWithPhase) != len(players):
+		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if card.controller == me:
 				card.highlight = myColor
