@@ -1003,8 +1003,10 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                 remoteCall(attacker.controller,"malakaisFirePrompt",[defender])
 
         #Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
-        dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
-        defender.controller.Mana -= dManaDrain
+        if defender.Type in ['Creature','Mage']:
+            dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
+            defender.controller.Mana -= dManaDrain
+        else: dManaDrain = ""
         if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.name))
         #Vampirism
         if (atkTraits.get('Vampiric') and drainableHealth and
