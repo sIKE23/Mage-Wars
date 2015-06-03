@@ -66,6 +66,8 @@
 		<globalvariable name="Map" value=""/>
 		<globalvariable name="RoundNumber" value=""/>
 		<globalvariable name="PlayerWithIni" value=""/>
+		<globalvariable name="GameHost" value=""/>
+		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
 	</globalvariables>
 	<card back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>

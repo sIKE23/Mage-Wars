@@ -2,6 +2,8 @@
 ##########################    v1.12.6.0     #######################################
 ###########################################################################
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append(wd("lib"))
 from math import factorial
 from copy import deepcopy
 """
@@ -709,7 +711,6 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
-        setGlobalVariable("avoidAttackTempStorage","Miss")
         if getSetting("BattleCalculator",True):
                 if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
                 else: remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
@@ -973,8 +974,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
-        notify("Checkpoint 3: {}".format(defender.Name))
-        if "Vine Marker" in defender.Name: drainableHealth = 0#""
+        if "Vine Marker" in defender.Name: drainableHealth = 0
         else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
