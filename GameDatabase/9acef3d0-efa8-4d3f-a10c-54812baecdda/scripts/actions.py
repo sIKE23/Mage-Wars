@@ -108,6 +108,15 @@ DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 diceBank = []
 diceBankD12 = []
 
+##########################		 Card Sizes 			########################
+
+cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60}, 
+                   'Horizontal Cards': {'height': 60, 'width': 80, 'backHeight': 80, 'backWidth': 60}, 
+                   'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130},
+                   'PhaseMarkers': {'height': 20, 'width': 90, 'backHeight': 20, 'backWidth': 90},
+                   'InitativeMarkers': {'height': 50, 'width': 50, 'backHeight': 50, 'backWidth': 50},
+                   'ModularBoardPieces': {'height': 250, 'width': 250, 'backHeight': 250, 'backWidth': 250}}
+
 ##########################		Other			############################
 
 PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
@@ -449,7 +458,7 @@ def playerSetup():
 
 def createVineMarker(group, x=0, y=0):
 	mute()
-	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", 450, -40 )
+	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", x, y)
 	notify("{} creates a Vine Marker.".format(me))
 
 def createCompassRose(group, x=0, y=0):
@@ -1608,8 +1617,9 @@ def toggleToken(card, tokenType):
 			notify("{} added to face-down card.".format(tokenType[0]))
 
 def playCardFaceDown(card, x=0, y=0):
-        mute()
+	mute()
 	myColor = me.getGlobalVariable("MyColor")
+	card.isFaceUp = False
 	moveCardToDefaultLocation(card)
 	card.peek()
 	card.highlight = myColor
@@ -1619,11 +1629,12 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         mute()
         mapDict = eval(getGlobalVariable('Map'))
         x,y = 0,0
+        if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
+        else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
         if mapDict:
                 zoneArray = mapDict.get('zoneArray')
                 cardType = card.type
                 if cardType == 'Internal': return
-                cardW,cardH = card.width(),card.height()
                 mapX,mapW = mapDict.get('x'),mapDict.get('X')
                 if cardType == 'DiceRoll':
                         diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
