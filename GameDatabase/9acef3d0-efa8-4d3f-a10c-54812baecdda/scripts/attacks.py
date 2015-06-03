@@ -974,8 +974,9 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
         #Prep for Vampirism
         aDamage = getStatusDict(attacker).get('Damage',0)
-        if "Vine Marker" in defender.Name: drainableHealth = 0
-        else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
+        drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0)) if defender.Type in ["Mage","Creature"] else 0
+        #if "Vine Marker" in defender.Name: drainableHealth = 0
+        #else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
         if defender.Type == 'Mage': defender.controller.Damage += damage
         else: defender.markers[Damage] += damage
@@ -988,6 +989,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         if "Vine Marker" in defender.name and damage >0:
               notify("{} is smashed into the ground and destroyed.".format(defender))
               defender.moveTo(me.piles['Discard'])
+              return #No sense going any further.
 
         #Bloodreaper health drain
         if attacker.markers[BloodReaper] and not timesHasOccured("Blood Reaper",attacker.controller) and defender.Type in ["Creature","Mage"] and dTraitDict.get("Living") and 'Demon' in attacker.Subtype and damage:
