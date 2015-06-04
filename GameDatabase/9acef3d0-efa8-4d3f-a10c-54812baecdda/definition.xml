@@ -20,6 +20,7 @@
 		<script src="scripts/attacks.py" />
 		<script src="scripts/attachcards.py" />
 		<script src="scripts/textfunctions.py" />
+		<script src="scripts/timer.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
@@ -102,6 +103,7 @@
 		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
 		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
 		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
+		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer" />
 		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
