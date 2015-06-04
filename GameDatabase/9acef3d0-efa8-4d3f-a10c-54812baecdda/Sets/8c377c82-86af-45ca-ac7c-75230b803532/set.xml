@@ -4,7 +4,7 @@
 	id="8c377c82-86af-45ca-ac7c-75230b803532" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="1.4.2.1" 
-	version="1.12.0.0">
+	version="1.13.0.0">
 	<markers>
 		<marker id="3c74d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />		
 		<marker id="c56839d2-46f4-49a8-85e4-3838e7f09cc2" name="Control Marker Red" />
@@ -418,13 +418,13 @@
 			<property name="CardID" value="MWBG1Q01" />
 		</card>
 		
-		<card id="a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage" />
+		<card id="a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage">
 			<property name="Type" value="Internal" />
 		</card>
-		<card id="8731f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap" />
+		<card id="8731f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap">
 			<property name="Type" value="Internal" />
 		</card>
-		<card id="3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off" />
+		<card id="3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off">
 			<property name="Type" value="Internal" />
 				<alternate name="V&apos;Tar Orb On" type="B">
 					<property name="Type" value="Internal"/>
