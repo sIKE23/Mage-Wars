@@ -263,6 +263,10 @@ def computeAttack(aTraitDict,attack,dTraitDict):
                                         break
         #BM Conditional Ranged +1
         if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
+        #Wildfire Imp Melee buff for attacking a Burning Object
+        if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
+        #Bloodfire Helmet Demon buff
+        #if attacker.Subtype == "Demon" and attacker.controller == ?? and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
         #Wounded prey
         if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.type == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
