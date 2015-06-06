@@ -459,7 +459,7 @@ def playerSetup():
 def createVineMarker(group, x=0, y=0):
 	mute()
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", x, y)
-	notify("{} creates a Vine Marker.".format(me))
+	notify("{} creates a Green Vine Marker.".format(me))
 
 def createCompassRose(group, x=0, y=0):
 	table.create("7ff8ed79-159c-46e5-9e87-649b3269a931", 450, -40 )
@@ -1373,17 +1373,20 @@ def flipcard(card, x = 0, y = 0):
 	mute()
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
-		if card.alternate == "B":
-			card.switchTo("")
-		else:
+		if card.alternate == '':
 			card.switchTo("B")
-		notify("{} Flips Vine Marker.".format(me))
+			notify("{} flips the Vine Marker to use its Black side.".format(me))
+		else:
+			card.switchTo('')
+			notify("{} flips the Vine Marker to use its Green side.".format(me))
+		return
 	elif "Alt Zone" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo("")
 		else:
 			card.switchTo("B")
-		notify("{} Flips Zone Marker.".format(me))
+		notify("{} flips Zone Marker.".format(me))
+		return
 	elif "1st Player Token" in card.Name:
 		nextPlayer = getNextPlayerNum()
 		setGlobalVariable("PlayerWithIni", str(nextPlayer))

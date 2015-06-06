@@ -98,7 +98,7 @@
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack" />
 		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
-		<groupaction menu="Add Vine Marker" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
+		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
 		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
@@ -207,6 +207,7 @@
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
 			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
+			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
 			<cardaction menu="Use Untargeted Ability" shortcut="TAB" execute="useUntargetedAbility" />
 			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction" />
