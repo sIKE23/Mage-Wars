@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.6.0     #######################################
+##########################    v1.12.7.0     #######################################
 ###########################################################################
 # -*- coding: utf-8 -*-
 import sys
@@ -1317,6 +1317,8 @@ def computeTraits(card):
         if markers[Treebond] and 'Tree' in subtype: extend(['Innate Life +4','Armor +1','Lifebond +2'])
         if markers[Veteran] and 'Soldier' in subtype: extend(['Armor +1','Melee +1'])
         if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
+        if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
+        if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
 
                 #Harshforge monolith
 

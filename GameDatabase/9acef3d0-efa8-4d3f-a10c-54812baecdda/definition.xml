@@ -5,7 +5,7 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
 	scriptVersion ="3.1.0.1"
-	version="1.12.6.0"
+	version="1.12.7.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -156,7 +156,9 @@
 			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple" />
 			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
+			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+E" execute="addRage" />
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
+			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+H" execute="addBanish" />
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
 			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged" />
@@ -167,6 +169,7 @@
 			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTainted" />
 			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran" />
 			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak" />
+			<cardaction menu="Add Weak Marker" default="False" shortcut="Alt+W" execute="addWrath" />
 			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
 			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther" />
 		</cardactions>
@@ -180,7 +183,9 @@
 			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
 			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
+			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />
 			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
+			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish" />
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
 			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged" />
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
@@ -191,6 +196,7 @@
 			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint" />
 			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVeteran" />
 			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
+			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Alt+W" execute="subWrath" />
 			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie" />
 			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
 		</cardactions>
