@@ -1018,13 +1018,13 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         if (atkTraits.get('Vampiric') and drainableHealth and
             (dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type in ['Creature','Mage'] > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
                 if attacker.controller == me: healingQuery(aTraitDict,
-                                                           'Drain {} health from {}?'.format(drainableHealth,defender.name),
+                                                           'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
                                                            drainableHealth,
-                                                           "{} drains {} health from {}!".format(attacker.name,'{}',defender.name))
+                                                           "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name))
                 else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
-                                                                   'Drain {} health from {}?'.format(drainableHealth,defender.name),
+                                                                   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
                                                                    drainableHealth,
-                                                                   "{} drains {} health from {}!".format(attacker.name,'{}',defender.name)])
+                                                                   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
         #Finally, apply conditions
         effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:
