@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.6.0     #######################################
+##########################    v1.12.7.0     #######################################
 ###########################################################################
 import time
 import re
@@ -11,8 +11,6 @@ import os
 ############################################################################
 
 ##########################		Markers			##################################
-VTar3 = ("3 V'Tar", "4a5ae073-693a-48d4-9c43-0c220668f585")
-VTar5 = ("5 V'Tar", "5018cced-2d6b-4aaa-9bde-12e9b10740b5")
 ActionBlue = ("Action", "c980c190-448d-414f-9397-a5f17068ac58" )
 ActionBlueUsed = ("Action Used", "5926df42-919d-4c63-babb-5bfedd14f649" )
 ActionGreen = ("Action", "9cd83c4b-91b7-4386-9d9a-70719971f949" )
@@ -26,6 +24,7 @@ ActionGreyUsed = ("Action Used", "99bd454e-fab9-47c6-9f59-54a112eeb2da" )
 ActionPurple = ("Action", "edb61e00-a666-480a-81f3-20eb9944b0ea")
 ActionPurpleUsed = ("Action Used", "158f738b-6034-4c6d-b4ca-5abcf159ed9f" )
 Armor = ("Armor +1", "b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" )
+Banish = ("Banish"="fdaa2c02-a65a-40e0-a315-962f9315b732" )
 Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
 Burn = ("Burn", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
@@ -57,6 +56,7 @@ MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
 Quick = ("Quick", "11370fe9-41a4-4f05-9249-29a179c0031b" )
 QuickBack = ("Quick Back", "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" )
+Rage = ("Rage"="feb7e8f8-5c38-4978-92c8-2d47d54bdd29" )
 Ranged = ("Ranged +1","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
@@ -86,10 +86,13 @@ Visible = ("Visible", "b9b205a2-a998-44f5-97dc-c7f315afbbe2" )
 VoltaricON = ("Voltaric On", "a6e79926-db8d-4095-9aee-e3b46bf24a3f" )
 VoltaricOFF = ("Voltaric Off", "d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" )
 VTar =	("V'Tar", "3c74d2dd-cabd-4f90-8845-18297d503b70" )
+VTar3 = ("3 V'Tar", "4a5ae073-693a-48d4-9c43-0c220668f585")
+VTar5 = ("5 V'Tar", "5018cced-2d6b-4aaa-9bde-12e9b10740b5")
 VTarOrbOn = ("V'Tar Orb On", "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" )
 VTarOrbOff  = ("V'Tar Orb Off", "3f056a2d-3045-4f38-ae8b-f2155250f4dc" )
 Weak = ("Weak", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
 WoundedPrey = ("Wounded Prey", "42f6cee3-3de4-4c90-a77c-9fb2c432d78d" )
+Wrath = ("Wrath"="fffe964a-3839-4bc0-ba85-3268b59817c6" )
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
 
 ##########################		Dice-related			########################

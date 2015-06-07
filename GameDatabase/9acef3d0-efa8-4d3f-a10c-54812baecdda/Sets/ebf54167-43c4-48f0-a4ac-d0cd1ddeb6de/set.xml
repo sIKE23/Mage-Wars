@@ -4,7 +4,7 @@
 	id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="1.4.2.1" 
-	version="1.12.6.0">
+	version="1.12.7.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -49,6 +49,9 @@
 		<marker id="6383011a-c544-443d-b039-9f7ba8de4c6b" name="Storm Token" />
 		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate Token" />
 		<marker id="fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" name="Forcefield Token" />
+		<marker id="fdaa2c02-a65a-40e0-a315-962f9315b732" name="Banish" />
+		<marker id="feb7e8f8-5c38-4978-92c8-2d47d54bdd29" name="Rage" />
+		<marker id="fffe964a-3839-4bc0-ba85-3268b59817c6" name="Wrath" />
 	</markers>
 	<cards>
 		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">

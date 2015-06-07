@@ -1,5 +1,5 @@
 changelog = {
-		1126000: ("1.12.6.0", "1 June 2015", [
+		1120700: ("1.12.7.0", "7 June 2015", [
 			" Please update your Image Pack",
 			" Game Documents | Playing Mage Wars on OCTGN",
 			" Game Documents | OCTGN Apprentice Mode",
