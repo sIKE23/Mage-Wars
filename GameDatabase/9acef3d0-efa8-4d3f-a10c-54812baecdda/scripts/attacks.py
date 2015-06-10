@@ -257,7 +257,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
                 for e in eventList:
                         if e[0] == 'Attack' and e[1][0] == dTraitDict.get('OwnerID') and e[1][3] > 0:
                                 victim = Card(e[1][1]) if e[1][1] else None
-                                if victim and victim.controller==attacker.controller and (victim.Type in ['Creature','Mage'] or ('Conjuration' in victim.Type and 'Holy' in victim.School)):
+                                if victim and victim.controller==attacker.controller and (victim.Type in ['Creature','Mage'] or ('Conjuration' in victim.Type and 'Holy' in victim.School)) and victim != attacker:
                                         localADict['Melee'] = localADict.get('Melee',0) + 2
                                         localADict['Piercing'] = localADict.get('Piercing',0) + 1
                                         break
