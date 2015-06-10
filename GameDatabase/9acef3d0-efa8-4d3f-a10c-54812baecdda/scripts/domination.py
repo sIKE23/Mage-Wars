@@ -6,6 +6,23 @@
 ############################	   Map Construction      ################################
 ############################################################################
 
+def checkDominationVictory():
+        goal = eval(getGlobalVariable("Goal")).get("Goal")
+        debug(str(goal))
+        victoriousPlayers = []
+        for player in players:
+                mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
+                vtar = mage.markers[VTar] + 3*mage.markers[VTar3] + 5*mage.markers[VTar5]
+                if vtar >= goal: victoriousPlayers.append([player,vtar])
+        soleWinner = None
+        for player in victoriousPlayers:
+                for other in list(victoriousPlayers):
+                        if other[1] >= player[1] and other!=player: break
+                        soleWinner = player
+        if soleWinner:
+                notify("{} wins with {} V'tar!".format(soleWinner[0],soleWinner[1]))
+                return True
+
 def importArray(filename):
         """Takes a txt character array and outputs a dictionary of arrays (sets of columns). To get an entry from an array, use array[x][y]"""
         #Open the file
@@ -22,8 +39,8 @@ def importArray(filename):
                 if line == '\n': pass #ignore blank lines
                 elif "@Scenario" in line:
                         raw = line.replace('\n','').strip('@')
-                        split = raw.split("=")
-                        scenarioDict["Scenario"] = {"Type":split[0],"Goal":split[1]}
+                        split = raw.split("=")[1].strip("[]").split(",")
+                        scenarioDict["Scenario"] = {"Type":split[0],"Goal":int(split[1])}
                 elif "@" in line:
                         raw = line.replace('\n','').strip('@')
                         split = raw.split("=")
@@ -55,6 +72,8 @@ def loadMapFile(group, x=0, y=0):
         if choice == 0 or choice == len(choices): return
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
+
+        if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
         
         mapArray = scenario.get('Map',False)
         mapTileSize = 250 #replace 250 with a stored tilesize from scenario if we later decide to allow the design of maps with non-standard tilesizes.
@@ -93,10 +112,10 @@ def loadMapFile(group, x=0, y=0):
         
         for obj,locations in mapObjects:
                 for L in locations:
-                        i,j = L
+                        j,i = L
                         mapPlace(obj,(i-1,j-1))
 
-def mapPlace(key,coords): #We'll assume hardcoded map definitions for now.
+def mapPlace(key,coords):
         mapDict = eval(getGlobalVariable("Map"))
         i,j = coords
         x,y = i*mapTileSize+mapDict["x"],j*mapTileSize+mapDict["y"]

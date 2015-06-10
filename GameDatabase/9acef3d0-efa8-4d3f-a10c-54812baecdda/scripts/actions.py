@@ -187,6 +187,9 @@ def onGameStart():
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
 
+        #set the goal
+        setGlobalVariable("Goal",str({}))
+        
 	#enable AutoRoll of Initative for now....
 	setSetting("AutoRollIni", True)
 
@@ -645,6 +648,10 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
+                        #Check for domination victory
+                        goal = eval(getGlobalVariable("Goal"))
+                        debug(str(goal))
+                        if goal.get("Type")=="Domination" and checkDominationVictory(): return
 			setEventList('Round',[])
 			setEventList('Turn',[])#Clear event list for new round
 			gTurn = getGlobalVariable("RoundNumber")
