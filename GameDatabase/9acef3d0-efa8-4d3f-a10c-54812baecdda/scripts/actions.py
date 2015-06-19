@@ -1002,6 +1002,10 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 				attatchedTo = getAttachTarget(card1)
 				damage = card1.markers[CrushToken]
 				remoteCall(attatchedTo.controller,"stranglevineReceiptPrompt",[attatchedTo,damage])
+			else:
+				if card1.Name == "Forcefield" and card1.controller == me and card1.isFaceUp and card1.markers[FFToken] < 3:
+					card1.markers[FFToken] += 1
+					notify("{} adds a Forcefield token to {}, which has a total of {} Forcefield tokens now.".format(me.name,card1.name, card1.markers[FFToken]))
 			return
 		if choice == 1 and not card1.isFaceUp:
 			me.Mana -= upKeepCost

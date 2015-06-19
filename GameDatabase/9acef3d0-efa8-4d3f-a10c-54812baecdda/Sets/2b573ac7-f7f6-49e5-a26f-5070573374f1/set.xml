@@ -448,7 +448,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Life=7, Armor=0" />
+			<property name="Stats" value="Armor=0, Life=7" />
 			<property name="AttackBar" value="Wicked Spikes:&#xD;&#xA;[Dice=2] [Unavoidable] [Piercing +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Mangler Caltrops attacks each non-Flying creature immediately after it enters the zone. Mangler Caltrops hinders non-Flying creatures. Ranged attacks cannot target Caltrops" />
