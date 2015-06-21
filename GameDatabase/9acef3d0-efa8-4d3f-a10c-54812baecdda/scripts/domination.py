@@ -133,10 +133,7 @@ def mapPlace(key,coords):
                                 finished = False
                                 break
                 if finished: break
-        debug(GUID)
-        table.create("bf217fd3-18c0-4b61-a33a-117167533f3d",x,y)
         card = table.create(GUID,x,y)
-        debug("{}".format(card))
         
 ### Map Definitions ###
 
