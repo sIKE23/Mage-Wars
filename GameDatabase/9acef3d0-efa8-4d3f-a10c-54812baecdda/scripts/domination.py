@@ -100,8 +100,7 @@ def loadMapFile(group, x=0, y=0):
                                 if tile:
                                         tile = table.create(tile,x,y)
                                         tile.anchor = True
-                                        if SPT: table.create("8731f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2,y+mapTileSize/2) #Add trap marker
-                                        #It doesn't look like this is the correct identifier for trap markers.
+                                        if SPT: table.create("8731f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2 - 28,y+mapTileSize/2 - 40) #Add trap marker
                         y += mapTileSize
                 x += mapTileSize
                 y = -Y/2
