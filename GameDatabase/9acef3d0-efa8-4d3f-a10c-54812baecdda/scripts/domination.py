@@ -80,8 +80,8 @@ def loadMapFile(group, x=0, y=0):
         mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
 
         for c in table:
-                if c.type == "Internal": c.delete()# or
-                   # card.name in ["Sslak, Orb Guardian","Usslak, Greater Orb Guardian"]): card.delete() #We need a way to distinguish between scenario guardians and those in spellbooks
+                if c.type == "Internal" or c.type == "Creature-Scenario": c.delete() # delete Scenario creatrues and other game markers
+                	
 	setNoGameBoard(table)
 
         #iterate over elements, top to bottom then left to right.
@@ -116,6 +116,7 @@ def loadMapFile(group, x=0, y=0):
 
 def mapPlace(key,coords):
         mapDict = eval(getGlobalVariable("Map"))
+        mapTileSize = mapDict['tileSize']
         i,j = coords
         x,y = i*mapTileSize+mapDict["x"],j*mapTileSize+mapDict["y"]
         GUID=mapObjectsDict[key]["GUID"]
@@ -133,6 +134,8 @@ def mapPlace(key,coords):
                                 break
                 if finished: break
         card = table.create(GUID,x,y)
+        if card.type == "Creature":
+                card.type = "Creature-Scenario"
         
 ### Map Definitions ###
 

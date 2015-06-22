@@ -2404,29 +2404,3 @@ def loadMapFile(group, x=0, y=0):
         setGlobalVariable("Map",str(mapDict))
         for c in table:
                 remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
-
-### Map Definitions ###
-
-mapTileSize = 250
-mapObjectOffset = 175
-mapMultipleObjectOffset = -100
-mapCreatureOffset = 0
-mapMultipleCreatureOffset = 62
-
-
-mapTileDict = {
-                "1" : "5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64", #V'Torrak
-                "2" : "6136ff26-d2d9-44d2-b972-1e26214675b5", #Corrosive Pool
-                "3" : "8972d2d1-348c-4c4b-8c9d-a1d235fe482e", #Altar of Oblivion
-                "4" : "a47fa32e-ac83-4ced-8f6a-23906ee38880", #Septagram
-                "5" : "bf833552-8ee4-4c62-abd2-83da233da4ce", #Molten Rock
-                "6" : "c3e970f7-1eeb-432b-ac3f-7dbcd4f45492", #Spiked Pit
-                "7" : "edca7d45-53e0-468d-83a5-7a446c81f070", #Samandriel's Circle
-                "8" : "f8d70e09-2734-4de8-8351-66fa98ae0171", #Ethereal Mist
-                "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
-
-mapObjectsDict = {
-                "Orb" : "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f",
-                "Sslak" : "bf217fd3-18c0-4b61-a33a-117167533f3d",
-                "Usslak" : "54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd",
-                "SecretPassage" : "a4b3bb92-b597-441e-b2eb-d18ef6b8cc77"}
