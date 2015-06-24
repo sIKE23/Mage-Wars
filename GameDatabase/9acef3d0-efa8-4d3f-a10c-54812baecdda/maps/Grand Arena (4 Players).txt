@@ -10,7 +10,4 @@
 
 @Sslak=[(2,2),(2,3),(3,2),(3,3)]
 
-@StartPosition1=(1,1)
-@StartPosition2=(4,1)
-@StartPosition3=(1,4)
-@StartPosition4=(4,4)
+@startZoneDict=[{ "Player" : 1, "Zone" : "1,1" },{ "Player" : 2, "Zone" : "4,1" },{ "Player" : 3, "Zone" : "1,4" },{ "Player" : 4, "Zone" : "4,4" }]

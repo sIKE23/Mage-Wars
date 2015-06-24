@@ -80,7 +80,7 @@ def loadMapFile(group, x=0, y=0):
         mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
 
         for c in table:
-                if c.type == "Internal" or c.type == "Creature-Scenario": c.delete() # delete Scenario creatrues and other game markers
+                if c.type == "Internal" or "Scenario" in c.type: c.delete() # delete Scenario creatrues and other game markers
                 	
 	setNoGameBoard(table)
 
@@ -136,6 +136,8 @@ def mapPlace(key,coords):
         card = table.create(GUID,x,y)
         if card.type == "Creature":
                 card.type = "Creature-Scenario"
+        elif card.type == "Conjuration":
+                card.type = "Conjuration-Scenario"
         
 ### Map Definitions ###
 
