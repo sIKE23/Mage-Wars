@@ -44,6 +44,8 @@ DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f" )
 EternalServant = ("Eternal Servant", "86a71cf6-35ce-4728-a2f8-6701b1e29aa4" )
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5" )
 FFToken = ("Forcefield Token", "fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" )
+GateClosed = ("Gate Closed", "fcdf5fa2-cb09-47a3-8c81-d4b87380b397" )
+GateOpened = ("Gate Opened", "fd17ee65-9bc8-4a00-a359-ff8e2418ad5c" )
 Growth = ("Growth", "c580e015-96ff-4b8c-8905-28688bcd70e8" )
 Guard = ("Guard", "91ed27dc-294d-4732-ab71-37911f4011f2" )
 HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
@@ -1314,6 +1316,18 @@ def toggleDeflect(card, x=0, y=0):
 		card.markers[DeflectU] = 0
 		notify("'{}' readies deflect".format(card.Name))
 
+def toggleGatetoHell(card, x=0, y=0):
+	mute()
+	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.markers[GateClosed] > 0:
+		card.markers[GateClosed] = 0
+		card.markers[GateOpened] = 1
+		notify("The Gate to Hell has been Opened!")
+	else:
+		card.markers[GateClosed] = 1
+		card.markers[GateOpened] = 0
+		notify("The Gate to Hell has been Closed!")
+
 def toggleGuard(card, x=0, y=0):
 	mute()
 	if card.Type in typeIgnoreList or not card.isFaceUp: return
@@ -1484,6 +1498,8 @@ def flipcard(card, x = 0, y = 0):
   				card.markers[MistToken] = 1
 			if "Rolling Fog" == card.Name:
   				card.markers[DissipateToken] = 3
+			if "Gate to Hell" == card.Name:
+  				card.markers[GateClosed] = 1
 		if "Defense" in card.Stats and not card.Name=="Forcemaster":
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1

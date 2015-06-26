@@ -158,9 +158,9 @@
 			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple" />
 			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
-			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+E" execute="addRage" />
+			<cardaction menu="Add Rage Marker" default="False" shortcut="Alt+E" execute="addRage" />
 			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
-			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+H" execute="addBanish" />
+			<cardaction menu="Add Banish Marker" default="False" shortcut="Alt+H" execute="addBanish" />
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
 			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged" />
@@ -185,9 +185,9 @@
 			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
 			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
-			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />
+			<cardaction menu="Remove Rage Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />
 			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
-			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish" />
+			<cardaction menu="Remove Banish Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish" />
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
 			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged" />
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
@@ -211,6 +211,7 @@
 			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric" />
 			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+Shift+D" execute="toggleDeflect" />
 			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
+			<cardaction menu="Toggle Gate To Hell Marker" default="False" shortcut="Ctrl+Shift+G" execute="toggleGatetoHell" />
 		</cardactions>
 			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
 			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />

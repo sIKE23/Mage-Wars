@@ -52,6 +52,8 @@
 		<marker id="fdaa2c02-a65a-40e0-a315-962f9315b732" name="Banish" />
 		<marker id="feb7e8f8-5c38-4978-92c8-2d47d54bdd29" name="Rage" />
 		<marker id="fffe964a-3839-4bc0-ba85-3268b59817c6" name="Wrath" />
+		<marker id="fcdf5fa2-cb09-47a3-8c81-d4b87380b397" name="Gate Closed" />
+		<marker id="fd17ee65-9bc8-4a00-a359-ff8e2418ad5c" name="Gate Opened" />
 	</markers>
 	<cards>
 		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
