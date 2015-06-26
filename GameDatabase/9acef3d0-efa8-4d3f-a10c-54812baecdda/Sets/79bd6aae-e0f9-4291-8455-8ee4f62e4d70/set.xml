@@ -413,6 +413,21 @@
 			<property name="Text" value="If Cheetah takes two move actions immediately before it makes its Claws attack, it may add +8 to the effect die roll for that attack. It does not receive this bonus if it moves back and forth between 2 zone when it takes its move actions." />
 			<property name="CardID" value="MWPROMO65" />
 		</card>
+		<card id="e61ffd47-605f-45b1-9fe5-9b925be949ea" name="Screaming Zombie">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="10" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;[Full] [Ranged 0-1] [Psychic] [Dice=2] [d12] [8+ = Daze] [Ethereal] [Sweeping] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Bloodthirsty +0, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO61" />
+		</card>
 		<card id="b68954f6-3fd7-4558-ae90-73d28681d5de" name="Sersiryx, Imp Familiar">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
@@ -655,7 +670,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Upkeep +2" />			
+			<property name="Traits" value="Upkeep +2" />
 			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. Uncontainable creatures can be Restrained by Bind Spirit." />
 			<property name="CardID" value="MWPROMO80" />
 		</card>
@@ -730,7 +745,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magecast, Holy Mage Only, Unique" />			
+			<property name="Traits" value="Magecast, Holy Mage Only, Unique" />
 			<property name="Text" value="Each Upkeep Phase, the controller of Life Link may heal up to 3 damage from this creature and place it on himself as direct damage, regardless of distance or LoS." />
 			<property name="CardID" value="MWPROMO82" />
 		</card>
@@ -790,7 +805,7 @@
 			<property name="Level" value="1/1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />			
+			<property name="Traits" value="" />
 			<property name="Text" value="This conjuration gains Armor +1 and Innate Life +4." />
 			<property name="CardID" value="MWPROMO85" />
 		</card>
@@ -930,6 +945,21 @@
 			<property name="Traits" value="Legendary, War Mage Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO52" />
+		</card>
+		<card id="810a99dc-31e7-4b89-8245-43a36e69ccde" name="Leather Belt">
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Belt" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
+			<property name="CardID" value="MWPROMO45" />
 		</card>
 		<card id="a91dde7c-ba80-4d21-a37b-2bac136f72e6" name="Leviathan Scale Armor">
 			<property name="Type" value="Equipment" />
@@ -1202,6 +1232,21 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristics above; the lightning damage type, and an effect roll." />
 			<property name="CardID" value="MWPROMO40" />
+		</card>
+		<card id="c7984a2a-0ef4-4546-98bc-991cfdb2a9c7" name="Teleport">
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Teleport" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Creature &amp; Zone" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target creature is Teleported to the target zone. X = 3 mana per zone moved away from its current zone. You must pay at least 3 mana even if target is Teleported into the same zone. This does not count as a move action for the creature." />
+			<property name="CardID" value="MWPROMO66" />
 		</card>
 	</cards>
 </set>
