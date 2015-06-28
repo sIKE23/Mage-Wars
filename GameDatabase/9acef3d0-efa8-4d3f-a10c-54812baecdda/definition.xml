@@ -5,7 +5,7 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
 	scriptVersion ="3.1.0.1"
-	version="99999.12.7.0"
+	version="99999.13.0.0"
 	markersize="16"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -213,8 +213,7 @@
 			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
 			<cardaction menu="Toggle Gate To Hell Marker" default="False" shortcut="Ctrl+Shift+G" execute="toggleGatetoHell" />
 		</cardactions>
-			<cardaction menu="Flip Card" default="False" shortcut="Ctrl+F" execute="flipcard" />
-			<cardaction menu="Show Card Alternate" default="False" execute="showAltCard" />
+			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />

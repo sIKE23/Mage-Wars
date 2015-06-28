@@ -339,6 +339,7 @@ The ability to cancel the attack to remove Burn conditions is not optional. If t
 The Geyser attack spell may target an object with the Hydro Immunity trait. If it does, the attack deals no damage or effects to the object, other than to remove all Burn conditions. In this manner, a Geyser attack can be used to extinguish the fires of a burning plant object.
 #
 Ghoul Rot
+Current Text: "Each Upkeep Phase, this creature receives 2 direct poison damage."
 #
 Giant Wolf Spider
 Its Poison Fangs attack gains the +4 effect die bonus if the defender is Restrained or Incapacitated.

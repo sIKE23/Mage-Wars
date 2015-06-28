@@ -63,11 +63,11 @@ Ranged = ("Ranged +1","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
-RuneofFortification = ("Rune of Fortification: If this equipment gives an Armor +X bonus to the Mage, \n it gives an additional Armor +1.","ae179c85-11ce-4be7-b9c9-352139d0c8f2" )
-RuneofPower = ("Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound\nto this equipment or using a spell action provided by this equipment.","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" )
+RuneofFortification = ("Rune of Fortification: If this equipment gives an Armor +X bonus \nto the Mage, it gives an additional Armor +1.","ae179c85-11ce-4be7-b9c9-352139d0c8f2" )
+RuneofPower = ("Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound to this equipment or using a spell action provided by this equipment.","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" )
 RuneofPrecision = ("Rune of Precision: This equipment's non-spell attacks gain the Piercing +1 trait.","c2a265f9-ad97-4976-a83c-78891a224478" )
 RuneofReforging = ("Rune of Reforging: This equipment gains the Cantrip trait.","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
-RuneofShielding = ("Rune of Shielding: If this equipment gives your Mage a Defense, the first time each\nround that defense is used, add +2 to the Defense roll.","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
+RuneofShielding = ("Rune of Shielding: If this equipment gives your Mage a Defense, the first time each round that defense is used, add +2 to the Defense roll.","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
 SecretPassage = ("Secret Passage","a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" )
 Slam = ("Slam", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
@@ -1215,14 +1215,14 @@ for token in tokenList:
         exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
 
 def addDamage(card, x = 0, y = 0):
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if "Mage" in card.Type and card.controller == me:
 		me.Damage += 1
 	else:
 		addToken(card, Damage)
 
 def addOther(card, x = 0, y = 0):
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	marker, qty = askMarker()
 	if qty == 0:
 		return
@@ -1241,12 +1241,12 @@ def clearTokens(card, x = 0, y = 0):
 	notify("{} removes all tokens from '{}'".format(me, card.Name))
 
 ##########################     Toggle Actions/Tokens     ##############################
-typeIgnoreList = ['Internal','Phase','DiceRoll']
+typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
 
 def toggleAction(card, x=0, y=0):
 	mute()
 	myColor = me.getGlobalVariable("MyColor")
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if myColor == "#800080":
 		whisper("Please perform player setup to initialize player color")
 	elif myColor == PlayerColor[0]: # Red
@@ -1306,7 +1306,7 @@ def toggleAction(card, x=0, y=0):
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[DeflectR] > 0:
 		card.markers[DeflectR] = 0
 		card.markers[DeflectU] = 1
@@ -1318,7 +1318,7 @@ def toggleDeflect(card, x=0, y=0):
 
 def toggleGatetoHell(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[GateClosed] > 0:
 		card.markers[GateClosed] = 0
 		card.markers[GateOpened] = 1
@@ -1330,12 +1330,12 @@ def toggleGatetoHell(card, x=0, y=0):
 
 def toggleGuard(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	toggleToken(card, Guard)
 
 def toggleInvisible(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Invisible] > 0:
 		card.markers[Invisible] = 0
 		card.markers[Visible] = 1
@@ -1347,7 +1347,7 @@ def toggleInvisible(card, x=0, y=0):
 
 def toggleReady(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
@@ -1359,7 +1359,7 @@ def toggleReady(card, x=0, y=0):
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[ReadyII] > 0:
 		card.markers[ReadyII] = 0
 		card.markers[UsedII] = 1
@@ -1371,7 +1371,7 @@ def toggleReadyII(card, x=0, y=0):
 
 def toggleQuick(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
@@ -1383,7 +1383,7 @@ def toggleQuick(card, x=0, y=0):
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
-	if card.Type in typeIgnoreList or not card.isFaceUp: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.markers[VoltaricON] > 0:
 		card.markers[VoltaricON] = 0
 		card.markers[VoltaricOFF] = 1
@@ -1410,10 +1410,11 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
+	cardalt = card.alternates
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == '':
-			card.switchTo("B")
+			card.switchTo('B')
 			notify("{} flips the Vine Marker to use its Black side.".format(me))
 		else:
 			card.switchTo('')
@@ -1421,10 +1422,18 @@ def flipcard(card, x = 0, y = 0):
 		return
 	elif "Alt Zone" in card.Name and card.controller == me:
 		if card.alternate == "B":
-			card.switchTo("")
+			card.switchTo('')
 		else:
-			card.switchTo("B")
+			card.switchTo('B')
 		notify("{} flips Zone Marker.".format(me))
+		return
+	elif "V'Tar Orb" in card.Name and card.controller == me:
+		if card.alternate == "B":
+			card.switchTo('')
+			notify("{} flips V'Tar Orb On.".format(me))
+		else:
+			card.switchTo('B')
+			notify("{} flips V'Tar Orb On.".format(me))
 		return
 	elif "1st Player Token" in card.Name:
 		nextPlayer = getNextPlayerNum()
@@ -1433,7 +1442,7 @@ def flipcard(card, x = 0, y = 0):
 			remoteCall(p, "changeIniColor", [card])
 
 	# do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
-	if card.Type in typeIgnoreList: return
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return
 	# normal card flipping processing starts here
 	if card.isFaceUp == False:
 		card.isFaceUp = True
@@ -1514,6 +1523,14 @@ def flipcard(card, x = 0, y = 0):
 		notify("{} turns '{}' face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
+		
+	if "B" in cardalt and card.isFaceUp == True:
+		if card.alternate == '':
+			notify("{} flips {} to the alternate version of the card.".format(me, card))
+			card.switchTo('B')
+		else:
+			notify("{} flips {} to the standard version of the card.".format(me, card))
+			card.switchTo()
 
 def getNextPlayerNum():
 	activePlayer = int(getGlobalVariable("PlayerWithIni"))
@@ -1627,7 +1644,7 @@ def defaultAction(card,x=0,y=0):
 
 def addToken(card, tokenType):
 	mute()
-	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:
 		notify("{} added to '{}'".format(tokenType[0], card.Name))
@@ -1636,7 +1653,7 @@ def addToken(card, tokenType):
 
 def subToken(card, tokenType):
 	mute()
-	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] -= 1
 		if card.isFaceUp:
@@ -1646,7 +1663,7 @@ def subToken(card, tokenType):
 
 def toggleToken(card, tokenType):
 	mute()
-	if card.Type in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] = 0
 		if card.isFaceUp:
@@ -1796,17 +1813,6 @@ def findCard(group, model):
 		if c.model == model:
 			return c
 	return None
-
-def showAltCard(card, x = 0, y = 0):
-	mute()
-	alt = card.alternates
-	if 'B' in alt:
-		if card.alternate == '':
-			notify("{} flips {} to the alternate version of the card.".format(me, card))
-			card.switchTo("B")
-		else:
-			notify("{} flips {} to the standard version of the card.".format(me, card))
-			card.switchTo()
 
 #------------------------------------------------------------
 # Global variable manipulations function
