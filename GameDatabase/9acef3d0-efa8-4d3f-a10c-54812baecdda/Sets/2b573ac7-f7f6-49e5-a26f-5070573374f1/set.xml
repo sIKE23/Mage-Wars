@@ -84,7 +84,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Dice=4] [d12] [6-10 = Daze; 11+ = Stun]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Dice=4] [d12] [6-10 = Daze; 11+ = Stun] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWA03" />
