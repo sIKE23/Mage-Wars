@@ -70,9 +70,10 @@ def loadMapFile(group, x=0, y=0):
         colors = ['#6600CC' for f in fileList] + ['#FF0000']
         choice = askChoice('Load which map?',choices,colors)
         if choice == 0 or choice == len(choices): return
+        choiceName = choices[choice-1]
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
-        setGlobalVariable("DominationMap",strfileList[choice-1])
+        #setGlobalVariable("DominationMap",strfileList[choice-1]) #Better to store this informtion in the existing map variable than to create a brand new global variable.
         
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
         
@@ -82,15 +83,13 @@ def loadMapFile(group, x=0, y=0):
         startZones = scenario.get("startZoneDict",{}) #should probably include a default placement dictionary.
 
         for c in table:
-                if c.type == "Internal" or "Scenario" in c.special: c.delete() # delete Scenario creatrues and other game markers
+                if c.type == "Internal" or "Scenario" in c.special: c.delete() # delete Scenario creatures and other game markers
 
         #iterate over elements, top to bottom then left to right.
         I,J = len(mapArray),len(mapArray[0])
         X,Y = I*mapTileSize,J*mapTileSize
         x,y = (-X/2,-Y/2) #Do we want 0,0 to be the center, or the upper corner? Currently set as center.
 
-
-        
         zoneArray = mapArray
 
         for i in range(I):
@@ -110,6 +109,8 @@ def loadMapFile(group, x=0, y=0):
 
         mapDict = createMap(I,J,zoneArray,mapTileSize)
 
+        mapDict["Map Name"] = choiceName
+        debug(mapDict.get("Map Name","Unnamed map"))
         for z in startZones:
                 playerNumber = z["Player"]
                 zx,zy = eval(z["Zone"])

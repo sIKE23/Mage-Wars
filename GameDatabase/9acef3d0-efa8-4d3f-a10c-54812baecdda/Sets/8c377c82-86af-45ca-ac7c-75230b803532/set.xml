@@ -421,14 +421,17 @@
 		<card id="a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage">
 			<property name="Type" value="Internal" />
 		</card>
+
 		<card id="8731f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap">
 			<property name="Type" value="Internal" />
 		</card>
+
 		<card id="3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off">
 			<property name="Type" value="Conjuration" />
 				<alternate name="V&apos;Tar Orb On" type="B">
 					<property name="Type" value="Conjuration"/>
 				</alternate>
 		</card>	
+
 	</cards>
 </set>
