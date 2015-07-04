@@ -218,7 +218,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO80" />
 		</card>
-		<card id="cb4358c4-1b2e-42ab-af13-80cbe1f3a260" name="Eeker">
+		<!-- <card id="cb4358c4-1b2e-42ab-af13-80cbe1f3a260" name="Eeker">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="9" />
@@ -232,7 +232,7 @@
 			<property name="Traits" value="Elusive, Legendary, Pest" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO67" />
-		</card>
+		</card> -->
 		<card id="9c877bec-af74-4d95-8583-a8b814cc1a58" name="Eligor Larington">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Knight" />
@@ -413,7 +413,7 @@
 			<property name="Text" value="If Cheetah takes two move actions immediately before it makes its Claws attack, it may add +8 to the effect die roll for that attack. It does not receive this bonus if it moves back and forth between 2 zone when it takes its move actions." />
 			<property name="CardID" value="MWPROMO65" />
 		</card>
-		<card id="e61ffd47-605f-45b1-9fe5-9b925be949ea" name="Screaming Zombie">
+		<!-- <card id="e61ffd47-605f-45b1-9fe5-9b925be949ea" name="Screaming Zombie">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="10" />
@@ -427,7 +427,7 @@
 			<property name="Traits" value="Bloodthirsty +0, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO61" />
-		</card>
+		</card> -->
 		<card id="b68954f6-3fd7-4558-ae90-73d28681d5de" name="Sersiryx, Imp Familiar">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />

@@ -417,10 +417,6 @@
 			<property name="Text" value="Mage gains +2 to the effect die roll for all melee and ranged attacks he makes that deal wind damage. If he makes mutiple attacks in the same round, all of them receive this bonus.&#xD;&#xA;[Wind] [+2]" />
 			<property name="CardID" value="MWBG1Q01" />
 		</card>
-		
-		<card id="3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="Orb">
-			<property name="Type" value="Internal" />
-		</card>
 
 		<card id="a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage">
 			<property name="Type" value="Internal" />

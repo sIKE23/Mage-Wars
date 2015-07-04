@@ -72,6 +72,7 @@ def loadMapFile(group, x=0, y=0):
         if choice == 0 or choice == len(choices): return
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
+        setGlobalVariable("DominationMap",strfileList[choice-1])
         
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
         
@@ -81,7 +82,7 @@ def loadMapFile(group, x=0, y=0):
         startZones = scenario.get("startZoneDict",{}) #should probably include a default placement dictionary.
 
         for c in table:
-                if c.type == "Internal" or "Scenario" in c.type: c.delete() # delete Scenario creatrues and other game markers
+                if c.type == "Internal" or "Scenario" in c.special: c.delete() # delete Scenario creatrues and other game markers
 
         #iterate over elements, top to bottom then left to right.
         I,J = len(mapArray),len(mapArray[0])
@@ -144,11 +145,10 @@ def mapPlace(key,coords):
                 if finished: break
                 
         card = table.create(GUID,x,y)
-        #This will cause problems by overwriting the type of the card. Better to define a new property, such as card.special = "Scenario". Otherwise it will mess up code that, for instance, checks card.type == "Creature"
-        #if card.type == "Creature":
-         #       card.type = "Creature-Scenario"
-        #elif card.type == "Conjuration":
-         #       card.type = "Conjuration-Scenario"
+        if card.type == "Creature":
+                card.special = "Scenario"
+        elif card.type == "Conjuration":
+                card.special = "Scenario"
         
 ### Map Definitions ###
 
