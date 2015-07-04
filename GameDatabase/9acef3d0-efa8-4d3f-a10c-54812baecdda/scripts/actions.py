@@ -1692,6 +1692,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
         else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
+        debug(str(bool(mapDict)))
         if mapDict:
                 zoneArray = mapDict.get('zoneArray')
                 cardType = card.type
@@ -1729,6 +1730,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                                 zone = zoneArray[i][j]
                                 if zone and zone.get('startLocation') == str(playerNum):
                                         zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
+                                        debug(str(zone.get("startLocation"))+" {},{}".format(zoneX,zoneY))
                                         if cardType == 'Mage':
                                                 x = (zoneX if i < mapDict.get('I')/2 else mapX + mapW - cardW)
                                                 y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)

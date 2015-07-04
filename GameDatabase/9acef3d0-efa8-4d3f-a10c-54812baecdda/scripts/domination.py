@@ -72,23 +72,24 @@ def loadMapFile(group, x=0, y=0):
         if choice == 0 or choice == len(choices): return
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
-
+        
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
         
         mapArray = scenario.get('Map',False)
         mapTileSize = 250 #replace 250 with a stored tilesize from scenario if we later decide to allow the design of maps with non-standard tilesizes.
         mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
+        startZones = scenario.get("startZoneDict",{}) #should probably include a default placement dictionary.
 
         for c in table:
                 if c.type == "Internal" or "Scenario" in c.type: c.delete() # delete Scenario creatrues and other game markers
-                	
-	setNoGameBoard(table)
 
         #iterate over elements, top to bottom then left to right.
         I,J = len(mapArray),len(mapArray[0])
         X,Y = I*mapTileSize,J*mapTileSize
         x,y = (-X/2,-Y/2) #Do we want 0,0 to be the center, or the upper corner? Currently set as center.
 
+
+        
         zoneArray = mapArray
 
         for i in range(I):
@@ -106,13 +107,21 @@ def loadMapFile(group, x=0, y=0):
                 y = -Y/2
         x = -X/2
 
-        mapDict = createMap(I,J,zoneArray,mapTileSize) 
+        mapDict = createMap(I,J,zoneArray,mapTileSize)
+
+        for z in startZones:
+                playerNumber = z["Player"]
+                zx,zy = eval(z["Zone"])
+                mapDict['zoneArray'][zy-1][zx-1]['startLocation'] = str(playerNumber)
+
         setGlobalVariable("Map",str(mapDict))
-        
+
         for obj,locations in mapObjects:
                 for L in locations:
                         j,i = L
                         mapPlace(obj,(i-1,j-1))
+
+        setNoGameBoard(table)
 
 def mapPlace(key,coords):
         mapDict = eval(getGlobalVariable("Map"))
@@ -133,11 +142,13 @@ def mapPlace(key,coords):
                                 finished = False
                                 break
                 if finished: break
+                
         card = table.create(GUID,x,y)
-        if card.type == "Creature":
-                card.type = "Creature-Scenario"
-        elif card.type == "Conjuration":
-                card.type = "Conjuration-Scenario"
+        #This will cause problems by overwriting the type of the card. Better to define a new property, such as card.special = "Scenario". Otherwise it will mess up code that, for instance, checks card.type == "Creature"
+        #if card.type == "Creature":
+         #       card.type = "Creature-Scenario"
+        #elif card.type == "Conjuration":
+         #       card.type = "Conjuration-Scenario"
         
 ### Map Definitions ###
 
