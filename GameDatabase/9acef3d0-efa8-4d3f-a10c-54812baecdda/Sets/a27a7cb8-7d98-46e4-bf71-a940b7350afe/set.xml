@@ -33,5 +33,8 @@
 		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
 		</card>
+		<card id="a25a6dd5-04a8-490f-b5e6-834ffac8d018" name="Domination Tracker" size="DominationMarkers" >
+			<property name="Type" value="Internal" />
+		</card>
 	</cards>
 </set>

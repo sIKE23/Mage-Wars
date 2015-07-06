@@ -11,8 +11,6 @@
 		<marker id="da724182-3695-4124-becc-928eb870c5dc" name="Control Marker Blue" />
 		<marker id="e97408e7-985b-46d9-a5e7-98ffb4a3f587" name="Control Marker Green" />
 		<marker id="fe2adfab-4cda-4a1d-843a-84865747ff98" name="Control Marker Yellow" />
-		<marker id="4a5ae073-693a-48d4-9c43-0c220668f585" name="3 V&apos;Tar" />
-		<marker id="5018cced-2d6b-4aaa-9bde-12e9b10740b5" name="5 V&apos;Tar" />
 	</markers>
 	<cards>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="Bolt of V&apos;Tar">

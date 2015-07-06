@@ -35,6 +35,10 @@
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />
 	</sounds>
+	<fonts>
+		<font src="fonts/shouldve known.ttf" size="13" target="context" />
+		<font src="fonts/shouldve known.ttf" size="13" target="chat" />
+  </fonts>
 	<proxygen definitionsrc="proxy/CardGenData.xml" />
 	<documents>
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
@@ -91,9 +95,13 @@
 		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False" />
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
 		<property name="Special" type="String" hidden="True" ignoreText="False" />
+		<property name="Special1" type="String" hidden="True" ignoreText="False" />
+		<property name="Special2" type="String" hidden="True" ignoreText="False" />
+		<property name="Special3" type="String" hidden="True" ignoreText="False" />
 		<size name="ModularBoardPieces" width="250" height="250" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="0" />
 		<size name="InitativeMarkers" width="50" height="50" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="PhaseMarkers" width="90" height="20" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="DominationMarkers" width="90" height="40" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
 		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
 	</card>
@@ -141,6 +149,7 @@
 			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
 			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
 			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
+			<groupaction menu="Set 4X3 Marble Floors Arena Game Board" default="False" shortcut="Alt+F6" execute="setGameBoard6" />
 			<groupaction menu="Set 2x3 Apprentice Arena Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard9" />
 			<groupaction menu="Set 3x3 OCTGN Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
 			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />

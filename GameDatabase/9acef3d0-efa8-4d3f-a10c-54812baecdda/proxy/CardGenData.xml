@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- v1.12.0.0 -->
+<!-- v1.13.0.0 -->
 <templates>
 	<blocks>
 		<block type="overlay" id="CostCircle" src="proxy/Template/Mana.png">
@@ -111,6 +111,17 @@
 			<location x="0" y="480" />
 			<text color="#000000" size="16" />
 			<wordwrap height="75" width="400" align="center" />
+		</block>
+		<!-- Layout for Domination Tracker Card -->
+		<block type="text" id="Special1">
+			<location x="0" y="0" />
+			<text color="#000000" size="12" font="fonts/shouldve known.ttf" />
+			<wordwrap height="18" width="0" align="far" />
+		</block>
+		<block type="text" id="Special2">
+			<location x="25" y="0" />
+			<text color="#000000" size="12" font="fonts/shouldve known.ttf" />
+			<wordwrap height="18" width="0" align="far" />
 		</block>
 	</blocks>
 	<template src="Proxy/Attack-Proxy.png">
@@ -403,6 +414,14 @@
 			<link block="MageAbilities"><property name="MageAbilities" /></link>
 		</textblocks>
 	</template>
-
+	<!-- Template for Domination Tracker Card -->
+	<template src="proxy/DominationTracker.png" default="True" >
+		<matches>
+			<match name="Name" value="Domination Tracker" />
+		</matches>
+		<textblocks>
+			<link block="Special1"><property name="Special1" /></link>
+			<link block="Special2"><property name="Special2" /></link>
+		</textblocks>
+	</template>
 </templates>
-

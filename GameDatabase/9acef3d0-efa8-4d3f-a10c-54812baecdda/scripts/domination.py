@@ -23,6 +23,13 @@ def checkDominationVictory():
                 notify("{} wins with {} V'tar!".format(soleWinner[0],soleWinner[1]))
                 return True
 
+def DominationTracker():
+        mute()
+        #need dynamic proxy card generation for this to work....
+        card = table.create("a25a6dd5-04a8-490f-b5e6-834ffac8d018",-591,-5)
+        card.Special1 = str(eval(getGlobalVariable("Map")).get("Map Name"))
+        card.Special2 = str(eval(getGlobalVariable("Goal")).get("Goal"))
+
 def importArray(filename):
         """Takes a txt character array and outputs a dictionary of arrays (sets of columns). To get an entry from an array, use array[x][y]"""
         #Open the file
@@ -74,9 +81,9 @@ def loadMapFile(group, x=0, y=0):
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
         #setGlobalVariable("DominationMap",strfileList[choice-1]) #Better to store this informtion in the existing map variable than to create a brand new global variable.
-        
+
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
-        
+
         mapArray = scenario.get('Map',False)
         mapTileSize = 250 #replace 250 with a stored tilesize from scenario if we later decide to allow the design of maps with non-standard tilesizes.
         mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
@@ -144,13 +151,13 @@ def mapPlace(key,coords):
                                 finished = False
                                 break
                 if finished: break
-                
+
         card = table.create(GUID,x,y)
         if card.type == "Creature":
                 card.special = "Scenario"
         elif card.type == "Conjuration":
                 card.special = "Scenario"
-        
+
 ### Map Definitions ###
 
 mapTileDict = {

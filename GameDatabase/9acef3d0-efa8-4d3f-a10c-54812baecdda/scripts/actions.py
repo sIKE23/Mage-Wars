@@ -52,7 +52,7 @@ HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613" )
 Ichthellid = ("Ichthellid Larva", "c8bff05e-e43a-4b23-b467-9c4596050f28" )
 Invisible = ("Invisible", "8d994fe9-2422-4a9d-963d-3ad10b2b823d" )
 LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942" )
-Mana = ("Mana", "00000000-0000-0000-0000-000000000002" )
+Mana = ("Mana", "7ff7afc3-ae04-49bf-9961-1a04b0f6ac19" )
 Melee = ("Melee +1", "e96b3791-fbcf-40a2-9c11-106342703db9" )
 MistToken = ("Mist Token","fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" )
 Pet = ("Pet", "f4a2d3d3-4a95-4b9a-b899-81ea58293167" )
@@ -341,6 +341,10 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         if fromCard.Type == "Enchantment" and not fromCard.isFaceUp and castSpell(fromCard,toCard):
                                 attach(fromCard,toCard)
                                 fromCard.arrow(toCard,False)
+                        elif toCard.Type in typeIgnoreList or toCard.Name in typeIgnoreList or toCard.Type == "Magestats":
+                        	mute()
+                        	notify("{} is not a legal target".format(toCard.Name))
+                        	fromCard.arrow(toCard,False)
                         elif fromCard.Type !="Enchantment":
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
                                 fromCard.arrow(toCard,False)
@@ -484,65 +488,70 @@ def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
 
 def setNoGameBoard(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard0.png"
-	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard1(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard1.jpg"
-	mute()
+	defineRectangularMap(4,3,250)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard2(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard2.jpg"
-	mute()
+	defineRectangularMap(6,4,310)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard3(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard3.jpg"
-	mute()
+	defineRectangularMap(5,4,170)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard4(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard4.jpg"
-	mute()
+	defineRectangularMap(4,3,250)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard5(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard5.jpg"
-	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard6(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard6.jpg"
-	mute()
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard9(group, x=0, y=0):
+	mute()
 	global boardSet
 	boardSet = "GameBoard9.jpg"
-	mute()
+	defineRectangularMap(3,2,330)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
 def setGameBoard10(group, x=0, y=0):
-	global boardSet
-	boardSet = "GameBoard10.jpg"
 	mute()
+	global boardSe
+	boardSet = "GameBoard10.jpg"
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
