@@ -1037,6 +1037,7 @@ def malakaisFirePrompt(heathen):
         mute()
         if me.mana >= 1 and askChoice("Smite the heathen with Malakai's Fire?",["Yes (1 mana)","No"],["#01603e","#de2827"])==1:
                 me.mana -= 1
+                notify("{} pays 1 mana to Smite the heathen {} with Malakai's Fire.".format(me,heathen))  
                 rememberPlayerEvent("Malakai's Fire")
                 remoteCall(heathen.controller,"malakaisFireReceiptPrompt",[heathen])
 
@@ -1209,7 +1210,7 @@ def computeTraits(card):
                                 if cName == "Sentinel of V'tar":
                                         for o in table:
                                                 isWithOrb = False
-                                                if (o.name == "V'tar Orb" and
+                                                if ("V'Tar Orb" in c.name and
                                                     getZoneContaining(c) == getZoneContaining(card)): isWithOrb = True
                                                 if isWithOrb:
                                                         extend(['Unmovable','Anchored'])
@@ -1219,9 +1220,9 @@ def computeTraits(card):
                         if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
                                 #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
                                 if (name == 'Skeelax, Taunting Imp'
-                                    and c.markers[Burn]): append('Regenerate 2') #and phase = upkeep, but I don't think this matters for now.
-                                elif (name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and
-                                    cName == "V'tar Orb"): extend(['Unmovable','Anchored'])
+                                        and c.markers[Burn]): append('Regenerate 2') #and phase = upkeep, but I don't think this matters for now.
+                                elif (name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and "V'Tar Orb" in c.name):
+                                        extend(['Unmovable','Anchored'])
                                 if cType == 'Enchantment':
                                         if (cName == 'Fortified Position' and
                                             cardType in ['Creature','Mage'] and

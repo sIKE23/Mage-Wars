@@ -63,7 +63,7 @@ Ranged = ("Ranged +1","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
 Rot = ("Rot", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
-RuneofFortification = ("Rune of Fortification: If this equipment gives an Armor +X bonus \nto the Mage, it gives an additional Armor +1.","ae179c85-11ce-4be7-b9c9-352139d0c8f2" )
+RuneofFortification = ("Rune of Fortification: If this equipment gives an Armor +X bonus to the Mage, it gives an additional Armor +1.","ae179c85-11ce-4be7-b9c9-352139d0c8f2" )
 RuneofPower = ("Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound to this equipment or using a spell action provided by this equipment.","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" )
 RuneofPrecision = ("Rune of Precision: This equipment's non-spell attacks gain the Piercing +1 trait.","c2a265f9-ad97-4976-a83c-78891a224478" )
 RuneofReforging = ("Rune of Reforging: This equipment gains the Cantrip trait.","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
@@ -140,7 +140,6 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#c0c0c0"]		# Grey
 boardSet = "GameBoard1.png"
 debugMode = False
-myIniRoll = 0
 deckLoaded = False
 iniTokenCreated = False
 blankSpellbook = False
@@ -192,9 +191,6 @@ def onGameStart():
         #set the goal
         setGlobalVariable("Goal",str({}))
         
-	#enable AutoRoll of Initative for now....
-	setSetting("AutoRollIni", True)
-
 	# bring up window to point to documentation
 	initializeGame()
 
@@ -259,7 +255,7 @@ def onLoadDeck(player, groups):
 				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
 				if not getGlobalVariable("IniAllDone") == 'x':
 					for p in players:
-						remoteCall(p, "SetupForIni", [])
+						remoteCall(p, "rollForInitative", [])
 					notify("All players have set up. Please roll for initiative.")
 		else:
 			#notify and delete deck
@@ -327,7 +323,10 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                 else:
                                         cost = attack.get('Cost')
                                         realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
-                                        if realCost <= me.Mana: 
+                                        if realCost == None:
+                                                notify("{} has chosen to not pay the needed mana to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
+                                                return                                        	
+                                        elif realCost <= me.Mana: 
                                         	me.Mana -= realCost
                                         	notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))   	
                                         else:
@@ -337,6 +336,9 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                 remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                                 attacker.arrow(defender,False)
                         elif attack.get("Dice"): rollDice(attack.get("Dice"))
+                        else:
+                                fromCard.arrow(toCard,False)
+                                notify("The Attack on {} was canceled.".format(toCard))
                 else:
                         if fromCard.Type == "Enchantment" and not fromCard.isFaceUp and castSpell(fromCard,toCard):
                                 attach(fromCard,toCard)
@@ -357,28 +359,24 @@ def setClearVars():
 	deckLoaded = False
 	iniTokenCreated = False
 
-def SetupForIni():
+def rollForInitative():
 	mute()
-	global myIniRoll
-	global playerNum
-
-	if getSetting("AutoRollIni", False):
+	notify("Automatically rolling initiative for {}...".format(me))
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	if not me.name == gameHost.name: return
+	else:
 		effect = 0
-		for i in range(playerNum * 2):
-			effect = rnd(1, 12)
-		notify("Automatically rolling initiative for {}...".format(me))
-		setGlobalVariable("InitiativeDone", "True")
-		iniRoll(effect)
+		rollForPlayer = 0
+		for p in players:
+			effect = rnd(1,12)
+			rollForPlayer += 1
+			notify("{} rolled a {} for initiative".format(p.name, effect))
+			myRollStr = (str(rollForPlayer) + ":" + str(effect) + ";")
+			setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
+			update()
 
-def iniRoll(effect):
-	global playerNum
-	global myIniRoll
-	myIniRoll = effect
-	notify("{} rolled a {} for initiative".format(me, effect))
-	myRollStr = (str(playerNum) + ":" + str(effect) + ";")
-	setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
+	#all initiatives rolled, see who had highest
 	if getGlobalVariable("OppIniRoll").count(";") == len(getPlayers()):
-		#all initiatives rolled, see who had highest
 		rollString = getGlobalVariable("OppIniRoll")
 		rollStringList = rollString.split(";")
 		max = 0
@@ -395,8 +393,8 @@ def iniRoll(effect):
 			elif int(temp[1]) == max:
 				timesMaxRolled += 1
 
+		# we got a tie in there somewhere. determine winner randomly from high rollers
 		if timesMaxRolled > 1:
-			# we got a tie in there somewhere. determine winner randomly from high rollers
 			notify("High roll tied! Randomly determining initiative...")
 			highRollerPlayerNums = []
 			for roll in rollStringList:
@@ -408,8 +406,11 @@ def iniRoll(effect):
 			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
 			debug(str(victoriousPlayerNum))
 
+		setGlobalVariable("InitiativeDone", "True")
 		for p in players:
 			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
+	else:
+		notify("The Automated Roll for Initative Failed! Please restart the game!")
 
 ############################################################################
 ######################		Group Actions			########################
@@ -680,7 +681,7 @@ def nextPhase(group, x=-360, y=-150):
 
 			#resolve other automated items
 			for p in players:
-				remoteCall(p,"resetDiscounts",[])
+				remoteCall(p, "resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [p])
 				remoteCall(p, "resolveBurns", [])
@@ -690,7 +691,6 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resolveLoadTokens", [])
 				remoteCall(p, "resolveStormTokens", [])
 				remoteCall(p, "resolveUpkeep", [])
-
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
@@ -734,12 +734,21 @@ def resetMarkers():
 		                if c.markers[key] == 1:
 		                        c.markers[key] = 0
 		                        c.markers[mDict[key]] = 1
+		#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
+		for c in table:
+		      if "Orb Guardian" in c.name:
+                   for o in table:
+                         isWithOrb = False
+		                  if "V'Tar Orb" in o.name and (getZoneContaining(o) == getZoneContaining(c)):
+		                        isWithOrb = True
+		                        if isWithOrb:
+		                              c.markers[Guard] = 1
+
 	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
 	mute()
-
 	#is the setting on?
 	if not getSetting("AutoResolveBurns", True):
 		return
@@ -1136,7 +1145,6 @@ fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automa
                           ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
                           ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
                           ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
-                          ["AutoRollInitiative","AutoRollIni","You have {} automatically rolling initiative.",False],
                           ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
                           ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
                           ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
@@ -1199,6 +1207,10 @@ tokenList=['Armor',
            'Bleed',
            'Burn',
            'Cripple',
+           'ControlMarkerBlue',
+           'ControlMarkerGreen',
+           'ControlMarkerRed',
+           'ControlMarkerYellow',
            'Corrode',
            'Disable',
            'Daze',
@@ -1396,11 +1408,18 @@ def toggleVoltaric(card, x=0, y=0):
 	if card.markers[VoltaricON] > 0:
 		card.markers[VoltaricON] = 0
 		card.markers[VoltaricOFF] = 1
-		notify("'{}' disables Voltaric shield".format(card.Name))
+		notify("{} disables Voltaric shield".format(card.Name))
 	else:
-		card.markers[VoltaricON] = 1
-		card.markers[VoltaricOFF] = 0
-		notify("'{}' enables Voltaric shield".format(card.Name))
+		choice = askChoice('Do you want to enable your Voltaric Shield by paying 2 mana?'['Yes','No'],["#171e78","#de2827"])
+		    if choice == 1:
+		    	if me.Mana < 2:
+		    		notify("{} has insufficient mana in pool".format(me))
+		    		return
+		    	me.Mana -= 2
+		    	card.markers[VoltaricON] = 1
+		    	card.markers[VoltaricOFF] = 0
+				notify("{} enables his Voltaric shield".format(me))
+			else: notify("{} chose not to enable his Voltaric shield".format(me))
 
 ############################################################################
 ######################		Other  Actions		################################
@@ -1653,6 +1672,11 @@ def defaultAction(card,x=0,y=0):
 
 def addToken(card, tokenType):
 	mute()
+	if "V'Tar Orb" in card.name: 
+		if "Control Marker" in tokenType[0]:
+			card.markers[tokenType] = 1
+			notify("{} added to '{}'".format(tokenType[0], card.Name))
+		else: return
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:

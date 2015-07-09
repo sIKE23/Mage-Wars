@@ -80,7 +80,6 @@ def loadMapFile(group, x=0, y=0):
         choiceName = choices[choice-1]
         scenario = importArray(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
-        #setGlobalVariable("DominationMap",strfileList[choice-1]) #Better to store this informtion in the existing map variable than to create a brand new global variable.
 
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
 
@@ -90,8 +89,9 @@ def loadMapFile(group, x=0, y=0):
         startZones = scenario.get("startZoneDict",{}) #should probably include a default placement dictionary.
 
         for c in table:
-                if c.type == "Internal" or "Scenario" in c.special: c.delete() # delete Scenario creatures and other game markers
-
+                if c.type == "Internal" or "Scenario" in c.special and c.controller == me: c.delete() # delete Scenario creatures and other game markers
+                remoteCall(c.controller,'remoteDeleteDominationObjects', [c])
+	
         #iterate over elements, top to bottom then left to right.
         I,J = len(mapArray),len(mapArray[0])
         X,Y = I*mapTileSize,J*mapTileSize
@@ -132,6 +132,9 @@ def loadMapFile(group, x=0, y=0):
 
         setNoGameBoard(table)
 
+def remoteDeleteDominationObjects(card):
+        card.delete()
+
 def mapPlace(key,coords):
         mapDict = eval(getGlobalVariable("Map"))
         mapTileSize = mapDict['tileSize']
@@ -155,6 +158,8 @@ def mapPlace(key,coords):
         card = table.create(GUID,x,y)
         if card.type == "Creature":
                 card.special = "Scenario"
+                if "Orb Guardian" in card.name:
+                        toggleGuard(card)
         elif card.type == "Conjuration":
                 card.special = "Scenario"
 
