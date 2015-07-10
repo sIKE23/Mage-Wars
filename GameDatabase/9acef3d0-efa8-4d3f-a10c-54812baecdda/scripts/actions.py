@@ -29,10 +29,10 @@ Bleed = ("Bleed", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("BloodReaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
 Burn = ("Burn", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
 Corrode = ("Corrode", "c3de25bf-4845-4d2d-8a28-6c31ad12af46" )
-ControlMarkerBlue = ("Control Marker Blue", "da724182-3695-4124-becc-928eb870c5dc" )
-ControlMarkerGreen = ("Control Marker Green", "e97408e7-985b-46d9-a5e7-98ffb4a3f587" )
-ControlMarkerRed = ("Control Marker Red", "c56839d2-46f4-49a8-85e4-3838e7f09cc2" )
-ControlMarkerYellow = ("Control Marker Yellow", "fe2adfab-4cda-4a1d-843a-84865747ff98" )
+ControlMarkerBlue = ("Blue Control Marker", "da724182-3695-4124-becc-928eb870c5dc" )
+ControlMarkerGreen = ("Green Control Marker", "e97408e7-985b-46d9-a5e7-98ffb4a3f587" )
+ControlMarkerRed = ("Red Control Marker", "c56839d2-46f4-49a8-85e4-3838e7f09cc2" )
+ControlMarkerYellow = ("Yellow Control Marker", "fe2adfab-4cda-4a1d-843a-84865747ff98" )
 Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5" )
 CrushToken = ("Crush Token", "d7472637-7c6d-4593-bc16-5975155c2926" )
 Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
@@ -88,8 +88,6 @@ Visible = ("Visible", "b9b205a2-a998-44f5-97dc-c7f315afbbe2" )
 VoltaricON = ("Voltaric On", "a6e79926-db8d-4095-9aee-e3b46bf24a3f" )
 VoltaricOFF = ("Voltaric Off", "d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" )
 VTar =	("V'Tar", "3c74d2dd-cabd-4f90-8845-18297d503b70" )
-VTar3 = ("3 V'Tar", "4a5ae073-693a-48d4-9c43-0c220668f585")
-VTar5 = ("5 V'Tar", "5018cced-2d6b-4aaa-9bde-12e9b10740b5")
 VTarOrbOn = ("V'Tar Orb On", "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" )
 VTarOrbOff  = ("V'Tar Orb Off", "3f056a2d-3045-4f38-ae8b-f2155250f4dc" )
 Weak = ("Weak", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
@@ -120,6 +118,8 @@ Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
 DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 diceBank = []
 diceBankD12 = []
+
+listControlMarkers = [ControlMarkerBlue,ControlMarkerGreen,ControlMarkerRed,ControlMarkerYellow];
 
 ##########################		 Card Sizes 			########################
 
@@ -736,13 +736,13 @@ def resetMarkers():
 		                        c.markers[mDict[key]] = 1
 		#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
 		for c in table:
-		      if "Orb Guardian" in c.name:
-                   for o in table:
-                         isWithOrb = False
-		                  if "V'Tar Orb" in o.name and (getZoneContaining(o) == getZoneContaining(c)):
-		                        isWithOrb = True
-		                        if isWithOrb:
-		                              c.markers[Guard] = 1
+			if "Orb Guardian" in c.name:
+				for o in table:
+					isWithOrb = False
+					if "V'Tar Orb" in o.name and (getZoneContaining(o) == getZoneContaining(c)):
+						isWithOrb = True
+						if isWithOrb:
+							c.markers[Guard] = 1
 
 	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
@@ -1411,15 +1411,15 @@ def toggleVoltaric(card, x=0, y=0):
 		notify("{} disables Voltaric shield".format(card.Name))
 	else:
 		choice = askChoice('Do you want to enable your Voltaric Shield by paying 2 mana?'['Yes','No'],["#171e78","#de2827"])
-		    if choice == 1:
-		    	if me.Mana < 2:
-		    		notify("{} has insufficient mana in pool".format(me))
-		    		return
-		    	me.Mana -= 2
-		    	card.markers[VoltaricON] = 1
-		    	card.markers[VoltaricOFF] = 0
-				notify("{} enables his Voltaric shield".format(me))
-			else: notify("{} chose not to enable his Voltaric shield".format(me))
+		if choice == 1:
+			if me.Mana < 2:
+				notify("{} has insufficient mana in pool".format(me))
+				return
+			me.Mana -= 2
+			card.markers[VoltaricON] = 1
+			card.markers[VoltaricOFF] = 0
+			notify("{} enables his Voltaric shield".format(me))
+		else: notify("{} chose not to enable his Voltaric shield".format(me))
 
 ############################################################################
 ######################		Other  Actions		################################
@@ -1458,7 +1458,7 @@ def flipcard(card, x = 0, y = 0):
 	elif "V'Tar Orb" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.switchTo('')
-			notify("{} flips V'Tar Orb On.".format(me))
+			notify("{} flips V'Tar Orb Off".format(me))
 		else:
 			card.switchTo('B')
 			notify("{} flips V'Tar Orb On.".format(me))
@@ -1674,9 +1674,16 @@ def addToken(card, tokenType):
 	mute()
 	if "V'Tar Orb" in card.name: 
 		if "Control Marker" in tokenType[0]:
+			if card.alternate == "":
+				card.switchTo('B')
+				notify("{} flips V'Tar Orb On.".format(me))
+			for controlMarker in listControlMarkers:
+				if controlMarker in card.markers and controlMarker != tokenType[0]:
+					card.markers[controlMarker] = 0
+					notify("{} removes a {} from the V'Tar Orb".format(me,controlMarker[0]))
 			card.markers[tokenType] = 1
-			notify("{} added to '{}'".format(tokenType[0], card.Name))
-		else: return
+			notify("{} added a {} to V'Tar Orb and now controls it".format(me,tokenType[0]))
+			return
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:
