@@ -303,7 +303,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=10" />
-			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Full] [Ranged:0-2]{Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Staff of Smiting:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [+2 vs. Nonliving and Dark creatures]" />
+			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Full] [Ranged:0-2] [Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Staff of Smiting:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [+2 vs. Nonliving and Dark creatures]" />
 			<property name="Traits" value="Legendary, Holy Mage Only" />
 			<property name="Text" value="Joseph Trublood gains Armor +2 against attacks from Nonliving or Dark creatures." />
 			<property name="CardID" value="MWPROMO11" />
@@ -453,7 +453,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=1, Life=13" />
-			<property name="AttackBar" value="Halberd:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Great Winged Wind Blast:[Full] [Ranged:0-1] [Wind] [Dice=2] [d12] [7+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
+			<property name="AttackBar" value="Halberd:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Great Winged Wind Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Wind] [Dice=2] [d12] [7+ = Push] [Sweeping] [Unavoidable] [+2 vs. Flying] [Ethereal]" />
 			<property name="Traits" value="Aegis 1, Flying, Wind Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO34" />
