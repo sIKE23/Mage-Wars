@@ -1020,11 +1020,11 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                 if attacker.controller == me: healingQuery(aTraitDict,
                                                            'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
                                                            drainableHealth,
-                                                           "{} heals {} damage through vampirism!".format(attacker.name,{},defender.name))
+                                                           "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name))
                 else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
                                                                    'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
                                                                    drainableHealth,
-                                                                   "{} heals {} damage through vampirism!".format(attacker.name,{},defender.name)])
+                                                                   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
         #Finally, apply conditions
         effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:
