@@ -11,6 +11,7 @@
 		<marker id="da724182-3695-4124-becc-928eb870c5dc" name="Control Marker Blue" />
 		<marker id="e97408e7-985b-46d9-a5e7-98ffb4a3f587" name="Control Marker Green" />
 		<marker id="fe2adfab-4cda-4a1d-843a-84865747ff98" name="Control Marker Yellow" />
+		<marker id="9ea607d3-dade-44dc-a69d-1c0d5691a246" name="Taunt (Skelax)" />
 	</markers>
 	<cards>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="Bolt of V&apos;Tar">

@@ -64,7 +64,6 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Quick Summoning: Once per round, the Beastmaster may summon a Level 1 Animal creature as a quick spell. &#xD;&#xA;PET: When a friendly non-Legendary animal creature comes into play, you may make it your Pet. Pay mana equal to the creatures Level +1, then place the Pet maker on it. Pet gains Melee +1, Armor +1, and Life +3. Whenever Pet is in the same zone as his Beastmaster, it gains an additional Melee +1. If Pet is destroyed, you may assign the marker again in the same manner when a new animal is summoned. &#xD;&#xA;Beastmaster has the Melee +1 trait." />
 			<property name="Traits" value="Melee +1" />
-			<alternate name="Beastmaster" type="B" />
 	  			<alternate name="Beastmaster" type="B">
 	  				<property name="Type" value="Mage" />
 	  				<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
@@ -119,7 +118,6 @@
 			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
-			<alternate name="Priestess" type="B" />
 				<alternate name="Priestess (Apprentice)" type="B">
 					<property name="Type" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
@@ -158,7 +156,6 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
-			<alternate name="Warlock" type="B" />
 				<alternate name="Warlock (Apprentice)" type="B">
 					<property name="Type" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
@@ -179,7 +176,6 @@
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
-			<alternate name="Wizard(Air)" type="B" />
 				<alternate name="Wizard(Air)" type="B">
 					<property name="Type" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -196,7 +192,6 @@
 			<property name="MageSchoolCost" value="Arcane=1, Earth=1" />
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
-			<alternate name="Wizard(Earth)" type="B" />
 				<alternate name="Wizard(Earth)" type="B">
 					<property name="Type" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -237,6 +232,7 @@
 					<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				</alternate>
+		</card>
 		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard (Apprentice)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />

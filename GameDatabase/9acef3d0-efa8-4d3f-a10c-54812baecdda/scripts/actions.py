@@ -318,20 +318,26 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         #Pay costs for spells
                         if attack.get('Cost'):
                                 originalSource = Card(attack.get('OriginalSourceID'))
-                                if not originalSource.isFaceUp: flipcard(originalSource)
-                                if originalSource.type == 'Attack': castSpell(originalSource)
+                                if originalSource.type == 'Attack': cost = castSpell(originalSource)
+                                        if cost == None:
+                                                notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
+                                                attacker.arrow(defender,False)
+                                                return          
                                 else:
                                         cost = attack.get('Cost')
                                         realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
                                         if realCost == None:
-                                                notify("{} has chosen to not pay the needed mana to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
+                                                notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
+                                                attacker.arrow(defender,False)
                                                 return                                        	
                                         elif realCost <= me.Mana: 
                                         	me.Mana -= realCost
                                         	notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))   	
                                         else:
                                                 notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
+                                                attacker.arrow(defender,False)
                                                 return
+                        if not originalSource.isFaceUp: flipcard(originalSource)
                         if attack and attack.get('SourceID')==attacker._id:
                                 remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                                 attacker.arrow(defender,False)
