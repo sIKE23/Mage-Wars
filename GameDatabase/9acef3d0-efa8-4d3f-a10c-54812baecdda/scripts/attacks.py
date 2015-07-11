@@ -917,7 +917,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                 if healingAmt > 0: healingQuery(dTraitDict,
                                                 'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
                                                 healingAmt,
-                                                "{} heals {} for {} damage!".format(attacker.name,defender.name,'{}'))
+                                                "{} heals {} for {} damage!".format(attacker.name,defender.name,{}))
                 else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
                 return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
 
@@ -1020,11 +1020,11 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                 if attacker.controller == me: healingQuery(aTraitDict,
                                                            'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
                                                            drainableHealth,
-                                                           "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name))
+                                                           "{} heals {} damage through vampirism!".format(attacker.name,{},defender.name))
                 else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
                                                                    'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
                                                                    drainableHealth,
-                                                                   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
+                                                                   "{} heals {} damage through vampirism!".format(attacker.name,{},defender.name)])
         #Finally, apply conditions
         effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
         for e in effects:

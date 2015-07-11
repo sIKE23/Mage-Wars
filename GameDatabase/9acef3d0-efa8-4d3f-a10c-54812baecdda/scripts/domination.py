@@ -89,9 +89,11 @@ def loadMapFile(group, x=0, y=0):
         startZones = scenario.get("startZoneDict",{}) #should probably include a default placement dictionary.
 
         for c in table:
-                if c.type == "Internal" or "Scenario" in c.special and c.controller == me: c.delete() # delete Scenario creatures and other game markers
-                remoteCall(c.controller,'remoteDeleteDominationObjects', [c])
-	
+                if (c.type == "Internal" or "Scenario" in c.special) and c.controller == me:
+                        c.delete() # delete Scenario creatures and other game markers
+                elif (c.type == "Internal" or "Scenario" in c.special)  and c.controller != me:
+                        remoteCall(c.controller,'remoteDeleteCard', [c])
+
         #iterate over elements, top to bottom then left to right.
         I,J = len(mapArray),len(mapArray[0])
         X,Y = I*mapTileSize,J*mapTileSize
@@ -131,9 +133,6 @@ def loadMapFile(group, x=0, y=0):
                         mapPlace(obj,(i-1,j-1))
 
         setNoGameBoard(table)
-
-def remoteDeleteDominationObjects(card):
-        card.delete()
 
 def mapPlace(key,coords):
         mapDict = eval(getGlobalVariable("Map"))
