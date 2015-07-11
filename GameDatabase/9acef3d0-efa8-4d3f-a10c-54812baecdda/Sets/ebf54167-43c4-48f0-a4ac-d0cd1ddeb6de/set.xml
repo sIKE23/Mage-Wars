@@ -65,6 +65,15 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Quick Summoning: Once per round, the Beastmaster may summon a Level 1 Animal creature as a quick spell. &#xD;&#xA;PET: When a friendly non-Legendary animal creature comes into play, you may make it your Pet. Pay mana equal to the creatures Level +1, then place the Pet maker on it. Pet gains Melee +1, Armor +1, and Life +3. Whenever Pet is in the same zone as his Beastmaster, it gains an additional Melee +1. If Pet is destroyed, you may assign the marker again in the same manner when a new animal is summoned. &#xD;&#xA;Beastmaster has the Melee +1 trait." />
 			<property name="Traits" value="Melee +1" />
 			<alternate name="Beastmaster" type="B" />
+	  			<alternate name="Beastmaster" type="B">
+	  				<property name="Type" value="Mage" />
+	  				<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
+	  				<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+	      		<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+	      		<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+	      		<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Quick Summoning: Once per round, the Beastmaster may summon a Level 1 Animal creature as a quick spell. &#xD;&#xA;PET: When a friendly non-Legendary animal creature comes into play, you may make it your Pet. Pay mana equal to the creatures Level +1, then place the Pet maker on it. Pet gains Melee +1, Armor +1, and Life +3. Whenever Pet is in the same zone as his Beastmaster, it gains an additional Melee +1. If Pet is destroyed, you may assign the marker again in the same manner when a new animal is summoned. &#xD;&#xA;Beastmaster has the Melee +1 trait." />
+	      		<property name="Traits" value="Melee +1" />
+	      	</alternate>
 		</card>
 		<card id="608f34d9-e0dd-4ca4-9840-2ef90b742058" name="Beastmaster (Apprentice)">
 			<property name="Type" value="Mage" />
@@ -74,7 +83,15 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
-			<alternate name="Beastmaster" type="B" />
+				<alternate name="Beastmaster (Apprentice)" type="B">
+	  				<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
+					<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="" />
+					<property name="Traits" value="" />
+				</alternate>
 		</card>
 		<card id="665fd551-678d-4b5c-94a3-347dd320f20a" name="Beastmaster Stats">
 			<property name="Type" value="Magestats" />
@@ -86,7 +103,14 @@
 			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal costs." />
-			<alternate name="Priestess" type="B" />
+				<alternate name="Priestess" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal co." />
+				</alternate>
 		</card>
 		<card id="9b9af674-185b-4e60-9943-fa6f1c35d4b2" name="Priestess (Apprentice)">
 			<property name="Type" value="Mage" />
@@ -96,6 +120,14 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 			<alternate name="Priestess" type="B" />
+				<alternate name="Priestess (Apprentice)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
+					<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="" />
+				</alternate>
 		</card>
 		<card id="352e2f88-a99e-46f0-86f9-ab7b05d978cb" name="Priestess Stats">
 			<property name="Type" value="Magestats" />
@@ -108,7 +140,15 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
 			<property name="Traits" value="Melee +1" />
-			<alternate name="Warlock" type="B" />
+				<alternate name="Warlock" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
+					<property name="Stats" value="Spellbook=120, Life=38, Armor=0, Channeling=9" />
+					<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
+					<property name="Traits" value="Melee +1" />
+				</alternate>
 		</card>
 		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
 			<property name="Type" value="Mage" />
@@ -119,6 +159,15 @@
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
 			<alternate name="Warlock" type="B" />
+				<alternate name="Warlock (Apprentice)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
+					<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="" />
+					<property name="Traits" value="" />
+				</alternate>
 		</card>
 		<card id="52fdb62d-59e3-4b5e-904e-d92ae2be7012" name="Warlock Stats">
 			<property name="Type" value="Magestats" />
@@ -131,6 +180,14 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Air)" type="B" />
+				<alternate name="Wizard(Air)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+					<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
+				</alternate>
 		</card>
 		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard (Earth)">
 			<property name="Type" value="Mage" />
@@ -140,6 +197,14 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 			<alternate name="Wizard(Earth)" type="B" />
+				<alternate name="Wizard(Earth)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Arcane=1, Earth=1" />
+					<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
+				</alternate>
 		</card>
 		<card id="4f252cfc-75a7-42b8-9f4c-2fb4a40b227e" name="Wizard (Fire)">
 			<property name="Type" value="Mage" />
@@ -148,7 +213,14 @@
 			<property name="MageSchoolCost" value="Arcane=1, Fire=1" />
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
-			<alternate name="Wizard(Fire)" type="B" />
+				<alternate name="Wizard(Fire)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Arcane=1, Fire=1" />
+					<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
+				</alternate>
 		</card>
 		<card id="7f276a4a-d18d-426f-890e-e50b143e7940" name="Wizard (Water)">
 			<property name="Type" value="Mage" />
@@ -157,8 +229,14 @@
 			<property name="MageSchoolCost" value="Arcane=1, Water=1" />
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
-			<alternate name="Wizard(Water)" type="B" />
-		</card>
+				<alternate name="Wizard(Water)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Arcane=1, Water=1" />
+					<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
+				</alternate>
 		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard (Apprentice)">
 			<property name="Type" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -166,7 +244,14 @@
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
-			<alternate name="Wizard(Water)" type="B" />
+				<alternate name="Wizard (Apprentice)" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+					<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="" />
+				</alternate>
 		</card>
 		<card id="e27b8293-65cd-4479-b5e9-2616201ba512" name="Wizard Stats">
 			<property name="Type" value="Magestats" />
