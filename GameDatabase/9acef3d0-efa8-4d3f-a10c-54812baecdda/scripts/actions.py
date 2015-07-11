@@ -318,7 +318,8 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         #Pay costs for spells
                         if attack.get('Cost'):
                                 originalSource = Card(attack.get('OriginalSourceID'))
-                                if originalSource.type == 'Attack': cost = castSpell(originalSource)
+                                if originalSource.type == 'Attack':
+                                        cost = castSpell(originalSource)
                                         if cost == None:
                                                 notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
                                                 attacker.arrow(defender,False)
