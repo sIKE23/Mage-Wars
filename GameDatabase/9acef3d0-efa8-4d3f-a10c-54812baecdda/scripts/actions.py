@@ -1554,12 +1554,11 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[FFToken] = 3
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
-	elif card.isFaceUp:
+	elif card.isFaceUp and not "B" in cardalt:
 		notify("{} turns {} face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
-		
-	if "B" in cardalt and card.isFaceUp == True:
+	elif card.isFaceUp and "B" in cardalt:
 		if card.alternate == '':
 			notify("{} flips {} to the alternate version of the card.".format(me, card))
 			card.switchTo('B')
