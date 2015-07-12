@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.7.0     #######################################
+##########################    v1.13.0.0     #######################################
 ###########################################################################
 import time
 import re
@@ -33,6 +33,9 @@ ControlMarkerBlue = ("Blue Control Marker", "da724182-3695-4124-becc-928eb870c5d
 ControlMarkerGreen = ("Green Control Marker", "e97408e7-985b-46d9-a5e7-98ffb4a3f587" )
 ControlMarkerRed = ("Red Control Marker", "c56839d2-46f4-49a8-85e4-3838e7f09cc2" )
 ControlMarkerYellow = ("Yellow Control Marker", "fe2adfab-4cda-4a1d-843a-84865747ff98" )
+ControlMarkerPurple = ("Purple Control Marker", "5d6e5424-031b-44d4-9e0e-eb93f29baf6d" )
+ControlMarkerGrey = ("Grey Control Marker", "1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" )
+
 Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5" )
 CrushToken = ("Crush Token", "d7472637-7c6d-4593-bc16-5975155c2926" )
 Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
