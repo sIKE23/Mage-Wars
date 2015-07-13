@@ -35,7 +35,6 @@ ControlMarkerRed = ("Red Control Marker", "c56839d2-46f4-49a8-85e4-3838e7f09cc2"
 ControlMarkerYellow = ("Yellow Control Marker", "fe2adfab-4cda-4a1d-843a-84865747ff98" )
 ControlMarkerPurple = ("Purple Control Marker", "5d6e5424-031b-44d4-9e0e-eb93f29baf6d" )
 ControlMarkerGrey = ("Grey Control Marker", "1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" )
-
 Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5" )
 CrushToken = ("Crush Token", "d7472637-7c6d-4593-bc16-5975155c2926" )
 Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
@@ -122,7 +121,7 @@ DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 diceBank = []
 diceBankD12 = []
 
-listControlMarkers = [ControlMarkerBlue,ControlMarkerGreen,ControlMarkerRed,ControlMarkerYellow];
+listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];
 
 ##########################		 Card Sizes 			########################
 
@@ -139,8 +138,9 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#171e78", 		# Blue		R=23  G=30  B=120
 				"#01603e", 		# Green		R=1   G=96  B=62
 				"#f7d917", 		# Yellow 	R=247 G=217 B=23
-				"#c680b4",		# Purple
-				"#c0c0c0"]		# Grey
+				"#c680b4",		# Purple R=198 G=128 B=180
+				"#c0c0c0"]		# Grey R=192 G=192 B=192
+				
 boardSet = "GameBoard1.png"
 debugMode = False
 deckLoaded = False

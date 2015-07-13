@@ -166,6 +166,8 @@
 			<cardaction menu="Add Control Marker Green" default="False" execute="addControlMarkerGreen" />
 			<cardaction menu="Add Control Marker Red" default="False" execute="addControlMarkerRed" />
 			<cardaction menu="Add Control Marker Yellow" default="False" execute="addControlMarkerYellow" />
+			<cardaction menu="Add Control Marker Purple" default="False" execute="addControlMarkerPurple" />
+			<cardaction menu="Add Control Marker Grey" default="False" execute="addControlMarkerGrey" />
 			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
 			<cardaction menu="Add Rage Marker" default="False" shortcut="Alt+E" execute="addRage" />
@@ -197,6 +199,8 @@
 			<cardaction menu="Remove Control Marker Green" default="False" execute="removeControlMarkerGreen" />
 			<cardaction menu="Remove Control Marker Red" default="False" execute="removeControlMarkerRed" />
 			<cardaction menu="Remove Control Marker Yellow" default="False" execute="removeControlMarkerYellow" />
+			<cardaction menu="Remove Control Marker Purple" default="False" execute="removeControlMarkerPurple" />
+			<cardaction menu="Remove Control Marker Grey" default="False" execute="removeControlMarkerGrey" />
 			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
 			<cardaction menu="Remove Rage Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />
