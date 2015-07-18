@@ -1789,22 +1789,31 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                                         else:
                                                 x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
                                                 y = (zoneY+cardH+cardH*int(returning) if j < mapDict.get('J')/2 else zoneY+zoneS-2*cardH-cardH*int(returning))
-                                                xOffset = 0
-                                                while True:
-                                                        occupied = False
-                                                        for c in table:
-                                                                if c.controller == me:
-                                                                        posx, posy = c.position
-                                                                        #debug("c.position {}".format(c.position))
-                                                                        if posx == x+xOffset and posy == y:
-                                                                                occupied = True
-                                                                                break
-                                                        if occupied:
-                                                                xOffset += cardW*(-1 if i < mapDict.get('I')/2 else 1)
-                                                        else: break
-                                                x += xOffset
+                                                dVector = ((-1,0) if i<mapDict.get('I')/2 else (1,0))
+                                                x,y = splay(x,y,dVector)
         card.moveToTable(x,y,True)
         #setUpDiceAndPhaseCards,CreateIniToken
+
+def splay(x,y,dVector = (1,0)):
+        """Returns coordinates x,y unless there is already a card at those coordinates,
+        in which case it searches for the next open position in the direction defined by dVector."""
+        dx,dy = dVector
+        while True:
+                occupied = False
+                w,h = 100,100
+                for c in table:
+                        if c.controller == me:
+                                cx,cy = c.position
+                                if cx == x and cy == y:
+                                        if not c.isFaceUp: w,h = cardSizes[c.size()]['backWidth'],cardSizes[c.size()]['backHeight']
+                                        else: w,h = cardSizes[c.size()]['width'],cardSizes[c.size()]['height']
+                                        occupied = True
+                                        break
+                if occupied:
+                        x += dx*w
+                        y += dy*h
+                else: break
+        return (x,y)
 
 def debug(str):
 	mute()

@@ -139,22 +139,15 @@ def mapPlace(key,coords):
         mapTileSize = mapDict['tileSize']
         i,j = coords
         x,y = i*mapTileSize+mapDict["x"],j*mapTileSize+mapDict["y"]
-        GUID=mapObjectsDict[key]["GUID"]
-        offset=mapObjectsDict[key]["Offset"]
-        multiOffset=mapObjectsDict[key]["Multiple Offset"]
+        GUID = mapObjectsDict[key]["GUID"]
+        offset = mapObjectsDict[key]["Offset"]
+        dVector = mapObjectsDict[key]["Splay Vector"]
         x += offset
         y += offset
-        while True:
-                finished = True
-                for c in table:
-                        cx,cy = c.position
-                        if cx==x and cy == y: #and c.Type == "Creature"
-                                x += multiOffset
-                                finished = False
-                                break
-                if finished: break
 
+        x,y = splay(x,y,dVector)
         card = table.create(GUID,x,y)
+
         if card.type == "Creature":
                 card.special = "Scenario"
                 if "Orb Guardian" in card.name:
@@ -176,8 +169,8 @@ mapTileDict = {
         "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
 
 mapObjectsDict = {
-        "Orb" : {"GUID":"3d339a9d-8804-4afa-9bd5-1cabb1bebc9f", "Offset":175, "Multiple Offset": -100},
-        "Sslak" : {"GUID":"bf217fd3-18c0-4b61-a33a-117167533f3d", "Offset":5, "Multiple Offset": 62},
-        "Usslak" : {"GUID":"54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", "Offset":5, "Multiple Offset": 62},
-        "SecretPassage" : {"GUID":"a4b3bb92-b597-441e-b2eb-d18ef6b8cc77", "Offset":175, "Multiple Offset": -100}
+        "Orb" : {"GUID":"3d339a9d-8804-4afa-9bd5-1cabb1bebc9f", "Offset":175, "Splay Vector": (-1,0)},
+        "Sslak" : {"GUID":"bf217fd3-18c0-4b61-a33a-117167533f3d", "Offset":5, "Splay Vector": (1,0)},
+        "Usslak" : {"GUID":"54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", "Offset":5, "Splay Vector": (1,0)},
+        "SecretPassage" : {"GUID":"a4b3bb92-b597-441e-b2eb-d18ef6b8cc77", "Offset":175, "Splay Vector": (-1,0)}
         }
