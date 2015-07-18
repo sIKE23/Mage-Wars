@@ -19,10 +19,12 @@ Reverse Attack
 Avoid Attack
 Agony
 Bear Strength
+Critical Strike
 Decoy
 Divine Protection
 Enchantment Transfusion
 Hawkeye
+Lion Savagery
 Marked for Death
 Sacred Ground
 Standard Bearer
@@ -31,12 +33,10 @@ Roll Dice
 Barkskin
 Brace Yourself
 Bull Endurance
-Critical Strike
 Decoy
 Enchantment Transfusion
 Fortified Position
 Healing Charm
-Lion Savagery
 Rhino Hide
 Rise Again
 Rust

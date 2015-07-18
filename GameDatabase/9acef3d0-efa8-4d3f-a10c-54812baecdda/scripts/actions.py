@@ -321,6 +321,7 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         #Pay costs for spells
                         if attack.get('Cost'):
                                 originalSource = Card(attack.get('OriginalSourceID'))
+                                if not originalSource.isFaceUp: flipcard(originalSource)
                                 if originalSource.type == 'Attack':
                                         cost = castSpell(originalSource)
                                         if cost == None:
@@ -341,7 +342,6 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                                 notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
                                                 attacker.arrow(defender,False)
                                                 return
-                        if not originalSource.isFaceUp: flipcard(originalSource)
                         if attack and attack.get('SourceID')==attacker._id:
                                 remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
                                 attacker.arrow(defender,False)
@@ -360,7 +360,6 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         elif fromCard.Type !="Enchantment":
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
                                 fromCard.arrow(toCard,False)
-
 def setClearVars():
 	global deckLoaded
 	global iniTokenCreated
