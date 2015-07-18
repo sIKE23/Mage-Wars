@@ -14,3 +14,5 @@
 @Usslak=[(3,3)]
 
 @startZoneDict=[{ "Player" : 1, "Zone" : "1,4" },{ "Player" : 2, "Zone" : "2,1" },{ "Player" : 3, "Zone" : "4,5" },{ "Player" : 4, "Zone" : "5,2" }]
+
+@RDA=(3,3)

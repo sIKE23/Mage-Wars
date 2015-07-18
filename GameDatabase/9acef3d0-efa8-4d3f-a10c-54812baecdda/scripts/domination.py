@@ -30,14 +30,13 @@ def DominationTracker():
         card.Special1 = str(eval(getGlobalVariable("Map")).get("Map Name"))
         card.Special2 = str(eval(getGlobalVariable("Goal")).get("Goal"))
 
-def importArray(filename):
-        """Takes a txt character array and outputs a dictionary of arrays (sets of columns). To get an entry from an array, use array[x][y]"""
+def readMap(filename):
+        """Interprets a properly formatted .txt map file and returns a dictionary with the relevant scenario information."""
         #Open the file
         directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
         try: raw = open('{}\{}{}'.format(directory,filename,'.txt'),'r')
-        except: return #Bad practice, I know. I'll try to find a better way later.
-        #Create an empty array.
-        #Because of the order in which data are read, we will need to transpose it.
+        except: return
+        #Create an empty array. Because of the order in which data are read, we will need to transpose it.
         transposeArray = []
         #Fill up the transposed array, as a set of rows.
         scenarioDict = {}
@@ -78,7 +77,7 @@ def loadMapFile(group, x=0, y=0):
         choice = askChoice('Load which map?',choices,colors)
         if choice == 0 or choice == len(choices): return
         choiceName = choices[choice-1]
-        scenario = importArray(fileList[choice-1])
+        scenario = readMap(fileList[choice-1])
         notify('{} loads {}.'.format(me,fileList[choice-1]))
 
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
@@ -87,6 +86,7 @@ def loadMapFile(group, x=0, y=0):
         mapTileSize = 250 #replace 250 with a stored tilesize from scenario if we later decide to allow the design of maps with non-standard tilesizes.
         mapObjects = [(k,scenario.get(k,[])) for k in mapObjectsDict]
         startZones = scenario.get("startZoneDict",{}) #should probably include a default placement dictionary.
+        jRDA,iRDA = scenario.get("RDA",(2,2))
 
         for c in table:
                 if (c.type == "Internal" or "Scenario" in c.special) and c.controller == me:
@@ -119,13 +119,17 @@ def loadMapFile(group, x=0, y=0):
         mapDict = createMap(I,J,zoneArray,mapTileSize)
 
         mapDict["Map Name"] = choiceName
-        debug(mapDict.get("Map Name","Unnamed map"))
+        mapDict["RDA"] = iRDA,jRDA
+        
         for z in startZones:
                 playerNumber = z["Player"]
                 zx,zy = eval(z["Zone"])
                 mapDict['zoneArray'][zy-1][zx-1]['startLocation'] = str(playerNumber)
 
         setGlobalVariable("Map",str(mapDict))
+
+        for c in table:
+                if c.type in ['DiceRoll','Phase']: moveRDA(c)
 
         for obj,locations in mapObjects:
                 for L in locations:

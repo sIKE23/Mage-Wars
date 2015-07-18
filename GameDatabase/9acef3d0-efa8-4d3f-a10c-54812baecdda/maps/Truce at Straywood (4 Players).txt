@@ -13,3 +13,5 @@
 @SecretPassage=[(1,5),(4,2)]
 
 @startZoneDict=[{ "Player" : 1, "Zone" : "2,1" },{ "Player" : 2, "Zone" : "3,1" },{ "Player" : 3, "Zone" : "2,6" },{ "Player" : 4, "Zone" : "3,6" }]
+
+@RDA=(1,3)

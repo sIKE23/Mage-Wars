@@ -213,6 +213,7 @@ def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
 	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
 	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
+	mapDict["RDA"] = (2,2)
 	setGlobalVariable("Map", str(mapDict))
 
 def setUpDiceAndPhaseCards():
@@ -224,8 +225,51 @@ def setUpDiceAndPhaseCards():
                 AskDiceRollArea()
                 card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
                 card.anchor = (True)
-                moveCardToDefaultLocation(card)
+                for c in table:
+                        if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)
+
+def moveRDA(card):
+        """Moves the dice roll area/initiative/phase marker to the appropriate area"""
+        cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
+        cardType = card.type
+        rdaChoice = getGlobalVariable("DiceRollAreaPlacement")
+        mapDict = eval(getGlobalVariable("Map"))
+        mapX,mapY = mapDict["x"],mapDict["y"]
+        zoneS = mapDict["tileSize"]
+        rdaI,rdaJ = mapDict["RDA"]
+        mapHeight = mapDict["Y"]
+        
+        rowY = mapY + rdaJ*zoneS
+        columnX = mapX + rdaI*zoneS
+
+        x,y = 0,0
+
+        if cardType == "DiceRoll":
+                if rdaChoice == "Side":
+                        x = mapX - cardW - 10
+                        y = rowY - zoneS + 100
+                else:
+                        x = columnX - zoneS
+                        y = mapY + mapHeight + 100
+
+        elif '1st Player Token' in card.name:
+                if rdaChoice == "Side":
+                        x = mapX - cardW - 10 - 100
+                        y = rowY - zoneS
+                else:
+                        x = columnX - zoneS
+                        y = mapY + mapHeight + 10
+
+        elif cardType=='Phase' and 'Phase' in card.name:
+                if rdaChoice == "Side":
+                        x = mapX - cardW - 10
+                        y = rowY - zoneS + 10
+                else:
+                        x = columnX - zoneS + 100
+                        y = mapY + mapHeight + 10 + 10
+                
+        card.moveToTable(x,y,True)
 
 def onLoadDeck(player, groups):
 	mute()
@@ -236,7 +280,7 @@ def onLoadDeck(player, groups):
 	global iniTokenCreated
 	global blankSpellbook
 	if bool(getGlobalVariable('DiceAndPhaseCardsDone')):
-                setUpDiceAndPhaseCards()
+                setUpDiceAndPhaseCards() 
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
 		#if a deck was already loaded, reset the game
@@ -602,9 +646,6 @@ def AskDiceRollArea():
 	else:
 		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
                 setGlobalVariable("DiceRollAreaPlacement", "Bottom")
-	#setDRAIP(choice)
-	#for p in players:
-		#remoteCall(p, "setDRAIP", [choice])
 
 def CreateIniToken():
 	global gameStartTime
@@ -1740,45 +1781,20 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
         else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
-        debug(str(bool(mapDict)))
         if mapDict:
+                iRDA,jRDA = mapDict.get("RDA",(2,2))
                 zoneArray = mapDict.get('zoneArray')
                 cardType = card.type
                 if cardType == 'Internal': return
                 mapX,mapW = mapDict.get('x'),mapDict.get('X')
-                if cardType == 'DiceRoll':
-                        diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
-                        zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
-                                [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
-                        zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-                        x=zoneX-(cardW if diceBoxSetup=='Side' else 0)
-                        y=zoneY+zoneS-(cardH if diceBoxSetup=='Side' else 0)
-                        card.moveToTable(x,y,True)
-                        mapDict['DiceBoxLocation'] = (x,y)
-                        setGlobalVariable("Map",str(mapDict))
-                        #except: notify('Error! Maps must be at least 2 zones tall!')
-                        return
-                if cardType == 'Phase':
-                        diceBoxSetup = getGlobalVariable("DiceRollAreaPlacement")
-                        zone = ([z for z in zoneArray[0] if z and not z.get('startLocation')] if diceBoxSetup == 'Side' else
-                                [z[-1] for z in zoneArray if z[-1] and not z[-1].get('startLocation')])[0]
-                        zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-                        x=zoneX-(130 if diceBoxSetup=='Side' else 0)
-                        y=zoneY+zoneS-(80 if diceBoxSetup=='Side' else 0)
-                        if '1st Player Token' in card.name:
-                                x-=(18  if diceBoxSetup=='Side' else -105-cardH)
-                                y+=(-75 if diceBoxSetup=='Side' else 80-cardH)
-                        elif cardType=='Phase' and 'Phase' in card.name:
-                                x+=(39 if diceBoxSetup=='Side' else 155-cardH)
-                                y+=(-63 if diceBoxSetup=='Side' else 23-cardH)
-                        card.moveToTable(x,y,True)
+                if cardType in ['DiceRoll','Phase']:
+                        moveRDA(card)
                         return
                 for i in range(len(zoneArray)):
                         for j in range(len(zoneArray[0])):
                                 zone = zoneArray[i][j]
                                 if zone and zone.get('startLocation') == str(playerNum):
                                         zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-                                        debug(str(zone.get("startLocation"))+" {},{}".format(zoneX,zoneY))
                                         if cardType == 'Mage':
                                                 x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
                                                 y = (zoneY if j < mapDict.get('J')/2 else zoneY + zoneS - cardH)
@@ -1791,7 +1807,6 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                                                 dVector = ((-1,0) if i<mapDict.get('I')/2 else (1,0))
                                                 x,y = splay(x,y,dVector)
         card.moveToTable(x,y,True)
-        #setUpDiceAndPhaseCards,CreateIniToken
 
 def splay(x,y,dVector = (1,0)):
         """Returns coordinates x,y unless there is already a card at those coordinates,
