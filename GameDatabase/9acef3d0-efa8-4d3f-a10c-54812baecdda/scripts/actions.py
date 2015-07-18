@@ -1781,8 +1781,8 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
                                         zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
                                         debug(str(zone.get("startLocation"))+" {},{}".format(zoneX,zoneY))
                                         if cardType == 'Mage':
-                                                x = (zoneX if i < mapDict.get('I')/2 else mapX + mapW - cardW)
-                                                y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
+                                                x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
+                                                y = (zoneY if j < mapDict.get('J')/2 else zoneY + zoneS - cardH)
                                         elif cardType == 'Magestats':
                                                 x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
                                                 y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
