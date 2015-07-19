@@ -493,7 +493,6 @@ def flipCoin(group, x = 0, y = 0):
 
 def playerSetup():
 	mute()
-
 	# Players select their color
 	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
 	if not debugMode or len(getPlayers()) > 1:
@@ -525,6 +524,7 @@ def playerSetup():
 		if "Channeling" in statval[0]:
 			me.Channeling = int(statval[1])
 			me.Mana = 10+me.Channeling
+			#if debugMode: me.Mana = 100
 			whisper("Channeling set to {} and Mana to {}".format(me.Channeling,me.Mana))
 		elif "Life" in statval[0]:
 			me.Life = int(statval[1])
@@ -2040,8 +2040,12 @@ def castSpell(card,target=None):
                 if casterCost: notify("{} pays {} mana.".format(caster,str(casterCost)))
                 cost -= casterCost
                 if cost:
-                        me.Mana = max(me.Mana-cost,0)
-                        notify("{} pays {} mana.".format(me,str(cost)))
+                        if discountString =="":
+                        	notify("{} pays {} mana.".format(me,str(cost)))
+                        	me.Mana = max(me.Mana-cost,0)
+                        else:
+                        	notify("{} pays {} mana with the following discount applied: {}.".format(me,str(cost),discountSourceNames))
+                        	me.Mana = max(me.Mana-cost,0)
                 for c,d in usedDiscounts: #track discount usage
                         if c.Name=="Construction Yard": c.markers[Mana] -= d
                         rememberAbilityUse(c)

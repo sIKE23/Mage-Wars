@@ -1,10 +1,9 @@
 ## Recommendations are to reveal enchantment at end of given phase.
-#Where to put Akiro's favor?
-#Divine Intervention?
 Declare Attack
 Block
 Cobra Reflexes
 Decoy
+Divine Intervention
 Enchantment Transfusion
 Falcon Precision
 Force Crush
@@ -30,10 +29,12 @@ Sacred Ground
 Standard Bearer
 #
 Roll Dice
+Akiro's Favor
 Barkskin
 Brace Yourself
 Bull Endurance
 Decoy
+Divine Intervention
 Enchantment Transfusion
 Fortified Position
 Healing Charm

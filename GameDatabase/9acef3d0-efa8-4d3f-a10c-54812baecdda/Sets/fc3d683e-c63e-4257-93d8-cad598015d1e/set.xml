@@ -360,7 +360,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=5" />
-			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;" />
+			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Climbing" />
 			<property name="Text" value="Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
