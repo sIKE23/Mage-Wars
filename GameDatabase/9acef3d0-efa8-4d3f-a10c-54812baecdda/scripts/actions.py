@@ -269,6 +269,8 @@ def moveRDA(card):
                         x = columnX - zoneS + 100
                         y = mapY + mapHeight + 10 + 10
                 
+        mapDict['DiceBoxLocation'] = (x,y)
+        setGlobalVariable("Map",str(mapDict))
         card.moveToTable(x,y,True)
 
 def onLoadDeck(player, groups):
