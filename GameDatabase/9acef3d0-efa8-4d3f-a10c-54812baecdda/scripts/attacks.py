@@ -266,7 +266,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
         #Wildfire Imp Melee buff for attacking a Burning Object
         if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
         #Bloodfire Helmet Demon buff
-        #if attacker.Subtype == "Demon" and attacker.controller == ?? and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
+         if attacker.Subtype == "Demon" and [1 for c in table if c.Name=="Bloodfire Helmet" and c.isFaceUp and c.controller == attacker.controller] and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1 
         #Wounded prey
         if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.type == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
         attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
@@ -800,6 +800,12 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
                         notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
                         interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
                         return
+                if [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and not attack.get('RangeType') == 'Counterstrike' and not attack.get("Traits",{}).get("Nonliving") or not attack.get("Traits",{}).get("Psychic Immunity"):
+                        damageRoll,effectRoll = rollDice(0)
+                        if effectRoll >= 9:
+                                notfiy("{}'s cowers in fear from the Mavelovement gaze of Warlock throguh his Helm of Fear!".format(attacker.name.split(',')[0]))
+                                interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
+                                return
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
