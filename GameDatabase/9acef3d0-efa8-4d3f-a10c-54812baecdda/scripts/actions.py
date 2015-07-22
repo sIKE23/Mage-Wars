@@ -138,7 +138,7 @@ PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
 				"#171e78", 		# Blue		R=23  G=30  B=120
 				"#01603e", 		# Green		R=1   G=96  B=62
 				"#f7d917", 		# Yellow 	R=247 G=217 B=23
-				"#c680b4",		# Purple R=198 G=128 B=180
+				"#ae76f6",		# Purple R=174 G=118 B=246
 				"#c0c0c0"]		# Grey R=192 G=192 B=192
 				
 boardSet = "GameBoard1.png"
