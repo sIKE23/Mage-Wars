@@ -920,6 +920,7 @@ This creature is rooted to the ground. It cannot take move actions, and it has t
 #
 Snatch,Snatched
 This attack can grab and pull creatures into its zone. Snatch is a Push effect, where the object is Pushed one zone closer towards the source of the Push. 
+
 - Snatch has no effect on Uncontainable or Unmovable creatures.
 #
 Uproot X,Uproot
@@ -972,3 +973,51 @@ When an object with Dissipate X comes into play, it gets X Dissipate tokens. Eac
 #
 Unstoppable
 This creature is exceptionally large, heavy, and/or strong, possibly animated by powerful magics. It cannot be hindered and gains the Unmovable and Uncontainable traits.
+####################
+###### Domination ######
+####################
+Anchored,Anchor
+This object has an exceptionally strong connection to the plane of Etheria, and it resists attempts to magically transport it. Objects with this trait cannot be Teleported.
+#
+Hit
+If an attack reaches the Damage & Effects Step then it is considered to have “hit” its target. If this step is skipped (for example, the attack misses due to a Daze condition, or is avoided by a Defense) or if the attack is canceled before this step can occur (for example, the target uses Divine Intervention to Teleport away), then the attack does not “hit”.
+#
+Lifelink +X,LifeLink
+This is a Mage trait which can be used in team games. During the Upkeep Phase, a Mage with this trait may transfer up to X damage to or from another Mage on his team.
+#
+Moving Conjurations
+Conjurations are attached to the zone they occupy, but some conjurations can move (such as Raincloud). A conjuration can only move into a zone that it could legally be attached to. You cannot move a Conjuration into a zone that already has a conjuration with the same name attached to it (each zone can only have one Conjuration of a given name attached to it at a time).
+#
+Skeelax's Taunt
+Skeelax is a special creature who can taunt his enemies into attacking him. His Trident attack can place a Taunt marker on its target. A Taunted creature must make a melee attack against Skeelax, Taunting Imp during its next Action Phase, if possible, unless Skeelax, Taunting Imp is not in the same zone. The Taunted creature cannot move or take any other action if it is able to make a melee attack against Skeelax, Taunting Imp.
+
+- If the Taunted creature is also required to take a different action (such as attack a different creature because of Bloodthirsty), its controller may choose which of these targets to attack.
+
+- Taunt is a psychic effect, so it does not work on creatures with Psychic Immunity. It also cannot affect Mages.
+
+- Remove Taunt at the end of the creature’s next Action Phase, or when Skeelax, Taunting Imp is activated, whichever comes first.
+#
+Terrain
+Terrain is a type of conjuration spell players will be able to cast in future Mage Wars expansions. A terrain spell changes a zone, giving it special new features. For example, a “Mud” terrain spell might turn a zone into a sticky pool of mud, whereas a “Hellscape” terrain spell might create a hellish fire zone.
+
+- For future compatibility, each of these special Domination tiles counts as Terrain. 
+
+- When you cast a terrain spell on a zone which already has terrain in it, the new terrain spell cancels out and replaces the old terrain spell effects. 
+
+- The special tiles of Battlegrounds all count as terrain, and you can cancel their effects by casting a Terrain spell on top of them. However, they cannot be destroyed or moved.
+
+- You must follow all of the normal rules for overlaying Terrain. For the purposes of using terrain rules, these special tiles have a mana cost of 0.
+
+- If, for some reason, the Terrain that overlays a special tile is removed or destroyed, the original special ability of the tile functions again.
+#
+V’Tar
+This is the raw and unrefined power of the plane of Voltari. It has a myriad of uses, including powering up the V’Torrak to achieve victory in Domination.
+#
+V’Tar Orb
+The V’Tar Orbs are the key to powering the ancient V’Torrak artifact. Mages fight for control of these orbs in the Domination scenario.
+#
+V’Torrak Artifact
+This zone contains a legendary V’Torrak artifact capable of breaking down the barriers between worlds and providing nearly limitless mana to its controller.
+#
+Warded,Ward
+This object is protected from hostile magic. It cannot be targeted by an enemy controlled incantation or enchantment spell. It can still be affected by enemy incantations or enchantments which do not directly target it, such as a zone effect.
