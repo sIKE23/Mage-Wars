@@ -757,6 +757,14 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        #Check for helm of fear
+        if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
+                notify("The Helm of Fear radiates a terrifying aura!")
+                damageRoll,effectRoll = rollDice(0)
+                if effectRoll >= 9:
+                        notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.name.split(',')[0]))
+                        return
+                else: notify("{} resists the urge to panic!".format(attacker.name.split(',')[0]))
         #Remember arcane zap
         if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
         #If the defender is not flying, the attacker should lose the flying trait
@@ -801,12 +809,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
                         notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
                         interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
                         return
-                if [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and not attack.get('RangeType') == 'Counterstrike' and (not attack.get("Traits",{}).get("Nonliving") or not attack.get("Traits",{}).get("Psychic Immunity")):
-                        damageRoll,effectRoll = rollDice(0)
-                        if effectRoll >= 9:
-                                notfiy("{}'s cowers in fear from the Mavelovement gaze of the Warlock through his Helm of Fear!".format(attacker.name.split(',')[0]))
-                                interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
-                                return
+
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
