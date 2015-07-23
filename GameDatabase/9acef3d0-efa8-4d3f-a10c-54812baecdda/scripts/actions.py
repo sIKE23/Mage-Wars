@@ -678,7 +678,7 @@ def CreateIniToken():
                 card.switchTo("Planning") #skips upkeep for first turn
                 card.anchor = (True)
 		for c in table:
-                        remoteCall(c.controller,'moveCardToDefaultLocation',[c])
+			if not c.special or not c.special == "Scenario": remoteCall(c.controller,'moveCardToDefaultLocation',[c])
 		notify("Setup is complete!")
 
 def nextPhase(group, x=-360, y=-150):
