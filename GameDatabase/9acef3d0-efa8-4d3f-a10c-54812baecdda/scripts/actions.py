@@ -134,12 +134,21 @@ cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth
 
 ##########################		Other			############################
 
-PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
-				"#171e78", 		# Blue		R=23  G=30  B=120
-				"#01603e", 		# Green		R=1   G=96  B=62
-				"#f7d917", 		# Yellow 	R=247 G=217 B=23
-				"#ae76f6",		# Purple R=174 G=118 B=246
-				"#c0c0c0"]		# Grey R=192 G=192 B=192
+#PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
+#				"#171e78", 		# Blue		R=23  G=30  B=120
+#				"#01603e", 		# Green		R=1   G=96  B=62
+#				"#f7d917", 		# Yellow 	R=247 G=217 B=23
+#				"#ae76f6",		# Purple R=174 G=118 B=246
+#				"#c0c0c0"]		# Grey R=192 G=192 B=192
+				
+playerColorDict = {
+        1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":"ControlMarkerRed"}, #Red - R=222 G=40  B=39
+        2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":"ControlMarkerBlue"}, #Blue - R=23  G=30  B=120
+        3 : {"PlayerColor":"Green", "Hex":"#01603e", "ControlMarker":"ControlMarkerGreen"}, #Green - R=1   G=96  B=62
+        4 : {"PlayerColor":"Yellow", "Hex":"#f7d917", "ControlMarker":"ControlMarkerYellow"}, #Yellow - R=247 G=217 B=23
+        5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":"ControlMarkerPurple"}, #Purple - R=174 G=118 B=246
+        6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":"ControlMarkerGrey"} #Grey - R=192 G=192 B=192
+             }
 				
 boardSet = "GameBoard1.png"
 debugMode = False
@@ -196,18 +205,24 @@ def onGameStart():
         
 	# bring up window to point to documentation
 	initializeGame()
-
+		
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
 		playerNum = 2
-		me.setGlobalVariable("MyColor", PlayerColor[0])
+		me.setGlobalVariable("MyColor", str(5)) #Purple for testing
 		CreateIniToken()
 		#	players[0].setActivePlayer()
-		setGlobalVariable("InitiativeDone", "True")
+		setGlobalVariable("InitiativeDone", "True") #slowly getting this stuff cleaned up, the line below should eventually go away
+		setGlobalVariable("IniAllDone", "x")
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
-	setGlobalVariable("IniAllDone", ("x" if len(getPlayers()) == 1 else "")) #Needs to be done here, since onTableLoad happens first.
+	else: # Players are now prompted to select a Mage Color
+		choosePlayerColor()
+	
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	if me.name == gameHost.name:
+			notify("Players have selected thier color, they should now load their Spellbooks.")
 
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
@@ -253,7 +268,7 @@ def moveRDA(card):
                         x = columnX - zoneS
                         y = mapY + mapHeight + 100
 
-        elif '1st Player Token' in card.name:
+        elif 'Player Token' in card.name:
                 if rdaChoice == "Side":
                         x = mapX - cardW - 10 - 100
                         y = rowY - zoneS
@@ -294,8 +309,9 @@ def onLoadDeck(player, groups):
 			resetGame()
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
 			deckLoaded = True
-			playerSetup()
+			mageSetup()
 			if len(getGlobalVariable("SetupDone")) != len(getPlayers()) - 1: #we're not the last done with setup
+				notify("Debug: 3")
 				playerNum = len(getGlobalVariable("SetupDone")) + 1
 				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
 				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
@@ -492,26 +508,31 @@ def flipCoin(group, x = 0, y = 0):
         notify("{} flips heads.".format(me))
     else:
         notify("{} flips tails.".format(me))
-
-def playerSetup():
+        
+def choosePlayerColor():
 	mute()
-	# Players select their color
-	choiceList = ["Red", "Blue", "Green", "Yellow", "Purple", "Grey"]
-	if not debugMode or len(getPlayers()) > 1:
+	colorsList = []
+	colorsListHex = []
+	#debugMode = eval(me.getGlobalVariable("DebugMode"))
+	for num in playerColorDict:
+			colorsListHex.append(playerColorDict[num]["Hex"])
+			colorsList.append(playerColorDict[num]["PlayerColor"])
+	if debugMode or len(getPlayers()) > 0:
 		while (True):
-			choice = askChoice("Pick a color:", choiceList, PlayerColor) - 1
+			choice = askChoice("Pick a color:", colorsList, colorsListHex)
 			colorsChosen = getGlobalVariable("ColorsChosen")
 			if colorsChosen == "":	#we're the first to pick
 				setGlobalVariable("ColorsChosen", str(choice))
-				me.setGlobalVariable("MyColor", PlayerColor[choice])
+				me.setGlobalVariable("MyColor", str(choice))
 				break
 			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
 				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-				me.setGlobalVariable("MyColor", PlayerColor[choice])
+				me.setGlobalVariable("MyColor", str(choice))
 				break
 			else:	#someone else took our choice
 				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
+def mageSetup():
 	#set initial health and channeling values
 	global blankSpellbook
 	if blankSpellbook: return
@@ -655,20 +676,11 @@ def CreateIniToken():
 	global currentPhase
 	myColor = me.getGlobalVariable("MyColor")
 	mute()
-	dieCardX = -570
-	dieCardY = -40
 	if not iniTokenCreated:
 		iniTokenCreated = True
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f", (dieCardX + 5) , (dieCardY - 75 ) ) #initiative token # Obsolete dieCard definitions, not high priority.
+		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
 		init.anchor = (True)
-		init.switchTo({
-                        PlayerColor[0]:"",
-                        PlayerColor[1]:"B",
-                        PlayerColor[2]:"C",
-                        PlayerColor[3]:"D",
-                        PlayerColor[4]:"E",
-                        PlayerColor[5]:"F"
-                        }[myColor])
+		init.switchTo(myColor)
 		setGlobalVariable("IniAllDone", "x")
 		setGlobalVariable("RoundNumber", "1")
 		setGlobalVariable("PlayerWithIni", str(playerNum))
@@ -1318,11 +1330,11 @@ typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
 
 def toggleAction(card, x=0, y=0):
 	mute()
-	myColor = me.getGlobalVariable("MyColor")
+	myColor = int(me.getGlobalVariable("MyColor"))
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
-	if myColor == "#800080":
+	if myColor == "0":
 		whisper("Please perform player setup to initialize player color")
-	elif myColor == PlayerColor[0]: # Red
+	elif myColor == 1: # Red
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
@@ -1331,7 +1343,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
 			notify("{} spends Action Marker".format(card.Name))
-	elif myColor == PlayerColor[1]: # Blue
+	elif myColor == 2: # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
@@ -1340,7 +1352,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
 			notify("{} spends Action Marker".format(card.Name))
-	elif myColor == PlayerColor[2]: #Green
+	elif myColor == 3: #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
@@ -1349,7 +1361,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
 			notify("{} spends Action Marker".format(card.Name))
-	elif myColor == PlayerColor[3]: #Yellow
+	elif myColor == 4: #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
@@ -1358,7 +1370,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
 			notify("{} spends Action Marker".format(card.Name))
-	elif myColor == PlayerColor[4]: #Purple
+	elif myColor == 5: #Purple
 		if card.markers[ActionPurpleUsed] > 0:
 			card.markers[ActionPurple] = 1
 			card.markers[ActionPurpleUsed] = 0
@@ -1367,7 +1379,7 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
 			notify("{} spends Action Marker".format(card.Name))
-	elif myColor == PlayerColor[5]: #Grey
+	elif myColor == 6: #Grey
 		if card.markers[ActionGreyUsed] > 0:
 			card.markers[ActionGrey] = 1
 			card.markers[ActionGreyUsed] = 0
@@ -1515,7 +1527,7 @@ def flipcard(card, x = 0, y = 0):
 			card.switchTo('B')
 			notify("{} flips V'Tar Orb On.".format(me))
 		return
-	elif "1st Player Token" in card.Name:
+	elif "Player Token" in card.Name:
 		nextPlayer = getNextPlayerNum()
 		setGlobalVariable("PlayerWithIni", str(nextPlayer))
 		for p in players:
@@ -1621,38 +1633,10 @@ def getNextPlayerNum():
 def changeIniColor(card):
 	mute()
 	myColor = me.getGlobalVariable("MyColor")
-
 	if playerNum == int(getGlobalVariable("PlayerWithIni")):
-		if myColor == PlayerColor[0]:
-			if card.controller == me:
-				card.switchTo("")
-			else:
-				remoteCall(card.controller, "remoteSwitchPhase", [card, "", ""])
-		elif myColor == PlayerColor[1]:
-			if card.controller == me:
-				card.switchTo("B")
-			else:
-				remoteCall(card.controller, "remoteSwitchPhase", [card, "B", ""])
-		elif myColor == PlayerColor[2]:
-			if card.controller == me:
-				card.switchTo("C")
-			else:
-				remoteCall(card.controller, "remoteSwitchPhase", [card, "C", ""])
-		elif myColor == PlayerColor[3]:
-			if card.controller == me:
-				card.switchTo("D")
-			else:
-				remoteCall(card.controller, "remoteSwitchPhase", [card, "D", ""])
-		elif myColor == PlayerColor[4]:
-			if card.controller == me:
-				card.switchTo("E")
-			else:
-				remoteCall(card.controller, "remoteSwitchPhase", [card, "E", ""])
-		elif myColor == PlayerColor[5]:
-			if card.controller == me:
-				card.switchTo("F")
-			else:
-				remoteCall(card.controller, "remoteSwitchPhase", [card, "F", ""])
+		card.switchTo(myColor)
+	else:
+		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
 
 def discard(card, x=0, y=0):
 	mute()
@@ -1770,11 +1754,11 @@ def toggleToken(card, tokenType):
 
 def playCardFaceDown(card, x=0, y=0):
 	mute()
-	myColor = me.getGlobalVariable("MyColor")
+	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 	card.isFaceUp = False
 	moveCardToDefaultLocation(card)
 	card.peek()
-	card.highlight = myColor
+	card.highlight = myHexColor
 	notify("{} prepares a Spell from their Spellbook by placing a card face down on the table.".format(me))
 
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
@@ -1850,12 +1834,6 @@ def createCard(group,x=0,y=0):
                         	notify("*** ILLEGAL *** - Spellbook is no longer valid")
                         notify("A card was created and was placed into {}'s spellbook.".format(me))
 
-def moveCard(model, x, y):
-	for c in table:
-		if c.model == model:
-			c.moveToTable(x, y)
-			return c
-	return table.create(model, x, y)
 
 #Check see if a card at x1,y1 overlaps a card at x2,y2
 #Both have size w, h
@@ -1939,7 +1917,7 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 	return 0
 
 def switchPhase(card, phase, phrase):
-	myColor = me.getGlobalVariable("MyColor")
+	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 	global playerNum
 	global currentPhase
 	mute()
@@ -1957,9 +1935,9 @@ def switchPhase(card, phase, phrase):
 		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if card.controller == me:
-				card.highlight = myColor
+				card.highlight = myHexColor
 			else:
-				remoteCall(card.controller, "remoteHighlight", [card, myColor])
+				remoteCall(card.controller, "remoteHighlight", [card, myHexColor])
 			notify("{} is done with the {}".format(me.name,card.Name))
 			return False
 		else:

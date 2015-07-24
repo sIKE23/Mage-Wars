@@ -2904,21 +2904,24 @@
 					<property name="Type" value="Phase" />
 				</alternate>
 		</card>
-		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="1st Player Token Red" size="InitativeMarkers">
+		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="Player Token Default" size="InitativeMarkers">
 			<property name="Type" value="Phase" />
-				<alternate name="1st Player Token Blue" type="B">
+				<alternate name="Player Token Red" type="1">
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="1st Player Token Green" type="C">
+				<alternate name="Player Token Blue" type="2">
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="1st Player Token Yellow" type="D">
+				<alternate name="Player Token Green" type="3">
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="1st Player Token Purple" type="E">
+				<alternate name="Player Token Yellow" type="4">
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="1st Player Token Grey" type="F">
+				<alternate name="Player Token Purple" type="5">
+					<property name="Type" value="Phase" />
+				</alternate>
+				<alternate name="Player Token Grey" type="6">
 					<property name="Type" value="Phase" />
 				</alternate>
 		</card>
