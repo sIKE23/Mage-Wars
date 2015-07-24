@@ -125,8 +125,8 @@ listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,Cont
 
 ##########################		 Card Sizes 			########################
 
-cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60}, 
-                   'Horizontal Cards': {'height': 60, 'width': 80, 'backHeight': 80, 'backWidth': 60}, 
+cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60},
+                   'Horizontal Cards': {'height': 60, 'width': 80, 'backHeight': 80, 'backWidth': 60},
                    'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130},
                    'PhaseMarkers': {'height': 20, 'width': 90, 'backHeight': 20, 'backWidth': 90},
                    'InitativeMarkers': {'height': 50, 'width': 50, 'backHeight': 50, 'backWidth': 50},
@@ -140,7 +140,7 @@ cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth
 #				"#f7d917", 		# Yellow 	R=247 G=217 B=23
 #				"#ae76f6",		# Purple R=174 G=118 B=246
 #				"#c0c0c0"]		# Grey R=192 G=192 B=192
-				
+
 playerColorDict = {
         1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":"ControlMarkerRed"}, #Red - R=222 G=40  B=39
         2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":"ControlMarkerBlue"}, #Blue - R=23  G=30  B=120
@@ -149,7 +149,7 @@ playerColorDict = {
         5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":"ControlMarkerPurple"}, #Purple - R=174 G=118 B=246
         6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":"ControlMarkerGrey"} #Grey - R=192 G=192 B=192
              }
-				
+
 boardSet = "GameBoard1.png"
 debugMode = False
 deckLoaded = False
@@ -183,10 +183,10 @@ def onGameStart():
 	global debugMode
 	#Set default map
 	defineRectangularMap(4,3,250)
-	
+
 	#set the Game Host (this player will be the owner of the Initative and Phase Markers)
 	setGlobalVariable("GameHostID", str((sorted([x._id for x in getPlayers()])[0])))
-	
+
 	# reset python Global Variables
 	for p in players:
 		remoteCall(p, "setClearVars",[])
@@ -202,10 +202,10 @@ def onGameStart():
 
         #set the goal
         setGlobalVariable("Goal",str({}))
-        
+
 	# bring up window to point to documentation
 	initializeGame()
-		
+
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
@@ -219,7 +219,7 @@ def onGameStart():
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 	else: # Players are now prompted to select a Mage Color
 		choosePlayerColor()
-	
+
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
 	if me.name == gameHost.name:
 			notify("Players have selected thier color, they should now load their Spellbooks.")
@@ -254,7 +254,7 @@ def moveRDA(card):
         zoneS = mapDict["tileSize"]
         rdaI,rdaJ = mapDict["RDA"]
         mapHeight = mapDict["Y"]
-        
+
         rowY = mapY + rdaJ*zoneS
         columnX = mapX + rdaI*zoneS
 
@@ -283,7 +283,7 @@ def moveRDA(card):
                 else:
                         x = columnX - zoneS + 100
                         y = mapY + mapHeight + 10 + 10
-                
+
         mapDict['DiceBoxLocation'] = (x,y)
         setGlobalVariable("Map",str(mapDict))
         card.moveToTable(x,y,True)
@@ -297,7 +297,7 @@ def onLoadDeck(player, groups):
 	global iniTokenCreated
 	global blankSpellbook
 	if bool(getGlobalVariable('DiceAndPhaseCardsDone')):
-                setUpDiceAndPhaseCards() 
+                setUpDiceAndPhaseCards()
                 setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
 		#if a deck was already loaded, reset the game
@@ -389,17 +389,17 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                         if cost == None:
                                                 notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
                                                 attacker.arrow(defender,False)
-                                                return          
+                                                return
                                 else:
                                         cost = attack.get('Cost')
                                         realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
                                         if realCost == None:
                                                 notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
                                                 attacker.arrow(defender,False)
-                                                return                                        	
-                                        elif realCost <= me.Mana: 
+                                                return
+                                        elif realCost <= me.Mana:
                                         	me.Mana -= realCost
-                                        	notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))   	
+                                        	notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))
                                         else:
                                                 notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
                                                 attacker.arrow(defender,False)
@@ -508,7 +508,7 @@ def flipCoin(group, x = 0, y = 0):
         notify("{} flips heads.".format(me))
     else:
         notify("{} flips tails.".format(me))
-        
+
 def choosePlayerColor():
 	mute()
 	colorsList = []
@@ -1655,7 +1655,7 @@ def discard(card, x=0, y=0):
 	detach(card)
 	card.moveTo(me.piles['Discard'])
 	notify("{} discards {}".format(me, card))
-	
+
 def obliterate(card, x=0, y=0):
 	mute()
 	if card.controller != me:
@@ -1707,7 +1707,7 @@ def defaultAction(card,x=0,y=0):
 
 def addToken(card, tokenType):
 	mute()
-	if "V'Tar Orb" in card.name: 
+	if "V'Tar Orb" in card.name:
 		if "Control Marker" in tokenType[0]:
 			if card.alternate == "":
 				card.switchTo('B')
@@ -1957,7 +1957,7 @@ def remoteHighlight(card, color):
 
 def remoteSwitchPhase(card, phase, phrase):
 	card.switchTo(phase)
-	
+
 def remoteDeleteCard(c):
       c.delete()
 
