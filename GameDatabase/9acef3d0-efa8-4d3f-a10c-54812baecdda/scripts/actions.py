@@ -1298,7 +1298,19 @@ for token in tokenList:
 def addControlMarker(card, x = 0, y = 0):
 	mute()
 	myControlMarkerColor = playerColorDict[int(me.getGlobalVariable("MyColor"))]["ControlMarker"]
-	addToken(card,myControlMarkerColor)
+	if "V'Tar Orb" in card.name:
+		if "Control Marker" in myControlMarkerColor[0]:
+			if card.alternate == "":
+				card.switchTo('B')
+				notify("{} flips V'Tar Orb On.".format(me))
+			for controlMarker in listControlMarkers:
+				if controlMarker in card.markers and controlMarker != myControlMarkerColor[0]:
+					card.markers[controlMarker] = 0
+					notify("{} removes a {} from the V'Tar Orb it is now neutral!".format(me,controlMarker[0]))
+					return
+				elif card.markers[myControlMarkerColor] == 0:
+					card.markers[myControlMarkerColor] = 1
+					notify("{} added a {} to V'Tar Orb and now controls it".format(me,myControlMarkerColor[0]))
 
 def addDamage(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -1708,19 +1720,6 @@ def defaultAction(card,x=0,y=0):
 
 def addToken(card, tokenType):
 	mute()
-	if "V'Tar Orb" in card.name:
-		if "Control Marker" in tokenType[0]:
-			if card.alternate == "":
-				card.switchTo('B')
-				notify("{} flips V'Tar Orb On.".format(me))
-			for controlMarker in listControlMarkers:
-				if controlMarker in card.markers and controlMarker != tokenType:
-					card.markers[controlMarker] = 0
-					notify("{} removes a {} from the V'Tar Orb it is now netural!".format(me,controlMarker[0]))
-				elif card.markers[tokenType] == 0:
-					card.markers[tokenType] = 1
-					notify("{} added a {} to V'Tar Orb and now controls it".format(me,tokenType[0]))
-				return
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:
