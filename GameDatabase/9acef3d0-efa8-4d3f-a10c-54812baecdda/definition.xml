@@ -162,12 +162,7 @@
 			<cardaction menu="Add Bleed Marker" default="False" shortcut="Alt+B" execute="addBleed" />
 			<cardaction menu="Add Corrode Marker" default="False" shortcut="Ctrl+C" execute="addCorrode" />
 			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple" />
-			<cardaction menu="Add Control Marker Blue" default="False" execute="addControlMarkerBlue" />
-			<cardaction menu="Add Control Marker Green" default="False" execute="addControlMarkerGreen" />
-			<cardaction menu="Add Control Marker Red" default="False" execute="addControlMarkerRed" />
-			<cardaction menu="Add Control Marker Yellow" default="False" execute="addControlMarkerYellow" />
-			<cardaction menu="Add Control Marker Purple" default="False" execute="addControlMarkerPurple" />
-			<cardaction menu="Add Control Marker Grey" default="False" execute="addControlMarkerGrey" />
+			<cardaction menu="Add a Control Marker" default="False" shortcut="Alt+O" execute="addControlMarker" />
 			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
 			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
 			<cardaction menu="Add Rage Marker" default="False" shortcut="Alt+E" execute="addRage" />
@@ -195,12 +190,7 @@
 			<cardaction menu="Remove Bleed Marker" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
 			<cardaction menu="Remove Corrode Marker" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
 			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
-			<cardaction menu="Remove Control Marker Blue" default="False" execute="removeControlMarkerBlue" />
-			<cardaction menu="Remove Control Marker Green" default="False" execute="removeControlMarkerGreen" />
-			<cardaction menu="Remove Control Marker Red" default="False" execute="removeControlMarkerRed" />
-			<cardaction menu="Remove Control Marker Yellow" default="False" execute="removeControlMarkerYellow" />
-			<cardaction menu="Remove Control Marker Purple" default="False" execute="removeControlMarkerPurple" />
-			<cardaction menu="Remove Control Marker Grey" default="False" execute="removeControlMarkerGrey" />
+			<cardaction menu="Remove Control Marker" default="False" shortcut="Ctrl+Alt+D" execute="removeControlMarker" />
 			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
 			<cardaction menu="Remove Rage Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />

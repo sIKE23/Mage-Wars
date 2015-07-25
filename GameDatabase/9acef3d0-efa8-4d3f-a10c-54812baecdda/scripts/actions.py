@@ -142,12 +142,12 @@ cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth
 #				"#c0c0c0"]		# Grey R=192 G=192 B=192
 
 playerColorDict = {
-        1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":"ControlMarkerRed"}, #Red - R=222 G=40  B=39
-        2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":"ControlMarkerBlue"}, #Blue - R=23  G=30  B=120
-        3 : {"PlayerColor":"Green", "Hex":"#01603e", "ControlMarker":"ControlMarkerGreen"}, #Green - R=1   G=96  B=62
-        4 : {"PlayerColor":"Yellow", "Hex":"#f7d917", "ControlMarker":"ControlMarkerYellow"}, #Yellow - R=247 G=217 B=23
-        5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":"ControlMarkerPurple"}, #Purple - R=174 G=118 B=246
-        6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":"ControlMarkerGrey"} #Grey - R=192 G=192 B=192
+        1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":ControlMarkerRed}, #Red - R=222 G=40  B=39
+        2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":ControlMarkerBlue}, #Blue - R=23  G=30  B=120
+        3 : {"PlayerColor":"Green", "Hex":"#01603e", "ControlMarker":ControlMarkerGreen}, #Green - R=1   G=96  B=62
+        4 : {"PlayerColor":"Yellow", "Hex":"#f7d917", "ControlMarker":ControlMarkerYellow}, #Yellow - R=247 G=217 B=23
+        5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":ControlMarkerPurple}, #Purple - R=174 G=118 B=246
+        6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":ControlMarkerGrey} #Grey - R=192 G=192 B=192
              }
 
 boardSet = "GameBoard1.png"
@@ -1156,7 +1156,7 @@ def getTextTraitValue(card, TraitName):
 
 def mageStatus():
 	mute()
-	if not me.Damage >= me.Life:
+	if not me.Damage >= me.Life or debugMode:
 		return
 	for c in table:
 		if c.Type == "Mage" and c.controller == me:
@@ -1271,10 +1271,6 @@ tokenList=['Armor',
            'Bleed',
            'Burn',
            'Cripple',
-           'ControlMarkerBlue',
-           'ControlMarkerGreen',
-           'ControlMarkerRed',
-           'ControlMarkerYellow',
            'Corrode',
            'Disable',
            'Daze',
@@ -1298,6 +1294,11 @@ tokenList=['Armor',
 for token in tokenList:
         exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')
         exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
+
+def addControlMarker(card, x = 0, y = 0):
+	mute()
+	myControlMarkerColor = playerColorDict[int(me.getGlobalVariable("MyColor"))]["ControlMarker"]
+	addToken(card,myControlMarkerColor)
 
 def addDamage(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -1713,12 +1714,13 @@ def addToken(card, tokenType):
 				card.switchTo('B')
 				notify("{} flips V'Tar Orb On.".format(me))
 			for controlMarker in listControlMarkers:
-				if controlMarker in card.markers and controlMarker != tokenType[0]:
+				if controlMarker in card.markers and controlMarker != tokenType:
 					card.markers[controlMarker] = 0
-					notify("{} removes a {} from the V'Tar Orb".format(me,controlMarker[0]))
-			card.markers[tokenType] = 1
-			notify("{} added a {} to V'Tar Orb and now controls it".format(me,tokenType[0]))
-			return
+					notify("{} removes a {} from the V'Tar Orb it is now netural!".format(me,controlMarker[0]))
+				elif card.markers[tokenType] == 0:
+					card.markers[tokenType] = 1
+					notify("{} added a {} to V'Tar Orb and now controls it".format(me,tokenType[0]))
+				return
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:

@@ -12,7 +12,7 @@ def checkDominationVictory():
         victoriousPlayers = []
         for player in players:
                 mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
-                vtar = mage.markers[VTar] + 3*mage.markers[VTar3] + 5*mage.markers[VTar5]
+                vtar = mage.markers[VTar]
                 if vtar >= goal: victoriousPlayers.append([player,vtar])
         soleWinner = None
         for player in victoriousPlayers:
