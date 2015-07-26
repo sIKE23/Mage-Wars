@@ -930,7 +930,13 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                                                 "{} heals {} for {} damage!".format(attacker.name,defender.name,{}))
                 else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
                 return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
-
+		if "V'Tar Orb" in defender.name and defender.controller == me: 
+			addControlMarker(defender)
+			return
+		else: 
+			remoteCall(defender.controller, "addControlMarker", [card, "myColor", ""])
+			return
+		
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
         if defender.markers[VoltaricON] and actualDmg:#Voltaric Shield
