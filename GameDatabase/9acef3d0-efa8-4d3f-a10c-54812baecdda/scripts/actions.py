@@ -210,7 +210,7 @@ def onGameStart():
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
-		setGlobalVariable("MWPlayerDict",str({me._id : 1}))
+		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		#	players[0].setActivePlayer()
 		setUpDiceAndPhaseCards()
@@ -1070,7 +1070,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 	else:
 		choiceList = ['Yes', 'No']
 		colorsList = ['#0000FF', '#FF0000']
-		choice = askChoice("{}".format(notifystr), choiceList, colorsList)#Bookmark
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
 		#whisper("{} {}".format(me, notifystr))
 		if choice == 1 and card1.isFaceUp:
 			me.Mana -= upKeepCost
@@ -1709,8 +1709,8 @@ def defaultAction(card,x=0,y=0):
 				flipcard(card, x, y)
 
 				if not getSetting('attackChangeNotified',False) and not payForAttack:
-                                        whisper('Note: Mana for {} will be paid when you declare an attack using the Battle Calculator, or if you double-click on {} again.'.format(card,card))
-                                        setSetting('attackChangeNotified',True)
+					whisper('Note: Mana for {} will be paid when you declare an attack using the Battle Calculator, or if you double-click on {} again.'.format(card,card))
+					setSetting('attackChangeNotified',True)
 			elif card.Type == "Enchantment": revealEnchantment(card)
 			else: castSpell(card)
 
@@ -1769,57 +1769,51 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         mute()
         mapDict = eval(getGlobalVariable('Map'))
         mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+        debug("\n" + str(mwPlayerDict))
         playerNum = mwPlayerDict[me._id]["PlayerNum"]
+        debug(str(playerNum))
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
         else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
         if mapDict:
-                iRDA,jRDA = mapDict.get("RDA",(2,2))
-                zoneArray = mapDict.get('zoneArray')
-                cardType = card.type
-                if cardType == 'Internal': return
-                mapX,mapW = mapDict.get('x'),mapDict.get('X')
-                if cardType in ['DiceRoll','Phase']:
-                        moveRDA(card)
-                        return
-                for i in range(len(zoneArray)):
-                        for j in range(len(zoneArray[0])):
-                                zone = zoneArray[i][j]
-                                if zone and zone.get('startLocation') == str(playerNum):
-                                        zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-                                        if cardType == 'Mage':
-                                                x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
-                                                y = (zoneY if j < mapDict.get('J')/2 else zoneY + zoneS - cardH)
-                                        elif cardType == 'Magestats':
-                                                x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
-                                                y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
-                                        else:
-                                                x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
-                                                y = (zoneY+cardH+cardH*int(returning) if j < mapDict.get('J')/2 else zoneY+zoneS-2*cardH-cardH*int(returning))
-                                                dVector = ((-1,0) if i<mapDict.get('I')/2 else (1,0))
-                                                x,y = splay(x,y,dVector)
+		        debug(str(mapDict))
+		        iRDA,jRDA = mapDict.get("RDA",(2,2))
+		        zoneArray = mapDict.get('zoneArray')
+		        cardType = card.type
+		        if cardType == 'Internal': return
+		        mapX,mapW = mapDict.get('x'),mapDict.get('X')
+		        if cardType in ['DiceRoll','Phase']:
+		        	moveRDA(card)
+		        	return
+		        for i in range(len(zoneArray)):
+		            	for j in range(len(zoneArray[0])):
+			            		zone = zoneArray[i][j]
+			            		if zone and zone.get('startLocation') == str(playerNum):
+				                    	zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
+				                    	if cardType == 'Mage':
+					                    		x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
+					                    		y = (zoneY if j < mapDict.get('J')/2 else zoneY + zoneS - cardH)
+				                    	elif cardType == 'Magestats':
+					                    		x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
+					                    		y = (zoneY if j < mapDict.get('J')/2 else zoneY+zoneS-cardH)
+				                    	else:
+					                    		x = (zoneX - cardW if i < mapDict.get('I')/2 else mapX + mapW)
+					                    		y = (zoneY+cardH+cardH*int(returning) if j < mapDict.get('J')/2 else zoneY+zoneS-2*cardH-cardH*int(returning))
+					                    		dVector = ((-1,0) if i<mapDict.get('I')/2 else (1,0))
+					                    		x,y = splay(x,y,dVector)
         card.moveToTable(x,y,True)
 
 def splay(x,y,dVector = (1,0)):
-        """Returns coordinates x,y unless there is already a card at those coordinates,
-        in which case it searches for the next open position in the direction defined by dVector."""
-        dx,dy = dVector
-        while True:
-                occupied = False
-                w,h = 100,100
-                for c in table:
-                        if c.controller == me:
-                                cx,cy = c.position
-                                if cx == x and cy == y:
-                                        if not c.isFaceUp: w,h = cardSizes[c.size()]['backWidth'],cardSizes[c.size()]['backHeight']
-                                        else: w,h = cardSizes[c.size()]['width'],cardSizes[c.size()]['height']
-                                        occupied = True
-                                        break
-                if occupied:
-                        x += dx*w
-                        y += dy*h
-                else: break
-        return (x,y)
+	"""Returns coordinates x,y unless there is already a card at those coordinates,
+	in which case it searches for the next open position in the direction defined by dVector.
+	Now using recursion!"""
+	dx,dy = dVector
+	for c in table:
+		if c.controller == me and (x,y) == c.position:
+			wKey,hKey = {True: ("width","height"), False: ("backWidth","backHeight")}[c.isFaceUp]
+			w,h = cardSizes[c.size()][wKey],cardSizes[c.size()][hKey]
+			return splay(x+dx*w,y+dy*h,dVector)
+	return x,y
 
 def debug(str):
 	mute()
