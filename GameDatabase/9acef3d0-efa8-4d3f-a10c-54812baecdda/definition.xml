@@ -60,9 +60,10 @@
 		<globalvariable name="ColorsChosen" value=""/>
 		<globalvariable name="SetupDone" value=""/>
 		<globalvariable name="OppIniRoll" value=""/>
-		<globalvariable name="IniAllDone" value=""/>
-		<globalvariable name="GameReset" value=""/>
-		<globalvariable name="DiceAndPhaseCardsDone" value="False"/>
+		<globalvariable name="PlayerWithIni" value=""/>
+		<globalvariable name="PlayersIDList" value=""/>
+		<globalvariable name="MWPlayerDict" value=""/>
+		<globalvariable name="GameHost" value=""/>
 		<globalvariable name="DoneWithPhase" value=""/>
 		<globalvariable name="GameIsOver" value=""/>
 		<globalvariable name="attachDict" value=""/>
@@ -71,8 +72,6 @@
 		<globalvariable name="turnEventList" value=""/>
 		<globalvariable name="Map" value=""/>
 		<globalvariable name="RoundNumber" value=""/>
-		<globalvariable name="PlayerWithIni" value=""/>
-		<globalvariable name="GameHost" value=""/>
 		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
 		<globalvariable name="Goal" value=""/>
 	</globalvariables>

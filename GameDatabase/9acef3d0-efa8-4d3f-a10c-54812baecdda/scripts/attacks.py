@@ -831,6 +831,10 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 notify('Error: invalid attack format - no dice found')
                 return
         damageRoll,effectRoll = rollDice(dice)
+        if "V'Tar Orb" in defender.name and sum(damageRoll) != 0: #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
+                notify("{} scores a Hit the V'Tar Orb!".format(attacker.name))
+                remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
+                return
         setGlobalVariable("avoidAttackTempStorage","Hit")
         interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
 
@@ -930,13 +934,6 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                                                 "{} heals {} for {} damage!".format(attacker.name,defender.name,{}))
                 else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
                 return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
-		if "V'Tar Orb" in defender.name and defender.controller == me: 
-			addControlMarker(defender)
-			return
-		else: 
-			remoteCall(defender.controller, "addControlMarker", [card, "myColor", ""])
-			return
-		
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
         if defender.markers[VoltaricON] and actualDmg:#Voltaric Shield

@@ -153,7 +153,6 @@ playerColorDict = {
 boardSet = "GameBoard1.png"
 debugMode = False
 deckLoaded = False
-iniTokenCreated = False
 blankSpellbook = False
 currentPhase = ""
 discountsUsed = [ ]
@@ -162,7 +161,6 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 gameNum = 1
-playerNum = 0
 Magebind = ""
 mageRevealCost = ""
 infostr = ""
@@ -179,7 +177,6 @@ def onTableLoad():
 
 def onGameStart():
 	mute()
-	global playerNum
 	global debugMode
 	#Set default map
 	defineRectangularMap(4,3,250)
@@ -200,29 +197,40 @@ def onGameStart():
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
 
-        #set the goal
-        setGlobalVariable("Goal",str({}))
+	#set the goal
+	setGlobalVariable("Goal",str({}))
 
 	# bring up window to point to documentation
-	initializeGame()
+	documentationReminder()
+	#new Player Order
+ 	setGlobalVariable("PlayersIDList",str([]))
+ 	setGlobalVariable("MWPlayerDict",str({}))
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
-		playerNum = 2
-		me.setGlobalVariable("MyColor", str(5)) #Purple for testing
-		CreateIniToken()
+		setGlobalVariable("MWPlayerDict",str({me._id : 1}))
+		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		#	players[0].setActivePlayer()
-		setGlobalVariable("InitiativeDone", "True") #slowly getting this stuff cleaned up, the line below should eventually go away
-		setGlobalVariable("IniAllDone", "x")
+		setUpDiceAndPhaseCards()
+		setGlobalVariable("InitiativeDone","True")
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
-	else: # Players are now prompted to select a Mage Color
+	else:
 		choosePlayerColor()
+		if me.name == gameHost.name:
+			PlayerSetup()
+			AskDiceRollArea()
+			# the Game Host now sets up the Initative, Phase, and Roll Dice Area
+			setUpDiceAndPhaseCards()
+			notify("Players will now roll for initiative.")
+			rollForInitative()
+			notify("Game setup is complete! Players should now load their Spellbooks.")
 
-	gameHost = Player(int(getGlobalVariable("GameHostID")))
-	if me.name == gameHost.name:
-			notify("Players have selected thier color, they should now load their Spellbooks.")
+###########################################################################
+##########	################    OnGameStart Event Functions   ###########################
+###########################################################################
 
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
@@ -231,18 +239,150 @@ def defineRectangularMap(I,J,tilesize):
 	mapDict["RDA"] = (2,2)
 	setGlobalVariable("Map", str(mapDict))
 
+def PlayerSetup():
+	mute()
+	playersIDList = eval(getGlobalVariable("PlayersIDList"))
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+
+	#creates a list of PlayerID's weeding out any Spectators who joined in the game lobby
+	if eval(getGlobalVariable("PlayersIDList")) == []:
+		for p in getPlayers():
+			playersIDList.append(p._id)
+			playersIDList.sort()
+			setGlobalVariable("PlayersIDList",str(playersIDList))
+	#creates a dictionary where { key is PlayerID : { PlayerNum, PlayerName }}
+	playersIDList = eval(getGlobalVariable("PlayersIDList"))
+	for i,j in range(len(playersIDList)), playersIDList:
+		mwPlayerDict[j] = {"PlayerNum": (i+1),"PlayerName":Player(j).name}
+		setGlobalVariable("MWPlayerDict",str(mwPlayerDict))
+
+def choosePlayerColor():
+	mute()
+	colorsList = []
+	colorsListHex = []
+	#debugMode = eval(me.getGlobalVariable("DebugMode"))
+	for num in playerColorDict:
+			colorsListHex.append(playerColorDict[num]["Hex"])
+			colorsList.append(playerColorDict[num]["PlayerColor"])
+	if debugMode or len(getPlayers()) > 0:
+		while (True):
+			choice = askChoice("Pick a color:", colorsList, colorsListHex)
+			colorsChosen = getGlobalVariable("ColorsChosen")
+			if colorsChosen == "":	#we're the first to pick
+				setGlobalVariable("ColorsChosen", str(choice))
+				me.setGlobalVariable("MyColor", str(choice))
+				break
+			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
+				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
+				me.setGlobalVariable("MyColor", str(choice))
+				break
+			else:	#someone else took our choice
+				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+
+def AskDiceRollArea():
+	mute()
+	notify("{} is choosing where the Dice Roll Area will be placed.".format(me))
+	choiceList = ['Side', 'Bottom']
+	colorsList = ['#FF0000', '#0000FF']
+	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Bottom of the Gameboard?", choiceList, colorsList)
+	if choice == 0 or choice == 1:
+		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
+	else:
+		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
+                setGlobalVariable("DiceRollAreaPlacement", "Bottom")
+
 def setUpDiceAndPhaseCards():
 	mute()
 	tableSetup = getGlobalVariable("TableSetup")
+	myColor = me.getGlobalVariable("MyColor")
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
 	if tableSetup == "False" and me.name == gameHost.name:
-                # set Dice Rolling Area, Initative, and Phase Marker Card location
-                AskDiceRollArea()
-                card = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #dice field
-                card.anchor = (True)
+                RDA = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #Roll Dice Area
+                RDA.anchor = (True)
+                init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
+                init.anchor = (True)
+                init.switchTo(myColor)
+                currentPhase = "Planning"
+                phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
+                phase.switchTo("Planning") #skips upkeep for first turn
+                phase.anchor = (True)
                 for c in table:
                         if c.type in ['DiceRoll','Phase']: moveRDA(c)
-		setGlobalVariable("TableSetup", True)
+	setGlobalVariable("TableSetup", True)
+
+def rollForInitative():
+	mute()
+	effect = 0
+	rollForPlayer = 0
+	for p in getPlayers():
+		notify("Automatically rolling initiative for {}...".format(p.name))
+		effect = rnd(1,12)
+		effect = 3
+		rollForPlayer += 1
+		notify("{} rolled a {} for initiative".format(p.name, effect))
+		myRollStr = (str(p._id) + ":" + str(effect) + ";")
+		setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
+		update()
+
+	#all initiatives rolled, see who had highest
+	if getGlobalVariable("OppIniRoll").count(";") == len(getPlayers()):
+		rollString = getGlobalVariable("OppIniRoll")
+		rollStringList = rollString.split(";")
+		max = 0
+		timesMaxRolled = 0
+		victoriousPlayerNum = 0
+		for roll in rollStringList:
+			if roll == "":
+				continue
+			temp = roll.split(":")
+			if int(temp[1]) > max:
+				max = int(temp[1])
+				timesMaxRolled = 1
+				victoriousPlayerID = int(temp[0])
+			elif int(temp[1]) == max:
+				timesMaxRolled += 1
+
+		# we got a tie in there somewhere. determine winner randomly from high rollers
+		if timesMaxRolled > 1:
+			notify("High roll tied! Randomly determining initiative...")
+			highRollerPlayerNums = []
+			for roll in rollStringList:
+				if roll == "":
+					continue
+				temp = roll.split(":")
+				if int(temp[1]) == max:
+					highRollerPlayerNums.append(int(temp[0]))
+			victoriousPlayerID = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
+			debug(str(victoriousPlayerID))
+
+		setGlobalVariable("InitiativeDone", "True")
+		remoteCall(Player(victoriousPlayerID), "AskInitiative", [victoriousPlayerID])
+	else:
+		notify("Something unexpected happened and the automation for Initative has failed! Setting the game host as the player to choose Initative!")
+		gameHost = Player(int(getGlobalVariable("GameHostID")))
+		remoteCall(gameHost, "AskInitiative", [1])
+
+def AskInitiative(playerID):
+	mute()
+	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+	notify("{} has won the Initative Roll and is chosing whether or not to go first.".format(me))
+	choiceList = ['Yes', 'No']
+	colorsList = ['#FF0000', '#0000FF']
+	choice = askChoice("You have won initiative! Would you like to go first?", choiceList, colorsList)
+	if choice == 1:
+		notify("{} has elected to go first!".format(me))
+	else:
+		for p in getPlayers():
+			if not me._id == p._id and len(getPlayers()) == 2:
+				playerID = p._id
+			else:
+				playerNum = rnd(1,len(getPlayers()) - 1) # this is still not right, need to think on it more, have to exclude the p._id ini roll winner somehow as he has choosen not to go first in a multiplayer game
+				if mwPlayerDict[p._id]["PlayerNum"] == playerNum: playerID = p._id
+		notify("{} has elected NOT to go first! {} has the starting initiative.".format(me, Player(playerID).name))
+	setGlobalVariable("PlayerWithIni", str(playerID))
+	init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
+	init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
 
 def moveRDA(card):
         """Moves the dice roll area/initiative/phase marker to the appropriate area"""
@@ -288,17 +428,19 @@ def moveRDA(card):
         setGlobalVariable("Map",str(mapDict))
         card.moveToTable(x,y,True)
 
+def setClearVars():
+	global deckLoaded
+	global gameNum
+	if gameNum == 1: return
+	deckLoaded = False
+
 def onLoadDeck(player, groups):
 	mute()
 	global gameNum
 	global deckLoaded
 	global debugMode
 	global playerNum
-	global iniTokenCreated
 	global blankSpellbook
-	if bool(getGlobalVariable('DiceAndPhaseCardsDone')):
-                setUpDiceAndPhaseCards()
-                setGlobalVariable('DiceAndPhaseCardsDone','True')
 	if player == me:
 		#if a deck was already loaded, reset the game
 		if deckLoaded:
@@ -310,18 +452,6 @@ def onLoadDeck(player, groups):
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
 			deckLoaded = True
 			mageSetup()
-			if len(getGlobalVariable("SetupDone")) != len(getPlayers()) - 1: #we're not the last done with setup
-				notify("Debug: 3")
-				playerNum = len(getGlobalVariable("SetupDone")) + 1
-				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
-				setGlobalVariable("SetupDone", getGlobalVariable("SetupDone") + "x")
-			else:	#other guy is done too
-				playerNum = len(getGlobalVariable("SetupDone")) + 1
-				setGlobalVariable("P" + str(playerNum) + "Name", me.name)
-				if not getGlobalVariable("IniAllDone") == 'x':
-					for p in players:
-						remoteCall(p, "rollForInitative", [])
-					notify("All players have set up. Please roll for initiative.")
 		else:
 			#notify and delete deck
 			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
@@ -422,66 +552,7 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         elif fromCard.Type !="Enchantment":
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
                                 fromCard.arrow(toCard,False)
-def setClearVars():
-	global deckLoaded
-	global iniTokenCreated
-	global gameNum
-	if gameNum == 1: return
-	deckLoaded = False
-	iniTokenCreated = False
 
-def rollForInitative():
-	mute()
-	notify("Automatically rolling initiative for {}...".format(me))
-	gameHost = Player(int(getGlobalVariable("GameHostID")))
-	if not me.name == gameHost.name: return
-	else:
-		effect = 0
-		rollForPlayer = 0
-		for p in players:
-			effect = rnd(1,12)
-			rollForPlayer += 1
-			notify("{} rolled a {} for initiative".format(p.name, effect))
-			myRollStr = (str(rollForPlayer) + ":" + str(effect) + ";")
-			setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
-			update()
-
-	#all initiatives rolled, see who had highest
-	if getGlobalVariable("OppIniRoll").count(";") == len(getPlayers()):
-		rollString = getGlobalVariable("OppIniRoll")
-		rollStringList = rollString.split(";")
-		max = 0
-		timesMaxRolled = 0
-		victoriousPlayerNum = 0
-		for roll in rollStringList:
-			if roll == "":
-				continue
-			temp = roll.split(":")
-			if int(temp[1]) > max:
-				max = int(temp[1])
-				timesMaxRolled = 1
-				victoriousPlayerNum = int(temp[0])
-			elif int(temp[1]) == max:
-				timesMaxRolled += 1
-
-		# we got a tie in there somewhere. determine winner randomly from high rollers
-		if timesMaxRolled > 1:
-			notify("High roll tied! Randomly determining initiative...")
-			highRollerPlayerNums = []
-			for roll in rollStringList:
-				if roll == "":
-					continue
-				temp = roll.split(":")
-				if int(temp[1]) == max:
-					highRollerPlayerNums.append(int(temp[0]))
-			victoriousPlayerNum = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
-			debug(str(victoriousPlayerNum))
-
-		setGlobalVariable("InitiativeDone", "True")
-		for p in players:
-			remoteCall(p, "AskInitiative", [victoriousPlayerNum])
-	else:
-		notify("The Automated Roll for Initative Failed! Please restart the game!")
 
 ############################################################################
 ######################		Group Actions			########################
@@ -508,29 +579,6 @@ def flipCoin(group, x = 0, y = 0):
         notify("{} flips heads.".format(me))
     else:
         notify("{} flips tails.".format(me))
-
-def choosePlayerColor():
-	mute()
-	colorsList = []
-	colorsListHex = []
-	#debugMode = eval(me.getGlobalVariable("DebugMode"))
-	for num in playerColorDict:
-			colorsListHex.append(playerColorDict[num]["Hex"])
-			colorsList.append(playerColorDict[num]["PlayerColor"])
-	if debugMode or len(getPlayers()) > 0:
-		while (True):
-			choice = askChoice("Pick a color:", colorsList, colorsListHex)
-			colorsChosen = getGlobalVariable("ColorsChosen")
-			if colorsChosen == "":	#we're the first to pick
-				setGlobalVariable("ColorsChosen", str(choice))
-				me.setGlobalVariable("MyColor", str(choice))
-				break
-			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
-				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
-				me.setGlobalVariable("MyColor", str(choice))
-				break
-			else:	#someone else took our choice
-				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
 
 def mageSetup():
 	#set initial health and channeling values
@@ -638,61 +686,6 @@ def setGameBoard(bset):
 	boardSet = bset
 	table.setBoardImage("GameBoards\\{}".format(boardSet))
 
-def AskInitiative(pNum):
-	global playerNum
-	if playerNum != pNum:
-		return
-	mute()
-	notify("{} is choosing whether or not to go first.".format(me))
-	choiceList = ['Yes', 'No']
-	colorsList = ['#FF0000', '#0000FF']
-	choice = askChoice("You have won initiative! Would you like to go first?", choiceList, colorsList)
-	if choice == 1:
-		notify("{} has elected to go first!".format(me))
-		CreateIniToken()
-		players[0].setActivePlayer()
-	else:
-		#randomly determine who else should go first (in a 2 player game, this will always choose the other player)
-		pNum = rnd(1, len(getPlayers()) - 1)
-		notify("{} has elected NOT to go first! {} has first initiative.".format(me, players[pNum]))
-		remoteCall(players[pNum], "CreateIniToken", [])
-		players[pNum].setActivePlayer()
-
-def AskDiceRollArea():
-	mute()
-	notify("{} is choosing where the Dice Roll Area will be placed.".format(me))
-	choiceList = ['Side', 'Bottom']
-	colorsList = ['#FF0000', '#0000FF']
-	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Bottom of the Gameboard?", choiceList, colorsList)
-	if choice == 0 or choice == 1:
-		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
-	else:
-		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
-                setGlobalVariable("DiceRollAreaPlacement", "Bottom")
-
-def CreateIniToken():
-	global gameStartTime
-	global iniTokenCreated
-	global currentPhase
-	myColor = me.getGlobalVariable("MyColor")
-	mute()
-	if not iniTokenCreated:
-		iniTokenCreated = True
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
-		init.anchor = (True)
-		init.switchTo(myColor)
-		setGlobalVariable("IniAllDone", "x")
-		setGlobalVariable("RoundNumber", "1")
-		setGlobalVariable("PlayerWithIni", str(playerNum))
-		gameStartTime = time.time()
-		currentPhase = "Planning"
-                card = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-                card.switchTo("Planning") #skips upkeep for first turn
-                card.anchor = (True)
-		for c in table:
-			if not c.special or not c.special == "Scenario": remoteCall(c.controller,'moveCardToDefaultLocation',[c])
-		notify("Setup is complete!")
-
 def nextPhase(group, x=-360, y=-150):
         mute()
 	global roundTimes
@@ -701,7 +694,7 @@ def nextPhase(group, x=-360, y=-150):
 	if gameIsOver:	#don't advance phase once the game is done
 		notify("Game is Over!")
 		return
-	if getGlobalVariable("IniAllDone") == "": # Player setup is not done yet.
+	if getGlobalVariable("InitiativeDone") == "False": # Player setup is not done yet.
 		return
 	mageStatus()
 	card = None
@@ -773,8 +766,8 @@ def advanceTurn():
 			for p2 in players:
 				remoteCall(p2, "setActiveP", [p])
 
-def setActiveP(p):
-	p.setActivePlayer()
+#def setActiveP(p):
+#	p.setActivePlayer()
 
 def resetMarkers():
 	mute()
@@ -1178,7 +1171,7 @@ def reportDeath(deadmage):
 
 def checkMageDeath(player, counter, oldvalue):
 	global currentPhase
-	if getGlobalVariable("IniAllDone") == "x" and (counter.name == "Damage" or counter.name == "Life"):
+	if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
 		if me.Damage >= me.Life and currentPhase == "Actions":
 			if not confirm("                       Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?"):
 				mageStatus()
@@ -1297,20 +1290,29 @@ for token in tokenList:
 
 def addControlMarker(card, x = 0, y = 0):
 	mute()
-	myControlMarkerColor = playerColorDict[int(me.getGlobalVariable("MyColor"))]["ControlMarker"]
-	if "V'Tar Orb" in card.name:
-		if "Control Marker" in myControlMarkerColor[0]:
-			if card.alternate == "":
-				card.switchTo('B')
-				notify("{} flips V'Tar Orb On.".format(me))
-			for controlMarker in listControlMarkers:
-				if controlMarker in card.markers and controlMarker != myControlMarkerColor[0]:
-					card.markers[controlMarker] = 0
-					notify("{} removes a {} from the V'Tar Orb it is now neutral!".format(me,controlMarker[0]))
-					return
-				elif card.markers[myControlMarkerColor] == 0:
-					card.markers[myControlMarkerColor] = 1
-					notify("{} added a {} to V'Tar Orb and now controls it".format(me,myControlMarkerColor[0]))
+	addControlMarker(me,card)
+
+def placeControlMarker(attacker,defender):
+	mute()
+	attackerControlMarkerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
+	notify("1: attackerControlMarkerColor: {}".format(attackerControlMarkerColor))
+	if "Control Marker" in attackerControlMarkerColor[0]:
+		if defender.alternate == "":
+			defender.switchTo('B')
+			notify("{} flips V'Tar Orb On.".format(me))
+		for controlMarker in listControlMarkers:
+			notify("2: controlMarker: {}".format(controlMarker))
+			notify("3: defender.markers: {}".format(defender.markers))
+			if controlMarker in defender.markers and controlMarker[0] != attackerControlMarkerColor[0]:
+				notify("4: controlMarker: {}".format(controlMarker))
+				defender.markers[controlMarker] = 0
+				notify("{} removes a {} from the V'Tar Orb it is now neutral!".format(attacker.name,controlMarker[0]))
+				return
+			elif defender.markers[attackerControlMarkerColor] == 0:
+				notify("5: attackerControlMarkerColor: {}".format(attackerControlMarkerColor))
+				defender.markers[attackerControlMarkerColor] = 1
+				notify("{} added a {} to V'Tar Orb and now controls it".format(attacker.name,attackerControlMarkerColor[0]))
+				return
 
 def addDamage(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -1646,7 +1648,8 @@ def getNextPlayerNum():
 def changeIniColor(card):
 	mute()
 	myColor = me.getGlobalVariable("MyColor")
-	if playerNum == int(getGlobalVariable("PlayerWithIni")):
+	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+	if mwPlayerDict[me._id]["PlayerNum"] == int(getGlobalVariable("PlayerWithIni")):
 		card.switchTo(myColor)
 	else:
 		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
@@ -1765,6 +1768,8 @@ def playCardFaceDown(card, x=0, y=0):
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
         mute()
         mapDict = eval(getGlobalVariable('Map'))
+        mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+        playerNum = mwPlayerDict[me._id]["PlayerNum"]
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
         else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
@@ -1886,7 +1891,7 @@ def playSoundFX(sound):
 	else:
 		playSound(sound)
 
-def initializeGame():
+def documentationReminder():
     mute()
     #### LOAD UPDATES
     v1, v2, v3, v4 = gameVersion.split('.')  ## split apart the game's version number
@@ -1919,7 +1924,8 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 
 def switchPhase(card, phase, phrase):
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
-	global playerNum
+	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+	playerNum = mwPlayerDict[me._id]["PlayerNum"]
 	global currentPhase
 	mute()
 	currentPhase = phase
@@ -2100,7 +2106,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
                 #Discounts that only apply when your mage casts the spell
                 if (mageCast and
                     ((cName == "Arcane Ring" and sType != "Enchantment" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
-                     (cName == "Enchanter's Ring" and target and target.controller == card.controller and sType == "Enchantment") or
+                     (cName == "Enchanter's Ring" and target and target.controller == card.controller and target.type == "Creature" and sType == "Enchantment") or
                      (cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
                      (cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
                      (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
