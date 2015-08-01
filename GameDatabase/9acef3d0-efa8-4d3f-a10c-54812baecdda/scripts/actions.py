@@ -1294,12 +1294,22 @@ def addControlMarker(card, x = 0, y = 0):
 
 def placeControlMarker(attacker,defender):
 	mute()
+	#First, remove all control markers from defender. Then add the appropriate control marker
+
 	attackerControlMarkerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
 	notify("1: attackerControlMarkerColor: {}".format(attackerControlMarkerColor))
 	if "Control Marker" in attackerControlMarkerColor[0]:
+		#If orb is off, turn it on
 		if defender.alternate == "":
 			defender.switchTo('B')
 			notify("{} flips V'Tar Orb On.".format(me))
+		#Remove all control markers from the orb
+		for m in listControlMarkers:
+			defender.markers[m] = 0
+		#Add a marker of attacker's color to orb. Text should make sense even if orb is already controlled by attacker.
+		defender.markers[attackerControlMarkerColor] = 1
+		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,attackerControlMarkerColor[0]))
+	"""
 		for controlMarker in listControlMarkers:
 			notify("2: controlMarker: {}".format(controlMarker))
 			notify("3: defender.markers: {}".format(defender.markers))
@@ -1313,7 +1323,7 @@ def placeControlMarker(attacker,defender):
 				defender.markers[attackerControlMarkerColor] = 1
 				notify("{} added a {} to V'Tar Orb and now controls it".format(attacker.name,attackerControlMarkerColor[0]))
 				return
-
+	"""
 def addDamage(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if "Mage" in card.Type and card.controller == me:
@@ -1771,12 +1781,10 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
         debug("\n" + str(mwPlayerDict))
         playerNum = mwPlayerDict[me._id]["PlayerNum"]
-        debug(str(playerNum))
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
         else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
         if mapDict:
-		        debug(str(mapDict))
 		        iRDA,jRDA = mapDict.get("RDA",(2,2))
 		        zoneArray = mapDict.get('zoneArray')
 		        cardType = card.type
@@ -1807,11 +1815,11 @@ def splay(x,y,dVector = (1,0)):
 	"""Returns coordinates x,y unless there is already a card at those coordinates,
 	in which case it searches for the next open position in the direction defined by dVector.
 	Now using recursion!"""
-	dx,dy = dVector
 	for c in table:
 		if c.controller == me and (x,y) == c.position:
 			wKey,hKey = {True: ("width","height"), False: ("backWidth","backHeight")}[c.isFaceUp]
 			w,h = cardSizes[c.size()][wKey],cardSizes[c.size()][hKey]
+			dx,dy = dVector
 			return splay(x+dx*w,y+dy*h,dVector)
 	return x,y
 
