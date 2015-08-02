@@ -1292,14 +1292,26 @@ for token in tokenList:
 
 def addControlMarker(card, x = 0, y = 0):
 	mute()
-	addControlMarker(me,card)
+	placeControlMarker(me,card)
 
 def placeControlMarker(attacker,defender):
 	mute()
-	#First, remove all control markers from defender. Then add the appropriate control marker
-	attackerControlMarkerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
-	notify("1: attackerControlMarkerColor: {}".format(attackerControlMarkerColor))
-	if "Control Marker" in attackerControlMarkerColor[0]:
+	#First, place a control marker of your color.
+	markerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
+	defender.markers[markerColor] += 1
+	#Next, count the number of control markers on the orb. If it is 2 or more, remove 1 control marker of each color from the orb
+	if sum([defender.markers[m] for m in listControlMarkers]) >=2:
+		for m in listControlMarkers:
+			defender.markers[m] = max(defender.markers[m]-1,0)
+	#If there are any markers left, report that the player has taken control; otherwise, report that the orb is now uncontrolled. Flip the orb as appropriate.
+	if defender.markers[markerColor] == 1:
+		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
+		defender.switchTo('B')
+	else:
+		notify("{} neutralizes the V'tar Orb!".format(attacker.name))
+		defender.switchTo('')
+	"""
+	if "Control Marker" in markerColor[0]:
 		#If orb is off, turn it on
 		if defender.alternate == "":
 			defender.switchTo('B')
@@ -1308,21 +1320,22 @@ def placeControlMarker(attacker,defender):
 		for m in listControlMarkers:
 			defender.markers[m] = 0
 		#Add a marker of attacker's color to orb. Text should make sense even if orb is already controlled by attacker.
-		defender.markers[attackerControlMarkerColor] = 1
-		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,attackerControlMarkerColor[0]))
+		defender.markers[markerColor] = 1
+		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
+	"""
 	"""
 		for controlMarker in listControlMarkers:
 			notify("2: controlMarker: {}".format(controlMarker))
 			notify("3: defender.markers: {}".format(defender.markers))
-			if controlMarker in defender.markers and controlMarker[0] != attackerControlMarkerColor[0]:
+			if controlMarker in defender.markers and controlMarker[0] != markerColor[0]:
 				notify("4: controlMarker: {}".format(controlMarker))
 				defender.markers[controlMarker] = 0
 				notify("{} removes a {} from the V'Tar Orb it is now neutral!".format(attacker.name,controlMarker[0]))
 				return
-			elif defender.markers[attackerControlMarkerColor] == 0:
-				notify("5: attackerControlMarkerColor: {}".format(attackerControlMarkerColor))
-				defender.markers[attackerControlMarkerColor] = 1
-				notify("{} added a {} to V'Tar Orb and now controls it".format(attacker.name,attackerControlMarkerColor[0]))
+			elif defender.markers[markerColor] == 0:
+				notify("5: markerColor: {}".format(markerColor))
+				defender.markers[markerColor] = 1
+				notify("{} added a {} to V'Tar Orb and now controls it".format(attacker.name,markerColor[0]))
 				return
 	"""
 def addDamage(card, x = 0, y = 0):

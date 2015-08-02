@@ -832,7 +832,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 return
         damageRoll,effectRoll = rollDice(dice)
         if "V'Tar Orb" in defender.name and sum(damageRoll) != 0: #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
-                notify("{} scores a Hit the V'Tar Orb!".format(attacker.name))
+                notify("{} scores a hit on the V'Tar Orb!".format(attacker.name))
                 remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
                 return
         setGlobalVariable("avoidAttackTempStorage","Hit")
