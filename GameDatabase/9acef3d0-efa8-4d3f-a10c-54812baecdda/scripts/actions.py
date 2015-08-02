@@ -197,6 +197,9 @@ def onGameStart():
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
 
+	#Set the round to 0
+	setGlobalVariable("RoundNumber", str(1))
+
 	#set the goal
 	setGlobalVariable("Goal",str({}))
 
@@ -210,6 +213,7 @@ def onGameStart():
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
+		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		#	players[0].setActivePlayer()
@@ -717,14 +721,12 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Quick2","Final Quickcast Phase")
 	elif card.alternate == "Quick2":
 		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
-                        #Check for domination victory
-                        goal = eval(getGlobalVariable("Goal"))
-                        debug(str(goal))
-                        if goal.get("Type")=="Domination" and checkDominationVictory(): return
+		#Check for domination victory
+			goal = eval(getGlobalVariable("Goal"))
+			if goal.get("Type")=="Domination" and updateVtarScore() and checkDominationVictory(): return
 			setEventList('Round',[])
 			setEventList('Turn',[])#Clear event list for new round
-			gTurn = getGlobalVariable("RoundNumber")
-			gameTurn = int(gTurn) + 1
+			gameTurn = int(getGlobalVariable("RoundNumber")) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
@@ -1295,7 +1297,6 @@ def addControlMarker(card, x = 0, y = 0):
 def placeControlMarker(attacker,defender):
 	mute()
 	#First, remove all control markers from defender. Then add the appropriate control marker
-
 	attackerControlMarkerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
 	notify("1: attackerControlMarkerColor: {}".format(attackerControlMarkerColor))
 	if "Control Marker" in attackerControlMarkerColor[0]:
@@ -1554,6 +1555,7 @@ def flipcard(card, x = 0, y = 0):
 		return
 	elif "Player Token" in card.Name:
 		nextPlayer = getNextPlayerNum()
+		debug(nextPlayer)
 		setGlobalVariable("PlayerWithIni", str(nextPlayer))
 		for p in players:
 			remoteCall(p, "changeIniColor", [card])
@@ -1649,6 +1651,7 @@ def flipcard(card, x = 0, y = 0):
 			card.switchTo()
 
 def getNextPlayerNum():
+	debug(getGlobalVariable("PlayerWithIni"))
 	activePlayer = int(getGlobalVariable("PlayerWithIni"))
 	nextPlayer = activePlayer + 1
 	if nextPlayer > len(getPlayers()):

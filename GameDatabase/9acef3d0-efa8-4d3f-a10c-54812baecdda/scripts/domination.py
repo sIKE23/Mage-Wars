@@ -8,7 +8,6 @@
 
 def checkDominationVictory():
         goal = eval(getGlobalVariable("Goal")).get("Goal")
-        debug(str(goal))
         victoriousPlayers = []
         for player in players:
                 mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
@@ -22,6 +21,16 @@ def checkDominationVictory():
         if soleWinner:
                 notify("{} wins with {} V'tar!".format(soleWinner[0],soleWinner[1]))
                 return True
+
+def updateVtarScore():
+    for player in players:
+        mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
+        controlMarkerColor = playerColorDict[int(mage.controller.getGlobalVariable("MyColor"))]["ControlMarker"]
+        vtarGain = len([1 for c in table if  ("V'Tar Orb" in c.name and c.markers[controlMarkerColor]) or (c.name == "Galaxxus" and c.controller == mage.controller)])
+        if vtarGain:
+            mage.markers[VTar] += vtarGain
+            notify("{} gains {} V'tar!".format(mage.controller,str(vtarGain)))
+    return True #This doesn't actually matter, except that we need it so that our if statement in nextPhase() evaluates to true.
 
 def DominationTracker():
         mute()
