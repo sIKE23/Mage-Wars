@@ -225,24 +225,24 @@ def onGameStart():
 	else:
 		choosePlayerColor()
 		test = 0
-		if me.name == gameHost.name:
+		if gameHost == me: #me.name == gameHost.name:#no need to refer to the names when the objects are the same. Referring to the names will cause a bug when both players have the same name (as it did for me when debugging)
 			#players update the ColorsChosen variable with the choice number in choosePlayerColor() - remove this comment once while logic is working properly
-			while len(getPlayers()) > len(getGlobalVariable("ColorsChosen")):
-				notify("len(getPlayers()): {}".format(len(getPlayers())))
-				notify("len(getGlobalVariable('ColorsChosen'))): {}".format(len(getGlobalVariable("ColorsChosen"))))
-				time.sleep(1)
-				#remove the trhee lines below once the while logic is working properly
-				test += 1
-				notify("Test: {}".format(test))
-				if test == 20: break
-			PlayerSetup()
-			AskDiceRollArea()
-			# the Game Host now sets up the Initative, Phase, and Roll Dice Area
-			setUpDiceAndPhaseCards()
-			notify("Players will now roll for initiative.")
-			rollForInitative()
-			notify("Game setup is complete! Players should now load their Spellbooks.")
+			remoteCall(me,"finishSetup",[])
 
+def finishSetup(): #Waits until all players have chosen a color, then finishes the setup process.
+	mute()
+	#first, check whether all the players have chosen a color. If not, use remoteCall to 'bounce' finishSetup() off of OCTGN so that it checks again later.
+	if len(getPlayers()) > len(getGlobalVariable("ColorsChosen")):
+		remoteCall(me,"finishSetup",[])
+		return
+	#if everybody has chosen a color, finish the process of setting up
+	PlayerSetup()
+	AskDiceRollArea()
+	#the Game Host now sets up the Initative, Phase, and Roll Dice Area
+	setUpDiceAndPhaseCards()
+	notify("Players will now roll for initiative.")
+	rollForInitative()
+	notify("Game setup is complete! Players should now load their Spellbooks.")
 ###########################################################################
 ##########	################    OnGameStart Event Functions   ###########################
 ###########################################################################
@@ -305,26 +305,26 @@ def AskDiceRollArea():
 		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
 	else:
 		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
-                setGlobalVariable("DiceRollAreaPlacement", "Bottom")
+		setGlobalVariable("DiceRollAreaPlacement", "Bottom")
 
 def setUpDiceAndPhaseCards():
 	mute()
 	tableSetup = getGlobalVariable("TableSetup")
 	myColor = me.getGlobalVariable("MyColor")
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
-	if tableSetup == "False" and me.name == gameHost.name:
-                RDA = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #Roll Dice Area
-                RDA.anchor = (True)
-                init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
-                init.anchor = (True)
-                init.switchTo(myColor)
-                currentPhase = "Planning"
-                phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-                phase.switchTo("Planning") #skips upkeep for first turn
-                phase.anchor = (True)
-                for c in table:
-                        if c.type in ['DiceRoll','Phase']: moveRDA(c)
-	setGlobalVariable("TableSetup", True)
+	if tableSetup == "False" and gameHost == me: #me.name == gameHost.name:
+		RDA = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #Roll Dice Area
+		RDA.anchor = (True)
+		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
+		init.anchor = (True)
+		init.switchTo(myColor)
+		currentPhase = "Planning"
+		phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
+		phase.switchTo("Planning") #skips upkeep for first turn
+		phase.anchor = (True)
+		for c in table:
+			if c.type in ['DiceRoll','Phase']: moveRDA(c)
+		setGlobalVariable("TableSetup", True)
 
 def rollForInitative():
 	mute()
@@ -380,6 +380,22 @@ def rollForInitative():
 def AskInitiative(playerID):
 	mute()
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+	notify("{} has won the Initative Roll and is deciding who should go first.".format(me))
+	players = getPlayers()
+	choices = [p.name + (" (me)" if p==me else "") for p in players]
+	colors = [("#0000CC" if p==me else "#000066") for p in players]
+	#To simplify the process of determining initiative, we will have the initiative winner explicitly decide who goes first.
+	while True:
+		choice = askChoice("Who should go first?",choices,colors)
+		if choice == 0: continue
+		firstPlayer = players[choice - 1]
+		playerID = firstPlayer._id
+		notify("A decision is reached! {} will go first.".format(firstPlayer))
+		setGlobalVariable("PlayerWithIni", str(playerID))
+		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
+		init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
+		break
+	"""
 	notify("{} has won the Initative Roll and is chosing whether or not to go first.".format(me))
 	choiceList = ['Yes', 'No']
 	colorsList = ['#FF0000', '#0000FF']
@@ -397,6 +413,7 @@ def AskInitiative(playerID):
 	setGlobalVariable("PlayerWithIni", str(playerID))
 	init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 	init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
+	"""
 
 def moveRDA(card):
         """Moves the dice roll area/initiative/phase marker to the appropriate area"""
