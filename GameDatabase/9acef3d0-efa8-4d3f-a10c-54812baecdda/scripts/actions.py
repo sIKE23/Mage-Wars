@@ -1296,6 +1296,24 @@ def addControlMarker(card, x = 0, y = 0):
 
 def placeControlMarker(attacker,defender):
 	mute()
+	#First, If orb is off, turn it on
+	if defender.alternate == "":
+		defender.switchTo('B')
+		notify("{} flips V'Tar Orb On.".format(me))
+	#Second, check to see if there is a control marker on the Orb already and if so remove it
+	markerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
+	if defender.markers[markerColor] == 1:
+		notify("{} already has control of the V'tar Orb!".format(attacker.name))
+		return
+	elif sum([defender.markers[m] for m in listControlMarkers]) > 0:
+		for m in listControlMarkers:
+			defender.markers[m] = max(defender.markers[m]-1,0)
+		notify("{} neutralizes the V'tar Orb!".format(attacker.name))
+	else:
+		defender.markers[markerColor] = 1
+		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
+
+	"""
 	#First, place a control marker of your color.
 	markerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
 	defender.markers[markerColor] += 1
@@ -1310,6 +1328,7 @@ def placeControlMarker(attacker,defender):
 	else:
 		notify("{} neutralizes the V'tar Orb!".format(attacker.name))
 		defender.switchTo('')
+	"""
 	"""
 	if "Control Marker" in markerColor[0]:
 		#If orb is off, turn it on
