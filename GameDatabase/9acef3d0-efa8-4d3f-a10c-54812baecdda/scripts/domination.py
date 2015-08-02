@@ -23,6 +23,9 @@ def checkDominationVictory():
                 return True
 
 def updateVtarScore():
+    if [1 for c in table if c.name=="Dampening Field" and c.isFaceUp]:
+        notify("The dampening field suppresses all V'tar generation!")
+        return True
     for player in players:
         mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
         controlMarkerColor = playerColorDict[int(mage.controller.getGlobalVariable("MyColor"))]["ControlMarker"]
