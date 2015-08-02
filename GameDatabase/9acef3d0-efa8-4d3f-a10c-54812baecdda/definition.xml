@@ -21,7 +21,6 @@
 		<script src="scripts/attachcards.py" />
 		<script src="scripts/textfunctions.py" />
 		<script src="scripts/domination.py" />
-		<script src="scripts/timer.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
@@ -34,6 +33,8 @@
 	</events>
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />
+	<sound name="Alarm" src="Sounds/alarm.mp3" />
+	<sound name="Notification" src="Sounds/notification.mp3" />
 	</sounds>
 	<fonts>
 		<font src="fonts/shouldve known.ttf" size="13" target="context" />

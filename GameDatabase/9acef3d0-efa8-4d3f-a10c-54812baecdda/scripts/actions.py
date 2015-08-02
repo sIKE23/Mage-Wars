@@ -199,6 +199,7 @@ def onGameStart():
 
 	#Set the round to 0
 	setGlobalVariable("RoundNumber", str(1))
+	setGlobalVariable("timerIsRunning",str(False))
 
 	#set the goal
 	setGlobalVariable("Goal",str({}))
@@ -561,6 +562,47 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
 ############################################################################
 ######################		Group Actions			########################
 ############################################################################
+
+#This function lets the player set a timer
+def setTimer(group,x,y):
+        timerIsRunning = eval(getGlobalVariable("timerIsRunning"))
+        if timerIsRunning:
+                whisper("You cannot start a new timer until the current one finishes!")
+                return
+        setGlobalVariable("timerIsRunning",str(True))
+        timerDefault = getSetting('timerDefault',300)
+        choices = ["30 seconds","60 seconds","180 seconds","{} seconds".format(str(timerDefault)),"Other"]
+        colors = ["#006600" for c in choices][:-1] + ['#003366']
+        choice = askChoice("Set timer for how long?",choices,colors)
+        if choice == 0: return
+        seconds = {1:30,2:60,3:180,4:timerDefault}.get(choice,0)
+        if choice == 5: 
+                seconds = askInteger("Set timer for how many seconds?",timerDefault)
+                setSetting('timerDefault',seconds)
+        notify("{} sets a timer for {} minutes, {} seconds.".format(me,seconds/60,seconds%60))
+        playSoundFX('Notification')
+        time.sleep(0.2)
+        playSoundFX('Notification')
+        notifications = range(11) + [30] + [x*60 for x in range(seconds/60+1)][1:]
+        endTime = time.time() + seconds
+        notifications = [endTime - t for t in notifications if t < seconds]
+        updateTimer(endTime,notifications)
+
+#This function checks the timer, and then remotecalls itself if the timer has not finished
+def updateTimer(endTime,notifications):
+        mute()
+        currentTime = time.time()
+        if currentTime>notifications[-1]:
+                timeLeft = int(endTime - notifications[-1])
+                playSoundFX('Notification')
+                if timeLeft > 60: notify("{} minutes left!".format(timeLeft/60))
+                else: notify("{} seconds left!".format(timeLeft))
+                notifications.remove(notifications[-1])
+        if notifications: remoteCall(me,"updateTimer",[endTime,notifications])
+        else:
+                playSoundFX('Alarm')
+                notify("Time's up!")
+                setGlobalVariable("timerIsRunning",str(False))
 
 def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
