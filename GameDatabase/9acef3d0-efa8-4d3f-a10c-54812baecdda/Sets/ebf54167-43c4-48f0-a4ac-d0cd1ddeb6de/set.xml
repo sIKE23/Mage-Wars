@@ -54,6 +54,7 @@
 		<marker id="fffe964a-3839-4bc0-ba85-3268b59817c6" name="Wrath" />
 		<marker id="fcdf5fa2-cb09-47a3-8c81-d4b87380b397" name="Gate Closed" />
 		<marker id="7ff7afc3-ae04-49bf-9961-1a04b0f6ac19" name="Mana" />
+		<marker id="f316259d-10ad-471f-bdbc-884d11a8ced9" name="Damage" />
 	</markers>
 	<cards>
 		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">

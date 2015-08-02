@@ -37,7 +37,7 @@ ControlMarkerPurple = ("Purple Control Marker", "5d6e5424-031b-44d4-9e0e-eb93f29
 ControlMarkerGrey = ("Grey Control Marker", "1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" )
 Cripple = ("Cripple", "82df2507-4fba-4c81-a1de-71e70b9a16f5" )
 CrushToken = ("Crush Token", "d7472637-7c6d-4593-bc16-5975155c2926" )
-Damage = ("Damage", "00000000-0000-0000-0000-000000000004" )
+Damage = ("Damage", "f316259d-10ad-471f-bdbc-884d11a8ced9" )
 Daze = ("Daze","3ef51126-e2c0-44b3-b781-0b3f8476cb20" )
 DeflectR = ("Deflect Ready", "684fcda0-e69d-426e-861c-5a92bc984f55" )
 DeflectU = ("Deflect Used", "2c5b85ea-93de-4a99-b64d-da6c48baa205" )
@@ -224,7 +224,17 @@ def onGameStart():
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 	else:
 		choosePlayerColor()
+		test = 0
 		if me.name == gameHost.name:
+			#players update the ColorsChosen variable with the choice number in choosePlayerColor() - remove this comment once while logic is working properly
+			while len(getPlayers()) > len(getGlobalVariable("ColorsChosen")):
+				notify("len(getPlayers()): {}".format(len(getPlayers())))
+				notify("len(getGlobalVariable('ColorsChosen'))): {}".format(len(getGlobalVariable("ColorsChosen"))))
+				time.sleep(1)
+				#remove the trhee lines below once the while logic is working properly
+				test += 1
+				notify("Test: {}".format(test))
+				if test == 20: break
 			PlayerSetup()
 			AskDiceRollArea()
 			# the Game Host now sets up the Initative, Phase, and Roll Dice Area
@@ -323,7 +333,6 @@ def rollForInitative():
 	for p in getPlayers():
 		notify("Automatically rolling initiative for {}...".format(p.name))
 		effect = rnd(1,12)
-		effect = 3
 		rollForPlayer += 1
 		notify("{} rolled a {} for initiative".format(p.name, effect))
 		myRollStr = (str(p._id) + ":" + str(effect) + ";")
@@ -1560,11 +1569,11 @@ def toggleQuick(card, x=0, y=0):
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
-		notify("{} spends Quick Cast action".format(card.Name))
+		notify("{} spends Quickcast action".format(card.Name))
 	else:
 		card.markers[Quick] = 1
 		card.markers[QuickBack] = 0
-		notify("{} readies Quick Cast action".format(card.Name))
+		notify("{} readies Quickcast Marker".format(card.Name))
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
@@ -1582,7 +1591,7 @@ def toggleVoltaric(card, x=0, y=0):
 			me.Mana -= 2
 			card.markers[VoltaricON] = 1
 			card.markers[VoltaricOFF] = 0
-			notify("{} enables his Voltaric shield".format(me))
+			notify("{}  spends two mana to enable his Voltaric shield".format(me))
 		else: notify("{} chose not to enable his Voltaric shield".format(me))
 
 ############################################################################
