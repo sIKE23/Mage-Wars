@@ -772,7 +772,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         #Check for daze
-        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier':
+        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier' or not "Autonomous" in c.Traits:
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll < 7:
                         notify("{} is so dazed that it completely misses!".format(attacker))
