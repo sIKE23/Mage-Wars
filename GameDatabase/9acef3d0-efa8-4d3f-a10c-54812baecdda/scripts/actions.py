@@ -134,13 +134,6 @@ cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth
 
 ##########################		Other			############################
 
-#PlayerColor = 	["#de2827", 	# Red 		R=222 G=40  B=39
-#				"#171e78", 		# Blue		R=23  G=30  B=120
-#				"#01603e", 		# Green		R=1   G=96  B=62
-#				"#f7d917", 		# Yellow 	R=247 G=217 B=23
-#				"#ae76f6",		# Purple R=174 G=118 B=246
-#				"#c0c0c0"]		# Grey R=192 G=192 B=192
-
 playerColorDict = {
         1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":ControlMarkerRed}, #Red - R=222 G=40  B=39
         2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":ControlMarkerBlue}, #Blue - R=23  G=30  B=120
@@ -225,24 +218,9 @@ def onGameStart():
 	else:
 		choosePlayerColor()
 		test = 0
-		if gameHost == me: #me.name == gameHost.name:#no need to refer to the names when the objects are the same. Referring to the names will cause a bug when both players have the same name (as it did for me when debugging)
-			#players update the ColorsChosen variable with the choice number in choosePlayerColor() - remove this comment once while logic is working properly
+		if gameHost == me:
 			remoteCall(me,"finishSetup",[])
 
-def finishSetup(): #Waits until all players have chosen a color, then finishes the setup process.
-	mute()
-	#first, check whether all the players have chosen a color. If not, use remoteCall to 'bounce' finishSetup() off of OCTGN so that it checks again later.
-	if len(getPlayers()) > len(getGlobalVariable("ColorsChosen")):
-		remoteCall(me,"finishSetup",[])
-		return
-	#if everybody has chosen a color, finish the process of setting up
-	PlayerSetup()
-	AskDiceRollArea()
-	#the Game Host now sets up the Initative, Phase, and Roll Dice Area
-	setUpDiceAndPhaseCards()
-	notify("Players will now roll for initiative.")
-	rollForInitative()
-	notify("Game setup is complete! Players should now load their Spellbooks.")
 ###########################################################################
 ##########	################    OnGameStart Event Functions   ###########################
 ###########################################################################
@@ -253,24 +231,6 @@ def defineRectangularMap(I,J,tilesize):
 	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
 	mapDict["RDA"] = (2,2)
 	setGlobalVariable("Map", str(mapDict))
-
-def PlayerSetup():
-	mute()
-	playersIDList = eval(getGlobalVariable("PlayersIDList"))
-	gameHost = Player(int(getGlobalVariable("GameHostID")))
-	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
-
-	#creates a list of PlayerID's weeding out any Spectators who joined in the game lobby
-	if eval(getGlobalVariable("PlayersIDList")) == []:
-		for p in getPlayers():
-			playersIDList.append(p._id)
-			playersIDList.sort()
-			setGlobalVariable("PlayersIDList",str(playersIDList))
-	#creates a dictionary where { key is PlayerID : { PlayerNum, PlayerName }}
-	playersIDList = eval(getGlobalVariable("PlayersIDList"))
-	for i,j in range(len(playersIDList)), playersIDList:
-		mwPlayerDict[j] = {"PlayerNum": (i+1),"PlayerName":Player(j).name}
-		setGlobalVariable("MWPlayerDict",str(mwPlayerDict))
 
 def choosePlayerColor():
 	mute()
@@ -294,6 +254,39 @@ def choosePlayerColor():
 				break
 			else:	#someone else took our choice
 				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+
+def finishSetup(): #Waits until all players have chosen a color, then finishes the setup process.
+	mute()
+	#first, check whether all the players have chosen a color. If not, use remoteCall to 'bounce' finishSetup() off of OCTGN so that it checks again later.
+	if len(getPlayers()) > len(getGlobalVariable("ColorsChosen")):
+		remoteCall(me,"finishSetup",[])
+		return
+	#if everybody has chosen a color, finish the process of setting up
+	PlayerSetup()
+	AskDiceRollArea()
+	#the Gamehost now sets up the Initative, Phase, and Roll Dice Area
+	setUpDiceAndPhaseCards()
+	notify("Players will now roll for initiative.")
+	rollForInitative()
+	notify("Game setup is complete! Players should now load their Spellbooks.")
+
+def PlayerSetup():
+	mute()
+	playersIDList = eval(getGlobalVariable("PlayersIDList"))
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+
+	#creates a list of PlayerID's weeding out any Spectators who joined in the game lobby
+	if eval(getGlobalVariable("PlayersIDList")) == []:
+		for p in getPlayers():
+			playersIDList.append(p._id)
+			playersIDList.sort()
+			setGlobalVariable("PlayersIDList",str(playersIDList))
+	#creates a dictionary where { key is PlayerID : { PlayerNum, PlayerName }}
+	playersIDList = eval(getGlobalVariable("PlayersIDList"))
+	for i,j in range(len(playersIDList)), playersIDList:
+		mwPlayerDict[j] = {"PlayerNum": (i+1),"PlayerName":Player(j).name}
+		setGlobalVariable("MWPlayerDict",str(mwPlayerDict))
 
 def AskDiceRollArea():
 	mute()
@@ -395,25 +388,6 @@ def AskInitiative(playerID):
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 		init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
 		break
-	"""
-	notify("{} has won the Initative Roll and is chosing whether or not to go first.".format(me))
-	choiceList = ['Yes', 'No']
-	colorsList = ['#FF0000', '#0000FF']
-	choice = askChoice("You have won initiative! Would you like to go first?", choiceList, colorsList)
-	if choice == 1:
-		notify("{} has elected to go first!".format(me))
-	else:
-		for p in getPlayers():
-			if not me._id == p._id and len(getPlayers()) == 2:
-				playerID = p._id
-			else:
-				playerNum = rnd(1,len(getPlayers()) - 1) # this is still not right, need to think on it more, have to exclude the p._id ini roll winner somehow as he has choosen not to go first in a multiplayer game
-				if mwPlayerDict[p._id]["PlayerNum"] == playerNum: playerID = p._id
-		notify("{} has elected NOT to go first! {} has the starting initiative.".format(me, Player(playerID).name))
-	setGlobalVariable("PlayerWithIni", str(playerID))
-	init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-	init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
-	"""
 
 def moveRDA(card):
         """Moves the dice roll area/initiative/phase marker to the appropriate area"""
@@ -602,7 +576,7 @@ def setTimer(group,x,y):
         choice = askChoice("Set timer for how long?",choices,colors)
         if choice == 0: return
         seconds = {1:30,2:60,3:180,4:timerDefault}.get(choice,0)
-        if choice == 5: 
+        if choice == 5:
                 seconds = askInteger("Set timer for how many seconds?",timerDefault)
                 setSetting('timerDefault',seconds)
         notify("{} sets a timer for {} minutes, {} seconds.".format(me,seconds/60,seconds%60))
@@ -662,7 +636,6 @@ def mageSetup():
 			break
 	for stat in stats:
 		debug("stat {}".format(stat))
-
 		statval = stat.split("=")
 		if "Channeling" in statval[0]:
 			me.Channeling = int(statval[1])
@@ -1381,50 +1354,6 @@ def placeControlMarker(attacker,defender):
 		defender.markers[markerColor] = 1
 		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
 
-	"""
-	#First, place a control marker of your color.
-	markerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
-	defender.markers[markerColor] += 1
-	#Next, count the number of control markers on the orb. If it is 2 or more, remove 1 control marker of each color from the orb
-	if sum([defender.markers[m] for m in listControlMarkers]) >=2:
-		for m in listControlMarkers:
-			defender.markers[m] = max(defender.markers[m]-1,0)
-	#If there are any markers left, report that the player has taken control; otherwise, report that the orb is now uncontrolled. Flip the orb as appropriate.
-	if defender.markers[markerColor] == 1:
-		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
-		defender.switchTo('B')
-	else:
-		notify("{} neutralizes the V'tar Orb!".format(attacker.name))
-		defender.switchTo('')
-	"""
-	"""
-	if "Control Marker" in markerColor[0]:
-		#If orb is off, turn it on
-		if defender.alternate == "":
-			defender.switchTo('B')
-			notify("{} flips V'Tar Orb On.".format(me))
-		#Remove all control markers from the orb
-		for m in listControlMarkers:
-			defender.markers[m] = 0
-		#Add a marker of attacker's color to orb. Text should make sense even if orb is already controlled by attacker.
-		defender.markers[markerColor] = 1
-		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
-	"""
-	"""
-		for controlMarker in listControlMarkers:
-			notify("2: controlMarker: {}".format(controlMarker))
-			notify("3: defender.markers: {}".format(defender.markers))
-			if controlMarker in defender.markers and controlMarker[0] != markerColor[0]:
-				notify("4: controlMarker: {}".format(controlMarker))
-				defender.markers[controlMarker] = 0
-				notify("{} removes a {} from the V'Tar Orb it is now neutral!".format(attacker.name,controlMarker[0]))
-				return
-			elif defender.markers[markerColor] == 0:
-				notify("5: markerColor: {}".format(markerColor))
-				defender.markers[markerColor] = 1
-				notify("{} added a {} to V'Tar Orb and now controls it".format(attacker.name,markerColor[0]))
-				return
-	"""
 def addDamage(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if "Mage" in card.Type and card.controller == me:
