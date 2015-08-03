@@ -383,7 +383,7 @@ def AskInitiative(playerID):
 	notify("{} has won the Initative Roll and is deciding who should go first.".format(me))
 	players = getPlayers()
 	choices = [p.name + (" (me)" if p==me else "") for p in players]
-	colors = [("#0000CC" if p==me else "#000066") for p in players]
+	colors = [(playerColorDict[int(p.getGlobalVariable("MyColor"))]["Hex"]) for p in players]
 	#To simplify the process of determining initiative, we will have the initiative winner explicitly decide who goes first.
 	while True:
 		choice = askChoice("Who should go first?",choices,colors)
