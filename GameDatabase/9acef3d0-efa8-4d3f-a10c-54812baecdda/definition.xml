@@ -38,7 +38,7 @@
 	</sounds>
 	<fonts>
 		<font src="fonts/shouldve known.ttf" size="13" target="context" />
-		<font src="fonts/shouldve known.ttf" size="13" target="chat" />
+		<font src="fonts/APHont-Bold.ttf" size="13" target="chat" />
   </fonts>
 	<proxygen definitionsrc="proxy/CardGenData.xml" />
 	<documents>
