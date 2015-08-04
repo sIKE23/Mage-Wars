@@ -19,7 +19,9 @@ def checkDominationVictory():
                         if other[1] >= player[1] and other!=player: break
                         soleWinner = player
         if soleWinner:
+                setGlobalVariable("GameIsOver", True)
                 notify("{} wins with {} V'tar!".format(soleWinner[0],soleWinner[1]))
+                [remoteCall(p,"reportVTarWin",[soleWinner[0],soleWinner[1]]) for p in players]
                 return True
 
 def updateVtarScore():
@@ -149,6 +151,21 @@ def loadMapFile(group, x=0, y=0):
                         mapPlace(obj,(i-1,j-1))
 
         setNoGameBoard(table)
+        for p in players:
+        	remoteCall(p,"DominationMatchStart",[]) 
+        
+def DominationMatchStart():
+        mute()
+        mapText = ""
+        map = str(eval(getGlobalVariable("Map")).get("Map Name"))
+        goal = str(eval(getGlobalVariable("Goal")).get("Goal"))
+        mapText = getMapText(map)
+        choiceList = ['OK']
+        colorList = ['#de2827']
+        notify("{}!\n\nYou will need {} V'Tar to secure the V'Torrak and Dominate the arena! Good Luck!".format(mapText,goal))
+        choice = askChoice("{}!\n\nYou will need {} V'Tar to secure the V'Torrak and Dominate the arena! Good Luck!".format(mapText,goal), choiceList, colorList)
+        if choice == 0 or choice == 1:
+                return
 
 def mapPlace(key,coords):
         mapDict = eval(getGlobalVariable("Map"))

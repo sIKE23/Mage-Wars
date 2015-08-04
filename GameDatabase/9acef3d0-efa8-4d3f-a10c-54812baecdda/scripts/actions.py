@@ -1212,6 +1212,16 @@ def reportDeath(deadmage):
 	if choice == 0 or choice == 1:
 		return
 
+def reportVTarWin(winningmage,score):
+	setGlobalVariable("GameIsOver", True)
+	setGlobalVariable("GameEndTime", str(time.ctime()))
+	choiceList = ['OK']
+	colorsList = ['#de2827']
+	whisper("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
+	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
+	if choice == 0 or choice == 1:
+		return
+
 def checkMageDeath(player, counter, oldvalue):
 	global currentPhase
 	if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):

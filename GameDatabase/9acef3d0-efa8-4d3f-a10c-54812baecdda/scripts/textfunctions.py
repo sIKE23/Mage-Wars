@@ -154,6 +154,18 @@ def getGender(card):
                 if line in ['Male','Female']:
                         gender = line
                 elif line == name: return gender
+                	
+def getMapText(map):
+        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+        rawMapText = list(open('{}\{}{}'.format(textDirectory,'MapText','.txt'),'r'))
+        newMapText = []
+        entry = []
+        for l in rawMapText:
+                line = l.replace('\n','')
+                if map in line:
+                        newMapText = line.split(':')
+                        return str(newMapText[1])
+                elif line == map: return str(map)
 
 def getNewFeaturesList(table, x=0, y=0):
         textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')

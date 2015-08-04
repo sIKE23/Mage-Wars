@@ -757,6 +757,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        #atkOS = Card(attack['OriginalSourceID'])
         #Check for helm of fear
         if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
                 notify("The Helm of Fear radiates a terrifying aura!")
@@ -772,7 +773,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         #Check for daze
-        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier' or not "Autonomous" in attacker.Traits:
+        #if (attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier') or not "Autonomous" in atkOS.traits:
+        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier':
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll < 7:
                         notify("{} is so dazed that it completely misses!".format(attacker))
