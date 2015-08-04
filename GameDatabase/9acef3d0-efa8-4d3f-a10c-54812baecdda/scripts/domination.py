@@ -162,7 +162,7 @@ def DominationMatchStart():
         mapText = getMapText(map)
         choiceList = ['OK']
         colorList = ['#de2827']
-        notify("{}!\n\nYou will need {} V'Tar to secure the V'Torrak and Dominate the arena! Good Luck!".format(mapText,goal))
+        whisper("{}!\n\nYou will need {} V'Tar to secure the V'Torrak and Dominate the arena! Good Luck!".format(mapText,goal))
         choice = askChoice("{}!\n\nYou will need {} V'Tar to secure the V'Torrak and Dominate the arena! Good Luck!".format(mapText,goal), choiceList, colorList)
         if choice == 0 or choice == 1:
                 return
