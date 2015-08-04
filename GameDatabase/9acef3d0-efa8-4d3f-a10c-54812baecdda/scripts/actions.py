@@ -79,8 +79,9 @@ StormToken = ("Storm Token", "6383011a-c544-443d-b039-9f7ba8de4c6b" )
 Stuck = ("Stuck", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun", "4bbac09e-a46c-42de-9272-422e8074533f" )
 Tainted = ("Tainted", "826e81c3-6281-4a43-be30-bac60343c58f" )
-Taunt = ("Taunt(Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
-TauntT = ("Taunt(Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
+Taunt = ("Taunt (Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
+TauntS = ("Taunt (Skeelax)","9ea607d3-dade-44dc-a69d-1c0d5691a246" )
+TauntT = ("Taunt (Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
 Treebond = ("Treebond", "ced2ce11-5e69-46a9-9fbb-887e96bdf805" )
 Turn = ("Turn", "e0a54bea-6e30-409d-82cd-44a944e591dc" )
 Used = ("Used", "ab8708ac-9735-4803-ba4d-4932a787540d" )
@@ -1648,6 +1649,8 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[TauntT] = 1
 			if "Sosruko, Ferret Companion" == card.Name:
 					card.markers[Taunt] = 1
+			if "Skeelax, Taunting Imp" == card.Name:
+					card.markers[TauntS] = 1
 			if "Ichthellid" == card.Name:
 					card.markers[EggToken] = 1
 			if "Talos" == card.Name:
