@@ -408,81 +408,82 @@ def canDeclareAttack(card):
 ############################################################################
 
 def rollDice(dice):
-        mute()
-        global diceBank
-	global diceBankD12
-        mapDict = eval(getGlobalVariable('Map'))
-	if not deckLoaded == True:
-		notify("Please Load a Spellbook first. (Ctrl+L)")
-		choiceList = ['OK','Load Blank Spellbook (not recommended)']
-		colorsList = ['#FF0000','#0000FF']
-		choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
-		if choice == 2:
-                        global blankSpellbook
-                        blankSpellbook = True
-                        onLoadDeck(me,[me.hand,table])
-		return
+    mute()
+    global diceBank
+    global diceBankD12
+    mapDict = eval(getGlobalVariable('Map'))
+    if not deckLoaded == True:
+        notify("Please Load a Spellbook first. (Ctrl+L)")
+        choiceList = ['OK','Load Blank Spellbook (not recommended)']
+        colorsList = ['#FF0000','#0000FF']
+        choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
+        if choice == 2:
+            global blankSpellbook
+            blankSpellbook = True
+            onLoadDeck(me,[me.hand,table])
+        return
 
-	for c in table:
-		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
-			c.delete()
-	dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
-	dieCard.anchor = (True)
-	rnd(0,0)
-	diceFrom = ""
-        count = dice
-        if (len(diceBank) < count): #diceBank running low - fetch more
-		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
-		#debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
-		if random_org[1]==200: # OK code received:
-			diceBank = random_org[0].splitlines()
-			diceFrom = "from Random.org"
-		else:
-#			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
-			diceFrom = "from the native randomizer"
-			while (len(diceBank) < 20):
-				diceBank.append(rnd(0, 5))
+    for c in table:
+        if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
 
-	result = [0,0,0,0,0,0]
-	for x in range(count):
-		roll = int(diceBank.pop())
-		result[roll] += 1
+    dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
+    debug(str((dieCardX,dieCardY)))
+    dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+    dieCard.anchor = (True)
+    rnd(0,0)
+    diceFrom = ""
+    count = dice
+    if (len(diceBank) < count): #diceBank running low - fetch more
+        random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
+	#debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
+        if random_org[1]==200: # OK code received:
+            diceBank = random_org[0].splitlines()
+            diceFrom = "from Random.org"
+        else:
+        #notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
+            diceFrom = "from the native randomizer"
+            while (len(diceBank) < 20):
+                diceBank.append(rnd(0, 5))
+
+    result = [0,0,0,0,0,0]
+    for x in range(count):
+        roll = int(diceBank.pop())
+        result[roll] += 1
 	#debug("diceRoller result: {}".format(result))
-	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
+    notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
 
-	damPiercing = result[4] + 2* result[5]
-	damNormal = result[2] + 2* result[3]
-	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
-	dieCard.markers[attackDie[2]] = result[2] #1
-	dieCard.markers[attackDie[3]] = result[3] #2
-	dieCard.markers[attackDie[4]] = result[4] #1*
-	dieCard.markers[attackDie[5]] = result[5] #2*
+    damPiercing = result[4] + 2* result[5]
+    damNormal = result[2] + 2* result[3]
+    dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
+    dieCard.markers[attackDie[2]] = result[2] #1
+    dieCard.markers[attackDie[3]] = result[3] #2
+    dieCard.markers[attackDie[4]] = result[4] #1*
+    dieCard.markers[attackDie[5]] = result[5] #2*
 
-	d12DiceCount = 1
-	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
-		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
-		#debug("Random.org response code for effect roll: {}".format(d12[1]))
-		if d12[1]==200: # OK code received:
-			diceBankD12 = d12[0].splitlines()
-			notify ("Using die from Random.org")
-		else:
-			notify ("Using die from the native randomizer")
-			while (len(diceBankD12) < 100):
-				diceBankD12.append(rnd(0, 11))
+    d12DiceCount = 1
+    if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
+        d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
+        #debug("Random.org response code for effect roll: {}".format(d12[1]))
+        if d12[1]==200: # OK code received:
+            diceBankD12 = d12[0].splitlines()
+            notify ("Using die from Random.org")
+        else:
+            notify ("Using die from the native randomizer")
+            while (len(diceBankD12) < 100):
+                diceBankD12.append(rnd(0, 11))
 
-	effect = int(diceBankD12.pop()) + 1
-	dieCard.markers[DieD12] = effect
-	initiativeDone = getGlobalVariable("InitiativeDone")
-	if initiativeDone:
-		playSoundFX('Dice')
-		time.sleep(1)
-		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
-                return (result,effect)
-	else:
-		setGlobalVariable("InitiativeDone", "True")
-		iniRoll(effect)
-		return None,None
+    effect = int(diceBankD12.pop()) + 1
+    dieCard.markers[DieD12] = effect
+    initiativeDone = getGlobalVariable("InitiativeDone")
+    if initiativeDone:
+        playSoundFX('Dice')
+        time.sleep(1)
+        notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
+        return (result,effect)
+    else:
+        setGlobalVariable("InitiativeDone", "True")
+        iniRoll(effect)
+	return None,None
 
 ############################################################################
 ######################            Event Memory          ####################

@@ -391,48 +391,47 @@ def AskInitiative(playerID):
 		break
 
 def moveRDA(card):
-        """Moves the dice roll area/initiative/phase marker to the appropriate area"""
-        cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
-        cardType = card.type
-        rdaChoice = getGlobalVariable("DiceRollAreaPlacement")
-        mapDict = eval(getGlobalVariable("Map"))
-        mapX,mapY = mapDict["x"],mapDict["y"]
-        zoneS = mapDict["tileSize"]
-        rdaI,rdaJ = mapDict["RDA"]
-        mapHeight = mapDict["Y"]
+    """Moves the dice roll area/initiative/phase marker to the appropriate area"""
+    cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
+    cardType = card.type
+    rdaChoice = getGlobalVariable("DiceRollAreaPlacement")
+    mapDict = eval(getGlobalVariable("Map"))
+    mapX,mapY = mapDict["x"],mapDict["y"]
+    zoneS = mapDict["tileSize"]
+    rdaI,rdaJ = mapDict["RDA"]
+    mapHeight = mapDict["Y"]
 
-        rowY = mapY + rdaJ*zoneS
-        columnX = mapX + rdaI*zoneS
+    rowY = mapY + rdaJ*zoneS
+    columnX = mapX + rdaI*zoneS
 
-        x,y = 0,0
+    x,y = 0,0
 
-        if cardType == "DiceRoll":
-                if rdaChoice == "Side":
-                        x = mapX - cardW - 10
-                        y = rowY - zoneS + 100
-                else:
-                        x = columnX - zoneS
-                        y = mapY + mapHeight + 100
+    if cardType == "DiceRoll":
+		if rdaChoice == "Side":
+			x = mapX - cardW - 10
+			y = rowY - zoneS + 100
+		else:
+			x = columnX - zoneS
+			y = mapY + mapHeight + 100
+		mapDict['DiceBoxLocation'] = (x,y)
+		setGlobalVariable("Map",str(mapDict))
 
-        elif 'Player Token' in card.name:
-                if rdaChoice == "Side":
-                        x = mapX - cardW - 10 - 100
-                        y = rowY - zoneS
-                else:
-                        x = columnX - zoneS
-                        y = mapY + mapHeight + 10
+    elif 'Player Token' in card.name:
+		if rdaChoice == "Side":
+			x = mapX - cardW - 10 - 100
+			y = rowY - zoneS
+		else:
+			x = columnX - zoneS
+			y = mapY + mapHeight + 10
 
-        elif cardType=='Phase' and 'Phase' in card.name:
-                if rdaChoice == "Side":
-                        x = mapX - cardW - 10
-                        y = rowY - zoneS + 10
-                else:
-                        x = columnX - zoneS + 100
-                        y = mapY + mapHeight + 10 + 10
-
-        mapDict['DiceBoxLocation'] = (x,y)
-        setGlobalVariable("Map",str(mapDict))
-        card.moveToTable(x,y,True)
+    elif cardType=='Phase' and 'Phase' in card.name:
+		if rdaChoice == "Side":
+		    x = mapX - cardW - 10
+		    y = rowY - zoneS + 10
+		else:
+			x = columnX - zoneS + 100
+			y = mapY + mapHeight + 10 + 10
+    card.moveToTable(x,y,True)
 
 def setClearVars():
 	global deckLoaded
