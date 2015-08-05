@@ -360,7 +360,6 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
                 attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
-                #bookmark
                 if [True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
                         eventList = getEventList('Round')
                         if not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id]:
@@ -427,7 +426,6 @@ def rollDice(dice):
         if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
 
     dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
-    debug(str((dieCardX,dieCardY)))
     dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
     dieCard.anchor = (True)
     rnd(0,0)
@@ -758,6 +756,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        atkOS = Card(attack['OriginalSourceID'])
         #atkOS = Card(attack['OriginalSourceID'])
         #Check for helm of fear
         if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
@@ -774,8 +773,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         #Check for daze
-        #if (attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier') or not "Autonomous" in atkOS.traits:
-        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier':
+        if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll < 7:
                         notify("{} is so dazed that it completely misses!".format(attacker))
