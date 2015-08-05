@@ -1416,8 +1416,9 @@ def computeArmor(aTraitDict,attack,dTraitDict):
 
 def getRemainingLife(cTraitDict):
         card = Card(cTraitDict.get('OwnerID'))
-        life = getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0) #Preventing life gain is handled when traits are computed, not here
-        if life: return max(life - card.markers[Damage] - (card.markers[Tainted]*3),0)
+        damage =  card.markers[Damage] + card.markers[Tainted]*3 + (card.controller.damage if card.type=="Mage" else 0)
+        life = (card.controller.life if card.type=="Mage" else (getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0)))
+        if life: return max(life - damage,0)
 
 ############################################################################
 ######################		Battle Predictions	####################
