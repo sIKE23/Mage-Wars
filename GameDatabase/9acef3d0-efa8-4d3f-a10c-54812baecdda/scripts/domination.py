@@ -124,7 +124,7 @@ def loadMapFile(group, x=0, y=0):
                                 if tile:
                                         tile = table.create(tile,x,y)
                                         tile.anchor = True
-                                        if SPT: table.create("8731f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2 - 28,y+mapTileSize/2 - 40) #Add trap marker
+                                        if SPT: table.create("fc31f61b-2af8-41f7-8474-bb9be0f32926",x+mapTileSize/2 - 28,y+mapTileSize/2 - 40) #Add trap marker
                         y += mapTileSize
                 x += mapTileSize
                 y = -Y/2
@@ -180,14 +180,14 @@ def mapPlace(key,coords):
 
         x,y = splay(x,y,dVector)
         card = table.create(GUID,x,y)
-
+'''
         if card.type == "Creature":
                 card.special = "Scenario"
                 if "Orb Guardian" in card.name:
                         toggleGuard(card)
         elif card.type == "Conjuration":
                 card.special = "Scenario"
-
+'''
 ### Map Definitions ###
 
 mapTileDict = {
@@ -202,8 +202,8 @@ mapTileDict = {
         "." : "4f1b033d-7923-4e0e-8c3d-b92ae19fbad1"} #Generic Tile
 
 mapObjectsDict = {
-        "Orb" : {"GUID":"3d339a9d-8804-4afa-9bd5-1cabb1bebc9f", "Offset":175, "Splay Vector": (-1,0)},
-        "Sslak" : {"GUID":"bf217fd3-18c0-4b61-a33a-117167533f3d", "Offset":5, "Splay Vector": (1,0)},
-        "Usslak" : {"GUID":"54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd", "Offset":5, "Splay Vector": (1,0)},
-        "SecretPassage" : {"GUID":"a4b3bb92-b597-441e-b2eb-d18ef6b8cc77", "Offset":175, "Splay Vector": (-1,0)}
+        "Orb" : {"GUID":"fd339a9d-8804-4afa-9bd5-1cabb1bebc9f", "Offset":175, "Splay Vector": (-1,0)},
+        "Sslak" : {"GUID":"865954e9-4c67-4858-b3e0-484c66e19db9", "Offset":5, "Splay Vector": (1,0)},
+        "Usslak" : {"GUID":"5688957a-e243-4999-8301-b869be3f6fdb", "Offset":5, "Splay Vector": (1,0)},
+        "SecretPassage" : {"GUID":"fb43bb92-b597-441e-b2eb-d18ef6b8cc77", "Offset":175, "Splay Vector": (-1,0)}
         }

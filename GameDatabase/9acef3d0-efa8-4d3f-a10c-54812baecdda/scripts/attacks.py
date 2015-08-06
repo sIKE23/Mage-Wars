@@ -832,9 +832,11 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 notify('Error: invalid attack format - no dice found')
                 return
         damageRoll,effectRoll = rollDice(dice)
-        if "V'Tar Orb" in defender.name and sum(damageRoll) != 0: #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
+        if "V'Tar Orb" in defender.name and sum(damageRoll) != 0 and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
                 notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
                 remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
+                return
+        elif if "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
                 return
         setGlobalVariable("avoidAttackTempStorage","Hit")
         interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
