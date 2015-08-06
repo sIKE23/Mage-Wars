@@ -180,14 +180,14 @@ def mapPlace(key,coords):
 
         x,y = splay(x,y,dVector)
         card = table.create(GUID,x,y)
-'''
+
         if card.type == "Creature":
                 card.special = "Scenario"
                 if "Orb Guardian" in card.name:
                         toggleGuard(card)
         elif card.type == "Conjuration":
                 card.special = "Scenario"
-'''
+
 ### Map Definitions ###
 
 mapTileDict = {

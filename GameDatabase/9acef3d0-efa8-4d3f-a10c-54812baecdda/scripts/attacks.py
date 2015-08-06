@@ -757,7 +757,6 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         atkOS = Card(attack['OriginalSourceID'])
-        #atkOS = Card(attack['OriginalSourceID'])
         #Check for helm of fear
         if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
                 notify("The Helm of Fear radiates a terrifying aura!")
@@ -836,7 +835,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
                 remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
                 return
-        elif if "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
+        elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
                 return
         setGlobalVariable("avoidAttackTempStorage","Hit")
         interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
