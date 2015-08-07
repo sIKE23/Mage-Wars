@@ -185,6 +185,7 @@ def mapPlace(key,coords):
                 card.special = "Scenario"
                 if "Orb Guardian" in card.name:
                         toggleGuard(card)
+                        card.highlight = guardianColor
         elif card.type == "Conjuration":
                 card.special = "Scenario"
 
@@ -207,3 +208,5 @@ mapObjectsDict = {
         "Usslak" : {"GUID":"5688957a-e243-4999-8301-b869be3f6fdb", "Offset":5, "Splay Vector": (1,0)},
         "SecretPassage" : {"GUID":"fb43bb92-b597-441e-b2eb-d18ef6b8cc77", "Offset":175, "Splay Vector": (-1,0)}
         }
+
+guardianColor = "#7EC6DE" #Light Blue - R=126 G=198 B=222 

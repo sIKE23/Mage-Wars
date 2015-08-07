@@ -52,7 +52,6 @@
 	</documents>
 	<gameModes>
 		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
-		<gameMode name="2v2" shortDescription="2 vs. 2 Player Game" image="Documents/Images/MageWars-2v2.png" playerCount="4" />
 	</gameModes>
 	<globalvariables>
 		<globalvariable name="TableSetup" value="False"/>
