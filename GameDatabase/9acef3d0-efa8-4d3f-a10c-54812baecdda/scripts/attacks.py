@@ -157,6 +157,7 @@ getAttackList:
 def getAttackList(card):
         """This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
         if not card: return [] #Return an empty list if passed a blank argument
+        if card.Name=="Dancing Scimitar" and timesHasUsedAbility(card) > 0: return []  #Dancing Scimitar's attack is only once per round.
         attackList = []
         if card.AttackBar != "":
                 rawData = card.AttackBar
@@ -625,6 +626,7 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
                                         defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
         for c in table:
                 if (dTraitDict.get("Incapacitated") and not ("Autonomous" in c.Traits or c.Name in ["Force Orb","Force Sword"])): continue
+                if c.Name=="Dancing Scimitar" and timesHasUsedAbility(c) > 0: continue #Dancing Scimitar's defense is only once per round.
                 if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone' and (c.controller == defender.controller if c.type == "Equipment" else True)) and not c.markers[Disable]):
                         rawText = c.text.split('\r\n[')
                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
@@ -695,6 +697,8 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
         if defSource.Name == "Forcemaster": #Flip forcemaster's deflect marker
                 defSource.markers[DeflectR]=0
                 defSource.markers[DeflectU]=1
+        if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
+                rememberAbilityUse(defSource) #Bookmark
         if effectRoll >= defense.get('Minimum',13):
                notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
                return defense
@@ -757,6 +761,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
         atkOS = Card(attack['OriginalSourceID'])
+        if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
         #Check for helm of fear
         if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
                 notify("The Helm of Fear radiates a terrifying aura!")
