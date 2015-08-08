@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
-	name="Druid vs Necromancer" 
-	id="fc3d683e-c63e-4257-93d8-cad598015d1e" 
-	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
-	gameVersion="1.4.2.1" 
-	version="1.12.7.0">
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Druid vs Necromancer"
+	id="fc3d683e-c63e-4257-93d8-cad598015d1e"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="1.4.2.1"
+	version="1.13.0.0">
 	<markers>
 		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
 		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
@@ -23,7 +23,15 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
-			<alternate name="Druid" type="B" />
+				<alternate name="Druid" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="Traits" value="Poison Immunity" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
+				</alternate>
 		</card>
 		<card id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260" name="Druid Stats">
 			<property name="Type" value="Magestats" />
@@ -36,7 +44,15 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Poison Immunity" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
-			<alternate name="Necromancer" type="B" />
+				<alternate name="Necromancer" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+					<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="Traits" value="Poison Immunity" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
+				</alternate>
 		</card>
 		<card id="682d3b40-7c08-437b-9c88-16e2f389773f" name="Necromancer Stats">
 			<property name="Type" value="Magestats" />
@@ -344,7 +360,7 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=5" />
-			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;" />
+			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Climbing" />
 			<property name="Text" value="Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
@@ -648,7 +664,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +2, Cantrip, Druid Only" />
-			<property name="Text" value="Mage gains Armor +2 and Regenerate 2." />
+			<property name="Text" value="Mage gains Armor +2 and Regenerate 2.&#xD;&#xA;[Armor +2] [Regenerate 2]" />
 			<property name="CardID" value="DNE01" />
 		</card>
 		<card id="69227c1a-b122-4395-a31a-463dab9d16e1" name="Rise Again">
@@ -695,7 +711,7 @@
 			<property name="Stats" value="Location=Cloak" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dark Mage Only" />
-			<property name="Text" value="Mage gains the Obscured and Light -2 traits." />
+			<property name="Text" value="Mage gains the Obscured and Light -2 traits.&#xD;&#xA;[Obscured] [Light -2]" />
 			<property name="CardID" value="DNQ01" />
 		</card>
 		<card id="70e1dca8-85ef-40f0-a18a-6904ed4539de" name="Death Ring">
@@ -957,7 +973,7 @@
 		</card>
 
 
-		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">			
+		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">
 			<property name="Type" value="Conjuration" />
 			<property name="Stats" value="Armor=-, Life=1" />
 				<alternate name="Vine Marker Black" type="B">
@@ -965,7 +981,5 @@
 					<property name="Stats" value="Armor=-, Life=1" />
 				</alternate>
 		</card>
-
-
 	</cards>
 </set>

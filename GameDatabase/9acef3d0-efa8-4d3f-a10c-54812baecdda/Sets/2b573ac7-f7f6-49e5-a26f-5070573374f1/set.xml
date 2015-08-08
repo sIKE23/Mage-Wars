@@ -4,7 +4,7 @@
 	id="2b573ac7-f7f6-49e5-a26f-5070573374f1" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="1.4.2.1" 
-	version="1.12.0.0">
+	version="1.13.0.0">
  	<markers>
  			<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
@@ -27,6 +27,15 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Deflect: The Forcemaster uses telekinesis to deflect attacks. She has a Defense which can be used once per round, and avoids attacks on a roll of 7+. She must pay 1 mana each time she uses this Defense (before rolling for the Defense). This Defense uses its own unique ready marker &quot;Deflect&quot;.&#xD;&#xA;Force Pull: Once per round, she may cast this quick force spell. Target creature is Pushed 1 zone TOWARDS her. Will not Push a creature through a wall with the Passage Attacks trait." />
+				<alternate name="Forcemaster" type="B">
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the Mind school of Magic. Non-Mind creature spells cost triple during spellbook construction." />
+					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Defense=7+ 1x" />
+					<property name="MageSchoolCost" value="Mind=1, Creature=3" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="Traits" value="" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Deflect: The Forcemaster uses telekinesis to deflect attacks. She has a Defense which can be used once per round, and avoids attacks on a roll of 7+. She must pay 1 mana each time she uses this Defense (before rolling for the Defense). This Defense uses its own unique ready marker &quot;Deflect&quot;.&#xD;&#xA;Force Pull: Once per round, she may cast this quick force spell. Target creature is Pushed 1 zone TOWARDS her. Will not Push a creature through a wall with the Passage Attacks trait." />
+				</alternate>
 		</card>
 		<card id="6d6362dc-1130-4bd0-ae5b-55ae2c59bc82" name="Forcemaster Stats">
 			<property name="Type" value="Magestats" />
@@ -39,7 +48,16 @@
 			<property name="Traits" value="Melee +1" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Veterans: Whenever a friendly non-Mage creature melee attacks and destroys an enemy creature, place a veteran badge token on that creature (maximum of one token per creature). That creature gains Melee +1 and Armor +1.&#xD;&#xA;Battle Orders: Once per round, the Warlord may pay 1 mana and cast one of the following quick command spells. The chosen spell affects all friendly soldiers in his zone at the time it is cast and the effect lasts until the end of the round. To Battle! - Gain charge +1 trait; Release Volley! - Gain Ranged +1 trait; On Guard! - Gain Melee +1 and Armor +1 while guarding.&#xD;&#xA;Battle Skill: Warlord has Melee +1 trait." />
-		</card>
+				<alternate name="Warlord" type="B">					
+					<property name="Type" value="Mage" />
+					<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
+					<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+					<property name="MageSchoolCost" value="War=1, Earth=1, Arcane=3" />
+					<property name="Traits" value="Melee +1" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Veterans: Whenever a friendly non-Mage creature melee attacks and destroys an enemy creature, place a veteran badge token on that creature (maximum of one token per creature). That creature gains Melee +1 and Armor +1.&#xD;&#xA;Battle Orders: Once per round, the Warlord may pay 1 mana and cast one of the following quick command spells. The chosen spell affects all friendly soldiers in his zone at the time it is cast and the effect lasts until the end of the round. To Battle! - Gain charge +1 trait; Release Volley! - Gain Ranged +1 trait; On Guard! - Gain Melee +1 and Armor +1 while guarding.&#xD;&#xA;Battle Skill: Warlord has Melee +1 trait." />
+				</alternate>
+			</card>
 		<card id="3b8c0ce6-8b89-4f40-b60a-a1530507ca4f" name="Warlord Stats">
 			<property name="Type" value="Magestats" />
 		</card>
@@ -84,7 +102,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Dice=4] [d12] [6-10 = Daze; 11+ = Stun]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Dice=4] [d12] [6-10 = Daze; 11+ = Stun] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWA03" />
@@ -373,9 +391,9 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=11" />
-			<property name="AttackBar" value="Boulder:&#xD;&#xA;[Ranged:2-3] [Dice=8] [Can only target Corporeal Conjurations]&#xD;&#xA;Rock Storm:&#xD;&#xA;[Ranged:2-3] [Zone Attack] [Dice=8] [Unavoidable]" />
+			<property name="AttackBar" value="Boulder:&#xD;&#xA;[Ranged:2-3] [Dice=8] [Can only target Corporeal Conjurations]&#xD;&#xA;Rock Storm:&#xD;&#xA;[Ranged:2-3] [Zone Attack] [Dice=3] [Unavoidable]" />
 			<property name="Traits" value="Zone Exclusive, Flame +2, Legendary, Warlord Only" />
-			<property name="Text" value="Akiro&apos;s starts with 1 Load token on it. Each Upkeep Phase place 1 token on it (to a maximum or 2). Before or after any friendly Action Phase, you may remove 2 tokens to make 1 of its 2 attacks listed above." />
+			<property name="Text" value="Akiro&apos;s Hammer starts with 1 Load token on it. Each Upkeep Phase place 1 token on it (to a maximum of 2). Before or after any friendly Action Phase, you may remove 2 tokens to make 1 of its 2 attacks listed above." />
 			<property name="CardID" value="FWJ01" />
 		</card>
 		<card id="d5a7e765-259d-449f-b38f-591990d0a24d" name="Archer&apos;s Watchtower">
@@ -448,7 +466,7 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
-			<property name="Stats" value="Life=7, Armor=0" />
+			<property name="Stats" value="Armor=0, Life=7" />
 			<property name="AttackBar" value="Wicked Spikes:&#xD;&#xA;[Dice=2] [Unavoidable] [Piercing +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Mangler Caltrops attacks each non-Flying creature immediately after it enters the zone. Mangler Caltrops hinders non-Flying creatures. Ranged attacks cannot target Caltrops" />

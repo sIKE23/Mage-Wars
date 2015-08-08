@@ -2,7 +2,7 @@
 
 *...
 1..2
-.5.3
+5..3
 ...*
 #Map#
 
@@ -10,5 +10,6 @@
 
 @Sslak=[(1,2),(2,1),(2,3),(3,2),(3,4),(4,3)]
 
-@StartPosition1=(1,4)
-@StartPosition2=(4,1)
+@startZoneDict=[{ "Player" : 1, "Zone" : "1,4" },{ "Player" : 2, "Zone" : "4,1" }]
+
+@RDA=(2,2)

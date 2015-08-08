@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.7.0     #######################################
+##########################    v1.13.0.0     #######################################
 ###########################################################################
 # -*- coding: utf-8 -*-
 import sys
@@ -54,7 +54,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
         if aTraitDict.get("Incapacitated"):
                 if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.name.split(',')[0]))
                 return {}
-        if attacker and aTraitDict.get('Charge') and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
+        if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if c.Name=="Lion Savagery" and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
         if not attacker: defender = None
         dTraitDict = (computeTraits(defender) if defender else {})
         attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
@@ -157,6 +157,7 @@ getAttackList:
 def getAttackList(card):
         """This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
         if not card: return [] #Return an empty list if passed a blank argument
+        if card.Name=="Dancing Scimitar" and timesHasUsedAbility(card) > 0: return []  #Dancing Scimitar's attack is only once per round.
         attackList = []
         if card.AttackBar != "":
                 rawData = card.AttackBar
@@ -346,7 +347,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
         atkOS = Card(attack['OriginalSourceID'])
         if attacker and not "Autonomous" in atkOS.traits:
                 if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
-                        if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)
+                        if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
                         if attack.get('RangeType') == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
                 #No restriction on how many times may be applied
                 if not atkTraits.get('Spell'):
@@ -360,7 +361,6 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
                 attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
-                #bookmark
                 if [True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
                         eventList = getEventList('Round')
                         if not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id]:
@@ -408,81 +408,81 @@ def canDeclareAttack(card):
 ############################################################################
 
 def rollDice(dice):
-        mute()
-        global diceBank
-	global diceBankD12
-        mapDict = eval(getGlobalVariable('Map'))
-	if not deckLoaded == True:
-		notify("Please Load a Spellbook first. (Ctrl+L)")
-		choiceList = ['OK','Load Blank Spellbook (not recommended)']
-		colorsList = ['#FF0000','#0000FF']
-		choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
-		if choice == 2:
-                        global blankSpellbook
-                        blankSpellbook = True
-                        onLoadDeck(me,[me.hand,table])
-		return
+    mute()
+    global diceBank
+    global diceBankD12
+    mapDict = eval(getGlobalVariable('Map'))
+    if not deckLoaded == True:
+        notify("Please Load a Spellbook first. (Ctrl+L)")
+        choiceList = ['OK','Load Blank Spellbook (not recommended)']
+        colorsList = ['#FF0000','#0000FF']
+        choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
+        if choice == 2:
+            global blankSpellbook
+            blankSpellbook = True
+            onLoadDeck(me,[me.hand,table])
+        return
 
-	for c in table:
-		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me:
-			c.delete()
-	dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
-	dieCard.anchor = (True)
-	rnd(0,0)
-	diceFrom = ""
-        count = dice
-        if (len(diceBank) < count): #diceBank running low - fetch more
-		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
-		#debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
-		if random_org[1]==200: # OK code received:
-			diceBank = random_org[0].splitlines()
-			diceFrom = "from Random.org"
-		else:
-#			notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
-			diceFrom = "from the native randomizer"
-			while (len(diceBank) < 20):
-				diceBank.append(rnd(0, 5))
+    for c in table:
+        if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
 
-	result = [0,0,0,0,0,0]
-	for x in range(count):
-		roll = int(diceBank.pop())
-		result[roll] += 1
+    dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
+    dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+    dieCard.anchor = (True)
+    rnd(0,0)
+    diceFrom = ""
+    count = dice
+    if (len(diceBank) < count): #diceBank running low - fetch more
+        random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
+	#debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
+        if random_org[1]==200: # OK code received:
+            diceBank = random_org[0].splitlines()
+            diceFrom = "from Random.org"
+        else:
+        #notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
+            diceFrom = "from the native randomizer"
+            while (len(diceBank) < 20):
+                diceBank.append(rnd(0, 5))
+
+    result = [0,0,0,0,0,0]
+    for x in range(count):
+        roll = int(diceBank.pop())
+        result[roll] += 1
 	#debug("diceRoller result: {}".format(result))
-	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
+    notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
 
-	damPiercing = result[4] + 2* result[5]
-	damNormal = result[2] + 2* result[3]
-	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
-	dieCard.markers[attackDie[2]] = result[2] #1
-	dieCard.markers[attackDie[3]] = result[3] #2
-	dieCard.markers[attackDie[4]] = result[4] #1*
-	dieCard.markers[attackDie[5]] = result[5] #2*
+    damPiercing = result[4] + 2* result[5]
+    damNormal = result[2] + 2* result[3]
+    dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
+    dieCard.markers[attackDie[2]] = result[2] #1
+    dieCard.markers[attackDie[3]] = result[3] #2
+    dieCard.markers[attackDie[4]] = result[4] #1*
+    dieCard.markers[attackDie[5]] = result[5] #2*
 
-	d12DiceCount = 1
-	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
-		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
-		#debug("Random.org response code for effect roll: {}".format(d12[1]))
-		if d12[1]==200: # OK code received:
-			diceBankD12 = d12[0].splitlines()
-			notify ("Using die from Random.org")
-		else:
-			notify ("Using die from the native randomizer")
-			while (len(diceBankD12) < 100):
-				diceBankD12.append(rnd(0, 11))
+    d12DiceCount = 1
+    if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
+        d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
+        #debug("Random.org response code for effect roll: {}".format(d12[1]))
+        if d12[1]==200: # OK code received:
+            diceBankD12 = d12[0].splitlines()
+            notify ("Using die from Random.org")
+        else:
+            notify ("Using die from the native randomizer")
+            while (len(diceBankD12) < 100):
+                diceBankD12.append(rnd(0, 11))
 
-	effect = int(diceBankD12.pop()) + 1
-	dieCard.markers[DieD12] = effect
-	initiativeDone = getGlobalVariable("InitiativeDone")
-	if initiativeDone:
-		playSoundFX('Dice')
-		time.sleep(1)
-		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
-                return (result,effect)
-	else:
-		setGlobalVariable("InitiativeDone", "True")
-		iniRoll(effect)
-		return None,None
+    effect = int(diceBankD12.pop()) + 1
+    dieCard.markers[DieD12] = effect
+    initiativeDone = getGlobalVariable("InitiativeDone")
+    if initiativeDone:
+        playSoundFX('Dice')
+        time.sleep(1)
+        notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
+        return (result,effect)
+    else:
+        setGlobalVariable("InitiativeDone", "True")
+        iniRoll(effect)
+	return None,None
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -626,6 +626,7 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
                                         defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
         for c in table:
                 if (dTraitDict.get("Incapacitated") and not ("Autonomous" in c.Traits or c.Name in ["Force Orb","Force Sword"])): continue
+                if c.Name=="Dancing Scimitar" and timesHasUsedAbility(c) > 0: continue #Dancing Scimitar's defense is only once per round.
                 if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Type == 'Mage' and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone' and (c.controller == defender.controller if c.type == "Equipment" else True)) and not c.markers[Disable]):
                         rawText = c.text.split('\r\n[')
                         traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
@@ -696,6 +697,8 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
         if defSource.Name == "Forcemaster": #Flip forcemaster's deflect marker
                 defSource.markers[DeflectR]=0
                 defSource.markers[DeflectU]=1
+        if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
+                rememberAbilityUse(defSource) #Bookmark
         if effectRoll >= defense.get('Minimum',13):
                notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
                return defense
@@ -736,6 +739,7 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
         for p in playersList:
                 if p != me: otherPlayer = p
         selfAttached = revealAttachmentQuery([attacker,defender],prevStepName)
+
         if (otherPlayer == me) or (not selfAttached and refusedReveal):
                 aTraitDict = computeTraits(attacker)
                 dTraitDict = computeTraits(defender)
@@ -756,6 +760,16 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         mute()
         attacker = Card(aTraitDict.get('OwnerID'))
         defender = Card(dTraitDict.get('OwnerID'))
+        atkOS = Card(attack['OriginalSourceID'])
+        if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
+        #Check for helm of fear
+        if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
+                notify("The Helm of Fear radiates a terrifying aura!")
+                damageRoll,effectRoll = rollDice(0)
+                if effectRoll >= 9:
+                        notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.name.split(',')[0]))
+                        return
+                else: notify("{} resists the urge to panic!".format(attacker.name.split(',')[0]))
         #Remember arcane zap
         if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
         #If the defender is not flying, the attacker should lose the flying trait
@@ -763,7 +777,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         #Check for daze
-        if attacker.markers[Daze] and not attack.get('RangeType') == 'Damage Barrier':
+        if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll < 7:
                         notify("{} is so dazed that it completely misses!".format(attacker))
@@ -800,6 +814,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
                         notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
                         interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
                         return
+
         if attack.get('EffectType','Attack')=='Attack':
                if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
                        #Spiked buckler code here, perhaps?
@@ -821,6 +836,12 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
                 notify('Error: invalid attack format - no dice found')
                 return
         damageRoll,effectRoll = rollDice(dice)
+        if "V'Tar Orb" in defender.name and sum(damageRoll) != 0 and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
+                notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
+                remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
+                return
+        elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
+                return
         setGlobalVariable("avoidAttackTempStorage","Hit")
         interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
 
@@ -917,10 +938,9 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                 if healingAmt > 0: healingQuery(dTraitDict,
                                                 'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
                                                 healingAmt,
-                                                "{} heals {} for {} damage!".format(attacker.name,defender.name,'{}'))
+                                                "{} heals {} for {} damage!".format(attacker.name,defender.name,{}))
                 else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
                 return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
-
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
         actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
         if defender.markers[VoltaricON] and actualDmg:#Voltaric Shield
@@ -930,7 +950,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
                 defender.markers[VoltaricOFF] = 1
         if defender.type == "Creature" or defender.type == "Mage": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
         else: dManaDrain = ""
-                
+
         choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
                                                                                                           actualDmg,
                                                                                                           ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
@@ -1037,6 +1057,7 @@ def malakaisFirePrompt(heathen):
         mute()
         if me.mana >= 1 and askChoice("Smite the heathen with Malakai's Fire?",["Yes (1 mana)","No"],["#01603e","#de2827"])==1:
                 me.mana -= 1
+                notify("{} pays 1 mana to Smite the heathen {} with Malakai's Fire.".format(me,heathen))
                 rememberPlayerEvent("Malakai's Fire")
                 remoteCall(heathen.controller,"malakaisFireReceiptPrompt",[heathen])
 
@@ -1206,10 +1227,22 @@ def computeTraits(card):
                                                 append('Flame +1')
                                                 adraAbility = False
                                                 debug('Triggered')
+                                if cName == "Sentinel of V'tar":
+                                        for o in table:
+                                                isWithOrb = False
+                                                if ("V'Tar Orb" in c.name and
+                                                    getZoneContaining(c) == getZoneContaining(card)): isWithOrb = True
+                                                if isWithOrb:
+                                                        extend(['Unmovable','Anchored'])
+                                                        if markers[Guard]: extend(['Armor +2','Melee +1'])
                                 elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
                         # Get traits from cards in this zone
                         if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
                                 #Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
+                                if (name == 'Skeelax, Taunting Imp'
+                                        and c.markers[Burn]): append('Regenerate 2') #and phase = upkeep, but I don't think this matters for now.
+                                elif (name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and "V'Tar Orb" in c.name):
+                                        extend(['Unmovable','Anchored'])
                                 if cType == 'Enchantment':
                                         if (cName == 'Fortified Position' and
                                             cardType in ['Creature','Mage'] and
@@ -1218,11 +1251,16 @@ def computeTraits(card):
                                             cController == controller and
                                             cardType in ['Creature','Mage'] and
                                             'Living' in rawTraitsList): append('Aegis 1')
+                                        elif (cName == 'Astral Anchor' and
+                                            cardType in ['Creature','Mage']): append('Anchored')
                                         elif (cName == 'Standard Bearer' and
                                             cController == controller and
                                             getAttachTarget(c) != card and
                                             cardType in ['Creature','Mage']): extend(['Melee +1','Armor +1'])
                                 elif cType == 'Conjuration':
+                                        if (name == 'Guard Dog'
+                                            and cController == controller
+                                            and not getAttachTarget(c)): append('Vigilant')
                                         if (cName == 'Mohktari, Great Tree of Life' and
                                             cController == controller and
                                             cardType in ['Creature','Mage'] and
@@ -1384,8 +1422,9 @@ def computeArmor(aTraitDict,attack,dTraitDict):
 
 def getRemainingLife(cTraitDict):
         card = Card(cTraitDict.get('OwnerID'))
-        life = getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0) #Preventing life gain is handled when traits are computed, not here
-        if life: return max(life - card.markers[Damage] - (card.markers[Tainted]*3),0)
+        damage =  card.markers[Damage] + card.markers[Tainted]*3 + (card.controller.damage if card.type=="Mage" else 0)
+        life = (card.controller.life if card.type=="Mage" else (getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0)))
+        if life: return max(life - damage,0)
 
 ############################################################################
 ######################		Battle Predictions	####################

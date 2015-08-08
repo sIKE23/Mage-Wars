@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.12.4.0     #######################################
+##########################    v1.13.0.0     #######################################
 ###########################################################################
 ############################
 # Card Attachment and Alignment
@@ -336,6 +336,7 @@ def canBind(card,target):
         or (tName == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
         or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
         or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
+        or (tName == 'Sectarus, Dark Rune Sword' and (card.Type == 'Enchantment' and 'Curse' in card.Subtype))
 #Spawnpoints
         or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype and target.markers[Mana] >= 2)
         or (tName == 'Battle Forge' and card.Type == 'Equipment')
