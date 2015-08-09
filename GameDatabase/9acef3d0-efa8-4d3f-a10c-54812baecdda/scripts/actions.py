@@ -1566,6 +1566,7 @@ def rotateCard(card, x = 0, y = 0):
 def flipcard(card, x = 0, y = 0):
 	mute()
 	cardalt = card.alternates
+	cZone = getZoneContaining(card)
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == '':
@@ -1652,7 +1653,7 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[EggToken] = 1
 			if "Talos" == card.Name:
 					toggleAction(card)
-			if "Orb Guardian" in card.name:
+			if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
 					card.markers[Guard] = 1
 		if card.Type == "Conjuration":
 			if "Ballista" == card.Name:
@@ -1719,6 +1720,9 @@ def discard(card, x=0, y=0):
 		if card.Type == "Mage":
 			notify("{} decreases the Channeling stat by 1 as a result of {} being discarded".format(me, card))
 			me.Channeling -= 1
+	elif card.special == "Scenario":
+		obliterate(card)
+		return
 	card.isFaceUp = True
 	detach(card)
 	card.moveTo(me.piles['Discard'])

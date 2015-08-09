@@ -179,7 +179,7 @@ def mapPlace(key,coords):
         y += offset
 
         x,y = splay(x,y,dVector)
-        card = table.create(GUID,x,y)
+        card = table.create(GUID,x,y,persist = True)
 
         if card.type == "Creature":
                 card.special = "Scenario"
