@@ -995,7 +995,7 @@ Skeelax is a special creature who can taunt his enemies into attacking him. His 
 
 - Taunt is a psychic effect, so it does not work on creatures with Psychic Immunity. It also cannot affect Mages.
 
-- Remove Taunt at the end of the creature’s next Action Phase, or when Skeelax, Taunting Imp is activated, whichever comes first.
+- Remove Taunt at the end of the creature's next Action Phase, or when Skeelax, Taunting Imp is activated, whichever comes first.
 #
 Terrain
 Terrain is a type of conjuration spell players will be able to cast in future Mage Wars expansions. A terrain spell changes a zone, giving it special new features. For example, a “Mud” terrain spell might turn a zone into a sticky pool of mud, whereas a “Hellscape” terrain spell might create a hellish fire zone.
@@ -1010,14 +1010,14 @@ Terrain is a type of conjuration spell players will be able to cast in future Ma
 
 - If, for some reason, the Terrain that overlays a special tile is removed or destroyed, the original special ability of the tile functions again.
 #
-V’Tar
-This is the raw and unrefined power of the plane of Voltari. It has a myriad of uses, including powering up the V’Torrak to achieve victory in Domination.
+V'Tar
+This is the raw and unrefined power of the plane of Voltari. It has a myriad of uses, including powering up the V'Torrak to achieve victory in Domination.
 #
-V’Tar Orb
-The V’Tar Orbs are the key to powering the ancient V’Torrak artifact. Mages fight for control of these orbs in the Domination scenario.
+V'Tar Orb
+The V'Tar Orbs are the key to powering the ancient V'Torrak artifact. Mages fight for control of these orbs in the Domination scenario.
 #
-V’Torrak Artifact
-This zone contains a legendary V’Torrak artifact capable of breaking down the barriers between worlds and providing nearly limitless mana to its controller.
+V'Torrak Artifact
+This zone contains a legendary V'Torrak artifact capable of breaking down the barriers between worlds and providing nearly limitless mana to its controller.
 #
 Warded,Ward
 This object is protected from hostile magic. It cannot be targeted by an enemy controlled incantation or enchantment spell. It can still be affected by enemy incantations or enchantments which do not directly target it, such as a zone effect.

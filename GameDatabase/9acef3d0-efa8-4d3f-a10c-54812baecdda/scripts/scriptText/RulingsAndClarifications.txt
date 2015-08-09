@@ -30,16 +30,16 @@ Anvil Throne Warlord Stats
 
 - Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound to this equipment or using a spell action provided by this equipment.
 
-- Rune of Precision: This equipment’s non-spell attacks gain the Piercing +1 trait.
+- Rune of Precision: This equipment's non-spell attacks gain the Piercing +1 trait.
 
 - Rune of Reforging: This equipment gains the Cantrip trait.
 
 - Rune of Shielding:  If this equipment gives your Mage a Defense, the first time each round that defense is used, add +2 to the Defense roll.
 #
 Altar of Oblivion
-If you control this zone, once per round, before or after a friendly creature’s Action Phase, you may destroy a creature that you own and control, to gain mana equal to half its casting cost and one V’Tar. Use a Ready marker to keep track of this ability. 
+If you control this zone, once per round, before or after a friendly creature's Action Phase, you may destroy a creature that you own and control, to gain mana equal to half its casting cost and one V'Tar. Use a Ready marker to keep track of this ability. 
 
-- The creature you destroy can be anywhere in the arena; it does not have to be in the Altar of Oblivion’s zone.
+- The creature you destroy can be anywhere in the arena; it does not have to be in the Altar of Oblivion's zone.
 #
 Armor Ward
 For example, if the opponent casts a Dissolve spell to attempt to destroy your Hunting Bow, he will pay the normal 11 mana to cast the Dissolve. Then, when the Dissolve spell resolves, he will have to pay an additional 4 mana to destroy the Hunting Bow.
@@ -103,7 +103,7 @@ Burst of Thorns causes a Vine marker to explode in shower of sharp thorns. The V
 If Reverse Attack is revealed against an attack from Burst of Thorns, the Reverse Attack acts to avoid the attack, but has no other effect. Since the Vine marker is the source of the attack (not the Mage), the Vine marker would "attack itself" which has no effect.
 ##### C Section #####
 Cascading Force Push
-When you cast Cascading Force Push, you must choose a target creature, like normal. That creature gets Pushed one zone in the direction of your choice. After that creature has been Pushed, you may pay three additional Mana to choose a different creature in the Pushed creature’s new zone and Push that creature one zone in the direction of your choice. You may continue to pay three Mana to Push a creature as long as there are different creatures you can Push.
+When you cast Cascading Force Push, you must choose a target creature, like normal. That creature gets Pushed one zone in the direction of your choice. After that creature has been Pushed, you may pay three additional Mana to choose a different creature in the Pushed creature's new zone and Push that creature one zone in the direction of your choice. You may continue to pay three Mana to Push a creature as long as there are different creatures you can Push.
 
 - You can Push multiple creatures back and forth between the same two zones, paying the required Mana each time.
 
@@ -216,8 +216,8 @@ You can only heal up to as much damage as the amount you deal to the target. Dra
 
 The roll is made as part of the resolution of the spell. There is no opportunity to reveal enchantments between when the roll is made and when the damage is dealt.
 #
-Dragon’s Breath
-When you cast Dragon’s Breath, you make the attack shown on the target creature as normal. Then, as part of the same action, you may also attack another target creature exactly one zone further away, but still in range of the spell.
+Dragon's Breath
+When you cast Dragon's Breath, you make the attack shown on the target creature as normal. Then, as part of the same action, you may also attack another target creature exactly one zone further away, but still in range of the spell.
 #
 Drain Power
 The target can't lose more mana than he has in his mana supply, and the caster cannot gain more mana than the target loses.
@@ -608,7 +608,7 @@ If Rouse the Beast is cast during the Final Quickcast Phase, it will still flip 
 Sacrificial Altar
 This does not target either the creature destroyed or the creature it gives the bonus to.
 #
-Samandriel’s Circle
+Samandriel's Circle
 Living creatures in this zone gain the Regenerate 1 trait. During each Upkeep Phase, each Nonliving creature in this zone receives 1 direct damage. This zone hinders Nonliving creatures.
 #
 Sardonyx, Blight of the Living
@@ -729,13 +729,13 @@ This only affects the next attack, not the entire next attack action.
 Vine Tree
 If Vine Tree is deployed during the Deployment Phase (for instance by a Seedling Pod), you may still use its ability to place a Vine Marker during that same Deployment Phase.
 #
-V’Tarrian Energy Wave
+V'Tarrian Energy Wave
 The two zones targeted by this spell must both be within range and adjacent to each other. The spell attacks both zones and any walls that may be between them.
 #
-V’Torrak
-If you control this zone, once per round, during the Deployment Phase, you may Summon one Sslak into this zone. To Summon the Sslak, you must pay its mana cost and spend one V’Tar (more on V’Tar later), fetching its spell card from outside your spellbook. As with any creature you Summon, the Sslak is under your control.
+V'Torrak
+If you control this zone, once per round, during the Deployment Phase, you may Summon one Sslak into this zone. To Summon the Sslak, you must pay its mana cost and spend one V'Tar (more on V'Tar later), fetching its spell card from outside your spellbook. As with any creature you Summon, the Sslak is under your control.
 
-- Note that if this tile loses its special ability [perhaps because a terrain spell replaces its effect] the V’Torrak artifact is still considered "buried beneath the zone", and the player who collects enough V’Tar still wins the game!. Even in arenas without the V’Torrak, it is still possible to win domination.
+- Note that if this tile loses its special ability [perhaps because a terrain spell replaces its effect] the V'Torrak artifact is still considered "buried beneath the zone", and the player who collects enough V'Tar still wins the game!. Even in arenas without the V'Torrak, it is still possible to win domination.
 #
 ##### W Section #####
 #
