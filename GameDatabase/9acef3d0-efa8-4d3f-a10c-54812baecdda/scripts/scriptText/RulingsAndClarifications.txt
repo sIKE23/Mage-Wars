@@ -223,10 +223,12 @@ Drain Power
 The target can't lose more mana than he has in his mana supply, and the caster cannot gain more mana than the target loses.
 
 The roll is made as part of the resolution of the spell. There is no opportunity to reveal enchantments between when the roll is made and when the mana is transferred.
+#
 Drain Soul
 The Life gain is conditional on placing the Tainted markers on the enemy. If the Tainted markers are unable to be placed somehow, such as if the creature has Poison Immunity, the Life is not gained. If placing the markers destroys the creature the caster will still gain the 6 Life.
 
 This spell is not an attack. Placing the Tainted markers is not considered an attack, and is not considered dealing damage to the creature.
+#
 Earth Elemental
 Earth Elemental is only immune to its own Quake Stomp attack, not to the Quake Stomp attack of another Earth Elemental.
 #

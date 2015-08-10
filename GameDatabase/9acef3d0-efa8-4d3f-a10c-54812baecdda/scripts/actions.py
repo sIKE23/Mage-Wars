@@ -571,11 +571,12 @@ def optionsMenu(group,x=0,y=0):
 		{True : "Autorot Enabled", False: "Autorot Disabled", "setting": "AutoResolveRot"},
 		{True : "Autoattach Enabled", False: "Autoattach Disabled", "setting": "AutoAttach"},
 		{True : "Battle Calculator Enabled", False: "Battle Calculator Disabled", "setting": "BattleCalculator"},
-		{True : "Sound Effects Enabled", False: "Sound Effects Disabled", "setting": "AutoConfigSoundFX"}
+		{True : "Sound Effects Enabled", False: "Sound Effects Disabled", "setting": "AutoConfigSoundFX"},
+		{True : "Tutorial Enabled", False: "Tutorial Disabled", "setting": "octgnTutorial"}
 	]
 	choices = [e[getSetting(e["setting"],True)] for e in settingsList] + ["Done"]
 	colors = [{True:"#006600",False:"#800000"}[getSetting(e["setting"],True)] for e in settingsList] + ["#000000"]
-	choice = askChoice("Change automation settings",choices,colors)
+	choice = askChoice("Click to toggle any game setting",choices,colors)
 	if choice not in [0,len(choices)]:
 		setSetting(settingsList[choice-1]["setting"],not getSetting(settingsList[choice-1]["setting"],True))
 		optionsMenu(group)

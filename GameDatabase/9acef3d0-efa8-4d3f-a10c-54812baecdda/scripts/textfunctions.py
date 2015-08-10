@@ -9,13 +9,20 @@ import sys
 sys.path.append(wd("lib"))
 import os
 
+def readScriptTextFile(filename):
+    "Takes a .txt file from the scriptText directory and returns a list of each line in that file."
+    textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
+    rawList = list(open('{}\{}{}'.format(textDirectory,filename,'.txt'),'r'))
+    for n,text in enumerate(rawList): #We need to strip \n from the lines
+        rawList[n] = text.replace("\n","")
+    return rawList
+
 def searchCodex(group, x=0, y=0):
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        rawCodex = list(open('{}\{}{}'.format(textDirectory,'Codex','.txt'),'r'))
+        rawCodex = readScriptTextFile("Codex")
         codexDict = {}
         entry = []
         for line in rawCodex:
-                if line[0] == '#':
+                if line and line[0] == '#':
                         if len(entry) >= 2:
                                 entry[1] = ' \n'.join(entry[1:])
                                 keys = entry[0].split(',')
@@ -38,8 +45,7 @@ def getRulingsAndClarifications(card, x=0, y=0):
                 whisper('You do not have permission to view that card')
                 return
         name = card.name
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        rawList = list(open('{}\{}{}'.format(textDirectory,'RulingsAndClarifications','.txt'),'r'))
+        rawList = readScriptTextFile("RulingsAndClarifications")
         entry = []
         for line in rawList:
                 if line and line[0] == '#':
@@ -63,11 +69,10 @@ def isNumber(s):
 
 def getEnchantRecommendationList(step):
         """Returns a list of names of recommended enchantments to reveal"""
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        rawData = list(open('{}\{}{}'.format(textDirectory,'EnchantmentTiming','.txt'),'r'))
+        rawData = readScriptTextFile("EnchantmentTiming")
         recommendationList = []
         for line in rawData:
-                if line[0] == '#':
+                if line and line[0] == '#':
                         if len(recommendationList) >= 2 and recommendationList[0] == step: return recommendationList[1:]
                         recommendationList = []
                 else: recommendationList.append(line.replace('\n','').strip(' '))
@@ -84,8 +89,7 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
         mage = Card(traitDict.get('MageID')) if traitDict.get('MageID') else None
         attackerMage = Card(aTraitDict.get('MageID')) if aTraitDict.get('MageID') else None
         atkTraits = attack.get('Traits',{})
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        rawData = list(open('{}\{}{}'.format(textDirectory,'DeathMessages','.txt'),'r'))
+        rawData = readScriptTextFile("DeathMessages")
         gender = getGender(card)
         attackerGender = getGender(attacker) if attacker else None
         deathMessages = []
@@ -145,8 +149,7 @@ def deathMessage(traitDict,attack={},aTraitDict={}):
         notify(deathMessage)
 
 def getGender(card):
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        genders = list(open('{}\{}{}'.format(textDirectory,'Genders','.txt'),'r'))
+        genders = readScriptTextFile("Genders")
         name = card.Name
         gender = None
         for l in genders:
@@ -156,8 +159,7 @@ def getGender(card):
                 elif line == name: return gender
                 	
 def getMapText(map):
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        rawMapText = list(open('{}\{}{}'.format(textDirectory,'MapText','.txt'),'r'))
+        rawMapText = readScriptTextFile("MapText")
         newMapText = []
         entry = []
         for l in rawMapText:
@@ -168,8 +170,7 @@ def getMapText(map):
                 elif line == map: return str(map)
 
 def getNewFeaturesList(table, x=0, y=0):
-        textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
-        rawFeatures = list(open('{}\{}{}'.format(textDirectory,'NewFeatures','.txt'),'r'))
+        rawFeatures = readScriptTextFile("NewFeatures")
         featuresList = []
         entry = []
         for l in rawFeatures:
@@ -189,15 +190,24 @@ def getNewFeaturesList(table, x=0, y=0):
                 elif askChoice(featuresList[f-1][1],['Tell me about something else','Thanks, I\'m done'],['#666699','#000000'])!=1: return
 
 def tutorialMessage(tag):
-    debug(str(getSetting("Tutorial Enabled",False)))
-    #if getSetting("Tutorial Enabled",False): return
-    messageDict = {
-        "Introduction" : "Welcome to OCTGN! If you are new to OCTGN, we will teach you the basics of using the module. Of course, if you are a pro, just disable this tutorial.",
-        "Load Deck" : "The first thing you need to do is to load a deck - after all, you can hardly be expected to play without any cards! Press CTRL + L or select 'Load Deck' from the Game menu (upper left-hand corner of the screen)"
-    }
-    choices = ["\nGot it\n","Disable tutorial"]
+    if not getSetting("octgnTutorial", True): return
+    rawData = readScriptTextFile("Tutorial")
+    messageDict = {}
+    key = ""
+    entry = {}
+    for l in rawData:
+        if l[0] == "": continue
+        elif l[0] == "#":
+            if key:
+                messageDict[key] = entry
+                entry = {}
+        elif l[0] == "@": key = l[1:]
+        else: entry[{">":"boxText","*":"whisperText"}[l[0]]] = l[1:]
+    choices = ["\nContinue\n","Disable tutorial"]
     colors = ["#006600","#990000"]
-    message = messageDict[tag]
-    whisper(message)
-    choice = askChoice(message,choices,colors)
-    if choice == 2: setSetting("Tutorial Enabled",False)
+    boxText = messageDict[tag].get("boxText")
+    whisperText = messageDict[tag].get("whisperText")
+    if boxText:
+        choice = askChoice(boxText,choices,colors)
+        if choice == 2: setSetting("octgnTutorial",False)
+    if whisperText: whisper(whisperText)

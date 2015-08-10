@@ -1,0 +1,13 @@
+###########################################################################
+###	@ = tag used to call tutorial entry				###
+###	> = message shown to player in askChoice box (optional)		###
+###	* = message whispered to player (optional)			###
+###	Note: Make sure to put ##### after each entry.			###
+###########################################################################
+@Introduction
+>Welcome to OCTGN! If you are a new player, this tutorial will teach you how to play Mage Wars on OCTGN. If you are an experienced player, you can disable this tutorial by clicking "Disable Tutorial" below or by toggling the tutorial in the Game Options menu.
+#####
+@Load Deck
+>The first thing you need to do is to load a deck; after all, you can hardly be expected to play without any cards! Press CTRL + L or select 'Load Deck' from the Game menu (upper left-hand corner of the screen)
+*Press CTRL + L or select Load Deck from the Game menu to load a deck.
+#####
