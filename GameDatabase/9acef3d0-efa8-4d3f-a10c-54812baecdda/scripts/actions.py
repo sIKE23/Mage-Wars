@@ -178,9 +178,11 @@ def onGameStart():
 	#set the Game Host (this player will be the owner of the Initative and Phase Markers)
 	setGlobalVariable("GameHostID", str((sorted([x._id for x in getPlayers()])[0])))
 
-	# reset python Global Variables
+	# reset python Global Variables and give tutorial message
 	for p in players:
 		remoteCall(p, "setClearVars",[])
+		remoteCall(p, "tutorialMessage", ["Introduction"])
+		remoteCall(p, "tutorialMessage", ["Load Deck"])
 
 	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
@@ -561,6 +563,23 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
 ######################		Group Actions			########################
 ############################################################################
 
+def optionsMenu(group,x=0,y=0):
+	#Consolidates the many game toggle options into a single menu
+	settingsList = [
+		{True : "Autoburn Enabled", False: "Autoburn Disabled", "setting": "AutoResolveBurns"},
+		{True : "Autobleed Enabled", False: "Autobleed Disabled", "setting": "AutoResolveBleed"},
+		{True : "Autorot Enabled", False: "Autorot Disabled", "setting": "AutoResolveRot"},
+		{True : "Autoattach Enabled", False: "Autoattach Disabled", "setting": "AutoAttach"},
+		{True : "Battle Calculator Enabled", False: "Battle Calculator Disabled", "setting": "BattleCalculator"},
+		{True : "Sound Effects Enabled", False: "Sound Effects Disabled", "setting": "AutoConfigSoundFX"}
+	]
+	choices = [e[getSetting(e["setting"],True)] for e in settingsList] + ["Done"]
+	colors = [{True:"#006600",False:"#800000"}[getSetting(e["setting"],True)] for e in settingsList] + ["#000000"]
+	choice = askChoice("Change automation settings",choices,colors)
+	if choice not in [0,len(choices)]:
+		setSetting(settingsList[choice-1]["setting"],not getSetting(settingsList[choice-1]["setting"],True))
+		optionsMenu(group)
+
 #This function lets the player set a timer
 def setTimer(group,x,y):
         timerIsRunning = eval(getGlobalVariable("timerIsRunning"))
@@ -674,7 +693,7 @@ def setGameBoard2(group, x=0, y=0):
 	mute()
 	global boardSet
 	boardSet = "GameBoard2.jpg"
-	defineRectangularMap(6,4,250)
+	defineRectangularMap(6,4,170)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
@@ -1245,7 +1264,7 @@ def concede(group=table, x = 0, y = 0):
 Format:
 [function name, setting name, message, default]
 """
-
+#Bookmark
 fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
                           ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
                           ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],

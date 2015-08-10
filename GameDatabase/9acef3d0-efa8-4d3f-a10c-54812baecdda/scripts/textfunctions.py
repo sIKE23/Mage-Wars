@@ -187,3 +187,17 @@ def getNewFeaturesList(table, x=0, y=0):
                 f = askChoice("Which new feature interests you?",choices,colors)
                 if f in [0,len(choices)]: return
                 elif askChoice(featuresList[f-1][1],['Tell me about something else','Thanks, I\'m done'],['#666699','#000000'])!=1: return
+
+def tutorialMessage(tag):
+    debug(str(getSetting("Tutorial Enabled",False)))
+    #if getSetting("Tutorial Enabled",False): return
+    messageDict = {
+        "Introduction" : "Welcome to OCTGN! If you are new to OCTGN, we will teach you the basics of using the module. Of course, if you are a pro, just disable this tutorial.",
+        "Load Deck" : "The first thing you need to do is to load a deck - after all, you can hardly be expected to play without any cards! Press CTRL + L or select 'Load Deck' from the Game menu (upper left-hand corner of the screen)"
+    }
+    choices = ["\nGot it\n","Disable tutorial"]
+    colors = ["#006600","#990000"]
+    message = messageDict[tag]
+    whisper(message)
+    choice = askChoice(message,choices,colors)
+    if choice == 2: setSetting("Tutorial Enabled",False)

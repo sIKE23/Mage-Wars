@@ -114,6 +114,7 @@
 		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
 		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
 		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer" />
+		<groupaction menu="Game Options" default="False" shortcut="" execute="optionsMenu" />
 		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
 		<groupactions menu="Automation">
 			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
