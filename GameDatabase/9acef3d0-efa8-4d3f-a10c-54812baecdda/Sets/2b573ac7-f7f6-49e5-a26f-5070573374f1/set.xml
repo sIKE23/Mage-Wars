@@ -106,6 +106,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWA03" />
+			<alternate name="Hail of Stones" type="B" />
 		</card>
 		<card id="f8e7349e-4779-447d-a4e7-ab0f2178392a" name="Hurl Boulder">
 			<property name="Type" value="Attack" />
@@ -456,6 +457,7 @@
 			<property name="Traits" value="Zone Exclusive, Burnproof, Unique" />
 			<property name="Text" value="Whenever a spell or ability an opponent controls causes you lose or pay mana, including upkeep costs and Mana Drain/Transfer effects, place that mana on Mare Prism instead. If the mana was being transferred to their supply, cancel that transfer. During the Chanel Phase you may remove 2 mana from Mana Prism and place it in your supply." />
 			<property name="CardID" value="FWJ05" />
+			<alternate name="Mana Prism" type="B" />
 		</card>
 		<card id="0c32a2d1-eef1-4233-a712-62e155402809" name="Mangler Caltrops">
 			<property name="Type" value="Conjuration" />
@@ -484,8 +486,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Indestructible" />
-			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases. Place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level.&#xD;&#xA;[Restrained] [Unmovable]" />
+			<property name="Text" value="Target creature is Restrained, and gains the Unmovable trait. At the end of each of its Action Phases, place a Sink token on Quicksand. When there are 4 Sink tokens on Quicksand, destroy it and the creature. As a quick action, creature may roll 1d12 to escape, subtracting 1 for each Sink token. On an 8+ destroy Quicksand. X = the creature&apos;s Level. Quicksand cannot target creatures with the Uncontainable trait.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="FWJ07" />
+			<alternate name="Quicksand" type="B" />
 		</card>
 		<card id="c8373d7e-a8be-47cf-a1e0-5e5e90d271e8" name="Renewing Spring">
 			<property name="Type" value="Conjuration" />
@@ -621,8 +624,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +X, Mind Mage Only" />
-			<property name="Text" value="You control this creature. Mind Control can only be revealed between Action Phases, and the controller must be within 1 zone of Mind Control. When Mind Control is revealed or removed, place a Stun condition on this creature. X = Target creature&apos;s Level. Mind Control cannot be moved to a new target." />
+			<property name="Text" value="You control this creature. Mind Control can only be revealed between Action Phases, and the controller must be within 1 zone of Mind Control. When Mind Control is revealed or removed, place a Stun condition on this creature. X = Target creature&apos;s Level. Mind Control cannot be moved to a new target. DUring the Upkeep Phase, Mind Control&apos;s upkeep cost must be paid before any other upkeep costs on this creature." />
 			<property name="CardID" value="FWE07" />
+			<alternate name="Mind Control" type="B" />
 		</card>
 		<card id="8ab159b0-1318-4b8a-a68b-b5c41bb30a51" name="Mind Shield">
 			<property name="Type" value="Enchantment" />
@@ -865,8 +869,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. This will not Push it through a wall with the Passage Attacks trait, unless you pay on additional 3 mana when this spell is cast. Target receives the Slam condition. If target Is Pushed into a zone with other creatures, you may choose one of those creatures and also give it the Slam condition." />
+			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. This will not Push it through a wall with the Passage Attacks trait, unless you pay on additional 3 mana when this spell is cast. If the Push moved the target, give it the Slam condition, and you may choose a secondary target creature in that zone and also give it the Slam condition." />
 			<property name="CardID" value="FWI03" />
+			<alternate name="Force Bash" type="B" />
 		</card>
 		<card id="b176fb6a-7ced-4f32-b008-90114cfaebde" name="Force Wave">
 			<property name="Type" value="Incantation" />
@@ -908,7 +913,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="" />
+			<property name="AttackBar" value="" /> 
 			<property name="Traits" value="Novice" />
 			<property name="Text" value="Target gains the Melee +2 trait for its next melee attack this round.&#xD;&#xA;Melee +2" />
 			<property name="CardID" value="FWI06" />

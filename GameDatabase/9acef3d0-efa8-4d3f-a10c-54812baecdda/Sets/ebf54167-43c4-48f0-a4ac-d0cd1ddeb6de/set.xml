@@ -587,6 +587,7 @@
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
 			<property name="Text" value="During the Upkeep Phase, each Living creature receives 1 point of direct poison damage." />
 			<property name="CardID" value="MW1J11" />
+			<alternate name="Skeletal Sentry" type="B" />
 		</card>
 		<card id="9efdd1ac-d30c-4773-9ccd-f916470f4861" name="Mana Crystal">
 			<property name="Type" value="Conjuration" />
@@ -647,6 +648,7 @@
 			<property name="Traits" value="Regenerate 2, Living, Legendary, Flame +2, Hydro Immunity" />
 			<property name="Text" value="All friendly Living creatures in Mohktari&apos;s zone gain the Regenerate 2 trait." />
 			<property name="CardID" value="MW1J15" />
+			<alternate name="Mohktari, Great Tree of Life" type="B" />
 		</card>
 		<card id="26208d5a-4b15-41ee-880c-2dcf896ac45c" name="Mordok&apos;s Obelisk">
 			<property name="Type" value="Conjuration" />
@@ -752,6 +754,7 @@
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="MW1J22" />
+			<alternate name="Skeletal Sentry" type="B" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">
 			<property name="Type" value="Conjuration" />
@@ -1162,6 +1165,7 @@
 			<property name="Traits" value="Slow, Poison Immunity, Legendary" />
 			<property name="Text" value="Each Upkeep Phase, all Living creatures in Malacoda&apos;s zone receive 2 points of direct poison damage." />
 			<property name="CardID" value="MW1C23" />
+			<alternate name="Malacoda" type="B" />
 		</card>
 		<card id="ad3b90cf-5a53-4541-903f-4b0cfe397f64" name="Mana Leech">
 			<property name="Type" value="Creature" />
@@ -1282,6 +1286,7 @@
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C32" />
+			<alternate name="Skeletal Sentry" type="B" />
 		</card>
 		<card id="28828fac-23f8-4b66-bde0-38d4a4931862" name="Sosruko, Ferret Companion">
 			<property name="Type" value="Creature" />
