@@ -1,4 +1,4 @@
-###################
+﻿###################
 # compiled source #
 ###################
 *.com
@@ -57,3 +57,8 @@ Icon?
 Thumbs.db
 *.bak
 Deckbuilder/Octgn.MagewarsPlugin.sln
+#####################
+#   Subdirectories  #
+#####################
+Decks/**
+ImageDatabase/**
