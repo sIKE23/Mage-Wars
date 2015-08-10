@@ -674,7 +674,7 @@ def setGameBoard2(group, x=0, y=0):
 	mute()
 	global boardSet
 	boardSet = "GameBoard2.jpg"
-	defineRectangularMap(6,4,250)
+	defineRectangularMap(6,4,170)
 	for p in players:
 		remoteCall(p, "setGameBoard", [boardSet])
 
