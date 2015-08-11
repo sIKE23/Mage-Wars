@@ -115,6 +115,8 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
         defender = Card(dTraitDict.get('OwnerID'))
         atkTraits = attack.get('Traits',{})
         if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
+        notify("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
+        if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
         if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
         if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
         aZone = getZoneContaining(attacker)
@@ -361,10 +363,10 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
                 attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
-                if ([True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
+                if [True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
                         eventList = getEventList('Round')
                         if ((not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id])
-                                                                    and atacker.type in ['Creature','Mage']
+                                                                    and attacker.type in ['Creature','Mage']
                                                                     and (attacker and not hasAttackedThisTurn(attacker))
                                                                     and attack.get('RangeType') != 'Damage Barrier'):
                                 attackDice += 1
