@@ -150,6 +150,7 @@ deckLoaded = False
 blankSpellbook = False
 currentPhase = ""
 discountsUsed = [ ]
+tutorialTagsRead = []
 gameStartTime = ""
 gameEndTime = ""
 roundTimes = []
@@ -181,8 +182,6 @@ def onGameStart():
 	# reset python Global Variables and give tutorial message
 	for p in players:
 		remoteCall(p, "setClearVars",[])
-		remoteCall(p, "tutorialMessage", ["Introduction"])
-		remoteCall(p, "tutorialMessage", ["Load Deck"])
 
 	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
@@ -217,6 +216,8 @@ def onGameStart():
 		setGlobalVariable("InitiativeDone","True")
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
+		tutorialMessage("Introduction")
+		tutorialMessage("Load Deck")
 	else:
 		choosePlayerColor()
 		test = 0
@@ -271,6 +272,9 @@ def finishSetup(): #Waits until all players have chosen a color, then finishes t
 	notify("Players will now roll for initiative.")
 	rollForInitative()
 	notify("Game setup is complete! Players should now load their Spellbooks.")
+	for p in players:
+		remoteCall(p, "tutorialMessage", ["Introduction"])
+		remoteCall(p, "tutorialMessage", ["Load Deck"])
 
 def PlayerSetup():
 	mute()
@@ -458,6 +462,7 @@ def onLoadDeck(player, groups):
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
 			deckLoaded = True
 			mageSetup()
+			tutorialMessage("Play Card")
 		else:
 			#notify and delete deck
 			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
@@ -772,13 +777,18 @@ def nextPhase(group, x=-360, y=-150):
 		switchPhase(card,"Planning","Planning Phase")
 	elif card.alternate == "Planning":
 		switchPhase(card,"Deploy","Deployment Phase")
+		tutorialMessage("Actions Menu")
 	elif card.alternate == "Deploy":
 		switchPhase(card,"Quick","First Quickcast Phase")
+		tutorialMessage("Cast Spell")
 	elif card.alternate == "Quick":
 		switchPhase(card,"Actions","Actions Phase")
+		tutorialMessage("Actions Phase")
 	elif card.alternate == "Actions":
 		switchPhase(card,"Quick2","Final Quickcast Phase")
+		tutorialMessage("Bind Spell")
 	elif card.alternate == "Quick2":
+		remoteCall(me, "tutorialMessage", ["End"])			
 		if switchPhase(card,"","Upkeep Phase") == True: # "New Round" begins time to perform the Intiative, Reset, Channeling and Upkeep Phases
 		#Check for domination victory
 			goal = eval(getGlobalVariable("Goal"))
@@ -1585,6 +1595,7 @@ def rotateCard(card, x = 0, y = 0):
 
 def flipcard(card, x = 0, y = 0):
 	mute()
+	tutorialMessage("Advance Phase")
 	cardalt = card.alternates
 	cZone = getZoneContaining(card)
 	# markers that are cards in game that have two sides
@@ -1834,6 +1845,7 @@ def toggleToken(card, tokenType):
 
 def playCardFaceDown(card, x=0, y=0):
 	mute()
+	tutorialMessage("Reveal Card")
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 	card.isFaceUp = False
 	moveCardToDefaultLocation(card)

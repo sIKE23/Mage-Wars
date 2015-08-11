@@ -5,9 +5,38 @@
 ###	Note: Make sure to put ##### after each entry.			###
 ###########################################################################
 @Introduction
->Welcome to OCTGN! If you are a new player, this tutorial will teach you how to play Mage Wars on OCTGN. If you are an experienced player, you can disable this tutorial by clicking "Disable Tutorial" below or by toggling the tutorial in the Game Options menu.
+>Welcome to OCTGN! If you are a new player, this tutorial will teach you how to play Mage Wars on OCTGN. This tutorial assumes that you understand how to play Mage Wars, but are not completely comfortable with playing it on OCTGN. If you are an experienced OCTGN user, you can disable this tutorial by clicking "Disable Tutorial" below or by toggling the tutorial in the Game Options menu.^^For detailed information on a variety of topics related to use of the Mage Wars OCTGN module, you can also open one of the files in the Game Documents menu (second menu from the left at the top-left corner of the screen).
 #####
 @Load Deck
->The first thing you need to do is to load a deck; after all, you can hardly be expected to play without any cards! Press CTRL + L or select 'Load Deck' from the Game menu (upper left-hand corner of the screen)
+>The first thing you need to do is to load a deck; after all, you can hardly be expected to play without any cards! Press CTRL + L or select 'Load Deck' from the Game menu (upper left-hand corner of the screen)^^If you attempt to load a new deck while you already have one loaded, the game will be reset. Your opponent might not be happy about this.
 *Press CTRL + L or select Load Deck from the Game menu to load a deck.
+#####
+@Play Card
+>Now you need to play your mage card and plan your first-round spells. To move a card from your spellbook to the table, simply double-click on it with the left mouse button. It will automatically be moved to the board face-down. If you ever need to move a card to the board face-up for some reason, you can left-click and drag it. Generally, it is better to use the double-click method.
+*Double-click on your mage's card to move it from your spellbook to your start zone.
+
+#####
+@Reveal Card
+>Good! Once both players have played their mages face-down, it is time to reveal them. To flip any card on the table face-up, simply double click on it. This will cause the card to flip, and will automatically place all appropriate tokens and markers on the card.
+*Double-click on your mage's card to reveal it.
+#####
+@Advance Phase
+>Now that your Mage is revealed, you are ready to start the first planning phase of the game. You will want to put out your Mage Stats card and two planned spells, which you can do by double-clicking. Once you are finished with the planning phase, you can advance to the next phase by right-clicking anywhere on the table to bring up the table actions menu and selecting "Next Phase".
+*Select "Next Phase" from the table actions menu.
+#####
+@Actions Menu
+>Notice that the phase only advances after both players select Next Phase. Also, you may have seen in the table actions menu that pressing CTRL+DOWN is the shortcut to advance the phase. Many of the options in the table actions menu have such shortcuts.^^In addition to the table actions menu, there is also a card actions menu which may be accessed by right clicking on one of your cards. The card actions menu contains actions relating to cards, such as adding/removing markers or looking up rulings related to the card.
+*Advance to the First Quickcast Phase by pressing CTRL+DOWN.
+#####
+@Cast Spell
+>Casting a spell is often as simple as revealing it, which requires double-clicking on the face-down card. To move cards around on the board, simply left-click and drag the card.^^Some spells such as enchantments target objects in the game. For these, you may cast the spell by holding SHIFT and left-click-dragging an arrow from the spell to the target.
+#####
+@Actions Phase
+>During the actions phase, players take turns moving cards. To signal that your turn is done (but not that you are ready for the next phase), press CTRL+RIGHT or select "Done" from the actions menu.^^You will also need to declare attacks at some point. To declare an attack, simply drag an arrow (SHIFT+LEFT CLICK) from the attacking creature to the target. If you need to roll dice manually, you can also press TAB to bring up the dice roll menu.
+#####
+@Bind Spell
+>If you have a spawnpoint, familiar, or spellbind card, you may need to bind/prepare spells for it to cast. To indicate that a spell is assigned to such a card, simply drag it over the card in question.
+#####
+@End
+>You now know the basics of using the Mage Wars OCTGN module! We hope that you will have many fun hours on it playing Mage Wars. If you have any suggestions for how we can improve this tutorial, please feel free to suggest them to us on the arcanewonders forums.
 #####

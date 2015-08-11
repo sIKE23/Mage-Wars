@@ -14,7 +14,7 @@ def readScriptTextFile(filename):
     textDirectory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('scripts\scriptText')
     rawList = list(open('{}\{}{}'.format(textDirectory,filename,'.txt'),'r'))
     for n,text in enumerate(rawList): #We need to strip \n from the lines
-        rawList[n] = text.replace("\n","")
+        rawList[n] = text.replace("\n","").replace("^","\n") #Use ^ to indicate a newline in the txt files
     return rawList
 
 def searchCodex(group, x=0, y=0):
@@ -190,13 +190,15 @@ def getNewFeaturesList(table, x=0, y=0):
                 elif askChoice(featuresList[f-1][1],['Tell me about something else','Thanks, I\'m done'],['#666699','#000000'])!=1: return
 
 def tutorialMessage(tag):
-    if not getSetting("octgnTutorial", True): return
+    global tutorialTagsRead
+    if not getSetting("octgnTutorial", True) or tag in tutorialTagsRead: return
+    tutorialTagsRead.append(tag)
     rawData = readScriptTextFile("Tutorial")
     messageDict = {}
     key = ""
     entry = {}
     for l in rawData:
-        if l[0] == "": continue
+        if l == "": continue
         elif l[0] == "#":
             if key:
                 messageDict[key] = entry
