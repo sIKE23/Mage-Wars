@@ -367,6 +367,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                         eventList = getEventList('Round')
                         if ((not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id])
                                                                     and attacker.type in ['Creature','Mage']
+                                                                    and (attacker and not hasAttackedThisRound(attacker))
                                                                     and attack.get('RangeType') != 'Damage Barrier'):
                                 attackDice += 1
                 vs = atkTraits.get('VS')
