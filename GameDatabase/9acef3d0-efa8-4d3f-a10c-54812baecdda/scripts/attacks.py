@@ -361,9 +361,12 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                                                                     and defender.type in ['Creature','Mage']
                                                                     and not dTraitDict.get('Nonliving')) else 0)
                 attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
-                if [True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
+                if ([True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
                         eventList = getEventList('Round')
-                        if not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id]:
+                        if ((not [True for e in eventList if e[0] == 'Attack' and e[1][0] == attacker._id and e[1][1] == defender._id])
+                                                                    and atacker.type in ['Creature','Mage']
+                                                                    and (attacker and not hasAttackedThisTurn(attacker))
+                                                                    and attack.get('RangeType') != 'Damage Barrier'):
                                 attackDice += 1
                 vs = atkTraits.get('VS')
                 if vs: #We'll assume each attack has only one vs+ trait
