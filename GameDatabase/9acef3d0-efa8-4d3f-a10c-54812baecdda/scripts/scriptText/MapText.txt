@@ -1,15 +1,15 @@
-Ancient Wards (2 Players):Testing20
-Blasted Lands (2 Players):Testing21
-Court of the Antarians (2 Players):Testing22
+Ancient Wards (2 Players):You've broken through to the Ancient Wards, an ancient lair of an ancient dragon, seeking the ancient treasure within. But a not so ancient enemy of yours, got there before you did! 
+Blasted Lands (2 Players):The Blasted Lands before you were laid waste by a powerful destructive force in an long forgotten. You feel a sense of foreboding, you feel as if you shouldn't be here. No one should be here.
+Court of the Antarians (2 Players):The Court of the Antarians
 Gauntlet of V'Tar (2 Players):I challenge thee by throwing down my Gauntlet of V'Tar
-Grand Arena (4 Players):Testing34
-Lost Expedition (2 Players):You've stumbled upon a Lost Expedition
-No Man's Land (2 Players):Testing25
-Path of War (2 Players):Testing259
-Triumvirate (3 Players):Testing345
-Truce at Straywood (4 Players):Testing3454
-Unseen Passage (3 Players):Testing8790
-Wartorn Expanse (3 Players):Testing23443
-Weathered Sanctuary (2 Players):Testing6578
-Wheel of Death (4 Players):Testing6454
-Ziggurat's Rise (3 Players):Testing9808790
+Grand Arena (4 Players):The Grand Arena
+Lost Expedition (2 Players):You and your trusty sidekick explorer have stumbled upon the Lost Expedition, the archaeological find of the century! It is the lair of an ancient dragon, and it contains artifacts of great power. Your sidekick has a greedy look in their eyes. They're probably going to take all the treasure for themselves! You can't let that happen!
+No Man's Land (2 Players):No Man's Land
+Path of War (2 Players):Path of War
+Triumvirate (3 Players):Triumvirate
+Truce at Straywood (4 Players):The Truce at Straywood: Two teams enter, only one can win! 
+Unseen Passage (3 Players):Unseen Passage
+Wartorn Expanse (3 Players):The Wartorn Expanse is very famous for being easy to find, and because of that mages come here very often to fight for control of its V'Torrak. Strangley, it is a very popular tourist attraction as well, despite the danger. 
+Weathered Sanctuary (2 Players):Weathered Sanctuary is a place of refuge for lost souls that has endured through the ages...hidden somewhere within is a secret room containing an artifact of great power...
+Wheel of Death (4 Players):The Wheel of Death 
+Ziggurat's Rise (3 Players):Deep underground you have found Ziggurat's Rise, an ancient Draconian temple unbelivably large in size. How did they get that down here? 
