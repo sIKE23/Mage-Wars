@@ -272,7 +272,6 @@ def finishSetup(): #Waits until all players have chosen a color, then finishes t
 	setUpDiceAndPhaseCards()
 	notify("Players will now roll for initiative.")
 	rollForInitative()
-	notify("Game setup is complete! Players should now load their Spellbooks.")
 	for p in players:
 		remoteCall(p, "tutorialMessage", ["Introduction"])
 		remoteCall(p, "tutorialMessage", ["Load Deck"])
@@ -390,11 +389,12 @@ def AskInitiative(playerID):
 		if choice == 0: continue
 		firstPlayer = players[choice - 1]
 		playerID = firstPlayer._id
-		notify("A decision is reached! {} will go first.".format(firstPlayer))
+		notify("A decision has been reached! {} will go first.".format(firstPlayer))
 		setGlobalVariable("PlayerWithIni", str(playerID))
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 		init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
 		break
+	notify("Game setup is complete! Players should now load their Spellbooks.")
 
 def moveRDA(card):
     """Moves the dice roll area/initiative/phase marker to the appropriate area"""

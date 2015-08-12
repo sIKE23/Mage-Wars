@@ -2,7 +2,21 @@ Game Timer
 Now you can set a timer for your games! Simply select "Set Timer" from the table actions menu, and input the desired amount of time. The timer will beep every minute, so we recommend not setting it for more than 10 minutes or so.
 #
 Domination Mode
-<explanation here>
+Mage Wars Battlegrounds: Domination is now included as a feature of the Mage Wars module. Once you have completed setup and loaded in your Mages Spellbook, right click anywhere on the Table and select "Load Map".
+
+You will be prompted with a menu to select which map you wish to play, once you have selected the map you wish to play, it will be loaded for all players. The player that loads the map will be the controller (OCTGN context) of the Domination objects such as the Sslak's. This means the player will roll the dice for Sslak when they are attacked and to apply any damage and effects to them.
+
+Items that are automated at this time:
+- Attacking Orbs and turning them on
+- Awarding of V'Tar during upkeep
+- The Win condition for the map is monitored and the first mage to meet the win condition will end the match.
+- Guard Markers are added to the Guardians during upkeep
+- Guardians Upkeep effects (like Burns) will be processed by the player who loaded the map
+
+Items that are not automated at this time:
+- Orb bonuses for turning one on and during upkeep
+- Tile Effects
+- Any Effect that is not automated for players own creatures will need to be processed by the player who controls the Sslak
 #
 OCTGN Tutorial
 The game will now teach players new to OCTGN the basics of playing Mage Wars on OCTGN.
