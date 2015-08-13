@@ -1042,7 +1042,7 @@ def resolveUpkeep():
 			ManaPrism = card
 		if card.Name == "Psi-Orb" and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
 		 	PsiOrbDisc = 3
-		 	if PsiOrbDisc == 3: notify("{}".format(PsiOrbDisc))
+		 	if PsiOrbDisc == 3: notify("The PSI-Orb has {} Upkeep discounts avaialbe this Round.".format(PsiOrbDisc))
 
 	for card in table:
 		upKeepCost = 0

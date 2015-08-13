@@ -783,6 +783,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
         #Check for daze
         if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
+                notify("{} is rolling the Effect Die to check the Dazed condition.".format(attacker))#gotta figure that gender thing of yours out.
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll < 7:
                         notify("{} is so dazed that it completely misses!".format(attacker))
