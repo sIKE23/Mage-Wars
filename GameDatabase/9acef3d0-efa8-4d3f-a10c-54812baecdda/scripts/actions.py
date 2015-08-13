@@ -2047,7 +2047,10 @@ def remoteSwitchPhase(card, phase, phrase):
 	card.switchTo(phase)
 
 def remoteDeleteCard(c):
-      c.delete()
+	c.delete()
+
+def returnToHand(card): #Return card to your hand
+	card.moveTo(me.hand)
 
 #---------------------------------------------------------------------------
 # Table card actions

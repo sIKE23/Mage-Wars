@@ -107,6 +107,8 @@ def loadMapFile(group, x=0, y=0):
                         c.delete() # delete Scenario creatures and other game markers
                 elif (c.type == "Internal" or "Scenario" in c.special)  and c.controller != me:
                         remoteCall(c.controller,'remoteDeleteCard', [c])
+                else: #return all non-scenario cards to their owners' hands
+                        remoteCall(c.controller,"returnToHand",[c])
 
         #iterate over elements, top to bottom then left to right.
         I,J = len(mapArray),len(mapArray[0])
