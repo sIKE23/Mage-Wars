@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda" sleeveid="0">
+  <section name="Mage" shared="False">
+    <card qty="1" id="b52ee3c1-ee9f-494c-8c45-55f2b1ff6313">Anvil Throne Warlord</card>
+    <card qty="1" id="988facc7-debe-493b-95f0-95f0be0157cb">Anvil Throne Warlord Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="a5386a31-5786-4e70-9482-65657607d802">Acid Ball</card>
+    <card qty="1" id="a4f6206e-6ee3-46e2-9cdf-0c69e51061ed">Hail of Stones</card>
+    <card qty="2" id="f8e7349e-4779-447d-a4e7-ab0f2178392a">Hurl Boulder</card>
+    <card qty="1" id="4d8e3876-3c1d-4448-895e-4fc929625673">Hurl Meteorite</card>
+    <card qty="2" id="8163ee1a-da88-4bbd-8eed-4f1ca3cdc0a2">Hurl Rock</card>
+    <card qty="2" id="a1de2c11-60ab-42b5-99d5-752f5cb85770">Surging Wave</card>
+    <card qty="1" id="6ffd7fe8-14ac-4bfa-8da4-aef87dbaa61a">Windstorm</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="cf99cd9b-dc7a-4a61-b327-f62f78e731de">Akiro's Hammer</card>
+    <card qty="1" id="d5a7e765-259d-449f-b38f-591990d0a24d">Archer's Watchtower</card>
+    <card qty="1" id="71e32301-4724-497d-9224-9f052fcf9808">Galaxxus</card>
+    <card qty="1" id="8cc57f35-4ba7-45dc-b52b-326790f804d2">Garrison Post</card>
+    <card qty="1" id="27dacd66-4f54-465e-a728-10358b0c7548">Gravikor</card>
+    <card qty="1" id="3a8f2eb2-df0d-4108-a8f1-499c05fb0d35">Quicksand</card>
+    <card qty="4" id="a81df3d7-fcb9-4afb-8da8-6e24db0f064e">Wall of Earth</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="b1f01ef5-7382-4254-8761-293fde18e240">Bloodcrag Minotaur</card>
+    <card qty="1" id="13788dfb-6de8-4a9a-b00b-7c8f68ab7ca7">Dwarf Kriegsbiel</card>
+    <card qty="1" id="6122329b-8107-4d1a-a322-52311bd11a60">Dwarf Panzergarde</card>
+    <card qty="1" id="811f2772-a2fa-4bf7-acd4-cb962e29f605">Guard Dog</card>
+    <card qty="1" id="2327f50e-53df-43d0-9d07-0b01d9c3bcb2">Ludwig Boltstorm</card>
+    <card qty="1" id="88ee2f45-5730-4d7a-ae12-f7112a3522ac">Thorg, Chief Bodyguard</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="38829558-8804-4804-a16d-e3491fdeebe1">Akiro's Favor</card>
+    <card qty="1" id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6">Agony</card>
+    <card qty="1" id="80055594-f757-4d3c-ae32-13b1210cee28">Astral Anchor</card>
+    <card qty="1" id="8df84f88-e24a-4517-aae5-8595c09cc3cd">Bear Strength</card>
+    <card qty="2" id="7cebacd8-7bef-43b7-93ce-c071e34ca3ea">Brace Yourself</card>
+    <card qty="1" id="f7fee204-8053-446d-b85d-c8d07e70d4fd">Eagle Wings</card>
+    <card qty="1" id="7fe6a6b2-4403-4a07-8048-4692d954898a">Force Orb</card>
+    <card qty="1" id="5c2d7a57-f15c-44a9-9dc8-9393056d9e55">Heal</card>
+    <card qty="1" id="b8f44b5f-29f5-4e47-84d1-122349187585">Lion Savagery</card>
+    <card qty="1" id="76d440be-b82c-4a12-97ef-c2bad86fdc1a">Regrowth</card>
+    <card qty="1" id="c0dbf89b-5373-47b5-ab1f-979400ea69f8">Sentinel of V'Tar</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="1db6906f-12ec-4538-8d1e-534a7beb81d4">Dancing Scimitar</card>
+    <card qty="1" id="973a5e42-c3aa-45a2-8d0d-349e6219ff53">Harshforge Plate</card>
+    <card qty="1" id="6883436a-f838-4fc6-ae53-a6b1fdb9ef72">War Sledge</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="a1959fe8-780f-4720-a446-0c2f999e2df2">Battle Fury</card>
+    <card qty="1" id="04c9e8ae-8b36-4ea6-b8fb-9f01e1fc5dd6">Defend</card>
+    <card qty="2" id="c46fd335-9b2e-4a23-b52b-77e708de89c0">Dispel</card>
+    <card qty="1" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+    <card qty="1" id="965bddc4-b43e-4f90-bc05-8bd602d7c33d">Evade</card>
+    <card qty="1" id="9100e9fa-f1b0-47de-95b2-52cd795e97ea">Perfect Strike</card>
+    <card qty="2" id="9455c697-f680-4d12-b5d6-72235c03f77c">Force Push</card>
+    <card qty="2" id="b969cb2f-6f0b-4d89-8839-511aab891c0d">Teleport</card>
+    <card qty="1" id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2">Rouse the Beast</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

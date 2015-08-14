@@ -5,8 +5,8 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
 	scriptVersion ="3.1.0.1"
-	version="99999.13.0.0"
-	markersize="16"
+	version="1.13.0.0"
+	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
 	setsurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
@@ -33,17 +33,17 @@
 	</events>
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />
-	<sound name="Alarm" src="Sounds/alarm.mp3" />
-	<sound name="Notification" src="Sounds/notification.mp3" />
+		<sound name="Alarm" src="Sounds/alarm.mp3" />
+		<sound name="Notification" src="Sounds/notification.mp3" />
 	</sounds>
 	<fonts>
-		<font src="fonts/shouldve known.ttf" size="13" target="context" />
 		<font src="fonts/APHont-Bold.ttf" size="13" target="chat" />
   </fonts>
 	<proxygen definitionsrc="proxy/CardGenData.xml" />
 	<documents>
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
 		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html" />
+		<document name="How to Build your own Domination Map" icon="Documents/MW-Help.png" src="Documents/Map Building How-To.html" />
 		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html" />
 		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v2.html" />
 		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html" />
@@ -107,26 +107,15 @@
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack" />
-		<groupaction menu="Flip a Coin" default="False" execute="flipCoin" />
 		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
+		<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
 		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
 		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
+		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
 		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
 		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer" />
 		<groupaction menu="Game Options" default="False" shortcut="" execute="optionsMenu" />
-		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
-		<groupactions menu="Automation">
-			<groupaction menu="Toggle Debug Mode" default="False" execute="toggleDebug" />
-			<groupaction menu="Toggle Auto-resolving Burns" default="False" execute="toggleResolveBurns" />
-			<groupaction menu="Toggle Auto-resolving Rot" default="False" execute="toggleResolveRot" />
-			<groupaction menu="Toggle Auto-resolving Dissipate" default="False" execute="toggleResolveDissipate" />
-			<groupaction menu="Toggle Auto-resolving Bleed" default="False" execute="toggleResolveBleed" />
-			<groupaction menu="Toggle Auto-Attaching Cards" default="False" execute="toggleAutoAttach" />
-			<groupaction menu="Toggle Battle Calculator" default="False" execute="toggleBattleCalculator" />
-			<groupaction menu="Toggle Declaring Attacks with Targeting Arrow" default="False" execute="toggleDeclareAttackWithArrow" />
-			<groupaction menu="Toggle Game Sounds On/Off" default="False" execute="toggleSoundFX" />
-		</groupactions>
 		<groupactions menu="Chat Shortcuts">
 			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
 			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+2" execute="sayNo" />
@@ -136,9 +125,8 @@
 			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
 			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
 			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant" />
-			<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
 		</groupactions>
-		<groupactions menu="Alternative Play">
+		<groupactions menu="Alternate Arena Game Boards">
 			<groupaction menu="Set 4X3 Westlock Arena Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
 			<groupaction menu="Set 6X4 Double Westlock Game Board" default="False" shortcut="Alt+F2" execute="setGameBoard2" />
 			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
@@ -154,6 +142,7 @@
 			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack" />
 			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
 		</groupactions>
+		<groupaction menu="Toggle Debug Mode On/Off" default="False" execute="toggleDebug" />
 		<cardactions menu="Add Markers">
 			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage" />
 			<cardaction menu="Add Mana Counter" default="False" shortcut="Ctrl+M" execute="addMana" />

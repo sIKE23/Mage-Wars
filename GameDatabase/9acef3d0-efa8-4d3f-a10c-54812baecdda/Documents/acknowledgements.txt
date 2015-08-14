@@ -1,8 +1,14 @@
-v1.12.0.0
+v1.13.0.0
 Thanks goes out to the following:
 
 freeSFX - http://www.freesfx.co.uk for sounds used in the game
 Arcane Wonders - they have graciously provided custom 1v1 and 2v2 images for Matchmaking. www.arcanewonders.com
 Brine - for being so paitent and helpful
 Kelly - for being so paitent and helpful
- FabooGuy - for the Marble Floor Tiles Texture where the orginal art can be found at http://fabooguy.deviantart.com/art/Marble-Floor-Tiles-Texture-Tileable-2048x2048-436170199
+FabooGuy - for the Marble Floor Tiles Texture where the orginal art can be found at http://fabooguy.deviantart.com/art/Marble-Floor-Tiles-Texture-Tileable-2048x2048-436170199
+Arcane Duels - for providing a Domination Spellbook
+Sailor Vulcan, aka Imanginator, aka henry_ketchup for some flavor text with the Domination maps
+and...
+who could forget Schwenkgott the playtester with the mostest! All the suggetions, OCTGN centric Apprentice Mode Spellbooks and rules, and just the help we making this work the best it can before we release out into the wild!
+
+Thanks to all once again! 

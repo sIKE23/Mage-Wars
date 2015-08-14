@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda" sleeveid="0">
+  <section name="Mage" shared="False">
+    <card qty="1" id="d20c9d4a-65a7-4018-bffc-16ed0cb62912">Druid</card>
+    <card qty="1" id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260">Druid Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="3" id="a5386a31-5786-4e70-9482-65657607d802">Acid Ball</card>
+    <card qty="2" id="a1de2c11-60ab-42b5-99d5-752f5cb85770">Surging Wave</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="2" id="a3a04a1e-76e9-4043-a22c-d731ac2a103f">Corrosive Orchid</card>
+    <card qty="1" id="71e32301-4724-497d-9224-9f052fcf9808">Galaxxus</card>
+    <card qty="1" id="782de4d1-61aa-4efa-baf1-99df5688704e">Mana Flower</card>
+    <card qty="1" id="62a0b1ac-91d1-4dc5-9bcc-eb4209261388">Raincloud</card>
+    <card qty="3" id="a7f900e4-64ac-4c1b-8905-90607feb7d1a">Tanglevine</card>
+    <card qty="1" id="b0993b6c-e604-4ba4-86d7-b45e53daae9b">Vine Tree</card>
+    <card qty="3" id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab">Wall of Thorns</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="7add1431-cfce-4c3e-b7bc-88cf0c126e9a">Dire Wolf</card>
+    <card qty="1" id="6ea8364e-2843-4649-af14-44ebedeeb41e">Galador, Protector of Straywood</card>
+    <card qty="4" id="1c7345af-d370-446b-8d71-ebb1e90b0db9">Raptor Vine</card>
+    <card qty="4" id="bc0190fc-cb97-47e5-aa19-a2d387a64b73">Vine Snapper</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="86308614-b7be-477c-b0ab-be56d31cadc5">Barkskin</card>
+    <card qty="2" id="8df84f88-e24a-4517-aae5-8595c09cc3cd">Bear Strength</card>
+    <card qty="2" id="7cebacd8-7bef-43b7-93ce-c071e34ca3ea">Brace Yourself</card>
+    <card qty="1" id="746e5dba-4689-4ae5-831e-a844131c4824">Cobra Reflexes</card>
+    <card qty="1" id="77b5e9a1-9824-40a5-95e9-2f669a01a5c8">Force Sword</card>
+    <card qty="2" id="76d440be-b82c-4a12-97ef-c2bad86fdc1a">Regrowth</card>
+    <card qty="2" id="afd1e927-92a2-4525-a33f-50fec7c9b382">Rhino Hide</card>
+    <card qty="2" id="09e11b3e-3129-4a87-8f8e-b3c18045389a">Rust</card>
+    <card qty="3" id="c0dbf89b-5373-47b5-ab1f-979400ea69f8">Sentinel of V'Tar</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="12b4584c-1338-4155-8a7f-6ba27ced88ba">Bearskin</card>
+    <card qty="1" id="ceee5eaa-4aef-4b81-b272-b23d7e15380d">Druid's Leaf Ring</card>
+    <card qty="1" id="c4daa855-667a-4211-8970-5b210eeb145d">Eagleclaw Boots</card>
+    <card qty="1" id="5a07689a-9edc-4366-9d70-6eecf5f4447d">Leather Boots</card>
+    <card qty="1" id="a6a267f1-a2ec-4264-aaff-85b40c0a68dd">Leather Gloves</card>
+    <card qty="1" id="983a31d2-4e37-441d-a39e-3088f9b3d84c">Regrowth Belt</card>
+    <card qty="1" id="6fa5b665-0b7d-4815-9122-09e27b50c7a9">Vinewhip Staff</card>
+    <card qty="1" id="b96b5ebe-6e6b-4ee8-b644-8e68dda574c0">Wand of Healing</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="3" id="7c50b8b4-149e-4636-8beb-88672929946b">Burst of Thorns</card>
+    <card qty="4" id="c46fd335-9b2e-4a23-b52b-77e708de89c0">Dispel</card>
+    <card qty="6" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+    <card qty="2" id="9455c697-f680-4d12-b5d6-72235c03f77c">Force Push</card>
+    <card qty="3" id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2">Rouse the Beast</card>
+    <card qty="2" id="3aaab9ab-7dbf-4694-b3cb-fc7e4710bad3">Seeking Dispel</card>
+    <card qty="2" id="b969cb2f-6f0b-4d89-8839-511aab891c0d">Teleport</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
