@@ -115,7 +115,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
         defender = Card(dTraitDict.get('OwnerID'))
         atkTraits = attack.get('Traits',{})
         if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
-        notify("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
+        debug("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
         if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
         if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
         if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
