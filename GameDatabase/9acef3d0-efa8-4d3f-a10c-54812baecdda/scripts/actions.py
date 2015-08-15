@@ -290,7 +290,8 @@ def PlayerSetup():
 			setGlobalVariable("PlayersIDList",str(playersIDList))
 	#creates a dictionary where { key is PlayerID : { PlayerNum, PlayerName }}
 	playersIDList = eval(getGlobalVariable("PlayersIDList"))
-	for i,j in range(len(playersIDList)), playersIDList:
+	for i,j in enumerate(playersIDList):
+	#for i,j in range(len(playersIDList)), playersIDList:
 		mwPlayerDict[j] = {"PlayerNum": (i+1),"PlayerName":Player(j).name}
 		setGlobalVariable("MWPlayerDict",str(mwPlayerDict))
 
