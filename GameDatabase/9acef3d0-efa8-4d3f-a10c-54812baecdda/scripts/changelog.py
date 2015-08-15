@@ -1,5 +1,16 @@
 changelog = {
-		1130000: ("1.13.0.0", "8 August 2015", [
+		1130100: ("1.13.1.0", "14 August 2015", [
+			" Please update your Image Pack",
+			" Game Documents | Playing Mage Wars on OCTGN",
+			" Game Documents | OCTGN Apprentice Mode",
+			"How to Build your own Domination Map",
+			" Game Documents | Keyboard Shortcut Mappings",
+			" Game Documents | Mage Wars Complete Codex",
+			" Game Documents | Mage Wars Condition Markers",
+			" Game Documents | Spellbook Builder Install Help",
+			" Game Documents | ChangeLog",
+			]),
+		1130000: ("1.13.0.0", "14 August 2015", [
 			" Please update your Image Pack",
 			" Game Documents | Playing Mage Wars on OCTGN",
 			" Game Documents | OCTGN Apprentice Mode",
