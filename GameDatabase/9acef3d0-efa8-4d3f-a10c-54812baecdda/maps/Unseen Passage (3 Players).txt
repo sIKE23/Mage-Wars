@@ -1,4 +1,4 @@
-@Scenario=[Domination,1]
+@Scenario=[Domination,11]
 
 *..*
 ..4.
