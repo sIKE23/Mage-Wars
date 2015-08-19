@@ -238,11 +238,18 @@ def canAttach(card,target):
             (cName == 'Forcefield' and tName == 'Forcemaster') or
             (cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
             (cTargetBar == 'Creature' and tType in ['Creature','Mage']) or
+            (cTargetBar == 'Minor Creature' and tType in ['Creature','Mage']) or
             (cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
             (cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in target.Subtype and tController == cController) or
+            (cTargetBar == 'Demon Creature' and tType in ['Creature'] and 'Demon' in target.Subtype)
             (cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
             (cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
             (cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or #Ugh...
+            (cTargetBar == 'Minor Creature' and tType == 'Creature' and target.Level <= 2) or #Ugh Ugh...
+            (cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and target.Level <= 2) or #Ugh Ugh...
+            (cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2) or #Ugh Ugh...
+            (cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2 and 'Animal' in target.Subtype ) or #Ugh Ugh...
+            (cTargetBar == 'Knight Creature' and tType in ['Creature'] and 'Knight' in target.Subtype) or
             (cTargetBar == 'Mage' and tType == 'Mage') or
             (cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
             (cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
