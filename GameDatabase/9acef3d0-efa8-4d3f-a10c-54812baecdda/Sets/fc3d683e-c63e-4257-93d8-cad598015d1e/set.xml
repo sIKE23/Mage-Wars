@@ -974,10 +974,10 @@
 
 
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">
-			<property name="Type" value="Conjuration" />
+			<property name="Type" value="Conjuration-Vine" />
 			<property name="Stats" value="Armor=-, Life=1" />
 				<alternate name="Vine Marker Black" type="B">
-					<property name="Type" value="Conjuration" />
+					<property name="Type" value="Conjuration-Vine" />
 					<property name="Stats" value="Armor=-, Life=1" />
 				</alternate>
 		</card>

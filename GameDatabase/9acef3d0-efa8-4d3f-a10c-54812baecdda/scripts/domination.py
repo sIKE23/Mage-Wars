@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.1.0     #######################################
+##########################    v1.13.5.0     #######################################
 ###########################################################################
 
 ############################################################################
@@ -82,7 +82,7 @@ def readMap(filename):
                         scenarioDict[dictKey] = array
         return scenarioDict
 
-def loadMapFile(group, x=0, y=0):
+def loadMapFile():
         mute()
         directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
         fileList = [f.split('.')[0] for f in os.listdir(directory) if (os.path.isfile(os.path.join(directory,f)) and f.split('.')[1]=='txt')]
@@ -147,12 +147,12 @@ def loadMapFile(group, x=0, y=0):
         for c in table:
                 if c.type in ['DiceRoll','Phase']: moveRDA(c)
 
+        table.board = "Default"
         for obj,locations in mapObjects:
                 for L in locations:
                         j,i = L
                         mapPlace(obj,(i-1,j-1))
 
-        setNoGameBoard(table)
         for p in players:
         	remoteCall(p,"DominationMatchStart",[]) 
         

@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.1.0     #######################################
+##########################    v1.13.5.0     #######################################
 ###########################################################################
 import time
 import re
@@ -123,10 +123,7 @@ DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 diceBank = []
 diceBankD12 = []
 
-listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];
-
 ##########################		 Card Sizes 			########################
-
 cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60},
                    'Horizontal Cards': {'height': 60, 'width': 80, 'backHeight': 80, 'backWidth': 60},
                    'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130},
@@ -134,8 +131,7 @@ cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth
                    'InitativeMarkers': {'height': 50, 'width': 50, 'backHeight': 50, 'backWidth': 50},
                    'ModularBoardPieces': {'height': 250, 'width': 250, 'backHeight': 250, 'backWidth': 250}}
 
-##########################		Other			############################
-
+##########################		Player Color Settings			############################
 playerColorDict = {
         1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":ControlMarkerRed}, #Red - R=222 G=40  B=39
         2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":ControlMarkerBlue}, #Blue - R=23  G=30  B=120
@@ -144,8 +140,23 @@ playerColorDict = {
         5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":ControlMarkerPurple}, #Purple - R=174 G=118 B=246
         6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":ControlMarkerGrey} #Grey - R=192 G=192 B=192
              }
+ 
+listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];
 
-boardSet = "GameBoard1.png"
+##########################		Board Settings			############################            
+gameBoardsDict = {
+				1 : {"boardName":"Westlock - 4X3","zoneDef":(4,3,250),"buttonColor":"#171e78"},
+				2 : {"boardName":"Inferno - 4x3","zoneDef":(4,3,250),"buttonColor":"#de2827"},
+				3 : {"boardName":"Marble Floors - 4X3","zoneDef":(4,3,250),"buttonColor":"#c0c0c0"},
+				4 : {"boardName":"Slimy Rocks - 4X4","zoneDef":(4,4,200),"buttonColor":"#c680b4"},
+				5 : {"boardName":"Forest - 4X5","zoneDef":(4,5,200),"buttonColor":"#01603e"},
+				6 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
+				7 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
+				8 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"}
+						 }
+
+##########################		Other			############################            
+
 debugMode = False
 deckLoaded = False
 blankSpellbook = False
@@ -206,6 +217,9 @@ def onGameStart():
  	setGlobalVariable("PlayersIDList",str([]))
  	setGlobalVariable("MWPlayerDict",str({}))
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	
+	if me.name == gameHost.name:
+		chooseGame()
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
@@ -228,6 +242,49 @@ def onGameStart():
 ###########################################################################
 ##########	################    OnGameStart Event Functions   ###########################
 ###########################################################################
+
+def chooseGame():
+	mute()
+	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
+	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
+	buttonColorList = ["#de2827","#171e78"];
+	choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination"];
+
+	while (True): 
+		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
+		if choice == 1:
+			setGlobalVariable("GameMode", "Arena")
+			setArenaBoard()
+			break
+		elif choice == 2:
+			setGlobalVariable("GameMode", "Domination")
+			loadMapFile()
+			break
+	'''	elif choice == 3:
+			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
+			setArenaBoard()
+		elif choice == 4:
+			setGlobalVariable("GameMode", "DominationCoOpTeamPlay")
+			loadMapFile2()
+		elif choice == 5:
+			setGlobalVariable("GameMode", "Academy")
+		elif choice == 6:
+			setGlobalVariable("GameMode", "AcademyArenaCoOpTeamPlay")'''
+
+def setArenaBoard():
+	mute()
+	boardButtonColorList = []
+	boardList = []
+	for num in gameBoardsDict:
+		boardButtonColorList.append(gameBoardsDict[num]["buttonColor"])
+		boardList.append(gameBoardsDict[num]["boardName"])
+	while (True):
+		choice = askChoice("Which Arena Game board would you like to to Use?", boardList, boardButtonColorList)
+		break
+	table.board = gameBoardsDict[choice]["boardName"]
+	zoneDef = gameBoardsDict[choice]["zoneDef"]
+	defineRectangularMap(zoneDef[0],zoneDef[1],zoneDef[2])
+	return
 
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
@@ -563,6 +620,14 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         elif fromCard.Type !="Enchantment":
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
                                 fromCard.arrow(toCard,False)
+                                
+def OnChangeCounter(player, counter, oldValue):
+	mute()
+	testing(player,counter,oldValue)
+
+def testing(player,counter,oldValue):
+	mute()
+	notify("(player {}, counter: {}, oldValue: {}".format(player,counter,oldValue))
 
 ############################################################################
 ######################		Group Actions			########################
@@ -679,80 +744,6 @@ def createCompassRose(group, x=0, y=0):
 
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
-
-def setNoGameBoard(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard0.png"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard1(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard1.jpg"
-	defineRectangularMap(4,3,250)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard2(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard2.jpg"
-	defineRectangularMap(6,4,170)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard3(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard3.jpg"
-	defineRectangularMap(5,4,170)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard4(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard4.jpg"
-	defineRectangularMap(4,3,250)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard5(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard5.jpg"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard6(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard6.jpg"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard9(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard9.jpg"
-	defineRectangularMap(3,2,330)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard10(group, x=0, y=0):
-	mute()
-	global boardSe
-	boardSet = "GameBoard10.jpg"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard(bset):
-	mute()
-	global boardSet
-	boardSet = bset
-	table.setBoardImage("GameBoards\\{}".format(boardSet))
 
 def nextPhase(group, x=-360, y=-150):
         mute()
@@ -1220,7 +1211,8 @@ def getTextTraitValue(card, TraitName):
 
 def mageStatus():
 	mute()
-	if not me.Damage >= me.Life or debugMode:
+	#if not me.Damage >= me.Life or debugMode:
+	if not me.Damage >= me.Life:
 		return
 	for c in table:
 		if c.Type == "Mage" and c.controller == me:
@@ -1230,8 +1222,22 @@ def mageStatus():
 		remoteCall(p, "reportDeath",[me])
 	#reportGame('MageDeath')
 
+
+def checkMageDeath(player, counter, oldvalue):
+	global currentPhase
+	choiceList = ['Side', 'Bottom']
+	colorsList = ['#FF0000', '#0000FF']
+	if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
+		if me.Damage >= me.Life and currentPhase != "Actions":
+			mageStatus()
+		elif me.Damage >= me.Life and currentPhase == "Actions":
+			if askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?',['Yes','No'],["#01603e","#de2827"]) == 0:
+				notify("No!")
+				mageStatus()
+
+
 def reportDeath(deadmage):
-	setGlobalVariable("GameIsOver", True)
+	#setGlobalVariable("GameIsOver", True)
 	setGlobalVariable("GameEndTime", str(time.ctime()))
 	choiceList = ['OK']
 	colorsList = ['#de2827']
@@ -1249,13 +1255,6 @@ def reportVTarWin(winningmage,score):
 	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
 	if choice == 0 or choice == 1:
 		return
-
-def checkMageDeath(player, counter, oldvalue):
-	global currentPhase
-	if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
-		if me.Damage >= me.Life and currentPhase == "Actions":
-			if not confirm("                       Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?"):
-				mageStatus()
 
 def concede(group=table, x = 0, y = 0):
 	global gameTurn
@@ -1857,7 +1856,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         mute()
         mapDict = eval(getGlobalVariable('Map'))
         mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
-        debug("\n" + str(mwPlayerDict))
+        #debug("\n" + str(mwPlayerDict))
         playerNum = mwPlayerDict[me._id]["PlayerNum"]
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
