@@ -126,7 +126,7 @@ diceBankD12 = []
 ##########################		 Card Sizes 			########################
 cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60},
                    'Horizontal Cards': {'height': 60, 'width': 80, 'backHeight': 80, 'backWidth': 60},
-                   'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130},
+                   'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130}, 
                    'PhaseMarkers': {'height': 20, 'width': 90, 'backHeight': 20, 'backWidth': 90},
                    'InitativeMarkers': {'height': 50, 'width': 50, 'backHeight': 50, 'backWidth': 50},
                    'ModularBoardPieces': {'height': 250, 'width': 250, 'backHeight': 250, 'backWidth': 250}}
@@ -149,7 +149,7 @@ gameBoardsDict = {
 				2 : {"boardName":"Inferno - 4x3","zoneDef":(4,3,250),"buttonColor":"#de2827"},
 				3 : {"boardName":"Marble Floors - 4X3","zoneDef":(4,3,250),"buttonColor":"#c0c0c0"},
 				4 : {"boardName":"Slimy Rocks - 4X4","zoneDef":(4,4,200),"buttonColor":"#c680b4"},
-				5 : {"boardName":"Forest - 4X5","zoneDef":(4,5,200),"buttonColor":"#01603e"},
+				5 : {"boardName":"Forest - 5X4","zoneDef":(5,4,200),"buttonColor":"#01603e"},
 				6 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
 				7 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
 				8 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"}
