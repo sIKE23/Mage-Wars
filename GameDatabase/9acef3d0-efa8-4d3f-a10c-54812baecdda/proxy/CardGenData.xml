@@ -265,6 +265,7 @@
 			<link block="Type"><property name="Type" /></link>
 			<link block="Stats"><property name="Stats" /></link>
 		</textblocks>
+	</template>
 	<template src="Proxy/Creature-Proxy.png">
 		<matches>
 			<match name="Type" value="Creature" />
