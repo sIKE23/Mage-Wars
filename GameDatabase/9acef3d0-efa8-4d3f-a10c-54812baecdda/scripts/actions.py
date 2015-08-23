@@ -218,12 +218,12 @@ def onGameStart():
  	setGlobalVariable("MWPlayerDict",str({}))
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
 	
-	if me.name == gameHost.name:
-		chooseGame()
+
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
+		table.board = "Westlock - 4X3"
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
@@ -234,8 +234,9 @@ def onGameStart():
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
 	else:
+		if me.name == gameHost.name:
+			chooseGame()
 		choosePlayerColor()
-		test = 0
 		if gameHost == me:
 			remoteCall(me,"finishSetup",[])
 
