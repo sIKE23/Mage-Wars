@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.0.0     #######################################
+##########################    v1.13.1.0     #######################################
 ###########################################################################
 import time
 import re
@@ -279,7 +279,6 @@ def finishSetup(): #Waits until all players have chosen a color, then finishes t
 def PlayerSetup():
 	mute()
 	playersIDList = eval(getGlobalVariable("PlayersIDList"))
-	gameHost = Player(int(getGlobalVariable("GameHostID")))
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 
 	#creates a list of PlayerID's weeding out any Spectators who joined in the game lobby
@@ -290,9 +289,8 @@ def PlayerSetup():
 			setGlobalVariable("PlayersIDList",str(playersIDList))
 	#creates a dictionary where { key is PlayerID : { PlayerNum, PlayerName }}
 	playersIDList = eval(getGlobalVariable("PlayersIDList"))
-	for i,j in enumerate(playersIDList):
-	#for i,j in range(len(playersIDList)), playersIDList:
-		mwPlayerDict[j] = {"PlayerNum": (i+1),"PlayerName":Player(j).name}
+	for i,j in enumerate(playersIDList, start=1):
+		mwPlayerDict[j] = {"PlayerNum": (i),"PlayerName":Player(j).name}
 		setGlobalVariable("MWPlayerDict",str(mwPlayerDict))
 
 def AskDiceRollArea():
