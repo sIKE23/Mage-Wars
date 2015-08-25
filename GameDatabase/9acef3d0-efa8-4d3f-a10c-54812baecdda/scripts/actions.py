@@ -622,14 +622,6 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
                                 fromCard.arrow(toCard,False)
                                 
-def OnChangeCounter(player, counter, oldValue):
-	mute()
-	testing(player,counter,oldValue)
-
-def testing(player,counter,oldValue):
-	mute()
-	notify("(player {}, counter: {}, oldValue: {}".format(player,counter,oldValue))
-
 ############################################################################
 ######################		Group Actions			########################
 ############################################################################
@@ -695,7 +687,6 @@ def updateTimer(endTime,notifications):
 
 def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
-	mageStatus()
 
 def useUntargetedAbility(attacker, x=0, y=0):
         mute()
@@ -756,7 +747,6 @@ def nextPhase(group, x=-360, y=-150):
 		return
 	if getGlobalVariable("InitiativeDone") == "False": # Player setup is not done yet.
 		return
-	mageStatus()
 	card = None
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
@@ -1210,41 +1200,29 @@ def getTextTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1].strip('[]'))
 	return (TraitCost)
 
-def mageStatus():
-	mute()
-	#if not me.Damage >= me.Life or debugMode:
-	if not me.Damage >= me.Life:
-		return
-	for c in table:
-		if c.Type == "Mage" and c.controller == me:
-			c.orientation = 1
-	#	playSoundFX('Winner')
-	for p in players:
-		remoteCall(p, "reportDeath",[me])
-	#reportGame('MageDeath')
-
-
 def checkMageDeath(player, counter, oldvalue):
-	global currentPhase
-	choiceList = ['Side', 'Bottom']
-	colorsList = ['#FF0000', '#0000FF']
-	if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
-		if me.Damage >= me.Life and currentPhase != "Actions":
-			mageStatus()
-		elif me.Damage >= me.Life and currentPhase == "Actions":
-			if askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?',['Yes','No'],["#01603e","#de2827"]) == 0:
-				notify("No!")
-				mageStatus()
-
+        mute()
+        global currentPhase
+        choiceList = ['Side', 'Bottom']
+        colorsList = ['#FF0000', '#0000FF']
+        if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
+                if me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
+                        for card in table:
+                                if card.Type == "Mage" and card.controller == me:
+                                        card.orientation = 1
+                                        #playSoundFX('Winner')
+                                        for p in players:
+                                                remoteCall(p, "reportDeath",[me])
+        #reportGame('MageDeath')
 
 def reportDeath(deadmage):
-	#setGlobalVariable("GameIsOver", True)
+	setGlobalVariable("GameIsOver", True)
 	setGlobalVariable("GameEndTime", str(time.ctime()))
 	choiceList = ['OK']
 	colorsList = ['#de2827']
 	whisper("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
-	if choice == 0 or choice == 1:
+	if choice == 0 or 1:
 		return
 
 def reportVTarWin(winningmage,score):
@@ -1254,7 +1232,7 @@ def reportVTarWin(winningmage,score):
 	colorsList = ['#de2827']
 	whisper("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
-	if choice == 0 or choice == 1:
+	if choice == 0 or 1:
 		return
 
 def concede(group=table, x = 0, y = 0):
