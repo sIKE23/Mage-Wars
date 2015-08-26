@@ -223,7 +223,7 @@ def onGameStart():
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
-		table.board = "Westlock - 4X3"
+		#table.board = "Westlock - 4X3"
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
@@ -233,6 +233,7 @@ def onGameStart():
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
+		chooseGame()
 	else:
 		if me.name == gameHost.name:
 			chooseGame()
@@ -249,7 +250,7 @@ def chooseGame():
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
 	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
 	buttonColorList = ["#de2827","#171e78"];
-	choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
 
 	while (True): 
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
