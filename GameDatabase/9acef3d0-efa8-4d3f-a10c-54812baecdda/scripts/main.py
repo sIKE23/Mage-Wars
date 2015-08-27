@@ -11,32 +11,71 @@ import sys
 sys.path.append(wd("lib"))
 import os
 
+def testFormatting(card,x=0,y=0): #delete this function later
+	formatCardObject(card)
+	debug(str(card.nickname))
+	debug(str(card.pronouns))
+	debug(str(card.baseCost))
+	debug(str(card.baseReveal))
+	debug(str(card.ranges))
+	debug(str(card.subtypes))
+	debug(str(card.baseArmor))
+	debug(str(card.baseLife))
+	debug(str(card.baseChanneling))
+
 def formatCardObject(card): #Interprets the XML file for the card and correctly formats each field.
-	#Format cost
-	try: card.Cost = int(card.Cost)
-	except:
-		try: card.Cost = eval(card.CostFunction)
-		except: card.Cost = 0
+	#Format name without title
+	card.nickname = card.Name.split(", ")[0]
+
+	#Format pronouns for card
+	i = {"Male":1,"Female":2}.get(getGender(card),0)
+	card.pronouns = {
+		"Sub": ["it","he","her"][i],				#Subject
+		"Obj": ["it","him","her"][i],				#Object
+		"Pos": ["its","his","her"][i],				#Possessive
+		"Ref": ["itself","himself","herself"][i]	#Reflexive
+	}
+
+	#Format casting cost
+	try: card.baseCost = int(card.Cost.split("+")[0])
+	except: card.baseCost = 0
+
+	#Format reveal cost
+	try:
+		reveal = card.Cost.split("+")[1]
+		try: card.baseReveal = int(reveal)
+		except: card.baseReveal = 0
+	except: card.baseReveal = None
 
 	#Format range.
-	try: card.Range = [int(n) for n in card.Range.split("-")]
-	except: card.Range = [0,0]
+	try: card.ranges = [int(n) for n in card.Range.split("-")]
+	except: card.ranges = [0,0]
 
 	#Format target
-	try: card.TargetParameters = card.TargetParameters.split(", ")
-	except: card.TargetParameters = ["Zone"]
+	try: card.targets = [s.split(",") for s in card.targeting.split("||")]
+	except: card.targets = ["Zone"]
 
 	#Format subtypes
-	card.Subtypes = card.Subtype.split(", ")
-
+	card.subtypes = card.Subtype.split(", ")
 	#Format stats
-	stats = keyValueStringParser(card.Stats.split(", ")) #Might be a more concise way to get this.
+	stats = statsParser(card.Stats.split(", ")) #Might be a more concise way to get this.
+	card.baseArmor = stats.get("Armor")
+	card.baseLife = stats.get("Life")
+	card.baseChanneling = stats.get("Channeling")
+	#Add card's built-in defense here
 	#Work in progress, clearly.
 
-def keyValueStringParser(stringList):
+
+"""
+Here is how to format the relevant new XML properties:
+"Flying, Living Conjuration or Non-Mage Creature" === <property name="targeting" value="Flying,Living,Conjuration||!Mage,Creature" />
+
+"""
+def statsParser(stringList):
 	#Parses sets of "key=value" formatted strings and returns a dictionary
 	output = {}
 	for s in stringList:
 		pair = s.split("=")
-		output[pair[0]] = pair[1]
+		try: output[pair[0]] = int(pair[1])
+		except: output[pair[0]] = 0
 	return output

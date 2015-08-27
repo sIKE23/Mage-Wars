@@ -157,7 +157,7 @@ def getGender(card):
                 if line in ['Male','Female']:
                         gender = line
                 elif line == name: return gender
-                	
+
 def getMapText(map):
         rawMapText = readScriptTextFile("MapText")
         newMapText = []
