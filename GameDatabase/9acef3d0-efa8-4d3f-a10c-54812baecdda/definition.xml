@@ -21,6 +21,7 @@
 		<script src="scripts/attachcards.py" />
 		<script src="scripts/textfunctions.py" />
 		<script src="scripts/domination.py" />
+		<script src="scripts/main.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
@@ -210,6 +211,7 @@
 			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
 			<cardaction menu="Toggle Gate To Hell Marker" default="False" shortcut="Ctrl+Shift+G" execute="toggleGatetoHell" />
 		</cardactions>
+			<cardaction menu="Format Card (for testing only)" default="False" execute="testFormatting" />
 			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard" />
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
