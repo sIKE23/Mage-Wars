@@ -218,12 +218,14 @@ def onGameStart():
  	setGlobalVariable("MWPlayerDict",str({}))
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
 	
-
+	if me == gameHost and getSetting("AutoBoard", True):
+		chooseGame()
+	else:
+		table.board = "Westlock - 4X3"
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
 		debugMode = True
-		table.board = "Westlock - 4X3"
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
@@ -234,8 +236,6 @@ def onGameStart():
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
 	else:
-		if me.name == gameHost.name:
-			chooseGame()
 		choosePlayerColor()
 		if gameHost == me:
 			remoteCall(me,"finishSetup",[])
@@ -629,10 +629,9 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
 def optionsMenu(group,x=0,y=0):
 	#Consolidates the many game toggle options into a single menu
 	settingsList = [
-		{True : "Autoburn Enabled", False: "Autoburn Disabled", "setting": "AutoResolveBurns"},
-		{True : "Autobleed Enabled", False: "Autobleed Disabled", "setting": "AutoResolveBleed"},
-		{True : "Autorot Enabled", False: "Autorot Disabled", "setting": "AutoResolveRot"},
-		{True : "Autoattach Enabled", False: "Autoattach Disabled", "setting": "AutoAttach"},
+		{True : "Auto Calculate Upkeep Effects Enabled", False: "Auto Calculate Upkeep Effects Disabled", "setting": "AutoResolveEffects"},
+		{True : "Auto Attachments Enabled", False: "Auto Attachments Disabled", "setting": "AutoAttach"},
+		{True : "Prompt for Game Selection and Board", False: "Standard Arena Board Enabled", "setting": "AutoBoard"},	
 		{True : "Battle Calculator Enabled", False: "Battle Calculator Disabled", "setting": "BattleCalculator"},
 		{True : "Sound Effects Enabled", False: "Sound Effects Disabled", "setting": "AutoConfigSoundFX"},
 		{True : "Tutorial Enabled", False: "Tutorial Disabled", "setting": "octgnTutorial"}
@@ -860,7 +859,7 @@ def resetMarkers():
 def resolveBurns():
 	mute()
 	#is the setting on?
-	if not getSetting("AutoResolveBurns", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
 	if len(cardsWithBurn) > 0:
@@ -887,7 +886,7 @@ def resolveRot():
 	mute()
 
 	#is the setting on?
-	if not getSetting("AutoResolveRot", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithRot = [c for c in table if c.markers[Rot] and c.controller == me]
 	if len(cardsWithRot) > 0:
@@ -906,7 +905,7 @@ def resolveBleed():
 	mute()
 
 	#is the setting on?
-	if not getSetting("AutoResolveBleed", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithBleed = [c for c in table if c.markers[Bleed] and c.controller == me]
 	if len(cardsWithBleed) > 0:
@@ -1253,28 +1252,6 @@ def concede(group=table, x = 0, y = 0):
 Format:
 [function name, setting name, message, default]
 """
-#Bookmark
-fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
-                          ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
-                          ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
-                          ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
-                          ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
-                          ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
-                          ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
-                          ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
-                          ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
-                          ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
-                          ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons.",True],
-                          ["BattleCalculator","BattleCalculator","You have {} the battle calculator.",True],
-                          ["DeclareAttackWithArrow","DeclareAttackWithArrow","You have {} declaring attacks with the targeting arrow.",True]]
-
-for fGen in fGenToggleSettingsList:
-        exec(
-'def toggle'+fGen[0]+'(group,x=0,y=0):\n\t'+
-        'state=getSetting("'+fGen[1]+'",'+str(fGen[3])+')\n\t'+
-        'setSetting("'+fGen[1]+'", not state)\n\t'+
-        'if state:\n\t\twhisper("'+fGen[2].format('disabled')+'")\n\t'+
-        'else:\n\t\twhisper(":'+fGen[2].format('enabled')+'")')
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
