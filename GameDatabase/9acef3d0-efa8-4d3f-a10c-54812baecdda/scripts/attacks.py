@@ -478,16 +478,11 @@ def rollDice(dice):
 
     effect = int(diceBankD12.pop()) + 1
     dieCard.markers[DieD12] = effect
-    initiativeDone = getGlobalVariable("InitiativeDone")
-    if initiativeDone:
+    if getGlobalVariable("SetupDone") == "True":
         playSoundFX('Dice')
         time.sleep(1)
         notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
         return (result,effect)
-    else:
-        setGlobalVariable("InitiativeDone", "True")
-        iniRoll(effect)
-	return None,None
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -768,7 +763,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
         atkOS = Card(attack['OriginalSourceID'])
         if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
         #Check for helm of fear
-        if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
+        if defender.type=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') == 'Melee') and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
                 notify("The Helm of Fear radiates a terrifying aura!")
                 damageRoll,effectRoll = rollDice(0)
                 if effectRoll >= 9:
