@@ -158,7 +158,6 @@ gameBoardsDict = {
 ##########################		Other			############################            
 
 debugMode = False
-deckLoaded = False
 blankSpellbook = False
 currentPhase = ""
 discountsUsed = [ ]
@@ -193,7 +192,7 @@ def onGameStart():
 
 	# reset python Global Variables and give tutorial message
 	for p in players:
-		remoteCall(p, "setClearVars",[])
+		remoteCall(p, "setClearVars",[0])
 
 	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
@@ -230,7 +229,7 @@ def onGameStart():
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		setUpDiceAndPhaseCards()
-		setGlobalVariable("InitiativeDone","True")
+		setGlobalVariable("SetupDone","True")
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
@@ -426,7 +425,6 @@ def rollForInitative():
 			victoriousPlayerID = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
 			debug(str(victoriousPlayerID))
 
-		setGlobalVariable("InitiativeDone", "True")
 		remoteCall(Player(victoriousPlayerID), "AskInitiative", [victoriousPlayerID])
 	else:
 		notify("Something unexpected happened and the automation for Initative has failed! Setting the game host as the player to choose Initative!")
@@ -496,29 +494,36 @@ def moveRDA(card):
 			y = mapY + mapHeight + 10 + 10
     card.moveToTable(x,y,True)
 
-def setClearVars():
-	global deckLoaded
+def setClearVars(groups):
 	global gameNum
 	if gameNum == 1: return
-	deckLoaded = False
+	if groups != 0:
+		for group in groups:
+			for card in group:
+				if card.controller == me:
+					card.delete()
+		me.damage = 0
+		me.mana = 0
+		me.life = 0
+		me.Channeling = 0
 
 def onLoadDeck(player, groups):
 	mute()
 	global gameNum
-	global deckLoaded
 	global debugMode
 	global playerNum
 	global blankSpellbook
 	if player == me:
 		#if a deck was already loaded, reset the game
-		if deckLoaded:
+		if getGlobalVariable("DeckLoaded") == "True":
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			for p in players:
-				remoteCall(p, "setClearVars",[])
+				remoteCall(p, "setClearVars",[groups])
 			gameNum += 1
-			resetGame()
+			setGlobalVariable("DeckLoaded",str(0))
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
-			deckLoaded = True
+			setGlobalVariable("DeckLoaded", int(getGlobalVariable("DeckLoaded"))+1)
+			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
 			tutorialMessage("Play Card")
 		else:
@@ -724,6 +729,9 @@ def mageSetup():
 		elif "Life" in statval[0]:
 			me.Life = int(statval[1])
 			whisper("Life set to {}".format(me.Life))
+			
+	setGlobalVariable("SetupDone",int(getGlobalVariable("SetupDone"))+1)
+	if eval(getGlobalVariable("SetupDone")) == len(getPlayers()): setGlobalVariable("SetupDone","True")
 
 def createVineMarker(group, x=0, y=0):
 	mute()
@@ -744,7 +752,7 @@ def nextPhase(group, x=-360, y=-150):
 	if gameIsOver:	#don't advance phase once the game is done
 		notify("Game is Over!")
 		return
-	if getGlobalVariable("InitiativeDone") == "False": # Player setup is not done yet.
+	if getGlobalVariable("SetupDone") == "False": # Player setup is not done yet.
 		return
 	card = None
 	for c in table: #find phase card
@@ -1204,7 +1212,7 @@ def checkMageDeath(player, counter, oldvalue):
         global currentPhase
         choiceList = ['Side', 'Bottom']
         colorsList = ['#FF0000', '#0000FF']
-        if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
+        if getGlobalVariable("SetupDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
                 if me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
                         for card in table:
                                 if card.Type == "Mage" and card.controller == me:

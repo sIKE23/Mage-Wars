@@ -478,16 +478,11 @@ def rollDice(dice):
 
     effect = int(diceBankD12.pop()) + 1
     dieCard.markers[DieD12] = effect
-    initiativeDone = getGlobalVariable("InitiativeDone")
-    if initiativeDone:
+    if getGlobalVariable("SetupDone") == "True":
         playSoundFX('Dice')
         time.sleep(1)
         notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
         return (result,effect)
-    else:
-        setGlobalVariable("InitiativeDone", "True")
-        iniRoll(effect)
-	return None,None
 
 ############################################################################
 ######################            Event Memory          ####################

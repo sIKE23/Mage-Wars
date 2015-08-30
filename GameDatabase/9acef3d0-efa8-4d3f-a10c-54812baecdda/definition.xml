@@ -55,11 +55,11 @@
 	</gameModes>
 	<globalvariables>
 		<globalvariable name="TableSetup" value="False"/>
-		<globalvariable name="InitiativeDone" value="False"/>
 		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
 		<globalvariable name="ColorsChosen" value=""/>
-		<globalvariable name="SetupDone" value=""/>
+		<globalvariable name="SetupDone" value="0"/>
 		<globalvariable name="OppIniRoll" value=""/>
+		<globalvariable name="DeckLoaded" value="0"/>
 		<globalvariable name="PlayerWithIni" value=""/>
 		<globalvariable name="PlayersIDList" value=""/>
 		<globalvariable name="MWPlayerDict" value=""/>
