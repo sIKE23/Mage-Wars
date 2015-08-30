@@ -522,7 +522,7 @@ def onLoadDeck(player, groups):
 			gameNum += 1
 			setGlobalVariable("DeckLoaded",str(0))
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
-			setGlobalVariable("DeckLoaded", int(getGlobalVariable("DeckLoaded"))+1)
+			setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
 			tutorialMessage("Play Card")
@@ -730,7 +730,7 @@ def mageSetup():
 			me.Life = int(statval[1])
 			whisper("Life set to {}".format(me.Life))
 			
-	setGlobalVariable("SetupDone",int(getGlobalVariable("SetupDone"))+1)
+	setGlobalVariable("SetupDone", str(int(getGlobalVariable("SetupDone"))+1))
 	if eval(getGlobalVariable("SetupDone")) == len(getPlayers()): setGlobalVariable("SetupDone","True")
 
 def createVineMarker(group, x=0, y=0):
