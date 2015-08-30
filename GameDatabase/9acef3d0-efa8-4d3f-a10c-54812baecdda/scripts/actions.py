@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.1.0     #######################################
+##########################    v1.13.5.0     #######################################
 ###########################################################################
 import time
 import re
@@ -123,19 +123,15 @@ DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
 diceBank = []
 diceBankD12 = []
 
-listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];
-
 ##########################		 Card Sizes 			########################
-
 cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60},
                    'Horizontal Cards': {'height': 60, 'width': 80, 'backHeight': 80, 'backWidth': 60},
-                   'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130},
+                   'Dice Roll Area': {'height': 80, 'width': 130, 'backHeight': 80, 'backWidth': 130}, 
                    'PhaseMarkers': {'height': 20, 'width': 90, 'backHeight': 20, 'backWidth': 90},
                    'InitativeMarkers': {'height': 50, 'width': 50, 'backHeight': 50, 'backWidth': 50},
                    'ModularBoardPieces': {'height': 250, 'width': 250, 'backHeight': 250, 'backWidth': 250}}
 
-##########################		Other			############################
-
+##########################		Player Color Settings			############################
 playerColorDict = {
         1 : {"PlayerColor":"Red", "Hex":"#de2827", "ControlMarker":ControlMarkerRed}, #Red - R=222 G=40  B=39
         2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":ControlMarkerBlue}, #Blue - R=23  G=30  B=120
@@ -144,10 +140,24 @@ playerColorDict = {
         5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":ControlMarkerPurple}, #Purple - R=174 G=118 B=246
         6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":ControlMarkerGrey} #Grey - R=192 G=192 B=192
              }
+ 
+listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];
 
-boardSet = "GameBoard1.png"
+##########################		Board Settings			############################            
+gameBoardsDict = {
+				1 : {"boardName":"Westlock - 4X3","zoneDef":(4,3,250),"buttonColor":"#171e78"},
+				2 : {"boardName":"Inferno - 4x3","zoneDef":(4,3,250),"buttonColor":"#de2827"},
+				3 : {"boardName":"Marble Floors - 4X3","zoneDef":(4,3,250),"buttonColor":"#c0c0c0"},
+				4 : {"boardName":"Slimy Rocks - 4X4","zoneDef":(4,4,200),"buttonColor":"#c680b4"},
+				5 : {"boardName":"Forest - 5X4","zoneDef":(5,4,200),"buttonColor":"#01603e"},
+				6 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
+				7 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
+				8 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"}
+						 }
+
+##########################		Other			############################            
+
 debugMode = False
-deckLoaded = False
 blankSpellbook = False
 currentPhase = ""
 discountsUsed = [ ]
@@ -182,7 +192,7 @@ def onGameStart():
 
 	# reset python Global Variables and give tutorial message
 	for p in players:
-		remoteCall(p, "setClearVars",[])
+		remoteCall(p, "setClearVars",[0])
 
 	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
@@ -206,6 +216,11 @@ def onGameStart():
  	setGlobalVariable("PlayersIDList",str([]))
  	setGlobalVariable("MWPlayerDict",str({}))
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	
+	if me == gameHost and getSetting("AutoBoard", True):
+		chooseGame()
+	else:
+		table.board = "Westlock - 4X3"
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
@@ -214,20 +229,62 @@ def onGameStart():
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		setUpDiceAndPhaseCards()
-		setGlobalVariable("InitiativeDone","True")
+		setGlobalVariable("SetupDone","True")
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
 	else:
 		choosePlayerColor()
-		test = 0
 		if gameHost == me:
 			remoteCall(me,"finishSetup",[])
 
 ###########################################################################
 ##########	################    OnGameStart Event Functions   ###########################
 ###########################################################################
+
+def chooseGame():
+	mute()
+	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
+	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
+	buttonColorList = ["#de2827","#171e78"];
+	choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination"];
+
+	while (True): 
+		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
+		if choice == 1:
+			setGlobalVariable("GameMode", "Arena")
+			setArenaBoard()
+			break
+		elif choice == 2:
+			setGlobalVariable("GameMode", "Domination")
+			loadMapFile()
+			break
+	'''	elif choice == 3:
+			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
+			setArenaBoard()
+		elif choice == 4:
+			setGlobalVariable("GameMode", "DominationCoOpTeamPlay")
+			loadMapFile2()
+		elif choice == 5:
+			setGlobalVariable("GameMode", "Academy")
+		elif choice == 6:
+			setGlobalVariable("GameMode", "AcademyArenaCoOpTeamPlay")'''
+
+def setArenaBoard():
+	mute()
+	boardButtonColorList = []
+	boardList = []
+	for num in gameBoardsDict:
+		boardButtonColorList.append(gameBoardsDict[num]["buttonColor"])
+		boardList.append(gameBoardsDict[num]["boardName"])
+	while (True):
+		choice = askChoice("Which Arena Game board would you like to to Use?", boardList, boardButtonColorList)
+		break
+	table.board = gameBoardsDict[choice]["boardName"]
+	zoneDef = gameBoardsDict[choice]["zoneDef"]
+	defineRectangularMap(zoneDef[0],zoneDef[1],zoneDef[2])
+	return
 
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
@@ -368,7 +425,6 @@ def rollForInitative():
 			victoriousPlayerID = highRollerPlayerNums[rnd(0, len(highRollerPlayerNums) - 1)]
 			debug(str(victoriousPlayerID))
 
-		setGlobalVariable("InitiativeDone", "True")
 		remoteCall(Player(victoriousPlayerID), "AskInitiative", [victoriousPlayerID])
 	else:
 		notify("Something unexpected happened and the automation for Initative has failed! Setting the game host as the player to choose Initative!")
@@ -438,29 +494,36 @@ def moveRDA(card):
 			y = mapY + mapHeight + 10 + 10
     card.moveToTable(x,y,True)
 
-def setClearVars():
-	global deckLoaded
+def setClearVars(groups):
 	global gameNum
 	if gameNum == 1: return
-	deckLoaded = False
+	if groups != 0:
+		for group in groups:
+			for card in group:
+				if card.controller == me:
+					card.delete()
+		me.damage = 0
+		me.mana = 0
+		me.life = 0
+		me.Channeling = 0
 
 def onLoadDeck(player, groups):
 	mute()
 	global gameNum
-	global deckLoaded
 	global debugMode
 	global playerNum
 	global blankSpellbook
 	if player == me:
 		#if a deck was already loaded, reset the game
-		if deckLoaded:
+		if getGlobalVariable("DeckLoaded") == "True":
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			for p in players:
-				remoteCall(p, "setClearVars",[])
+				remoteCall(p, "setClearVars",[groups])
 			gameNum += 1
-			resetGame()
+			setGlobalVariable("DeckLoaded",str(0))
 		elif debugMode or blankSpellbook or validateDeck(groups[0]):
-			deckLoaded = True
+			setGlobalVariable("DeckLoaded", int(getGlobalVariable("DeckLoaded"))+1)
+			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
 			tutorialMessage("Play Card")
 		else:
@@ -563,7 +626,7 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
                         elif fromCard.Type !="Enchantment":
                                 castSpell(fromCard,toCard) #Assume that player wants to cast card on target
                                 fromCard.arrow(toCard,False)
-
+                                
 ############################################################################
 ######################		Group Actions			########################
 ############################################################################
@@ -571,10 +634,9 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
 def optionsMenu(group,x=0,y=0):
 	#Consolidates the many game toggle options into a single menu
 	settingsList = [
-		{True : "Autoburn Enabled", False: "Autoburn Disabled", "setting": "AutoResolveBurns"},
-		{True : "Autobleed Enabled", False: "Autobleed Disabled", "setting": "AutoResolveBleed"},
-		{True : "Autorot Enabled", False: "Autorot Disabled", "setting": "AutoResolveRot"},
-		{True : "Autoattach Enabled", False: "Autoattach Disabled", "setting": "AutoAttach"},
+		{True : "Auto Calculate Upkeep Effects Enabled", False: "Auto Calculate Upkeep Effects Disabled", "setting": "AutoResolveEffects"},
+		{True : "Auto Attachments Enabled", False: "Auto Attachments Disabled", "setting": "AutoAttach"},
+		{True : "Prompt for Game Selection and Board", False: "Standard Arena Board Enabled", "setting": "AutoBoard"},	
 		{True : "Battle Calculator Enabled", False: "Battle Calculator Disabled", "setting": "BattleCalculator"},
 		{True : "Sound Effects Enabled", False: "Sound Effects Disabled", "setting": "AutoConfigSoundFX"},
 		{True : "Tutorial Enabled", False: "Tutorial Disabled", "setting": "octgnTutorial"}
@@ -629,7 +691,6 @@ def updateTimer(endTime,notifications):
 
 def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
-	mageStatus()
 
 def useUntargetedAbility(attacker, x=0, y=0):
         mute()
@@ -668,6 +729,9 @@ def mageSetup():
 		elif "Life" in statval[0]:
 			me.Life = int(statval[1])
 			whisper("Life set to {}".format(me.Life))
+			
+	setGlobalVariable("SetupDone",int(getGlobalVariable("SetupDone"))+1)
+	if eval(getGlobalVariable("SetupDone")) == len(getPlayers()): setGlobalVariable("SetupDone","True")
 
 def createVineMarker(group, x=0, y=0):
 	mute()
@@ -680,80 +744,6 @@ def createCompassRose(group, x=0, y=0):
 def createAltBoardCard(group, x=0, y=0):
 	table.create("af14ca09-a83d-4185-afa0-bc38a31dbf82", 450, -40 )
 
-def setNoGameBoard(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard0.png"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard1(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard1.jpg"
-	defineRectangularMap(4,3,250)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard2(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard2.jpg"
-	defineRectangularMap(6,4,170)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard3(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard3.jpg"
-	defineRectangularMap(5,4,170)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard4(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard4.jpg"
-	defineRectangularMap(4,3,250)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard5(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard5.jpg"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard6(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard6.jpg"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard9(group, x=0, y=0):
-	mute()
-	global boardSet
-	boardSet = "GameBoard9.jpg"
-	defineRectangularMap(3,2,330)
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard10(group, x=0, y=0):
-	mute()
-	global boardSe
-	boardSet = "GameBoard10.jpg"
-	for p in players:
-		remoteCall(p, "setGameBoard", [boardSet])
-
-def setGameBoard(bset):
-	mute()
-	global boardSet
-	boardSet = bset
-	table.setBoardImage("GameBoards\\{}".format(boardSet))
-
 def nextPhase(group, x=-360, y=-150):
         mute()
 	global roundTimes
@@ -762,9 +752,8 @@ def nextPhase(group, x=-360, y=-150):
 	if gameIsOver:	#don't advance phase once the game is done
 		notify("Game is Over!")
 		return
-	if getGlobalVariable("InitiativeDone") == "False": # Player setup is not done yet.
+	if getGlobalVariable("SetupDone") == "False": # Player setup is not done yet.
 		return
-	mageStatus()
 	card = None
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
@@ -878,7 +867,7 @@ def resetMarkers():
 def resolveBurns():
 	mute()
 	#is the setting on?
-	if not getSetting("AutoResolveBurns", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
 	if len(cardsWithBurn) > 0:
@@ -905,7 +894,7 @@ def resolveRot():
 	mute()
 
 	#is the setting on?
-	if not getSetting("AutoResolveRot", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithRot = [c for c in table if c.markers[Rot] and c.controller == me]
 	if len(cardsWithRot) > 0:
@@ -924,7 +913,7 @@ def resolveBleed():
 	mute()
 
 	#is the setting on?
-	if not getSetting("AutoResolveBleed", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithBleed = [c for c in table if c.markers[Bleed] and c.controller == me]
 	if len(cardsWithBleed) > 0:
@@ -1218,17 +1207,20 @@ def getTextTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1].strip('[]'))
 	return (TraitCost)
 
-def mageStatus():
-	mute()
-	if not me.Damage >= me.Life or debugMode:
-		return
-	for c in table:
-		if c.Type == "Mage" and c.controller == me:
-			c.orientation = 1
-	#	playSoundFX('Winner')
-	for p in players:
-		remoteCall(p, "reportDeath",[me])
-	#reportGame('MageDeath')
+def checkMageDeath(player, counter, oldvalue):
+        mute()
+        global currentPhase
+        choiceList = ['Side', 'Bottom']
+        colorsList = ['#FF0000', '#0000FF']
+        if getGlobalVariable("SetupDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
+                if me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
+                        for card in table:
+                                if card.Type == "Mage" and card.controller == me:
+                                        card.orientation = 1
+                                        #playSoundFX('Winner')
+                                        for p in players:
+                                                remoteCall(p, "reportDeath",[me])
+        #reportGame('MageDeath')
 
 def reportDeath(deadmage):
 	setGlobalVariable("GameIsOver", True)
@@ -1237,7 +1229,7 @@ def reportDeath(deadmage):
 	colorsList = ['#de2827']
 	whisper("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
-	if choice == 0 or choice == 1:
+	if choice == 0 or 1:
 		return
 
 def reportVTarWin(winningmage,score):
@@ -1247,15 +1239,8 @@ def reportVTarWin(winningmage,score):
 	colorsList = ['#de2827']
 	whisper("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
-	if choice == 0 or choice == 1:
+	if choice == 0 or 1:
 		return
-
-def checkMageDeath(player, counter, oldvalue):
-	global currentPhase
-	if getGlobalVariable("InitiativeDone") == "True" and (counter.name == "Damage" or counter.name == "Life"):
-		if me.Damage >= me.Life and currentPhase == "Actions":
-			if not confirm("                       Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?"):
-				mageStatus()
 
 def concede(group=table, x = 0, y = 0):
 	global gameTurn
@@ -1275,28 +1260,6 @@ def concede(group=table, x = 0, y = 0):
 Format:
 [function name, setting name, message, default]
 """
-#Bookmark
-fGenToggleSettingsList = [['ResolveBurns','AutoResolveBurns',"You have {} automatic resolution of Burn tokens on your cards.",True],
-                          ['SoundFX','AutoConfigSoundFX',"You have {} Sound Effects.",True],
-                          ["ResolveRot","AutoResolveRot","You have {} automatic resolution of Rot tokens on your cards.",True],
-                          ["FFTokens","AutoResolveFFTokens","You have {} automatic resolution of Forcefield tokens on your cards.",True],
-                          ["ResolveBleed","AutoResolveBleed","You have {} automatic resolution of Bleed markers on your cards.",True],
-                          ["ResolveDissipate","AutoResolveDissipate","You have {} automatic resolution of Dissipate tokens on your cards.",True],
-                          ["EnchantRevealPrompt","EnchantPromptReveal","You have {} the enchantment reveal prompt.",False],
-                          ["AutoResolveUpkeep","ResolveUpkeep","You have {} automatically caculating Upkeep costs.",False],
-                          ["AutoAttach","AutoAttach","You have {} automatically attaching cards.",True],
-                          ["ComputeProbabilities","AutoConfigProbabilities","You have {} battle computations on targeted cards.",True],
-                          ["DiceButtons","AutoConfigDiceButtons","You have {} dice selection buttons.",True],
-                          ["BattleCalculator","BattleCalculator","You have {} the battle calculator.",True],
-                          ["DeclareAttackWithArrow","DeclareAttackWithArrow","You have {} declaring attacks with the targeting arrow.",True]]
-
-for fGen in fGenToggleSettingsList:
-        exec(
-'def toggle'+fGen[0]+'(group,x=0,y=0):\n\t'+
-        'state=getSetting("'+fGen[1]+'",'+str(fGen[3])+')\n\t'+
-        'setSetting("'+fGen[1]+'", not state)\n\t'+
-        'if state:\n\t\twhisper("'+fGen[2].format('disabled')+'")\n\t'+
-        'else:\n\t\twhisper(":'+fGen[2].format('enabled')+'")')
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
@@ -1857,7 +1820,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
         mute()
         mapDict = eval(getGlobalVariable('Map'))
         mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
-        debug("\n" + str(mwPlayerDict))
+        #debug("\n" + str(mwPlayerDict))
         playerNum = mwPlayerDict[me._id]["PlayerNum"]
         x,y = 0,0
         if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']

@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.1.0     #######################################
+##########################    v1.13.5.0     #######################################
 ###########################################################################
 
 ############################################################################
@@ -82,17 +82,19 @@ def readMap(filename):
                         scenarioDict[dictKey] = array
         return scenarioDict
 
-def loadMapFile(group, x=0, y=0):
+def loadMapFile():
         mute()
         directory = os.path.split(os.path.dirname(__file__))[0]+'\{}'.format('maps')
         fileList = [f.split('.')[0] for f in os.listdir(directory) if (os.path.isfile(os.path.join(directory,f)) and f.split('.')[1]=='txt')]
-        choices = fileList+['Cancel']
-        colors = ['#6600CC' for f in fileList] + ['#FF0000']
-        choice = askChoice('Load which map?',choices,colors)
-        if choice == 0 or choice == len(choices): return
-        choiceName = choices[choice-1]
-        scenario = readMap(fileList[choice-1])
-        notify('{} loads {}.'.format(me,fileList[choice-1]))
+        choices = fileList
+        colors = ['#6600CC' for f in fileList]
+        while (True):
+                choice = askChoice('Load which map?',choices,colors)
+                if choice >= 1:
+                        choiceName = choices[choice-1]
+                        scenario = readMap(fileList[choice-1])
+                        notify('{} loads {}.'.format(me,fileList[choice-1]))
+                        break
 
         if scenario.get("Scenario"): setGlobalVariable("Goal",str(scenario["Scenario"]))
 
@@ -147,12 +149,12 @@ def loadMapFile(group, x=0, y=0):
         for c in table:
                 if c.type in ['DiceRoll','Phase']: moveRDA(c)
 
+        table.board = "Default"
         for obj,locations in mapObjects:
                 for L in locations:
                         j,i = L
                         mapPlace(obj,(i-1,j-1))
 
-        setNoGameBoard(table)
         for p in players:
         	remoteCall(p,"DominationMatchStart",[]) 
         

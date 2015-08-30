@@ -5,7 +5,7 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
 	scriptVersion ="3.1.0.1"
-	version="1.13.1.0"
+	version="1.13.5.0"
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -56,11 +56,11 @@
 	</gameModes>
 	<globalvariables>
 		<globalvariable name="TableSetup" value="False"/>
-		<globalvariable name="InitiativeDone" value="False"/>
 		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
 		<globalvariable name="ColorsChosen" value=""/>
-		<globalvariable name="SetupDone" value=""/>
+		<globalvariable name="SetupDone" value="0"/>
 		<globalvariable name="OppIniRoll" value=""/>
+		<globalvariable name="DeckLoaded" value="0"/>
 		<globalvariable name="PlayerWithIni" value=""/>
 		<globalvariable name="PlayersIDList" value=""/>
 		<globalvariable name="MWPlayerDict" value=""/>
@@ -104,14 +104,23 @@
 		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
 		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
 	</card>
-	<table name="Table" visibility="undefined" ordered="False" width="1500" height="1000" board="GameBoards/GameBoard1.jpg" background="background/background.jpg" boardPosition="-500,-375,1000,750" backgroundStyle="uniformToFill">
+	<gameboards x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard.png" >
+		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg" />
+		<gameboard name="Inferno - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard2.jpg" />
+		<gameboard name="Marble Floors - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard3.jpg" />
+		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard4.jpg" />
+		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard5.jpg" />
+		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard6.jpg" />
+		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard7.jpg" />
+		<gameboard name="Double Westlock - 6x4" x="-500" y="-334" width="1000" height="667" src="Images/GameBoards/GameBoard8.jpg" />
+	</gameboards>
+	<table name="Table" visibility="undefined" ordered="False" width="1100" height="1100" background="Images/background.jpg" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack" />
 		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
 		<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
-		<groupaction menu="Load Map" default="False" shortcut="" execute="loadMapFile" />
 		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
 		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
 		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
@@ -126,18 +135,6 @@
 			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
 			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
 			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant" />
-		</groupactions>
-		<groupactions menu="Alternate Arena Game Boards">
-			<groupaction menu="Set 4X3 Westlock Arena Game Board" default="False" shortcut="Alt+F1" execute="setGameBoard1" />
-			<groupaction menu="Set 6X4 Double Westlock Game Board" default="False" shortcut="Alt+F2" execute="setGameBoard2" />
-			<groupaction menu="Set 4X5 Forest Arena Game Board" default="False" shortcut="Alt+F3" execute="setGameBoard3" />
-			<groupaction menu="Set 4x3 Inferno Arena Game Board" default="False" shortcut="Alt+F4" execute="setGameBoard4" />
-			<groupaction menu="Set 4X4 Slimy Rocks Arena Game Board" default="False" shortcut="Alt+F5" execute="setGameBoard5" />
-			<groupaction menu="Set 4X3 Marble Floors Arena Game Board" default="False" shortcut="Alt+F6" execute="setGameBoard6" />
-			<groupaction menu="Set 2x3 Apprentice Arena Game Board" default="False" shortcut="Alt+F9" execute="setGameBoard9" />
-			<groupaction menu="Set 3x3 OCTGN Apprentice Arena Game Board" default="False" shortcut="Alt+F10" execute="setGameBoard10" />
-			<groupaction menu="Set No Game Board"  default="False"  shortcut="Alt+F11" execute="setNoGameBoard" />
-			<groupaction menu="Add Alt Board Card" default="False" shortcut="Alt+F12" execute="createAltBoardCard" />
 		</groupactions>
 		<groupactions menu="Alternate Hotkeys">
 			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack" />

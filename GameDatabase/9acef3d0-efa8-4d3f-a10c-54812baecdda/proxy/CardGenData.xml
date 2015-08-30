@@ -256,6 +256,16 @@
 			<link block="CardID"><property name="CardID" /></link>
 		</textblocks>
 	</template>
+	<template src="Proxy/Conjuration-Proxy.png">
+		<matches>
+			<match name="Type" value="Conjuration-Vine" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
+			<link block="Type"><property name="Type" /></link>
+			<link block="Stats"><property name="Stats" /></link>
+		</textblocks>
+	</template>
 	<template src="Proxy/Creature-Proxy.png">
 		<matches>
 			<match name="Type" value="Creature" />
@@ -401,7 +411,7 @@
 			<link block="MageAbilities"><property name="MageAbilities" /></link>
 		</textblocks>
 	</template>
-	<template src="proxy/Mage-Stats-Proxy.png" default="True" >
+	<template src="proxy/Mage-Stats-Proxy.png">
 		<matches>
 			<match name="Type" value="Magestats" />
 		</matches>
@@ -415,13 +425,22 @@
 		</textblocks>
 	</template>
 	<!-- Template for Domination Tracker Card -->
-	<template src="proxy/DominationTracker.png" default="True" >
+	<template src="proxy/DominationTracker.png" >
 		<matches>
 			<match name="Name" value="Domination Tracker" />
 		</matches>
 		<textblocks>
 			<link block="Special1"><property name="Special1" /></link>
 			<link block="Special2"><property name="Special2" /></link>
+		</textblocks>
+	</template>
+	<!-- Should Cover Anything Else  -->
+	<template src="proxy/Mage-Stats-Proxy.png" default="True" >
+		<matches>
+			<match name="Type" value="Name" />
+		</matches>
+		<textblocks>
+			<link block="Title"><property name="Name" /></link>
 		</textblocks>
 	</template>
 </templates>
