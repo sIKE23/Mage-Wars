@@ -478,7 +478,7 @@ def rollDice(dice):
 
     effect = int(diceBankD12.pop()) + 1
     dieCard.markers[DieD12] = effect
-    if getGlobalVariable("SetupDone") == "True":
+    if getGlobalVariable("GameSetup") == "True":
         playSoundFX('Dice')
         time.sleep(1)
         notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
