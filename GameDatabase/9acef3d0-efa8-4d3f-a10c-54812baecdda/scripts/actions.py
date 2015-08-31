@@ -275,7 +275,9 @@ def setArenaBoard():
 		boardList.append(gameBoardsDict[num]["boardName"])
 	while (True):
 		choice = askChoice("Which Arena Game board would you like to to Use?", boardList, boardButtonColorList)
-		break
+		if choice >= 1:
+			notify('{} loads {}.'.format(me,boardList[choice-1]))
+			break
 	table.board = gameBoardsDict[choice]["boardName"]
 	zoneDef = gameBoardsDict[choice]["zoneDef"]
 	defineRectangularMap(zoneDef[0],zoneDef[1],zoneDef[2])
