@@ -736,6 +736,7 @@ def nextPhase(group, x=-360, y=-150):
 	if getGlobalVariable("GameSetup") != "True": # Player setup is not done yet.
 		return
 	card = None
+	checkMageDeath(0,0,0)
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
 			card = c
@@ -1194,14 +1195,13 @@ def checkMageDeath(player, counter, oldvalue):
         choiceList = ['Side', 'Bottom']
         colorsList = ['#FF0000', '#0000FF']
 
-        if getGlobalVariable("GameSetup") == "True" and (counter.name == "Damage" or counter.name == "Life"):
-                if me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current creatures Action Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
-                        for card in table:
-                                if card.Type == "Mage" and card.controller == me:
-                                        card.orientation = 1
-                                        #playSoundFX('Winner')
-                                        for p in players:
-                                                remoteCall(p, "reportDeath",[me])
+        if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
+                for card in table:
+                        if card.Type == "Mage" and card.controller == me:
+                                card.orientation = 1
+                                #playSoundFX('Winner')
+                                for p in players:
+                                        remoteCall(p, "reportDeath",[me])
         #reportGame('MageDeath')
 
 def reportDeath(deadmage):
