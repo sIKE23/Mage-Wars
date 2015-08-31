@@ -417,17 +417,6 @@ def rollDice(dice):
     global diceBank
     global diceBankD12
     mapDict = eval(getGlobalVariable('Map'))
-    if not deckLoaded == True:
-        notify("Please Load a Spellbook first. (Ctrl+L)")
-        choiceList = ['OK','Load Blank Spellbook (not recommended)']
-        colorsList = ['#FF0000','#0000FF']
-        choice = askChoice("Please load a Spellbook first!", choiceList, colorsList)
-        if choice == 2:
-            global blankSpellbook
-            blankSpellbook = True
-            onLoadDeck(me,[me.hand,table])
-        return
-
     for c in table:
         if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
 
