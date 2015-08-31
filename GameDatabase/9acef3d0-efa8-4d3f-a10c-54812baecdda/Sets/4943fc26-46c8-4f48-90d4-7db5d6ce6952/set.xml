@@ -4,7 +4,7 @@
 	id="4943fc26-46c8-4f48-90d4-7db5d6ce6952"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="1.4.2.1"
-	version="1.13.0.0">
+	version="1.13.5.0">
 	<markers>
 		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
 		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
@@ -377,7 +377,7 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Unmovable and Climbing traits." />
+			<property name="Text" value="Mage gains the Unmovable and Climbing traits.&#xD;&#xA;[Unmovable] [Climbing]" />
 			<property name="CardID" value="MWSTX1CKQ06" />
 		</card>
 		<card id="590146ae-4e92-4d85-abf9-4f6520cfb8d6" name="Hunting Bow">

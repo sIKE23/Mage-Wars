@@ -158,7 +158,6 @@ gameBoardsDict = {
 ##########################		Other			############################
 
 debugMode = False
-blankSpellbook = False
 currentPhase = ""
 discountsUsed = [ ]
 tutorialTagsRead = []
@@ -167,10 +166,7 @@ gameEndTime = ""
 roundTimes = []
 gameTurn = 0
 gameNum = 0
-Magebind = ""
-mageRevealCost = ""
 infostr = ""
-passOnClick = ""
 
 ############################################################################
 ############################		Events		##################################
@@ -495,14 +491,13 @@ def onLoadDeck(player, groups):
 	mute()
 	global gameNum
 	global debugMode
-	global blankSpellbook
 	if player == me:
 		#if a deck was already loaded, reset the game
 		if getGlobalVariable("DeckLoaded") == "True":
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			gameNum += 1
 			resetGame()
-		elif debugMode or blankSpellbook or validateDeck(groups[0]):
+		elif debugMode or validateDeck(groups[0]):
 			setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
@@ -693,8 +688,6 @@ def flipCoin(group, x = 0, y = 0):
 
 def mageSetup():
 	#set initial health and channeling values
-	global blankSpellbook
-	if blankSpellbook: return
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
