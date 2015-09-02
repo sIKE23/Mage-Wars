@@ -4,7 +4,7 @@
 	id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="1.4.2.1"
-	version="1.13.0.0">
+	version="1.13.5.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -285,6 +285,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Each time Chain Lightning damages a target, it may attack another target. That target must be in LoS of the last target, and may be up to 1 zone away from that target. Each successive attack rolls 1 fewer attack dice, and subtracts 1 more from the effect die roll. Chain Lightning can&apos;t attack the same target twice." />
 			<property name="CardID" value="MW1A02" />
+			<alternate name="Chain Lightning" type="B" />
 		</card>
 		<card id="96b996dd-50d6-4449-9ad5-3b7c52936738" name="Electrify">
 			<property name="Type" value="Attack" />
@@ -543,6 +544,7 @@
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may give a Living creature Armor +1 or the Melee +1 trait until the end of the round. or you may heal 1 damage from it. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J08" />
 			<alternate name="Hand of Bim-Shalla" type="B" />
+			<alternate name="Hand of Bim-Shalla" type="C" />
 		</card>
 		<card id="177abb85-6437-4e91-8ebb-7df1c9103c06" name="Temple of the Dawnbreaker">
 			<property name="Type" value="Conjuration" />
@@ -787,6 +789,7 @@
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J24" />
 			<alternate name="Temple of Light" type="B" />
+			<alternate name="Temple of Light" type="C" />
 		</card>
 
 
@@ -1693,8 +1696,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="Each Upkeep Phase, this creature receives 2 direct damage." />
+			<property name="Text" value="Each Upkeep Phase, this creature receives 2 direct poison damage." />
 			<property name="CardID" value="MW1E19" />
+			<alternate name="Ghoul Rot" type="B" />
 		</card>
 		<card id="f5d06493-1929-4d1f-9bcb-756339ccf23e" name="Harmonize">
 			<property name="Type" value="Enchantment" />
@@ -1903,7 +1907,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When this creature is attacked, you must reveal Reverse Attack during the Avoid Attack Step.  The attack is avoided and then redirected back to the attacker, who now becomes the target of that attack for the next 2 steps (Roll Dice and Damage and Effects). Then, destroy Reverse Attack. If the attack is Unavoidable, destroy Reverse Attack without effect." />
+			<property name="Text" value="When this creature is attacked, you must reveal Reverse Attack during the Avoid Attack Step. The attack is avoided and then redirected back to the attacker, who now becomes the target of that attack for the next 2 steps (Roll Dice and Damage and Effects). Then, destroy Reverse Attack. If the attack is Unavoidable, destroy Reverse Attack without effect." />
 			<property name="CardID" value="MW1E34" />
 		</card>
 		<card id="5f318366-9c85-4304-b7b1-3c60daf0edde" name="Reverse Magic">
@@ -1922,6 +1926,8 @@
 				Spell Step. You take control of that spell. Redirect it back to the caster, who now becomes the target of the spell. You control that spell, and may make new choices, paying additional
 				 mana costs if any. Then, destroy Reverse Magic." />
 			<property name="CardID" value="MW1E35" />
+			<alternate name="Battle Fury" type="B" />
+			<alternate name="Battle Fury" type="C" />
 		</card>
 		<card id="afd1e927-92a2-4525-a33f-50fec7c9b382" name="Rhino Hide">
 			<property name="Type" value="Enchantment" />
@@ -2177,8 +2183,9 @@
 			<property name="Stats" value="Location=Helmet" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlock Only" />
-			<property name="Text" value="Whenever this Mage is targeted by a melee attack (except a Counterstrike), at the beginning of the Declare Attack Step, roll the effect die. On a 9+ the attack is canceled and the attacker may choose to attack a different attack action instead, but cannot melee attack theis Mage for the rest of the Action Phase. Has no affect creatures with the Nonliving or Psychic Immunity traits." />
+			<property name="Text" value="Whenever this Mage is targeted by a melee attack (except a Counterstrike), at the beginning of the Declare Attack Step, roll the effect die. On a 9+ the attack is canceled. The attacker may choose to attack a different target instead. This does not affect creatures with the Nonliving or Psychic Immunity traits." />
 			<property name="CardID" value="MW1Q12" />
+			<alternate name="Helm of Fear" type="B" />
 		</card>
 		<card id="86e3fd4a-e52d-4ccd-9b33-333a13126ac8" name="Ivarium Longbow">
 			<property name="Type" value="Equipment" />
@@ -2632,6 +2639,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. This will not Push it through a wall with the Passage Attacks trait, unless you pay an additional 3 mana when this spell is cast." />
 			<property name="CardID" value="MW1I12" />
+			<alternate name="Force Push" type="B" />
 		</card>
 		<card id="f3c06b0f-69ac-40ba-8d78-632c5f89505c" name="Group Heal">
 			<property name="Type" value="Incantation" />

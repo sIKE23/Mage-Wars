@@ -221,6 +221,7 @@ def onGameStart():
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		setUpDiceAndPhaseCards()
+		setGlobalVariable("GameSetup", str(0))
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
@@ -442,6 +443,7 @@ def AskInitiative(playerID):
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 		init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
 		break
+	setGlobalVariable("GameSetup", str(0))
 	notify("Game setup is complete! Players should now load their Spellbooks.")
 
 def moveRDA(card):
@@ -491,6 +493,9 @@ def onLoadDeck(player, groups):
 	mute()
 	global gameNum
 	global debugMode
+	if getGlobalVariable("GameSetup") == "False" and player == me:
+		askChoice("Please Finish Setup before you try to load a deck.", ["OK"], ["#FF0000"])
+		return
 	if player == me:
 		#if a deck was already loaded, reset the game
 		if getGlobalVariable("DeckLoaded") == "True":
@@ -1651,10 +1656,13 @@ def flipcard(card, x = 0, y = 0):
 		notify("{} turns {} face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
-	elif card.isFaceUp and "B" in cardalt:
+	elif card.isFaceUp and "B" or "C" in cardalt:
 		if card.alternate == '':
 			notify("{} flips {} to the alternate version of the card.".format(me, card))
 			card.switchTo('B')
+		elif card.alternate == 'B' and 'C' in cardalt:
+			notify("{} flips {} to the alternate version of the card.".format(me, card))
+			card.switchTo('C')
 		else:
 			notify("{} flips {} to the standard version of the card.".format(me, card))
 			card.switchTo()

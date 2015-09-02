@@ -57,7 +57,7 @@
 		<globalvariable name="TableSetup" value="False"/>
 		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
 		<globalvariable name="ColorsChosen" value=""/>
-		<globalvariable name="GameSetup" value="0"/>
+		<globalvariable name="GameSetup" value="False"/>
 		<globalvariable name="OppIniRoll" value=""/>
 		<globalvariable name="DeckLoaded" value="0"/>
 		<globalvariable name="PlayerWithIni" value=""/>
