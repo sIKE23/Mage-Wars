@@ -668,7 +668,7 @@ def updateTimer(endTime,notifications):
 def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 
-def useUntargetedAbility(attacker, x=0, y=0):
+def useUntargetedAbility(card, x=0, y=0):
         mute()
         pass
 
@@ -1678,6 +1678,8 @@ def changeIniColor(card):
 
 def discard(card, x=0, y=0):
 	mute()
+	#[formatCardObject(c) for c in table if c.Type == "Creature"]
+	#[c.onDiscard(card) for c in table if c.Type == "Creature"] #Testing the new discard method
 	if card.controller != me:
 		whisper("{} does not control {} - discard cancelled".format(me, card))
 		return

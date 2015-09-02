@@ -13,15 +13,16 @@ import os
 
 def testFormatting(card,x=0,y=0): #delete this function later
 	formatCardObject(card)
-	debug(str(card.nickname))
-	debug(str(card.pronouns))
-	debug(str(card.baseCost))
-	debug(str(card.baseReveal))
-	debug(str(card.ranges))
-	debug(str(card.subtypes))
-	debug(str(card.baseArmor))
-	debug(str(card.baseLife))
-	debug(str(card.baseChanneling))
+	debug(str(card.onDiscard))
+	#debug(str(card.nickname))
+	#debug(str(card.pronouns))
+	#debug(str(card.baseCost))
+	#debug(str(card.baseReveal))
+	#debug(str(card.ranges))
+	#debug(str(card.subtypes))
+	#debug(str(card.baseArmor))
+	#debug(str(card.baseLife))
+	#debug(str(card.baseChanneling))
 
 def formatCardObject(card): #Interprets the XML file for the card and correctly formats each field.
 	#Format name without title
@@ -65,6 +66,14 @@ def formatCardObject(card): #Interprets the XML file for the card and correctly 
 	#Add card's built-in defense here
 	#Work in progress, clearly.
 
+	#Method Triggers:
+	card.onDiscard = getOnDiscardFunction(card)
+
+def getOnDiscardFunction(self): #Let's test this and see if it works...
+	def discardFunction(caller):
+		if self == caller: notify("{} is discarded!".format(self))
+		else: notify("{} is a amused by {}'s destruction!".format(self,caller))
+	return [discardFunction]
 
 """
 Here is how to format the relevant new XML properties:
