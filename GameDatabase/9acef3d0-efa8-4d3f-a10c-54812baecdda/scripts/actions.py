@@ -668,10 +668,6 @@ def updateTimer(endTime,notifications):
 def playerDone(group, x=0, y=0):
 	notify("{} is done".format(me.name))
 
-def useUntargetedAbility(card, x=0, y=0):
-        mute()
-        pass
-
 def genericAttack(group, x=0, y=0):
 	target = [cards for cards in table if cards.targetedBy==me]
 	defender = (target[0] if len(target) == 1 else None)
