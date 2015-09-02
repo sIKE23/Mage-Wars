@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Beastmaster vs. Wizard"
+	id="ac23a0f6-73c1-488b-9376-f3e81e0afc3a"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="1.4.2.1"
+	version="1.13.5.0">
+	<markers>
+		<marker id="ede2252f-b47f-4ea2-a448-08fd3b22d506" name="Stagger" />
+	</markers>
+</set>

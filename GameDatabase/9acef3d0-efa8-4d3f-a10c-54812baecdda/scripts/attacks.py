@@ -327,7 +327,7 @@ def computeD12(dTraitDict,d12Pair):
                 if ((e=='Burn' and dTraitDict.get('Burnproof'))
                     or (e in ['Snatch','Push'] and dTraitDict.get('Unmovable'))
                     or (e == 'Bleed' and (dTraitDict.get('Nonliving') or 'Plant' in defender.Subtype))
-                    or (e in ['Bleed','Stuck','Stun','Daze','Cripple','Weak','Slam'] and defender.Type not in ['Creature','Mage'])): illegalEffect = True #not sure about weak; can it affect conjurations?
+                    or (e in ['Bleed','Stuck','Stun','Daze','Cripple','Weak','Slam','Stagger'] and defender.Type not in ['Creature','Mage'])): illegalEffect = True #not sure about weak; can it affect conjurations?
                 if illegalEffect: effects.remove(e)
         #Finally, replace corrode with damage if neccessary
         currentArmor = getStat(Card(dTraitDict['OwnerID']).Stats,'Armor') + dTraitDict.get("Armor",0)
@@ -354,6 +354,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
                 #No restriction on how many times may be applied
                 if not atkTraits.get('Spell'):
                         attackDice -= attacker.markers[Weak]
+                        attackDice -= attacker.markers[Stagger] * 2
                         if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Agony"]: attackDice -= 2
         if defender:
                 attackDice -= dTraitDict.get('Aegis',0)
@@ -968,7 +969,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
         defender = Card(dTraitDict.get('OwnerID',''))
         atkTraits = attack.get('Traits',{})
         expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
-        conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Rot','Slam','Sleep','Stuck','Stun','Tainted','Weak']
+        conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Rot','Slam','Sleep','Stagger','Stuck','Stun','Tainted','Weak']
         effectsInflictDict = {'Damage' : "suffers 1 point of direct damage! (+1 Damage)",
                               'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
                               'Burn' : 'is set ablaze! (+1 Burn)',
@@ -978,6 +979,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
                               'Rot' : 'rots! (+1 Rot)',
                               'Slam' : 'is slammed to the ground! (+1 Slam)',
                               'Sleep' : 'falls fast alseep! (+1 Sleep)',
+                              'Stagger' : 'staggers about, not quite sure what is going on! (Minor Creatures can not Attack or Guard, Major Creatures -2 to All Attacks)',
                               'Stuck' : 'is stuck fast! (+1 Stuck)',
                               'Stun' : 'is stunned! (Stun)',
                               'Tainted' : "'s wounds fester! (+1 Tainted)",
