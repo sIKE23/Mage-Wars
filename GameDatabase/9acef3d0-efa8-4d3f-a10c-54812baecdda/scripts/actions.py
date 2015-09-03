@@ -208,11 +208,13 @@ def onGameStart():
  	setGlobalVariable("PlayersIDList",str([]))
  	setGlobalVariable("MWPlayerDict",str({}))
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
-
-	if me == gameHost and getSetting("AutoBoard", True):
-		chooseGame()
-	else:
-		table.board = "Westlock - 4X3"
+	
+	if me == gameHost:
+		setRDALocation()
+		if getSetting("AutoBoard", True):
+			chooseGame()
+		else:
+			table.board = "Westlock - 4X3"
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
@@ -318,7 +320,6 @@ def finishSetup(): #Waits until all players have chosen a color, then finishes t
 		return
 	#if everybody has chosen a color, finish the process of setting up
 	PlayerSetup()
-	AskDiceRollArea()
 	#the Gamehost now sets up the Initative, Phase, and Roll Dice Area
 	setUpDiceAndPhaseCards()
 	notify("Players will now roll for initiative.")
@@ -344,16 +345,12 @@ def PlayerSetup():
 		mwPlayerDict[j] = {"PlayerNum": (i),"PlayerName":Player(j).name}
 		setGlobalVariable("MWPlayerDict",str(mwPlayerDict))
 
-def AskDiceRollArea():
+def setRDALocation():
 	mute()
-	notify("{} is choosing where the Dice Roll Area will be placed.".format(me))
-	choiceList = ['Side', 'Bottom']
-	colorsList = ['#FF0000', '#0000FF']
-	choice = askChoice("Would you like to place the Dice Roll Area, Initative Marker, and Phase Marker to the Side or Bottom of the Gameboard?", choiceList, colorsList)
-	if choice == 0 or choice == 1:
-		notify("{} has elected to place the Dice Roll Area to the Side.".format(me))
+	if getSetting("RDALocation", True):
+		notify("{} places the Roll Dice Area to the side of the Gameboard.".format(me))
 	else:
-		notify("{} has elected to place the Dice Roll Area to the Bottom.".format(me))
+		notify("{} places the Roll Dice Area to the Bottom of the Gameboard.".format(me))
 		setGlobalVariable("DiceRollAreaPlacement", "Bottom")
 
 def setUpDiceAndPhaseCards():
@@ -617,9 +614,10 @@ def optionsMenu(group,x=0,y=0):
 	settingsList = [
 		{True : "Auto Calculate Upkeep Effects Enabled", False: "Auto Calculate Upkeep Effects Disabled", "setting": "AutoResolveEffects"},
 		{True : "Auto Attachments Enabled", False: "Auto Attachments Disabled", "setting": "AutoAttach"},
-		{True : "Prompt for Game Selection and Board", False: "Standard Arena Board Enabled", "setting": "AutoBoard"},
+		{True : "Prompt for Game Selection and Board", False: "Standard Arena Gameboard Enabled", "setting": "AutoBoard"},
 		{True : "Battle Calculator Enabled", False: "Battle Calculator Disabled", "setting": "BattleCalculator"},
 		{True : "Sound Effects Enabled", False: "Sound Effects Disabled", "setting": "AutoConfigSoundFX"},
+		{True : "Place the Roll Dice Area to the Side", False: "Place the Dice Roll Area to the Bottom", "setting": "RDALocation"},
 		{True : "Tutorial Enabled", False: "Tutorial Disabled", "setting": "octgnTutorial"}
 	]
 	choices = [e[getSetting(e["setting"],True)] for e in settingsList] + ["Done"]
