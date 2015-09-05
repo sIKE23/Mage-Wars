@@ -1510,8 +1510,7 @@ def toggleVoltaric(card, x=0, y=0):
 		card.markers[VoltaricOFF] = 1
 		notify("{} disables Voltaric shield".format(card.Name))
 	else:
-		choice = askChoice('Do you want to enable your Voltaric Shield by paying 2 mana?'['Yes','No'],["#171e78","#de2827"])
-		if choice == 1:
+		if askChoice("Do you want to enable your Voltaric Shield by paying 2 mana?",["Yes","No"],["#171e78","#de2827"]) == 1:
 			if me.Mana < 2:
 				notify("{} has insufficient mana in pool".format(me))
 				return
