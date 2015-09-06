@@ -212,7 +212,19 @@ def getAttackList(card):
                                         aDict['Range'] = [0,0]
                                 elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
                                 elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
-                                elif 'Dice' in attribute: aDict['Dice'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
+                                elif 'Dice' in attribute: 
+                                        if attribute.split('=')[1] != 'X':
+                                                aDict['Dice'] = int(attribute.split('=')[1])
+                                        elif card.name == "Temple of Light" and card.controller == me:
+                                                X = 0
+                                                for c in table:
+                                                        if c.subtype == "Temple" and c.controller == me: X += 1
+                                                aDict['Dice'] = askInteger('Enter amount to pay for Temple of Lights attack (max: {})'.format(X),X)
+                                                appendEventList('Round',['ToLX', X])
+                                                me.mana -= aDict['Dice'] if me.mana >= aDict['Dice'] else aDict['Dice'] == 0
+                                                toggleReady(card)
+                                        else:
+                                                aDict['Dice'] = 0
                                 elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
                                 elif attribute == 'd12' : effectSwitch = True
                                 elif effectSwitch:
@@ -1135,6 +1147,11 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
         attacker = Card(aTraitDict['OwnerID'])
         #Giant Wolf Spider's attack
         if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and (dTraitDict.get("Restrained") or dTraitDict.get("Incapacitated")): modRoll += 4
+        if attacker.Name == "Temple of Light":
+                eventList = getEventList("Round")
+                for e in eventList:
+                        if "ToLX" in e[0]:
+                                modRoll += e[1]
         vs = attack.get('Traits',{}).get('VS')
         if vs: #We'll assume each attack has only one vs+ trait
                         if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
@@ -1490,6 +1507,11 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
         attacker = Card(aTraitDict['OwnerID'])
         #Giant Wolf Spider's attack
         if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): d12Bonus += 4
+        if attacker.Name == "Temple of Light":
+                          eventList = getEventList("Round")
+                          for e in eventList:
+                              if "ToLX" in e[0]:
+                              	d12Bonus += e[1]
         vs = attack.get('Traits',{}).get('VS')
         if vs: #We'll assume each attack has only one vs+ trait
                         if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
