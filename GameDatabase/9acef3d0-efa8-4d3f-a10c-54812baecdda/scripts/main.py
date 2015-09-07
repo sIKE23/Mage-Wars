@@ -22,8 +22,7 @@ def testFormatting(card,x=0,y=0): #delete this function later
 
 def formatCardObject(card): #Interprets the XML file for the card and correctly formats each field.
 	#Format name without title
-	card.nickname = "test"#card.Name.split(", ")[0]
-	debug(card.nickname)
+	card.nickname = card.Name.split(", ")[0]
 
 	#Format pronouns for card
 	i = {"Male":1,"Female":2}.get(getGender(card),0)
