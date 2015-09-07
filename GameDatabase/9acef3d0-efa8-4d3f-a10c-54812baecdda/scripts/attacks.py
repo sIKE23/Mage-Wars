@@ -839,9 +839,24 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				notify('Error: invalid attack format - no dice found')
 				return
 		damageRoll,effectRoll = rollDice(dice)
-		if "V'Tar Orb" in defender.name and sum(damageRoll) != 0 and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
+		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
 				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
 				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
+				buttonColorList = ["#de2827","#171e78","#01603e"]
+				buttonList = ["Gain 2 mana","Heal 2 damage","Gain 1 Mana and Heal 1 damage"]
+				while (True):
+						choice = askChoice("When the Orb was touched and was Powered On, it released a small amount of residual energy and your Mage may choose immediate bonus!",buttonList,buttonColorList)
+						if choice == 1:
+								attacker.controller.mana += 2
+								break
+						elif choice == 2:
+								if attacker.controller.damage >= 2: attacker.controller.damage -= 2
+								elif attacker.controller.damage >= 1: attacker.controller.damage -= 1
+								break
+						elif choice == 3:
+								attacker.controller.mana += 1
+								if attacker.controller.damage >= 1: attacker.controller.damage -= 1
+								break
 				return
 		elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
 				return

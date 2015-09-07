@@ -56,7 +56,7 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze;9+ = Stun]" />
+			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze; 9+ = Stun]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWBG1A03" />
@@ -71,7 +71,7 @@
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Wind] [Dice=2] [d12] [4-6 = Push;7-9 = Daze;10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Wind] [Dice=2] [d12] [4-6 = Push; 7-9 = Daze; 10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWBG1A04" />
