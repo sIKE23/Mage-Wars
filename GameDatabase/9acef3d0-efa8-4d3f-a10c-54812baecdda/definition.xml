@@ -104,6 +104,8 @@
 		<property name="PObj" type="String" hidden="True" ignoreText="False" />
 		<property name="PPos" type="String" hidden="True" ignoreText="False" />
 		<property name="PRef" type="String" hidden="True" ignoreText="False" />
+		<!--Memory-->
+		<property name="Memory" type="String" hidden="True" ignoreText="False" />
 		<size name="ModularBoardPieces" width="250" height="250" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="0" />
 		<size name="InitativeMarkers" width="50" height="50" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
 		<size name="PhaseMarkers" width="90" height="20" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />

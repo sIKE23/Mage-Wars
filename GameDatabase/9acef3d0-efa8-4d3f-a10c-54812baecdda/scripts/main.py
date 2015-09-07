@@ -13,9 +13,9 @@ import os
 
 
 def useUntargetedAbility(card, x=0, y=0):
-    mute()
-    debug(card.nickname)
-    #debug(str(card.subtypes))
+	mute()
+	debug(card.nickname)
+	#debug(str(card.subtypes))
 
 def testFormatting(card,x=0,y=0): #delete this function later
 	formatCardObject(card)
@@ -28,7 +28,7 @@ def formatCardObject(card): #Interprets the XML file for the card and correctly 
 	i = {"Male":1,"Female":2}.get(getGender(card),0)
 	card.PSub = ["it","he","her"][i]				#Subject
 	card.PObj = ["it","him","her"][i]				#Object
-	card.PPos = ["its","his","her"][i]			#Possessive
+	card.PPos = ["its","his","her"][i]				#Possessive
 	card.PRef = ["itself","himself","herself"][i]	#Reflexive
 	"""
 	#Format casting cost
@@ -63,12 +63,6 @@ def formatCardObject(card): #Interprets the XML file for the card and correctly 
 	#Method Triggers:
 	card.onDiscard = getOnDiscardFunction(card)
 	"""
-def getOnDiscardFunction(self): #Let's test this and see if it works...
-	def discardFunction(caller):
-		if self == caller: notify("{} is discarded!".format(self))
-		else: notify("{} is a amused by {}'s destruction!".format(self,caller))
-	return discardFunction
-
 """
 Here is how to format the relevant new XML properties:
 "Flying, Living Conjuration or Non-Mage Creature" === <property name="targeting" value="Flying,Living,Conjuration||!Mage,Creature" />
