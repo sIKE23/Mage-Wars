@@ -20,16 +20,20 @@
 
 	<cards>
 		<card id="7f88625f-591b-41ef-861d-4a89a4a57f24" name="Forcemaster">
-			<property name="Type" value="Mage" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Mind school of Magic. Non-Mind creature spells cost triple during spellbook construction." />
+			<property name="Level" value="6" />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Defense=7+ 1x" />
 			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Deflect: The Forcemaster uses telekinesis to deflect attacks. She has a Defense which can be used once per round, and avoids attacks on a roll of 7+. She must pay 1 mana each time she uses this Defense (before rolling for the Defense). This Defense uses its own unique ready marker &quot;Deflect&quot;.&#xD;&#xA;Force Pull: Once per round, she may cast this quick force spell. Target creature is Pushed 1 zone TOWARDS her. Will not Push a creature through a wall with the Passage Attacks trait." />
 				<alternate name="Forcemaster" type="B">
-					<property name="Type" value="Mage" />
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Mind school of Magic. Non-Mind creature spells cost triple during spellbook construction." />
+					<property name="Level" value="6" />
 					<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Defense=7+ 1x" />
 					<property name="MageSchoolCost" value="Mind=1, Creature=3" />
 					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
@@ -41,16 +45,20 @@
 			<property name="Type" value="Magestats" />
 		</card>
 		<card id="5cf0be26-ce65-405f-9c4a-312f31bceedb" name="Warlord">
-			<property name="Type" value="Mage" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
+			<property name="Level" value="6" />
 			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
 			<property name="MageSchoolCost" value="War=1, Earth=1, Arcane=3" />
 			<property name="Traits" value="Melee +1" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Veterans: Whenever a friendly non-Mage creature melee attacks and destroys an enemy creature, place a veteran badge token on that creature (maximum of one token per creature). That creature gains Melee +1 and Armor +1.&#xD;&#xA;Battle Orders: Once per round, the Warlord may pay 1 mana and cast one of the following quick command spells. The chosen spell affects all friendly soldiers in his zone at the time it is cast and the effect lasts until the end of the round. To Battle! - Gain charge +1 trait; Release Volley! - Gain Ranged +1 trait; On Guard! - Gain Melee +1 and Armor +1 while guarding.&#xD;&#xA;Battle Skill: Warlord has Melee +1 trait." />
-				<alternate name="Warlord" type="B">					
-					<property name="Type" value="Mage" />
+				<alternate name="Warlord" type="B">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
+					<property name="Level" value="6" />
 					<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
 					<property name="MageSchoolCost" value="War=1, Earth=1, Arcane=3" />
 					<property name="Traits" value="Melee +1" />

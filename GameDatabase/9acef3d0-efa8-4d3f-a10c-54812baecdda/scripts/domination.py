@@ -10,7 +10,7 @@ def checkDominationVictory():
 		goal = eval(getGlobalVariable("Goal")).get("Goal")
 		victoriousPlayers = []
 		for player in players:
-				mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
+				mage = [c for c in table if c.Subtype=="Mage" and c.controller == player][0]
 				vtar = mage.markers[VTar]
 				if vtar >= goal: victoriousPlayers.append([player,vtar])
 		soleWinner = None
@@ -29,7 +29,7 @@ def updateVtarScore():
 		notify("The dampening field suppresses all V'tar generation!")
 		return True
 	for player in players:
-		mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
+		mage = [c for c in table if c.Subtype=="Mage" and c.controller == player][0]
 		controlMarkerColor = playerColorDict[int(mage.controller.getGlobalVariable("MyColor"))]["ControlMarker"]
 		vtarGain = len([1 for c in table if  ("V'Tar Orb" in c.name and c.markers[controlMarkerColor]) or (c.name == "Galaxxus" and c.controller == mage.controller)])
 		if vtarGain:

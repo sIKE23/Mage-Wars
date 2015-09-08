@@ -557,7 +557,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
 		if player == me == fromCard.controller and isTargeted:
-				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and (toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage'] or "Vine Marker" in toCard.Name):
+				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and (toCard.type in ['Creature','Conjuration','Conjuration-Wall'] or "Vine Marker" in toCard.Name):
 						attacker,defender = fromCard,toCard #Should probably make an attack declaration function. Eventually.
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
@@ -688,7 +688,7 @@ def flipCoin(group, x = 0, y = 0):
 def mageSetup():
 	#set initial health and channeling values
 	for c in me.hand:
-		if c.Type == "Mage":
+		if c.Subtype == "Mage":
 			stats = c.Stats.split(",")
 			break
 	for stat in stats:
@@ -857,9 +857,9 @@ def resolveBurns():
 					burnsRemoved += 1
 				burnDamage += roll
 			#apply damage
-			if card.Type == "Mage":
+			if card.Subtype == "Mage":
 				card.controller.Damage += burnDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
+			elif card.Type == "Creature" or "Conjuration" in card.Type and not card.Subtype == "Mage":
 				card.markers[Damage] += burnDamage
 			notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
 		notify("Finished auto-resolving Burns for {}.".format(me))
@@ -876,9 +876,9 @@ def resolveRot():
 		for card in cardsWithRot:
 			rotDamage = (card.markers[Rot])
 			 #apply damage
-			if card.Type == "Mage":
-				card.controller.Damage += rotDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
+			if card.Subtype == "Mage":
+				card.controller.Damage += burnDamage
+			elif card.Type == "Creature" or "Conjuration" in card.Type and not card.Subtype == "Mage":
 				card.markers[Damage] += rotDamage
 			notify("{} damage added to {}.".format(rotDamage, card.Name))
 		notify("Finished auto-resolving Rot for {}.".format(me))
@@ -895,9 +895,9 @@ def resolveBleed():
 		for card in cardsWithBleed:
 			bleedDamage = (card.markers[Bleed])
 			 #apply damage
-			if card.Type == "Mage":
-				card.controller.Damage += bleedDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
+			if card.Subtype == "Mage":
+				card.controller.Damage += burnDamage
+			elif card.Type == "Creature" or "Conjuration" in card.Type and not card.Subtype == "Mage":
 				card.markers[Damage] += bleedDamage
 			notify("{} damage added to {}.".format(bleedDamage, card.Name))
 		notify("Finished auto-resolving Bleed for {}.".format(me))
@@ -958,7 +958,7 @@ def resolveChanneling(p):
 	mute()
 	for c in table:
 				if c.controller==me and c.isFaceUp:
-						if c.Stats != None and c.Type != "Mage":
+						if c.Stats != None and c.Subtype != "Mage":
 								if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 										channel = getStat(c.Stats,"Channeling")
 										channelBoost = len([k for k in table if k.isFaceUp and k.name == "Harmonize" and c == getAttachTarget(k)]) #Well, you can't really attach more than 1 harmonize anyway. But if there were another spell that boosted channeling, we could add it to this list.
@@ -1130,7 +1130,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
-				if card.Type == "Mage": card.controller.damage += damage
+				if card.Subtype == "Mage": card.controller.damage += damage
 				else: card.markers[Damage] += damage
 				strangleMessages=["Stranglevine tightens its hold on {}! ({} damage)",
 								  "As Stranglevine grows, its hold on {} tightens! ({} damage)",
@@ -1189,7 +1189,7 @@ def checkMageDeath(player, counter, oldvalue):
 
 		if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
 				for card in table:
-						if card.Type == "Mage" and card.controller == me:
+						if card.Subtype == "Mage" and card.controller == me:
 								card.orientation = 1
 								#playSoundFX('Winner')
 								for p in players:
@@ -1222,7 +1222,7 @@ def concede(group=table, x = 0, y = 0):
 	if confirm("Are you sure you want to concede this game?"):
 		setGlobalVariable("GameIsOver", True)
 		for c in table:
-			if c.Type == "Mage" and c.controller == me:
+			if c.Subtype == "Mage" and c.controller == me:
 				c.orientation = 1
 		setGlobalVariable("GameEndTime", str(time.time()))
 #		reportGame('Conceded')
@@ -1331,7 +1331,7 @@ def placeControlMarker(attacker,defender):
 
 def addDamage(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
-	if "Mage" in card.Type and card.controller == me:
+	if "Mage" in card.Subtype and card.controller == me:
 		me.Damage += 1
 	else:
 		addToken(card, Damage)
@@ -1344,7 +1344,7 @@ def addOther(card, x = 0, y = 0):
 	card.markers[marker] += qty
 
 def subDamage(card, x = 0, y = 0):
-	if "Mage" in card.Type and card.controller == me:
+	if card.Subtype == "Mage" and card.controller == me:
 			me.Damage -= 1
 	else:
 		subToken(card, Damage)
@@ -1573,9 +1573,9 @@ def flipcard(card, x = 0, y = 0):
 		card.isFaceUp = True
 		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
-		if card.Type == "Mage" or card.Type == "Creature": #places action marker on card
+		if card.Type == "Creature": #places action marker on card
 			toggleAction(card)
-		if card.Type == "Mage": #once more to flip action to active side
+		if card.Subtype == "Mage": #once more to flip action to active side
 			toggleAction(card)
 			toggleQuick(card)
 			if "Wizard" in card.Name:
@@ -1605,7 +1605,7 @@ def flipcard(card, x = 0, y = 0):
 			me.Channeling += 1
 		if "Harmonize" == card.Name and card.controller == me and isAttached(card) and card.isFaceUp == True:
 			magecard = getAttachTarget(card)
-			if magecard.Type == "Mage":
+			if magecard.Subtype == "Mage":
 				notify("{} increases the Channeling stat by 1 as a result of {} being revealed".format(me, card))
 				me.Channeling += 1
 		if card.Type == "Creature":
@@ -1690,7 +1690,7 @@ def discard(card, x=0, y=0):
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
-		if card.Type == "Mage":
+		if card.Subtype == "Mage":
 			notify("{} decreases the Channeling stat by 1 as a result of {} being discarded".format(me, card))
 			me.Channeling -= 1
 	elif card.special == "Scenario":
@@ -1711,7 +1711,7 @@ def obliterate(card, x=0, y=0):
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
-		if magecard.Type == "Mage":
+		if card.Subtype == "Mage":
 			notify("{} decreases the Channeling stat by 1 because {} has been obliterated".format(me, card))
 			me.Channeling -= 1
 	else:
@@ -1734,7 +1734,7 @@ def defaultAction(card,x=0,y=0):
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
 			payForAttack = not (getSetting('BattleCalculator',True) and card.Type=='Attack')
-			if "Mage" in card.Type or not payForAttack: #Attack spells will now be paid for through the battlecalculator
+			if card.Subtype == "Mage" or not payForAttack or card.Type == "Magestats": #Attack spells will now be paid for through the battlecalculator
 				flipcard(card, x, y)
 
 				if not getSetting('attackChangeNotified',False) and not payForAttack:
@@ -1818,7 +1818,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 								zone = zoneArray[i][j]
 								if zone and zone.get('startLocation') == str(playerNum):
 										zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-										if cardType == 'Mage':
+										if card.Subtype == 'Mage':
 												x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
 												y = (zoneY if j < mapDict.get('J')/2 else zoneY + zoneS - cardH)
 										elif cardType == 'Magestats':
@@ -2002,7 +2002,7 @@ def castSpell(card,target=None):
 		binder = getBindTarget(card)
 		caster = getBindTarget(card)
 		if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
-				casters = [d for d in table if d.Type == "Mage" and d.isFaceUp and d.controller == me]
+				casters = [d for d in table if d.Subtype == "Mage" and d.isFaceUp and d.controller == me]
 				if casters: caster = casters[0]
 				else:
 						whisper("And just who do you expect to cast that? You need to play a mage first.")
@@ -2038,7 +2038,7 @@ def castSpell(card,target=None):
 				discountSourceNames = '\n'.join(map(lambda t: "{} (-{})".format(t[0].Name,str(t[1])),usedDiscounts))
 				discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
 				pronoun = {"Male":"he","Female":"she"}.get(getGender(caster),"it")
-				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Name.split(",")[0],pronoun) if (caster.Type != "Mage" and caster.markers[Mana]) else ""
+				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Name.split(",")[0],pronoun) if (caster.Subtype != "Mage" and caster.markers[Mana]) else ""
 				cost = askInteger("We think this spell costs {} mana.\n\n".format(str(cost))+
 									 discountString+
 									 casterString+
@@ -2180,14 +2180,14 @@ def computeRevealCost(card): #For enchantment reveals
 		if not target: return cost
 		#Exceptions
 		name = card.Name
-		tLevel = 6 if target.Type == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+')))) #And...this is why mages NEED to have a level field in the XML file.
+		tLevel = int(sum(map(lambda x: int(x), target.Level.split('+'))))
 		if name == "Mind Control":
 				cost = 2*tLevel
 		elif name in ["Charm","Fumble"]:
 				cost = tLevel-1
 		if cost == None: return #If it doesn't fit an exception, the player will have to handle it.
 		traits = computeTraits(card)
-		if target.Type=="Mage":
+		if target.Subtype=="Mage":
 				cost += traits.get("Magebind",0)
 		return cost
 
@@ -2198,7 +2198,7 @@ def computeCastCost(card,target=None): #Does NOT take discounts into considerati
 		if target: #Compute exact cost based on target. For now, cards like dissolve will have to target the spell they want to destroy. Does not check for target legality.
 				name = card.Name
 				if "Vine Marker" in target.Name and card.Name == "Burst of Thorns": return int(card.Cost)
-				tLevel = 6 if target.Type == "Mage" else (int(target.Level.split("/")[0]) if "/" in target.Level else int(sum(map(lambda x: int(x), target.Level.split('+')))))
+				tLevel = (int(target.Level.split("/")[0]) if "/" in target.Level else int(sum(map(lambda x: int(x), target.Level.split('+')))))
 				if name in ["Dissolve", "Conquer"]:
 						cost = int(target.Cost)
 				elif name in ["Dispel","Steal Enchantment"]:
@@ -2230,7 +2230,7 @@ def inspectCard(card, x = 0, y = 0):
 
 def validateDeck(deck):
 	for c in deck:
-		if c.Type == "Mage":
+		if c.Subtype == "Mage":
 			stats = c.Stats.split(",")
 			schoolcosts = c.MageSchoolCost.split(",")
 			break

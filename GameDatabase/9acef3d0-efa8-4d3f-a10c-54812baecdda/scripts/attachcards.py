@@ -212,10 +212,11 @@ def setGlobalDictEntry(dictionary,key,value):
 def canAttach(card,target):
 	"""Determines whether <card> may be attached to <target>"""
 	tType = target.Type
+	subType = target.Subtype
 	if (card==target
 		or not target in table
 		or not card in table
-		or tType not in ['Conjuration','Creature','Conjuration-Wall','Equipment','Mage']
+		or tType not in ['Conjuration','Creature','Conjuration-Wall','Equipment']
 		or not target.isFaceUp
 		or isAttached(target)
 		or getAttachments(card)): return False
@@ -236,30 +237,30 @@ def canAttach(card,target):
 		if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
-			(cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
-			(cTargetBar == 'Creature' and tType in ['Creature','Mage']) or
-			(cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
-			(cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in target.Subtype and tController == cController) or
-			(cTargetBar == 'Demon Creature' and tType in ['Creature'] and 'Demon' in target.Subtype) or
-			(cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
-			(cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
+			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
+			(cTargetBar == 'Creature' and tType == 'Creature') or
+			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
+			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in subType and tController == cController) or
+			(cTargetBar == 'Demon Creature' and tType == 'Creature' and 'Demon' in subType) or
+			(cTargetBar == 'Incorporeal Creature' and tType == 'Creature' and traits.get('Incorporeal')) or
+			(cTargetBar == 'Living Creature' and tType == 'Creature' and traits.get('Living')) or
 			(cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or
 			(cTargetBar == 'Minor Creature' and tType == 'Creature' and target.Level <= 2) or
 			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and target.Level <= 2) or
 			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2) or
-			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2 and 'Animal' in target.Subtype) or
-			(cTargetBar == 'Knight Creature' and tType in ['Creature'] and 'Knight' in target.Subtype) or
-			(cTargetBar == 'Living Holy Creature' and tType in ['Creature'] and 'Holy' in target.School and traits.get('Living')) or
-			(cTargetBar == 'Mage' and tType == 'Mage') or
-			(cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
+			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and 'Animal' in subType and traits.get('Living') and target.Level <= 2) or
+			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in subType) or
+			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
+			(cTargetBar == 'Mage' and subType == 'Mage') or
+			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
 			(cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
 			(cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
 			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
 			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic')) or
 			(cTargetBar == 'Zone or Object')): return True
-	elif ((cType == 'Equipment' and tType == 'Mage') or
-		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and not traits.get('Flying'))): return True
+	elif ((cType == 'Equipment' and subType == 'Mage') or
+		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType =='Creature' and not traits.get('Flying'))): return True
 	return False
 
 def isAttachCardsEnabled():
@@ -485,7 +486,7 @@ def snapToZone(card):
 	zoneList = getZonesBordering(card)
 	if zoneList:
 			zone = zoneClosest(zoneList,card)
-			if card.Target == 'Zone' or card.Type == 'Mage' or not card.isFaceUp: #snap to zone
+			if card.Target == 'Zone' or card.SubType == 'Mage' or not card.isFaceUp: #snap to zone
 					snapX,snapY = zoneGetContain(zone,card)
 					card.moveToTable(snapX,snapY)
 			elif card.type == 'Conjuration-Wall': #snap to zone border
