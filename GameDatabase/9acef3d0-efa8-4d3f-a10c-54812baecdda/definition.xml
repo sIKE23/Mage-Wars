@@ -3,9 +3,9 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	octgnVersion="3.1.159.352"
+	octgnVersion="3.1.225.0"
 	scriptVersion ="3.1.0.1"
-	version="9999.13.5.0"
+	version="2.0.0.0"
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -15,13 +15,18 @@
 	iconurl="http://octgn.gamersjudgement.com/wordpress/magewars/wp-content/uploads/sites/33/2013/06/image1.png"
 	usetwosidedtable="False">
 	<scripts>
+		<script src="scripts/academy.py" />
 		<script src="scripts/actions.py" />
-		<script src="scripts/changelog.py" />
-		<script src="scripts/attacks.py" />
+		<script src="scripts/arena.py" />
 		<script src="scripts/attachcards.py" />
-		<script src="scripts/textfunctions.py" />
+		<script src="scripts/attacks.py" />
+		<script src="scripts/boneyard.py" />
+		<script src="scripts/changelog.py" />
+		<script src="scripts/constants.py" />
 		<script src="scripts/domination.py" />
+		<script src="scripts/events.py" />
 		<script src="scripts/main.py" />
+		<script src="scripts/textfunctions.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoad" action="onTableLoad" />
