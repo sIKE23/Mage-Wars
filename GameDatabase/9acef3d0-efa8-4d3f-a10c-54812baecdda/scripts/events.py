@@ -394,7 +394,7 @@ def mageSetup():
 	if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
 
 
-def onCardsMoved(args)
+def onCardsMoved(args):
 	mute()
 
 def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,faceup):
