@@ -249,7 +249,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and target.Level <= 2) or
 			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2) or
 			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and 'Animal' in subType and traits.get('Living') and target.Level <= 2) or
-			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in subType) or
+			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in subType and traits.get('Living')) or
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Mage' and subType == 'Mage') or
 			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or

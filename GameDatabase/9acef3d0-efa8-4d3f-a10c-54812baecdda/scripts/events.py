@@ -75,7 +75,7 @@ def chooseGame():
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
 	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
 	buttonColorList = ["#de2827","#171e78"];
-	choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)

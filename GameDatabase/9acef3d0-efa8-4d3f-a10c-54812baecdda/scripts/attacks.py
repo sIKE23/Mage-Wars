@@ -1350,6 +1350,7 @@ def computeTraits(card):
 						elif (cName == 'Rolling Fog'): append('Obscured')
 						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
 						elif (cName == 'Gravikor' and cardType == 'Creature' and cardGetDistance(c,card)<=2): append('Non-Flying')
+						elif (cName == 'Stranglevine'): append('Life +{}'.format(str(2*markers[CrushToken])))
 						#>>Altar of Skulls<<
 						#Incantations
 						elif (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])
