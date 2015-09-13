@@ -31,44 +31,40 @@ def formatCardObject(card): #Interprets the XML file for the card and correctly 
 	card.PObj = ["it","him","her"][i]				#Object
 	card.PPos = ["its","his","her"][i]				#Possessive
 	card.PRef = ["itself","himself","herself"][i]	#Reflexive
-	"""
-	#Format casting cost
-	try: card.baseCost = int(card.Cost.split("+")[0])
-	except: card.baseCost = 0
 
-	#Format reveal cost
-	try:
-		reveal = card.Cost.split("+")[1]
-		try: card.baseReveal = int(reveal)
-		except: card.baseReveal = 0
-	except: card.baseReveal = None
-
-	#Format range.
-	try: card.ranges = [int(n) for n in card.Range.split("-")]
-	except: card.ranges = [0,0]
-
-	#Format target
-	try: card.targets = [s.split(",") for s in card.targeting.split("||")]
-	except: card.targets = ["Zone"]
-
-	#Format subtypes
-	card.subtypes = card.Subtype.split(", ")
-	#Format stats
-	stats = statsParser(card.Stats.split(", ")) #Might be a more concise way to get this.
-	card.baseArmor = stats.get("Armor")
-	card.baseLife = stats.get("Life")
-	card.baseChanneling = stats.get("Channeling")
-	#Add card's built-in defense here
-	#Work in progress, clearly.
-
-	#Method Triggers:
-	card.onDiscard = getOnDiscardFunction(card)
-	"""
 """
 Here is how to format the relevant new XML properties:
-"Flying, Living Conjuration or Non-Mage Creature" === <property name="targeting" value="Flying,Living,Conjuration||!Mage,Creature" />
+
+For targeting:
+"Flying, Living Conjuration or Non-Mage Creature" === <property name="targeting" value="m0,M2))tFlying,tLiving,TConjuration||!SMage,TCreature" />
+
+note use of )) (range separator) and || (OR operator)
+
+Range of spell given by
+	m - minimum range
+	M - maximum range
+assumes infinite range (e.g. arena) if not specified
+
+Can specify zone as a target via "_Zone"
+
+For simple buffs:
+
+<property name="buffs" value="#X,@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1]" />
+
+prefixes:
+	@ - self, other, or all. Assumes other if not specified
+	[ - the type of buff granted to objects that qualify
+	t - trait possessed
+	! - NOT operator
+	T - type of card
+	S - subtype possessed
+	^ - alignment (friendly vs enemy) possessed
+	l - min level (can also use for minor flag)
+	L - max level
+	s - school possessed
 
 """
+
 def statsParser(stringList):
 	#Parses sets of "key=value" formatted strings and returns a dictionary
 	output = {}
@@ -77,3 +73,4 @@ def statsParser(stringList):
 		try: output[pair[0]] = int(pair[1])
 		except: output[pair[0]] = 0
 	return output
+
