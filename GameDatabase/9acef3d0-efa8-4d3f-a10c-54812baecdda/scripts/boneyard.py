@@ -19,6 +19,23 @@ def advanceTurn():
 #def setActiveP(p):
 #	p.setActivePlayer()
 
+def getStat(stats, stat): #searches stats string for stat and extract value
+	statlist = stats.split(", ")
+	for statitem in statlist:
+		statval = statitem.split("=")
+		if statval[0] == stat:
+						try: return int(statval[1])
+						except: return 0
+	return 0
+	
+def cardX(card):
+	x, y = card.position
+	return x
+
+def cardY(card):
+	x, y = card.position
+	return y
+
 def resetMarkers():
 	mute()
 	for c in table:
