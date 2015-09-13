@@ -68,7 +68,6 @@ def onGameStart():
 		if gameHost == me:
 			remoteCall(me,"finishSetup",[])
 
-
 #OnGameStarted Event Functions#
 def chooseGame():
 	mute()

@@ -79,6 +79,7 @@
 		<globalvariable name="Map" value=""/>
 		<globalvariable name="RoundNumber" value=""/>
 		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
+		<globalvariable name="TimerIsRunning" value="False"/>
 		<globalvariable name="Goal" value=""/>
 	</globalvariables>
 	<card back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
@@ -240,6 +241,8 @@
 		<counter name="Damage" default="0" reset="True" icon="counters/damage.png" />
 		<counter name="Life" default="0" reset="True" icon="counters/life.png" />
 		<globalvariable name="MyColor" value=""/>
+		<globalvariable name="DiceBankD6" value="[]"/>
+		<globalvariable name="DiceBankD12" value="[]"/>
 		<hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
 			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
 			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />

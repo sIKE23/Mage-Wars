@@ -1,6 +1,7 @@
-###########################################################################
-##########################    v2.0.0.0     ###############################
-###########################################################################
+#######
+#v2.0.0.0#
+#######
+
 """
 The purpose of this module is to contain the bulk of the non-action code. I want to migrate the code not related to group/cardactions to this file.
 """

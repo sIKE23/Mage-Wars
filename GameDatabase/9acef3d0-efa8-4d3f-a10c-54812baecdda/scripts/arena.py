@@ -1,5 +1,5 @@
 
-def nextPhase(group, x=-360, y=-150):
+def nextPhaseArena():
 	mute()
 	global roundTimes
 	global gameTurn
