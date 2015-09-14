@@ -141,7 +141,7 @@ namespace Octgn.MageWarsValidator
                         hashtotal += card.GetHashCode() + card.Quantity;
 
                         //MessageBox.Show(String.Format("{0}", card.Name));
-                        if ("Mage" == Property(card, "Type"))
+                        if ("Mage" == Property(card, "Subtype"))
                         {
                             var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
                             var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
