@@ -76,7 +76,7 @@ def switchPhase(card, phase, phrase):
 	mute()
 	currentPhase = phase
 	if debugMode:	#debuggin'
-		card.switchTo(phase)
+		card.alternate = phase
 		notify("Phase changed to the {}".format(phrase))
 		return True
 	else:
@@ -97,7 +97,7 @@ def switchPhase(card, phase, phrase):
 			setGlobalVariable("DoneWithPhase", "")
 			if card.controller == me:
 				card.highlight = None
-				card.switchTo(phase)
+				card.alternate = phase 
 			else:
 				remoteCall(card.controller, "remoteHighlight", [card, None])
 				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])

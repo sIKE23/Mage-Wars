@@ -4,7 +4,7 @@
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.225.0"
-	scriptVersion ="3.1.0.1"
+	scriptVersion ="3.1.0.2"
 	version="2.0.0.0"
 	markersize="12"
 	tags="Mage Wars"
@@ -29,13 +29,13 @@
 		<script src="scripts/textfunctions.py" />
 	</scripts>
 	<events>
-		<event name="OnTableLoad" action="onTableLoad" />
-		<event name="OnGameStart" action="onGameStart" />
-		<event name="OnLoadDeck" action="onLoadDeck" />
+		<event name="OnTableLoaded" action="onTableLoaded" />
+		<event name="OnGameStarted" action="onGameStarted" />
+		<event name="OnDeckLoaded" action="onDeckLoaded" />
 		<event name="OnChangeCounter" action="checkMageDeath" />
-		<event name="OnMoveCards" action="onMoveCards" />
-		<event name="OnTargetCardArrow" action="onTargetCardArrow" />
-		<event name="OnCardDoubleClick" action="OnCardDoubleClick" />
+		<event name="OnCardsMoved" action="onCardsMoved" />
+		<event name="OnCardArrowTargeted" action="onCardArrowTargeted" />
+		<event name="OnCardDoubleClicked" action="onCardDoubleClicked" />
 	</events>
 	<sounds>
     	<sound name="Dice" src="Sounds/dice.mp3" />

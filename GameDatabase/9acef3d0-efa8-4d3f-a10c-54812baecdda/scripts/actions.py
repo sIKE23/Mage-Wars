@@ -183,7 +183,7 @@ def placeControlMarker(attacker,defender):
 	mute()
 	#First,If orb is off,turn it on
 	if defender.alternate == "":
-		defender.switchTo('B')
+		defender.alternate = "B"
 		notify("{} flips V'Tar Orb On.".format(me))
 	#Second,check to see if there is a control marker on the Orb already and if so remove it
 	markerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
@@ -406,26 +406,26 @@ def flipcard(card,x = 0,y = 0):
 	cZone = getZoneContaining(card)
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
-		if card.alternate == '':
-			card.switchTo('B')
+		if card.alternate == "":
+			card.alternate = "B"
 			notify("{} flips the Vine Marker to use its Black side.".format(me))
 		else:
-			card.switchTo('')
+			card.alternate = ""
 			notify("{} flips the Vine Marker to use its Green side.".format(me))
 		return
 	elif "Alt Zone" in card.Name and card.controller == me:
 		if card.alternate == "B":
-			card.switchTo('')
+			card.alternate = ""
 		else:
-			card.switchTo('B')
+			card.alternate = "B"
 		notify("{} flips Zone Marker.".format(me))
 		return
 	elif "V'Tar Orb" in card.Name and card.controller == me:
 		if card.alternate == "B":
-			card.switchTo('')
+			card.alternate = ""
 			notify("{} flips V'Tar Orb Off".format(me))
 		else:
-			card.switchTo('B')
+			card.alternate ="B"
 			notify("{} flips V'Tar Orb On.".format(me))
 		return
 	elif "Player Token" in card.Name:
@@ -520,15 +520,15 @@ def flipcard(card,x = 0,y = 0):
 		card.isFaceUp = False
 		card.peek()
 	elif card.isFaceUp and "B" or "C" in cardalt:
-		if card.alternate == '':
+		if card.alternate == "":
 			notify("{} flips {} to the alternate version of the card.".format(me,card))
-			card.switchTo('B')
-		elif card.alternate == 'B' and 'C' in cardalt:
+			card.alternate = "B"
+		elif card.alternate == "B" and "C" in cardalt:
 			notify("{} flips {} to the alternate version of the card.".format(me,card))
-			card.switchTo('C')
+			card.alternate = "C"
 		else:
 			notify("{} flips {} to the standard version of the card.".format(me,card))
-			card.switchTo()
+			card.alternate = ""
 
 def discard(card,x=0,y=0):
 	mute()

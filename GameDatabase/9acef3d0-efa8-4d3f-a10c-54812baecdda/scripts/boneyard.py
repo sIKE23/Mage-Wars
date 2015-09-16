@@ -427,7 +427,7 @@ def changeIniColor(card):
 	myColor = me.getGlobalVariable("MyColor")
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	if mwPlayerDict[me._id]["PlayerNum"] == int(getGlobalVariable("PlayerWithIni")):
-		card.switchTo(myColor)
+		card.alternate = myColor
 	else:
 		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
 
@@ -438,8 +438,8 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 		#debug("\n" + str(mwPlayerDict))
 		playerNum = mwPlayerDict[me._id]["PlayerNum"]
 		x,y = 0,0
-		if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
-		else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
+		if not card.isFaceUp: cardW,cardH = cardSizes[card.size]['backWidth'],cardSizes[card.size]['backHeight']
+		else: cardW,cardH = cardSizes[card.size]['width'],cardSizes[card.size]['height']
 		if mapDict:
 				iRDA,jRDA = mapDict.get("RDA",(2,2))
 				zoneArray = mapDict.get('zoneArray')
@@ -529,7 +529,7 @@ def remoteHighlight(card, color):
 	card.highlight = color
 
 def remoteSwitchPhase(card, phase, phrase):
-	card.switchTo(phase)
+	card.alternate = phase
 
 def remoteDeleteCard(c):
 	c.delete()
