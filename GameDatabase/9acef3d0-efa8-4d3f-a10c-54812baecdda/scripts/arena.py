@@ -10,7 +10,7 @@ def nextPhaseArena():
 	if getGlobalVariable("GameSetup") != "True": # Player setup is not done yet.
 		return
 	card = None
-	checkMageDeath(0,0,0)
+	checkMageDeath(0)
 	for c in table: #find phase card
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
 			card = c

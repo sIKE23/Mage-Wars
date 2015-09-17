@@ -36,7 +36,7 @@ def formatCardObject(card): #Interprets the XML file for the card and correctly 
 Here is how to format the relevant new XML properties:
 
 For targeting:
-"Flying, Living Conjuration or Non-Mage Creature" === <property name="targeting" value="m0,M2))tFlying,tLiving,TConjuration||!SMage,TCreature" />
+"Flying, Living Conjuration or Non-Mage Creature" === <property name="cTargets" value="m0,M2))tFlying,tLiving,TConjuration||!SMage,TCreature" />
 
 note use of )) (range separator) and || (OR operator)
 
@@ -49,7 +49,7 @@ Can specify zone as a target via "_Zone"
 
 For simple buffs:
 
-<property name="buffs" value="#X,@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1]" />
+<property name="cBuffs" value="#X,@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1]" />
 
 prefixes:
 	@ - self, other, or all. Assumes other if not specified

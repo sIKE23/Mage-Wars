@@ -100,7 +100,7 @@ def toggleDebug(group,x=0,y=0):
 def nextPhase(group,x=0,y=0):
 	mute()
 	gameMode = getGlobalVariable("GameMode")
-	if  gameMode == "Arena" or "Domination": nextPhaseArena()
+	if gameMode == "Arena" or "Domination": nextPhaseArena()
 	elif gameMode == "Academy": nextPhaseAcademy()
 
 ############################################################################

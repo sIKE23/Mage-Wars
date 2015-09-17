@@ -46,6 +46,7 @@ def onGameStarted():
 			chooseGame()
 		else:
 			table.board = "Westlock - 4X3"
+			setGlobalVariable("GameMode", "Arena")
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
@@ -54,7 +55,7 @@ def onGameStarted():
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		setUpDiceAndPhaseCards()
-		setGlobalVariable("GameSetup", str(0))
+		setGlobalVariable("GameSetup",str(0))
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
@@ -319,7 +320,7 @@ def onDeckLoaded(args):
 	mute()
 	global gameNum
 	global debugMode
-	if getGlobalVariable("GameSetup") == "False" and args.player == me:
+	if eval(getGlobalVariable("GameSetup")) != 0 and args.player == me:
 		askChoice("Please Finish Setup before you try to load a deck.", ["OK"], ["#FF0000"])
 		return
 	if args.player == me:
@@ -403,7 +404,7 @@ def onCardsMoved(args):
 		  						detach(card)
 		  						detachAll(card)
 		  						unbindAll(card)
-		  				if not ((args.indexs[i] != card.position[i] and args.xs[i]==str(int(card.position[0]))[i] and args.ys[i]==str(int(card.position[1])[i])) or
+		  				if not ((args.indexs[i] != card.position and args.xs[i]==str(int(card.position[0])) and args.ys[i]==str(int(card.position[1]))) or
 		  						isAttached(card) or
 				  				getBindTarget(card) or
 				  				args.toGroups[i] != table):

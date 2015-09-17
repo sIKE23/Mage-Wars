@@ -17,7 +17,7 @@ def advanceTurn():
 				remoteCall(p2, "setActiveP", [p])
 
 #def setActiveP(p):
-#	p.setActivePlayer()
+#	p.setActive()
 
 def getStat(stats, stat): #searches stats string for stat and extract value
 	statlist = stats.split(", ")
@@ -129,7 +129,7 @@ def resolveBleed():
 			bleedDamage = (card.markers[Bleed])
 			 #apply damage
 			if card.Subtype == "Mage":
-				card.controller.Damage += burnDamage
+				card.controller.Damage += bleedDamage
 			elif card.Type == "Creature" or "Conjuration" in card.Type and not card.Subtype == "Mage":
 				card.markers[Damage] += bleedDamage
 			notify("{} damage added to {}.".format(bleedDamage, card.Name))
@@ -474,7 +474,7 @@ def splay(x,y,dVector = (1,0)):
 	for c in table:
 		if c.controller == me and (x,y) == c.position:
 			wKey,hKey = {True: ("width","height"), False: ("backWidth","backHeight")}[c.isFaceUp]
-			w,h = cardSizes[c.size()][wKey],cardSizes[c.size()][hKey]
+			w,h = cardSizes[c.size][wKey],cardSizes[c.size][hKey]
 			dx,dy = dVector
 			return splay(x+dx*w,y+dy*h,dVector)
 	return x,y

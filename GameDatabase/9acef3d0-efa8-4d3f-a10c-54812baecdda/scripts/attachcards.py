@@ -1,4 +1,4 @@
-###########################################################################
+                                                                                                                                                                                                                                   ###########################################################################
 ##########################    v1.13.0.0     #######################################
 ###########################################################################
 ############################
@@ -109,7 +109,7 @@ def alignAttachments(card):
 				c.moveToTable(x,Y)
 				for p in reversed(prevCards):
 					if p.controller == me:
-						c.setIndex(p.getIndex)
+						c.index = p.index
 						break
 			#...before assisting other players
 			else:
@@ -133,7 +133,7 @@ def remoteAlign(alignData,alignedPlayers):
 		card.moveToTable(X,Y)
 		for c in reversed(prevCards):
 			if c.controller in alignedPlayers:
-				card.setIndex(c.getIndex)
+				card.index = c.index
 				break
 
 def detachAll(card):
@@ -314,15 +314,15 @@ def alignBound(card):
 	x,y = card.position
 	x -= 0
 	y += 30
-	z = card.getIndex
+	z = card.index
 	if bound.controller == me: moveAndSetIndex(bound,x,y,z)
 	else: remoteCall(bound.controller,'moveAndSetIndex',[bound,x,y,z])
-	card.setIndex(z+1) #Assumes I control <card>. Not sure why I need this when alignAttachments works without, but it seems that moving a card brings it to the front.
+	card.index = z+1 #Assumes I control <card>. Not sure why I need this when alignAttachments works without, but it seems that moving a card brings it to the front.
 
 def moveAndSetIndex(card,x,y,z):
 	mute()
 	card.moveToTable(x,y)
-	card.setIndex(z)
+	card.index = z
 
 def canBind(card,target):
 	"""Determines whether <card> may be attached to <target>"""

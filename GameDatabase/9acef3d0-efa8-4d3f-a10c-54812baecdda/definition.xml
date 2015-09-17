@@ -195,7 +195,6 @@
 			<cardaction menu="Remove Bleed Marker" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
 			<cardaction menu="Remove Corrode Marker" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
 			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
-			<cardaction menu="Remove Control Marker" default="False" shortcut="Ctrl+Alt+D" execute="removeControlMarker" />
 			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
 			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
 			<cardaction menu="Remove Rage Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />
