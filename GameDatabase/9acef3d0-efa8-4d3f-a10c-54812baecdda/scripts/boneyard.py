@@ -94,12 +94,12 @@ def resolveBurns():
 				card.controller.Damage += burnDamage
 			elif card.Type == "Creature" or "Conjuration" in card.Type and not card.Subtype == "Mage":
 				card.markers[Damage] += burnDamage
-			notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
+			if burnDamage > 0: notify("{} continues to Burn, {} damage was added!".format(card.Name, burnDamage))
+			if burnRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card.Name))
 		notify("Finished auto-resolving Burns for {}.".format(me))
 
 def resolveRot():
 	mute()
-
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
@@ -118,7 +118,6 @@ def resolveRot():
 
 def resolveBleed():
 	mute()
-
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
@@ -137,11 +136,9 @@ def resolveBleed():
 
 def resolveDissipate():
 	mute()
-
 #is the setting on?
 	if not getSetting("AutoResolveDissipate", True):
 		return
-
 	cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
 	if len(cardsWithDissipate) > 0:
 		notify("Resolving Dissipate for {}...".format(me))	#found at least one
@@ -795,7 +792,7 @@ def rollDice2(dice):
 		dieCard.markers[attackDie[3]] = attackRoll[3] # 2 Normal Damage
 		dieCard.markers[attackDie[4]] = attackRoll[4] # 1 Critical Damage
 		dieCard.markers[attackDie[5]] = attackRoll[5] # 2 Critical Damage
-		dieCard.markers[DieD12] = effectRoll
+		dieCard.markers[effectDie] = effectRoll
 
 	playSoundFX('Dice')
 	time.sleep(1)

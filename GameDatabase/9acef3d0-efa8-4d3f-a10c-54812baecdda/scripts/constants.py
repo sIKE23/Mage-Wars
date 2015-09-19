@@ -92,27 +92,16 @@ Wrath = ("Wrath","fffe964a-3839-4bc0-ba85-3268b59817c6" )
 Zombie = ("Zombie", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
 
 #Dice-related#
-Die = [ "DieBlank",
-		"DieBlank",
-		"Die1",
-		"Die2",
-		"Die1s",
-		"Die2s"]
-attackDie = [ ("DieBlank","a1f061ec-efbe-444e-8e06-8d973600696c"),
-		("DieBlank","a1f061ec-efbe-444e-8e06-8d973600696c"),
-		("Die1","8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165"),
-		("Die2","b881f652-9384-43e1-9758-e68b04583b3b"),
-		("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39"),
-		("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb"),
-		]
-DieBlank = ("DieBlank","a1f061ec-efbe-444e-8e06-8d973600696c")
-Die1 = ("Die1","8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165")
-Die2 = ("Die2","b881f652-9384-43e1-9758-e68b04583b3b")
-Die1s = ("Die1s","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
-Die2s = ("Die2s","101976ea-ec22-4496-a762-6fbc0d1a41bb")
-DieD12 = ("DieD12","3cdf4231-065d-400e-9c74-d0ae669e852c")
-diceBank = []
-diceBankD12 = []
+attackDie = [ ("No Damage","a1f061ec-efbe-444e-8e06-8d973600696c"),
+					("No Damage","a1f061ec-efbe-444e-8e06-8d973600696c"),
+					("1 Normal Damage","8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165"),
+					("2 Normal Damage","b881f652-9384-43e1-9758-e68b04583b3b"),
+					("1 Critical Damage","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39"),
+					("2 Critical Damage","101976ea-ec22-4496-a762-6fbc0d1a41bb")]
+
+effectDie = ("Effect Die (d12)","3cdf4231-065d-400e-9c74-d0ae669e852c")
+attackDiceBank = []
+effectDieBank = []
 
 #Card Sizes#
 cardSizes = {'Default': {'height': 80, 'width': 60, 'backHeight': 80, 'backWidth': 60},

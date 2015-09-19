@@ -254,10 +254,10 @@ def canAttach(card,target):
 			(cTargetBar == 'Mage' and subType == 'Mage') or
 			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
-			(cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
-			(cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
-			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
-			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic')) or
+			(cTargetBar == 'Non-Mage Creature' and tType=='Creature' and subType != "Mage") or
+			(cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and subType != "Mage" and traits.get('Corporeal')) or
+			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and subType != "Mage" and traits.get('Living')) or
+			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and subType != "Mage" and traits.get('Living') and not traits.get('Epic')) or
 			(cTargetBar == 'Zone or Object')): return True
 	elif ((cType == 'Equipment' and subType == 'Mage') or
 		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType =='Creature' and not traits.get('Flying'))): return True

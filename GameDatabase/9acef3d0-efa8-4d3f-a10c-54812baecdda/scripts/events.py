@@ -55,7 +55,7 @@ def onGameStarted():
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		setUpDiceAndPhaseCards()
-		setGlobalVariable("GameSetup",str(0))
+		setGlobalVariable("GameSetup", str(0))
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
@@ -126,11 +126,13 @@ def choosePlayerColor():
 	for num in playerColorDict:
 			colorsListHex.append(playerColorDict[num]["Hex"])
 			colorsList.append(playerColorDict[num]["PlayerColor"])
-	if debugMode or len(getPlayers()) > 0:
+	if not debugMode or len(getPlayers()) > 0:
 		while (True):
 			choice = askChoice("Pick a color:", colorsList, colorsListHex)
 			colorsChosen = getGlobalVariable("ColorsChosen")
-			if colorsChosen == "":	#we're the first to pick
+			if choice == 0:
+				askChoice("Please choose a color!", ["OK"], ["#FF0000"])
+			elif colorsChosen == "":	#we're the first to pick
 				setGlobalVariable("ColorsChosen", str(choice))
 				me.setGlobalVariable("MyColor", str(choice))
 				break
@@ -320,7 +322,7 @@ def onDeckLoaded(args):
 	mute()
 	global gameNum
 	global debugMode
-	if eval(getGlobalVariable("GameSetup")) != 0 and args.player == me:
+	if eval(getGlobalVariable("GameSetup")) == "False" and args.player == me:
 		askChoice("Please Finish Setup before you try to load a deck.", ["OK"], ["#FF0000"])
 		return
 	if args.player == me:

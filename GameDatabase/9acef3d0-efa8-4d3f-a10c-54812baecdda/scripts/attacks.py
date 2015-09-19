@@ -427,8 +427,8 @@ def canDeclareAttack(card):
 
 def rollDice(dice):
 	mute()
-	global diceBank
-	global diceBankD12
+	global attackDiceBank
+	global effectDieBank
 	mapDict = eval(getGlobalVariable('Map'))
 	for c in table:
 		if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
@@ -439,21 +439,21 @@ def rollDice(dice):
 	rnd(0,0)
 	diceFrom = ""
 	count = dice
-	if (len(diceBank) < count): #diceBank running low - fetch more
+	if (len(attackDiceBank) < count): #attackDiceBank running low - fetch more
 		random_org = webRead("http://www.random.org/integers/?num=200&min=0&max=5&col=1&base=10&format=plain&rnd=new")
 	#debug("Random.org response code for damage dice roll: {}".format(random_org[1]))
 		if random_org[1]==200: # OK code received:
-			diceBank = random_org[0].splitlines()
+			attackDiceBank = random_org[0].splitlines()
 			diceFrom = "from Random.org"
 		else:
 		#notify("www.random.org not responding (code:{}). Using built-in randomizer".format(random_org[1]))
 			diceFrom = "from the native randomizer"
-			while (len(diceBank) < 20):
-				diceBank.append(rnd(0, 5))
+			while (len(attackDiceBank) < 20):
+				attackDiceBank.append(rnd(0, 5))
 
 	result = [0,0,0,0,0,0]
 	for x in range(count):
-		roll = int(diceBank.pop())
+		roll = int(attackDiceBank.pop())
 		result[roll] += 1
 	#debug("diceRoller result: {}".format(result))
 	notify("{} rolls {} attack dice {}".format(me,count,diceFrom))
@@ -467,19 +467,19 @@ def rollDice(dice):
 	dieCard.markers[attackDie[5]] = result[5] #2*
 
 	d12DiceCount = 1
-	if (len(diceBankD12) < d12DiceCount): #diceBank running low - fetch more
+	if (len(effectDieBank) < d12DiceCount): #diceBank running low - fetch more
 		d12 = webRead("http://www.random.org/integers/?num=100&min=0&max=11&col=1&base=10&format=plain&rnd=new")
 		#debug("Random.org response code for effect roll: {}".format(d12[1]))
 		if d12[1]==200: # OK code received:
-			diceBankD12 = d12[0].splitlines()
+			effectDieBank = d12[0].splitlines()
 			notify ("Using die from Random.org")
 		else:
 			notify ("Using die from the native randomizer")
-			while (len(diceBankD12) < 100):
-				diceBankD12.append(rnd(0, 11))
+			while (len(effectDieBank) < 100):
+				effectDieBank.append(rnd(0, 11))
 
-	effect = int(diceBankD12.pop()) + 1
-	dieCard.markers[DieD12] = effect
+	effect = int(effectDieBank.pop()) + 1
+	dieCard.markers[effectDie] = effect
 	if getGlobalVariable("GameSetup") == "True":
 		playSoundFX('Dice')
 		time.sleep(1)

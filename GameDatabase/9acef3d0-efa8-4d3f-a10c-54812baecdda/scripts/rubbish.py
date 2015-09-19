@@ -3,6 +3,20 @@
 # I am guessing that Cosworth used another game as a jumping point and these fuctions were from that game 
 
 
+Die = [ "DieBlank",
+		"DieBlank",
+		"Die1",
+		"Die2",
+		"Die1s",
+		"Die2s"]
+
+DieBlank = ("No Damage","a1f061ec-efbe-444e-8e06-8d973600696c")
+Die1 = ("1 Normal Damage","8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165")
+Die2 = ("2 Normal Damageface","b881f652-9384-43e1-9758-e68b04583b3b")
+Die1s = ("1 Critical Damage","a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39")
+Die2s = ("2 Critical Damage","101976ea-ec22-4496-a762-6fbc0d1a41bb")
+
+
 def inspectCard(card, x = 0, y = 0):
 	whisper("{}".format(card))
 	for k in card.properties:
