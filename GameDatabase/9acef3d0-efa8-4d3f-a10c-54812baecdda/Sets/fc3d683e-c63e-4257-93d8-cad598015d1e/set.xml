@@ -572,7 +572,7 @@
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="7" />
-			<property name="Action" value="Quick" />
+			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
