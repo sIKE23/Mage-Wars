@@ -359,7 +359,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
-		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
+		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Nickname),["Yes","No"],["#01603e","#de2827"])==1:
 				if card.Subtype == "Mage": card.controller.damage += damage
 				else: card.markers[Damage] += damage
 				strangleMessages=["Stranglevine tightens its hold on {}! ({} damage)",
@@ -576,7 +576,7 @@ def castSpell(card,target=None):
 				discountSourceNames = '\n'.join(map(lambda t: "{} (-{})".format(t[0].Name,str(t[1])),usedDiscounts))
 				discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
 				pronoun = {"Male":"he","Female":"she"}.get(getGender(caster),"it")
-				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Name.split(",")[0],pronoun) if (caster.Subtype != "Mage" and caster.markers[Mana]) else ""
+				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Nickname,pronoun) if (caster.Subtype != "Mage" and caster.markers[Mana]) else ""
 				cost = askInteger("We think this spell costs {} mana.\n\n".format(str(cost))+
 									 discountString+
 									 casterString+

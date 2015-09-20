@@ -7,6 +7,7 @@
 	version="1.12.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
+			<property name="Nickname" value="Hurl Meteorite" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="12" />
@@ -23,6 +24,7 @@
 			<property name="CardID" value="MWPROMO09" />
 		</card>
 		<card id="12a6fc65-0f69-441a-9fe7-2719fb0b5857" name="Hurl Rock">
+			<property name="Nickname" value="Hurl Rock" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
@@ -39,6 +41,7 @@
 			<property name="CardID" value="MWPROMO10" />
 		</card>
 		<card id="e63a5bc7-ddb8-4386-8173-03c873515c17" name="Sandstorm">
+			<property name="Nickname" value="Sandstorm" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="8" />
@@ -55,6 +58,7 @@
 			<property name="CardID" value="MWPROMO25" />
 		</card>
 		<card id="d549a998-ff11-4568-b75c-d5442de3e9c6" name="Acid Blast">
+			<property name="Nickname" value="Acid Blast" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="5" />
@@ -71,6 +75,7 @@
 			<property name="CardID" value="MWPROMO35" />
 		</card>
 		<card id="368402ba-aa65-462a-84c9-093a9f0ae808" name="Dragon&apos;s Breath">
+			<property name="Nickname" value="Dragon&apos;s Breath" />
 			<property name="Type" value="Attack" />
 			<property name="Cost" value="12" />
 			<property name="Action" value="Full" />
@@ -87,6 +92,7 @@
 			<property name="CardID" value="MWPROMO36" />
 		</card>
 		<card id="5cd5afd0-f8a7-4c32-9114-785ce1aaafb7" name="Sunfire Burst">
+			<property name="Nickname" value="Sunfire Burst" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Light" />
 			<property name="Cost" value="5" />
@@ -103,6 +109,7 @@
 			<property name="CardID" value="MWPROMO37" />
 		</card>
 		<card id="33c4fb08-fd7a-4428-aecd-2591723e3ed1" name="Windstorm">
+			<property name="Nickname" value="Windstorm" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Wind" />
 			<property name="Cost" value="4" />
@@ -121,6 +128,7 @@
 
 
 		<card id="57355673-ff5f-4ac6-8d78-2a89c8791ee5" name="Asto Vidatu, Angel Slayer">
+			<property name="Nickname" value="Asto Vidatu" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Manticore" />
 			<property name="Cost" value="20" />
@@ -137,6 +145,7 @@
 			<property name="CardID" value="MWPROMO56" />
 		</card>
 		<card id="0a4d7796-8763-4af6-b283-23d98582c5d0" name="Asyran Defender">
+			<property name="Nickname" value="Asyran Defender" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Knight, Soldier" />
 			<property name="Cost" value="8" />
@@ -153,6 +162,7 @@
 			<property name="CardID" value="MWPROMO3" />
 		</card>
 		<card id="5c0a536d-f31e-4f46-b150-fe8841577c83" name="Bloodcrag Minotaur">
+			<property name="Nickname" value="Bloodcrag Minotaur" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Minotaur, Soldier" />
 			<property name="Cost" value="15" />
@@ -169,6 +179,7 @@
 			<property name="CardID" value="MWPROMO5" />
 		</card>
 		<card id="58e2b7cb-33b8-40bc-9861-b2dc10ddb4ea" name="Bloodwave Greatbow">
+			<property name="Nickname" value="Bloodwave Greatbow" />
 			<property name="Type" value="Creature" />
 			<property name="Cost" value="12" />
 			<property name="Action" value="Full"  />
@@ -185,6 +196,7 @@
 			<property name="CardID" value="MWPROMO59" />
 		</card>
 		<card id="d7076396-cb62-44c5-b3ba-2d344f205fb5" name="Death&apos;s Head Scorpion">
+			<property name="Nickname" value="Death&apos;s Head Scorpion" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect" />
 			<property name="Cost" value="9" />
@@ -201,6 +213,7 @@
 			<property name="CardID" value="MWPROMO58" />
 		</card>
 		<card id="d7236c40-8918-4391-b8ea-46dab8cac9d5" name="Dragonclaw Wolverine">
+			<property name="Nickname" value="Dragonclaw Wolverine" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="14" />
@@ -217,6 +230,7 @@
 			<property name="CardID" value="MWPROMO57" />
 		</card>
 		<card id="36f427c9-a678-45de-a099-db291e9db6b4" name="Dwarf Kriegshammer">
+			<property name="Nickname" value="Dwarf Kriegshammer" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Dwarf, Soldier" />
 			<property name="Cost" value="11" />
@@ -233,6 +247,7 @@
 			<property name="CardID" value="MWPROMO80" />
 		</card>
 		<!-- <card id="cb4358c4-1b2e-42ab-af13-80cbe1f3a260" name="Eeker">
+			<property name="Nickname" value="Eeker" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="9" />
@@ -249,6 +264,7 @@
 			<property name="CardID" value="MWPROMO67" />
 		</card> -->
 		<card id="9c877bec-af74-4d95-8583-a8b814cc1a58" name="Eligor Larington">
+			<property name="Nickname" value="Eligor Larington" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Knight" />
 			<property name="Cost" value="15" />
@@ -265,6 +281,7 @@
 			<property name="CardID" value="MWPROMO68" />
 		</card>
 		<card id="4d68d973-aa67-448f-b244-8aee05089205" name="Fire Elemental">
+			<property name="Nickname" value="Fire Elemental" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Flame, Elemental" />
 			<property name="Cost" value="20" />
@@ -281,6 +298,7 @@
 			<property name="CardID" value="MWPROMO41" />
 		</card>
 		<card id="019fbc44-d07c-4510-9cac-7c998613bb05" name="Galador, Protector of Straywood">
+			<property name="Nickname" value="Galador" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="16" />
@@ -297,6 +315,7 @@
 			<property name="CardID" value="MWPRO3" />
 		</card>
 		<card id="3b40edc6-c26b-4370-b6c5-ea52b748c0bb" name="Gerard Matranga">
+			<property name="Nickname" value="Gerard Matranga" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Pirate" />
 			<property name="Cost" value="13" />
@@ -313,6 +332,7 @@
 			<property name="CardID" value="MWPROMO69" />
 		</card>
 		<card id="bf25b529-cd16-46ec-b820-e5935992bcf1" name="Joseph Trublood, High Cleric">
+			<property name="Nickname" value="Joseph Trublood" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Cleric" />
 			<property name="Cost" value="12" />
@@ -329,6 +349,7 @@
 			<property name="CardID" value="MWPROMO11" />
 		</card>
 		<card id="73b104ed-5fec-46c2-a8fc-a64ae20f23b2" name="Kumanjaran Leopard">
+			<property name="Nickname" value="Kumanjaran Leopard" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Cat" />
 			<property name="Cost" value="13" />
@@ -345,6 +366,7 @@
 			<property name="CardID" value="MWPROMO43" />
 		</card>
 		<card id="b54089c7-7d6b-46db-b5bc-83477eb9af07" name="Lightning Beetle">
+			<property name="Nickname" value="Lightning Beetle" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect, Beetle" />
 			<property name="Cost" value="13" />
@@ -361,6 +383,7 @@
 			<property name="CardID" value="MWPROMO60" />
 		</card>
 		<card id="c50062c9-1ee8-4b5d-90a9-ffeff230089d" name="Magma Golem">
+			<property name="Nickname" value="Magma Golem" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Golem" />
 			<property name="Cost" value="15" />
@@ -377,6 +400,7 @@
 			<property name="CardID" value="MWPROMO83" />
 		</card>
 		<card id="e4eb8e8f-449c-4bd1-9da4-86832be1dde3" name="Mending Angel">
+			<property name="Nickname" value="Mending Angel" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Angel, Cleric" />
 			<property name="Cost" value="9" />
@@ -393,6 +417,7 @@
 			<property name="CardID" value="MWPROMO84" />
 		</card>
 		<card id="4c2baceb-b4bb-4118-869b-b9f3e6dc000d" name="Mountain Ram">
+			<property name="Nickname" value="Mountain Ram" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Bovid" />
 			<property name="Cost" value="8" />
@@ -409,6 +434,7 @@
 			<property name="CardID" value="MWPROMO63" />
 		</card>
 		<card id="8ff009e0-eb99-49d3-86b4-5559e654abbe" name="Oscuda">
+			<property name="Nickname" value="Oscuda" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="13" />
@@ -425,6 +451,7 @@
 			<property name="CardID" value="MWPROMO16" />
 		</card>
 		<card id="485f6711-aae1-4408-8cc8-6ac421c541b7" name="Pharaoh&apos;s Cheetah">
+			<property name="Nickname" value="Pharaoh&apos;s Cheetah" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Cat" />
 			<property name="Cost" value="12" />
@@ -441,6 +468,7 @@
 			<property name="CardID" value="MWPROMO65" />
 		</card>
 		<!-- <card id="e61ffd47-605f-45b1-9fe5-9b925be949ea" name="Screaming Zombie">
+			<property name="Nickname" value="Screaming Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="10" />
@@ -457,6 +485,7 @@
 			<property name="CardID" value="MWPROMO61" />
 		</card> -->
 		<card id="b68954f6-3fd7-4558-ae90-73d28681d5de" name="Sersiryx, Imp Familiar">
+			<property name="Nickname" value="Sersiryx" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="12" />
@@ -473,6 +502,7 @@
 			<property name="CardID" value="MWPROMO18" />
 		</card>
 		<card id="177a3787-5d22-43cd-9897-ac0e44156775" name="Selesius, the East Wind">
+			<property name="Nickname" value="Selesius" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Angel" />
 			<property name="Cost" value="21" />
@@ -489,6 +519,7 @@
 			<property name="CardID" value="MWPROMO34" />
 		</card>
 		<card id="82b98f7b-6f00-4f84-ba31-31275906b59c" name="Temple High Guard">
+			<property name="Nickname" value="Temple High Guard" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="High Elf, Soldier" />
 			<property name="Cost" value="12" />
@@ -505,6 +536,7 @@
 			<property name="CardID" value="MWPROMO20" />
 		</card>
 		<card id="f03bbaea-edd6-4230-87d0-817610ff68d5" name="Unstable Fire Imp">
+			<property name="Nickname" value="Unstable Fire Imp" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="5" />
@@ -521,6 +553,7 @@
 			<property name="CardID" value="MWPROMO86" />
 		</card>
 		<card id="6cbc50f5-d807-4f1c-984e-ece07ce6ebf9" name="Victorian Griffin">
+			<property name="Nickname" value="Victorian Griffin" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Griffin" />
 			<property name="Cost" value="17" />
@@ -539,6 +572,7 @@
 
 
 		<card id="5a6c0937-b7fb-4c68-a854-7e7d6dce4b3c" name="Altar of Peace">
+			<property name="Nickname" value="Altar of Peace" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Temple" />
 			<property name="Cost" value="7" />
@@ -555,6 +589,7 @@
 			<property name="CardID" value="MWPROMO2" />
 		</card>
 		<card id="0468e485-cced-4a0e-bf79-af4c03f2abe5" name="Altar of the Iron Guard">
+			<property name="Nickname" value="Altar of the Iron Guard" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Statue, Artifact" />
 			<property name="Cost" value="4" />
@@ -571,6 +606,7 @@
 			<property name="CardID" value="MWPROMO31" />
 		</card>
 		<card id="18b08e7f-4d82-4bcf-8a0c-fdf83b4683ac" name="Ballista">
+			<property name="Nickname" value="Ballista" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="War Machine" />
 			<property name="Cost" value="8" />
@@ -587,6 +623,7 @@
 			<property name="CardID" value="MWPROMO4" />
 		</card>
 		<card id="90f01a26-1598-4df0-9fb3-5f40353bb6c9" name="Gravikor">
+			<property name="Nickname" value="Gravikor" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Obelisk, Artifact" />
 			<property name="Cost" value="8" />
@@ -603,6 +640,8 @@
 			<property name="CardID" value="MWPROMO8" />
 		</card>
 		<card id="b0a9a73a-4de7-4e14-b922-f859d66bbe96"  name="Hidden Tunnels" >
+			<property name="Nickname" value="Hidden Tunnels" >
+" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Tunnel" />
 			<property name="Cost" value="8" />
@@ -619,6 +658,7 @@
 			<property name="CardID" value="MWPROMO81" />
 		</card>
 		<card id="e5381c8b-33ad-46c9-a416-dfa47d128e5c" name="Raincloud">
+			<property name="Nickname" value="Raincloud" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Cloud, Weather" />
 			<property name="Cost" value="8" />
@@ -637,6 +677,7 @@
 
 
 		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force" size="Horizontal Cards">
+			<property name="Nickname" value="Wall of Force" size="Horizontal Cards" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
@@ -653,6 +694,7 @@
 			<property name="CardID" value="MWPROMO24" />
 		</card>
 		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas" size="Horizontal Cards">
+			<property name="Nickname" value="Wall of Poison Gas" size="Horizontal Cards" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Cloud, Poison" />
 			<property name="Cost" value="7" />
@@ -671,6 +713,7 @@
 
 
 		<card id="65d66e09-37bd-480d-a4a6-d98819b66b9e" name="Akiro&apos;s Favor">
+			<property name="Nickname" value="Akiro&apos;s Favor" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+1" />
@@ -687,6 +730,7 @@
 			<property name="CardID" value="MWPROMO1" />
 		</card>
 		<card id="e079dd8b-8134-4d1e-acae-601c4c7e4016" name="Bear Strength">
+			<property name="Nickname" value="Bear Strength" />
 			<property name="Type" value="Enchantment" />
 			<property name="Cost" value="2+3" />
 			<property name="Action" value="Q"  />
@@ -703,6 +747,7 @@
 			<property name="CardID" value="MWPROMO64" />
 		</card>
 		<card id="11ac648e-7c45-4a33-ac33-3cfb8c7bb6d7" name="Bind Spirit">
+			<property name="Nickname" value="Bind Spirit" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+2" />
@@ -719,6 +764,7 @@
 			<property name="CardID" value="MWPROMO80" />
 		</card>
 		<card id="1b90a2b2-c916-4e3a-9ed7-c037a5e3cc36" name="Blur">
+			<property name="Nickname" value="Blur" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Illusion" />
 			<property name="Cost" value="2+0" />
@@ -735,6 +781,7 @@
 			<property name="CardID" value="MWPROMO79" />
 		</card>
 		<card id="29121772-6f18-41ec-9add-87712e5f86ec" name="Circle of Light">
+			<property name="Nickname" value="Circle of Light" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Light, Barrier" />
 			<property name="Cost" value="2+4" />
@@ -751,6 +798,7 @@
 			<property name="CardID" value="MWPROMO42" />
 		</card>
 		<card id="ccc78522-653a-443d-9c36-5be3eb96f1e1" name="Critical Strike">
+			<property name="Nickname" value="Critical Strike" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="2+3" />
@@ -767,6 +815,7 @@
 			<property name="CardID" value="MWPROMO17" />
 		</card>
 		<card id="ccba65d6-3b9a-484c-9517-ff7b3ef5cb21" name="Debilitate">
+			<property name="Nickname" value="Debilitate" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse" />
 			<property name="Cost" value="2+4" />
@@ -783,6 +832,7 @@
 			<property name="CardID" value="MWPROMO29" />
 		</card>
 		<card id="b591255e-d632-4d8f-9cd7-7ae6687c2269" name="Life Link">
+			<property name="Nickname" value="Life Link" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+2" />
@@ -799,6 +849,7 @@
 			<property name="CardID" value="MWPROMO82" />
 		</card>
 		<card id="901f4850-d501-4205-afa5-cdea2bb187f8" name="Lion Savagery">
+			<property name="Nickname" value="Lion Savagery" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
@@ -815,6 +866,7 @@
 			<property name="CardID" value="MWPROMO12" />
 		</card>
 		<card id="c710760d-6f2e-4b59-a349-2792f2af02b6" name="Mana Vampirism">
+			<property name="Nickname" value="Mana Vampirism" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="2+2" />
@@ -831,6 +883,7 @@
 			<property name="CardID" value="MWPROMO13" />
 		</card>
 		<card id="db4a3acd-3d6a-4ee1-8b74-b7b57407711d" name="Plagued">
+			<property name="Nickname" value="Plagued" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Poison" />
 			<property name="Cost" value="2+4" />
@@ -847,6 +900,7 @@
 			<property name="CardID" value="MWPROMO30" />
 		</card>
 		<card id="ea25707a-6947-47cc-9f85-7905246f92c1" name="Reinforce">
+			<property name="Nickname" value="Reinforce" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
@@ -863,6 +917,7 @@
 			<property name="CardID" value="MWPROMO85" />
 		</card>
 		<card id="ac38099d-6358-4295-a048-47293b4793c9" name="Rhino Hide">
+			<property name="Nickname" value="Rhino Hide" />
 			<property name="Type" value="Enchantment" />
 			<property name="Cost" value="2+3" />
 			<property name="Action" value="Quick"  />
@@ -879,6 +934,7 @@
 			<property name="CardID" value="MWPROMO65" />
 		</card>
 		<card id="17b28bea-2fff-41c3-b0f6-a28bcbb14aa6" name="Stumble">
+			<property name="Nickname" value="Stumble" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="2+1" />
@@ -895,6 +951,7 @@
 			<property name="CardID" value="MWPROMO23" />
 		</card>
 		<card id="82956c06-e294-4d3e-bf84-7d6c56dcbb2c" name="Summoning Circle">
+			<property name="Nickname" value="Summoning Circle" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Portal" />
 			<property name="Cost" value="2+4" />
@@ -913,6 +970,7 @@
 
 
 		<card id="e7700c22-26e9-485d-b74f-7c06f58321a7" name="Ankh of Asyra	">
+			<property name="Nickname" value="Ankh of Asyra	" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Light" />
 			<property name="Cost" value="8" />
@@ -929,6 +987,7 @@
 			<property name="CardID" value="MWPROMO78" />
 		</card>
 		<card id="5adeed7f-a23f-46f9-9d3a-2d697a8b6855" name="Chitin Armor">
+			<property name="Nickname" value="Chitin Armor" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="6" />
@@ -945,6 +1004,7 @@
 			<property name="CardID" value="MWPROMO34" />
 		</card>
 		<card id="b070db04-d9b8-4f10-81cb-09feec6f73d1" name="Elfric&apos;s Life Ring">
+			<property name="Nickname" value="Elfric&apos;s Life Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
@@ -961,6 +1021,7 @@
 			<property name="CardID" value="MWPROMO7" />
 		</card>
 		<card id="b037229d-3ab8-40c8-9c47-86e87a3e6372" name="Gale Force Ring">
+			<property name="Nickname" value="Gale Force Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
@@ -977,6 +1038,7 @@
 			<property name="CardID" value="MWPROMO48" />
 		</card>
 		<card id="8fdefc7f-f6c8-4b63-98fe-76699d00c1e7" name="Gloves of Skill">
+			<property name="Nickname" value="Gloves of Skill" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
@@ -993,6 +1055,7 @@
 			<property name="CardID" value="MWPROMO53" />
 		</card>
 		<card id="e0a9c95c-c435-48d2-8c2f-235aefe82265" name="Heart of Gravikor">
+			<property name="Nickname" value="Heart of Gravikor" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="10" />
@@ -1009,6 +1072,7 @@
 			<property name="CardID" value="MWPROMO52" />
 		</card>
 		<card id="810a99dc-31e7-4b89-8245-43a36e69ccde" name="Leather Belt">
+			<property name="Nickname" value="Leather Belt" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2" />
@@ -1025,6 +1089,7 @@
 			<property name="CardID" value="MWPROMO45" />
 		</card>
 		<card id="a91dde7c-ba80-4d21-a37b-2bac136f72e6" name="Leviathan Scale Armor">
+			<property name="Nickname" value="Leviathan Scale Armor" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="6" />
@@ -1041,6 +1106,7 @@
 			<property name="CardID" value="MWPROMO47" />
 		</card>
 		<card id="c84d3e91-00ff-4197-82c5-20f7217322f4" name="Meditation Amulet">
+			<property name="Nickname" value="Meditation Amulet" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="4" />
@@ -1057,6 +1123,7 @@
 			<property name="CardID" value="MWPROMO14" />
 		</card>
 		<card id="47f776f7-0abf-46f3-8279-e1cdde8ad0cd" name="Mordok&apos;s Tome">
+			<property name="Nickname" value="Mordok&apos;s Tome" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Tome" />
 			<property name="Cost" value="5" />
@@ -1073,6 +1140,7 @@
 			<property name="CardID" value="MWPROMO27" />
 		</card>
 		<card id="d82d768a-5be2-4284-b9ab-b9d273a50a94" name="Morning Star">
+			<property name="Nickname" value="Morning Star" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -1089,6 +1157,7 @@
 			<property name="CardID" value="MWPROMO15" />
 		</card>
 		<card id="da6a068d-ea92-4655-9095-7f9878df711f" name="Ring of Healing">
+			<property name="Nickname" value="Ring of Healing" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
@@ -1105,6 +1174,7 @@
 			<property name="CardID" value="MWPROMO49" />
 		</card>
 		<card id="a5170083-ad05-4e98-84a2-a14aecfdc463" name="Spiked Armor">
+			<property name="Nickname" value="Spiked Armor" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="9" />
@@ -1121,6 +1191,7 @@
 			<property name="CardID" value="MWPROMO51" />
 		</card>
 		<card id="79692c1d-4dc8-4c84-9c04-9ad47d797bd6" name="Spiked Buckler">
+			<property name="Nickname" value="Spiked Buckler" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Shield" />
 			<property name="Cost" value="8" />
@@ -1137,6 +1208,7 @@
 			<property name="CardID" value="MWPROMO26" />
 		</card>
 		<card id="eecd62c9-300c-4a7c-bef3-a57555b89bdc" name="Staff of Storms">
+			<property name="Nickname" value="Staff of Storms" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="7" />
@@ -1153,6 +1225,7 @@
 			<property name="CardID" value="MWPROMO28" />
 		</card>
 		<card id="3388ff14-df8b-448b-ae4f-1584c099a978" name="Storm Drake Hide">
+			<property name="Nickname" value="Storm Drake Hide" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="6" />
@@ -1169,6 +1242,7 @@
 			<property name="CardID" value="MWPROMO33" />
 		</card>
 		<card id="105b2ac7-86ac-42e3-9931-a40d39b28d3b" name="Vorpal Blade">
+			<property name="Nickname" value="Vorpal Blade" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -1185,6 +1259,7 @@
 			<property name="CardID" value="MWPROMO21" />
 		</card>
 		<card id="09028056-1cb4-4a85-888f-dbe0854ad016" name="Wand of Healing">
+			<property name="Nickname" value="Wand of Healing" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="2" />
@@ -1203,6 +1278,7 @@
 
 
 		<card id="a1d0ef02-3e53-4a53-8dc5-6460c16b0021" name="Clear Mind">
+			<property name="Nickname" value="Clear Mind" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Psychic" />
 			<property name="Cost" value="X" />
@@ -1219,6 +1295,7 @@
 			<property name="CardID" value="MWPROMO6" />
 		</card>
 		<card id="c46fd335-9b2e-4a23-b52b-77e708de89c0" name="Dispel">
+			<property name="Nickname" value="Dispel" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="X" />
@@ -1235,6 +1312,7 @@
 			<property name="CardID" value="MWPRO1" />
 		</card>
 		<card id="a43ae982-247b-4783-ab1d-058e5a5c6b18" name="Holy Strike">
+			<property name="Nickname" value="Holy Strike" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
@@ -1251,6 +1329,7 @@
 			<property name="CardID" value="MWPROMO32" />
 		</card>
 		<card id="82174fd6-1e51-4aef-b5a5-fca0af2ff0bc" name="Minor Heal">
+			<property name="Nickname" value="Minor Heal" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="5" />
@@ -1267,6 +1346,7 @@
 			<property name="CardID" value="MWPRO2" />
 		</card>
 		<card id="5c78af5c-ddd6-4973-a5c2-d8bcfb48ba04" name="Bloodthirsty Strike">
+			<property name="Nickname" value="Bloodthirsty Strike" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Psychic, Curse" />
 			<property name="Cost" value="2" />
@@ -1283,6 +1363,7 @@
 			<property name="CardID" value="MWPROMO38" />
 		</card>
 		<card id="6185f05c-1d3d-4f44-b7b5-88f05283a13a" name="Flame Strike">
+			<property name="Nickname" value="Flame Strike" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Flame" />
 			<property name="Cost" value="4" />
@@ -1299,6 +1380,7 @@
 			<property name="CardID" value="MWPROMO39" />
 		</card>
 		<card id="861fed39-7c5e-4fd8-8ffa-8b27f5737043" name="Lightning Strike">
+			<property name="Nickname" value="Lightning Strike" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Lightning" />
 			<property name="Cost" value="4" />
@@ -1315,6 +1397,7 @@
 			<property name="CardID" value="MWPROMO40" />
 		</card>
 		<card id="c7984a2a-0ef4-4546-98bc-991cfdb2a9c7" name="Teleport">
+			<property name="Nickname" value="Teleport" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Teleport" />
 			<property name="Cost" value="X" />

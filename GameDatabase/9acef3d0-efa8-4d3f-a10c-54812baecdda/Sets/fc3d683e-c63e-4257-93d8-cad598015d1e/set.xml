@@ -16,6 +16,7 @@
 	</markers>
 	<cards>
 		<card id="d20c9d4a-65a7-4018-bffc-16ed0cb62912" name="Druid">
+			<property name="Nickname" value="Druid" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple." />
@@ -38,9 +39,11 @@
 				</alternate>
 		</card>
 		<card id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260" name="Druid Stats">
+			<property name="Nickname" value="Druid Stats" />
 			<property name="Type" value="Magestats" />
 		</card>
 		<card id="6b830552-8420-4797-bbb5-3ec5bb768265" name="Necromancer">
+			<property name="Nickname" value="Necromancer" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
@@ -63,11 +66,13 @@
 				</alternate>
 		</card>
 		<card id="682d3b40-7c08-437b-9c88-16e2f389773f" name="Necromancer Stats">
+			<property name="Nickname" value="Necromancer Stats" />
 			<property name="Type" value="Magestats" />
 		</card>
 
 
 		<card id="a5386a31-5786-4e70-9482-65657607d802" name="Acid Ball">
+			<property name="Nickname" value="Acid Ball" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="5" />
@@ -86,6 +91,7 @@
 
 
 		<card id="31f4cf44-febc-46fb-920c-5293a7e2d615" name="Altar of Skulls">
+			<property name="Nickname" value="Altar of Skulls" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Skeleton, Altar" />
 			<property name="Cost" value="9" />
@@ -102,6 +108,7 @@
 			<property name="CardID" value="DNJ01" />
 		</card>
 		<card id="a3a04a1e-76e9-4043-a22c-d731ac2a103f" name="Corrosive Orchid">
+			<property name="Nickname" value="Corrosive Orchid" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Flower, Vine" />
 			<property name="Cost" value="7" />
@@ -118,6 +125,7 @@
 			<property name="CardID" value="DNJ02" />
 		</card>
 		<card id="0dfe805d-f194-437d-84bd-7a8da15aa95e" name="Etherian Lifetree">
+			<property name="Nickname" value="Etherian Lifetree" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="7" />
@@ -134,6 +142,7 @@
 			<property name="CardID" value="DNJ03" />
 		</card>
 		<card id="be8a0047-ad80-44c5-91cb-ab7a65cbdf1e" name="Graveyard">
+			<property name="Nickname" value="Graveyard" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="14" />
@@ -150,6 +159,7 @@
 			<property name="CardID" value="DNJ04" />
 		</card>
 		<card id="0eb7fe47-d3b5-44d8-b7e8-424b7bc674e0" name="Mohktari, Great Tree of Life">
+			<property name="Nickname" value="Mohktari" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="8" />
@@ -166,6 +176,7 @@
 			<property name="CardID" value="DNJ05" />
 		</card>
 		<card id="9192232a-e12a-4f84-8880-6ba315124062" name="Nightshade Lotus">
+			<property name="Nickname" value="Nightshade Lotus" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Flower, Vine" />
 			<property name="Cost" value="7" />
@@ -182,6 +193,7 @@
 			<property name="CardID" value="DNJ06" />
 		</card>
 		<card id="11a15edf-2a69-4507-9449-f57badafcfe4" name="Seedling Pod">
+			<property name="Nickname" value="Seedling Pod" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="3" />
@@ -198,6 +210,7 @@
 			<property name="CardID" value="DNJ08" />
 		</card>
 		<card id="f839c0c0-ed2f-4440-931f-ec5ecf6b385d" name="Samara Tree">
+			<property name="Nickname" value="Samara Tree" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="7" />
@@ -214,6 +227,7 @@
 			<property name="CardID" value="DNJ09" />
 		</card>
 		<card id="32a5f867-3654-41b3-9917-74b5983eedd2" name="Stranglevine">
+			<property name="Nickname" value="Stranglevine" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="7" />
@@ -230,6 +244,7 @@
 			<property name="CardID" value="DNJ10" />
 		</card>
 		<card id="a7f900e4-64ac-4c1b-8905-90607feb7d1a" name="Tanglevine">
+			<property name="Nickname" value="Tanglevine" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="5" />
@@ -246,6 +261,7 @@
 			<property name="CardID" value="DNJ11" />
 		</card>
 		<card id="b0993b6c-e604-4ba4-86d7-b45e53daae9b" name="Vine Tree">
+			<property name="Nickname" value="Vine Tree" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="9" />
@@ -262,6 +278,7 @@
 			<property name="CardID" value="DNJ12" />
 		</card>
 		<card id="1aea1576-11e2-413c-b49a-50493f07fe99" name="Ziggurat of Undeath">
+			<property name="Nickname" value="Ziggurat of Undeath" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Artifact, Temple" />
 			<property name="Cost" value="8" />
@@ -280,6 +297,7 @@
 
 
 		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall" size="Horizontal Cards">
+			<property name="Nickname" value="Bloodspine Wall" size="Horizontal Cards" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="4" />
@@ -296,6 +314,7 @@
 			<property name="CardID" value="DNW01" />
 		</card>
 		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones" size="Horizontal Cards">
+			<property name="Nickname" value="Wall of Bones" size="Horizontal Cards" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Skeleton" />
 			<property name="Cost" value="6" />
@@ -314,6 +333,7 @@
 
 
 		<card id="9a1370a0-44cb-47ac-a736-807f96a51785" name="Acolyte of the Bog Queen">
+			<property name="Nickname" value="Acolyte of the Bog Queen" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Dark Elf, Cleric" />
 			<property name="Cost" value="5" />
@@ -330,6 +350,7 @@
 			<property name="CardID" value="DNC01" />
 		</card>
 		<card id="5f5be863-dbbe-4eb7-93c2-b933cc5eab89" name="Deathfang">
+			<property name="Nickname" value="Deathfang" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Canine" />
 			<property name="Cost" value="8" />
@@ -346,6 +367,7 @@
 			<property name="CardID" value="DNC02" />
 		</card>
 		<card id="ec3dc5d5-57c6-423e-bb65-ba2a0a0f91b9" name="Devouring Jelly">
+			<property name="Nickname" value="Devouring Jelly" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Ooze" />
 			<property name="Cost" value="13" />
@@ -362,6 +384,7 @@
 			<property name="CardID" value="DNC03" />
 		</card>
 		<card id="4fc86a1f-d24d-4da7-9f85-5818df967abd" name="Grey Wraith">
+			<property name="Nickname" value="Grey Wraith" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Spirit" />
 			<property name="Cost" value="10" />
@@ -378,6 +401,7 @@
 			<property name="CardID" value="DNC04" />
 		</card>
 		<card id="08222fa4-57c4-4ebd-a27a-66f7942e46cb" name="Ichthellid">
+			<property name="Nickname" value="Ichthellid" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Insect" />
 			<property name="Cost" value="9" />
@@ -394,6 +418,7 @@
 			<property name="CardID" value="DNC05" />
 		</card>
 		<card id="e4fb0871-99e8-40c3-b744-828400701c36" name="Kralathor, The Devourer">
+			<property name="Nickname" value="Kralathor" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="16" />
@@ -410,6 +435,7 @@
 			<property name="CardID" value="DNC06" />
 		</card>
 		<card id="352583ca-7fed-481b-9b8a-456b05e61501" name="Mort">
+			<property name="Nickname" value="Mort" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="16" />
@@ -426,6 +452,7 @@
 			<property name="CardID" value="DNC07" />
 		</card>
 		<card id="fb442d50-c831-4da9-bbb8-dace15fea19b" name="Unstable Zombie">
+			<property name="Nickname" value="Unstable Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="9" />
@@ -442,6 +469,7 @@
 			<property name="CardID" value="DNC08" />
 		</card>
 		<card id="c0ae161f-891a-4fa8-824e-ca35ea8effeb" name="Plague Zombie">
+			<property name="Nickname" value="Plague Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="9" />
@@ -458,6 +486,7 @@
 			<property name="CardID" value="DNC09" />
 		</card>
 		<card id="1c7345af-d370-446b-8d71-ebb1e90b0db9" name="Raptor Vine">
+			<property name="Nickname" value="Raptor Vine" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="9" />
@@ -474,6 +503,7 @@
 			<property name="CardID" value="DNC10" />
 		</card>
 		<card id="499cdd49-3a70-433b-8ecf-a43f1906b845" name="Ravenous Ghoul">
+			<property name="Nickname" value="Ravenous Ghoul" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead" />
 			<property name="Cost" value="13" />
@@ -490,6 +520,7 @@
 			<property name="CardID" value="DNC11" />
 		</card>
 		<card id="42e4bd62-7a26-4d7a-9b19-21e4c26fc0dd" name="Shaggoth-Zora">
+			<property name="Nickname" value="Shaggoth-Zora" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="8" />
@@ -506,6 +537,7 @@
 			<property name="CardID" value="DNC12" />
 		</card>
 		<card id="310c13cd-b845-46c2-9ad7-94eda4626f1d" name="Skeletal Archer">
+			<property name="Nickname" value="Skeletal Archer" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="11" />
@@ -522,6 +554,7 @@
 			<property name="CardID" value="DNC13" />
 		</card>
 		<card id="b3ea6383-16dc-4786-92c5-e1498f2811c3" name="Skeletal Knight">
+			<property name="Nickname" value="Skeletal Knight" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="13" />
@@ -538,6 +571,7 @@
 			<property name="CardID" value="DNC14" />
 		</card>
 		<card id="d40817b6-6574-4d86-b0bf-0f32fb1e49cf" name="Skeletal Minion">
+			<property name="Nickname" value="Skeletal Minion" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="5" />
@@ -554,6 +588,7 @@
 			<property name="CardID" value="DNC15" />
 		</card>
 		<card id="6ae1f6c5-8005-4201-a6c3-223e2622c902" name="Spitting Raptor">
+			<property name="Nickname" value="Spitting Raptor" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Reptile" />
 			<property name="Cost" value="11" />
@@ -570,6 +605,7 @@
 			<property name="CardID" value="DNC16" />
 		</card>
 		<card id="8d28ba55-a8ea-43e6-8df4-8becc8cb088f" name="Tataree">
+			<property name="Nickname" value="Tataree" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect" />
 			<property name="Cost" value="6" />
@@ -586,6 +622,7 @@
 			<property name="CardID" value="DNC17" />
 		</card>
 		<card id="b95362fb-2d0e-428d-af86-a85f667626dd" name="Togorah, Forest Sentinel">
+			<property name="Nickname" value="Togorah" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Tree, Sequoian" />
 			<property name="Cost" value="21" />
@@ -602,6 +639,7 @@
 			<property name="CardID" value="DNC18" />
 		</card>
 		<card id="f4574320-6839-4346-a36f-cad119af8b43" name="Venomous Zombie">
+			<property name="Nickname" value="Venomous Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="7" />
@@ -618,6 +656,7 @@
 			<property name="CardID" value="DNC19" />
 		</card>
 		<card id="bc0190fc-cb97-47e5-aa19-a2d387a64b73" name="Vine Snapper">
+			<property name="Nickname" value="Vine Snapper" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="7" />
@@ -634,6 +673,7 @@
 			<property name="CardID" value="DNC20" />
 		</card>
 		<card id="5065ae95-c3be-494f-ba68-afedb3b8c2d9" name="Thornlasher">
+			<property name="Nickname" value="Thornlasher" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="7" />
@@ -650,6 +690,7 @@
 			<property name="CardID" value="DNC21" />
 		</card>
 		<card id="b37bdf0c-85f9-4b78-b32a-fe550c37d047" name="Zombie Brute">
+			<property name="Nickname" value="Zombie Brute" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="11" />
@@ -666,6 +707,7 @@
 			<property name="CardID" value="DNC22" />
 		</card>
 		<card id="96c21a43-e794-4f23-9408-5c7f2523a4f6" name="Zombie Crawler">
+			<property name="Nickname" value="Zombie Crawler" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="4" />
@@ -682,6 +724,7 @@
 			<property name="CardID" value="DNC23" />
 		</card>
 		<card id="e91c66db-b4cc-4b38-8427-06dceb2103a0" name="Zombie Minion">
+			<property name="Nickname" value="Zombie Minion" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="7" />
@@ -700,6 +743,7 @@
 
 
 		<card id="86308614-b7be-477c-b0ab-be56d31cadc5" name="Barkskin">
+			<property name="Nickname" value="Barkskin" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Plant, Healing, Protection" />
 			<property name="Cost" value="2+2" />
@@ -716,6 +760,7 @@
 			<property name="CardID" value="DNE01" />
 		</card>
 		<card id="69227c1a-b122-4395-a31a-463dab9d16e1" name="Rise Again">
+			<property name="Nickname" value="Rise Again" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Necro" />
 			<property name="Cost" value="2+0" />
@@ -732,6 +777,7 @@
 			<property name="CardID" value="DNE02" />
 		</card>
 		<card id="1431371e-755e-4ff5-9fe3-7677673bce7b" name="Stumble">
+			<property name="Nickname" value="Stumble" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="2+1" />
@@ -750,6 +796,7 @@
 
 
 		<card id="290f58ae-7089-4ddd-a7ad-3abdd129f9dc" name="Cloak of Shadows">
+			<property name="Nickname" value="Cloak of Shadows" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Shadow" />
 			<property name="Cost" value="6" />
@@ -766,6 +813,7 @@
 			<property name="CardID" value="DNQ01" />
 		</card>
 		<card id="70e1dca8-85ef-40f0-a18a-6904ed4539de" name="Death Ring">
+			<property name="Nickname" value="Death Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Necro, Mana" />
 			<property name="Cost" value="5" />
@@ -782,6 +830,7 @@
 			<property name="CardID" value="DNQ02" />
 		</card>
 		<card id="84aeeb75-a297-4b94-a79d-f9068e19dcd9" name="Deathshroud Staff">
+			<property name="Nickname" value="Deathshroud Staff" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="8" />
@@ -798,6 +847,7 @@
 			<property name="CardID" value="DNQ03" />
 		</card>
 		<card id="ceee5eaa-4aef-4b81-b272-b23d7e15380d" name="Druid&apos;s Leaf Ring">
+			<property name="Nickname" value="Druid&apos;s Leaf Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="2" />
@@ -814,6 +864,7 @@
 			<property name="CardID" value="DNQ04" />
 		</card>
 		<card id="3eaae143-ac4b-4d8b-9396-83f8215aed51" name="Libro Mortuos">
+			<property name="Nickname" value="Libro Mortuos" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Necro, Tome" />
 			<property name="Cost" value="10" />
@@ -830,6 +881,7 @@
 			<property name="CardID" value="DNQ05" />
 		</card>
 		<card id="10e5eda8-f2b6-459f-9309-172251215aa9" name="Mohktari&apos;s Branch">
+			<property name="Nickname" value="Mohktari&apos;s Branch" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="4" />
@@ -846,6 +898,7 @@
 			<property name="CardID" value="DNQ06" />
 		</card>
 		<card id="94757213-e96f-44b3-a520-7528fa098d74" name="Veteran&apos;s Belt">
+			<property name="Nickname" value="Veteran&apos;s Belt" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
@@ -862,6 +915,7 @@
 			<property name="CardID" value="DNQ07" />
 		</card>
 		<card id="6fa5b665-0b7d-4815-9122-09e27b50c7a9" name="Vinewhip Staff">
+			<property name="Nickname" value="Vinewhip Staff" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Vine" />
 			<property name="Cost" value="7" />
@@ -878,6 +932,7 @@
 			<property name="CardID" value="DNQ08" />
 		</card>
 		<card id="b96b5ebe-6e6b-4ee8-b644-8e68dda574c0" name="Wand of Healing">
+			<property name="Nickname" value="Wand of Healing" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="2" />
@@ -894,6 +949,7 @@
 			<property name="CardID" value="DNQ09" />
 		</card>
 		<card id="2fbb95eb-e736-4710-b3d1-7a0a399f5a76" name="Meditation Amulet">
+			<property name="Nickname" value="Meditation Amulet" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="4" />
@@ -912,6 +968,7 @@
 
 
 		<card id="ee58773c-a3ea-42b9-b1ec-c0a4560f8cd6" name="Animate Dead">
+			<property name="Nickname" value="Animate Dead" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="X" />
@@ -928,6 +985,7 @@
 			<property name="CardID" value="DNI01" />
 		</card>
 		<card id="7c50b8b4-149e-4636-8beb-88672929946b" name="Burst of Thorns">
+			<property name="Nickname" value="Burst of Thorns" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -944,6 +1002,7 @@
 			<property name="CardID" value="DNI02" />
 		</card>
 		<card id="bdf3c1a5-2f4e-41bb-806f-b8db38ba7242" name="Reassemble">
+			<property name="Nickname" value="Reassemble" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="4" />
@@ -960,6 +1019,7 @@
 			<property name="CardID" value="DNI03" />
 		</card>
 		<card id="8cdd0758-7dcb-4c58-9855-a1d852b86e33" name="Renewing Rain">
+			<property name="Nickname" value="Renewing Rain" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Healing, Weather" />
 			<property name="Cost" value="9" />
@@ -976,6 +1036,7 @@
 			<property name="CardID" value="DNI04" />
 		</card>
 		<card id="fed20306-b9fa-4351-acb0-126701a1bd8f" name="Unholy Resurgence">
+			<property name="Nickname" value="Unholy Resurgence" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="9" />
@@ -992,6 +1053,7 @@
 			<property name="CardID" value="DNI05" />
 		</card>
 		<card id="da57df3c-1a95-48dd-a340-e304fb2d8bb7" name="Zombie Frenzy">
+			<property name="Nickname" value="Zombie Frenzy" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="9" />
@@ -1008,6 +1070,7 @@
 			<property name="CardID" value="DNI06" />
 		</card>
 		<card id="b6ba6985-8bc2-4e41-9883-9b44fc8ddadf" name="Dispel">
+			<property name="Nickname" value="Dispel" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="X" />
@@ -1024,6 +1087,7 @@
 			<property name="CardID" value="DNI07" />
 		</card>
 		<card id="12a46022-4004-47d3-82ca-f78230814d67" name="Dissolve">
+			<property name="Nickname" value="Dissolve" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="X" />
@@ -1042,6 +1106,7 @@
 
 
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">
+			<property name="Nickname" value="Vine Marker Green" />
 			<property name="Type" value="Conjuration-Vine" />
 			<property name="Stats" value="Armor=-, Life=1" />
 				<alternate name="Vine Marker Black" type="B">

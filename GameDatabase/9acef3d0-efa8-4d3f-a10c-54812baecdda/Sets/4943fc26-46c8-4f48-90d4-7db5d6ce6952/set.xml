@@ -14,6 +14,7 @@
 	</markers>
 	<cards>
 		<card id="e0a0b790-fbfb-4a08-a12e-77e415134391" name="Johktari Beastmaster">
+			<property name="Nickname" value="Johktari Beastmaster" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
@@ -36,9 +37,11 @@
 				</alternate>
 		</card>
 		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Johktari Beastmaster Stats">
+			<property name="Nickname" value="Johktari Beastmaster Stats" />
 		 <property name="Type" value="Magestats" />
 		</card>
 		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
+			<property name="Nickname" value="Priest" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="MageTraining" value="Training: Trained In the Holy school. Dark spells cost triple during spellbook construction. The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only." />
@@ -59,11 +62,13 @@
 				</alternate>
 		</card>
 		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest Stats">
+			<property name="Nickname" value="Priest Stats" />
 		 <property name="Type" value="Magestats" />
 		</card>
 
 
 		<card id="a1de2c11-60ab-42b5-99d5-752f5cb85770" name="Surging Wave">
+			<property name="Nickname" value="Surging Wave" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Hydro" />
 			<property name="Cost" value="5" />
@@ -82,6 +87,7 @@
 
 
 		<card id="97a1bcd1-5702-4ad6-87f9-7977901b4d02" name="Bridge Troll">
+			<property name="Nickname" value="Bridge Troll" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Soldier, Troll" />
 			<property name="Cost" value="13" />
@@ -98,6 +104,7 @@
 			<property name="CardID" value="MWSTX1CKC01" />
 		</card>
 		<card id="7add1431-cfce-4c3e-b7bc-88cf0c126e9a" name="Dire Wolf">
+			<property name="Nickname" value="Dire Wolf" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Canine" />
 			<property name="Cost" value="12" />
@@ -113,6 +120,7 @@
 			<property name="CardID" value="MWSTX1CKC02" />
 		</card>
 		<card id="6122329b-8107-4d1a-a322-52311bd11a60" name="Dwarf Panzergarde">
+			<property name="Nickname" value="Dwarf Panzergarde" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Soldier, Dwarf" />
 			<property name="Cost" value="11" />
@@ -129,6 +137,7 @@
 			<property name="CardID" value="MWSTX1CKC07" />
 		</card>
 		<card id="6ea8364e-2843-4649-af14-44ebedeeb41e" name="Galador, Protector of Straywood">
+			<property name="Nickname" value="Galador" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Cervine" />
 			<property name="Cost" value="16" />
@@ -145,6 +154,7 @@
 			<property name="CardID" value="MWSTX1CKC03" />
 		</card>
 		<card id="600817a2-1dc1-4ac8-bb73-838afbb8b929" name="Gargoyle Sentry">
+			<property name="Nickname" value="Gargoyle Sentry" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Gargoyle" />
 			<property name="Cost" value="11" />
@@ -161,6 +171,7 @@
 			<property name="CardID" value="MWSTX1CKC08" />
 		</card>
 		<card id="b6003a5c-e5ec-46fe-921f-1b1d02b2e48e" name="Giant Wolf Spider">
+			<property name="Nickname" value="Giant Wolf Spider" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect, Spider" />
 			<property name="Cost" value="15" />
@@ -177,6 +188,7 @@
 			<property name="CardID" value="MWSTX1CKC09" />
 		</card>
 		<card id="dcc3b017-d4f4-479f-83c4-6597f06a2cce" name="Guardian Angel">
+			<property name="Nickname" value="Guardian Angel" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Angel" />
 			<property name="Cost" value="12" />
@@ -193,6 +205,7 @@
 			<property name="CardID" value="MWSTX1CKC06" />
 		</card>
 		<card id="a47455b5-caf0-42c0-9e3c-5945a108767d" name="Makunda">
+			<property name="Nickname" value="Makunda" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Cat" />
 			<property name="Cost" value="17" />
@@ -209,6 +222,7 @@
 			<property name="CardID" value="MWSTX1CKC04" />
 		</card>
 		<card id="1f8f30b7-8d0c-4350-ae4f-0616df0abc88" name="Screech Harpy">
+			<property name="Nickname" value="Screech Harpy" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Bird, Harpy" />
 			<property name="Cost" value="11" />
@@ -227,6 +241,7 @@
 
 
 		<card id="c9fd02fd-f37f-4c1d-88f2-bf3a7bae0e8e" name="Enchanter&apos;s Wardstone">
+			<property name="Nickname" value="Enchanter&apos;s Wardstone" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Protection, Rune" />
 			<property name="Cost" value="4" />
@@ -243,6 +258,7 @@
 			<property name="CardID" value="MWSTX1CKJ01" />
 		</card>
 		<card id="dbe14006-e729-4f6e-90f9-89eadb863a91" name="Wizard&apos;s Tower">
+			<property name="Nickname" value="Wizard&apos;s Tower" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Tower" />
 			<property name="Cost" value="7" />
@@ -261,6 +277,7 @@
 
 
 		<card id="a7287ca4-7c90-42aa-9c86-c8a6bedc286b" name="Wall of Steel" size="Horizontal Cards">
+			<property name="Nickname" value="Wall of Steel" size="Horizontal Cards" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Metal" />
 			<property name="Cost" value="8" />
@@ -280,6 +297,7 @@
 
 
 		<card id="97da4784-8449-434a-931e-32f3fc93af43" name="Armor Ward">
+			<property name="Nickname" value="Armor Ward" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Protection, Metamagic" />
 			<property name="Cost" value="2+4" />
@@ -296,6 +314,7 @@
 			<property name="CardID" value="MWSTX1CKE01" />
 		</card>
 		<card id="d93bcebb-5798-4e16-9d48-b41e0c3cab75" name="Divine Might">
+			<property name="Nickname" value="Divine Might" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
@@ -312,6 +331,7 @@
 			<property name="CardID" value="MWSTX1CKE02" />
 		</card>
 		<card id="4adafa93-0231-4956-9041-f7eef728e5f5" name="Enchantment Transfusion">
+			<property name="Nickname" value="Enchantment Transfusion" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="2+X" />
@@ -328,6 +348,7 @@
 			<property name="CardID" value="MWSTX1CKE04" />
 		</card>
 		<card id="f3974912-fc35-4007-98e0-14bdddfe3e0c" name="Healing Charm">
+			<property name="Nickname" value="Healing Charm" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Charm, Healing" />
 			<property name="Cost" value="2+3" />
@@ -344,6 +365,7 @@
 			<property name="CardID" value="MWSTX1CKE03" />
 		</card>
 		<card id="8cfdf60f-2a11-4b9b-a6b8-1338ef7f6179" name="Spiked Pit">
+			<property name="Nickname" value="Spiked Pit" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Trap" />
 			<property name="Cost" value="2+5" />
@@ -362,6 +384,7 @@
 
 
 		<card id="8a1b4d7b-83d0-4b5d-9751-68acdb065fc7" name="Colossus Belt">
+			<property name="Nickname" value="Colossus Belt" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
@@ -378,6 +401,7 @@
 			<property name="CardID" value="MWSTX1CKQ03" />
 		</card>
 		<card id="e128dbb9-3fad-49af-91ad-eb9dbfbb1802" name="Dispel Wand">
+			<property name="Nickname" value="Dispel Wand" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="4" />
@@ -394,6 +418,7 @@
 			<property name="CardID" value="MWSTX1CKQ05" />
 		</card>
 		<card id="c4daa855-667a-4211-8970-5b210eeb145d" name="Eagleclaw Boots">
+			<property name="Nickname" value="Eagleclaw Boots" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
@@ -410,6 +435,7 @@
 			<property name="CardID" value="MWSTX1CKQ06" />
 		</card>
 		<card id="590146ae-4e92-4d85-abf9-4f6520cfb8d6" name="Hunting Bow">
+			<property name="Nickname" value="Hunting Bow" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="11" />
@@ -426,6 +452,7 @@
 			<property name="CardID" value="MWSTX1CKQ02" />
 		</card>
 		<card id="f43f1435-b902-4d89-8feb-f69f34fac492" name="Reflex Boots">
+			<property name="Nickname" value="Reflex Boots" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Defense" />
 			<property name="Cost" value="9" />
@@ -442,6 +469,7 @@
 			<property name="CardID" value="MWSTX1CKQ04" />
 		</card>
 		<card id="0f9291dd-f242-47e7-8053-e8382dc614b8" name="Sunfire Amulet">
+			<property name="Nickname" value="Sunfire Amulet" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="6" />
@@ -460,6 +488,7 @@
 
 
 		<card id="41138f05-1492-444a-b4e0-888247b95349" name="Akiro&apos;s Battle Cry">
+			<property name="Nickname" value="Akiro&apos;s Battle Cry" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Command" />
 			<property name="Cost" value="14" />
@@ -476,6 +505,7 @@
 			<property name="CardID" value="MWSTX1CKI02" />
 		</card>
 		<card id="7bc8847c-fee8-484f-a7f5-9f649e958087" name="Drain Soul">
+			<property name="Nickname" value="Drain Soul" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Vampiric" />
 			<property name="Cost" value="16" />

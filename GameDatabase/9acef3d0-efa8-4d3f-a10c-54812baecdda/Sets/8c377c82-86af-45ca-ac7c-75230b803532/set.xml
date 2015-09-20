@@ -17,6 +17,7 @@
 	</markers>
 	<cards>
 		<card id="2bc9e256-d325-435a-81ea-e6ad31b3f56b" name="Bolt of V&apos;Tar">
+			<property name="Nickname" value="Bolt of V&apos;Tar" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="V&apos;Tar, Lightning" />
 			<property name="Cost" value="8" />
@@ -33,6 +34,7 @@
 			<property name="CardID" value="MWBG1A01" />
 		</card>
 		<card id="3f7a8262-09e1-40bd-8fb9-c7c6ac880ae0" name="Dragon&apos;s Breath">
+			<property name="Nickname" value="Dragon&apos;s Breath" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Flame" />
 			<property name="Cost" value="12" />
@@ -49,6 +51,7 @@
 			<property name="CardID" value="MWBG1A02" />
 		</card>
 		<card id="4d8e3876-3c1d-4448-895e-4fc929625673" name="Hurl Meteorite">
+			<property name="Nickname" value="Hurl Meteorite" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="12" />
@@ -65,6 +68,7 @@
 			<property name="CardID" value="MWBG1A03" />
 		</card>
 		<card id="5c22f66f-bbeb-4027-b20f-3e468d428111" name="Sandstorm">
+			<property name="Nickname" value="Sandstorm" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Wind" />
 			<property name="Cost" value="8" />
@@ -81,6 +85,7 @@
 			<property name="CardID" value="MWBG1A04" />
 		</card>
 		<card id="6e4c7b12-9bc4-4c19-976f-840e40999a03" name="V&apos;Tarrian Energy Wave">
+			<property name="Nickname" value="V&apos;Tarrian Energy Wave" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="V&apos;Tar" />
 			<property name="Cost" value="12" />
@@ -97,6 +102,7 @@
 			<property name="CardID" value="MWBG1A05" />
 		</card>
 		<card id="6ffd7fe8-14ac-4bfa-8da4-aef87dbaa61a" name="Windstorm">
+			<property name="Nickname" value="Windstorm" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Wind" />
 			<property name="Cost" value="4" />
@@ -115,6 +121,7 @@
 
 
 		<card id="9b486167-9d34-424d-85c2-014d8772730a" name="Altar of the Iron Guard">
+			<property name="Nickname" value="Altar of the Iron Guard" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Statue, Artifact" />
 			<property name="Cost" value="4" />
@@ -131,6 +138,7 @@
 			<property name="CardID" value="MWBG1J01" />
 		</card>
 		<card id="27dacd66-4f54-465e-a728-10358b0c7548" name="Gravikor">
+			<property name="Nickname" value="Gravikor" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Obelisk, Artifact" />
 			<property name="Cost" value="8" />
@@ -147,6 +155,7 @@
 			<property name="CardID" value="MWBG1J02" />
 		</card>
 		<card id="54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd" name="V&apos;Torrak Gate">
+			<property name="Nickname" value="V&apos;Torrak Gate" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Teleport, Portal" />
 			<property name="Cost" value="8" />
@@ -163,6 +172,7 @@
 			<property name="CardID" value="MWBG1J03" />
 		</card>
 		<card id="62a0b1ac-91d1-4dc5-9bcc-eb4209261388" name="Raincloud">
+			<property name="Nickname" value="Raincloud" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Cloud, Weather" />
 			<property name="Cost" value="8" />
@@ -179,6 +189,7 @@
 			<property name="CardID" value="MWBG1J04" />
 		</card>
 		<card id="71e32301-4724-497d-9224-9f052fcf9808" name="Galaxxus">
+			<property name="Nickname" value="Galaxxus" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="V&apos;Tar, Artifact" />
 			<property name="Cost" value="8" />
@@ -197,6 +208,7 @@
 
 
 		<card id="82ce9e6d-a218-488a-843c-46b85f3f393d" name="Wall of Force" size="Horizontal Cards">
+			<property name="Nickname" value="Wall of Force" size="Horizontal Cards" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="6" />
@@ -215,6 +227,7 @@
 
 
 		<card id="811f2772-a2fa-4bf7-acd4-cb962e29f605" name="Guard Dog">
+			<property name="Nickname" value="Guard Dog" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Canine" />
 			<property name="Cost" value="8" />
@@ -231,6 +244,7 @@
 			<property name="CardID" value="MWBG1C01" />
 		</card>
 		<card id="9153fc63-f781-443a-ab94-10c5acb50faa" name="Oscuda">
+			<property name="Nickname" value="Oscuda" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal" />
 			<property name="Cost" value="13" />
@@ -247,6 +261,7 @@
 			<property name="CardID" value="MWBG1C02" />
 		</card>
 		<card id="42464e26-8982-4244-b06e-2aab60f88203" name="Skeelax, Taunting Imp">
+			<property name="Nickname" value="Skeelax" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Demon" />
 			<property name="Cost" value="11" />
@@ -263,6 +278,7 @@
 			<property name="CardID" value="MWBG1C03" />
 		</card>
 		<card id="721428d1-878a-457b-8885-4e5f9bb2e20c" name="Slaknir, Goblin Chieftain">
+			<property name="Nickname" value="Slaknir" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Goblin, Soldier" />
 			<property name="Cost" value="12" />
@@ -279,6 +295,7 @@
 			<property name="CardID" value="MWBG1C04" />
 		</card>
 		<card id="865954e9-4c67-4858-b3e0-484c66e19db9" name="Sslak, Orb Guardian">
+			<property name="Nickname" value="Sslak" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Antarian" />
 			<property name="Cost" value="7" />
@@ -295,6 +312,7 @@
 			<property name="CardID" value="MWBG1C05" />
 		</card>
 		<card id="5688957a-e243-4999-8301-b869be3f6fdb" name="Usslak, Greater Orb Guardian">
+			<property name="Nickname" value="Usslak" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Antarian" />
 			<property name="Cost" value="11" />
@@ -313,6 +331,7 @@
 
 
 		<card id="80055594-f757-4d3c-ae32-13b1210cee28" name="Astral Anchor">
+			<property name="Nickname" value="Astral Anchor" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="2+4" />
@@ -329,6 +348,7 @@
 			<property name="CardID" value="MWBD1E01" />
 		</card>
 		<card id="bf217fd3-18c0-4b61-a33a-117167533f3d" name="Plagued">
+			<property name="Nickname" value="Plagued" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Poison" />
 			<property name="Cost" value="2+4" />
@@ -345,6 +365,7 @@
 			<property name="CardID" value="MWBG1E02" />
 		</card>
 		<card id="c0dbf89b-5373-47b5-ab1f-979400ea69f8" name="Sentinel of V&apos;Tar">
+			<property name="Nickname" value="Sentinel of V&apos;Tar" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="2+3" />
@@ -361,6 +382,7 @@
 			<property name="CardID" value="MWBG1E03" />
 		</card>
 		<card id="d44f62c7-0a73-4ac1-9b21-9b32638b205c" name="V&apos;Tar Force Sentry">
+			<property name="Nickname" value="V&apos;Tar Force Sentry" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="V&apos;Tar, Protection, Force" />
 			<property name="Cost" value="2+3" />
@@ -379,6 +401,7 @@
 
 
 		<card id="e3e77121-4a91-443b-ae3a-1d7c4241b0ee" name="Cascading Force Wave">
+			<property name="Nickname" value="Cascading Force Wave" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="3" />
@@ -395,6 +418,7 @@
 			<property name="CardID" value="MWBG1I01" />
 		</card>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="V&apos;Tarrian Healing Song">
+			<property name="Nickname" value="V&apos;Tarrian Healing Song" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="V&apos;Tar, Healing" />
 			<property name="Cost" value="5" />
@@ -411,6 +435,7 @@
 			<property name="CardID" value="MWBG1I02" />
 		</card>
 		<card id="f397a9b9-24dd-4f0b-a3a0-17337ec69d9f" name="V&apos;Tar Suppression">
+			<property name="Nickname" value="V&apos;Tar Suppression" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="V&apos;Tar, Curse" />
 			<property name="Cost" value="6" />
@@ -429,6 +454,7 @@
 
 
 		<card id="fa23207a-afe0-4757-a7f0-fe38cd974c71" name="Gale Force Ring">
+			<property name="Nickname" value="Gale Force Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="3" />
@@ -446,14 +472,17 @@
 		</card>
 
 		<card id="fb43bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage">
+			<property name="Nickname" value="Secret Passage" />
 			<property name="Type" value="Internal" />
 		</card>
 
 		<card id="fc31f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap">
+			<property name="Nickname" value="Spiked Pit Trap" />
 			<property name="Type" value="Internal" />
 		</card>
 
 		<card id="fd339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off">
+			<property name="Nickname" value="V&apos;Tar Orb Off" />
 			<property name="Type" value="Conjuration" />
 				<alternate name="V&apos;Tar Orb On" type="B">
 					<property name="Type" value="Conjuration"/>

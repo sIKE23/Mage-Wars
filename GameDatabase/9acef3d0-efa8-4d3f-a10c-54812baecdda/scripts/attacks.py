@@ -52,7 +52,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		setEventList('Turn',[]) #Clear the turn event list. Will need to be changed when we implement sweeping/zone attacks properly
 		aTraitDict = (computeTraits(attacker) if attacker else {})
 		if aTraitDict.get("Incapacitated"):
-				if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.name.split(',')[0]))
+				if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.Nickname))
 				return {}
 		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if c.Name=="Lion Savagery" and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
 		if not attacker: defender = None
@@ -769,9 +769,9 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				notify("The Helm of Fear radiates a terrifying aura!")
 				damageRoll,effectRoll = rollDice(0)
 				if effectRoll >= 9:
-						notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.name.split(',')[0]))
+						notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.Nickname))
 						return
-				else: notify("{} resists the urge to panic!".format(attacker.name.split(',')[0]))
+				else: notify("{} resists the urge to panic!".format(attacker.Nickname))
 		#Remember arcane zap
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
 		#If the defender is not flying, the attacker should lose the flying trait
@@ -797,24 +797,24 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 		if not attack.get('RangeType') == 'Damage Barrier':
 				#Check for forcefield
 				if len([reduceFF(c) for c in getAttachments(defender) if c.isFaceUp and c.name == "Forcefield" and c.markers[FFToken]]):
-						notify("The forcefield absorbs the attack!".format(attacker.name.split(',')[0]))
+						notify("The forcefield absorbs the attack!".format(attacker.Nickname))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						return
 				#Check for fumble
 				if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
-						notify("{} fumbles the attack!".format(attacker.name.split(',')[0]))
+						notify("{} fumbles the attack!".format(attacker.Nickname))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for block
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
+						notify("{}'s attack is blocked!".format(attacker.Nickname))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for reverse attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
+						notify("{}'s attack is magically reversed!".format(attacker.Nickname))
 						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
 						return
 
@@ -1082,7 +1082,7 @@ def malakaisFirePrompt(heathen):
 
 def malakaisFireReceiptPrompt(heathen):
 		mute()
-		if askChoice("Malakai smites {}! Apply Burn condition?".format(heathen.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
+		if askChoice("Malakai smites {}! Apply Burn condition?".format(heathen.Nickname),["Yes","No"],["#01603e","#de2827"])==1:
 				heathen.markers[Burn]+=1
 				bookOfMalakai=["...AND THE HEATHENS IN THEIR TREACHERY DOTH BURN LIKE CANDLES, SPAKE MALAKAI. AND LO, SO THEY DID BURN.\n- The book of Malakai, 16:3",
 							   "...AND HE LIT A THOUSAND FIRES BENEATH THE FOUL. AND MALAKAI SAW THAT IT WAS JUST.\n- The book of Malakai, 19:25",
@@ -1095,7 +1095,7 @@ def malakaisFireReceiptPrompt(heathen):
 							   "... AND I WILL STRIKE DOWN UPON THEE WITH GREAT VENGEANCE AND FURIOUS ANGER THOSE WHO ATTEMPT TO POISON AND DESTROY MY BROTHERS. AND YOU WILL KNOW MY NAME IS MALAKAI WHEN I LAY MY LIGHT UPON THEE \n-The book of Malakai, 25:17"]
 				passage=rnd(0,len(bookOfMalakai)-1)
 				notify(bookOfMalakai[passage])
-				notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
+				notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Nickname))
 
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		card = Card(cardTraitsDict.get('OwnerID'))
