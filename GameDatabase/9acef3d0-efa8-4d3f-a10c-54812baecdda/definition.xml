@@ -83,7 +83,7 @@
 		<globalvariable name="TimerIsRunning" value="False"/>
 		<globalvariable name="Goal" value=""/>
 	</globalvariables>
-	<card back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
+	<card back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
 		<property name="Subtype" type="String" hidden="False" ignoreText="False" />
 		<property name="Cost" type="String" hidden="False" ignoreText="False" />
@@ -116,12 +116,12 @@
 		<property name="cBuffs" type="String" hidden="True" ignoreText="False" />
 		<!--Memory-->
 		<property name="Memory" type="String" hidden="True" ignoreText="False" />
-		<size name="ModularBoardPieces" width="250" height="250" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="0" />
-		<size name="InitativeMarkers" width="50" height="50" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="PhaseMarkers" width="90" height="20" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="DominationMarkers" width="90" height="40" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="Dice Roll Area" width="130" height="80" back="cards/lg-card-back.jpg" front="cards/lg-card-back.jpg" cornerRadius="3" />
-		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="cards/sm-card-back.jpg" front="cards/sm-card-back.jpg" cornerRadius="3" />
+		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0" />
+		<size name="InitativeMarkers" width="50" height="50" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="PhaseMarkers" width="90" height="20" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="DominationMarkers" width="90" height="40" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
+		<size name="Dice Roll Area" width="130" height="80" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="3" />
+		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="3" />
 	</card>
 	<gameboards x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard.png" >
 		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg" />
@@ -239,21 +239,21 @@
 			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">
-		<counter name="Channeling" default="0" reset="True" icon="counters/channeling.png" />
-		<counter name="Mana" default="0" reset="True" icon="counters/mana.png" />
-		<counter name="Damage" default="0" reset="True" icon="counters/damage.png" />
-		<counter name="Life" default="0" reset="True" icon="counters/life.png" />
+		<counter name="Channeling" default="0" reset="True" icon="Images/Counters/channeling.png" />
+		<counter name="Mana" default="0" reset="True" icon="Images/Counters/mana.png" />
+		<counter name="Damage" default="0" reset="True" icon="Images/Counters/damage.png" />
+		<counter name="Life" default="0" reset="True" icon="Images/Counters/life.png" />
 		<globalvariable name="MyColor" value=""/>
 		<globalvariable name="DiceBankD6" value="[]"/>
 		<globalvariable name="DiceBankD12" value="[]"/>
-		<hand name="Hand" visibility="me" ordered="False" width="126" height="176" icon="groups/hand.png">
+		<hand name="Spellbook" visibility="me" ordered="False" width="126" height="176" icon="Images/Groups/Spellbook.png">
 			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
 			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 		</hand>
-		<group name="Discard" visibility="all" ordered="False" width="126" height="176" icon="groups/discard.png" collapsed="False">
+		<group name="Discard Pile" visibility="all" ordered="False" width="126" height="176" icon="Images/Groups/Discard.png" collapsed="False">
 		</group>
-		<group name="Obliterate Pile" visibility="all" ordered="False" width="126" height="176" icon="groups/obliterate.png" collapsed="True">
+		<group name="Obliterate Pile" visibility="all" ordered="False" width="126" height="176" icon="Images/Groups/Obliterate.png" collapsed="True">
 		</group>
 	</player>
 	<deck>
