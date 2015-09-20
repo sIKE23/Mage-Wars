@@ -372,46 +372,78 @@ def onCardsMoved(args):
 	#args = player,cards,fromGroups,toGroups,indexs,xs,ys,highlights,markers,faceups
 	mute()
 	setGlobalVariable("MoveCardArgs",str(args))
-	for i in range(len(args.cards)):
-		  	card = args.cards[i]
-		  	if card.controller == me and args.fromGroups[i]==table:
-		  				if not (getAttachTarget(card) in args.cards or getBindTarget(card) in args.cards): #Only check for detach if the attachtarget was not moved
-		  						unbind(card)
-		  						c,t = detach(card)
-		  						if args.toGroups[i] == table: card.moveToTable(card.position[0],card.position[1])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
-		  						actionType = None
-		  						if t:
-		  								actionType = ['detaches','from']
-		  						hasAttached = False
-		  						if len(args.cards) == 1 and args.toGroups[i] == table: #Only check for autoattach if this is the only card moved
-		  								for a in table:
-		  										if (cardX(a)-card.position[0])**2 + (cardY(a)-card.position[1])**2 < 400 and canBind(card,a):
-		  												c,t = bind(card,a)
-		  												if t:
-		  														actionType = ['binds','to']
-		  														hasAttached = True
-		  														break
-		  										elif getSetting('AutoAttach',True) and (cardX(a)-card.position[0])**2 + (cardY(a)-card.position[1])**2 < 400 and canAttach(card,a):
-		  												if (card.Type == "Enchantment" or card.Name in ["Tanglevine","Stranglevine","Quicksand"]) and not card.isFaceUp and not castSpell(card,a): break
-		  												c,t = attach(card,a)
-		  												if t:
-		  														actionType = ['attaches','to']
-		  														hasAttached = True
-		  														break
-		  						if (not hasAttached) and (args.toGroups[i] == table): snapToZone(card)
-		  						if actionType:
-		  								notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
-		  				if args.toGroups[i] != table:
-		  						unbind(card)
-		  						detach(card)
-		  						detachAll(card)
-		  						unbindAll(card)
-		  				if not ((args.indexs[i] != card.position and args.xs[i]==str(int(card.position[0])) and args.ys[i]==str(int(card.position[1]))) or
-		  						isAttached(card) or
-				  				getBindTarget(card) or
-				  				args.toGroups[i] != table):
-				  				alignAttachments(card)
-				  				alignBound(card)#Do not realign if it is  only the index that is changing. Prevents recursions.
+	#assign variables when appropriate to cut down on memory access operations
+	cards = args.cards
+	toGroups = args.toGroups
+	fromGroups = args.fromGroups
+	xs = args.xs
+	ys = args.ys
+	indices = args.indexs
+	#loop over all cards
+	for i, card in enumerate(cards):
+	  	position = card.position
+	  	if card.controller == me and fromGroups[i]==table:
+			if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
+				unbind(card)
+				c,t = detach(card)
+				if toGroups[i] == table: card.moveToTable(position[0],position[1])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
+				actionType = None
+				if t:
+					actionType = ['detaches','from']
+				hasAttached = False
+				if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
+					for a in table:
+						if (cardX(a)-position[0])**2 + (cardY(a)-position[1])**2 < 400 and canBind(card,a):
+							c,t = bind(card,a)
+							if t:
+								actionType = ['binds','to']
+								hasAttached = True
+								break
+						elif getSetting('AutoAttach',True) and (cardX(a)-position[0])**2 + (cardY(a)-position[1])**2 < 400 and canAttach(card,a):
+							if (card.Type == "Enchantment" or card.Name in ["Tanglevine","Stranglevine","Quicksand"]) and not card.isFaceUp and not castSpell(card,a): break
+							c,t = attach(card,a)
+							if t:
+								actionType = ['attaches','to']
+								hasAttached = True
+								break
+				if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
+				if actionType:
+					notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+				if toGroups[i] != table:
+					unbind(card)
+					detach(card)
+					detachAll(card)
+					unbindAll(card)
+				if not ((indices[i] != position and xs[i]==str(int(position[0])) and ys[i]==str(int(position[1]))) or
+					isAttached(card) or
+	  				getBindTarget(card) or
+	  				toGroups[i] != table):
+	  				alignAttachments(card)
+	  				alignBound(card)#Do not realign if it is  only the index that is changing. Prevents recursions.
+
+def onScriptedCardsMoved(args):
+	#assign variables to args before the loop to cut down on memory access operations
+	cards = args.cards
+	toGroups = args.toGroups
+	indices = args.indexs
+	xs = args.xs
+	ys = args.ys
+	#handle attached cards when attach target is moved/deleted by a function
+	for i in range(len(cards)):
+		card = cards[i]
+		position = card.position
+		if toGroups[i] != table:
+			unbind(card)
+			detach(card)
+			detachAll(card)
+			unbindAll(card)
+		if not ((indices[i] != position and xs[i]==str(int(position[0])) and ys[i]==str(int(position[1]))) or
+			isAttached(card) or
+			getBindTarget(card) or
+			toGroups[i] != table):
+			alignAttachments(card)
+			alignBound(card)
+
 
 def onCardArrowTargeted(args):
 	#args = player,fromCard,toCard,targeted,scripted
