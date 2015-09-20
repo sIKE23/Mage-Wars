@@ -211,6 +211,13 @@ def setGlobalDictEntry(dictionary,key,value):
 
 def canAttach(card,target):
 	"""Determines whether <card> may be attached to <target>"""
+	cTargets = card.cTargets
+	if not cTargets: return False
+	cTargetString = cTargets.split("))")[1]
+	if card.Type in ["Enchantment","Equipment","Conjuration"]: 
+		return targetMatcher(card,target,cTargetString) 
+	return False
+	"""
 	tType = target.Type
 	subType = target.Subtype
 	if (card==target
@@ -233,6 +240,7 @@ def canAttach(card,target):
 	for s in card.Subtype.split(', '):
 		if s in traits.get('Immunity',[]): return False
 	if cName in ['Force Hold','Force Crush','Tanglevine','Stranglevine'] and traits.get('Uncontainable'): return False
+	
 	if cType == 'Enchantment':
 		if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
 			(cName == 'Barkskin' and tName == 'Druid') or
@@ -259,9 +267,11 @@ def canAttach(card,target):
 			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and subType != "Mage" and traits.get('Living')) or
 			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and subType != "Mage" and traits.get('Living') and not traits.get('Epic')) or
 			(cTargetBar == 'Zone or Object')): return True
+	
 	elif ((cType == 'Equipment' and subType == 'Mage') or
 		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType =='Creature' and not traits.get('Flying'))): return True
-	return False
+	"""
+	#return False
 
 def isAttachCardsEnabled():
 	"""Checks whether the attachCards module is turned on."""

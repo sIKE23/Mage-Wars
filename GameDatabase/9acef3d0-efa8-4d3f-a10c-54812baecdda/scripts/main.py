@@ -46,10 +46,11 @@ Range of spell given by
 assumes infinite range (e.g. arena) if not specified
 
 Can specify zone as a target via "_Zone"
+Can specify facedown via "_Facedown" or any facing via "_Anyfacing"
 
 For simple buffs:
 
-<property name="cBuffs" value="#X,@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1]" />
+<property name="cBuffs" value="#X,@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1" />
 
 prefixes:
 	@ - self, other, or all. Assumes other if not specified
@@ -63,6 +64,7 @@ prefixes:
 	L - max level
 	s - school possessed
 
+
 """
 
 def statsParser(stringList):
@@ -74,3 +76,40 @@ def statsParser(stringList):
 		except: output[pair[0]] = 0
 	return output
 
+def targetMatcher(targeter,target,cTargetString):
+	"This function returns True if the target given satisfies the conditions in cTargetString (which should be given without range requirements)"
+	candLists = cTargetString.split("||")
+	for candidate in candLists:
+		disqualified = False
+		reqList = candidate.split(",")
+		for req in reqList:
+			disqualified = not targetReqParser(targeter,target,req)
+		if not disqualified: return True
+	return False
+
+def targetReqParser(targeter,target,req):
+	"This parses a single requirement for targetMatcher to see if it is satisfied by card."
+	notFlag = False
+	tagPos = 0
+	tag = req[0]
+	if tag == "!":
+		notFlag = True
+		tag = req[1]
+		tagPos = 1
+	value = req[tagPos+1:]
+	satisfies = False
+	#Checks for each type of tag
+	if tag == "t": satisfies = (value in getAllTraits(target))
+	elif tag == "T": satisfies = (value == target.Type)
+	elif tag == "S": satisfies = (value in target.Subtype) #In the future, will need to make a getAllSubtypes function to handle effects that can change subtypes, such as zombie tokens.
+	elif tag == "s": satisfies = (value in target.School)
+	elif tag == "_": satisfies = False #For now. Will change later.
+	elif tag == "^": satisfies = ((value == "Friendly") == (target.controller == targeter.controller)) #A temporary placeholder until we get alignment working.
+	if notFlag: satisfies = not satisfies
+	return satisfies
+
+
+def getAllTraits(card):
+	return card.Traits.split(",")
+	#	In the future, this function will calculate every single trait of the card (even those not listed in its xml, 
+	#	much like computeTraits does now. For now, I will leave it as this placeholder.

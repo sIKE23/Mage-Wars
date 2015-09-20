@@ -69,6 +69,7 @@
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!tFlying,TCreature||!tFlying,TConjuration" />
 			<property name="Target" value="Non-Flying Creature or Conjuration" />
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
@@ -86,6 +87,7 @@
 			<property name="Cost" value="13" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature+War" />
 			<property name="Level" value="2+1" />
@@ -101,6 +103,7 @@
 			<property name="Cost" value="12" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
@@ -115,6 +118,7 @@
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
@@ -130,6 +134,7 @@
 			<property name="Cost" value="16" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature+Air" />
 			<property name="Level" value="3+1" />
@@ -145,6 +150,7 @@
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
@@ -160,6 +166,7 @@
 			<property name="Cost" value="15" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
@@ -175,6 +182,7 @@
 			<property name="Cost" value="12" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
@@ -190,6 +198,7 @@
 			<property name="Cost" value="17" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
@@ -205,6 +214,7 @@
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="2+1" />
@@ -222,6 +232,7 @@
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
@@ -237,6 +248,7 @@
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
@@ -254,6 +266,7 @@
 			<property name="Cost" value="8" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone Border" />
 			<property name="Target" value="Zone Border" />
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
@@ -272,6 +285,7 @@
 			<property name="Cost" value="2+4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy+War" />
 			<property name="Level" value="1+1" />
@@ -287,6 +301,7 @@
 			<property name="Cost" value="2+3" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
@@ -302,6 +317,7 @@
 			<property name="Cost" value="2+X" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
@@ -317,6 +333,7 @@
 			<property name="Cost" value="2+3" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
@@ -332,6 +349,7 @@
 			<property name="Cost" value="2+5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="War+Earth" />
 			<property name="Level" value="1+1" />
@@ -349,6 +367,7 @@
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
@@ -364,6 +383,7 @@
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
@@ -379,6 +399,7 @@
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
@@ -394,6 +415,7 @@
 			<property name="Cost" value="11" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
@@ -409,6 +431,7 @@
 			<property name="Cost" value="9" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
@@ -424,6 +447,7 @@
 			<property name="Cost" value="6" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy+Nature" />
 			<property name="Level" value="1+1" />
@@ -441,6 +465,7 @@
 			<property name="Cost" value="14" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Arena" />
 			<property name="Target" value="Arena" />
 			<property name="School" value="War" />
 			<property name="Level" value="4" />
@@ -456,6 +481,7 @@
 			<property name="Cost" value="16" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))tLiving,TCreature" />
 			<property name="Target" value="Living Creature" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
