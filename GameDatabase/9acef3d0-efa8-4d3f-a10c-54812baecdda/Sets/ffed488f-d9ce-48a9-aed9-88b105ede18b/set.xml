@@ -3,8 +3,8 @@
 	name="Forged in Fire"  
 	id="ffed488f-d9ce-48a9-aed9-88b105ede18b" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
-	gameVersion="1.4.2.1" 
-	version="1.12.0.0">
+	gameVersion="2.0.0.0" 
+	version="2.0.0.0">
 	<markers>
 		<marker id="ae179c85-11ce-4be7-b9c9-352139d0c8f2" name="Rune of Fortification" />
 		<marker id="b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" name="Rune of Power" />
@@ -189,7 +189,7 @@
 
 
 		<card id="a81df3d7-fcb9-4afb-8da8-6e24db0f064e" name="Wall of Earth" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Earth" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Earth" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />

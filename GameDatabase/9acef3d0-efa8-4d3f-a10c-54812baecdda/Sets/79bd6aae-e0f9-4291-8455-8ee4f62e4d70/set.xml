@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
-	name="Promo"
+	name="Promo&apos;s"
 	id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	gameVersion="1.4.2.1"
-	version="1.12.0.0">
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Nickname" value="Hurl Meteorite" />
@@ -677,7 +677,7 @@
 
 
 		<card id="98a8cc53-14dc-4b9b-84ba-80575758ba0b" name="Wall of Force" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Force" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Force" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="5" />
@@ -694,7 +694,7 @@
 			<property name="CardID" value="MWPROMO24" />
 		</card>
 		<card id="2309d5a7-b49a-42ce-baa1-ca86a86c25dd" name="Wall of Poison Gas" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Poison Gas" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Poison Gas" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Cloud, Poison" />
 			<property name="Cost" value="7" />

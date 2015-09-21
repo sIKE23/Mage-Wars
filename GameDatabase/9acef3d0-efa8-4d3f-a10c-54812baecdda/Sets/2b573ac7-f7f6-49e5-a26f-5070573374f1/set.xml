@@ -3,8 +3,8 @@
 	name="Forcemaster vs Warlord" 
 	id="2b573ac7-f7f6-49e5-a26f-5070573374f1" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
-	gameVersion="1.4.2.1" 
-	version="1.13.0.0">
+	gameVersion="2.0.0.0" 
+	version="0.0.0.0">
  	<markers>
  			<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />
@@ -576,7 +576,7 @@
 			<property name="CardID" value="FWJ08" />
 		</card>
 		<card id="61dd52be-2c3b-420c-937a-dd1bdf44dd80" name="Wall of Pikes" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Pikes" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Pikes" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />

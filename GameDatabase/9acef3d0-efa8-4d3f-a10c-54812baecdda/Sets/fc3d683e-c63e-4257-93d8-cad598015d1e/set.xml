@@ -3,8 +3,8 @@
 	name="Druid vs Necromancer"
 	id="fc3d683e-c63e-4257-93d8-cad598015d1e"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	gameVersion="1.4.2.1"
-	version="1.13.0.0">
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
 	<markers>
 		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
 		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
@@ -27,6 +27,7 @@
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
 				<alternate name="Druid" type="B">
+					<property name="Nickname" value="Druid" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
@@ -54,6 +55,7 @@
 			<property name="Traits" value="Poison Immunity" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
 				<alternate name="Necromancer" type="B">
+					<property name="Nickname" value="Necromancer" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
@@ -297,7 +299,7 @@
 
 
 		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall" size="Horizontal Cards">
-			<property name="Nickname" value="Bloodspine Wall" size="Horizontal Cards" />
+			<property name="Nickname" value="Bloodspine Wall" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="4" />
@@ -314,7 +316,7 @@
 			<property name="CardID" value="DNW01" />
 		</card>
 		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Bones" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Bones" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Skeleton" />
 			<property name="Cost" value="6" />
@@ -1106,10 +1108,11 @@
 
 
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">
-			<property name="Nickname" value="Vine Marker Green" />
+			<property name="Nickname" value="A Green Vine Marker" />
 			<property name="Type" value="Conjuration-Vine" />
 			<property name="Stats" value="Armor=-, Life=1" />
 				<alternate name="Vine Marker Black" type="B">
+					<property name="Nickname" value="A Black Vine Marker" />
 					<property name="Type" value="Conjuration-Vine" />
 					<property name="Stats" value="Armor=-, Life=1" />
 				</alternate>
