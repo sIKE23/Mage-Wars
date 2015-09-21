@@ -3,8 +3,8 @@
 	name="Core"
 	id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	gameVersion="1.4.2.1"
-	version="1.13.5.0">
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -70,6 +70,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Quick Summoning: Once per round, the Beastmaster may summon a Level 1 Animal creature as a quick spell. &#xD;&#xA;PET: When a friendly non-Legendary animal creature comes into play, you may make it your Pet. Pay mana equal to the creatures Level +1, then place the Pet maker on it. Pet gains Melee +1, Armor +1, and Life +3. Whenever Pet is in the same zone as his Beastmaster, it gains an additional Melee +1. If Pet is destroyed, you may assign the marker again in the same manner when a new animal is summoned. &#xD;&#xA;Beastmaster has the Melee +1 trait." />
 			<property name="Traits" value="Melee +1" />
 	  			<alternate name="Beastmaster" type="B">
+	  				<property name="Nickname" value="Beastmaster" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />	
 	  				<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
@@ -93,6 +94,7 @@
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
 				<alternate name="Beastmaster (Apprentice)" type="B">
+					<property name="Nickname" value="Beastmaster (Apprentice)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
@@ -119,6 +121,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal costs." />
 				<alternate name="Priestess" type="B">
+					<property name="Nickname" value="Priestess" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
@@ -140,6 +143,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 				<alternate name="Priestess (Apprentice)" type="B">
+					<property name="Nickname" value="Priestess (Apprentice)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
@@ -166,6 +170,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
 			<property name="Traits" value="Melee +1" />
 				<alternate name="Warlock" type="B">
+					<property name="Nickname" value="Warlock" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
@@ -189,6 +194,7 @@
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
 				<alternate name="Warlock (Apprentice)" type="B">
+					<property name="Nickname" value="Warlock (Apprentice)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
@@ -215,6 +221,7 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				<alternate name="Wizard(Air)" type="B">
+					<property name="Nickname" value="Wizard (Air)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -236,7 +243,8 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				<alternate name="Wizard(Earth)" type="B">
-					<property name="Type" value="Creature" />
+					<property name="Nickname" value="Wizard (Earth)" />
+					property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 					<property name="Level" value="6" />
@@ -257,6 +265,7 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				<alternate name="Wizard(Fire)" type="B">
+					<property name="Nickname" value="Wizard (Fire)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -278,6 +287,7 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				<alternate name="Wizard(Water)" type="B">
+					<property name="Nickname" value="Wizard (Water)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -299,6 +309,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 				<alternate name="Wizard (Apprentice)" type="B">
+					<property name="Nickname" value="Wizard (Apprentice)" />
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
@@ -923,7 +934,7 @@
 
 
 		<card id="ca4dc7c2-6172-46fe-9a2d-a22a66214615" name="Fog Bank" size="Horizontal Cards">
-			<property name="Nickname" value="Fog Bank" size="Horizontal Cards" />
+			<property name="Nickname" value="Fog Bank" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Cloud" />
 			<property name="Cost" value="4" />
@@ -940,7 +951,7 @@
 			<property name="CardID" value="MW1W01" />
 		</card>
 		<card id="b318bb77-75c5-4e7a-9347-dbdcbde55f33" name="Wall of Stone" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Stone" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Stone" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="7" />
@@ -957,7 +968,7 @@
 			<property name="CardID" value="MW1W02" />
 		</card>
 		<card id="4223e20b-75b1-4f21-938e-a4a8acf06195" name="Wall of Fire" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Fire" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Fire" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="7" />
@@ -974,7 +985,7 @@
 			<property name="CardID" value="MW1W03" />
 		</card>
 		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Thorns" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Thorns" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Plant" />
 			<property name="Cost" value="5" />
@@ -3306,47 +3317,58 @@
 
 
 		<card id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Die Roll Area" size="Dice Roll Area">
-			<property name="Nickname" value="Die Roll Area" size="Dice Roll Area" />
+			<property name="Nickname" value="Die Roll Area" />
  			<property name="Type" value="DiceRoll" />
 		</card>
 		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Upkeep Phase" size="PhaseMarkers">
-			<property name="Nickname" value="Upkeep Phase" size="PhaseMarkers" />
+			<property name="Nickname" value="Upkeep Phase" />
 			<property name="Type" value="Phase" />
 				<alternate name="Planning Phase" type="Planning">
+					<property name="Nickname" value="Planning Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Deployment Phase" type="Deploy">
+					<property name="Nickname" value="Deployment Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="First Quickcast Phase" type="Quick">
+					<property name="Nickname" value="First Quickcast Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Action Phases" type="Actions">
+					<property name="Nickname" value="Action Phases" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Final Quickcast Phase" type="Quick2">
+					<property name="Nickname" value="Final Quickcast Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
 		</card>
 		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="Player Token Default" size="InitativeMarkers">
-			<property name="Nickname" value="Player Token Default" size="InitativeMarkers" />
+			<property name="Nickname" value="Player Token Default" />
 			<property name="Type" value="Phase" />
 				<alternate name="Player Token Red" type="1">
+					<property name="Nickname" value="Player Token Red" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Player Token Blue" type="2">
+					<property name="Nickname" value="Player Token Blue" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Player Token Green" type="3">
+					<property name="Nickname" value="Player Token Green" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Player Token Yellow" type="4">
+					<property name="Nickname" value="Player TokenYellow " />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Player Token Purple" type="5">
+					<property name="Nickname" value="Player Token Purple" />
 					<property name="Type" value="Phase" />
 				</alternate>
 				<alternate name="Player Token Grey" type="6">
+					<property name="Nickname" value="Player Token Grey" />
 					<property name="Type" value="Phase" />
 				</alternate>
 		</card>
@@ -3354,6 +3376,7 @@
 			<property name="Nickname" value="Alt Zone Intersection" />
 			<property name="Type" value="Internal" />
 				<alternate name="Alt Zone Compass" type="B">
+					<property name="Nickname" value="Alt Zone Compass" 
 					<property name="Type" value="Internal" />
 				</alternate>
 		</card>

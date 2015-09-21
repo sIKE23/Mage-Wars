@@ -3,8 +3,8 @@
 	name="Mage Wars Battlegrounds: Domination" 
 	id="8c377c82-86af-45ca-ac7c-75230b803532" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
-	gameVersion="1.4.2.1" 
-	version="1.13.0.0">
+	gameVersion="2.0.0.0" 
+	version="2.0.0.0">
 	<markers>
 		<marker id="3c74d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />		
 		<marker id="c56839d2-46f4-49a8-85e4-3838e7f09cc2" name="Control Marker Red" />
@@ -208,7 +208,7 @@
 
 
 		<card id="82ce9e6d-a218-488a-843c-46b85f3f393d" name="Wall of Force" size="Horizontal Cards">
-			<property name="Nickname" value="Wall of Force" size="Horizontal Cards" />
+			<property name="Nickname" value="Wall of Force" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="6" />
@@ -485,6 +485,7 @@
 			<property name="Nickname" value="V&apos;Tar Orb Off" />
 			<property name="Type" value="Conjuration" />
 				<alternate name="V&apos;Tar Orb On" type="B">
+					<property name="Nickname" value="V&apos;Tar Orb On" />
 					<property name="Type" value="Conjuration"/>
 				</alternate>
 		</card>	
