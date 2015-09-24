@@ -640,8 +640,7 @@
 			<property name="CardID" value="MWPROMO8" />
 		</card>
 		<card id="b0a9a73a-4de7-4e14-b922-f859d66bbe96"  name="Hidden Tunnels" >
-			<property name="Nickname" value="Hidden Tunnels" >
-" />
+			<property name="Nickname" value="Hidden Tunnels" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Tunnel" />
 			<property name="Cost" value="8" />
@@ -1204,7 +1203,7 @@
 			<property name="Stats" value="Location=Shield, Defense=8+ 1x No Ranged" />
 			<property name="AttackBar" value="Shield Bash:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence.&#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence.&#xD;&#xA;[Armor +1] [Defense=8+ 1x No Ranged]" />
 			<property name="CardID" value="MWPROMO26" />
 		</card>
 		<card id="eecd62c9-300c-4a7c-bef3-a57555b89bdc" name="Staff of Storms">

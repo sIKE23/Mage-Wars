@@ -257,12 +257,12 @@
 		</group>
 	</player>
 	<deck>
-		<section name="Mage" group="Hand" />
-		<section name="Attack" group="Hand" />
-		<section name="Conjuration" group="Hand" />
-		<section name="Creature" group="Hand" />
-		<section name="Enchantment" group="Hand" />
-		<section name="Equipment" group="Hand" />
-		<section name="Incantation" group="Hand" />
+		<section name="Mage" group="Spellbook" />
+		<section name="Attack" group="Spellbook" />
+		<section name="Conjuration" group="Spellbook" />
+		<section name="Creature" group="Spellbook" />
+		<section name="Enchantment" group="Spellbook" />
+		<section name="Equipment" group="Spellbook" />
+		<section name="Incantation" group="Spellbook" />
 	</deck>
 </game>

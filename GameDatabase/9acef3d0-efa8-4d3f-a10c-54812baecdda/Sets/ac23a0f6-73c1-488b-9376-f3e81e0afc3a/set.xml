@@ -8,6 +8,7 @@
 	<markers>
 		<marker id="ede2252f-b47f-4ea2-a448-08fd3b22d506" name="Stagger" />
 	</markers>
+	<cards>
 		<card id="4ecfffeb-67bb-44a0-bd8b-683d8153f651"  name="Arcane Missiles" >
 			<property name="Nickname" value="Arcane Missiles" />
 			<property name="Type" value="Attack" />
@@ -970,4 +971,3 @@
 		</card>
 	</cards>
 </set>
-

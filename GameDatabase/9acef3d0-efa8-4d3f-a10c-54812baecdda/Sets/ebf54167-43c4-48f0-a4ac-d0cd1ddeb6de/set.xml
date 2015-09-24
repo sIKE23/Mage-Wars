@@ -244,7 +244,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				<alternate name="Wizard(Earth)" type="B">
 					<property name="Nickname" value="Wizard (Earth)" />
-					property name="Type" value="Creature" />
+					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
 					<property name="Level" value="6" />
@@ -1752,7 +1752,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="This creature gains a Defense.&#xD;&#xA;[Defense 7+ 1x]" />
+			<property name="Text" value="This creature gains a Defense.&#xD;&#xA;[Defense=7+ 1x]" />
 			<property name="CardID" value="MW1E07" />
 		</card>
 		<card id="46b36e31-5dec-4a37-a39c-c2a5b6e0caee" name="Death Link">
@@ -1922,7 +1922,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze.&#xD;&#xA;[Defense 8+ 1x No Melee]" />
+			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze.&#xD;&#xA;[Defense=8+ 1x No Melee]" />
 			<property name="CardID" value="MW1E17" />
 		</card>
 		<card id="77b5e9a1-9824-40a5-95e9-2f669a01a5c8" name="Force Sword">
@@ -1939,7 +1939,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze. &#xD;&#xA;[Defense 8+ 1x No Ranged]" />
+			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze. &#xD;&#xA;[Defense=8+ 1x No Ranged]" />
 			<property name="CardID" value="MW1E18" />
 		</card>
 		<card id="660cd33f-8812-48bb-a513-2ada886a0320" name="Ghoul Rot">
@@ -2371,7 +2371,7 @@
 			<property name="Stats" value="Location=Gloves" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defense.&#xD;&#xA;[Defense 7+ 1x No Ranged]" />
+			<property name="Text" value="Mage gains a Defense.&#xD;&#xA;[Defense=7+ 1x No Ranged]" />
 			<property name="CardID" value="MW1Q04" />
 		</card>
 		<card id="fc42efdc-0a85-4a45-a273-f5e403f1489c" name="Demonhide Armor">
@@ -3376,7 +3376,7 @@
 			<property name="Nickname" value="Alt Zone Intersection" />
 			<property name="Type" value="Internal" />
 				<alternate name="Alt Zone Compass" type="B">
-					<property name="Nickname" value="Alt Zone Compass" 
+					<property name="Nickname" value="Alt Zone Compass" />
 					<property name="Type" value="Internal" />
 				</alternate>
 		</card>
