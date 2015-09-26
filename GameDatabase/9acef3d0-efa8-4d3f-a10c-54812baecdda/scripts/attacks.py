@@ -622,7 +622,9 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
 		if not dTraitDict.get("Incapacitated"):
 				for s in statList:
 						if 'Defense' in s:
+								notify("Test: 5 s {}".format(s))
 								dCandidate = defenseParser(defender._id,s)
+								notify("Test: 6 dCandidater {}".format(dCandidate))
 								#Probably should actually separate so we first find the defenses, and iterate through them separately, but this will do for now.
 								if dCandidate.get('Uses',0)=='inf' or timesHasUsedDefense(defender,dCandidate) < dCandidate.get('Uses',0):
 										defenseList.append(dCandidate) #DO NOT modify the defense yet. We want to the history to see the original defense, not the modified one.
@@ -658,9 +660,15 @@ def computeDefense(aTraitDict,attack,dTraitDict,defense):
 
 def defenseQuery(aTraitDict,attack,dTraitDict):
 		"""Returns the defense if the attack was evaded and false if it was not"""
+		notify("Test: 1")
 		defender = Card(dTraitDict.get('OwnerID'))
+		notify("Test: 2 defender {}".format(defender))
 		atkTraits = attack.get('Traits',{})
+		notify("Test: 3a atkTraits {}".format(atkTraits))
+		notify("Test: 3b attack {}".format(attack))		
+		notify("Test: 3c dTraitDict {}".format(dTraitDict))
 		defenseList = getDefenseList(aTraitDict,attack,dTraitDict)
+		notify("Test: 4 defenseList {}".format(defenseList))
 		if atkTraits.get('Unavoidable') or not defenseList: return False
 		modDefenseList = [computeDefense(aTraitDict,attack,dTraitDict,d) for d in defenseList]
 		queryList = ['{}\nSuccess Rate {}% | Uses Remaining: {}'.format(Card(d.get('Source')).name.center(68,' '),
@@ -1315,12 +1323,15 @@ def computeTraits(card):
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
 						if cSubtype == 'Mage':
-								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
-										rawText = c.text.split('\r\n[')
-										traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
-										extend(traitsGranted)
-										#Runesmithing
-										if c.markers[RuneofFortification] and 'Armor +' in ', '.join(rawText): append('Armor +1')
+								notify("Test 23a: card.name {}".format(card.name))
+								for card in table:
+									notify("card.name{}".format(card.name))
+									if card.type == 'Equipment' and card.controller == me and not card.markers[Disable]:
+											rawText = card.text.split('\r\n[')
+											traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
+											extend(traitsGranted)
+											#Runesmithing
+											if c.markers[RuneofFortification] and 'Armor +' in ', '.join(rawText): append('Armor +1')
 								if cName in ['Mana Crystal','Mana Flower']: append('Channeling +1')
 								if cName == 'Animal Kinship':
 										canine = reptile = bear = ape = cat = False
