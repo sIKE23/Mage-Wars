@@ -251,7 +251,7 @@ def resolveUpkeep():
 			else:
 				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Down {} from Harshforge Monolith's effect?".format(card.Name)
 			if distance < 2:
-				processUpKeep(monolithUpKeepCost, card.Name, HarshforgeMonolith, notifystr)
+				processUpKeep(monolithUpKeepCost, card, HarshforgeMonolith, notifystr)
 				if ManaPrismInPlay == 1:
 					addToken(ManaPrism, Mana)
 		# Process Upkeep for Mordok's Obelisk's
