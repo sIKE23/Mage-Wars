@@ -399,8 +399,8 @@
 			<property name="Text" value="Magma Golem is immune to flame damage. When activated place a Burn condition on Magma Golem. Damage from Magma Golem&apos;s Burn conditions is instead dealt as direct flame damage to all other creatures in this zone. X = the number of Burn conditions on Magma Golem." />
 			<property name="CardID" value="MWPROMO83" />
 		</card>
-		<card id="e4eb8e8f-449c-4bd1-9da4-86832be1dde3" name="Mending Angel">
-			<property name="Nickname" value="Mending Angel" />
+		<card id="e4eb8e8f-449c-4bd1-9da4-86832be1dde3" name="Messenger of Bim-Shalla">
+			<property name="Nickname" value="Messenger of Bin-Shalla" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Angel, Cleric" />
 			<property name="Cost" value="9" />
@@ -410,11 +410,11 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Holy"  />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Armor=0, Life=9" />
-			<property name="AttackBar" value="Staff:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="AttackBar" value="Radiant Touch:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="Aegis 1, Flying" />
-			<property name="Text" value="When Mending Angel is summoned, if you pay 4 mana, then heal a friendly living creature within 1 zone the amount rolled on 4 attack dice." />
-			<property name="CardID" value="MWPROMO84" />
+			<property name="Text" value="When Messenger of Bin-Shalla is Summoned, heal a friendly living creature within 1 zone the amount rolled on 4 attack dice." />
+			<property name="CardID" value="MWPROMO75" />
 		</card>
 		<card id="4c2baceb-b4bb-4118-869b-b9f3e6dc000d" name="Mountain Ram">
 			<property name="Nickname" value="Mountain Ram" />
