@@ -3323,39 +3323,39 @@
 		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Ready Stage" size="PhaseMarkers">
 			<property name="Nickname" value="Ready Stage" />
 			<property name="Type" value="Phase" />
-				<alternate name="Initative Phase" type="0">
+				<alternate name="Initative" type="1">
 					<property name="Nickname" value="Initative Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="Reset Phase" type="1">
+				<alternate name="Reset" type="2">
 					<property name="Nickname" value="Reset Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="Channeling Phase" type="2">
+				<alternate name="Channeling" type="3">
 					<property name="Nickname" value="Channeling Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="Upkeep Phase" type="3">
+				<alternate name="Upkeep" type="4">
 					<property name="Nickname" value="Upkeep Phase" />
 					<property name="Type" value="Phase" /> 
 				</alternate>
-				<alternate name="Planning Phase" type="4">
+				<alternate name="Planning" type="5">
 					<property name="Nickname" value="Planning Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="Deployment Phase" type="5">
+				<alternate name="Deployment" type="6">
 					<property name="Nickname" value="Deployment Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="First Quickcast Phase" type="6">
+				<alternate name="First Quickcast" type="7">
 					<property name="Nickname" value="First Quickcast Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="Creature Action Phases" type="7">
+				<alternate name="Creature Actions" type="8">
 					<property name="Nickname" value="Creature Action Phases" />
 					<property name="Type" value="Phase" />
 				</alternate>
-				<alternate name="Final Quickcast Phase" type="8">
+				<alternate name="Final Quickcast" type="9">
 					<property name="Nickname" value="Final Quickcast Phase" />
 					<property name="Type" value="Phase" />
 				</alternate>

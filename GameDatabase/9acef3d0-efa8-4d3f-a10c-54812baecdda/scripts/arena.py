@@ -1,5 +1,5 @@
 
-def nextPhaseArena():
+def nextPhaseArena2():
 	mute()
 	global roundTimes
 	global gameTurn
@@ -54,6 +54,7 @@ def nextPhaseArena():
 
 			#resolve other automated items
 			for p in players:
+				remoteCall(p, "playerStats",[])
 				remoteCall(p, "resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [p])

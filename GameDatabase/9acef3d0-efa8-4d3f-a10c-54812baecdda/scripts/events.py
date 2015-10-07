@@ -142,6 +142,7 @@ def choosePlayerColor():
 				break
 			else:	#someone else took our choice
 				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
+		notify("{} chooses {}!".format(me.name,playerColorDict[choice]["PlayerColor"]))
 
 def finishSetup(): #Waits until all players have chosen a color, then finishes the setup process.
 	mute()
@@ -192,13 +193,14 @@ def setUpDiceAndPhaseCards(): #some of this is for arena only, I think....
 	if tableSetup == "False" and gameHost == me: #me.name == gameHost.name:
 		RDA = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #Roll Dice Area
 		RDA.anchor = (True)
-		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
-		init.anchor = (True)
-		init.alternate = myColor
-		currentPhase = "Planning"
-		phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-		phase.alternate = "Planning" #skips upkeep for first turn
-		phase.anchor = (True)
+		initativeCard = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #Initiative Marker
+		initativeCard.anchor = (True)
+		initativeCard.alternate = myColor
+		setGlobalVariable("InitativeCard",str(initativeCard._id))
+		phaseCard = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase Marker/Next Phase Button
+		phaseCard.anchor = (True)
+		phaseCard.alternate = "5" #Game starts at the Planning Phase
+		setGlobalVariable("PhaseCard",str(phaseCard._id))
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)
@@ -308,7 +310,7 @@ def moveRDA(card):
 			x = columnX - zoneS
 			y = mapY + mapHeight + 10
 
-	elif cardType=='Phase' and 'Phase' in card.name:
+	elif cardType=='Phase' and 'Phase' in card.nickname:
 		if rdaChoice == "Side":
 			x = mapX - cardW - 10
 			y = rowY - zoneS + 10
@@ -510,31 +512,34 @@ def checkMageDeath(args):
 	#reportGame('MageDeath')
 
 def reportDeath(deadmage):
-	setGlobalVariable("GameIsOver", True)
+	setGlobalVariable("GameIsOver", "True")
 	setGlobalVariable("GameEndTime", str(time.ctime()))
 	whisper("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), ['OK'], ['#de2827'])
+	endingStats()
 	if choice == 0 or 1:
 		return
 
 def reportVTarWin(winningmage,score):
-	setGlobalVariable("GameIsOver", True)
+	setGlobalVariable("GameIsOver", "True")
 	setGlobalVariable("GameEndTime", str(time.ctime()))
 	whisper("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), ['OK'], ['#de2827'])
+	endingStats()
 	if choice == 0 or 1:
 		return
 
 def concede(group=table, x = 0, y = 0):
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
-		setGlobalVariable("GameIsOver", True)
+		setGlobalVariable("GameIsOver", "True")
 		setGlobalVariable("GameEndTime", str(time.time()))
 		for c in table:
 			if c.Subtype == "Mage" and c.controller == me:
 				c.orientation = 1
 		# reportGame('Conceded')
 		notify("{} has conceded the game".format(me))
+		endingStats()
 	else:
 		notify("{} was about to concede the game, but thought better of it...".format(me))
 
@@ -546,3 +551,9 @@ def onCardDoubleClicked(args):
 
 	if args.card.type =="Phase":
 		nextPhase(table)
+
+def playerStats():
+	mute()
+	if getGlobalVariable("GameIsOver") == "True":
+		notify("Player Stats at the end of the Match")
+	notify("\nAt the Start of Round #{}, {}'s Mage has the following stats: Channeling: {}, Mana Pool {}, Life {}, and Damage {}.".format(getGlobalVariable("RoundNumber"),me.name,me.channeling,me.mana,me.life,me.damage))

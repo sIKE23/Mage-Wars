@@ -419,15 +419,6 @@ def getNextPlayerNum():
 		nextPlayer = 1
 	return nextPlayer
 
-def changeIniColor(card):
-	mute()
-	myColor = me.getGlobalVariable("MyColor")
-	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
-	if mwPlayerDict[me._id]["PlayerNum"] == int(getGlobalVariable("PlayerWithIni")):
-		card.alternate = myColor
-	else:
-		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
-
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
 		mute()
 		mapDict = eval(getGlobalVariable('Map'))
@@ -522,11 +513,6 @@ def documentationReminder():
 # Table group actions
 #---------------------------------------------------------------------------
 
-def remoteHighlight(card, color):
-	card.highlight = color
-
-def remoteSwitchPhase(card, phase, phrase):
-	card.alternate = phase
 
 def remoteDeleteCard(c):
 	c.delete()

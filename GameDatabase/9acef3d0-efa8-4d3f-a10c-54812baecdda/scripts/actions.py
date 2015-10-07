@@ -433,7 +433,7 @@ def flipcard(card,x = 0,y = 0):
 		debug(nextPlayer)
 		setGlobalVariable("PlayerWithIni",str(nextPlayer))
 		for p in players:
-			remoteCall(p,"changeIniColor",[card])
+			remoteCall(p,"changeIniMarker",[])
 
 	# do not place markers/tokens on table objects like Initative,Phase,and Vine Markers
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return

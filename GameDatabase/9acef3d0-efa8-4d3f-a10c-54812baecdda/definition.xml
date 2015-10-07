@@ -27,6 +27,7 @@
 		<script src="scripts/events.py" />
 		<script src="scripts/main.py" />
 		<script src="scripts/textfunctions.py" />
+		<script src="scripts/newPhase.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoaded" action="onTableLoaded" />
@@ -79,9 +80,12 @@
 		<globalvariable name="turnEventList" value=""/>
 		<globalvariable name="Map" value=""/>
 		<globalvariable name="RoundNumber" value=""/>
+		<globalvariable name="RoundTimes" value="[]"/>
 		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
 		<globalvariable name="TimerIsRunning" value="False"/>
 		<globalvariable name="Goal" value=""/>
+		<globalvariable name="PhaseCard" value=""/>
+		<globalvariable name="CurrentPhase" value="5"/>
 	</globalvariables>
 	<card back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
