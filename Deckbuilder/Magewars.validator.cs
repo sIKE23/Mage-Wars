@@ -1,4 +1,4 @@
-﻿//Version: 1.12.0.0
+﻿//Version: 2.0.0.0
 
 namespace Octgn.MageWarsValidator
 {
@@ -31,7 +31,7 @@ namespace Octgn.MageWarsValidator
         public static bool deckValidated = false;
         public static int bookPoints = 0;
         public static int totalCards = 0;
-        public static int validatedDeckHash = 0;
+perl        public static int validatedDeckHash = 0;
 
         public IEnumerable<IPluginMenuItem> MenuItems
         {
@@ -113,12 +113,12 @@ namespace Octgn.MageWarsValidator
             var curDeck = con.GetLoadedDeck();
             MageWarsValidator.deckValidated = false;
 
-            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
+            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars Spellbook loaded?
             {
                 var secArray = curDeck.Sections.ToArray();
                 int cardcount = 0;
                 int spellbook = 0;
-                string magename = "none in deck";
+                string magename = "none in spellbook";
                 int spellpoints = 0;
                 string reporttxt = "";
                 bool Talos = false;
@@ -241,9 +241,9 @@ namespace Octgn.MageWarsValidator
                                 }
                                 else if (school.Contains("/")) //add just the cheapest of these
                                 {
-                                    if (magename == "none in deck") //no mage found yet
+                                    if (magename == "none in spellbook") //no mage found yet
                                     {
-                                        System.Windows.MessageBox.Show("Warning - No mage card has been found yet. This may lead to inaccurate calculations. Ensure that the first card in the deck is a mage");
+                                        System.Windows.MessageBox.Show("Warning - Your Mage Card has not been found. This may lead to inaccurate calculations. Ensure that the first card in the Spellbook is the Mage Card.");
                                     }
                                     var lev = Splitme(level, "/")[0]; //just take the first value as each is the same
                                     var mincost = 3;
@@ -377,7 +377,7 @@ namespace Octgn.MageWarsValidator
 
                                     if (!legal)
                                     {
-                                        System.Windows.MessageBox.Show("Validation FAILED: The card " + card.Name + " is not legal in a " + magename + " deck.");
+                                        System.Windows.MessageBox.Show("Validation FAILED: The card " + card.Name + " is not legal in a " + magename + " Spellbook.");
                                         return;
                                     }
                                 }
@@ -404,7 +404,7 @@ namespace Octgn.MageWarsValidator
                                 (l >= 2 && card.Quantity > 4))
                             {
                                 // too many
-                                System.Windows.MessageBox.Show("Validation FAILED: There are too many copies of " + card.Name + " in the deck.");
+                                System.Windows.MessageBox.Show("Validation FAILED: There are too many copies of " + card.Name + " in the Spellbook.");
                                 return;
                             }
 
@@ -424,7 +424,7 @@ namespace Octgn.MageWarsValidator
                 reporttmp += reporttxt;
                 //System.Windows.MessageBox.Show(reporttmp);
                 Clipboard.SetText(reporttmp);
-                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook, magename, spellpoints));
+                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the Spellbook using '{1}' as the mage. {2} spellpoints are allowed.\npPellbook has been copied to the clipboard.", spellbook, magename, spellpoints));
                 if (spellbook <= spellpoints)
                 {
                     MageWarsValidator.deckValidated = true;
@@ -493,21 +493,21 @@ namespace Octgn.MageWarsValidator
                     hashtotal += card.GetHashCode() + card.Quantity;
             if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != hashtotal)
             {
-                System.Windows.MessageBox.Show("You must successfully validate the current deck before exporting it to a forum post.");
+                System.Windows.MessageBox.Show("You must successfully validate the current spellbook before exporting it to a BBFormated Mage Wars Forum post.");
                 return;
             }
 
-            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
+            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars Spellbook loaded?
             {
                 //setup some stuff
                 var secArray = curDeck.Sections.ToArray();
                 StringBuilder text = new StringBuilder();
 
-                //ask for the deck name
-                string deckName = Prompt.ShowDialog("What is the name of this deck?", "Deck Name");
+                //ask for the Spellbook's name
+                string deckName = Prompt.ShowDialog("What is the name of this Spellbook?", "Spellbook Name");
                 if (string.IsNullOrEmpty(deckName))
                 {
-                    deckName = "OCTGN Deck";
+                    deckName = "OCTGN Spellbook";
                 }
 
                 //start the writing
@@ -555,8 +555,8 @@ namespace Octgn.MageWarsValidator
                 //copy to clipboard
                 Clipboard.SetText(text.ToString());
                 if (promoFound)
-                    System.Windows.MessageBox.Show("Promos found in deck. Be aware that promos are not supported by the forum preview system.");
-                System.Windows.MessageBox.Show("Forum post containing deck has been copied to clipboard.");
+                    System.Windows.MessageBox.Show("Promos have been included in this Spellbook. Please note that promos are not supported by the forum preview system.");
+                System.Windows.MessageBox.Show("Forum post containing the Spellbook has been copied to clipboard.");
             }
         }        
 
@@ -603,11 +603,11 @@ namespace Octgn.MageWarsValidator
                     hashtotal += card.GetHashCode() + card.Quantity;
             if (!MageWarsValidator.deckValidated || MageWarsValidator.validatedDeckHash != hashtotal)
             {
-                System.Windows.MessageBox.Show("You must successfully validate the current deck before exporting it to the AW SBB.");
+                System.Windows.MessageBox.Show("You must successfully validate the current Spellbook before exporting it to the Arcane Wonders Spellbook Builder format.");
                 return;
             }
 
-            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars deck loaded?
+            if (curDeck.GameId.Equals(Guid.Parse("9acef3d0-efa8-4d3f-a10c-54812baecdda"))) //Is a Mage Wars Spellbook loaded?
             {
                 var secArray = curDeck.Sections.ToArray();
                 StringBuilder text = new StringBuilder();
@@ -615,11 +615,11 @@ namespace Octgn.MageWarsValidator
                 //ignore spell counts
                 text.AppendLine("1");
 
-                //ask for deck name
-                string deckName = Prompt.ShowDialog("What is the name of this deck?", "Deck Name");
+                //ask for Spellbook name
+                string deckName = Prompt.ShowDialog("What is the name of this Spellbook?", "Spellbook Name");
                 if (string.IsNullOrEmpty(deckName))
                 {
-                    deckName = "OCTGN Deck";
+                    deckName = "OCTGN Spellbook";
                 }
                 text.AppendLine(deckName);
 
@@ -644,7 +644,7 @@ namespace Octgn.MageWarsValidator
                 //cost per type - does this matter?
                 text.AppendLine("120,120,120,120,120,120");
 
-                //cards in deck
+                //cards in Spellbook
                 text.AppendLine(MageWarsValidator.totalCards.ToString());
 
                 //card ID and count
@@ -670,7 +670,7 @@ namespace Octgn.MageWarsValidator
 
                 if (promoFound)
                 {
-                    System.Windows.MessageBox.Show("There are one or more promos in this spellbook. They have been omitted from the export file because the AW SBB does not currently support them.");
+                    System.Windows.MessageBox.Show("There are one or more promos included in this spellbook. They have been omitted from the export file because the AW SBB does not currently support them.");
                 }
 
                 //all done, ask for file location

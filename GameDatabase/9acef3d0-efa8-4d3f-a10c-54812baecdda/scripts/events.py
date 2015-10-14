@@ -270,8 +270,8 @@ def AskInitiative(playerID):
 		playerID = firstPlayer._id
 		notify("A decision has been reached! {} will go first.".format(firstPlayer))
 		setGlobalVariable("PlayerWithIni", str(playerID))
-		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-		init.alternate = Player(playerID).getGlobalVariable("MyColor")
+		initativeCard = Card(int(getGlobalVariable("InitativeCard")))
+		initativeCard.alternate = Player(playerID).getGlobalVariable("MyColor")
 		break
 	setGlobalVariable("GameSetup", str(0))
 	notify("Game setup is complete! Players should now load their Spellbooks.")
@@ -352,6 +352,7 @@ def mageSetup():
 	for c in me.hand:
 		if c.Subtype == "Mage":
 			stats = c.Stats.split(",")
+			#me.Mage = c.name - when #1278 happens and game Counters support strings....
 			break
 	for stat in stats:
 		debug("stat {}".format(stat))

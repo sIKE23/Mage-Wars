@@ -7,14 +7,7 @@ def resetDiscounts():
 		discountsUsed.remove(tup)
 		discountsUsed.append((tup[0],tup[1],0))
 
-def advanceTurn():
-	mute()
-	nextPlayer = getNextPlayerNum()
-	nextPlayerName = getGlobalVariable("P" + str(nextPlayer) + "Name")
-	for p in players:
-		if p.name == nextPlayerName:
-			for p2 in players:
-				remoteCall(p2, "setActiveP", [p])
+
 
 #def setActiveP(p):
 #	p.setActive()
@@ -68,7 +61,6 @@ def resetMarkers():
 						if isWithOrb:
 							c.markers[Guard] = 1
 
-	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
 def resolveBurns():
@@ -411,13 +403,7 @@ def getTextTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1].strip('[]'))
 	return (TraitCost)
 
-def getNextPlayerNum():
-	debug(getGlobalVariable("PlayerWithIni"))
-	activePlayer = int(getGlobalVariable("PlayerWithIni"))
-	nextPlayer = activePlayer + 1
-	if nextPlayer > len(getPlayers()):
-		nextPlayer = 1
-	return nextPlayer
+
 
 def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to go to the returning zone
 		mute()

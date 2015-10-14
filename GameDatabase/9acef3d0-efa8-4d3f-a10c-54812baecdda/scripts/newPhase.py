@@ -18,7 +18,7 @@ def nextPhaseArena():
 
 	if debugMode:	#
 		phaseCard.alternate = str(currentPhase)
-		notify("Phase changed to the {}".format(phaseCard.Nickname))
+		notify("\nPhase changed to the {}".format(phaseCard.Nickname))
 	else:
 
 		doneWithPhase = getGlobalVariable("DoneWithPhase") 
@@ -64,19 +64,18 @@ def nextPhaseArena():
 		roundTimes.append(rTime)
 		setGlobalVariable("RoundTimes",str(roundTimes))
 		notify("\n****** Round {} ******\nStart Time: {}\n".format(str(gameTurn),time.ctime(roundTimes[-1])))
-		notify("It is {Player Initative is being passed to} Initiative Phase\n")#need to finish this....
-
+		
+		
+		notify("{Player with Initative} has Initative this round")#need to finish this....
+		changeIniMarker() # this should change to the proper players ini marker color
+		
 		for p in players:
 			remoteCall(p, "playerStats",[])
 
-		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-		if init.controller == me:
-			flipcard(init)
-		else:
-			remoteCall(init.controller, "flipcard", [init])
+		
 
 	elif currentPhase == 2: #Reset Phase
-		notify("Reseting all Action Markers, Quickcast Markers, and Ready Markers on all players cards by flipping them to their active side.")
+		notify("\nReseting all Action Markers, Quickcast Markers, and Ready Markers on all players cards by flipping them to their active side.")
 		for p in players:
 			remoteCall(p, "resetMarkers", [])
 			remoteCall(p, "resetDiscounts",[])
