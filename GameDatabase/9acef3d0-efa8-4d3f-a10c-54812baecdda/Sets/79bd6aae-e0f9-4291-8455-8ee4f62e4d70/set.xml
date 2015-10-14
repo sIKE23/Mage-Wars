@@ -740,7 +740,7 @@
 			<property name="Cost" value="2+2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Incorporeal Creature" />
+			<property name="Target" value="Non-Mage Living Creature" />
 			<property name="School" value="Holy"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
