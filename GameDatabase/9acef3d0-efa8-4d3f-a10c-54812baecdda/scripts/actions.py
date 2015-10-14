@@ -2132,7 +2132,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				#Discounts that only apply when your mage casts the spell
 				if (mageCast and
 					((cName == "Arcane Ring" and sType != "Enchantment" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
-					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and target.type == "Creature" and sType == "Enchantment") or
+					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and target.type == ("Creature" or "Mage") and sType == "Enchantment") or
 					 (cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
 					 (cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
 					 (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
