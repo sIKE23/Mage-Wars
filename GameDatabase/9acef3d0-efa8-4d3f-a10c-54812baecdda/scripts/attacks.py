@@ -1017,7 +1017,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 						remoteCall(mage.controller, "remotePlayerHeal", [healing])
 
 		#Malakai's Fire
-		if (attacker.Name=="Priest" and attack.get("Type")=="Light" and damage and not timesHasOccured("Malakai's Fire",attacker.controller) and "Flame" not in dTraitDict.get("Immunity",[])):
+		if (attacker.Name=="Priest" and attack.get("Type")=="Light" and damage and "Conjuration" not in defender.Type and not timesHasOccured("Malakai's Fire",attacker.controller) and "Flame" not in dTraitDict.get("Immunity",[])):
 				remoteCall(attacker.controller,"malakaisFirePrompt",[defender])
 
 		#Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
