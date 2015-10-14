@@ -801,8 +801,8 @@
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Nonliving Corporeal Conjuration" />
-			<property name="School" value="Earth/War"  />
-			<property name="Level" value="1/1" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
