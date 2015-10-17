@@ -25,8 +25,8 @@ def checkDominationVictory():
 				return True
 
 def updateVtarScore():
-	if [1 for c in table if c.name=="Dampening Field" and c.isFaceUp]:
-		notify("The dampening field suppresses all V'tar generation!")
+	if [1 for c in table if c.name=="V'Tar Suppression" and c.isFaceUp]:
+		notify("V'Tar Suppression, suppresses all V'tar generation this round!")
 		return True
 	for player in players:
 		mage = [c for c in table if c.Subtype=="Mage" and c.controller == player][0]
