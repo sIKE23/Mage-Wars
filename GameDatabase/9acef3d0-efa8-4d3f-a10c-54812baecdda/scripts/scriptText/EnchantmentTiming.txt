@@ -12,6 +12,7 @@ Force Orb
 Force Sword
 Forcefield
 Fumble
+Jinx
 Mind Shield
 Reverse Attack
 #

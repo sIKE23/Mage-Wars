@@ -1237,6 +1237,7 @@ def computeTraits(card):
 								if cType == 'Enchantment':
 										if (cName == 'Fortified Position' and
 											cardType in ['Creature','Mage'] and
+											cController == controller and
 											'Corporeal' in rawTraitsList): append('Armor +2')
 										elif (cName == 'Sacred Ground' and
 											cController == controller and

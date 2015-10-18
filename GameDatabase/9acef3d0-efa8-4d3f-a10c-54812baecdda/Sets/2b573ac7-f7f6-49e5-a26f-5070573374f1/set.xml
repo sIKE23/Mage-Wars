@@ -285,7 +285,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
-			<property name="AttackBar" value="Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Triplestrike OR Zone Attack] [Unavoidable]&#xD;&#xA;Wristblade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Triplestrike ]&#xD;&#xA;Repeating Crossbow:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Zone Attack] [Unavoidable]&#xD;&#xA;Wristblade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC10" />
@@ -345,7 +345,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Defense=6+ 2x No Ranged, Armor=1, Life=13" />
-			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Flashing Blades:&#xD;&#xA;[Full] [Melee] [Dice=4] [Doublestrike OR Sweeping]" />
+			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Flashing Blades:&#xD;&#xA;[Full] [Melee] [Dice=4] [Doublestrike]&#xD;&#xA;Flashing Blades:&#xD;&#xA;[Full] [Melee] [Dice=4] [Sweeping]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWC14" />
@@ -715,7 +715,8 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Piercing +2]&#xD;&#xA;Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Sweeping OR Doublestrike]" />
+			<property name="AttackBar" value="Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Piercing +2]&#xD;&#xA;
+				Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Sweeping]&#xD;&#xA;Spinning Slash:&#xD;&#xA;[Full] [Melee] [Dice=4] [Ethereal] [Doublestrike]" />
 			<property name="Traits" value="Cantrip, Forcemaster Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="FWQ04" />
