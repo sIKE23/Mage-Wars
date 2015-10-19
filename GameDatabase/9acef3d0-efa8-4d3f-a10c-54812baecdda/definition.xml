@@ -235,7 +235,7 @@
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
-			<cardaction menu="Use Untargeted Ability" shortcut="TAB" execute="useUntargetedAbility" />
+			<cardaction menu="Card Action Menu" shortcut="TAB" execute="actionMenu" />
 			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
