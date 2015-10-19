@@ -31,7 +31,7 @@ namespace Octgn.MageWarsValidator
         public static bool deckValidated = false;
         public static int bookPoints = 0;
         public static int totalCards = 0;
-perl        public static int validatedDeckHash = 0;
+        public static int validatedDeckHash = 0;
 
         public IEnumerable<IPluginMenuItem> MenuItems
         {
