@@ -118,14 +118,14 @@ def CX_reconstruct(card,amount):
 
 spellDictionary = {}
 
-#####
-# A #
-#####
+#############################################################################
+# ----------------------------------- A ----------------------------------- #
+#############################################################################
 
 
-################################
-###  Acolyte of the Bog Queen ##
-################################
+##############################
+## Acolyte of the Bog Queen ##
+##############################
 
 def acolyteOfTheBogQueen_f1(arg):
 	def clickFunction(arg2):
@@ -145,6 +145,7 @@ def acolyteOfTheBogQueen_f2(arg):
 		if arg2.get("target") and arg2.get("actor"):
 			target = arg2["target"]
 			actor = arg2["actor"]
+			#TODO: Find out if target is a zombie here, don't rely on subtype.
 			if "Zombie" in target.subtype and (target.type == "Creature") and cardGetDistance(actor,target) <= 1: 
 				buff(target,["Melee +1"],"round")
 				notify("Acolyte of the Bog Queen casts Vigor of the Grave!")

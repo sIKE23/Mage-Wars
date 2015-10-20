@@ -52,10 +52,10 @@ Can specify facedown via "_Facedown" or any facing via "_Anyfacing"
 
 For simple buffs:
 
-<property name="cBuffs" value="#X,@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1" />
+<property name="cBuffs" value="m0,M1))@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1" />
 
 prefixes:
-	@ - self, other, or all. Assumes other if not specified
+	@ - self, other, target, or all. Assumes all if not specified.
 	[ - the type of buff granted to objects that qualify
 	t - trait possessed
 	! - NOT operator
@@ -65,6 +65,8 @@ prefixes:
 	l - min level (can also use for minor flag)
 	L - max level
 	s - school possessed
+
+For infinite range buffs, use inf))
 
 
 """
@@ -78,18 +80,47 @@ def statsParser(stringList):
 		except: output[pair[0]] = 0
 	return output
 
-def targetMatcher(targeter,target,cTargetString):
+def rangeMatcher(source,target,cRangeString):
+	"Returns true if source and target are within range."
+	distance = cardGetDistance(source,target)
+	rangeSet = cRangeString.split(",")
+	minimum = int(rangeSet[0][1:])
+	maximum = int(rangeSet[1][1:])
+	return (minimum <= distance <= maximum)
+
+def targetMatcher(source,target,cTargetString):
 	"This function returns True if the target given satisfies the conditions in cTargetString (which should be given without range requirements)"
 	candLists = cTargetString.split("||")
-	for candidate in candLists:
-		disqualified = False
-		reqList = candidate.split(",")
-		for req in reqList:
-			disqualified = not targetReqParser(targeter,target,req)
-		if not disqualified: return True
+	if "" in candLists: candLists.remove("")
+	if candLists:
+		debug("B")
+		for candidate in candLists:
+			disqualified = False
+			reqList = candidate.split(",")
+			for req in reqList:
+				disqualified = not targetReqParser(source,target,req)
+				if disqualified: break
+			if not disqualified: return True
 	return False
 
-def targetReqParser(targeter,target,req):
+def buffMatcher(source,target,cBuffString):
+	"This function returns a buff if the target given satisfies the conditions in cBuffString (which should be given without range requirements)"
+	candLists = cBuffString.split("||")
+	if "" in candLists: candLists.remove("")
+	if candLists:
+		for candidate in candLists:
+			buff = []
+			disqualified = False
+			reqList = candidate.split(",")
+			for req in reqList:
+				if req[0] == "[": buff.extend(req[1:].split(";"))
+				else: disqualified = not targetReqParser(source,target,req)
+				if disqualified: break
+			if not disqualified: 
+				return buff
+	return []
+
+def targetReqParser(source,target,req):
 	"This parses a single requirement for targetMatcher to see if it is satisfied by card."
 	notFlag = False
 	tagPos = 0
@@ -102,22 +133,30 @@ def targetReqParser(targeter,target,req):
 	satisfies = False
 	#Checks for each type of tag
 	if tag == "t": satisfies = (value in getAllTraits(target))
+	elif tag == "@": satisfies = (
+		(value=="self" and source == target ) or 
+		(value == "other" and source != target) or 
+		(value == "all") or 
+		(value == "target" and getAttachTarget(source) == target)
+	)
 	elif tag == "T": satisfies = (value == target.Type)
 	elif tag == "S": satisfies = (value in target.Subtype) #In the future, will need to make a getAllSubtypes function to handle effects that can change subtypes, such as zombie tokens.
 	elif tag == "s": satisfies = (value in target.School)
 	elif tag == "_": satisfies = False #For now. Will change later.
-	elif tag == "^": satisfies = ((value == "Friendly") == (target.controller == targeter.controller)) #A temporary placeholder until we get alignment working.
+	elif tag == "^": satisfies = ((value == "Friendly") == (target.controller == source.controller)) #A temporary placeholder until we get alignment working.
 	if notFlag: satisfies = not satisfies
+	debug(source.Name+" "+target.Name+" "+tag+" "+value+" "+str(satisfies))
 	return satisfies
 
 
 def getAllTraits(card):
-	return card.Traits.split(",")
+	return getBasicTraits(card)
 	#	In the future, this function will calculate every single trait of the card (even those not listed in its xml, 
 	#	much like computeTraits does now. For now, I will leave it as this placeholder.
 
 
 ###For now, let's store the targeting features here. Will need to move them in future.
+
 
 ######################################
 ######     Memory Functions     ######

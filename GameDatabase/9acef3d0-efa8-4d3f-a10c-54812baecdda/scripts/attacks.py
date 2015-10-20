@@ -1216,6 +1216,22 @@ def healingQuery(traitDict,queryText,healingAmt,notifyText):
 This section contains functions that figure out exactly which traits a card has.
 """
 
+def getBasicTraits(card):
+	"Returns basic traits intrinsic to the card"
+
+	traits = card.Traits.split(", ")
+	if "" in traits: traits.remove("")
+	basicTraits = {'Creature' : ['Living','Corporeal'],
+					'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
+					'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(card.Type,[])
+
+	if 'Living' in traits and 'Nonliving' in basicTraits: basicTraits.remove('Nonliving')
+	elif 'Nonliving' in traits and 'Living' in basicTraits: basicTraits.remove('Living')
+	if 'Incorporeal' in traits and 'Corporeal' in basicTraits: basicTraits.remove('Corporeal')
+
+	traits.extend(basicTraits)
+	return traits
+
 def computeTraits(card):
 		"""This is the centralized function that reads all traits possessed by a card. Do NOT compute traits anywhere else, ONLY compute them here.
 		It returns a dictionary of traits. This function will end up being quite long and complex.It works together with traitParser. Standard format
@@ -1226,17 +1242,18 @@ def computeTraits(card):
 		controller = card.controller
 		subtype = card.subtype
 		cardType = card.type
-		rawTraitsList = ({'Creature' : ['Living','Corporeal'],
-						  'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
-						  'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(cardType,[])) #Get innate traits depending on card type
+		#rawTraitsList = ({'Creature' : ['Living','Corporeal'],
+		#				  'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
+		#				  'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(cardType,[])) #Get innate traits depending on card type
+		rawTraitsList = getBasicTraits(card)
 		append = rawTraitsList.append
 		extend = rawTraitsList.extend
 		remove = rawTraitsList.remove
-		listedTraits = card.Traits.split(', ')
-		if 'Living' in listedTraits and 'Nonliving' in rawTraitsList: remove('Nonliving')
-		elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: remove('Living')
-		if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: remove('Corporeal')
-		extend(listedTraits)
+		#listedTraits = card.Traits.split(', ')
+		#if 'Living' in listedTraits and 'Nonliving' in rawTraitsList: remove('Nonliving')
+		#elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: remove('Living')
+		#if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: remove('Corporeal')
+		#extend(listedTraits)
 		adraAbility = True
 		adraEnemy = bool([c for c in table if c.name=="Adramelech Warlock" and c.controller != controller])
 		for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
@@ -1244,6 +1261,13 @@ def computeTraits(card):
 				cController = c.controller
 				cSubtype = c.subtype
 				cType = c.type
+				cBuffs = c.cBuffs
+				if cBuffs:
+					cBuffRange = cBuffs.split("))")[0]
+					cBuffString = cBuffs.split("))")[1]
+					if cBuffRange=="inf" or rangeMatcher(c,card,cBuffRange): extend(buffMatcher(c,card,cBuffString))
+				#Revamping this system
+				"""
 				if cSubtype == 'Mage' and cController == controller: traitDict['MageID'] = c._id #Each card knows which mage controls it.
 				if c.isFaceUp: #only look at face-up cards
 						if getAttachTarget(c) == card: #Get traits from attachments to this card:
@@ -1349,6 +1373,7 @@ def computeTraits(card):
 										if bear: append('Tough -2')
 										if ape: append('Climbing')
 										if cat: append('Elusive')
+	
 						#Global effects
 						#Conjurations
 						elif (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
@@ -1368,7 +1393,7 @@ def computeTraits(card):
 						elif (cName == 'Zombie Frenzy' and ('Zombie' in subtype or markers[Zombie])):
 								rawTraitsList = [t for t in rawTraitsList if t not in ['Lumbering','Pest','Slow']]
 								extend(['Fast','Bloodthirsty +1'])
-
+			"""
 		if markers[Melee]: append('Melee +{}'.format(str(markers[Melee])))
 		if markers[Ranged]: append('Ranged +{}'.format(str(markers[Ranged])))
 		if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))
