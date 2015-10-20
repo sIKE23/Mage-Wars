@@ -137,109 +137,13 @@ Events are stored as dictionaries containing all relevant parameters. Example:
  In contrast to the previous method of storing events, there will be only one list, and it will contain all the events that have occured in the entire game.
 """
 
-def storeEvent(argument):
-	argument["Round Number"] = int(getGlobalVariable("RoundNumber"))
+def storeEvent(arg):
+	arg["Round Number"] = int(getGlobalVariable("RoundNumber"))
 	memory = eval(getGlobalVariable("gameMemory"))
-	memory.append(argument)
+	memory.append(arg)
 	setGlobalVariable("gameMemory",str(memory))
 
 def timesHasOccurredThisRound(event): #Searches memory for instances of this event that have occurred this round. Only registers a match if all given keys match those from a remembered instance. Returns number of matches
 	event["Round Number"] = int(getGlobalVariable("RoundNumber"))
 	memory = eval(getGlobalVariable("gameMemory"))
 	return len([1 for e in memory if len([k for k in event if e.get(k)==event[k]])==len(event)])
-
-###############################
-######     Targeting     ######
-###############################
-
-def listenForClick(argument):
-	global passOnClick
-	whisper(argument.get("Click Prompt","Left click to select target"))
-	passOnClick = argument
-
-def onCardClick(card,mousebutton,keysdown):
-	global passOnClick
-	if mousebutton == 0 and passOnClick:
-		function,argument = passOnClick["Function"],passOnClick
-		argument["Target ID"] = card._id
-		function(argument)
-		passOnClick = None
-
-###########################################################################
-##########################    v2.00.0.0     ###############################
-###########################################################################
-
-#Label spell functions associated with card actions with "CA", e.g. CA_Guard, CA_Attack, etc.
-#On spells, label with before CA (bCA) and after CA (aCA) to indicated whether the effect should be  done before or after the card action.
-#Here is the function for generating the spell list.
-#spellList = [mergeDictionaries(spellDictionary[c.Name],{"Card ID":c._id) for c in table]
-
-def passFunction(arg):
-	pass
-
-def actionMenu(card,x=0,y=0):
-	"""This function brings up a menu of options for a given card. Called with *TAB*."""
-	choiceList = getChoiceList(card) #getChoiceList returns a list of dictionary objects containing the choice text, color, function, and argument.
-	choice = askChoice("What should {} do?".format(card.nickname),[c.get("text","") for c in choiceList],[c.get("color","") for c in choiceList])
-	if choice == 0: return
-	function,argument = choiceList[choice-1].get("function",passFunction),choiceList[choice-1].get("argument",{})
-	argument["actor"] = card
-	function(argument)
-
-def getChoiceList(card):
-	dictionary = spellDictionary[card.Name]
-	choiceList = []
-	#Get attacks - For now, attacks will not be integrated into this system
-	#if canAttack(dictionary):
-	#	for a in dictionary.get("Attacks",[]):
-	#		if a.get("Action") not in ["Quick","Full","Passage Attack"]: continue
-	#		c = {"Text":"Attack with {}\n{}".ljust(100,' ').format(a["Name"],"Passage Attack" if a["Action"]=="Passage Attack" else "{} dice {} attack".format(a["Dice"],a.get("Range Type","").lower())),
-	#			 "Color":"#FF0000", #Red; later, might change so that color depends on type of attack
-	#			 "Function":CA_Attack,
-	#			 "Argument":a}
-	#		choiceList.append(c)
-	#Get special actions
-	for a in dictionary.get("Special Actions",[]):
-		c = {"text":	a["text"],
-			 "color":	a.get("color","#303030"), #Grey by default
-			 "function":a["function"],
-			 "argument":a["argument"]}
-		choiceList.append(c)
-	#Get guard action
-	if canGuard(card):
-		c = {"text":	"{}\n{}".format("Guard".ljust(100,' '),dictionary.get('tCA_Guard',"Gain a guard token.")),#Need to add intercept text as well
-			 "color":	"#303030", #Grey
-			 "function":CA_Guard,
-			 "argument":{}
-			}
-		choiceList.append(c) #Creatures have option to guard
-	return choiceList
-
-def canGuard(card):
-	dictionary = spellDictionary[card.Name]
-	if card.Type == "Creature": return True
-	#if dictionary.get("Type")=="Creature": return True #For the purposes of testing, we'll just leave this simple for now.
-
-#############################
-######    Guarding     ######
-#############################
-
-##Convention for functions: first argument is card that has function, second is card calling the function.
-
-def CA_Guard(arg):
-	card = arg["actor"]
-	#dictionary = spellDictionary[card.Name]
-	#actor = Card(dictionary["Actor ID"])
-	spellList = [(c,spellDictionary[c.Name]) for c in table if c.Name in spellDictionary]
-
-	#First, resolve bCA effects
-	[d["bCA_Guard"]["function"](c,card) for (c,d) in spellList if "bCA_Guard" in d]
-	#[d["bCA_Guard"]["Function"](mergeDictionaries([d["bCA_Guard"]["Argument"],{"Source ID":d["Card ID"]},{"Actor ID":dictionary["Actor ID"]}])) for d in spellList if "bCA_Guard" in d]
-	#Second, gain the guard marker
-	card.markers[Guard] = 1
-	notify("{} guards!".format(card.nickname))
-	#Third, resolve aCA effects
-	[d["aCA_Guard"]["function"](c,card) for (c,d) in spellList if "aCA_Guard" in d]
-	#[d["aCA_Guard"]["Function"](mergeDictionaries([d["aCA_Guard"]["Argument"],{"Source ID":d["Card ID"]},{"Actor ID":dictionary["Actor ID"]}])) for d in spellList if "aCA_Guard" in d]
-
-spellDictionary = {"Vine Snapper": {}}

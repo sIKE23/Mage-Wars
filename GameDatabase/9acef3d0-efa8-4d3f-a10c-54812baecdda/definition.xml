@@ -21,6 +21,7 @@
 		<script src="scripts/attachcards.py" />
 		<script src="scripts/attacks.py" />
 		<script src="scripts/boneyard.py" />
+		<script src="scripts/cardActions.py" />
 		<script src="scripts/changelog.py" />
 		<script src="scripts/constants.py" />
 		<script src="scripts/domination.py" />
@@ -35,6 +36,7 @@
 		<event name="OnDeckLoaded" action="onDeckLoaded" />
 		<event name="OnChangeCounter" action="checkMageDeath" />
 		<event name="OnCardsMoved" action="onCardsMoved" />
+		<event name="OnCardClicked" action="onCardClicked" />
 		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved" />
 		<event name="OnCardArrowTargeted" action="onCardArrowTargeted" />
 		<event name="OnCardDoubleClicked" action="onCardDoubleClicked" />

@@ -26,6 +26,9 @@ def onGameStarted():
 	setGlobalVariable("roundEventList",str([]))
 	setGlobalVariable("turnEventList",str([]))
 
+	#above to be replaced with consolidated game memory:
+	setGlobalVariable("gameMemory",str([]))
+
 	#Set the round to 0
 	setGlobalVariable("RoundNumber", str(1))
 	setGlobalVariable("timerIsRunning",str(False))
@@ -369,6 +372,28 @@ def mageSetup():
 	setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
 	if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
 
+
+###############################
+######     Targeting     ######
+###############################
+
+passOnClick = None
+
+def listenForClick(arg):
+	global passOnClick
+	whisper(arg.get("Click Prompt","Left click to select target"))
+	passOnClick = arg
+
+def onCardClicked(args):
+	#args = card, mouseButton, keysDown
+	global passOnClick
+	if passOnClick != None: #TODO - restrict to only left click
+		function,argument = passOnClick["function"],passOnClick
+		argument["target"] = args.card
+		function(argument)
+		passOnClick = None
+
+###############################
 
 #def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,faceup):
 def onCardsMoved(args):
