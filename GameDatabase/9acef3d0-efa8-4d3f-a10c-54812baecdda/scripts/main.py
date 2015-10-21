@@ -173,15 +173,44 @@ Events are stored as dictionaries containing all relevant parameters. Example:
  etc. I have not worked out whether or not OCTGN can handle storing dictionary objects (as opposed to dictionaries as strings),
  so that is something that is important to test.
  In contrast to the previous method of storing events, there will be only one list, and it will contain all the events that have occured in the entire game.
+
+BUFF FORMAT
+
+		"round": 		int(getGlobalVariable("RoundNumber"))	int
+		"type": 		"buff",									str ("buff")
+		"card id":		card._id,								int
+		"traits":		traits,									list
+		"duration":		duration								str ("round","game","turn")
+
 """
 
 def storeEvent(arg):
-	arg["Round Number"] = int(getGlobalVariable("RoundNumber"))
+	arg["round"] = int(getGlobalVariable("RoundNumber"))
 	memory = eval(getGlobalVariable("gameMemory"))
 	memory.append(arg)
 	setGlobalVariable("gameMemory",str(memory))
 
-def timesHasOccurredThisRound(event): #Searches memory for instances of this event that have occurred this round. Only registers a match if all given keys match those from a remembered instance. Returns number of matches
-	event["Round Number"] = int(getGlobalVariable("RoundNumber"))
+def timesHasOccurred(event,keys): #Searches memory for instances of this event that have occurred. Only registers a match if all given keys match those from a remembered instance. Returns number of matches
+	event["round"] = int(getGlobalVariable("RoundNumber"))
 	memory = eval(getGlobalVariable("gameMemory"))
-	return len([1 for e in memory if len([k for k in event if e.get(k)==event[k]])==len(event)])
+	#Check how many events this round match in the given keys
+	return len([1 for e in memory if len([1 for k in keys if e.get(k)==event[k]])==len(keys)])
+
+######################################
+######     Recall Functions     ######
+######################################
+
+def rememberBuffs(card):
+	"Returns a list of text-formatted traits granted via memorized buffs"
+	memory = eval(getGlobalVariable("gameMemory"))
+	roundNo = int(getGlobalVariable("RoundNumber"))
+	cardID = card._id
+	buffs = []
+	extend = buffs.extend
+	for m in memory:
+		get = m.get
+		if (get("type") == "buff"
+			and get("card id") == cardID
+			and ((get("duration") == "round" and get("round") == roundNo) or get("duration") == "game")
+		): extend(get("traits",[]))
+	return buffs

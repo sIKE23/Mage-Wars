@@ -1242,18 +1242,15 @@ def computeTraits(card):
 		controller = card.controller
 		subtype = card.subtype
 		cardType = card.type
-		#rawTraitsList = ({'Creature' : ['Living','Corporeal'],
-		#				  'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
-		#				  'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(cardType,[])) #Get innate traits depending on card type
+
 		rawTraitsList = getBasicTraits(card)
 		append = rawTraitsList.append
 		extend = rawTraitsList.extend
 		remove = rawTraitsList.remove
-		#listedTraits = card.Traits.split(', ')
-		#if 'Living' in listedTraits and 'Nonliving' in rawTraitsList: remove('Nonliving')
-		#elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: remove('Living')
-		#if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: remove('Corporeal')
-		#extend(listedTraits)
+
+		#Search history for buffs
+		extend(rememberBuffs(card))
+
 		adraAbility = True
 		adraEnemy = bool([c for c in table if c.name=="Adramelech Warlock" and c.controller != controller])
 		for c in table: #scan cards in table for bonuses. We want to minimize iterations, so we'll scan only once.
@@ -1262,10 +1259,14 @@ def computeTraits(card):
 				cSubtype = c.subtype
 				cType = c.type
 				cBuffs = c.cBuffs
+				#Search arena for passive buffs
 				if cBuffs:
 					cBuffRange = cBuffs.split("))")[0]
 					cBuffString = cBuffs.split("))")[1]
 					if cBuffRange=="inf" or rangeMatcher(c,card,cBuffRange): extend(buffMatcher(c,card,cBuffString))
+				
+
+
 				#Revamping this system
 				"""
 				if cSubtype == 'Mage' and cController == controller: traitDict['MageID'] = c._id #Each card knows which mage controls it.
