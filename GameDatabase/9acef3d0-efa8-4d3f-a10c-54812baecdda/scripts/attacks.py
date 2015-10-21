@@ -485,6 +485,10 @@ def rollDice(dice):
 		notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
 		return (result,effect)
 
+def simpleRollDice(dice):
+	"RollDice function which returns a plain number, rather than a list of values"
+	values,effect = rollDice(dice)
+	return values[2] + values[4] + 2 * (values[3] + values[5])
 ############################################################################
 ######################            Event Memory          ####################
 ############################################################################

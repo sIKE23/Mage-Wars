@@ -156,6 +156,19 @@ def getAllTraits(card):
 
 ###For now, let's store the targeting features here. Will need to move them in future.
 
+######################################
+######       Transactions       ######
+######################################
+
+def transaction(player,delta):
+	"Handles mana transactions, changing the value of player's by delta as long as it does not drop below 0. Returns whether the transaction succeeded."
+	if canTransact(player,delta):
+		player.Mana += delta
+		return True
+	return False
+
+def canTransact(player,delta):
+	return (player.Mana-delta >= 0)
 
 ######################################
 ######     Memory Functions     ######

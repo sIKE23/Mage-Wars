@@ -5,7 +5,6 @@
 #Label spell functions associated with card actions with "CA", e.g. CA_Guard, CA_Attack, etc.
 #On spells, label with before CA (bCA) and after CA (aCA) to indicated whether the effect should be  done before or after the card action.
 #Here is the function for generating the spell list.
-#spellList = [mergeDictionaries(spellDictionary[c.Name],{"Card ID":c._id) for c in table]
 
 def passFunction(arg):
 	pass
@@ -20,7 +19,7 @@ def actionMenu(card,x=0,y=0):
 	function(argument)
 
 def getChoiceList(card):
-	dictionary = spellDictionary[card.Name]
+	dictionary = spellDictionary.get(card.Name,{})
 	choiceList = []
 	#Get attacks - For now, attacks will not be integrated into this system
 	#if canAttack(dictionary):
@@ -49,7 +48,7 @@ def getChoiceList(card):
 	return choiceList
 
 def canGuard(card):
-	dictionary = spellDictionary[card.Name]
+	dictionary = spellDictionary.get(card.Name,{})
 	if card.Type == "Creature": return True
 	#if dictionary.get("Type")=="Creature": return True #For the purposes of testing, we'll just leave this simple for now.
 
@@ -63,7 +62,7 @@ def CA_Guard(arg):
 	card = arg["actor"]
 	#dictionary = spellDictionary[card.Name]
 	#actor = Card(dictionary["Actor ID"])
-	spellList = [(c,spellDictionary[c.Name]) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#First, resolve bCA effects
 	[d["bCA_Guard"]["function"](c,card) for (c,d) in spellList if "bCA_Guard" in d]
@@ -166,6 +165,71 @@ spellDictionary["Acolyte of the Bog Queen"] = {
 			"color":	"#996600",
 			"function":	acolyteOfTheBogQueen_f2,
 			"argument":	{},
+		}
+	]
+}
+
+##########################
+## Adramelech's Torment ##
+##########################
+
+def adramelechsTorment_f1(arg):
+	def clickFunction(arg2):
+		if arg2.get("target") and arg2.get("actor"):
+			target = arg2["target"]
+			actor = arg2["actor"]
+			#TODO: Find out if target is a zombie here, don't rely on subtype.
+			if not target.isFaceUp:
+				whisper("Invalid target!")
+				return
+			if [1 for c in table if c.controller == actor.controller and getAttachTarget(c) == target and c.isFaceUp and "Curse" in c.subtype]:
+				if target.markers[Burn] == 0:
+					paid = transaction(actor.controller,-2)
+					if paid: 
+						target.markers[Burn] += 1
+						notify("Adramelech's Torment sets {} aflame! (+1 Burn)".format(target.nickname))
+					else:
+						whisper("Insufficient mana!")
+				else: whisper("{} is already burning!".format(target.nickname))
+			else: whisper("{} must have a revealed curse to be ignited!".format(target.nickname))
+	arg["function"] = clickFunction
+	listenForClick(arg)
+
+spellDictionary["Adramelech's Torment"] = {
+		"special actions" : [
+		{
+			"text" :	"Ignite Curse (2 mana):\nSet a cursed creature aflame.".ljust(100,' '),
+			"color":	"#990000",
+			"function":	adramelechsTorment_f1,
+			"argument": {},
+		}
+	]
+}
+
+###################
+## Asyran Cleric ##
+###################
+
+def asyranCleric_f1(arg):
+	def clickFunction(arg2):
+		if arg2.get("target") and arg2.get("actor"):
+			target = arg2["target"]
+			actor = arg2["actor"]
+			if "Living" in getBasicTraits(target) and cardGetDistance(actor,target) <= 1: #TODO: Fix check for living trait; getBasicTraits is not sufficient long term
+				notify("Asyran Cleric casts Healing Light!")
+				amount = str(CX_heal(target,simpleRollDice(1)))
+				notify("{} heals {} damage!".format(target.nickname,amount))
+			else: whisper("Invalid target!")
+	arg["function"] = clickFunction
+	listenForClick(arg)
+
+spellDictionary["Asyran Cleric"] = {
+	"special actions" : [
+		{
+			"text" :	"Healing Light:\nHeal a nearby living creature.".ljust(100,' '),
+			"color":	"#FF9900",
+			"function":	asyranCleric_f1,
+			"argument": {},
 		}
 	]
 }
