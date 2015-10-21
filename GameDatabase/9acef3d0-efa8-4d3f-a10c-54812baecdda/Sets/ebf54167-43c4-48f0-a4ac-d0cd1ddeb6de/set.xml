@@ -612,7 +612,7 @@
 			<property name="Traits" value="Zone Exclusive" />
 			<property name="Text" value="All animal creature&apos;s melee attacks gain the Piercing +1 trait." />
 			<property name="CardID" value="MW1J03" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,SAnimal,TCreature,[mPiercing +1" />
 		</card>
 		<card id="7e359ecb-7ce3-46f0-a516-de5a5f589733" name="Battle Forge">
 			<property name="Nickname" value="Battle Forge" />
@@ -648,7 +648,7 @@
 			<property name="Traits" value="Zone Exclusive, Flame Immunity, Hydro +3, Epic, Warlock Only" />
 			<property name="Text" value="All demon creatures gain Melee +1. Gate to Hell enters play with a &apos;Closed&apos; token. Once per game, as a full action, you may pay 12 mana to flip the token to the &quot;Opened&quot; side, and make the above attack against each non-flying creature in the arena. Once opened, whenever you, or a spawnpoint or familiar you control, Summon a demon creature, you may place it in the Gate&apos;s zone." />
 			<property name="CardID" value="MW1J06" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,SDemon,TCreature,[Melee +1" />
 		</card>
 		<card id="ee196806-7dc0-4de8-af56-50b3b76c2206" name="Gate to Voltari">
 			<property name="Nickname" value="Gate to Voltari" />
@@ -757,9 +757,9 @@
 			<property name="Stats" value="Armor=2, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Flame Immunity" />
-			<property name="Text" value="Controller gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Controller gains Channeling +1." />
 			<property name="CardID" value="MW1J12" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Channeling +1" />
 		</card>
 		<card id="782de4d1-61aa-4efa-baf1-99df5688704e" name="Mana Flower">
 			<property name="Nickname" value="Mana Flower" />
@@ -775,9 +775,9 @@
 			<property name="Stats" value="Armor=0, Life=6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Regenerate 2, Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Controller gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Controller gains Channeling +1." />
 			<property name="CardID" value="MW1J13" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Channeling +1" />
 		</card>
 		<card id="cfbeb5ae-3c91-4b05-94e2-bbde8bec21f9" name="Mana Syphon">
 			<property name="Nickname" value="Mana Syphon" />
@@ -814,7 +814,7 @@
 			<property name="Text" value="All friendly Living creatures in Mohktari&apos;s zone gain the Regenerate 2 trait." />
 			<property name="CardID" value="MW1J15" />
 			<alternate name="Mohktari, Great Tree of Life" type="B" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="m0,M0))@all,^friendly,tLiving,TCreature,[Regenerate 2" />
 		</card>
 		<card id="26208d5a-4b15-41ee-880c-2dcf896ac45c" name="Mordok&apos;s Obelisk">
 			<property name="Nickname" value="Mordok&apos;s Obelisk" />
@@ -832,7 +832,7 @@
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
 			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait." />
 			<property name="CardID" value="MW1J16" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,!SMage,TCreature,[Upkeep +1" />
 		</card>
 		<card id="6a65ca7e-df13-4c27-90cb-44d4c86b2610" name="Pentagram">
 			<property name="Nickname" value="Pentagram" />
@@ -886,7 +886,7 @@
 			<property name="Traits" value="Zone Exclusive, Epic" />
 			<property name="Text" value="All creatures and conjurations gain the Finite Life trait." />
 			<property name="CardID" value="MW1J19" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,TCreature,[Finite Life||@all,TConjuration,[Finite Life" />
 		</card>
 		<card id="9dfe00eb-4795-4583-b272-b7b31ddb0f7c" name="Sacrificial Altar">
 			<property name="Nickname" value="Sacrificial Altar" />
@@ -938,10 +938,10 @@
 			<property name="Stats" value="Armor=0, Life=8" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
+			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine." />
 			<property name="CardID" value="MW1J22" />
 			<alternate name="Skeletal Sentry" type="B" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Restrained;Unmovable" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">
 			<property name="Nickname" value="Temple of Asyra" />
@@ -1379,7 +1379,7 @@
 			<property name="Traits" value="Regenerate 2, Charge +2" />
 			<property name="Text" value="All friendly Living creatures in the same zone as Highland Unicorn gain the Regenerate 1 trait." />
 			<property name="CardID" value="MW1C20" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="m0,M0))@all,^friendly,tLiving,TCreature,[Regenerate 1" />
 		</card>
 		<card id="e6dc6c98-4d6b-4d02-9b13-1df201ea1df4" name="Huginn, Raven Familiar">
 			<property name="Nickname" value="Huginn" />
@@ -1542,7 +1542,7 @@
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="All other friendly canine creatures in the same zone as Redclaw gain Armor +1 and the Melee +1 trait." />
 			<property name="CardID" value="MW1C29" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="m0,M0))@all,^friendly,SCanine,TCreature,[Armor +1;Melee +1" />
 		</card>
 		<card id="33e41d11-c799-4fb0-a25d-dcb5758bc0f0" name="Samandriel, Angel of Light">
 			<property name="Nickname" value="Samandriel" />
@@ -1741,9 +1741,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Melee +2 trait.&#xD;&#xA;[Melee +2]" />
+			<property name="Text" value="This creature gains the Melee +2 trait." />
 			<property name="CardID" value="MW1E01" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Melee +2" />
 		</card>
 		<card id="25d70640-eea1-4429-b146-4d176b493e41" name="Block">
 			<property name="Nickname" value="Block" />
@@ -1777,9 +1777,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains Life +4.&#xD;&#xA;[Life +4]" />
+			<property name="Text" value="This creature gains Life +4." />
 			<property name="CardID" value="MW1E03" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Life +4" />
 		</card>
 		<card id="775fd07c-63b3-48af-9a6d-061165fe5805" name="Chains of Agony">
 			<property name="Nickname" value="Chains of Agony" />
@@ -1813,9 +1813,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Fast trait.&#xD;&#xA;[Fast]" />
+			<property name="Text" value="This creature gains the Fast trait." />
 			<property name="CardID" value="MW1E05" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Fast" />
 		</card>
 		<card id="0574a699-e012-4b4e-9c68-1b5f02f05c8a" name="Circle of Lightning">
 			<property name="Nickname" value="Circle of Lightning" />
@@ -1939,9 +1939,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="This creature gains the Aegis 1 trait.&#xD;&#xA;[Aegis 1]" />
+			<property name="Text" value="This creature gains the Aegis 1 trait." />
 			<property name="CardID" value="MW1E12" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Aegis 1" />
 		</card>
 		<card id="f7fee204-8053-446d-b85d-c8d07e70d4fd" name="Eagle Wings">
 			<property name="Nickname" value="Eagle Wings" />
@@ -1957,9 +1957,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Flying trait.&#xD;&#xA;[Flying]" />
+			<property name="Text" value="This creature gains the Flying trait." />
 			<property name="CardID" value="MW1E13" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Flying" />
 		</card>
 		<card id="20b2deab-90f3-4a9b-83b4-ad83129ec14c" name="Enfeeble">
 			<property name="Nickname" value="Enfeeble" />
@@ -1975,9 +1975,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Slow trait.&#xD;&#xA;[Slow]" />
+			<property name="Text" value="This creature gains the Slow trait." />
 			<property name="CardID" value="MW1E14" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Slow" />
 		</card>
 		<card id="00cfd5d8-8fa8-4db5-b4df-6f5bae378d4b" name="Essence Drain">
 			<property name="Nickname" value="Essence Drain" />
@@ -1993,9 +1993,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Upkeep +2 trait.&#xD;&#xA;[Upkeep +2]" />
+			<property name="Text" value="This creature gains the Upkeep +2 trait." />
 			<property name="CardID" value="MW1E15" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Upkeep +2" />
 		</card>
 		<card id="aeada61e-e636-4c46-b169-833162a13b93" name="Force Hold">
 			<property name="Nickname" value="Force Hold" />
@@ -2004,16 +2004,16 @@
 			<property name="Cost" value="2+2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="cTargets" value="m0,M2))TCreature,!tUncontainable" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Mind" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +3" />
-			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait.&#xD;&#xA;[Unmovable] [Restrained]" />
+			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait." />
 			<property name="CardID" value="MW1E16" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Restrained,Unmovable" />
 		</card>
 		<card id="7fe6a6b2-4403-4a07-8048-4692d954898a" name="Force Orb">
 			<property name="Nickname" value="Force Orb" />
@@ -2084,9 +2084,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1." />
 			<property name="CardID" value="MW1E20" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Channeling +1" />
 		</card>
 		<card id="8c9e5e56-a9a9-4077-92c1-f35123ee4c64" name="Hawkeye">
 			<property name="Nickname" value="Hawkeye" />
@@ -2102,9 +2102,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Ranged +1 trait.&#xD;&#xA;[Ranged +1]" />
+			<property name="Text" value="This creature gains the Ranged +1 trait." />
 			<property name="CardID" value="MW1E21" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Ranged +1" />
 		</card>
 		<card id="22fe0c48-f14e-4d31-b5ff-4013a4245071" name="Hellfire Trap">
 			<property name="Nickname" value="Hellfire Trap" />
@@ -2210,9 +2210,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Elusive trait.&#xD;&#xA;[Elusive]" />
+			<property name="Text" value="This creature gains the Elusive trait." />
 			<property name="CardID" value="MW1E28" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Elusive" />
 		</card>
 		<card id="81c93236-8b3f-41fd-9210-89a9498ecfce" name="Nullify">
 			<property name="Nickname" value="Nullify" />
@@ -2264,9 +2264,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Finite Life trait.&#xD;&#xA;[Finite Life]" />
+			<property name="Text" value="This creature gains the Finite Life trait." />
 			<property name="CardID" value="MW1E31" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Finite Life" />
 		</card>
 		<card id="76d440be-b82c-4a12-97ef-c2bad86fdc1a" name="Regrowth">
 			<property name="Nickname" value="Regrowth" />
@@ -2282,9 +2282,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains the Regenerate 2 trait.&#xD;&#xA;[Regenerate 2]" />
+			<property name="Text" value="This creature gains the Regenerate 2 trait." />
 			<property name="CardID" value="MW1E32" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Regenerate 2" />
 		</card>
 		<card id="24b63480-3272-4f93-b576-48710d5bedaa" name="Retaliate">
 			<property name="Nickname" value="Retaliate" />
@@ -2358,9 +2358,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +1" />
-			<property name="Text" value="This creature gains Armor +2.&#xD;&#xA;[Armor +2]" />
+			<property name="Text" value="This creature gains Armor +2." />
 			<property name="CardID" value="MW1E36" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Armor +2" />
 		</card>
 		<card id="39d0a0a1-154d-4e33-9af0-937f0b98465c" name="Sacred Ground">
 			<property name="Nickname" value="Sacred Ground" />
@@ -2376,9 +2376,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="All friendly Living creatures in this zone gain the Aegis 1 trait.&#xD;&#xA;[Aegis 1]" />
+			<property name="Text" value="All friendly Living creatures in this zone gain the Aegis 1 trait." />
 			<property name="CardID" value="MW1E37" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="m0,M0))^friendly,TCreature,tLiving,[Aegis 1" />
 		</card>
 		<card id="f6a5cb45-a9ec-4e4a-858f-60a48d88b7ab" name="Teleport Trap">
 			<property name="Nickname" value="Teleport Trap" />
@@ -2412,9 +2412,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +4" />
-			<property name="Text" value="This creature is Incapacitated, and gains Armor +6. You cannot reveal Turn to Stone during an action, such as an attack or spell.&#xD;&#xA;[Incapacitated] [Armor +6]" />
+			<property name="Text" value="This creature is Incapacitated, and gains Armor +6. You cannot reveal Turn to Stone during an action, such as an attack or spell." />
 			<property name="CardID" value="MW1E39" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Incapacitated;Armor +6" />
 		</card>
 		<card id="b981c228-b1e5-4318-a7ec-444c647eed87" name="Vampirism">
 			<property name="Nickname" value="Vampirism" />
@@ -2430,9 +2430,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature&apos;s melee attacks gain the Vampiric trait.&#xD;&#xA;[Vampiric]" />
+			<property name="Text" value="This creature&apos;s melee attacks gain the Vampiric trait." />
 			<property name="CardID" value="MW1E40" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Vampiric" />
 		</card>
 
 
@@ -2470,7 +2470,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Mage gains Armor +2 and the Frost -2 trait.&#xD;&#xA;[Armor +2] [Frost -2]" />
 			<property name="CardID" value="MW1Q02" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2;Frost -2" />
 		</card>
 		<card id="5d82d063-51bc-491f-a9eb-a72a6722d509" name="Crown of Protection">
 			<property name="Nickname" value="Crown of Protection" />
@@ -2522,9 +2522,9 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="Demonic Presence:&#xD;&#xA;[Damage Barrier] [Dice=1] [Ethereal] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Dark Mage Only" />
-			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier. &#xD;&#xA;[Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier." />
 			<property name="CardID" value="MW1Q05" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2" />
 		</card>
 		<card id="66582dca-63bc-4b49-bbcd-add00a57cf11" name="Dragonscale Hauberk">
 			<property name="Nickname" value="Dragonscale Hauberk" />
@@ -2540,9 +2540,9 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait. &#xD;&#xA;[Armor +2] [Flame -2]" />
+			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait." />
 			<property name="CardID" value="MW1Q06" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2;Flame -2" />
 		</card>
 		<card id="dda72c4a-8f33-42cf-9eed-bd52fb91af22" name="Elemental Cloak">
 			<property name="Nickname" value="Elemental Cloak" />
@@ -2558,9 +2558,9 @@
 			<property name="Stats" value="Location=Cloak" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +1, and the Flame -2, Frost -2, and Lightning -2 traits. &#xD;&#xA;[Armor +1] [Flame -2] [Frost -2] [Lightning -2]" />
+			<property name="Text" value="Mage gains Armor +1, and the Flame -2, Frost -2, and Lightning -2 traits." />
 			<property name="CardID" value="MW1Q07" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +1;Flame -2;Frost -2;Lightning -2" />
 		</card>
 		<card id="469d4201-ec88-4f13-a8dc-f11b48e3df4b" name="Elemental Wand">
 			<property name="Nickname" value="Elemental Wand" />
@@ -2630,9 +2630,9 @@
 			<property name="Stats" value="Location=Gloves" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Melee +1 trait. &#xD;&#xA;[Melee +1]" />
+			<property name="Text" value="Mage gains the Melee +1 trait." />
 			<property name="CardID" value="MW1Q11" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Melee +1" />
 		</card>
 		<card id="ad9461c7-8594-44f6-9616-2bba7edbbd44" name="Helm of Fear">
 			<property name="Nickname" value="Helm of Fear" />
@@ -2703,9 +2703,9 @@
 			<property name="Stats" value="Location=Boots" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="Mage gains Armor +1." />
 			<property name="CardID" value="MW1Q15" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +1" />
 		</card>
 		<card id="a6a267f1-a2ec-4264-aaff-85b40c0a68dd" name="Leather Gloves">
 			<property name="Nickname" value="Leather Gloves" />
@@ -2721,9 +2721,9 @@
 			<property name="Stats" value="Location=Gloves" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="Mage gains Armor +1." />
 			<property name="CardID" value="MW1Q16" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +1" />
 		</card>
 		<card id="d2b981a2-18c0-450a-b4cf-4d1c3d412e63" name="Lightning Ring">
 			<property name="Nickname" value="Lightning Ring" />
@@ -2811,9 +2811,9 @@
 			<property name="Stats" value="Location=Amulet" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Channel +1 trait.&#xD;&#xA;[Channeling +1]" />
+			<property name="Text" value="Mage gains the Channel +1 trait." />
 			<property name="CardID" value="MW1Q22" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Channeling +1" />
 		</card>
 		<card id="983a31d2-4e37-441d-a39e-3088f9b3d84c" name="Regrowth Belt">
 			<property name="Nickname" value="Regrowth Belt" />
@@ -2829,9 +2829,9 @@
 			<property name="Stats" value="Location=Belt" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains the Regenerate 2 trait.&#xD;&#xA;[Regenerate 2]" />
+			<property name="Text" value="Mage gains the Regenerate 2 trait." />
 			<property name="CardID" value="MW1Q23" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Regenerate 2" />
 		</card>
 		<card id="aa404428-c691-4c46-b11c-824158dfcf4d" name="Ring of Asyra">
 			<property name="Nickname" value="Ring of Asyra" />
@@ -2991,9 +2991,9 @@
 			<property name="Stats" value="Location=Chest Piece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait.&#xD;&#xA;[Armor +2] [Wind -3]" />
+			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait." />
 			<property name="CardID" value="MW1Q33" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2;Wind -3" />
 		</card>
 
 
@@ -3050,7 +3050,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="All friendly animal creatures in the arena gain the Melee +1 trait until the end of the round." />
 			<property name="CardID" value="MW1I03" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@all,^friendly,SAnimal,TCreature,[Melee +1" />
 		</card>
 		<card id="78846d18-04ca-4fc8-b3e1-bc22003a92a8" name="Charge">
 			<property name="Nickname" value="Charge" />
@@ -3066,9 +3066,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target gains the Fast and Charge +1 traits until the end of the round.&#xD;&#xA;[Fast] [Charge]" />
+			<property name="Text" value="Target gains the Fast and Charge +1 traits until the end of the round." />
 			<property name="CardID" value="MW1I04" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Fast;Charge +1" />
 		</card>
 		<card id="2753eeea-2130-4399-ae88-f96ed1ccf776" name="Dispel">
 			<property name="Nickname" value="Dispel" />
@@ -3156,9 +3156,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Target gains the Elusive trait until the end of the round.&#xD;&#xA;[Elusive]" />
+			<property name="Text" value="Target gains the Elusive trait until the end of the round." />
 			<property name="CardID" value="MW1I10" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Elusive" />
 		</card>
 		<card id="90e866bf-64db-4199-ba5f-3364eecaf7ce" name="Explode">
 			<property name="Nickname" value="Explode" />
@@ -3240,7 +3240,7 @@
 			<property name="Cost" value="3" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="cTargets" value="m0,M2))TCreature,!tUnmovable" />
 			<property name="Target" value="Creature" />
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
@@ -3249,7 +3249,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target is Incapacitated until the beginning of its next Action Phase, or until the end of the round, whichever comes first. Knockdown has no effect on Unmovable creatures." />
 			<property name="CardID" value="MW1I15" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Incapacitated" />
 		</card>
 		<card id="61d4135c-e151-4c04-b759-23b1eb12abee" name="Lay Hands">
 			<property name="Nickname" value="Lay Hands" />
@@ -3301,9 +3301,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Target&apos;s next melee attack this round gains the Unavoidable trait.&#xD;&#xA;[Unavoidable]" />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Unavoidable trait." />
 			<property name="CardID" value="MW1I18" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[mUnavoidable" />
 		</card>
 		<card id="dc3cd8bd-9867-4dde-99a2-911d3ca69b67" name="Piercing Strike">
 			<property name="Nickname" value="Piercing Strike" />
@@ -3319,9 +3319,9 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Target&apos;s next melee attack this round gains the Piercing +3 trait.&#xD;&#xA;[Piercing +3]" />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Piercing +3 trait." />
 			<property name="CardID" value="MW1I19" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[mPiercing +3" />
 		</card>
 		<card id="59cd1ea8-72d8-4ce8-90f9-1513ef6940ae" name="Purify">
 			<property name="Nickname" value="Purify" />
@@ -3501,7 +3501,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target&apos;s next melee attack this round gains the Vampiric and Piercing +1 traits." />
 			<property name="CardID" value="MW1I29" />
-			<property name="cBuffs" value="" />
+			<property name="cBuffs" value="inf))@target,[Vampiric;mPiercing +1" />
 		</card>
 
 

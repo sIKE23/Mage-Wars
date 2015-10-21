@@ -55,13 +55,13 @@ For simple buffs:
 <property name="cBuffs" value="m0,M1))@Self,tFlying,tLiving,TConjuration,[Fast;Psychic Immune;Armor+1,||#Y:^Friendly,Other,Cat,[mPiercing +1" />
 
 prefixes:
-	@ - self, other, target, or all. Assumes all if not specified.
+	@ - self, target, or all. Assumes all if not specified.
 	[ - the type of buff granted to objects that qualify
 	t - trait possessed
 	! - NOT operator
 	T - type of card
 	S - subtype possessed
-	^ - alignment (friendly vs enemy) possessed
+	^ - alignment (friendly vs controlled vs enemy)
 	l - min level (can also use for minor flag)
 	L - max level
 	s - school possessed
@@ -135,7 +135,6 @@ def targetReqParser(source,target,req):
 	if tag == "t": satisfies = (value in getAllTraits(target))
 	elif tag == "@": satisfies = (
 		(value=="self" and source == target ) or 
-		(value == "other" and source != target) or 
 		(value == "all") or 
 		(value == "target" and getAttachTarget(source) == target)
 	)
@@ -143,7 +142,7 @@ def targetReqParser(source,target,req):
 	elif tag == "S": satisfies = (value in target.Subtype) #In the future, will need to make a getAllSubtypes function to handle effects that can change subtypes, such as zombie tokens.
 	elif tag == "s": satisfies = (value in target.School)
 	elif tag == "_": satisfies = False #For now. Will change later.
-	elif tag == "^": satisfies = ((value == "Friendly") == (target.controller == source.controller)) #A temporary placeholder until we get alignment working.
+	elif tag == "^": satisfies = ((value in ["friendly","controlled"]) == (target.controller == source.controller)) #A temporary placeholder until we get alignment working.
 	if notFlag: satisfies = not satisfies
 	debug(source.Name+" "+target.Name+" "+tag+" "+value+" "+str(satisfies))
 	return satisfies
