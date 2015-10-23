@@ -140,16 +140,22 @@ def acolyteOfTheBogQueen_f1(arg):
 	listenForClick(arg)
 
 def acolyteOfTheBogQueen_f2(arg):
+	
 	def clickFunction(arg2):
 		if arg2.get("target") and arg2.get("actor"):
 			target = arg2["target"]
 			actor = arg2["actor"]
 			#TODO: Find out if target is a zombie here, don't rely on subtype.
-			if "Zombie" in target.subtype and (target.type == "Creature") and cardGetDistance(actor,target) <= 1: 
-				buff(target,["Melee +1"],"round")
-				notify("Acolyte of the Bog Queen casts Vigor of the Grave!")
-				notify("{} lets out an unearthly moan of fury! (Melee +1)".format(target.nickname))
-			else: whisper("Invalid target!")
+			if not (target.isFaceUp and "Zombie" in target.subtype and target.type == "Creature"):
+				whisper("Invalid target! Must target zombie creature.")
+				return
+			if cardGetDistance(actor,target) > 1
+				whisper("{} is too far away to invigorate. Target must be within 1 zone.".format(target.nickname))
+				return
+			buff(target,["Melee +1"],"round")
+			notify("Acolyte of the Bog Queen casts Vigor of the Grave!")
+			notify("{} lets out an unearthly moan of fury! (Melee +1)".format(target.nickname))
+
 	arg["function"] = clickFunction
 	listenForClick(arg)
 
@@ -178,20 +184,22 @@ def adramelechsTorment_f1(arg):
 		if arg2.get("target") and arg2.get("actor"):
 			target = arg2["target"]
 			actor = arg2["actor"]
-			#TODO: Find out if target is a zombie here, don't rely on subtype.
-			if not target.isFaceUp:
+			if not (target.isFaceUp and target.Type=="Creature"):
 				whisper("Invalid target!")
 				return
-			if [1 for c in table if c.controller == actor.controller and getAttachTarget(c) == target and c.isFaceUp and "Curse" in c.subtype]:
-				if target.markers[Burn] == 0:
-					paid = transaction(actor.controller,-2)
-					if paid: 
-						target.markers[Burn] += 1
-						notify("Adramelech's Torment sets {} aflame! (+1 Burn)".format(target.nickname))
-					else:
-						whisper("Insufficient mana!")
-				else: whisper("{} is already burning!".format(target.nickname))
-			else: whisper("{} must have a revealed curse to be ignited!".format(target.nickname))
+			if not [1 for c in table if c.controller == actor.controller and getAttachTarget(c) == target and c.isFaceUp and "Curse" in c.subtype]:
+				whisper("{} must have a revealed curse to be ignited!".format(target.nickname))
+				return
+			if target.markers[Burn] > 0:
+				whisper("{} is already burning!".format(target.nickname))
+				return
+			paid = transaction(actor.controller,-2)
+			if paid: 
+				target.markers[Burn] += 1
+				notify("Adramelech's Torment sets {} aflame! (+1 Burn)".format(target.nickname))
+			else:
+				whisper("Insufficient mana!")
+
 	arg["function"] = clickFunction
 	listenForClick(arg)
 
@@ -211,15 +219,22 @@ spellDictionary["Adramelech's Torment"] = {
 ###################
 
 def asyranCleric_f1(arg):
+
 	def clickFunction(arg2):
 		if arg2.get("target") and arg2.get("actor"):
 			target = arg2["target"]
 			actor = arg2["actor"]
-			if "Living" in getBasicTraits(target) and cardGetDistance(actor,target) <= 1: #TODO: Fix check for living trait; getBasicTraits is not sufficient long term
-				notify("Asyran Cleric casts Healing Light!")
-				amount = str(CX_heal(target,simpleRollDice(1)))
-				notify("{} heals {} damage!".format(target.nickname,amount))
-			else: whisper("Invalid target!")
+			#TODO: Fix check for living trait; getBasicTraits is not sufficient long term
+			if not (target.isFaceUp and target.Type=="Creature" and "Living" in getBasicTraits(target)):
+				whisper("Invalid target! Must target living creature.")
+				return
+			if cardGetDistance(actor,target) > 1
+				whisper("{} is too far away to heal. Target must be within 1 zone.".format(target.nickname))
+				return
+			notify("Asyran Cleric casts Healing Light!")
+			amount = str(CX_heal(target,simpleRollDice(1)))
+			notify("{} heals {} damage!".format(target.nickname,amount))
+
 	arg["function"] = clickFunction
 	listenForClick(arg)
 
