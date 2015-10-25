@@ -227,3 +227,58 @@ def rememberBuffs(card):
 			and ((get("duration") == "round" and get("round") == roundNo) or get("duration") == "game")
 		): extend(get("traits",[]))
 	return buffs
+
+######################################
+######        Targeting         ######
+######################################
+
+#Will probably need to move this.
+
+def isValidAttackSource(card):
+	return canDeclareAttack(card) #We'll just pass the buck for now.
+
+def isValidAttackTarget(card):
+	return ("Life" in card.stats)
+
+def payForAttackSpell(player,attack):
+	"Returns boolean for whether or not cost was paid"
+	originalSource = Card(attack.get('OriginalSourceID'))
+	if originalSource.Type == "Attack": return castSpell(originalSource)
+	else:
+		cost = attack.get('Cost')
+		realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
+		if realCost == None: return False
+		else: return transaction(player,-realCost)
+
+def targetMenu(source,target):
+	"This will be a general function determining what happens when one card targets another, regardless of the method."
+	#args = player,fromCard,toCard,targeted,scripted
+	mute()
+	if not source and target: return
+
+	if isValidAttackSource(source) and isValidAttackTarget(target) and getSetting('BattleCalculator',True):
+		aTraitDict = computeTraits(source)
+		dTraitDict = computeTraits(target)
+		attack = diceRollMenu(source,target)
+		if attack:
+			if attack.get("Cost") and not payForAttackSpell(me,attack): return
+			if attack.get('SourceID')==source._id:
+				remoteCall(target.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
+				source.arrow(target,False)
+				return
+			elif attack.get("Dice"): 
+				notify("Attack cannot be parsed by Battle Calculator; rolling dice manually.")
+				rollDice(attack.get("Dice"))
+				source.arrow(target,False)
+				return
+	else:
+		if source.Type == "Enchantment" and not source.isFaceUp and castSpell(source,target):
+			attach(source,target)
+			source.arrow(target,False)
+		elif target.Type in typeIgnoreList or target.Name in typeIgnoreList or target.Type == "Magestats":
+			mute()
+			notify("{} is not a legal target".format(target.Name))
+			source.arrow(target,False)
+		elif source.Type !="Enchantment":
+			castSpell(source,target) #Assume that player wants to cast card on target
+			source.arrow(target,False)

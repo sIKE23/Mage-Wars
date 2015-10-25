@@ -476,54 +476,8 @@ def onScriptedCardsMoved(args):
 def onCardArrowTargeted(args):
 	#args = player,fromCard,toCard,targeted,scripted
 	mute()
-	attacker,defender = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
-	if args.player == me == attacker.controller and args.targeted:
-			if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type == 'Creature' or 'Conjuration' in defender.type):
-					aTraitDict = computeTraits(attacker)
-					dTraitDict = computeTraits(defender)
-					attack = diceRollMenu(attacker,defender)
-					#Pay costs for spells
-					if attack.get('Cost'):
-							originalSource = Card(attack.get('OriginalSourceID'))
-							if not originalSource.isFaceUp: flipcard(originalSource)
-							if originalSource.type == 'Attack':
-									cost = castSpell(originalSource)
-									if cost == None:
-											notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
-											attacker.arrow(defender,False)
-											return
-							else:
-									cost = attack.get('Cost')
-									realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
-									if realCost == None:
-											notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
-											attacker.arrow(defender,False)
-											return
-									elif realCost <= me.Mana:
-										me.Mana -= realCost
-										notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))
-									else:
-											notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
-											attacker.arrow(defender,False)
-											return
-					if attack and attack.get('SourceID')==attacker._id:
-							remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
-							attacker.arrow(defender,False)
-					elif attack.get("Dice"): rollDice(attack.get("Dice"))
-					else:
-							attacker.arrow(defender,False)
-							notify("The Attack on {} was canceled.".format(defender))
-			else:
-					if attacker.Type == "Enchantment" and not attacker.isFaceUp and castSpell(attacker,defender):
-							attach(attacker,defender)
-							attacker.arrow(defender,False)
-					elif defender.Type in typeIgnoreList or defender.Name in typeIgnoreList or defender.Type == "Magestats":
-						mute()
-						notify("{} is not a legal target".format(defender.Name))
-						attacker.arrow(defender,False)
-					elif attacker.Type !="Enchantment":
-							castSpell(attacker,defender) #Assume that player wants to cast card on target
-							attacker.arrow(defender,False)
+	source,target = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
+	if args.player == me == source.controller and args.targeted and not args.scripted and getSetting("DeclareAttackWithArrow",True): targetMenu(source,target)
 
 def checkMageDeath(args):
 	#args = player,counter,value,scripted

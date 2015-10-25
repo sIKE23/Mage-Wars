@@ -21,22 +21,22 @@ def actionMenu(card,x=0,y=0):
 def getChoiceList(card):
 	dictionary = spellDictionary.get(card.Name,{})
 	choiceList = []
-	#Get attacks - For now, attacks will not be integrated into this system
-	#if canAttack(dictionary):
-	#	for a in dictionary.get("Attacks",[]):
-	#		if a.get("Action") not in ["Quick","Full","Passage Attack"]: continue
-	#		c = {"Text":"Attack with {}\n{}".ljust(100,' ').format(a["Name"],"Passage Attack" if a["Action"]=="Passage Attack" else "{} dice {} attack".format(a["Dice"],a.get("Range Type","").lower())),
-	#			 "Color":"#FF0000", #Red; later, might change so that color depends on type of attack
-	#			 "Function":CA_Attack,
-	#			 "Argument":a}
-	#		choiceList.append(c)
+	append = choiceList.append
+	#Creatures should have the option to attack
+	if isValidAttackSource(card):
+		c = {"text":	"{}\n{}".format("Declare Attack".ljust(100,' '),dictionary.get('tCA_Attack',"Declare an attack against a target object.")),#Need to add intercept text as well
+			 "color":	"#FF0000", #Red
+			 "function":CA_Attack,
+			 "argument":{}
+			}
+		append(c)
 	#Get special actions
 	for a in dictionary.get("special actions",[]):
 		c = {"text":	a["text"],
 			 "color":	a.get("color","#303030"), #Grey by default
 			 "function":a["function"],
 			 "argument":a["argument"]}
-		choiceList.append(c)
+		append(c)
 	#Get guard action
 	if canGuard(card):
 		c = {"text":	"{}\n{}".format("Guard".ljust(100,' '),dictionary.get('tCA_Guard',"Gain a guard token.")),#Need to add intercept text as well
@@ -44,19 +44,31 @@ def getChoiceList(card):
 			 "function":CA_Guard,
 			 "argument":{}
 			}
-		choiceList.append(c) #Creatures have option to guard
+		append(c) #Creatures have option to guard
 	return choiceList
 
-def canGuard(card):
-	dictionary = spellDictionary.get(card.Name,{})
-	if card.Type == "Creature": return True
-	#if dictionary.get("Type")=="Creature": return True #For the purposes of testing, we'll just leave this simple for now.
+def CA_Attack(arg):
+	actor = arg["actor"]
+	def clickFunction(arg2):
+		target = arg2["target"]
+		if isValidAttackTarget(target): 
+			actor.arrow(target,True)
+			targetMenu(actor,target)
+		else:
+			whisper("That is not a valid attack target!")
+	arg["function"] = clickFunction
+	listenForClick(arg)
+
 
 #############################
 ######    Guarding     ######
 #############################
 
 ##Convention for functions: first argument is card that has function, second is card calling the function.
+def canGuard(card):
+	dictionary = spellDictionary.get(card.Name,{})
+	if card.Type == "Creature": return True
+	#if dictionary.get("Type")=="Creature": return True #For the purposes of testing, we'll just leave this simple for now.
 
 def CA_Guard(arg):
 	card = arg["actor"]
@@ -140,7 +152,7 @@ def acolyteOfTheBogQueen_f1(arg):
 	listenForClick(arg)
 
 def acolyteOfTheBogQueen_f2(arg):
-	
+
 	def clickFunction(arg2):
 		if arg2.get("target") and arg2.get("actor"):
 			target = arg2["target"]
@@ -149,7 +161,7 @@ def acolyteOfTheBogQueen_f2(arg):
 			if not (target.isFaceUp and "Zombie" in target.subtype and target.type == "Creature"):
 				whisper("Invalid target! Must target zombie creature.")
 				return
-			if cardGetDistance(actor,target) > 1
+			if cardGetDistance(actor,target) > 1:
 				whisper("{} is too far away to invigorate. Target must be within 1 zone.".format(target.nickname))
 				return
 			buff(target,["Melee +1"],"round")
@@ -228,7 +240,7 @@ def asyranCleric_f1(arg):
 			if not (target.isFaceUp and target.Type=="Creature" and "Living" in getBasicTraits(target)):
 				whisper("Invalid target! Must target living creature.")
 				return
-			if cardGetDistance(actor,target) > 1
+			if cardGetDistance(actor,target) > 1:
 				whisper("{} is too far away to heal. Target must be within 1 zone.".format(target.nickname))
 				return
 			notify("Asyran Cleric casts Healing Light!")
