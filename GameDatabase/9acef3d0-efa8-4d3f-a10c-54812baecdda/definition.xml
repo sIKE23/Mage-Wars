@@ -113,10 +113,8 @@
 		<property name="Special3" type="String" hidden="True" ignoreText="False" />
 		<!--Convenient name and pronoun Properties-->
 		<property name="Nickname" type="String" hidden="True" ignoreText="False" />
-		<property name="PSub" type="String" hidden="True" ignoreText="False" />
-		<property name="PObj" type="String" hidden="True" ignoreText="False" />
-		<property name="PPos" type="String" hidden="True" ignoreText="False" />
-		<property name="PRef" type="String" hidden="True" ignoreText="False" />
+		<property name="Gender" type="String" hidden="True" ignoreText="False" />
+
 		<!--translations of properties into code versions-->
 		<property name="cTargets" type="String" hidden="True" ignoreText="False" />
 		<property name="cBuffs" type="String" hidden="True" ignoreText="False" />

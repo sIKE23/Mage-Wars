@@ -23,16 +23,17 @@ def useUntargetedAbility(card, x=0, y=0):
 def testFormatting(card,x=0,y=0): #delete this function later
 	formatCardObject(card)
 
-def formatCardObject(card): #Interprets the XML file for the card and correctly formats each field.
-	#Format name without title
-	#card.nickname = card.Name.split(", ")[0]
+def pSub(card):
+	return {"M" : "he", "F" : "she"}.get(card.gender,"it")
 
-	#Format pronouns for card
-	i = {"Male":1,"Female":2}.get(getGender(card),0)
-	card.PSub = ["it","he","her"][i]				#Subject
-	card.PObj = ["it","him","her"][i]				#Object
-	card.PPos = ["its","his","her"][i]				#Possessive
-	card.PRef = ["itself","himself","herself"][i]	#Reflexive
+def pObj(card):
+	return {"M" : "him", "F" : "her"}.get(card.gender,"it")
+
+def pPos(card):
+	return {"M" : "his", "F" : "her"}.get(card.gender,"its")
+
+def pRef(card):
+	return {"M" : "himself", "F" : "herself"}.get(card.gender,"itself")
 
 """
 Here is how to format the relevant new XML properties:

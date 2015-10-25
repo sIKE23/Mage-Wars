@@ -82,6 +82,7 @@
 	      		<property name="Traits" value="Melee +1" />
 	      	</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="608f34d9-e0dd-4ca4-9840-2ef90b742058" name="Beastmaster (Apprentice)">
 			<property name="Nickname" value="Beastmaster (Apprentice)" />
@@ -107,11 +108,13 @@
 					<property name="Traits" value="" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="665fd551-678d-4b5c-94a3-347dd320f20a" name="Beastmaster Stats">
 			<property name="Nickname" value="Beastmaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b5de32e7-8b57-44f2-a25a-b7bae56bffb7" name="Priestess">
 			<property name="Nickname" value="Priestess" />
@@ -135,6 +138,7 @@
 					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal co." />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="9b9af674-185b-4e60-9943-fa6f1c35d4b2" name="Priestess (Apprentice)">
 			<property name="Nickname" value="Priestess (Apprentice)" />
@@ -158,11 +162,13 @@
 					<property name="MageAbilities" value="" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="352e2f88-a99e-46f0-86f9-ab7b05d978cb" name="Priestess Stats">
 			<property name="Nickname" value="Priestess Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="2253ac7a-0146-4022-bd2e-4f5403ad8e1d" name="Warlock">
 			<property name="Nickname" value="Warlock" />
@@ -188,6 +194,7 @@
 					<property name="Traits" value="Melee +1" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
 			<property name="Nickname" value="Warlock (Apprentice)" />
@@ -213,11 +220,13 @@
 					<property name="Traits" value="" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="52fdb62d-59e3-4b5e-904e-d92ae2be7012" name="Warlock Stats">
 			<property name="Nickname" value="Warlock Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="4208e1b0-b570-42de-9e62-5ce15b97b91e" name="Wizard (Air)">
 			<property name="Nickname" value="Wizard (Air)" />
@@ -241,6 +250,7 @@
 					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard (Earth)">
 			<property name="Nickname" value="Wizard (Earth)" />
@@ -264,6 +274,7 @@
 					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="4f252cfc-75a7-42b8-9f4c-2fb4a40b227e" name="Wizard (Fire)">
 			<property name="Nickname" value="Wizard (Fire)" />
@@ -287,6 +298,7 @@
 					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="7f276a4a-d18d-426f-890e-e50b143e7940" name="Wizard (Water)">
 			<property name="Nickname" value="Wizard (Water)" />
@@ -310,6 +322,7 @@
 					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard (Apprentice)">
 			<property name="Nickname" value="Wizard (Apprentice)" />
@@ -333,11 +346,13 @@
 					<property name="MageAbilities" value="" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="e27b8293-65cd-4479-b5e9-2616201ba512" name="Wizard Stats">
 			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -358,6 +373,7 @@
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
 			<property name="CardID" value="MW1A01" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d9db82f3-e853-4281-8f24-1574f02912b9" name="Chain Lightning">
 			<property name="Nickname" value="Chain Lightning" />
@@ -377,6 +393,7 @@
 			<property name="CardID" value="MW1A02" />
 			<alternate name="Chain Lightning" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="96b996dd-50d6-4449-9ad5-3b7c52936738" name="Electrify">
 			<property name="Nickname" value="Electrify" />
@@ -395,6 +412,7 @@
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
 			<property name="CardID" value="MW1A03" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d8562a1d-6a95-4ca4-99aa-91c5ca769a33" name="Fireball">
 			<property name="Nickname" value="Fireball" />
@@ -413,6 +431,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A04" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="aecb2a7e-5d16-48bd-8a82-67522fa1f96e" name="Firestorm">
 			<property name="Nickname" value="Firestorm" />
@@ -431,6 +450,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A05" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f47d8498-c367-44dd-98c8-e919a02e4b1d" name="Flameblast">
 			<property name="Nickname" value="Flameblast" />
@@ -449,6 +469,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A06" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9217f8a0-e46d-401e-b8b6-477100eaba54" name="Lightning Bolt">
 			<property name="Nickname" value="Lightning Bolt" />
@@ -467,6 +488,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A07" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="8ca4ca3f-2d9f-4828-bbfc-b106fb9b7b46" name="Geyser">
 			<property name="Nickname" value="Geyser" />
@@ -485,6 +507,7 @@
 			<property name="Traits" value="" />
 			<property name="CardID" value="MW1A08" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="effa9ea8-3cf2-4efe-a83f-6f920c8faa22" name="Jet Stream">
 			<property name="Nickname" value="Jet Stream" />
@@ -503,6 +526,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A09" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d661f9e7-c9b5-4913-b809-e9fda8606c2b" name="Pillar of Light">
 			<property name="Nickname" value="Pillar of Light" />
@@ -521,6 +545,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A11" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="297f9d29-cedf-4d1a-970c-703a3f978907" name="Ring of Fire">
 			<property name="Nickname" value="Ring of Fire" />
@@ -539,6 +564,7 @@
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
 			<property name="CardID" value="MW1A12" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f214db3b-3583-4e9f-b09b-3abb0481efbe" name="Thunderbolt">
 			<property name="Nickname" value="Thunderbolt" />
@@ -557,6 +583,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1A13" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -577,6 +604,7 @@
 			<property name="Text" value="All animal creatures gain the Charge +1 trait." />
 			<property name="CardID" value="MW1J01" />
 			<property name="cBuffs" value="inf))@all,SAnimal,TCreature,[Charge +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="0d5dd26c-5ff4-4678-8ad4-8bcdf4107085" name="Animal Kinship">
 			<property name="Nickname" value="Animal Kinship" />
@@ -595,6 +623,7 @@
 			<property name="Text" value="As long as you control any of these animal creatures, your Mage gains these traits and abilities: Canine = Melee +1, Reptile = Armor +1, Bear = Tough -2, Ape = Climbing, Cat = Elusive." />
 			<property name="CardID" value="MW1J02" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="a239d7aa-4e81-4a4e-b447-cc3202bb5bad" name="Tooth &amp; Nail">
 			<property name="Nickname" value="Tooth &amp; Nail" />
@@ -613,6 +642,7 @@
 			<property name="Text" value="All animal creature&apos;s melee attacks gain the Piercing +1 trait." />
 			<property name="CardID" value="MW1J03" />
 			<property name="cBuffs" value="inf))@all,SAnimal,TCreature,[mPiercing +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="7e359ecb-7ce3-46f0-a516-de5a5f589733" name="Battle Forge">
 			<property name="Nickname" value="Battle Forge" />
@@ -631,6 +661,7 @@
 			<property name="Text" value="During the Deployment Phase, Battle Forge may cast one equipment spell." />
 			<property name="CardID" value="MW1J04" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b684d6b9-0bc0-4735-998b-026a82ce7e4b" name="Gate to Hell">
 			<property name="Nickname" value="Gate to Hell" />
@@ -649,6 +680,7 @@
 			<property name="Text" value="All demon creatures gain Melee +1. Gate to Hell enters play with a &apos;Closed&apos; token. Once per game, as a full action, you may pay 12 mana to flip the token to the &quot;Opened&quot; side, and make the above attack against each non-flying creature in the arena. Once opened, whenever you, or a spawnpoint or familiar you control, Summon a demon creature, you may place it in the Gate&apos;s zone." />
 			<property name="CardID" value="MW1J06" />
 			<property name="cBuffs" value="inf))@all,SDemon,TCreature,[Melee +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="ee196806-7dc0-4de8-af56-50b3b76c2206" name="Gate to Voltari">
 			<property name="Nickname" value="Gate to Voltari" />
@@ -667,6 +699,7 @@
 			<property name="Text" value="When Gate to Voltari comes into play, choose an opponent Mage. Whenever that Mage casts and resolves a spell, place 1 mana on Gate. During the Deployment Phase, if there is 3 or more mana on Gate, it may summon one Corporeal Arcane creature." />
 			<property name="CardID" value="MW1J07" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="804e971e-0b45-4198-bf12-ff71c7d43b05" name="Hand of Bim-Shalla">
 			<property name="Nickname" value="Hand of Bim-Shalla" />
@@ -687,6 +720,7 @@
 			<alternate name="Hand of Bim-Shalla" type="B" />
 			<alternate name="Hand of Bim-Shalla" type="C" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="177abb85-6437-4e91-8ebb-7df1c9103c06" name="Temple of the Dawnbreaker">
 			<property name="Nickname" value="Temple of the Dawnbreaker" />
@@ -705,6 +739,7 @@
 			<property name="Text" value="Once per round, you may choose and do one of these: Re-roll a Defense or Escape roll that you just rolled, or, if a friendly creature is the defender of an attack, you can re-roll the effect roll or all of the attack dice from that attack, Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J09" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="a6a69bf2-56a1-4f73-b62e-d1423983eddf" name="Lair">
 			<property name="Nickname" value="Lair" />
@@ -723,6 +758,7 @@
 			<property name="Text" value="During The Deployment Phase, Lair may summon 1 animal creature" />
 			<property name="CardID" value="MW1J10" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="c175d5b3-b5b7-4e1b-896a-cd9bef3c790c" name="Idol of Pestilence">
 			<property name="Nickname" value="Idol of Pestilence" />
@@ -742,6 +778,7 @@
 			<property name="CardID" value="MW1J11" />
 			<alternate name="Skeletal Sentry" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9efdd1ac-d30c-4773-9ccd-f916470f4861" name="Mana Crystal">
 			<property name="Nickname" value="Mana Crystal" />
@@ -760,6 +797,7 @@
 			<property name="Text" value="Controller gains Channeling +1." />
 			<property name="CardID" value="MW1J12" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Channeling +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="782de4d1-61aa-4efa-baf1-99df5688704e" name="Mana Flower">
 			<property name="Nickname" value="Mana Flower" />
@@ -778,6 +816,7 @@
 			<property name="Text" value="Controller gains Channeling +1." />
 			<property name="CardID" value="MW1J13" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Channeling +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="cfbeb5ae-3c91-4b05-94e2-bbde8bec21f9" name="Mana Syphon">
 			<property name="Nickname" value="Mana Syphon" />
@@ -796,6 +835,7 @@
 			<property name="Text" value="When Mana Siphon comes into play, choose a Mage up to 2 zones away and within LoS of this spell. That Mage gains Channeling -2 as long as Mana Siphon remains in play, and regardless of where the chosen Mage is in the arena." />
 			<property name="CardID" value="MW1J14" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="358a2b4f-f579-45f3-813f-b2790eab468b" name="Mohktari, Great Tree of Life">
 			<property name="Nickname" value="Mohktari" />
@@ -815,6 +855,7 @@
 			<property name="CardID" value="MW1J15" />
 			<alternate name="Mohktari, Great Tree of Life" type="B" />
 			<property name="cBuffs" value="m0,M0))@all,^friendly,tLiving,TCreature,[Regenerate 2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="26208d5a-4b15-41ee-880c-2dcf896ac45c" name="Mordok&apos;s Obelisk">
 			<property name="Nickname" value="Mordok&apos;s Obelisk" />
@@ -833,6 +874,7 @@
 			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait." />
 			<property name="CardID" value="MW1J16" />
 			<property name="cBuffs" value="inf))@all,!SMage,TCreature,[Upkeep +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="6a65ca7e-df13-4c27-90cb-44d4c86b2610" name="Pentagram">
 			<property name="Nickname" value="Pentagram" />
@@ -851,6 +893,7 @@
 			<property name="Text" value="Each time a different enemy creature is attacked and damaged by a friendly creature, place 1 mana on Pentagram. Pentagram may gain a maximum of 2 mana per round this way. During the Deployment Phase, if there is 2 or more mana on Pentagram, it may summon 1 Dark Living creature." />
 			<property name="CardID" value="MW1J17" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="884ef60a-b2a2-4dc3-89a2-6134541724f3" name="Poison Gas Cloud">
 			<property name="Nickname" value="Poison Gas Cloud" />
@@ -869,6 +912,7 @@
 			<property name="Text" value="Each Upkeep Phase all Living creatures in Poison Gas Cloud&apos;s zone receive 2 points of direct poison damage. If a Living creature enters this zone, or starts its Action Phase in this zone, it may not take more than one move action this round." />
 			<property name="CardID" value="MW1J18" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d6f98712-aa0d-45b5-950e-7f9b991f5684" name="Deathlock">
 			<property name="Nickname" value="Deathlock" />
@@ -887,6 +931,7 @@
 			<property name="Text" value="All creatures and conjurations gain the Finite Life trait." />
 			<property name="CardID" value="MW1J19" />
 			<property name="cBuffs" value="inf))@all,TCreature,[Finite Life||@all,TConjuration,[Finite Life" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9dfe00eb-4795-4583-b272-b7b31ddb0f7c" name="Sacrificial Altar">
 			<property name="Nickname" value="Sacrificial Altar" />
@@ -905,6 +950,7 @@
 			<property name="Text" value="Once per round, before or after a friendly creature&apos;s Action Phase, you may destroy a creature you control and own to give a friendly creature the Melee +X and Piercing +X trait until the end of the round. X = the destroyed creature&apos;s Level." />
 			<property name="CardID" value="MW1J20" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="20ee0189-9f93-4000-93f0-b236bbc20c67" name="Suppression Orb">
 			<property name="Nickname" value="Suppression Orb" />
@@ -923,6 +969,7 @@
 			<property name="Text" value="Whenever any non-Mage creature takes a move action, its controller must first pay 1 mana." />
 			<property name="CardID" value="MW1J21" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="2380dfaa-3339-4fd9-b927-91aa7a30019d" name="Tanglevine">
 			<property name="Nickname" value="Tanglevine" />
@@ -942,6 +989,7 @@
 			<property name="CardID" value="MW1J22" />
 			<alternate name="Skeletal Sentry" type="B" />
 			<property name="cBuffs" value="inf))@target,[Restrained;Unmovable" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">
 			<property name="Nickname" value="Temple of Asyra" />
@@ -960,6 +1008,7 @@
 			<property name="Text" value="Up to twice per round, you may have a friendly cleric creature use a full action to place 1 mana on Temple of Asyra. During the Deployment Phase, if there is 2 or more mana on Temple of Asyra, it may summon 1 Holy creature." />
 			<property name="CardID" value="MW1J23" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="0e4eed2a-34a6-4b4f-9fb2-23aabb2e958c" name="Temple of Light">
 			<property name="Nickname" value="Temple of Light" />
@@ -980,6 +1029,7 @@
 			<alternate name="Temple of Light" type="B" />
 			<alternate name="Temple of Light" type="C" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -1000,6 +1050,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1W01" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b318bb77-75c5-4e7a-9347-dbdcbde55f33" name="Wall of Stone" size="Horizontal Cards">
 			<property name="Nickname" value="Wall of Stone" />
@@ -1018,6 +1069,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1W02" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="4223e20b-75b1-4f21-938e-a4a8acf06195" name="Wall of Fire" size="Horizontal Cards">
 			<property name="Nickname" value="Wall of Fire" />
@@ -1036,6 +1088,7 @@
 			<property name="Text" value="Hydro attacks gain the Ethereal trait when attacking Wall of Fire." />
 			<property name="CardID" value="MW1W03" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="6444b6f4-ae19-45b7-8855-a1dd96ba6bab" name="Wall of Thorns" size="Horizontal Cards">
 			<property name="Nickname" value="Wall of Thorns" />
@@ -1054,6 +1107,7 @@
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
 			<property name="CardID" value="MW1W04" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -1074,6 +1128,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C01" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="8963689f-6703-417d-aeda-64cbb9dab440" name="Asyran Cleric">
 			<property name="Nickname" value="Asyran Cleric" />
@@ -1092,6 +1147,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C02" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="a0eb52c1-e93d-40a5-aafe-3e4e0d5c6b3b" name="Dark Pact Slayer">
 			<property name="Nickname" value="Dark Pact Slayer" />
@@ -1110,6 +1166,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C03" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="87cb82db-2f99-4227-8447-72cffba636dc" name="Bitterwood Fox">
 			<property name="Nickname" value="Bitterwood Fox" />
@@ -1128,6 +1185,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C04" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="64ac6979-be87-4a71-b840-c60fade56a13" name="Blue Gremlin">
 			<property name="Nickname" value="Blue Gremlin" />
@@ -1146,6 +1204,7 @@
 			<property name="Text" value="When this creature is activated, you may pay 1 mana. If you do, Gremlin gains the Fast trait until the end of round, and each move action he takes this round is a Teleport to the next zone." />
 			<property name="CardID" value="MW1C05" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="76d2e8e3-6414-488c-b866-20d91f6320db" name="Brogan Bloodstone">
 			<property name="Nickname" value="Brogan Bloodstone" />
@@ -1164,6 +1223,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C06" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="1df603fc-3d5d-4a40-9942-640bca00e396" name="Cervere, The Forest Shadow">
 			<property name="Nickname" value="Cervere" />
@@ -1182,6 +1242,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C07" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="bd1f7bbc-4a61-4006-a1d8-a5cbd78799db" name="Darkfenne Bat">
 			<property name="Nickname" value="Darkfenne Bat" />
@@ -1200,6 +1261,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C08" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="1b6c4df2-706b-440e-9f55-c6d3c0df93a7" name="Darkfenne Hydra">
 			<property name="Nickname" value="Darkfenne Hydra" />
@@ -1218,6 +1280,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C09" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="ddb64417-619b-49a4-a783-9bcf77f54c34" name="Emerald Tegu">
 			<property name="Nickname" value="Emerald Tegu" />
@@ -1236,6 +1299,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C12" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="bf4ff874-b6f9-4f70-9dcb-7831a58c8997" name="Fellella, Pixie Familiar">
 			<property name="Nickname" value="Fellella" />
@@ -1254,6 +1318,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C13" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="acfc7da8-49f0-45f0-ab19-e7ccd124711f" name="Feral Bobcat">
 			<property name="Nickname" value="Feral Bobcat" />
@@ -1272,6 +1337,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C14" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d6769d21-6095-43b4-a5c3-cbfd6c5f9436" name="Firebrand Imp">
 			<property name="Nickname" value="Firebrand Imp" />
@@ -1290,6 +1356,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C15" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="4ed5ed50-3c2a-4513-ae98-c954766e5a79" name="Flaming Hellion">
 			<property name="Nickname" value="Flaming Hellion" />
@@ -1308,6 +1375,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C16" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="536cee06-aa95-4efc-a484-e4d19a3f2222" name="Goran, Werewolf Pet">
 			<property name="Nickname" value="Goran" />
@@ -1326,6 +1394,7 @@
 			<property name="Text" value="Goran gains an additional Bloodthirsty +1 trait while in the same zone as his controlling Mage." />
 			<property name="CardID" value="MW1C17" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="03d52691-75b2-42ec-a81c-ca2074f28002" name="Gorgon Archer">
 			<property name="Nickname" value="Gorgon Archer" />
@@ -1344,6 +1413,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C18" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="8bd0df13-3dc5-4ff1-888e-e36beb073902" name="Gray Angel">
 			<property name="Nickname" value="Gray Angel" />
@@ -1362,6 +1432,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C19" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="da91fdd3-73dd-418f-91cf-bf827ef40509" name="Highland Unicorn">
 			<property name="Nickname" value="Highland Unicorn" />
@@ -1380,6 +1451,7 @@
 			<property name="Text" value="All friendly Living creatures in the same zone as Highland Unicorn gain the Regenerate 1 trait." />
 			<property name="CardID" value="MW1C20" />
 			<property name="cBuffs" value="m0,M0))@all,^friendly,tLiving,TCreature,[Regenerate 1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="e6dc6c98-4d6b-4d02-9b13-1df201ea1df4" name="Huginn, Raven Familiar">
 			<property name="Nickname" value="Huginn" />
@@ -1398,6 +1470,7 @@
 			<property name="Text" value="Huginn can cast only level 1-2 incantation spells." />
 			<property name="CardID" value="MW1C21" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="12f32a67-eb37-4311-ab57-addb40573990" name="Knight of Westlock">
 			<property name="Nickname" value="Knight of Westlock" />
@@ -1416,6 +1489,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C22" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="52b0f102-59d5-415c-9e5b-3d2192613155" name="Malacoda">
 			<property name="Nickname" value="Malacoda" />
@@ -1435,6 +1509,7 @@
 			<property name="CardID" value="MW1C23" />
 			<alternate name="Malacoda" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="ad3b90cf-5a53-4541-903f-4b0cfe397f64" name="Mana Leech">
 			<property name="Nickname" value="Mana Leech" />
@@ -1453,6 +1528,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C24" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b49212c1-f912-441b-b63f-9f9e415c2d00" name="Mountain Gorilla">
 			<property name="Nickname" value="Mountain Gorilla" />
@@ -1471,6 +1547,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C25" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="a69231c7-9c7a-4b15-a432-275aeaf4bfed" name="Necropian Vampiress">
 			<property name="Nickname" value="Necropian Vampiress" />
@@ -1489,6 +1566,7 @@
 			<property name="Text" value="When this creature is activated, you may pay 1 mana to give her the Flying trait until the end of her Action Phase." />
 			<property name="CardID" value="MW1C26" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="057affb5-b19a-4de0-b75a-abc5451897df" name="Moonglow Faerie">
 			<property name="Nickname" value="Moonglow Faerie" />
@@ -1507,6 +1585,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C27" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="38380818-d4ca-45b4-a13e-d85d7683c25a" name="Royal Archer">
 			<property name="Nickname" value="Royal Archer" />
@@ -1525,6 +1604,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C28" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="cdfe1a7e-8adf-42c1-b786-9dbef6256061" name="Redclaw, Alpha Male">
 			<property name="Nickname" value="Redclaw" />
@@ -1543,6 +1623,7 @@
 			<property name="Text" value="All other friendly canine creatures in the same zone as Redclaw gain Armor +1 and the Melee +1 trait." />
 			<property name="CardID" value="MW1C29" />
 			<property name="cBuffs" value="m0,M0))@all,^friendly,SCanine,TCreature,[Armor +1;Melee +1" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="33e41d11-c799-4fb0-a25d-dcb5758bc0f0" name="Samandriel, Angel of Light">
 			<property name="Nickname" value="Samandriel" />
@@ -1561,6 +1642,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C31" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="0d9b07c9-5d2b-45fa-9e69-6f371293f883" name="Skeletal Sentry">
 			<property name="Nickname" value="Skeletal Sentry" />
@@ -1580,6 +1662,7 @@
 			<property name="CardID" value="MW1C32" />
 			<alternate name="Skeletal Sentry" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="28828fac-23f8-4b66-bde0-38d4a4931862" name="Sosruko, Ferret Companion">
 			<property name="Nickname" value="Sosruko" />
@@ -1598,6 +1681,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C33" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="3a55bfaa-a96e-43fc-9a66-f8aff21701d5" name="Steelclaw Grizzly">
 			<property name="Nickname" value="Steelclaw Grizzly" />
@@ -1616,6 +1700,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C34" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="031d394a-fafc-4e88-b1c9-1152b223b278" name="Stonegaze Basilisk">
 			<property name="Nickname" value="Stonegaze Basilisk" />
@@ -1634,6 +1719,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C35" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5745219f-22d6-4027-8006-e71e9557b3ff" name="Tarok, the Skyhunter">
 			<property name="Nickname" value="Tarok" />
@@ -1652,6 +1738,7 @@
 			<property name="Text" value="Tarok&apos;s defense only works against Melee attacks from Flying creatures." />
 			<property name="CardID" value="MW1C36" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="M" />
 		</card>
 		<card id="d83c084a-1757-4402-98cb-443958e22f54" name="Thunderift Falcon">
 			<property name="Nickname" value="Thunderift Falcon" />
@@ -1670,6 +1757,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C37" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="434d1870-d8bb-4362-aa21-415d4843e839" name="Timber Wolf">
 			<property name="Nickname" value="Timber Wolf" />
@@ -1688,6 +1776,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C38" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="4519600d-8012-4b90-b05c-bcf36ca62469" name="Valshalla, Lightning Angel">
 			<property name="Nickname" value="Valshalla" />
@@ -1706,6 +1795,7 @@
 			<property name="Text" value="Once per round, if a friendly creature is attacked and destroyed by an enemy creature, place a Wrath token on Valshalla, up to a maximum of 4 tokens. For each token on her, Valshalla gains Melee +1." />
 			<property name="CardID" value="MW1C39" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="F" />
 		</card>
 		<card id="ec0215f9-dcc4-4df6-98f9-25e789a21a51" name="Whirling Spirit">
 			<property name="Nickname" value="Whirling Spirit" />
@@ -1724,6 +1814,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C40" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -1744,6 +1835,7 @@
 			<property name="Text" value="This creature gains the Melee +2 trait." />
 			<property name="CardID" value="MW1E01" />
 			<property name="cBuffs" value="inf))@target,[Melee +2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="25d70640-eea1-4429-b146-4d176b493e41" name="Block">
 			<property name="Nickname" value="Block" />
@@ -1762,6 +1854,7 @@
 			<property name="Text" value="When this creature is attacked, you must reveal Block during the Avoid Attack Step. Block counts as a Defense, and the attack is avoided. Then, destroy Block. If the attack is Unavoidable, destroy Block without effect." />
 			<property name="CardID" value="MW1E02" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b4c5b374-da35-482f-9ef1-594a39de116e" name="Bull Endurance">
 			<property name="Nickname" value="Bull Endurance" />
@@ -1780,6 +1873,7 @@
 			<property name="Text" value="This creature gains Life +4." />
 			<property name="CardID" value="MW1E03" />
 			<property name="cBuffs" value="inf))@target,[Life +4" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="775fd07c-63b3-48af-9a6d-061165fe5805" name="Chains of Agony">
 			<property name="Nickname" value="Chains of Agony" />
@@ -1798,6 +1892,7 @@
 			<property name="Text" value="Each time this creature takes a move action, it receives 1 direct damage." />
 			<property name="CardID" value="MW1E04" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="7b9de53a-a500-44b5-a510-19636528d89a" name="Cheetah Speed">
 			<property name="Nickname" value="Cheetah Speed" />
@@ -1816,6 +1911,7 @@
 			<property name="Text" value="This creature gains the Fast trait." />
 			<property name="CardID" value="MW1E05" />
 			<property name="cBuffs" value="inf))@target,[Fast" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="0574a699-e012-4b4e-9c68-1b5f02f05c8a" name="Circle of Lightning">
 			<property name="Nickname" value="Circle of Lightning" />
@@ -1834,6 +1930,7 @@
 			<property name="Text" value="This creature gains a Damage Barrier." />
 			<property name="CardID" value="MW1E06" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="746e5dba-4689-4ae5-831e-a844131c4824" name="Cobra Reflexes">
 			<property name="Nickname" value="Cobra Reflexes" />
@@ -1852,6 +1949,7 @@
 			<property name="Text" value="This creature gains a Defense.&#xD;&#xA;[Defense=7+ 1x]" />
 			<property name="CardID" value="MW1E07" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="46b36e31-5dec-4a37-a39c-c2a5b6e0caee" name="Death Link">
 			<property name="Nickname" value="Death Link" />
@@ -1870,6 +1968,7 @@
 			<property name="Text" value="Each Upkeep Phase, the controller of Death Link may heal up to 2 damage from his Mage and place it on this creature as direct damage, regardless of distance or LoS." />
 			<property name="CardID" value="MW1E08" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6" name="Agony">
 			<property name="Nickname" value="Agony" />
@@ -1888,6 +1987,7 @@
 			<property name="Text" value="Whenever this creature makes a non-spell ranged or melee attack, it rolls 2 fewer attack dice." />
 			<property name="CardID" value="MW1E09" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="ed610a8f-e3f2-4d3e-8db6-5d85c42afb4b" name="Decoy">
 			<property name="Nickname" value="Decoy" />
@@ -1906,6 +2006,7 @@
 			<property name="Text" value="When Decoy is revealed, destroy it. If this spell is destroyed, even if it has not been revealed, its controller gains 2 mana." />
 			<property name="CardID" value="MW1E10" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d7ad20c5-f185-4e32-beec-f6e120e05719" name="Divine Intervention">
 			<property name="Nickname" value="Divine Intervention" />
@@ -1924,6 +2025,7 @@
 			<property name="Text" value="When this spell is revealed, you may Teleport this creature to any zone in the Arena, then destroy Divine Intervention." />
 			<property name="CardID" value="MW1E11" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="58b52bf5-816a-4342-b1b8-a37f16daa49f" name="Divine Protection">
 			<property name="Nickname" value="Divine Protection" />
@@ -1942,6 +2044,7 @@
 			<property name="Text" value="This creature gains the Aegis 1 trait." />
 			<property name="CardID" value="MW1E12" />
 			<property name="cBuffs" value="inf))@target,[Aegis 1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f7fee204-8053-446d-b85d-c8d07e70d4fd" name="Eagle Wings">
 			<property name="Nickname" value="Eagle Wings" />
@@ -1960,6 +2063,7 @@
 			<property name="Text" value="This creature gains the Flying trait." />
 			<property name="CardID" value="MW1E13" />
 			<property name="cBuffs" value="inf))@target,[Flying" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="20b2deab-90f3-4a9b-83b4-ad83129ec14c" name="Enfeeble">
 			<property name="Nickname" value="Enfeeble" />
@@ -1978,6 +2082,7 @@
 			<property name="Text" value="This creature gains the Slow trait." />
 			<property name="CardID" value="MW1E14" />
 			<property name="cBuffs" value="inf))@target,[Slow" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="00cfd5d8-8fa8-4db5-b4df-6f5bae378d4b" name="Essence Drain">
 			<property name="Nickname" value="Essence Drain" />
@@ -1996,6 +2101,7 @@
 			<property name="Text" value="This creature gains the Upkeep +2 trait." />
 			<property name="CardID" value="MW1E15" />
 			<property name="cBuffs" value="inf))@target,[Upkeep +2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="aeada61e-e636-4c46-b169-833162a13b93" name="Force Hold">
 			<property name="Nickname" value="Force Hold" />
@@ -2014,6 +2120,7 @@
 			<property name="Text" value="This creature is Restrained, and gains the Unmovable trait. This does not affect creatures with the Uncontainable trait." />
 			<property name="CardID" value="MW1E16" />
 			<property name="cBuffs" value="inf))@target,[Restrained,Unmovable" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="7fe6a6b2-4403-4a07-8048-4692d954898a" name="Force Orb">
 			<property name="Nickname" value="Force Orb" />
@@ -2032,6 +2139,7 @@
 			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze.&#xD;&#xA;[Defense=8+ 1x No Melee]" />
 			<property name="CardID" value="MW1E17" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="77b5e9a1-9824-40a5-95e9-2f669a01a5c8" name="Force Sword">
 			<property name="Nickname" value="Force Sword" />
@@ -2050,6 +2158,7 @@
 			<property name="Text" value="This creature gains a Defense, which is unaffected by conditions on this creature, including Incapacitated, Restrained, and Daze. &#xD;&#xA;[Defense=8+ 1x No Ranged]" />
 			<property name="CardID" value="MW1E18" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="660cd33f-8812-48bb-a513-2ada886a0320" name="Ghoul Rot">
 			<property name="Nickname" value="Ghoul Rot" />
@@ -2069,6 +2178,7 @@
 			<property name="CardID" value="MW1E19" />
 			<alternate name="Ghoul Rot" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f5d06493-1929-4d1f-9bcb-756339ccf23e" name="Harmonize">
 			<property name="Nickname" value="Harmonize" />
@@ -2087,6 +2197,7 @@
 			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1." />
 			<property name="CardID" value="MW1E20" />
 			<property name="cBuffs" value="inf))@target,[Channeling +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="8c9e5e56-a9a9-4077-92c1-f35123ee4c64" name="Hawkeye">
 			<property name="Nickname" value="Hawkeye" />
@@ -2105,6 +2216,7 @@
 			<property name="Text" value="This creature gains the Ranged +1 trait." />
 			<property name="CardID" value="MW1E21" />
 			<property name="cBuffs" value="inf))@target,[Ranged +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="22fe0c48-f14e-4d31-b5ff-4013a4245071" name="Hellfire Trap">
 			<property name="Nickname" value="Hellfire Trap" />
@@ -2123,6 +2235,7 @@
 			<property name="Text" value="Hellfire Trap can only target a zone without enemy creatures. When an enemy creature enters the zone, you must reveal Hellfire Trap. Hellfire Trap immediately attacks that creature. Then, destroy Hellfire Trap." />
 			<property name="CardID" value="MW1E22" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="7bc882f8-d7d0-4c70-b40f-2cbc844e3579" name="Jinx">
 			<property name="Nickname" value="Jinx" />
@@ -2141,6 +2254,7 @@
 			<property name="Text" value="When this creature casts a quick spell, you must reveal Jinx during the Counter Spell Step. That spell is canceled and is returned to its owner&apos;s spellbook. Any mana spent to cast that spell is refunded to the caster&apos;s mana supply. Then, destroy Jinx." />
 			<property name="CardID" value="MW1E23" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9fd89680-0bb1-442c-ad19-193ea556873e" name="Magebane">
 			<property name="Nickname" value="Magebane" />
@@ -2159,6 +2273,7 @@
 			<property name="Text" value="Each time this creature casts and resolves a spell, it receives 1 direct damage." />
 			<property name="CardID" value="MW1E24" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="6fa6c0f1-d187-47ed-8285-4d40aeb49207" name="Maim Wings">
 			<property name="Nickname" value="Maim Wings" />
@@ -2177,6 +2292,7 @@
 			<property name="Text" value="This creature loses the Flying trait." />
 			<property name="CardID" value="MW1E25" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="2d94d69e-5c08-4db2-89a0-5c811bfaca17" name="Marked for Death">
 			<property name="Nickname" value="Marked for Death" />
@@ -2195,6 +2311,7 @@
 			<property name="Text" value="All creatures gain +1 attack die when attacking this creature. Creatures can only gain this bonus for the first attack they make each round against this creature." />
 			<property name="CardID" value="MW1E27" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="4d939439-345f-4005-9f35-b95d5a41f70a" name="Mongoose Agility">
 			<property name="Nickname" value="Mongoose Agility" />
@@ -2213,6 +2330,7 @@
 			<property name="Text" value="This creature gains the Elusive trait." />
 			<property name="CardID" value="MW1E28" />
 			<property name="cBuffs" value="inf))@target,[Elusive" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="81c93236-8b3f-41fd-9210-89a9498ecfce" name="Nullify">
 			<property name="Nickname" value="Nullify" />
@@ -2231,6 +2349,7 @@
 			<property name="Text" value="When this creature is targeted by an incantation or enchantment spell controlled by an opponent, you must reveal Nullify during the Counter Spell Step. That spell is countered. Then, destroy Nullify." />
 			<property name="CardID" value="MW1E29" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="22a8931e-1c99-44dd-bfb1-ad56e91fb361" name="Pacify">
 			<property name="Nickname" value="Pacify" />
@@ -2249,6 +2368,7 @@
 			<property name="Text" value="Each round, the first time this creature makes a melee or ranged attack, its controller must pay 2 mana during the Declare Attack Step, or else the attack is canceled. Pacify does not affect counterstrikes." />
 			<property name="CardID" value="MW1E30" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="52758d34-ee4f-46cd-bb00-6f9bc5edd553" name="Poisoned Blood">
 			<property name="Nickname" value="Poisoned Blood" />
@@ -2267,6 +2387,7 @@
 			<property name="Text" value="This creature gains the Finite Life trait." />
 			<property name="CardID" value="MW1E31" />
 			<property name="cBuffs" value="inf))@target,[Finite Life" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="76d440be-b82c-4a12-97ef-c2bad86fdc1a" name="Regrowth">
 			<property name="Nickname" value="Regrowth" />
@@ -2285,6 +2406,7 @@
 			<property name="Text" value="This creature gains the Regenerate 2 trait." />
 			<property name="CardID" value="MW1E32" />
 			<property name="cBuffs" value="inf))@target,[Regenerate 2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="24b63480-3272-4f93-b576-48710d5bedaa" name="Retaliate">
 			<property name="Nickname" value="Retaliate" />
@@ -2303,6 +2425,7 @@
 			<property name="Text" value="This creature&apos;s quick action melee attacks gain the Counterstrike trait. The first time it makes a Counterstrike attack, destroy Retaliate." />
 			<property name="CardID" value="MW1E33" />
 			<property name="cBuffs" value="m0,M0))@target,TCreature,tCorporeal,[Counterstrike" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="732f4d7f-0cf6-4393-9446-b9360c8f18e3" name="Reverse Attack">
 			<property name="Nickname" value="Reverse Attack" />
@@ -2321,6 +2444,7 @@
 			<property name="Text" value="When this creature is attacked, you must reveal Reverse Attack during the Avoid Attack Step. The attack is avoided and then redirected back to the attacker, who now becomes the target of that attack for the next 2 steps (Roll Dice and Damage and Effects). Then, destroy Reverse Attack. If the attack is Unavoidable, destroy Reverse Attack without effect." />
 			<property name="CardID" value="MW1E34" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5f318366-9c85-4304-b7b1-3c60daf0edde" name="Reverse Magic">
 			<property name="Nickname" value="Reverse Magic" />
@@ -2343,6 +2467,7 @@
 			<alternate name="Battle Fury" type="B" />
 			<alternate name="Battle Fury" type="C" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="afd1e927-92a2-4525-a33f-50fec7c9b382" name="Rhino Hide">
 			<property name="Nickname" value="Rhino Hide" />
@@ -2361,6 +2486,7 @@
 			<property name="Text" value="This creature gains Armor +2." />
 			<property name="CardID" value="MW1E36" />
 			<property name="cBuffs" value="inf))@target,[Armor +2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="39d0a0a1-154d-4e33-9af0-937f0b98465c" name="Sacred Ground">
 			<property name="Nickname" value="Sacred Ground" />
@@ -2379,6 +2505,7 @@
 			<property name="Text" value="All friendly Living creatures in this zone gain the Aegis 1 trait." />
 			<property name="CardID" value="MW1E37" />
 			<property name="cBuffs" value="m0,M0))^friendly,TCreature,tLiving,[Aegis 1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f6a5cb45-a9ec-4e4a-858f-60a48d88b7ab" name="Teleport Trap">
 			<property name="Nickname" value="Teleport Trap" />
@@ -2397,6 +2524,7 @@
 			<property name="Text" value="Teleport Trap can only target a zone without enemy creatures. When an enemy creature enters the zone, you must reveal Teleport Trap. That creature is immediately teleported to a zone of your choice, up to 2 zones away. Then, destroy Teleport Trap." />
 			<property name="CardID" value="MW1E38" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="6c1dde62-0d1d-429a-ae53-af492e964f8d" name="Turn to Stone">
 			<property name="Nickname" value="Turn to Stone" />
@@ -2415,6 +2543,7 @@
 			<property name="Text" value="This creature is Incapacitated, and gains Armor +6. You cannot reveal Turn to Stone during an action, such as an attack or spell." />
 			<property name="CardID" value="MW1E39" />
 			<property name="cBuffs" value="inf))@target,[Incapacitated;Armor +6" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b981c228-b1e5-4318-a7ec-444c647eed87" name="Vampirism">
 			<property name="Nickname" value="Vampirism" />
@@ -2433,6 +2562,7 @@
 			<property name="Text" value="This creature&apos;s melee attacks gain the Vampiric trait." />
 			<property name="CardID" value="MW1E40" />
 			<property name="cBuffs" value="inf))@target,[Vampiric" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -2453,6 +2583,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a metamagic or mana spell. Enchantments only receive this discount when they are revealed. &#xD;&#xA;[Casting Discount] [1] [Metamagic/Mana]  [x1]" />
 			<property name="CardID" value="MW1Q01" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="12b4584c-1338-4155-8a7f-6ba27ced88ba" name="Bearskin">
 			<property name="Nickname" value="Bearskin" />
@@ -2471,6 +2602,7 @@
 			<property name="Text" value="Mage gains Armor +2 and the Frost -2 trait.&#xD;&#xA;[Armor +2] [Frost -2]" />
 			<property name="CardID" value="MW1Q02" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2;Frost -2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5d82d063-51bc-491f-a9eb-a72a6722d509" name="Crown of Protection">
 			<property name="Nickname" value="Crown of Protection" />
@@ -2489,6 +2621,7 @@
 			<property name="Text" value="Once per round, as a quick spell, this Mage may pay 2 mana to place an Armor +1 token on a target Living non-Mage creature up to one zone away. These tokens may stack." />
 			<property name="CardID" value="MW1Q03" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="0c8d6e31-5e59-454c-a7e0-0d3118f0cead" name="Deflection Bracers">
 			<property name="Nickname" value="Deflection Bracers" />
@@ -2507,6 +2640,7 @@
 			<property name="Text" value="Mage gains a Defense.&#xD;&#xA;[Defense=7+ 1x No Ranged]" />
 			<property name="CardID" value="MW1Q04" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="fc42efdc-0a85-4a45-a273-f5e403f1489c" name="Demonhide Armor">
 			<property name="Nickname" value="Demonhide Armor" />
@@ -2525,6 +2659,7 @@
 			<property name="Text" value="Mage gains Armor +2 and a Damage Barrier." />
 			<property name="CardID" value="MW1Q05" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="66582dca-63bc-4b49-bbcd-add00a57cf11" name="Dragonscale Hauberk">
 			<property name="Nickname" value="Dragonscale Hauberk" />
@@ -2543,6 +2678,7 @@
 			<property name="Text" value="Mage gains Armor +2 and the Flame -2 trait." />
 			<property name="CardID" value="MW1Q06" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2;Flame -2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="dda72c4a-8f33-42cf-9eed-bd52fb91af22" name="Elemental Cloak">
 			<property name="Nickname" value="Elemental Cloak" />
@@ -2561,6 +2697,7 @@
 			<property name="Text" value="Mage gains Armor +1, and the Flame -2, Frost -2, and Lightning -2 traits." />
 			<property name="CardID" value="MW1Q07" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +1;Flame -2;Frost -2;Lightning -2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="469d4201-ec88-4f13-a8dc-f11b48e3df4b" name="Elemental Wand">
 			<property name="Nickname" value="Elemental Wand" />
@@ -2579,6 +2716,7 @@
 			<property name="Text" value="You may bind a non-Epic attack spell from your spellbook to Elemental Wand. As a quick spell, you may pay 3 mana to change the bound spell." />
 			<property name="CardID" value="MW1Q08" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d2d9ee17-377b-453f-9772-e996076cece4" name="Enchanter&apos;s Ring">
 			<property name="Nickname" value="Enchanter&apos;s Ring" />
@@ -2597,6 +2735,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an enchantment spell that targets a friendly creature. &#xD;&#xA;[Casting Discount] [1] [Enchantment] [x1]" />
 			<property name="CardID" value="MW1Q09" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="42f6de77-bab3-4be7-a0e1-567957dc37ba" name="Fireshaper Ring">
 			<property name="Nickname" value="Fireshaper Ring" />
@@ -2615,6 +2754,7 @@
 			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal flame damage." />
 			<property name="CardID" value="MW1Q10" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="1257b363-d905-4ebe-94c8-cd220565b28c" name="Gauntlets of Strength">
 			<property name="Nickname" value="Gauntlets of Strength" />
@@ -2633,6 +2773,7 @@
 			<property name="Text" value="Mage gains the Melee +1 trait." />
 			<property name="CardID" value="MW1Q11" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Melee +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="ad9461c7-8594-44f6-9616-2bba7edbbd44" name="Helm of Fear">
 			<property name="Nickname" value="Helm of Fear" />
@@ -2652,6 +2793,7 @@
 			<property name="CardID" value="MW1Q12" />
 			<alternate name="Helm of Fear" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="86e3fd4a-e52d-4ccd-9b33-333a13126ac8" name="Ivarium Longbow">
 			<property name="Nickname" value="Ivarium Longbow" />
@@ -2670,6 +2812,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q13" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5d2f72e1-7aaf-4931-b0e0-f11cce928313" name="Lash of Hellfire">
 			<property name="Nickname" value="Lash of Hellfire" />
@@ -2688,6 +2831,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q14" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5a07689a-9edc-4366-9d70-6eecf5f4447d" name="Leather Boots">
 			<property name="Nickname" value="Leather Boots" />
@@ -2706,6 +2850,7 @@
 			<property name="Text" value="Mage gains Armor +1." />
 			<property name="CardID" value="MW1Q15" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="a6a267f1-a2ec-4264-aaff-85b40c0a68dd" name="Leather Gloves">
 			<property name="Nickname" value="Leather Gloves" />
@@ -2724,6 +2869,7 @@
 			<property name="Text" value="Mage gains Armor +1." />
 			<property name="CardID" value="MW1Q16" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d2b981a2-18c0-450a-b4cf-4d1c3d412e63" name="Lightning Ring">
 			<property name="Nickname" value="Lightning Ring" />
@@ -2742,6 +2888,7 @@
 			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal lightning damage." />
 			<property name="CardID" value="MW1Q17" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="fabfda9b-1168-4b3b-9f2b-c5ead9215b81" name="Mage Staff">
 			<property name="Nickname" value="Mage Staff" />
@@ -2760,6 +2907,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q18" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="86d43008-5faf-4eaf-a66a-cdd985f45d5f" name="Mage Wand">
 			<property name="Nickname" value="Mage Wand" />
@@ -2778,6 +2926,7 @@
 			<property name="Text" value="You may bind a non-Epic incantation spell from your spellbook to Mage Wand. As a quick spell, you may pay 3 mana to change the bound spell." />
 			<property name="CardID" value="MW1Q19" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="83181c0c-46a8-40f3-9451-c7b28ca8783f" name="Moloch&apos;s Torment">
 			<property name="Nickname" value="Moloch&apos;s Torment" />
@@ -2796,6 +2945,7 @@
 			<property name="Text" value="During the Upkeep Phase, for each creature that has at least one curse you control attached to it, you may spend 1 mana to deal 1 direct damage to that creature." />
 			<property name="CardID" value="MW1Q21" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b28a0c37-8690-4bb4-826a-131cd9f12294" name="Moonglow Amulet">
 			<property name="Nickname" value="Moonglow Amulet" />
@@ -2814,6 +2964,7 @@
 			<property name="Text" value="Mage gains the Channel +1 trait." />
 			<property name="CardID" value="MW1Q22" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Channeling +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="983a31d2-4e37-441d-a39e-3088f9b3d84c" name="Regrowth Belt">
 			<property name="Nickname" value="Regrowth Belt" />
@@ -2832,6 +2983,7 @@
 			<property name="Text" value="Mage gains the Regenerate 2 trait." />
 			<property name="CardID" value="MW1Q23" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Regenerate 2" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="aa404428-c691-4c46-b11c-824158dfcf4d" name="Ring of Asyra">
 			<property name="Nickname" value="Ring of Asyra" />
@@ -2850,6 +3002,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a Holy enchantment or incantation spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Holy] [x1]" />
 			<property name="CardID" value="MW1Q24" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="7900f68c-f781-48d1-9c96-74973d16530c" name="Ring of Beasts">
 			<property name="Nickname" value="Ring of Beasts" />
@@ -2868,6 +3021,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts an animal creature spell.&#xD;&#xA;[Casting Discount] [1] [Animal] [x1]" />
 			<property name="CardID" value="MW1Q25" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="35592eff-8121-45e0-9c1f-a52bf24469ae" name="Dawnbreaker Ring">
 			<property name="Nickname" value="Dawnbreaker Ring" />
@@ -2886,6 +3040,7 @@
 			<property name="Text" value="Mage gains the Melee +1 and Ranged +1 traits for all attacks he makes that deal light damage." />
 			<property name="CardID" value="MW1Q27" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="91180ca9-e88e-4355-854a-49e78e2b4ec6" name="Ring of Curses">
 			<property name="Nickname" value="Ring of Curses" />
@@ -2904,6 +3059,7 @@
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when he casts or reveals a curse spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Curse] [x1]" />
 			<property name="CardID" value="MW1Q28" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d78f4233-edf8-4535-b3db-37ba3a69d0ab" name="Staff of Asyra">
 			<property name="Nickname" value="Staff of Asyra" />
@@ -2922,6 +3078,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q29" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="e3375aac-6b2d-45b8-93a9-c8d0b316ee94" name="Staff of Beasts">
 			<property name="Nickname" value="Staff of Beasts" />
@@ -2940,6 +3097,7 @@
 			<property name="Text" value="Once per round, as a quick spell, this Mage may pay 2 mana and target an animal creature up to 1 zone away and either give them the Melee +2 trait until end of round, or heal damage equal to the amount rolled on 2 attack dice." />
 			<property name="CardID" value="MW1Q30" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="4376c705-deea-45cd-9dc2-70d5bc1483a8" name="Staff of the Arcanum">
 			<property name="Nickname" value="Staff of the Arcanum" />
@@ -2958,6 +3116,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q31" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b37baf19-da0b-40f6-8cb3-cf8205bfb04e" name="Suppression Cloak">
 			<property name="Nickname" value="Suppression Cloak" />
@@ -2976,6 +3135,7 @@
 			<property name="Text" value="The first time each round that each creature makes a melee attack against this Mage, its controller must pay 2 mana during the Declare Attack Step, as an additional cost of making that attack. Has no effect on counterstrikes." />
 			<property name="CardID" value="MW1Q32" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9394929c-4773-4aa2-bd02-2a930cfa07a0" name="Wind Wyvern Hide">
 			<property name="Nickname" value="Wind Wyvern Hide" />
@@ -2994,6 +3154,7 @@
 			<property name="Text" value="Mage gains Armor +2 and the Wind -3 trait." />
 			<property name="CardID" value="MW1Q33" />
 			<property name="cBuffs" value="inf))@all,^controlled,SMage,TCreature,[Armor +2;Wind -3" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -3014,6 +3175,7 @@
 			<property name="Text" value="Teleport target creature out of the arena. Place 3 Banish tokens on it. Remove 1 Banish token each Upkeep Phase. When the final token is removed, return the creature to the last zone it was in. While out of the arena, this creature cannot take any action, its action marker remains unchanged, and it can only be affected by attached spells, conditions, or its own traits and abilities." />
 			<property name="CardID" value="MW1I01" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="a1959fe8-780f-4720-a446-0c2f999e2df2" name="Battle Fury">
 			<property name="Nickname" value="Battle Fury" />
@@ -3033,6 +3195,7 @@
 			<property name="CardID" value="MW1I02" />
 			<alternate name="Battle Fury" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5d5025e2-8e1a-4694-9845-fd944cc37b92" name="Call of the Wild">
 			<property name="Nickname" value="Call of the Wild" />
@@ -3051,6 +3214,7 @@
 			<property name="Text" value="All friendly animal creatures in the arena gain the Melee +1 trait until the end of the round." />
 			<property name="CardID" value="MW1I03" />
 			<property name="cBuffs" value="inf))@all,^friendly,SAnimal,TCreature,[Melee +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="78846d18-04ca-4fc8-b3e1-bc22003a92a8" name="Charge">
 			<property name="Nickname" value="Charge" />
@@ -3069,6 +3233,7 @@
 			<property name="Text" value="Target gains the Fast and Charge +1 traits until the end of the round." />
 			<property name="CardID" value="MW1I04" />
 			<property name="cBuffs" value="inf))@target,[Fast;Charge +1" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="2753eeea-2130-4399-ae88-f96ed1ccf776" name="Dispel">
 			<property name="Nickname" value="Dispel" />
@@ -3087,6 +3252,7 @@
 			<property name="Text" value="Destroy the target. X = total mana cost of target enchantment (casting plus reveal cost)." />
 			<property name="CardID" value="MW1I06" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="87fb7a11-c77d-4503-a66c-659ddd6ad100" name="Dissolve">
 			<property name="Nickname" value="Dissolve" />
@@ -3105,6 +3271,7 @@
 			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. X = equipment&apos;s casting cost. Then, destroy the chosen equipment." />
 			<property name="CardID" value="MW1I07" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="ffda5f70-74ef-40d8-9da5-f848c2447615" name="Drain Life">
 			<property name="Nickname" value="Drain Life" />
@@ -3123,6 +3290,7 @@
 			<property name="Text" value="The target receives 5 attack dice of direct damage. The caster also heals damage equal to the damage received by the target creature." />
 			<property name="CardID" value="MW1I08" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="59b650aa-2e7c-42bb-b7b5-4c7a938b2b4b" name="Drain Power">
 			<property name="Nickname" value="Drain Power" />
@@ -3141,6 +3309,7 @@
 			<property name="Text" value="Roll 8 attack dice. The target loses that much mana from his mana supply. The caster gains mana equal to the mana lost." />
 			<property name="CardID" value="MW1I09" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="965bddc4-b43e-4f90-bc05-8bd602d7c33d" name="Evade">
 			<property name="Nickname" value="Evade" />
@@ -3159,6 +3328,7 @@
 			<property name="Text" value="Target gains the Elusive trait until the end of the round." />
 			<property name="CardID" value="MW1I10" />
 			<property name="cBuffs" value="inf))@target,[Elusive" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="90e866bf-64db-4199-ba5f-3364eecaf7ce" name="Explode">
 			<property name="Nickname" value="Explode" />
@@ -3177,6 +3347,7 @@
 			<property name="Text" value="When you cast Explode, choose an equipment object attached to target Mage. X = 6 + the equipment&apos;s casting cost. Destroy the choosen equipment. Then, Explode makes the above flame attack against the target Mage." />
 			<property name="CardID" value="MW1I11" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9455c697-f680-4d12-b5d6-72235c03f77c" name="Force Push">
 			<property name="Nickname" value="Force Push" />
@@ -3196,6 +3367,7 @@
 			<property name="CardID" value="MW1I12" />
 			<alternate name="Force Push" type="B" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f3c06b0f-69ac-40ba-8d78-632c5f89505c" name="Group Heal">
 			<property name="Nickname" value="Group Heal" />
@@ -3214,6 +3386,7 @@
 			<property name="Text" value="Heal each friendly Living creature in the target zone the amount rolled on 5 attack dice. Roll separately for each creature." />
 			<property name="CardID" value="MW1I13" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="5c2d7a57-f15c-44a9-9dc8-9393056d9e55" name="Heal">
 			<property name="Nickname" value="Heal" />
@@ -3232,6 +3405,7 @@
 			<property name="Text" value="Heal target creature the amount rolled on 8 attack dice." />
 			<property name="CardID" value="MW1I14" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="70840eb1-9d97-4eff-bba2-1b23ef72d9db" name="Knockdown">
 			<property name="Nickname" value="Knockdown" />
@@ -3250,6 +3424,7 @@
 			<property name="Text" value="Target is Incapacitated until the beginning of its next Action Phase, or until the end of the round, whichever comes first. Knockdown has no effect on Unmovable creatures." />
 			<property name="CardID" value="MW1I15" />
 			<property name="cBuffs" value="inf))@target,[Incapacitated" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="61d4135c-e151-4c04-b759-23b1eb12abee" name="Lay Hands">
 			<property name="Nickname" value="Lay Hands" />
@@ -3268,6 +3443,7 @@
 			<property name="Text" value="Heal target creature the amount rolled on 12 attack dice. Remove as many condition markers as you wish from target creature by paying their removal costs." />
 			<property name="CardID" value="MW1I16" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="96719b92-1dd5-4a7e-b7eb-574464feeca8" name="Minor Heal">
 			<property name="Nickname" value="Minor Heal" />
@@ -3286,6 +3462,7 @@
 			<property name="Text" value="Heal target creature the amount rolled on 5 attack dice." />
 			<property name="CardID" value="MW1I17" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="9100e9fa-f1b0-47de-95b2-52cd795e97ea" name="Perfect Strike">
 			<property name="Nickname" value="Perfect Strike" />
@@ -3304,6 +3481,7 @@
 			<property name="Text" value="Target&apos;s next melee attack this round gains the Unavoidable trait." />
 			<property name="CardID" value="MW1I18" />
 			<property name="cBuffs" value="inf))@target,[mUnavoidable" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="dc3cd8bd-9867-4dde-99a2-911d3ca69b67" name="Piercing Strike">
 			<property name="Nickname" value="Piercing Strike" />
@@ -3322,6 +3500,7 @@
 			<property name="Text" value="Target&apos;s next melee attack this round gains the Piercing +3 trait." />
 			<property name="CardID" value="MW1I19" />
 			<property name="cBuffs" value="inf))@target,[mPiercing +3" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="59cd1ea8-72d8-4ce8-90f9-1513ef6940ae" name="Purify">
 			<property name="Nickname" value="Purify" />
@@ -3340,6 +3519,7 @@
 			<property name="Text" value="Remove as many poison conditions as you wish from the target, paying the removal cost for each one. Then, destroy as many revealed poison enchantments from the target as you wish, paying the total mana cost (casting and reveal cost) for each one." />
 			<property name="CardID" value="MW1I20" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d40a8aa6-93d7-434b-b855-94e960a3553f" name="Purge Magic">
 			<property name="Nickname" value="Purge Magic" />
@@ -3358,6 +3538,7 @@
 			<property name="Text" value="Destroy all enchantments attached to target object (both hidden and revealed)." />
 			<property name="CardID" value="MW1I21" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="f03a6893-230c-48e1-b611-2ad5cde7552e" name="Resurrection">
 			<property name="Nickname" value="Resurrection" />
@@ -3376,6 +3557,7 @@
 			<property name="Text" value="Choose a destroyed Living creature from your discard pile and summon it to the caster&apos;s zone. X = target spell&apos;s mana cost plus its spell Level." />
 			<property name="CardID" value="MW1I22" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="4f78b672-2c43-4979-8a3b-0bb2e3e8e1a2" name="Rouse the Beast">
 			<property name="Nickname" value="Rouse the Beast" />
@@ -3394,6 +3576,7 @@
 			<property name="Text" value="Target a creature summoned this round. Flip target creature&apos;s action marker to the active side. That creature may act normally this round. You can only cast this one time per round on the same creature. X = target&apos;s Level." />
 			<property name="CardID" value="MW1I23" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="3aaab9ab-7dbf-4694-b3cb-fc7e4710bad3" name="Seeking Dispel">
 			<property name="Nickname" value="Seeking Dispel" />
@@ -3412,6 +3595,7 @@
 			<property name="Text" value="Destroy target hidden enchantment. Controller of target enchantment cannot reveal the enchantment once Seeking Dispel has been cast." />
 			<property name="CardID" value="MW1I24" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="daf6a859-cc1a-48a8-bbfb-79365761acee" name="Shift Enchantment">
 			<property name="Nickname" value="Shift Enchantment" />
@@ -3430,6 +3614,7 @@
 			<property name="Text" value="Move target enchantment you control to a new legal target. Both the enchantment and the new target must be within range and LoS. X = 1 if the enchantment is hidden, or the Level of the enchantment if it is revealed." />
 			<property name="CardID" value="MW1I25" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="d781b3a9-4c77-47c0-a899-0067fbafe856" name="Sleep">
 			<property name="Nickname" value="Sleep" />
@@ -3448,6 +3633,7 @@
 			<property name="Text" value="Target falls asleep. Place a Sleep condition marker on it. Does not affect creatures with Psychic Immunity. Look up the value of X below: &#xD;&#xA;Level 1 = 4 mana &#xD;&#xA;Level 2 = 5 mana &#xD;&#xA;Level 3 = 6 mana &#xD;&#xA;Add 2 mana to the cost for each Level beyond 3." />
 			<property name="CardID" value="MW1I26" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="be358e54-8996-43cb-8aad-6ed879bbdbb7" name="Steal Enchantment">
 			<property name="Nickname" value="Steal Enchantment" />
@@ -3466,6 +3652,7 @@
 			<property name="Text" value="Move target enchantment to a new legal target. Both the enchantment and the new target must be within range and LoS. You now control that enchantment. X = the casting &amp; reveal cost of target enchantment, plus you pay the casting &amp; reveal cost of attaching it to the new target (as if you just cast and revealed the spell)." />
 			<property name="CardID" value="MW1I27" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b969cb2f-6f0b-4d89-8839-511aab891c0d" name="Teleport">
 			<property name="Nickname" value="Teleport" />
@@ -3484,6 +3671,7 @@
 			<property name="Text" value="Target creature is Teleported to the target zone. X = 3 mana per zone moved away from its current zone. You must pay at least 3 mana even if the target is teleported into the same zone. This does not count as a move action for the creature." />
 			<property name="CardID" value="MW1I28" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="b0624cd4-8802-4e9f-8e1d-869638c3b861" name="Vampiric Strike">
 			<property name="Nickname" value="Vampiric Strike" />
@@ -3502,6 +3690,7 @@
 			<property name="Text" value="Target&apos;s next melee attack this round gains the Vampiric and Piercing +1 traits." />
 			<property name="CardID" value="MW1I29" />
 			<property name="cBuffs" value="inf))@target,[Vampiric;mPiercing +1" />
+			<property name="Gender" value="" />
 		</card>
 
 
@@ -3509,6 +3698,7 @@
 			<property name="Nickname" value="Die Roll Area" />
  			<property name="Type" value="DiceRoll" />
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="6a71e6e9-83fa-4604-9ff7-23c14bf75d48" name="Ready Stage" size="PhaseMarkers">
 			<property name="Nickname" value="Ready Stage" />
@@ -3550,6 +3740,7 @@
 					<property name="Type" value="Phase" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="8ad1880e-afee-49fe-a9ef-b0c17aefac3f" name="Player Token Default" size="InitativeMarkers">
 			<property name="Nickname" value="Player Token Default" />
@@ -3579,6 +3770,7 @@
 					<property name="Type" value="Phase" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 		<card id="af14ca09-a83d-4185-afa0-bc38a31dbf82" name="Alt Zone Intersection">
 			<property name="Nickname" value="Alt Zone Intersection" />
@@ -3588,6 +3780,7 @@
 					<property name="Type" value="Internal" />
 				</alternate>
 			<property name="cBuffs" value="" />
+			<property name="Gender" value="" />
 		</card>
 	</cards>
 </set>

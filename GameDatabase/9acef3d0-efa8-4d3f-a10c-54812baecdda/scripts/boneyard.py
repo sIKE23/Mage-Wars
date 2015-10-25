@@ -138,7 +138,7 @@ def resolveDissipate():
 			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
 			card.markers[DissipateToken] -= 1 # Remove Token
 			if card.markers[DissipateToken] == 0 and card.Name == "Rolling Fog": # Only discard Rolling Fog for now
-				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
+				notify("{} discards {} as {} no longer has any Dissipate Tokens".format(me, pSub(card), card.Name))
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
 
@@ -285,20 +285,20 @@ def resolveUpkeep():
 				upKeepCost = 0
 		# Process Upkeep for Mind Control
 		elif card.Name == "Mind Control" and card.controller == me and card.isFaceUp and isAttached(card) == True:
-			attatchedTo = getAttachTarget(card)
-			upKeepCost = int(attatchedTo.level)
+			attachedTo = getAttachTarget(card)
+			upKeepCost = int(attachedTo.level)
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
-				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attachedTo.Name)
 		# Process Upkeep for Stranglevine
 		else:
 			if card.Name == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
-				attatchedTo = getAttachTarget(card)
-				notify("{} has a Stranglevine attached to it adding a Crush token...".format(attatchedTo.name))
+				attachedTo = getAttachTarget(card)
+				notify("{} has a Stranglevine attached to {} adding a Crush token...".format(attachedTo.nickname, pObj(attachedTo)))
 				card.markers[CrushToken] += 1
 				upKeepCost = card.markers[CrushToken]
-				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attachedTo.Name)
 
 		if upKeepCost >= 1:
 			processUpKeep(upKeepCost, card, Upkeep, notifystr)

@@ -697,8 +697,9 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 				else: return False
 		rememberDefenseUse(defender,defense)
 		defense = computeDefense(aTraitDict,attack,dTraitDict,defense) #NOW we modify the defense
-		notify("{} attempts to avoid the attack using {}!".format(defender,
-																 ('its innate defense' if defSource == defender else 'its defense from {}'.format(defSource))))
+		notify("{} attempts to avoid the attack using {} {}!".format(defender.nickname,
+																	pPos(defender),
+																 	('innate defense' if defSource == defender else 'defense from {}'.format(defSource))))
 
 		damageRoll,effectRoll = rollDice(0)
 		if defense.get('Uses',0)>=1 and defSource.markers[Ready]: #Flip the defense marker
@@ -713,10 +714,10 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
 				rememberAbilityUse(defSource) #Bookmark
 		if effectRoll >= defense.get('Minimum',13):
-			   notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
+			   notify("{} succeeds in {} defense attempt! Attack avoided!".format(defender.nickname,pPos(defender)))
 			   return defense
 		else:
-			   notify("{} fails to defend itself...".format(defender))
+			   notify("{} fails to defend {}...".format(defender.nickname,pRef(defender)))
 			   return False
 
 ############################################################################
@@ -965,10 +966,10 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		if False and attack.get('EffectType','Attack')=='Heal':
 				healingAmt = min(sum([{0:0,1:0,2:1,3:2,4:1,5:2}.get(i,0)*roll[i] for i in range(len(roll))]),getStatusDict(defender).get('Damage',0))
 				if healingAmt > 0: healingQuery(dTraitDict,
-												'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
+												'Heal {} for {} damage?'.format(defender.nickname,str(healingAmt)),
 												healingAmt,
-												"{} heals {} for {} damage!".format(attacker.name,defender.name,{}))
-				else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
+												"{} heals {} for {} damage!".format(attacker.nickname,defender.nickname,{}))
+				else: notify("{} attempts to heal {} but fails.".format(attacker.nickname,defender.nickname))
 				return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
 		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
 		actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
@@ -980,12 +981,12 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		if defender.type == "Creature" or defender.Subtype == "Mage": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
 		else: dManaDrain = ""
 
-		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
+		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.nickame,
 																										  actualDmg,
 																										  ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
-																										  defender.Name,
+																										  defender.nickname,
 																										  (' It will also drain {} mana from {}.'.format(
-																												  str(dManaDrain),defender.controller.name) if dManaDrain else '')),
+																												  str(dManaDrain),defender.controller.nickname) if dManaDrain else '')),
 						   ['Yes',"Other Damage Amount",'No'],
 						   ["#01603e","#FF6600","#de2827"])
 		if choice == 1:
@@ -1063,25 +1064,25 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 			dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
 			defender.controller.Mana -= dManaDrain
 		else: dManaDrain = ""
-		if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.name))
+		if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.nickname))
 		#Vampirism
 		if (atkTraits.get('Vampiric') and drainableHealth and
 			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
 				if attacker.controller == me: healingQuery(aTraitDict,
-														   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
+														   'Heal {} damage through vampirism?'.format(drainableHealth,defender.nickname),
 														   drainableHealth,
-														   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name))
+														   "{} heals {} damage through vampirism!".format(attacker.nickname,'{}',defender.nickname))
 				else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
-																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
+																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.nickname),
 																   drainableHealth,
-																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
+																   "{} heals {} damage through vampirism!".format(attacker.nickname,'{}',defender.nickname)])
 		#Finally, apply conditions
 		effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
 		for e in effects:
 				if e in conditionsList:
 						if e=="Damage" and defender.Subtype == "Mage": defender.controller.damage += 1
 						else: defender.markers[eval(e)]+=1
-				notify('{} {}'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
+				notify('{} {}'.format(defender.nickname,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
 def malakaisFirePrompt(heathen):
 		mute()
@@ -1111,7 +1112,7 @@ def malakaisFireReceiptPrompt(heathen):
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		card = Card(cardTraitsDict.get('OwnerID'))
 
-		choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
+		choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.nickname),
 						   ["Yes","No"],
 						   ["#01603e","#de2827"])
 		if choice == 1:
@@ -1143,7 +1144,7 @@ def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment
 																		  not c.isFaceUp and
 																		  c.Name in recommendList)])
 				if not aList: return (False if recurText == 'an' else True)
-				options = ['{}\n{}\n{}'.format(c.Name.center(68,' '),(('('+getAttachTarget(c).Name+')').center(68,' ')),c.Text.split('\r\n')[0]) for c in aList]
+				options = ['{}\n{}\n{}'.format(c.nickname.center(68,' '),(('('+getAttachTarget(c).nickname+')').center(68,' ')),c.Text.split('\r\n')[0]) for c in aList]
 				colors = ['#CC6600' for i in options] #Orange
 				options.append('I would not like to reveal an enchantment.')
 				colors.append("#de2827")
