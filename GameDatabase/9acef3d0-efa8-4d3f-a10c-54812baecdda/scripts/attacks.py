@@ -723,6 +723,15 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 ############################################################################
 ######################      Seven Steps of an Attack    ####################
 ############################################################################
+
+"""
+notation:
+
+bAS - before Attack Step
+aAS - after Attack Step
+
+"""
+
 """
 Since each attack step may be carried out by a different player, each step of the
 attack should lead into the next.
@@ -730,158 +739,129 @@ attack should lead into the next.
 
 def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
 		mute()
+
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
-		if getSetting("BattleCalculator",True):
-				if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
-				else: remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
+
+		#for now, let's package everything together beforehand
+		argument = {
+			"sourceID":		Card(attack['OriginalSourceID'])._id,
+			"attackerID":	attacker._id,
+			"defenderID":	defender._id,
+			"attack": 		attack,
+			"hit":			False,
+			"damage": 		0,
+			"conditions":	[],
+		}
+
+		if getSetting("BattleCalculator",True): remoteCall(attacker.controller,'declareAttackStep',[argument])
 		else:
 				if attacker.controller == me: genericAttack(table)
 				else:
 						remoteCall(attacker.controller,'whisper',['{} has disabled Battle Calculator, so generic dice menu will be used'])
 						remoteCall(attacker.controller,'genericAttack',[table])
 
-def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refusedReveal = False,damageRoll = None,effectRoll = None): #The time between steps during which attachments may be revealed. After both players pass, play proceeds to the next step.
-		mute()
-		#First, check if the defender is dead. If it is, this attack needs to end now.
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		aController = attacker.controller
-		dController = defender.controller
-		playersList = [aController,dController]
-		otherPlayer = me
-		for p in playersList:
-				if p != me: otherPlayer = p
-		selfAttached = revealAttachmentQuery([attacker,defender],prevStepName)
+def declareAttackStep(argument): #Executed by attacker
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	atkOS 		= 	Card(argument["source._id"])
+	attack 		= 	argument["attack"]
 
-		if (otherPlayer == me) or (not selfAttached and refusedReveal):
-				aTraitDict = computeTraits(attacker)
-				dTraitDict = computeTraits(defender)
-				if not dTraitDict.get('Flying') or not aTraitDict.get('Flying'): aTraitDict['Flying']=False
-				attack = computeAttack(aTraitDict,attack,dTraitDict)
-				nextPlayer = {'declareAttackStep': aController,
-							  'avoidAttackStep' : dController,
-							  'rollDiceStep' : aController,
-							  'damageAndEffectsStep' : dController,
-							  'additionalStrikesStep' : aController,
-							  'damageBarrierStep' : dController,
-							  'counterstrikeStep' : dController,
-							  'attackEndsStep' : aController}[nextStepFunction]
-				remoteCall(nextPlayer,nextStepFunction,[aTraitDict,attack,dTraitDict]+([damageRoll,effectRoll] if (damageRoll != None and effectRoll != None) else []))
-		else: remoteCall(otherPlayer,'interimStep',[aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,(not selfAttached),damageRoll,effectRoll])
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	
+	#1: resolve bAS effects
+	[d["bAS_DeclareAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_DeclareAttack" in d]
 
-def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		atkOS = Card(attack['OriginalSourceID'])
-		if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
-		#Check for helm of fear
-		if defender.Subtype=="Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') == 'Melee') and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
-				notify("The Helm of Fear radiates a terrifying aura!")
-				damageRoll,effectRoll = rollDice(0)
-				if effectRoll >= 9:
-						notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.Nickname))
-						return
-				else: notify("{} resists the urge to panic!".format(attacker.Nickname))
-		#Remember arcane zap
-		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
-		#If the defender is not flying, the attacker should lose the flying trait
-		if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
-		elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
-		else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
-		#Check for daze
-		if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
-				notify("{} is rolling the Effect Die to check the Dazed condition.".format(attacker))#gotta figure that gender thing of yours out.
-				damageRoll,effectRoll = rollDice(0)
-				if effectRoll < 7:
-						notify("{} is so dazed that it completely misses!".format(attacker))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
-						return
-				else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker))
-		interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
+	#2: check for daze
+	if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
+		notify("{} is rolling the Effect Die to check the Dazed condition.".format(attacker.nickname))#gotta figure that gender thing of yours out.
+		damageRoll,effectRoll = rollDice(0)
+		if effectRoll < 7:
+			notify("{} is so dazed that {} completely misses!".format(attacker.nickname,pSub(attacker)))
+			rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+			additionalStrikesStep(argument)
+			return
+		else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker.nickname))
 
-def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		if not attack.get('RangeType') == 'Damage Barrier':
-				#Check for forcefield
-				if len([reduceFF(c) for c in getAttachments(defender) if c.isFaceUp and c.name == "Forcefield" and c.markers[FFToken]]):
-						notify("The forcefield absorbs the attack!".format(attacker.Nickname))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						return
-				#Check for fumble
-				if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
-						notify("{} fumbles the attack!".format(attacker.Nickname))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-						return
-				#Check for block
-				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is blocked!".format(attacker.Nickname))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-						return
-				#Check for reverse attack
-				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is magically reversed!".format(attacker.Nickname))
-						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
-						return
+	#3: give appropriate notification
 
-		if attack.get('EffectType','Attack')=='Attack':
-			   if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
-					   #Spiked buckler code here, perhaps?
-					   rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-					   interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-					   return
-		interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
+	if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker.nickname,attack.get('Name','a nameless attack')))
+	elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
+	else: notify("{} attacks {} with {}!".format(attacker.nickname,defender.nickname,attack.get('Name','a nameless attack')))
 
-def reduceFF(card):
-		card.markers[FFToken] = max(0, card.markers[FFToken]-1)
-		return 1
+	#4: resolve aAS effects
+	[d["aAS_DeclareAttack"]["function"](c,card) for (c,d) in spellList if "aAS_DeclareAttack" in d]
+
+	remoteCall(defender.controller,'avoidAttackStep',[argument])
+
+def avoidAttackStep(argument): #Executed by defender
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	atkOS 		= 	Card(argument["source._id"])
+	attack 		= 	argument["attack"]
+
+	#1: resolve bAS effects
+	[d["bAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_AvoidAttack" in d]
+
+	#2: Roll defenses
+	if attack.get('EffectType','Attack')=='Attack': defenseQuery(argument) #DefenseQuery will set the argument[hit] to false
+
+	#3: resolve aAS effects
+	[d["aAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "aAS_AvoidAttack" in d]
+
+	#4: go to the next step
+	remoteCall(
+		attacker.controller, 
+		"rollDiceStep" if argument["hit"] else "additionalStrikesStep", 
+		[argument]
+	)
 
 def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		dice = attack.get('Dice',-1)
-		if dice < 0:
-				notify('Error: invalid attack format - no dice found')
-				return
-		damageRoll,effectRoll = rollDice(dice)
-		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
-				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
-				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
-				buttonColorList = ["#de2827","#171e78","#01603e"]
-				buttonList = ["Gain 2 mana","Heal 2 damage","Gain 1 Mana and Heal 1 damage"]
-				while (True):
-						choice = askChoice("When the Orb was touched and was Powered On, it released a small amount of residual energy and your Mage may choose immediate bonus!",buttonList,buttonColorList)
-						if choice == 1:
-								attacker.controller.mana += 2
-								break
-						elif choice == 2:
-								if attacker.controller.damage >= 2: attacker.controller.damage -= 2
-								elif attacker.controller.damage >= 1: attacker.controller.damage -= 1
-								break
-						elif choice == 3:
-								attacker.controller.mana += 1
-								if attacker.controller.damage >= 1: attacker.controller.damage -= 1
-								break
-				return
-		elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
-				return
-		setGlobalVariable("avoidAttackTempStorage","Hit")
-		interimStep(aTraitDict,attack,dTraitDict,'Roll Dice','damageAndEffectsStep',False,damageRoll,effectRoll)
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	atkOS 		= 	Card(argument["sourceID"])
+	attack 		= 	argument["attack"]
 
-def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #Executed by defender
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
-		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
+	#1: resolve bAS effects
+	[d["bAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
+
+	#2: roll dice
+
+	dice = attack.get('Dice',-1)
+	if dice < 0:
+		notify('Error: invalid attack format - no dice found')
+		return
+
+	damageRoll,effectRoll = rollDice(dice)
+
+	argument["roll"] = (damageRoll,effectRoll)
+
+	#3: resolve aAS effects
+	[d["aAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
+
+	remoteCall(defender.controller,'rollDiceStep',[argument])
+
+def damageAndEffectsStep(argument): #Executed by defender
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	atkOS 		= 	Card(argument["sourceID"])
+	attack 		= 	argument["attack"]
+
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+
+	damageRoll,effectRoll = argument["roll"]
+
+	damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+	argument["damage"] = damage
+
+	rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
+
+	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		mute()
@@ -1269,137 +1249,7 @@ def computeTraits(card):
 					cBuffRange = cBuffs.split("))")[0]
 					cBuffString = cBuffs.split("))")[1]
 					if cBuffRange=="inf" or rangeMatcher(c,card,cBuffRange): extend(buffMatcher(c,card,cBuffString))
-				
 
-
-				#Revamping this system
-				"""
-				if cSubtype == 'Mage' and cController == controller: traitDict['MageID'] = c._id #Each card knows which mage controls it.
-				if c.isFaceUp: #only look at face-up cards
-						if getAttachTarget(c) == card: #Get traits from attachments to this card:
-								if cType in ['Enchantment','Conjuration']:
-										rawText = c.text.split('\r\n[')
-										traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
-										extend(traitsGranted)
-								if adraEnemy and "Curse" in cSubtype and cController != controller:
-										adra = bool([k for k in table if k.name=="Adramelech Warlock" and k.controller == cController])
-										if adra and adraAbility:
-												append('Flame +1')
-												adraAbility = False
-												debug('Triggered')
-								if cName == "Sentinel of V'tar":
-										for o in table:
-												isWithOrb = False
-												if ("V'Tar Orb" in c.name and
-													getZoneContaining(c) == getZoneContaining(card)): isWithOrb = True
-												if isWithOrb:
-														extend(['Unmovable','Anchored'])
-														if markers[Guard]: extend(['Armor +2','Melee +1'])
-								elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
-						# Get traits from cards in this zone
-						if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
-								#Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
-								if (name == 'Skeelax, Taunting Imp'
-										and c.markers[Burn]): append('Regenerate 2') #and phase = upkeep, but I don't think this matters for now.
-								elif (name in ['Sslak, Orb Guardian','Usslak, Orb Guardian'] and "V'Tar Orb" in c.name):
-										extend(['Unmovable','Anchored'])
-								if cType == 'Enchantment':
-										if (cName == 'Fortified Position' and
-											cardType == 'Creature' and
-											'Corporeal' in rawTraitsList): append('Armor +2')
-										elif (cName == 'Sacred Ground' and
-											cController == controller and
-											cardType == 'Creature' and
-											'Living' in rawTraitsList): append('Aegis 1')
-										elif (cName == 'Astral Anchor' and
-											cardType == 'Creature'): append('Anchored')
-										elif (cName == 'Standard Bearer' and
-											cController == controller and
-											getAttachTarget(c) != card and
-											cardType == 'Creature'): extend(['Melee +1','Armor +1'])
-								elif cType == 'Conjuration':
-										if (name == 'Guard Dog'
-											and cController == controller
-											and not getAttachTarget(c)): append('Vigilant')
-										if (cName == 'Mohktari, Great Tree of Life' and
-											cController == controller and
-											cardType == 'Creature' and
-											'Living' in rawTraitsList): append('Regenerate 2')
-										elif (cName == 'Raincloud' and
-											  cController == controller and
-											  cardType in ['Creature','Conjuration']): extend(['Regenerate 1','Flame -2','Acid -2'])
-								elif cType == 'Creature':
-										if (cName == 'Highland Unicorn' and
-											  cController == controller and
-											  cardType == 'Creature' and
-											  'Living' in rawTraitsList): append('Regenerate 1')
-										elif (cName == 'Makunda' and
-											  cController == controller and
-											  c != card and
-											  cardType == 'Creature' and
-											  'Cat' in subtype): append('Piercing +1') #Long term, need to indicate that it is only melee attacks. For now, should not matter since no cats have ranged attacks.
-										#Mort?
-										elif (cName == 'Redclaw, Alpha Male' and
-											  c != card and
-											  cardType == 'Creature' and
-											  'Canine' in subtype): extend(['Armor +1','Melee +1'])
-										elif (cName == 'Sardonyx, Blight of the Living' and
-											  cardType == 'Creature' and
-											  'Living' in rawTraitsList): append('Finite Life')
-										#Victorian Gryffin, but I don't feel like adding it right now
-								elif cType == 'Incantation': pass
-								elif (cSubtype == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
-										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
-										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
-						if cSubtype == 'Mage':
-								notify("Test 23a: card.name {}".format(card.name))
-								for card in table:
-									notify("card.name{}".format(card.name))
-									if card.type == 'Equipment' and card.controller == me and not card.markers[Disable]:
-											rawText = card.text.split('\r\n[')
-											traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
-											extend(traitsGranted)
-											#Runesmithing
-											if c.markers[RuneofFortification] and 'Armor +' in ', '.join(rawText): append('Armor +1')
-								if cName in ['Mana Crystal','Mana Flower']: append('Channeling +1')
-								if cName == 'Animal Kinship':
-										canine = reptile = bear = ape = cat = False
-										for a in table:
-												aSubtype = a.subtype
-												if (a.controller == controller and
-													'Animal' in aSubtype
-													and cardType == 'Creature'):
-														if 'Canine' in aSubtype: canine = True
-														if 'Reptile' in aSubtype: reptile = True
-														if 'Bear' in aSubtype: bear = True
-														if 'Ape' in aSubtype: ape = True
-														if 'Cat' in aSubtype: cat = True
-										if canine: append('Melee +1')
-										if reptile: append('Armor +1')
-										if bear: append('Tough -2')
-										if ape: append('Climbing')
-										if cat: append('Elusive')
-	
-						#Global effects
-						#Conjurations
-						elif (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
-						elif (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
-						elif (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
-						elif (cName == 'Mordok\'s Obelisk' and cardType == 'Creature'): append('Upkeep +1')
-						elif (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall']): append('Finite Life')
-						elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
-						elif (cName == 'Rolling Fog'): append('Obscured')
-						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
-						elif (cName == 'Gravikor' and cardType == 'Creature' and cardGetDistance(c,card)<=2): append('Non-Flying')
-						elif (cName == 'Stranglevine'): append('Life +{}'.format(str(2*markers[CrushToken])))
-						#>>Altar of Skulls<<
-						#Incantations
-						elif (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])
-						elif (cName == 'Call of the Wild' and cController == controller and 'Animal' in subtype): append('Melee +1')
-						elif (cName == 'Zombie Frenzy' and ('Zombie' in subtype or markers[Zombie])):
-								rawTraitsList = [t for t in rawTraitsList if t not in ['Lumbering','Pest','Slow']]
-								extend(['Fast','Bloodthirsty +1'])
-			"""
 		if markers[Melee]: append('Melee +{}'.format(str(markers[Melee])))
 		if markers[Ranged]: append('Ranged +{}'.format(str(markers[Ranged])))
 		if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))

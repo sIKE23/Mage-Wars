@@ -123,6 +123,30 @@ def CX_reconstruct(card,amount):
 	#TODO: aCX functions
 	return amount
 
+
+#############################
+###  Attack Step Functions ##
+#############################
+"""
+AS_DeclareAttack(source,attack)
+
+where source is the function's source and attack is a dictionary containing all the information about the attack.
+
+attack = {
+	sourceID	int
+	attackerID	int
+	defenderID	int
+	args 		dict
+	hit			bool
+	damage 		int
+	conditions	list(str)
+}
+
+Should have an event to indicate that a creature began an attack, and another to indicate that it finished its attack.
+
+"""
+
+
 #############################
 ###  Spells (Alphabetical) ##
 #############################
