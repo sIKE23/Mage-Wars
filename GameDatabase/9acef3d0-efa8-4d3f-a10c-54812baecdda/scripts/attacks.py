@@ -156,6 +156,51 @@ getAttackList:
 		canDeclareAttack
 """
 
+"""
+New format for attack dictionary:
+attack = {
+	"name" : 			str,
+	"dice" : 			int,
+	"source id" : 		int,	(the card that supplies the attack)
+	"user id" :			int,	(the card that is using the attack)
+	"damage type" :		int,
+	"action type" :		str, {"quick", "full", "counterstrike", "damage barrier", "none"}
+	"range type" :		str, {"ranged", "melee"}
+	"effects" :			dict[int:list[str]],		(example: {8:[burn],11:[burn,burn]})
+	"cost" :			int
+	"range" :			tuple(int,int)
+
+	"counterstrike" :	bool,
+	"piercing" :		int,
+	"mana drain" :		int,
+	"charge" :			int,
+	"vampiric" :		bool,
+	etc.
+
+	"bAS_[step name]" : fun,
+	"aAS_[step name]" : fun,
+}
+
+we can store these properties in the xml files with the following notation:
+
+<property name="cAttacks" value="
+	name=Snapping Bite;
+	action type=quick;
+	range type=melee;
+	dice=4;
+	traits=[counterstrike=true
+	||
+	name=Triple Bite;
+	action type=full;
+	range type=melee;
+	dice=3;
+	traits=[triplestrike=True
+" />
+
+for multiple traits, use notation [trait1=value1,trait2=value2
+
+"""
+
 def getAttackList(card):
 		"""This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
 		if not card: return [] #Return an empty list if passed a blank argument
@@ -863,61 +908,75 @@ def damageAndEffectsStep(argument): #Executed by defender
 
 	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
 
-def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		strikes = 1
-		atkTraits = attack.get('Traits',{})
-		if atkTraits.get('Doublestrike'): strikes = 2
-		if atkTraits.get('Triplestrike'): strikes = 3
-		if attacker.Name == 'Wall of Thorns':
-				level = int(defender.Level)
-				strikes = (level - 1 if level > 1 else 1)
-		if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
-		else: interimStep(aTraitDict,attack,dTraitDict,'Additional Strikes','damageBarrierStep')
+def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by attacker
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	atkOS 		= 	Card(argument["sourceID"])
+	attack 		= 	argument["attack"]
 
-def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		deathFlag = False
-		#Check for death here
-		if getRemainingLife(dTraitDict) == 0:
-				deathPrompt(dTraitDict,attack,aTraitDict)
-				deathFlag = True
-		#But damage barriers can still happen after death!
-		if attack.get('RangeType') == 'Melee' and getGlobalVariable("avoidAttackTempStorage")=="Hit":
-				attackList = getAttackList(defender)
-				dBarrier = None
-				for a in attackList:
-						if a.get('RangeType') == 'Damage Barrier':
-								dBarrier = a
-								break
-				if dBarrier:
-						bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
-						declareAttackStep(bTraitDict,dBarrier,aTraitDict)
-		if deathFlag:
-				setEventList('Turn',[]) #Clear the turn event list
-				return
-		interimStep(aTraitDict,attack,dTraitDict,'Damage Barrier','counterstrikeStep')
+	strikes = 1
+	atkTraits = attack.get('Traits',{})
+	if atkTraits.get('Doublestrike'): strikes = 2
+	if atkTraits.get('Triplestrike'): strikes = 3
+	if attacker.Name == 'Wall of Thorns':
+		level = int(defender.Level)
+		strikes = (level - 1 if level > 1 else 1)
 
-def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
-		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
-		if attack.get('RangeType') == 'Melee':
-				counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
-				if counterAttack:
-						counterAttack['RangeType'] = 'Counterstrike'
-						interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
-				defender.markers[Guard] = 0
-		interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')
+	if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(argument)
+	else: remoteCall(defender.controller,'damageBarrierStep',[argument])
 
-def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+def damageBarrierStep(argument): #Executed by defender
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	attack 		= 	argument["attack"]
+
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+
+	deathFlag = False
+	#Check for death here
+	if getRemainingLife(dTraitDict) == 0:
+		deathPrompt(dTraitDict,attack,aTraitDict)
+		deathFlag = True
+	#But damage barriers can still happen after death!
+	if attack.get('RangeType') == 'Melee' and getGlobalVariable("avoidAttackTempStorage")=="Hit":
+		attackList = getAttackList(defender)
+		dBarrier = None
+		for a in attackList:
+			if a.get('RangeType') == 'Damage Barrier':
+				dBarrier = a
+				break
+		if dBarrier:
+			bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
+			declareAttackStep(bTraitDict,dBarrier,aTraitDict)
+	if deathFlag:
+		setEventList('Turn',[]) #Clear the turn event list
+		return
+
+	remoteCall(defender.controller,'counterstrikeStep',[argument])
+
+def counterstrikeStep(argument): #Executed by defender
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	attack 		= 	argument["attack"]
+
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+
+	if attack.get('RangeType') == 'Melee':
+		counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
+		if counterAttack:
+			counterAttack['RangeType'] = 'Counterstrike'
+			interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
+		defender.markers[Guard] = 0
+
+	remoteCall(attacker.controller,'attackEndsStep',[argument])
+
+def attackEndsStep(argument): #Executed by attacker
 		mute()
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
 		setEventList('Turn',[]) #Clear the turn event list
 
 ############################################################################
