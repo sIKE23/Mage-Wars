@@ -303,7 +303,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=10" />
-			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Full] [Ranged:0-2] [Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Staff of Smiting:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [+2 vs. Nonliving and Dark creatures]" />
+			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Full] [Ranged:0-2] [Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Staff of Smiting:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [+2 vs. Nonliving Creatures] [+2 vs. Dark Creatures]" />
 			<property name="Traits" value="Legendary, Holy Mage Only" />
 			<property name="Text" value="Joseph Trublood gains Armor +2 against attacks from Nonliving or Dark creatures." />
 			<property name="CardID" value="MWPROMO11" />

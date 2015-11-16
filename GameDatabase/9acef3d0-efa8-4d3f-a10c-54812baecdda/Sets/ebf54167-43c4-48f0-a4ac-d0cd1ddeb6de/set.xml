@@ -1926,8 +1926,8 @@
 				Spell Step. You take control of that spell. Redirect it back to the caster, who now becomes the target of the spell. You control that spell, and may make new choices, paying additional
 				 mana costs if any. Then, destroy Reverse Magic." />
 			<property name="CardID" value="MW1E35" />
-			<alternate name="Battle Fury" type="B" />
-			<alternate name="Battle Fury" type="C" />
+			<alternate name="Reverse Magic" type="B" />
+			<alternate name="Reverse Magic" type="C" />
 		</card>
 		<card id="afd1e927-92a2-4525-a33f-50fec7c9b382" name="Rhino Hide">
 			<property name="Type" value="Enchantment" />

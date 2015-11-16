@@ -1,4 +1,4 @@
-﻿//Version: 1.12.0.0
+﻿//Version: 1.14.0.0
 
 namespace Octgn.MageWarsValidator
 {
@@ -269,7 +269,7 @@ namespace Octgn.MageWarsValidator
                                 }
                             }
 
-                            //Paladin is trained in level 3 holy, level 2 war, and all holy creatures
+                            //Paladin is trained in level 2 holy, level 2 war, and all holy creatures
                             //If the current card is in the paladin's trainings, it has already been correctly added (assuming paladin's trainings contains Holy=1 and War=1)
                             //so we only need to check for the exceptions
                             if (magename.Contains("Paladin") && Property(card, "Type") != "Creature")
@@ -295,10 +295,10 @@ namespace Octgn.MageWarsValidator
                                 }
                             }
 
-                            //Siren is trained in Water and all spells with Curse or Drowned subtype.
-                            //By this point, Water has been correctly calculated, but the Curse/Drowned spells are overcosted if they are not Water
+                            //Siren is trained in Water and all spells with Song or Drowned subtype.
+                            //By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
                             if (magename.Contains("Siren") && !school.Contains("Water") &&
-                                (Property(card, "Subtype").Contains("Curse") || Property(card, "Subtype").Contains("Drowned")))
+                                (Property(card, "Subtype").Contains("Song") || Property(card, "Subtype").Contains("Drowned")))
                             {
                                 //subtract 1 per level per count as this card has been added x2 per non-trained school already
                                 spellbook -= totalLevel * card.Quantity;
@@ -400,8 +400,8 @@ namespace Octgn.MageWarsValidator
                             {
                                 l = Convert.ToInt32(level);
                             }
-                            if ((l == 1 && card.Quantity > 6) ||
-                                (l >= 2 && card.Quantity > 4))
+                            if ((l == 1 && card.Quantity > 6 && (!card.Name.Contains("Shallow Sea") && magename.Contains("Siren")) ||
+                            (l >= 2 && card.Quantity > 4)))
                             {
                                 // too many
                                 System.Windows.MessageBox.Show("Validation FAILED: There are too many copies of " + card.Name + " in the deck.");

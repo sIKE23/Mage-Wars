@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.6.0     #######################################
+##########################    v1.13.7.0     #######################################
 ###########################################################################
 import time
 import re
@@ -2351,6 +2351,14 @@ def validateDeck(deck):
 					levels[card.School] -= 1
 					booktotal += 1
 				debug("levels {}".format(levels))
+		
+
+		#Siren is trained in Water and all spells with Song or Drowned subtype.
+		#By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
+		if "Water" not in card.School and c.name == "Siren" and ("Song" or "Drowned" in card.Subtype):
+			#subtract 1 per level per count as this card has been added x2 per non-trained school already
+			booktotal -= totalLevel
+			cost -= totalLevel;
 
 		if "Epic" in card.Traits:	#check for multiple epic cards
 			if card.Name in epics:
@@ -2395,7 +2403,7 @@ def validateDeck(deck):
 				l = int(level[0])
 			else:
 				l = int(card.Level)
-			if (l == 1 and cardCounts.get(card.Name) > 6) or (l >= 2 and cardCounts.get(card.Name) > 4):
+			if (l == 1 and cardCounts.get(card.Name) > 6 and (card.Name !="Shallow Sea" and "Siren" in magename) or (l >= 2 and cardCounts.get(card.Name) > 4):
 				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
 				return False
 
