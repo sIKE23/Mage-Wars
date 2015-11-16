@@ -237,12 +237,15 @@ def canAttach(card,target):
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
 			(cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
-			(cTargetBar == 'Creature' and tType in ['Creature','Mage']) or
+			(cTargetBar == 'Creature' and tType in ['Creature','Mage']) or			
+			(cTargetBar == 'Paladin Mage' and tType in ['Mage'] and tName == 'Paladin') or
 			(cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
+			(cTargetBar == 'Enemy Creature' and tType in ['Creature','Mage'] and tController != cController) or
 			(cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in target.Subtype and tController == cController) or
 			(cTargetBar == 'Demon Creature' and tType in ['Creature'] and 'Demon' in target.Subtype) or
 			(cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
 			(cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
+			(cTargetBar == 'Living Non-Aquatic Creature' and tType in ['Creature','Mage'] and traits.get('Living') and not traits.get('Aquatic')) or
 			(cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or
 			(cTargetBar == 'Minor Creature' and tType == 'Creature' and target.Level <= 2) or
 			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and target.Level <= 2) or
@@ -337,7 +340,6 @@ def canBind(card,target):
 #Familiars
 	if ((tName == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
 		or (tName == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
-		#or sectarus, but I haven't got around to it yet.
 		or (tName == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
 		or (tName == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.Subtype)) and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
@@ -353,7 +355,7 @@ def canBind(card,target):
 		or (tName == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
 		or (tName == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
 		or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Subtype and target.markers[Mana] >= 3)
-		or (tName == 'Samara Tree' and card.name == 'Seedling Pod')
+		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
 		or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Subtype)
 		or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
 #Spellbind (only)
