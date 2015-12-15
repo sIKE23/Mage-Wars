@@ -892,6 +892,7 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
 				counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
 				if counterAttack:
 						counterAttack['RangeType'] = 'Counterstrike'
+						counterAttack["OriginalAttack"]["RangeType"] = 'Counterstrike'
 						interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
 				defender.markers[Guard] = 0
 		interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')
