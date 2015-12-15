@@ -172,6 +172,16 @@ def canTransact(player,delta):
 	return (player.Mana-delta >= 0)
 
 ######################################
+######   Turn Order Functions   ######
+######################################
+
+"Functions for handling turn order"
+
+def establishTurnOrder():
+	"The calling player chooses a turn order for all players"
+	pass
+
+######################################
 ######     Memory Functions     ######
 ######################################
 

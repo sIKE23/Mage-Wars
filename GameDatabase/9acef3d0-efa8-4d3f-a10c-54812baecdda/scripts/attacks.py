@@ -163,7 +163,7 @@ attack = {
 	"dice" : 			int,
 	"source id" : 		int,	(the card that supplies the attack)
 	"user id" :			int,	(the card that is using the attack)
-	"damage type" :		int,
+	"damage type" :		str,
 	"action type" :		str, {"quick", "full", "counterstrike", "damage barrier", "none"}
 	"range type" :		str, {"ranged", "melee"}
 	"effects" :			dict[int:list[str]],		(example: {8:[burn],11:[burn,burn]})
