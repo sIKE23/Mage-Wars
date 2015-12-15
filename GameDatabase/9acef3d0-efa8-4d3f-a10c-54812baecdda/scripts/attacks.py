@@ -787,6 +787,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 				if len([reduceFF(c) for c in getAttachments(defender) if c.isFaceUp and c.name == "Forcefield" and c.markers[FFToken]]):
 						notify("The forcefield absorbs the attack!".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for fumble
 				if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
