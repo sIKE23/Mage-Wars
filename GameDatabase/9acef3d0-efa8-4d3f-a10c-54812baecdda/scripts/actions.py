@@ -2403,7 +2403,7 @@ def validateDeck(deck):
 				l = int(level[0])
 			else:
 				l = int(card.Level)
-			if (l == 1 and cardCounts.get(card.Name) > 6 and (card.Name !="Shallow Sea" and "Siren" in magename) or (l >= 2 and cardCounts.get(card.Name) > 4):
+			if (l == 1 and cardCounts.get(card.Name) > 6 and (card.Name !="Shallow Sea" and "Siren" in magename) or (l >= 2 and cardCounts.get(card.Name) > 4)):
 				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
 				return False
 
