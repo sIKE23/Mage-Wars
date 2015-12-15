@@ -113,11 +113,12 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		if not (aTraitDict.get('OwnerID') and dTraitDict.get('OwnerID')): return True
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
+		atkOS = Card(attack['OriginalSourceID'])
 		atkTraits = attack.get('Traits',{})
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
 		debug("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
-		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
+		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender) for c in table]) if atkOS.Type == "Attack" else 0): return False
 		if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
 		aZone = getZoneContaining(attacker)
 		if attack.get('Range'):
