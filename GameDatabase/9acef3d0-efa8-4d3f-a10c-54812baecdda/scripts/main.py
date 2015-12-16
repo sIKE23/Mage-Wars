@@ -181,6 +181,10 @@ def establishTurnOrder():
 	"The calling player chooses a turn order for all players"
 	pass
 
+def getTurnOrder():
+	"Retrieves the current turn order as a list of all player objects in order, with the current player first"
+	pass
+
 ######################################
 ######     Memory Functions     ######
 ######################################

@@ -782,6 +782,68 @@ Since each attack step may be carried out by a different player, each step of th
 attack should lead into the next.
 """
 
+def revealAttachmentMenu(): #Returns true if at least 1 attachment was revealed
+	"Prompts the player to reveal an enchantment. For now, it will simply look at all enchantments the player has. Returns boolean of whether enchantment was revealed"
+	def getLocation(enchantment):
+		#Is it attached to a card?
+		attachTarget = getAttachTarget(enchantment)
+		if attachTarget: return attachTarget.Nickname
+		#Otherwise, return the zone
+		zone = getZoneContaining(enchantment)
+		return "Zone {},{}".format(str(zone[i]+1),str(zone[j]+1))
+
+	#Get a list of my enchantments and their targets
+	myEnchantments = [(e,getLocation(e)) for e in table if e.Type == "Enchantment" and not e.isFaceUp and e.controller == me]
+
+	#Present menu
+	options = ["{}\n{}\n{}".format(e[0].Nickname.center(68,' '),e[1],e[0].Text.split('\r\n')[0]) for e in myEnchantments] + ["I would not like to reveal an enchantment."]
+	colors = ['#CC6600' for i in options] + ["#de2827"]
+	choice = askChoice('Would you like to reveal an enchantment?'.format(recurText),options,colors)
+
+	#Player chose not to reveal an enchantment
+	if choice in [0,len(options)]: return False
+
+	#Player selected an enchantment to reveal
+	return revealEnchantment(myEnchantments[choice-1])
+
+
+def revealEnchantmentsStep(doneList,nextPlayer,nextStep,argument):
+	"""
+	Step where players have a chance to reveal enchantments. Each player in turn order may reveal an enchantment or pass
+	doneList - players who are done revealing enchantments
+	nextStep - string naming the function for the step to be executed after completing the reveal enchantments step
+	nextPlayer - the player object for the player that will execute the next step
+	argument - the argument to be passed to the function for the next step
+	"""
+	turnOrder = getTurnOrder()
+
+	# If everybody is finished revealing enchantments, we need to proceed to the next step
+	if len(doneList) == len(turnOrder):
+		remoteCall(nextPlayer,nextStep,[argument])
+		return
+
+	#Otherwise, ask the current player if they want to reveal any enchantments.
+	#If yes, perform this step again
+	if revealEnchantmentMenu():
+		doneList = [] #reset the done list
+		revealEnchantmentsStep(doneList,nextStep,nextPlayer,argument)
+	#If no, proceed to the next player in turn order
+	else:
+		# Add me to the done list
+		doneList.append(me) 
+
+		# Find my place in the turnOrder list
+		myTurnNo = 0
+		while turnOrder[myTurnNo] != me:
+			myTurnNo += 1
+
+		# Find the next player to reveal enchantments
+		nextRevealerNo = (myTurnNo + 1) % len(turnOrder)
+		nextRevealer = turnOrder[nextRevealerNo]
+
+		# Next player to reveal enchantments gets a chance to do so
+		remoteCall(nextRevealer,"revealEnchantmentsStep",[doneList,nextPlayer,nextStep,argument])
+
 def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
 		mute()
 
@@ -863,7 +925,7 @@ def avoidAttackStep(argument): #Executed by defender
 		[argument]
 	)
 
-def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
+def rollDiceStep(argument): #Executed by attacker
 	mute()
 	attacker 	= 	Card(argument["attackerID"])
 	defender 	= 	Card(argument["defenderID"])
@@ -1172,25 +1234,6 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 					card.markers[Zombie]): obliterate(card)
 				else: discard(card)
 		else: notify("{} does not accept the destruction of {}.".format(me,card))
-
-def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment was revealed
-		recommendList = getEnchantRecommendationList(step)
-		recurText = 'an'
-		while True:
-				aList = []
-				for card in cardList:
-						aList.extend([c for c in getAttachments(card) if (c.controller == me and
-																		  not c.isFaceUp and
-																		  c.Name in recommendList)])
-				if not aList: return (False if recurText == 'an' else True)
-				options = ['{}\n{}\n{}'.format(c.nickname.center(68,' '),(('('+getAttachTarget(c).nickname+')').center(68,' ')),c.Text.split('\r\n')[0]) for c in aList]
-				colors = ['#CC6600' for i in options] #Orange
-				options.append('I would not like to reveal an enchantment.')
-				colors.append("#de2827")
-				choice = askChoice('Would you like to reveal {} enchantment?'.format(recurText),options,colors)
-				if choice == len(options): return (False if recurText == 'an' else True)
-				revealEnchantment(aList[choice-1])
-				recurText = 'another'
 
 def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict["OwnerID"])
