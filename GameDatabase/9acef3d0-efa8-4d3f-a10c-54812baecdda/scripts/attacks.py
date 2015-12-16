@@ -1073,6 +1073,8 @@ def malakaisFireReceiptPrompt(heathen):
 				notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
 
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
+		mute()
+		if card.type == "Mage": return
 		card = Card(cardTraitsDict.get('OwnerID'))
 
 		choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
