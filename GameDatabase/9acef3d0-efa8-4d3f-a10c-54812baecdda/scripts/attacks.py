@@ -782,6 +782,21 @@ Since each attack step may be carried out by a different player, each step of th
 attack should lead into the next.
 """
 
+"""
+argument will contain the following keys:
+
+"sourceID":
+"attackerID":
+"defenderID":
+"attack": 		The attack object
+"hit":			Boolean indicating whether the attack has successfully hit
+"damage": 		Amount of damage inflicted by the attack
+"conditions":	Conditions inflicted by the attack
+"strike":		The number of the current strike (e.g. the second strike would be 2)
+
+"""
+
+
 def revealAttachmentMenu(): #Returns true if at least 1 attachment was revealed
 	"""
 	Prompts the player to reveal an enchantment. 
@@ -862,6 +877,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 		"hit":			False,
 		"damage": 		0,
 		"conditions":	[],
+		"strike":		1,
 	}
 	
 	if getSetting("BattleCalculator",True): 
@@ -1013,16 +1029,27 @@ def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by
 	defender 	= 	Card(argument["defenderID"])
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
+	atkTraits 	= 	attack.get('Traits',{})
 
 	strikes = 1
-	atkTraits = attack.get('Traits',{})
+	
 	if atkTraits.get('Doublestrike'): strikes = 2
 	if atkTraits.get('Triplestrike'): strikes = 3
 	if attacker.Name == 'Wall of Thorns':
 		level = int(defender.Level)
 		strikes = (level - 1 if level > 1 else 1)
 
-	if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(argument)
+	if argument["strike"] < strikes:
+		#Store this strike in history
+
+		#Adjust argument and reset parameters
+		argument["strike"] += 1
+		argument["hit"] = False
+		argument["damage"] = 0
+		argument["conditions"] = []
+
+		#Go back to declareAttackStep and begin a new strike 
+
 	else:
 
 	#?: Go to next step
