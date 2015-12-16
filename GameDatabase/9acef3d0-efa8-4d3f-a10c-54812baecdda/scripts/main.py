@@ -182,7 +182,10 @@ def establishTurnOrder():
 	pass
 
 def getTurnOrder():
-	"Retrieves the current turn order as a list of all player objects in order, with the current player first"
+	"""
+	Retrieves the current turn order as a list of all player objects in order, with the current player first
+	Use getTurnOrder()[0] to get the first player
+	"""
 	pass
 
 ######################################

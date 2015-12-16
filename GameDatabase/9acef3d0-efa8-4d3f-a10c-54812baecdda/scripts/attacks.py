@@ -783,7 +783,12 @@ attack should lead into the next.
 """
 
 def revealAttachmentMenu(): #Returns true if at least 1 attachment was revealed
-	"Prompts the player to reveal an enchantment. For now, it will simply look at all enchantments the player has. Returns boolean of whether enchantment was revealed"
+	"""
+	Prompts the player to reveal an enchantment. 
+	For now, it will simply look at all enchantments the player has. 
+	Later I may add the ability to recommend enchantments.
+	Returns boolean of whether enchantment was revealed.
+	"""
 	def getLocation(enchantment):
 		#Is it attached to a card?
 		attachTarget = getAttachTarget(enchantment)
@@ -807,7 +812,7 @@ def revealAttachmentMenu(): #Returns true if at least 1 attachment was revealed
 	return revealEnchantment(myEnchantments[choice-1])
 
 
-def revealEnchantmentsStep(doneList,nextPlayer,nextStep,argument):
+def revealEnchantmentsStep(nextPlayer,nextStep,argument,doneList=[]):
 	"""
 	Step where players have a chance to reveal enchantments. Each player in turn order may reveal an enchantment or pass
 	doneList - players who are done revealing enchantments
@@ -824,9 +829,7 @@ def revealEnchantmentsStep(doneList,nextPlayer,nextStep,argument):
 
 	#Otherwise, ask the current player if they want to reveal any enchantments.
 	#If yes, perform this step again
-	if revealEnchantmentMenu():
-		doneList = [] #reset the done list
-		revealEnchantmentsStep(doneList,nextStep,nextPlayer,argument)
+	if revealEnchantmentMenu(): revealEnchantmentsStep(nextStep,nextPlayer,argument) #Reset the done list
 	#If no, proceed to the next player in turn order
 	else:
 		# Add me to the done list
@@ -842,31 +845,39 @@ def revealEnchantmentsStep(doneList,nextPlayer,nextStep,argument):
 		nextRevealer = turnOrder[nextRevealerNo]
 
 		# Next player to reveal enchantments gets a chance to do so
-		remoteCall(nextRevealer,"revealEnchantmentsStep",[doneList,nextPlayer,nextStep,argument])
+		remoteCall(nextRevealer,"revealEnchantmentsStep",[nextPlayer,nextStep,argument,doneList])
 
 def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
-		mute()
+	mute()
 
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID'))
+	attacker = Card(aTraitDict.get('OwnerID'))
+	defender = Card(dTraitDict.get('OwnerID'))
 
-		#for now, let's package everything together beforehand
-		argument = {
-			"sourceID":		Card(attack['OriginalSourceID'])._id,
-			"attackerID":	attacker._id,
-			"defenderID":	defender._id,
-			"attack": 		attack,
-			"hit":			False,
-			"damage": 		0,
-			"conditions":	[],
-		}
+	#for now, let's package everything together beforehand
+	argument = {
+		"sourceID":		Card(attack['OriginalSourceID'])._id,
+		"attackerID":	attacker._id,
+		"defenderID":	defender._id,
+		"attack": 		attack,
+		"hit":			False,
+		"damage": 		0,
+		"conditions":	[],
+	}
+	
+	if getSetting("BattleCalculator",True): 
+		remoteCall(
+			getTurnOrder()[0],			# First player
+			"revealEnchantmentsStep",	# Interim step
+				[attacker.controller,	# Next player
+				"declareAttackStep",	# Next Step
+				argument]				# Argument
+		)			
 
-		if getSetting("BattleCalculator",True): remoteCall(attacker.controller,'declareAttackStep',[argument])
+	else:
+		if attacker.controller == me: genericAttack(table)
 		else:
-				if attacker.controller == me: genericAttack(table)
-				else:
-						remoteCall(attacker.controller,'whisper',['{} has disabled Battle Calculator, so generic dice menu will be used'])
-						remoteCall(attacker.controller,'genericAttack',[table])
+			remoteCall(attacker.controller,'whisper',['{} has disabled Battle Calculator, so generic dice menu will be used'])
+			remoteCall(attacker.controller,'genericAttack',[table])
 
 def declareAttackStep(argument): #Executed by attacker
 	mute()
@@ -900,7 +911,14 @@ def declareAttackStep(argument): #Executed by attacker
 	#4: resolve aAS effects
 	[d["aAS_DeclareAttack"]["function"](c,card) for (c,d) in spellList if "aAS_DeclareAttack" in d]
 
-	remoteCall(defender.controller,'avoidAttackStep',[argument])
+	#5: Next step
+	remoteCall(
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[defender.controller,	# Next player
+		"avoidAttackStep",		# Next Step
+		argument]				# Argument
+	)		
 
 def avoidAttackStep(argument): #Executed by defender
 	mute()
@@ -919,10 +937,13 @@ def avoidAttackStep(argument): #Executed by defender
 	[d["aAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "aAS_AvoidAttack" in d]
 
 	#4: go to the next step
+
 	remoteCall(
-		attacker.controller, 
-		"rollDiceStep" if argument["hit"] else "additionalStrikesStep", 
-		[argument]
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[attacker.controller,	# Next player
+		"rollDiceStep",			# Next Step
+		argument]				# Argument
 	)
 
 def rollDiceStep(argument): #Executed by attacker
@@ -949,7 +970,14 @@ def rollDiceStep(argument): #Executed by attacker
 	#3: resolve aAS effects
 	[d["aAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
 
-	remoteCall(defender.controller,'rollDiceStep',[argument])
+	#4: Go to next step
+	remoteCall(
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[defender.controller,	# Next player
+		"damageAndEffectsStep",	# Next Step
+		argument]				# Argument
+	)
 
 def damageAndEffectsStep(argument): #Executed by defender
 	mute()
@@ -967,6 +995,15 @@ def damageAndEffectsStep(argument): #Executed by defender
 	argument["damage"] = damage
 
 	rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
+
+	#?: Go to next step
+	remoteCall(
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[attacker.controller,	# Next player
+		"additionalStrikesStep",# Next Step
+		argument]				# Argument
+	)
 
 	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
 
@@ -986,7 +1023,16 @@ def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by
 		strikes = (level - 1 if level > 1 else 1)
 
 	if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(argument)
-	else: remoteCall(defender.controller,'damageBarrierStep',[argument])
+	else:
+
+	#?: Go to next step
+	remoteCall(
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[defender.controller,	# Next player
+		"damageBarrierStep",	# Next Step
+		argument]				# Argument
+	)
 
 def damageBarrierStep(argument): #Executed by defender
 	mute()
@@ -1017,7 +1063,14 @@ def damageBarrierStep(argument): #Executed by defender
 		setEventList('Turn',[]) #Clear the turn event list
 		return
 
-	remoteCall(defender.controller,'counterstrikeStep',[argument])
+	#?: Go to next step
+	remoteCall(
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[defender.controller,	# Next player
+		"counterstrikeStep",	# Next Step
+		argument]				# Argument
+	)
 
 def counterstrikeStep(argument): #Executed by defender
 	mute()
@@ -1035,7 +1088,14 @@ def counterstrikeStep(argument): #Executed by defender
 			interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
 		defender.markers[Guard] = 0
 
-	remoteCall(attacker.controller,'attackEndsStep',[argument])
+	#?: Go to next step
+	remoteCall(
+	getTurnOrder()[0],			# First player
+	"revealEnchantmentsStep",	# Interim step
+		[attacker.controller,	# Next player
+		"attackEndsStep",		# Next Step
+		argument]				# Argument
+	)
 
 def attackEndsStep(argument): #Executed by attacker
 		mute()
