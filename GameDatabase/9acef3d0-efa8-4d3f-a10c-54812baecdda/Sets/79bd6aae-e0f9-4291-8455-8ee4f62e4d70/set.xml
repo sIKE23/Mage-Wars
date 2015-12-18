@@ -1060,10 +1060,10 @@
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
-			<property name="Stats" value="Location=Shield, Defense=8+ 1x No Ranged" />
+			<property name="Stats" value="Location=Shield" />
 			<property name="AttackBar" value="Shield Bash:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence.&#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="Mage gains a Defense. Whenever this Defense successfully avoids an attack, Spiked Buckler&apos;s attack gains the Counterstrike trait until the end of that attack sequence.&#xD;&#xA;[Armor +1] [Defense 8+ 1x No Ranged]" />
 			<property name="CardID" value="MWPROMO26" />
 		</card>
 		<card id="eecd62c9-300c-4a7c-bef3-a57555b89bdc" name="Staff of Storms">
