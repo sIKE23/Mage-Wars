@@ -815,3 +815,7 @@ def rollD12():
 	effectRoll = int(diceBankD12.pop()) + 1
 	me.setGlobalVariable("DiceBankD12", str(diceBankD12))
 	return effectRoll
+
+def isDead(card):
+	"returns boolean indicating whether this card is dead."
+	pass

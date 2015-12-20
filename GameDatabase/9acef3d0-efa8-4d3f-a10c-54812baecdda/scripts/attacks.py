@@ -785,6 +785,7 @@ attack should lead into the next.
 """
 argument will contain the following keys:
 
+"identifier":	Should be "attack", identifying this argument as an attack for the purposes of event memory handling.
 "sourceID":
 "attackerID":
 "defenderID":
@@ -870,11 +871,12 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 
 	#for now, let's package everything together beforehand
 	argument = {
+		"identifier":	"attack",
 		"sourceID":		Card(attack['OriginalSourceID'])._id,
 		"attackerID":	attacker._id,
 		"defenderID":	defender._id,
 		"attack": 		attack,
-		"hit":			False,
+		"hit":			True,
 		"damage": 		0,
 		"conditions":	[],
 		"strike":		1,
@@ -927,13 +929,16 @@ def declareAttackStep(argument): #Executed by attacker
 	#4: resolve aAS effects
 	[d["aAS_DeclareAttack"]["function"](c,card) for (c,d) in spellList if "aAS_DeclareAttack" in d]
 
-	#5: Next step
+	#5: end attack if cancelled
+	if argument.get("cancel"): return
+
+	#6: Next step
 	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[defender.controller,	# Next player
-		"avoidAttackStep",		# Next Step
-		argument]				# Argument
+		getTurnOrder()[0],			# First player
+		"revealEnchantmentsStep",	# Interim step
+			[defender.controller,	# Next player
+			"avoidAttackStep",		# Next Step
+			argument]				# Argument
 	)		
 
 def avoidAttackStep(argument): #Executed by defender
@@ -947,19 +952,30 @@ def avoidAttackStep(argument): #Executed by defender
 	[d["bAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_AvoidAttack" in d]
 
 	#2: Roll defenses
-	if attack.get('EffectType','Attack')=='Attack': defenseQuery(argument) #DefenseQuery will set the argument[hit] to false
+	defenseQuery(argument) #DefenseQuery will set the argument[hit] to false
 
 	#3: resolve aAS effects
 	[d["aAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "aAS_AvoidAttack" in d]
 
-	#4: go to the next step
+	#4: end attack if cancelled
+	if argument.get("cancel"): return
 
+	#5: go to the next step. If !hit, skip to additional strikes step
+	if argument["hit"]:
 	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[attacker.controller,	# Next player
-		"rollDiceStep",			# Next Step
-		argument]				# Argument
+		getTurnOrder()[0],			# First player
+		"revealEnchantmentsStep",	# Interim step
+			[attacker.controller,	# Next player
+			"rollDiceStep",			# Next Step
+			argument]				# Argument
+	)
+	else:
+	remoteCall(
+		getTurnOrder()[0],			# First player
+		"revealEnchantmentsStep",	# Interim step
+			[attacker.controller,	# Next player
+			"additionalStrikesStep",# Next Step
+			argument]				# Argument
 	)
 
 def rollDiceStep(argument): #Executed by attacker
@@ -973,12 +989,10 @@ def rollDiceStep(argument): #Executed by attacker
 	[d["bAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
 
 	#2: roll dice
-
 	dice = attack.get('Dice',-1)
 	if dice < 0:
 		notify('Error: invalid attack format - no dice found')
 		return
-
 	damageRoll,effectRoll = rollDice(dice)
 
 	argument["roll"] = (damageRoll,effectRoll)
@@ -986,13 +1000,16 @@ def rollDiceStep(argument): #Executed by attacker
 	#3: resolve aAS effects
 	[d["aAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
 
-	#4: Go to next step
+	#4: end attack if cancelled
+	if argument.get("cancel"): return
+
+	#5: Go to next step
 	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[defender.controller,	# Next player
-		"damageAndEffectsStep",	# Next Step
-		argument]				# Argument
+		getTurnOrder()[0],			# First player
+		"revealEnchantmentsStep",	# Interim step
+			[defender.controller,	# Next player
+			"damageAndEffectsStep",	# Next Step
+			argument]				# Argument
 	)
 
 def damageAndEffectsStep(argument): #Executed by defender
@@ -1005,20 +1022,27 @@ def damageAndEffectsStep(argument): #Executed by defender
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
 
-	damageRoll,effectRoll = argument["roll"]
+	#1: resolve bAS effects
+	[d["bAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
 
+	#2: apply damage and effects
+	damageRoll,effectRoll = argument["roll"]
 	damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
 	argument["damage"] = damage
 
-	rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
+	#3: resolve aAS effects
+	[d["aAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
 
-	#?: Go to next step
+	#4: end attack if cancelled
+	if argument.get("cancel"): return
+
+	#5: Go to next step
 	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[attacker.controller,	# Next player
-		"additionalStrikesStep",# Next Step
-		argument]				# Argument
+		getTurnOrder()[0],			# First player
+		"revealEnchantmentsStep",	# Interim step
+			[attacker.controller,	# Next player
+			"additionalStrikesStep",# Next Step
+			argument]				# Argument
 	)
 
 	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
@@ -1031,35 +1055,54 @@ def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by
 	attack 		= 	argument["attack"]
 	atkTraits 	= 	attack.get('Traits',{})
 
+	#1: store use of the attack in memory
+	storeEvent(deepcopy(argument))
+
+	#2: resolve bAS effects
+	[d["bAS_AdditionalStrikes"]["function"](c,argument) for (c,d) in spellList if "bAS_AdditionalStrikes" in d]
+
+	#3: resolve strikes
+
 	strikes = 1
-	
 	if atkTraits.get('Doublestrike'): strikes = 2
-	if atkTraits.get('Triplestrike'): strikes = 3
-	if attacker.Name == 'Wall of Thorns':
+	elif atkTraits.get('Triplestrike'): strikes = 3
+	elif attacker.Name == 'Wall of Thorns':
 		level = int(defender.Level)
 		strikes = (level - 1 if level > 1 else 1)
 
-	if argument["strike"] < strikes:
-		#Store this strike in history
+	#4: resolve aAS effects
+	[d["aAS_AdditionalStrikes"]["function"](c,argument) for (c,d) in spellList if "aAS_AdditionalStrikes" in d]
 
+	#5: end attack if cancelled
+	if argument.get("cancel"): return
+
+	#6: if there are strikes remaining and defender is not dead, resolve them.
+
+	if argument["strike"] < strikes and not isDead(defender):
 		#Adjust argument and reset parameters
 		argument["strike"] += 1
-		argument["hit"] = False
+		argument["hit"] = True
 		argument["damage"] = 0
 		argument["conditions"] = []
 
 		#Go back to declareAttackStep and begin a new strike 
-
-	else:
-
-	#?: Go to next step
-	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[defender.controller,	# Next player
-		"damageBarrierStep",	# Next Step
-		argument]				# Argument
+		remoteCall(
+			getTurnOrder()[0],			# First player
+			"revealEnchantmentsStep",	# Interim step
+				attacker.controller,	# Next player
+				"declareAttackStep",	# Next Step
+				argument]				# Argument
 	)
+
+	#7: if not, go to the next step
+	else:
+		remoteCall(
+			getTurnOrder()[0],			# First player
+			"revealEnchantmentsStep",	# Interim step
+				[defender.controller,	# Next player
+				"damageBarrierStep",	# Next Step
+				argument]				# Argument
+		)
 
 def damageBarrierStep(argument): #Executed by defender
 	mute()
@@ -1070,27 +1113,28 @@ def damageBarrierStep(argument): #Executed by defender
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
 
-	deathFlag = False
-	#Check for death here
-	if getRemainingLife(dTraitDict) == 0:
-		deathPrompt(dTraitDict,attack,aTraitDict)
-		deathFlag = True
-	#But damage barriers can still happen after death!
-	if attack.get('RangeType') == 'Melee' and getGlobalVariable("avoidAttackTempStorage")=="Hit":
+	#1: resolve bAS effects
+	[d["bAS_DamageBarrier"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
+
+	#2: resolve damage barrier
+	if attack.get("range type") == "Melee" and argument["hit"]:
 		attackList = getAttackList(defender)
 		dBarrier = None
 		for a in attackList:
-			if a.get('RangeType') == 'Damage Barrier':
+			if a.get('action type') == 'Damage Barrier':
 				dBarrier = a
 				break
 		if dBarrier:
-			bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
-			declareAttackStep(bTraitDict,dBarrier,aTraitDict)
-	if deathFlag:
-		setEventList('Turn',[]) #Clear the turn event list
-		return
+			# create a new dbarrier attack and resolve it. Depends on how I implement attack sources.
+			pass
 
-	#?: Go to next step
+	#3: resolve aAS effects
+	[d["aAS_DamageBarrier"]["function"](c,argument) for (c,d) in spellList if "aAS_DamageBarrier" in d]
+
+	#4: end attack if cancelled or if defender is now dead
+	if argument.get("cancel") or isDead(defender): return
+
+	#5: Go to next step
 	remoteCall(
 	getTurnOrder()[0],			# First player
 	"revealEnchantmentsStep",	# Interim step

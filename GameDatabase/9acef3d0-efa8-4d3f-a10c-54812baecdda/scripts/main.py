@@ -227,6 +227,12 @@ def timesHasOccurred(event,keys): #Searches memory for instances of this event t
 	#Check how many events this round match in the given keys
 	return len([1 for e in memory if len([1 for k in keys if e.get(k)==event[k]])==len(keys)])
 
+def getEvents(round):
+	"Returns an ordered list of all events from the requested round"
+	memory = eval(getGlobalVariable("gameMemory"))
+	memory = [m for m in memory if m.get("round")==round]
+	return memory
+
 ######################################
 ######     Recall Functions     ######
 ######################################
