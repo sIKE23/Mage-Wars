@@ -1224,11 +1224,17 @@ def concede(group=table, x = 0, y = 0):
 	global gameTurn
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
-		setGlobalVariable("GameIsOver", True)
 		for c in table:
 			if c.Type == "Mage" and c.controller == me:
 				c.orientation = 1
-		setGlobalVariable("GameEndTime", str(time.time()))
+		if len(getPlayers()) > 2:
+			setGlobalVariable("MageConceded",str(int(getGlobalVariable("MageConceded"))+1))
+			if int(getGlobalVariable("MageConceded") == (len(getPlayers())-1):
+				setGlobalVariable("GameEndTime", str(time.time()))
+				setGlobalVariable("GameIsOver", True)
+		else: 
+			setGlobalVariable("GameEndTime", str(time.time()))
+			setGlobalVariable("GameIsOver", True)
 #		reportGame('Conceded')
 		notify("{} has conceded the game".format(me))
 	else:
