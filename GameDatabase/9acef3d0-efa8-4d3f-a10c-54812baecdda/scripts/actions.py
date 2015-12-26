@@ -1544,6 +1544,7 @@ def flipcard(card, x = 0, y = 0):
 	tutorialMessage("Advance Phase")
 	cardalt = card.alternates
 	cZone = getZoneContaining(card)
+	traits = computeTraits(card)
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == '':
@@ -1641,10 +1642,10 @@ def flipcard(card, x = 0, y = 0):
 				card.markers[MistToken] = 1
 			if "Nightshade Lotus" == card.Name:
 				card.markers[MistToken] = 1
-			if "Rolling Fog" == card.Name:
-				card.markers[DissipateToken] = 3
 			if "Gate to Hell" == card.Name:
 				card.markers[GateClosed] = 1
+			if "Dissipate" in traits:
+				card.markers[DissipateToken] = traits.get("Dissipate",0)
 		if "Defense" in card.Stats and not card.Name=="Forcemaster":
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1
