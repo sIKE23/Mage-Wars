@@ -62,6 +62,7 @@
 		<globalvariable name="DeckLoaded" value="0"/>
 		<globalvariable name="PlayerWithIni" value=""/>
 		<globalvariable name="PlayersIDList" value=""/>
+		<globalvariable name="PlayersState" value="[]"/>
 		<globalvariable name="MWPlayerDict" value=""/>
 		<globalvariable name="GameHost" value=""/>
 		<globalvariable name="DoneWithPhase" value=""/>
