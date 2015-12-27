@@ -910,19 +910,20 @@ def resolveDissipate():
 	mute()
 
 #is the setting on?
-	if not getSetting("AutoResolveDissipate", True):
+	if not getSetting("AutoResolveEffects", True):
 		return
-
-	cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
-	if len(cardsWithDissipate) > 0:
-		notify("Resolving Dissipate for {}...".format(me))	#found at least one
-		for card in cardsWithDissipate:
+	
+	for card in table:
+		traits = computeTraits(card)
+		if "Dissipate" in traits and card.controller == me:
+			notify("Resolving Dissipate for {}...".format(me))	#found at least one
+		#cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
 			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
 			card.markers[DissipateToken] -= 1 # Remove Token
-			if card.markers[DissipateToken] == 0 and card.Name == "Rolling Fog": # Only discard Rolling Fog for now
+			if card.markers[DissipateToken] == 0:
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
-			notify("Finished auto-resolving Dissipate for {}.".format(me))
+	notify("Finished auto-resolving Dissipate for {}.".format(me))
 
 	#use the logic for Dissipate for Disable Markers
 	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
@@ -1617,34 +1618,32 @@ def flipcard(card, x = 0, y = 0):
 			if magecard.Type == "Mage":
 				notify("{} increases the Channeling stat by 1 as a result of {} being revealed".format(me, card))
 				me.Channeling += 1
-		if card.Type == "Creature":
-			if "Invisible Stalker" == card.Name:
-					card.markers[Invisible] = 1
-			if "Thorg, Chief Bodyguard" == card.Name:
-					card.markers[TauntT] = 1
-			if "Sosruko, Ferret Companion" == card.Name:
-					card.markers[Taunt] = 1
-			if "Skeelax, Taunting Imp" == card.Name:
-					card.markers[TauntS] = 1
-			if "Ichthellid" == card.Name:
-					card.markers[EggToken] = 1
-			if "Talos" == card.Name:
-					toggleAction(card)
-			if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
-					card.markers[Guard] = 1
-		if card.Type == "Conjuration":
-			if "Ballista" == card.Name:
-				card.markers[LoadToken] = 1
-			if "Akiro's Hammer" == card.Name:
-				card.markers[LoadToken] = 1
-			if "Corrosive Orchid" == card.Name:
-				card.markers[MistToken] = 1
-			if "Nightshade Lotus" == card.Name:
-				card.markers[MistToken] = 1
-			if "Gate to Hell" == card.Name:
-				card.markers[GateClosed] = 1
-			if "Dissipate" in traits:
-				card.markers[DissipateToken] = traits.get("Dissipate",0)
+		if "Invisible Stalker" == card.Name:
+				card.markers[Invisible] = 1
+		if "Thorg, Chief Bodyguard" == card.Name:
+				card.markers[TauntT] = 1
+		if "Sosruko, Ferret Companion" == card.Name:
+				card.markers[Taunt] = 1
+		if "Skeelax, Taunting Imp" == card.Name:
+				card.markers[TauntS] = 1
+		if "Ichthellid" == card.Name:
+				card.markers[EggToken] = 1
+		if "Talos" == card.Name:
+				toggleAction(card)
+		if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
+				card.markers[Guard] = 1
+		if "Akiro's Hammer" == card.Name:
+			card.markers[LoadToken] = 1
+		if "Ballista" == card.Name:
+			card.markers[LoadToken] = 1
+		if "Corrosive Orchid"  == card.Name:
+			card.markers[MistToken] = 1
+		if "Nightshade Lotus" == card.Name:
+			card.markers[MistToken] = 1
+		if "Gate to Hell" == card.Name:
+			card.markers[GateClosed] = 1
+		if "Dissipate" in traits:
+			card.markers[DissipateToken] = traits.get("Dissipate",0)
 		if "Defense" in card.Stats and not card.Name=="Forcemaster":
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1
