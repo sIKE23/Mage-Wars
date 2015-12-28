@@ -842,6 +842,22 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+		for attachedCard in getAttachments(defender):
+				if attachedCard.isFaceUp and attachedCard.Name == "Blur":
+						if defender.controller.mana == 0:
+								detach(attachedCard)
+								attachedCard.moveTo(me.piles['Discard'])
+								alignAttachments(defender)
+								notify("{} does not have enough mana to pay for Blur, it has been Destroyed!".format(defender.Name))
+						payManaChoice = askChoice("Pay 1 mana to maintain Blur on your {}?".format(defender.Name),["Yes","No"],["#01603e","#de2827"])
+						if payManaChoice == 1:
+								defender.controller.mana -= 1
+								notify("{} pays 1 mana.".format(me))
+						else:
+								detach(attachedCard)
+								attachedCard.moveTo(me.piles['Discard'])
+								alignAttachments(defender)
+								notify("{} did not pay to maintain Blur, it has been Destroyed.".format(me))
 		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
 		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 

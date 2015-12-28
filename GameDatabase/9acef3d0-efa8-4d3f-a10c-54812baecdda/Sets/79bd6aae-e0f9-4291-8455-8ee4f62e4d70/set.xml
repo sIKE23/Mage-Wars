@@ -686,7 +686,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Obscured trait. Each time this creature is Hit by an attack, destroy Blur unless you pay 1 mana. Blur cannot be revealed during an Action Phase or Quickcast Action." />
+			<property name="Text" value="This creature gains the Obscured trait. Each time this creature is Hit by an attack, destroy Blur unless you pay 1 mana. Blur cannot be revealed during an Action Phase or Quickcast Action.&#xD;&#xA;[Obscured]" />
 			<property name="CardID" value="MWPROMO79" />
 		</card>
 		<card id="29121772-6f18-41ec-9add-87712e5f86ec" name="Circle of Light">
