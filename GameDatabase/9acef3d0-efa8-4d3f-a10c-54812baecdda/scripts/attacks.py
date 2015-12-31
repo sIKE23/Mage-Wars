@@ -171,9 +171,9 @@ attack = {
 	"range" :			tuple(int,int)
 
 	"counterstrike" :	bool,
-	"piercing" :		int,
-	"mana drain" :		int,
-	"charge" :			int,
+	"piercing +X" :		int,
+	"mana drain +X" :	int,
+	"charge +X" :		int,
 	"vampiric" :		bool,
 	etc.
 
@@ -181,25 +181,74 @@ attack = {
 	"aAS_[step name]" : fun,
 }
 
-we can store these properties in the xml files with the following notation:
+we can store these properties in the xml files with the following notation (no spaces between fields):
 
 <property name="cAttacks" value="
 	name=Snapping Bite;
 	action type=quick;
 	range type=melee;
 	dice=4;
-	traits=[counterstrike=true
+	counterstrike=True;
+	piercing +X=4;
 	||
 	name=Triple Bite;
 	action type=full;
 	range type=melee;
 	dice=3;
-	traits=[triplestrike=True
+	triplestrike=True
 " />
 
 for multiple traits, use notation [trait1=value1,trait2=value2
 
 """
+
+def parseAttack(string):
+	"Takes a raw attack string for a single attack (in the format used in the new xml fields) and returns a properly formatted dictionary object"
+	#Requires that string contain exactly 1 properly formatted attack
+	#Does not store the information of the original source of the attack
+
+	output = {}
+	fields = string.split(";")
+	for field in fields:
+		pair = field.split("=")
+		try: output[pair[0]] = eval(pair[1]) #non-string values
+		except: output[pair[0]] = pair[1]
+	return output
+
+def getAttacks(card):
+	"""
+	Returns a list containing the attacks of the argument card.
+	This includes ALL attacks belonging to that card, including damage barriers.
+	Attacks associated with the card itself (that the card can declare) will be stored in cAttacks
+	Attacks that the card provides to its attachtarget will be stored in aAttacks
+	Additionally, all cards in play will be queried for attacks that they provide.
+	"""
+	#Requires that card be a card that may legally declare an attack
+	output = []
+
+	#1: parse attacks given in the card's cAttacks field
+	if card.cAttacks:
+		rawAttackList = card.cAttacks.split("||")
+		for string in rawAttackList:
+			attack = parseAttack(string)
+			attack["source id"] = card._id
+			output.append(attack)
+
+	#2: parse attacks from attached cards
+	attachments = getAttachments(card) + ([c for c in table if c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp] if "Mage" in card.Subtype else [])
+	for a in attachments:
+		if a.aAttacks:
+			rawAttackList = a.aAttacks.split("||")
+			for string in rawAttackList:
+				attack = parseAttack(string)
+				attack["source id"] = a._id
+				output.append(attack)
+
+	#3: parse attacks from other sources
+	"""Notation: 'on parse function' = oPF_getAttacks, which is assumed to contain only a function"""
+	[spellDictionary[c.Name]["oPF_getAttacks"](c,card,output) for c in table if "oPF_getAttacks" in spellDictionary.get(c.Name,{})]
+
+	return output
 
 def getAttackList(card):
 		"""This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
