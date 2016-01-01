@@ -190,17 +190,30 @@ we can store these properties in the xml files with the following notation (no s
 	dice=4;
 	counterstrike=True;
 	piercing +X=4;
+	effects=5:Burn,8:Burn+Burn
 	||
 	name=Triple Bite;
 	action type=full;
 	range type=melee;
 	dice=3;
 	triplestrike=True
+	effects=5:Daze,8:Push+Daze
 " />
 
-for multiple traits, use notation [trait1=value1,trait2=value2
-
 """
+
+def parseEffects(string):
+	"""
+	Takes a raw d12 effects string (as formatted in the xml file) and returns a dictionary object with format {int:list[string]}
+	Where int is the minimum d12 roll to trigger the effect
+	and list[string] is a list of effects caused (with doubles as repeated entries)
+	"""
+	output = {}
+	effects = string.split(",")
+	for e in effects:
+		pair = e.split(":")
+		output[int(pair[0])] = pair[1].split("+")
+	return output
 
 def parseAttack(string):
 	"Takes a raw attack string for a single attack (in the format used in the new xml fields) and returns a properly formatted dictionary object"
@@ -211,8 +224,13 @@ def parseAttack(string):
 	fields = string.split(";")
 	for field in fields:
 		pair = field.split("=")
-		try: output[pair[0]] = eval(pair[1]) #non-string values
-		except: output[pair[0]] = pair[1]
+		if pair[0] = "effects":
+			output[pair[0]] = parseEffects(pair[1])
+			continue
+		try: output[pair[0]] = int(pair[1]) #non-string values
+		except:
+			try: output[pair[0]] = bool(pair[1])
+			except: output[pair[0]] = pair[1]
 	return output
 
 def getAttacks(card):
