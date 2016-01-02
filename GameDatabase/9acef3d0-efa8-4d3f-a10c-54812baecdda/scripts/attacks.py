@@ -191,6 +191,7 @@ we can store these properties in the xml files with the following notation (no s
 	counterstrike=True;
 	piercing +X=4;
 	effects=5:Burn,8:Burn+Burn
+	range=(1,2)
 	||
 	name=Triple Bite;
 	action type=full;
@@ -225,12 +226,10 @@ def parseAttack(string):
 	for field in fields:
 		pair = field.split("=")
 		if pair[0] = "effects":
-			output[pair[0]] = parseEffects(pair[1])
+			output["effects"] = parseEffects(pair[1])
 			continue
-		try: output[pair[0]] = int(pair[1]) #non-string values
-		except:
-			try: output[pair[0]] = bool(pair[1])
-			except: output[pair[0]] = pair[1]
+		try: output[pair[0]] = eval(pair[1]) #non-string values
+		except: output[pair[0]] = pair[1]
 	return output
 
 def getAttacks(card):
@@ -238,7 +237,7 @@ def getAttacks(card):
 	Returns a list containing the attacks of the argument card.
 	This includes ALL attacks belonging to that card, including damage barriers.
 	Attacks associated with the card itself (that the card can declare) will be stored in cAttacks
-	Attacks that the card provides to its attachtarget will be stored in aAttacks
+	Attacks that the card provides to its attachtarget will be stored in tAttacks
 	Additionally, all cards in play will be queried for attacks that they provide.
 	"""
 	#Requires that card be a card that may legally declare an attack
@@ -249,16 +248,18 @@ def getAttacks(card):
 		rawAttackList = card.cAttacks.split("||")
 		for string in rawAttackList:
 			attack = parseAttack(string)
+			attack["user id"] = card._id
 			attack["source id"] = card._id
 			output.append(attack)
 
 	#2: parse attacks from attached cards
 	attachments = getAttachments(card) + ([c for c in table if c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp] if "Mage" in card.Subtype else [])
 	for a in attachments:
-		if a.aAttacks:
-			rawAttackList = a.aAttacks.split("||")
+		if a.tAttacks:
+			rawAttackList = a.tAttacks.split("||")
 			for string in rawAttackList:
 				attack = parseAttack(string)
+				attack["user id"] = card._id
 				attack["source id"] = a._id
 				output.append(attack)
 
