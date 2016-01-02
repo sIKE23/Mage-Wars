@@ -405,7 +405,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Blinding Flash;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Light;dice=2;effects={10: ['Stun'], 4: ['Daze']};Ethereal=True;Unavoidable=True;+2 vs. Nonliving Creatures=True" />
+			<property name="cAttacks" value="name=Blinding Flash;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Light;dice=2;effects={10: ['Stun'], 4: ['Daze']};Ethereal=True;Unavoidable=True;bonus=2))tNonliving,TCreature" />
 			<property name="AttackBar" value="[Ranged] [Zone Attack] [Light] [Dice=2] [d12] [4-9 = Daze; 10+ = Stun] [Ethereal] [Unavoidable] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
@@ -595,7 +595,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Pillar of Light;range type=Ranged;range=(0,2);damage type=Light;dice=2;effects={11: ['Stun'], 4: ['Daze']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="cAttacks" value="name=Pillar of Light;range type=Ranged;range=(0,2);damage type=Light;dice=2;effects={11: ['Stun'], 4: ['Daze']};Ethereal=True;bonus=2))tNonliving,TCreature" />
 			<property name="AttackBar" value="[Ranged] [Light] [Dice=2] [d12] [4-10 = Daze; 11+ = Stun] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -1127,7 +1127,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=8" />
-			<property name="cAttacks" value="name=Light Blast;range type=Ranged;range=(0,2);damage type=Light;dice=X;effects={9: ['Stun'], 11: ['Daze']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="cAttacks" value="name=Light Blast;range type=Ranged;range=(0,2);damage type=Light;dice=X;effects={9: ['Stun'], 11: ['Daze']};Ethereal=True;bonus=2))tNonliving,TCreature" />
 			<property name="AttackBar" value="Light Blast:&#xD;&#xA;[Ranged:0-2] [Light] [Dice=X] [d12] [9-10 = Stun; 11+ = Daze] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="Zone Exclusive, Unique" />
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
@@ -1215,7 +1215,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="cAttacks" value="name=Sharp Thorns;Passage Attack=True;dice=2;Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.=True;Unavoidable=True" />
+			<property name="cAttacks" value="name=Sharp Thorns;Passage Attack=True;dice=2;Unavoidable=True" />
 			<property name="AttackBar" value="Sharp Thorns:&#xD;&#xA;[Passage Attack] [Dice=2] [Creatures which pass through this wall, receive a number of attacks equal to their Level -1. Examples: A Level 3 creature is attacked twice, a Level 1 is not attacked.] [Unavoidable]" />
 			<property name="Traits" value="Passage Attacks, Blocks LOS, Regenerate 2, Living, Flame +2, Hydro Immunity, Extendable" />
 			<property name="Text" value="Creatures of Level 2 or higher must spend a full action to move through the Wall of Thorns." />
@@ -1259,7 +1259,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=1, Life=6" />
-			<property name="cAttacks" value="name=Staff;action type=Quick;range type=Melee;range=(0,0);dice=2||name=Healing Light;action type=Full;range type=Ranged;range=(0,1);Heal=True;dice=1;Heal target Living Creature the amount rolled.=True" />
+			<property name="cAttacks" value="name=Staff;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Healing Light:&#xD;&#xA;[Full] [Ranged:0-1] [Heal] [Dice=1] [Heal target Living Creature the amount rolled.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -1574,7 +1574,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
-			<property name="cAttacks" value="name=Sword;action type=Quick;range type=Melee;range=(0,0);dice=4||name=Redeeming Sacrifice;action type=Full;Heal=True;dice=6;Heal any Living creature in the arena the amount rolled. Then, destroy Gray Angel=True" />
+			<property name="cAttacks" value="name=Sword;action type=Quick;range type=Melee;range=(0,0);dice=4" />
 			<property name="AttackBar" value="Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Redeeming Sacrifice:&#xD;&#xA;[Full] [Heal] [Dice=6] [Heal any Living creature in the arena the amount rolled. Then, destroy Gray Angel]" />
 			<property name="Traits" value="Flying" />
 			<property name="Text" value="" />
@@ -1616,7 +1616,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1, Defense=6+ inf, Armor=0, Life=5" />
-			<property name="cAttacks" value="name=Beak;action type=Quick;range type=Melee;range=(0,0);dice=1;Piercing +X=1||name=Raven&apos;s Eye;action type=Quick;range type=Ranged;range=(0,2);Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).=True" />
+			<property name="cAttacks" value="name=Beak;action type=Quick;range type=Melee;range=(0,0);dice=1;Piercing +X=1" />
 			<property name="AttackBar" value="Beak:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1]&#xD;&#xA;Raven&apos;s Eye:&#xD;&#xA;[Quick] [Ranged:0-2] [Huginn may look at a target hidden enchantment. After looking, leave it face down (hidden).]" />
 			<property name="Traits" value="Familiar, Flying, Pest, Legendary, Arcane Mage Only" />
 			<property name="Text" value="Huginn can cast only level 1-2 incantation spells." />
@@ -1743,7 +1743,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Defense=6+ inf, Armor=0, Life=5" />
-			<property name="cAttacks" value="name=Zap;action type=Quick;range type=Melee;range=(0,0);dice=2;Ethereal=True;+2 vs. Incorporeal=True" />
+			<property name="cAttacks" value="name=Zap;action type=Quick;range type=Melee;range=(0,0);dice=2;Ethereal=True;bonus=2))tIncorporeal" />
 			<property name="AttackBar" value="Zap:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Ethereal] [+2 vs. Incorporeal]" />
 			<property name="Traits" value="Flying, Pest" />
 			<property name="Text" value="" />
@@ -1806,7 +1806,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="5" />
 			<property name="Stats" value="Armor=1, Life=14" />
-			<property name="cAttacks" value="name=The Greatsword &quot;Starfire&quot;;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=5;effects={11: ['Stun'], 7: ['Daze']};Ethereal=True;+1 vs. Nonliving or Dark Creatures=True" />
+			<property name="cAttacks" value="name=The Greatsword &quot;Starfire&quot;;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=5;effects={11: ['Stun'], 7: ['Daze']};Ethereal=True;bonus=1))tNonliving,TCreature**sDark,TCreature" />
 			<property name="AttackBar" value="The Greatsword &quot;Starfire&quot;:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=5] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal] [+1 vs. Nonliving or Dark Creatures]" />
 			<property name="Traits" value="Aegis 1, Flying, Light Immunity, Legendary" />
 			<property name="Text" value="" />
@@ -1912,7 +1912,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Defense=7+ 1x No Ranged, Armor=2, Life=9" />
-			<property name="cAttacks" value="name=Beak &amp; Talons;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1;+2 vs. Flying=True" />
+			<property name="cAttacks" value="name=Beak &amp; Talons;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1;bonus=2))tFlying" />
 			<property name="AttackBar" value="Beak &amp; Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1] [+2 vs. Flying]" />
 			<property name="Traits" value="Flying, Legendary" />
 			<property name="Text" value="Tarok&apos;s defense only works against Melee attacks from Flying creatures." />
@@ -1996,7 +1996,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=-, Life=13" />
-			<property name="cAttacks" value="name=Windstorm;action type=Quick;range type=Melee;range=(0,0);damage type=Wind;dice=4;effects={11: ['Push', 'Daze'], 7: ['Push']};Ethereal=True;+2 vs. Incorporeal=True" />
+			<property name="cAttacks" value="name=Windstorm;action type=Quick;range type=Melee;range=(0,0);damage type=Wind;dice=4;effects={11: ['Push', 'Daze'], 7: ['Push']};Ethereal=True;bonus=2))tIncorporeal" />
 			<property name="AttackBar" value="Windstorm:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [7-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs. Incorporeal]" />
 			<property name="Traits" value="Upkeep +1, Incorporeal, Nonliving" />
 			<property name="Text" value="" />
@@ -2124,14 +2124,14 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Electric Surge;action type=Damage Barrier;damage type=Lightning;dice=2;effects={11: ['Stun'], 7: ['Daze']};Ethereal=True;Unavoidable=True" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Electric Surge:&#xD;&#xA;[Damage Barrier] [Lightning] [Dice=2] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="This creature gains a Damage Barrier." />
 			<property name="CardID" value="MW1E06" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Electric Surge;action type=Damage Barrier;damage type=Lightning;dice=2;effects={11: ['Stun'], 7: ['Daze']};Ethereal=True;Unavoidable=True" />
 		</card>
 		<card id="746e5dba-4689-4ae5-831e-a844131c4824" name="Cobra Reflexes">
 			<property name="Nickname" value="Cobra Reflexes" />
@@ -3098,14 +3098,14 @@
 			<property name="School" value="War" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon+Shield" />
-			<property name="cAttacks" value="name=Voltaric Strike;action type=Full;range type=Ranged;range=(1,2);dice=4;Piercing +X=1" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Voltaric Strike:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q13" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Voltaric Strike;action type=Full;range type=Ranged;range=(1,2);dice=4;Piercing +X=1" />
 		</card>
 		<card id="5d2f72e1-7aaf-4931-b0e0-f11cce928313" name="Lash of Hellfire">
 			<property name="Nickname" value="Lash of Hellfire" />
@@ -3119,14 +3119,14 @@
 			<property name="School" value="Dark+Fire" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="cAttacks" value="name=Searing Thrash;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=4;effects={11: ['Burn', 'Burn'], 7: ['Burn']};Reach=True;Defrost=True" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Searing Thrash:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Reach] [Defrost]" />
 			<property name="Traits" value="Warlock Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q14" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Searing Thrash;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=4;effects={11: ['Burn', 'Burn'], 7: ['Burn']};Reach=True;Defrost=True" />
 		</card>
 		<card id="5a07689a-9edc-4366-9d70-6eecf5f4447d" name="Leather Boots">
 			<property name="Nickname" value="Leather Boots" />
@@ -3203,14 +3203,14 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="cAttacks" value="name=Arcane Burst;action type=Quick;range type=Melee;range=(0,0);dice=4;Reach=True;Ethereal=True" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Arcane Burst:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Reach] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q18" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Arcane Burst;action type=Quick;range type=Melee;range=(0,0);dice=4;Reach=True;Ethereal=True" />
 		</card>
 		<card id="86d43008-5faf-4eaf-a66a-cdd985f45d5f" name="Mage Wand">
 			<property name="Nickname" value="Mage Wand" />
@@ -3392,14 +3392,14 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="cAttacks" value="name=Celestial Strike;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=4;effects={11: ['Stun'], 5: ['Daze']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Celestial Strike:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=4] [d12] [5-10 = Daze; 11+ = Stun] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="Priestess Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q29" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Celestial Strike;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=4;effects={11: ['Stun'], 5: ['Daze']};Ethereal=True;bonus=2))tNonliving,TCreature" />
 		</card>
 		<card id="e3375aac-6b2d-45b8-93a9-c8d0b316ee94" name="Staff of Beasts">
 			<property name="Nickname" value="Staff of Beasts" />
@@ -3413,14 +3413,14 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="cAttacks" value="name=Savage Strike;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Savage Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Beastmaster Only" />
 			<property name="Text" value="Once per round, as a quick spell, this Mage may pay 2 mana and target an animal creature up to 1 zone away and either give them the Melee +2 trait until end of round, or heal damage equal to the amount rolled on 2 attack dice." />
 			<property name="CardID" value="MW1Q30" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Savage Strike;action type=Quick;range type=Melee;range=(0,0);dice=4" />
 		</card>
 		<card id="4376c705-deea-45cd-9dc2-70d5bc1483a8" name="Staff of the Arcanum">
 			<property name="Nickname" value="Staff of the Arcanum" />
@@ -3434,14 +3434,14 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="cAttacks" value="name=Arcane Strike;action type=Quick;range type=Melee;range=(0,0);dice=4;Ethereal=True;Mana Drain +X=1||name=Arcane Blast;action type=Full;range type=Ranged;range=(1,1);dice=3;Ethereal=True;Mana Drain +X=1" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Arcane Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Ethereal] [Mana Drain +1]&#xD;&#xA;Arcane Blast:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Ethereal] [Mana Drain +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q31" />
 			<property name="cBuffs" value="" />
 			<property name="Gender" value="" />
-			<property name="tAttacks" value="" />
+			<property name="tAttacks" value="name=Arcane Strike;action type=Quick;range type=Melee;range=(0,0);dice=4;Ethereal=True;Mana Drain +X=1||name=Arcane Blast;action type=Full;range type=Ranged;range=(1,1);dice=3;Ethereal=True;Mana Drain +X=1" />
 		</card>
 		<card id="b37baf19-da0b-40f6-8cb3-cf8205bfb04e" name="Suppression Cloak">
 			<property name="Nickname" value="Suppression Cloak" />
