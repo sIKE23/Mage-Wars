@@ -21,10 +21,13 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Arcane Missiles" >
+;range type=Ranged;range=(0,1);dice=2;Ethereal=True;Unavoidable=True" />
 			<property name="AttackBar" value="[Ranged] [Dice=2] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="You may make this attack against up to 3 different targets in the same zone. Damage from this attack is critical (ignores armor). Roll for each attack separately." />
 			<property name="CardID" value="MWA01A01" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="5de89ddc-9741-41ee-9f20-09cc28b4f645"  name="Forked Lightning" >
 			<property name="Nickname" value="Forked Lightning" />
@@ -38,10 +41,13 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Forked Lightning" >
+;range type=Ranged;range=(0,1);damage type=Lightning;dice=3;effects={7: ['Stagger']};Sweeping=True;Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=3] [d12] [7+ = Stagger] [Sweeping] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01A02" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="6a72b4b5-80a9-44bb-a697-e71969ff2dfe"  name="Lightning Jolt" >
 			<property name="Nickname" value="Lightning Jolt" />
@@ -55,10 +61,13 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Lightning Jolt" >
+;range type=Ranged;range=(0,1);damage type=Lightning;dice=3;effects={5: ['Stagger']};Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=3] [d12] [5+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01A03" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="6d3991af-0717-4abb-880c-d815ad95714b"  name="Piercing Thunderstrike" >
 			<property name="Nickname" value="Piercing Thunderstrike" />
@@ -72,10 +81,13 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Piercing Thunderstrike" >
+;range type=Ranged;range=(0,1);damage type=Lightning;dice=4;effects={7: ['Stagger']};Ethereal=True;Piercing +X=2" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=4] [7+ = Stagger] [Ethereal] [Piercing +2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01A04" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="6e0c16ef-faca-413c-925b-ce70f0c1f54b"  name="Voltaic Discharge" >
 			<property name="Nickname" value="Voltaic Discharge" />
@@ -89,10 +101,13 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Voltaic Discharge" >
+;Zone Attack=True;range type=Ranged;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
 			<property name="AttackBar" value="[Zone Attack] [Ranged] [Dice=3] [d12] [7+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01A05" />
+			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -108,10 +123,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=6" />
+			<property name="cAttacks" value="name=Club Tail;action type=Full;range type=Melee;range=(0,0);dice=3;Sweeping=True" />
 			<property name="AttackBar" value="Club Tail:&#xD;&#xA;[Full] [Melee] [Dice=3] [Sweeping]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C01" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="7a8e1879-97ff-49ef-b386-60204878e021"  name="Atticaran Porcupine" >
 			<property name="Nickname" value="Atticaran Porcupine" />
@@ -125,10 +142,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="cAttacks" value="name=Quill Attack;action type=Quick;range type=Melee;range=(0,0);dice=1;Piercing +X=1;Counterstrike=True" />
 			<property name="AttackBar" value="Quill Attack:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Piercing +1] [Counterstrike]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="While making a counterstrike, Atticaran Porcupine gains Melee +2." />
 			<property name="CardID" value="MWA01C02" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="9ab3487b-57d4-45ed-b9aa-0cce08d7d143"  name="Azurean Genie" >
 			<property name="Nickname" value="Azurean Genie" />
@@ -142,10 +161,12 @@
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="cAttacks" value="name=Scimitar;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Scimitar:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When Azurean Genie is summoned, place 3 Wish tokens on him. As a quick action, remove 1 Wish token and target a Living creature in his zone. The target gains Melee +2 this round, Heals 2 damage, or gains the Stagger condition." />
 			<property name="CardID" value="MWA01C03" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="9c9d7f74-7a46-4d7d-9c38-d7c172adcce9"  name="Darkfenne Asp" >
 			<property name="Nickname" value="Darkfenne Asp" />
@@ -159,10 +180,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Defense=5+ inf, Armor=0, Life=3" />
+			<property name="cAttacks" value="name=Poison Bite;action type=Quick;range type=Melee;range=(0,0);dice=1;effects={7: ['Weak']}" />
 			<property name="AttackBar" value="Poison Bite:&#xD;&#xA;[Quick] [Melee] [Dice=1] [d12] [7+ = Weak]" />
 			<property name="Traits" value="Pest" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C04" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="21ae548d-a4cd-425c-b832-38b2b3280aca"  name="Jade Gremlin" >
 			<property name="Nickname" value="Jade Gremlin" />
@@ -176,10 +199,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="cAttacks" value="name=Fists;action type=Quick;range type=Melee;range=(0,0);dice=2] " />
 			<property name="AttackBar" value="Fists:&#xD;&#xA;[Quick] [Melee] [Dice=2] " />
 			<property name="Traits" value="Pest" />
 			<property name="Text" value="When Jade Gremlin is melee attacked, as a Defense, you may pay 1 mana to have it avoid the attack." />
 			<property name="CardID" value="MWA01C05" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="64cb4b02-c623-4d77-877d-7ed1956e9a8a"  name="Lightning Raptor" >
 			<property name="Nickname" value="Lightning Raptor" />
@@ -193,10 +218,12 @@
 			<property name="School" value="Arcane+Air" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="cAttacks" value="name=Electric Bolt;action type=Quick;range type=Melee;range=(0,0);damage type=Lightning;dice=X;effects={7: ['Stagger']};Ethereal=True" />
 			<property name="AttackBar" value="Electric Bolt:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=X] [d12] [7+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Each Upkeep, Lightning Raptor gains a Charge token, to a maximum of 5 tokens. X = the number of Charge tokens on him. If Lightning Raptor has 5 charge tokens, its Electric Bolt attack gains the Counterstrike trait." />
 			<property name="CardID" value="MWA01C06" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="66c08dca-587c-4e03-8fd6-102a8eba319f"  name="Mana Worm" >
 			<property name="Nickname" value="Mana Worm" />
@@ -210,10 +237,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="cAttacks" value="name=Stinging Tentacles;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Stinging Tentacles:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When Mana Worm attacks and damages a creature, that creature&apos;s controller loses 1 mana (if he has any to lose)." />
 			<property name="CardID" value="MWA01C07" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="79d6b5e7-4bf8-4e3d-9cff-97eb4f449f04"  name="Paralyzing Basilisk" >
 			<property name="Nickname" value="Paralyzing Basilisk" />
@@ -227,10 +256,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=7" />
+			<property name="cAttacks" value="name=Paralyzing Ray;action type=Quick;range type=Ranged;range=(0,1);dice=2;effects={7: ['Stagger']}" />
 			<property name="AttackBar" value="Paralyzing Ray:&#xD;&#xA;[Quick] [Ranged:0-1] [Dice=2] [7+ = Stagger]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C08" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="94abb5a9-a04e-4979-8d33-1ff04964c872"  name="Pellian Lynx" >
 			<property name="Nickname" value="Pellian Lynx" />
@@ -244,10 +275,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=2;Piercing +X=1" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Piercing +1]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C09" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="97d10f95-fb85-42a9-a910-bfca2c43f6f3"  name="Rajah, Jungle&apos;s Talon" >
 			<property name="Nickname" value="Rajah" />
@@ -261,10 +294,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=11" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Legendary, Elusive" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C10" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="98f044b2-9356-494d-a7fa-2ba28cfa5983"  name="Razortusk" >
 			<property name="Nickname" value="Razortusk" />
@@ -278,10 +313,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=7" />
+			<property name="cAttacks" value="name=Razor Tusks;action type=Quick;range type=Melee;range=(0,0);dice=4" />
 			<property name="AttackBar" value="Razor Tusks:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C11" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="205b0393-78fe-44a4-a5a3-c1d5e954db39"  name="Redcrested Cockatrice" >
 			<property name="Nickname" value="Redcrested Cockatrice" />
@@ -295,10 +332,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="cAttacks" value="name=Poison Bite;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={7: ['Weak']}" />
 			<property name="AttackBar" value="Poison Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [7+ = Weak]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When Cockatrice makes a counterstrike, he gains Melee +1, and his Poison Bite attack gains Piercing +1." />
 			<property name="CardID" value="MWA01C12" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="267c950c-7612-4078-a704-f2ed31b6d3aa"  name="Ridgeback Skunk" >
 			<property name="Nickname" value="Ridgeback Skunk" />
@@ -312,10 +351,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When a Living creature melee attacks Ridgeback Skunk, that creature receives a Stagger condition after the attack." />
 			<property name="CardID" value="MWA01C13" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="306d1907-3949-4503-a8f5-cd85e37375f9"  name="Sailfin Hydra" >
 			<property name="Nickname" value="Sailfin Hydra" />
@@ -329,10 +370,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=13" />
+			<property name="cAttacks" value="name=Bite;action type=Full;range type=Melee;range=(0,0);dice=3;Doublestrike=True" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Full] [Melee] [Dice=3] [Doublestrike]" />
 			<property name="Traits" value="Regenerate 1" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C14" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="902d458d-7714-4e5d-a49e-f1483f537b78"  name="Satyr Gruff" >
 			<property name="Nickname" value="Satyr Gruff" />
@@ -346,10 +389,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=10" />
+			<property name="cAttacks" value="name=Heavy Mace;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Heavy Mace:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When Satyr Gruff attacks and deals 4 or more damage to an enemy creature, place a Stagger condition on that creature." />
 			<property name="CardID" value="MWA01C15" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="1015ff77-a388-47fd-a456-0ddcfbef326c"  name="Slavörg, Fang of the First Moon" >
 			<property name="Nickname" value="Slavörg" />
@@ -363,10 +408,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=2, Life=13" />
+			<property name="cAttacks" value="name=Saber Fangs;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=2" />
 			<property name="AttackBar" value="Saber Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +2]" />
 			<property name="Traits" value="Legendary, Epic" />
 			<property name="Text" value="Slavörg costs 2 less mana for each animal creature in your discard pile. At the end of each of his activations, you may pay 2 mana to place a Guard marker on him." />
 			<property name="CardID" value="MWA01C16" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="2476d3b1-113b-46ee-aaeb-bc6d2a30c6be"  name="Steelclaw Cub" >
 			<property name="Nickname" value="Steelclaw Cub" />
@@ -380,10 +427,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=2, Life=5" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Pest" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C17" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="3731ed1f-9c07-4516-9598-0bff3cfe0fba"  name="Steelclaw Matriarch" >
 			<property name="Nickname" value="Steelclaw Matriarch" />
@@ -397,10 +446,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=3, Life=11" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Steelclaw Matriarch gains Melee +1 for each friendly Steelclaw Cub in her zone." />
 			<property name="CardID" value="MWA01C18" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="5922c3dc-f6a0-4841-adf2-168538d4e0b4"  name="Tarraki, Thousand Bites" >
 			<property name="Nickname" value="Tarraki" />
@@ -414,10 +465,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Defense=5+ inf, Armor=0, Life=4" />
+			<property name="cAttacks" value="name=Ravenous Bite;action type=Quick;range type=Melee;range=(0,0);dice=2;Unavoidable=True" />
 			<property name="AttackBar" value="Ravenous Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Unavoidable]" />
 			<property name="Traits" value="Pest, Elusive, Legendary, Beastmaster Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWA01C19" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="89564a45-1d59-46b2-ba5d-50293874b714"  name="Wychwood Faerie" >
 			<property name="Nickname" value="Wychwood Faerie" />
@@ -431,10 +484,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Defense=5+ inf, Armor=0, Life=3" />
+			<property name="cAttacks" value="name=Faerie Zap;action type=Quick;range type=Melee;range=(0,0);dice=1;Ethereal=True" />
 			<property name="AttackBar" value="Faerie Zap:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal]" />
 			<property name="Traits" value="Pest, Unique, Beastmaster Only" />
 			<property name="Text" value="Once per round, if Wychwood Faerie is in your zone, you may pay 1 less mana if you cast an enchantment or an animal creature spell." />
 			<property name="CardID" value="MWA01C20" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="265070fd-df30-4796-8309-987f66e2d5d2"  name="Wychwood Hound" >
 			<property name="Nickname" value="Wychwood Hound" />
@@ -448,10 +503,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="While Wychwood Hound is in the same zone as another friendly Wychwood Hound, it gains Armor +1 and the Melee +1 trait." />
 			<property name="CardID" value="MWA01C21" />
+			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -467,10 +524,12 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Epic" />
 			<property name="Text" value="When you reveal Akiro&apos;s Game you gain 2 mana. During the Upkeep Phase, place a Stagger condition on the creature with the highest casting cost in this zone. If there is a tie, roll a die randomly to decide which creature is Staggered." />
 			<property name="CardID" value="MWA01E01" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="0516964e-079e-4d13-812b-470de8ca2c02"  name="Arcane Ward" >
 			<property name="Nickname" value="Arcane Ward" />
@@ -484,10 +543,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When this creature is the target of an incantation or enchantment spell, you must reveal Arcane Ward. That spell is countered (canceled without effect). Any mana spent to cast the spell is refunded to the caster. Then, destroy Arcane Ward." />
 			<property name="CardID" value="MWA01E02" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="3836215f-fb53-43aa-83f3-ae6c37e08a4d"  name="Badger Frenzy" >
 			<property name="Nickname" value="Badger Frenzy" />
@@ -501,10 +562,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="The next time this creature makes a quick melee attack, that attack gains the Doublestrike trait. At the end of that attack, destroy Badger Frenzy. If this creature is Level 1, you may reduce the reveal cost of Badger Frenzy by 1." />
 			<property name="CardID" value="MWA01E03" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="63335626-734d-44cd-ab90-c8ac3e7861f4"  name="Divine Reversal" >
 			<property name="Nickname" value="Divine Reversal" />
@@ -518,10 +581,12 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When this creature is attacked, you must reveal Divine Reversal. You may prevent up to 2 damage from that attack. After the attack, heal this creature 2 damage. Then, destroy Divine Reversal." />
 			<property name="CardID" value="MWA01E04" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="92078586-0956-442b-a882-67b0cb4afefb"  name="Dodge" >
 			<property name="Nickname" value="Dodge" />
@@ -535,10 +600,12 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
 			<property name="Text" value="Dodge counts as a Defense and must be revealed when this creature is attacked. If this creature is a minor creature the attack is avoided. Otherwise, roll a d12: On a roll of 7+ the attack is avoided. Then destroy Dodge." />
 			<property name="CardID" value="MWA01E05" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="a3e66932-56af-43ad-b583-5395295ef9c9"  name="Exile" >
 			<property name="Nickname" value="Exile" />
@@ -552,10 +619,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dissipate 2" />
 			<property name="Text" value="When this creature activates you may reveal Exile and teleport this creature outside the arena (remove it from the play area with this enchantment attached). When this enchantment is destroyed, this creature returns to the same zone it came from. If this creature is Level 1, you may reduce the reveal cost of Exile by 1." />
 			<property name="CardID" value="MWA01E06" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="a6f7875c-5c52-4be7-96de-051d461c99e9"  name="Gator Toughness" >
 			<property name="Nickname" value="Gator Toughness" />
@@ -569,10 +638,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="This creature gains Armor +1 and Life +2.&#xD;&#xA;[Armor +1] [Life +2]" />
 			<property name="CardID" value="MWA01E07" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="a9f156d5-7032-4e6f-a8fc-001733cbf2b7"  name="Giant Size" >
 			<property name="Nickname" value="Giant Size" />
@@ -586,10 +657,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dissipate 2" />
 			<property name="Text" value="This creature gains Life +5 and Melee +2.&#xD;&#xA;[Life +5] [Melee +2]" />
 			<property name="CardID" value="MWA01E08" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="a73f2bf1-e700-4bbe-beae-62117b70801b"  name="Hoodwink" >
 			<property name="Nickname" value="Hoodwink" />
@@ -603,10 +676,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Wizard Only, Epic" />
 			<property name="Text" value="When this object the target of an opponent&apos;s spell or attack, you may reveal Hoodwink: Gain 3 mana and then destroy Hoodwink. If Hoodwink is destroyed, even if hidden, you may place it back into your spellbook." />
 			<property name="CardID" value="MWA01E09" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="a105e27a-e8a4-4f34-b63b-5a2d49e78af5"  name="Iguana Regrowth" >
 			<property name="Nickname" value="Iguana Regrowth" />
@@ -620,10 +695,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="This creature gains Life +2 and the Regenerate 1 trait. X = the creature&apos;s Level.&#xD;&#xA;[Life +2] [Regenerate 1]" />
 			<property name="CardID" value="MWA01E10" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="a544114e-4657-431c-a2a6-a91e972a6a00"  name="Joined Strength" >
 			<property name="Nickname" value="Joined Strength" />
@@ -637,10 +714,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Unique, Beastmaster Only" />
 			<property name="Text" value="This creature gains Melee +1. Whenever it is attacked and receives damage you must transfer 1 of that damage to your Mage instead. If this creature is destroyed you may pay 1 mana to move Joined Strength to a new target in your zone." />
 			<property name="CardID" value="MWA01E11" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="accd0a36-8ff6-4ca0-8d6d-5b931a7730af"  name="Minor Essence Drain" >
 			<property name="Nickname" value="Minor Essence Drain" />
@@ -654,10 +733,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="During this creature&apos;s Upkeep, its controller must pay 1 mana or the creature is destroyed." />
 			<property name="CardID" value="MWA01E12" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="b0aecaf5-6e97-48fd-8d81-3c2c56f3da43"  name="Panther Stealth" >
 			<property name="Nickname" value="Panther Stealth" />
@@ -671,10 +752,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="This creature gains the Elusive trait. If this creature is Level 1, you may reduce the reveal cost of Panther Stealth by 1.&#xD;&#xA;[Elusive]" />
 			<property name="CardID" value="MWA01E13" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="b829bf8a-b4a5-42af-ae44-2d24ce3779c1"  name="Shrink" >
 			<property name="Nickname" value="Shrink" />
@@ -688,10 +771,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dissipate 2" />
 			<property name="Text" value="This creature gains the Pest trait. When it attacks, it rolls 2 fewer attack dice (to a minimum of 1). X = the creatures Level." />
 			<property name="CardID" value="MWA01E15" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="b897b2ca-3c47-4cd0-9df5-8aba04d8919e"  name="Tangleroot" >
 			<property name="Nickname" value="Tangleroot" />
@@ -705,10 +790,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dissipate 3" />
 			<property name="Text" value="This creature&apos;s melee attacks roll 1 less attack die (to a minimum of 1) for each Dissipate token on Tangleroot." />
 			<property name="CardID" value="MWA01E16" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="bba14d55-8d94-4749-9420-0d3c2d1fa24a"  name="Wolf Fury" >
 			<property name="Nickname" value="Wolf Fury" />
@@ -722,10 +809,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="This creature gains the Melee +1 trait, and its melee attacks gain Piercing +1. If this creature is Level 1, you may reduce the reveal cost of Wolf Fury by 1." />
 			<property name="CardID" value="MWA01E17" />
+			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -741,10 +830,12 @@
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When you cast Crumble, you gain 2 mana. Destroy target equipment. X = the casting cost of target equipment." />
 			<property name="CardID" value="MWA01I01" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="c3f45020-4e2c-4fe1-87a5-52741a6c2794"  name="Disperse" >
 			<property name="Nickname" value="Disperse" />
@@ -758,10 +849,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Destroy target enchantment. X = the reveal cost of target enchantment." />
 			<property name="CardID" value="MWA01I02" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="c6fd8d19-169d-4579-bfa8-25f657c48138"  name="Group Mend" >
 			<property name="Nickname" value="Group Mend" />
@@ -775,10 +868,12 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Heal each friendly Living creature in this zone the amount rolled on 2 attack dice. Roll separately for each creature." />
 			<property name="CardID" value="MWA01I03" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="c192f65e-43e2-4aa2-bae4-92ae341f5b5f"  name="Mend" >
 			<property name="Nickname" value="Mend" />
@@ -792,10 +887,12 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
 			<property name="Text" value="Heal target creature the amount rolled on 3 attack dice." />
 			<property name="CardID" value="MWA01I04" />
+			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -811,10 +908,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Shield" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Beastmaster Only" />
 			<property name="Text" value="During the Upkeep Phase, you may heal up to 2 different animal creatures in your zone 1 damage each, by paying 1 mana per creature healed." />
 			<property name="CardID" value="MWA01Q01" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="cdbeeaf6-7945-402d-95b8-7fd41c775695"  name="Johktari Hunting Knife" >
 			<property name="Nickname" value="Johktari Hunting Knife" />
@@ -828,10 +927,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
+			<property name="cAttacks" value="name=Curved Blade;action type=Quick;range type=Melee;range=(0,0);dice=3] " />
 			<property name="AttackBar" value="Curved Blade:&#xD;&#xA;[Quick] [Melee] [Dice=3] " />
 			<property name="Traits" value="" />
 			<property name="Text" value="When you attack and deal damage with this weapon, a friendly animal creature in your zone may gain Melee +1 until the end of the round. If this Mage is level 5 or greater, Johktari Hunting Knife rolls an additional attack die." />
 			<property name="CardID" value="MWA01Q03" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="d2ae5c7e-a8f1-4f6d-816c-9caaa9341937"  name="Kajarah" >
 			<property name="Nickname" value="Kajarah" />
@@ -845,10 +946,13 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
+			<property name="cAttacks" value="name=Kajarah" >
+;Serrated Edge:[Quick=True;range type=Ranged;range=(0,1);dice=2" />
 			<property name="AttackBar" value="Serrated Edge:[Quick] [Ranged:0-1] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If a friendly animal creature attacked and damaged the target this round, this attack gains +1 attack dice." />
 			<property name="CardID" value="MWA01Q04" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="d1117208-e1ef-4eb0-b33b-ba947a2fa230"  name="Leather Greaves" >
 			<property name="Nickname" value="Leather Greaves" />
@@ -862,10 +966,12 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Greaves" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
 			<property name="Text" value="This Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWA01Q05" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="dca18219-24b6-4ba2-9f2a-e455ba10cb19"  name="Packleader&apos;s Cowl" >
 			<property name="Nickname" value="Packleader&apos;s Cowl" />
@@ -879,10 +985,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Helmet+Cloak" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Beastmaster Only" />
 			<property name="Text" value="This Mage gains Armor +1.&#xD;&#xA;Once per round during this Mage&apos;s activation, he may choose a minor friendly animal creature in his zone, pay mana equal to their level, and place a Guard marker on that creature.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWA01Q07" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="e9839f16-bce0-49cb-b3a4-9525103f27db"  name="Repulsion Cloak" >
 			<property name="Nickname" value="Repulsion Cloak" />
@@ -896,10 +1004,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Cloak" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Wizard Only" />
 			<property name="Text" value="When this Mage is melee attacked (except for a counterstrike), the attacker must pay 1 mana, or the attack is canceled." />
 			<property name="CardID" value="MWA01Q07" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="ee416c3f-de96-49e0-9c8f-7e818db2fc42"  name="Rod of the Arcanum" >
 			<property name="Nickname" value="Rod of the Arcanum" />
@@ -913,10 +1023,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
+			<property name="cAttacks" value="name=Eldritch Bash;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Eldritch Bash:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When this attack damages an enemy Non-Mage creature, that creatures controller loses 1 mana (if he has any to lose). If this Mage is level 5 or higher, Rod of the Arcanum rolls an additional attack die." />
 			<property name="CardID" value="MWA01Q08" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="fc4fac9b-cfb9-448e-a0ac-57e95092c02b"  name="Sistarran Robes" >
 			<property name="Nickname" value="Sistarran Robes" />
@@ -930,10 +1042,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Chestpiece" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="This Mage gains Armor +1.&#xD;&#xA;Once per round, when an opponent loses mana because of an effect you control, you gain 1 mana.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="fc8cfb9b-8a8a-44bc-b2e3-9bb1209e9f07"  name="Wispwillow Amulet" >
 			<property name="Nickname" value="Wispwillow Amulet" />
@@ -947,10 +1061,12 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Amulet" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dissipate 6" />
 			<property name="Text" value="Whenever you remove a Dissipate token from Wispwillow Amulet, gain 1 mana." />
 			<property name="CardID" value="MWA01Q10" />
+			<property name="tAttacks" value="" />
 		</card>
 		<card id="fca98dd8-af3f-4a3d-8c23-df736f4a3739"  name="Wychwood Ironvine" >
 			<property name="Nickname" value="Wychwood Ironvine" />
@@ -964,10 +1080,12 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Belt" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="This Mage gains Armor +1 and the Regenerate 1 trait.&#xD;&#xA;[Armor +1] [Regenerate 1]" />
 			<property name="CardID" value="MWA01Q11" />
+			<property name="tAttacks" value="" />
 		</card>
 	</cards>
 </set>
