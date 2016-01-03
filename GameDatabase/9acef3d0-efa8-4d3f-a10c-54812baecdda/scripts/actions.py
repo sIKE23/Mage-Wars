@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.13.7.0     #######################################
+##########################    v1.14.0.0     #######################################
 ###########################################################################
 import time
 import re
@@ -424,6 +424,7 @@ def rollForInitative():
 
 def AskInitiative(playerID):
 	mute()
+	setGlobalVariable("VictoriousPlayerID", str(playerID))
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	notify("{} has won the Initative Roll and is deciding who should go first.".format(me))
 	players = getPlayers()
