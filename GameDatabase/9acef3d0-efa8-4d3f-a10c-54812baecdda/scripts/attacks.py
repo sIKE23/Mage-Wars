@@ -47,6 +47,28 @@ diceRollMenu:
 
 """
 
+def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
+	"""
+	Prompts the attacking player to select an attack. Assumes that there exists an attacker and a defender.
+	If you want to restrict the types of attack that can be chosen, you can set permissible action types in actionFilters
+	If you set the action filter to "None", it will only pick up attacks without an action type.
+	"""
+	mute()
+
+	#1: Populate the attack list.
+
+	def filterPredicate(attack): #For clarity
+		return attack.get("action type","None") in actionFilters or "Counterstrike" in actionFilters and attack.get("Counterstrike")
+	attackList = [attack for attack in getAttacks(attacker) if filterPredicate(attack)]
+
+	#2: Get a modified list of attacks for populating the menu. Format: List[(attack,kill chance),...]
+	modifiedAttacks = [(computeAttack(attacker,defender,attack),chanceToKill(attacker,attack,defender) for attack in attackList]
+
+	#3: Display the menu to the player and allow them to choose an option
+
+	#4: Initiate the chosen attack
+
+
 def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		mute()
 		setEventList('Turn',[]) #Clear the turn event list. Will need to be changed when we implement sweeping/zone attacks properly
@@ -57,11 +79,11 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if c.Name=="Lion Savagery" and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
 		if not attacker: defender = None
 		dTraitDict = (computeTraits(defender) if defender else {})
-		attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
+		attackList = getAttacks(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
 		choiceText = "Roll how many attack dice?"
 		#Suppose there is an attacker with at least one attack:
 		if aTraitDict:
-				attackList = [computeAttack(aTraitDict,attack,dTraitDict) for attack in attackList if attack.get('RangeType') != 'Damage Barrier']
+				attackList = [computeAttack(attacker,defender,attack) for attack in attackList if attack.get('action type') != 'Damage Barrier']
 				choiceText = "Use which attack?"
 		if specialCase == 'Counterstrike':
 				for a in list(attackList):
@@ -115,7 +137,6 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict.get('OwnerID'))
 		atkTraits = attack.get('Traits',{})
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
-		debug("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0): return False
 		if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
@@ -149,7 +170,7 @@ Functions that retrieve and compute the entries of attack dictionaries.
 
 ---Code Structure---
 
-getAttackList:
+getAttacks:
 		computeAttack:
 				getAdjustedDice
 		getAttackTraitStr
@@ -163,6 +184,7 @@ attack = {
 	"dice" : 			int,
 	"source id" : 		int,	(the card that supplies the attack)
 	"user id" :			int,	(the card that is using the attack)
+	"target id" :		int,	(the card being targeted by the attack)
 	"damage type" :		str,
 	"action type" :		str, {"quick", "full", "counterstrike", "damage barrier", "none"}
 	"range type" :		str, {"ranged", "melee"}
@@ -203,31 +225,17 @@ we can store these properties in the xml files with the following notation (no s
 
 """
 
-def parseEffects(string):
-	"""
-	Takes a raw d12 effects string (as formatted in the xml file) and returns a dictionary object with format {int:list[string]}
-	Where int is the minimum d12 roll to trigger the effect
-	and list[string] is a list of effects caused (with doubles as repeated entries)
-	"""
-	output = {}
-	effects = string.split(",")
-	for e in effects:
-		pair = e.split(":")
-		output[int(pair[0])] = pair[1].split("+")
-	return output
-
 def parseAttack(string):
 	"Takes a raw attack string for a single attack (in the format used in the new xml fields) and returns a properly formatted dictionary object"
 	#Requires that string contain exactly 1 properly formatted attack
 	#Does not store the information of the original source of the attack
-
 	output = {}
 	fields = string.split(";")
 	for field in fields:
 		pair = field.split("=")
-		if pair[0] = "effects":
-			output["effects"] = parseEffects(pair[1])
-			continue
+	#	if pair[0] == "effects":
+	#		output["effects"] = parseEffects(pair[1])
+	#		continue
 		try: output[pair[0]] = eval(pair[1]) #non-string values
 		except: output[pair[0]] = pair[1]
 	return output
@@ -242,16 +250,15 @@ def getAttacks(card):
 	"""
 	#Requires that card be a card that may legally declare an attack
 	output = []
-
 	#1: parse attacks given in the card's cAttacks field
 	if card.cAttacks:
 		rawAttackList = card.cAttacks.split("||")
 		for string in rawAttackList:
+			debug(string)
 			attack = parseAttack(string)
 			attack["user id"] = card._id
 			attack["source id"] = card._id
 			output.append(attack)
-
 	#2: parse attacks from attached cards
 	attachments = getAttachments(card) + ([c for c in table if c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp] if "Mage" in card.Subtype else [])
 	for a in attachments:
@@ -262,171 +269,26 @@ def getAttacks(card):
 				attack["user id"] = card._id
 				attack["source id"] = a._id
 				output.append(attack)
-
 	#3: parse attacks from other sources
 	"""Notation: 'on parse function' = oPF_getAttacks, which is assumed to contain only a function"""
 	[spellDictionary[c.Name]["oPF_getAttacks"](c,card,output) for c in table if "oPF_getAttacks" in spellDictionary.get(c.Name,{})]
-
+	debug("e")
 	return output
 
-def getAttackList(card):
-		"""This returns an unmodified list of the card's attacks. It must be modified by <computeAttack> independently."""
-		if not card: return [] #Return an empty list if passed a blank argument
-		if card.Name=="Dancing Scimitar" and timesHasUsedAbility(card) > 0: return []  #Dancing Scimitar's attack is only once per round.
-		attackList = []
-		if card.AttackBar != "":
-				rawData = card.AttackBar
-				#Split up the attacks:
-				attackKeyList0 = [attack.split(':\r\n') for attack in card.AttackBar.split(']\r\n')]
-				isAttackSpell = (card.Type == 'Attack')
-				#Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
-				attackKeyList1 = []
-				for attack in attackKeyList0:
-						name = (card.Name if isAttackSpell else attack[0])
-						attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
-						if isAttackSpell: attributes.append('Spell')
-						options = []
-						tempAttributes = attributes
-						for a in list(attributes):
-								if ' OR ' in a:
-										attributes.remove(a)
-										options = a.split(' OR ')
-						if options:
-								for o in options:
-										attackKeyList1.append([name,attributes+[o]])
-						else:
-								attackKeyList1.append([name,attributes])
-				#Create attack dictionaries
-				for attack in attackKeyList1:
-						name = attack[0]
-						attributes = attack[1]
-						aDict = {'Name':name,
-								 'd12':[],
-								 'Traits': {},
-								 'EffectType': 'Attack',
-								 'SourceID': card._id,
-								 'OriginalSourceID': card._id
-								 #Later, when functionality is expanded to include non-attack effects, this will be modified
-								 }
-						if isAttackSpell:
-								aDict['Range'] = [int(r) for r in card.Range.split('-')]
-								aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
-						#Now we extract the attributes
-						effectSwitch = False
-						if "Heal" in attributes: continue
-						for attribute in attributes: #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
-								attribute = attribute.strip('[]')
-								if attribute in ['Quick','Full'] : aDict['Action'] = attribute
-								elif 'Ranged' in attribute:
-										aDict['RangeType'] = attribute.split(':')[0]
-										if not isAttackSpell: aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
-								elif 'Melee' in attribute:
-										aDict['RangeType'] = 'Melee'
-										aDict['Range'] = [0,0]
-								elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
-								elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
-								elif 'Dice' in attribute: 
-										if attribute.split('=')[1] != 'X':
-												aDict['Dice'] = int(attribute.split('=')[1])
-										elif card.name == "Temple of Light" and card.controller == me:
-												X = 0
-												for c in table:
-														if c.subtype == "Temple" and c.controller == me: X += 1
-												aDict['Dice'] = askInteger('Enter amount to pay for Temple of Lights attack (max: {})'.format(X),X)
-												appendEventList('Round',['ToLX', X])
-												me.mana -= aDict['Dice'] if me.mana >= aDict['Dice'] else aDict['Dice'] == 0
-												toggleReady(card)
-										else:
-												aDict['Dice'] = 0
-								elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
-								elif attribute == 'd12' : effectSwitch = True
-								elif effectSwitch:
-										options = attribute.split('; ')
-										aDict['d12'] = [o.split(' = ') for o in options]
-										effectSwitch = False
-								else:
-										tPair = traitParser(attribute)
-										if tPair[0] in additiveTraits: aDict['Traits'][tPair[0]] = aDict.get(tPair[0],0)+tPair[1]
-										elif tPair[0] in superlativeTraits: aDict['Traits'][tPair[0]] = max(aDict.get(tPair[0],0),tPair[1])
-										else: aDict['Traits'][tPair[0]] = tPair[1]
-						aDict['OriginalAttack'] = deepcopy(aDict)
-						if aDict.get('Dice')!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
+def computeAttack(attacker,defender,attack):
+	#Returns a new dictionary object containing the modified form of the attack, taking all bonuses into account. Does NOT modify the original attack.
+	attack = deepcopy(attack)
 
-		for c in table:
-				if card.Subtype == 'Mage':
-						if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack') and
-							(getBindTarget(c) == card or (not canDeclareAttack(getBindTarget(c)) if getBindTarget(c) else True)) and
-							not c.markers[Disable]): attackList.extend(getAttackList(c))
-				if c.Type == 'Enchantment' and c.isFaceUp and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
+	#1: compute all buffs on the attacker and defender
 
-		if 'Familiar' in card.Traits or 'Spawnpoint' in card.Traits:
-				for c in table:
-						if (c.Type == 'Attack' and card.controller == c.controller and getBindTarget(c)==card): attackList.extend(getAttackList(c))
-		for a in attackList:
-				if a.get('RangeType')!='Damage Barrier':
-						a['SourceID'] = card._id
-						a['OriginalAttack']['SourceID'] = card._id
-		return attackList
+	#2: modify output based on buffs computed in #1
 
-def computeAttack(aTraitDict,attack,dTraitDict):
-		attacker = Card(aTraitDict.get('OwnerID'))
-		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
-		originalAttack = attack["OriginalAttack"]
-		attack = deepcopy(attack["OriginalAttack"])
-		attack["OriginalAttack"] = originalAttack
-		atkTraits = attack["Traits"]
-		localADict = dict(aTraitDict)
-		#Runesmithing
-		atkOS = Card(attack['OriginalSourceID'])
-		if atkOS.markers[RuneofPrecision] and atkOS.type == 'Equipment' and not atkTraits.get('Spell'): atkTraits['Piercing'] = atkTraits.get('Piercing',0) + 1
-		#Holy Avenger
-		if attacker.markers[HolyAvenger] and 'Holy' in attacker.School and not 'Legendary' in aTraitDict and not hasAttackedThisRound(attacker): #Holy avenger code
-				eventList = getEventList('Round')
-				for e in eventList:
-						if e[0] == 'Attack' and e[1][0] == dTraitDict.get('OwnerID') and e[1][3] > 0:
-								victim = Card(e[1][1]) if e[1][1] else None
-								if victim and victim.controller==attacker.controller and ((victim.Type == 'Creature' or 'Conjuration' in victim.Type) and 'Holy' in victim.School) and victim != attacker:
-										localADict['Melee'] = localADict.get('Melee',0) + 2
-										localADict['Piercing'] = localADict.get('Piercing',0) + 1
-										break
-		#BM Conditional Ranged +1
-		if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
-		#Wildfire Imp Melee buff for attacking a Burning Object
-		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
-		#Bloodfire Helmet Demon buff
-		if attacker.Subtype == "Demon" and [1 for c in table if c.Name=="Bloodfire Helmet" and c.isFaceUp and c.controller == attacker.controller] and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
-		#Wounded prey
-		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.Subtype == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
-		attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
-		if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
-		if attack.get('RangeType') == 'Melee':
-				if localADict.get('Vampiric'): attack['Traits']['Vampiric'] = True
-				if attack.get('Action') == 'Quick' and localADict.get('Counterstrike'): attack['Traits']['Counterstrike'] = True
-		for c in table:
-				cName = c.name
-				if (cName == "Critical Strike"
-					and attacker == getAttachTarget(c)
-					and not hasAttackedThisTurn(attacker)
-					and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
-						attack['Traits']['Piercing'] += 3
-				elif (cName == "Lion Savagery"
-					  and attacker == getAttachTarget(c)
-					  and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
-						attack['Traits']['Piercing'] += 1
-				elif (cName == 'Tooth & Nail' and #Global effects
-					'Animal' in attacker.Subtype and
-					attack.get('RangeType') in ['Melee','Counterstrike']): attack['Traits']['Piercing'] += 1
-				elif c.controller == attacker.controller: #Friendly effects
-						aType = attack.get('Type')
-						if (attacker.Subtype == "Mage" and
-							((cName == 'Dawnbreaker Ring' and aType == 'Light') or
-							 (cName == 'Fireshaper Ring' and aType == 'Flame') or
-							 (cName == 'Lightning Ring' and aType == 'Lightning'))):
-							localADict['Melee'] = localADict.get('Melee',0) + 1
-							localADict['Ranged'] = localADict.get('Ranged',0) + 1
-		attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
-		if dTraitDict.get('OwnerID'): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
-		return attack #If attack has zone attack trait, then it gains unavoidable
+	#3: take special abilities (from the spelldictionary) into account
+
+	#4: normalize dice to 0 if negative
+	attack["dice"] = max(attack["dice"],0)
+
+	return attack
 
 def computeD12(dTraitDict,d12Pair):
 		defender = Card(dTraitDict.get('OwnerID'))
@@ -471,7 +333,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 		atkTraits = attack.get('Traits',{})
 		attacker = (Card(aTraitDict['OwnerID']) if 'OwnerID' in aTraitDict else None)
 		defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
-		atkOS = Card(attack['OriginalSourceID'])
+		atkOS = Card(attack['source id'])
 		if attacker and not "Autonomous" in atkOS.traits:
 				if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
 						if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
@@ -530,7 +392,7 @@ def canDeclareAttack(card):
 			('Conjuration' in card.Type and card.AttackBar != '') or
 			(("Familiar" in card.Traits or "Spawnpoint" in card.Traits) and [True for c in [getBound(card)] if c and c.Type == "Attack"]) or
 			computeTraits(card).get('Autonomous') or
-			[1 for attack in getAttackList(card) if attack.get('RangeType')=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
+			[1 for attack in getAttacks(card) if attack.get('RangeType')=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
 				return True
 
 ############################################################################
@@ -940,7 +802,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 	#for now, let's package everything together beforehand
 	argument = {
 		"identifier":	"attack",
-		"sourceID":		Card(attack['OriginalSourceID'])._id,
+		"sourceID":		Card(attack['source id'])._id,
 		"attackerID":	attacker._id,
 		"defenderID":	defender._id,
 		"attack": 		attack,
@@ -983,7 +845,7 @@ def declareAttackStep(argument): #Executed by attacker
 		damageRoll,effectRoll = rollDice(0)
 		if effectRoll < 7:
 			notify("{} is so dazed that {} completely misses!".format(attacker.nickname,pSub(attacker)))
-			rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+			#remember attack use
 			additionalStrikesStep(argument)
 			return
 		else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker.nickname))
@@ -1030,20 +892,20 @@ def avoidAttackStep(argument): #Executed by defender
 
 	#5: go to the next step. If !hit, skip to additional strikes step
 	if argument["hit"]:
-	remoteCall(
-		getTurnOrder()[0],			# First player
-		"revealEnchantmentsStep",	# Interim step
-			[attacker.controller,	# Next player
-			"rollDiceStep",			# Next Step
-			argument]				# Argument
+		remoteCall(
+			getTurnOrder()[0],			# First player
+			"revealEnchantmentsStep",	# Interim step
+				[attacker.controller,	# Next player
+				"rollDiceStep",			# Next Step
+				argument]				# Argument
 	)
 	else:
-	remoteCall(
-		getTurnOrder()[0],			# First player
-		"revealEnchantmentsStep",	# Interim step
-			[attacker.controller,	# Next player
-			"additionalStrikesStep",# Next Step
-			argument]				# Argument
+		remoteCall(
+			getTurnOrder()[0],			# First player
+			"revealEnchantmentsStep",	# Interim step
+				[attacker.controller,	# Next player
+				"additionalStrikesStep",# Next Step
+				argument]				# Argument
 	)
 
 def rollDiceStep(argument): #Executed by attacker
@@ -1157,7 +1019,7 @@ def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by
 		remoteCall(
 			getTurnOrder()[0],			# First player
 			"revealEnchantmentsStep",	# Interim step
-				attacker.controller,	# Next player
+				[attacker.controller,	# Next player
 				"declareAttackStep",	# Next Step
 				argument]				# Argument
 	)
@@ -1186,7 +1048,7 @@ def damageBarrierStep(argument): #Executed by defender
 
 	#2: resolve damage barrier
 	if attack.get("range type") == "Melee" and argument["hit"]:
-		attackList = getAttackList(defender)
+		attackList = getAttacks(defender)
 		dBarrier = None
 		for a in attackList:
 			if a.get('action type') == 'Damage Barrier':
