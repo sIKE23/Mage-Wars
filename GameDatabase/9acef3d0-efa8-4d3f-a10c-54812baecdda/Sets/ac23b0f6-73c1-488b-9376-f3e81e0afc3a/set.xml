@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
 	name="Mage Wars Academy: Beastmaster vs. Wizard"
-	id="ac23a0f6-73c1-488b-9376-f3e81e0afc3a"
+	id="ac23b0f6-73c1-488b-9376-f3e81e0afc3a"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
@@ -21,8 +21,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Arcane Missiles" >
-;range type=Ranged;range=(0,1);dice=2;Ethereal=True;Unavoidable=True" />
+			<property name="cAttacks" value="name=Arcane Missiles;range type=Ranged;range=(0,1);dice=2;Ethereal=True;Unavoidable=True" />
 			<property name="AttackBar" value="[Ranged] [Dice=2] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="You may make this attack against up to 3 different targets in the same zone. Damage from this attack is critical (ignores armor). Roll for each attack separately." />
@@ -41,8 +40,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Forked Lightning" >
-;range type=Ranged;range=(0,1);damage type=Lightning;dice=3;effects={7: ['Stagger']};Sweeping=True;Ethereal=True" />
+			<property name="cAttacks" value="name=Forked Lightning;range type=Ranged;range=(0,1);damage type=Lightning;dice=3;effects={7: ['Stagger']};Sweeping=True;Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=3] [d12] [7+ = Stagger] [Sweeping] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -61,8 +59,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Lightning Jolt" >
-;range type=Ranged;range=(0,1);damage type=Lightning;dice=3;effects={5: ['Stagger']};Ethereal=True" />
+			<property name="cAttacks" value="name=Lightning Jolt;range type=Ranged;range=(0,1);damage type=Lightning;dice=3;effects={5: ['Stagger']};Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=3] [d12] [5+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -81,8 +78,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Piercing Thunderstrike" >
-;range type=Ranged;range=(0,1);damage type=Lightning;dice=4;effects={7: ['Stagger']};Ethereal=True;Piercing +X=2" />
+			<property name="cAttacks" value="name=Piercing Thunderstrike;range type=Ranged;range=(0,1);damage type=Lightning;dice=4;effects={7: ['Stagger']};Ethereal=True;Piercing +X=2" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=4] [7+ = Stagger] [Ethereal] [Piercing +2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -101,8 +97,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Voltaic Discharge" >
-;Zone Attack=True;range type=Ranged;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
+			<property name="cAttacks" value="name=Voltaic Discharge;Zone Attack=True;range type=Ranged;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
 			<property name="AttackBar" value="[Zone Attack] [Ranged] [Dice=3] [d12] [7+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -946,8 +941,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="cAttacks" value="name=Kajarah" >
-;Serrated Edge:[Quick=True;range type=Ranged;range=(0,1);dice=2" />
+			<property name="cAttacks" value="name=Kajarah;Serrated Edge:[Quick=True;range type=Ranged;range=(0,1);dice=2" />
 			<property name="AttackBar" value="Serrated Edge:[Quick] [Ranged:0-1] [Dice=2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If a friendly animal creature attacked and damaged the target this round, this attack gains +1 attack dice." />
