@@ -103,7 +103,7 @@
 			<property name="Stats" value="Armor=0, Life=7" />
 			<property name="AttackBar" value="Corrosive Mist:&#xD;&#xA;[Ranged:0-0] [Acid] [Dice=2] [d12] [7+ = Corrode] [Unavoidable]" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Comes into play with a Mist token on it. When Orchid&apos;s attack targets a Mage, at the end of the Damage &amp; Effects Step, you may remove the Mist token, choose an equipment object on that Mage, and pay its casting cost to destroy that object." />
+			<property name="Text" value="Comes into play with a Mist token on it. When Orchid&apos;s attack targets a Mage, at the end of the Damage &amp; Effects Step, you may remove the Mist token, choose an equipment object on that Mage, and pay its casting cost to destroy that object.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="DNJ02" />
 		</card>
 		<card id="0dfe805d-f194-437d-84bd-7a8da15aa95e" name="Etherian Lifetree">
@@ -163,7 +163,7 @@
 			<property name="Stats" value="Armor=0, Life=7" />
 			<property name="AttackBar" value="Poison Sleep Mist:&#xD;&#xA;[Ranged:0-0] [Poison] [Dice=3] [Unavoidable]" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
-			<property name="Text" value="Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature." />
+			<property name="Text" value="Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="DNJ06" />
 		</card>
 		<card id="11a15edf-2a69-4507-9449-f57badafcfe4" name="Seedling Pod">
