@@ -186,7 +186,8 @@ def getTurnOrder():
 	Retrieves the current turn order as a list of all player objects in order, with the current player first
 	Use getTurnOrder()[0] to get the first player
 	"""
-	pass
+	debug("getTurnOrder()")
+	return getPlayers() #TEMPORARY! Todo: implament turn order. For now, we will just use the id list
 
 ######################################
 ######     Memory Functions     ######
@@ -283,7 +284,7 @@ def targetMenu(source,target):
 	if isValidAttackSource(source) and isValidAttackTarget(target) and getSetting('BattleCalculator',True):
 		aTraitDict = computeTraits(source)
 		dTraitDict = computeTraits(target)
-		attack = diceRollMenu(source,target)
+		attack = attackChoicePrompt(source,target)#diceRollMenu(source,target)
 		if attack:
 			if attack.get("Cost") and not payForAttackSpell(me,attack): return
 			if attack.get('SourceID')==source._id:

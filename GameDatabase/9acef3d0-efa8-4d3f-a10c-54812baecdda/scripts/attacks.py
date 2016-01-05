@@ -54,20 +54,41 @@ def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
 	If you set the action filter to "None", it will only pick up attacks without an action type.
 	"""
 	mute()
+	debug("attackChoicePrompt({},{},{})".format(attacker.name,defender.name,str(actionFilters)))
 
 	#1: Populate the attack list.
-
 	def filterPredicate(attack): #For clarity
 		return attack.get("action type","None") in actionFilters or "Counterstrike" in actionFilters and attack.get("Counterstrike")
 	attackList = [attack for attack in getAttacks(attacker) if filterPredicate(attack)]
 
-	#2: Get a modified list of attacks for populating the menu. Format: List[(attack,kill chance),...]
-	modifiedAttacks = [(computeAttack(attacker,defender,attack),chanceToKill(attacker,attack,defender) for attack in attackList]
+	#2: Get a modified list of attacks for populating the menu.
+	modifiedAttacks = [computeAttack(attacker,defender,attack) for attack in attackList]
 
-	#3: Display the menu to the player and allow them to choose an option
+	#3: Compute the kill chances for the modified attacks
+	killChances = [chanceToKill(attacker,attack,defender) for attack in modifiedAttacks]
 
-	#4: Initiate the chosen attack
+	#4: Generate the list of choices that will appear on the menu
+	options = []
+	append = options.append
 
+	for i,attack in enumerate(modifiedAttacks):
+		name = attack["name"]
+		dice = attack["dice"]
+		#Todo: add traits and effects
+		killChance = "{}%".format(str(killChances[i]))
+
+		append("{} ({})".format(name,dice).center(68,' ') + "\nChance to Kill: {}".format(killChance).center(68,' '))
+
+	colors = ["#CC0000" for i in options] #Red
+	choiceText = "Use which attack?" if options else "No legal attacks available!"
+
+	#5: Display the menu to the player and allow them to choose an option
+	choice = askChoice(choiceText, options, colors)
+
+	#6: Initiate the chosen attack. Note that the attack will be pulled from the UNMODIFIED attack list.
+	if choice > 0:
+		index = choice - 1
+		initializeAttackSequence(attacker,attackList[index],defender)
 
 def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		mute()
@@ -212,7 +233,7 @@ we can store these properties in the xml files with the following notation (no s
 	dice=4;
 	counterstrike=True;
 	piercing +X=4;
-	effects=5:Burn,8:Burn+Burn
+	effects={5:['Burn'],8:['Burn','Burn']}
 	range=(1,2)
 	||
 	name=Triple Bite;
@@ -225,19 +246,31 @@ we can store these properties in the xml files with the following notation (no s
 
 """
 
+
+
 def parseAttack(string):
 	"Takes a raw attack string for a single attack (in the format used in the new xml fields) and returns a properly formatted dictionary object"
 	#Requires that string contain exactly 1 properly formatted attack
 	#Does not store the information of the original source of the attack
+	mute()
+	typeMatcher = { #contains types for all non-string fields
+		# --- Basic fields
+		"dice" : int,
+		"effects" : dict,
+		"range" : tuple,
+		# --- Traits
+		"Counterstrike" : int,
+		"Piercing +X" : int,
+		"Mana Drain +X" : int,
+		"Mana Transfer +X" : int,
+		"Charge +X": int,
+	}
+
 	output = {}
 	fields = string.split(";")
 	for field in fields:
 		pair = field.split("=")
-	#	if pair[0] == "effects":
-	#		output["effects"] = parseEffects(pair[1])
-	#		continue
-		try: output[pair[0]] = eval(pair[1]) #non-string values
-		except: output[pair[0]] = pair[1]
+		output[pair[0]] = typeMatcher.get(pair[0],str)(pair[1])
 	return output
 
 def getAttacks(card):
@@ -248,17 +281,21 @@ def getAttacks(card):
 	Attacks that the card provides to its attachtarget will be stored in tAttacks
 	Additionally, all cards in play will be queried for attacks that they provide.
 	"""
+
 	#Requires that card be a card that may legally declare an attack
+	debug("getAttacks({})".format(card.Name))
 	output = []
+	append = output.append
 	#1: parse attacks given in the card's cAttacks field
 	if card.cAttacks:
 		rawAttackList = card.cAttacks.split("||")
 		for string in rawAttackList:
-			debug(string)
+			debug("string = {}".format(string))
 			attack = parseAttack(string)
 			attack["user id"] = card._id
 			attack["source id"] = card._id
-			output.append(attack)
+			append(attack)
+			debug("attack = " + str(attack))
 	#2: parse attacks from attached cards
 	attachments = getAttachments(card) + ([c for c in table if c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp] if "Mage" in card.Subtype else [])
 	for a in attachments:
@@ -268,11 +305,11 @@ def getAttacks(card):
 				attack = parseAttack(string)
 				attack["user id"] = card._id
 				attack["source id"] = a._id
-				output.append(attack)
+				append(attack)
 	#3: parse attacks from other sources
 	"""Notation: 'on parse function' = oPF_getAttacks, which is assumed to contain only a function"""
 	[spellDictionary[c.Name]["oPF_getAttacks"](c,card,output) for c in table if "oPF_getAttacks" in spellDictionary.get(c.Name,{})]
-	debug("e")
+	debug(str(output))
 	return output
 
 def computeAttack(attacker,defender,attack):
@@ -728,7 +765,7 @@ argument will contain the following keys:
 """
 
 
-def revealAttachmentMenu(): #Returns true if at least 1 attachment was revealed
+def revealEnchantmentMenu(): #Returns true if at least 1 attachment was revealed
 	"""
 	Prompts the player to reveal an enchantment. 
 	For now, it will simply look at all enchantments the player has. 
@@ -749,13 +786,13 @@ def revealAttachmentMenu(): #Returns true if at least 1 attachment was revealed
 	#Present menu
 	options = ["{}\n{}\n{}".format(e[0].Nickname.center(68,' '),e[1],e[0].Text.split('\r\n')[0]) for e in myEnchantments] + ["I would not like to reveal an enchantment."]
 	colors = ['#CC6600' for i in options] + ["#de2827"]
-	choice = askChoice('Would you like to reveal an enchantment?'.format(recurText),options,colors)
+	choice = askChoice('Would you like to reveal an enchantment?',options,colors)
 
 	#Player chose not to reveal an enchantment
 	if choice in [0,len(options)]: return False
 
 	#Player selected an enchantment to reveal
-	return revealEnchantment(myEnchantments[choice-1])
+	return revealEnchantment(myEnchantments[choice-1][0])
 
 
 def revealEnchantmentsStep(nextPlayer,nextStep,argument,doneList=[]):
@@ -775,7 +812,7 @@ def revealEnchantmentsStep(nextPlayer,nextStep,argument,doneList=[]):
 
 	#Otherwise, ask the current player if they want to reveal any enchantments.
 	#If yes, perform this step again
-	if revealEnchantmentMenu(): revealEnchantmentsStep(nextStep,nextPlayer,argument) #Reset the done list
+	if revealEnchantmentMenu(): revealEnchantmentsStep(nextPlayer,nextStep,argument) #Reset the done list
 	#If no, proceed to the next player in turn order
 	else:
 		# Add me to the done list
@@ -793,11 +830,8 @@ def revealEnchantmentsStep(nextPlayer,nextStep,argument,doneList=[]):
 		# Next player to reveal enchantments gets a chance to do so
 		remoteCall(nextRevealer,"revealEnchantmentsStep",[nextPlayer,nextStep,argument,doneList])
 
-def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
+def initializeAttackSequence(attacker,attack,defender): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
 	mute()
-
-	attacker = Card(aTraitDict.get('OwnerID'))
-	defender = Card(dTraitDict.get('OwnerID'))
 
 	#for now, let's package everything together beforehand
 	argument = {
@@ -831,7 +865,7 @@ def declareAttackStep(argument): #Executed by attacker
 	mute()
 	attacker 	= 	Card(argument["attackerID"])
 	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["source._id"])
+	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 
 	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
@@ -854,7 +888,7 @@ def declareAttackStep(argument): #Executed by attacker
 
 	if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker.nickname,attack.get('Name','a nameless attack')))
 	elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
-	else: notify("{} attacks {} with {}!".format(attacker.nickname,defender.nickname,attack.get('Name','a nameless attack')))
+	else: notify("{} attacks {} with {}!".format(attacker.nickname,defender.nickname,attack.get('name','a nameless attack')))
 
 	#4: resolve aAS effects
 	[d["aAS_DeclareAttack"]["function"](c,card) for (c,d) in spellList if "aAS_DeclareAttack" in d]
@@ -875,14 +909,16 @@ def avoidAttackStep(argument): #Executed by defender
 	mute()
 	attacker 	= 	Card(argument["attackerID"])
 	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["source._id"])
+	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
+
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: resolve bAS effects
 	[d["bAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_AvoidAttack" in d]
 
 	#2: Roll defenses
-	defenseQuery(argument) #DefenseQuery will set the argument[hit] to false
+	pass #defenseQuery(argument) #DefenseQuery will set the argument[hit] to false
 
 	#3: resolve aAS effects
 	[d["aAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "aAS_AvoidAttack" in d]
@@ -915,11 +951,13 @@ def rollDiceStep(argument): #Executed by attacker
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+
 	#1: resolve bAS effects
 	[d["bAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
 
 	#2: roll dice
-	dice = attack.get('Dice',-1)
+	dice = attack.get('dice',-1)
 	if dice < 0:
 		notify('Error: invalid attack format - no dice found')
 		return
@@ -951,6 +989,7 @@ def damageAndEffectsStep(argument): #Executed by defender
 
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: resolve bAS effects
 	[d["bAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
@@ -984,6 +1023,8 @@ def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 	atkTraits 	= 	attack.get('Traits',{})
+
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: store use of the attack in memory
 	storeEvent(deepcopy(argument))
@@ -1043,6 +1084,8 @@ def damageBarrierStep(argument): #Executed by defender
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
 
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+
 	#1: resolve bAS effects
 	[d["bAS_DamageBarrier"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
 
@@ -1081,6 +1124,8 @@ def counterstrikeStep(argument): #Executed by defender
 
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
+
+	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
 
 	if attack.get('RangeType') == 'Melee':
 		counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
@@ -1545,7 +1590,9 @@ def expectedDamage(aTraitDict,attack,dTraitDict):
 		if dTraitDict.get('Incorporeal'): return (float(dice) if atkTraits.get('Ethereal') else float(dice)/3)
 		return sum([computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict)*distrDict[key] for key in distrDict])/float(6**dice)
 
-def chanceToKill(aTraitDict,attack,dTraitDict):
+def chanceToKill(attacker,attack,defender):
+		aTraitDict = computeTraits(attacker)
+		dTraitDict = computeTraits(defender)
 		dice = attack.get('Dice',0)
 		armor = computeArmor(aTraitDict,attack,dTraitDict)
 		defender = Card(dTraitDict['OwnerID'])
