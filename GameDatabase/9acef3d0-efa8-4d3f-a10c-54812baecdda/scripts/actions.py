@@ -208,7 +208,7 @@ def onGameStart():
 	setGlobalVariable("PlayersIDList",str([]))
 	setGlobalVariable("MWPlayerDict",str({}))
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
-	
+
 	if me == gameHost:
 		setRDALocation()
 		if getSetting("AutoBoard", True):
@@ -500,7 +500,7 @@ def onLoadDeck(player, groups):
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			gameNum += 1
 			resetGame()
-		elif debugMode or validateDeck(groups[0]):
+		elif validateDeck(groups[0]):
 			setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
@@ -913,7 +913,7 @@ def resolveDissipate():
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	
+
 	for card in table:
 		traits = computeTraits(card)
 		if "Dissipate" in traits and card.controller == me:
@@ -2239,15 +2239,15 @@ def validateDeck(deck):
 	for c in deck:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
-			schoolcosts = c.MageSchoolCost.split(",")
+			schoolcosts = c.MageSchoolCost.replace(' ','').split(",")
 			break
 
-	debug("Stats {}".format(stats))
+	#debug("Stats {}".format(stats))
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 
 	#get spellbook point limit
 	for stat in stats:
-		debug("stat {}".format(stat))
+		#debug("stat {}".format(stat))
 		statval = stat.split("=")
 		if "Spellbook" in statval[0]:
 			spellbook["spellpoints"] = int(statval[1])
@@ -2255,7 +2255,7 @@ def validateDeck(deck):
 
 	#get school costs
 	for schoolcost in schoolcosts:
-		debug("schoolcost {}".format(schoolcost))
+		#debug("schoolcost {}".format(schoolcost))
 		costval = schoolcost.split("=")
 		if "Spellbook" in costval[0]:
 			spellbook["spellpoints"] = int(costval[1])
@@ -2279,20 +2279,26 @@ def validateDeck(deck):
 			spellbook["Air"] = int(costval[1])
 		elif "Fire" in costval[0]:
 			spellbook["Fire"] = int(costval[1])
-	debug("Spellbook {}".format(spellbook))
-	#spellbook["Dark"] = sumLevel("Dark")
+	#debug("Spellbook {}".format(spellbook))
+	
+	# loop throught all the spell cards in the spellbook then calculate the levels by school in the dictionary 'levels'
+	# with a level a count per school. Spells/mages that are/have exceptions will typically be tracked in the booktotal value
+	# once done the spell levels as caculated will be mutipled by their schoolcost mutipler and added to the booktotal value 
+	#which should not exceed the mages Spellbook Points
 	levels = {}
 	booktotal = 0
 	epics = ["", "three"]
 	cardCounts = { }
 	for card in deck: #run through deck adding levels
+		cardCost = 0
 		if "Novice" in card.Traits: #Novice cards cost 1 spellpoint
-			debug("novice {}".format(card))
+			#debug("novice {}".format(card))
 			booktotal += 1
+
 		elif "Talos" in card.Name: #Talos costs nothing
 			debug("Talos")
-		elif "+" in card.School: #and clause
-			debug("and {}".format(card))
+		elif "+" in card.School: #t this point process cards that belong in 2 schools and add their levels up
+			#debug("and School {}".format(card))
 			schools = card.School.split("+")
 			level = card.Level.split("+")
 			i = 0
@@ -2302,8 +2308,8 @@ def validateDeck(deck):
 				except:
 					levels[s] = int(level[i])
 				i += 1
-		elif "/" in card.School: #or clause
-			debug("or {}".format(card))
+		elif "/" in card.School: # at this point process cards that belong in 1 or more schools and figure out which school is the cheapest
+			#debug("or School {}".format(card))
 			schools = card.School.split("/")
 			level = card.Level.split("/")
 			i = -1
@@ -2315,10 +2321,9 @@ def validateDeck(deck):
 					break
 			try:
 				levels[s_low] += int(level[i])
-			except:
-				levels[s_low] = int(level[i])
-		elif card.School != "": # only one school
-			debug("single {}".format(card))
+			except:				levels[s_low] = int(level[i])
+		elif card.School != "": # at this point cards processed below should belong to only one school (and are not novice)
+			#debug("Single School {}".format(card))
 			try:
 				levels[card.School] += int(card.Level)
 			except:
@@ -2357,16 +2362,45 @@ def validateDeck(deck):
 					levels[card.School] -= 1
 					booktotal += 1
 				debug("levels {}".format(levels))
-		
 
 		#Siren is trained in Water and all spells with Song or Drowned subtype.
 		#By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
-		if "Water" not in card.School and c.name == "Siren" and ("Song" or "Drowned" in card.Subtype):
+		if "Water" not in card.School and c.name == "Siren" and ("Song" in card.Subtype or "Drowned" in card.Subtype):
 			#subtract 1 per level per count as this card has been added x2 per non-trained school already
 			booktotal -= totalLevel
 			cost -= totalLevel;
 
-		if "Epic" in card.Traits:	#check for multiple epic cards
+		#Paladin is trained in Holy Level 3 Spells, War Level 2 Spells, and all Holy Creatures reguardless of their training
+		#By this point, Level 3 and Lower Holy Spells and Level 2 and Lower War Spells have been correctly calculated, but spells higher then the specifed levels have been undercosted
+		if "Holy" in card.School or "War" in card.School and c.name == "Paladin":
+				if "+" in card.School:
+						level = card.Level.split("+")
+						school = card.School.split("+")
+						for count in range(len(level)):
+								if "Holy" == school[count] and int(level[count]) > 3 and card.Type != "Creature":# All Holy Creatures have already been caculated corretly with a 1x training cost
+										booktotal += int(level[count])
+								elif "War" == school[count] and int(level[count]) > 2  and card.Type != "Creature":# All War Creatures have already been caculated corretly with a 1x training cost
+										booktotal += int(level[count])
+								elif school[count] != "Holy" and school[count] != "War" and card.Type == "Creature":# Creatures not in the Holy or War School have already been caculated incorrectly with a 2x training cost
+										booktotal -= int(level[count])
+				elif "/" in card.School: # need to validate that this logic is correct
+						level = card.Level.split("/")
+						school = card.School.split("/")
+						for count in range(len(level)):
+								if "Holy" == school[count] and int(level[count]) > 3 and card.Type != "Creature":
+										booktotal += int(level[count])
+										break
+								elif "War" == school[count] and int(level[count]) > 2  and card.Type != "Creature":
+										booktotal += int(level[count])
+										break
+				else:
+					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature":
+						booktotal += int(card.Level)
+					 elif "War" == card.School and int(card.Level) > 2:
+						booktotal += int(card.Level)
+
+		#multiple Epic cards are not allowed in the spellbook.
+		if "Epic" in card.Traits:
 			if card.Name in epics:
 				notify("*** ILLEGAL ***: multiple copies of Epic card {} found in spellbook".format(card.Name))
 				return False
@@ -2383,7 +2417,7 @@ def validateDeck(deck):
 				magename = "Warlock"
 			if "Warlord" in magename:
 				magename = "Warlord"
-			if "Priestess" in magename:
+			if "Priest" in magename:
 				magename = "Priestess"
 			if magename in card.Traits:	#mage restriction
 				ok = True
@@ -2413,9 +2447,7 @@ def validateDeck(deck):
 				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
 				return False
 
-	debug("levels {}".format(levels))
 	for level in levels:
-		debug("booktotal {}, level {}".format(booktotal,level))
 		booktotal += spellbook[level]*levels[level]
 	notify("Spellbook of {} calculated to {} points".format(me,booktotal))
 

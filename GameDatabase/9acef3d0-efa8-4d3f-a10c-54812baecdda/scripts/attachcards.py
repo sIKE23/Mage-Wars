@@ -237,6 +237,7 @@ def canAttach(card,target):
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
 			(cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
+			(cTargetBar == 'Corporeal Conjuration or Creature' and tType in ['Creature','Mage','Conjuration'] and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType in ['Creature','Mage']) or			
 			(cTargetBar == 'Paladin Mage' and tType in ['Mage'] and tName == 'Paladin') or
 			(cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
@@ -253,6 +254,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2 and 'Animal' in target.Subtype) or
 			(cTargetBar == 'Knight Creature' and tType in ['Creature'] and 'Knight' in target.Subtype) or
 			(cTargetBar == 'Living Holy Creature' and tType in ['Creature'] and 'Holy' in target.School and traits.get('Living')) or
+			(cTargetBar == 'Holy Creature' and tType in ['Creature'] and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Mage' and tType == 'Mage') or
 			(cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
@@ -260,7 +262,8 @@ def canAttach(card,target):
 			(cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
 			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
 			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic')) or
-			(cTargetBar == 'Zone or Object')): return True
+			(cTargetBar == 'Zone or Object') or
+			(cTargetBar == 'Object or Zone')): return True
 	elif ((cType == 'Equipment' and tType == 'Mage') or
 		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and not traits.get('Flying'))): return True
 	return False
@@ -346,6 +349,9 @@ def canBind(card,target):
 		or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
 		or (tName == 'Sectarus, Dark Rune Sword' and (card.Type == 'Enchantment' and 'Curse' in card.Subtype))
+		or (tName == 'Cassiel, Shield of Asyra' and (card.Subtype == 'Healing' or card.Subtype == 'Protection'))
+		or (tName == 'The Squire' and card.Type == 'Equipment')
+		or (tName ==  'Naiya' and card.School == 'Water' and not 'Creature' in card.Type)
 #Spawnpoints
 		or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype and target.markers[Mana] >= 2)
 		or (tName == 'Battle Forge' and card.Type == 'Equipment')
@@ -358,6 +364,7 @@ def canBind(card,target):
 		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
 		or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Subtype)
 		or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
+		or (tName == 'Triton\'s Horn' and card.Type == 'Creature' and 'Water' in card.School)
 #Spellbind (only)
 		or (tName == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
 		or (tName == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
