@@ -500,7 +500,7 @@ def onLoadDeck(player, groups):
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			gameNum += 1
 			resetGame()
-		elif validateDeck(groups[0]):
+		elif debugMode or validateDeck(groups[0]):
 			setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
