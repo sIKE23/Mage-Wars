@@ -1103,8 +1103,8 @@ def malakaisFireReceiptPrompt(heathen):
 
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		mute()
-		if card.type == "Mage": return
 		card = Card(cardTraitsDict.get('OwnerID'))
+		if card.type == "Mage": return
 
 		choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
 						   ["Yes","No"],

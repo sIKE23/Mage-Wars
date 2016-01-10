@@ -916,7 +916,7 @@ def resolveDissipate():
 
 	for card in table:
 		traits = computeTraits(card)
-		if "Dissipate" in traits and card.controller == me:
+		if "Dissipate" in traits and card.controller == me and card.isFaceUp and card.markers[DissipateToken]:
 			notify("Resolving Dissipate for {}...".format(me))	#found at least one
 		#cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
 			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
@@ -937,7 +937,7 @@ def resolveDissipate():
 
 def resolveLoadTokens():
 	mute()
-	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp ]
+	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
 	for card in loadTokenCards:
 		notify("Resolving Load Tokens for {}...".format(me))	#found at least one
 		if card.markers[LoadToken] == 0:
@@ -1227,7 +1227,7 @@ def concede(group=table, x = 0, y = 0):
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
 		for card in table:
-			if card.Type == "Mage" and c.controller == me:
+			if card.Type == "Mage" and card.controller == me:
 				card.orientation = 1
 				notify("{} has conceded the game".format(me))
 			playersState = eval(getGlobalVariable("PlayersState"))
@@ -2181,12 +2181,16 @@ def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY 
 
 def computeRevealCost(card): #For enchantment reveals
 		target = getAttachTarget(card) #To what is it attached?
+		debug("23:{}".format(target))
 		cost = None
+		debug("24:{}".format(cost))
 		try: cost = int(card.Cost.split('+')[1])
 		except: pass
 		if not target: return cost
 		#Exceptions
+		debug("25:{}".format(cost))
 		name = card.Name
+		debug("26:{}".format(name))
 		tLevel = 6 if target.Type == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+')))) #And...this is why mages NEED to have a level field in the XML file.
 		if name == "Mind Control":
 				cost = 2*tLevel
