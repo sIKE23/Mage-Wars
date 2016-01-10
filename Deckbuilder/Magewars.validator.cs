@@ -269,16 +269,16 @@ namespace Octgn.MageWarsValidator
                                 }
                             }
 
-                            //Paladin is trained in level 2 holy, level 2 war, and all holy creatures
+                            //Paladin is trained in level 3 holy, level 2 war, and all holy creatures
                             //If the current card is in the paladin's trainings, it has already been correctly added (assuming paladin's trainings contains Holy=1 and War=1)
                             //so we only need to check for the exceptions
-                            if (magename.Contains("Paladin") && Property(card, "Type") != "Creature")
+                            if (magename.Contains("Paladin"))
                             {
                                 string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
                                 if (school.Contains("Holy"))
                                 {
                                     int holyLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Holy")]);
-                                    if (holyLevel > 3)
+                                    if (holyLevel > 3 && Property(card, "Type") != "Creature")
                                     {
                                         spellbook += holyLevel * card.Quantity;
                                         cost += holyLevel;
@@ -287,12 +287,19 @@ namespace Octgn.MageWarsValidator
                                 if (school.Contains("War"))
                                 {
                                     int warLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("War")]);
-                                    if (warLevel > 2)
+                                    if (warLevel > 2 && !school.Contains("+"))
                                     {
                                         spellbook += warLevel * card.Quantity;
                                         cost += warLevel;
                                     }
                                 }
+                                //{
+                                    // Holy Creature rules go here should check of Creatures that are in two schools Holy + Other School 
+                                    // (other school should also exclude War)
+                                    // we need to reduce the spellbook & cost by the spelllevel as if they were a 1x training.
+                                        //spellbook -= spellLevel * card.Quantity;
+                                        //cost -= spellLevel
+                                //}
                             }
 
                             //Siren is trained in Water and all spells with Song or Drowned subtype.
