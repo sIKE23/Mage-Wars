@@ -128,7 +128,7 @@ def alignAttachments(card):
 
 	#1: Retrieve attachments and end function if there are none.
 	attachments = getAttachments(card)
-	
+
 	if not attachments: return
 
 	#2: Controller of first attachment calls alignCards
@@ -316,21 +316,20 @@ def getBindTarget(card):
 	if result and card in table: return Card(result)
 
 def alignBound(card):
+	"""
+	Aligns the card bound to input card.
+	Requires that input card belong to calling player
+
+	"""
 	mute()
+
+	#1: Retrieve bound card and end function if there are none.
 	bound = getBound(card)
 	if not bound: return
-	x,y = card.position
-	x -= 0
-	y += 30
-	z = card.getIndex
-	if bound.controller == me: moveAndSetIndex(bound,x,y,z)
-	else: remoteCall(bound.controller,'moveAndSetIndex',[bound,x,y,z])
-	card.setIndex(z+1) #Assumes I control <card>. Not sure why I need this when alignAttachments works without, but it seems that moving a card brings it to the front.
 
-def moveAndSetIndex(card,x,y,z):
-	mute()
-	card.moveToTable(x,y)
-	card.setIndex(z)
+	#2: Align the cards
+	cardList = [card,bound]
+	alignCards(cardList,0,30)
 
 def canBind(card,target):
 	"""Determines whether <card> may be attached to <target>"""
