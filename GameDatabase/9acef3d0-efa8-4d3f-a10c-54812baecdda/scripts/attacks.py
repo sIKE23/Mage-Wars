@@ -62,7 +62,7 @@ def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
 	attackList = [attack for attack in getAttacks(attacker) if filterPredicate(attack)]
 
 	#2: Get a modified list of attacks for populating the menu.
-	modifiedAttacks = [computeAttack(attacker,defender,attack) for attack in attackList]
+	modifiedAttacks = [computeAttack(attacker,attack,defender) for attack in attackList]
 
 	#3: Compute the kill chances for the modified attacks
 	killChances = [chanceToKill(attacker,attack,defender) for attack in modifiedAttacks]
@@ -104,7 +104,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		choiceText = "Roll how many attack dice?"
 		#Suppose there is an attacker with at least one attack:
 		if aTraitDict:
-				attackList = [computeAttack(attacker,defender,attack) for attack in attackList if attack.get('action type') != 'Damage Barrier']
+				attackList = [computeAttack(attacker,attack,defender) for attack in attackList if attack.get('action type') != 'Damage Barrier']
 				choiceText = "Use which attack?"
 		if specialCase == 'Counterstrike':
 				for a in list(attackList):
@@ -312,12 +312,13 @@ def getAttacks(card):
 	debug(str(output))
 	return output
 
-def computeAttack(attacker,defender,attack):
+def computeAttack(attacker,attack,defender):
 	#Returns a new dictionary object containing the modified form of the attack, taking all bonuses into account. Does NOT modify the original attack.
 	attack = deepcopy(attack)
 
 	#1: compute all buffs on the attacker and defender
-
+	# Attacker: Melee +X, Piercing +X,
+	# Defender: Armor +X, Tough +X,
 	#2: modify output based on buffs computed in #1
 
 	#3: take special abilities (from the spelldictionary) into account
@@ -996,7 +997,7 @@ def damageAndEffectsStep(argument): #Executed by defender
 
 	#2: apply damage and effects
 	damageRoll,effectRoll = argument["roll"]
-	damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+	damage = receiveDamagePrompt(argument,damageRoll,effectRoll) #damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
 	argument["damage"] = damage
 
 	#3: resolve aAS effects
@@ -1015,6 +1016,68 @@ def damageAndEffectsStep(argument): #Executed by defender
 	)
 
 	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
+
+def receiveDamagePrompt(argument,damageRoll,effectRoll):
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	attack 		= 	argument["attack"]
+
+	defPlayer	=	defender.controller
+	attPlayer	=	attacker.controller
+
+	#1: Get damage and effects
+	damage,effects = getAttackResults(argument,damageRoll,effectRoll)
+
+	#2: Generate informational statement
+	statement = "{}'s attack ({}) will result in the following:".format(attacker.nickname,attack["name"])
+	results = []
+	append = results.append
+
+	if damage: append("It will inflict {} damage upon {}".format(str(damage),defender.nickname))
+	if effects: append("It will apply {}".format(" and ".join(effects)))
+	if ManaDrain(attack,"check"): append("It will drain up to {} mana from {}".format(attack["Mana Drain +X"],defPlayer.Name))
+	if attack.get("Mana Transfer +X"): append("It will transfer up to {} mana from {} to {}".format(attack["Mana Transfer +X"],defPlayer.Name,attPlayer.name))
+
+	statement += "\n".join(results)
+
+	askChoice()
+
+def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
+		attacker = Card(aTraitDict.get('OwnerID'))
+		defender = Card(dTraitDict.get('OwnerID'))
+		atkTraits = attack.get('Traits',{})
+
+		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
+		actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
+
+
+		if defender.markers[VoltaricON] and actualDmg:#Voltaric Shield
+				notify("The Voltaric Shield absorbs {} points of damage!".format(str(min(actualDmg,3))))
+				actualDmg = max(actualDmg-3,0)
+				defender.markers[VoltaricON] = 0
+				defender.markers[VoltaricOFF] = 1
+		if defender.type == "Creature" or defender.Subtype == "Mage": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
+		else: dManaDrain = ""
+
+		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.nickame,
+																										  actualDmg,
+																										  ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
+																										  defender.nickname,
+																										  (' It will also drain {} mana from {}.'.format(
+																												  str(dManaDrain),defender.controller.nickname) if dManaDrain else '')),
+						   ['Yes',"Other Damage Amount",'No'],
+						   ["#01603e","#FF6600","#de2827"])
+		if choice == 1:
+				applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
+				return actualDmg #for remembering damage. Pretty crude; We'll come up with a better alternative in Q2
+		elif choice == 2:
+				actualDmg = askInteger("Apply how much damage?",actualDmg)
+				applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
+				return actualDmg
+		else:
+				notify('{} has elected not to apply auto-calculated battle results'.format(me))
+				whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
 
 def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by attacker
 	mute()
