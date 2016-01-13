@@ -92,49 +92,52 @@ def detach(card):
 		return card,target
 	return card,None
 
-def alignAttachments(card):
-	"""Orders <card> and its attachments"""
+def alignCards(cardList,xOffset,yOffset):
+	"""
+	Input is a list of card objects that need to be aligned. The first card in the list is the card against which the second will be aligned.
+	This function is recursive. When called, the first call should be on the card to which the rest are attached.
+	The input MUST be a list of length at least 2.
+	"""
 	mute()
-	if card.controller == me:
-		attachments = getAttachments(card)
-		prevCards  = [card]
-		count = 1
-		x,y = card.position
-		alignQueue = {}
-		side = (-1 if table.isInverted(y) else 1)
-		for c in attachments:
-			Y = y-(count*side)*12
-			#Please align your own cards first...
-			if c.controller == me:
-				c.moveToTable(x,Y)
-				for p in reversed(prevCards):
-					if p.controller == me:
-						c.setIndex(p.getIndex)
-						break
-			#...before assisting other players
-			else:
-				controller = c.controller
-				if controller not in alignQueue: alignQueue[controller] = []
-				alignQueue[controller].append({'cardId' : c._id, 'X' : x, 'Y' : Y, 'prevCardIds' : [i._id for i in prevCards]})
-			count += 1
-			prevCards.append(c)
-		#Remotely trigger alignment in other players
-		alignedPlayers = [me]
-		for p in alignQueue:
-			if p in getPlayers():
-				alignedPlayers.append(p)
-				rnd(1,10) #avoids desync issues
-				remoteCall(p,'remoteAlign',[alignQueue[p],alignedPlayers])
 
-def remoteAlign(alignData,alignedPlayers):
+	#1: Align the second card in the list with the first
+	c0,c1 = cardList[0],cardList[1]
+	x0,y0 = c0.position
+	x1,y1 = x0 + xOffset, y0 + yOffset
+
+	c1.moveToTable(x1,y1)
+
+	#2: Move the second card beneath the first
+	c1.setIndex(c0.getIndex)
+
+	#3: Slice the list. If it is now shorter than 2 cards, we are done.
+	cardList = cardList[1:]
+	if len(cardList) < 2: return
+
+	#4: Otherwise, the owner of the second card in the new list calls this function.
+	nextCard = cardList[1]
+	remoteCall(nextCard.controller,"alignCards",[cardList,xOffset,yOffset])
+
+def alignAttachments(card):
+	"""
+	Aligns the attachments of input card.
+	Requires that input card belong to calling player
+
+	"""
 	mute()
-	for d in alignData:
-		card,X,Y,prevCards = Card(d['cardId']),d['X'],d['Y'],[Card(i) for i in d['prevCardIds']]
-		card.moveToTable(X,Y)
-		for c in reversed(prevCards):
-			if c.controller in alignedPlayers:
-				card.setIndex(c.getIndex)
-				break
+
+	#1: Retrieve attachments and end function if there are none.
+	attachments = getAttachments(card)
+	
+	if not attachments: return
+
+	#2: Controller of first attachment calls alignCards
+	cardList = [card] + attachments
+	firstAttachment = attachments[0]
+
+	remoteCall(firstAttachment.controller,"alignCards",[cardList,0,-12])
+
+	#3: Profit??? Seriously, the previous method was way too convoluted.
 
 def detachAll(card):
 	"""Removes all attachments from <card> and places them in front of their owners"""
