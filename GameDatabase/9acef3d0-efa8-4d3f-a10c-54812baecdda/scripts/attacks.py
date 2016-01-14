@@ -1154,13 +1154,16 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 		if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + ((2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0)),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
 		normal = roll[2] + 2*roll[3]
 		critical = roll[4] + 2*roll[5]
+
+		normalD = 0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal
+		criticalD = critical + normal if atkTraits.get('Critical Damage') else 0
+
 		if defender.Type == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt
-				reduction = min(critical,2)
-				critical -= reduction
-				normal += reduction
-		return (max((0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal) - armor,0) +
-				critical + (normal if atkTraits.get('Critical Damage') else 0),
-				computeEffect(effectRoll,aTraitDict,attack,dTraitDict))
+				reduction = min(criticalD,2)
+				criticalD -= reduction
+				normalD += reduction
+
+		return ( max( normalD - armor, 0 ) + criticalD, computeEffect(effectRoll,aTraitDict,attack,dTraitDict))
 
 def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 		modRoll = effectRoll + dTraitDict.get('Tough',0) + dTraitDict.get(attack.get('Type'),0)
@@ -1512,14 +1515,19 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict["OwnerID"])
-		if defender.Type == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt in damage prediction
-				reduction = min(critical,2)
-				critical -= reduction
-				normal += reduction
-		armor = computeArmor(aTraitDict,attack,dTraitDict)
 		atkTraits = attack.get('Traits',{})
-		return (max((0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal) - armor,0) +
-				critical + (normal if atkTraits.get('Critical Damage') else 0))
+
+		normalD = 0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal
+		criticalD = critical + (normal if atkTraits.get('Critical Damage') else 0)
+
+		if defender.Type == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt in damage prediction
+				reduction = min(criticalD,2)
+				criticalD -= reduction
+				normalD += reduction
+
+		armor = computeArmor(aTraitDict,attack,dTraitDict)
+		
+		return (max( normalD - armor , 0 ) + criticalD)
 
 def nCr(n,r):
 	return factorial(n) / factorial(r) / factorial(n-r)
