@@ -27,9 +27,9 @@ ActionPurple = ("Purple Action Marker", "edb61e00-a666-480a-81f3-20eb9944b0ea")
 ActionPurpleUsed = ("Purple Action Marker Used", "158f738b-6034-4c6d-b4ca-5abcf159ed9f" )
 Armor = ("Armor +1", "b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" )
 Banish = ("Banish","fdaa2c02-a65a-40e0-a315-962f9315b732" )
-Bleed = ("Bleed: Upkeep: Take 1 Damage./nRemove with 1 Healing./nRemoval Cost: 2", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
+Bleed = ("Bleed: Upkeep: Take 1 Damage. Remove with 1 Healing. Removal Cost: 2", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("Blood Reaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
-Burn = ("Burn: Upkeep: Roll 1 die/n0 = Remove Burn/n1-2 = Take Damage", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
+Burn = ("Burn: Upkeep: Roll 1 die 0 = Remove Burn 1-2 = Take Damage", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
 ChargeToken = ("Charge Token","4546a2ed-3ac4-4baf-8d56-9f51af888a75" )
 Corrode = ("Corrode: -1 Armor", "c3de25bf-4845-4d2d-8a28-6c31ad12af46" )
 ControlMarkerBlue = ("Blue Control Marker", "da724182-3695-4124-becc-928eb870c5dc" )
@@ -1020,6 +1020,7 @@ def resolveUpkeep():
 		upKeepCost = 0
 		obeliskUpKeepCost = 0
 		monolithUpKeepCost = 0
+		upKeepFilter = "#ABFFFFFF" #Light Blue - R=126 G=198 B=222
 		# Process Upkeep for Harshforge Monolith
 		if card.Type == "Enchantment" and card.controller == me and HarshforgeMonolithInPlay == 1:
 			monolithUpKeepCost = 1
@@ -1031,6 +1032,7 @@ def resolveUpkeep():
 			else:
 				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Down {} from Harshforge Monolith's effect?".format(card.Name)
 			if distance < 2:
+				card.filter = upKeepFilter
 				processUpKeep(monolithUpKeepCost, card, HarshforgeMonolith, notifystr)
 				if ManaPrismInPlay == 1:
 					addToken(ManaPrism, Mana)
@@ -1038,6 +1040,7 @@ def resolveUpkeep():
 		if card.Type == "Creature" and card.controller == me and MordoksObeliskInPlay == 1 and card.isFaceUp:
 			obeliskUpKeepCost = 1
 			notifystr = "Do you wish to pay the Upkeep +1 cost for {} from Mordok's Obelisk's effect?".format(card.Name)
+			card.filter = upKeepFilter
 			processUpKeep(obeliskUpKeepCost, card, MordoksObelisk, notifystr)
 			if ManaPrismInPlay == 1:
 				addToken(ManaPrism, Mana)
@@ -1067,6 +1070,7 @@ def resolveUpkeep():
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+				card.filter = upKeepFilter
 				processUpKeep(upKeepCost, card, Upkeep, notifystr)
 				if ManaPrismInPlay == 1:
 					addToken(ManaPrism, Mana)
@@ -1089,6 +1093,7 @@ def resolveUpkeep():
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 
 		if upKeepCost >= 1:
+			card.filter = upKeepFilter
 			processUpKeep(upKeepCost, card, Upkeep, notifystr)
 
 def processPsiOrb(card, PsiOrbDisc, upKeepCost):
@@ -1118,6 +1123,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 		#whisper("{} {}".format(me, notifystr))
 		if choice == 1 and card1.isFaceUp:
 			me.Mana -= upKeepCost
+			card1.filter = None
 			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
 			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
 				attatchedTo = getAttachTarget(card1)
@@ -1126,11 +1132,13 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			else:
 				if card1.Name == "Forcefield" and card1.controller == me and card1.isFaceUp and card1.markers[FFToken] < 3:
 					card1.markers[FFToken] += 1
+					card1.Filter = None
 					notify("{} adds a Forcefield token to {}, which has a total of {} Forcefield tokens now.".format(me.name,card1.name, card1.markers[FFToken]))
 			return
 		if choice == 1 and not card1.isFaceUp:
 			me.Mana -= upKeepCost
 			notify("{} pays the Upkeep cost of {} for the mage's Face Down Enchantment".format(me, upKeepCost, card1))
+			card1.Filter = None
 			return
 		else:
 			card1.moveTo(me.piles['Discard'])

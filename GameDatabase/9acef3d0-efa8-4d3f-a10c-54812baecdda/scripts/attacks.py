@@ -1103,6 +1103,7 @@ def malakaisFireReceiptPrompt(heathen):
 
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		mute()
+		card = ""
 		card = Card(cardTraitsDict.get('OwnerID'))
 		if card.type == "Mage": return
 
