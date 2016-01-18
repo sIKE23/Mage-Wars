@@ -222,7 +222,7 @@ def getAttackList(card):
 														if "Temple" in c.subtype and c.controller == me: X += 1
 												X = min(me.mana,X) #Don't allow overspending
 												askAmount = askInteger('Enter amount to pay for Temple of Lights attack (max: {})'.format(X),X)
-												if askAmount == None: return [] #Allow player to cancel
+												if askAmount == None or askAmount < 1: return [] #Allow player to cancel
 												strength = min(askAmount,X) #Enforce maximum
 												aDict['Dice'] = strength
 												appendEventList('Round',['ToLX', strength])  
