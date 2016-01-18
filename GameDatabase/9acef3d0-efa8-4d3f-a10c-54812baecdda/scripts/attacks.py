@@ -219,10 +219,14 @@ def getAttackList(card):
  										elif card.name == "Temple of Light" and card.controller == me:  
 												X = 0  
 												for c in table:  
-														if c.subtype == "Temple" and c.controller == me: X += 1
-												aDict['Dice'] = askInteger('Enter amount to pay for Temple of Lights attack (max: {})'.format(X),X)  
-												appendEventList('Round',['ToLX', X])  
-												me.mana -= aDict['Dice'] if me.mana >= aDict['Dice'] else aDict['Dice'] == 0  
+														if "Temple" in c.subtype and c.controller == me: X += 1
+												X = min(me.mana,X) #Don't allow overspending
+												askAmount = askInteger('Enter amount to pay for Temple of Lights attack (max: {})'.format(X),X)
+												if askAmount == None: return [] #Allow player to cancel
+												strength = min(askAmount,X) #Enforce maximum
+												aDict['Dice'] = strength
+												appendEventList('Round',['ToLX', strength])  
+												me.mana -= strength #Since maximum and mana supply are enforced,guaranteed to not be over limit
 												toggleReady(card)  
 										else:  
 												aDict['Dice'] = 0  
@@ -1174,9 +1178,10 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and (dTraitDict.get("Restrained") or dTraitDict.get("Incapacitated")): modRoll += 4
 		if attacker.Name == "Temple of Light":  
 				eventList = getEventList("Round")  
-				for e in eventList:  
+				for e in reversed(eventList):  
 						if "ToLX" in e[0]:  
-								modRoll += e[1]  
+								modRoll += e[1]
+								break  
 
 		vs = attack.get('Traits',{}).get('VS')
 		if vs: #We'll assume each attack has only one vs+ trait
@@ -1541,9 +1546,10 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): d12Bonus += 4
 		if attacker.Name == "Temple of Light":  
 				eventList = getEventList("Round")  
-				for e in eventList:  
+				for e in reversed(eventList):  
 						if "ToLX" in e[0]:  
-								d12Bonus += e[1]  
+								d12Bonus += e[1]
+								break
 
 		vs = attack.get('Traits',{}).get('VS')
 		if vs: #We'll assume each attack has only one vs+ trait
