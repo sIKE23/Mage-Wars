@@ -5,7 +5,7 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
 	scriptVersion ="3.1.0.1"
-	version="1.13.6.0"
+	version="1.14.0.0"
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -158,6 +158,7 @@
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
 			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged" />
+			<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution" />
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep" />
@@ -185,6 +186,7 @@
 			<cardaction menu="Remove Banish Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish" />
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
 			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged" />
+			<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution" />
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />

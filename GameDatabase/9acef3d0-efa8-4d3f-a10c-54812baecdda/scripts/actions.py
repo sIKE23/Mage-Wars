@@ -67,6 +67,7 @@ Rage = ("Rage","feb7e8f8-5c38-4978-92c8-2d47d54bdd29" )
 Ranged = ("Ranged +1","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready", "aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" )
 ReadyII = ("Ready II", "73fffebd-a8f0-43bd-a118-6aebc366ecf6" )
+Retribution = ("Retribution: Melee +1", "88fc4b07-9596-48f4-a049-d5be58ae254c" )
 Rot = ("Rot: During Upkeep take 1 Damage - Removal Cost 2", "81360faf-87d6-42a8-a719-c49386bd2ab5" )
 RuneofFortification = ("Rune of Fortification: If this equipment gives an Armor +X bonus to the Mage, it gives an additional Armor +1.","ae179c85-11ce-4be7-b9c9-352139d0c8f2" )
 RuneofPower = ("Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound to this equipment or using a spell action provided by this equipment.","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" )
@@ -75,14 +76,14 @@ RuneofReforging = ("Rune of Reforging: This equipment gains the Cantrip trait.",
 RuneofShielding = ("Rune of Shielding: If this equipment gives your Mage a Defense, the first time each round that defense is used, add +2 to the Defense roll.","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
 SecretPassage = ("Secret Passage","a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" )
 Slam = ("Slam: Incapacitated. Replace with Daze when activated. - Removal Cost: 3", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
-Sleep = ("Sleep: Incapacitated. Replace with Daze when damaged. Removal Cost: Sleep has a removal cost equal to the sleeping creature\’s .Level", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
+Sleep = ("Sleep: Incapacitated. Replace with Daze when damaged. Removal Cost: Sleep has a removal cost equal to the sleeping creature's Level", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
 SecretPassage = ("Secret Passage",	"a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" )
 SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926" )
 Stagger = ("Stagger: Minor Creature: Can not Attack or Guard, Major Creature: -2 Attack Dice","ede2252f-b47f-4ea2-a448-08fd3b22d506" )
 StormToken = ("Storm Token", "6383011a-c544-443d-b039-9f7ba8de4c6b" )
 Stuck = ("Stuck: Restrained and Unmovable. Roll 7+ to remove. - Removal Cost:4", "a01e836f-0768-4aba-94d8-018982dfc122" )
 Stun = ("Stun: Incapacitated. Remove after acting. - Removal Cost: 4", "4bbac09e-a46c-42de-9272-422e8074533f" )
-Tainted = ("Tainted: This can\'t be healed. - Removal Cost: 3", "826e81c3-6281-4a43-be30-bac60343c58f" )
+Tainted = ("Tainted: This can't be healed. - Removal Cost: 3", "826e81c3-6281-4a43-be30-bac60343c58f" )
 Taunt = ("Taunt (Sosroku)", "16f03c44-5656-4e9d-9629-90c4ff1765a7" )
 TauntS = ("Taunt (Skeelax)","9ea607d3-dade-44dc-a69d-1c0d5691a246" )
 TauntT = ("Taunt (Thorg)", "8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" )
@@ -699,18 +700,16 @@ def mageSetup():
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
+			debug("Mage Stats: {}".format(stat))
 			break
 	for stat in stats:
-		debug("stat {}".format(stat))
 		statval = stat.split("=")
 		if "Channeling" in statval[0]:
 			me.Channeling = int(statval[1])
 			me.Mana = 10+me.Channeling
-			#if debugMode: me.Mana = 100
-			whisper("Channeling set to {} and Mana to {}".format(me.Channeling,me.Mana))
 		elif "Life" in statval[0]:
 			me.Life = int(statval[1])
-			whisper("Life set to {}".format(me.Life))
+		notify("{} Channeling is set to {} and Mana is set to {} and Life set to {}".format(me, me.Channeling,me.Mana,me.Life))
 
 	setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
 	if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
@@ -1313,6 +1312,7 @@ tokenList=['Armor',
 		   'Melee',
 		   'Rage',
 		   'Ranged',
+		   'Retribution',
 		   'Rot',
 		   'Slam',
 		   'Stun',
@@ -2297,7 +2297,7 @@ def validateDeck(deck):
 			spellbook["Fire"] = int(costval[1])
 	#debug("Spellbook {}".format(spellbook))
 	
-	# loop throught all the spell cards in the spellbook then calculate the levels by school in the dictionary 'levels'
+	# loop through all the spell cards in the spellbook then calculate the levels by school in the dictionary 'levels'
 	# with a level a count per school. Spells/mages that are/have exceptions will typically be tracked in the booktotal value
 	# once done the spell levels as caculated will be mutipled by their schoolcost mutipler and added to the booktotal value 
 	#which should not exceed the mages Spellbook Points
@@ -2410,9 +2410,9 @@ def validateDeck(deck):
 										booktotal += int(level[count])
 										break
 				else:
-					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature":
+					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature" and c.name == "Paladin":
 						booktotal += int(card.Level)
-					 elif "War" == card.School and int(card.Level) > 2:
+					 elif "War" == card.School and int(card.Level) > 2 and c.name == "Paladin":
 						booktotal += int(card.Level)
 
 		#multiple Epic cards are not allowed in the spellbook.

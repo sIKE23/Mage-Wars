@@ -27,7 +27,7 @@ additiveTraits = ["Melee","Ranged",
 				  "Magebind",
 				  "Lifebond",
 				  "Upkeep",
-				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
+				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
 superlativeTraits = ["Regenerate",
 					 "Aegis",
 					 "Uproot",
@@ -1377,6 +1377,7 @@ def computeTraits(card):
 								extend(['Fast','Bloodthirsty +1'])
 
 		if markers[Melee]: append('Melee +{}'.format(str(markers[Melee])))
+		if markers[Retribution]: append('Melee +{}'.format(str(markers[Retribution])))
 		if markers[Ranged]: append('Ranged +{}'.format(str(markers[Ranged])))
 		if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))
 		if markers[Growth]: extend(['Life +{}'.format(str(3*markers[Growth])),'Melee +{}'.format(str(markers[Growth]))])
