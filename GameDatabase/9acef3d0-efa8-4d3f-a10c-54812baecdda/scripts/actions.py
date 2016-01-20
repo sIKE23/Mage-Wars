@@ -700,7 +700,7 @@ def mageSetup():
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
-			debug("Mage Stats: {}".format(stat))
+			debug("Mage Stats: {}".format(stats))
 			break
 	for stat in stats:
 		statval = stat.split("=")
