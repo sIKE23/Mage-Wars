@@ -1161,7 +1161,7 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 		critical = roll[4] + 2*roll[5]
 
 		normalD = 0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal
-		criticalD = critical + normal if atkTraits.get('Critical Damage') else 0
+		criticalD = critical + (normal if atkTraits.get('Critical Damage') else 0)
 
 		if defender.Type == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt
 				reduction = min(criticalD,2)
