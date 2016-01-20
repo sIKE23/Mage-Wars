@@ -265,6 +265,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
 			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
 			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic')) or
+			(cTargetBar == 'Non-Mage Object' and tType!='Mage') or
 			(cTargetBar == 'Zone or Object') or
 			(cTargetBar == 'Object or Zone')): return True
 	elif ((cType == 'Equipment' and tType == 'Mage') or
