@@ -194,6 +194,7 @@ def onGameStart():
 	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
 	setGlobalVariable("bindDict",str({}))
+	setGlobalVariable("mountDict",str({}))
 	setSetting("AutoAttach", True)
 
 	#set global event lists for rounds and single actions
@@ -525,6 +526,7 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 				if card.controller == me and fromGroups[i]==table:
 						if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
 								unbind(card)
+								dismount(card)
 								c,t = detach(card)
 								if toGroups[i] == table: card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
 								actionType = None
@@ -533,7 +535,13 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 								hasAttached = False
 								if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
 										for a in table:
-												if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
+												if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canMount(card,a):
+														c,t = mount(card,a)
+														if t:
+																actionType = ['mounts','upon']
+																hasAttached = True
+																break
+												elif (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
 														c,t = bind(card,a)
 														if t:
 																actionType = ['binds','to']
@@ -552,14 +560,21 @@ def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,
 						if toGroups[i] != table:
 								unbind(card)
 								detach(card)
+								dismount(card)
 								detachAll(card)
 								unbindAll(card)
-						if not ((oldIndices[i] != indices[i] and oldXs[i]==xs[i] and oldYs[i]==ys[i]) or
+								dismountAll(card)
+						if not ((oldIndices[i] != indices[i] and oldXs[i]==xs[i] and oldYs[i]==ys[i]) or #Do not realign if it is  only the index that is changing. Prevents recursions.
 								isAttached(card) or
 								getBindTarget(card) or
 								toGroups[i] != table):
 								alignAttachments(card)
-								alignBound(card)#Do not realign if it is  only the index that is changing. Prevents recursions.
+								alignBound(card)
+								alignMounted(card)
+						mounted = getMounted(card)
+						if mounted: #Ugly, but it will do for now.
+								alignAttachments(mounted)
+								alignBound(mounted)
 
 def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
 		if player == me == fromCard.controller and isTargeted:
@@ -700,7 +715,7 @@ def mageSetup():
 	for c in me.hand:
 		if c.Type == "Mage":
 			stats = c.Stats.split(",")
-			debug("Mage Stats: {}".format(stat))
+			debug("Mage Stats: {}".format(str(stats)))
 			break
 	for stat in stats:
 		statval = stat.split("=")
