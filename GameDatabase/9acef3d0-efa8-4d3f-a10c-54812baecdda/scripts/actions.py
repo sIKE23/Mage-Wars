@@ -75,6 +75,7 @@ RuneofPrecision = ("Rune of Precision: This equipment's non-spell attacks gain t
 RuneofReforging = ("Rune of Reforging: This equipment gains the Cantrip trait.","d10ada1f-c03b-4077-b6cb-c9667d6b2744" )
 RuneofShielding = ("Rune of Shielding: If this equipment gives your Mage a Defense, the first time each round that defense is used, add +2 to the Defense roll.","e0bb0e90-4831-43c6-966e-27c8dc2d2eef" )
 SecretPassage = ("Secret Passage","a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" )
+SirensCall = ("Siren's Call","9fd3ef71-6cee-4a72-8ae1-5615362eae07" )
 Slam = ("Slam: Incapacitated. Replace with Daze when activated. - Removal Cost: 3", "f7379e4e-8120-4f1f-b734-51f1bd9fbab9" )
 Sleep = ("Sleep: Incapacitated. Replace with Daze when damaged. Removal Cost: Sleep has a removal cost equal to the sleeping creature's Level", "ad0e8e3c-c1af-47b7-866d-427f8908dea4" )
 SecretPassage = ("Secret Passage",	"a4b3bb92-b597-441e-b2eb-d18ef6b8cc77" )
@@ -954,7 +955,7 @@ def resolveDissipate():
 
 def resolveLoadTokens():
 	mute()
-	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
+	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer", "Dwarf Kanone"] and card.controller == me and card.isFaceUp]
 	for card in loadTokenCards:
 		notify("Resolving Load Tokens for {}...".format(me))	#found at least one
 		if card.markers[LoadToken] == 0:
@@ -1631,6 +1632,8 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[EternalServant] = 1
 			if "Warlock" == card.Name:
 					card.markers[BloodReaper] = 1
+			if "Siren" == card.Name:
+					card.markers[SirensCall] = 1
 		if "Anvil Throne Warlord Stats" == card.Name:
 					card.markers[RuneofFortification] = 1
 					card.markers[RuneofPower] = 1
@@ -1659,9 +1662,7 @@ def flipcard(card, x = 0, y = 0):
 				toggleAction(card)
 		if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
 				card.markers[Guard] = 1
-		if "Akiro's Hammer" == card.Name:
-			card.markers[LoadToken] = 1
-		if "Ballista" == card.Name:
+		if card.Name in ["Ballista", "Akiro's Hammer", "Dwarf Kanone"]:
 			card.markers[LoadToken] = 1
 		if "Corrosive Orchid"  == card.Name:
 			card.markers[MistToken] = 1
