@@ -479,7 +479,7 @@ def createZone(i,j,mapX,mapY,size):
 
 def zoneContains(zone,card): #returns whether an object is inside the zone
 	x,y = card.position
-	X,Y = card.width(),card.height()
+	X,Y = card.width,card.height
 	if getAttachTarget(card):
 		return zoneContains(zone,getAttachTarget(card))
 	else:
@@ -489,7 +489,7 @@ def zoneContains(zone,card): #returns whether an object is inside the zone
 
 def zoneBorders(zone,card): #returns whether an object overlaps the zone border
 	x,y = card.position
-	X,Y = card.width(),card.height()
+	X,Y = card.width,card.height
 	if (zoneContains(zone,card) or
 		(x > zone.get('x') + zone.get('size')) or (x < zone.get('x') - X) or
 		(y > zone.get('y') + zone.get('size')) or (y < zone.get('y') - Y)): return False
@@ -497,7 +497,7 @@ def zoneBorders(zone,card): #returns whether an object overlaps the zone border
 
 def zoneClosest(zoneList,card): #finds closest zone from a list. If border is enabled, returns
 	x,y = card.position
-	X,Y = card.width(),card.height()
+	X,Y = card.width,card.height
 	x += X/2
 	y += Y/2
 	zone = zoneList[0]
@@ -509,7 +509,7 @@ def zoneClosest(zoneList,card): #finds closest zone from a list. If border is en
 
 def zoneGetContain(zone,card): # Finds the closest straight-line place to move the object so it is contained.
 	x,y = card.position
-	X,Y = card.width(),card.height()
+	X,Y = card.width,card.height
 	coordinates = [x,y]
 	if (x <= zone.get('x')): coordinates[0] = zone.get('x') + 1
 	if (x + X >= zone.get('x')+zone.get('size')): coordinates[0] = zone.get('x') + zone.get('size') - X - 1
@@ -519,7 +519,7 @@ def zoneGetContain(zone,card): # Finds the closest straight-line place to move t
 
 def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the nearest border.
 	x,y = card.position
-	X,Y = card.width(),card.height()
+	X,Y = card.width,card.height
 	borders = [[(zone['x']),(zone['y'] + zone['size']/2)],
 			   [(zone['x'] + zone['size']/2),(zone['y'])],
 			   [(zone['x'] + zone['size']),(zone['y'] + zone['size']/2)],
@@ -546,7 +546,7 @@ def getZoneContaining(card): #returns the zone occupied by the card. If attached
 	tileSize = mapDict.get('tileSize')
 	zoneArray = mapDict.get('zoneArray')
 	cx,cy = card.position
-	cX,cY = (card.width(),card.height())
+	cX,cY = (card.width,card.height)
 	if not (x<cx+cX/2<x+X and y<cy+cY/2<y+Y): return None
 	i,j = int(float(cx+cX/2-x)/tileSize),int(float(cy+cY/2-y)/tileSize)
 	if zoneArray[i][j]: return zoneArray[i][j]

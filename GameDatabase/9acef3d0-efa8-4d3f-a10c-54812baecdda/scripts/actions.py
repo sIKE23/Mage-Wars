@@ -178,12 +178,13 @@ infostr = ""
 ############################		Events		##################################
 ############################################################################
 
-def onTableLoad():
+def onTableLoaded():
+	mute()
 	#log in chat screen what version of the game definiton the player is using
 	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 
-def onGameStart():
+def onGameStarted():
 	mute()
 	global debugMode
 	#Set default map
@@ -230,7 +231,7 @@ def onGameStart():
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
 		setUpDiceAndPhaseCards()
-		setGlobalVariable("GameSetup", str(0))
+		setGlobalVariable("GameSetup",str(0))
 		notify("There is only one player, so there is no need to roll for initative.")
 		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
@@ -311,10 +312,12 @@ def choosePlayerColor():
 			if colorsChosen == "":	#we're the first to pick
 				setGlobalVariable("ColorsChosen", str(choice))
 				me.setGlobalVariable("MyColor", str(choice))
+				me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 				break
 			elif str(choice) not in colorsChosen:	#not first to pick but no one else has taken this yet
 				setGlobalVariable("ColorsChosen", colorsChosen + str(choice))
 				me.setGlobalVariable("MyColor", str(choice))
+				me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 				break
 			else:	#someone else took our choice
 				askChoice("Someone else took that color. Choose a different one.", ["OK"], ["#FF0000"])
@@ -370,10 +373,10 @@ def setUpDiceAndPhaseCards():
 		RDA.anchor = (True)
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
 		init.anchor = (True)
-		init.switchTo(myColor)
+		init.alternate = myColor
 		currentPhase = "Planning"
 		phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-		phase.switchTo("Planning") #skips upkeep for first turn
+		phase.alternate = "Planning" #skips upkeep for first turn
 		phase.anchor = (True)
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
@@ -446,14 +449,14 @@ def AskInitiative(playerID):
 		notify("A decision has been reached! {} will go first.".format(firstPlayer))
 		setGlobalVariable("PlayerWithIni", str(playerID))
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-		init.switchTo(Player(playerID).getGlobalVariable("MyColor"))
+		init.alternate = Player(playerID).getGlobalVariable("MyColor")
 		break
 	setGlobalVariable("GameSetup", str(0))
 	notify("Game setup is complete! Players should now load their Spellbooks.")
 
 def moveRDA(card):
 	"""Moves the dice roll area/initiative/phase marker to the appropriate area"""
-	cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
+	cardW,cardH = cardSizes[card.size]['width'],cardSizes[card.size]['height']
 	cardType = card.type
 	rdaChoice = getGlobalVariable("DiceRollAreaPlacement")
 	mapDict = eval(getGlobalVariable("Map"))
@@ -494,11 +497,14 @@ def moveRDA(card):
 			y = mapY + mapHeight + 10 + 10
 	card.moveToTable(x,y,True)
 
-def onLoadDeck(player, groups):
+def onDeckLoaded(args):
+	#args = player,groups
+	player = args.player
+	groups = args.groups
 	mute()
 	global gameNum
 	global debugMode
-	if getGlobalVariable("GameSetup") == "False" and player == me:
+	if eval(getGlobalVariable("GameSetup")) != 0 and player == me:
 		askChoice("Please Finish Setup before you try to load a deck.", ["OK"], ["#FF0000"])
 		return
 	if player == me:
@@ -515,72 +521,110 @@ def onLoadDeck(player, groups):
 		else:
 			#notify and delete deck
 			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
-			for group in groups:
+			for group in args.groups:
 				for card in group:
 					if card.controller == me:
 						card.delete()
 
-def onMoveCards(player,cards,fromGroups,toGroups,oldIndices,indices,oldXs,oldYs,xs,ys,highlights,markers,faceup):
-		mute()
-		for i in range(len(cards)):
-				card = cards[i]
-				if card.controller == me and fromGroups[i]==table:
-						if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
-								unbind(card)
-								dismount(card)
-								c,t = detach(card)
-								if toGroups[i] == table: card.moveToTable(xs[i],ys[i])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
-								actionType = None
-								if t:
-										actionType = ['detaches','from']
-								hasAttached = False
-								if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
-										for a in table:
-												if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canMount(card,a):
-														c,t = mount(card,a)
-														if t:
-																actionType = ['mounts','upon']
-																hasAttached = True
-																break
-												elif (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
-														c,t = bind(card,a)
-														if t:
-																actionType = ['binds','to']
-																hasAttached = True
-																break
-												elif getSetting('AutoAttach',True) and (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canAttach(card,a):
-														if (card.Type == "Enchantment" or card.Name in ["Tanglevine","Stranglevine","Quicksand"]) and not card.isFaceUp and not castSpell(card,a): break
-														c,t = attach(card,a)
-														if t:
-																actionType = ['attaches','to']
-																hasAttached = True
-																break
-								if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
-								if actionType:
-										notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
-						if toGroups[i] != table:
-								unbind(card)
-								detach(card)
-								dismount(card)
-								detachAll(card)
-								unbindAll(card)
-								dismountAll(card)
-						if not ((oldIndices[i] != indices[i] and oldXs[i]==xs[i] and oldYs[i]==ys[i]) or #Do not realign if it is  only the index that is changing. Prevents recursions.
-								isAttached(card) or
-								getBindTarget(card) or
-								toGroups[i] != table):
-								alignAttachments(card)
-								alignBound(card)
-								alignMounted(card)
-						mounted = getMounted(card)
-						if mounted: #Ugly, but it will do for now.
-								alignAttachments(mounted)
-								alignBound(mounted)
+def onCardsMoved(args):
+	#args = player,cards,fromGroups,toGroups,indexs,xs,ys,highlights,markers,faceups
+	mute()
+	setGlobalVariable("MoveCardArgs",str(args))
+	#assign variables when appropriate to cut down on memory access operations
+	cards = args.cards
+	toGroups = args.toGroups
+	fromGroups = args.fromGroups
+	xs = args.xs
+	ys = args.ys
+	indices = args.indexs
+	#loop over all cards
+	for i, card in enumerate(cards):
+	  	position = card.position
+	  	if card.controller == me and fromGroups[i]==table:
+			if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
+				unbind(card)
+				dismount(card)
+				c,t = detach(card)
+				if toGroups[i] == table: card.moveToTable(position[0],position[1])#ugly, but fixes a bug that was preventing all but the first detached enchantment from moving.
+				actionType = None
+				if t:
+					actionType = ['detaches','from']
+				hasAttached = False
+				if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
+					for a in table:
+							if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canMount(card,a):
+									c,t = mount(card,a)
+									if t:
+											actionType = ['mounts','upon']
+											hasAttached = True
+											break
+									elif (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
+										c,t = bind(card,a)
+										if t:
+												actionType = ['binds','to']
+												hasAttached = True
+												break
+							elif getSetting('AutoAttach',True) and (cardX(a)-position[0])**2 + (cardY(a)-position[1])**2 < 400 and canAttach(card,a):
+									if (card.Type == "Enchantment" or card.Name in ["Tanglevine","Stranglevine","Quicksand"]) and not card.isFaceUp and not castSpell(card,a): break
+									c,t = attach(card,a)
+									if t:
+											actionType = ['attaches','to']
+											hasAttached = True
+											break
+				if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
+				if actionType:
+						notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+				if toGroups[i] != table:
+						unbind(card)
+						detach(card)
+						dismount(card)
+						detachAll(card)
+						unbindAll(card)
+						dismountAll(card)
+				if not ((indices[i] != position and xs[i]==str(int(position[0])) and ys[i]==str(int(position[1]))) or # Do not realign if it is only the index that is changing. Prevents recursions.
+						isAttached(card) or
+	  					getBindTarget(card) or
+	  					toGroups[i] != table):
+	  					alignAttachments(card)
+	  					alignBound(card)
+	  					alignMounted(card)
+	  			mounted = getMounted(card)
+				if mounted: #Ugly, but it will do for now.
+						alignAttachments(mounted)
+						alignBound(mounted)
 
-def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function to become SEVERELY overworked in Q2... :)
-		if player == me == fromCard.controller and isTargeted:
-				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(fromCard) and (toCard.type in ['Creature','Conjuration','Conjuration-Wall','Mage'] or "Vine Marker" in toCard.Name):
-						attacker,defender = fromCard,toCard #Should probably make an attack declaration function. Eventually.
+def onScriptedCardsMoved(args):
+	#assign variables to args before the loop to cut down on memory access operations
+	cards = args.cards
+	toGroups = args.toGroups
+	indices = args.indexs
+	xs = args.xs
+	ys = args.ys
+	#handle attached cards when attach target is moved/deleted by a function
+	for i in range(len(cards)):
+		card = cards[i]
+		position = card.position
+		if toGroups[i] != table:
+			unbind(card)
+			detach(card)
+			dismount(card)
+			detachAll(card)
+			unbindAll(card)
+			dismountAll(card)
+		if not ((indices[i] != position and xs[i]==str(int(position[0])) and ys[i]==str(int(position[1]))) or
+			isAttached(card) or
+			getBindTarget(card) or
+			toGroups[i] != table):
+			alignAttachments(card)
+			alignBound(card)
+			alignMounted(card)
+
+def onCardArrowTargeted(args):
+		#args = player,fromCard,toCard,targeted,scripted
+		mute()
+		attacker,defender = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
+		if args.player == me == attacker.controller and args.targeted:
+				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type == 'Creature' or 'Conjuration' in defender.type):
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
 						attack = diceRollMenu(attacker,defender)
@@ -613,19 +657,19 @@ def onTargetCardArrow(player,fromCard,toCard,isTargeted):#Expect this function t
 								attacker.arrow(defender,False)
 						elif attack.get("Dice"): rollDice(attack.get("Dice"))
 						else:
-								fromCard.arrow(toCard,False)
-								notify("The Attack on {} was canceled.".format(toCard))
+								attacker.arrow(defender,False)
+								notify("The Attack on {} was canceled.".format(defender))
 				else:
-						if fromCard.Type == "Enchantment" and not fromCard.isFaceUp and castSpell(fromCard,toCard):
-								attach(fromCard,toCard)
-								fromCard.arrow(toCard,False)
-						elif toCard.Type in typeIgnoreList or toCard.Name in typeIgnoreList or toCard.Type == "Magestats":
+						if attacker.Type == "Enchantment" and not attacker.isFaceUp and castSpell(attacker,defender):
+								attach(attacker,defender)
+								attacker.arrow(defender,False)
+						elif defender.Type in typeIgnoreList or defender.Name in typeIgnoreList or defender.Type == "Magestats":
 							mute()
-							notify("{} is not a legal target".format(toCard.Name))
-							fromCard.arrow(toCard,False)
-						elif fromCard.Type !="Enchantment":
-								castSpell(fromCard,toCard) #Assume that player wants to cast card on target
-								fromCard.arrow(toCard,False)
+							notify("{} is not a legal target".format(defender.Name))
+							attacker.arrow(defender,False)
+						elif attacker.Type !="Enchantment":
+								castSpell(attacker,defender) #Assume that player wants to cast card on target
+								attacker.arrow(defender,False)
 
 ############################################################################
 ######################		Group Actions			########################
@@ -724,7 +768,7 @@ def mageSetup():
 			me.Mana = 10+me.Channeling
 		elif "Life" in statval[0]:
 			me.Life = int(statval[1])
-		notify("{} Channeling is set to {} and Mana is set to {} and Life set to {}".format(me, me.Channeling,me.Mana,me.Life))
+	notify("{} Channeling is set to {} and Mana is set to {} and Life set to {}".format(me, me.Channeling,me.Mana,me.Life))
 
 	setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
 	if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
@@ -824,7 +868,7 @@ def advanceTurn():
 				remoteCall(p2, "setActiveP", [p])
 
 #def setActiveP(p):
-#	p.setActivePlayer()
+#	p.setActive()
 
 def resetMarkers():
 	mute()
@@ -1213,7 +1257,8 @@ def getTextTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1].strip('[]'))
 	return (TraitCost)
 
-def checkMageDeath(player, counter, oldvalue):
+def checkMageDeath(args):
+		#args = player,counter,value,scripted
 		mute()
 		global currentPhase
 		choiceList = ['Side', 'Bottom']
@@ -1231,18 +1276,14 @@ def checkMageDeath(player, counter, oldvalue):
 def reportDeath(deadmage):
 	setGlobalVariable("GameIsOver", True)
 	setGlobalVariable("GameEndTime", str(time.ctime()))
-	choiceList = ['OK']
-	colorsList = ['#de2827']
 	whisper("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
-	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
+	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), ['OK'], ['#de2827'])
 	if choice == 0 or 1:
 		return
 
 def reportVTarWin(winningmage,score):
 	setGlobalVariable("GameIsOver", True)
 	setGlobalVariable("GameEndTime", str(time.ctime()))
-	choiceList = ['OK']
-	colorsList = ['#de2827']
 	whisper("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
 	if choice == 0 or 1:
@@ -1352,7 +1393,7 @@ def placeControlMarker(attacker,defender):
 	mute()
 	#First, If orb is off, turn it on
 	if defender.alternate == "":
-		defender.switchTo('B')
+		defender.alternate = "B"
 		notify("{} flips V'Tar Orb On.".format(me))
 	#Second, check to see if there is a control marker on the Orb already and if so remove it
 	markerColor = playerColorDict[int(attacker.getGlobalVariable("MyColor"))]["ControlMarker"]
@@ -1576,25 +1617,25 @@ def flipcard(card, x = 0, y = 0):
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == '':
-			card.switchTo('B')
+			card.alternate = "B"
 			notify("{} flips the Vine Marker to use its Black side.".format(me))
 		else:
-			card.switchTo('')
+			card.alternate = ""
 			notify("{} flips the Vine Marker to use its Green side.".format(me))
 		return
 	elif "Alt Zone" in card.Name and card.controller == me:
 		if card.alternate == "B":
-			card.switchTo('')
+			card.alternate = ""
 		else:
-			card.switchTo('B')
+			card.alternate = "B"
 		notify("{} flips Zone Marker.".format(me))
 		return
 	elif "V'Tar Orb" in card.Name and card.controller == me:
 		if card.alternate == "B":
-			card.switchTo('')
+			card.alternate = ""
 			notify("{} flips V'Tar Orb Off".format(me))
 		else:
-			card.switchTo('B')
+			card.alternate = "B"
 			notify("{} flips V'Tar Orb On.".format(me))
 		return
 	elif "Player Token" in card.Name:
@@ -1687,15 +1728,15 @@ def flipcard(card, x = 0, y = 0):
 		card.isFaceUp = False
 		card.peek()
 	elif card.isFaceUp and "B" or "C" in cardalt:
-		if card.alternate == '':
+		if card.alternate == "":
 			notify("{} flips {} to the alternate version of the card.".format(me, card))
-			card.switchTo('B')
-		elif card.alternate == 'B' and 'C' in cardalt:
+			card.alternate = "B"
+		elif card.alternate == "B" and "C" in cardalt:
 			notify("{} flips {} to the alternate version of the card.".format(me, card))
-			card.switchTo('C')
+			card.alternate = "C"
 		else:
 			notify("{} flips {} to the standard version of the card.".format(me, card))
-			card.switchTo()
+			card.alternate = ""
 
 def getNextPlayerNum():
 	debug(getGlobalVariable("PlayerWithIni"))
@@ -1710,7 +1751,7 @@ def changeIniColor(card):
 	myColor = me.getGlobalVariable("MyColor")
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	if mwPlayerDict[me._id]["PlayerNum"] == int(getGlobalVariable("PlayerWithIni")):
-		card.switchTo(myColor)
+		card.alternate = myColor
 	else:
 		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
 
@@ -1754,12 +1795,13 @@ def obliterate(card, x=0, y=0):
 	detach(card)
 	card.moveTo(me.piles['Obliterate Pile'])
 
-def OnCardDoubleClick(card, mouseButton, keysDown):
+def onCardDoubleClicked(args):
+	#args = card, mouseButton, keysDown
 	mute()
-	if card.type == "DiceRoll":
+	if args.card.type == "DiceRoll":
 		genericAttack(0)
 
-	if card.type =="Phase":
+	if args.card.type =="Phase":
 		nextPhase(table)
 
 def defaultAction(card,x=0,y=0):
@@ -1836,8 +1878,8 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 		#debug("\n" + str(mwPlayerDict))
 		playerNum = mwPlayerDict[me._id]["PlayerNum"]
 		x,y = 0,0
-		if not card.isFaceUp: cardW,cardH = cardSizes[card.size()]['backWidth'],cardSizes[card.size()]['backHeight']
-		else: cardW,cardH = cardSizes[card.size()]['width'],cardSizes[card.size()]['height']
+		if not card.isFaceUp: cardW,cardH = cardSizes[card.size]['backWidth'],cardSizes[card.size]['backHeight']
+		else: cardW,cardH = cardSizes[card.size]['width'],cardSizes[card.size]['height']
 		if mapDict:
 				iRDA,jRDA = mapDict.get("RDA",(2,2))
 				zoneArray = mapDict.get('zoneArray')
@@ -1872,7 +1914,7 @@ def splay(x,y,dVector = (1,0)):
 	for c in table:
 		if c.controller == me and (x,y) == c.position:
 			wKey,hKey = {True: ("width","height"), False: ("backWidth","backHeight")}[c.isFaceUp]
-			w,h = cardSizes[c.size()][wKey],cardSizes[c.size()][hKey]
+			w,h = cardSizes[c.size][wKey],cardSizes[c.size][hKey]
 			dx,dy = dVector
 			return splay(x+dx*w,y+dy*h,dVector)
 	return x,y
@@ -1986,7 +2028,7 @@ def switchPhase(card, phase, phrase):
 	mute()
 	currentPhase = phase
 	if debugMode:	#debuggin'
-		card.switchTo(phase)
+		card.alternate = phase
 		notify("Phase changed to the {}".format(phrase))
 		return True
 	else:
@@ -2007,7 +2049,7 @@ def switchPhase(card, phase, phrase):
 			setGlobalVariable("DoneWithPhase", "")
 			if card.controller == me:
 				card.highlight = None
-				card.switchTo(phase)
+				card.alternate = phase
 			else:
 				remoteCall(card.controller, "remoteHighlight", [card, None])
 				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
@@ -2019,10 +2061,10 @@ def remoteHighlight(card, color):
 	card.highlight = color
 
 def remoteSwitchPhase(card, phase, phrase):
-	card.switchTo(phase)
+	card.alternate = phase
 
-def remoteDeleteCard(c):
-	c.delete()
+def remoteDeleteCard(card):
+	ccard.delete()
 
 def returnToHand(card): #Return card to your hand
 	card.moveTo(me.hand)
@@ -2403,7 +2445,7 @@ def validateDeck(deck):
 
 		#Paladin is trained in Holy Level 3 Spells, War Level 2 Spells, and all Holy Creatures reguardless of their training
 		#By this point, Level 3 and Lower Holy Spells and Level 2 and Lower War Spells have been correctly calculated, but spells higher then the specifed levels have been undercosted
-		if "Holy" in card.School or "War" in card.School and c.name == "Paladin":
+		if "Holy" in card.School or "War" in card.School and "Paladin" in c.name:
 				if "+" in card.School:
 						level = card.Level.split("+")
 						school = card.School.split("+")
@@ -2425,9 +2467,9 @@ def validateDeck(deck):
 										booktotal += int(level[count])
 										break
 				else:
-					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature" and c.name == "Paladin":
+					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature" and "Paladin" in c.name:
 						booktotal += int(card.Level)
-					 elif "War" == card.School and int(card.Level) > 2 and c.name == "Paladin":
+					 elif "War" == card.School and int(card.Level) > 2 and "Paladin" in c.name:
 						booktotal += int(card.Level)
 
 		#multiple Epic cards are not allowed in the spellbook.
@@ -2450,6 +2492,8 @@ def validateDeck(deck):
 				magename = "Warlord"
 			if "Priest" in magename:
 				magename = "Priestess"
+			if "Paladin" in magename:
+				magename = "Paladin"
 			if magename in card.Traits:	#mage restriction
 				ok = True
 			for s in [school for school in spellbook if spellbook[school] == 1]:
