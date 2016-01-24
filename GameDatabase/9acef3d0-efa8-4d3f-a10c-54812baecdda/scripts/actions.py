@@ -624,7 +624,7 @@ def onCardArrowTargeted(args):
 		mute()
 		attacker,defender = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
 		if args.player == me == attacker.controller and args.targeted:
-				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type == 'Creature' or 'Conjuration' in defender.type):
+				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type == 'Creature' or 'Conjuration' or 'Mage' in defender.type):
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
 						attack = diceRollMenu(attacker,defender)
