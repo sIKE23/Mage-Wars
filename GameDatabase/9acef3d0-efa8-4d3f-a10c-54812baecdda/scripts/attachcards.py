@@ -108,7 +108,7 @@ def alignCards(cardList,xOffset,yOffset):
 	c1.moveToTable(x1,y1)
 
 	#2: Move the second card beneath the first
-	c1.setIndex(c0.getIndex)
+	c1.index = c0.index
 
 	#3: Slice the list. If it is now shorter than 2 cards, we are done.
 	cardList = cardList[1:]
