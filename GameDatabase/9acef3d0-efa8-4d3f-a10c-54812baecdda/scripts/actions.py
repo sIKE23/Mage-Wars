@@ -911,15 +911,22 @@ def resolveBurns():
 	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
+	
 	if len(cardsWithBurn) > 0:
 		notify("Resolving Burns for {}...".format(me))	#found at least one
 		for card in cardsWithBurn:
 			numMarkers = card.markers[Burn]
 			burnDamage = 0
 			burnsRemoved = 0
+			SolInZone = "False"
+			zone = getZoneContaining(card)
+			isInZone = getCardsInZone(zone)
+				 for i in isInZone:
+				 		if i.name == "Sol, Blazing Angel":
+				 			SolInZone = "True"
 			for i in range(0, numMarkers):
 				roll = rnd(0, 2)
-				if roll == 0:
+				if roll == 0 and not SolInZone == "True":
 					card.markers[Burn] -= 1
 					burnsRemoved += 1
 				burnDamage += roll
