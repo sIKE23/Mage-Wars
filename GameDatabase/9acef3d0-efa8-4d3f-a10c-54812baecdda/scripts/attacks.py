@@ -843,7 +843,7 @@ def initializeAttackSequence(attacker,attack,defender): #Here is the defender's 
 		"attack": 		attack,
 		"hit":			True,
 		"damage": 		0,
-		"conditions":	[],
+		"effects":		[],
 		"strike":		1,
 	}
 	
@@ -997,8 +997,7 @@ def damageAndEffectsStep(argument): #Executed by defender
 
 	#2: apply damage and effects
 	damageRoll,effectRoll = argument["roll"]
-	damage = receiveDamagePrompt(argument,damageRoll,effectRoll) #damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-	argument["damage"] = damage
+	applyAttackResultsPrompt(argument,damageRoll,effectRoll) #damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
 
 	#3: resolve aAS effects
 	[d["aAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
@@ -1017,7 +1016,7 @@ def damageAndEffectsStep(argument): #Executed by defender
 
 	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
 
-def receiveDamagePrompt(argument,damageRoll,effectRoll):
+def applyAttackResultsPrompt(argument,damageRoll,effectRoll):
 	mute()
 	attacker 	= 	Card(argument["attackerID"])
 	defender 	= 	Card(argument["defenderID"])
@@ -1034,14 +1033,116 @@ def receiveDamagePrompt(argument,damageRoll,effectRoll):
 	results = []
 	append = results.append
 
-	if damage: append("It will inflict {} damage upon {}".format(str(damage),defender.nickname))
-	if effects: append("It will apply {}".format(" and ".join(effects)))
-	if ManaDrain(attack,"check"): append("It will drain up to {} mana from {}".format(attack["Mana Drain +X"],defPlayer.Name))
-	if attack.get("Mana Transfer +X"): append("It will transfer up to {} mana from {} to {}".format(attack["Mana Transfer +X"],defPlayer.Name,attPlayer.name))
+	if damage: append("{} damage inflicted upon {}".format(str(damage),defender.nickname))
+	if effects: append("Effects: {}".format(" and ".join(effects)))
+	if damage and attack.get("Mana Drain +X"): append("{} mana drained from {}".format(attack["Mana Drain +X"],defPlayer.Name))
+	if damage and attack.get("Mana Transfer +X"): append("{} mana transferred from {} to {}".format(attack["Mana Transfer +X"],defPlayer.Name,attPlayer.name))
 
+	append("\nConfirm these results")
 	statement += "\n".join(results)
 
-	askChoice()
+	#3: Prompt player to accept damage
+	choice = askChoice(statement,["Accept","Reject (cancels attack)"],["#0f3706","#CC0000"])
+
+	#4: If player did not accept, flag the attack as cancelled and return
+	if not choice == 1:
+		argument["cancel"] = True
+		return
+
+	#5: Apply damage and effects
+	argument["damage"] = damage
+	argument["effects"] = effects
+	applyDamageAndEffects(argument)
+
+def applyDamageAndEffects(argument):
+	mute()
+	attacker 	= 	Card(argument["attackerID"])
+	defender 	= 	Card(argument["defenderID"])
+	attack 		= 	argument["attack"]
+
+	#1: Compute actual damage
+	
+
+def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In general, need to adjust functions to accomodate partially or fully untargeted attacks.
+		attacker = Card(aTraitDict.get('OwnerID',''))
+		defender = Card(dTraitDict.get('OwnerID',''))
+		atkTraits = attack.get('Traits',{})
+		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
+		conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Rot','Slam','Sleep','Stagger','Stuck','Stun','Tainted','Weak']
+		effectsInflictDict = {'Damage' : "suffers 1 point of direct damage! (+1 Damage)",
+							  'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
+							  'Burn' : 'is set ablaze! (+1 Burn)',
+							  'Corrode' : 'corrodes! (+1 Corrode)',
+							  'Cripple' : 'is crippled! (+1 Cripple)',
+							  'Daze' : 'is dazed! (+1 Daze)',
+							  'Rot' : 'rots! (+1 Rot)',
+							  'Slam' : 'is slammed to the ground! (+1 Slam)',
+							  'Sleep' : 'falls fast alseep! (+1 Sleep)',
+							  'Stagger' : 'staggers about, not quite sure what is going on! (Minor Creatures can not Attack or Guard, Major Creatures -2 to All Attacks)',
+							  'Stuck' : 'is stuck fast! (+1 Stuck)',
+							  'Stun' : 'is stunned! (Stun)',
+							  'Tainted' : "'s wounds fester! (+1 Tainted)",
+							  'Weak' : 'is weakened! (+1 Weak)',
+							  'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
+							  'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
+							  'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
+
+		#Prep for Vampirism
+		aDamage = getStatusDict(attacker).get('Damage',0)
+		drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0)) if defender.Type == "Creature" else 0
+		#if "Vine Marker" in defender.Name: drainableHealth = 0
+		#else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
+
+		if defender.Subtype == 'Mage': defender.controller.Damage += damage
+		else: defender.markers[Damage] += damage
+		notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
+																	str(damage),
+																	defender,
+																	('! (an above' if damage >= expectedDmg else '... (a below')))
+
+		#Vine Markers are always destroyed from any amount of damage
+		if "Vine Marker" in defender.name and damage >0:
+			  notify("{} is smashed into the ground and destroyed.".format(defender))
+			  defender.moveTo(me.piles['Discard'])
+			  return #No sense going any further.
+
+		#Bloodreaper health drain
+		if attacker.markers[BloodReaper] and not timesHasOccured("Blood Reaper",attacker.controller) and defender.Type == "Creature" and dTraitDict.get("Living") and 'Demon' in attacker.Subtype and damage:
+				mage = Card(aTraitDict.get('MageID'))
+				healing = min(2,mage.controller.damage)
+				if healing and not computeTraits(mage).get("Finite Life"):
+						rememberPlayerEvent("Blood Reaper",attacker.controller)
+						notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)".format(mage,str(healing)))
+						remoteCall(mage.controller, "remotePlayerHeal", [healing])
+
+		#Malakai's Fire
+		if (attacker.Name=="Priest" and attack.get("Type")=="Light" and damage and "Conjuration" not in defender.Type and not timesHasOccured("Malakai's Fire",attacker.controller) and "Flame" not in dTraitDict.get("Immunity",[])):
+				remoteCall(attacker.controller,"malakaisFirePrompt",[defender])
+
+		#Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
+		if defender.Type == 'Creature':
+			dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
+			defender.controller.Mana -= dManaDrain
+		else: dManaDrain = ""
+		if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.nickname))
+		#Vampirism
+		if (atkTraits.get('Vampiric') and drainableHealth and
+			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
+				if attacker.controller == me: healingQuery(aTraitDict,
+														   'Heal {} damage through vampirism?'.format(drainableHealth,defender.nickname),
+														   drainableHealth,
+														   "{} heals {} damage through vampirism!".format(attacker.nickname,'{}',defender.nickname))
+				else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
+																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.nickname),
+																   drainableHealth,
+																   "{} heals {} damage through vampirism!".format(attacker.nickname,'{}',defender.nickname)])
+		#Finally, apply conditions
+		effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
+		for e in effects:
+				if e in conditionsList:
+						if e=="Damage" and defender.Subtype == "Mage": defender.controller.damage += 1
+						else: defender.markers[eval(e)]+=1
+				notify('{} {}'.format(defender.nickname,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
 def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		attacker = Card(aTraitDict.get('OwnerID'))
@@ -1272,87 +1373,6 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 
 def remotePlayerHeal(amount):
 		me.damage -= amount
-
-def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In general, need to adjust functions to accomodate partially or fully untargeted attacks.
-		attacker = Card(aTraitDict.get('OwnerID',''))
-		defender = Card(dTraitDict.get('OwnerID',''))
-		atkTraits = attack.get('Traits',{})
-		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
-		conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Rot','Slam','Sleep','Stagger','Stuck','Stun','Tainted','Weak']
-		effectsInflictDict = {'Damage' : "suffers 1 point of direct damage! (+1 Damage)",
-							  'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
-							  'Burn' : 'is set ablaze! (+1 Burn)',
-							  'Corrode' : 'corrodes! (+1 Corrode)',
-							  'Cripple' : 'is crippled! (+1 Cripple)',
-							  'Daze' : 'is dazed! (+1 Daze)',
-							  'Rot' : 'rots! (+1 Rot)',
-							  'Slam' : 'is slammed to the ground! (+1 Slam)',
-							  'Sleep' : 'falls fast alseep! (+1 Sleep)',
-							  'Stagger' : 'staggers about, not quite sure what is going on! (Minor Creatures can not Attack or Guard, Major Creatures -2 to All Attacks)',
-							  'Stuck' : 'is stuck fast! (+1 Stuck)',
-							  'Stun' : 'is stunned! (Stun)',
-							  'Tainted' : "'s wounds fester! (+1 Tainted)",
-							  'Weak' : 'is weakened! (+1 Weak)',
-							  'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
-							  'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
-							  'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
-
-		#Prep for Vampirism
-		aDamage = getStatusDict(attacker).get('Damage',0)
-		drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0)) if defender.Type == "Creature" else 0
-		#if "Vine Marker" in defender.Name: drainableHealth = 0
-		#else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
-
-		if defender.Subtype == 'Mage': defender.controller.Damage += damage
-		else: defender.markers[Damage] += damage
-		notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
-																	str(damage),
-																	defender,
-																	('! (an above' if damage >= expectedDmg else '... (a below')))
-
-		#Vine Markers are always destroyed from any amount of damage
-		if "Vine Marker" in defender.name and damage >0:
-			  notify("{} is smashed into the ground and destroyed.".format(defender))
-			  defender.moveTo(me.piles['Discard'])
-			  return #No sense going any further.
-
-		#Bloodreaper health drain
-		if attacker.markers[BloodReaper] and not timesHasOccured("Blood Reaper",attacker.controller) and defender.Type == "Creature" and dTraitDict.get("Living") and 'Demon' in attacker.Subtype and damage:
-				mage = Card(aTraitDict.get('MageID'))
-				healing = min(2,mage.controller.damage)
-				if healing and not computeTraits(mage).get("Finite Life"):
-						rememberPlayerEvent("Blood Reaper",attacker.controller)
-						notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)".format(mage,str(healing)))
-						remoteCall(mage.controller, "remotePlayerHeal", [healing])
-
-		#Malakai's Fire
-		if (attacker.Name=="Priest" and attack.get("Type")=="Light" and damage and "Conjuration" not in defender.Type and not timesHasOccured("Malakai's Fire",attacker.controller) and "Flame" not in dTraitDict.get("Immunity",[])):
-				remoteCall(attacker.controller,"malakaisFirePrompt",[defender])
-
-		#Mana Drain - Long term, will want a centralized function to adjust damage/mana of a card so we can take into account things like Mana Prism
-		if defender.Type == 'Creature':
-			dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
-			defender.controller.Mana -= dManaDrain
-		else: dManaDrain = ""
-		if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.nickname))
-		#Vampirism
-		if (atkTraits.get('Vampiric') and drainableHealth and
-			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
-				if attacker.controller == me: healingQuery(aTraitDict,
-														   'Heal {} damage through vampirism?'.format(drainableHealth,defender.nickname),
-														   drainableHealth,
-														   "{} heals {} damage through vampirism!".format(attacker.nickname,'{}',defender.nickname))
-				else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
-																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.nickname),
-																   drainableHealth,
-																   "{} heals {} damage through vampirism!".format(attacker.nickname,'{}',defender.nickname)])
-		#Finally, apply conditions
-		effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
-		for e in effects:
-				if e in conditionsList:
-						if e=="Damage" and defender.Subtype == "Mage": defender.controller.damage += 1
-						else: defender.markers[eval(e)]+=1
-				notify('{} {}'.format(defender.nickname,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
 def malakaisFirePrompt(heathen):
 		mute()
