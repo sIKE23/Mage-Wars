@@ -921,9 +921,9 @@ def resolveBurns():
 			SolInZone = "False"
 			zone = getZoneContaining(card)
 			isInZone = getCardsInZone(zone)
-				 for i in isInZone:
-				 		if i.name == "Sol, Blazing Angel":
-				 			SolInZone = "True"
+			for i in isInZone:
+		 		if i.name == "Sol, Blazing Angel":
+		 			SolInZone = "True"
 			for i in range(0, numMarkers):
 				roll = rnd(0, 2)
 				if roll == 0 and not SolInZone == "True":
