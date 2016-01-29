@@ -1,10 +1,11 @@
-v1.13.1.0
+v1.14.0.0
 Thanks goes out to the following:
 
 freeSFX - http://www.freesfx.co.uk for sounds used in the game
 Arcane Wonders - they have graciously provided custom 1v1 and 2v2 images for Matchmaking. www.arcanewonders.com
 Brine - for being so paitent and helpful
 Kelly - for being so paitent and helpful
+bigfatchief - for the new and improved Action Markers
 FabooGuy - for the Marble Floor Tiles Texture where the orginal art can be found at http://fabooguy.deviantart.com/art/Marble-Floor-Tiles-Texture-Tileable-2048x2048-436170199
 Arcane Duels - for providing a Domination Spellbook
 Sailor Vulcan, aka Imanginator, aka henry_ketchup for some of the flavor text for the Domination map pop ups!

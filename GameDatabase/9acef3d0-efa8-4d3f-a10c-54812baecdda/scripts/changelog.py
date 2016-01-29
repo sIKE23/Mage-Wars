@@ -1,9 +1,9 @@
 changelog = {
-		1130500: ("1.13.5.0", "4 September 2015", [
+		1140000: ("1.14.0.0", "31 January 2016", [
 			" Please update your Image Pack",
 			" Game Documents | Playing Mage Wars on OCTGN",
 			" Game Documents | OCTGN Apprentice Mode",
-			"How to Build your own Domination Map",
+			" How to Build your own Domination Map",
 			" Game Documents | Keyboard Shortcut Mappings",
 			" Game Documents | Mage Wars Complete Codex",
 			" Game Documents | Mage Wars Condition Markers",
