@@ -990,6 +990,9 @@ def resolveDissipate():
 		#cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
 			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
 			card.markers[DissipateToken] -= 1 # Remove Token
+			if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
+				me.Mana += 1
+				notify("{} adds 1 mana from Wispwillow Amulet.".format(me.name))
 			if card.markers[DissipateToken] == 0:
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
