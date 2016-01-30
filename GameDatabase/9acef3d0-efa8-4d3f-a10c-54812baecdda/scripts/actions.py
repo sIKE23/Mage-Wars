@@ -230,6 +230,7 @@ def onGameStarted():
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
+		me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 		setUpDiceAndPhaseCards()
 		setGlobalVariable("GameSetup",str(0))
 		notify("There is only one player, so there is no need to roll for initative.")
@@ -978,7 +979,6 @@ def resolveBleed():
 
 def resolveDissipate():
 	mute()
-
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
@@ -987,12 +987,12 @@ def resolveDissipate():
 		traits = computeTraits(card)
 		if "Dissipate" in traits and card.controller == me and card.isFaceUp and card.markers[DissipateToken]:
 			notify("Resolving Dissipate for {}...".format(me))	#found at least one
-		#cardsWithDissipate = [c for c in table if c.markers[DissipateToken] and c.controller == me]
-			notify("Removing 1 Dissipate Token from {}...".format(card.Name))
 			card.markers[DissipateToken] -= 1 # Remove Token
 			if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
 				me.Mana += 1
-				notify("{} adds 1 mana from Wispwillow Amulet.".format(me.name))
+				notify("{} gains 1 Mana by removing a Dissipate Token from a Wispwillow Amulet.".format(me.name))
+			else:
+				notify("Removing 1 Dissipate Token from {}...".format(card.Name))
 			if card.markers[DissipateToken] == 0:
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
