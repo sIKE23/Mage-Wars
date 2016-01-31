@@ -500,21 +500,19 @@ def moveRDA(card):
 
 def onDeckLoaded(args):
 	#args = player,groups
-	player = args.player
-	groups = args.groups
 	mute()
 	global gameNum
 	global debugMode
-	if eval(getGlobalVariable("GameSetup")) != 0 and player == me:
+	if eval(getGlobalVariable("GameSetup")) == "False" and args.player == me:
 		askChoice("Please Finish Setup before you try to load a deck.", ["OK"], ["#FF0000"])
 		return
-	if player == me:
+	if args.player == me:
 		#if a deck was already loaded, reset the game
 		if getGlobalVariable("DeckLoaded") == "True":
 			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			gameNum += 1
 			resetGame()
-		elif debugMode or validateDeck(groups[0]):
+		elif debugMode or validateDeck(args.groups[0]):
 			setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			mageSetup()
@@ -700,7 +698,6 @@ def setTimer(group,x,y):
 		if timerIsRunning:
 				whisper("You cannot start a new timer until the current one finishes!")
 				return
-		setGlobalVariable("timerIsRunning",str(True))
 		timerDefault = getSetting('timerDefault',300)
 		choices = ["30 seconds","60 seconds","180 seconds","{} seconds".format(str(timerDefault)),"Other"]
 		colors = ["#006600" for c in choices][:-1] + ['#003366']
@@ -710,6 +707,7 @@ def setTimer(group,x,y):
 		if choice == 5:
 				seconds = askInteger("Set timer for how many seconds?",timerDefault)
 				setSetting('timerDefault',seconds)
+		setGlobalVariable("timerIsRunning",str(True))
 		notify("{} sets a timer for {} minutes, {} seconds.".format(me,seconds/60,seconds%60))
 		playSoundFX('Notification')
 		time.sleep(0.2)
@@ -843,6 +841,7 @@ def nextPhase(group, x=-360, y=-150):
 				remoteCall(p, "resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [p])
+				remoteCall(p, "resolveRegeneration", [])
 				remoteCall(p, "resolveBurns", [])
 				remoteCall(p, "resolveRot", [])
 				remoteCall(p, "resolveBleed", [])
@@ -996,7 +995,7 @@ def resolveDissipate():
 			if card.markers[DissipateToken] == 0:
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
-	notify("Finished auto-resolving Dissipate for {}.".format(me))
+			notify("Finished auto-resolving Dissipate for {}.".format(me))
 
 	#use the logic for Dissipate for Disable Markers
 	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
@@ -1212,6 +1211,31 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			card1.moveTo(me.piles['Discard'])
 			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
 			return
+ 
+def resolveRegeneration():
+ 	mute()
+ 	for card in table:
+			traits = computeTraits(card)
+			if ("Regenerate" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+					notify("{} has the Finite Life Trait and can not Regenerate".format(card.name))
+					return
+			elif "Regenerate" in traits and card.controller == me and card.isFaceUp:
+					regenAmount = traits.get("Regenerate")
+					if card.Type == "Mage" and card.controller == me and me.damage != 0:
+							if me.damage <= regenAmount: 
+									me.damage = 0
+									notify("{} regenerates and removes all damage.".format(card.name))
+							else: 
+									me.damage -= regenAmount
+									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
+					elif card.Type in ['Creature','Conjuration']: 
+							damage = card.markers[Damage]
+							if damage <= regenAmount and damage != 0: 
+									card.markers[Damage] = 0
+									notify("{} regenerates and removes all damage.".format(card.name))
+							else: 
+									card.markers[Damage] -= regenAmount
+									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
 
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
@@ -2233,6 +2257,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				if (cName == "Construction Yard" and
 					((not "Incorporeal" in spell.Traits and "War" in sSchool and "Conjuration" in sType) or ("Earth" in sSchool and sType=="Conjuration-Wall"))):
 						return card.markers[Mana]
+				#if card.markers[RuneofPower]
 		if timesUsed <2: #Twice-per-round discounts
 				if cName == "Death Ring" and (mageCast or spawnpointCast) and sType != "Enchantment" and ("Necro" in sSubtype or "Undead" in sSubtype):
 						return 1
@@ -2260,16 +2285,12 @@ def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY 
 
 def computeRevealCost(card): #For enchantment reveals
 		target = getAttachTarget(card) #To what is it attached?
-		debug("23:{}".format(target))
 		cost = None
-		debug("24:{}".format(cost))
 		try: cost = int(card.Cost.split('+')[1])
 		except: pass
 		if not target: return cost
 		#Exceptions
-		debug("25:{}".format(cost))
 		name = card.Name
-		debug("26:{}".format(name))
 		tLevel = 6 if target.Type == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+')))) #And...this is why mages NEED to have a level field in the XML file.
 		if name == "Mind Control":
 				cost = 2*tLevel
@@ -2448,7 +2469,7 @@ def validateDeck(deck):
 
 		#Siren is trained in Water and all spells with Song or Drowned subtype.
 		#By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
-		if "Water" not in card.School and c.name == "Siren" and ("Song" in card.Subtype or "Drowned" in card.Subtype):
+		if "Water" not in card.School and "Siren" in c.name and ("Song" in card.Subtype or "Drowned" in card.Subtype):
 			#subtract 1 per level per count as this card has been added x2 per non-trained school already
 			booktotal -= totalLevel
 			cost -= totalLevel;
@@ -2504,6 +2525,8 @@ def validateDeck(deck):
 				magename = "Priestess"
 			if "Paladin" in magename:
 				magename = "Paladin"
+			if "Siren" in magename:
+				magename = "Siren"
 			if magename in card.Traits:	#mage restriction
 				ok = True
 			for s in [school for school in spellbook if spellbook[school] == 1]:
@@ -2528,7 +2551,7 @@ def validateDeck(deck):
 				l = int(level[0])
 			else:
 				l = int(card.Level)
-			if (l == 1 and cardCounts.get(card.Name) > 6 and (card.Name !="Shallow Sea" and "Siren" in magename) or (l >= 2 and cardCounts.get(card.Name) > 4)):
+			if (l == 1 and cardCounts.get(card.Name) > 6 or (l >= 2 and cardCounts.get(card.Name) > 4)):
 				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
 				return False
 

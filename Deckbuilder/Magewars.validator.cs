@@ -373,6 +373,7 @@ namespace Octgn.MageWarsValidator
                                     if (mname.Contains("Warlord")) mname = "Warlord";
                                     if (mname.Contains("Priestess")) mname = "Priestess";
                                     if (mname.Contains("Paladin")) mname = "Paladin";
+                                    if (mname.Contains("Siren")) mname = "Siren";
                                     if (onlyPhrase.Contains(mname))
                                         legal = true;
 

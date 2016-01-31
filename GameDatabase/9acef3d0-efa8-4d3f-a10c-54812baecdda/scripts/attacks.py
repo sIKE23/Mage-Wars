@@ -1308,12 +1308,17 @@ def computeTraits(card):
 											'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Raincloud' and
 											  cController == controller and
-											  cardType in ['Creature','Mage','Conjuration']): extend(['Regenerate 1','Flame -2','Acid -2'])
+											  cardType in ['Creature','Mage','Conjuration'] and
+											'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 											  cController == controller and
 											  cardType in ['Creature','Mage'] and
 											  'Living' in rawTraitsList): append('Regenerate 1')
+										if (cName == 'Dorseus, Stallion of Westlock' and
+											  cController == controller and
+											  cardType in ['Creature','Mage'] and
+											  'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Makunda' and
 											  cController == controller and
 											  c != card and
@@ -1327,7 +1332,8 @@ def computeTraits(card):
 										elif (cName == 'Sardonyx, Blight of the Living' and
 											  cardType in ['Creature','Mage'] and
 											  'Living' in rawTraitsList): append('Finite Life')
-										#Victorian Gryffin, but I don't feel like adding it right now
+										elif (cName == 'Victorian Griffin' and
+											  cardType in ['Creature','Mage']: remove('Elusive')
 								elif cType == 'Incantation': pass
 								elif (cType == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
