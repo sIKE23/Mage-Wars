@@ -551,18 +551,18 @@ def onCardsMoved(args):
 				hasAttached = False
 				if len(cards) == 1 and toGroups[i] == table: #Only check for autoattach if this is the only card moved
 					for a in table:
-							if (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canMount(card,a):
+							if (cardX(a)-position[0])**2 + (cardY(a)-position[1])**2 < 400 and canMount(card,a):
 									c,t = mount(card,a)
 									if t:
 											actionType = ['mounts','upon']
 											hasAttached = True
 											break
-									elif (cardX(a)-xs[i])**2 + (cardY(a)-ys[i])**2 < 400 and canBind(card,a):
-										c,t = bind(card,a)
-										if t:
-												actionType = ['binds','to']
-												hasAttached = True
-												break
+							elif (cardX(a)-position[0])**2 + (cardY(a)-position[1])**2 < 400 and canBind(card,a):
+									c,t = bind(card,a)
+									if t:
+											actionType = ['binds','to']
+											hasAttached = True
+											break
 							elif getSetting('AutoAttach',True) and (cardX(a)-position[0])**2 + (cardY(a)-position[1])**2 < 400 and canAttach(card,a):
 									if (card.Type == "Enchantment" or card.Name in ["Tanglevine","Stranglevine","Quicksand"]) and not card.isFaceUp and not castSpell(card,a): break
 									c,t = attach(card,a)
@@ -2229,6 +2229,7 @@ def revealEnchantment(card):
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
 		if card.controller != spell.controller or not card.isFaceUp or card==spell: return 0 #No discounts from other players' cards or facedown cards!
 		caster = getBindTarget(spell)
+		notify("Line#2232: card.Name: {}, spell.Name: {}".format(card.Name,spell.name))
 		mageCast = not(caster and ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits))
 		spawnpointCast = (caster and "Spawnpoint" in caster.Traits)
 		cName = card.Name
@@ -2257,7 +2258,12 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				if (cName == "Construction Yard" and
 					((not "Incorporeal" in spell.Traits and "War" in sSchool and "Conjuration" in sType) or ("Earth" in sSchool and sType=="Conjuration-Wall"))):
 						return card.markers[Mana]
-				#if card.markers[RuneofPower]
+				#Discounts from Markers on Equipment
+				if isBound(spell) == True and card.type == 'Equipment' and getBindTarget(spell) == card:
+					 	boundCasterTraits = computeTraits(card)
+						#Rune of Power 
+						if boundCasterTraits.get('Spellbind') == True and caster.markers[RuneofPower] == 1:
+							return 1
 		if timesUsed <2: #Twice-per-round discounts
 				if cName == "Death Ring" and (mageCast or spawnpointCast) and sType != "Enchantment" and ("Necro" in sSubtype or "Undead" in sSubtype):
 						return 1

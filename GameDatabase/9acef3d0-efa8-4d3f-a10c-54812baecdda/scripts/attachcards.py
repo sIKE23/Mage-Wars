@@ -176,7 +176,6 @@ def dismountAll(card):
 			remoteCall(c.controller,'dismount',[c])
 		rnd(0,0)
 
-
 def isAttached(card):
 	"""Determines whether <card> is attached to anything."""
 	mute()
@@ -322,6 +321,13 @@ def getBound(card):
 	bDict = eval(getGlobalVariable("bindDict"))
 	bound = map(lambda key: Card(key),[k for k in bDict if bDict[k]==card._id])
 	if bound and bound[0] in table: return bound[0]
+		
+def isBound(card):
+	"""Determines whether <card> is attached to anything."""
+	mute()
+	if getGlobalDictEntry('bindDict',card._id) and card in table:
+		return True
+	return False
 
 def getBindTarget(card):
 	mute()

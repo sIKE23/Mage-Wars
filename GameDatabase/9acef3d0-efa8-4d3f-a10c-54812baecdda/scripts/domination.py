@@ -25,13 +25,15 @@ def checkDominationVictory():
 				return True
 
 def updateVtarScore():
+	mute()
+	vTarSuppression = "False"
 	if [1 for c in table if c.name=="V'Tar Suppression" and c.isFaceUp]:
-		notify("V'Tar Suppression, suppresses all V'tar generation this round!")
-		return True
+		notify("V'Tar Suppression, suppresses all V'Tar generation from V'Tar Orbs this round!")
+		vTarSuppression = "True"
 	for player in players:
 		mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
 		controlMarkerColor = playerColorDict[int(mage.controller.getGlobalVariable("MyColor"))]["ControlMarker"]
-		vtarGain = len([1 for c in table if  ("V'Tar Orb" in c.name and c.markers[controlMarkerColor]) or (c.name == "Galaxxus" and c.controller == mage.controller)])
+		vtarGain = len([1 for c in table if  ("V'Tar Orb" in c.name and c.markers[controlMarkerColor] and vTarSuppression == "False") or (c.name == "Galaxxus" and c.controller == mage.controller)])
 		if vtarGain:
 			mage.markers[VTar] += vtarGain
 			notify("{} gains {} V'tar!".format(mage.controller,str(vtarGain)))
