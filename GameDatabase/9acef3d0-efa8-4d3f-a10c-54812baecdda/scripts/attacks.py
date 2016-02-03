@@ -118,7 +118,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
 		debug("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
-		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender) for c in table]) if atkOS.Type == "Attack" else 0): return False
+		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
 		if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
 		aZone = getZoneContaining(attacker)
 		if attack.get('Range'):
@@ -1333,7 +1333,7 @@ def computeTraits(card):
 											  cardType in ['Creature','Mage'] and
 											  'Living' in rawTraitsList): append('Finite Life')
 										elif (cName == 'Victorian Griffin' and
-											  cardType in ['Creature','Mage']: remove('Elusive')
+											  cardType in ['Creature','Mage']): remove('Elusive')
 								elif cType == 'Incantation': pass
 								elif (cType == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')

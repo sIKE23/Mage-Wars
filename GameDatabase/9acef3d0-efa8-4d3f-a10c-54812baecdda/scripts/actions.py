@@ -2134,18 +2134,20 @@ def castSpell(card,target=None):
 						else: return
 				casterMana = caster.markers[Mana]
 				ownerMana = me.Mana
-				discountList = filter(lambda d: d[1]>0, map(lambda c: (c,getCastDiscount(c,card,target)),table)) #Find all discounts. It would be better to pass a list, but this isn't a bottleneck, so we'll make do for now.
+				discountList = filter(lambda d: d[1][0]>0, [(c,getCastDiscount(c,card,target)) for c in table])
+				#filter(lambda d: d[1]>0, map(lambda c: (c,getCastDiscount(c,card,target)),table)) #Find all discounts. It would be better to pass a list, but this isn't a bottleneck, so we'll make do for now.
 				#Reduce printed cost by sum of discounts
 				usedDiscounts = []
 				discountAppend = usedDiscounts.append
 				for c,d in discountList:
 						if cost > 0: #Right now, all discounts are for 1 (except construction yard). If there is ever a 2-mana discount, we will need to adjust this to optimize discount use. Come to think of it, some discounts overlap, and we might want to optimize for those...well, we can cross that bridge when we reach it.
-								discAmt = min(cost,d)
+								discAmt = min(cost,d[0])
 								cost -= discAmt
-								discountAppend((c,discAmt)) #Keep track of which discounts we are applying, and how much of each was applied
+								discountAppend((c,discAmt,d[1])) #Keep track of which discounts we are applying, and how much of each was applied
 						else: break #Stop if the cost of the spell reaches 0; we don't need any more discounts.
 				#Ask the player how much mana they want to pay
-				discountSourceNames = '\n'.join(map(lambda t: "{} (-{})".format(t[0].Name,str(t[1])),usedDiscounts))
+				discountSourceNames = "\n".join(["{} -{}".format(d[2],str(d[1])) for d in usedDiscounts])
+				#discountSourceNames = '\n'.join(map(lambda t: "{} (-{})".format(t[0].Name,str(t[1])),usedDiscounts))
 				discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
 				pronoun = {"Male":"he","Female":"she"}.get(getGender(caster),"it")
 				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Name.split(",")[0],pronoun) if (caster.Type != "Mage" and caster.markers[Mana]) else ""
@@ -2227,7 +2229,7 @@ def revealEnchantment(card):
 				return True
 
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
-		if card.controller != spell.controller or not card.isFaceUp or card==spell: return 0 #No discounts from other players' cards or facedown cards!
+		if card.controller != spell.controller or not card.isFaceUp or card==spell: return (0,"") #No discounts from other players' cards or facedown cards!
 		caster = getBindTarget(spell)
 		notify("Line#2232: card.Name: {}, spell.Name: {}".format(card.Name,spell.name))
 		mageCast = not(caster and ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits))
@@ -2249,25 +2251,25 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 					 (cName == "Druid's Leaf Ring" and sType != "Enchantment" and ("Plant" in sSubtype)) or
 					 (cName == "Force Ring" and sType != "Enchantment" and ("Force" in sSubtype)) or
 					 (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)))):
-						return 1
+						return (1,cName)
 				#Discounts that apply no matter who casts the spell
 				if ((cName == "General's Signet Ring" and ("Soldier" in sSubtype)) or
 					(cName == "Eisenach's Forge Hammer" and (sType == "Equipment"))):
-						return 1
+						return (1,cName)
 				#Construction yard will be treated as a once-per-round discount.
 				if (cName == "Construction Yard" and
 					((not "Incorporeal" in spell.Traits and "War" in sSchool and "Conjuration" in sType) or ("Earth" in sSchool and sType=="Conjuration-Wall"))):
-						return card.markers[Mana]
+						return (card.markers[Mana],cName)
 				#Discounts from Markers on Equipment
 				if isBound(spell) == True and card.type == 'Equipment' and getBindTarget(spell) == card:
 					 	boundCasterTraits = computeTraits(card)
 						#Rune of Power 
 						if boundCasterTraits.get('Spellbind') == True and caster.markers[RuneofPower] == 1:
-							return 1
+							return (1,"Rune of Power on {}".format(cName))
 		if timesUsed <2: #Twice-per-round discounts
 				if cName == "Death Ring" and (mageCast or spawnpointCast) and sType != "Enchantment" and ("Necro" in sSubtype or "Undead" in sSubtype):
-						return 1
-		return 0
+						return (1,cName)
+		return (0,"")
 		#Returns discount as integer (0, if no discount)
 
 def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY used for revealing enchantments (don't call for casting spells!)
