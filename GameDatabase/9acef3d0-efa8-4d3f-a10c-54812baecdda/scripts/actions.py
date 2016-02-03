@@ -2170,7 +2170,7 @@ def castSpell(card,target=None):
 						else:
 							notify("{} pays {} mana with the following discount applied: {}.".format(me,str(cost),discountSourceNames))
 							me.Mana = max(me.Mana-cost,0)
-				for c,d in usedDiscounts: #track discount usage
+				for c,d,e in usedDiscounts: #track discount usage
 						if c.Name=="Construction Yard": c.markers[Mana] -= d
 						rememberAbilityUse(c)
 				if card.Type == "Enchantment": notify("{} enchants {}!".format(caster,target.Name) if target else "{} casts an enchantment!".format(caster))
