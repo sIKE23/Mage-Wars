@@ -4,7 +4,7 @@
 	id="a27a7cb8-7d98-46e4-bf71-a940b7350afe" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="1.4.2.1" 
-	version="1.12.0.0">
+	version="1.14.0.0">
 	<cards>
 		<card id="5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64" name="V&apos;Torrak" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />
