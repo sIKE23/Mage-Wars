@@ -811,7 +811,7 @@
 		</card>
 		<card id="ac38099d-6358-4295-a048-47293b4793c9" name="Rhino Hide">
 			<property name="Type" value="Enchantment" />
-			<property name="Cost" value="2+3" />
+			<property name="Cost" value="2+2" />
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="Target" value="Living Creature" />

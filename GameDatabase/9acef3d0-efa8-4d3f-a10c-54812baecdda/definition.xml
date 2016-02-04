@@ -26,7 +26,7 @@
 		<event name="OnTableLoaded" action="onTableLoaded" />
 		<event name="OnGameStarted" action="onGameStarted" />
 		<event name="OnDeckLoaded" action="onDeckLoaded" />
-		<event name="OnChangeCounter" action="checkMageDeath" />
+		<event name="OnCounterChanged" action="checkMageDeath" />
 		<event name="OnCardsMoved" action="onCardsMoved" />
 		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved" />
 		<event name="OnCardArrowTargeted" action="onCardArrowTargeted" />

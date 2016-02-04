@@ -869,7 +869,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 						payManaChoice = askChoice("Pay 1 mana to maintain Blur on your {}?".format(defender.Name),["Yes","No"],["#01603e","#de2827"])
 						if payManaChoice == 1:
 								defender.controller.mana -= 1
-								notify("{} pays 1 mana.".format(me))
+								notify("{} pays 1 mana for Blur.".format(me))
 						else:
 								detach(attachedCard)
 								attachedCard.moveTo(me.piles['Discard'])
@@ -1307,7 +1307,6 @@ def computeTraits(card):
 											cardType in ['Creature','Mage'] and
 											'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Raincloud' and
-											  cController == controller and
 											  cardType in ['Creature','Mage','Conjuration'] and
 											'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
 								elif cType == 'Creature':

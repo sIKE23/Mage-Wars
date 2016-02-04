@@ -2231,7 +2231,6 @@ def revealEnchantment(card):
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
 		if card.controller != spell.controller or not card.isFaceUp or card==spell: return (0,"") #No discounts from other players' cards or facedown cards!
 		caster = getBindTarget(spell)
-		notify("Line#2232: card.Name: {}, spell.Name: {}".format(card.Name,spell.name))
 		mageCast = not(caster and ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits))
 		spawnpointCast = (caster and "Spawnpoint" in caster.Traits)
 		cName = card.Name
@@ -2244,7 +2243,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				#Discounts that only apply when your mage casts the spell
 				if (mageCast and
 					((cName == "Arcane Ring" and sType != "Enchantment" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
-					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and target.type == ("Creature" or "Mage") and sType == "Enchantment") or
+					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and (target.type == "Creature" or target.type == "Mage") and sType == "Enchantment") or
 					 (cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
 					 (cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
 					 (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or

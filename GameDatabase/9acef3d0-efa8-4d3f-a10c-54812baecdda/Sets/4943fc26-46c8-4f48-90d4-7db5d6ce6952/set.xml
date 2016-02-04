@@ -257,7 +257,6 @@
 		</card>
 
 
-
 		<card id="97da4784-8449-434a-931e-32f3fc93af43" name="Armor Ward">
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Protection, Metamagic" />
@@ -285,7 +284,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature&apos;s melee attacks gain the Ethereal trait" />
+			<property name="Text" value="This creature&apos;s melee attacks gain the Ethereal trait&#xD;&#xA;[Ethereal]" />
 			<property name="CardID" value="MWSTX1CKE02" />
 		</card>
 		<card id="4adafa93-0231-4956-9041-f7eef728e5f5" name="Enchantment Transfusion">
