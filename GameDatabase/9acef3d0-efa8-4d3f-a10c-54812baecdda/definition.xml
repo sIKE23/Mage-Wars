@@ -159,7 +159,7 @@
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
 			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged" />
-			<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution" />
+			<!--<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution" />-->
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep" />
@@ -187,7 +187,7 @@
 			<cardaction menu="Remove Banish Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish" />
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
 			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged" />
-			<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution" />
+			<!--<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution" />-->
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
