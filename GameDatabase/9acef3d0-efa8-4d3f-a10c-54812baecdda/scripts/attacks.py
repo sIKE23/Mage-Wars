@@ -821,6 +821,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 				#Check for reverse attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
 						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
+						attack["OriginalAttack"]["original target dict"] = dTraitDict
 						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
 						return
 
@@ -880,6 +881,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 
 def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		mute()
+		dTraitDict = attack.get("original target dict",dTraitDict) #a messy solution to the issue of multiple attacks for reverse attack.
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		strikes = 1
