@@ -127,6 +127,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 						inRange = False
 						for z in dZones:
 								distance = zoneGetDistance(aZone,z)
+								if dTraitDict.get("Obscured") and distance > 1: return False #Obscured Check
 								if ((0 if (attack.get('RangeType')=='Ranged' and dTraitDict.get('Flying')) else attack.get('Range')[0])
 									<= distance
 									<= attack.get('Range')[1]): inRange = True
@@ -134,6 +135,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 				else:
 						dZone = getZoneContaining(defender)
 						distance = zoneGetDistance(aZone,dZone)
+						if dTraitDict.get("Obscured") and distance > 1: return False #Obscured Check
 						minRange = (0 if (attack.get('RangeType')=='Ranged' and dTraitDict.get('Flying')) else attack.get('Range')[0])
 						if not (minRange <= distance <= attack.get('Range')[1]): return False
 		if (dTraitDict.get('Flying') and
