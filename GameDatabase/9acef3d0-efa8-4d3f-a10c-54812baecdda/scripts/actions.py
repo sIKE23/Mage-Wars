@@ -1199,13 +1199,13 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			else:
 				if card1.Name == "Forcefield" and card1.controller == me and card1.isFaceUp and card1.markers[FFToken] < 3:
 					card1.markers[FFToken] += 1
-					card1.Filter = None
+					card1.filter = None
 					notify("{} adds a Forcefield token to {}, which has a total of {} Forcefield tokens now.".format(me.name,card1.name, card1.markers[FFToken]))
 			return
 		if choice == 1 and not card1.isFaceUp:
 			me.Mana -= upKeepCost
 			notify("{} pays the Upkeep cost of {} for the mage's Face Down Enchantment".format(me, upKeepCost, card1))
-			card1.Filter = None
+			card1.filter = None
 			return
 		else:
 			card1.moveTo(me.piles['Discard'])
@@ -1295,8 +1295,6 @@ def checkMageDeath(args):
 		#args = player,counter,value,scripted
 		mute()
 		global currentPhase
-		choiceList = ['Side', 'Bottom']
-		colorsList = ['#FF0000', '#0000FF']
 
 		if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
 				for card in table:
