@@ -4,6 +4,7 @@ Block
 Cobra Reflexes
 Decoy
 Divine Intervention
+Dodge
 Enchantment Transfusion
 Falcon Precision
 Force Crush
@@ -23,14 +24,17 @@ Critical Strike
 Decoy
 Divine Protection
 Enchantment Transfusion
+Giant Size
 Hawkeye
 Lion Savagery
 Marked for Death
 Sacred Ground
+Shrink
 Standard Bearer
 #
 Roll Dice
 Akiro's Favor
+Badger Frenzy
 Barkskin
 Brace Yourself
 Bull Endurance
@@ -38,12 +42,18 @@ Decoy
 Divine Intervention
 Enchantment Transfusion
 Fortified Position
+Gator Toughness
+Giant Size
 Healing Charm
+Iguana Regrowth
+Joined Strength 
 Rhino Hide
 Rise Again
 Rust
 Standard Bearer
+Tangleroot
 Vampirism
+Wolf Fury
 #
 Damage and Effects
 Decoy

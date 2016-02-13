@@ -9,7 +9,7 @@ import os
 ############################################################################
 ##########################		Constants		##################################
 ############################################################################
-
+# -*- coding: utf-8 -*-
 ##########################		Markers			##################################
 AcademyAction = ("Acadmey Action Marker","06c01638-6a75-43ef-82bc-807764521c5a" )
 AcademyActionUsed = ("Acadmey Used Action Marker","06c01638-6a75-43ef-82bc-807764521c5a" )
@@ -30,7 +30,7 @@ Banish = ("Banish","fdaa2c02-a65a-40e0-a315-962f9315b732" )
 Bleed = ("Bleed: Upkeep: Take 1 Damage. Remove with 1 Healing. Removal Cost: 2", "df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" )
 BloodReaper = ("Blood Reaper","50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" )
 Burn = ("Burn: Upkeep: Roll 1 die 0 = Remove Burn 1-2 = Take Damage", "f9eb0f3a-63de-49eb-832b-05912fc9ec64" )
-ChargeToken = ("Charge Token","4546a2ed-3ac4-4baf-8d56-9f51af888a75" )
+Charge = ("Charge Token","4546a2ed-3ac4-4baf-8d56-9f51af888a75" )
 Corrode = ("Corrode: -1 Armor", "c3de25bf-4845-4d2d-8a28-6c31ad12af46" )
 ControlMarkerBlue = ("Blue Control Marker", "da724182-3695-4124-becc-928eb870c5dc" )
 ControlMarkerGreen = ("Green Control Marker", "e97408e7-985b-46d9-a5e7-98ffb4a3f587" )
@@ -100,7 +100,7 @@ VTar =	("V'Tar", "3c74d2dd-cabd-4f90-8845-18297d503b70" )
 VTarOrbOn = ("V'Tar Orb On", "3d339a9d-8804-4afa-9bd5-1cabb1bebc9f" )
 VTarOrbOff  = ("V'Tar Orb Off", "3f056a2d-3045-4f38-ae8b-f2155250f4dc" )
 Weak = ("Weak: -1 Attack Dice for Non-Spell Attacks - Removal Cost: 2", "22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" )
-WishToken = ("Wish Token", "fcf39fa4-238a-4cb6-92bb-5f561be747c0")
+Wish = ("Wish Token", "fcf39fa4-238a-4cb6-92bb-5f561be747c0")
 WoundedPrey = ("Wounded Prey", "42f6cee3-3de4-4c90-a77c-9fb2c432d78d" )
 Wrath = ("Wrath","fffe964a-3839-4bc0-ba85-3268b59817c6" )
 Zombie = ("Zombie: Psychic Immunity, Slow, Nonliving, Bloodthirsty +0", "de101060-a4b4-4387-a7f8-aab82ecff2c8" )
@@ -143,8 +143,8 @@ playerColorDict = {
 		2 : {"PlayerColor":"Blue", "Hex":"#171e78", "ControlMarker":ControlMarkerBlue}, #Blue - R=23  G=30  B=120
 		3 : {"PlayerColor":"Green", "Hex":"#01603e", "ControlMarker":ControlMarkerGreen}, #Green - R=1   G=96  B=62
 		4 : {"PlayerColor":"Yellow", "Hex":"#f7d917", "ControlMarker":ControlMarkerYellow}, #Yellow - R=247 G=217 B=23
-		5 : {"PlayerColor":"Purple", "Hex":"#ae76f6", "ControlMarker":ControlMarkerPurple}, #Purple - R=174 G=118 B=246
-		6 : {"PlayerColor":"Grey", "Hex":"#c0c0c0", "ControlMarker":ControlMarkerGrey} #Grey - R=192 G=192 B=192
+		5 : {"PlayerColor":"Purple", "Hex":"#8a2be2", "ControlMarker":ControlMarkerPurple}, #Purple - R=138 G=43 B=226
+		6 : {"PlayerColor":"Grey", "Hex":"#696969", "ControlMarker":ControlMarkerGrey} #Grey - R=105 G=105 B=105
 			 }
 
 listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];
@@ -159,8 +159,12 @@ gameBoardsDict = {
 				6 : {"boardName":"Forest - 5X4","zoneDef":(5,4,200),"buttonColor":"#01603e"},
 				7 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
 				8 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
-				9 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"}
-						 }
+				9 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"},
+				10 : {"boardName":"Tabletop/No Board","zoneDef":(1,1,500),"buttonColor":"#fadda0"}
+					}
+
+##########################		Lists			############################
+listMageWeapons = ["Johktari Hunting Knife", "Rod of the Arcanum", "Hellstar", "Resplendent Bow"]
 
 ##########################		Other		############################
 
@@ -893,15 +897,13 @@ def resetMarkers():
 						if c.markers[key] == 1:
 								c.markers[key] = 0
 								c.markers[mDict[key]] = 1
-		#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
-		for c in table:
+			if "Packleader's Cowl" == c.Name: c.markers[Guard] = 1
+			#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
 			if "Orb Guardian" in c.name:
-				for o in table:
-					isWithOrb = False
-					if "V'Tar Orb" in o.name and (getZoneContaining(o) == getZoneContaining(c)):
-						isWithOrb = True
-						if isWithOrb:
-							c.markers[Guard] = 1
+					for o in table:
+							isWithOrb = False
+							if "V'Tar Orb" in o.name and (getZoneContaining(o) == getZoneContaining(c)): isWithOrb = True
+							if isWithOrb: c.markers[Guard] = 1
 
 	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
@@ -1238,6 +1240,14 @@ def resolveRegeneration():
 									card.markers[Damage] -= regenAmount
 									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
 
+			if ("Lifegain" in traits and not "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+					lifeGainAmount = traits.get("Lifegain")
+					me.Life += lifeGainAmount
+					notify("{} gains {} Life from the brilliant glow of the Sunfire Amulet.".format(card.name,lifeGainAmount))
+			elif ("Lifegain" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+					notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
+					return
+				
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
@@ -1392,6 +1402,7 @@ tokenList=['Armor',
 		   'Banish',
 		   'Bleed',
 		   'Burn',
+		   'Charge',
 		   'Cripple',
 		   'Corrode',
 		   'Disable',
@@ -1404,12 +1415,14 @@ tokenList=['Armor',
 		   'Retribution',
 		   'Rot',
 		   'Slam',
+		   'Stagger',
 		   'Stun',
 		   'Stuck',
 		   'Sleep',
 		   'Tainted',
 		   'Veteran',
 		   'Weak',
+		   'Wish',
 		   'Wrath',
 		   'Zombie'
 		   ]
@@ -1756,6 +1769,8 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[FFToken] = 3
 		if "[ReadyMarker]" in card.Text:
 			card.markers[Ready] = 1
+		if "Packleader's Cowl" == card.Name:
+			card.markers[Guard] = 1
 	elif card.isFaceUp and not "B" in cardalt:
 		notify("{} turns {} face down.".format(me, card.Name))
 		card.isFaceUp = False
@@ -2136,6 +2151,12 @@ def castSpell(card,target=None):
 				discountList = filter(lambda d: d[1][0]>0, [(c,getCastDiscount(c,card,target)) for c in table])
 				#filter(lambda d: d[1]>0, map(lambda c: (c,getCastDiscount(c,card,target)),table)) #Find all discounts. It would be better to pass a list, but this isn't a bottleneck, so we'll make do for now.
 				#Reduce printed cost by sum of discounts
+				if "Fang of the First Moon" in card.Name:
+						castDiscount = 0
+						for c in me.discard:
+								if "Animal" in c.Subtype:
+										castDiscount += 1
+								if castDiscount > 0: discountList = [castDiscount,"Found {} Animals in {}'s Discard pile".format(castDiscount,me)]
 				usedDiscounts = []
 				discountAppend = usedDiscounts.append
 				for c,d in discountList:

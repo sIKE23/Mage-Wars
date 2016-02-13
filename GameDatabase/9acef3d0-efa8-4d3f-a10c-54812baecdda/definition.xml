@@ -5,7 +5,7 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.159.352"
 	scriptVersion ="3.1.0.2"
-	version="1.14.0.0"
+	version="1.14.1.0"
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -148,6 +148,7 @@
 			<cardaction menu="Add Armor +1 Marker" default="False" shortcut="Alt+A" execute="addArmor" />
 			<cardaction menu="Add Burn Marker" default="False" shortcut="Ctrl+B" execute="addBurn" />
 			<cardaction menu="Add Bleed Marker" default="False" shortcut="Alt+B" execute="addBleed" />
+			<cardaction menu="Add Charge Token" default="False" shortcut="Alt+Shift+C" execute="addCharge" />
 			<cardaction menu="Add Corrode Marker" default="False" shortcut="Ctrl+C" execute="addCorrode" />
 			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple" />
 			<cardaction menu="Add a Control Marker" default="False" shortcut="Alt+O" execute="addControlMarker" />
@@ -163,10 +164,12 @@
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
 			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep" />
+			<cardaction menu="Add Stagger Marker" default="False" shortcut="Alt+Shift+S" execute="addStagger" />
 			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
 			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTainted" />
 			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran" />
 			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak" />
+			<cardaction menu="Add Wish Token" default="False" shortcut="Alt+Shift+W" execute="addWish" />
 			<cardaction menu="Add Wrath Marker" default="False" shortcut="Alt+W" execute="addWrath" />
 			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
 			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther" />

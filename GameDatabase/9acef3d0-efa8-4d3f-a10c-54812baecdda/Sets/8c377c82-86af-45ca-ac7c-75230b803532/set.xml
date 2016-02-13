@@ -257,7 +257,7 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=9" />
-			<property name="AttackBar" value="Tribal Staff:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Move Out!:&#xD;&#xA;[Quick] [Ranged:0-1] [Target goblin you control is Pushed 1 zone in the direction of your choice.] " />
+			<property name="AttackBar" value="Tribal Staff:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Move Out!:&#xD;&#xA;[Quick] [Ranged:0-1] [Target goblin you control is Pushed 1 zone in the direction of your choice.]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="All friendly goblins gain the Elusive trait." />
 			<property name="CardID" value="MWBG1C04" />

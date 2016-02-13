@@ -6,7 +6,12 @@
 	gameVersion="1.4.2.1"
 	version="1.14.0.0">
 	<markers>
+		<marker id="06c01638-6a75-43ef-82bc-807764521c5a" name="Academy Action" />
+		<marker id="1eeac15f-fb5d-4305-b39c-16b1b1c8b6e3" name="Academy Action Used" />
+		<marker id="4546a2ed-3ac4-4baf-8d56-9f51af888a75" name="Charge" />
+		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate" />
 		<marker id="ede2252f-b47f-4ea2-a448-08fd3b22d506" name="Stagger" />
+		<marker id="fcf39fa4-238a-4cb6-92bb-5f561be747c0" name="Wish" />
 	</markers>
 	<cards>
 		<card id="10cfffeb-67bb-44a0-bd8b-683d8153f651"  name="Arcane Missiles" >
@@ -156,7 +161,7 @@
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=5" />
-			<property name="AttackBar" value="Fists:&#xD;&#xA;[Quick] [Melee] [Dice=2] " />
+			<property name="AttackBar" value="Fists:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Pest" />
 			<property name="Text" value="When Jade Gremlin is melee attacked, as a Defense, you may pay 1 mana to have it avoid the attack." />
 			<property name="CardID" value="MWA01C05" />
@@ -173,7 +178,7 @@
 			<property name="Stats" value="Armor=1, Life=9" />
 			<property name="AttackBar" value="Electric Bite:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=X] [d12] [7+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="Unique" />
-			<property name="Text" value="During the Upkeep Phase, Lightning Raptor gains a Charge token, to a maximum of 5 tokens. X = the number of Charge tokens on him. If Lightning Raptor has 5 charge tokens, its Electric Bolt attack gains the Counterstrike trait." />
+			<property name="Text" value="During the Upkeep Phase, Lightning Raptor gains a Charge token, to a maximum of 5 tokens. X = the number of Charge tokens on him. If Lightning Raptor has 5 charge tokens, its attack gains the Counterstrike trait." />
 			<property name="CardID" value="MWA01C06" />
 		</card>
 		<card id="3cc08dca-587c-4e03-8fd6-102a8eba319f"  name="Mana Worm" >
@@ -580,7 +585,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="During the Upkeep Phase, this creature&apos;s controller must pay 1 mana or the creature is destroyed." />
+			<property name="Text" value="During the Upkeep Phase, this creature&apos;s controller must pay 1 mana or the creature is destroyed.&#xD;&#xA;[Upkeep +1]" />
 			<property name="CardID" value="MWA01E12" />
 		</card>
 		<card id="80aecaf5-6e97-48fd-8d81-3c2c56f3da43"  name="Panther Stealth" >
@@ -670,7 +675,7 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon" />
-			<property name="AttackBar" value="Curved Blade:&#xD;&#xA;[Quick] [Melee] [Dice=3] " />
+			<property name="AttackBar" value="Curved Blade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When you attack and deal damage with this weapon, a friendly animal creature in your zone may gain Melee +1 until the end of the round. If this Mage is level 5 or greater, Johktari Hunting Knife rolls an additional attack die." />
 			<property name="CardID" value="MWA01Q02" />
@@ -762,7 +767,7 @@
 			<property name="Stats" value="Location=Chestpiece" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This Mage gains Armor +1. Once per round, when an opponent pays or loses mana because of an effect you control, you gain 1 mana.&#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="This Mage gains Armor +1. Once per round, when an opponent pays or loses mana because of an effect you control, you gain 1 mana.&#xD;&#xA;[Armor +1][ReadyMarker]" />
 			<property name="CardID" value="MWA01Q09" />
 		</card>
 		<card id="bc8cfb9b-8a8a-44bc-b2e3-9bb1209e9f07"  name="Wispwillow Amulet" >

@@ -26,6 +26,7 @@ additiveTraits = ["Melee","Ranged",
 				  "Mana Transfer",
 				  "Magebind",
 				  "Lifebond",
+				  "Lifegain",
 				  "Upkeep",
 				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
 superlativeTraits = ["Regenerate",
@@ -229,6 +230,7 @@ def getAttackList(card):
 												aDict['Dice'] = strength
 												appendEventList('Round',['ToLX', strength])  
 												me.mana -= strength #Since maximum and mana supply are enforced,guaranteed to not be over limit
+												notify("{} spends {} mana to power the Light Blast from the Temple of Light".format(me,str(strength)))
 												toggleReady(card)  
 										else:  
 												aDict['Dice'] = 0  
@@ -288,10 +290,13 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
 		#Wildfire Imp Melee buff for attacking a Burning Object
 		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
+		#Lightning Raptor Counterstrike buff with 5 Charge tokens
+		if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] == 5: attack['Traits']['Counterstrike'] = True
 		#Bloodfire Helmet Demon buff
 		if attacker.Subtype == "Demon" and [1 for c in table if c.Name=="Bloodfire Helmet" and c.isFaceUp and c.controller == attacker.controller] and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
 		#Wounded prey
-		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.type == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and (attacker.controller != defender.controller or (attacker.controller == defender.controller and card.special == "Scenario")) and (attacker.type == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+		#if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.type == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
 		attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
 		if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
 		if attack.get('RangeType') == 'Melee':
@@ -376,6 +381,11 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 						attackDice -= attacker.markers[Weak]
 						attackDice -= attacker.markers[Stagger] * 2
 						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Agony"]: attackDice -= 2
+				
+				level = (6 if attacker.Type == 'Mage' else eval(attacker.Level)) #remove for the next release
+				if Card(attack['OriginalSourceID']).name in listMageWeapons and attacker.Type == "Mage" and level >= 5: attackDice += 1
+				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
+							
 		if defender:
 				attackDice -= dTraitDict.get('Aegis',0)
 				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or (defender.Type=="Mage" and defender.controller.Damage))
@@ -891,7 +901,7 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		if atkTraits.get('Doublestrike'): strikes = 2
 		if atkTraits.get('Triplestrike'): strikes = 3
 		if attacker.Name == 'Wall of Thorns':
-				level = (6 if defender.type == 'Mage' else int(defender.Level)) #Mages really should have level in their xml. But we don't need to worry about this; the spellDictionary will render this moot.
+				level = (6 if defender.type == 'Mage' else eval(defender.Level)) #Mages really should have level in their xml. But we don't need to worry about this; the spellDictionary will render this moot.
 				strikes = (level - 1 if level > 1 else 1)
 		if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
 		else: interimStep(aTraitDict,attack,dTraitDict,'Additional Strikes','damageBarrierStep')
@@ -1417,7 +1427,8 @@ def computeTraits(card):
 		if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
 		if 'Restrained' in rawTraitsList: extend(['Defense -2','Non-Flying'])
 		if 'Incapacitated' in rawTraitsList: append('Non-Flying')
-
+		
+		if (name == "Stranglevine" and markers[CrushToken]): append('Life +{}'.format(str(2*markers[CrushToken])))
 		if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
 		elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
 		#Dragonclaw wolverine, but we need rage markers for its ability.

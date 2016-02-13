@@ -226,6 +226,7 @@ def setGlobalDictEntry(dictionary,key,value):
 def canAttach(card,target):
 	"""Determines whether <card> may be attached to <target>"""
 	tType = target.Type
+	tSubtype = target.Subtype
 	if (card==target
 		or not target in table
 		or not card in table
@@ -256,24 +257,24 @@ def canAttach(card,target):
 			(cTargetBar == 'Paladin Mage' and tType in ['Mage'] and tName == 'Paladin') or
 			(cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Enemy Creature' and tType in ['Creature','Mage'] and tController != cController) or
-			(cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in target.Subtype and tController == cController) or
-			(cTargetBar == 'Demon Creature' and tType in ['Creature'] and 'Demon' in target.Subtype) or
+			(cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in tSubtype and tController == cController) or
+			(cTargetBar == 'Demon Creature' and tType in ['Creature'] and 'Demon' in tSubtype) or
 			(cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
 			(cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
 			(cTargetBar == 'Living Non-Aquatic Creature' and tType in ['Creature','Mage'] and traits.get('Living') and not traits.get('Aquatic')) or
 			(cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or
-			(cTargetBar == 'Minor Creature' and tType == 'Creature' and target.Level <= 2) or
-			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and target.Level <= 2) or
-			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2) or
-			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and traits.get('Living') and target.Level <= 2 and 'Animal' in target.Subtype) or
-			(cTargetBar == 'Knight Creature' and tType in ['Creature'] and 'Knight' in target.Subtype) or
-			(cTargetBar == 'Animal Creature' and tType in ['Creature'] and 'Animal' in target.Subtype) or
-			(cTargetBar == 'Living Holy Creature' and tType in ['Creature'] and 'Holy' in target.School and traits.get('Living')) or
-			(cTargetBar == 'Holy Creature' and tType in ['Creature'] and 'Holy' in target.School and traits.get('Living')) or
+			(cTargetBar == 'Minor Creature' and tType == 'Creature' and eval(target.Level <= 2)) or
+			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and eval(target.Level <= 2)) or
+			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and eval(target.Level <= 2)) or
+			(cTargetBar == 'Minor Living Animal Creature' and 'Animal' in tSubtype  and tType == 'Creature' and traits.get('Living') and eval(target.Level) <= 2) or
+			(cTargetBar == 'Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype) or
+			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype) or
+			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
+			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
 			(cTargetBar == 'Mage' and tType == 'Mage') or
 			(cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
 			(cTargetBar == 'Non-Flying Corporeal Creature' and tType in ['Creature','Mage'] and not traits.get('Flying') and traits.get('Corporeal')) or
-			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal')) or
+			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal') and traits.get('Nonliving')) or
 			(cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
 			(cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
 			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
