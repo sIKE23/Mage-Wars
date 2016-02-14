@@ -2156,10 +2156,9 @@ def castSpell(card,target=None):
 						for c in me.discard:
 								if "Animal" in c.Subtype:
 										castDiscount += 1
-								if castDiscount > 0: discountList = [(card, (castDiscount,"Found {} discarded animal creatures in {}'s Discard pile".format(castDiscount,me)))]
+								if castDiscount > 0: discountList = [(card, (castDiscount,"Found {} discarded animal creatures in {}'s discard pile".format(castDiscount,me)))]
 				usedDiscounts = []
 				discountAppend = usedDiscounts.append
-				notify("2162: discountList {}".format(discountList))
 				for c,d in discountList:
 						if cost > 0: #Right now, all discounts are for 1 (except construction yard). If there is ever a 2-mana discount, we will need to adjust this to optimize discount use. Come to think of it, some discounts overlap, and we might want to optimize for those...well, we can cross that bridge when we reach it.
 								discAmt = min(cost,d[0])
