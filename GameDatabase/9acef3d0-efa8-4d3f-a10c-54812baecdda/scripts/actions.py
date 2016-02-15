@@ -154,13 +154,13 @@ gameBoardsDict = {
 				1 : {"boardName":"Westlock - 4X3","zoneDef":(4,3,250),"buttonColor":"#171e78"},
 				2 : {"boardName":"Inferno - 4x3","zoneDef":(4,3,250),"buttonColor":"#de2827"},
 				3 : {"boardName":"Marble Floors - 4X3","zoneDef":(4,3,250),"buttonColor":"#c0c0c0"},
-				4 : {"boardName":"Forest - 3X4","zoneDef":(4,3,250),"buttonColor":"#01603e"},	
+				4 : {"boardName":"Forest - 4x3","zoneDef":(4,3,250),"buttonColor":"#01603e"},	
 				5 : {"boardName":"Slimy Rocks - 4X4","zoneDef":(4,4,250),"buttonColor":"#c680b4"},
 				6 : {"boardName":"Forest - 5X4","zoneDef":(5,4,200),"buttonColor":"#01603e"},
 				7 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
 				8 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
 				9 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"},
-				10 : {"boardName":"Tabletop/No Board","zoneDef":(1,1,500),"buttonColor":"#fadda0"}
+				10 : {"boardName":"Academy - 1x1","zoneDef":(1,1,-440),"buttonColor":"#fadda0"}
 					}
 
 ##########################		Lists			############################
@@ -1755,6 +1755,8 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[MistToken] = 1
 		if "Nightshade Lotus" == card.Name:
 			card.markers[MistToken] = 1
+		if "Azurean Genie" == card.Name:
+			card.markers[Wish] = 3
 		if "Gate to Hell" == card.Name:
 			card.markers[GateClosed] = 1
 		if "Dissipate" in traits:
@@ -2155,7 +2157,7 @@ def castSpell(card,target=None):
 						castDiscount = 0
 						for c in me.discard:
 								if "Animal" in c.Subtype:
-										castDiscount += 1
+										castDiscount += 2
 								if castDiscount > 0: discountList = [(card, (castDiscount,"Found {} discarded animal creatures in {}'s discard pile".format(castDiscount,me)))]
 				usedDiscounts = []
 				discountAppend = usedDiscounts.append

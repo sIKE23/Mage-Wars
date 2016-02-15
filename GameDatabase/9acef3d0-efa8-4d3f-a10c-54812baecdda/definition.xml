@@ -109,11 +109,13 @@
 		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg" />
 		<gameboard name="Inferno - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard2.jpg" />
 		<gameboard name="Marble Floors - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard3.jpg" />
-		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard4.jpg" />
-		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard5.jpg" />
-		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard6.jpg" />
-		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard7.jpg" />
-		<gameboard name="Double Westlock - 6x4" x="-500" y="-334" width="1000" height="667" src="Images/GameBoards/GameBoard8.jpg" />
+		<gameboard name="Forest - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard4.jpg" />
+		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard5.jpg" />
+		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard6.jpg" />
+		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard7.jpg" />
+		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard8.jpg" />
+		<gameboard name="Double Westlock - 6x4" x="-500" y="-334" width="1000" height="667" src="Images/GameBoards/GameBoard9.jpg" />
+		<gameboard name="Academy - 1x1" x="-362" y="-435" width="724" height="870" src="Images/GameBoards/GameBoard10.jpg" />
 	</gameboards>
 	<table name="Table" visibility="undefined" ordered="False" width="1100" height="1100" background="Images/background.jpg" backgroundStyle="uniformToFill">
 		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
