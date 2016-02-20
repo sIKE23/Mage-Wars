@@ -1086,6 +1086,16 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
 																   drainableHealth,
 																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
+		#Reconstruct - Devouring Jelly for now
+		if (attacker.Name=="Devouring Jelly" and defender.Type in ['Creature','Mage'] and dTraitsDict.get('Corporeal') and damage > 0): # fix Type in the next release
+				cDamage = attacker.markers[Damage]
+				reconstructAmount = 2
+				if damage <= reconstructAmount and cDamage != 0: 
+						attacker.markers[Damage] = 0
+						notify("{} reconstructs 2 Life and removes all damage.".format(attacker.Name))
+				else: 
+						attacker.markers[Damage] -= reconstructAmount
+						notify("{} reconstructs 2 Life and removes {} damage.".format(attacker.Name,reconstructAmount))
 		#Finally, apply conditions
 		effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
 		for e in effects:
