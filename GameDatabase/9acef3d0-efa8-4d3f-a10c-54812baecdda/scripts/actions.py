@@ -255,8 +255,8 @@ def chooseGame():
 	mute()
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
 	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
-	buttonColorList = ["#de2827","#171e78"];
-	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
+	buttonColorList = ["#de2827","#171e78","#00FF00"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination","Mage Wars Academy"];
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
@@ -267,6 +267,10 @@ def chooseGame():
 		elif choice == 2:
 			setGlobalVariable("GameMode", "Domination")
 			loadMapFile()
+			break
+		elif choice == 3:
+			setGlobalVariable("GameMode", "Arena")
+			setAcademyBoard()
 			break
 	'''	elif choice == 3:
 			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
@@ -296,12 +300,24 @@ def setArenaBoard():
 	defineRectangularMap(zoneDef[0],zoneDef[1],zoneDef[2])
 	return
 
+def setAcademyBoard():
+	mute()
+	#For now, let's just define a region of the appropriate size. We also need an image (or do we?)
+	table.board = gameBoardsDict[8]["boardName"]
+	defineRectangularMap(1,1,900)
+
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
-	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
-	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
+	#If the map is a single zone, then all start locations are the same.
+	if len(mapDict['zoneArray'][0]) == 1 and len(mapDict['zoneArray']) == 1:
+		mapDict.get('zoneArray')[0][0]['startLocation'] = '*'
+	#Otherwise, place them on opposite corners of the board
+	else:
+		mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
+		mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
 	mapDict["RDA"] = (2,2)
 	setGlobalVariable("Map", str(mapDict))
+	notify("AAAAA "+str(mapDict))
 
 def choosePlayerColor():
 	mute()
@@ -1942,7 +1958,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 				for i in range(len(zoneArray)):
 						for j in range(len(zoneArray[0])):
 								zone = zoneArray[i][j]
-								if zone and zone.get('startLocation') == str(playerNum):
+								if zone and zone.get('startLocation') in [str(playerNum),"*"]:
 										zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
 										if cardType == 'Mage':
 												x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
