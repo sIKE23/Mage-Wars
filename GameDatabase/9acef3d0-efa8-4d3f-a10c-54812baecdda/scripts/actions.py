@@ -303,7 +303,7 @@ def setArenaBoard():
 def setAcademyBoard():
 	mute()
 	#For now, let's just define a region of the appropriate size. We also need an image (or do we?)
-	table.board = gameBoardsDict[8]["boardName"]
+	table.board = gameBoardsDict[10]["boardName"]
 	defineRectangularMap(1,1,900)
 
 def defineRectangularMap(I,J,tilesize):
