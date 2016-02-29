@@ -214,7 +214,7 @@ def getAttackList(card):
 								elif 'Melee' in attribute:
 										aDict['RangeType'] = 'Melee'
 										aDict['Range'] = [0,0]
-								elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
+								elif attribute in ['Trample','Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
 								elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
 								elif 'Dice' in attribute:   
 										if attribute.split('=')[1] != 'X':  
