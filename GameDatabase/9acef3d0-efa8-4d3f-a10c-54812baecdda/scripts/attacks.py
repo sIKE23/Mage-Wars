@@ -375,7 +375,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 		if attacker and not "Autonomous" in atkOS.traits:
 				if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
 						if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
-						if attack.get('RangeType') == 'Ranged': attackDice += aTraitDict.get('Ranged',0)
+						if attack.get('RangeType') == 'Ranged' and not attack.get("Traits",{}).get("Zone Attack"): attackDice += aTraitDict.get('Ranged',0)
 				#No restriction on how many times may be applied
 				if not atkTraits.get('Spell'):
 						attackDice -= attacker.markers[Weak]
