@@ -87,6 +87,13 @@
 		<property name="School" type="String" hidden="False" ignoreText="False" />
 		<property name="Level" type="String" hidden="False" ignoreText="False" />
 		<property name="Stats" type="String" hidden="False" ignoreText="False" />
+		<property name="Stats.Armor" type="Integer" hidden=True" ignoreText="False" />
+		<property name="Stats.Channeling" type="Integer" hidden=True" ignoreText="False" />
+		<property name="Stats.Defense" type="String" hidden=True" ignoreText="False" />
+		<property name="Stats.EquipmentSlot" type="String" hidden=True" ignoreText="False" />
+		<property name="Stats.Life" type="Integer" hidden=True" ignoreText="False" />
+		<property name="Stats.SpellBookPoints" type="Integer" hidden=True" ignoreText="False" />
+		<property name="Stats.StartingMana" type="Integer" hidden=True" ignoreText="False" />
 		<property name="AttackBar" type="String" hidden="False" ignoreText="False" />
 		<property name="Traits" type="String" hidden="False" ignoreText="False" />
 		<property name="Text" type="String" hidden="False" ignoreText="False" />
