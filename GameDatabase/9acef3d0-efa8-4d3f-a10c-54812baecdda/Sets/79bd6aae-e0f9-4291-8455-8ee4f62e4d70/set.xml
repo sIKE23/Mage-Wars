@@ -365,7 +365,7 @@
 			<property name="Stats" value="Armor=0, Life=7" />
 			<property name="AttackBar" value="Radiant Touch:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="Aegis 1, Flying" />
-			<property name="Text" value="When Messenger of Bin-Shalla is Summoned, heal a friendly living creature within 1 zone the amount rolled on 4 attack dice." />
+			<property name="Text" value="When Messenger of Bim-Shalla is Summoned, heal a friendly living creature within 1 zone the amount rolled on 4 attack dice." />
 			<property name="CardID" value="MWPROMO75" />
 		</card>
 		<card id="4c2baceb-b4bb-4118-869b-b9f3e6dc000d" name="Mountain Ram">

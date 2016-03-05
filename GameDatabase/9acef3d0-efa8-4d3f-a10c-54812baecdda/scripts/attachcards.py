@@ -373,9 +373,10 @@ def canBind(card,target):
 		or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
 		or (tName == 'Sectarus, Dark Rune Sword' and (card.Type == 'Enchantment' and 'Curse' in card.Subtype))
-		or (tName == 'Cassiel, Shield of Asyra' and (card.Subtype == 'Healing' or card.Subtype == 'Protection'))
+		or (tName == 'Cassiel, Shield of Asyra' and card.Subtype in ['Healing','Protection'])
 		or (tName == 'The Squire' and card.Type == 'Equipment')
-		or (tName ==  'Naiya' and card.School == 'Water' and not 'Creature' in card.Type)
+		or (tName ==  'Naiya' and not 'Creature' in card.Type and (card.School == 'Water' or 'Song' in card.Subtype))
+		or (tName ==  'Ithiel' and card.School == 'Holy' and 'Creature' in card.Type)
 #Spawnpoints
 		or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype and target.markers[Mana] >= 2)
 		or (tName == 'Battle Forge' and card.Type == 'Equipment')
@@ -384,7 +385,7 @@ def canBind(card,target):
 		or (tName == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits) and target.markers[Mana] >= 2)
 		or (tName == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
 		or (tName == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-		or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Subtype and target.markers[Mana] >= 3)
+		or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Plant' in card.Subtype and target.markers[Mana] >= 3)
 		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
 		or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Subtype)
 		or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
@@ -451,7 +452,7 @@ def alignMounted(card):
 
 	#2: Align the cards
 	cardList = [card,mounted]
-	alignCards(cardList,card.width()-20,0) #For now, we will simply put the cards side by side.
+	alignCards(cardList,card.width-117,0) #For now, we will simply put the cards side by side.
 
 def canMount(card,target):
 	return card.Name == "Paladin" and target.Name == "Pegasus"

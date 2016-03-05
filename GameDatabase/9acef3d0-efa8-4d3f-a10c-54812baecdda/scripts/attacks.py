@@ -1322,23 +1322,43 @@ def computeTraits(card):
 											cController == controller and
 											getAttachTarget(c) != card and
 											cardType in ['Creature','Mage']): extend(['Melee +1','Armor +1'])
+										eilf (cName == 'Consecrated Ground' and
+											  cardType in ['Creature','Mage'] and
+											cController == controller and
+											  'Living' in rawTraitsList): append(['Regenerate 1'])
 								elif cType == 'Conjuration':
 										if (name == 'Guard Dog'
 											and cController == controller
 											and not getAttachTarget(c)): append('Vigilant')
-										if (cName == 'Mohktari, Great Tree of Life' and
+										elif (cName == 'Mohktari, Great Tree of Life' and
 											cController == controller and
 											cardType in ['Creature','Mage'] and
 											'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Raincloud' and
 											  cardType in ['Creature','Mage','Conjuration'] and
 											'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
+										elif (cName == 'Hellscape' and
+											  cardType in ['Creature','Mage'] and
+											  "Demon" in cSubtype and
+											  'Living' in rawTraitsList): append(['Regenerate 1'])
+										elif (cName == 'Shallow Sea' and
+											  cardType in ['Creature,Mage'] and
+											  "Aquatic" in cSubtype): append(['Melee +1'])
+										elif (cName == 'Steep Hill' and
+											  cardType in ['Creature,Mage'] and
+											  'Non-Flying' in rawTraitsList): append(['Ranged +1'])
+										elif (cName == 'Swamp' and
+											  cardType in ['Creature,Mage'] and
+											  not "Aquatic" in cSubtype and
+											  'Non-Flying' in rawTraitsList):
+														extend(['Slow','Unmovable'])
+														remove('Elusive')
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 											  cController == controller and
 											  cardType in ['Creature','Mage'] and
 											  'Living' in rawTraitsList): append('Regenerate 1')
-										if (cName == 'Dorseus, Stallion of Westlock' and
+										elif (cName == 'Dorseus, Stallion of Westlock' and
 											  cController == controller and
 											  cardType in ['Creature','Mage'] and
 											  'Living' in rawTraitsList): append('Regenerate 2')
@@ -1347,7 +1367,6 @@ def computeTraits(card):
 											  c != card and
 											  cardType in ['Creature','Mage'] and
 											  'Cat' in subtype): append('Piercing +1') #Long term, need to indicate that it is only melee attacks. For now, should not matter since no cats have ranged attacks.
-										#Mort?
 										elif (cName == 'Redclaw, Alpha Male' and
 											  c != card and
 											  cardType in ['Creature','Mage'] and
@@ -1413,7 +1432,7 @@ def computeTraits(card):
 		if markers[Corrode]: append('Armor -{}'.format(str(markers[Corrode])))
 		if markers[Guard]: extend(['Counterstrike','Non-Flying'])
 		if markers[Sleep] or markers[Stun] or markers[Slam]: append('Incapacitated')
-		if markers[Zombie] :
+		if markers[Zombie]:
 				extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
 				remove('Living')
 				#Also should add undead,zombie subtypes, but no way to do that without the spellDictionary.
@@ -1438,10 +1457,12 @@ def computeTraits(card):
 		if 'Restrained' in rawTraitsList: extend(['Defense -2','Non-Flying'])
 		if 'Incapacitated' in rawTraitsList: append('Non-Flying')
 		
-		if (name == "Stranglevine" and markers[CrushToken]): append('Life +{}'.format(str(2*markers[CrushToken])))
+		#if (name == "Stranglevine" and markers[CrushToken]) and not "Finite Life" in rawTraitsList: append('Life +{}'.format(str(2*markers[CrushToken])))
 		if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
-		elif (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
-		#Dragonclaw wolverine, but we need rage markers for its ability.
+		if (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
+		if (name == 'Dragonclaw Wolverine' and markers[Rage]): 
+				append('Armor +{}'.format(str(markers[Rage])))
+				if markers[Rage] >= 3): append('Counterstrike')
 
 		if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying' and t != 'Non-Flying']
 

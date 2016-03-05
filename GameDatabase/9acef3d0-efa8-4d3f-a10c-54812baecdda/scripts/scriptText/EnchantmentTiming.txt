@@ -26,6 +26,8 @@ Divine Protection
 Enchantment Transfusion
 Giant Size
 Hawkeye
+Knight's Blessing
+Knight's Courage
 Lion Savagery
 Marked for Death
 Sacred Ground
@@ -38,7 +40,6 @@ Badger Frenzy
 Barkskin
 Brace Yourself
 Bull Endurance
-Decoy
 Divine Intervention
 Enchantment Transfusion
 Fortified Position
@@ -56,24 +57,22 @@ Vampirism
 Wolf Fury
 #
 Damage and Effects
-Decoy
+Blind
 Divine Might
 Enchantment Transfusion
+Penance
 #
 Additional Strikes
 Circle of Fire
 Circle of Light
 Circle of Lightning
-Decoy
 Enchantment Transfusion
 #
 Damage Barrier
-Decoy
 Enchantment Transfusion
 Retaliate
 #
 Counterstrike
-Decoy
 Enchantment Transfusion
 #
 Attack Ends
