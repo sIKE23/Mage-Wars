@@ -1322,7 +1322,7 @@ def computeTraits(card):
 											cController == controller and
 											getAttachTarget(c) != card and
 											cardType in ['Creature','Mage']): extend(['Melee +1','Armor +1'])
-										eilf (cName == 'Consecrated Ground' and
+										elif (cName == 'Consecrated Ground' and
 											  cardType in ['Creature','Mage'] and
 											cController == controller and
 											  'Living' in rawTraitsList): append(['Regenerate 1'])
@@ -1462,7 +1462,7 @@ def computeTraits(card):
 		if (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
 		if (name == 'Dragonclaw Wolverine' and markers[Rage]): 
 				append('Armor +{}'.format(str(markers[Rage])))
-				if markers[Rage] >= 3): append('Counterstrike')
+				if markers[Rage] >= 3: append('Counterstrike')
 
 		if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying' and t != 'Non-Flying']
 
