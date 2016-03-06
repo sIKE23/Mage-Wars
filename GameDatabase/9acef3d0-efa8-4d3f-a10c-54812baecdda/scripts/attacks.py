@@ -207,14 +207,14 @@ def getAttackList(card):
 						if "Heal" in attributes: continue
 						for attribute in attributes: #Heal is too much bother for now. It will be easier to do in Q2 #aDict['EffectType'] = 'Heal'
 								attribute = attribute.strip('[]')
-								if attribute in ['Quick','Full'] : aDict['Action'] = attribute
+								if attribute in ['Quick','Full',"Trample"] : aDict['Action'] = attribute
 								elif 'Ranged' in attribute:
 										aDict['RangeType'] = attribute.split(':')[0]
 										if not isAttackSpell: aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
 								elif 'Melee' in attribute:
 										aDict['RangeType'] = 'Melee'
 										aDict['Range'] = [0,0]
-								elif attribute in ['Trample','Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
+								elif attribute in ['Damage Barrier','Passage Attack'] : aDict['RangeType'] = attribute
 								elif 'Cost' in attribute: aDict['Cost'] = (int(attribute.split('=')[1]) if attribute.split('=')[1] != 'X' else 0)
 								elif 'Dice' in attribute:   
 										if attribute.split('=')[1] != 'X':  
@@ -374,7 +374,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 		atkOS = Card(attack['OriginalSourceID'])
 		if attacker and not "Autonomous" in atkOS.traits:
 				if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
-						if attack.get('RangeType') == 'Melee': attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
+						if attack.get('RangeType') == 'Melee' and not attack.get("Action") == "Trample": attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
 						if attack.get('RangeType') == 'Ranged' and not attack.get("Traits",{}).get("Zone Attack"): attackDice += aTraitDict.get('Ranged',0)
 				#No restriction on how many times may be applied
 				if not atkTraits.get('Spell'):
@@ -391,7 +391,10 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or (defender.Type=="Mage" and defender.controller.Damage))
 																	and (attacker and not hasAttackedThisTurn(attacker))
 																	and defender.type in ['Creature','Mage']
-																	and not dTraitDict.get('Nonliving')) else 0)
+																	and not dTraitDict.get('Nonliving')
+																	and attack.get("ActionType") == "Melee"
+																	and not attack.get("Action") == "Trample"
+																	) else 0)
 				attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
 				if [True for c in getAttachments(defender) if c.isFaceUp and c.name == "Marked for Death"]: #Marked for death
 						eventList = getEventList('Round')
