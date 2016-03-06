@@ -720,7 +720,7 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 				defSource.markers[DeflectR]=0
 				defSource.markers[DeflectU]=1
 		if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
-				rememberAbilityUse(defSource) #Bookmark
+				rememberAbilityUse(defSource)
 		if effectRoll >= defense.get('Minimum',13):
 			   notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
 			   return defense
@@ -814,6 +814,10 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 		mute()
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
+		# Cancel spell if jinxed
+		if [1 for c in getAttachments(attacker) if c.Name == "Jinx" and c.isFaceUp] and attack.get("Traits",{}).get("Spell") and attack.get("Action") == "Quick":
+				notify("Jinx!")
+				return
 		if not attack.get('RangeType') == 'Damage Barrier':
 				#Check for forcefield
 				if len([reduceFF(c) for c in getAttachments(defender) if c.isFaceUp and c.name == "Forcefield" and c.markers[FFToken]]):
