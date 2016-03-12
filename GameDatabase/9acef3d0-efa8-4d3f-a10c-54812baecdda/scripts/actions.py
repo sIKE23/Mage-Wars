@@ -1001,7 +1001,11 @@ def resolveDissipate():
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-
+	
+	countOutposts = 0
+	for card in table: #ugh - this is done much better in the next release
+		if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
+				countOutposts += 1
 	for card in table:
 		traits = computeTraits(card)
 		if "Dissipate" in traits and card.controller == me and card.isFaceUp and card.markers[DissipateToken]:
@@ -1016,6 +1020,10 @@ def resolveDissipate():
 				notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 				card.moveTo(me.piles['Discard'])
 			notify("Finished auto-resolving Dissipate for {}.".format(me))
+		if card.Name == "Altar of Domination" and card.controller == me and card.isFaceUp:
+			if countOutposts >= 3:
+					card.markers[DominationToken] += 1
+					notify("Placing a Domination Token on to the {}...".format(card))
 
 	#use the logic for Dissipate for Disable Markers
 	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
