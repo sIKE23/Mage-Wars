@@ -15,7 +15,9 @@
 	</markers>
 	<cards>
 		<card id="b52ee3c1-ee9f-494c-8c45-55f2b1ff6313" name="Anvil Throne Warlord">
-			<property name="Type" value="Mage" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
 			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
 			<property name="MageSchoolCost" value="War=1, Earth=1, Arcane=3" />
@@ -27,7 +29,9 @@
 			<property name="Type" value="Magestats" />
 		</card>
 		<card id="4f27a0aa-8ef2-42cc-ae24-1ae0bf0f8a64" name="Adramelech Warlock">
-			<property name="Type" value="Mage" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook construction." />
 			<property name="Stats" value="Spellbook=120, Life=33, Armor=0, Channeling=9" />
 			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />

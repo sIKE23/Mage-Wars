@@ -480,7 +480,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="Dodge counts as a Defense and must be revealed when this creature is attacked. If this creature is a minor creature the attack is avoided. Otherwise, roll a d12: On a roll of 7+ the attack is avoided. Then destroy Dodge." />
+			<property name="Text" value="Dodge counts as a Defense and must be revealed when this creature is attacked. If this creature is a minor creature the attack is avoided. Otherwise, roll a d12: On a roll of 7+ the attack is avoided. Then destroy Dodge.&#xD;&#xA;[Defense 7+ 1x]" />
 			<property name="CardID" value="MWA01E05" />
 		</card>
 		<card id="63e66932-56af-43ad-b583-5395295ef9c9"  name="Exile" >

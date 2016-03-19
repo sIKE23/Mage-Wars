@@ -10,7 +10,7 @@ def checkDominationVictory():
 		goal = eval(getGlobalVariable("Goal")).get("Goal")
 		victoriousPlayers = []
 		for player in players:
-				mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
+				mage = [c for c in table if c.Subtype == "Mage" and c.controller == player][0]
 				vtar = mage.markers[VTar]
 				if vtar >= goal: victoriousPlayers.append([player,vtar])
 		soleWinner = None
@@ -31,7 +31,7 @@ def updateVtarScore():
 		notify("V'Tar Suppression, suppresses all V'Tar generation from V'Tar Orbs this round!")
 		vTarSuppression = "True"
 	for player in players:
-		mage = [c for c in table if c.type=="Mage" and c.controller == player][0]
+		mage = [c for c in table if c.Subtype == "Mage" and c.controller == player][0]
 		controlMarkerColor = playerColorDict[int(mage.controller.getGlobalVariable("MyColor"))]["ControlMarker"]
 		vtarGain = len([1 for c in table if  ("V'Tar Orb" in c.name and c.markers[controlMarkerColor] and vTarSuppression == "False") or (c.name == "Galaxxus" and c.controller == mage.controller)])
 		if vtarGain:
@@ -140,7 +140,7 @@ def loadMapFile():
 
 		mapDict["Map Name"] = choiceName
 		mapDict["RDA"] = iRDA,jRDA
-		
+
 		for z in startZones:
 				playerNumber = z["Player"]
 				zx,zy = eval(z["Zone"])
@@ -158,8 +158,8 @@ def loadMapFile():
 						mapPlace(obj,(i-1,j-1))
 
 		for p in players:
-			remoteCall(p,"DominationMatchStart",[]) 
-		
+			remoteCall(p,"DominationMatchStart",[])
+
 def DominationMatchStart():
 		mute()
 		mapText = ""
@@ -215,4 +215,4 @@ mapObjectsDict = {
 		"SecretPassage" : {"GUID":"fb43bb92-b597-441e-b2eb-d18ef6b8cc77", "Offset":175, "Splay Vector": (-1,0)}
 		}
 
-guardianColor = "#7EC6DE" #Light Blue - R=126 G=198 B=222 
+guardianColor = "#7EC6DE" #Light Blue - R=126 G=198 B=222

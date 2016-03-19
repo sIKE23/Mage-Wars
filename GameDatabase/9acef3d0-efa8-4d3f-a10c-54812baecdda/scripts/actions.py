@@ -155,7 +155,7 @@ gameBoardsDict = {
 				1 : {"boardName":"Westlock - 4X3","zoneDef":(4,3,250),"buttonColor":"#171e78"},
 				2 : {"boardName":"Inferno - 4x3","zoneDef":(4,3,250),"buttonColor":"#de2827"},
 				3 : {"boardName":"Marble Floors - 4X3","zoneDef":(4,3,250),"buttonColor":"#c0c0c0"},
-				4 : {"boardName":"Forest - 4x3","zoneDef":(4,3,250),"buttonColor":"#01603e"},	
+				4 : {"boardName":"Forest - 4x3","zoneDef":(4,3,250),"buttonColor":"#01603e"},
 				5 : {"boardName":"Slimy Rocks - 4X4","zoneDef":(4,4,250),"buttonColor":"#c680b4"},
 				6 : {"boardName":"Forest - 5X4","zoneDef":(5,4,200),"buttonColor":"#01603e"},
 				7 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
@@ -165,7 +165,7 @@ gameBoardsDict = {
 					}
 
 ##########################		Lists			############################
-listMageWeapons = ["Johktari Hunting Knife", "Rod of the Arcanum", "Hellstar", "Resplendent Bow"]
+listMageWeapons = ["Johktari Hunting Knife","Rod of the Arcanum","Hellstar","Resplendent Bow"]
 
 ##########################		Other		############################
 
@@ -645,7 +645,7 @@ def onCardArrowTargeted(args):
 		mute()
 		attacker,defender = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
 		if args.player == me == attacker.controller and args.targeted:
-				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type == 'Creature' or 'Conjuration' or 'Mage' in defender.type):
+				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type in ['Creature','Conjuration']):
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
 						attack = diceRollMenu(attacker,defender)
@@ -779,7 +779,7 @@ def flipCoin(group, x = 0, y = 0):
 def mageSetup():
 	#set initial health and channeling values
 	for c in me.hand:
-		if c.Type == "Mage":
+		if c.Subtype == "Mage":
 			stats = c.Stats.split(",")
 			break
 	for stat in stats:
@@ -932,12 +932,12 @@ def resolveBurns():
 	if not getSetting("AutoResolveEffects", True):
 		return
 	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
-	
+
 	if len(cardsWithBurn) > 0:
 		notify("Resolving Burns for {}...".format(me))	#found at least one
 		for card in cardsWithBurn:
 			numMarkers = card.markers[Burn]
-			burnDamage = 0
+			Damage = 0
 			burnsRemoved = 0
 			SolInZone = "False"
 			zone = getZoneContaining(card)
@@ -950,18 +950,16 @@ def resolveBurns():
 				if roll == 0 and not SolInZone == "True":
 					card.markers[Burn] -= 1
 					burnsRemoved += 1
-				burnDamage += roll
+				Damage += roll
 			#apply damage
-			if card.Type == "Mage":
-				card.controller.Damage += burnDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
-				card.markers[Damage] += burnDamage
-			notify("{} damage added to {}. {} Burns removed.".format(burnDamage, card.Name, burnsRemoved))
+			#apply damage
+			addDamage(card,Damage)
+			if Damage > 0: notify("Adremelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
+			if burnRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
 		notify("Finished auto-resolving Burns for {}.".format(me))
 
 def resolveRot():
 	mute()
-
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
@@ -969,18 +967,14 @@ def resolveRot():
 	if len(cardsWithRot) > 0:
 		notify("Resolving Rot for {}...".format(me))	#found at least one
 		for card in cardsWithRot:
-			rotDamage = (card.markers[Rot])
-			 #apply damage
-			if card.Type == "Mage":
-				card.controller.Damage += rotDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
-				card.markers[Damage] += rotDamage
-			notify("{} damage added to {}.".format(rotDamage, card.Name))
+			Damage = (card.markers[Rot])
+			#apply damage
+			addDamage(card,Damage)
+			notify("{} damage added to {}.".format(Damage, card.Name))
 		notify("Finished auto-resolving Rot for {}.".format(me))
 
 def resolveBleed():
 	mute()
-
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
@@ -988,13 +982,10 @@ def resolveBleed():
 	if len(cardsWithBleed) > 0:
 		notify("Resolving Bleed for {}...".format(me))	#found at least one
 		for card in cardsWithBleed:
-			bleedDamage = (card.markers[Bleed])
-			 #apply damage
-			if card.Type == "Mage":
-				card.controller.Damage += bleedDamage
-			elif card.Type == "Creature" or "Conjuration" in card.Type:
-				card.markers[Damage] += bleedDamage
-			notify("{} damage added to {}.".format(bleedDamage, card.Name))
+			Damage = (card.markers[Bleed])
+			#apply damage
+			addDamage(card,Damage)
+			notify("{} damage added to {}.".format(Damage, card.Name))
 		notify("Finished auto-resolving Bleed for {}.".format(me))
 
 def resolveDissipate():
@@ -1002,7 +993,6 @@ def resolveDissipate():
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	
 	countOutposts = 0
 	for card in table: #ugh - this is done much better in the next release
 		if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
@@ -1064,7 +1054,7 @@ def resolveChanneling(p):
 	mute()
 	for c in table:
 				if c.controller==me and c.isFaceUp:
-						if c.Stats != None and c.Type != "Mage":
+						if c.Stats != None and c.Subtype != "Mage":
 								if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 										channel = getStat(c.Stats,"Channeling")
 										channelBoost = len([k for k in table if k.isFaceUp and k.name == "Harmonize" and c == getAttachTarget(k)]) #Well, you can't really attach more than 1 harmonize anyway. But if there were another spell that boosted channeling, we could add it to this list.
@@ -1240,7 +1230,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			card1.moveTo(me.piles['Discard'])
 			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
 			return
- 
+
 def resolveRegeneration():
  	mute()
  	for card in table:
@@ -1250,19 +1240,19 @@ def resolveRegeneration():
 					return
 			elif "Regenerate" in traits and card.controller == me and card.isFaceUp:
 					regenAmount = traits.get("Regenerate")
-					if card.Type == "Mage" and card.controller == me and me.damage != 0:
-							if me.damage <= regenAmount: 
+					if card.Subtype == "Mage" and card.controller == me and me.damage != 0:
+							if me.damage <= regenAmount:
 									me.damage = 0
 									notify("{} regenerates and removes all damage.".format(card.name))
-							else: 
+							else:
 									me.damage -= regenAmount
 									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
-					elif card.Type in ['Creature','Conjuration']: 
+					elif card.Type in ['Creature','Conjuration']:
 							damage = card.markers[Damage]
-							if damage <= regenAmount and damage != 0: 
+							if damage <= regenAmount and damage != 0:
 									card.markers[Damage] = 0
 									notify("{} regenerates and removes all damage.".format(card.name))
-							else: 
+							else:
 									card.markers[Damage] -= regenAmount
 									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
 
@@ -1273,12 +1263,13 @@ def resolveRegeneration():
 			elif ("Lifegain" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
 					notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
 					return
-				
+
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
-				if card.Type == "Mage": card.controller.damage += damage
-				else: card.markers[Damage] += damage
+#				if card.Subtype == "Mage": card.controller.damage += damage
+#				else: card.markers[Damage] += damage
+				addDamage(card,damage)
 				strangleMessages=["Stranglevine tightens its hold on {}! ({} damage)",
 								  "As Stranglevine grows, its hold on {} tightens! ({} damage)",
 								  "{} is constricted by Stranglevine! ({} damage)",
@@ -1335,7 +1326,7 @@ def checkMageDeath(args):
 
 		if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
 				for card in table:
-						if card.Type == "Mage" and card.controller == me:
+						if card.Subtype == "Mage" and card.controller == me:
 								card.orientation = 1
 								#playSoundFX('Winner')
 								for p in players:
@@ -1363,7 +1354,7 @@ def concede(group=table, x = 0, y = 0):
 	mute()
 	if confirm("Are you sure you want to concede this game?"):
 		for card in table:
-			if card.Type == "Mage" and card.controller == me:
+			if card.Subtype == "Mage" and card.controller == me:
 				card.orientation = 1
 				notify("{} has conceded the game".format(me))
 			playersState = eval(getGlobalVariable("PlayersState"))
@@ -1480,12 +1471,13 @@ def placeControlMarker(attacker,defender):
 		defender.markers[markerColor] = 1
 		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
 
-def addDamage(card, x = 0, y = 0):
+def addDamage(card,amount = 1,x = 0,y = 0):
+	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
-	if "Mage" in card.Type and card.controller == me:
-		me.Damage += 1
+	if card.Subtype == "Mage" and card.controller == me:
+			me.Damage += amount
 	else:
-		addToken(card, Damage)
+			card.markers[Damage] += amount
 
 def addOther(card, x = 0, y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -1494,11 +1486,13 @@ def addOther(card, x = 0, y = 0):
 		return
 	card.markers[marker] += qty
 
-def subDamage(card, x = 0, y = 0):
-	if "Mage" in card.Type and card.controller == me:
-			me.Damage -= 1
+def subDamage(card,amount = 1, x = 0, y = 0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	if card.Subtype == "Mage" and card.controller == me:
+			me.Damage -= amount
 	else:
-		subToken(card, Damage)
+			card.markers[Damage] += amount
 
 def clearTokens(card, x = 0, y = 0):
 	mute()
@@ -1724,9 +1718,9 @@ def flipcard(card, x = 0, y = 0):
 		card.isFaceUp = True
 		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
-		if card.Type == "Mage" or card.Type == "Creature": #places action marker on card
+		if card.Type == "Creature": #places action marker on card
 			toggleAction(card)
-		if card.Type == "Mage": #once more to flip action to active side
+		if card.Subtype == "Mage": #once more to flip action to active side
 			toggleAction(card)
 			toggleQuick(card)
 			if "Wizard" in card.Name:
@@ -1758,7 +1752,7 @@ def flipcard(card, x = 0, y = 0):
 			me.Channeling += 1
 		if "Harmonize" == card.Name and card.controller == me and isAttached(card) and card.isFaceUp == True:
 			magecard = getAttachTarget(card)
-			if magecard.Type == "Mage":
+			if magecard.Subtype == "Mage":
 				notify("{} increases the Channeling stat by 1 as a result of {} being revealed".format(me, card))
 				me.Channeling += 1
 		if "Invisible Stalker" == card.Name:
@@ -1841,7 +1835,7 @@ def discard(card, x=0, y=0):
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
-		if card.Type == "Mage":
+		if card.Subtype == "Mage":
 			notify("{} decreases the Channeling stat by 1 as a result of {} being discarded".format(me, card))
 			me.Channeling -= 1
 	elif card.special == "Scenario":
@@ -1862,7 +1856,7 @@ def obliterate(card, x=0, y=0):
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
-		if magecard.Type == "Mage":
+		if magecard.Subtype == "Mage":
 			notify("{} decreases the Channeling stat by 1 because {} has been obliterated".format(me, card))
 			me.Channeling -= 1
 	else:
@@ -1886,7 +1880,7 @@ def defaultAction(card,x=0,y=0):
 		if not card.isFaceUp:
 			#is this a face-down enchantment? if so, prompt before revealing
 			payForAttack = not (getSetting('BattleCalculator',True) and card.Type=='Attack')
-			if "Mage" in card.Type or not payForAttack: #Attack spells will now be paid for through the battlecalculator
+			if card.Subtype == "Mage" or not payForAttack or card.Type == "Magestats": #Attack spells will now be paid for through the battlecalculator
 				flipcard(card, x, y)
 
 				if not getSetting('attackChangeNotified',False) and not payForAttack:
@@ -1960,6 +1954,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 				iRDA,jRDA = mapDict.get("RDA",(2,2))
 				zoneArray = mapDict.get('zoneArray')
 				cardType = card.type
+				cardSubtype = card.Subtype
 				if cardType == 'Internal': return
 				mapX,mapW = mapDict.get('x'),mapDict.get('X')
 				if cardType in ['DiceRoll','Phase']:
@@ -1970,7 +1965,7 @@ def moveCardToDefaultLocation(card,returning=False):#Returning if you want it to
 								zone = zoneArray[i][j]
 								if zone and zone.get('startLocation') in [str(playerNum),"*"]:
 										zoneX,zoneY,zoneS = zone.get('x'),zone.get('y'),zone.get('size')
-										if cardType == 'Mage':
+										if cardSubtype == "Mage":
 												x = (zoneX if i < mapDict.get('I')/2 else zoneX + zoneS - cardW)
 												y = (zoneY if j < mapDict.get('J')/2 else zoneY + zoneS - cardH)
 										elif cardType == 'Magestats':
@@ -2058,7 +2053,6 @@ def findCard(group, model):
 
 def playSoundFX(sound):
 	mute()
-
 	#is the setting on?
 	if not getSetting("AutoConfigSoundFX", True):
 		return
@@ -2154,7 +2148,7 @@ def castSpell(card,target=None):
 		binder = getBindTarget(card)
 		caster = getBindTarget(card)
 		if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
-				casters = [d for d in table if d.Type == "Mage" and d.isFaceUp and d.controller == me]
+				casters = [d for d in table if d.Subtype == "Mage" and d.isFaceUp and d.controller == me]
 				if casters: caster = casters[0]
 				else:
 						whisper("And just who do you expect to cast that? You need to play a mage first.")
@@ -2291,7 +2285,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				#Discounts that only apply when your mage casts the spell
 				if (mageCast and
 					((cName == "Arcane Ring" and sType != "Enchantment" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
-					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and (target.type == "Creature" or target.type == "Mage") and sType == "Enchantment") or
+					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and (target.type == "Creature" or target.Subtype == "Mage") and sType == "Enchantment") or
 					 (cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
 					 (cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
 					 (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
@@ -2310,7 +2304,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				#Discounts from Markers on Equipment
 				if isBound(spell) == True and card.type == 'Equipment' and getBindTarget(spell) == card:
 					 	boundCasterTraits = computeTraits(card)
-						#Rune of Power 
+						#Rune of Power
 						if boundCasterTraits.get('Spellbind') == True and caster.markers[RuneofPower] == 1:
 							return (1,"Rune of Power on {}".format(cName))
 		if timesUsed <2: #Twice-per-round discounts
@@ -2346,14 +2340,14 @@ def computeRevealCost(card): #For enchantment reveals
 		if not target: return cost
 		#Exceptions
 		name = card.Name
-		tLevel = 6 if target.Type == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+')))) #And...this is why mages NEED to have a level field in the XML file.
+		tLevel = 6 if target.Subtype == "Mage" else int(sum(map(lambda x: int(x), target.Level.split('+')))) #And...this is why mages NEED to have a level field in the XML file.
 		if name == "Mind Control":
 				cost = 2*tLevel
 		elif name in ["Charm","Fumble"]:
 				cost = tLevel-1
 		if cost == None: return #If it doesn't fit an exception, the player will have to handle it.
 		traits = computeTraits(card)
-		if target.Type=="Mage":
+		if target.Subtype == "Mage":
 				cost += traits.get("Magebind",0)
 		return cost
 
@@ -2364,7 +2358,7 @@ def computeCastCost(card,target=None): #Does NOT take discounts into considerati
 		if target: #Compute exact cost based on target. For now, cards like dissolve will have to target the spell they want to destroy. Does not check for target legality.
 				name = card.Name
 				if "Vine Marker" in target.Name and card.Name == "Burst of Thorns": return int(card.Cost)
-				tLevel = 6 if target.Type == "Mage" else (int(target.Level.split("/")[0]) if "/" in target.Level else int(sum(map(lambda x: int(x), target.Level.split('+')))))
+				tLevel = int(target.Level.split("/")[0]) if "/" in target.Level else int(sum(map(lambda x: int(x), target.Level.split('+'))))
 				if name in ["Dissolve", "Conquer"]:
 						cost = int(target.Cost)
 				elif name in ["Dispel","Steal Enchantment"]:
@@ -2396,7 +2390,7 @@ def inspectCard(card, x = 0, y = 0):
 
 def validateDeck(deck):
 	for c in deck:
-		if c.Type == "Mage":
+		if c.Subtype == "Mage":
 			stats = c.Stats.split(",")
 			schoolcosts = c.MageSchoolCost.replace(' ','').split(",")
 			break
@@ -2439,10 +2433,10 @@ def validateDeck(deck):
 		elif "Fire" in costval[0]:
 			spellbook["Fire"] = int(costval[1])
 	#debug("Spellbook {}".format(spellbook))
-	
+
 	# loop through all the spell cards in the spellbook then calculate the levels by school in the dictionary 'levels'
 	# with a level a count per school. Spells/mages that are/have exceptions will typically be tracked in the booktotal value
-	# once done the spell levels as caculated will be mutipled by their schoolcost mutipler and added to the booktotal value 
+	# once done the spell levels as caculated will be mutipled by their schoolcost mutipler and added to the booktotal value
 	#which should not exceed the mages Spellbook Points
 	levels = {}
 	booktotal = 0

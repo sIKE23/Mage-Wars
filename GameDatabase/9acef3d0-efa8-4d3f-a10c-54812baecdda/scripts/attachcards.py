@@ -75,9 +75,9 @@ def enchantmentAttachCost(card,target): #Target useful for when things like Hars
 		return
 	for dc in foundDiscounts:
 		doDiscount(dc)
-	me.Mana -= manacost 
+	me.Mana -= manacost
 	notify(notifyStr)
-				
+
 def detach(card):
 	"""Removes <card> from its target, then consolidates remaining cards on target."""
 	mute()
@@ -230,7 +230,7 @@ def canAttach(card,target):
 	if (card==target
 		or not target in table
 		or not card in table
-		or tType not in ['Conjuration','Creature','Conjuration-Wall','Conjuration-Terrian','Equipment','Mage']
+		or tType not in ['Conjuration','Creature','Conjuration-Wall','Conjuration-Terrian','Equipment']
 		or not target.isFaceUp
 		or isAttached(target)
 		or getAttachments(card)): return False
@@ -251,40 +251,40 @@ def canAttach(card,target):
 		if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
-			(cTargetBar == 'Corporeal Creature' and tType in ['Creature','Mage'] and traits.get('Corporeal')) or
-			(cTargetBar == 'Corporeal Conjuration or Creature' and tType in ['Creature','Mage','Conjuration'] and traits.get('Corporeal')) or
-			(cTargetBar == 'Creature' and tType in ['Creature','Mage']) or			
-			(cTargetBar == 'Paladin Mage' and tType in ['Mage'] and tName == 'Paladin') or
-			(cTargetBar == 'Friendly Living Creature' and tType in ['Creature','Mage'] and traits.get('Living') and tController == cController) or
-			(cTargetBar == 'Enemy Creature' and tType in ['Creature','Mage'] and tController != cController) or
-			(cTargetBar == 'Friendly, Soldier Creature' and tType in ['Creature','Mage'] and 'Soldier' in tSubtype and tController == cController) or
-			(cTargetBar == 'Demon Creature' and tType in ['Creature'] and 'Demon' in tSubtype) or
-			(cTargetBar == 'Incorporeal Creature' and tType in ['Creature','Mage'] and traits.get('Incorporeal')) or
-			(cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
-			(cTargetBar == 'Living Non-Aquatic Creature' and tType in ['Creature','Mage'] and traits.get('Living') and not traits.get('Aquatic')) or
+			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
+			(cTargetBar == 'Corporeal Conjuration or Creature' and tType in ['Creature','Conjuration'] and traits.get('Corporeal')) or
+			(cTargetBar == 'Creature' and tType == 'Creature') or
+			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
+			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
+			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and tController == cController) or
+			(cTargetBar == 'Demon Creature' and tType == 'Creature' and 'Demon' in tSubtype) or
+			(cTargetBar == 'Incorporeal Creature' and tType == 'Creature' and traits.get('Incorporeal')) or
+			(cTargetBar == 'Living Creature' and tType == 'Creature' and traits.get('Living')) or
+			(cTargetBar == 'Living Non-Aquatic Creature' and tType == 'Creature' and traits.get('Living') and not traits.get('Aquatic')) or
 			(cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or
 			(cTargetBar == 'Minor Creature' and tType == 'Creature' and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and (eval(target.Level) <= 2)) or
-			(cTargetBar == 'Minor Living Animal Creature' and 'Animal' in tSubtype  and tType == 'Creature' and traits.get('Living') and (eval(target.Level) <= 2)) or
+			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype and traits.get('Living') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype) or
 			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype) or
 			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
-			(cTargetBar == 'Mage' and tType == 'Mage') or
-			(cTargetBar == 'Non-Flying Creature' and tType in ['Creature','Mage'] and not traits.get('Flying')) or
-			(cTargetBar == 'Non-Flying Corporeal Creature' and tType in ['Creature','Mage'] and not traits.get('Flying') and traits.get('Corporeal')) or
+			(cTargetBar == 'Mage' and tSubtype == 'Mage') or
+			(cTargetBar == 'Paladin Mage' and tSubtype == 'Mage' and tName == 'Paladin') or
+			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
+			(cTargetBar == 'Non-Flying Corporeal Creature' and tType == 'Creature' and not traits.get('Flying') and traits.get('Corporeal')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal') and traits.get('Nonliving')) or
-			(cTargetBar == 'Non-Mage Corporeal Creature' and tType=='Creature' and traits.get('Corporeal')) or
-			(cTargetBar == 'Non-Mage Creature' and tType=='Creature') or
-			(cTargetBar == 'Non-Mage Living Creature' and tType=='Creature' and traits.get('Living')) or
-			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType=='Creature' and traits.get('Living') and not traits.get('Epic')) or
-			(cTargetBar == 'Non-Mage Object' and tType!='Mage') or
+			(cTargetBar == 'Non-Mage Corporeal Creature' and tType == 'Creature' and tSubtype != 'Mage' and traits.get('Corporeal')) or
+			(cTargetBar == 'Non-Mage Creature' and tType == 'Creature' and tSubtype != 'Mage' ) or
+			(cTargetBar == 'Non-Mage Living Creature' and tType == 'Creature' and tSubtype != 'Mage' and traits.get('Living')) or
+			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType == 'Creature' and tSubtype != 'Mage' and traits.get('Living') and not traits.get('Epic')) or
+			(cTargetBar == 'Non-Mage Object' and tSubtype != 'Mage') or
 			(cTargetBar == 'Zone or Object') or
 			(cTargetBar == 'Object or Zone')): return True
-	elif ((cType == 'Equipment' and tType == 'Mage') or
-		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType in ['Creature','Mage'] and not traits.get('Flying'))): return True
+	elif ((cType == 'Equipment' and tSubtype == 'Mage') or
+		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType == 'Creature' and not traits.get('Flying'))): return True
 	return False
 
 def isAttachCardsEnabled():
@@ -325,7 +325,7 @@ def getBound(card):
 	bDict = eval(getGlobalVariable("bindDict"))
 	bound = map(lambda key: Card(key),[k for k in bDict if bDict[k]==card._id])
 	if bound and bound[0] in table: return bound[0]
-		
+
 def isBound(card):
 	"""Determines whether <card> is attached to anything."""
 	mute()
@@ -356,6 +356,8 @@ def alignBound(card):
 
 def canBind(card,target):
 	"""Determines whether <card> may be attached to <target>"""
+	cType = card.Type
+	cSubtype = card.Subtype
 	if (card==target
 		or not target in table
 		or not card in table
@@ -366,35 +368,36 @@ def canBind(card,target):
 		or not target.isFaceUp): return False
 	tName = target.Name
 #Familiars
-	if ((tName == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
-		or (tName == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
-		or (tName == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
-		or (tName == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.Subtype)) and sum([int(i) for i in card.level.split('+')])<=2)
-		or (tName == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
-		or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
-		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
-		or (tName == 'Sectarus, Dark Rune Sword' and (card.Type == 'Enchantment' and 'Curse' in card.Subtype))
-		or (tName == 'Cassiel, Shield of Asyra' and card.Subtype in ['Healing','Protection'])
-		or (tName == 'The Squire' and card.Type == 'Equipment')
-		or (tName ==  'Naiya' and not 'Creature' in card.Type and (card.School == 'Water' or 'Song' in card.Subtype))
-		or (tName ==  'Ithiel' and card.School == 'Holy' and 'Creature' in card.Type)
+	if ((tName == 'Goblin Builder' and 'Conjuration' in cType and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+		or (tName == 'Thoughtspore' and cType in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
+		or (tName == 'Wizard\'s Tower' and cType == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
+		or (tName == 'Sersiryx, Imp Familiar' and ((cType == 'Attack' and 'Fire' in card.School) or (cType == 'Enchantment' and 'Curse' in cSubtype)) and sum([int(i) for i in card.level.split('+')])<=2)
+		or (tName == 'Fellella, Pixie Familiar' and cType == 'Enchantment')
+		or (tName == 'Huginn, Raven Familiar' and cType == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
+		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in cSubtype)
+		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
+		or (tName == 'Cassiel, Shield of Asyra' and cSubtype in ['Healing','Protection'])
+		or (tName == 'The Squire' and cType == 'Equipment')
+		or (tName ==  'Naiya' and not 'Creature' in cType and (card.School == 'Water' or 'Song' in cSubtype))
+		or (tName ==  'Ithiel' and card.School == 'Holy' and 'Creature' in cType)
 #Spawnpoints
-		or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype and target.markers[Mana] >= 2)
-		or (tName == 'Battle Forge' and card.Type == 'Equipment')
-		or (tName == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School and not ("Incorporeal" in card.Traits) and target.markers[Mana] >= 3)
-		or (tName == 'Lair' and card.Type == 'Creature' and 'Animal' in card.Subtype)
-		or (tName == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits) and target.markers[Mana] >= 2)
-		or (tName == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
-		or (tName == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-		or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Plant' in card.Subtype and target.markers[Mana] >= 3)
+		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
+		or (tName == 'Battle Forge' and cType == 'Equipment')
+		or (tName == 'Gate to Voltari' and cType == 'Creature' and 'Arcane' in card.School and not ("Incorporeal" in card.Traits) and target.markers[Mana] >= 3)
+		or (tName == 'Lair' and cType == 'Creature' and 'Animal' in cSubtype)
+		or (tName == 'Pentagram' and cType == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits) and target.markers[Mana] >= 2)
+		or (tName == 'Temple of Asyra' and cType == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
+		or (tName == 'Graveyard' and cType == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+		or (tName == 'Seedling Pod' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Plant' in cSubtype and target.markers[Mana] >= 3)
 		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
-		or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Subtype)
-		or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
-		or (tName == 'Triton\'s Horn' and card.Type == 'Creature' and 'Water' in card.School)
+		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in cSubtype)
+		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
+		or (tName == 'Triton\'s Horn' and cType == 'Creature' and 'Water' in card.School)
+		or (tName == 'Spawning Grounds' and cType == 'Creature' and 'Aquatic' in cSubtype)
 #Spellbind (only)
-		or (tName == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
-		or (tName == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
-		or (tName == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
+		or (tName == 'Helm of Command' and cType == 'Incantation' and 'Epic' not in card.Traits and 'Command' in cSubtype)
+		or (tName == 'Elemental Wand' and cType == 'Attack' and 'Epic' not in card.Traits)
+		or (tName == 'Mage Wand' and cType == 'Incantation' and 'Epic' not in card.Traits)):
 		return True
 	return False
 
@@ -475,7 +478,7 @@ def createMap(I,J,zoneArray,tileSize):
 	for i in range(len(zoneArray)):
 		for j in range(len(zoneArray[0])):
 			z = (createZone(i,j,mapDict['x'],mapDict['y'],mapDict['tileSize']) if zoneArray[i][j] else {})
-			array[i][j] = z 
+			array[i][j] = z
 			if z: zoneList.append(z)
 	mapDict['zoneArray'] = array
 	mapDict['zoneList'] = zoneList
@@ -580,7 +583,7 @@ def snapToZone(card):
 	zoneList = getZonesBordering(card)
 	if zoneList:
 			zone = zoneClosest(zoneList,card)
-			if card.Target == 'Zone' or card.Type == 'Mage' or not card.isFaceUp: #snap to zone
+			if card.Target == 'Zone' or card.Subtype == "Mage" or not card.isFaceUp: #snap to zone
 					snapX,snapY = zoneGetContain(zone,card)
 					card.moveToTable(snapX,snapY)
 			elif card.type == 'Conjuration-Wall': #snap to zone border
