@@ -230,7 +230,7 @@ def canAttach(card,target):
 	if (card==target
 		or not target in table
 		or not card in table
-		or tType not in ['Conjuration','Creature','Conjuration-Wall','Equipment','Mage']
+		or tType not in ['Conjuration','Creature','Conjuration-Wall','Conjuration-Terrian','Equipment','Mage']
 		or not target.isFaceUp
 		or isAttached(target)
 		or getAttachments(card)): return False
@@ -263,12 +263,13 @@ def canAttach(card,target):
 			(cTargetBar == 'Living Creature' and tType in ['Creature','Mage'] and traits.get('Living')) or
 			(cTargetBar == 'Living Non-Aquatic Creature' and tType in ['Creature','Mage'] and traits.get('Living') and not traits.get('Aquatic')) or
 			(cTargetBar == 'Living Non-Mage Creature' and tType == 'Creature' and traits.get('Living')) or
-			(cTargetBar == 'Minor Creature' and tType == 'Creature' and eval(target.Level <= 2)) or
-			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and eval(target.Level <= 2)) or
-			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and eval(target.Level <= 2)) or
-			(cTargetBar == 'Minor Living Animal Creature' and 'Animal' in tSubtype  and tType == 'Creature' and traits.get('Living') and eval(target.Level) <= 2) or
+			(cTargetBar == 'Minor Creature' and tType == 'Creature' and (eval(target.Level) <= 2)) or
+			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and (eval(target.Level) <= 2)) or
+			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and (eval(target.Level) <= 2)) or
+			(cTargetBar == 'Minor Living Animal Creature' and 'Animal' in tSubtype  and tType == 'Creature' and traits.get('Living') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype) or
 			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype) or
+			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
 			(cTargetBar == 'Mage' and tType == 'Mage') or

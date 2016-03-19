@@ -1094,7 +1094,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 																   drainableHealth,
 																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
 		#Reconstruct - Devouring Jelly for now
-		if (attacker.Name=="Devouring Jelly" and defender.Type in ['Creature','Mage'] and dTraitsDict.get('Corporeal') and damage > 0): # fix Type in the next release
+		if (attacker.Name=="Devouring Jelly" and defender.Type in ['Creature','Mage'] and dTraitDict.get('Corporeal') and damage > 0): # fix Type in the next release
 				cDamage = attacker.markers[Damage]
 				reconstructAmount = 2
 				if damage <= reconstructAmount and cDamage != 0: 
@@ -1332,12 +1332,9 @@ def computeTraits(card):
 										elif (cName == 'Consecrated Ground' and
 											  cardType in ['Creature','Mage'] and
 											cController == controller and
-											  'Living' in rawTraitsList): append(['Regenerate 1'])
-								elif cType == 'Conjuration':
-										if (name == 'Guard Dog'
-											and cController == controller
-											and not getAttachTarget(c)): append('Vigilant')
-										elif (cName == 'Mohktari, Great Tree of Life' and
+											  'Living' in rawTraitsList): append('Regenerate 1')
+								elif cType == 'Conjuration' or cType == 'Conjuration-Terrain':
+										if (cName == 'Mohktari, Great Tree of Life' and
 											cController == controller and
 											cardType in ['Creature','Mage'] and
 											'Living' in rawTraitsList): append('Regenerate 2')
@@ -1346,18 +1343,18 @@ def computeTraits(card):
 											'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
 										elif (cName == 'Hellscape' and
 											  cardType in ['Creature','Mage'] and
-											  "Demon" in cSubtype and
-											  'Living' in rawTraitsList): append(['Regenerate 1'])
+											  "Demon" in subtype and
+											  'Living' in rawTraitsList): append('Regenerate 1')
 										elif (cName == 'Shallow Sea' and
-											  cardType in ['Creature,Mage'] and
-											  "Aquatic" in cSubtype): append(['Melee +1'])
+											  cardType in ['Creature','Mage'] and
+											  "Aquatic" in subtype): append('Melee +1')
 										elif (cName == 'Steep Hill' and
-											  cardType in ['Creature,Mage'] and
-											  'Non-Flying' in rawTraitsList): append(['Ranged +1'])
+											  cardType in ['Creature','Mage'] and
+											  not 'Flying' in rawTraitsList): append('Ranged +1')
 										elif (cName == 'Swamp' and
-											  cardType in ['Creature,Mage'] and
-											  not "Aquatic" in cSubtype and
-											  'Non-Flying' in rawTraitsList):
+											  cardType in ['Creature','Mage'] and
+											  not "Aquatic" in subtype and not
+											  'Flying' in rawTraitsList):
 														extend(['Slow','Unmovable'])
 														remove('Elusive')
 								elif cType == 'Creature':
@@ -1369,6 +1366,9 @@ def computeTraits(card):
 											  cController == controller and
 											  cardType in ['Creature','Mage'] and
 											  'Living' in rawTraitsList): append('Regenerate 2')
+										elif (name == 'Guard Dog'
+											and cController == controller
+											and not getAttachTarget(c)): append('Vigilant')
 										elif (cName == 'Makunda' and
 											  cController == controller and
 											  c != card and
@@ -1383,6 +1383,9 @@ def computeTraits(card):
 											  'Living' in rawTraitsList): append('Finite Life')
 										elif (cName == 'Victorian Griffin' and
 											  cardType in ['Creature','Mage']): remove('Elusive')
+										elif (cName == 'Naiya' and
+											  cardType == "Conjuration-Terrain" and
+											  "Water" in subtype): extend(['Armor +1','Channeling +1'])
 								elif cType == 'Incantation': pass
 								elif (cType == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')

@@ -897,7 +897,7 @@ def resetMarkers():
 	for c in table:
 		if c.targetedBy == me:
 			c.target(False)
-		if c.controller == me and c.isFaceUp and not "Alfiya" in card.Name: #don't waste time on facedown cards and only reset the markers on my cards.
+		if c.controller == me and c.isFaceUp and not "Alfiya" in c.Name: #don't waste time on facedown cards and only reset the markers on my cards.
 			mDict = {ActionRedUsed : ActionRed,
 						ActionBlueUsed : ActionBlue,
 						ActionGreenUsed : ActionGreen,
@@ -915,6 +915,7 @@ def resetMarkers():
 								c.markers[key] = 0
 								c.markers[mDict[key]] = 1
 			if "Packleader's Cowl" == c.Name: c.markers[Guard] = 1
+			if "Lightning Raptor" == c.Name: c.markers[Charge] = 1
 			#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
 			if "Orb Guardian" in c.name:
 					for o in table:
