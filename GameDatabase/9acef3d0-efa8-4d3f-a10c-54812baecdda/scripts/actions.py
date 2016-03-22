@@ -952,9 +952,8 @@ def resolveBurns():
 					burnsRemoved += 1
 				Damage += roll
 			#apply damage
-			#apply damage
-			addDamage(card,Damage)
-			if Damage > 0: notify("Adremelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
+			addDamageAmount(card,Damage)
+			if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
 			if burnRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
 		notify("Finished auto-resolving Burns for {}.".format(me))
 
@@ -969,7 +968,7 @@ def resolveRot():
 		for card in cardsWithRot:
 			Damage = (card.markers[Rot])
 			#apply damage
-			addDamage(card,Damage)
+			addDamageAmount(card,Damage)
 			notify("{} damage added to {}.".format(Damage, card.Name))
 		notify("Finished auto-resolving Rot for {}.".format(me))
 
@@ -984,7 +983,7 @@ def resolveBleed():
 		for card in cardsWithBleed:
 			Damage = (card.markers[Bleed])
 			#apply damage
-			addDamage(card,Damage)
+			addDamageAmount(card,Damage)
 			notify("{} damage added to {}.".format(Damage, card.Name))
 		notify("Finished auto-resolving Bleed for {}.".format(me))
 
@@ -1269,7 +1268,7 @@ def stranglevineReceiptPrompt(card,damage):#I suppose this would really be bette
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
 #				if card.Subtype == "Mage": card.controller.damage += damage
 #				else: card.markers[Damage] += damage
-				addDamage(card,damage)
+				addDamageAmount(card,damage)
 				strangleMessages=["Stranglevine tightens its hold on {}! ({} damage)",
 								  "As Stranglevine grows, its hold on {} tightens! ({} damage)",
 								  "{} is constricted by Stranglevine! ({} damage)",
@@ -1471,7 +1470,15 @@ def placeControlMarker(attacker,defender):
 		defender.markers[markerColor] = 1
 		notify("{} asserts control over the V'tar Orb!\nIndicating control using a {}.".format(attacker.name,markerColor[0]))
 
-def addDamage(card,amount = 1,x = 0,y = 0):
+def addDamage(card, x = 0,y = 0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	if card.Subtype == "Mage" and card.controller == me:
+			me.Damage += 1
+	else:
+			card.markers[Damage] += 1
+
+def addDamageAmount(card,amount = 1):
 	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.Subtype == "Mage" and card.controller == me:
@@ -1480,19 +1487,20 @@ def addDamage(card,amount = 1,x = 0,y = 0):
 			card.markers[Damage] += amount
 
 def addOther(card, x = 0, y = 0):
+	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	marker, qty = askMarker()
 	if qty == 0:
 		return
 	card.markers[marker] += qty
 
-def subDamage(card,amount = 1, x = 0, y = 0):
+def subDamage(card, x = 0, y = 0):
 	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if card.Subtype == "Mage" and card.controller == me:
-			me.Damage -= amount
+			me.Damage -= 1
 	else:
-			card.markers[Damage] += amount
+			card.markers[Damage] += 1
 
 def clearTokens(card, x = 0, y = 0):
 	mute()

@@ -1313,7 +1313,6 @@ def computeTraits(card):
 														if markers[Guard]: extend(['Armor +2','Melee +1'])
 								elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
 								elif cName == 'Shrink': append('Pest')
-								elif cName == 'Badger Frenzy': append('Doublestrike')
 						# Get traits from cards in this zone
 						if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
 								#Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
