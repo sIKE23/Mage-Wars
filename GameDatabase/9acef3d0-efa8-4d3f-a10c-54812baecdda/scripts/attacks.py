@@ -309,6 +309,11 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 					and not hasAttackedThisTurn(attacker)
 					and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
 						attack['Traits']['Piercing'] += 3
+				elif (cName == "Badger Frenzy"
+					and attacker == getAttachTarget(c)
+					and attack.get('RangeType') in ["Melee","Counterstrike"]
+					and attack.get("Action") == "Quick"): 
+						attack['Traits']['Doublestrike'] = True
 				elif (cName == "Lion Savagery"
 					  and attacker == getAttachTarget(c)
 					  and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
