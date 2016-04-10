@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda" sleeveid="0">
+  <section name="Mage" shared="False">
+    <card qty="1" id="2563e3d8-8f45-482a-9009-d80a51fdf377">Wizard (Apprentice)</card>
+    <card qty="1" id="e27b8293-65cd-4479-b5e9-2616201ba512">Wizard Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="d9db82f3-e853-4281-8f24-1574f02912b9">Chain Lightning</card>
+    <card qty="1" id="96b996dd-50d6-4449-9ad5-3b7c52936738">Electrify</card>
+    <card qty="2" id="9217f8a0-e46d-401e-b8b6-477100eaba54">Lightning Bolt</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="1b6c4df2-706b-440e-9f55-c6d3c0df93a7">Darkfenne Hydra</card>
+    <card qty="1" id="03d52691-75b2-42ec-a81c-ca2074f28002">Gorgon Archer</card>
+    <card qty="2" id="ad3b90cf-5a53-4541-903f-4b0cfe397f64">Mana Leech</card>
+    <card qty="1" id="031d394a-fafc-4e88-b1c9-1152b223b278">Stonegaze Basilisk</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="00cfd5d8-8fa8-4db5-b4df-6f5bae378d4b">Essence Drain</card>
+    <card qty="1" id="aeada61e-e636-4c46-b169-833162a13b93">Force Hold</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="66582dca-63bc-4b49-bbcd-add00a57cf11">Dragonscale Hauberk</card>
+    <card qty="1" id="4376c705-deea-45cd-9dc2-70d5bc1483a8">Staff of the Arcanum</card>
+    <card qty="1" id="b37baf19-da0b-40f6-8cb3-cf8205bfb04e">Suppression Cloak</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="c46fd335-9b2e-4a23-b52b-77e708de89c0">Dispel</card>
+    <card qty="1" id="87fb7a11-c77d-4503-a66c-659ddd6ad100">Dissolve</card>
+    <card qty="2" id="82174fd6-1e51-4aef-b5a5-fca0af2ff0bc">Minor Heal</card>
+    <card qty="1" id="d781b3a9-4c77-47c0-a899-0067fbafe856">Sleep</card>
+    <card qty="1" id="be358e54-8996-43cb-8aad-6ed879bbdbb7">Steal Enchantment</card>
+    <card qty="1" id="b969cb2f-6f0b-4d89-8839-511aab891c0d">Teleport</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <notes><![CDATA[]]></notes>
+</deck>
