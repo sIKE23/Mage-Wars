@@ -4,7 +4,7 @@
 	id="79bd6aae-e0f9-4291-8455-8ee4f62e4d70"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="1.4.2.1"
-	version="1.14.0.0">
+	version="1.15.0.0">
 	<cards>
 		<card id="b4f84074-d8ab-43c0-a316-ad259d4c9f6a" name="Hurl Meteorite">
 			<property name="Type" value="Attack" />
@@ -503,6 +503,21 @@
 			<property name="Traits" value="Flying" />
 			<property name="CardID" value="MWPROMO62" />
 		</card>
+		<card id="0832ef31-bf50-4617-84be-924f3b435954" name="Gorgon Spearthrower">
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Gorgon, Serpent" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="AttackBar" value="Poison Spear:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=2] [d12] [7+ = Weak]" />
+			<property name="Text" value="" />
+			<property name="Traits" value="Regenerate 1" />
+			<property name="CardID" value="MWAPROMO#01" />
+		</card>
 
 
 		<card id="5a6c0937-b7fb-4c68-a854-7e7d6dce4b3c" name="Altar of Peace">
@@ -853,6 +868,21 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Whenever your Mage summons a creature, he may place it in Summoning Circle&apos;s zone instead of his own zone, regardless of range or LoS." />
 			<property name="CardID" value="MWPROMO19" />
+		</card>
+		<card id="1bf7f538-0a38-40ba-89db-658de6197d3f" name="Shock">
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Lightning" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this creature is melee attacked you must reveal Shock. After the attack, the attacker receives the Staggered condition. Then, destroy Shock." />
+			<property name="CardID" value="MWAPROMO#02" />
 		</card>
 
 

@@ -4,7 +4,7 @@
 	id="ac23b0f6-73c1-488b-9376-f3e81e0afc3a"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="1.4.2.1"
-	version="1.14.0.0">
+	version="1.15.0.0">
 	<markers>
 		<marker id="06c01638-6a75-43ef-82bc-807764521c5a" name="Academy Action" />
 		<marker id="1eeac15f-fb5d-4305-b39c-16b1b1c8b6e3" name="Academy Action Used" />
@@ -283,7 +283,7 @@
 			<property name="Stats" value="Armor=1, Life=7" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When a Living creature melee attacks Ridgeback Skunk,place a Stagger condition on that creature duriung the Counterstrike Step of that attack." />
+			<property name="Text" value="When a Living creature melee attacks Ridgeback Skunk, place a Stagger condition on that creature during the Counterstrike Step of that attack." />
 			<property name="CardID" value="MWA01C13" />
 		</card>
 		<card id="456d1907-3949-4503-a8f5-cd85e37375f9"  name="Sailfin Hydra" >
@@ -692,7 +692,7 @@
 			<property name="Stats" value="Location=Weapon" />
 			<property name="AttackBar" value="Serrated Edge:&#xD;&#xA;[Quick] [Ranged:0-1] [Dice=2]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="If a friendly animal creature attacked and damaged the target this round, this attack gains +1 attack dice." />
+			<property name="Text" value="If a friendly animal creature attacked and damaged the target this round, this attack gains 1 attack die." />
 			<property name="CardID" value="MWA01Q03" />
 		</card>
 		<card id="b1117208-e1ef-4eb0-b33b-ba947a2fa230"  name="Leather Chausses" >
@@ -722,7 +722,7 @@
 			<property name="Stats" value="Location=Helmet+Cloak" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Beastmaster Only" />
-			<property name="Text" value="This Mage gains Armor +1.&#xD;&#xA;Once per round during this Mage&apos;s activation, he may choose a minor friendly animal creature in his zone, pay mana equal to their level, and place a Guard marker on that creature.&#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="This Mage gains Armor +1.&#xD;&#xA;Once per round during this Mage's activation, he may choose a minor friendly animal creature in his zone, pay mana equal to their level, and place a Guard marker on that creature.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWA01Q05" />
 		</card>
 		<card id="b4839f16-bce0-49cb-b3a4-9525103f27db"  name="Repulsion Cloak" >
