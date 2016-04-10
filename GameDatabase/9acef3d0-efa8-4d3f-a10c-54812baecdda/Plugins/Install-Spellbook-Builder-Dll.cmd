@@ -1,5 +1,5 @@
 @echo off
-rem v1.13.0.0
+rem v1.15.0.0
 cd /d %~dp0
 
 @echo Please refer to the Spellbook Builder Page on GamersJudgement for information on how to install this plugin:
@@ -9,4 +9,6 @@ cd /d %~dp0
 
 .\OCTGN-SBB-for-MageWars.msi
 
+
+@echo This file will no longer be updated after the v1.15.0.0 release and will be removed from the install kit.
 pause

@@ -4,7 +4,7 @@
 	id="2b573ac7-f7f6-49e5-a26f-5070573374f1" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="1.4.2.1" 
-	version="1.14.0.0">
+	version="1.15.0.0">
  	<markers>
  			<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" />
 			<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" />

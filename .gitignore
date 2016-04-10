@@ -64,3 +64,6 @@ Decks/**
 ImageDatabase/**
 Garbage/**
 Template/~$OCTGN - Key Map.xlsx
+*.aip
+*.aip
+Deckbuilder/Installer/InstallScript.aip
