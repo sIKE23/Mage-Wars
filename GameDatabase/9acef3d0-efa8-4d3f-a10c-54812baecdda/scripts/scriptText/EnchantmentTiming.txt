@@ -45,7 +45,6 @@ Divine Intervention
 Enchantment Transfusion
 Fortified Position
 Gator Toughness
-Giant Size
 Healing Charm
 Iguana Regrowth
 Joined Strength 
@@ -60,6 +59,7 @@ Damage and Effects
 Blind
 Divine Might
 Enchantment Transfusion
+Giant Size
 Penance
 #
 Additional Strikes

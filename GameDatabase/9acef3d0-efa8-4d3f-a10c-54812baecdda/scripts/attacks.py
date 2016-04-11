@@ -726,7 +726,7 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 				defSource.markers[DeflectU]=1
 		if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
 				rememberAbilityUse(defSource)
-		if effectRoll >= defense.get('Minimum',13):
+		if (effectRoll >= defense.get('Minimum',13)) or (defSource.Name == "Dodge" and defender.level <= 2):
 			   notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
 			   return defense
 		else:
@@ -1099,12 +1099,12 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 																   drainableHealth,
 																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
 		#Reconstruct - Devouring Jelly for now
-		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and damage > 0): # fix Type in the next release
+		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and attacker.markers[Damage] > 0):
 				cDamage = attacker.markers[Damage]
 				reconstructAmount = 2
-				if damage <= reconstructAmount and cDamage != 0:
+				if cDamage <= 2:
 						attacker.markers[Damage] = 0
-						notify("{} reconstructs 2 Life and removes all damage.".format(attacker.Name))
+						notify("{} reconstructs {} Life and removes all damage.".format(attacker.Name,cDamage))
 				else:
 						attacker.markers[Damage] -= reconstructAmount
 						notify("{} reconstructs 2 Life and removes {} damage.".format(attacker.Name,reconstructAmount))
