@@ -1358,9 +1358,9 @@ def computeTraits(card):
 										elif (cName == 'Steep Hill' and
 											  cardType == 'Creature' and
 											  not 'Flying' in rawTraitsList): append('Ranged +1')
-										elif (cName == 'Swamp' and cardType == 'Creature' and not 'Aquatic' in subtype or not 'Flying' in rawTraitsList):
-														extend(['Slow','Unmovable'])
-														if 'Elusive' in rawTraitsList: remove('Elusive')
+										elif (cName == 'Swamp' and cardType == 'Creature' and 
+											  (not 'Aquatic' in subtype) and 
+											  ("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow','Unmovable','Non-Elusive'])
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 											  cController == controller and
@@ -1476,7 +1476,9 @@ def computeTraits(card):
 				append('Armor +{}'.format(str(markers[Rage])))
 				if markers[Rage] >= 3: append('Counterstrike')
 
-		if 'Non-Flying' in rawTraitsList: rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying' and t != 'Non-Flying']
+		for nulltrait in ["Flying,Elusive"]:
+				if 'Non-{}'.format(nulltrait) in rawTraitsList: 
+						rawTraitsList = [t for t in list(rawTraitsList) if t != nulltrait and t != 'Non-{}'.format(nulltrait)]
 
 		for rawTrait in rawTraitsList:
 				formTrait = traitParser(rawTrait)
