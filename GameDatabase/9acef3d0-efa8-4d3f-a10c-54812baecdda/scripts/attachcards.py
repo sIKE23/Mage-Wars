@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.14.0.0     #######################################
+##########################    v1.15.0.0     #######################################
 ###########################################################################
 ############################
 # Card Attachment and Alignment
@@ -376,7 +376,7 @@ def canBind(card,target):
 		or (tName == 'Huginn, Raven Familiar' and cType == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in cSubtype)
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
-		or (tName == 'Cassiel, Shield of Asyra' and cSubtype in ['Healing','Protection'])
+		or (tName == 'Cassiel, Shield of Asyra' and ("Healing" in cSubtype or "Protection" in cSubtype))
 		or (tName == 'The Squire' and cType == 'Equipment')
 		or (tName ==  'Naiya' and not 'Creature' in cType and (card.School == 'Water' or 'Song' in cSubtype))
 		or (tName ==  'Ithiel' and card.School == 'Holy' and 'Creature' in cType)

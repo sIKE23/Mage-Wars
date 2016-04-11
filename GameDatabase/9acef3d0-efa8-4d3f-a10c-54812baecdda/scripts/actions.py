@@ -1,5 +1,5 @@
 ###########################################################################
-##########################    v1.14.0.0     #######################################
+##########################    v1.15.0.0     #######################################
 ###########################################################################
 import time
 import re
@@ -1111,6 +1111,9 @@ def resolveUpkeep():
 			monolithUpKeepCost = 1
 			aZone = getZoneContaining(card)
 			bZone = getZoneContaining(HarshforgeMonolith)
+			if aZone == None: 
+					debug("Error: Harshforge Monolith: Card Name: {}, aZone: {}, bZone: {}".format(card,aZone,bZone))
+					continue
 			distance = zoneGetDistance(aZone,bZone)
 			if card.isFaceUp:
 				notifystr = "Do you wish to pay the Upkeep +1 cost for your Face Up {} from Harshforge Monolith's effect?".format(card.Name)

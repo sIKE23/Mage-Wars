@@ -1358,10 +1358,7 @@ def computeTraits(card):
 										elif (cName == 'Steep Hill' and
 											  cardType == 'Creature' and
 											  not 'Flying' in rawTraitsList): append('Ranged +1')
-										elif (cName == 'Swamp' and
-											  cardType == 'Creature' and
-											  not "Aquatic" in subtype and not
-											  'Flying' in rawTraitsList):
+										elif (cName == 'Swamp' and cardType == 'Creature' and not 'Aquatic' in subtype or not 'Flying' in rawTraitsList):
 														extend(['Slow','Unmovable'])
 														if 'Elusive' in rawTraitsList: remove('Elusive')
 								elif cType == 'Creature':
