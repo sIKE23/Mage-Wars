@@ -1360,7 +1360,7 @@ def computeTraits(card):
 											  not 'Flying' in rawTraitsList): append('Ranged +1')
 										elif (cName == 'Swamp' and cardType == 'Creature' and 
 											  (not 'Aquatic' in subtype) and 
-											  ("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow','Unmovable','Non-Elusive'])
+											  ("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 											  cController == controller and
@@ -1475,6 +1475,13 @@ def computeTraits(card):
 		if (name == 'Dragonclaw Wolverine' and markers[Rage]):
 				append('Armor +{}'.format(str(markers[Rage])))
 				if markers[Rage] >= 3: append('Counterstrike')
+
+		if not "Flying" in rawTraitsList: append("Non-Flying") #Unfortunate, but needed for next step
+
+		for condtrait in ["Slow","Unmovable"]:
+				for cond in ["Non-Flying"]:
+						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList: 
+								append(condtrait)
 
 		for nulltrait in ["Flying,Elusive"]:
 				if 'Non-{}'.format(nulltrait) in rawTraitsList: 
