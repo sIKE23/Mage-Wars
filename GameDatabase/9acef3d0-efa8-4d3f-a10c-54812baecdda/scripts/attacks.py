@@ -659,9 +659,11 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
 
 def computeDefense(aTraitDict,attack,dTraitDict,defense):
 		source = Card(defense.get("Source"))
+		defender = Card(dTraitDict.get('OwnerID'))
 		if "Autonomous" in source.Traits or source.Name in ["Force Orb","Force Sword"]: return dict(defense) #Autonomous equipment is not modified by anything
 		modDefense = dict(defense)
 		modDefense['Minimum'] = max(modDefense.get('Minimum',13)-dTraitDict.get('Defense',0),1)
+		if (source.Name == "Dodge" and int(defender.level) <= 2): modDefense["Minimum"] = 1 #Note that dodge has 100% success rate for minors
 		return modDefense
 
 def defenseQuery(aTraitDict,attack,dTraitDict):
@@ -683,6 +685,8 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		if choice == 0 or choice == len(queryList): return False
 		defense = defenseList[choice-1]
 		defSource = Card(defense.get('Source'))
+		debug("{}".format(defSource))
+		debug(str(defender.level))
 		if defSource.Name == "Forcemaster": #Forcemaster's special defense
 				if me.mana == 0:
 						whisper("You cannot use that defense - you have no mana!")
@@ -692,6 +696,11 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 						me.mana -= 1
 						notify("{} pays 1 mana.".format(me))
 				else: return False
+		elif (defSource.Name == "Dodge" and int(defender.level) <= 2): #No need to roll dice if defender is minor for dodge
+			rememberDefenseUse(defender,defense)
+			notify("{} reflexively dodges the attack!".format(defender))
+			return defense
+
 		rememberDefenseUse(defender,defense)
 		defense = computeDefense(aTraitDict,attack,dTraitDict,defense) #NOW we modify the defense
 		notify("{} attempts to avoid the attack using {}!".format(defender,
@@ -709,7 +718,7 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 				defSource.markers[DeflectU]=1
 		if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
 				rememberAbilityUse(defSource)
-		if (effectRoll >= defense.get('Minimum',13)) or (defSource.Name == "Dodge" and defender.level <= 2):
+		if (effectRoll >= defense.get('Minimum',13)):
 			   notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
 			   return defense
 		else:
@@ -1464,8 +1473,6 @@ def computeTraits(card):
 				for cond in ["Non-Flying"]:
 						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList and cond in rawTraitsList: 
 								append(condtrait)
-
-		debug(str(rawTraitsList))
 
 		for nulltrait in ["Flying,Elusive"]:
 				if 'Non-{}'.format(nulltrait) in rawTraitsList: 
