@@ -1339,7 +1339,8 @@ def computeTraits(card):
 											  cardType == 'Creature' and
 											  "Aquatic" in subtype): append('Melee +1')
 										elif (cName == 'Steep Hill' and
-											  cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
+											  cardType == 'Creature' and
+											  not 'Flying' in rawTraitsList): append('Ranged +1')
 										elif (cName == 'Swamp' and cardType == 'Creature' and 
 											  (not 'Aquatic' in subtype) and 
 											  ("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
@@ -1460,12 +1461,10 @@ def computeTraits(card):
 
 		if not "Flying" in rawTraitsList: append("Non-Flying") #Unfortunate, but needed for next step
 
-		for condtrait in ["Slow","Unmovable","Ranged +1"]:
+		for condtrait in ["Slow","Unmovable"]:
 				for cond in ["Non-Flying"]:
-						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList and cond in rawTraitsList: 
+						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList: 
 								append(condtrait)
-
-		debug(str(rawTraitsList))
 
 		for nulltrait in ["Flying,Elusive"]:
 				if 'Non-{}'.format(nulltrait) in rawTraitsList: 
