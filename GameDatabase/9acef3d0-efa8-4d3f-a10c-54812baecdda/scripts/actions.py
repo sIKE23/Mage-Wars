@@ -6,6 +6,7 @@ import re
 import sys
 sys.path.append(wd("lib"))
 import os
+from random import randint
 ############################################################################
 ##########################		Constants		##################################
 ############################################################################
@@ -161,7 +162,6 @@ gameBoardsDict = {
 				7 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
 				8 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
 				9 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"},
-				10 : {"boardName":"Academy - 1x1","zoneDef":(1,1,-440),"buttonColor":"#fadda0"}
 					}
 
 ##########################		Lists			############################
@@ -256,8 +256,8 @@ def chooseGame():
 	mute()
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
 	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
-	buttonColorList = ["#de2827","#171e78","#00FF00"];
-	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination","Mage Wars Academy"];
+	buttonColorList = ["#de2827","#171e78"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
@@ -269,10 +269,10 @@ def chooseGame():
 			setGlobalVariable("GameMode", "Domination")
 			loadMapFile()
 			break
-		elif choice == 3:
-			setGlobalVariable("GameMode", "Arena")
-			setAcademyBoard()
-			break
+#		elif choice == 3:
+#			setGlobalVariable("GameMode", "Arena")
+#			setAcademyBoard()
+#			break
 	'''	elif choice == 3:
 			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
 			setArenaBoard()
@@ -318,7 +318,7 @@ def defineRectangularMap(I,J,tilesize):
 		mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
 	mapDict["RDA"] = (2,2)
 	setGlobalVariable("Map", str(mapDict))
-	notify("AAAAA "+str(mapDict))
+	debug("AAAAA "+str(mapDict))
 
 def choosePlayerColor():
 	mute()
@@ -2531,8 +2531,15 @@ def validateDeck(deck):
 		#By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
 		if "Water" not in card.School and "Siren" in c.name and ("Song" in card.Subtype or "Drowned" in card.Subtype):
 			#subtract 1 per level per count as this card has been added x2 per non-trained school already
-			booktotal -= totalLevel
-			cost -= totalLevel;
+				if "+" in card.School:
+					level = card.Level.split("+")
+					for l in level:
+						booktotal -= int(l)
+				elif "/" in card.School:
+					level = card.Level.split("/")
+					booktotal -= int(level[0])
+				elif card.School != "": # only one school
+					booktotal -= int(card.Level)
 
 		#Paladin is trained in Holy Level 3 Spells, War Level 2 Spells, and all Holy Creatures reguardless of their training
 		#By this point, Level 3 and Lower Holy Spells and Level 2 and Lower War Spells have been correctly calculated, but spells higher then the specifed levels have been undercosted
