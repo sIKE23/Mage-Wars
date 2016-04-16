@@ -116,6 +116,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict.get('OwnerID'))
 		atkOS = Card(attack['OriginalSourceID'])
 		atkTraits = attack.get('Traits',{})
+		if not "Life" in defender.Stats: return False
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
 		# AOE attacks that don't affect attacker
 		elif (attack["Name"] in 
