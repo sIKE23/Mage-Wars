@@ -117,7 +117,10 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		atkOS = Card(attack['OriginalSourceID'])
 		atkTraits = attack.get('Traits',{})
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
-		debug("isLegalAttack:attack.get('RangeType'): {}".format(attack.get('RangeType')))
+		# AOE attacks that don't affect attacker
+		elif (attack["Name"] in 
+			["Blinding Flash", "Electrify", "Ring of Fire"] 
+			and attacker == defender): return False
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
 		if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
@@ -737,9 +740,18 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 		mute()
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
+		
+
 		if getSetting("BattleCalculator",True):
-				if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
+				#We can handle zone attacks here
+				if attack.get("Traits",{}).get("Zone Attack"):
+						targetList = [computeTraits(c) for c in getCardsInZone(getZoneContaining(defender))]
+						targetList = [t for t in targetList if isLegalAttack(aTraitDict,attack,t)]
+						for target in targetList:
+								remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,target])
 				else: remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
+				#if attacker.controller == me: declareAttackStep(aTraitDict,attack,dTraitDict)
+				#else: remoteCall(attacker.controller,'declareAttackStep',[aTraitDict,attack,dTraitDict])
 		else:
 				if attacker.controller == me: genericAttack(table)
 				else:
