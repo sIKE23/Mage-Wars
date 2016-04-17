@@ -162,6 +162,7 @@ gameBoardsDict = {
 				7 : {"boardName":"Westlock Apprentice - 3x2","zoneDef":(3,2,300),"buttonColor":"#171e78"},
 				8 : {"boardName":"OCTGN Forest Apprentice - 3x3","zoneDef":(3,3,300),"buttonColor":"#01603e"},
 				9 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"},
+				10 : {"boardName":"Academy - 1x2","zoneDef":(1,2,500),"buttonColor":"#fadda0"}
 					}
 
 ##########################		Lists			############################
