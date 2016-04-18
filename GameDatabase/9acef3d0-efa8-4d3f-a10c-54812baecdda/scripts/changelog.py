@@ -1,6 +1,7 @@
 changelog = {
 		1150000: ("1.15.0.0", "03 April 2016", [
 			" Please update your Image Pack!",
+			" Please update your Spellbook Builder Plugin!",
 			" Game Documents | Playing Mage Wars on OCTGN",
 			" Game Documents | OCTGN Apprentice Mode",
 			" Game Documents | How to Build your own Domination Map",
