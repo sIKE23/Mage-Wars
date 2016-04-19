@@ -197,6 +197,7 @@ namespace Octgn.MageWarsValidator
                             var level = Property(card, "Level");
                             var typestr = Property(card, "Type");
                             if (typestr.Equals("Conjuration-Wall")) typestr = "Conjuration";
+                            if (typestr.Equals("Conjuration-Terrain")) typestr = "Conjuration";
                             if (!reporttxt.Contains(typestr)) // has this type been listed before??
                             {
                                 reporttxt += string.Format("\n---  {0}  ---\n", typestr);
