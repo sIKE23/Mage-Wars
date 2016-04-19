@@ -2278,8 +2278,8 @@ def revealEnchantment(card):
 						notify("{} pays {} mana.".format(me,str(cost)))
 				for c,d in usedDiscounts: #track discount usage
 						rememberAbilityUse(c)
-				notify("{} reveals {}!".format(me,card))
 				flipcard(card)
+				notify("{} reveals {}!".format(me,card))
 				return True
 
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
