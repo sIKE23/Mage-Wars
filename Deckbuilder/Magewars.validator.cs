@@ -141,7 +141,7 @@ namespace Octgn.MageWarsValidator
                         hashtotal += card.GetHashCode() + card.Quantity;
 
                         //MessageBox.Show(String.Format("{0}", card.Name));
-                        if ("Mage" == Property(card, "Type"))
+                        if (Property(card, "Subtype").Contains("Mage"))
                         {
                             var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
                             var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
@@ -530,7 +530,7 @@ namespace Octgn.MageWarsValidator
                 {
                     foreach (var card in section.Cards)
                     {
-                        if (Property(card, "Type") == "Mage")
+                        if (Property(card, "Subtype").Contains("Mage"))
                         {
                             text.AppendLine("[mage]A " + card.Name + " Spellbook[/mage]");
 
@@ -638,7 +638,7 @@ namespace Octgn.MageWarsValidator
                 {
                     foreach (var card in section.Cards)
                     {
-                        if (Property(card, "Type") == "Mage")
+                        if (Property(card, "Subtype").Contains("Mage"))
                         {
                             text.AppendLine(card.Name);
                         }
