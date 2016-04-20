@@ -5,7 +5,6 @@ Cobra Reflexes
 Decoy
 Divine Intervention
 Dodge
-Enchantment Transfusion
 Falcon Precision
 Force Crush
 Force Hold
@@ -23,9 +22,7 @@ Avoid Attack
 Agony
 Bear Strength
 Critical Strike
-Decoy
 Divine Protection
-Enchantment Transfusion
 Hawkeye
 Lion Savagery
 Marked for Death
@@ -41,7 +38,6 @@ Barkskin
 Brace Yourself
 Bull Endurance
 Divine Intervention
-Enchantment Transfusion
 Fortified Position
 Gator Toughness
 Healing Charm
@@ -65,13 +61,10 @@ Additional Strikes
 Circle of Fire
 Circle of Light
 Circle of Lightning
-Enchantment Transfusion
 #
 Damage Barrier
-Enchantment Transfusion
 Retaliate
 #
 Counterstrike
-Enchantment Transfusion
 #
 Attack Ends
