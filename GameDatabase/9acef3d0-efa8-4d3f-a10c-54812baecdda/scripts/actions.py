@@ -2357,6 +2357,8 @@ def computeRevealCost(card): #For enchantment reveals
 				cost = 2*tLevel
 		elif name in ["Charm","Fumble"]:
 				cost = tLevel-1
+				cost -= 1
+				cost -= 1
 		if cost == None: return #If it doesn't fit an exception, the player will have to handle it.
 		traits = computeTraits(card)
 		if target.Subtype == "Mage":
