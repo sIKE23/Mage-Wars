@@ -2357,7 +2357,9 @@ def computeRevealCost(card): #For enchantment reveals
 				cost = 2*tLevel
 		elif name in ["Charm","Fumble"]:
 				cost = tLevel-1
+		elif name in ["Asyra's Touch","Badger Frenzy","Exile","Panther Stealth","Wolf Fury"] and tLevel == 1: #Level 1 Creatures Discount
 				cost -= 1
+		elif name in ["Sanctuary"] and tLevel <= 2: #Minor Creatures Discount
 				cost -= 1
 		if cost == None: return #If it doesn't fit an exception, the player will have to handle it.
 		traits = computeTraits(card)
