@@ -1407,7 +1407,7 @@ def computeTraits(card):
 										elif (cName == 'Victorian Griffin' and
 											  cardType == 'Creature'): remove('Elusive')
 										elif (cName == 'Steelclaw Cub' and
-											  cController == controller: append('Melee +1')
+											  cController == controller): append('Melee +1')
 								elif (cSubtype == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
