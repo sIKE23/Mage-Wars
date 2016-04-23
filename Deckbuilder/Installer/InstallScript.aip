@@ -11,10 +11,10 @@
     <ROW Property="LIMITUI" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="MSIFASTINSTALL" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="Manufacturer" Value="Mage Wars for OCTGN"/>
-    <ROW Property="ProductCode" Value="1033:{56330EB6-899C-47B9-850C-99285D009DD7} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{613A87A3-4E3B-4CCB-ADF4-261381E1C630} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="Mage Wars for OCTGN DeckBuilder Plugin Install v1.15.2.0"/>
-    <ROW Property="ProductVersion" Value="1.15.2.0" Type="32"/>
+    <ROW Property="ProductName" Value="Mage Wars for OCTGN DeckBuilder Plugin Install v1.15.4.0"/>
+    <ROW Property="ProductVersion" Value="1.15.4.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{C5C5B0E2-F8B4-4F5F-B6BB-879C69F7F5FE}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

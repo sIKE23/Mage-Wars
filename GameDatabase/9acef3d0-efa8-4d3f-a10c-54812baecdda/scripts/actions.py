@@ -2280,6 +2280,14 @@ def revealEnchantment(card):
 						rememberAbilityUse(c)
 				flipcard(card)
 				notify("{} reveals {}!".format(me,card))
+				if card.Name == "Healing Charm":
+						roll = rollDice(4)[0]
+						healAmount = roll[2] + 2*roll[3] + roll[4] + 2*roll[5]
+						if target.Subtype == "Mage":
+								target.Damage += healAmount
+						elif target.Type in ["Creature","Conjuration"] and target.Subtype != "Mage": 
+								target.markers[Damage] += healAmount
+						notify("Heal Charms heals {} of damage on {}!".format(healAmount,target))
 				return True
 
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
@@ -2532,9 +2540,9 @@ def validateDeck(deck):
 					booktotal += 1
 				debug("levels {}".format(levels))
 
-		#Siren is trained in Water and all spells with Song or Drowned subtype.
-		#By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
-		if "Water" not in card.School and "Siren" in c.name and ("Song" in card.Subtype or "Drowned" in card.Subtype):
+		#Siren is trained in Water and all spells with Song or or Pirate subtypes.
+		#By this point, Water has been correctly calculated, but the Song/Pirate spells are overcosted if they are not Water
+		if "Water" not in card.School and "Siren" in c.name and ("Song" in card.Subtype or "Pirate" in card.Subtype):
 			#subtract 1 per level per count as this card has been added x2 per non-trained school already
 				if "+" in card.School:
 					level = card.Level.split("+")

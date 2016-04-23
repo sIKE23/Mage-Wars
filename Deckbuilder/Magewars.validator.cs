@@ -303,10 +303,10 @@ namespace Octgn.MageWarsValidator
                                 //}
                             }
 
-                            //Siren is trained in Water and all spells with Song or Drowned subtype.
-                            //By this point, Water has been correctly calculated, but the Song/Drowned spells are overcosted if they are not Water
+                            //Siren is trained in Water and all spells with Song or Pirate subtypes.
+                            //By this point, Water has been correctly calculated, but the Song/Pirate spells are overcosted if they are not Water
                             if (magename.Contains("Siren") && !school.Contains("Water") &&
-                                (Property(card, "Subtype").Contains("Song") || Property(card, "Subtype").Contains("Drowned")))
+                                (Property(card, "Subtype").Contains("Song") || Property(card, "Subtype").Contains("Pirate")))
                             {
                                 //subtract 1 per level per count as this card has been added x2 per non-trained school already
                                 spellbook -= totalLevel * card.Quantity;

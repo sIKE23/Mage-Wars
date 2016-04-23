@@ -887,7 +887,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 								break
 						elif choice == 2:
 								if attacker.controller.damage > 1: attacker.controller.damage -= 2
-								elif attacker.controller.damage = 1: attacker.controller.damage -= 1
+								elif attacker.controller.damage == 1: attacker.controller.damage -= 1
 								break
 						elif choice == 3:
 								attacker.controller.mana += 1
@@ -1406,12 +1406,14 @@ def computeTraits(card):
 											  'Living' in rawTraitsList): append('Finite Life')
 										elif (cName == 'Victorian Griffin' and
 											  cardType == 'Creature'): remove('Elusive')
+										elif (cName == 'Steelclaw Cub' and
+											  cController == controller: append('Melee +1')
 								elif (cSubtype == 'Mage' and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
 								if ('Siren' in name and cType in ['Conjuration-Terrain'] and cSubtype == 'Water'): append('Regenerate 1')
 								if (name == 'Naiya' and cType in ["Conjuration-Terrain"] and cSubtype == 'Water'): extend(['Armor +1','Channeling +1'])
-						if cSubtype == 'Mage':
+						if 'Mage' in subtype:
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
 										traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
