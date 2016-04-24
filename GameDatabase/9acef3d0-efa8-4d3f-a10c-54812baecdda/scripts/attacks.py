@@ -1343,71 +1343,72 @@ def computeTraits(card):
 								elif cType == 'Incantation': pass
 								elif cType == 'Enchantment':
 										if (cName == 'Fortified Position' and
-											cardType == 'Creature' and
-											cController == controller and
-											'Corporeal' in rawTraitsList): append('Armor +2')
+												cardType == 'Creature' and
+												cController == controller and
+												'Corporeal' in rawTraitsList): append('Armor +2')
 										elif (cName == 'Sacred Ground' and
-											cController == controller and
-											cardType == 'Creature' and
-											'Living' in rawTraitsList): append('Aegis 1')
+												cController == controller and
+												cardType == 'Creature' and
+												'Living' in rawTraitsList): append('Aegis 1')
 										elif (cName == 'Astral Anchor' and
-											cardType == 'Creature'): append('Anchored')
+												cardType == 'Creature'): append('Anchored')
 										elif (cName == 'Standard Bearer' and
-											cController == controller and
-											getAttachTarget(c) != card and
-											cardType == 'Creature'): extend(['Melee +1','Armor +1'])
+												cController == controller and
+												getAttachTarget(c) != card and
+												cardType == 'Creature'): extend(['Melee +1','Armor +1'])
 										elif (cName == 'Consecrated Ground' and
-											  cardType == 'Creature' and
-											cController == controller and
-											  'Living' in rawTraitsList): append('Regenerate 1')
+												cardType == 'Creature' and
+												cController == controller and
+												'Living' in rawTraitsList): append('Regenerate 1')
 								elif cType == 'Conjuration' or cType == 'Conjuration-Terrain':
 										if (cName == 'Mohktari, Great Tree of Life' and
-											cController == controller and
-											cardType == 'Creature' and
-											'Living' in rawTraitsList): append('Regenerate 2')
+												cController == controller and
+												cardType == 'Creature' and
+												'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Raincloud' and
-											  cardType in ['Creature','Conjuration'] and
-											'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
+												cardType in ['Creature','Conjuration'] and
+												'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
 										elif (cName == 'Hellscape' and
-											  cardType == 'Creature' and
-											  "Demon" in subtype and
-											  'Living' in rawTraitsList): append('Regenerate 1')
+												cardType == 'Creature' and
+												"Demon" in subtype and
+												'Living' in rawTraitsList): append('Regenerate 1')
 										elif (cName == 'Shallow Sea' and
-											  cardType == 'Creature' and
-											  "Aquatic" in subtype): append('Melee +1')
+												cardType == 'Creature' and
+												"Aquatic" in subtype): append('Melee +1')
 										elif (cName == 'Steep Hill' and
-											  cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
+												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
 										elif (cName == 'Swamp' and cardType == 'Creature' and 
-											  (not 'Aquatic' in subtype) and 
-											  ("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
+												(not 'Aquatic' in subtype) and 
+												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
-											  cController == controller and
-											  cardType == 'Creature' and
-											  'Living' in rawTraitsList): append('Regenerate 1')
+												cController == controller and
+												cardType == 'Creature' and
+												'Living' in rawTraitsList): append('Regenerate 1')
 										elif (cName == 'Dorseus, Stallion of Westlock' and
-											  cController == controller and
-											  cardType == 'Creature' and
-											  'Living' in rawTraitsList): append('Regenerate 2')
+												cController == controller and
+												cardType == 'Creature' and
+												'Living' in rawTraitsList): append('Regenerate 2')
 										elif (name == 'Guard Dog'
-											and cController == controller
-											and not getAttachTarget(c)): append('Vigilant')
+												and cController == controller
+												and not getAttachTarget(c)): append('Vigilant')
 										elif (cName == 'Makunda' and
-											  cController == controller and
-											  c != card and
-											  cardType == 'Creature' and
-											  'Cat' in subtype): append('Piercing +1') #Long term, need to indicate that it is only melee attacks. For now, should not matter since no cats have ranged attacks.
+												cController == controller and
+												c != card and
+												cardType == 'Creature' and
+												'Cat' in subtype): append('Piercing +1') #Long term, need to indicate that it is only melee attacks. For now, should not matter since no cats have ranged attacks.
 										elif (cName == 'Redclaw, Alpha Male' and
-											  c != card and
-											  cardType == 'Creature' and
-											  'Canine' in subtype): extend(['Armor +1','Melee +1'])
+												c != card and
+												cardType == 'Creature' and
+												'Canine' in subtype): extend(['Armor +1','Melee +1'])
 										elif (cName == 'Sardonyx, Blight of the Living' and
-											  cardType == 'Creature' and
-											  'Living' in rawTraitsList): append('Finite Life')
+												cardType == 'Creature' and
+												'Living' in rawTraitsList): append('Finite Life')
 										elif (cName == 'Victorian Griffin' and
-											  cardType == 'Creature'): remove('Elusive')
+												cardType == 'Creature'): remove('Elusive')
 										elif (cName == 'Steelclaw Cub' and
-											  cController == controller): append('Melee +1')
+												name == 'Steelclaw Matriarch' and
+												cController == controller): append('Melee +1')
 								if ('Mage' in cSubtype and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
@@ -1426,8 +1427,8 @@ def computeTraits(card):
 										for a in table:
 												aSubtype = a.subtype
 												if (a.controller == controller and
-													'Animal' in aSubtype
-													and cardType == 'Creature'):
+														'Animal' in aSubtype and
+														cardType == 'Creature'):
 														if 'Canine' in aSubtype: canine = True
 														if 'Reptile' in aSubtype: reptile = True
 														if 'Bear' in aSubtype: bear = True
