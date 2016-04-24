@@ -645,7 +645,7 @@
 			<property name="Stats" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains the Melee +1 trait, and its melee attacks gain Piercing +1. If this creature is Level 1, reduce the reveal cost of Wolf Fury by 1.&#xD;&#xA;[Melee +1] [Piercing +1]" />
+			<property name="Text" value="This creature gains the Melee +1 trait, and its melee attacks gain Piercing +1. If this creature is Level 1, reduce the reveal cost of Wolf Fury by 1.&#xD;&#xA;[Melee +1]" />
 			<property name="CardID" value="MWA01E16" />
 		</card>
 
