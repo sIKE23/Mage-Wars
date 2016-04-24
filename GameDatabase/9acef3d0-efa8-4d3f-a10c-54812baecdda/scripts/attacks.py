@@ -401,7 +401,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 																	and (attacker and not hasAttackedThisTurn(attacker))
 																	and defender.type == 'Creature'
 																	and not dTraitDict.get('Nonliving')
-																	and attack.get("ActionType") == "Melee"
+																	and attack.get("RangeType") == "Melee"
 																	and not attack.get("Action") == "Trample"
 																	) else 0)
 				attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
