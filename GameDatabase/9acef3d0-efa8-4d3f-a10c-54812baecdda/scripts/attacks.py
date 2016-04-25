@@ -119,8 +119,8 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		if not "Life" in defender.Stats: return False
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
 		# AOE attacks that don't affect attacker
-		elif (attack["Name"] in 
-			["Blinding Flash", "Electrify", "Ring of Fire"] 
+		elif (attack["Name"] in
+			["Blinding Flash", "Electrify", "Ring of Fire"]
 			and attacker == defender): return False
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
@@ -316,7 +316,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 				elif (cName == "Badger Frenzy"
 					and attacker == getAttachTarget(c)
 					and attack.get('RangeType') in ["Melee","Counterstrike"]
-					and attack.get("Action") == "Quick"): 
+					and attack.get("Action") == "Quick"):
 						attack['Traits']['Doublestrike'] = True
 				elif (cName == "Lion Savagery"
 					  and attacker == getAttachTarget(c)
@@ -456,8 +456,6 @@ def canDeclareAttack(card):
 
 def rollDice(dice):
 	mute()
-	global diceBank
-	global diceBankD12
 	mapDict = eval(getGlobalVariable('Map'))
 	for c in table:
 			if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
@@ -466,37 +464,52 @@ def rollDice(dice):
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard.anchor = (True)
 	count = dice
-	if (len(diceBank) < count): #diceBankD6 is running low - fetch more
-			while (len(diceBank) < 50):
-					diceBank.append(randint(0,5))
+	if count == 0:
+		effectRoll = rollD12()
+		attackRoll = [0,0,0,0,0,0]
+	else:
+		attackRoll, effectRoll = rollD6(count)
+	#results of the roll with Normal/
+	normalDamage = attackRoll[2] + 2* attackRoll[3]
+	criticalDamage = attackRoll[4] + 2* attackRoll[5]
+	#defines the markers that will be displayed in the RA
+	dieCard.markers[attackDie[0]] = attackRoll[0]+attackRoll[1] # Blank Dice
+	dieCard.markers[attackDie[2]] = attackRoll[2] # 1 Normal Damage
+	dieCard.markers[attackDie[3]] = attackRoll[3] # 2 Normal Damage
+	dieCard.markers[attackDie[4]] = attackRoll[4] # 1 Critical Damage
+	dieCard.markers[attackDie[5]] = attackRoll[5] # 2 Critical Damage
+	dieCard.markers[DieD12] = effectRoll
 
-	result = [0,0,0,0,0,0]
+	playSoundFX('Dice')
+	time.sleep(1)
+	notify("{} rolled {} Normal Damage, {} Critical Damage, and {} on the effect die".format(me, normalDamage, criticalDamage, effectRoll))
+	return (attackRoll, effectRoll)
+
+def rollD6(dice):
+	mute()
+	global diceBankD6
+	count = dice
+	if (len(diceBankD6) < count):
+			while (len(diceBankD6) < 100):
+					diceBankD6.append(randint(0,5))
+	attackRoll = [0,0,0,0,0,0]
 	for x in range(count):
-			roll = int(diceBank.pop())
-			result[roll] += 1
-	#debug("diceRoller result: {}".format(result))
+			roll = int(diceBankD6.pop())
+			attackRoll[roll] += 1
+	effectRoll = rollD12()
+	debug("Raw Attack Dice Roll results: {} {}".format(attackRoll,effectRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
+	return attackRoll, effectRoll
 
-	damPiercing = result[4] + 2* result[5]
-	damNormal = result[2] + 2* result[3]
-	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
-	dieCard.markers[attackDie[2]] = result[2] #1
-	dieCard.markers[attackDie[3]] = result[3] #2
-	dieCard.markers[attackDie[4]] = result[4] #1*
-	dieCard.markers[attackDie[5]] = result[5] #2*
-
-	d12DiceCount = 1
-	if (len(diceBankD12) < d12DiceCount): #diceBankD12 is running low - fetch more
+def rollD12():
+	mute()
+	global diceBankD12
+	if (len(diceBankD12)) <= 1:
 			while (len(diceBankD12) < 50):
 					diceBankD12.append(randint(0,11))
-
-	effect = int(diceBankD12.pop()) + 1
-	dieCard.markers[DieD12] = effect
-	if getGlobalVariable("GameSetup") == "True":
-			playSoundFX('Dice')
-			time.sleep(1)
-			notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
-			return (result,effect)
+	effectRoll = int(diceBankD12.pop()) + 1
+	me.setGlobalVariable("DiceBankD12", str(diceBankD12))
+	return effectRoll
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -741,7 +754,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 		mute()
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
-		
+
 
 		if getSetting("BattleCalculator",True):
 				#We can handle zone attacks here
@@ -1377,8 +1390,8 @@ def computeTraits(card):
 												"Aquatic" in subtype): append('Melee +1')
 										elif (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
-										elif (cName == 'Swamp' and cardType == 'Creature' and 
-												(not 'Aquatic' in subtype) and 
+										elif (cName == 'Swamp' and cardType == 'Creature' and
+												(not 'Aquatic' in subtype) and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
@@ -1502,11 +1515,11 @@ def computeTraits(card):
 
 		for condtrait in ["Slow","Unmovable","Ranged +1"]:
 				for cond in ["Non-Flying"]:
-						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList and cond in rawTraitsList: 
+						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList and cond in rawTraitsList:
 								append(condtrait)
 
 		for nulltrait in ["Flying,Elusive"]:
-				if 'Non-{}'.format(nulltrait) in rawTraitsList: 
+				if 'Non-{}'.format(nulltrait) in rawTraitsList:
 						rawTraitsList = [t for t in list(rawTraitsList) if t != nulltrait and t != 'Non-{}'.format(nulltrait)]
 
 		for rawTrait in rawTraitsList:
