@@ -1514,7 +1514,7 @@ def subDamage(card, x = 0, y = 0):
 	if "Mage" in card.Subtype and card.controller == me:
 			me.Damage -= 1
 	else:
-			card.markers[Damage] += 1
+			card.markers[Damage] -= 1
 
 def clearTokens(card, x = 0, y = 0):
 	mute()
@@ -2297,11 +2297,11 @@ def revealEnchantment(card):
 				if card.Name == "Healing Charm":
 						roll = rollDice(4)[0]
 						healAmount = roll[2] + 2*roll[3] + roll[4] + 2*roll[5]
-						if target.Subtype == "Mage":
-								target.Damage += healAmount
-						elif target.Type in ["Creature","Conjuration"] and target.Subtype != "Mage":
-								target.markers[Damage] += healAmount
-						notify("Heal Charms heals {} of damage on {}!".format(healAmount,target))
+						if target.Subtype == "Mage" and target.controller == me:
+								me.Damage = 0 if me.Damage < healAmount else me.Damage - healAmount
+						elif "Creature" in target.Type and target.Subtype != "Mage" and target.controller == me:
+								target.markers[Damage] -= healAmount
+						notify("Heal Charm heals {} points of damage on {}!".format(healAmount,target))
 				return True
 
 def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spell> given <target>. NOT for revealing enchantments.
