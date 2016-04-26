@@ -1393,6 +1393,17 @@ def computeTraits(card):
 										elif (cName == 'Swamp' and cardType == 'Creature' and
 												(not 'Aquatic' in subtype) and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
+										elif cName == 'Ethereal Mist': append('Obscured')
+										elif ((cName == 'Corrosive Pool'  or 
+												cName == 'Molten Rock') and
+												cardType == 'Creature' and
+												'Corporeal' in rawTraitsList and
+												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): append('Hindered-if-Non-Flying')
+										elif cName == 'Samandriel’s Circle':
+												if cardType == 'Creature' and 'Living' in rawTraitsList: append('Regenerate 1')
+												elif cardType == 'Creature' and 'Nonliving' in rawTraitsList: append('Hindered')
+										elif (cName == 'Septagram' and
+												(not "Mage" in subtype): append('Warded')
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 												cController == controller and
