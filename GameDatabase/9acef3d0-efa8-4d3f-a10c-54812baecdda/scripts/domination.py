@@ -10,7 +10,7 @@ def checkDominationVictory():
 		goal = eval(getGlobalVariable("Goal")).get("Goal")
 		victoriousPlayers = []
 		for player in players:
-				mage = [c for c in table if c.Subtype == "Mage" and c.controller == player][0]
+				mage = [c for c in table if "Mage" in c.Subtype and c.controller == player][0]
 				vtar = mage.markers[VTar]
 				if vtar >= goal: victoriousPlayers.append([player,vtar])
 		soleWinner = None
@@ -31,7 +31,7 @@ def updateVtarScore():
 		notify("V'Tar Suppression, suppresses all V'Tar generation from V'Tar Orbs this round!")
 		vTarSuppression = "True"
 	for player in players:
-		mage = [c for c in table if c.Subtype == "Mage" and c.controller == player][0]
+		mage = [c for c in table if "Mage" in c.Subtype and c.controller == player][0]
 		controlMarkerColor = playerColorDict[int(mage.controller.getGlobalVariable("MyColor"))]["ControlMarker"]
 		vtarGain = len([1 for c in table if  ("V'Tar Orb" in c.name and c.markers[controlMarkerColor] and vTarSuppression == "False") or (c.name == "Galaxxus" and c.controller == mage.controller)])
 		if vtarGain:

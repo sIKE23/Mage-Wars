@@ -3,8 +3,8 @@
 	name="Conquest of Kumanjaro"
 	id="4943fc26-46c8-4f48-90d4-7db5d6ce6952"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	gameVersion="1.4.2.1"
-	version="1.15.0.0">
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
 	<markers>
 		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
 		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
@@ -12,54 +12,71 @@
 		<marker id="99381ac8-7d73-4d75-9787-60e6411d3613" name="Holy Avenger" />
 		<marker id="42f6cee3-3de4-4c90-a77c-9fb2c432d78d" name="Wounded Prey" />
 	</markers>
+
+
 	<cards>
 		<card id="e0a0b790-fbfb-4a08-a12e-77e415134391" name="Johktari Beastmaster">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
-			<property name="Level" value="6" />
-			<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
-			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
-			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-			<property name="Traits" value="Fast" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 				<alternate name="Johktari Beastmaster" type="B">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
-					<property name="Level" value="6" />
-					<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
-					<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
-					<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-					<property name="Traits" value="Fast" />
-					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
 				</alternate>
 		</card>
 		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Johktari Beastmaster Stats">
-		 <property name="Type" value="Magestats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
+			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="34" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="Traits" value="Fast" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
 		</card>
 		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
-			<property name="Level" value="6" />
-			<property name="MageTraining" value="Training: Trained In the Holy school. Dark spells cost triple during spellbook construction. The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only." />
-			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
-			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
-			<property name="AttackBar" value="Hand of Purification:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [d12] [9+ = Daze] [Ethereal]" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 end Piercing +1 for that attack. If it is destroyed, you may assign the marker again in the same manner. &#xD;&#xD;&#xA;Malakai’s Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
 				<alternate name="Priest" type="B">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
-					<property name="Level" value="6" />
-					<property name="MageTraining" value="Training: Trained In the Holy school. Dark spells cost triple during spellbook construction. The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only." />
-					<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
-					<property name="MageSchoolCost" value="Holy=1, Dark=3" />
-					<property name="AttackBar" value="Hand of Purification:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [d12] [9+ = Daze] [Ethereal]" />
-					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 end Piercing +1 for that attack. If it is destroyed, you may assign the marker again in the same manner. &#xD;&#xD;&#xA;Malakai’s Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
 				</alternate>
 		</card>
 		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest Stats">
-		 <property name="Type" value="Magestats" />
+		 	<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained In the Holy school. Dark spells cost triple during spellbook construction. The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only." />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="34" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="AttackBar" value="Hand of Purification:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [d12] [9+ = Daze] [Ethereal]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 and Piercing +1 for that attack. If it is destroyed, you may assign the marker again in the same manner. &#xD;&#xD;&#xA;Malakai’s Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
 		</card>
 
 
