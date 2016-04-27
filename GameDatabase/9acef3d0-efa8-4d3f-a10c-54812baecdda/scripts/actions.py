@@ -1732,14 +1732,15 @@ def flipcard(card, x = 0, y = 0):
 	# normal card flipping processing starts here
 	if card.isFaceUp == False:
 		card.isFaceUp = True
-		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
+		if card.Type != "Enchantment" and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
-		if card.Type == "Creature": #places action marker on card
+		if card.Type == "Creature" and not "Mage" in card.Subtype : #places action marker on card
 			toggleAction(card)
-		if "Mage" in card.Subtype: #once more to flip action to active side
-			toggleAction(card)
-			toggleQuick(card)
+		elif card.Type == "Creature" and "Mage" in card.Subtype: 
 			mageSetup()
+			toggleAction(card)
+			toggleAction(card) #ugh - flip action maker once more to active side
+			toggleQuick(card)
 			if "Wizard" in card.Name:
 					card.markers[VoltaricOFF] = 1
 			if "Forcemaster" == card.Name:

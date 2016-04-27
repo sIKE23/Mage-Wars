@@ -5,7 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="2.0.0.0" 
 	version="2.0.0.0"
-	hidden="True">
+	hidden="true">
 	<cards>
 		<card id="5fbc16dd-f861-42c2-ad0f-3f8aaf0ccb64" name="V&apos;Torrak" size="ModularBoardPieces" >
 			<property name="Type" value="Conjuration-Terrrain" />
@@ -29,7 +29,7 @@
 			<property name="Type" value="Conjuration-Terrrain" />
 		</card>
 		<card id="f8d70e09-2734-4de8-8351-66fa98ae0171" name="Ethereal Mist" size="ModularBoardPieces" >
-			<property name="Type" value="Conjuration-Terrrain />
+			<property name="Type" value="Conjuration-Terrrain" />
 		</card>			
 		<card id="4f1b033d-7923-4e0e-8c3d-b92ae19fbad1" name="Domination Tile" size="ModularBoardPieces" >
 			<property name="Type" value="Internal" />

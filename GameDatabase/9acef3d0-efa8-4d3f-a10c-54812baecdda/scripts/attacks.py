@@ -1399,7 +1399,7 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												'Corporeal' in rawTraitsList and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): append('Hindered-if-Non-Flying')
-										elif cName == 'Samandriel’s Circle':
+										elif cName == 'Samandriel&apos;s Circle':
 												if cardType == 'Creature' and 'Living' in rawTraitsList: append('Regenerate 1')
 												elif cardType == 'Creature' and 'Nonliving' in rawTraitsList: append('Hindered')
 										elif (cName == 'Septagram' and

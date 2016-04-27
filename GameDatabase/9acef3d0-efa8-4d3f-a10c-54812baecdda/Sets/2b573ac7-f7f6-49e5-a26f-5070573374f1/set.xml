@@ -45,7 +45,7 @@
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Defense=7+ 1x" />
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="10" />
-			<property name="StatDefense" value="Defense=7+ 1x"
+			<property name="StatDefense" value="Defense=7+ 1x" />
 			<property name="StatLife" value="32" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
