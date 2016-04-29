@@ -540,11 +540,13 @@ def onDeckLoaded(args):
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
 			setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
 			if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
+			mageDict = eval(me.getGlobalVariable("MageDict"))
 			for card in me.hand:
 				if card.Subtype == "Mage":
-						me.setGlobalVariable("MageID",str(card._id))
+						mageDict["MageID"] = card._id
 				elif card.Type == "Magestats":
-						me.setGlobalVariable("MageStatsID",str(card._id))
+						mageDict["MageStatsID"] = card._id
+			me.setGlobalVariable("MageDict",str(mageDict))
 			tutorialMessage("Play Card")
 		else:
 			#notify and delete deck
@@ -652,7 +654,7 @@ def onCardArrowTargeted(args):
 		mute()
 		attacker,defender = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
 		if args.player == me == attacker.controller and args.targeted:
-				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and (defender.type in ['Creature','Conjuration']):
+				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and ('Conjuration' in defender.type or defender.type == 'Creature'):
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
 						attack = diceRollMenu(attacker,defender)
@@ -785,19 +787,23 @@ def flipCoin(group, x = 0, y = 0):
 
 def mageSetup():
 	mute()
-	if me.getGlobalVariable("MageStatsID") == "False": return
-	mageID = int(me.getGlobalVariable("MageID"))
-	mageStatsID = int(me.getGlobalVariable("MageStatsID"))
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	if mageDict["MageStatsID"] == 00000: return #deck hasn't been loaded
+	mageID = int(mageDict["MageID"])
+	mageStatsID = int(mageDict["MageStatsID"])
 	#set initial health and channeling values
 	me.Channeling = int(Card(mageStatsID).StatChanneling)
 	me.Mana = me.Channeling + 10 + int(Card(mageStatsID).StatStartingMana)
 	me.Life = int(Card(mageStatsID).StatLife)
-	notify("{} Channeling is set to {} and Mana is set to {} and Life set to {}".format(me, me.Channeling,me.Mana,me.Life))
 	Card(mageID).Subtype = Card(mageStatsID).Subtype
 	Card(mageID).Level = Card(mageStatsID).Level
 	Card(mageID).Stats = Card(mageStatsID).Stats #havent decided if this is needed yet....proxygen??
 	Card(mageID).AttackBar = Card(mageStatsID).AttackBar
 	Card(mageID).Traits = Card(mageStatsID).Traits
+	mageDict["MageRevealed"] = 'True'
+	me.setGlobalVariable("MageDict",str(mageDict))
+	# here is where issue #360 should be called from.....
+	notify("{} enters the Arena! - Channeling is set to {} and Mana is set to {} and Life set to {}".format(Card(mageID),me.Channeling,me.Mana,me.Life))
 
 def createVineMarker(group, x=0, y=0):
 	mute()
@@ -1116,7 +1122,7 @@ def resolveUpkeep():
 			monolithUpKeepCost = 1
 			aZone = getZoneContaining(card)
 			bZone = getZoneContaining(HarshforgeMonolith)
-			if aZone == None: 
+			if aZone == None:
 					debug("Error: Harshforge Monolith: Card Name: {}, aZone: {}, bZone: {}".format(card,aZone,bZone))
 					continue
 			distance = zoneGetDistance(aZone,bZone)
@@ -1254,7 +1260,7 @@ def resolveRegeneration():
 							else:
 									me.damage -= regenAmount
 									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
-					elif card.Type in ['Creature','Conjuration']:
+					elif card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
 							damage = card.markers[Damage]
 							if damage <= regenAmount and damage != 0:
 									card.markers[Damage] = 0
@@ -1522,6 +1528,7 @@ typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
 def toggleAction(card, x=0, y=0):
 	mute()
 	myColor = int(me.getGlobalVariable("MyColor"))
+	mageDict = eval(me.getGlobalVariable("MageDict"))
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if myColor == "0":
 		whisper("Please perform player setup to initialize player color")
@@ -1529,56 +1536,56 @@ def toggleAction(card, x=0, y=0):
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
-			notify("{} readies Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Red Action Marker".format(card.Name))
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
-			notify("{} spends Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker".format(card.Name))
 	elif myColor == 2: # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
-			notify("{} readies Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Blue Action Marker".format(card.Name))
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
-			notify("{} spends Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker".format(card.Name))
 	elif myColor == 3: #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
-			notify("{} readies Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Green Action Marker".format(card.Name))
 		else:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
-			notify("{} spends Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker".format(card.Name))
 	elif myColor == 4: #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
-			notify("{} readies Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Yellow Action Marker".format(card.Name))
 		else:
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
-			notify("{} spends Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker".format(card.Name))
 	elif myColor == 5: #Purple
 		if card.markers[ActionPurpleUsed] > 0:
 			card.markers[ActionPurple] = 1
 			card.markers[ActionPurpleUsed] = 0
-			notify("{} readies Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Purple Action Marker".format(card.Name))
 		else:
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
-			notify("{} spends Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker".format(card.Name))
 	elif myColor == 6: #Grey
 		if card.markers[ActionGreyUsed] > 0:
 			card.markers[ActionGrey] = 1
 			card.markers[ActionGreyUsed] = 0
-			notify("{} readies Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Grey Action Marker".format(card.Name))
 		else:
 			card.markers[ActionGrey] = 0
 			card.markers[ActionGreyUsed] = 1
-			notify("{} spends Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker".format(card.Name))
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
@@ -1648,14 +1655,15 @@ def toggleReadyII(card, x=0, y=0):
 def toggleQuick(card, x=0, y=0):
 	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	mageDict = eval(me.getGlobalVariable("MageDict"))
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
-		notify("{} spends Quickcast action".format(card.Name))
+		if mageDict['MageRevealed'] == 'True': notify("{} spends Quickcast action".format(card.Name))
 	else:
 		card.markers[Quick] = 1
 		card.markers[QuickBack] = 0
-		notify("{} readies Quickcast Marker".format(card.Name))
+		if mageDict['MageRevealed'] == 'True': notify("{} readies Quickcast Marker".format(card.Name))
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
@@ -1736,11 +1744,11 @@ def flipcard(card, x = 0, y = 0):
 			card.highlight = None
 		if card.Type == "Creature" and not "Mage" in card.Subtype : #places action marker on card
 			toggleAction(card)
-		elif card.Type == "Creature" and "Mage" in card.Subtype: 
-			mageSetup()
+		elif card.Type == "Creature" and "Mage" in card.Subtype:
 			toggleAction(card)
-			toggleAction(card) #ugh - flip action maker once more to active side
+			toggleAction(card) #Mages always start with an active action marker
 			toggleQuick(card)
+			mageSetup()
 			if "Wizard" in card.Name:
 					card.markers[VoltaricOFF] = 1
 			if "Forcemaster" == card.Name:
@@ -2291,7 +2299,7 @@ def revealEnchantment(card):
 						healAmount = roll[2] + 2*roll[3] + roll[4] + 2*roll[5]
 						if target.Subtype == "Mage":
 								target.Damage += healAmount
-						elif target.Type in ["Creature","Conjuration"] and target.Subtype != "Mage": 
+						elif target.Type in ["Creature","Conjuration"] and target.Subtype != "Mage":
 								target.markers[Damage] += healAmount
 						notify("Heal Charms heals {} of damage on {}!".format(healAmount,target))
 				return True
@@ -2377,7 +2385,7 @@ def computeRevealCost(card): #For enchantment reveals
 				cost -= 1
 		if cost == None: return #If it doesn't fit an exception, the player will have to handle it.
 		traits = computeTraits(card)
-		if target.Subtype == "Mage":
+		if "Mage" in target.Subtype:
 				cost += traits.get("Magebind",0)
 		return cost
 
