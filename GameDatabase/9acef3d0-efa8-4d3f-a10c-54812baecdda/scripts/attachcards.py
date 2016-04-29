@@ -252,7 +252,7 @@ def canAttach(card,target):
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
 			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
-			(cTargetBar == 'Corporeal Conjuration or Creature' and tType in ['Creature','Conjuration'] and traits.get('Corporeal')) or
+			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or
 			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
@@ -368,7 +368,7 @@ def canBind(card,target):
 		or not target.isFaceUp): return False
 	tName = target.Name
 #Familiars
-	if ((tName == 'Goblin Builder' and 'Conjuration' in cType and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+	if ((tName == 'Goblin Builder' and 'Conjuration' in cType and card.Name not in ['Tanglevine','Stranglevine','Quicksand'])
 		or (tName == 'Thoughtspore' and cType in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Wizard\'s Tower' and cType == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
 		or (tName == 'Sersiryx, Imp Familiar' and ((cType == 'Attack' and 'Fire' in card.School) or (cType == 'Enchantment' and 'Curse' in cSubtype)) and sum([int(i) for i in card.level.split('+')])<=2)
@@ -390,7 +390,7 @@ def canBind(card,target):
 		or (tName == 'Graveyard' and cType == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
 		or (tName == 'Seedling Pod' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Plant' in cSubtype and target.markers[Mana] >= 3)
 		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
-		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in cSubtype)
+		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Vine' in cSubtype)
 		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
 		or (tName == 'Triton\'s Horn' and cType == 'Creature' and 'Water' in card.School)
 		or (tName == 'Spawning Grounds' and cType == 'Creature' and 'Aquatic' in cSubtype)

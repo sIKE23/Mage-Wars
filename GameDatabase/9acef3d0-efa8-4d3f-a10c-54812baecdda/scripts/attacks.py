@@ -85,7 +85,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 				if specialCase == 'Counterstrike' and a.get('RangeType') != 'Counterstrike': continue
 				if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
 				else: attackList.remove(a)
-		if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall']:
+		if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
 				choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
 		if specialCase == 'Counterstrike': choiceText = "{} can counterstrike! Use which attack?".format(attacker.name)
 		colors = ([] if attacker else ['#E0B525']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
@@ -1379,7 +1379,7 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Raincloud' and
-												cardType in ['Creature','Conjuration'] and
+												('Conjuration' in cardType or cardType == 'Creature') and
 												'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
 										elif (cName == 'Hellscape' and
 												cardType == 'Creature' and
@@ -1413,9 +1413,10 @@ def computeTraits(card):
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 2')
-										elif (name == 'Guard Dog'
-												and cController == controller
-												and not getAttachTarget(c)): append('Vigilant')
+										elif (name == 'Guard Dog' and
+												cController == controller and
+												'Conjuration' in cardType and
+												not getAttachTarget(c)): append('Vigilant')
 										elif (cName == 'Makunda' and
 												cController == controller and
 												c != card and
@@ -1469,7 +1470,7 @@ def computeTraits(card):
 						elif (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
 						elif (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
 						elif (cName == 'Mordok\'s Obelisk' and cardType == 'Creature'): append('Upkeep +1')
-						elif (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall']): append('Finite Life')
+						elif (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
 						elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						elif (cName == 'Rolling Fog'): append('Obscured')
 						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')

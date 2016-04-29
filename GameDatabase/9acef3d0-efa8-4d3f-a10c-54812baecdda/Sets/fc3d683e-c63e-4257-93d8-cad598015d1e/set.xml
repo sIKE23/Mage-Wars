@@ -39,6 +39,11 @@
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple." />
 			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="30" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
@@ -66,6 +71,11 @@
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
 			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Poison Immunity" />
@@ -990,9 +1000,11 @@
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">
 			<property name="Type" value="Conjuration-Vine" />
 			<property name="Stats" value="Armor=-, Life=1" />
+			<property name="Level" value="0" />
 				<alternate name="Vine Marker Black" type="B">
 					<property name="Type" value="Conjuration-Vine" />
 					<property name="Stats" value="Armor=-, Life=1" />
+					<property name="Level" value="0" />
 				</alternate>
 		</card>
 	</cards>
