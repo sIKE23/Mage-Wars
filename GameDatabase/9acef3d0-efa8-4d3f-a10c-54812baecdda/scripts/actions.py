@@ -800,9 +800,9 @@ def mageSetup():
 	Card(mageID).Stats = Card(mageStatsID).Stats #havent decided if this is needed yet....proxygen??
 	Card(mageID).AttackBar = Card(mageStatsID).AttackBar
 	Card(mageID).Traits = Card(mageStatsID).Traits
-	mageDict["MageRevealed"] = 'True'
+	mageDict["MageRevealed"] = "True"
 	me.setGlobalVariable("MageDict",str(mageDict))
-	# here is where issue #360 should be called from.....
+	# here is where issue #360 should be called from.....and replace the line below.
 	notify("{} enters the Arena! - Channeling is set to {} and Mana is set to {} and Life set to {}".format(Card(mageID),me.Channeling,me.Mana,me.Life))
 
 def createVineMarker(group, x=0, y=0):
@@ -1748,7 +1748,7 @@ def flipcard(card, x = 0, y = 0):
 			toggleAction(card)
 			toggleAction(card) #Mages always start with an active action marker
 			toggleQuick(card)
-			mageSetup()
+			if mageDict["'MageRevealed"] == "False": mageSetup()
 			if "Wizard" in card.Name:
 					card.markers[VoltaricOFF] = 1
 			if "Forcemaster" == card.Name:
@@ -2174,7 +2174,7 @@ def castSpell(card,target=None):
 		binder = getBindTarget(card)
 		caster = getBindTarget(card)
 		if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
-				casters = [d for d in table if d.Subtype == "Mage" and d.isFaceUp and d.controller == me]
+				casters = [d for d in table if "Mage" in d.Subtype and d.isFaceUp and d.controller == me]
 				if casters: caster = casters[0]
 				else:
 						whisper("And just who do you expect to cast that? You need to play a mage first.")

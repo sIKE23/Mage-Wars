@@ -432,7 +432,7 @@
 		<card id="fd339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off">
 			<property name="Type" value="Conjuration" />
 				<alternate name="V&apos;Tar Orb On" type="B">
-					<property name="Type" value="Conjuration"/>
+					<property name="Type" value="Conjuration" />
 				</alternate>
 		</card>	
 

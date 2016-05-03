@@ -116,6 +116,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict.get('OwnerID'))
 		atkOS = Card(attack['OriginalSourceID'])
 		atkTraits = attack.get('Traits',{})
+		if defender.name == "V'Tar Orb Off": return True
 		if not "Life" in defender.Stats: return False
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
 		# AOE attacks that don't affect attacker
@@ -894,17 +895,24 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				buttonColorList = ["#de2827","#171e78","#01603e"]
 				buttonList = ["Gain 2 Mana","Heal 2 damage","Gain 1 Mana and Heal 1 damage"]
 				while (True):
-						choice = askChoice("When the Orb was touched and was Powered On, it released a small amount of residual energy and your Mage may choose immediate bonus!",buttonList,buttonColorList)
+						choice = askChoice("As the Orb Powered On by the touch of the {}, it released a small amount of residual energy, your Mage may choose how to use this energy as an immediate bonus!".format(attacker.name),buttonList,buttonColorList)
 						if choice == 1:
 								attacker.controller.mana += 2
+								notify("{} Gains 2 Mana from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 						elif choice == 2:
-								if attacker.controller.damage > 1: attacker.controller.damage -= 2
-								elif attacker.controller.damage == 1: attacker.controller.damage -= 1
+								if attacker.controller.damage > 1: 
+										attacker.controller.damage -= 2
+										notify("{} Heals 2 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
+								elif attacker.controller.damage == 1: 
+										attacker.controller.damage -= 1
+										notify("{} Heals 1 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 						elif choice == 3:
 								attacker.controller.mana += 1
-								if attacker.controller.damage >= 1: attacker.controller.damage -= 1
+								if attacker.controller.damage >= 1: 
+										attacker.controller.damage -= 1
+										notify("{} Heals 1 Damage and Gains 1 Mana when a small amount of residual energy was released by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 				return
 		elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
