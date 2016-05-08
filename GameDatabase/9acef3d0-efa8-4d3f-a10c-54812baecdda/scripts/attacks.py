@@ -742,27 +742,33 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 	attacker = Card(aTraitDict['OwnerID'])
 	defender = Card(dTraitDict['OwnerID'])
 	
-
 	if getSetting("BattleCalculator",True):
 		attack_traits = attack.get("Traits",{})
 		#1. Check for interception on ranged single target attacks
 		if attack.get("RangeType") == "Ranged" and not attack_traits.get("Zone Attack"):
 			# Get list of valid interceptors
 			guard_dicts = [computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.markers[Guard] and c != defender and c.controller == defender.controller]
-			interceptor_dicts = [d for d in guard_dicts if d.get("Intercept") and not ("Restrained" in d or "Incapacitated" in d)]
+			interceptor_dicts = [d for d in guard_dicts if d.get("Intercept") and not ("Restrained" in d or "Incapacitated" in d) and isLegalAttack(aTraitDict,attack,d)]
 			if interceptor_dicts:
 				# Ask player which, if any, of the interceptors they would like to act
-				choice_text = "{} is being targeted by {}'s {}. Would you like to intercept the attack?".format(defender.Name,attacker.Name,attack.get("Name"))
-				choice_options = ["Intercept with {}".format(Card(d["OwnerID"]).Name) for d in interceptor_dicts] + ["Don't intercept"]
-				choice_colors = ["#009933" for d in interceptor_dicts] + ["#ff0000"]
-				choice = askChoice(choice_text,choice_options,choice_colors)
-				if 1 <= choice <= len(interceptor_dicts):
+				menu_text = "{} is being targeted by {}'s {}. Would you like to intercept the attack?".format(defender.Name,attacker.Name,attack.get("Name"))
+				to_text = lambda x: "Intercept with {}".format(Card(x["OwnerID"]).Name) if x else "Don't intercept"
+				to_color = lambda x: "#009933" if x else "#ff0000"
+				choice = listQuery(menu_text,interceptor_dicts,to_text,to_color)
+				if choice:
+					notify("{} leaps in front of {} to intercept the attack!".format(Card(choice["OwnerID"]),defender))
+					dTraitDict = choice
+					defender = Card(choice["OwnerID"])
+				#choice_options = ["Intercept with {}".format(Card(d["OwnerID"]).Name) for d in interceptor_dicts] + ["Don't intercept"]
+				#choice_colors = ["#009933" for d in interceptor_dicts] + ["#ff0000"]
+				#choice = askChoice(choice_text,choice_options,choice_colors)
+				#if 1 <= choice <= len(interceptor_dicts):
 					# Switch target to selected interceptor
-					iTraitDict = interceptor_dicts[choice-1]
-					interceptor = Card(iTraitDict['OwnerID'])
-					notify("{} leaps in front of {} to intercept the attack!".format(interceptor,defender))
-					dTraitDict = iTraitDict
-					defender = interceptor
+					#iTraitDict = interceptor_dicts[choice-1]
+					#interceptor = Card(iTraitDict['OwnerID'])
+					#notify("{} leaps in front of {} to intercept the attack!".format(interceptor,defender))
+					#dTraitDict = iTraitDict
+					#defender = interceptor
 					#defender.markers[Guard] = 0 #We should eventually change this so that it auto-removes guard. However, we cannot do this here as it would get rid of guard bonuses such as the Gargoyle sentry. The token must be removed upon completion of the attack.
 
 		#2. Handle Zone attacks

@@ -2026,6 +2026,14 @@ def boolQuery(query_text,true_text,false_text): # string -> string -> string -> 
 	if askChoice(query_text,[true_text,false_text],["#009933","#ff0000"]) == 1: return True
 	return False
 
+def listQuery(query_text,list,to_text,to_color): # string -> list<T> -> ( Option<T> -> string ) -> ( Option<T> -> color ) -> Option<T>
+	"""Takes a list and two functions. One function converts an element in the list into a string, the other converts to a color. Returns the selected element of the list."""
+	options = [to_text(e) for e in list] + [to_text(None)]
+	colors = [to_color(e) for e in list] + [to_color(None)]
+	choice = askChoice(query_text,options,colors)
+	if 0 < choice < len(options): return list[choice-1]
+	return None
+
 #Check see if a card at x1,y1 overlaps a card at x2,y2
 #Both have size w, h
 def overlaps(x1, y1, x2, y2, w, h):
