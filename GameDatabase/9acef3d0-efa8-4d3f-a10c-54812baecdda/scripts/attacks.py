@@ -792,6 +792,10 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		mute()
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
+		#1. Check whether any creatures in the zone are guarding and not restrained. If they are, and this is not one of them, cancel attack (if melee)
+		if (not "Elusive" in aTraitDict) and attack.get("RangeType") == "Melee" and not defender.markers[Guard]:
+			guard_dicts = [ computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.markers[Guard] and c.controller != attacker.controller ]
+
 		atkOS = Card(attack['OriginalSourceID'])
 		if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
 		#Check for helm of fear

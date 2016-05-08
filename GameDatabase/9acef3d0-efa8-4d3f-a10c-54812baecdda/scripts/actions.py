@@ -2021,6 +2021,10 @@ def createCard(group,x=0,y=0):
 							notify("*** ILLEGAL *** - Spellbook is no longer valid")
 						notify("A card was created and was placed into {}'s spellbook.".format(me))
 
+def boolQuery(query_text,true_text,false_text): # string -> string -> string -> bool
+	"""A generic boolean query menu with customizable text for both options"""
+	if askChoice(query_text,[true_text,false_text],["#009933","#ff0000"]) == 1: return True
+	return False
 
 #Check see if a card at x1,y1 overlaps a card at x2,y2
 #Both have size w, h
