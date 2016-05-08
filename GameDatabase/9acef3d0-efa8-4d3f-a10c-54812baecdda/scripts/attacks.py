@@ -795,6 +795,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		#1. Check whether any creatures in the zone are guarding and not restrained. If they are, and this is not one of them, cancel attack (if melee)
 		if (not "Elusive" in aTraitDict) and attack.get("RangeType") == "Melee" and not defender.markers[Guard]:
 			guard_dicts = [ computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.markers[Guard] and c.controller != attacker.controller ]
+			if [ True for d in guard_dicts if not ("Restrained" in d or "Incapacitated" in d or "Pest" in d) ] and not boolQuery("There appear to be guards in this zone. Continue with attack?","Yes, ignore the guards","No, cancel attack."): return
 
 		atkOS = Card(attack['OriginalSourceID'])
 		if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
