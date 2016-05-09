@@ -941,6 +941,8 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								attachedCard.moveTo(me.piles['Discard'])
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.".format(me))
+				#if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor":
+		#damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll) - Akiro's Favor		
 		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
 		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
@@ -1140,7 +1142,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 																   drainableHealth,
 																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
 		#Reconstruct - Devouring Jelly for now
-		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and attacker.markers[Damage] > 0):
+		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and damage and attacker.markers[Damage] > 0):
 				cDamage = attacker.markers[Damage]
 				reconstructAmount = 2
 				if cDamage <= 2:
