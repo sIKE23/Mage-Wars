@@ -252,7 +252,7 @@ def canAttach(card,target):
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
 			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
-			(cTargetBar == 'Corporeal Conjuration or Creature' and tType in ['Creature','Conjuration'] and traits.get('Corporeal')) or
+			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or
 			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
@@ -271,16 +271,16 @@ def canAttach(card,target):
 			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
-			(cTargetBar == 'Mage' and tSubtype == 'Mage') or
-			(cTargetBar == 'Paladin Mage' and tSubtype == 'Mage' and tName == 'Paladin') or
+			(cTargetBar == 'Mage' and 'Mage' not in tSubtype) or
+			(cTargetBar == 'Paladin Mage' and 'Mage' in tSubtype and tName == 'Paladin') or
 			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
 			(cTargetBar == 'Non-Flying Corporeal Creature' and tType == 'Creature' and not traits.get('Flying') and traits.get('Corporeal')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal') and traits.get('Nonliving')) or
-			(cTargetBar == 'Non-Mage Corporeal Creature' and tType == 'Creature' and tSubtype != 'Mage' and traits.get('Corporeal')) or
-			(cTargetBar == 'Non-Mage Creature' and tType == 'Creature' and tSubtype != 'Mage' ) or
-			(cTargetBar == 'Non-Mage Living Creature' and tType == 'Creature' and tSubtype != 'Mage' and traits.get('Living')) or
-			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType == 'Creature' and tSubtype != 'Mage' and traits.get('Living') and not traits.get('Epic')) or
-			(cTargetBar == 'Non-Mage Object' and tSubtype != 'Mage') or
+			(cTargetBar == 'Non-Mage Corporeal Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Corporeal')) or
+			(cTargetBar == 'Non-Mage Creature' and tType == 'Creature' and 'Mage' not in tSubtype) or
+			(cTargetBar == 'Non-Mage Living Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living')) or
+			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living') and not traits.get('Epic')) or
+			(cTargetBar == 'Non-Mage Object' and 'Mage' not in tSubtype) or
 			(cTargetBar == 'Zone or Object') or
 			(cTargetBar == 'Object or Zone')): return True
 	elif ((cType == 'Equipment' and tSubtype == 'Mage') or
@@ -368,7 +368,7 @@ def canBind(card,target):
 		or not target.isFaceUp): return False
 	tName = target.Name
 #Familiars
-	if ((tName == 'Goblin Builder' and 'Conjuration' in cType and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
+	if ((tName == 'Goblin Builder' and 'Conjuration' in cType and card.Name not in ['Tanglevine','Stranglevine','Quicksand'])
 		or (tName == 'Thoughtspore' and cType in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Wizard\'s Tower' and cType == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
 		or (tName == 'Sersiryx, Imp Familiar' and ((cType == 'Attack' and 'Fire' in card.School) or (cType == 'Enchantment' and 'Curse' in cSubtype)) and sum([int(i) for i in card.level.split('+')])<=2)
@@ -390,7 +390,7 @@ def canBind(card,target):
 		or (tName == 'Graveyard' and cType == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
 		or (tName == 'Seedling Pod' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Plant' in cSubtype and target.markers[Mana] >= 3)
 		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
-		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in cSubtype)
+		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Vine' in cSubtype)
 		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
 		or (tName == 'Triton\'s Horn' and cType == 'Creature' and 'Water' in card.School)
 		or (tName == 'Spawning Grounds' and cType == 'Creature' and 'Aquatic' in cSubtype)
@@ -583,7 +583,7 @@ def snapToZone(card):
 	zoneList = getZonesBordering(card)
 	if zoneList:
 			zone = zoneClosest(zoneList,card)
-			if card.Target == 'Zone' or card.Subtype == "Mage" or not card.isFaceUp: #snap to zone
+			if card.Target == 'Zone' or "Mage" in card.Subtype or not card.isFaceUp: #snap to zone
 					snapX,snapY = zoneGetContain(zone,card)
 					card.moveToTable(snapX,snapY)
 			elif card.type == 'Conjuration-Wall': #snap to zone border

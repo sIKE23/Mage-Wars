@@ -3,8 +3,8 @@
 	name="Mage Wars Battlegrounds: Domination" 
 	id="8c377c82-86af-45ca-ac7c-75230b803532" 
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
-	gameVersion="1.4.2.1" 
-	version="1.15.0.0">
+	gameVersion="2.0.0.0" 
+	version="2.0.0.0">
 	<markers>
 		<marker id="3c74d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />		
 		<marker id="c56839d2-46f4-49a8-85e4-3838e7f09cc2" name="Control Marker Red" />
@@ -15,6 +15,8 @@
 		<marker id="1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" name="Grey Control Marker" />
 		<marker id="9ea607d3-dade-44dc-a69d-1c0d5691a246" name="Taunt (Skeelax)" />
 	</markers>
+
+
 	<cards>
 		<card id="2bc9e256-d325-435a-81ea-e6ad31b3f56b" name="Bolt of V&apos;Tar">
 			<property name="Type" value="Attack" />
@@ -430,7 +432,7 @@
 		<card id="fd339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off">
 			<property name="Type" value="Conjuration" />
 				<alternate name="V&apos;Tar Orb On" type="B">
-					<property name="Type" value="Conjuration"/>
+					<property name="Type" value="Conjuration" />
 				</alternate>
 		</card>	
 

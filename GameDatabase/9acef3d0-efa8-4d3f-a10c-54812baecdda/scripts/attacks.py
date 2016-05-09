@@ -85,7 +85,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 				if specialCase == 'Counterstrike' and a.get('RangeType') != 'Counterstrike': continue
 				if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
 				else: attackList.remove(a)
-		if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall']:
+		if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
 				choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
 		if specialCase == 'Counterstrike': choiceText = "{} can counterstrike! Use which attack?".format(attacker.name)
 		colors = ([] if attacker else ['#E0B525']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
@@ -116,11 +116,12 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict.get('OwnerID'))
 		atkOS = Card(attack['OriginalSourceID'])
 		atkTraits = attack.get('Traits',{})
+		if defender.name == "V'Tar Orb Off": return True
 		if not "Life" in defender.Stats: return False
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
 		# AOE attacks that don't affect attacker
-		elif (attack["Name"] in 
-			["Blinding Flash", "Electrify", "Ring of Fire"] 
+		elif (attack["Name"] in
+			["Blinding Flash", "Electrify", "Ring of Fire"]
 			and attacker == defender): return False
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
@@ -254,7 +255,7 @@ def getAttackList(card):
 						if aDict.get('Dice')!=None: attackList.append(aDict) #For now, ignore abilities without a die roll. Maybe we can include them later...
 
 		for c in table:
-				if card.Subtype == "Mage":
+				if "Mage" in card.Subtype:
 						if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack') and
 							(getBindTarget(c) == card or (not canDeclareAttack(getBindTarget(c)) if getBindTarget(c) else True)) and
 							not c.markers[Disable]): attackList.extend(getAttackList(c))
@@ -299,8 +300,8 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		#Bloodfire Helmet Demon buff
 		if attacker.Subtype == "Demon" and [1 for c in table if c.Name=="Bloodfire Helmet" and c.isFaceUp and c.controller == attacker.controller] and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
 		#Wounded prey
-		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and (attacker.controller != defender.controller or (attacker.controller == defender.controller and card.special == "Scenario")) and (attacker.Subtype == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
-		#if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and (attacker.Subtype == "Mage" or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and (attacker.controller != defender.controller or (attacker.controller == defender.controller and card.special == "Scenario")) and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+		#if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
 		attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
 		if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
 		if attack.get('RangeType') == 'Melee':
@@ -316,7 +317,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 				elif (cName == "Badger Frenzy"
 					and attacker == getAttachTarget(c)
 					and attack.get('RangeType') in ["Melee","Counterstrike"]
-					and attack.get("Action") == "Quick"): 
+					and attack.get("Action") == "Quick"):
 						attack['Traits']['Doublestrike'] = True
 				elif (cName == "Lion Savagery"
 					  and attacker == getAttachTarget(c)
@@ -327,7 +328,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 					attack.get('RangeType') in ['Melee','Counterstrike']): attack['Traits']['Piercing'] += 1
 				elif c.controller == attacker.controller: #Friendly effects
 						aType = attack.get('Type')
-						if (attacker.Subtype == "Mage" and
+						if ( "Mage" == attacker.Subtype and
 							((cName == 'Dawnbreaker Ring' and aType == 'Light') or
 							 (cName == 'Fireshaper Ring' and aType == 'Flame') or
 							 (cName == 'Lightning Ring' and aType == 'Lightning'))):
@@ -393,11 +394,11 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Tangleroot"]: attackDice -= 1
 
 				level = eval(attacker.Level)
-				if Card(attack['OriginalSourceID']).name in listMageWeapons and attacker.Subtype == "Mage" and level >= 5: attackDice += 1
+				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
 				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
 		if defender:
 				attackDice -= dTraitDict.get('Aegis',0)
-				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or (defender.Subtype == "Mage" and defender.controller.Damage))
+				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or ("Mage" in defender.Subtype and defender.controller.Damage))
 																	and (attacker and not hasAttackedThisTurn(attacker))
 																	and defender.type == 'Creature'
 																	and not dTraitDict.get('Nonliving')
@@ -456,8 +457,6 @@ def canDeclareAttack(card):
 
 def rollDice(dice):
 	mute()
-	global diceBank
-	global diceBankD12
 	mapDict = eval(getGlobalVariable('Map'))
 	for c in table:
 			if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
@@ -466,37 +465,52 @@ def rollDice(dice):
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
 	dieCard.anchor = (True)
 	count = dice
-	if (len(diceBank) < count): #diceBankD6 is running low - fetch more
-			while (len(diceBank) < 50):
-					diceBank.append(randint(0,5))
+	if count == 0:
+		effectRoll = rollD12()
+		attackRoll = [0,0,0,0,0,0]
+	else:
+		attackRoll, effectRoll = rollD6(count)
+	#results of the roll with Normal/
+	normalDamage = attackRoll[2] + 2* attackRoll[3]
+	criticalDamage = attackRoll[4] + 2* attackRoll[5]
+	#defines the markers that will be displayed in the RA
+	dieCard.markers[attackDie[0]] = attackRoll[0]+attackRoll[1] # Blank Dice
+	dieCard.markers[attackDie[2]] = attackRoll[2] # 1 Normal Damage
+	dieCard.markers[attackDie[3]] = attackRoll[3] # 2 Normal Damage
+	dieCard.markers[attackDie[4]] = attackRoll[4] # 1 Critical Damage
+	dieCard.markers[attackDie[5]] = attackRoll[5] # 2 Critical Damage
+	dieCard.markers[DieD12] = effectRoll
 
-	result = [0,0,0,0,0,0]
+	playSoundFX('Dice')
+	time.sleep(1)
+	notify("{} rolled {} Normal Damage, {} Critical Damage, and {} on the effect die".format(me, normalDamage, criticalDamage, effectRoll))
+	return (attackRoll, effectRoll)
+
+def rollD6(dice):
+	mute()
+	global diceBankD6
+	count = dice
+	if (len(diceBankD6) < count):
+			while (len(diceBankD6) < 100):
+					diceBankD6.append(randint(0,5))
+	attackRoll = [0,0,0,0,0,0]
 	for x in range(count):
-			roll = int(diceBank.pop())
-			result[roll] += 1
-	#debug("diceRoller result: {}".format(result))
+			roll = int(diceBankD6.pop())
+			attackRoll[roll] += 1
+	effectRoll = rollD12()
+	debug("Raw Attack Dice Roll results: {} {}".format(attackRoll,effectRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
+	return attackRoll, effectRoll
 
-	damPiercing = result[4] + 2* result[5]
-	damNormal = result[2] + 2* result[3]
-	dieCard.markers[attackDie[0]] = result[0]+result[1] #blanks
-	dieCard.markers[attackDie[2]] = result[2] #1
-	dieCard.markers[attackDie[3]] = result[3] #2
-	dieCard.markers[attackDie[4]] = result[4] #1*
-	dieCard.markers[attackDie[5]] = result[5] #2*
-
-	d12DiceCount = 1
-	if (len(diceBankD12) < d12DiceCount): #diceBankD12 is running low - fetch more
+def rollD12():
+	mute()
+	global diceBankD12
+	if (len(diceBankD12)) <= 1:
 			while (len(diceBankD12) < 50):
 					diceBankD12.append(randint(0,11))
-
-	effect = int(diceBankD12.pop()) + 1
-	dieCard.markers[DieD12] = effect
-	if getGlobalVariable("GameSetup") == "True":
-			playSoundFX('Dice')
-			time.sleep(1)
-			notify("{} rolled {} normal damage, {} critical damage, and {} on the effect die".format(me,damNormal,damPiercing,effect))
-			return (result,effect)
+	effectRoll = int(diceBankD12.pop()) + 1
+	me.setGlobalVariable("DiceBankD12", str(diceBankD12))
+	return effectRoll
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -641,7 +655,7 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
 		for c in table:
 				if (dTraitDict.get("Incapacitated") and not ("Autonomous" in c.Traits or c.Name in ["Force Orb","Force Sword"])): continue
 				if c.Name=="Dancing Scimitar" and timesHasUsedAbility(c) > 0: continue #Dancing Scimitar's defense is only once per round.
-				if c.isFaceUp and (getAttachTarget(c) == defender or (defender.Subtype == "Mage" and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone' and (c.controller == defender.controller if c.type == "Equipment" else True)) and not c.markers[Disable]):
+				if c.isFaceUp and (getAttachTarget(c) == defender or ("Mage" in defender.Subtype and c.type in ['Enchantment','Equipment'] and not getAttachTarget(c) and not c.Target == 'Zone' and (c.controller == defender.controller if c.type == "Equipment" else True)) and not c.markers[Disable]):
 						rawText = c.text.split('\r\n[')
 						traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [') if (t.strip('[]')[0:8]=='Defense ' and t.strip('[]')[8]!='+')] if len(rawText) == 2 else [])
 						if traitsGranted:
@@ -825,7 +839,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		atkOS = Card(attack['OriginalSourceID'])
 		if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
 		#Check for helm of fear
-		if defender.Subtype == "Mage" and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') == 'Melee') and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
+		if "Mage" in defender.Subtype and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') == 'Melee') and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
 				notify("The Helm of Fear radiates a terrifying aura!")
 				damageRoll,effectRoll = rollDice(0)
 				if effectRoll >= 9:
@@ -911,17 +925,24 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				buttonColorList = ["#de2827","#171e78","#01603e"]
 				buttonList = ["Gain 2 Mana","Heal 2 damage","Gain 1 Mana and Heal 1 damage"]
 				while (True):
-						choice = askChoice("When the Orb was touched and was Powered On, it released a small amount of residual energy and your Mage may choose immediate bonus!",buttonList,buttonColorList)
+						choice = askChoice("As the Orb Powered On by the touch of the {}, it released a small amount of residual energy, your Mage may choose how to use this energy as an immediate bonus!".format(attacker.name),buttonList,buttonColorList)
 						if choice == 1:
 								attacker.controller.mana += 2
+								notify("{} Gains 2 Mana from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 						elif choice == 2:
-								if attacker.controller.damage > 1: attacker.controller.damage -= 2
-								elif attacker.controller.damage == 1: attacker.controller.damage -= 1
+								if attacker.controller.damage > 1: 
+										attacker.controller.damage -= 2
+										notify("{} Heals 2 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
+								elif attacker.controller.damage == 1: 
+										attacker.controller.damage -= 1
+										notify("{} Heals 1 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 						elif choice == 3:
 								attacker.controller.mana += 1
-								if attacker.controller.damage >= 1: attacker.controller.damage -= 1
+								if attacker.controller.damage >= 1: 
+										attacker.controller.damage -= 1
+										notify("{} Heals 1 Damage and Gains 1 Mana when a small amount of residual energy was released by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 				return
 		elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
@@ -950,6 +971,8 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								attachedCard.moveTo(me.piles['Discard'])
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.".format(me))
+				#if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor":
+		#damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll) - Akiro's Favor		
 		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
 		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
@@ -1105,7 +1128,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 		#if "Vine Marker" in defender.Name: drainableHealth = 0
 		#else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
-		if defender.Subtype == "Mage": defender.controller.Damage += damage
+		if "Mage" in defender.Subtype: defender.controller.Damage += damage
 		else: defender.markers[Damage] += damage
 		notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
 																	str(damage),
@@ -1149,7 +1172,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 																   drainableHealth,
 																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
 		#Reconstruct - Devouring Jelly for now
-		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and attacker.markers[Damage] > 0):
+		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and damage and attacker.markers[Damage] > 0):
 				cDamage = attacker.markers[Damage]
 				reconstructAmount = 2
 				if cDamage <= 2:
@@ -1162,7 +1185,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 		effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
 		for e in effects:
 				if e in conditionsList:
-						if e == "Damage" and defender.Subtype == "Mage": defender.controller.damage += 1
+						if e == "Damage" and "Mage" in defender.Subtype: defender.controller.damage += 1
 						else: defender.markers[eval(e)]+=1
 				notify('{} {}'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
@@ -1195,7 +1218,7 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		mute()
 		card = ""
 		card = Card(cardTraitsDict.get('OwnerID'))
-		if card.Subtype == "Mage": return
+		if "Mage" in card.Subtype: return
 
 		choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
 						   ["Yes","No"],
@@ -1249,7 +1272,7 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 		normalD = 0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal
 		criticalD = critical + (normal if atkTraits.get('Critical Damage') else 0)
 
-		if defender.Subtype == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt
+		if "Mage" in defender.Subtype and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt
 				reduction = min(criticalD,2)
 				criticalD -= reduction
 				normalD += reduction
@@ -1296,7 +1319,7 @@ def healingQuery(traitDict,queryText,healingAmt,notifyText):
 		choice = askChoice(queryText,['Yes','No'],["#01603e","#de2827"])
 		if choice == 1:
 				healed = 0
-				if card.Subtype == "Mage":
+				if "Mage" in card.Subtype:
 						healed = min(card.controller.Damage,healingAmt)
 						card.controller.Damage -= healed
 				else:
@@ -1396,7 +1419,7 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 2')
 										elif (cName == 'Raincloud' and
-												cardType in ['Creature','Conjuration'] and
+												('Conjuration' in cardType or cardType == 'Creature') and
 												'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
 										elif (cName == 'Hellscape' and
 												cardType == 'Creature' and
@@ -1407,9 +1430,20 @@ def computeTraits(card):
 												"Aquatic" in subtype): append('Melee +1')
 										elif (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
-										elif (cName == 'Swamp' and cardType == 'Creature' and 
-												(not 'Aquatic' in subtype) and 
+										elif (cName == 'Swamp' and cardType == 'Creature' and
+												(not 'Aquatic' in subtype) and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
+										elif cName == 'Ethereal Mist': append('Obscured')
+										elif ((cName == 'Corrosive Pool'  or 
+												cName == 'Molten Rock') and
+												cardType == 'Creature' and
+												'Corporeal' in rawTraitsList and
+												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): append('Hindered-if-Non-Flying')
+										elif cName == 'Samandriel&apos;s Circle':
+												if cardType == 'Creature' and 'Living' in rawTraitsList: append('Regenerate 1')
+												elif cardType == 'Creature' and 'Nonliving' in rawTraitsList: append('Hindered')
+										elif (cName == 'Septagram' and
+												(not "Mage" in subtype)): append('Warded')
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 												cController == controller and
@@ -1419,9 +1453,10 @@ def computeTraits(card):
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 2')
-										elif (name == 'Guard Dog'
-												and cController == controller
-												and not getAttachTarget(c)): append('Vigilant')
+										elif (name == 'Guard Dog' and
+												cController == controller and
+												'Conjuration' in cardType and
+												not getAttachTarget(c)): append('Vigilant')
 										elif (cName == 'Makunda' and
 												cController == controller and
 												c != card and
@@ -1475,7 +1510,7 @@ def computeTraits(card):
 						elif (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
 						elif (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
 						elif (cName == 'Mordok\'s Obelisk' and cardType == 'Creature'): append('Upkeep +1')
-						elif (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall']): append('Finite Life')
+						elif (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
 						elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						elif (cName == 'Rolling Fog'): append('Obscured')
 						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
@@ -1532,11 +1567,11 @@ def computeTraits(card):
 
 		for condtrait in ["Slow","Unmovable","Ranged +1"]:
 				for cond in ["Non-Flying"]:
-						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList and cond in rawTraitsList: 
+						if '{}-if-{}'.format(condtrait,cond) in rawTraitsList and cond in rawTraitsList:
 								append(condtrait)
 
 		for nulltrait in ["Flying,Elusive"]:
-				if 'Non-{}'.format(nulltrait) in rawTraitsList: 
+				if 'Non-{}'.format(nulltrait) in rawTraitsList:
 						rawTraitsList = [t for t in list(rawTraitsList) if t != nulltrait and t != 'Non-{}'.format(nulltrait)]
 
 		for rawTrait in rawTraitsList:
@@ -1579,7 +1614,7 @@ state of the game and the cards attached to it.
 """
 
 def getStatusDict(card): #Will later expand to make this more useful
-		if card.Subtype == "Mage": return {'Damage' : card.controller.Damage, 'Mana' : card.controller.Mana}
+		if "Mage" in card.Subtype: return {'Damage' : card.controller.Damage, 'Mana' : card.controller.Mana}
 		else: return {'Damage' : card.markers[Damage], 'Mana' : card.markers[Mana]}
 
 def computeArmor(aTraitDict,attack,dTraitDict):
@@ -1588,8 +1623,8 @@ def computeArmor(aTraitDict,attack,dTraitDict):
 
 def getRemainingLife(cTraitDict):
 		card = Card(cTraitDict.get('OwnerID'))
-		damage =  card.markers[Damage] + card.markers[Tainted]*3 + (card.controller.damage if card.Subtype == "Mage" else 0)
-		life = (card.controller.life if card.Subtype == "Mage" else (getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0)))
+		damage =  card.markers[Damage] + card.markers[Tainted]*3 + (card.controller.damage if "Mage" in card.Subtype else 0)
+		life = (card.controller.life if "Mage" in card.Subtype else (getStat(card.Stats,'Life') + cTraitDict.get('Life',0) + cTraitDict.get('Innate Life',0)))
 		if life: return max(life - damage,0)
 
 ############################################################################
@@ -1671,7 +1706,7 @@ def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
 		normalD = 0 if (dTraitDict.get('Resilient') or atkTraits.get('Critical Damage')) else normal
 		criticalD = critical + (normal if atkTraits.get('Critical Damage') else 0)
 
-		if defender.Subtype == "Mage" and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt in damage prediction
+		if "Mage" in defender.Subtype and [1 for c in table if c.isFaceUp and c.Name == "Veteran's Belt" and c.controller == defender.controller]: #handle veteran's belt in damage prediction
 				reduction = min(criticalD,2)
 				criticalD -= reduction
 				normalD += reduction
