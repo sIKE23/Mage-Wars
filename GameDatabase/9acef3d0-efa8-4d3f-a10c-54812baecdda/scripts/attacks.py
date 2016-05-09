@@ -1625,24 +1625,44 @@ def comboDistr(dice):
 	return distrDict
 
 def expectedDamage(aTraitDict,attack,dTraitDict):
-		dice= attack.get('Dice',0)
-		armor=computeArmor(aTraitDict,attack,dTraitDict)
-		atkTraits = attack.get('Traits',{})
-		if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
-		else: return
-		if dTraitDict.get('Incorporeal'): return (float(dice) if atkTraits.get('Ethereal') else float(dice)/3)
-		return sum([computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict)*distrDict[key] for key in distrDict])/float(6**dice)
+	dice= attack.get('Dice',0)
+	armor=computeArmor(aTraitDict,attack,dTraitDict)
+	atkTraits = attack.get('Traits',{})
+	if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
+	else: return
+	if dTraitDict.get('Incorporeal'): return (float(dice) if atkTraits.get('Ethereal') else float(dice)/3)
+	return sum([computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict)*distrDict[key] for key in distrDict])/float(6**dice)
 
 def chanceToKill(aTraitDict,attack,dTraitDict):
-		dice = attack.get('Dice',0)
-		armor = computeArmor(aTraitDict,attack,dTraitDict)
-		defender = Card(dTraitDict['OwnerID'])
-		life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
-		atkTraits = attack.get('Traits',{})
-		if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
-		else: return
-		if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
-		return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
+	dice = attack.get('Dice',0)
+	#armor = computeArmor(aTraitDict,attack,dTraitDict)
+	defender = Card(dTraitDict['OwnerID'])
+	life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
+	atkTraits = attack.get('Traits',{})
+	if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
+	else: return
+	if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
+	return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
+
+def computeDamageDistribution(aTraitDict,attack,dTraitDict): # dict: traitdict -> dict: attackdict -> dict: traitdict -> Option<dict<nat:float>>
+	"""Returns a dictionary where each key is a nat associated with the probability of inflicting that amount of damage"""
+	dice = attack.get('Dice',0)
+	output = {}
+	#1. For incorporeal opponents, a simple combinatorial calculation will suffice
+	if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')):
+		for n in range(dice+1):
+			output[n] = nCr(dice,n)*(2**n)*(4**(dice-n))/float(6**dice)
+		return output
+
+	#2. Otherwise, retrieve the distrdict; if there is none, return a NoneType
+	distrDict = damageDict.get(dice)
+	if not distrDict: return
+	#23. Iterate over the numbers between 0 and 2*dice. For each number, compute the probability of that number occurring
+	for n in range(dice*2+1):
+		#4. Compute list of damages matching n
+		matches = [distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) == n]
+		output[n] = sum(matches)/float(6**dice)
+	return output
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict["OwnerID"])

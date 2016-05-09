@@ -2032,7 +2032,6 @@ def listQuery(query_text,list,to_text,to_color): # string -> list<T> -> ( Option
 	colors = [to_color(e) for e in list] + [to_color(None)]
 	choice = askChoice(query_text,options,colors)
 	if 0 < choice < len(options): return list[choice-1]
-	return None
 
 #Check see if a card at x1,y1 overlaps a card at x2,y2
 #Both have size w, h
