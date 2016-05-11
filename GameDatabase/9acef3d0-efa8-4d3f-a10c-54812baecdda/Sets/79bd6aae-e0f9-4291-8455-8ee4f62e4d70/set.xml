@@ -650,7 +650,7 @@
 			<property name="Cost" value="2+1" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
-			<property name="Target" value="Living Creature" />
+			<property name="Target" value="Friendly Living Creature" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />

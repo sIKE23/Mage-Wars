@@ -457,34 +457,34 @@ def canDeclareAttack(card):
 
 def rollDice(dice):
 	mute()
+	if dice == 0: attackRoll = [0,0,0,0,0,0]
+	else: attackRoll = rollD6(dice)
+	effectRoll = rollD12()
+	displayRoll(attackRoll,effectRoll)
+	return (attackRoll, effectRoll)
+
+def displayRoll(attackRoll,effectRoll):
+	mute()
 	mapDict = eval(getGlobalVariable('Map'))
 	for c in table:
 			if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
-
 	dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field 1
+	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field
 	dieCard.anchor = (True)
-	count = dice
-	if count == 0:
-		effectRoll = rollD12()
-		attackRoll = [0,0,0,0,0,0]
-	else:
-		attackRoll, effectRoll = rollD6(count)
-	#results of the roll with Normal/
-	normalDamage = attackRoll[2] + 2* attackRoll[3]
-	criticalDamage = attackRoll[4] + 2* attackRoll[5]
-	#defines the markers that will be displayed in the RA
-	dieCard.markers[attackDie[0]] = attackRoll[0]+attackRoll[1] # Blank Dice
-	dieCard.markers[attackDie[2]] = attackRoll[2] # 1 Normal Damage
-	dieCard.markers[attackDie[3]] = attackRoll[3] # 2 Normal Damage
-	dieCard.markers[attackDie[4]] = attackRoll[4] # 1 Critical Damage
-	dieCard.markers[attackDie[5]] = attackRoll[5] # 2 Critical Damage
-	dieCard.markers[DieD12] = effectRoll
+	
+	normalDamage = attackRoll[2] + 2* attackRoll[3] # calculate the results for Normal Damage
+	criticalDamage = attackRoll[4] + 2* attackRoll[5] # calculate the results for Critical Damage
 
+	#defines the markers that will be displayed in the RDA
+	dieCard.markers[attackDie[0]] = attackRoll[0]+attackRoll[1] # Blank Dice
+	dieCard.markers[attackDie[2]] = attackRoll[2] # display 1 Normal Damage
+	dieCard.markers[attackDie[3]] = attackRoll[3] # display 2 Normal Damage
+	dieCard.markers[attackDie[4]] = attackRoll[4] # display 1 Critical Damage
+	dieCard.markers[attackDie[5]] = attackRoll[5] # display 2 Critical Damage
+	dieCard.markers[DieD12] = effectRoll
 	playSoundFX('Dice')
 	time.sleep(1)
 	notify("{} rolled {} Normal Damage, {} Critical Damage, and {} on the effect die".format(me, normalDamage, criticalDamage, effectRoll))
-	return (attackRoll, effectRoll)
 
 def rollD6(dice):
 	mute()
@@ -497,10 +497,9 @@ def rollD6(dice):
 	for x in range(count):
 			roll = int(diceBankD6.pop())
 			attackRoll[roll] += 1
-	effectRoll = rollD12()
-	debug("Raw Attack Dice Roll results: {} {}".format(attackRoll,effectRoll))
+	debug("Raw Attack Dice Roll results: {}".format(attackRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
-	return attackRoll, effectRoll
+	return attackRoll
 
 def rollD12():
 	mute()
@@ -845,7 +844,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				if effectRoll >= 9:
 						notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.name.split(',')[0]))
 						return
-				else: notify("{} resists the urge to panic!".format(attacker.name.split(',')[0]))
+				else:
+						notify("{} resists the urge to panic!".format(attacker.name.split(',')[0]))
 		#Remember arcane zap
 		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
 		#If the defender is not flying, the attacker should lose the flying trait
@@ -857,10 +857,19 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				notify("{} is rolling the Effect Die to check the Dazed condition.".format(attacker))#gotta figure that gender thing of yours out.
 				damageRoll,effectRoll = rollDice(0)
 				if effectRoll < 7:
-						notify("{} is so dazed that it completely misses!".format(attacker))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
-						return
+						for attachedCard in getAttachments(attacker):
+								if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
+										choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Effect Die?",["Yes!","No!"],["#171e78","#de2827"])
+										if choice == 1:
+												notify("With Akiro looking over his shoulder {} has decided to reroll his Effect Die!".format(me))
+												effectRoll = rollD12()
+												toggleReady(attachedCard)
+								displayRoll(damageRoll,effectRoll)
+								if effectRoll < 7:
+										notify("{} is so dazed that it completely misses!".format(attacker))
+										rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+										interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
+										return
 				else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker))
 		interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
@@ -919,6 +928,18 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				notify('Error: invalid attack format - no dice found')
 				return
 		damageRoll,effectRoll = rollDice(dice)
+		for attachedCard in getAttachments(attacker):
+				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
+						choice = askChoice("You have Akiro's Favor! What would you like to re-roll?",["Re-roll Attack Dice","Re-roll Effect Die","Nothing!"],["#ff0000","#ebc815","#171e78"])
+						if choice == 1:
+								notify("With Akiro looking over his shoulder {} has decided to re-roll his Attack Dice!".format(me))
+								damageRoll = rollD6(sum(damageRoll))
+								toggleReady(attachedCard)
+						elif choice == 2:
+								notify("With Akiro looking over his shoulder {} has decided to re-roll his Effect Die!".format(me))
+								effectRoll = rollD12()
+								toggleReady(attachedCard)
+				displayRoll(damageRoll,effectRoll)
 		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
 				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
 				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
@@ -971,8 +992,6 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								attachedCard.moveTo(me.piles['Discard'])
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.".format(me))
-				#if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor":
-		#damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll) - Akiro's Favor		
 		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
 		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
