@@ -2439,12 +2439,13 @@ def inspectCard(card, x = 0, y = 0):
 			whisper("{}: {}".format(k, card.properties[k]))
 
 def validateDeck(deck):
+	mute()
 	for c in deck:
-		if c.Subtype == "Mage":
-			stats = c.Stats.split(",")
-			schoolcosts = c.MageSchoolCost.replace(' ','').split(",")
+			if c.Type == "Magestats":
+					stats = c.Stats.split(",")
+					schoolcosts = c.MageSchoolCost.replace(' ','').split(",")
+					mageName = c.name.split(" Stats")[0]
 			break
-
 	#debug("Stats {}".format(stats))
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 
@@ -2618,28 +2619,27 @@ def validateDeck(deck):
 
 		if "Only" in card.Traits:	#check for school/mage restricted cards
 			ok = False
-			magename = c.Name
-			if "Beastmaster" in magename:
-				magename = "Beastmaster"
-			if "Wizard" in magename:
-				magename = "Wizard"
-			if "Warlock" in magename:
-				magename = "Warlock"
-			if "Warlord" in magename:
-				magename = "Warlord"
-			if "Priest" in magename:
-				magename = "Priestess"
-			if "Paladin" in magename:
-				magename = "Paladin"
-			if "Siren" in magename:
-				magename = "Siren"
-			if magename in card.Traits:	#mage restriction
-				ok = True
-			for s in [school for school in spellbook if spellbook[school] == 1]:
-				if s + " Mage" in card.Traits:
+			if "Beastmaster" in mageName:
+				mageName = "Beastmaster"
+			if "Wizard" in mageName:
+				mageName = "Wizard"
+			if "Warlock" in mageName:
+				mageName = "Warlock"
+			if "Warlord" in mageName:
+				mageName = "Warlord"
+			if "Priest" in mageName:
+				mageName = "Priestess"
+			if "Paladin" in mageName:
+				mageName = "Paladin"
+			if "Siren" in mageName:
+				mageName = "Siren"
+			if mageName in card.Traits:	# mage restriction
+				ok = True				
+			for s in [school for school in spellbook if spellbook[school] == 1]: # school restriction
+				if s + " Mage" in card.Traits: # s will hold the school like Holy or Dark
 					ok = True
 			if not ok:
-				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name, c.Name))
+				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name,mageName))
 				return False
 
 		l = 0	#check spell number restrictions
