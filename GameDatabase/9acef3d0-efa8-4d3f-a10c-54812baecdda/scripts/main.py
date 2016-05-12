@@ -284,18 +284,19 @@ def targetMenu(source,target):
 	if isValidAttackSource(source) and isValidAttackTarget(target) and getSetting('BattleCalculator',True):
 		aTraitDict = computeTraits(source)
 		dTraitDict = computeTraits(target)
-		attack = attackChoicePrompt(source,target)#diceRollMenu(source,target)
-		if attack:
-			if attack.get("Cost") and not payForAttackSpell(me,attack): return
-			if attack.get('SourceID')==source._id:
-				remoteCall(target.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
-				source.arrow(target,False)
-				return
-			elif attack.get("Dice"): 
-				notify("Attack cannot be parsed by Battle Calculator; rolling dice manually.")
-				rollDice(attack.get("Dice"))
-				source.arrow(target,False)
-				return
+		diceRollMenu(source,target)
+		#attack = attackChoicePrompt(source,target)#
+		#if attack:
+		#	if attack.get("Cost") and not payForAttackSpell(me,attack): return
+		#	if attack.get('SourceID')==source._id:
+		#		remoteCall(target.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
+		#		source.arrow(target,False)
+		#		return
+		#	elif attack.get("Dice"): 
+		#		notify("Attack cannot be parsed by Battle Calculator; rolling dice manually.")
+		#		rollDice(attack.get("Dice"))
+		#		source.arrow(target,False)
+		#		return
 	else:
 		if source.Type == "Enchantment" and not source.isFaceUp and castSpell(source,target):
 			attach(source,target)

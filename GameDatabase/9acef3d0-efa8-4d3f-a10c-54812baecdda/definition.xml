@@ -21,6 +21,8 @@
 		<script src="scripts/attachcards.py" />
 		<script src="scripts/textfunctions.py" />
 		<script src="scripts/domination.py" />
+		<script src="scripts/cardActions.py" />
+		<script src="scripts/main.py" />
 	</scripts>
 	<events>
 		<event name="OnTableLoaded" action="onTableLoaded" />
@@ -31,6 +33,7 @@
 		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved" />
 		<event name="OnCardArrowTargeted" action="onCardArrowTargeted" />
 		<event name="OnCardDoubleClicked" action="onCardDoubleClicked" />
+		<event name="OnCardClicked" action="onCardClicked" />
 	</events>
 	<sounds>
 		<sound name="Dice" src="Sounds/dice.mp3" />
@@ -238,7 +241,7 @@
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
 			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
 			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
-			<cardaction menu="Use Untargeted Ability" shortcut="TAB" execute="useUntargetedAbility" />
+			<cardaction menu="Card Actions Menu" shortcut="TAB" execute="actionMenu" />
 			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction" />
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
 			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />

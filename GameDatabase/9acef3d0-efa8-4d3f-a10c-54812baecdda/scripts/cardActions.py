@@ -2,6 +2,26 @@
 ##########################    v2.00.0.0     ###############################
 ###########################################################################
 
+###############################
+######     Targeting     ######
+###############################
+
+passOnClick = None
+
+def listenForClick(arg):
+	global passOnClick
+	whisper(arg.get("Click Prompt","Left click to select target"))
+	passOnClick = arg
+
+def onCardClicked(args):
+	#args = card, mouseButton, keysDown
+	global passOnClick
+	if passOnClick != None: #TODO - restrict to only left click
+		function,argument = passOnClick["function"],passOnClick
+		argument["target"] = args.card
+		function(argument)
+		passOnClick = None
+
 #Label spell functions associated with card actions with "CA", e.g. CA_Guard, CA_Attack, etc.
 #On spells, label with before CA (bCA) and after CA (aCA) to indicated whether the effect should be  done before or after the card action.
 #Here is the function for generating the spell list.
@@ -53,7 +73,8 @@ def CA_Attack(arg):
 		target = arg2["target"]
 		if isValidAttackTarget(target): 
 			actor.arrow(target,True)
-			targetMenu(actor,target)
+			diceRollMenu(actor,target)
+			#targetMenu(actor,target)
 		else:
 			whisper("That is not a valid attack target!")
 	arg["function"] = clickFunction
