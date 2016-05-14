@@ -859,12 +859,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				if effectRoll < 7:
 						for attachedCard in getAttachments(attacker):
 								if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
-										choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Effect Die?",["Yes!","No!"],["#171e78","#de2827"])
-										if choice == 1:
-												notify("With Akiro looking over his shoulder {} has decided to reroll his Effect Die!".format(me))
-												effectRoll = rollD12()
-												toggleReady(attachedCard)
-								displayRoll(damageRoll,effectRoll)
+										damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,2)
 								if effectRoll < 7:
 										notify("{} is so dazed that it completely misses!".format(attacker))
 										rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
@@ -927,19 +922,19 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		if dice < 0:
 				notify('Error: invalid attack format - no dice found')
 				return
-		damageRoll,effectRoll = rollDice(dice)
+		damageRoll,effectRoll = rollDice(dice) #base roll
+		# Gloves of Skill re-roll opportunity
+		if "Mage" in attacker.Subtype and [1 for c in table if c.Name=="Gloves of Skill" and c.isFaceUp and c.controller == attacker.controller] and (attack.get('RangeType') == 'Ranged') and not timesHasOccured("Gloves of Skill",attacker.controller):
+				choice = askChoice("Was your aim true? If not your Gloves of Skill will let you re-roll your Attack Dice?",["Yes! Re-Roll the Attack Dice!","No! Let them be!"],["#171e78","#de2827"])
+				if choice == 1:
+						notify("With the Gloves of Skill guiding their hands {} has decided to re-roll the Attack Dice!".format(me))
+						damageRoll = rollD6(sum(damageRoll))
+						rememberPlayerEvent("Gloves of Skill")
+				displayRoll(damageRoll,effectRoll)
+		# Akrio's Favor re-roll opportunity
 		for attachedCard in getAttachments(attacker):
 				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
-						choice = askChoice("You have Akiro's Favor! What would you like to re-roll?",["Re-roll Attack Dice","Re-roll Effect Die","Nothing!"],["#ff0000","#ebc815","#171e78"])
-						if choice == 1:
-								notify("With Akiro looking over his shoulder {} has decided to re-roll his Attack Dice!".format(me))
-								damageRoll = rollD6(sum(damageRoll))
-								toggleReady(attachedCard)
-						elif choice == 2:
-								notify("With Akiro looking over his shoulder {} has decided to re-roll his Effect Die!".format(me))
-								effectRoll = rollD12()
-								toggleReady(attachedCard)
-				displayRoll(damageRoll,effectRoll)
+						damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,1)
 		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
 				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
 				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
@@ -1053,6 +1048,39 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		setEventList('Turn',[]) #Clear the turn event list
+		
+def akirosFavor(card,damageRoll,effectRoll,selection):
+	mute()
+	# the fucntion will all a player to Akiro's Favor to re-roll the appropriate dice based on the choices avaialbale
+	# 1 - prompt to re-roll both Dice, 2 - prompt to re-roll only the effect die, 3 - prompt to re-roll only the attack dice
+	effectRoll = effectRoll
+	damageRoll = damageRoll
+	akirosFavor = card
+	if selection == 1:
+			choice = askChoice("You have Akiro's Favor! What would you like to re-roll?",["Re-roll Attack Dice","Re-roll Effect Die","Nothing!"],["#ff0000","#ebc815","#171e78"])
+			if choice == 1:
+					notify("With Akiro looking over his shoulder {} has decided to re-roll his Attack Dice!".format(me))
+					damageRoll = rollD6(sum(damageRoll))
+			elif choice == 2:
+					notify("With Akiro looking over his shoulder {} has decided to re-roll his Effect Die!".format(me))
+					effectRoll = rollD12()
+			else: return (damageRoll,effectRoll)
+	elif selection == 2:
+			choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Effect Die?",["Yes!","No!"],["#171e78","#de2827"])
+			if choice == 1:
+					notify("With Akiro looking over his shoulder {} has decided to reroll his Effect Die!".format(me))
+					effectRoll = rollD12()
+			else: return (damageRoll,effectRoll)
+	elif selection == 3:
+			choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Attackt Dice?",["Yes!","No!"],["#171e78","#de2827"])
+			if choice == 1:
+					notify("With Akiro looking over his shoulder {} has decided to reroll his Attack Dice!".format(me))
+					effectRoll = rollD6(sum(damageRoll))
+			else: return (damageRoll,effectRoll)		
+	toggleReady(akirosFavor)				
+	displayRoll(damageRoll,effectRoll)				
+	return (damageRoll,effectRoll)		
+	
 
 ############################################################################
 ######################    Applying Damage and Effects   ####################

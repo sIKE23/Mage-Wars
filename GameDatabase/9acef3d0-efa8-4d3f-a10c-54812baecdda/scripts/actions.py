@@ -737,6 +737,7 @@ def setTimer(group,x,y):
 		seconds = {1:30,2:60,3:180,4:timerDefault}.get(choice,0)
 		if choice == 5:
 				seconds = askInteger("Set timer for how many seconds?",timerDefault)
+				if seconds == 0 or seconds == None: return
 				setSetting('timerDefault',seconds)
 		setGlobalVariable("timerIsRunning",str(True))
 		notify("{} sets a timer for {} minutes, {} seconds.".format(me,seconds/60,seconds%60))
@@ -1064,7 +1065,7 @@ def resolveChanneling(p):
 	mute()
 	for c in table:
 				if c.controller==me and c.isFaceUp:
-						if c.Stats != None and c.Subtype != "Mage":
+						if c.Stats != None and not "Mage" in c.Subtype:
 								if "Channeling=" in c.Stats: #let's add mana for spawnpoints etc.
 										channel = getStat(c.Stats,"Channeling")
 										channelBoost = len([k for k in table if k.isFaceUp and k.name == "Harmonize" and c == getAttachTarget(k)]) #Well, you can't really attach more than 1 harmonize anyway. But if there were another spell that boosted channeling, we could add it to this list.
@@ -2445,17 +2446,10 @@ def validateDeck(deck):
 					stats = c.Stats.split(",")
 					schoolcosts = c.MageSchoolCost.replace(' ','').split(",")
 					mageName = c.name.split(" Stats")[0]
+					spellbook["spellpoints"] = int(StatSpellBookPoints)
 			break
 	#debug("Stats {}".format(stats))
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
-
-	#get spellbook point limit
-	for stat in stats:
-		#debug("stat {}".format(stat))
-		statval = stat.split("=")
-		if "Spellbook" in statval[0]:
-			spellbook["spellpoints"] = int(statval[1])
-			break
 
 	#get school costs
 	for schoolcost in schoolcosts:
@@ -2639,7 +2633,7 @@ def validateDeck(deck):
 				if s + " Mage" in card.Traits: # s will hold the school like Holy or Dark
 					ok = True
 			if not ok:
-				notify("*** ILLEGAL ***: the card {} is not legal in a {} deck.".format(card.Name,mageName))
+				notify("*** ILLEGAL ***: the card {} is not legal in a {} Spellbook.".format(card.Name,mageName))
 				return False
 
 		l = 0	#check spell number restrictions
@@ -2658,7 +2652,7 @@ def validateDeck(deck):
 			else:
 				l = int(card.Level)
 			if (l == 1 and cardCounts.get(card.Name) > 6 or (l >= 2 and cardCounts.get(card.Name) > 4)):
-				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s deck.".format(card.Name, me))
+				notify("*** ILLEGAL ***: there are too many copies of {} in {}'s Spellbook.".format(card.Name, me))
 				return False
 
 	for level in levels:
