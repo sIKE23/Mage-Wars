@@ -1602,8 +1602,6 @@ def computeTraits(card):
 		if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
 		if 'Restrained' in rawTraitsList: extend(['Defense -2','Non-Flying'])
 		if 'Incapacitated' in rawTraitsList: append('Non-Flying')
-
-		#if (name == "Stranglevine" and markers[CrushToken]) and not "Finite Life" in rawTraitsList: append('Life +{}'.format(str(2*markers[CrushToken])))
 		if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
 		if (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
 		if (name == 'Dragonclaw Wolverine' and markers[Rage]):

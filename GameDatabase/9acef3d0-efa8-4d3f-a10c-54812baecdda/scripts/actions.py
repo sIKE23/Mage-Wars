@@ -1192,7 +1192,7 @@ def resolveUpkeep():
 				upKeepCost = card.markers[CrushToken]
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 
-		if upKeepCost >= 1:
+		if upKeepCost > 0:
 			card.filter = upKeepFilter
 			processUpKeep(upKeepCost, card, Upkeep, notifystr)
 
@@ -1228,6 +1228,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
 				attatchedTo = getAttachTarget(card1)
 				damage = card1.markers[CrushToken]
+				if not "Finite Life" in computeTraits(card1): card1.statlife = str(2*card1.markers[CrushToken]+6)
 				remoteCall(attatchedTo.controller,"stranglevineReceiptPrompt",[attatchedTo,damage])
 			else:
 				if card1.Name == "Forcefield" and card1.controller == me and card1.isFaceUp and card1.markers[FFToken] < 3:

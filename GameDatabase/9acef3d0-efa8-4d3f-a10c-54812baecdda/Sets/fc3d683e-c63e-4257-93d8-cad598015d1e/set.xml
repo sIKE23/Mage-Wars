@@ -230,6 +230,8 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +X, Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
