@@ -15,250 +15,260 @@
 	iconurl="http://octgn.gamersjudgement.com/wordpress/magewars/wp-content/uploads/sites/33/2013/06/image1.png"
 	usetwosidedtable="False">
 	<scripts>
-		<script src="scripts/actions.py" />
-		<script src="scripts/changelog.py" />
-		<script src="scripts/attacks.py" />
-		<script src="scripts/attachcards.py" />
-		<script src="scripts/textfunctions.py" />
-		<script src="scripts/domination.py" />
-		<script src="scripts/cardActions.py" />
-		<script src="scripts/main.py" />
+		<script src="scripts/academy.py"/>
+		<script src="scripts/actions.py"/>
+		<script src="scripts/arena.py"/>
+		<script src="scripts/attachcards.py"/>
+		<script src="scripts/attacks.py"/>
+		<script src="scripts/boneyard.py"/>
+		<script src="scripts/cardActions.py"/>
+		<script src="scripts/changelog.py"/>
+		<script src="scripts/constants.py"/>
+		<script src="scripts/domination.py"/>
+		<script src="scripts/events.py"/>
+		<script src="scripts/main.py"/>
+		<script src="scripts/textfunctions.py"/>
 	</scripts>
 	<events>
-		<event name="OnTableLoaded" action="onTableLoaded" />
-		<event name="OnGameStarted" action="onGameStarted" />
-		<event name="OnDeckLoaded" action="onDeckLoaded" />
-		<event name="OnCounterChanged" action="checkMageDeath" />
-		<event name="OnCardsMoved" action="onCardsMoved" />
-		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved" />
-		<event name="OnCardArrowTargeted" action="onCardArrowTargeted" />
-		<event name="OnCardDoubleClicked" action="onCardDoubleClicked" />
-		<event name="OnCardClicked" action="onCardClicked" />
+		<event name="OnTableLoaded" action="onTableLoaded"/>
+		<event name="OnGameStarted" action="onGameStarted"/>
+		<event name="OnDeckLoaded" action="onDeckLoaded"/>
+		<event name="OnCounterChanged" action="checkMageDeath"/>
+		<event name="OnCardsMoved" action="onCardsMoved"/>
+		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved"/>
+		<event name="OnCardArrowTargeted" action="onCardArrowTargeted"/>
+		<event name="OnCardDoubleClicked" action="onCardDoubleClicked"/>
+		<event name="OnCardClicked" action="onCardClicked"/>
 	</events>
 	<sounds>
-		<sound name="Dice" src="Sounds/dice.mp3" />
-		<sound name="Alarm" src="Sounds/alarm.mp3" />
-		<sound name="Notification" src="Sounds/notification.mp3" />
+		<sound name="Dice" src="Sounds/dice.mp3"/>
+		<sound name="Alarm" src="Sounds/alarm.mp3"/>
+		<sound name="Notification" src="Sounds/notification.mp3"/>
 	</sounds>
 	<fonts>
-		<font src="fonts/APHont-Bold.ttf" size="13" target="chat" />
+		<font src="fonts/APHont-Bold.ttf" size="13" target="chat"/>
   </fonts>
-	<proxygen definitionsrc="proxy/CardGenData.xml" />
+	<proxygen definitionsrc="proxy/CardGenData.xml"/>
 	<documents>
-		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
-		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html" />
-		<document name="How to Build your own Domination Map" icon="Documents/MW-Help.png" src="Documents/Map Building How-To.html" />
-		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html" />
-		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v2.html" />
-		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html" />
-		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
-		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
+		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html"/>
+		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html"/>
+		<document name="How to Build your own Domination Map" icon="Documents/MW-Help.png" src="Documents/Map Building How-To.html"/>
+		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html"/>
+		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v2.html"/>
+		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html"/>
+		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html"/>
+		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html"/>
 	</documents>
 	<gameModes>
-		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
+		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2"/>
 	</gameModes>
 	<globalvariables>
-		<globalvariable name="TableSetup" value="False"/>
-		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
+		<globalvariable name="attachDict" value=""/>
+		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
+		<globalvariable name="bindDict" value=""/>
 		<globalvariable name="ColorsChosen" value=""/>
-		<globalvariable name="GameSetup" value="False"/>
-		<globalvariable name="OppIniRoll" value=""/>
+		<globalvariable name="CurrentPhase" value="5"/>
 		<globalvariable name="DeckLoaded" value="0"/>
+		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
+		<globalvariable name="DoneWithPhase" value=""/>
+		<globalvariable name="GameHost" value=""/>
+		<globalvariable name="GameIsOver" value=""/>
+		<globalvariable name="GameMode" value=""/>
+		<globalvariable name="GameSetup" value="False"/>
+		<globalvariable name="Goal" value=""/>
+		<globalvariable name="Map" value=""/>
+		<globalvariable name="MWPlayerDict" value=""/>
+		<globalvariable name="OppIniRoll" value=""/>
+		<globalvariable name="PhaseCard" value=""/>
 		<globalvariable name="PlayerWithIni" value=""/>
 		<globalvariable name="PlayersIDList" value=""/>
 		<globalvariable name="PlayersState" value="[]"/>
-		<globalvariable name="MWPlayerDict" value=""/>
-		<globalvariable name="GameHost" value=""/>
-		<globalvariable name="DoneWithPhase" value=""/>
-		<globalvariable name="GameIsOver" value=""/>
-		<globalvariable name="attachDict" value=""/>
-		<globalvariable name="bindDict" value=""/>
 		<globalvariable name="roundEventList" value=""/>
-		<globalvariable name="turnEventList" value=""/>
-		<globalvariable name="Map" value=""/>
 		<globalvariable name="RoundNumber" value=""/>
-		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
-		<globalvariable name="Goal" value=""/>
+		<globalvariable name="RoundTimes" value="[]"/>
+		<globalvariable name="TableSetup" value="False"/>
+		<globalvariable name="TimerIsRunning" value="False"/>
+		<globalvariable name="turnEventList" value=""/>
 	</globalvariables>
 	<card back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
-		<property name="Subtype" type="String" hidden="False" ignoreText="False" />
-		<property name="Cost" type="String" hidden="False" ignoreText="False" />
-		<property name="Action" type="String" hidden="False" ignoreText="False" />
-		<property name="Range" type="String" hidden="False" ignoreText="False" />
-		<property name="Target" type="String" hidden="False" ignoreText="False" />
-		<property name="School" type="String" hidden="False" ignoreText="False" />
-		<property name="Level" type="String" hidden="False" ignoreText="False" />
-		<property name="Stats" type="String" hidden="False" ignoreText="False" />
-		<property name="StatArmor" type="String" hidden="True" ignoreText="False" />
-		<property name="StatChanneling" type="String" hidden="True" ignoreText="False" />
-		<property name="StatDefense" type="String" hidden="True" ignoreText="False" />
-		<property name="StatEquipmentSlot" type="String" hidden="True" ignoreText="False" />
-		<property name="StatLife" type="String" hidden="True" ignoreText="False" />
-		<property name="StatSpellBookPoints" type="String" hidden="True" ignoreText="False" />
-		<property name="StatStartingMana" type="String" hidden="True" ignoreText="False" />
-		<property name="AttackBar" type="String" hidden="False" ignoreText="False" />
-		<property name="Traits" type="String" hidden="False" ignoreText="False" />
-		<property name="Text" type="String" hidden="False" ignoreText="False" />
-		<property name="CardID" type="String" hidden="False" ignoreText="False" />
-		<property name="MageTraining" type="String" hidden="False" ignoreText="False" />
-		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False" />
-		<property name="MageAbilities" type="String" hidden="False" ignoreText="False" />
-		<property name="Special" type="String" hidden="True" ignoreText="False" />
-		<property name="Special1" type="String" hidden="True" ignoreText="False" />
-		<property name="Special2" type="String" hidden="True" ignoreText="False" />
-		<property name="Special3" type="String" hidden="True" ignoreText="False" />
+		<property name="Subtype" type="String" hidden="False" ignoreText="False"/>
+		<property name="Cost" type="String" hidden="False" ignoreText="False"/>
+		<property name="Action" type="String" hidden="False" ignoreText="False"/>
+		<property name="Range" type="String" hidden="False" ignoreText="False"/>
+		<property name="Target" type="String" hidden="False" ignoreText="False"/>
+		<property name="School" type="String" hidden="False" ignoreText="False"/>
+		<property name="Level" type="String" hidden="False" ignoreText="False"/>
+		<property name="Stats" type="String" hidden="False" ignoreText="False"/>
+		<property name="StatArmor" type="String" hidden="True" ignoreText="False"/>
+		<property name="StatChanneling" type="String" hidden="True" ignoreText="False"/>
+		<property name="StatDefense" type="String" hidden="True" ignoreText="False"/>
+		<property name="StatEquipmentSlot" type="String" hidden="True" ignoreText="False"/>
+		<property name="StatLife" type="String" hidden="True" ignoreText="False"/>
+		<property name="StatSpellBookPoints" type="String" hidden="True" ignoreText="False"/>
+		<property name="StatStartingMana" type="String" hidden="True" ignoreText="False"/>
+		<property name="AttackBar" type="String" hidden="False" ignoreText="False"/>
+		<property name="Traits" type="String" hidden="False" ignoreText="False"/>
+		<property name="Text" type="String" hidden="False" ignoreText="False"/>
+		<property name="CardID" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageTraining" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
+		<property name="Special" type="String" hidden="True" ignoreText="False"/>
+		<property name="Special1" type="String" hidden="True" ignoreText="False"/>
+		<property name="Special2" type="String" hidden="True" ignoreText="False"/>
+		<property name="Special3" type="String" hidden="True" ignoreText="False"/>
 		<!--Convenient name and pronoun Properties-->
-		<property name="Nickname" type="String" hidden="True" ignoreText="False" />
-		<property name="PSub" type="String" hidden="True" ignoreText="False" />
-		<property name="PObj" type="String" hidden="True" ignoreText="False" />
-		<property name="PPos" type="String" hidden="True" ignoreText="False" />
-		<property name="PRef" type="String" hidden="True" ignoreText="False" />
+		<property name="Nickname" type="String" hidden="True" ignoreText="False"/>
+		<property name="PSub" type="String" hidden="True" ignoreText="False"/>
+		<property name="PObj" type="String" hidden="True" ignoreText="False"/>
+		<property name="PPos" type="String" hidden="True" ignoreText="False"/>
+		<property name="PRef" type="String" hidden="True" ignoreText="False"/>
 		<!--translations of properties into code versions-->
-		<property name="cTargets" type="String" hidden="True" ignoreText="False" />
-		<property name="cBuffs" type="String" hidden="True" ignoreText="False" />
+		<property name="cTargets" type="String" hidden="True" ignoreText="False"/>
+		<property name="cBuffs" type="String" hidden="True" ignoreText="False"/>
 		<!--Memory-->
-		<property name="Memory" type="String" hidden="True" ignoreText="False" />
-		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0" />
-		<size name="InitativeMarkers" width="50" height="50" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="PhaseMarkers" width="90" height="20" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="DominationMarkers" width="90" height="40" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="Dice Roll Area" width="130" height="80" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="3" />
-		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="3" />
+		<property name="Memory" type="String" hidden="True" ignoreText="False"/>
+		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0"/>
+		<size name="InitativeMarkers" width="50" height="50" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0"/>
+		<size name="PhaseMarkers" width="90" height="20" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0"/>
+		<size name="DominationMarkers" width="90" height="40" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0"/>
+		<size name="Dice Roll Area" width="130" height="80" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="3"/>
+		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="3"/>
 	</card>
 	<gameboards x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard.png" >
-		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg" />
-		<gameboard name="Inferno - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard2.jpg" />
-		<gameboard name="Marble Floors - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard3.jpg" />
-		<gameboard name="Forest - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard4.jpg" />
-		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard5.jpg" />
-		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard6.jpg" />
-		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard7.jpg" />
-		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard8.jpg" />
-		<gameboard name="Double Westlock - 6x4" x="-500" y="-334" width="1000" height="667" src="Images/GameBoards/GameBoard9.jpg" />
-		<gameboard name="Academy - 1x1" x="-362" y="-435" width="724" height="870" src="Images/GameBoards/GameBoard10.png" />
+		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg"/>
+		<gameboard name="Inferno - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard2.jpg"/>
+		<gameboard name="Marble Floors - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard3.jpg"/>
+		<gameboard name="Forest - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard4.jpg"/>
+		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard5.jpg"/>
+		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard6.jpg"/>
+		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard7.jpg"/>
+		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard8.jpg"/>
+		<gameboard name="Double Westlock - 6x4" x="-500" y="-334" width="1000" height="667" src="Images/GameBoards/GameBoard9.jpg"/>
+		<gameboard name="Academy - 1x1" x="-362" y="-435" width="724" height="870" src="Images/GameBoards/GameBoard10.png"/>
 	</gameboards>
 	<table name="Table" visibility="undefined" ordered="False" width="1100" height="1100" background="Images/background.jpg" backgroundStyle="uniformToFill">
-		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
+		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
-		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack" />
-		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
-		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
-		<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
-		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
-		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
-		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
-		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer" />
-		<groupaction menu="Game Options" default="False" shortcut="" execute="optionsMenu" />
+		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack"/>
+		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker"/>
+		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose"/>
+		<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede"/>
+		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex"/>
+		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList"/>
+		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard"/>
+		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer"/>
+		<groupaction menu="Game Options" default="False" shortcut="" execute="optionsMenu"/>
 		<groupactions menu="Chat Shortcuts">
-			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
-			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+2" execute="sayNo" />
-			<groupaction menu="Say Pass" default="False" shortcut="Ctrl+Shift+3" execute="sayPass" />
-			<groupaction menu="Say Thinking..." default="False" shortcut="Ctrl+Shift+4" execute="sayThinking" />
-			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking" />
-			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
-			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
-			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant" />
+			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes"/>
+			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+2" execute="sayNo"/>
+			<groupaction menu="Say Pass" default="False" shortcut="Ctrl+Shift+3" execute="sayPass"/>
+			<groupaction menu="Say Thinking..." default="False" shortcut="Ctrl+Shift+4" execute="sayThinking"/>
+			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking"/>
+			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn"/>
+			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn"/>
+			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant"/>
 		</groupactions>
 		<groupactions menu="Alternate Hotkeys">
-			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack" />
-			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
+			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack"/>
+			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase"/>
 		</groupactions>
-		<groupaction menu="Toggle Debug Mode On/Off" default="False" execute="toggleDebug" />
+		<groupaction menu="Toggle Debug Mode On/Off" default="False" execute="toggleDebug"/>
 		<cardactions menu="Add Markers">
-			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage" />
-			<cardaction menu="Add Mana Counter" default="False" shortcut="Ctrl+M" execute="addMana" />
-			<cardaction menu="Add Armor +1 Marker" default="False" shortcut="Alt+A" execute="addArmor" />
-			<cardaction menu="Add Burn Marker" default="False" shortcut="Ctrl+B" execute="addBurn" />
-			<cardaction menu="Add Bleed Marker" default="False" shortcut="Alt+B" execute="addBleed" />
-			<cardaction menu="Add Charge Token" default="False" shortcut="Alt+Shift+C" execute="addCharge" />
-			<cardaction menu="Add Corrode Marker" default="False" shortcut="Ctrl+C" execute="addCorrode" />
-			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple" />
-			<cardaction menu="Add a Control Marker" default="False" shortcut="Alt+O" execute="addControlMarker" />
-			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze" />
-			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable" />
-			<cardaction menu="Add Rage Marker" default="False" shortcut="Alt+E" execute="addRage" />
-			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth" />
-			<cardaction menu="Add Banish Marker" default="False" shortcut="Alt+H" execute="addBanish" />
-			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck" />
-			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee" />
-			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged" />
-			<!--<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution" />-->
-			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot" />
-			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam" />
-			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep" />
-			<cardaction menu="Add Stagger Marker" default="False" shortcut="Alt+Shift+S" execute="addStagger" />
-			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun" />
-			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTainted" />
-			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran" />
-			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak" />
-			<cardaction menu="Add Wish Token" default="False" shortcut="Alt+Shift+W" execute="addWish" />
-			<cardaction menu="Add Wrath Marker" default="False" shortcut="Alt+W" execute="addWrath" />
-			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie" />
-			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther" />
+			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage"/>
+			<cardaction menu="Add Mana Counter" default="False" shortcut="Ctrl+M" execute="addMana"/>
+			<cardaction menu="Add Armor +1 Marker" default="False" shortcut="Alt+A" execute="addArmor"/>
+			<cardaction menu="Add Burn Marker" default="False" shortcut="Ctrl+B" execute="addBurn"/>
+			<cardaction menu="Add Bleed Marker" default="False" shortcut="Alt+B" execute="addBleed"/>
+			<cardaction menu="Add Charge Token" default="False" shortcut="Alt+Shift+C" execute="addCharge"/>
+			<cardaction menu="Add Corrode Marker" default="False" shortcut="Ctrl+C" execute="addCorrode"/>
+			<cardaction menu="Add Cripple Marker" default="False" shortcut="Alt+C" execute="addCripple"/>
+			<cardaction menu="Add a Control Marker" default="False" shortcut="Alt+O" execute="addControlMarker"/>
+			<cardaction menu="Add Daze Marker" default="False" shortcut="Ctrl+D" execute="addDaze"/>
+			<cardaction menu="Add Disable Marker" default="False" shortcut="Alt+D" execute="addDisable"/>
+			<cardaction menu="Add Rage Marker" default="False" shortcut="Alt+E" execute="addRage"/>
+			<cardaction menu="Add Growth Marker" default="False" shortcut="Alt+G" execute="addGrowth"/>
+			<cardaction menu="Add Banish Marker" default="False" shortcut="Alt+H" execute="addBanish"/>
+			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck"/>
+			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee"/>
+			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged"/>
+			<!--<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution"/>-->
+			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot"/>
+			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam"/>
+			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep"/>
+			<cardaction menu="Add Stagger Marker" default="False" shortcut="Alt+Shift+S" execute="addStagger"/>
+			<cardaction menu="Add Stun Marker" default="False" shortcut="Alt+S" execute="addStun"/>
+			<cardaction menu="Add Tainted Marker" default="False" shortcut="Alt+T" execute="addTainted"/>
+			<cardaction menu="Add Veteran Marker" default="False" shortcut="Alt+V" execute="addVeteran"/>
+			<cardaction menu="Add Weak Marker" default="False" shortcut="Ctrl+W" execute="addWeak"/>
+			<cardaction menu="Add Wish Token" default="False" shortcut="Alt+Shift+W" execute="addWish"/>
+			<cardaction menu="Add Wrath Marker" default="False" shortcut="Alt+W" execute="addWrath"/>
+			<cardaction menu="Add Zombie Marker" default="False" shortcut="Ctrl+Z" execute="addZombie"/>
+			<cardaction menu="Add Other Marker/Token" default="False" shortcut="Ctrl+O" execute="addOther"/>
 		</cardactions>
 		<cardactions menu="Remove Markers">
-			<cardaction menu="Remove Damage Counter" default="False" shortcut="F4" execute="subDamage" />
-			<cardaction menu="Remove Mana Counter" default="False" shortcut="Ctrl+Shift+M" execute="subMana" />
-			<cardaction menu="Remove Armor +1 Marker" default="False" shortcut="Ctrl+Alt+A" execute="subArmor" />
-			<cardaction menu="Remove Burn Marker" default="False" shortcut="Ctrl+Shift+B" execute="subBurn" />
-			<cardaction menu="Remove Bleed Marker" default="False" shortcut="Ctrl+Alt+B" execute="subBleed" />
-			<cardaction menu="Remove Corrode Marker" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode" />
-			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple" />
-			<cardaction menu="Remove Control Marker" default="False" shortcut="Ctrl+Alt+D" execute="removeControlMarker" />
-			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze" />
-			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable" />
-			<cardaction menu="Remove Rage Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage" />
-			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth" />
-			<cardaction menu="Remove Banish Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish" />
-			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee" />
-			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged" />
-			<!--<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution" />-->
-			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck" />
-			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot" />
-			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam" />
-			<cardaction menu="Remove Sleep Marker" default="False" shortcut="Ctrl+Shift+P" execute="subSleep" />
-			<cardaction menu="Remove Stun Marker" default="False" shortcut="Ctrl+Alt+S" execute="subStun" />
-			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint" />
-			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVeteran" />
-			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Shift+W" execute="subWeak" />
-			<cardaction menu="Remove Wrath Marker" default="False" shortcut="Ctrl+Alt+W" execute="subWrath" />
-			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie" />
-			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens" />
+			<cardaction menu="Remove Damage Counter" default="False" shortcut="F4" execute="subDamage"/>
+			<cardaction menu="Remove Mana Counter" default="False" shortcut="Ctrl+Shift+M" execute="subMana"/>
+			<cardaction menu="Remove Armor +1 Marker" default="False" shortcut="Ctrl+Alt+A" execute="subArmor"/>
+			<cardaction menu="Remove Burn Marker" default="False" shortcut="Ctrl+Shift+B" execute="subBurn"/>
+			<cardaction menu="Remove Bleed Marker" default="False" shortcut="Ctrl+Alt+B" execute="subBleed"/>
+			<cardaction menu="Remove Corrode Marker" default="False" shortcut="Ctrl+Shift+C" execute="subCorrode"/>
+			<cardaction menu="Remove Cripple Marker" default="False" shortcut="Ctrl+Alt+C" execute="subCripple"/>
+			<cardaction menu="Remove Control Marker" default="False" shortcut="Ctrl+Alt+D" execute="removeControlMarker"/>
+			<cardaction menu="Remove Daze Marker" default="False" shortcut="Ctrl+Shift+D" execute="subDaze"/>
+			<cardaction menu="Remove Disable Marker" default="False" shortcut="Ctrl+Alt+D" execute="subDisable"/>
+			<cardaction menu="Remove Rage Marker" default="False" shortcut="Ctrl+Alt+E" execute="subRage"/>
+			<cardaction menu="Remove Growth Marker" default="False" shortcut="Ctrl+Alt+G" execute="subGrowth"/>
+			<cardaction menu="Remove Banish Marker" default="False" shortcut="Ctrl+Alt+H" execute="subBanish"/>
+			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee"/>
+			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged"/>
+			<!--<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution"/>-->
+			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck"/>
+			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot"/>
+			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam"/>
+			<cardaction menu="Remove Sleep Marker" default="False" shortcut="Ctrl+Shift+P" execute="subSleep"/>
+			<cardaction menu="Remove Stun Marker" default="False" shortcut="Ctrl+Alt+S" execute="subStun"/>
+			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint"/>
+			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVeteran"/>
+			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Shift+W" execute="subWeak"/>
+			<cardaction menu="Remove Wrath Marker" default="False" shortcut="Ctrl+Alt+W" execute="subWrath"/>
+			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie"/>
+			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens"/>
 		</cardactions>
 		<cardactions menu="Toggle Markers">
-			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction" />
-			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick" />
-			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady" />
-			<cardaction menu="Toggle Ready II Marker" default="False" shortcut="Ctrl+Shift+R" execute="toggleReadyII" />
-			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard" />
-			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric" />
-			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+Shift+D" execute="toggleDeflect" />
-			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible" />
-			<cardaction menu="Toggle Gate To Hell Marker" default="False" shortcut="Ctrl+Shift+G" execute="toggleGatetoHell" />
+			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction"/>
+			<cardaction menu="Toggle Quick Cast Marker " default="False" shortcut="Ctrl+Q" execute="toggleQuick"/>
+			<cardaction menu="Toggle Ready Marker" default="False" shortcut="Ctrl+R" execute="toggleReady"/>
+			<cardaction menu="Toggle Ready II Marker" default="False" shortcut="Ctrl+Shift+R" execute="toggleReadyII"/>
+			<cardaction menu="Toggle Guard Marker" default="False" shortcut="Ctrl+G" execute="toggleGuard"/>
+			<cardaction menu="Toggle Voltaric Shield Marker" default="False" shortcut="Ctrl+V" execute="toggleVoltaric"/>
+			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+Shift+D" execute="toggleDeflect"/>
+			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible"/>
+			<cardaction menu="Toggle Gate To Hell Marker" default="False" shortcut="Ctrl+Shift+G" execute="toggleGatetoHell"/>
 		</cardactions>
-			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard" />
-			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
-			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
-			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
-			<cardaction menu="Card Actions Menu" shortcut="TAB" execute="actionMenu" />
-			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction" />
-			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
-			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
-			<cardaction menu="Double Click" default="True" execute="defaultAction" />
-			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
+			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard"/>
+			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
+			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker"/>
+			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget"/>
+			<cardaction menu="Card Actions Menu" shortcut="TAB" execute="actionMenu"/>
+			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction"/>
+			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
+			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate"/>
+			<cardaction menu="Double Click" default="True" execute="defaultAction"/>
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications"/>
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">
-		<counter name="Channeling" default="0" reset="True" icon="Images/Counters/channeling.png" />
-		<counter name="Mana" default="0" reset="True" icon="Images/Counters/mana.png" />
-		<counter name="Damage" default="0" reset="True" icon="Images/Counters/damage.png" />
-		<counter name="Life" default="0" reset="True" icon="Images/Counters/life.png" />
+		<counter name="Channeling" default="0" reset="True" icon="Images/Counters/channeling.png"/>
+		<counter name="Mana" default="0" reset="True" icon="Images/Counters/mana.png"/>
+		<counter name="Damage" default="0" reset="True" icon="Images/Counters/damage.png"/>
+		<counter name="Life" default="0" reset="True" icon="Images/Counters/life.png"/>
 		<globalvariable name="MyColor" value=""/>
 		<globalvariable name="MageDict" value="{'MageRevealed' : 'False', 'MageID' : 000000, 'MageStatsID' : 00000}"/>
 		<hand name="Spellbook" visibility="me" ordered="False" width="126" height="176" icon="Images/Groups/Spellbook.png">
-			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown" />
-			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
-			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
+			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown"/>
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications"/>
+			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
 		</hand>
 		<group name="Discard Pile" visibility="all" ordered="False" width="126" height="176" icon="Images/Groups/Discard.png" collapsed="False">
 		</group>
@@ -266,12 +276,12 @@
 		</group>
 	</player>
 	<deck>
-		<section name="Mage" group="Spellbook" />
-		<section name="Attack" group="Spellbook" />
-		<section name="Conjuration" group="Spellbook" />
-		<section name="Creature" group="Spellbook" />
-		<section name="Enchantment" group="Spellbook" />
-		<section name="Equipment" group="Spellbook" />
-		<section name="Incantation" group="Spellbook" />
+		<section name="Mage" group="Spellbook"/>
+		<section name="Attack" group="Spellbook"/>
+		<section name="Conjuration" group="Spellbook"/>
+		<section name="Creature" group="Spellbook"/>
+		<section name="Enchantment" group="Spellbook"/>
+		<section name="Equipment" group="Spellbook"/>
+		<section name="Incantation" group="Spellbook"/>
 	</deck>
 </game>

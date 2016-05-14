@@ -1,7 +1,7 @@
-###########################################################################
-##########################    v1.15.0.0     #######################################
-###########################################################################
-# -*- coding: utf-8 -*-
+#######
+#v2.0.0.0#
+#######
+
 import sys
 sys.path.append(wd("lib"))
 from math import factorial
@@ -471,7 +471,7 @@ def displayRoll(attackRoll,effectRoll):
 	dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
 	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field
 	dieCard.anchor = (True)
-	
+
 	normalDamage = attackRoll[2] + 2* attackRoll[3] # calculate the results for Normal Damage
 	criticalDamage = attackRoll[4] + 2* attackRoll[5] # calculate the results for Critical Damage
 
@@ -481,21 +481,21 @@ def displayRoll(attackRoll,effectRoll):
 	dieCard.markers[attackDie[3]] = attackRoll[3] # display 2 Normal Damage
 	dieCard.markers[attackDie[4]] = attackRoll[4] # display 1 Critical Damage
 	dieCard.markers[attackDie[5]] = attackRoll[5] # display 2 Critical Damage
-	dieCard.markers[DieD12] = effectRoll
+	dieCard.markers[effectDie] = effectRoll
 	playSoundFX('Dice')
 	time.sleep(1)
 	notify("{} rolled {} Normal Damage, {} Critical Damage, and {} on the effect die".format(me, normalDamage, criticalDamage, effectRoll))
 
 def rollD6(dice):
 	mute()
-	global diceBankD6
+	global attackDiceBank
 	count = dice
-	if (len(diceBankD6) < count):
-			while (len(diceBankD6) < 100):
-					diceBankD6.append(randint(0,5))
+	if (len(attackDiceBank) < count):
+			while (len(attackDiceBank) < 100):
+					attackDiceBank.append(randint(0,5))
 	attackRoll = [0,0,0,0,0,0]
 	for x in range(count):
-			roll = int(diceBankD6.pop())
+			roll = int(attackDiceBank.pop())
 			attackRoll[roll] += 1
 	debug("Raw Attack Dice Roll results: {}".format(attackRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
@@ -503,12 +503,11 @@ def rollD6(dice):
 
 def rollD12():
 	mute()
-	global diceBankD12
-	if (len(diceBankD12)) <= 1:
-			while (len(diceBankD12) < 50):
-					diceBankD12.append(randint(0,11))
-	effectRoll = int(diceBankD12.pop()) + 1
-	me.setGlobalVariable("DiceBankD12", str(diceBankD12))
+	global effectDieBank
+	if (len(effectDieBank)) <= 1:
+			while (len(effectDieBank) < 50):
+					effectDieBank.append(randint(0,11))
+	effectRoll = int(effectDieBank.pop()) + 1
 	return effectRoll
 
 ############################################################################
@@ -574,13 +573,6 @@ def timesHasUsedAbility(card,number=0):
 		count = 0
 		for e in eventList:
 				if e[0] == 'Ability' and e[1][0] == card._id and e[1][1] == number: count += 1
-		return count
-
-def timesHasOccured(event,player=me):
-		eventList = getEventList('Round')
-		count = 0
-		for e in eventList:
-				if e[0] == 'Event' and e[1][0] == player._id: count += 1
 		return count
 
 def hasCharged(card):
@@ -754,7 +746,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 	mute()
 	attacker = Card(aTraitDict['OwnerID'])
 	defender = Card(dTraitDict['OwnerID'])
-	
+
 	if getSetting("BattleCalculator",True):
 		attack_traits = attack.get("Traits",{})
 		#1. Check for interception on ranged single target attacks
@@ -947,16 +939,16 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 								notify("{} Gains 2 Mana from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 						elif choice == 2:
-								if attacker.controller.damage > 1: 
+								if attacker.controller.damage > 1:
 										attacker.controller.damage -= 2
 										notify("{} Heals 2 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
-								elif attacker.controller.damage == 1: 
+								elif attacker.controller.damage == 1:
 										attacker.controller.damage -= 1
 										notify("{} Heals 1 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
 						elif choice == 3:
 								attacker.controller.mana += 1
-								if attacker.controller.damage >= 1: 
+								if attacker.controller.damage >= 1:
 										attacker.controller.damage -= 1
 										notify("{} Heals 1 Damage and Gains 1 Mana when a small amount of residual energy was released by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
 								break
@@ -1048,7 +1040,7 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		setEventList('Turn',[]) #Clear the turn event list
-		
+
 def akirosFavor(card,damageRoll,effectRoll,selection):
 	mute()
 	# the fucntion will all a player to Akiro's Favor to re-roll the appropriate dice based on the choices avaialbale
@@ -1076,11 +1068,11 @@ def akirosFavor(card,damageRoll,effectRoll,selection):
 			if choice == 1:
 					notify("With Akiro looking over his shoulder {} has decided to reroll his Attack Dice!".format(me))
 					effectRoll = rollD6(sum(damageRoll))
-			else: return (damageRoll,effectRoll)		
-	toggleReady(akirosFavor)				
-	displayRoll(damageRoll,effectRoll)				
-	return (damageRoll,effectRoll)		
-	
+			else: return (damageRoll,effectRoll)
+	toggleReady(akirosFavor)
+	displayRoll(damageRoll,effectRoll)
+	return (damageRoll,effectRoll)
+
 
 ############################################################################
 ######################    Applying Damage and Effects   ####################
@@ -1481,7 +1473,7 @@ def computeTraits(card):
 												(not 'Aquatic' in subtype) and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
 										elif cName == 'Ethereal Mist': append('Obscured')
-										elif ((cName == 'Corrosive Pool'  or 
+										elif ((cName == 'Corrosive Pool'  or
 												cName == 'Molten Rock') and
 												cardType == 'Creature' and
 												'Corporeal' in rawTraitsList and

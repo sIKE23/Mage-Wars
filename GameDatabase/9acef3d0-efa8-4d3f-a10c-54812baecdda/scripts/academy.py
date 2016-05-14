@@ -4,7 +4,7 @@
 
 def nextPhaseAcademy():
 	mute()
-	
+
 def tapCard(card, x=0, y=0):
 	mute()
 	if card.controller == me and card.orientation == Rot0:

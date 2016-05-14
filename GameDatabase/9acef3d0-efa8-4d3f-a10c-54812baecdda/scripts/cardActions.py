@@ -1,6 +1,6 @@
-###########################################################################
-##########################    v2.00.0.0     ###############################
-###########################################################################
+#######
+#v2.0.0.0#
+#######
 
 ###############################
 ######     Targeting     ######
@@ -71,7 +71,7 @@ def CA_Attack(arg):
 	actor = arg["actor"]
 	def clickFunction(arg2):
 		target = arg2["target"]
-		if isValidAttackTarget(target): 
+		if isValidAttackTarget(target):
 			actor.arrow(target,True)
 			diceRollMenu(actor,target)
 			#targetMenu(actor,target)
@@ -251,7 +251,7 @@ def adramelechsTorment_f1(arg):
 				whisper("{} is already burning!".format(target.nickname))
 				return
 			paid = transaction(actor.controller,-2)
-			if paid: 
+			if paid:
 				target.markers[Burn] += 1
 				notify("Adramelech's Torment sets {} aflame! (+1 Burn)".format(target.nickname))
 			else:

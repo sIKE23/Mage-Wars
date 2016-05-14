@@ -13,7 +13,7 @@ sys.path.append(wd("lib"))
 import os
 from math import factorial
 from copy import deepcopy
-
+from random import randint
 
 def useUntargetedAbility(card, x=0, y=0):
 	mute()
@@ -117,7 +117,7 @@ def buffMatcher(source,target,cBuffString):
 				if req[0] == "[": buff.extend(req[1:].split(";"))
 				else: disqualified = not targetReqParser(source,target,req)
 				if disqualified: break
-			if not disqualified: 
+			if not disqualified:
 				return buff
 	return []
 
@@ -135,8 +135,8 @@ def targetReqParser(source,target,req):
 	#Checks for each type of tag
 	if tag == "t": satisfies = (value in getAllTraits(target))
 	elif tag == "@": satisfies = (
-		(value=="self" and source == target ) or 
-		(value == "all") or 
+		(value=="self" and source == target ) or
+		(value == "all") or
 		(value == "target" and getAttachTarget(source) == target)
 	)
 	elif tag == "T": satisfies = (value == target.Type)
@@ -148,12 +148,10 @@ def targetReqParser(source,target,req):
 	debug(source.Name+" "+target.Name+" "+tag+" "+value+" "+str(satisfies))
 	return satisfies
 
-
 def getAllTraits(card):
 	return getBasicTraits(card)
-	#	In the future, this function will calculate every single trait of the card (even those not listed in its xml, 
+	#	In the future, this function will calculate every single trait of the card (even those not listed in its xml,
 	#	much like computeTraits does now. For now, I will leave it as this placeholder.
-
 
 ###For now, let's store the targeting features here. Will need to move them in future.
 
@@ -227,6 +225,13 @@ def timesHasOccurred(event,keys): #Searches memory for instances of this event t
 	memory = eval(getGlobalVariable("gameMemory"))
 	#Check how many events this round match in the given keys
 	return len([1 for e in memory if len([1 for k in keys if e.get(k)==event[k]])==len(keys)])
+	
+def timesHasOccured(event,player=me):
+		eventList = getEventList('Round')
+		count = 0
+		for e in eventList:
+				if e[0] == 'Event' and e[1][0] == player._id: count += 1
+		return count
 
 def getEvents(round):
 	"Returns an ordered list of all events from the requested round"
@@ -292,7 +297,7 @@ def targetMenu(source,target):
 		#		remoteCall(target.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
 		#		source.arrow(target,False)
 		#		return
-		#	elif attack.get("Dice"): 
+		#	elif attack.get("Dice"):
 		#		notify("Attack cannot be parsed by Battle Calculator; rolling dice manually.")
 		#		rollDice(attack.get("Dice"))
 		#		source.arrow(target,False)
@@ -308,3 +313,15 @@ def targetMenu(source,target):
 		elif source.Type !="Enchantment":
 			castSpell(source,target) #Assume that player wants to cast card on target
 			source.arrow(target,False)
+
+def boolQuery(query_text,true_text,false_text): # string -> string -> string -> bool
+	"""A generic boolean query menu with customizable text for both options"""
+	if askChoice(query_text,[true_text,false_text],["#009933","#ff0000"]) == 1: return True
+	return False
+
+def listQuery(query_text,list,to_text,to_color): # string -> list<T> -> ( Option<T> -> string ) -> ( Option<T> -> color ) -> Option<T>
+	"""Takes a list and two functions. One function converts an element in the list into a string, the other converts to a color. Returns the selected element of the list."""
+	options = [to_text(e) for e in list] + [to_text(None)]
+	colors = [to_color(e) for e in list] + [to_color(None)]
+	choice = askChoice(query_text,options,colors)
+	if 0 < choice < len(options): return list[choice-1]
