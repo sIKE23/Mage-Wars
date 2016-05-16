@@ -127,6 +127,7 @@
 		<!--translations of properties into code versions-->
 		<property name="cTargets" type="String" hidden="True" ignoreText="False"/>
 		<property name="cBuffs" type="String" hidden="True" ignoreText="False"/>
+		<property name="cAttacks" type="String" hidden="True" ignoreText="False"/>
 		<!--Memory-->
 		<property name="Memory" type="String" hidden="True" ignoreText="False"/>
 		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0"/>

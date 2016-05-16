@@ -841,9 +841,6 @@ def documentationReminder():
 			updates = '\n-'.join(text)
 			confirm("Documentation available in v.{} ({}):\n-{}".format(stringVersion, date, updates))
 	setSetting("lastVersion", convertToString(currentVersion))  ## Store's the current version to a setting
-	return nextPlayer
-
-
 
 def debug(str):
 	mute()

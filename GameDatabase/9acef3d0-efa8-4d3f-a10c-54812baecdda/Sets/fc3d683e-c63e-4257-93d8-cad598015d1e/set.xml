@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
 	name="Druid vs Necromancer"
 	id="fc3d683e-c63e-4257-93d8-cad598015d1e"
@@ -18,10 +18,12 @@
 
 	<cards>
 		<card id="d20c9d4a-65a7-4018-bffc-16ed0cb62912" name="Druid">
+			<property name="Nickname" value="Druid" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 				<alternate name="Druid" type="B">
@@ -29,11 +31,13 @@
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
 					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
 					<property name="AttackBar" value="" />
 					<property name="Traits" value="" />	
 				</alternate>
 		</card>
 		<card id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260" name="Druid Stats">
+			<property name="Nickname" value="Druid Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Wood Elf" />
 			<property name="Level" value="6" />
@@ -45,15 +49,18 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
 		</card>
 		<card id="6b830552-8420-4797-bbb5-3ec5bb768265" name="Necromancer">
+			<property name="Nickname" value="Necromancer" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 				<alternate name="Necromancer" type="B">
@@ -61,11 +68,13 @@
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
 					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
 					<property name="AttackBar" value="" />
 					<property name="Traits" value="" />	
 				</alternate>
 		</card>
 		<card id="682d3b40-7c08-437b-9c88-16e2f389773f" name="Necromancer Stats">
+			<property name="Nickname" value="Necromancer Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage,Human" />
 			<property name="Level" value="6" />
@@ -77,6 +86,7 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Poison Immunity" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
@@ -84,15 +94,18 @@
 
 
 		<card id="a5386a31-5786-4e70-9482-65657607d802" name="Acid Ball">
+			<property name="Nickname" value="Acid Ball" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature||TConjuration" />
 			<property name="Target" value="Creature or Conjuration" />
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Acid Ball;range type=Ranged;range=(0,2);damage type=Acid;dice=2;effects={1: ['Corrode'], 5: ['Corrode', 'Corrode']}" />
 			<property name="AttackBar" value="[Ranged] [Acid] [Dice=2] [d12] [1-4 = Corrode; 5+ = 2 Corrode]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -101,182 +114,244 @@
 
 
 		<card id="31f4cf44-febc-46fb-920c-5293a7e2d615" name="Altar of Skulls">
+			<property name="Nickname" value="Altar of Skulls" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Skeleton, Altar" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=16" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="16" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Epic, Necromancer Only" />
 			<property name="Text" value="Whenever an enemy Corporeal creature is destroyed, place a Skull token on Altar. Once per round, as a full action, a friendly cleric creature in Altar&apos;s zone may place a Skull token on Altar. While Altar has 8 or more Skull tokens, it gains Lifebond +2, all Living creatures gain Finite Life, and during the Upkeep Phase each Living creatures receives 2 direct poison damage." />
 			<property name="CardID" value="DNJ01" />
 		</card>
 		<card id="a3a04a1e-76e9-4043-a22c-d731ac2a103f" name="Corrosive Orchid">
+			<property name="Nickname" value="Corrosive Orchid" />
 			<property name="Type" value="Conjuration" />
 		<property name="Subtype" value="Plant, Flower, Vine" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Corrosive Mist;range type=Ranged;range=(0,0);damage type=Acid;dice=2;effects={7: ['Corrode']};Unavoidable=True" />
 			<property name="AttackBar" value="Corrosive Mist:&#xD;&#xA;[Ranged:0-0] [Acid] [Dice=2] [d12] [7+ = Corrode] [Unavoidable]" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Comes into play with a Mist token on it. When Orchid&apos;s attack targets a Mage, at the end of the Damage &amp; Effects Step, you may remove the Mist token, choose an equipment object on that Mage, and pay its casting cost to destroy that object.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="DNJ02" />
 		</card>
 		<card id="0dfe805d-f194-437d-84bd-7a8da15aa95e" name="Etherian Lifetree">
+			<property name="Nickname" value="Etherian Lifetree" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Regenerate 2, Unique, Flame +2, Hydro Immunity, Living" />
 			<property name="Text" value="All other Living creatures and conjurations gain Innate Life +2." />
 			<property name="CardID" value="DNJ03" />
 		</card>
 		<card id="be8a0047-ad80-44c5-91cb-ab7a65cbdf1e" name="Graveyard">
+			<property name="Nickname" value="Graveyard" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="14" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Channeling=1, Armor=1, Life=16" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="16" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Zone Exclusive, Lightning Immunity, Burnproof, Epic, Necromancer Only" />
 			<property name="Text" value="During the Deployment Phase, Graveyard may summon one Dark Nonliving creature. The first time each round that a creature is destroyed, you may place mana equal to its Level on Graveyard." />
 			<property name="CardID" value="DNJ04" />
 		</card>
 		<card id="0eb7fe47-d3b5-44d8-b7e8-424b7bc674e0" name="Mohktari, Great Tree of Life">
+			<property name="Nickname" value="Mohktari" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Regenerate 2, Living, Legendary, Flame +2, Hydro Immunity" />
 			<property name="Text" value="All friendly Living creatures in Mohktari&apos;s zone gain the Regenerate 2 trait." />
 			<property name="CardID" value="DNJ05" />
 		</card>
 		<card id="9192232a-e12a-4f84-8880-6ba315124062" name="Nightshade Lotus">
+			<property name="Nickname" value="Nightshade Lotus" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Flower, Vine" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Poison Sleep Mist;range type=Ranged;range=(0,0);damage type=Poison;dice=3;Unavoidable=True" />
 			<property name="AttackBar" value="Poison Sleep Mist:&#xD;&#xA;[Ranged:0-0] [Poison] [Dice=3] [Unavoidable]" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Comes into play with a Mist token on it. When Lotus&apos;s attack targets a Living non-Mage creature, at the end of the Damage &amp; Effects Step, you may remove the Mist token and pay mana equal to that creature&apos;s Level +2 to place a Sleep condition marker on that creature.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="DNJ06" />
 		</card>
 		<card id="11a15edf-2a69-4507-9449-f57badafcfe4" name="Seedling Pod">
+			<property name="Nickname" value="Seedling Pod" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="3" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Channeling=1, Armor=0, Life=5" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Regenerate 2, Living, Flame +2, Hydro Immunity, Druid Only" />
 			<property name="Text" value="During the Deployment Phase, if there is 3 or more mana on Seedling Pod, it may cast 1 plant creature or conjuration which targets its zone, an object on its zone, or a border of its zone. It it does, destroy Seedling Pod." />
 			<property name="CardID" value="DNJ08" />
 		</card>
 		<card id="f839c0c0-ed2f-4440-931f-ec5ecf6b385d" name="Samara Tree">
+			<property name="Nickname" value="Samara Tree" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Channeling=1, Armor=1, Life=8" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Zone Exclusive, Regenerate 2, Flame +2, Hydro Immunity, Living, Druid Only, Epic" />
 			<property name="Text" value="Your Seedling Pod spells gain the Cantrip trait. During the Deployment Phase, Samara Tree may cast 1 Seedling Pod spell." />
 			<property name="CardID" value="DNJ09" />
 		</card>
 		<card id="32a5f867-3654-41b3-9917-74b5983eedd2" name="Stranglevine">
+			<property name="Nickname" value="Stranglevine" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
 			<property name="Target" value="Corporeal Creature" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=6" />
 			<property name="StatArmor" value="0" />
 			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +X, Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Each Upkeep Phase, before paying Stranglevine&apos;s upkeep cost, place 1 Crush token on Stranglevine. X = the number of Crush tokens on Stranglevine. When you pay Stranglevine&apos;s Upkeep cost, this creature receives X direct damage. Stranglevine gains Life +2X. Stranglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Stranglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="DNJ10" />
 		</card>
 		<card id="a7f900e4-64ac-4c1b-8905-90607feb7d1a" name="Tanglevine">
+			<property name="Nickname" value="Tanglevine" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
 			<property name="Target" value="Corporeal Creature" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="DNJ11" />
 		</card>
 		<card id="b0993b6c-e604-4ba4-86d7-b45e53daae9b" name="Vine Tree">
+			<property name="Nickname" value="Vine Tree" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Plant, Tree" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Channeling=1, Armor=1, Life=8" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Zone Exclusive, Regenerate 2, Flame +2, Hydro Immunity, Living, Druid Only, Epic" />
 			<property name="Text" value="During the Deployment Phase, you may pay 1 mana to place 1 additional Vine marker with your Spreading Vines ability. During the Deployment Phase, Vine Tree may cast 1 vine creature or conjuration spell." />
 			<property name="CardID" value="DNJ12" />
 		</card>
 		<card id="1aea1576-11e2-413c-b49a-50493f07fe99" name="Ziggurat of Undeath">
+			<property name="Nickname" value="Ziggurat of Undeath" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Artifact, Temple" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Dark Mage Only, Epic" />
 			<property name="Text" value="When a friendly zombie creature destroys a Living non-Epic creature with a melee attack, you may pay half that creature&apos;s cast cost (rounded up) to Reanimate it. When the creature comes into play, place a Zombie condition marker on it, and place damage on it equal to its Level." />
@@ -285,30 +360,40 @@
 
 
 		<card id="dc82a5de-08e5-449d-a4c1-1ee193f816af" name="Bloodspine Wall" size="Horizontal Cards">
+			<property name="Nickname" value="Bloodspine Wall" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone Border" />
 			<property name="Target" value="Zone Border" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Impaling Thorns;action type=Passage Attack;dice=3;effects={5: ['Bleed']};Unavoidable=True;Piercing +X=2" />
 			<property name="AttackBar" value="Impaling Thorns:&#xD;&#xA;[Passage Attack] [Dice=3] [d12] [5+ = Bleed] [Unavoidable] [Piercing +2]" />
 			<property name="Traits" value="Regenerate 2, Living, Flame +2, Hydro Immunity, Passage Attacks, Extendable" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNW01" />
 		</card>
 		<card id="2518e7c2-bb94-4061-b2fc-f0435ef7e861" name="Wall of Bones" size="Horizontal Cards">
+			<property name="Nickname" value="Wall of Bones" />
 			<property name="Type" value="Conjuration-Wall" />
 			<property name="Subtype" value="Skeleton" />
 			<property name="Cost" value="6" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone Border" />
 			<property name="Target" value="Zone Border" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=12" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Passage Blocked, Blocks LOS, Extendable" />
 			<property name="Text" value="" />
@@ -317,81 +402,107 @@
 
 
 		<card id="9a1370a0-44cb-47ac-a736-807f96a51785" name="Acolyte of the Bog Queen">
+			<property name="Nickname" value="Acolyte of the Bog Queen" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Dark Elf, Cleric" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Sacrificial Knife;action type=Quick;range type=Melee;range=(0,0);dice=2||name=Repair Bones;action type=Full;range type=Ranged;range=(0,1);Reconstruct 2 damage from target skeleton object.=True||name=Vigor of the Grave;action type=Full;range type=Ranged;range=(0,1);Target zombie creature gains the Melee +X=1 trait until end of round." />
 			<property name="AttackBar" value="Sacrificial Knife:&#xD;&#xA;[Quick] [Melee] [Dice=2]&#xD;&#xA;Repair Bones:&#xD;&#xA;[Full] [Ranged:0-1] [Reconstruct 2 damage from target skeleton object.]&#xD;&#xA;Vigor of the Grave:&#xD;&#xA;[Full] [Ranged:0-1] [Target zombie creature gains the Melee +1 trait until end of round.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC01" />
 		</card>
 		<card id="5f5be863-dbbe-4eb7-93c2-b933cc5eab89" name="Deathfang">
+			<property name="Nickname" value="Deathfang" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Canine" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="Fast, Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC02" />
 		</card>
 		<card id="ec3dc5d5-57c6-423e-bb65-ba2a0a0f91b9" name="Devouring Jelly">
+			<property name="Nickname" value="Devouring Jelly" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Ooze" />
 			<property name="Cost" value="13" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=-, Life=9" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Corrosive Juices;action type=Full;range type=Melee;range=(0,0);damage type=Acid;dice=5;effects={9: ['Corrode', 'Corrode'], 5: ['Corrode']};Devour=True" />
 			<property name="AttackBar" value="Corrosive Juices:&#xD;&#xA;[Full] [Melee] [Acid] [Dice=5] [d12] [5-8 = Corrode; 9+ = 2 Corrode] [Devour]" />
 			<property name="Traits" value="Resilient, Uncontainable, Nonliving, Slow, Psychic Immunity, Acid Immunity" />
 			<property name="Text" value="Whenever Devouring Jelly attacks and damages a Corporeal creature, it may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC03" />
 		</card>
 		<card id="4fc86a1f-d24d-4da7-9f85-5818df967abd" name="Grey Wraith">
+			<property name="Nickname" value="Grey Wraith" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Spirit" />
 			<property name="Cost" value="10" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=-, Life=8" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Hand of Death;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={5: ['Weak']};Ethereal=True" />
 			<property name="AttackBar" value="Hand of Death:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [5+ = Weak] [Ethereal]" />
 			<property name="Traits" value="Upkeep +1, Incorporeal, Nonliving" />
 			<property name="Text" value="Instead of taking a move action, Grey Wraith may pay 1 mana to teleport to an adjacent zone." />
 			<property name="CardID" value="DNC04" />
 		</card>
 		<card id="08222fa4-57c4-4ebd-a27a-66f7942e46cb" name="Ichthellid">
+			<property name="Nickname" value="Ichthellid" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Insect" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=2, Life=5" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Impregnating Bite;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1" />
 			<property name="AttackBar" value="Impregnating Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Climbing" />
 			<property name="Text" value="Ichthellid comes into play with an egg token on it. When Ichthellid&apos;s attack damages, but does not destroy, a Living creature, you may pay 1 mana and remove the egg token to an Ichthellid Larva marker on that creature." />
 			<property name="CardID" value="DNC05" />
 		</card>
 		<card id="e4fb0871-99e8-40c3-b744-828400701c36" name="Kralathor, The Devourer">
+			<property name="Nickname" value="Kralathor" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="16" />
@@ -400,277 +511,373 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Great Maw;action type=Quick;range type=Melee;range=(0,0);dice=4;Reach=True;Devour=True;+2 vs. Undead=True" />
 			<property name="AttackBar" value="Great Maw:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Reach] [Devour] [+2 vs. Undead]" />
 			<property name="Traits" value="Legendary, Nature Mage Only, Epic, Regenerate 2, Hydro Immunity, Flame +2" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="Text" value="When Kralathor attacks and devours a Corporeal creature, it places a Growth marker on itself." />
 			<property name="CardID" value="DNC06" />
 		</card>
 		<card id="352583ca-7fed-481b-9b8a-456b05e61501" name="Mort">
+			<property name="Nickname" value="Mort" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="16" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="4" />
 			<property name="Stats" value="Armor=1, Life=13" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Cursed Sword;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={8: ['Tainted']}" />
 			<property name="AttackBar" value="Cursed Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Tainted]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity, Legendary" />
 			<property name="Text" value="Each Upkeep Phase, each friendly skeleton object, in or bordering Mort&apos;s zone, may Reconstruct up to 2 damage." />
 			<property name="CardID" value="DNC07" />
 		</card>
 		<card id="fb442d50-c831-4da9-bbb8-dace15fea19b" name="Unstable Zombie">
+			<property name="Nickname" value="Unstable Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Talons;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="When Unstable Zombie is activated, it may choose on the following: Remove up to 2 damage from itself, its attacks gain Piercing +2 until end of round, or it loses the Lumbering trait until end of round." />
 			<property name="CardID" value="DNC08" />
 		</card>
 		<card id="c0ae161f-891a-4fa8-824e-ca35ea8effeb" name="Plague Zombie">
+			<property name="Nickname" value="Plague Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=4" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Diseased Strike;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={8: ['Rot']}" />
 			<property name="AttackBar" value="Diseased Strike:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [8+ = Rot]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="When Plague Zombie is destroyed, place a Rot condition on each Living creature in its " />
 			<property name="CardID" value="DNC09" />
 		</card>
 		<card id="1c7345af-d370-446b-8d71-ebb1e90b0db9" name="Raptor Vine">
+			<property name="Nickname" value="Raptor Vine" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Voracious Bite;action type=Quick;range type=Melee;range=(0,0);dice=5;Vampiric=True" />
 			<property name="AttackBar" value="Voracious Bite:&#xD;&#xA;[Quick] [Melee] [Dice=5] [Vampiric]" />
 			<property name="Traits" value="Rooted, Uproot 1, Regenerate 1, Hydro Immunity, Flame +2" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC10" />
 		</card>
 		<card id="499cdd49-3a70-433b-8ecf-a43f1906b845" name="Ravenous Ghoul">
+			<property name="Nickname" value="Ravenous Ghoul" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead" />
 			<property name="Cost" value="13" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Fast, Psychic Immunity, Nonliving" />
 			<property name="Text" value="If a Corporeal creature was destroyed this round, and Ravenous Ghoul is in (or moves to) the zone it was destroyed in, as a quick action it may take that creature from its discard pile and remove it from the game to gain a Growth marker." />
 			<property name="CardID" value="DNC11" />
 		</card>
 		<card id="42e4bd62-7a26-4d7a-9b19-21e4c26fc0dd" name="Shaggoth-Zora">
+			<property name="Nickname" value="Shaggoth-Zora" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Mangling Claws;action type=Quick;range type=Melee;range=(0,0);dice=4" />
 			<property name="AttackBar" value="Mangling Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Resilient, Psychic Immunity, Nonliving, Legendary" />
 			<property name="Text" value="When Shaggoth-Zora is activated, it may Obliterate 1 friendly zombie creature in its zone to place a Growth marker on itself. It can have a maximum of 6 Growth markers." />
 			<property name="CardID" value="DNC12" />
 		</card>
 		<card id="310c13cd-b845-46c2-9ad7-94eda4626f1d" name="Skeletal Archer">
+			<property name="Nickname" value="Skeletal Archer" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Bow;action type=Full;range type=Ranged;range=(1,2);dice=4||name=Fist;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Bow:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4]&#xD;&#xA;Fist:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC13" />
 		</card>
 		<card id="b3ea6383-16dc-4786-92c5-e1498f2811c3" name="Skeletal Knight">
+			<property name="Nickname" value="Skeletal Knight" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="13" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Defense=8+ 1x, Armor=1, Life=12" />
+			<property name="StatDefense" value="8+ 1x" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="name=Broadsword;action type=Quick;range type=Melee;range=(0,0);dice=5" />
 			<property name="AttackBar" value="Broadsword:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC14" />
 		</card>
 		<card id="d40817b6-6574-4d86-b0bf-0f32fb1e49cf" name="Skeletal Minion">
+			<property name="Nickname" value="Skeletal Minion" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Skeleton, Soldier" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Femur;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Femur:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC15" />
 		</card>
 		<card id="6ae1f6c5-8005-4201-a6c3-223e2622c902" name="Spitting Raptor">
+			<property name="Nickname" value="Spitting Raptor" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Reptile" />
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=9" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Talons;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1||name=Spitting Acid;action type=Full;damage type=Acid;range type=Ranged;range=(0,1);dice=3;effects={5: ['Corrode']}" />
 			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Spitting Acid:&#xD;&#xA;[Full] [Acid] [Ranged:0-1] [Dice=3] [d12] [5+ = Corrode]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC16" />
 		</card>
 		<card id="8d28ba55-a8ea-43e6-8df4-8becc8cb088f" name="Tataree">
+			<property name="Nickname" value="Tataree" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Insect" />
 			<property name="Cost" value="6" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Defense=3+ inf, Armor=0, Life=3" />
+			<property name="StatDefense" value="3+ inf" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=Magical Burst;action type=Quick;range type=Melee;range=(0,0);dice=1;Ethereal=True" />
 			<property name="AttackBar" value="Magical Burst:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal]" />
 			<property name="Traits" value="Flying, Legendary, Pest, Druid Only" />
 			<property name="Text" value="As a quick action, Tataree may choose and do one of the following to a plant object in its zone; Heal it 1 damage, or place 1 mana on it (if it has the Channel attribute)." />
 			<property name="CardID" value="DNC17" />
 		</card>
 		<card id="b95362fb-2d0e-428d-af86-a85f667626dd" name="Togorah, Forest Sentinel">
+			<property name="Nickname" value="Togorah" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Tree, Sequoian" />
 			<property name="Cost" value="21" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="6" />
 			<property name="Stats" value="Armor=2, Life=18" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="18" />
+			<property name="cAttacks" value="name=Massive Branch Smash;action type=Full;range type=Melee;range=(0,0);dice=6;effects={7: ['Daze'], 11: ['Stun']};Reach=True" />
 			<property name="AttackBar" value="Massive Branch Smash:&#xD;&#xA;[Full] [Melee] [Dice=6] [d12] [7-10 = Daze; 11+ = Stun] [Reach]" />
 			<property name="Traits" value="Rooted, Uproot 2, Vigilant, Intercept, Flame +2, Regenerate 2, Hydro Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC18" />
 		</card>
 		<card id="f4574320-6839-4346-a36f-cad119af8b43" name="Venomous Zombie">
+			<property name="Nickname" value="Venomous Zombie" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Venomous Bite;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={7: ['Tainted']}" />
 			<property name="AttackBar" value="Venomous Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [7+ = Tainted]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC19" />
 		</card>
 		<card id="bc0190fc-cb97-47e5-aa19-a2d387a64b73" name="Vine Snapper">
+			<property name="Nickname" value="Vine Snapper" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Headbutt;action type=Quick;range type=Melee;range=(0,0);dice=4||name=Cavernous Maw;action type=Full;range type=Melee;range=(0,0);dice=5;Piercing +X=1;Devour=True" />
 			<property name="AttackBar" value="Headbutt:&#xD;&#xA;[Quick] [Melee] [Dice=4]&#xD;&#xA;Cavernous Maw:&#xD;&#xA;[Full] [Melee] [Dice=5] [Piercing +1] [Devour]" />
 			<property name="Traits" value="Rooted, Regenerate 1, Flame +2, Hydro Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC20" />
 		</card>
 		<card id="5065ae95-c3be-494f-ba68-afedb3b8c2d9" name="Thornlasher">
+			<property name="Nickname" value="Thornlasher" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Plant, Vine" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=11" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Ensnaring Vine;range type=Ranged;range=(0,1);dice=3;effects={5: ['Snatch']}" />
 			<property name="AttackBar" value="Ensnaring Vine:&#xD;&#xA;[Ranged:0-1] [Dice=3] [d12] [5+ = Snatch]" />
 			<property name="Traits" value="Rooted, Regenerate 2, Flame +2, Hydro Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC21" />
 		</card>
 		<card id="b37bdf0c-85f9-4b78-b32a-fe550c37d047" name="Zombie Brute">
+			<property name="Nickname" value="Zombie Brute" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="11" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Mangling Claws;action type=Quick;range type=Melee;range=(0,0);dice=4" />
 			<property name="AttackBar" value="Mangling Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
 			<property name="Traits" value="Bloodthirsty +2, Lumbering, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC22" />
 		</card>
 		<card id="96c21a43-e794-4f23-9408-5c7f2523a4f6" name="Zombie Crawler">
+			<property name="Nickname" value="Zombie Crawler" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=0, Life=4" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=2" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 			<property name="Traits" value="Bloodthirsty +1, Slow, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="DNC23" />
 		</card>
 		<card id="e91c66db-b4cc-4b38-8427-06dceb2103a0" name="Zombie Minion">
+			<property name="Nickname" value="Zombie Minion" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Undead, Zombie" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Bloodthirsty +1, Lumbering, Pest, Resilient, Psychic Immunity, Nonliving" />
 			<property name="Text" value="" />
@@ -679,45 +886,54 @@
 
 
 		<card id="86308614-b7be-477c-b0ab-be56d31cadc5" name="Barkskin">
+			<property name="Nickname" value="Barkskin" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Plant, Healing, Protection" />
 			<property name="Cost" value="2+2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
 			<property name="Target" value="Druid Mage" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Upkeep +2, Cantrip, Druid Only" />
 			<property name="Text" value="Mage gains Armor +2 and Regenerate 2.&#xD;&#xA;[Armor +2] [Regenerate 2]" />
 			<property name="CardID" value="DNE01" />
 		</card>
 		<card id="69227c1a-b122-4395-a31a-463dab9d16e1" name="Rise Again">
+			<property name="Nickname" value="Rise Again" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Curse, Necro" />
 			<property name="Cost" value="2+0" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,!tEpic,tLiving,TCreature" />
 			<property name="Target" value="Non-Mage, Non-Epic Living Creature" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dark Mage Only" />
 			<property name="Text" value="When this creature is destroyed, you may pay half its casting cost (rounded up) to Reanimate it. When the creature comes into play, place a Zombie condition marker on it, and place damage on it equal to its Level"  />
 			<property name="CardID" value="DNE02" />
 		</card>
 		<card id="1431371e-755e-4ff5-9fe3-7677673bce7b" name="Stumble">
+			<property name="Nickname" value="Stumble" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Force" />
 			<property name="Cost" value="2+1" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!tFlying,TCreature" />
 			<property name="Target" value="Non-Flying Creature" />
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When this creature is activated, you may reveal Stumble. If you do, the creature can&apos;t take a move action until the end of its Action Phase. Then, destroy Stumble. Has no effect on creatures with the Unmovable or Uncontainable trait." />
@@ -726,150 +942,191 @@
 
 
 		<card id="290f58ae-7089-4ddd-a7ad-3abdd129f9dc" name="Cloak of Shadows">
+			<property name="Nickname" value="Cloak of Shadows" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Shadow" />
 			<property name="Cost" value="6" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Cloak" />
+			<property name="StatEquipmentSlot" value="Cloak" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dark Mage Only" />
 			<property name="Text" value="Mage gains the Obscured and Light -2 traits.&#xD;&#xA;[Obscured] [Light -2]" />
 			<property name="CardID" value="DNQ01" />
 		</card>
 		<card id="70e1dca8-85ef-40f0-a18a-6904ed4539de" name="Death Ring">
+			<property name="Nickname" value="Death Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Necro, Mana" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Necromancer Only" />
 			<property name="Text" value="Up to twice per round, this Mage may pay 1 less mana when he, or a spawnpoint he controls, casts or reveals a necro or undead spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Necro/Undead] [x2]" />
 			<property name="CardID" value="DNQ02" />
 		</card>
 		<card id="84aeeb75-a297-4b94-a79d-f9068e19dcd9" name="Deathshroud Staff">
+			<property name="Nickname" value="Deathshroud Staff" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="8" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Deathshroud Strike;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={8: ['Rot']}" />
 			<property name="AttackBar" value="Deathshroud Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [8+ = Rot]" />
 			<property name="Traits" value="Necromancer Only" />
 			<property name="Text" value="Once per round, as a quick necro spell, you may pay 2 mana to target a zone up to 1 zone away. All friendly undead creatures in that zone gain Melee +1 until the end of the round." />
 			<property name="CardID" value="DNQ03" />
 		</card>
 		<card id="ceee5eaa-4aef-4b81-b272-b23d7e15380d" name="Druid&apos;s Leaf Ring">
+			<property name="Nickname" value="Druid&apos;s Leaf Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Druid Only" />
 			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a plant spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Plant] [x1]" />
 			<property name="CardID" value="DNQ04" />
 		</card>
 		<card id="3eaae143-ac4b-4d8b-9396-83f8215aed51" name="Libro Mortuos">
+			<property name="Nickname" value="Libro Mortuos" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Necro, Tome" />
 			<property name="Cost" value="10" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Channeling=1, Location=Weapon/Shield" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Necromancer Only, Epic" />
 			<property name="Text" value="During the Deployment Phase, Libro Mortuos may summon one undead creature into your zone. If Libro Mortuos is destroyed, you may lose 3 Life to return it to your spellbook instead of the discard pile." />
 			<property name="CardID" value="DNQ05" />
 		</card>
 		<card id="10e5eda8-f2b6-459f-9309-172251215aa9" name="Mohktari&apos;s Branch">
+			<property name="Nickname" value="Mohktari&apos;s Branch" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="name=Mohktari&apos;s Touch;cost=X;action type=Quick;range type=Ranged;range=(0,1);Remove 1 condition marker from target plant object (pay its removal cost). If you do, you may heal it 1 damage.=True" />
 			<property name="AttackBar" value="Mohktari&apos;s Touch:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 condition marker from target plant object (pay its removal cost). If you do, you may heal it 1 damage.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, this Mage may cast the above quick spell." />
 			<property name="CardID" value="DNQ06" />
 		</card>
 		<card id="94757213-e96f-44b3-a520-7528fa098d74" name="Veteran&apos;s Belt">
+			<property name="Nickname" value="Veteran&apos;s Belt" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Belt" />
+			<property name="StatEquipmentSlot" value="Belt" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Whenever this Mage is attacked, at the end of the Roll Dice Step, he may convert up to 2 critical damage to normal damage." />
 			<property name="CardID" value="DNQ07" />
 		</card>
 		<card id="6fa5b665-0b7d-4815-9122-09e27b50c7a9" name="Vinewhip Staff">
+			<property name="Nickname" value="Vinewhip Staff" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Vine" />
 			<property name="Cost" value="7" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Vinelash;action type=Quick;range type=Melee;range=(0,0);dice=4;Reach=True" />
 			<property name="AttackBar" value="Vinelash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Reach]" />
 			<property name="Traits" value="Druid Only" />
 			<property name="Text" value="As a quick spell, you may pay 1 mana to place a Vine Marker in a target zone up to 1 zone away. Once per round, as a quick spell, you may pay 4 mana and destroy a target friendly Vine marker up to 2 zones away, to give a target non-flying creature in that zone the Stuck condition." />
 			<property name="CardID" value="DNQ08" />
 		</card>
 		<card id="b96b5ebe-6e6b-4ee8-b644-8e68dda574c0" name="Wand of Healing">
+			<property name="Nickname" value="Wand of Healing" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Healing" />
 			<property name="Cost" value="2" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="name=Healing Light;cost=2;action type=Quick;range type=Ranged;range=(0,1);Heal=True;dice=2;Heal target Living creature the amount rolled.=True||name=Cleansing Light;cost=X;action type=Quick;range type=Ranged;range=(0,1);effects={}" />
 			<property name="AttackBar" value="Healing Light:&#xD;&#xA;[Cost=2] [Quick] [Ranged:0-1] [Heal] [Dice=2] [Heal target Living creature the amount rolled.]&#xD;&#xA;Cleansing Light:&#xD;&#xA;[Cost=X] [Quick] [Ranged:0-1] [Remove 1 Condition marker from target Living creature. X = its removal cost.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, this Mage may cast one of the 2 quick spells shown above." />
 			<property name="CardID" value="DNQ09" />
 		</card>
 		<card id="2fbb95eb-e736-4710-b3d1-7a0a399f5a76" name="Meditation Amulet">
+			<property name="Nickname" value="Meditation Amulet" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Mana" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Amulet" />
+			<property name="StatEquipmentSlot" value="Amulet" />
+			<property name="cAttacks" value="name=Meditate;action type=Full;Add 3 mana to your mana supply.=True" />
 			<property name="AttackBar" value="Meditate:&#xD;&#xA;[Full] [Add 3 mana to your mana supply.]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -878,120 +1135,144 @@
 
 
 		<card id="ee58773c-a3ea-42b9-b1ec-c0a4560f8cd6" name="Animate Dead">
+			<property name="Nickname" value="Animate Dead" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="X" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))NULL" />
 			<property name="Target" value="Discarded non-Epic Living Creature" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Dark Mage Only" />
 			<property name="Text" value="Choose a non-Epic Living creature from any discard pile, and Summon it into your zone. Place damage on that creature equal to its Level. Place a Zombie marker on this creature. X = half the creatures casting cost (rounded up)." />
 			<property name="CardID" value="DNI01" />
 		</card>
 		<card id="7c50b8b4-149e-4636-8beb-88672929946b" name="Burst of Thorns">
+			<property name="Nickname" value="Burst of Thorns" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="" />
 			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
 			<property name="Target" value="Friendly Vine Marker" />
 			<property name="School" value="Nature" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Thornburst;range type=Ranged;range=(0,0);dice=4;effects={7: ['Bleed']};Piercing +X=1" />
 			<property name="AttackBar" value="Thornburst:&#xD;&#xA;[Ranged:0-0] [Dice=4] [d12] [7+ = Bleed] [Piercing +1]" />
 			<property name="Traits" value="Druid Only" />
 			<property name="Text" value="Target friendly vine marker makes the above attack. Then, destroy that vine marker." />
 			<property name="CardID" value="DNI02" />
 		</card>
 		<card id="bdf3c1a5-2f4e-41bb-806f-b8db38ba7242" name="Reassemble">
+			<property name="Nickname" value="Reassemble" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="4" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SSkeleton,TCreature||SSkeleton,TConjuration||SSkeleton,TEnchantment||SSkeleton,TEquipment" />
 			<property name="Target" value="Skeleton Object" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Roll 6 attack dice. Target skeleton object may Reconstruct up to that much damage." />
 			<property name="CardID" value="DNI03" />
 		</card>
 		<card id="8cdd0758-7dcb-4c58-9855-a1d852b86e33" name="Renewing Rain">
+			<property name="Nickname" value="Renewing Rain" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Healing, Weather" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Arena" />
 			<property name="Target" value="Arena" />
 			<property name="School" value="Holy+Water" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Remove all Burn condition markers from all objects. All friendly Living objects may heal up to 2 damage." />
 			<property name="CardID" value="DNI04" />
 		</card>
 		<card id="fed20306-b9fa-4351-acb0-126701a1bd8f" name="Unholy Resurgence">
+			<property name="Nickname" value="Unholy Resurgence" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Arena" />
 			<property name="Target" value="Arena" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Epic" />
 			<property name="Text" value="Each friendly skeleton object in the arena rolls 6 attack dice and may Reconstruct up to that much damage (roll separately for each object)." />
 			<property name="CardID" value="DNI05" />
 		</card>
 		<card id="da57df3c-1a95-48dd-a340-e304fb2d8bb7" name="Zombie Frenzy">
+			<property name="Nickname" value="Zombie Frenzy" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Necro" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full" />
 			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Arena" />
 			<property name="Target" value="Arena" />
 			<property name="School" value="Dark" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Until the end of the round, all zombie creatures in the arena lose the Lumbering, Slow, and Pest traits, and gain the Fast and Bloodthirsty +1 traits." />
 			<property name="CardID" value="DNI06" />
 		</card>
 		<card id="b6ba6985-8bc2-4e41-9883-9b44fc8ddadf" name="Dispel">
+			<property name="Nickname" value="Dispel" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Metamagic" />
 			<property name="Cost" value="X" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TEnchantment" />
 			<property name="Target" value="Revealed Enchantment" />
 			<property name="School" value="Arcane" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Destroy target revealed enchantment. X = total mana cost of target enchantment (casting plus reveal cost)" />
 			<property name="CardID" value="DNI07" />
 		</card>
 		<card id="12a46022-4004-47d3-82ca-f78230814d67" name="Dissolve">
+			<property name="Nickname" value="Dissolve" />
 			<property name="Type" value="Incantation" />
 			<property name="Subtype" value="Acid" />
 			<property name="Cost" value="X" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))SMage" />
 			<property name="Target" value="Mage" />
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. Destroy the chosen equipment. X = equipment&apos;s casting cost" />
@@ -1000,12 +1281,17 @@
 
 
 		<card id="ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0" name="Vine Marker Green">
+			<property name="Nickname" value="Vine Marker Green" />
 			<property name="Type" value="Conjuration-Vine" />
 			<property name="Stats" value="Armor=-, Life=1" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="1" />
 			<property name="Level" value="0" />
 				<alternate name="Vine Marker Black" type="B">
 					<property name="Type" value="Conjuration-Vine" />
 					<property name="Stats" value="Armor=-, Life=1" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="1" />
 					<property name="Level" value="0" />
 				</alternate>
 		</card>

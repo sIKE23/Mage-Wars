@@ -141,7 +141,8 @@ def getNextPlayerNum():
 	nextPlayer = activePlayer + 1
 	if nextPlayer > len(getPlayers()):
 		nextPlayer = 1
-
+	return nextPlayer
+	
 def validateDeck(deck):
 	mute()
 	for c in deck:
