@@ -6,8 +6,8 @@
 ###########################################################################
 
 @Beastmaster
->The Beastmaster enters the arena, the sounds of howling echoing in his wake.
->"I will show you that nature is nothing to be trifled with," says the Beastmaster.
+>"I will show you that nature is nothing to be trifled with," he says.
+> The sound of howling echoes in his wake.
 
 @Necromancer
->"Death has come for you," cackles the Necromancer.
+>"Death has come for you," he cackles.
