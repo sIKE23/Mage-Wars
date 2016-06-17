@@ -5,9 +5,43 @@
 ###	Lines not prefaced with one of these are treated as comments		###
 ###########################################################################
 
+@Adramelech Warlock
+>"When in doubt... Kill it with fire."
+
+@Anvil Throne Warlord
+>He seems a little drunk.
+>"Why is it always m'self who has ter do tha king's dirty work?" he grumbles.
+>"Ye know why us dwarves have so much gold? Cause no one ken take it from us."
+>"I've heard of yer peoples' weak armor" he laughs.
+
 @Beastmaster
->"I will show you that nature is nothing to be trifled with," he says.
-> The sound of howling echoes in his wake.
+>"I will show you that nature is nothing to be trifled with."
+>The sound of howling echoes in his wake.
+>"I smelled your stench an hour ago."
+
+@Forcemaster
+>"Let's see if you can hit me."
+>"Maybe you should reconsider summoning one of your allies."
+
+@Johktari Beastmaster
+>"If you're smart, start running."
 
 @Necromancer
->"Death has come for you," he cackles.
+>"Death has come for you."
+>"Nothing is more loyal than an undead army."
+>"I hope you don't mind rotting flesh?"
+>"Don't be afraid. If you prove worthy, I might just bring you back."
+
+@Priest
+>"Another day, another heathen to kill"
+>"I will show you the power of Malakai!"
+>"Your idol will not protect you against the power of the light!"
+
+@Priestess
+>"Asyra, aid me."
+>"I don't want to hurt you," she says. "You can still stop this madness."
+
+@Warlord
+>He grins. "Finally, some excitement!" 
+>"Our army will rule this land!" he roars. 
+>"A warlock once suggested I should kill with fire," he says. "I crushed his head with a stone." 
