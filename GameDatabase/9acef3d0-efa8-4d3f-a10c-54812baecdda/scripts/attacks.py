@@ -70,24 +70,14 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 						else: attackList.remove(a)
 		choices = []
 		for a in list(attackList):
-				atkTraits = a.get('Traits',{})
-				traits = getAttackTraitStr(atkTraits)
-				expDam = str(round(expectedDamage(aTraitDict,a,dTraitDict),1)) if defender else ''
-				killCh = str(round(chanceToKill(aTraitDict,a,dTraitDict)*100,1)) if defender else ''
-				effectList = (['{} ({}%)'.format(e[1],
-												str(round(getD12Probability(e[0],aTraitDict,a,dTraitDict)*100,1))) for e in a.get('d12',[])]
-							  if a.get('d12') else '')
-				choice = (("{} ({})".format(a.get('Name'),str(a.get('Dice',0))).center(68,' ') if a.get('Name') else str(a.get('Dice',0)).center(68,' '))+
-						  ('\n{} Mana'.format(str(a.get('Cost',0))) if a.get('Cost') else '')+
-						  ('\n'+', '.join(traits) if traits else '')+
-						  ('\n'+', '.join(effectList) if effectList != '' else '')+
-						  ('\nExpected damage: {} | Kill chance: {}%'.format(expDam,killCh) if (defender and a.get('EffectType','Attack')=='Attack') else ''))
+				choice = formatAttackChoiceText(aTraitDict,a,dTraitDict)
 				if specialCase == 'Counterstrike' and a.get('RangeType') != 'Counterstrike': continue
 				if not attacker or isLegalAttack(aTraitDict,a,dTraitDict): choices.append(choice)
 				else: attackList.remove(a)
-		if defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
-				choiceText = "Attacking {} with {}. Use which Attack?".format(defender.name,attacker.name)
-		if specialCase == 'Counterstrike': choiceText = "{} can counterstrike! Use which attack?".format(attacker.name)
+		if specialCase == 'Counterstrike': 
+				choiceText = "{} can counterstrike! Use which attack?".format(attacker.name)
+		elif defender and attacker and defender.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
+				choiceText = "Attacking {} with {}. Use which attack?".format(defender.name,attacker.name)
 		colors = ([] if attacker else ['#E0B525']) + [getActionColor(attackList[i]) for i in range(len(choices))] + ['#666699','#000000']
 		attackList = ([] if attacker else [{'Dice':0}]) + list(attackList)
 		choices = ([] if attacker else ['Roll Effect Die']) + list(choices) + ['Other Dice Amount','Cancel Attack']
@@ -102,6 +92,21 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 						dice = min(askInteger("Roll how many Attack Dice?", getSetting('lastStandardDiceRollInput',8)),50) #max 50 dice rolled at once
 						setSetting('lastStandardDiceRollInput',dice)
 						return {'Dice' : dice}
+
+def formatAttackChoiceText(aTraitDict,attack,dTraitDict): # dict::trait -> dict::attack -> dict::trait -> str
+	"Formats the text of input attack for display in the attack menu."
+	# 1. Gather data
+	trait_string = getAttackTraitStr(attack.get('Traits',{}))
+	kill_chance = str(round(chanceToKill(aTraitDict,attack,dTraitDict)*100,1)) if dTraitDict else None
+	effects = ['{} ({}%)'.format(e[1],str(round(getD12Probability(e[0],aTraitDict,attack,dTraitDict)*100,1))) for e in attack.get('d12',[])]
+	# 2. Assemble components of attack string
+	title = "{} ({})".format(attack.get("Name","Unnamed Attack"),str(attack.get('Dice',0))).center(68,' ')
+	cost = '\n{} Mana'.format(str(attack.get('Cost',0))) if attack.get('Cost') else ""
+	traits = ("\n" + ", ".join(trait_string)) if trait_string else ""
+	effects = ("\n" + ", ".join(effects)) if effects else ""
+	kill_chance = "\nKill chance: {}%".format(kill_chance) if (kill_chance and attack.get('EffectType','Attack')=='Attack') else ""
+	# 3. Return formatted string
+	return title+cost+traits+effects+kill_chance
 
 def getActionColor(action):
 		if action.get('EffectType','Attack') == 'Heal': return "#663300"        #Heal is always in orange
