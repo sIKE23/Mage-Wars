@@ -521,20 +521,23 @@ def mageSetup():
 	mageDict = eval(me.getGlobalVariable("MageDict"))
 	if mageDict["MageStatsID"] == 00000: return #deck hasn't been loaded
 	mageID = int(mageDict["MageID"])
+	mage = Card(mageID)
 	mageStatsID = int(mageDict["MageStatsID"])
+	magestats = Card(mageStatsID)
 	#set initial health and channeling values
-	me.Channeling = int(Card(mageStatsID).StatChanneling)
-	me.Mana = me.Channeling + 10 + int(Card(mageStatsID).StatStartingMana)
-	me.Life = int(Card(mageStatsID).StatLife)
-	Card(mageID).Subtype = Card(mageStatsID).Subtype
-	Card(mageID).Level = Card(mageStatsID).Level
-	Card(mageID).Stats = Card(mageStatsID).Stats #havent decided if this is needed yet....proxygen??
-	Card(mageID).AttackBar = Card(mageStatsID).AttackBar
-	Card(mageID).Traits = Card(mageStatsID).Traits
+	me.Channeling = int(magestats.StatChanneling)
+	me.Mana = me.Channeling + 10 + int(magestats.StatStartingMana)
+	me.Life = int(magestats.StatLife)
+	Card(mageID).Subtype = magestats.Subtype
+	Card(mageID).Level = magestats.Level
+	Card(mageID).Stats = magestats.Stats #havent decided if this is needed yet....proxygen??
+	Card(mageID).AttackBar = magestats.AttackBar
+	Card(mageID).Traits = magestats.Traits
 	mageDict["MageRevealed"] = "True"
 	me.setGlobalVariable("MageDict",str(mageDict))
 	# here is where issue #360 should be called from.....and replace the line below.
 	notify("{} enters the Arena! - Channeling is set to {} and Mana is set to {} and Life set to {}".format(Card(mageID),me.Channeling,me.Mana,me.Life))
+	mageRevealMessage(mage)
 
 def discard(card, x=0, y=0):
 	mute()

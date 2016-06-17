@@ -1,0 +1,13 @@
+###########################################################################
+###	@ = tag used for name of mage										###
+###	> = denotes possible message to be shown upon mage entry to arena	###
+###	# = explicit comments 												###
+###	Lines not prefaced with one of these are treated as comments		###
+###########################################################################
+
+@Beastmaster
+>The Beastmaster enters the arena, the sounds of howling echoing in his wake.
+>"I will show you that nature is nothing to be trifled with," says the Beastmaster.
+
+@Necromancer
+>"Death has come for you," cackles the Necromancer.

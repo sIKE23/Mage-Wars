@@ -8,6 +8,7 @@
 import sys
 sys.path.append(wd("lib"))
 import os
+import random
 
 def readScriptTextFile(filename):
 	"Takes a .txt file from the scriptText directory and returns a list of each line in that file."
@@ -213,3 +214,19 @@ def tutorialMessage(tag):
 		choice = askChoice(boxText,choices,colors)
 		if choice == 2: setSetting("octgnTutorial",False)
 	if whisperText: whisper(whisperText)
+
+def mageRevealMessage(mage): # Card -> None
+	"Prints a message depending on the input mage. Messages are stored in scriptText/MageReveal.txt"
+	rawList = readScriptTextFile("MageReveal")
+	name = mage.Name
+	messages = []
+	append = messages.append
+	valid_message = False
+	for line in rawList:
+		if line:
+			content = line[1:].replace('\n','')
+			if line[0] == "#": continue
+			elif line[0] == "@": valid_message = (content == name)
+			elif line[0] == ">" and valid_message: append(content)
+	if messages: notify(random.choice(messages))
+	else: notify("The {} is ready to fight!".format(mage.Nickname))

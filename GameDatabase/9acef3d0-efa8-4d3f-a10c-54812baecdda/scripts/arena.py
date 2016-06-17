@@ -145,6 +145,9 @@ def getNextPlayerNum():
 	
 def validateDeck(deck):
 	mute()
+
+	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
+
 	for c in deck:
 			if c.Type == "Magestats":
 					stats = c.Stats.split(",")
@@ -153,7 +156,7 @@ def validateDeck(deck):
 					spellbook["spellpoints"] = int(StatSpellBookPoints)
 			break
 	#debug("Stats {}".format(stats))
-	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
+	#spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 
 	#get school costs
 	for schoolcost in schoolcosts:
