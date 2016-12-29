@@ -60,22 +60,22 @@ def resolveBurns():
 			numMarkers = card.markers[Burn]
 			Damage = 0
 			burnsRemoved = 0
-			SolInZone = "False"
+			#SolInZone = "False"
 			zone = getZoneContaining(card)
 			isInZone = getCardsInZone(zone)
-			for i in isInZone:
-		 		if i.name == "Sol, Blazing Angel":
-		 			SolInZone = "True"
+			#for i in isInZone:
+		 		#if i.name == "Sol, Blazing Angel":
+		 			#SolInZone = "True"
 			for i in range(0, numMarkers):
 				roll = rnd(0, 2)
-				if roll == 0 and not SolInZone == "True":
+				if roll == 0 #and not SolInZone == "True":
 					card.markers[Burn] -= 1
 					burnsRemoved += 1
 				Damage += roll
 			#apply damage
 			addDamageAmount(card,Damage)
 			if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
-			if burnRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
+			if burnsRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
 		notify("Finished auto-resolving Burns for {}.".format(me))
 
 def resolveRot():

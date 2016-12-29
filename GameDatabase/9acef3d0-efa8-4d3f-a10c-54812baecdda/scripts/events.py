@@ -79,7 +79,7 @@ def onGameStarted():
 def chooseGame():
 	mute()
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
-	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
+	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Mage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
 	buttonColorList = ["#de2827","#171e78"];
 	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
 
@@ -524,6 +524,15 @@ def onCardArrowTargeted(args):
 								castSpell(attacker,defender) #Assume that player wants to cast card on target
 								attacker.arrow(defender,False)
 
+def cardX(card):
+	x, y = card.position
+	return x
+
+def cardY(card):
+	x, y = card.position
+	return y
+								
+								
 def onCardDoubleClicked(args):
 	#args = card, mouseButton, keysDown
 	mute()
