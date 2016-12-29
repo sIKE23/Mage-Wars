@@ -325,3 +325,28 @@ def listQuery(query_text,list,to_text,to_color): # string -> list<T> -> ( Option
 	colors = [to_color(e) for e in list] + [to_color(None)]
 	choice = askChoice(query_text,options,colors)
 	if 0 < choice < len(options): return list[choice-1]
+
+def publicChatMsg(string):
+	mute()
+	gameHost = Player(int(getGlobalVariable("GameHostID")))
+	gameLog = eval(getGlobalVariable('GameLog'))
+	notify("{}".format(string))
+	if me == gameHost: 
+		gameLog.append(string + "\n")
+		setGlobalVariable('GameLog',str(gameLog))
+
+def privateChatMsg(string):
+	mute()
+	gameLog = eval(getGlobalVariable('GameLog'))
+	whisper("{}".format(string))
+	gameLog.append(string + "\n")
+	setGlobalVariable('GameLog',str(gameLog))
+
+def debugMsg(string):
+	mute()
+	global debugMode
+	if debugMode:
+			gameLog = eval(getGlobalVariable('GameLog'))
+			whisper("Debug Msg: {}".format(string))
+			gameLog.append(string + "\n")
+			setGlobalVariable('GameLog',str(gameLog))

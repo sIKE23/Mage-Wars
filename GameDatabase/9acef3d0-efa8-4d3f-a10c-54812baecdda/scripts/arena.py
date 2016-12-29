@@ -270,12 +270,15 @@ def validateDeck(deck):
 
 		#Siren is trained in Water and all spells with Song or or Pirate subtypes.
 		#By this point, Water has been correctly calculated, but the Song/Pirate spells are overcosted if they are not Water
-		if "Water" not in card.School and "Siren" in c.name and ("Song" in card.Subtype or "Pirate" in card.Subtype):
+		if "Siren" in c.name and (("Water" in card.School and "+" in card.School) or ("Water" not in card.School)) and ("Song" in card.Subtype or "Pirate" in card.Subtype):
 			#subtract 1 per level per count as this card has been added x2 per non-trained school already
 				if "+" in card.School:
 					level = card.Level.split("+")
-					for l in level:
-						booktotal -= int(l)
+					schools = card.School.split("+")
+					for s in schools:
+						if not s == "Water"
+							for l in level:
+							booktotal -= int(l)
 				elif "/" in card.School:
 					level = card.Level.split("/")
 					booktotal -= int(level[0])

@@ -10,7 +10,8 @@
 def onTableLoaded():
 	mute()
 	#log in chat screen what version of the game definiton the player is using
-	notify("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
+	setGlobalVariable('GameLog',str([]))
+	publicChatMsg("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 
 def onGameStarted():
@@ -62,8 +63,8 @@ def onGameStarted():
 		me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 		setUpDiceAndPhaseCards()
 		setGlobalVariable("GameSetup",str(0))
-		notify("There is only one player, so there is no need to roll for initative.")
-		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
+		publicChatMsg("There is only one player, so there is no need to roll for initative.")
+		publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
 	else:
@@ -117,7 +118,7 @@ def setArenaBoard():
 	while (True):
 		choice = askChoice("Which Arena Game board would you like to to Use?", boardList, boardButtonColorList)
 		if choice >= 1:
-			notify('{} loads {}.'.format(me,boardList[choice-1]))
+			publicChatMsg('{} loads {}.'.format(me,boardList[choice-1]))
 			break
 	table.board = gameBoardsDict[choice]["boardName"]
 	zoneDef = gameBoardsDict[choice]["zoneDef"]
@@ -178,7 +179,7 @@ def finishSetup(): #Waits until all players have chosen a color, then finishes t
 	PlayerSetup()
 	#the Gamehost now sets up the Initative, Phase, and Roll Dice Area
 	setUpDiceAndPhaseCards()
-	notify("Players will now roll for initiative.")
+	publicChatMsg("Players will now roll for initiative.")
 	rollForInitative()
 	for p in players:
 		remoteCall(p, "tutorialMessage", ["Introduction"])
@@ -204,9 +205,9 @@ def PlayerSetup():
 def setRDALocation():
 	mute()
 	if getSetting("RDALocation", True):
-		notify("{} places the Roll Dice Area to the side of the Gameboard.".format(me))
+		publicChatMsg("{} places the Roll Dice Area to the side of the Gameboard.".format(me))
 	else:
-		notify("{} places the Roll Dice Area to the Bottom of the Gameboard.".format(me))
+		publicChatMsg("{} places the Roll Dice Area to the Bottom of the Gameboard.".format(me))
 		setGlobalVariable("DiceRollAreaPlacement", "Bottom")
 
 def setUpDiceAndPhaseCards():
@@ -233,10 +234,10 @@ def rollForInitative():
 	effect = 0
 	rollForPlayer = 0
 	for p in getPlayers():
-		notify("Automatically rolling initiative for {}...".format(p.name))
+		publicChatMsg("Automatically rolling initiative for {}...".format(p.name))
 		effect = rnd(1,12)
 		rollForPlayer += 1
-		notify("{} rolled a {} for initiative".format(p.name, effect))
+		publicChatMsg("{} rolled a {} for initiative".format(p.name, effect))
 		myRollStr = (str(p._id) + ":" + str(effect) + ";")
 		setGlobalVariable("OppIniRoll", getGlobalVariable("OppIniRoll") + myRollStr)
 		update()
@@ -261,7 +262,7 @@ def rollForInitative():
 
 		# we got a tie in there somewhere. determine winner randomly from high rollers
 		if timesMaxRolled > 1:
-			notify("High roll tied! Randomly determining initiative...")
+			publicChatMsg("High roll tied! Randomly determining initiative...")
 			highRollerPlayerNums = []
 			for roll in rollStringList:
 				if roll == "":
@@ -274,7 +275,7 @@ def rollForInitative():
 
 		remoteCall(Player(victoriousPlayerID), "AskInitiative", [victoriousPlayerID])
 	else:
-		notify("Something unexpected happened and the automation for Initative has failed! Setting the game host as the player to choose Initative!")
+		publicChatMsg("Something unexpected happened and the automation for Initative has failed! Setting the game host as the player to choose Initative!")
 		gameHost = Player(int(getGlobalVariable("GameHostID")))
 		remoteCall(gameHost, "AskInitiative", [1])
 
@@ -282,7 +283,7 @@ def AskInitiative(playerID):
 	mute()
 	setGlobalVariable("VictoriousPlayerID", str(playerID))
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
-	notify("{} has won the Initative Roll and is deciding who should go first.".format(me))
+	publicChatMsg("{} has won the Initative Roll and is deciding who should go first.".format(me))
 	players = getPlayers()
 	choices = [p.name + (" (me)" if p==me else "") for p in players]
 	colors = [(playerColorDict[int(p.getGlobalVariable("MyColor"))]["Hex"]) for p in players]
@@ -292,13 +293,13 @@ def AskInitiative(playerID):
 		if choice == 0: continue
 		firstPlayer = players[choice - 1]
 		playerID = firstPlayer._id
-		notify("A decision has been reached! {} will go first.".format(firstPlayer))
+		publicChatMsg("A decision has been reached! {} will go first.".format(firstPlayer))
 		setGlobalVariable("PlayerWithIni", str(playerID))
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
 		init.alternate = Player(playerID).getGlobalVariable("MyColor")
 		break
 	setGlobalVariable("GameSetup", str(0))
-	notify("Game setup is complete! Players should now load their Spellbooks.")
+	publicChatMsg("Game setup is complete! Players should now load their Spellbooks.")
 
 def moveRDA(card):
 	"""Moves the dice roll area/initiative/phase marker to the appropriate area"""
@@ -354,7 +355,7 @@ def onDeckLoaded(args):
 	if args.player == me:
 		#if a deck was already loaded, reset the game
 		if getGlobalVariable("DeckLoaded") == "True":
-			notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
+			publicChatMsg("{} has attempted to load a second Spellbook, the game will be reset".format(me))
 			gameNum += 1
 			resetGame()
 		elif debugMode or validateDeck(args.groups[0]):
@@ -371,8 +372,8 @@ def onDeckLoaded(args):
 			me.setGlobalVariable("MageDict",str(mageDict))
 			tutorialMessage("Play Card")
 		else:
-			#notify and delete deck
-			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
+			#publicChatMsg and delete deck
+			publicChatMsg("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
 			for group in args.groups:
 				for card in group:
 					if card.controller == me:
@@ -425,7 +426,7 @@ def onCardsMoved(args):
 											break
 				if (not hasAttached) and (toGroups[i] == table): snapToZone(card)
 				if actionType:
-						notify("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
+						publicChatMsg("{} {} {} {} {}.".format(me,actionType[0],c,actionType[1],t))
 				if toGroups[i] != table:
 						unbind(card)
 						detach(card)
@@ -487,21 +488,21 @@ def onCardArrowTargeted(args):
 								if originalSource.type == 'Attack':
 										cost = castSpell(originalSource)
 										if cost == None:
-												notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
+												publicChatMsg("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
 												attacker.arrow(defender,False)
 												return
 								else:
 										cost = attack.get('Cost')
 										realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
 										if realCost == None:
-												notify("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
+												publicChatMsg("{} has chosen to not pay the mana needed to cast {}. Cancelling the attack.".format(me,attack.get('Name')))
 												attacker.arrow(defender,False)
 												return
 										elif realCost <= me.Mana:
 											me.Mana -= realCost
-											notify('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))
+											publicChatMsg('{} pays {} mana for {}.'.format(me,realCost,attack.get('Name')))
 										else:
-												notify('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
+												publicChatMsg('{} has insufficient mana for {}. Cancelling attack.'.format(me,attack.get('Name')))
 												attacker.arrow(defender,False)
 												return
 						if attack and attack.get('SourceID')==attacker._id:
@@ -510,14 +511,14 @@ def onCardArrowTargeted(args):
 						elif attack.get("Dice"): rollDice(attack.get("Dice"))
 						else:
 								attacker.arrow(defender,False)
-								notify("The Attack on {} was canceled.".format(defender))
+								publicChatMsg("The Attack on {} was canceled.".format(defender))
 				else:
 						if attacker.Type == "Enchantment" and not attacker.isFaceUp and castSpell(attacker,defender):
 								attach(attacker,defender)
 								attacker.arrow(defender,False)
 						elif defender.Type in typeIgnoreList or defender.Name in typeIgnoreList or defender.Type == "Magestats":
 							mute()
-							notify("{} is not a legal target".format(defender.Name))
+							publicChatMsg("{} is not a legal target".format(defender.Name))
 							attacker.arrow(defender,False)
 						elif attacker.Type !="Enchantment":
 								castSpell(attacker,defender) #Assume that player wants to cast card on target
@@ -549,7 +550,7 @@ def checkMageDeath(args):
 def reportDeath(deadmage):
 	setGlobalVariable("GameIsOver", True)
 	setGlobalVariable("GameEndTime", str(time.ctime()))
-	whisper("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
+	privateChatMsg("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has fallen in the arena! At {} after {} Rounds.".format(deadmage, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), ['OK'], ['#de2827'])
 	if choice == 0 or 1:
 		return
@@ -557,7 +558,7 @@ def reportDeath(deadmage):
 def reportVTarWin(winningmage,score):
 	setGlobalVariable("GameIsOver", True)
 	setGlobalVariable("GameEndTime", str(time.ctime()))
-	whisper("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
+	privateChatMsg("{} has won the Domination Match with a total of {} V'Tar! At {} after {} Rounds.".format(winningmage,score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")))
 	choice = askChoice("{} has won the Domination Match with a total of {} V'Tar!! At {} after {} Rounds.".format(winningmage, score, getGlobalVariable("GameEndTime"), getGlobalVariable("RoundNumber")), choiceList, colorsList)
 	if choice == 0 or 1:
 		return

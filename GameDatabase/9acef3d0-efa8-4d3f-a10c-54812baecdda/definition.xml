@@ -73,6 +73,7 @@
 		<globalvariable name="DoneWithPhase" value=""/>
 		<globalvariable name="GameHost" value=""/>
 		<globalvariable name="GameIsOver" value=""/>
+		<globalvariable name="GameLog" value=""/>
 		<globalvariable name="GameMode" value=""/>
 		<globalvariable name="GameSetup" value="False"/>
 		<globalvariable name="Goal" value=""/>
