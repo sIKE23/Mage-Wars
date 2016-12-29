@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Warlock"
+	id="0a6c39c9-b8d2-453d-b4dd-4e3ec475b8a7"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+	<markers>
+        <marker id="a95c1445-674c-4ab6-9247-d0b0fac80fb3" name="SealToken" />
+    </markers>
+	<cards>
+		<card id="14497585-2895-4283-8d39-5dcfb597e193" name="Firestream">
+			<property name="Nickname" value="Firestream" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Flame" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Firestream;range type=Ranged;range=(0,1);damage type=Flame;dice=4;effects={6: ['Burn']}" />
+			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [6+ = Burn]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWLA01" />
+		</card>
+		<card id="1670867b-9542-43cc-8afa-ffd676b65432" name="Twin Fireball">
+			<property name="Nickname" value="Twin Fireball" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Flame" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Twin Fireball;range type=Ranged;range=(0,1);damage type=Flame;dice=3;effects={6: ['Burn']};Sweeping=True" />
+			<property name="AttackBar" value="[Ranged] [Flame] [Dice=3] [d12] [6+ = Burn] [Sweeping]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWLA02" />
+		</card>
+		<card id="1ad9993d-4025-46d0-a916-ed67aed7ed27" name="Volley of Flame">
+			<property name="Nickname" value="Volley of Flame" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Flame" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Volley of Flame;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Flame;dice=3;effects={6: ['Burn']}" />
+			<property name="AttackBar" value="[Ranged] [Zone] [Flame] [Dice=3] [d12] [6+ = Burn] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="All creatures and conjurations in the target zone receive the above attack. Choose and roll for each 1 at a time." />
+			<property name="CardID" value="MWAWLA03" />
+		</card>
+
+
+		<card id="20e90477-12b6-4d58-b351-debd82f4ea54" name="Mhegedden, Sealed Demon">
+			<property name="Nickname" value="Mhegedden, Sealed Demon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=3, Life=13" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Bloodclaws;action type=Quick;range type=Melee;range=(0,0);dice=5" />
+			<property name="AttackBar" value="Bloodclaws:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
+			<property name="Traits" value="Legendary, Elusive" />
+			<property name="Text" value="When summoned, place 3 Seal tokens on Mhegedden. During the Upkeep Phase, move 1 Seal token onto your Mage. Each Seal token on your Mage gives him life -2. While Mhegedden has Seal tokens, he gains the Pest trait, and may not take any actions." />
+			<property name="CardID" value="MWAWLC07" />
+		</card>
+		<card id="228350cb-8201-4e11-89dd-8f0c7557bee3" name="Afflicted Demon">
+			<property name="Nickname" value="Afflicted Demon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Plague Claws;action type=Quick;range type=Melee;range=(0,0);dice=5" />
+			<property name="AttackBar" value="Plague Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Afflicted Demon is summoned, place 2 Weak condition markers on him. Whenever he attacks and damages a creature, he may move a Weak condition marker from himself to that creature." />
+			<property name="CardID" value="MWAWLC01" />
+		</card>
+		<card id="24123c10-4e5b-4495-bf31-1088b1b69500" name="Combustion Demon">
+			<property name="Nickname" value="Combustion Demon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=4" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Flaming Claws;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=2" />
+			<property name="AttackBar" value="Flaming Claws:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Combustion Demon is summoned, you must target a Corporeal creature in its zone which does not have a Burn condition on it; place a Burn condition on that creature." />
+			<property name="CardID" value="MWAWLC02" />
+		</card>
+		<card id="25fa30e2-24ba-4112-8e18-8d4fa91a61b9" name="Drakas, Imp Overlord">
+			<property name="Nickname" value="Drakas, Imp Overlord" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Chain Whip;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Chain Whip:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="All other friendly demons in Drakas&apos; zone gain Melee +1. During the Upkeep Phase another friendly demon creature in this zone must receive 1 direct damage, if able." />
+			<property name="CardID" value="MWAWLC03" />
+		</card>
+		<card id="2621a56d-1936-45a0-ba04-63e9184e6bb2" name="Firefist Brawler">
+			<property name="Nickname" value="Firefist Brawler" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Flaming Fists;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=1" />
+			<property name="AttackBar" value="Flaming Fists:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If the Flaming Fists attack rolls any critical damage, place a Burn condition on the defender." />
+			<property name="CardID" value="MWAWLC04" />
+		</card>
+		<card id="291e55ab-d166-4247-b909-f982e9f2ea48" name="Kharne, Horned Demon">
+			<property name="Nickname" value="Kharne, Horned Demon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Bloodthirsty Bite;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Bloodthirsty Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="Kharne gains Melee +1 for each enemy creature in his zone." />
+			<property name="CardID" value="MWAWLC06" />
+		</card>
+		<card id="2a4f0cbc-6a64-4a68-bb3f-bd8ddd023752" name="Khali-Gar, Blade Maiden">
+			<property name="Nickname" value="Khali-Gar, Blade Maiden" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Defense=7+ inf No Ranged, Armor=0, Life=9" />
+			<property name="StatDefense" value="7+ inf" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Cascade of Blades;action type=Quick;range type=Melee;range=(0,0);dice=4;Counterstrike=True" />
+			<property name="AttackBar" value="Cascade of Blades:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Counterstrike]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="Maiden of Blades Defense only works against melee attacks" />
+			<property name="CardID" value="MWAWLC05" />
+		</card>
+		<card id="2cca4705-17d2-4972-9a75-4b3cf4efe858" name="Naraka Vampiress">
+			<property name="Nickname" value="Naraka Vampiress" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Vampire" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Unholy Bite;action type=Quick;range type=Melee;range=(0,0);dice=3;Vampiric=True" />
+			<property name="AttackBar" value="Unholy Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Vampiric]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWLC08" />
+		</card>
+		<card id="2f6bec45-0156-40cc-bf56-1c15963d7f45" name="Sanguine Hunter">
+			<property name="Nickname" value="Sanguine Hunter" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Demon Claws;action type=Quick;range type=Melee;range=(0,0);dice=2;Piercing +X=1" />
+			<property name="AttackBar" value="Demon Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Sanguine Hunter comes into play, place 2 direct damage on a friendly creature in his zone." />
+			<property name="CardID" value="MWAWLC09" />
+		</card>
+		
+		
+		<card id="40ac8844-126a-4535-821f-7ecbe71242bb" name="Curse Item">
+			<property name="Nickname" value="Curse Item" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TEquipment" />
+			<property name="Target" value="Equipment" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During the Upkeep Phase, destroy this equipment, unless its controller chooses to receive 2 direct damage. This equipment cannot be replaced." />
+			<property name="CardID" value="MWAWLE01" />
+		</card>
+		<card id="44e89cc6-a5b0-4c9d-a90a-ba01389110fb" name="Curse of Decay">
+			<property name="Nickname" value="Curse of Decay" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor, TCreature, tCorporeal" />
+			<property name="Target" value="Minor Corporeal Creature"/>
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During the Upkeep Phase, this creature receives 1 direct damage." />
+			<property name="CardID" value="MWAWLE02" />
+		</card>
+		<card id="4575a8a5-1c7d-4859-80c8-dca61e151e4d" name="Demonic Link">
+			<property name="Nickname" value="Demonic Link" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse, Vampiric" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SDemon, TCreature" />
+			<property name="Target" value="Demon Creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlock Only" />
+			<property name="Text" value="This Demon creature gains the Melee +1 trait. The first time each round that this Demon creature attacks and damages a Living enemy creature, its controlling Mage may heal 1 damage.&#xD;&#xA;[Melee +1]" />
+			<property name="CardID" value="MWAWLE03" />
+		</card>
+		<card id="47b76fd0-6757-4431-b77e-1c1f4d1d7abe" name="Gator Toughness">
+			<property name="Nickname" value="Gator Toughness" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This creature gains Armor +1 and Life +2.&#xD;&#xA;[Armor +1] [Life +2]" />
+			<property name="CardID" value="MWA01E07" />
+		</card>
+		<card id="49d09423-6c10-460e-a568-add8be8164c9" name="Redirect">
+			<property name="Nickname" value="Redirect" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Defense, Force" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor,tLiving,TCreature" />
+			<property name="Target" value="Minor Living Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Redirect counts as a Defense and must be revealed when this creature is attacked. That attack is avoided. The attacker receives 2 direct damage. Then, destroy Redirect." />
+			<property name="CardID" value="MWAWLE05" />
+		</card>
+		<card id="4bb5d661-447f-4201-ad2b-2eaa479dde86" name="Sanguine Thirst">
+			<property name="Nickname" value="Sanguine Thirst" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Vampiric" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor,tLiving,TCreature" />
+			<property name="Target" value="Minor Living Creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This creature&apos;s melee attacks gain the Vampiric trait.&#xD;&#xA;[Vampiric]" />
+			<property name="CardID" value="MWAWLE06" />
+		</card>
+		<card id="4dec9cf2-26de-429d-b95e-741e8d96029f" name="Theft of Life">
+			<property name="Nickname" value="Theft of Life" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="The first time this creature is healed or regenerates each round, prevent 1 point of healing. Then, heal your Mage 1 damage." />
+			<property name="CardID" value="MWAWLE01" />
+		</card>
+		
+		
+		<card id="702fb3ef-d0e1-47ce-b553-ff0c5e1d442a" name="Burning Cuirass">
+			<property name="Nickname" value="Burning Cuirass" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlock Only" />
+			<property name="Text" value="This Mage gains +1 Armor. The first time this Mage is melee attacked each round, his attacker receives 1 point of direct flame damage during the Counterstrike Step.&#xD;&#xA;[Armor +1]" />
+			<property name="CardID" value="MWAWLQ01" />
+		</card>
+		<card id="72794020-30b4-41aa-82c9-7dfef14e536e" name="Cloak of Fire">
+			<property name="Nickname" value="Cloak of Fire" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Cloak" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Cloak" />
+			<property name="StatEquipmentSlot" value="Cloak" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Fire Mage Only" />
+			<property name="Text" value="Whenever you are melee attacked, during the Counterstrike Step of that attack, roll the effect die: On a roll of 7+, place a Burn condition marker on the attacker if they do not already have one." />
+			<property name="CardID" value="MWAWLQ02" />
+		</card>
+		<card id="742e455b-d551-4458-b9e7-490762f1188f" name="Demonhide Mask">
+			<property name="Nickname" value="Demonhide Mask" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Mask" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="StatEquipmentSlot" value="Helmet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlock Only" />
+			<property name="Text" value="This mage gains the Demon subtype while attacking. This Mage&apos;s attacks gain the Piercing +1 trait.&#xD;&#xA;[Piercing +1]" />
+			<property name="CardID" value="MWAWLQ03" />
+		</card>
+		<card id="749e80c0-00b1-4e6e-b09c-cbdb97837d3c" name="Eye of Bael">
+			<property name="Nickname" value="Eye of Bael" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Amulet" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Amulet" />
+			<property name="StatEquipmentSlot" value="Amulet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="The first time each round a friendly demon creature attacks and damages an enemy creature, you gain 1 mana. At the end of the round, if you have not gained mana from Eye of Bael, then your Mage receives 1 direct damage." />
+			<property name="CardID" value="MWAWLQ04" />
+		</card>
+		<card id="76d366d5-9102-47ed-a4eb-cded80b83031" name="Hellstar">
+			<property name="Nickname" value="Hellstar" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Mace, Weapon" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Shield" />
+			<property name="cAttacks" value="name=Flaming Spiked Ball;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Flaming Spiked Ball:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [8+ = Burn]" />
+			<property name="Traits" value="Warlock Only" />
+			<property name="Text" value="If this Mage is Level 5 or greater, Hellstar rolls an additional attack die." />
+			<property name="CardID" value="MWAWLQ05" />
+		</card>
+		
+		
+		<card id="e4c97004-8be5-4a2c-81b7-2b90863f7209" name="Disperse">
+			<property name="Nickname" value="Disperse" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TEnchantment" />
+			<property name="Target" value="Revealed Enchantment" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Destroy target enchantment. X = the reveal cost of target enchantment." />
+			<property name="CardID" value="MWA01I02" />
+		</card>
+		<card id="e7ec653b-273f-4326-8e2d-db73615a14be" name="Extinguish">
+			<property name="Nickname" value="Extinguish" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing, Hydro" />
+			<property name="Cost" value="1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Remove a Burn condition from the target. Then, you may remove any number of additional Burn conditions by paying the removal cost for each." />
+			<property name="CardID" value="MWAWLI02" />
+		</card>
+		<card id="e83d404a-39f9-495e-a578-68e09966c853" name="Siphon Life">
+			<property name="Nickname" value="Siphon Life" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Vampiric" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast, Dark Mage Only" />
+			<property name="Text" value="Only a Mage may cast this spell. Roll 3 attack dice. Target Living creature receives that much direct damage. The caster may heal up to the amount of damage dealt." />
+			<property name="CardID" value="MWAWLI03" />
+		</card>
+		<card id="e9127dd1-742f-4d76-860c-4dbd84c1e43c" name="Sneak Attack">
+			<property name="Nickname" value="Sneak Attack" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor, TCreature, tCorporeal" />
+			<property name="Target" value="Minor Corporeal Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target gains the Elusive trait and its melee attacks gain the Piercing +2 trait until the end of the round." />
+			<property name="CardID" value="MWAWLI04" />
+		</card>
+		<card id="ef2075be-2e07-4c17-95da-e0041ced12ff" name="Unholy Blood Ritual">
+			<property name="Nickname" value="Unholy Blood Ritual" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Arena" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlock Only" />
+			<property name="Text" value="Your Mage receives 1 direct damage for each friendly demon creature in play. While attacking this round, friendly demon creatures gain the Melee +1 trait." />
+			<property name="CardID" value="MWAWLI05" />
+		</card>
+	</cards>
+</set>

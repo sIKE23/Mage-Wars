@@ -60,7 +60,7 @@
 
 
 	<cards>
-		<card id="665fd551-678d-4b5c-94a3-347dd320f20a" name="Beastmaster">
+		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
 			<property name="Nickname" value="Beastmaster" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
@@ -79,7 +79,7 @@
 					<property name="Traits" value="" />
 	      	</alternate>
 		</card>
-		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster Stats">
+		<card id="665fd551-678d-4b5c-94a3-347dd320f20a" name="Beastmaster Stats">
 			<property name="Nickname" value="Beastmaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Wood Elf" />
@@ -115,7 +115,7 @@
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
 		</card>
-		<card id="352e2f88-a99e-46f0-86f9-ab7b05d978cb" name="Priestess">
+		<card id="b5de32e7-8b57-44f2-a25a-b7bae56bffb7" name="Priestess">
 			<property name="Nickname" value="Priestess" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
@@ -134,7 +134,7 @@
 					<property name="Traits" value="" />
 				</alternate>
 		</card>
-		<card id="b5de32e7-8b57-44f2-a25a-b7bae56bffb7" name="Priestess Stats">
+		<card id="352e2f88-a99e-46f0-86f9-ab7b05d978cb" name="Priestess Stats">
 			<property name="Nickname" value="Priestess Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, High Elf" />
@@ -168,10 +168,10 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
 		</card>
-		<card id="52fdb62d-59e3-4b5e-904e-d92ae2be7012" name="Warlock">
+		<card id="2253ac7a-0146-4022-bd2e-4f5403ad8e1d" name="Warlock">
 			<property name="Nickname" value="Warlock" />
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage, Human" />
+			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="" />
@@ -187,7 +187,7 @@
 					<property name="Traits" value="" />
 				</alternate>
 		</card>
-		<card id="2253ac7a-0146-4022-bd2e-4f5403ad8e1d" name="Warlock Stats">
+		<card id="52fdb62d-59e3-4b5e-904e-d92ae2be7012" name="Warlock Stats">
 			<property name="Nickname" value="Warlock Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
@@ -200,10 +200,10 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
+			<property name="Traits" value="Melee +1" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
-			<property name="Traits" value="Melee +1" />
 		</card>
 		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
 			<property name="Nickname" value="Warlock (Apprentice)" />
@@ -223,7 +223,7 @@
 			<property name="MageAbilities" value="" />
 			<property name="Traits" value="" />
 		</card>
-		<card id="e27b8293-65cd-4479-b5e9-2616201ba512" name="Wizard">
+		<card id="4208e1b0-b570-42de-9e62-5ce15b97b91e" name="Wizard">
 			<property name="Nickname" value="Wizard" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
@@ -242,8 +242,8 @@
 					<property name="Traits" value="" />
 				</alternate>
 		</card>
-		<card id="4208e1b0-b570-42de-9e62-5ce15b97b91e" name="Wizard Stats (Air)">
-			<property name="Nickname" value="Wizard Stats (Air)" />
+		<card id="e27b8293-65cd-4479-b5e9-2616201ba512" name="Wizard Stats">
+			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
