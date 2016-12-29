@@ -68,7 +68,7 @@ def resolveBurns():
 		 			#SolInZone = "True"
 			for i in range(0, numMarkers):
 				roll = rnd(0, 2)
-				if roll == 0 #and not SolInZone == "True":
+				if roll == 0: #and not SolInZone == "True":
 					card.markers[Burn] -= 1
 					burnsRemoved += 1
 				Damage += roll

@@ -276,9 +276,9 @@ def validateDeck(deck):
 					level = card.Level.split("+")
 					schools = card.School.split("+")
 					for s in schools:
-						if not s == "Water"
+						if not s == "Water":
 							for l in level:
-							booktotal -= int(l)
+								booktotal -= int(l)
 				elif "/" in card.School:
 					level = card.Level.split("/")
 					booktotal -= int(level[0])

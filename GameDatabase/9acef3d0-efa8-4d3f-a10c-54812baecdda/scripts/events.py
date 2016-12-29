@@ -9,9 +9,6 @@
 
 def onTableLoaded():
 	mute()
-	#log in chat screen what version of the game definiton the player is using
-	setGlobalVariable('GameLog',str([]))
-	publicChatMsg("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#if there's only one player, go into debug mode
 
 def onGameStarted():
@@ -22,7 +19,9 @@ def onGameStarted():
 
 	#set the Game Host (this player will be the owner of the Initative and Phase Markers)
 	setGlobalVariable("GameHostID",str((sorted([x._id for x in getPlayers()])[0])))
-
+	#log in chat screen what version of the game definiton the player is using
+	setGlobalVariable('GameLog',str([]))
+	publicChatMsg("{} is running v.{} of the Mage Wars module.".format(me, gameVersion))
 	#create a dictionary of attachments and bound spells and enable autoattachment
 	setGlobalVariable("attachDict",str({}))
 	setGlobalVariable("bindDict",str({}))
