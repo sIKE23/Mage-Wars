@@ -153,8 +153,8 @@ def validateDeck(deck):
 					stats = c.Stats.split(",")
 					schoolcosts = c.MageSchoolCost.replace(' ','').split(",")
 					mageName = c.name.split(" Stats")[0]
-					spellbook["spellpoints"] = int(StatSpellBookPoints)
-			break
+					spellbook["spellpoints"] = int(c.StatSpellBookPoints)
+					break
 	#debug("Stats {}".format(stats))
 	#spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 

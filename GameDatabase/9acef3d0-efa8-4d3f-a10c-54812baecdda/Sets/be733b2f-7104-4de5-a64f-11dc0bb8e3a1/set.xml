@@ -1,0 +1,1521 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Paladin vs Siren"
+	id="be733b2f-7104-4de5-a64f-11dc0bb8e3a1"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="1.4.2.1"
+	version="1.15.0.0">
+
+	<markers>
+		<marker id="f1247aea-2067-44e6-a496-8ea1a8789da9" name="Grapple" />
+		<marker id="f25d3ead-bb56-48dd-be22-f8c0faa26485" name="Martyr&apos;s Aura" />
+		<marker id="f356a905-6c71-4a70-a72e-b673d15a3eef" name="Solar Aura" />
+		<marker id="f4dba8be-5aeb-47d1-b7df-1dd6d9ef5fa0" name="Resolute Aura" />
+		<marker id="f56a9ec4-cc79-4894-8b02-8fbbd7edbc58" name="Retribution Aura" />
+		<marker id="f6eaf1e9-f0b0-4ac3-9719-7463777fb031" name="Siren&apos;s Call" />
+		<marker id="f7fc4b07-9596-48f4-a049-d5be58ae254c" name="Valor" />
+		<marker id="f8d3ef71-6cee-4a72-8ae1-5615362eae07" name="Cleansing Aura" />
+		<marker id="f965154e-3551-47c9-8722-2e572f26c0fb" name="Vengeful Aura " />
+		<marker id="540f077d-fb38-464b-936a-ec94d60caea9" name="Gold" />
+		<marker id="203022f6-4c33-4ba8-addf-a7ec46760fdc" name="Divine Challenge" />
+		<marker id="8c8dbf31-6ba3-4d14-ab1f-3771960671a5" name="Hate" />
+		<marker id="50861f40-93b8-4dc6-a6ba-108cc584de8e" name="Love" />
+		<marker id="332e2df0-3101-462d-a2b4-b489170f4212" name="FermataAA" />
+		<marker id="00113acf-e34c-4150-992f-fdcdca2978b2" name="FermataAB" />
+		<marker id="de825d87-c78f-4c35-aba4-e2abce2ef000" name="FermataBA" />
+		<marker id="e724865e-9e9a-486d-a230-1b7d94de2d6c" name="FermataBB" />
+		<marker id="c89baa9e-21c8-4f8c-8635-b258d5d80172" name="Suffocation" />
+	</markers>
+
+	<cards>
+		<card id="30a60bad-bf32-46a2-a69e-e949d288b7ac" name="Paladin">
+			<property name="Nickname" value="Paladin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="7dba45df-7c80-42a2-8cdc-2c02b170fd8c" name="Paladin Stats">
+			<property name="Nickname" value="Paladin Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in Holy level 3, War level 2, and all Holy Creatures. Dark Spells cost triple." />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="36" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Holy=1, War=1, Dark=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Valor; Once per round, when the Paladin melee attacks and damages the strongest enemy creature, he gains 1 Valor.&#xD;&#xA;Divine Auras&#xD;&#xA;As a quick action, the Paladin may gain an aura of his choice. Each aura has its own cost in Valor.&#xD;&#xA;Chivalrous Challenge&#xD;&#xA;During the Upkeep Phase, the Paladin may place his Challenge Marker on a target enemy creature within 2 zones. Once per round, the Paladin and his Challenged enemy may re-roll any number of their attack dice while melee attacking each other. If the Challenged enemy attacks any other object, gain 1 Valor. When the Challenged enemy is destroyed, return the marker to the Paladin. During the Upkeep Phase you may pay 2 Valor to return the Challenge marker from an enemy creature." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+		</card>
+		<card id="97d362aa-8ea9-4000-a711-45d716b55a47" name="Siren">
+			<property name="Nickname" value="Siren" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="cd4d2d6e-f65e-4c26-9528-8effec8e4f14" name="Siren Stats">
+			<property name="Nickname" value="Siren Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Aquatic, Merren" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Water school, as well as pirate and song spells." />
+			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="30" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Holy=1, War=1, Dark=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Siren&apos;s Call: As a Psychic Song quick spell the Siren may pay 1 mana to place her Siren&apos;s Call marker on target non-Mage creature within 2 zones. During its action phase that creature MUST move at least 1 zone closer to the Siren, if possible, and may not attack her. Return the marker at the end their Action Phase. Friendly aquatic creatures also gain Melee +2.&#xD;&#xA;Fermata: The Siren may extend an expiring song she controls by paying mana equal to its Level and placing a Fermata marker on it. The Siren may only have two songs affected by Fermata markers at a time, and each song may only be extended a maximum of up to 2 rounds.&#xD;&#xA;Amphibious: The Siren gains Regenerate 1 while in zones with aquatic terrain attached." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+		</card>
+
+		<card id="fbc5533d-ab11-4625-9667-7aa848bbf58d" name="Luminous Blast">
+			<property name="Nickname" value="Luminous Blast" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Light" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Luminous Blast;range type=Ranged;range=(0,0);damage type=Light;dice=5;effects={4: ['Daze'], 11: ['Stun']};Ethereal=True" />
+			<property name="AttackBar" value="[Ranged] [Light] [Dice=5] [d12] [4-10 = Daze; 11+ = Stun] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSA01" />
+		</card>
+		<card id="902698fd-2ca5-4bca-bc08-3d94686cbf19" name="Swell">
+			<property name="Nickname" value="Swell" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Hydro" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!tFlying,TCreature||!tFlying,TConjuration" />
+			<property name="Target" value="Non-Flying Creature or Conjuration" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Swell;range type=Ranged;range=(0,2);damage type=Hydro;dice=3;effects={7: ['Push']};Extinguish=True;Unavoidable=True" />
+			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [7+ = Push] [Extinguish] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSA02" />
+		</card>
+		<card id="d5d3c955-2e93-4c4d-8173-89c1701675d3" name="Tsunami">
+			<property name="Nickname" value="Tsunami" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Hydro" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Tsunami;range type=Ranged;range=(0,1);Zone Attack=True;damage type=Hydro;dice=3;effects={5: ['Push']};Extinguish=True;Unavoidable=True" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Hydro] [Dice=3] [d12] [5+ = Push] [Extinguish] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Tsunami is cast, choose a direction. After the attack resolves, repeat the attack one zone farther away in the chosen direction. This continues until there are no farther zones. Flying Creatures are immune to Tsunami" />
+			<property name="CardID" value="PSA03" />
+		</card>
+
+
+		<card id="986eea59-34dc-4150-8c63-9c859783929a" name="Bed of Urchins">
+			<property name="Nickname" value="Bed of Urchins" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Aquatic" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=10" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Venomous Spines;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={7: ['Rot']};Unavoidable=True" />
+			<property name="AttackBar" value="Venomous Spines:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [7+ = Rot] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Bed of Urchins attacks each Non-Flying creature immediately after they enter the zone. Aquatic creatures are immune to the Venomous Spines attack if there is an Aquatic terrain attached to this zone." />
+			<property name="CardID" value="PSJ01" />
+		</card>
+		<card id="b79e9334-a55e-4ce6-b366-1029ebe6917d" name="Crusade Banner">
+			<property name="Nickname" value="Crusade Banner" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Banner" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Channeling=2, Armor=1, Life=7" />
+			<property name="StatChanneling" value="2" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Spawnpoint, Zone Exclusive, Epic, Paladin Only" />
+			<property name="Text" value="Non-flame ranged attacks roll 2 less dice (to a minimum of 1) against Crusade Banner. During the Deployment Phase, it may summon exactly 2 Holy creatures. If it does, destroy Crusade Banner." />
+			<property name="CardID" value="PSJ03" />
+		</card>
+		<card id="ea9335e0-8d99-429e-a055-f370b552ed26" name="Temple of Meraveran">
+			<property name="Nickname" value="Temple of Meraveran" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Temple" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=2, Life=5" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive, Unique" />
+			<property name="Text" value="When a creature you control is attacked and damaged by an enemy creature, place a Valor token on Temple of Meraveran. Once per round, during the Upkeep Phase you may remove exactly 3 Valor tokens from this temple to give all friendly Holy creatures in the arena Melee +1 this round." />
+			<property name="CardID" value="PSJ10" />
+		</card>
+		<card id="f98c74f2-8acd-4dae-973f-2cee5509f41a" name="Malakai&apos;s Basilica">
+			<property name="Nickname" value="Malakai&apos;s Basilica" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Temple" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=2, Life=6" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive, Unique" />
+			<property name="Text" value="During the Upkeep Phase, target enemy creature gains the Light +1 trait until the end of the round." />
+			<property name="CardID" value="PSJ05" />
+		</card>
+		<card id="a482c083-20d2-46d8-9dbb-83e8405b2aea" name="Pillar of Righteous Flame">
+			<property name="Nickname" value="Pillar of Righteous Flame" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Flame, Light" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Holy Fire;range type=Ranged;range=(0,0);damage type=Light;dice=4;effects={7: ['Daze'], 9: ['Burn']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="AttackBar" value="Holy Fire:&#xD;&#xA;[Ranged:0-0] [Light] [Dice=4] [d12] [7-8 = Daze; 9+ = Burn] [Ethereal] [+2 vs. Nonliving Creatures]" />
+			<property name="Traits" value="Dissipate 3, Epic" />
+			<property name="Text" value="When Pillar of Righteous Flame is cast, or a Dissipate token is removed, it attacks an enemy creature in its zone. Pillar of Righteous Flame attacks each enemy creature immediately after they enter the zone." />
+			<property name="CardID" value="PSJ06" />
+		</card>
+		<card id="837ef959-dab8-42b1-9bb9-4678efe2ad47" name="Whirlpool">
+			<property name="Nickname" value="Whirlpool" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Hydro" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))" />
+			<property name="Target" value="Aquatic Terrain" />
+			<property name="School" value="Water" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 3, Epic" />
+			<property name="Text" value="All non-Flying non-aquatic creatures in this zone gain the Restrained and Unmovable traits. During the Upkeep Phase, they receive 2 direct hydro damage. Remove all Burn conditions from creatures damaged by Whirlpool. Uncontainable creatures are not affected by Whirlpool." />
+			<property name="CardID" value="PSJ11" />
+		</card>
+		<card id="aa2b21a7-fb96-44c9-a2e9-f11389611b5c" name="Wreck of the Viridian Lace">
+			<property name="Nickname" value="Wreck of the Viridian Lace" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Ship, Wreckage" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive, Legendary" />
+			<property name="Text" value="While you have Initiative, all pirate creatures gain Melee +1 and Ranged +1." />
+			<property name="CardID" value="PSJ12" />
+		</card>
+
+
+		<card id="98f6f10c-267d-451d-bb11-7d149c8d0f9c" name="Coral Barrier">
+			<property name="Nickname" value="Coral Barrier" />
+			<property name="Type" value="Conjuration-Wall" />
+			<property name="Subtype" value="Aquatic" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone Border" />
+			<property name="Target" value="Zone Border" />
+			<property name="School" value="Water" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Sharpened Coral;action type=Passage Attack;dice=4;effects={7: ['Bleed']};Piercing +X=2;Unavoidable=True" />
+			<property name="AttackBar" value="Sharpened Coral:&#xD;&#xA;[Passage Attack] [Dice=4] [d12] [7+ = Bleed] [Piercing +2] [Unavoidable]" />
+			<property name="Traits" value="Passage Attacks, Extendable, Living" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSW01" />
+		</card>
+	
+
+		<card id="4db00fb0-3444-49c7-9a5a-25bac97e290e" name="Consecrated Ground">
+			<property name="Nickname" value="Consecrated Ground" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="Healing, Light" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Indestructible" />
+			<property name="Text" value="During the Upkeep Phase, non-Holy enemy creatures in this zone receive 1 direct light damage. Friendly Holy creatures in this zone gain the Regenerate 1 trait." />
+			<property name="CardID" value="PSJ02" />
+		</card>
+		<card id="ddc2f76f-846c-4509-be8a-a7ead331a6ab" name="Elephant Grass">
+			<property name="Nickname" value="Elephant Grass" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="Plant" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=-, Life=12" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Hydro Immunity, Flame +2" />
+			<property name="Text" value="Other Non-flying objects in this zone gain the Obscured trait. Attacks against Non-Flying animal creatures in this zone roll 2 less attack dice. Non-Flying, non-animal creatures in this zone are hindered." />
+			<property name="CardID" value="PSJ04" />
+		</card>
+	
+		<card id="5ddf5771-870a-435d-a169-19604b8f5706" name="Shallow Sea">
+			<property name="Nickname" value="Shallow Sea" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="Aquatic" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Cantrip, Indestructible, Siren Only" />
+			<property name="Text" value="Aquatic creatures in this zone gain Melee +1. Non-Flying Non-aquatic creatures in this zone are hindered and roll 1 less die when making non-spell attacks." />
+			<property name="CardID" value="PSJ07" />
+		</card>
+		<card id="6e57accb-771a-4476-90ef-ee35aa736cd4" name="Steep Hill">
+			<property name="Nickname" value="Steep Hill" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="Elevated" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Indestructible" />
+			<property name="Text" value="LoS which passes through two sides of this zone is blocked. All non-Flying creatures in this zone gain the Ranged +1 trait. Non-Flying creatures require a full action to move into this zone." />
+			<property name="CardID" value="PSJ08" />
+		</card>
+		<card id="2d064201-ca75-4f33-b015-c7bfe44eda4b" name="Swamp">
+			<property name="Nickname" value="Swamp" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="Aquatic, Swamp" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Water" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Non-Flying, non-aquatic creatures in this zone have the Slow and Unmovable traits, and lose and cannot gain the Elusive trait." />
+			<property name="CardID" value="PSJ09" />
+		</card>
+		
+		
+		<card id="80245974-e200-4887-8763-61b7eeff9f2a" name="Artemis, Dawnbreaker&apos;s Eye">
+			<property name="Nickname" value="Artemis" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Cleric" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=1, Life=10" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Guided Spear;action type=Full;range type=Ranged;range=(1,2);damage type=Light;dice=4;effects={5: ['Daze']};Ethereal=True;Unavoidable=True;+2 Vs. Nonliving Creatures=True||name=Thrown Spear;action type=Full;range type=Ranged;range=(1,2);dice=4" />
+			<property name="AttackBar" value="Guided Spear:&#xD;&#xA;[Full] [Ranged:1-2] [Light] [Dice=4] [d12] [5+ = Daze] [Ethereal] [Unavoidable] [+2 Vs. Nonliving Creatures]&#xD;&#xA;Thrown Spear:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="When making a Guided Spear attack, you must pay 1 mana. Artemis&apos; attacks ignore the Obscured trait." />
+			<property name="CardID" value="PSC02" />
+		</card>
+		<card id="d6585389-66a4-4d31-93a9-f55cbc411a56" name="Blightheart">
+			<property name="Nickname" value="Blightheart" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Pirate, Skeleton, Undead" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark+Water"  />
+			<property name="Level" value="3+1" />
+			<property name="Stats" value="Armor=0, Life=15" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="15" />
+			<property name="cAttacks" value="name=Blighted Cutlass;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={7: ['Bleed'], 13: ['Bleed + Rot']}" />
+			<property name="AttackBar" value="Blighted Cutlass:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [7-12 = Bleed; 13+ = Bleed + Rot]" />
+			<property name="Traits" value="Elusive, Legendary, Nonliving, Psychic Immunity" />
+			<property name="Text" value="Blightheart&apos;s attacks against inactive creatures gain +4 to the effect roll. This does not effect counterstrikes." />
+			<property name="CardID" value="PSC03" />
+		</card>
+		<card id="cf0d8e35-24e6-4183-9243-ab9ae705703f" name="Alandell, the Blue Knight">
+			<property name="Nickname" value="Alandell" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Armor=3, Life=15" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="15" />
+			<property name="cAttacks" value="name=Stormbringer;action type=Quick;range type=Melee;range=(0,0);damage type=Lightning;dice=4;effects={11: ['Stun']};Ethereal=True" />
+			<property name="AttackBar" value="Stormbringer:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=4] [d12] [11+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="When Alandell is activated, you  may pay up to 4 mana. If you do, he gains Melee +1 and adds +1 to his effect rolls for each mana spent, until the end of the activation." />
+			<property name="CardID" value="PSC01" />
+		</card>
+		<card id="0eaf67cf-6b23-4e9c-906b-383fd6bd1e07" name="Cassiel, Shield of Bim-Shalla">
+			<property name="Nickname" value="Cassiel" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Angel, Cleric" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Channeling=1, Armor=0, Life=8" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Judgement;action type=Quick;range type=Melee;range=(0,0);dice=1" />
+			<property name="AttackBar" value="Judgement:&#xD;&#xA;[Quick] [Melee] [Dice=1]" />
+			<property name="Traits" value="Aegis 1, Familiar, Flying, Legendary, Holy Mage Only" />
+			<property name="Text" value="Cassiel can only cast Healing and Protection Spells." />
+			<property name="CardID" value="PSC04" />
+		</card>
+		<card id="994a9a7e-9380-4fab-a59c-44630902abe1" name="Colossal Crab">
+			<property name="Nickname" value="Colossal Crab" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Aquatic, Crustacean" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water+Nature"  />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=5, Life=8" />
+			<property name="StatArmor" value="5" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Grabbing Claw;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={7: ['Grapple']}||name=Crushing Claw;action type=Full;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Grabbing Claw:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [7+ = Grapple]&#xD;&#xA;Crushing Claw:&#xD;&#xA;[Full] [Melee] [Dice=4]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During the Upkeep Phase, Colossal Crab&apos;s prey receives 2 direct damage." />
+			<property name="CardID" value="PSC05" />
+		</card>
+		<card id="0bd874fa-f08f-41bd-8857-4a99ecb8ae5b" name="Crusader Griffin">
+			<property name="Nickname" value="Crusader Griffin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Griffin" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=9" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Charge +2, Fast, Flying" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC06" />
+		</card>
+		<card id="45a105e6-a839-4e6f-a0ac-59320683c26a" name="Dawnbreaker&apos;s Initiate">
+			<property name="Nickname" value="Dawnbreaker&apos;s Initiate" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Cleric" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Scepter;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Scepter:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Dawnbreaker&apos;s Initiate is destroyed by an enemy controlled attack or effect, you may teleport your Mage or a Holy creature you control, in the arena, to this zone." />
+			<property name="CardID" value="PSC07" />
+		</card>
+		<card id="c53cc69d-d104-435b-bd30-873269b0d237" name="Deptonne Berserker">
+			<property name="Nickname" value="Deptonne Berserker" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Deptonne" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=1, Life=12" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="name=Razor Claws Strike;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={9: ['Bleed']}" />
+			<property name="AttackBar" value="Razor Claws Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [9+ = Bleed]" />
+			<property name="Traits" value="Bloodthirsty+1" />
+			<property name="Text" value="If a creature in this zone has a Bleed condition, Razor Claws gain the Doublestrike trait." />
+			<property name="CardID" value="PSC08" />
+		</card>
+		<card id="2586d903-5bae-4df4-b81a-d884eb82ccd3" name="Deptonne Bloodshaman">
+			<property name="Nickname" value="Deptonne Bloodshaman" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Cleric, Deptonne" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Coral Staff;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={5: ['Bleed']}" />
+			<property name="AttackBar" value="Coral Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [5+ = Bleed]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When a deptonne in this zone melee attacks a creature with the Bleed condition for the first time each round, its attack gains the Vampiric trait for that attack." />
+			<property name="CardID" value="PSC09" />
+		</card>
+		<card id="83f70996-9bc9-4290-8f78-6cb6f5e69b71" name="Dorseus, Stallion of Westlock">
+			<property name="Nickname" value="Dorseus" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Horse" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Blessed Horn;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Blessed Horn:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Aegis 1, Legendary, Regenerate 2" />
+			<property name="Text" value="During the Upkeep Phase, Dorseus may heal another friendly living creature in this zone 2 damage. This bypasses the Finite Life trait." />
+			<property name="CardID" value="PSC10" />
+		</card>
+		<card id="04544cd8-a833-4940-ab24-0802230cbfe2" name="Drokkar">
+			<property name="Nickname" value="Drokkar" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Demon" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Wrenching Claws;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={5: ['Grapple']}||name=Tail Spike;action type=Full;range type=Melee;range=(0,0);dice=4;Piercing +X=2" />
+			<property name="AttackBar" value="Wrenching Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [5+ = Grapple]&#xD;&#xA;Tail Spike:&#xD;&#xA;[Full] [Melee] [Dice=4] [Piercing +2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="The Tail Spike attack rolls 2 additional attack dice when attacking the Drokarr&apos;s prey." />
+			<property name="CardID" value="PSC11" />
+		</card>
+		<card id="3da53bb4-fef7-421e-b6c8-99df185f2914" name="Eligor Larington">
+			<property name="Nickname" value="Eligor Larington" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=1, Life=15" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="15" />
+			<property name="cAttacks" value="name=Martial Strike;action type=Quick;range type=Melee;range=(0,0);dice=3;Counterstrike=True" />
+			<property name="AttackBar" value="Martial Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Counterstrike]" />
+			<property name="Traits" value="Aegis 1, Legendary" />
+			<property name="Text" value="Once per round, when making a counterstrike, Eligor gains the Melee +2 trait and Martial Strike gains the Piercing +1 trait for that attack." />
+			<property name="CardID" value="PSC12" />
+		</card>
+		<card id="d7ad8972-ee17-4588-8978-f8c7130e1cc4" name="Gerard Matranga">
+			<property name="Nickname" value="Gerard Matranga" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Pirate" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War+Water"  />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Avaricious Strike;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1 per Gold token on Gerard" />
+			<property name="AttackBar" value="Avaricious Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1 per Gold token on Gerard]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="During the Upkeep Phase, and when Gerard attacks and damages an enemy creature, he gains 1 Gold token. Your Mage may spend Gold tokens as mana when they summon Soldier or Pirate creatures." />
+			<property name="CardID" value="PSC13" />
+		</card>
+		<card id="a15cfb56-c7a8-45b6-8b60-931d5d50d9e0" name="Knight of the Red Helm">
+			<property name="Nickname" value="Knight of the Red Helm" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight, Soldier" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy+War"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=3, Life=8" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Warhammer;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Warhammer:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Psychic Immunity" />
+			<property name="Text" value="Knight of the Red Helm gains Melee +2 when attacking the Strongest enemy creature." />
+			<property name="CardID" value="PSC14" />
+		</card>
+		<card id="db090651-c57b-4b03-973d-2e1fffa6f1b0" name="Kraken">
+			<property name="Nickname" value="Kraken" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Octopus" />
+			<property name="Cost" value="21" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Armor=2, Life=19" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="19" />
+			<property name="cAttacks" value="name=Tentacle Grasp;action type=Quick;range type=Ranged;range=( 0,1);dice=3;effects={5: ['Grapple + Snatch']}||name=Devouring Beak;action type=Full;range type=Melee;range=(0,0);dice=6;Piercing +X=3" />
+			<property name="AttackBar" value="Tentacle Grasp:&#xD;&#xA;[Quick] [Ranged: 0-1] [Dice=3] [d12] [5+ = Grapple + Snatch]&#xD;&#xA;Devouring Beak:&#xD;&#xA;[Full] [Melee] [Dice=6] [Piercing +3]" />
+			<property name="Traits" value="Legendary, Slow" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC15" />
+		</card>
+		<card id="e6fe44d6-174e-4d6b-8a65-450d3efe9667" name="Light of Dawn">
+			<property name="Nickname" value="Light of Dawn" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Cleric" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Ray of Light;action type=Full;range type=Ranged;range=(1,1);damage type=Light;dice=3;effects={7: ['Daze'], 11: ['Stun']};Ethereal=True||name=Hand of Light;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=3;effects={7: ['Daze']};Ethereal=True" />
+			<property name="AttackBar" value="Ray of Light:&#xD;&#xA;[Full] [Ranged:1-1] [Light] [Dice=3] [d12] [7-10 = Daze; 11+ = Stun] [Ethereal]&#xD;&#xA;Hand of Light:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=3] [d12] [7+ = Daze] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC16" />
+		</card>
+		<card id="cb6cda55-d8a5-4a46-bb83-c91aff177023" name="Merren Harpooner">
+			<property name="Nickname" value="Merren Harpooner" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Merren, Pirate" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Harpoon;action type=Full;range type=Ranged;range=(1,2);dice=4;effects={7: ['Snatch']}||name=Coral Blade;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Harpoon:&#xD;&#xA;[Full] [Ranged:1-2] [Dice=4] [d12] [7+ = Snatch]&#xD;&#xA;Coral Blade:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC17" />
+		</card>
+		<card id="608fd102-04f4-4d11-b4a8-5108e91fa871" name="Metatron, Angelic Templar">
+			<property name="Nickname" value="Metatron" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Angel, Knight" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Templar Blade;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Templar Blade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Aegis 1, Flying, Legendary, Holy Mage Only" />
+			<property name="Text" value="Melee +X and Regen X, X = the number of friendly temple conjurations." />
+			<property name="CardID" value="PSC18" />
+		</card>
+		<card id="4c6d7c69-13c4-4dfe-9452-0d75ab2347f4" name="Naiya">
+			<property name="Nickname" value="Naiya" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Merren" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Channeling=1, Armor=0, Life=11" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Coral Dagger;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Coral Dagger:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Familiar, Legendary, Siren Only" />
+			<property name="Text" value="Naiya can cast only non-creature Water spells or song spells. While Naiya is in a zone with an Aquatic terrain attached, she gains Regenerate 1 and Channeling +1." />
+			<property name="CardID" value="PSC19" />
+		</card>
+		<card id="76339700-716d-42f7-b265-e7f3c12e0f12" name="Noble Vanguard">
+			<property name="Nickname" value="Noble Vanguard" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Dwarf, Knight, Soldier" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy+War"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=2, Life=7" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Longsword;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Longsword:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Intercept, Vigilant" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC20" />
+		</card>
+		<card id="c1ef7821-662d-43c7-b0e5-e6a5a09bb1d9" name="Shoalsdeep Crocodile">
+			<property name="Nickname" value="Shoalsdeep Crocodile" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Aquatic, Reptile" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Water"  />
+			<property name="Level" value="2+2" />
+			<property name="Stats" value="Armor=3, Life=13" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Quick Snap;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={5: ['Grapple']}||name=Death Roll;action type=Full;range type=Melee;range=(0,0);dice=5;effects={4: ['Bleed']}" />
+			<property name="AttackBar" value="Quick Snap:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [5+ = Grapple]&#xD;&#xA;Death Roll:&#xD;&#xA;[Full] [Melee] [Dice=5] [d12] [4+ = Bleed]" />
+			<property name="Traits" value="Tough -2" />
+			<property name="Text" value="The Death Roll attack can only attack Shoalsdeep Crocodile&apos;s prey." />
+			<property name="CardID" value="PSC21" />
+		</card>
+		<card id="d44afeb5-76ac-4d0d-863c-7281ba581475" name="Shoalsdeep Thrasher">
+			<property name="Nickname" value="Shoalsdeep Thrasher" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Deptonne, Pirate" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Serrated Sword;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={9: ['Bleed']}" />
+			<property name="AttackBar" value="Serrated Sword:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [9+ = Bleed]" />
+			<property name="Traits" value="Bloodthirsty +1" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC22" />
+		</card>
+		<card id="c157cd2e-4e2d-411a-9a37-5e952256b1c9" name="Shoalsdeep Tidecaller">
+			<property name="Nickname" value="Shoalsdeep Tidecaller" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Merren" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=11" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Riptide;action type=Quick;range type=Melee;range=(0,0);damage type=Hydro;dice=3;effects={9: ['Push']};Extinguish=True" />
+			<property name="AttackBar" value="Riptide:&#xD;&#xA;[Quick] [Melee] [Hydro] [Dice=3] [d12] [9+ = Push] [Extinguish]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While you have Initiative, Shoalsdeep Tidecaller gains the Melee +2 trait, and adds +4 to Riptide&apos;s effect rolls." />
+			<property name="CardID" value="PSC23" />
+		</card>
+		<card id="f3aeaa12-ed03-4237-9287-74751c22f238" name="Temple High Guard">
+			<property name="Nickname" value="Temple High Guard" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="High Elf, Soldier" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Halberd;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
+			<property name="AttackBar" value="Halberd:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="Traits" value="Lightning +2" />
+			<property name="Text" value="When guarding, Temple High Guard gains Melee +2 and may counterstrike first (the Counterstrike Step is moved to just after the Declare Attack Step)." />
+			<property name="CardID" value="PSC24" />
+		</card>
+		<card id="4b0e7bf5-e433-4f9d-b161-593b8aa07ddb" name="Turghut">
+			<property name="Nickname" value="Turghut" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Pirate, Skeleton, Undead" />
+			<property name="Cost" value="11" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark+Water"  />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Armor=0, Life=13" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Blighted Cutlass;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={7: ['Rot']}||name=Magic Flintlock;action type=Full;range type=Ranged;range=(1,1);dice=3;Piercing +X=2" />
+			<property name="AttackBar" value="Blighted Cutlass:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [7+ = Rot]&#xD;&#xA;Magic Flintlock:&#xD;&#xA;[Full] [Ranged:1-1] [Dice=3] [Piercing +2]" />
+			<property name="Traits" value="Legendary, Nonliving, Psychic Immunity" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSC25" />
+		</card>
+		<card id="b9ced997-b7fb-4cef-9f57-7264f3fea633" name="Water Elemental">
+			<property name="Nickname" value="Water Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Elemental, Hydro" />
+			<property name="Cost" value="22" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="6" />
+			<property name="Stats" value="Armor=-, Life=16" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="16" />
+			<property name="cAttacks" value="name=Crashing Wave;action type=Quick;range type=Melee;range=(0,0);damage type=Hydro;dice=5;effects={4: ['Push']};Extinguish=True" />
+			<property name="AttackBar" value="Crashing Wave:&#xD;&#xA;[Quick] [Melee] [Hydro] [Dice=5] [d12] [4+ = Push] [Extinguish]" />
+			<property name="Traits" value="Burnproof, Frost +3, Hydro Immunity, Nonliving, Resilient, Unstoppable" />
+			<property name="Text" value="When Water Elemental pushes a creature, after the Push, it may immediately move into that creature&apos;s zone." />
+			<property name="CardID" value="PSC26" />
+		</card>
+
+
+		<card id="327c59fe-1cab-4f4e-8145-31db7d3b8989" name="Blind">
+			<property name="Nickname" value="Blind" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Light, Retribution" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 3" />
+			<property name="Text" value="When this creature attacks and damages an object, you must reveal Blind. When this creature attacks, during the Roll to Miss step, roll the effect die. If the roll is a 6 or less, the attack misses." />
+			<property name="CardID" value="PSE02" />
+		</card>
+		<card id="80dca5bb-9162-4876-833b-a80687e0589b" name="Drown">
+			<property name="Nickname" value="Drown" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Hydro" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Living Non-Aquatic Creature" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Upkeep +X" />
+			<property name="Text" value="During the Upkeep Phase, Drown gains 1 Suffocation token. X = the number of Suffocation tokens" />
+			<property name="CardID" value="PSE04" />
+		</card>
+		<card id="d9830ac6-81d1-4f78-b0c4-7c94cea29733" name="Eye for an Eye">
+			<property name="Nickname" value="Eye for an Eye" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Retribution" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Friendly Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="Eye for an Eye can only be revealed before the Roll Dice Step of an attack. During the Damage and Effects Step, the attacker suffers the same damage and effects as the defender. Then, destroy Eye for an Eye." />
+			<property name="CardID" value="PSE05" />
+		</card>
+		<card id="40a892b7-ef42-4242-8e2f-68dfaa75b98b" name="Healing Madrigal">
+			<property name="Nickname" value="Healing Madrigal" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Healing, Song" />
+			<property name="Cost" value="2+5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 3" />
+			<property name="Text" value="During the Upkeep Phase, heal all friendly living creatures in this zone 2 damage." />
+			<property name="CardID" value="PSE06" />
+		</card>
+		<card id="d0ffcf7a-6a98-4028-80d1-5cd2ad708c2a" name="Ballad of Courage">
+			<property name="Nickname" value="Ballad of Courage" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic, Song" />
+			<property name="Cost" value="2+5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="War" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="This creature cannot be Hindered and gains the Charge +2 and Fast traits.&#xD;&#xA;[Charge +2] [Fast]" />
+			<property name="CardID" value="PSE01" />
+		</card>
+		<card id="12dda20e-f593-48d0-b31e-eef6ff240faf" name="Hydrothermal Vent">
+			<property name="Nickname" value="Hydrothermal Vent" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Hydro, Trap" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Superheated Vent;damage type=Hydro;dice=5;effects={9: ['Stun'], 4: ['Daze']}" />
+			<property name="AttackBar" value="Superheated Vent:&#xD;&#xA;[Hydro] [Dice=5] [d12] [4-8 = Daze; 9+ = Stun]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When an enemy creature enters this zone, Hydrothermal Vent must be revealed. Make the above attack, then destroy Hydrothermal Vent. The reveal cost is lowered by 1 if enchanting a zone with an aquatic terrain attached." />
+			<property name="CardID" value="PSE07" />
+		</card>
+		<card id="d29324b6-58d4-42d3-8ccd-d9df42b91d4a" name="Knight&apos;s Courage">
+			<property name="Nickname" value="Knight&apos;s Courage" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Blessing" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,SKnight,TCreature" />
+			<property name="Target" value="Living Knight Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While attacking the strongest enemy creature, this creature gains Melee +2 and its attacks gain Piercing +1." />
+			<property name="CardID" value="PSE08" />
+		</card>
+		<card id="7d30fdf8-a1d1-47cd-9c58-2eda8621055b" name="Life Link">
+			<property name="Nickname" value="Life Link" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,tLiving,TCreature" />
+			<property name="Target" value="Non-Mage Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast, Unique, Holy Mage Only" />
+			<property name="Text" value="Each Upkeep Phase, the controller of Life Link may heal up to 3 damage from this creature and place it on himself as direct damage, regardless of distance or LoS." />
+			<property name="CardID" value="PSE09" />
+		</card>
+		<card id="dd5b9000-b173-44bb-bce8-8b81ae35d09b" name="Lullaby">
+			<property name="Nickname" value="Lullaby" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic, Song" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,TCreature" />
+			<property name="Target" value="Non-Mage Creature" />
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="During the Upkeep Phase, roll the effect die. On a 7+ this creature gains a Stun Condition, otherwise it gains a Daze Condition." />
+			<property name="CardID" value="PSE10" />
+		</card>
+		<card id="81f50147-da6b-4ad3-8e41-7ea49d6d7d4f" name="Chant of Rage">
+			<property name="Nickname" value="Chant of Rage" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic, Song" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,tLiving,TCreature" />
+			<property name="Target" value="Non-Mage Living Creature" />
+			<property name="School" value="Dark/Mind" />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2, Unique" />
+			<property name="Text" value="Chant of Rage cannot be revealed during an Action Phase. When Chant of Rage is revealed, place a Hate token on one of your creatures. During its activation this creature must melee attack a creature with a Hate token. If it cannot, then it must move towards a creature with a Hate token, if possible. When this spell is destroyed, destroy a Hate token in play on a friendly creature, if possible.&#xD;&#xA;X = Creature&apos;s level -1" />
+			<property name="CardID" value="PSE03" />
+		</card>
+		<card id="e5ddd1db-e578-4647-b3fa-c75d55f1171c" name="Song of Love">
+			<property name="Nickname" value="Song of Love" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic, Song" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,TCreature" />
+			<property name="Target" value="Non-Mage Creature" />
+			<property name="School" value="Holy/Mind" />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2, Unique" />
+			<property name="Text" value="Song of Love cannot be revealed during an Action Phase. When Song of Love is revealed, place a Love token on a friendly creature. Enchanted creature cannot make a melee or ranged attack against a creature with a Love token. When this spell is destroyed, destroy a Love token in play on a friendly creature, if possible.&#xD;&#xA;X = Creature&apos;s level -1" />
+			<property name="CardID" value="PSE11" />
+		</card>
+
+		<card id="ff9058e5-0347-4fe6-a955-4e2d24cd7107" name="Signet of the Dawnbreaker">
+			<property name="Nickname" value="Signet of the Dawnbreaker" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Mana, Ring" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Paladin Only" />
+			<property name="Text" value="When you attack and destroy your Challenged enemy, gain Valor equal to its Level. Once per round, when you attack your Challenged enemy, gain 1 mana." />
+			<property name="CardID" value="PSQ11" />
+		</card>
+		<card id="e907ba99-6cb5-4954-a61e-6359378c391f" name="Champion&apos;s Gauntlets">
+			<property name="Nickname" value="Champion&apos;s Gauntlets" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Glove" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Gloves" />
+			<property name="StatEquipmentSlot" value="Gloves" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="War Mage Only" />
+			<property name="Text" value="Equipment objects in this Mage&apos;s Weapon, Ring and Shield slots cannot be destroyed by an opponent&apos;s effects. When Champion&apos;s Gauntlets would be destroyed by an opponent&apos;s effect, prevent that destruction unless that opponent pays 2 mana." />
+			<property name="CardID" value="PSQ01" />
+		</card>
+		<card id="3ed81c7f-e02d-483e-8134-3169ab51d5e6" name="Dawn&apos;s Bastion">
+			<property name="Nickname" value="Dawn&apos;s Bastion" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Defense, Shield" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Shield" />
+			<property name="StatEquipmentSlot" value="Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Paladin Only" />
+			<property name="Text" value="This Mage gains a Defense and the Intercept trait. When this Mage intercepts an enemy attack, gain 1 Valor.&#xD;&#xA;[Defense 7+ 1x]" />
+			<property name="CardID" value="PSQ02" />
+		</card>
+		<card id="e8bcb017-6e30-4893-94de-81fef6437659" name="Helm of Justice">
+			<property name="Nickname" value="Helm of Justice" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Retribition, Helm" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="StatEquipmentSlot" value="Helmet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="When a non-Mage friendly creature in your zone is attacked and damaged, you may pay 1 mana. If you do, the attacker receives 1 direct light damage, regardless of range or LoS." />
+			<property name="CardID" value="PSQ04" />
+		</card>
+		<card id="6241c1f5-66ff-44ec-88d1-24b0f7660e0e" name="Leviathan Scale Armor">
+			<property name="Nickname" value="Leviathan Scale Armor" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="StatEquipmentSlot" value="Chest Piece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains Armor +2 and the Hydro -2 trait.&#xD;&#xA;[Armor +2] [Hydro -2]" />
+			<property name="CardID" value="PSQ05" />
+		</card>
+		<card id="b531cb09-e8cd-41c5-869b-e71136764219" name="Paladin&apos;s Cloak">
+			<property name="Nickname" value="Paladin&apos;s Cloak" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Cloak" />
+			<property name="StatEquipmentSlot" value="Cloak" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Paladin Only" />
+			<property name="Text" value="When your Mage casts a Healing incantation, heal this Mage 1 damage. When a Healing incantation cast by your Mage heals 4 or more damage off a friendly non-Mage creature, gain 1 Valor." />
+			<property name="CardID" value="PSQ06" />
+		</card>
+		<card id="1d471db4-abb6-4638-9f2b-b2b501ecf61c" name="Radiant Breastplate">
+			<property name="Nickname" value="Radiant Breastplate" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Chest Piece" />
+			<property name="StatEquipmentSlot" value="Chest Piece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="Mage gains Armor +2. At the end of this Mage&apos;s Action Phase, he or she may pay 2 mana to gain a Guard Marker.&#xD;&#xA;[Armor +2]" />
+			<property name="CardID" value="PSQ07" />
+		</card>
+		<card id="a79b93ae-48d1-4836-b1ce-08124bdb3bf1" name="Ring of the Ocean&apos;s Depths">
+			<property name="Nickname" value="Ring of the Ocean&apos;s Depths" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Mana, Ring" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Water Mage Only" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a hydro or aquatic spell. Enchantments only receive this discount when they are revealed." />
+			<property name="CardID" value="PSQ08" />
+		</card>
+		<card id="44e16242-5bbf-479a-b92a-aba214250795" name="Ring of Tides">
+			<property name="Nickname" value="Ring of Tides" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Ring" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Siren Only" />
+			<property name="Text" value="While you have the Initiative, when this Mage makes a hydro attack, that attack rolls 1 additional attack die and adds +2 to the effect roll." />
+			<property name="CardID" value="PSQ09" />
+		</card>
+		<card id="e13ebde8-a2fa-49a0-b69a-ca844a41f015" name="Shoalsdeep Trident">
+			<property name="Nickname" value="Shoalsdeep Trident" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Spear, Weapon" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Spearpoint Thrust;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={5: ['Push']};Piercing +X=2||name=Shoalsdeep Trident;
+=True" />
+			<property name="AttackBar" value="Spearpoint Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [5+ = Push] [Piercing +2]&#xD;&#xA;
+			Wave Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Hydro] [Dice=3] [d12] [5+ = Push] [Extinguish]" /> 
+			<property name="Traits" value="Siren Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSQ10" />
+		</card>
+		<card id="3829b796-539f-4389-bc71-e03581896913" name="Steadfast Boots">
+			<property name="Nickname" value="Steadfast Boots" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Boots" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Boots" />
+			<property name="StatEquipmentSlot" value="Boots" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="War Mage Only" />
+			<property name="Text" value="This Mage gains the Unmovable and Anchored traits.&#xD;&#xA;[Unmovable] [Anchored]" />
+			<property name="CardID" value="PSQ12" />
+		</card>
+		<card id="6bbd7b17-4b41-4d47-989c-aff6290f8ac8" name="Sword of Radiance">
+			<property name="Nickname" value="Sword of Radiance" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Sword, Weapon" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Radiant Slash;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=4;effects={10: ['Daze'], 13: ['Burn']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="AttackBar" value="Radiant Slash:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=4] [d12] [10-12 = Daze; 13+ = Burn] [Ethereal] [+2 vs. Nonliving Creatures]" />
+			<property name="Traits" value="Paladin Only" />
+			<property name="Text" value="When you declare an attack with Radiant Slash, you may spend a Valor to add +6 to your effect roll. When the Radiant Slash deals 5 or more damage, gain 1 Valor Token." />
+			<property name="CardID" value="PSQ13" />
+		</card>
+		<card id="6dc4c536-39c3-4f0d-83f8-1a4cc5874e9b" name="Echo of the Depths">
+			<property name="Nickname" value="Echo of the Depths" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Horn, Instrument" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Channeling=1, Location=Weapon/Shield" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Spawnpoint, Siren Only, Epic" />
+			<property name="Text" value="While you control a song enchantment, Triton&apos;s Horn gains Channeling +1. During the Deployment Phase, Echo of the Depths may Summon 1 Water creature. If Echo of the Depths would be destroyed by an opponent&apos;s spell or effect, prevent that destruction, unless your opponent pays 2 mana for each song enchantment you control." />
+			<property name="CardID" value="PSQ03" />
+		</card>
+		<card id="c6dbbc2d-f0d7-4d82-b387-726c1b060ae3" name="Voice of the Sea">
+			<property name="Nickname" value="Voice of the Sea" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Instrument, Lyre" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Legendary, Siren Only" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts of reveals a song spell. Enchantments only receive this discount when they are revealed. When you reveal a song spell, you may place an extra dissipate token on it." />
+			<property name="CardID" value="PSC14" />
+		</card>
+
+
+		<card id="3401ad6d-e87f-4775-a573-3398cb348fd1" name="Martyr&apos;s Restoration">
+			<property name="Nickname" value="Martyr&apos;s Restoration" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="1" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="Remove up to 5 damage from target creature and place it on the caster of this spell. This effect bypasses the Finite Life trait." />
+			<property name="CardID" value="PSI04" />
+		</card>
+		<card id="da622c97-c498-450b-94bd-a8546d4bdc0f" name="Lesser Teleport">
+			<property name="Nickname" value="Lesser Teleport" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Teleport" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))NULL" />
+			<property name="Target" value="Friendly Creature" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Target creature, without attached conjurations, is Teleported to a target zone up to 1 zone away from its current zone." />
+			<property name="CardID" value="PSI03" />
+		</card>
+		<card id="efe9ca2d-9894-4e13-b733-3088963670be" name="Mending Wave">
+			<property name="Nickname" value="Mending Wave" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target creature heals the amount rolled on 3 attack dice. Then, heal target creature within 1 zone of the first creature the amount rolled on 3 attack dice. Then, heal target creature withing 1 zone of the second creature the amount rolled on 3 attack dice. Mending Wave can&apos;t target the same creature twice." />
+			<property name="CardID" value="PSI05" />
+		</card>
+		<card id="b25450be-9922-4dba-9d89-244254749195" name="Overextend">
+			<property name="Nickname" value="Overextend" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Friendly Soldier Creature" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Overextend can only target an inactive creature. Flip the creature&apos;s action marker face-up. After that creature&apos;s next activation, it gains a Stun condition. You can only cast this one time per round on the same creature." />
+			<property name="CardID" value="PSI06" />
+		</card>
+		<card id="6a624136-aa0f-46bb-a4a9-8758b96bb8ae" name="Smite">
+			<property name="Nickname" value="Smite" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Valor" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast, Epic, Paladin Only" />
+			<property name="Text" value="As an additional cost to cast Smite, you must pay 4 Valor. Your next melee attack this round, deals critical damage, gains the Unavoidable trait, and rolls 2 additional attack dice." />
+			<property name="CardID" value="PSI07" />
+		</card>
+		<card id="cb4e9753-09d9-4fe2-8ee8-9a69590934be" name="Dissolve">
+			<property name="Nickname" value="Dissolve" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Acid" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When you cast Dissolve, choose an equipment object attached to target Mage. X = equipment&apos;s casting cost. Then, destroy the chosen equipment." />
+			<property name="CardID" value="PSI01" />
+		</card>
+		<card id="9fe70da8-45c7-4319-8e3e-085e8872186a" name="Dispel">
+			<property name="Nickname" value="Dispel" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TEnchantment" />
+			<property name="Target" value="Revealed Enchantment" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Destroy the target. X = total mana cost of target enchantment (casting plus reveal cost)." />
+			<property name="CardID" value="PSI02" />
+		</card>
+	</cards>
+</set>
