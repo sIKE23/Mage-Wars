@@ -504,6 +504,7 @@ def flipcard(card, x = 0, y = 0):
 	# if card is already face up and doesnt have any card alternates
 	elif card.isFaceUp and cardAlts == 1:
 		notify("{} turns {} face down.".format(me, card.Name))
+		for marker in card.markers: card.markers[marker] = 0
 		card.isFaceUp = False
 		card.peek()
 	# handle any face up card with card alternates including Mages
@@ -521,13 +522,14 @@ def flipcard(card, x = 0, y = 0):
 			elif int(currentCardAlt) == cardAlts:
 				notify("{} turns {} face down.".format(me, card.Name))
 				card.alternate = ""
+				for marker in card.markers: card.markers[marker] = 0
 				card.isFaceUp = False
 				card.peek()
 
 def mageSetup():
 	mute()
 	mageDict = eval(me.getGlobalVariable("MageDict"))
-	if mageDict["MageStatsID"] == 00000 or mageDict["MageRevealed"] = "True": return #deck hasn't been loaded or the mage the mage card was flipped face down after mageSetup() has already run once
+	if mageDict["MageStatsID"] == 00000 or mageDict["MageRevealed"] == "True": return #deck hasn't been loaded or the mage the mage card was flipped face down after mageSetup() has already run once
 	mageID = int(mageDict["MageID"])
 	mage = Card(mageID)
 	mageStatsID = int(mageDict["MageStatsID"])
