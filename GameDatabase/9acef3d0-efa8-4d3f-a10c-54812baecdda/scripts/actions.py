@@ -527,7 +527,7 @@ def flipcard(card, x = 0, y = 0):
 def mageSetup():
 	mute()
 	mageDict = eval(me.getGlobalVariable("MageDict"))
-	if mageDict["MageStatsID"] == 00000: return #deck hasn't been loaded
+	if mageDict["MageStatsID"] == 00000 or mageDict["MageRevealed"] = "True": return #deck hasn't been loaded or the mage the mage card was flipped face down after mageSetup() has already run once
 	mageID = int(mageDict["MageID"])
 	mage = Card(mageID)
 	mageStatsID = int(mageDict["MageStatsID"])
