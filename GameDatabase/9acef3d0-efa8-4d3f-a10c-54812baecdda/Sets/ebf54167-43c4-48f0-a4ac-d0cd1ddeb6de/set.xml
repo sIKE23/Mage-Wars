@@ -69,7 +69,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-	  			<alternate name="Beastmaster" type="B">
+	  			<alternate name="Beastmaster" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -124,7 +124,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Priestess" type="B">
+				<alternate name="Priestess" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -177,7 +177,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Warlock" type="B">
+				<alternate name="Warlock" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -232,7 +232,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Wizard(Air)" type="B">
+				<alternate name="Wizard(Air)" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage, Human" />
 					<property name="Level" value="" />
@@ -689,8 +689,8 @@
 			<property name="Traits" value="Zone Exclusive, Unique" />
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may give a Living creature Armor +1 or the Melee +1 trait until the end of the round. or you may heal 1 damage from it. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J08" />
-			<alternate name="Hand of Bim-Shalla" type="B" />
-			<alternate name="Hand of Bim-Shalla" type="C" />
+			<alternate name="Hand of Bim-Shalla" type="2" />
+			<alternate name="Hand of Bim-Shalla" type="3" />
 		</card>
 		<card id="177abb85-6437-4e91-8ebb-7df1c9103c06" name="Temple of the Dawnbreaker">
 			<property name="Nickname" value="Temple of the Dawnbreaker" />
@@ -752,7 +752,7 @@
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
 			<property name="Text" value="During the Upkeep Phase, each Living creature receives 1 point of direct poison damage." />
 			<property name="CardID" value="MW1J11" />
-			<alternate name="Skeletal Sentry" type="B" />
+			<alternate name="Idol of Pestilence" type="2" />
 		</card>
 		<card id="9efdd1ac-d30c-4773-9ccd-f916470f4861" name="Mana Crystal">
 			<property name="Nickname" value="Mana Crystal" />
@@ -833,7 +833,7 @@
 			<property name="Traits" value="Regenerate 2, Living, Legendary, Flame +2, Hydro Immunity" />
 			<property name="Text" value="All friendly Living creatures in Mohktari&apos;s zone gain the Regenerate 2 trait." />
 			<property name="CardID" value="MW1J15" />
-			<alternate name="Mohktari, Great Tree of Life" type="B" />
+			<alternate name="Mohktari, Great Tree of Life" type="2" />
 		</card>
 		<card id="26208d5a-4b15-41ee-880c-2dcf896ac45c" name="Mordok&apos;s Obelisk">
 			<property name="Nickname" value="Mordok&apos;s Obelisk" />
@@ -975,7 +975,7 @@
 			<property name="Traits" value="Living, Flame +2, Hydro Immunity" />
 			<property name="Text" value="Target is Restrained and gains the Unmovable trait. Tanglevine cannot target creatures with the Flying or Uncontainable traits. Ranged attacks cannot target Tanglevine.&#xD;&#xA;[Restrained] [Unmovable]" />
 			<property name="CardID" value="MW1J22" />
-			<alternate name="Skeletal Sentry" type="B" />
+			<alternate name="Tanglevine" type="2" />
 		</card>
 		<card id="93627f10-0699-4aa9-a18a-3fe06fd1b7b1" name="Temple of Asyra">
 			<property name="Nickname" value="Temple of Asyra" />
@@ -1017,8 +1017,8 @@
 			<property name="Traits" value="Zone Exclusive, Unique" />
 			<property name="Text" value="Once each round, before or after any friendly creature&apos;s Action Phase, you may choose a value of X from 1 to the number of temples you control, and pay X mana to make the above attack, adding X to the effect die roll. Use a ready marker to keep track of this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MW1J24" />
-			<alternate name="Temple of Light" type="B" />
-			<alternate name="Temple of Light" type="C" />
+			<alternate name="Temple of Light" type="2" />
+			<alternate name="Temple of Light" type="3" />
 		</card>
 
 
@@ -1531,7 +1531,7 @@
 			<property name="Traits" value="Slow, Poison Immunity, Legendary" />
 			<property name="Text" value="Each Upkeep Phase, all Living creatures in Malacoda&apos;s zone receive 2 points of direct poison damage." />
 			<property name="CardID" value="MW1C23" />
-			<alternate name="Malacoda" type="B" />
+			<alternate name="Malacoda" type="2" />
 		</card>
 		<card id="ad3b90cf-5a53-4541-903f-4b0cfe397f64" name="Mana Leech">
 			<property name="Nickname" value="Mana Leech" />
@@ -1693,7 +1693,7 @@
 			<property name="Traits" value="Nonliving, Psychic Immunity" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1C32" />
-			<alternate name="Skeletal Sentry" type="B" />
+			<alternate name="Skeletal Sentry" type="2" />
 		</card>
 		<card id="28828fac-23f8-4b66-bde0-38d4a4931862" name="Sosruko, Ferret Companion">
 			<property name="Nickname" value="Sosruko" />
@@ -2200,7 +2200,7 @@
 			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="Each Upkeep Phase, this creature receives 2 direct poison damage." />
 			<property name="CardID" value="MW1E19" />
-			<alternate name="Ghoul Rot" type="B" />
+			<alternate name="Ghoul Rot" type="2" />
 		</card>
 		<card id="f5d06493-1929-4d1f-9bcb-756339ccf23e" name="Harmonize">
 			<property name="Nickname" value="Harmonize" />
@@ -2473,8 +2473,8 @@
 				Spell Step. You take control of that spell. Redirect it back to the caster, who now becomes the target of the spell. You control that spell, and may make new choices, paying additional
 				 mana costs if any. Then, destroy Reverse Magic." />
 			<property name="CardID" value="MW1E35" />
-			<alternate name="Reverse Magic" type="B" />
-			<alternate name="Reverse Magic" type="C" />
+			<alternate name="Reverse Magic" type="2" />
+			<alternate name="Reverse Magic" type="3" />
 		</card>
 		<card id="afd1e927-92a2-4525-a33f-50fec7c9b382" name="Rhino Hide">
 			<property name="Nickname" value="Rhino Hide" />
@@ -2795,7 +2795,7 @@
 			<property name="Traits" value="Warlock Only" />
 			<property name="Text" value="Whenever this Mage is targeted by a melee attack (except a Counterstrike), at the beginning of the Declare Attack Step, roll the effect die. On a 9+ the attack is canceled. The attacker may choose to attack a different target instead. This does not affect creatures with the Nonliving or Psychic Immunity traits." />
 			<property name="CardID" value="MW1Q12" />
-			<alternate name="Helm of Fear" type="B" />
+			<alternate name="Helm of Fear" type="2" />
 		</card>
 		<card id="86e3fd4a-e52d-4ccd-9b33-333a13126ac8" name="Ivarium Longbow">
 			<property name="Nickname" value="Ivarium Longbow" />
@@ -3195,7 +3195,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="The next time this round the target creature makes a non-countrstrike melee attack, at the end of that action it may immediately make a quick action melee attack. This extra attack counts as part of the same attack action. Only one Battle Fury spell may be cast per round on the same creature." />
 			<property name="CardID" value="MW1I02" />
-			<alternate name="Battle Fury" type="B" />
+			<alternate name="Battle Fury" type="2" />
 		</card>
 		<card id="5d5025e2-8e1a-4694-9845-fd944cc37b92" name="Call of the Wild">
 			<property name="Nickname" value="Call of the Wild" />
@@ -3358,7 +3358,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target creature is Pushed 1 zone in the direction of your choice. This will not Push it through a wall with the Passage Attacks trait, unless you pay an additional 3 mana when this spell is cast." />
 			<property name="CardID" value="MW1I12" />
-			<alternate name="Force Push" type="B" />
+			<alternate name="Force Push" type="2" />
 		</card>
 		<card id="f3c06b0f-69ac-40ba-8d78-632c5f89505c" name="Group Heal">
 			<property name="Nickname" value="Group Heal" />
@@ -3716,7 +3716,7 @@
 		<card id="af14ca09-a83d-4185-afa0-bc38a31dbf82" name="Alt Zone Intersection">
 			<property name="Nickname" value="Alt Zone Intersection" />
 			<property name="Type" value="Internal" />
-				<alternate name="Alt Zone Compass" type="B">
+				<alternate name="Alt Zone Compass" type="2">
 					<property name="Type" value="Internal" />
 				</alternate>
 		</card>

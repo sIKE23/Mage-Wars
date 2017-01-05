@@ -382,7 +382,6 @@ def rotateCard(card, x = 0, y = 0):
 def flipcard(card, x = 0, y = 0):
 	mute()
 	tutorialMessage("Advance Phase")
-	cardalt = card.alternates
 	cZone = getZoneContaining(card)
 	traits = computeTraits(card)
 	mageDict = eval(me.getGlobalVariable("MageDict"))
@@ -419,7 +418,8 @@ def flipcard(card, x = 0, y = 0):
 
 	# do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return
-	# normal card flipping processing starts here
+	# normal card flipping processing starts here for facedown cards
+	cardAlts = len(card.alternates)
 	if card.isFaceUp == False:
 		card.isFaceUp = True
 		if card.Type != "Enchantment" and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
@@ -501,20 +501,28 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[Ready] = 1
 		if "Packleader's Cowl" == card.Name:
 			card.markers[Guard] = 1
-	elif card.isFaceUp and not "B" in cardalt:
+	# if card is already face up and doesnt have any card alternates
+	elif card.isFaceUp and cardAlts == 1:
 		notify("{} turns {} face down.".format(me, card.Name))
 		card.isFaceUp = False
 		card.peek()
-	elif card.isFaceUp and "B" or "C" in cardalt:
-		if card.alternate == "":
-			notify("{} flips {} to the alternate version of the card.".format(me, card))
-			card.alternate = "B"
-		elif card.alternate == "B" and "C" in cardalt:
-			notify("{} flips {} to the alternate version of the card.".format(me, card))
-			card.alternate = "C"
-		else:
-			notify("{} flips {} to the standard version of the card.".format(me, card))
-			card.alternate = ""
+	# handle any face up card with card alternates including Mages
+	elif card.isFaceUp and cardAlts > 1:
+		currentCardAlt = card.alternate
+		if currentCardAlt == "":
+			card.alternate = "2"
+			if "Mage" in card.Subtype: notify("{} has decided to play with the Alternative Art version of the {}.".format(me, card))
+			else: notify("{} flips {} to an Alternate Art version of the card.".format(me, card)) 
+	 	if currentCardAlt != "":
+			if int(currentCardAlt) < cardAlts:
+				card.alternate = str(int(currentCardAlt) + 1)
+				if "Mage" in card.Subtype: notify("{} has decided to play with the Standard Art version of the {}.".format(me, card))
+				else: notify("{} flips {} to an Alternate Art version of the card.".format(me, card))
+			elif int(currentCardAlt) == cardAlts:
+				notify("{} turns {} face down.".format(me, card.Name))
+				card.alternate = ""
+				card.isFaceUp = False
+				card.peek()
 
 def mageSetup():
 	mute()
@@ -533,6 +541,15 @@ def mageSetup():
 	Card(mageID).Stats = magestats.Stats #havent decided if this is needed yet....proxygen??
 	Card(mageID).AttackBar = magestats.AttackBar
 	Card(mageID).Traits = magestats.Traits
+	Card(mageID).cAttacks = magestats.cAttacks
+	mage.alternate = "2"
+	Card(mageID).Subtype = Card(mageID).alternateProperty("", "Subtype")
+	Card(mageID).Level = Card(mageID).alternateProperty("", "Level")
+	Card(mageID).Stats = Card(mageID).alternateProperty("", "Stats") #havent decided if this is needed yet....proxygen??
+	Card(mageID).AttackBar = Card(mageID).alternateProperty("", "AttackBar")
+	Card(mageID).Traits = Card(mageID).alternateProperty("", "Traits")
+	Card(mageID).cAttacks = Card(mageID).alternateProperty("", "cAttacks")
+	mage.alternate = ""
 	mageDict["MageRevealed"] = "True"
 	me.setGlobalVariable("MageDict",str(mageDict))
 	# here is where issue #360 should be called from.....and replace the line below.
