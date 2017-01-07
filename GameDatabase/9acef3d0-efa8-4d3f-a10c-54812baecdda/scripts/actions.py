@@ -447,7 +447,7 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[EternalServant] = 1
 			if "Warlock" == card.Name:
 					card.markers[BloodReaper] = 1
-			if "Siren" == card.Name:
+			if "Siren Stats" == card.Name:
 					card.markers[SirensCall] = 1
 		if "Anvil Throne Warlord Stats" == card.Name:
 					card.markers[RuneofFortification] = 1

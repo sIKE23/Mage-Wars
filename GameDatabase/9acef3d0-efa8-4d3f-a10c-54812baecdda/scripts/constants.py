@@ -48,6 +48,7 @@ EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
 FFToken = ("Forcefield Token", "fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b")
 GateClosed = ("The Gate to Hell is Closed!", "fcdf5fa2-cb09-47a3-8c81-d4b87380b397")
 GateOpened = ("The Gate to Hell has been Opened, Bim-Shalla have mercy on our souls!", "fd17ee65-9bc8-4a00-a359-ff8e2418ad5c")
+Grapple = ("Grapple: May only Melee and rolls 2 less dice vs Grappler", "f1247aea-2067-44e6-a496-8ea1a8789da9")
 Growth = ("Growth: Innate Life +3, Melee +1", "c580e015-96ff-4b8c-8905-28688bcd70e8")
 Guard = ("Guard", "91ed27dc-294d-4732-ab71-37911f4011f2")
 HolyAvenger = ("Holy Avenger", "99381ac8-7d73-4d75-9787-60e6411d3613")
@@ -79,6 +80,7 @@ SecretPassage = ("Secret Passage",	"a4b3bb92-b597-441e-b2eb-d18ef6b8cc77")
 SpikedPitTrap = ("Spiked Pit Trap", "8731f61b-2af8-41f7-8474-bb9be0f32926")
 Stagger = ("Stagger: Minor Creature: Can not Attack or Guard, Major Creature: -2 Attack Dice","ede2252f-b47f-4ea2-a448-08fd3b22d506")
 StormToken = ("Storm Token", "6383011a-c544-443d-b039-9f7ba8de4c6b")
+Strongest = ("Strongest", "5c97e301-99fa-4581-a01c-617bc2c5eaa3")
 Stuck = ("Stuck: Restrained and Unmovable. Roll 7+ to remove. - Removal Cost:4", "a01e836f-0768-4aba-94d8-018982dfc122")
 Stun = ("Stun: Incapacitated. Remove after acting. - Removal Cost: 4", "4bbac09e-a46c-42de-9272-422e8074533f")
 Tainted = ("Tainted: This can't be healed. - Removal Cost: 3", "826e81c3-6281-4a43-be30-bac60343c58f")
@@ -152,8 +154,8 @@ gameBoardsDict = {
 listMageWeapons = ["Johktari Hunting Knife","Rod of the Arcanum","Hellstar","Resplendent Bow"]
 typeChannelingList = ["Mana Flower","Mana Crystal","Moonglow Amulet"]
 typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
-tokenList = ["Armor","Banish","Bleed","Burn","Charge","Cripple","Corrode","Disable","Daze","Growth","Mana","Melee","Rage",
-					"Ranged","Retribution","Rot","Slam","Stagger","Stun","Stuck","Sleep","Tainted","Veteran","Weak","Wish","Wrath","Zombie"]
+tokenList = ["Armor","Banish","Bleed","Burn","Charge","Cripple","Corrode","Disable","Daze","Grapple","Growth","Mana","Melee","Rage",
+					"Ranged","Retribution","Rot","Slam","Stagger","Strongest","Stun","Stuck","Sleep","Tainted","Veteran","Weak","Wish","Wrath","Zombie"]
 
 for token in tokenList:
 		exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')

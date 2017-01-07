@@ -20,6 +20,7 @@ additiveTraits = ["Melee","Ranged",
 				  "Armor","Life","Innate Life","Channeling","Defense",
 				  "Tough",
 				  "Charge",
+				  "Ethereal"
 				  "Bloodthirsty",
 				  "Piercing",
 				  "Mana Drain",
@@ -300,6 +301,13 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
 		#Wildfire Imp Melee buff for attacking a Burning Object
 		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
+		if "Wall of Fire" or "Fire Elemental" in defender.name and attack.get('Type') == 'Hydro': attack['Traits']['Ethereal'] = True
+		#Knight of the Red Helm attacking the Strongest (currently a token)
+		if defender.markers[Strongest] and attacker.Name == "Knight of the Red Helm": localADict['Melee'] = localADict.get('Melee',0) + 2
+		#Drokkar attacking Prey, currently works on anything with a grapple marker, not his specific prey
+		if attacker.Name == "Drokkar" and attack["Name"] == "Tail Spike" and defender.markers[Grapple]: localADict['Melee'] = localADict.get('Melee',0) + 2
+		#Wildfire Imp Melee buff for attacking a Burning Object
+		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
 		#Lightning Raptor Counterstrike buff with 5 Charge tokens
 		if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] == 5: attack['Traits']['Counterstrike'] = True
 		#Bloodfire Helmet Demon buff
@@ -397,6 +405,9 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 						attackDice -= attacker.markers[Stagger] * 2
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Agony" or c.Name == "Shrink")]: attackDice -= 2
 						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Tangleroot"]: attackDice -= 1
+						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Knight\'s Courage")] and defender.markers[Strongest]: 
+								attackDice += 2 
+								atkTraits['Piercing'] = atkTraits.get('Piercing',0) + 1
 
 				level = eval(attacker.Level)
 				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
@@ -1458,7 +1469,12 @@ def computeTraits(card):
 												cController == controller and
 												'Living' in rawTraitsList): append('Regenerate 1')
 								elif cType == 'Conjuration' or cType == 'Conjuration-Terrain':
-										if (cName == 'Mohktari, Great Tree of Life' and
+										if (cName == 'Consecrated Ground' and
+												cardType == 'Creature' and
+												cController == controller and
+												subtype != 'Mage' and
+												'Living' in rawTraitsList): append('Regenerate 1')
+										elif (cName == 'Mohktari, Great Tree of Life' and
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 2')
