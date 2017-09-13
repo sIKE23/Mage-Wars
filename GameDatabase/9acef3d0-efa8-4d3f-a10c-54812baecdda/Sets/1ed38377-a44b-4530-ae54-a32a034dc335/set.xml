@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Warlord"
+	id="1ed38377-a44b-4530-ae54-a32a034dc335"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="1.4.2.1"
+	version="2.0.0.0">
+
+	<cards>
+		<!--<card id="223d270f-2fa8-413b-ae62-3f6d2213ed92" name="Academy Warlord">
+			<property name="Nickname" value="Academy Warlord" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained in War Magic." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatLife" value="24" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="MageSchoolCost" value="War=1" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Battle Orders: Once per round, as a quick command spell, you may pay 3 mana. If you do, friendly Soldier creatures gain Melee +1 until the end of the round.  If you control a revealed formation, reduce the cost of this ability by 1." />
+				<alternate name="Academy Warlord" type="B">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage, High Elf" />
+					<property name="Level" value="4" />
+					<property name="MageTraining" value="Training: Trained in War Magic." />
+					<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatLife" value="24" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+					<property name="MageSchoolCost" value="War=1" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+					<property name="Traits" value="" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Battle Orders: Once per round, as a quick command spell, you may pay 3 mana. If you do, friendly Soldier creatures gain Melee +1 until the end of the round.  If you control a revealed formation, reduce the cost of this ability by 1." />
+				</alternate>
+		</card>-->
+		<card id="1d43c343-c85c-49e8-9038-dff61ea41aed" name="Academy Warlord Stats">
+			<property name="Nickname" value="Academy Warlord Stats" />
+			<property name="Type" value="Magestats" />
+		</card>
+
+		<card id="ec074139-9b10-432b-a21e-a8459e9ef6af" name="Seismic Burst">
+			<property name="Nickname" value="Seismic Burst" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Seismic" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))!tFlying,TCreature||!tFlying,TConjuration" />
+			<property name="Target" value="Non-Flying Creature or Conjuration" />
+			<property name="School" value="Earth"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Seismic Burst;range type=Ranged;range=(0,1);dice=4;effects={9: ['Stagger']};Sweeping=True" />
+			<property name="AttackBar" value="[Ranged] [Dice=4] [d12] [9+ = Stagger] [Sweeping]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWDA01" />
+		</card>
+
+		<card id="a2e828be-7057-40a7-bdfa-470355e4b97f" name="Stalagmite">
+			<property name="Nickname" value="Stalagmite" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Seismic" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))!tFlying,TCreature||!tFlying,TConjuration" />
+			<property name="Target" value="Non-Flying Creature or Conjuration" />
+			<property name="School" value="Earth"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Stalagmite;range type=Ranged;range=(0,1);dice=3;Piercing +X=3" />
+			<property name="AttackBar" value="[Ranged] [Dice=3] [Piercing +3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWDA02" />
+		</card>
+		
+
+		<card id="b925a719-b425-48ec-bca9-8c7a1fc682d2" name="Elven Soldier">
+			<property name="Nickname" value="Elven Soldier" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="High Elf, Soldier" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Elven Blade;action type=Quick;range type=Melee;range=(0,0);dice=2;Piercing +X=1" />
+			<property name="AttackBar" value="Elven Blade:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWDC01" />
+		</card>
+
+		<card id="0a6718f5-8b76-4e6d-9773-30945ed2c37e" name="Goblin Legionnaire">
+			<property name="Nickname" value="Goblin Legionnaire" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Goblin, Soldier" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=Shortsword;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Shortsword:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When summoned, you may pay 4 mana. If you do, immediately summon a Goblin Legionnaire from your spellbook, into the same zone, as a free action. A maximum of two additional friendly Goblin Legionnaires can be summoned this way, each round." />
+			<property name="CardID" value="MWAWDC02" />
+		</card>
+
+		<card id="9ca9fb53-e3dc-4b46-b232-f4d1aa29e8f5" name="Harshforge Construct">
+			<property name="Nickname" value="Harshforge Construct" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Construct" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=7" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Smash;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Smash:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="When Harshforge Construct would attack an object, after the attack dice are rolled, you may choose to destroy a revealed non-Epic enchantment attached to that object with a total mana cost (casting plus reveal cost) equal to or less than the total rolled on the attack dice, instead of dealing damage." />
+			<property name="CardID" value="MWAWDC03" />
+		</card>
+		
+		<card id="39c8d850-b5a8-4399-9b50-9771cda4501b" name="Harshforge Knight">
+			<property name="Nickname" value="Harshforge Knight" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight, Soldier" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Longsword;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Longsword:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Harshforge Knight cannot be targeted by enchantments or incantations." />
+			<property name="CardID" value="MWAWDC04" />
+		</card>
+
+		<card id="cce03d98-ad14-4e26-b973-61e27f2e2567" name="Izimbila, Daughter of Badgers">
+			<property name="Nickname" value="Izimbila" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Wood Elf" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature/War"  />
+			<property name="Level" value="2/2" />
+			<property name="Stats" value="Armor=1, Life=10" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Feral Spear;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=2" />
+			<property name="AttackBar" value="Feral Spear:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +2]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="If your Mage is trained in Nature magic, Izimbila gains the animal subtype. If your Mage is trained in War magic, Izimbila gains the soldier subtype." />
+			<property name="CardID" value="MWAWDC05" />
+		</card>
+		
+		<card id="efc26830-93e6-4ea2-90e8-dd219ec3b5cd" name="Kelsar Ranger">
+			<property name="Nickname" value="Kelsar Ranger" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Wood Elf, Soldier" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature/War"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Shortbow;action type=Quick;range type=Ranged;range=( 0,1);dice=2" />
+			<property name="AttackBar" value="Shortbow:&#xD;&#xA;[Quick] [Ranged: 0-1] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Kelsar Ranger&apos;s Shortbow attack gains the Piercing +1 trait while there is a friendly guarding creature in her zone." />
+			<property name="CardID" value="MWAWDC06" />
+		</card>
+		
+		<card id="fb1dbff0-9d03-4510-8b4e-a753dbae0a78" name="Pygmy Titanodon">
+			<property name="Nickname" value="Pygmy Titanodon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Elephant" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=12" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="name=Gore;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Gore:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Tough -2" />
+			<property name="Text" value="When Pygmy Titanodon is summoned, place a Charge token on it. Pygmy Titanodon rolls 3 additional attack dice while it has a Charge token. Remove the Charge token after making an attack." />
+			<property name="CardID" value="MWAWDC07" />
+		</card>
+		
+		<card id="cc960cdf-7ddf-4c36-977d-259b458d037c" name="Royal Armorer">
+			<property name="Nickname" value="Royal Armorer" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Soldier" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy/War"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Forge Hammer;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Forge Hammer:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="As a Quick action, Royal Armorer may pay 1 mana to place an Armor +1 token on a soldier, knight or angel creature in his zone which does not already have one." />
+			<property name="CardID" value="MWAWDC08" />
+		</card>
+		
+		<card id="abeb7257-6c99-4c4c-9365-1d5be6a83530" name="Straywood Scout">
+			<property name="Nickname" value="Straywood Scout" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Wood Elf, Soldier" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature/War"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Shortbow;action type=Quick;range type=Ranged;range=( 0,1);dice=2" />
+			<property name="AttackBar" value="Shortbow:&#xD;&#xA;[Quick] [Ranged: 0-1] [Dice=2]" />
+			<property name="Traits" value="Unique" />
+			<property name="Text" value="Once per round, as a full action, Straywood Scout may target an enemy creature. Friendly creatures gain +1 extra attack die for the next attack they make against the target creature, this round." />
+			<property name="CardID" value="MWAWDC09" />
+		</card>
+
+		<card id="6d3abf7d-7491-4c58-9abf-7fdcbb72b5b0" name="Torgo, Pit Troll">
+			<property name="Nickname" value="Torgo" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Troll, Soldier, Pitfighter" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+War"  />
+			<property name="Level" value="1+2" />
+			<property name="Stats" value="Armor=1, Life=10" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Heavy Club;action type=Quick;range type=Melee;range=(0,0);dice=5" />
+			<property name="AttackBar" value="Heavy Club:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
+			<property name="Traits" value="Legendary, Regenerate 2, Tough -2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWDC10" />
+		</card>
+		
+		<card id="3e87a086-fe1b-4358-a9cf-90378fb966b3" name="Wychwood Ranger">
+			<property name="Nickname" value="Wychwood Ranger" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Wood Elf, Soldier" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature/War"  />
+			<property name="Level" value="2/2" />
+			<property name="Stats" value="Armor=0, Life=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Shortbow;action type=Quick;range type=Ranged;range=( 0,1);dice=3" />
+			<property name="AttackBar" value="Shortbow:&#xD;&#xA;[Quick] [Ranged: 0-1] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAWDC11" />
+		</card>
+
+		<card id="2f02b1e4-875e-4826-a719-97e87735189b" name="Defend Me">
+			<property name="Nickname" value="Defend Me" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))^Friendly,tLiving,!SMage,TCreature" />
+			<property name="Target" value="Friendly Living Non-Mage Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="You can only reveal Defend Me when an enemy creature activates. This creature gains a guard marker, then destroy Defend Me. If this is a minor creature, reduce the reveal cost of Defend Me by 1." />
+			<property name="CardID" value="MWAWDE01" />
+		</card>
+
+		<card id="3063faf4-ae79-4ae2-8dd3-6afe29035687" name="Dig In">
+			<property name="Nickname" value="Dig In" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Command, Formation" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SDemon,TCreature" />
+			<property name="Target" value="Soldier Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Formation, Warlord Only" />
+			<property name="Text" value="Friendly soldier creatures in this zone gain Armor +1. At the end of a friendly soldier creature&apos;s activation, they may pay 2 mana. If they do, place a guard marker on that creature. If this ability is used by a minor creature, reduce the cost of this ability by 1." />
+			<property name="CardID" value="MWAWDE02" />
+		</card>
+		
+		<card id="b02113cc-5edf-4667-8a08-9a6dd73b8563" name="Fire at Will">
+			<property name="Nickname" value="Fire at Will" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Command, Formation" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SDemon,TCreature" />
+			<property name="Target" value="Soldier Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Formation, Warlord Only" />
+			<property name="Text" value="Non-spell ranged attacks made by friendly soldier creatures in this zone gain the Piecing +2 trait. When a friendly soldier creature in this zone declares a non-spell ranged attack, they may pay 2 mana. If they do, that attack gains the Unavoidable trait. If this ability is used by a minor creature, reduce the cost of this ability by 1." />
+			<property name="CardID" value="MWAWDE03" />
+		</card>
+
+		<card id="0460f1c6-805a-4e5b-aeb7-46a2bc8a5bf6" name="Form Ranks">
+			<property name="Nickname" value="Form Ranks" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Command, Formation" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SDemon,TCreature" />
+			<property name="Target" value="Soldier Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Formation, Warlord Only" />
+			<property name="Text" value="When a friendly soldier creature in this zone is attacked and receives damage, you may transfer 1 of that damage to another friendly soldier creature in this zone instead. When a friendly minor soldier creature in this zone would be melee attacked, they  may pay 2 mana. If they do, that attack rolls 2 less attack dice (to a minimum of 1)." />
+			<property name="CardID" value="MWAWDE04" />
+		</card>
+	
+		<card id="167dc78e-05dd-4314-847b-15c738acc404" name="Press the Attack">
+			<property name="Nickname" value="Press the Attack" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Command, Formation" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SDemon,TCreature" />
+			<property name="Target" value="Soldier Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Formation, Warlord Only" />
+			<property name="Text" value="Friendly soldier creatures in this zone gain Melee +1. When a friendly soldier creature makes a melee attack, during the Roll dice step of that attack, they may pay 2 mana. If they do, you ma re-roll all of the attack dice (but not the effect die). If this ability is used by a minor creature, reduce the cost of this ability by 1." />
+			<property name="CardID" value="MWAWDE05" />
+		</card>
+		
+		<card id="662f438e-c5da-47c5-bc2f-36a362add5af" name="Promotion">
+			<property name="Nickname" value="Promotion" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Minor Soldier Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlord Only" />
+			<property name="Text" value="You can only reveal Promotion when this creature attacks and damages an enemy creature. This creature gains Armor +1 and Melee +1. If this creature is Level 1, reduce the reveal cost of Promotion by 1. &#xD;&#xA; [Armor +1] [Melee +1]" />
+			<property name="CardID" value="MWAWDE06" />
+		</card>
+
+
+		<card id="60589ea6-8e73-4066-8c8a-cf28b8c44bf3" name="Commander&apos;s Cape">
+			<property name="Nickname" value="Commander&apos;s Cape" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Cape, Mana" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Cloak" />
+			<property name="StatEquipmentSlot" value="Cloak" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlord Only" />
+			<property name="Text" value="Once per round, you may pay 1 less mana if you cast or reveal a command spell or cast a soldier creature spell." />
+			<property name="CardID" value="MWAWDQ01" />
+		</card>
+		
+		<card id="e4f87497-1da8-4ec1-a15d-23c0be7a6d00" name="Ivarium Halberd">
+			<property name="Nickname" value="Ivarium Halberd" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Weapon, Polearm" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon+Shield" />
+			<property name="StatEquipmentSlot" value="Weapon+Shield" />
+			<property name="cAttacks" value="name=Slash;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1" />
+			<property name="AttackBar" value="Slash:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This Mage gains the effects of friendly formation spells and Battle Orders as if it had the soldier subtype. If your Mage is level 5 or higher, Ivarium Halberd rolls an additional attack die." />
+			<property name="CardID" value="MWAWDQ02" />
+		</card>
+
+		<card id="96214113-b3ff-4015-a86a-dc1bfb49ea8e" name="Leather Belt">
+			<property name="Nickname" value="Leather Belt" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Belt" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Belt" />
+			<property name="StatEquipmentSlot" value="Belt" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="This Mage gains Armor +1 &#xD;&#xA; [Armor +1]" />
+			<property name="CardID" value="MWAWDQ03" />
+		</card>
+		
+		<card id="93f7af5d-3398-48e4-bb14-f4da8f56a4a3" name="Leather Vest">
+			<property name="Nickname" value="Leather Vest" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="This Mage gains Armor +1 &#xD;&#xA; [Armor +1]" />
+			<property name="CardID" value="MWAWDQ04" />
+		</card>
+
+		<card id="43403c20-9e63-444e-9d9b-73ab99a0df4e" name="Strategist&apos;s Helm">
+			<property name="Nickname" value="Strategist&apos;s Helm" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Command, Helm" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="StatEquipmentSlot" value="Helmet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Warlord Only" />
+			<property name="Text" value="When you have Priority, your Mage may use their Battle Orders ability as a free action (paying its mana cost normally)." />
+			<property name="CardID" value="MWAWDQ05" />
+		</card>
+
+		<card id="cf572afb-fe6f-4373-b24a-66fa532432af" name="Tempered Faulds">
+			<property name="Nickname" value="Tempered Faulds" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Plate" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Breeches" />
+			<property name="StatEquipmentSlot" value="Breeches" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This Mage gains Armor +1. Once per round, when this Mage is the target of an attack with an effect roll, you may force the attacker to reroll the effect die. &#xD;&#xA; [Armor +1]" />
+			<property name="CardID" value="MWAWDQ06" />
+		</card>
+
+
+		<card id="a1a9d082-ab5a-4c2d-b947-ca91a4ec72be" name="Focused Strike">
+			<property name="Nickname" value="Focused Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="The target&apos;s next non-spell attack this round rolls an additional attack die, gains the Piercing +1 trait, and the Unavoidable trait. If the target is a minor creature, reduce the mana cost of Focused Strike by 1." />
+			<property name="CardID" value="MWAWDI02" />
+		</card>
+		
+		<card id="32feb5de-c6ed-4508-8a52-9c0fbdb2e93f" name="Gear Up">
+			<property name="Nickname" value="Gear Up" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast, Epic, Warlord Only" />
+			<property name="Text" value="Only a mage may cast this spell. As free actions, cast up to three Equipment spells from your spellbook, targeting your mage, paying the total mana cost for each one." />
+			<property name="CardID" value="MWAWDI03" />
+		</card>
+		<card id="395c7fed-49e0-4ad1-b83d-3e1c1998a13e" name="Sweeping Strike">
+			<property name="Nickname" value="Sweeping Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Command" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Once this round, if this creature uses a full action to make a quick action melee attack, that attack gains the Sweeping trait. Reduce Sweeping Strike&apos;s mana cost by 1 when targeting a minor creature." />
+			<property name="CardID" value="MWAWDI05" />
+		</card>
+	</cards>
+</set>

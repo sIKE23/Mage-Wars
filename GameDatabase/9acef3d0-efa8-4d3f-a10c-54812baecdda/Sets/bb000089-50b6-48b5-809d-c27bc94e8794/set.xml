@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Forcemaster"
+	id="bb000089-50b6-48b5-809d-c27bc94e8794"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="1.4.2.1"
+	version="2.0.0.0">
+
+	<cards>
+		<!--<card id="32e0369c-60a6-48b7-a31a-6ad444033461" name="Academy Forcemaster">
+			<property name="Nickname" value="Academy Forcemaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage, Dark Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained in Mind magic and Dsjer-Tet spells. Non-Mind, Non-Dsjer-Tet creature spells cost triple spellpoints." />
+			<property name="Stats" value="Spellbook=40, Life=22, Armor=0, Channeling=7" />
+			<property name="StatLife" value="22" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Power Transfer: Once per round, when your Mage or a friendly force creature declares an attack, you may pay 1 mana and remove a Dissipate token from a force creature you control. If you do, the attacking creature gains Melee +2 for that attack." />
+				<alternate name="Academy Forcemaster" type="B">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage, Dark Elf" />
+					<property name="Level" value="4" />
+					<property name="MageTraining" value="Training: Trained in Mind magic and Dsjer-Tet spells. Non-Mind, Non-Dsjer-Tet creature spells cost triple spellpoints." />
+					<property name="Stats" value="Spellbook=40, Life=22, Armor=0, Channeling=7" />
+			<property name="StatLife" value="22" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+					<property name="MageSchoolCost" value="Mind=1, Creature=3" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+					<property name="Traits" value="" />
+					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Power Transfer: Once per round, when your Mage or a friendly force creature declares an attack, you may pay 1 mana and remove a Dissipate token from a force creature you control. If you do, the attacking creature gains Melee +2 for that attack." />
+				</alternate>
+		</card>-->
+		<card id="18c4ecbe-0a44-43c0-b053-a3c8e0abd8cd" name="Academy Forcemaster Stats">
+			<property name="Nickname" value="Academy Forcemaster Stats" />
+			<property name="Type" value="Magestats" />
+		</card>
+
+
+		<card id="85e1046a-b4cd-40b4-9b08-8ba1788229bf" name="Force Daggers">
+			<property name="Nickname" value="Force Daggers" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))NULL" />
+			<property name="Target" value="1-3 Creatures or Conjurations" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Force Daggers;range type=Ranged;range=(0,1);dice=1;effects={4: ['Stagger']};Ethereal=True;Unavoidable=True" />
+			<property name="AttackBar" value="[Ranged] [Dice=1] [d12] [4+ = Stagger] [Ethereal] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="You may make this attack against up to 3 different targets in the same zone.  Roll for each attack separately." />
+			<property name="CardID" value="MWAFMA01" />
+		</card>
+
+		<card id="c381f725-e3c6-407e-8039-beab331869d6" name="Telekinetic Bolt">
+			<property name="Nickname" value="Telekinetic Bolt" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Telekinetic Bolt;range type=Ranged;range=(0,2);dice=4;effects={5: ['Stagger']};Ethereal=True" />
+			<property name="AttackBar" value="[Ranged] [Dice=4] [d12] [5+ = Stagger] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAFMA02" />
+		</card>
+
+		<card id="fec1694b-97c1-48d0-bc75-6b2fc1cecb4b" name="Telekinetic Burst">
+			<property name="Nickname" value="Telekinetic Burst" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Telekinetic Burst;range type=Ranged;range=(0,0);Zone=True;dice=3;effects={7: ['Stagger']};Ethereal=True;Unavoidable=True" />
+			<property name="AttackBar" value="[Ranged] [Zone] [Dice=3] [d12] [7+ = Stagger] [Ethereal] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Attacks all objects in the zone except the caster." />
+			<property name="CardID" value="MWAFMA03" />
+		</card>
+
+
+		<card id="252db70f-53d3-4c92-82f3-8f0832c73169" name="Eye of Itadjet">
+			<property name="Nickname" value="Eye of Itadjet" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Psyoculus" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Psionic Blast;action type=Quick;range type=Ranged;range=( 0,0);damage type=Psychic;dice=2;effects={7: ['Stagger']};Ethereal=True;Unavoidable=True;Critical Damage=True" />
+			<property name="AttackBar" value="Psionic Blast:&#xD;&#xA;[Quick] [Ranged: 0-0] [Psychic] [Dice=2] [d12] [7+ = Stagger] [Ethereal] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Pest" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAFMC01" />
+		</card>
+
+		<card id="5f798d36-1d1d-4e14-a79e-3ad41dd95141" name="Force Caracal">
+			<property name="Nickname" value="Force Caracal" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Force Shred;action type=Quick;range type=Melee;range=(0,0);dice=2;Piercing +X=2" />
+			<property name="AttackBar" value="Force Shred:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Piercing +2]" />
+			<property name="Traits" value="Forcemaster Only, Aegis 1, Nonliving, Dissipate 4" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAFMC02" />
+		</card>
+ 	
+		<card id="1d4d0993-60da-4b56-a7e1-6a1dbc52bc9c" name="Force Golem">
+			<property name="Nickname" value="Force Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct, Golem" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Kinetic Punch;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Kinetic Punch:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Forcemaster Only, Aegis 2, Nonliving, Dissipate 5" />
+			<property name="Text" value="When Force Golem successfully attacks and damages a creature, it may remove one of its Dissipate tokens to place a Stagger condition on that creature." />
+			<property name="CardID" value="MWAFMC03" />
+		</card>
+
+		<card id="91719f32-c6c3-40e6-ad21-44d195ab8dd6" name="Force Gremlin">
+			<property name="Nickname" value="Force Gremlin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=2" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="2" />
+			<property name="cAttacks" value="name=Force Punch;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Force Punch:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Forcemaster Only, Nonliving, Invisible, Dissipate 4" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAFMC04" />
+		</card>
+
+		<card id="b69e50c8-9682-4eec-8af1-b41a34ed1b51" name="Psionic Cobra">
+			<property name="Nickname" value="Psionic Cobra" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=4" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Psionic Strike;action type=Quick;range type=Melee;range=(0,0);dice=1" />
+			<property name="AttackBar" value="Psionic Strike:&#xD;&#xA;[Quick] [Melee] [Dice=1]" />
+			<property name="Traits" value="Forcemaster Only, Nonliving, Pest, Dissipate 5" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAFMC05" />
+		</card>
+
+		<card id="a454132f-d07c-406b-819d-8fde33ec7fd0" name="Psionic Scarab">
+			<property name="Nickname" value="Psionic Scarab" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Psionic Spike;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Psionic Spike:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Forcemaster Only, Aegis 2, Nonliving, Dissipate 5" />
+			<property name="Text" value="When Psionic Scarab successfullly attacks an object, it may remove one of its Dissipate tokens, before damage is dealt, to make all damage from that attack critical." />
+			<property name="CardID" value="MWAFMC06" />
+		</card>
+	
+		<card id="ca2b10a9-0c08-4649-997b-6fcbfef289f0" name="Tjusut, the Risen King">
+			<property name="Nickname" value="Tjusut" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value=" Undead, Mummy, Dsjer-Tet" />
+			<property name="Cost" value="11" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=10" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Necrotic Grasp;action type=Quick;range type=Melee;range=(0,0);dice=5" />
+			<property name="AttackBar" value="Necrotic Grasp:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
+			<property name="Traits" value="Legendary, Nonliving" />
+			<property name="Text" value="While Tjusut is summoned, place a Guard marker on him.  While Tjusut has a Guard marker, he cannot reset." />
+			<property name="CardID" value="MWAFMC07" />
+		</card>
+
+		<card id="445e4660-ce91-45c2-9bf2-d17669eb5053" name="Tomb Guardian">
+			<property name="Nickname" value="Tomb Guardian" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Psionic Blade;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Psionic Blade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Forcemaster Only, Aegis 2, Nonliving, Dissipate 5" />
+			<property name="Text" value="Once per round, when you have Priority, you may remove a Dissipate token from Tomb Guardian. If you do, place a Guard marker on Tomb Guardian." />
+			<property name="CardID" value="MWAFMC08" />
+		</card>
+
+
+		<card id="c4c418bf-4cde-4000-b9c4-585c98d4349c" name="Desperate Focus">
+			<property name="Nickname" value="Desperate Focus" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Chakra, Protection" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While this Mage controls fewer creatures than any other Mage in the Arena, this Mage gains Armor +1 and Melee +1." />
+			<property name="CardID" value="MWAFME01" />
+		</card>
+	
+		<card id="e6f782bc-66f4-46ff-ae01-1a16a10a86f8" name="Drop Item">
+			<property name="Nickname" value="Drop Item" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Minor Equipment" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Drop Item can only target equipment in the weapon and/or shield location. You can only reveal Drop Item when yo have Priority. This equipment is Disabled (it loses all attack bars, action bars, and non-trait abilities). As a quick action, the controller of this equipment may destroy Drop Item. If this equipment is level 2, increase the reveal cost of Drop Item by 2." />
+			<property name="CardID" value="MWAFME02" />
+		</card>
+
+		<card id="e99b27e9-f9ae-4f6c-8cde-3ea17563b8cb" name="Force Shield">
+			<property name="Nickname" value="Force Shield" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Forcemaster Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 3, Forcemaster Only, Epic" />
+			<property name="Text" value="This Mage gains the Aegis X trait while defending against a Melee attack. X equals the number of Dissipate tokens on Force Shield." />
+			<property name="CardID" value="MWAFME03" />
+		</card>
+
+		<card id="ab745e70-052a-497c-a307-e45939fcaa8c" name="Galvanize">
+			<property name="Nickname" value="Galvanize" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="You can only reveal Galvanize if this creature has a condition marker. Remove one condition marker from this creature by paying its removal cost, and this creature gains Melee +1. &#xD;&#xA; [Melee +1]" />
+			<property name="CardID" value="MWAFME04" />
+		</card>
+
+		<card id="359d8b05-3a2d-4ce6-8f51-b9744ede41ee" name="Lesser Invisibility">
+			<property name="Nickname" value="Lesser Invisibility" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Illusion" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Friendly Minor Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="You can only reveal Lesser Invisibility when you have Priority. This creature gains the Invisible trait. Destroy Lesser Invisibility after this creature makes an attack. If the target is Level 1, reduce the reveal cost of Lesser Invisibility by 1." />
+			<property name="CardID" value="MWAFME05" />
+		</card>
+
+		<card id="57793fab-de11-4206-959c-882f34e2d4f9" name="Mass Cowardice">
+			<property name="Nickname" value="Mass Cowardice" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic, Fear" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark/Mind"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 1, Epic" />
+			<property name="Text" value="Mass Cowardice can only be revealed when an enemy creature is activated.  Living creatures in this Zone cannot make melee attacks against creatures of a higher level." />
+			<property name="CardID" value="MWAFME06" />
+		</card>
+	
+		<card id="b2085151-be46-4b1c-b4b1-293e3600d009" name="Mind Seize">
+			<property name="Nickname" value="Mind Seize" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic, Control" />
+			<property name="Cost" value="2+x" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="non-mage Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Mind Mage Only" />
+			<property name="Text" value="When this creature activates, you must reveal Mind Seize. This creature must make a non-spell attack against a legal target of your choosing, in this zone.  Then, end its activation and destroy Mind Seize. x= target&apos;s level +2." />
+			<property name="CardID" value="MWAFME07" />
+		</card>
+	
+		<card id="b3f3c7a6-a55b-456b-aba6-1eb73ab3bdc3" name="Redistributed Power">
+			<property name="Nickname" value="Redistributed Power" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Forcemaster Only" />
+			<property name="Text" value="As an additional cost to reveal Redistributed Power, you must remove two Dissipate tokens from force creatures you control. This creature gains Melee +2.  If this spell would be destroyed by an opponent&apos;s effect, prevent that destruction, unless that opponent pays 3 mana. &#xD;&#xA; [Melee +2]" />
+			<property name="CardID" value="MWAFME08" />
+		</card>
+		
+		<card id="de52f68c-50a8-443a-9986-da785f930c33" name="Repulsion Field">
+			<property name="Nickname" value="Repulsion Field" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Forcemaster Only" />
+			<property name="Text" value="When this creature is melee attacked, you must reveal Repulsion Field. Cancel the attack and place a Stagger condition on the attacker, then destroy Repulsion Field." />
+			<property name="CardID" value="MWAFME09" />
+		</card>
+
+		<card id="aa9d500c-4f1c-446d-a9f6-f41c18e4aeb7" name="Telekinetic Bomb">
+			<property name="Nickname" value="Telekinetic Bomb" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Force" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Blast;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={4: ['Stagger']};Ethereal=True;Unavoidable=True" />
+			<property name="AttackBar" value="Blast:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [4+ = Stagger] [Ethereal] [Unavoidable]" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="When Telekinetic Bomb is destroyed after it has been revealed, it makes the above attack against the target." />
+			<property name="CardID" value="MWAFME10" />
+		</card>
+
+
+		<card id="78afb56f-0d84-4e81-9432-697752136f85" name="Force Armor">
+			<property name="Nickname" value="Force Armor" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Force, Armor" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Forcemaster Only" />
+			<property name="Text" value="This Mage gains Armor +1. Attacks targeting this Mage gain the Piercing -2 trait. &#xD;&#xA; [Armor +1]" />
+			<property name="CardID" value="MWAFMQ01" />
+		</card>
+
+		<card id="23a5de9f-2b7e-4eea-9c45-5f1653a8a150" name="Headdress of Stasis">
+			<property name="Nickname" value="Headdress of Stasis" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Helmet" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="StatEquipmentSlot" value="Helmet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Mind Mage Only" />
+			<property name="Text" value="Once per round, when a non-Epic Mind spell you control with the Dissipate X trait has its last Dissipate token removed, you may pay mana equal to its level -1 to destroy it at the end of the round instead." />
+			<property name="CardID" value="MWAFMQ02" />
+		</card>
+
+		<card id="e5d118ee-1439-4986-ba88-32611aee7182" name="Illusory Leggings">
+			<property name="Nickname" value="Illusory Leggings" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Illusion" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Breeches" />
+			<property name="StatEquipmentSlot" value="Breeches" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Mind Mage Only" />
+			<property name="Text" value="This Mage gains the Elusive trait." />
+			<property name="CardID" value="MWAFMQ03" />
+		</card>
+
+		<card id="1f1e7da2-0476-4cb4-a509-b95be027602b" name="Jeweled Scarab">
+			<property name="Nickname" value="Jeweled Scarab" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Amulet, Mana, Healing, Dsjer-Tet" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Amulet" />
+			<property name="StatEquipmentSlot" value="Amulet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When a creature your Mage controls is destroyed, your Mage may either heal 1 damage or gain 1 mana." />
+			<property name="CardID" value="MWAFMQ04" />
+		</card>
+
+		<card id="0354689d-511e-4ba6-b4bb-c13fe33e40d4" name="Shifratar">
+			<property name="Nickname" value="Shifratar" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Force, Weapon, Polearm" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Slash;action type=Quick;range type=Melee;range=(0,0);dice=3;Ethereal=True;Reach=True" />
+			<property name="AttackBar" value="Slash:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Ethereal] [Reach]" />
+			<property name="Traits" value="Cantrip, Forcemaster Only" />
+			<property name="Text" value="Once per round, when you declare a non-counterstrike attack with Shifratar, you may pay 3 mana. If you do, Shifratar&apos;s Slash attack gains the Sweeping trait for that attack.  If Shiftratar is destroyed, place it back into your spellbook. If this Mage is Level 5 or greater, Shiftratar rolls an additional attack die." />
+			<property name="CardID" value="MWAFMQ05" />
+		</card>
+
+		<card id="c8ada27f-b20e-4a89-812a-48ea97ab24fd" name="Symbiotic Orb">
+			<property name="Nickname" value="Symbiotic Orb" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Artifact, Defense" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Shield" />
+			<property name="StatEquipmentSlot" value="Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Forcemaster Only" />
+			<property name="Text" value="Once per round, when a friendly object in your zone is melee attacked, you may pay 3 mana or remove a Dissipate token from a force creature you control. If you do, the defender avoids the attack. This counts as a Defense." />
+			<property name="CardID" value="MWAFMQ06" />
+		</card>
+
+
+		<card id="427cb8da-3db4-4836-8ecd-7f3ea277d21a" name="Siphon Energy">
+			<property name="Nickname" value="Siphon Energy" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic, Healing" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Non-Epic Object" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Remove a Dissipate token from the target. If you do, heal 2 damage from your Mage. Siphon Energy cannot remove the last Dissipate token from an object." />
+			<property name="CardID" value="MWAFMI02" />
+		</card>
+	</cards>
+</set>
