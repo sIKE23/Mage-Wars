@@ -1589,7 +1589,9 @@ def computeTraits(card):
 		if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))
 		if markers[Growth]: extend(['Life +{}'.format(str(3*markers[Growth])),'Melee +{}'.format(str(markers[Growth]))])
 		if markers[Corrode]: append('Armor -{}'.format(str(markers[Corrode])))
-		if markers[Guard]: extend(['Counterstrike','Non-Flying'])
+		if markers[Guard]:
+				extend(['Counterstrike','Non-Flying'])
+				remove('Flying')
 		if markers[Sleep] or markers[Stun] or markers[Slam]: append('Incapacitated')
 		if markers[Zombie]:
 				extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])

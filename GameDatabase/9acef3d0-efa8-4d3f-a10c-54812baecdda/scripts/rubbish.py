@@ -27,14 +27,6 @@ def cardHere(x, y, stat=""):
 				return c
 	return None
 
-def cardX(card):
-	x, y = card.position
-	return x
-
-def cardY(card):
-	x, y = card.position
-	return y
-
 def findCard(group, model):
 	for c in group:
 		if c.model == model:

@@ -4,7 +4,7 @@
 	id="be733b2f-7104-4de5-a64f-11dc0bb8e3a1"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="1.4.2.1"
-	version="1.15.0.0">
+	version="2.0.0.0">
 
 	<markers>
 		<marker id="f1247aea-2067-44e6-a496-8ea1a8789da9" name="Grapple" />
@@ -20,10 +20,10 @@
 		<marker id="203022f6-4c33-4ba8-addf-a7ec46760fdc" name="Divine Challenge" />
 		<marker id="8c8dbf31-6ba3-4d14-ab1f-3771960671a5" name="Hate" />
 		<marker id="50861f40-93b8-4dc6-a6ba-108cc584de8e" name="Love" />
-		<marker id="332e2df0-3101-462d-a2b4-b489170f4212" name="FermataAA" />
-		<marker id="00113acf-e34c-4150-992f-fdcdca2978b2" name="FermataAB" />
-		<marker id="de825d87-c78f-4c35-aba4-e2abce2ef000" name="FermataBA" />
-		<marker id="e724865e-9e9a-486d-a230-1b7d94de2d6c" name="FermataBB" />
+		<marker id="332e2df0-3101-462d-a2b4-b489170f4212" name="Fermata (Blue) 1" />
+		<marker id="00113acf-e34c-4150-992f-fdcdca2978b2" name="Fermata (Blue) 2" />
+		<marker id="de825d87-c78f-4c35-aba4-e2abce2ef000" name="Fermata (Green) 1" />
+		<marker id="e724865e-9e9a-486d-a230-1b7d94de2d6c" name="Fermata (Green) 2" />
 		<marker id="c89baa9e-21c8-4f8c-8635-b258d5d80172" name="Suffocation" />
 	</markers>
 
