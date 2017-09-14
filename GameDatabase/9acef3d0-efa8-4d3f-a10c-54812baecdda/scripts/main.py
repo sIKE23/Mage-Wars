@@ -350,3 +350,14 @@ def debugMsg(string):
 			whisper("Debug Msg: {}".format(string))
 			gameLog.append(string + "\n")
 			setGlobalVariable('GameLog',str(gameLog))
+			
+def getCardLevel(card):
+		mute()
+		if not "+" or not "/" in card.Level:
+				cardLevel = int(card.Level)
+		elif "+" in card.Level:
+				cardLevel = eval(card.Level.split)
+		elif "/" in card.Level:
+			level = card.Level.split("/")
+			cardLevel = int(level[0])
+		return cardLevel

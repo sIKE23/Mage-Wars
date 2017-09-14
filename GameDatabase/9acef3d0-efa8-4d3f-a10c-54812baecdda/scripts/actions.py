@@ -347,6 +347,18 @@ def toggleQuick(card, x=0, y=0):
 		card.markers[Quick] = 1
 		card.markers[QuickBack] = 0
 		if mageDict['MageRevealed'] == 'True': notify("{} readies Quickcast Marker".format(card.Name))
+			
+def toggleFermata(card, x=0, y=0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	if card.markers[FermataBlue1] > 0:
+		card.markers[FermataBlue1] = 0
+		card.markers[FermataBlue2] = 1
+	elif card.markers[FermataGreen1] > 0:
+		card.markers[FermataGreen1] = 0
+		card.markers[FermataGreen2] = 1	
+	if mageDict['MageRevealed'] == 'True': notify("{} has decided to extend the song for a second round!".format(card.Name))
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
@@ -446,8 +458,10 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[EternalServant] = 1
 			if "Warlock" == card.Name:
 					card.markers[BloodReaper] = 1
-			if "Siren" == card.Name:
+		if "Siren Stats" == card.Name:
 					card.markers[SirensCall] = 1
+					card.markers[FermataBlue1] = 1
+					card.markers[FermataGreen1] = 1
 		if "Johktari Beastmaster Stats" == card.Name:
 					card.markers[WoundedPrey] = 1
 		if "Anvil Throne Warlord Stats" == card.Name:

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda" sleeveid="0">
+  <section name="Mage" shared="False">
+    <card qty="1" id="97d362aa-8ea9-4000-a711-45d716b55a47">Siren</card>
+    <card qty="1" id="cd4d2d6e-f65e-4c26-9528-8effec8e4f14">Siren Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="4" id="902698fd-2ca5-4bca-bc08-3d94686cbf19">Swell</card>
+    <card qty="2" id="d5d3c955-2e93-4c4d-8173-89c1701675d3">Tsunami</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="2" id="986eea59-34dc-4150-8c63-9c859783929a">Bed of Urchins</card>
+    <card qty="2" id="98f6f10c-267d-451d-bb11-7d149c8d0f9c">Coral Barrier</card>
+    <card qty="4" id="5ddf5771-870a-435d-a169-19604b8f5706">Shallow Sea</card>
+    <card qty="1" id="2d064201-ca75-4f33-b015-c7bfe44eda4b">Swamp</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="d6585389-66a4-4d31-93a9-f55cbc411a56">Blightheart</card>
+    <card qty="1" id="c53cc69d-d104-435b-bd30-873269b0d237">Deptonne Berserker</card>
+    <card qty="2" id="2586d903-5bae-4df4-b81a-d884eb82ccd3">Deptonne Bloodshaman</card>
+    <card qty="1" id="d7ad8972-ee17-4588-8978-f8c7130e1cc4">Gerard Matranga</card>
+    <card qty="1" id="db090651-c57b-4b03-973d-2e1fffa6f1b0">Kraken</card>
+    <card qty="2" id="cb6cda55-d8a5-4a46-bb83-c91aff177023">Merren Harpooner</card>
+    <card qty="1" id="4c6d7c69-13c4-4dfe-9452-0d75ab2347f4">Naiya</card>
+    <card qty="1" id="c1ef7821-662d-43c7-b0e5-e6a5a09bb1d9">Shoalsdeep Crocodile</card>
+    <card qty="4" id="d44afeb5-76ac-4d0d-863c-7281ba581475">Shoalsdeep Thrasher</card>
+    <card qty="1" id="c157cd2e-4e2d-411a-9a37-5e952256b1c9">Shoalsdeep Tidecaller</card>
+    <card qty="1" id="4b0e7bf5-e433-4f9d-b161-593b8aa07ddb">Turghut</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="d0ffcf7a-6a98-4028-80d1-5cd2ad708c2a">Ballad of Courage</card>
+    <card qty="2" id="81f50147-da6b-4ad3-8e41-7ea49d6d7d4f">Chant of Rage</card>
+    <card qty="1" id="80dca5bb-9162-4876-833b-a80687e0589b">Drown</card>
+    <card qty="2" id="40a892b7-ef42-4242-8e2f-68dfaa75b98b">Healing Madrigal</card>
+    <card qty="2" id="12dda20e-f593-48d0-b31e-eef6ff240faf">Hydrothermal Vent</card>
+    <card qty="2" id="dd5b9000-b173-44bb-bce8-8b81ae35d09b">Lullaby</card>
+    <card qty="1" id="e5ddd1db-e578-4647-b3fa-c75d55f1171c">Song of Love</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="6dc4c536-39c3-4f0d-83f8-1a4cc5874e9b">Echo of the Depths</card>
+    <card qty="2" id="6241c1f5-66ff-44ec-88d1-24b0f7660e0e">Leviathan Scale Armor</card>
+    <card qty="1" id="a79b93ae-48d1-4836-b1ce-08124bdb3bf1">Ring of the Ocean's Depths</card>
+    <card qty="1" id="44e16242-5bbf-479a-b92a-aba214250795">Ring of Tides</card>
+    <card qty="2" id="e13ebde8-a2fa-49a0-b69a-ca844a41f015">Shoalsdeep Trident</card>
+    <card qty="1" id="c6dbbc2d-f0d7-4d82-b387-726c1b060ae3">Voice of the Sea</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="9fe70da8-45c7-4319-8e3e-085e8872186a">Dispel</card>
+    <card qty="2" id="cb4e9753-09d9-4fe2-8ee8-9a69590934be">Dissolve</card>
+    <card qty="3" id="da622c97-c498-450b-94bd-a8546d4bdc0f">Lesser Teleport</card>
+    <card qty="2" id="efe9ca2d-9894-4e13-b733-3088963670be">Mending Wave</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
