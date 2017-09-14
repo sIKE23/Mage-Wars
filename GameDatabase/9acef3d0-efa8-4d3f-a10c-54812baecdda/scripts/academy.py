@@ -10,9 +10,9 @@ def tapCard(card, x=0, y=0):
 	if card.controller == me and card.orientation == Rot0:
 			card.orientation = Rot90
 			if card.isFaceUp:
-				notify("{} Taps {}".format(me, card.Name))
+				notify("{} Activates {}".format(me, card.Name))
 			else:
-				notify("{} Taps a card".format(me))
+				notify("{} Activates a card".format(me))
 
 def resetCards():
 	mute()

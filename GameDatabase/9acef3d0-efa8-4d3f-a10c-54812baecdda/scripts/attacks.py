@@ -20,7 +20,6 @@ additiveTraits = ["Melee","Ranged",
 				  "Armor","Life","Innate Life","Channeling","Defense",
 				  "Tough",
 				  "Charge",
-				  "Ethereal"
 				  "Bloodthirsty",
 				  "Piercing",
 				  "Mana Drain",
@@ -301,7 +300,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
 		#Wildfire Imp Melee buff for attacking a Burning Object
 		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
-		if "Wall of Fire" or "Fire Elemental" in defender.name and attack.get('Type') == 'Hydro': attack['Traits']['Ethereal'] = True
+		#if "Wall of Fire" or "Fire Elemental" in defender.name and attack.get('Type') == 'Hydro': attack['Traits']['Ethereal'] = True
 		#Knight of the Red Helm attacking the Strongest (currently a token)
 		if defender.markers[Strongest] and attacker.Name == "Knight of the Red Helm": localADict['Melee'] = localADict.get('Melee',0) + 2
 		#Drokkar attacking Prey, currently works on anything with a grapple marker, not his specific prey
@@ -313,7 +312,9 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		#Bloodfire Helmet Demon buff
 		if attacker.Subtype == "Demon" and [1 for c in table if c.Name=="Bloodfire Helmet" and c.isFaceUp and c.controller == attacker.controller] and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 1
 		#Wounded prey
-		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and (attacker.controller != defender.controller or (attacker.controller == defender.controller and card.special == "Scenario")) and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and defender.Subtype != 'Mage' and (attacker.controller != defender.controller or (attacker.controller == defender.controller and card.special == "Scenario")) and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
+		#()()()()This has an issue where the JBM's own creature attacks the JBM with the marker on her. It's a super corner case, but will need fixed sometime
+		
 		#if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
 		attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
 		if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
@@ -873,6 +874,10 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 										rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 										interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
 										return
+						notify("{} is so dazed that it completely misses!".format(attacker))
+						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+						interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
+						return
 				else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker))
 		interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
@@ -1198,13 +1203,22 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
 		#Bloodreaper health drain
 		if attacker.markers[BloodReaper] and not timesHasOccured("Blood Reaper",attacker.controller) and defender.Type == 'Creature' and dTraitDict.get("Living") and 'Demon' in attacker.Subtype and damage:
-				mage = Card(aTraitDict.get('MageID'))
+				mage = Card(aTraitDict.get('OwnerID'))
 				healing = min(2,mage.controller.damage)
 				if healing and not computeTraits(mage).get("Finite Life"):
 						rememberPlayerEvent("Blood Reaper",attacker.controller)
 						notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)".format(mage,str(healing)))
 						remoteCall(mage.controller, "remotePlayerHeal", [healing])
 
+		#Demonic Link health drain
+		if [1 for c in getAttachments(attacker) if c.Name=="Demonic Link" and c.controller==attacker.controller] and not timesHasOccured("Demonic Link",attacker) and defender.Type == 'Creature' and dTraitDict.get("Living") and damage:
+				mage = Card(aTraitDict.get('OwnerID'))
+				healing = min(1,mage.controller.damage)
+				if healing and not computeTraits(mage).get("Finite Life"):
+						rememberPlayerEvent("Demonic Link", attacker.controller)
+						notify("{}'s health is restored by the Demonic Link! (-{} Damage)".format(mage,str(healing)))
+						remoteCall(mage.controller, "remotePlayerHeal", [healing])
+						
 		#Malakai's Fire
 		if (attacker.Name=="Priest" and attack.get("Type")=="Light" and damage and "Conjuration" not in defender.Type and not timesHasOccured("Malakai's Fire",attacker.controller) and "Flame" not in dTraitDict.get("Immunity",[])):
 				remoteCall(attacker.controller,"malakaisFirePrompt",[defender])
@@ -1340,6 +1354,8 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 		attacker = Card(aTraitDict['OwnerID'])
 		#Giant Wolf Spider's attack
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and (dTraitDict.get("Restrained") or dTraitDict.get("Incapacitated")): modRoll += 4
+		#Tidecaller's attack
+		if attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id : modRoll += 4
 		if attacker.Name == "Temple of Light":
 				eventList = getEventList("Round")
 				for e in reversed(eventList):
@@ -1399,6 +1415,7 @@ def computeTraits(card):
 		controller = card.controller
 		subtype = card.subtype
 		cardType = card.type
+		school = card.school
 		rawTraitsList = ({'Creature' : ['Living','Corporeal'],
 						  'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
 						  'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
@@ -1410,6 +1427,7 @@ def computeTraits(card):
 		if 'Living' in listedTraits and 'Nonliving' in rawTraitsList: remove('Nonliving')
 		elif 'Nonliving' in listedTraits and 'Living' in rawTraitsList: remove('Living')
 		if 'Incorporeal' in listedTraits and 'Corporeal' in rawTraitsList: remove('Corporeal')
+		if (name == 'Shoalsdeep Tidecaller' and int(getGlobalVariable("PlayerWithIni")) == me._id): append('Melee +2')
 		extend(listedTraits)
 		adraAbility = True
 		adraEnemy = bool([c for c in table if c.name=="Adramelech Warlock" and c.controller != controller])
@@ -1473,6 +1491,7 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												cController == controller and
 												subtype != 'Mage' and
+												'Holy' in school and
 												'Living' in rawTraitsList): append('Regenerate 1')
 										elif (cName == 'Mohktari, Great Tree of Life' and
 												cController == controller and
@@ -1488,6 +1507,9 @@ def computeTraits(card):
 										elif (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" in subtype): append('Melee +1')
+										elif (cName == 'Shallow Sea' and
+												cardType == 'Creature' and
+												"Aquatic" not in subtype): append('Melee -1')
 										elif (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
 										elif (cName == 'Swamp' and cardType == 'Creature' and
@@ -1566,6 +1588,7 @@ def computeTraits(card):
 										if cat: append('Elusive')
 						#Global effects
 						#Conjurations
+						elif (cName == 'Wreck of the Viridian Lace' and 'Pirate' in subtype and int(getGlobalVariable("PlayerWithIni")) == me._id): extend(['Melee +1', 'Ranged +1'])
 						elif (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
 						elif (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
 						elif (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
@@ -1584,7 +1607,6 @@ def computeTraits(card):
 								extend(['Fast','Bloodthirsty +1'])
 
 		if markers[Melee]: append('Melee +{}'.format(str(markers[Melee])))
-		if markers[Retribution]: append('Melee +{}'.format(str(markers[Retribution])))
 		if markers[Ranged]: append('Ranged +{}'.format(str(markers[Ranged])))
 		if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))
 		if markers[Growth]: extend(['Life +{}'.format(str(3*markers[Growth])),'Melee +{}'.format(str(markers[Growth]))])
@@ -1608,6 +1630,8 @@ def computeTraits(card):
 		if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
 		if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
+		if markers[SirensCall] and 'Aquatic' in subtype and cController == controller and 'Mage' not in subtype: extend(['Melee +2'])
+
 
 				#Harshforge monolith
 
@@ -1784,6 +1808,7 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
 		attacker = Card(aTraitDict['OwnerID'])
 		#Giant Wolf Spider's attack
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): d12Bonus += 4
+		if attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id: d12Bonus += 4
 		if attacker.Name == "Temple of Light":
 				eventList = getEventList("Round")
 				for e in reversed(eventList):

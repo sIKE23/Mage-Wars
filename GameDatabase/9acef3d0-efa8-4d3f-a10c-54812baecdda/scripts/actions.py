@@ -174,6 +174,7 @@ def addDamage(card, x = 0,y = 0):
 			me.Damage += 1
 	else:
 			card.markers[Damage] += 1
+			notify("{} adds {} damage to {}".format(me, '1', card.Name))
 
 def addDamageAmount(card,amount = 1):
 	mute()
@@ -449,8 +450,6 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[DeflectR] = 1
 			if "Beastmaster" == card.Name:
 					card.markers[Pet] = 1
-			if "Johktari Beastmaster" == card.Name:
-					card.markers[WoundedPrey] = 1
 			if "Priest" == card.Name:
 					card.markers[HolyAvenger] = 1
 			if "Druid" == card.Name:
@@ -463,12 +462,16 @@ def flipcard(card, x = 0, y = 0):
 					card.markers[SirensCall] = 1
 					card.markers[FermataBlue1] = 1
 					card.markers[FermataGreen1] = 1
+		if "Johktari Beastmaster Stats" == card.Name:
+					card.markers[WoundedPrey] = 1
 		if "Anvil Throne Warlord Stats" == card.Name:
 					card.markers[RuneofFortification] = 1
 					card.markers[RuneofPower] = 1
 					card.markers[RuneofPrecision] = 1
 					card.markers[RuneofReforging] = 1
 					card.markers[RuneofShielding] = 1
+		if "Paladin Stats" == card.Name:
+					card.markers[DivineChallenge] = 1
 		if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
 			notify("{} increases the Channeling stat by 1 as a result of {} being revealed".format(me, card))
 			me.Channeling += 1
@@ -487,6 +490,8 @@ def flipcard(card, x = 0, y = 0):
 				card.markers[TauntS] = 1
 		if "Ichthellid" == card.Name:
 				card.markers[EggToken] = 1
+		if "Afflicted Demon" == card.Name:
+				card.markers[Weak] = 2
 		if "Talos" == card.Name:
 				toggleAction(card)
 		if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
@@ -590,7 +595,7 @@ def discard(card, x=0, y=0):
 		return
 	card.isFaceUp = True
 	detach(card)
-	card.moveTo(me.piles['Discard'])
+	card.moveTo(me.Discard)
 	notify("{} discards {}".format(me, card))
 
 def obliterate(card, x=0, y=0):
