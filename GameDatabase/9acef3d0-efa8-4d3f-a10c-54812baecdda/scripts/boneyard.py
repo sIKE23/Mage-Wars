@@ -151,7 +151,7 @@ def resolveDissipate():
 												notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
 						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
 							notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
-							card.moveTo(me.piles['Discard'])
+							card.moveTo(me.piles['Discard Pile'])
 							if card.markers[FermataBlue2]:
 								Card(mageStatsID).markers[FermataBlue1] = 1
 							elif card.markers[FermataGreen2]:
