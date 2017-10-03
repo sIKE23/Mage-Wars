@@ -72,22 +72,6 @@ def nextPhaseArena():
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
-#def resetCardsWith():
-#	global cardsWithBurn
-#	cardsWithBurn = []
-
-
-#def getCardsWith():
-#	mute()
-#	for card in table:
-#		if card.markers[Burn]:
-#			cardsWithBurn.append(card)
-	#cardsWith = [[c.markers[Burn]] for c in table]
-		#if c.markers[Rot] and c.controller == me:
-			#cardsWithRot += 1
-		#if c.markers[Bleed] and c.controller == me:
-			#cardsWithBleed += 1
-
 	
 def resetDiscounts():
 	#reset discounts used
