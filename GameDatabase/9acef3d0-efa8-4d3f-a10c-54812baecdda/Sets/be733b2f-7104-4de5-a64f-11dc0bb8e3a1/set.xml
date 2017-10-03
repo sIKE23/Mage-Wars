@@ -37,6 +37,15 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
+				<alternate name="Paladin" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>
 		</card>
 		<card id="7dba45df-7c80-42a2-8cdc-2c02b170fd8c" name="Paladin Stats">
 			<property name="Nickname" value="Paladin Stats" />
@@ -65,6 +74,15 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
+				<alternate name="Siren" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>
 		</card>
 		<card id="cd4d2d6e-f65e-4c26-9528-8effec8e4f14" name="Siren Stats">
 			<property name="Nickname" value="Siren Stats" />

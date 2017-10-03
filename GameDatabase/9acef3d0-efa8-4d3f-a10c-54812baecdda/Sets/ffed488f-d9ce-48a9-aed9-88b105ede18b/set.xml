@@ -25,7 +25,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />	
-				<alternate name="Anvil Throne Warlord" type="B">
+				<alternate name="Anvil Throne Warlord" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -62,7 +62,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />	
-				<alternate name="Adramelech Warlock" type="B">
+				<alternate name="Adramelech Warlock" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />

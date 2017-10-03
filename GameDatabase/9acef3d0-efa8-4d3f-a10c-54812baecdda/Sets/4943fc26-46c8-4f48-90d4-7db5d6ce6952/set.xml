@@ -24,7 +24,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Johktari Beastmaster" type="B">
+				<alternate name="Johktari Beastmaster" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -61,7 +61,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Priest" type="B">
+				<alternate name="Priest" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -334,6 +334,7 @@
 			<property name="Traits" value="Spellbind, Familiar, Unique, Arcane Mage Only" />
 			<property name="Text" value="You may bind a non-Epic quick attack spell from your spellbook to Wizard&apos;s Tower. Wizard&apos;s Tower may cast that spell once per round, before or after any friendly Action Phase. Use a ready marker to keep track of this ability. During the Planning Phase you may change the bound spell.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MWSTX1CKJ02" />
+			<alternate name="Wizard&apos;s Tower" type="2" />
 		</card>
 
 

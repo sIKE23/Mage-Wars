@@ -364,7 +364,7 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Each time Chain Lightning damages a target, it may attack another target. That target must be in LoS of the last target, and may be up to 1 zone away from that target. Each successive attack rolls 1 fewer attack dice, and subtracts 1 more from the effect die roll. Chain Lightning can&apos;t attack the same target twice." />
 			<property name="CardID" value="MW1A02" />
-			<alternate name="Chain Lightning" type="B" />
+			<alternate name="Chain Lightning" type="2" />
 		</card>
 		<card id="96b996dd-50d6-4449-9ad5-3b7c52936738" name="Electrify">
 			<property name="Nickname" value="Electrify" />
