@@ -579,6 +579,7 @@ def mageSetup():
 
 def discard(card, x=0, y=0):
 	mute()
+	notify("Card Name: {}".format(card.name))
 	if card.controller != me:
 		whisper("{} does not control {} - discard cancelled".format(me, card))
 		return
@@ -595,7 +596,7 @@ def discard(card, x=0, y=0):
 		return
 	card.isFaceUp = True
 	detach(card)
-	card.moveTo(me.Discard)
+	card.moveTo(me.piles['Discard Pile'])
 	notify("{} discards {}".format(me, card))
 
 def obliterate(card, x=0, y=0):
