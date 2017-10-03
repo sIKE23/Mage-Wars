@@ -13,6 +13,8 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 
 
 ##################################Upkeep######################################\
+
+
 def resetMarkers():
 	mute()
 	for c in table:
@@ -36,7 +38,7 @@ def resetMarkers():
 								c.markers[key] = 0
 								c.markers[mDict[key]] = 1
 			if "Packleader's Cowl" == c.Name: c.markers[Guard] = 1
-			if "Lightning Raptor" == c.Name: c.markers[Charge] = 1
+			if "Lightning Raptor" == c.Name and c.markers[Charge]<5: c.markers[Charge] += 1
 			#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
 			if "Orb Guardian" in c.name:
 					for o in table:
@@ -47,144 +49,129 @@ def resetMarkers():
 	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
-def resolveBurns():
+def resolveBurns(card):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
+	notify("Resolving Burns for {}...".format(card))	#found at least one
+	numMarkers = card.markers[Burn]
+	Damage = 0
+	burnsRemoved = 0
+	zone = getZoneContaining(card)
+	isInZone = getCardsInZone(zone)
+	for i in range(0, numMarkers):
+		roll = rnd(0, 2)
+		if roll == 0: 
+			card.markers[Burn] -= 1
+			burnsRemoved += 1
+		Damage += roll
+	#apply damage
+	addDamageAmount(card,Damage)
+	if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
+	if burnsRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
+	notify("Finished auto-resolving Burns for {}.".format(card))
 
-	if len(cardsWithBurn) > 0:
-		notify("Resolving Burns for {}...".format(me))	#found at least one
-		for card in cardsWithBurn:
-			numMarkers = card.markers[Burn]
-			Damage = 0
-			burnsRemoved = 0
-			#SolInZone = "False"
-			zone = getZoneContaining(card)
-			isInZone = getCardsInZone(zone)
-			#for i in isInZone:
-		 		#if i.name == "Sol, Blazing Angel":
-		 			#SolInZone = "True"
-			for i in range(0, numMarkers):
-				roll = rnd(0, 2)
-				if roll == 0: #and not SolInZone == "True":
-					card.markers[Burn] -= 1
-					burnsRemoved += 1
-				Damage += roll
-			#apply damage
-			addDamageAmount(card,Damage)
-			if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
-			if burnsRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
-		notify("Finished auto-resolving Burns for {}.".format(me))
-
-def resolveRot():
+def resolveRot(card):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	cardsWithRot = [c for c in table if c.markers[Rot] and c.controller == me]
-	if len(cardsWithRot) > 0:
-		notify("Resolving Rot for {}...".format(me))	#found at least one
-		for card in cardsWithRot:
-			Damage = (card.markers[Rot])
-			#apply damage
-			addDamageAmount(card,Damage)
-			notify("{} damage added to {}.".format(Damage, card.Name))
-		notify("Finished auto-resolving Rot for {}.".format(me))
+	notify("Resolving Rot for {}...".format(card))	#found at least one
+	Damage = (card.markers[Rot])
+	#apply damage
+	addDamageAmount(card,Damage)
+	notify("{} damage added to {}.".format(Damage, card.Name))
+	notify("Finished auto-resolving Rot for {}.".format(card))
 
-def resolveBleed():
+def resolveBleed(card):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	cardsWithBleed = [c for c in table if c.markers[Bleed] and c.controller == me]
-	if len(cardsWithBleed) > 0:
-		notify("Resolving Bleed for {}...".format(me))	#found at least one
-		for card in cardsWithBleed:
-			Damage = (card.markers[Bleed])
-			#apply damage
-			addDamageAmount(card,Damage)
-			notify("{} damage added to {}.".format(Damage, card.Name))
-		notify("Finished auto-resolving Bleed for {}.".format(me))
+	notify("Resolving Bleed for {}...".format(card))	#found at least one
+	Damage = (card.markers[Bleed])
+	#apply damage
+	addDamageAmount(card,Damage)
+	notify("{} damage added to {}.".format(Damage, card.Name))
+	notify("Finished auto-resolving Bleed for {}.".format(card))
 
-def resolveDissipate():
+def resolveDissipate(card):
 	mute()
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
 	countOutposts = 0
-	for card in table: #ugh - this is done much better in the next release
-		if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
-				countOutposts += 1
-	for card in table:
-		traits = computeTraits(card)
-		mageDict = eval(me.getGlobalVariable("MageDict"))
-		mageStatsID = int(mageDict["MageStatsID"])
-		mageID = int(mageDict["MageID"])
-		if "Dissipate" in traits and card.controller == me and card.isFaceUp and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
-				notify("Resolving Dissipate for {}...".format(me))	#found at least one
-				card.markers[DissipateToken] -= 1 # Remove Token
-				if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
-						me.Mana += 1
-						notify("{} gains 1 Mana by removing a Dissipate Token from a Wispwillow Amulet.".format(me.name))
-				else:
-						notify("Removing 1 Dissipate Token from {}, there are {} Dissipate tokens left.".format(card.Name,card.markers[DissipateToken]))
-				if not card.markers[DissipateToken] and card.controller == me:
-						cardLevel = getCardLevel(card)
-						#Siren Songs with Fermata Markers, process these first so we can return the Fermata marker to the stats card to use on another song during this Upkeep
-						if "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue1] or card.markers[FermataGreen1]):
-										if askChoice("Do you want to extend the Song {} for a second more Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
-												# has chosen to extend the Song a Second round but can't pay
-												if me.Mana < cardLevel:
-														notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
-														card.moveTo(me.piles['Discard'])
-														return
-												# has chosen to extend the Song a Second round and now pays
-												me.Mana -= cardLevel
-												if card.markers[FermataBlue1] > 0:
-														card.markers[FermataBlue1] = 0
-														card.markers[FermataBlue2] = 1
-												elif card.markers[FermataGreen1] > 0:
-														card.markers[FermataGreen1] = 0
-														card.markers[FermataGreen2] = 1
-												notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
-						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
-							notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
-							card.moveTo(me.piles['Discard Pile'])
-							if card.markers[FermataBlue2]:
-								Card(mageStatsID).markers[FermataBlue1] = 1
-							elif card.markers[FermataGreen2]:
-									Card(mageStatsID).markers[FermataGreen1] = 1
-									#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
-						#Siren Songs without Fermata Markers
-						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (Card(mageStatsID).markers[FermataBlue1] == 1 or Card(mageStatsID).markers[FermataGreen1] == 1):
-								if askChoice("Do you want to extend the Song {} for one Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
-										if me.Mana < cardLevel:
-												notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
-												card.moveTo(me.piles['Discard'])
-												return
-										me.Mana -= cardLevel
-										if Card(mageStatsID).markers[FermataBlue1] == 1:
-												card.markers[FermataBlue1] = 1
-												Card(mageStatsID).markers[FermataBlue1] = 0
-												notify("{} has decided to extend the Song {}, and moves the Blue Fermata Marker to this Song.".format(me,card.Name))
-										elif Card(mageStatsID).markers[FermataGreen1] == 1:
-												card.markers[FermataGreen1] = 1
-												Card(mageStatsID).markers[FermataGreen1] = 0
-												notify("{} has decided to extend the Song {}.".format(me,card.Name))
-								else:
-										card.moveTo(me.piles['Discard'])
-										notify("{} discards {} has decided not to extend the Song and it has expired. The Fermata Marker has been placed back on the {} Stats card.".format(me, card.Name,me))
-						else:
-							notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
-							card.moveTo(me.piles['Discard'])
-		#notify("Finished auto-resolving Dissipate for {}.".format(me))
-		if card.Name == "Altar of Domination" and card.controller == me and card.isFaceUp:
-			if countOutposts >= 3:
-					card.markers[DominationToken] += 1
-					notify("Placing a Domination Token on to the {}...".format(card))
-
+	#for card in table: #ugh - this is done much better in the next release
+	#	if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
+	#			countOutposts += 1
+	#for card in table:
+	traits = computeTraits(card)
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageID = int(mageDict["MageID"])
+	if card.controller == me and card.isFaceUp and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
+			notify("Resolving Dissipate for {}...".format(card))	#found at least one
+			card.markers[DissipateToken] -= 1 # Remove Token
+			if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
+					me.Mana += 1
+					notify("{} gains 1 Mana by removing a Dissipate Token from a Wispwillow Amulet.".format(me.name))
+			else:
+					notify("Removing 1 Dissipate Token from {}, there are {} Dissipate tokens left.".format(card.Name,card.markers[DissipateToken]))
+			if not card.markers[DissipateToken] and card.controller == me:
+					cardLevel = getCardLevel(card)
+					#Siren Songs with Fermata Markers, process these first so we can return the Fermata marker to the stats card to use on another song during this Upkeep
+					if "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue1] or card.markers[FermataGreen1]):
+									if askChoice("Do you want to extend the Song {} for a second more Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
+											# has chosen to extend the Song a Second round but can't pay
+											if me.Mana < cardLevel:
+													notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
+													card.moveTo(me.piles['Discard'])
+													return
+											# has chosen to extend the Song a Second round and now pays
+											me.Mana -= cardLevel
+											if card.markers[FermataBlue1] > 0:
+													card.markers[FermataBlue1] = 0
+													card.markers[FermataBlue2] = 1
+											elif card.markers[FermataGreen1] > 0:
+													card.markers[FermataGreen1] = 0
+													card.markers[FermataGreen2] = 1
+											notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
+					elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
+						notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
+						card.moveTo(me.piles['Discard Pile'])
+						if card.markers[FermataBlue2]:
+							Card(mageStatsID).markers[FermataBlue1] = 1
+						elif card.markers[FermataGreen2]:
+								Card(mageStatsID).markers[FermataGreen1] = 1
+								#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
+					#Siren Songs without Fermata Markers
+					elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (Card(mageStatsID).markers[FermataBlue1] == 1 or Card(mageStatsID).markers[FermataGreen1] == 1):
+							if askChoice("Do you want to extend the Song {} for one Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
+									if me.Mana < cardLevel:
+											notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
+											card.moveTo(me.piles['Discard'])
+											return
+									me.Mana -= cardLevel
+									if Card(mageStatsID).markers[FermataBlue1] == 1:
+											card.markers[FermataBlue1] = 1
+											Card(mageStatsID).markers[FermataBlue1] = 0
+											notify("{} has decided to extend the Song {}, and moves the Blue Fermata Marker to this Song.".format(me,card.Name))
+									elif Card(mageStatsID).markers[FermataGreen1] == 1:
+											card.markers[FermataGreen1] = 1
+											Card(mageStatsID).markers[FermataGreen1] = 0
+											notify("{} has decided to extend the Song {}.".format(me,card.Name))
+							else:
+									card.moveTo(me.piles['Discard'])
+									notify("{} discards {} has decided not to extend the Song and it has expired. The Fermata Marker has been placed back on the {} Stats card.".format(me, card.Name,me))
+					else:
+						notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
+						card.moveTo(me.piles['Discard Pile'])
+	#notify("Finished auto-resolving Dissipate for {}.".format(me))
+	if card.Name == "Altar of Domination" and card.controller == me and card.isFaceUp:
+		if countOutposts >= 3:
+				card.markers[DominationToken] += 1
+				notify("Placing a Domination Token on to the {}...".format(card))
 	#use the logic for Dissipate for Disable Markers
 	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
 	if len(cardsWithDisable) > 0:
@@ -196,7 +183,7 @@ def resolveDissipate():
 
 def resolveLoadTokens():
 	mute()
-	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer", "Dwarf Kanone"] and card.controller == me and card.isFaceUp]
+	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
 	for card in loadTokenCards:
 		notify("Resolving Load Tokens for {}...".format(me))	#found at least one
 		if card.markers[LoadToken] == 0:
