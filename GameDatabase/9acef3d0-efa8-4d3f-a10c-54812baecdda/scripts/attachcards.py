@@ -255,6 +255,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
 			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or
+			(cTargetBar == 'Creature or Conjuration' and (tType == 'Creature' or tType == 'Conjuration')) or
 			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
 			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and tController == cController) or
@@ -282,6 +283,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Non-Mage Living Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living') and not traits.get('Epic')) or
 			(cTargetBar == 'Non-Mage Object' and 'Mage' not in tSubtype) or
+			(cTargetBar == 'Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype) or
 			(cTargetBar == 'Zone or Object') or
 			(cTargetBar == 'Object or Zone')): return True
 	elif ((cType == 'Equipment' and tSubtype == 'Mage') or

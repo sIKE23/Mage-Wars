@@ -122,7 +122,7 @@ def resolveDissipate():
 		mageDict = eval(me.getGlobalVariable("MageDict"))
 		mageStatsID = int(mageDict["MageStatsID"])
 		mageID = int(mageDict["MageID"])
-		if "Dissipate" in traits and card.controller == me and card.isFaceUp and (card.markers[DissipateToken] or cardsWithFermata):
+		if "Dissipate" in traits and card.controller == me and card.isFaceUp and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
 				notify("Resolving Dissipate for {}...".format(me))	#found at least one
 				card.markers[DissipateToken] -= 1 # Remove Token
 				if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
@@ -149,14 +149,14 @@ def resolveDissipate():
 														card.markers[FermataGreen1] = 0
 														card.markers[FermataGreen2] = 1
 												notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
-								else: # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
-										notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
-										card.moveTo(me.piles['Discard'])
-										if card.markers[FermataBlue2]:
-												Card(mageStatsID).markers[FermataBlue1] = 1
-										elif card.markers[FermataGreen2]:
-												Card(mageStatsID).markers[FermataGreen1] = 1
-										#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
+						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
+							notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
+							card.moveTo(me.piles['Discard'])
+							if card.markers[FermataBlue2]:
+								Card(mageStatsID).markers[FermataBlue1] = 1
+							elif card.markers[FermataGreen2]:
+									Card(mageStatsID).markers[FermataGreen1] = 1
+									#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
 						#Siren Songs without Fermata Markers
 						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (Card(mageStatsID).markers[FermataBlue1] == 1 or Card(mageStatsID).markers[FermataGreen1] == 1):
 								if askChoice("Do you want to extend the Song {} for one Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:

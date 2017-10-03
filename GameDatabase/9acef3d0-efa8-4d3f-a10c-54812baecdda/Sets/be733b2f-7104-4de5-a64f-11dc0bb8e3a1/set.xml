@@ -78,7 +78,7 @@
 			<property name="StatLife" value="30" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Holy=1, War=1, Dark=3" />
+			<property name="MageSchoolCost" value="Water=1" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Siren&apos;s Call: As a Psychic Song quick spell the Siren may pay 1 mana to place her Siren&apos;s Call marker on target non-Mage creature within 2 zones. During its action phase that creature MUST move at least 1 zone closer to the Siren, if possible, and may not attack her. Return the marker at the end their Action Phase. Friendly aquatic creatures also gain Melee +2.&#xD;&#xA;Fermata: The Siren may extend an expiring song she controls by paying mana equal to its Level and placing a Fermata marker on it. The Siren may only have two songs affected by Fermata markers at a time, and each song may only be extended a maximum of up to 2 rounds.&#xD;&#xA;Amphibious: The Siren gains Regenerate 1 while in zones with aquatic terrain attached." />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />

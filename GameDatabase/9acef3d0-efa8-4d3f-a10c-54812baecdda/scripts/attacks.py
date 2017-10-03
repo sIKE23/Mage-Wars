@@ -1561,7 +1561,7 @@ def computeTraits(card):
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
 								if ('Siren' in name and cType in ['Conjuration-Terrain'] and cSubtype == 'Water'): append('Regenerate 1')
 								if (name == 'Naiya' and cType in ["Conjuration-Terrain"] and cSubtype == 'Water'): extend(['Armor +1','Channeling +1'])
-						if 'Mage' in subtype:
+						if 'Mage' in subtype and not 'Magestats' in cardType:
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
 										traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
@@ -1613,7 +1613,7 @@ def computeTraits(card):
 		if markers[Corrode]: append('Armor -{}'.format(str(markers[Corrode])))
 		if markers[Guard]:
 				extend(['Counterstrike','Non-Flying'])
-				remove('Flying')
+				if 'Flying' in listedTraits and 'Non-Flying' in rawTraitsList: remove('Flying')
 		if markers[Sleep] or markers[Stun] or markers[Slam]: append('Incapacitated')
 		if markers[Zombie]:
 				extend(['Psychic Immunity','Slow','Nonliving','Bloodthirsty +0'])
