@@ -101,11 +101,15 @@ def resolveDissipate(card):
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	countOutposts = 0
+		
+	# ***************** THIS NEEDS MOVED *******************
+	
+	#countOutposts = 0
 	#for card in table: #ugh - this is done much better in the next release
 	#	if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
 	#			countOutposts += 1
-	#for card in table:
+
+	
 	traits = computeTraits(card)
 	mageDict = eval(me.getGlobalVariable("MageDict"))
 	mageStatsID = int(mageDict["MageStatsID"])
@@ -139,12 +143,12 @@ def resolveDissipate(card):
 											notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
 					elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
 						notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
-						card.moveTo(me.piles['Discard Pile'])
 						if card.markers[FermataBlue2]:
 							Card(mageStatsID).markers[FermataBlue1] = 1
 						elif card.markers[FermataGreen2]:
-								Card(mageStatsID).markers[FermataGreen1] = 1
-								#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
+							Card(mageStatsID).markers[FermataGreen1] = 1
+						card.moveTo(me.piles['Discard Pile'])
+							#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
 					#Siren Songs without Fermata Markers
 					elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (Card(mageStatsID).markers[FermataBlue1] == 1 or Card(mageStatsID).markers[FermataGreen1] == 1):
 							if askChoice("Do you want to extend the Song {} for one Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
@@ -172,39 +176,44 @@ def resolveDissipate(card):
 		if countOutposts >= 3:
 				card.markers[DominationToken] += 1
 				notify("Placing a Domination Token on to the {}...".format(card))
+
+
+	# *********************** THIS NEEDS MOVED ***************************************
+
+	
 	#use the logic for Dissipate for Disable Markers
-	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
-	if len(cardsWithDisable) > 0:
-		notify("Resolving Disable Markers for {}...".format(me))	#found at least one
-		for card in cardsWithDisable:
-			notify("{} removes a Disable Marker from {}".format(me, c.name))	#found at least one
-			card.markers[Disable] -= 1 # Remove Marker
-			notify("Finished auto-resolving Disable Markers for {}.".format(me))
+	#cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
+	#if len(cardsWithDisable) > 0:
+	#	notify("Resolving Disable Markers for {}...".format(me))	#found at least one
+	#	for card in cardsWithDisable:
+	#		notify("{} removes a Disable Marker from {}".format(me, c.name))	#found at least one
+	#		card.markers[Disable] -= 1 # Remove Marker
+	#		notify("Finished auto-resolving Disable Markers for {}.".format(me))
 
-def resolveLoadTokens():
+def resolveLoadTokens(card):
 	mute()
-	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
-	for card in loadTokenCards:
-		notify("Resolving Load Tokens for {}...".format(me))	#found at least one
-		if card.markers[LoadToken] == 0:
-			notify("Placing the First Load Token on {}...".format(card.Name)) #found no load token on card
-			card.markers[LoadToken] = 1
-		elif card.markers[LoadToken] == 1:
-			notify("Placing the Second Load Token on {}...".format(card.Name)) #found one load token on card
-			card.markers[LoadToken] = 2
-		notify("Finished adding Load Tokens for {}.".format(me))
+	#loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
+	#for card in loadTokenCards:
+	notify("Resolving Load Tokens for {}...".format(card))	#found at least one
+	if card.markers[LoadToken] == 0:
+		notify("Placing the First Load Token on {}...".format(card)) #found no load token on card
+		card.markers[LoadToken] = 1
+	elif card.markers[LoadToken] == 1:
+		notify("Placing the Second Load Token on {}...".format(card)) #found one load token on card
+		card.markers[LoadToken] = 2
+	#notify("Finished adding Load Tokens for {}.".format(card))
 
-def resolveStormTokens():
+def resolveStormTokens(card):
 	mute()
-	stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
-	for card in stormTokenCards:
-		if card.markers[StormToken] ==4:
-			return
-		notify("Resolving Storm Tokens for {}...".format(me))	#found at least one
-		if card.markers[StormToken] == 0 or card.markers[StormToken] < 4:
-			notify("Placing a Storm Token on the {}...".format(card.Name)) #Card needs a load token
-			card.markers[StormToken] += 1
-		notify("Finished adding Storm Tokens for {}.".format(me))
+	#stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
+	#for card in stormTokenCards:
+	if card.markers[StormToken] ==4:
+		return
+	notify("Resolving Storm Tokens for {}...".format(card))	#found at least one
+	if card.markers[StormToken] == 0 or card.markers[StormToken] < 4:
+		notify("Placing a Storm Token on the {}...".format(card)) #Card needs a load token
+		card.markers[StormToken] += 1
+	#notify("Finished adding Storm Tokens for {}.".format(me))
 
 def resolveChanneling(p):
 	mute()

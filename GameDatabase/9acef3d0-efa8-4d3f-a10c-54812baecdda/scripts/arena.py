@@ -57,20 +57,38 @@ def nextPhaseArena():
 
 			#resolve other automated items
 			for p in players:
+				for card in table:
+					if card.markers[Burn] and card.controller == me: remoteCall(p, "resolveBurns", [card])
+					if card.markers[Rot] and card.controller == me: remoteCall(p, "resolveRot", [card])
+					if card.markers[Bleed] and card.controller == me: remoteCall(p, "resolveBleed", [card])
+					if (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]) and card.controller == me and not "Siren Stats" in card.Name: remoteCall(p, "resolveDissipate", [card])
+					if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
+					if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp: remoteCall(p, "resolveStormTokens", [card])
 				remoteCall(p, "resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [p])
 				remoteCall(p, "resolveRegeneration", [])
-				remoteCall(p, "resolveBurns", [])
-				remoteCall(p, "resolveRot", [])
-				remoteCall(p, "resolveBleed", [])
-				remoteCall(p, "resolveDissipate", [])
-				remoteCall(p, "resolveLoadTokens", [])
-				remoteCall(p, "resolveStormTokens", [])
 				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
+#def resetCardsWith():
+#	global cardsWithBurn
+#	cardsWithBurn = []
+
+
+#def getCardsWith():
+#	mute()
+#	for card in table:
+#		if card.markers[Burn]:
+#			cardsWithBurn.append(card)
+	#cardsWith = [[c.markers[Burn]] for c in table]
+		#if c.markers[Rot] and c.controller == me:
+			#cardsWithRot += 1
+		#if c.markers[Bleed] and c.controller == me:
+			#cardsWithBleed += 1
+
+	
 def resetDiscounts():
 	#reset discounts used
 	for tup in discountsUsed:
