@@ -728,7 +728,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Unique, Beastmaster Only" />
-			<property name="Text" value="This creature gains Melee +1. Whenever it is attacked and receives damage you must transfer 1 of that damage to your Mage instead. If this creature is destroyed you may pay 1 mana to move Joined Strength to a new target in your zone." />
+			<property name="Text" value="This creature gains Melee +1. Whenever it is attacked and receives damage you must transfer 1 of that damage to your Mage instead. If this creature is destroyed you may pay 1 mana to move Joined Strength to a new target in your zone.&#xD;&#xA;[Melee +1]" />
 			<property name="CardID" value="MWA01E11" />
 		</card>
 		<card id="7ccd0a36-8ff6-4ca0-8d6d-5b931a7730af"  name="Minor Essence Drain" >

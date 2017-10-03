@@ -1500,10 +1500,8 @@ def computeTraits(card):
 										elif (cName == 'Raincloud' and
 												('Conjuration' in cardType or cardType == 'Creature') and
 												'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
-										elif (cName == 'Hellscape' and
-												cardType == 'Creature' and
-												"Demon" in subtype and
-												'Living' in rawTraitsList): append('Regenerate 1')
+										#elif (cName == 'Shallow Sea' and
+												#"Siren" in name): append('Regenerate 1')
 										elif (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" in subtype): append('Melee +1')
@@ -1559,8 +1557,8 @@ def computeTraits(card):
 								if ('Mage' in cSubtype and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
-								if ('Siren' in name and cType in ['Conjuration-Terrain'] and cSubtype == 'Water'): append('Regenerate 1')
-								if (name == 'Naiya' and cType in ["Conjuration-Terrain"] and cSubtype == 'Water'): extend(['Armor +1','Channeling +1'])
+								if ('Siren' in name and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): append('Regenerate 1')
+								if (name == 'Naiya' and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): append('Regenerate 1'), extend('Channeling +1')
 						if 'Mage' in subtype and not 'Magestats' in cardType:
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
@@ -1597,7 +1595,9 @@ def computeTraits(card):
 						elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						elif (cName == 'Rolling Fog'): append('Obscured')
 						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
-						elif (cName == 'Gravikor' and cardType == 'Creature' and cardGetDistance(c,card)<=2): append('Non-Flying')
+						elif (cName == 'Gravikor' and card.isFaceUp and cardType == 'Creature' and 'Flying' in rawTraitsList and cardGetDistance(c,card)<=2): 
+							append('Non-Flying')
+							remove('Flying')
 						#>>Altar of Skulls<<
 						#Incantations
 						elif (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])

@@ -415,11 +415,15 @@ def resolveRegeneration():
 							else:
 									me.damage -= regenAmount
 									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
+					elif "Mage" in card.Subtype and card.controller == me and me.damage != 0:
+							notify("{} is at full health.".format(card.name))
 					elif card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
 							damage = card.markers[Damage]
 							if damage <= regenAmount and damage != 0:
 									card.markers[Damage] = 0
 									notify("{} regenerates and removes all damage.".format(card.name))
+							elif damage == 0:
+									notify("{} is at full health.".format(card.name))
 							else:
 									card.markers[Damage] -= regenAmount
 									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
@@ -758,7 +762,9 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 					 (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
 					 (cName == "Druid's Leaf Ring" and sType != "Enchantment" and ("Plant" in sSubtype)) or
 					 (cName == "Force Ring" and sType != "Enchantment" and ("Force" in sSubtype)) or
-					 (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)))):
+					 (cName == "Ring of the Ocean\'s Depths" and sType != "Enchantment" and ("Hydro" in sSubtype or "Aquatic" in sSubtype)) or
+					 (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)) or
+					 (cName == "Commander\'s Cape" and sType != "Enchantment" and ("Command" in sSubtype or ("Soldier" in sSubtype and "Creature" in sType))))):
 						return (1,cName)
 				#Discounts that apply no matter who casts the spell
 				if ((cName == "General's Signet Ring" and ("Soldier" in sSubtype)) or
@@ -794,7 +800,8 @@ def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY 
 							  (cName == "Ring of Curses" and ("Curse" in sSubtype)) or
 							  (cName == "Druid's Leaf Ring" and ("Plant" in sSubtype)) or
 							  (cName == "Force Ring" and ("Force" in sSubtype)) or
-							  (cName == "Ring of Command" and ("Command" in sSubtype))): return 1
+							  (cName == "Ring of Command" and ("Command" in sSubtype)) or
+							  (cName == "Commander\'s Cape" and ("Command" in sSubtype))): return 1
 		if timesUsed <2 and cName == "Death Ring" and ("Necro" in sSubtype or "Undead" in sSubtype): return 1
 		return 0
 		#Returns discount as integer (0, if no discount)
