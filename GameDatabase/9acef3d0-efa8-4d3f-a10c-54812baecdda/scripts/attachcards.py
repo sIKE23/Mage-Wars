@@ -166,16 +166,6 @@ def unbindAll(card):
 			remoteCall(c.controller,'moveCardToDefaultLocation',[c,True])
 		rnd(0,0)
 
-def dismountAll(card):
-	"""Like detachAll, but for mounteds"""
-	mute()
-	c = getMounted(card)
-	if c:
-		if c.controller == me:
-			dismount(c)
-		else:
-			remoteCall(c.controller,'dismount',[c])
-		rnd(0,0)
 
 def isAttached(card):
 	"""Determines whether <card> is attached to anything."""
@@ -380,8 +370,7 @@ def canBind(card,target):
 		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in cSubtype)
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
 		or (tName == 'Cassiel, Shield of Asyra' and ("Healing" in cSubtype or "Protection" in cSubtype))
-		or (tName == 'The Squire' and cType == 'Equipment')
-		or (tName ==  'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
+		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
 #Spawnpoints
 		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
 		or (tName == 'Battle Forge' and cType == 'Equipment')
@@ -402,65 +391,21 @@ def canBind(card,target):
 		return True
 	return False
 
-############################################################################
-##########################     Mounts     ##################################
-############################################################################
 
-def mount(card,target):
-	"""
-	Mounts <card> upon <target>
-	"""
-	mute()
-	dismount(card)
-	if card.controller == me:
-		b = getMounted(target)
-		if b: dismount(b)
-		setGlobalDictEntry("mountDict",card._id,target._id)
-		remoteCall(target.controller,'alignMounted',[target])
-		return card,target
-	return card,None
-
-def dismount(card):
-	"""
-	Removes <card> from its mount
-	"""
-	mute()
-	if card.controller == me:
-		target = getGlobalDictEntry('mountDict',card._id)
-		setGlobalDictEntry('mountDict',card._id,None)
-		return card,target
-	return card,None
-
-def getMounted(card):
-	"""Returns the card mounted upon <card>"""
-	mute()
-	mDict = eval(getGlobalVariable("mountDict"))
-	mounted = [Card(key) for key in mDict if mDict[key]==card._id]
-	if mounted and mounted[0] in table: return mounted[0]
-
-def getMount(card):
-	"""Returns <card>'s mount"""
-	mute()
-	result = getGlobalDictEntry('mountDict',card._id)
-	if result and card in table: return Card(result)
-
-def alignMounted(card):
-	"""
-	Aligns the card mounted upon input card.
-	Requires that input card belong to calling player
-	"""
-	mute()
-
-	#1: Retrieve bound card and end function if there are none.
-	mounted = getMounted(card)
-	if not mounted: return
-
-	#2: Align the cards
-	cardList = [card,mounted]
-	alignCards(cardList,card.width-117,0) #For now, we will simply put the cards side by side.
-
-def canMount(card,target):
-	return card.Name == "Paladin" and target.Name == "Pegasus"
+#def alignMounted(card):
+#	"""
+#	Aligns the card mounted upon input card.
+#	Requires that input card belong to calling player
+#	"""
+#	mute()
+#
+#	#1: Retrieve bound card and end function if there are none.
+#	mounted = getMounted(card)
+#	if not mounted: return
+#
+#	#2: Align the cards
+#	cardList = [card,mounted]
+#	alignCards(cardList,card.width-117,0) #For now, we will simply put the cards side by side.
 
 ############################################################################
 ##########################    Zones       ##################################
