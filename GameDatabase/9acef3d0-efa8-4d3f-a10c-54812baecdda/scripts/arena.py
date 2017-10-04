@@ -58,10 +58,11 @@ def nextPhaseArena():
 			#resolve other automated items
 			for p in players:
 				for card in table:
+					traits = computeTraits(card)
 					if card.markers[Burn] and card.controller == me: remoteCall(p, "resolveBurns", [card])
 					if card.markers[Rot] and card.controller == me: remoteCall(p, "resolveRot", [card])
 					if card.markers[Bleed] and card.controller == me: remoteCall(p, "resolveBleed", [card])
-					if (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]) and card.controller == me and not "Siren Stats" in card.Name: remoteCall(p, "resolveDissipate", [card])
+					if 'Dissipate' in traits and card.controller == me: remoteCall(p, "resolveDissipate", [traits, card])
 					if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
 					if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp: remoteCall(p, "resolveStormTokens", [card])
 				remoteCall(p, "resetDiscounts",[])

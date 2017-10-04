@@ -8,8 +8,8 @@
 	<markers>
 		<marker id="06c01638-6a75-43ef-82bc-807764521c5a" name="Academy Action" />
 		<marker id="1eeac15f-fb5d-4305-b39c-16b1b1c8b6e3" name="Academy Action Used" />
+		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate Token" />
 		<marker id="4546a2ed-3ac4-4baf-8d56-9f51af888a75" name="Charge" />
-		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate" />
 		<marker id="ede2252f-b47f-4ea2-a448-08fd3b22d506" name="Stagger" />
 		<marker id="fcf39fa4-238a-4cb6-92bb-5f561be747c0" name="Wish" />
 	</markers>

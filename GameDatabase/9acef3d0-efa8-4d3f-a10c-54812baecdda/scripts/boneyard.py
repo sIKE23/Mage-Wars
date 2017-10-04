@@ -96,7 +96,7 @@ def resolveBleed(card):
 	notify("{} damage added to {}.".format(Damage, card.Name))
 	notify("Finished auto-resolving Bleed for {}.".format(card))
 
-def resolveDissipate(card):
+def resolveDissipate(traits, card):
 	mute()
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
@@ -110,11 +110,11 @@ def resolveDissipate(card):
 	#			countOutposts += 1
 
 	
-	traits = computeTraits(card)
+
 	mageDict = eval(me.getGlobalVariable("MageDict"))
 	mageStatsID = int(mageDict["MageStatsID"])
 	mageID = int(mageDict["MageID"])
-	if card.controller == me and card.isFaceUp and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
+	if card.controller == me and 'Dissipate' in traits and card.isFaceUp:# and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
 			notify("Resolving Dissipate for {}...".format(card))	#found at least one
 			card.markers[DissipateToken] -= 1 # Remove Token
 			if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
@@ -166,7 +166,7 @@ def resolveDissipate(card):
 											Card(mageStatsID).markers[FermataGreen1] = 0
 											notify("{} has decided to extend the Song {}.".format(me,card.Name))
 							else:
-									card.moveTo(me.piles['Discard'])
+									card.moveTo(me.piles['Discard Pile'])
 									notify("{} discards {} has decided not to extend the Song and it has expired. The Fermata Marker has been placed back on the {} Stats card.".format(me, card.Name,me))
 					else:
 						notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
@@ -801,6 +801,7 @@ def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY 
 							  (cName == "Druid's Leaf Ring" and ("Plant" in sSubtype)) or
 							  (cName == "Force Ring" and ("Force" in sSubtype)) or
 							  (cName == "Ring of Command" and ("Command" in sSubtype)) or
+							  (cName == "Voice of the Sea" and ("Song" in sSubtype)) or
 							  (cName == "Commander\'s Cape" and ("Command" in sSubtype))): return 1
 		if timesUsed <2 and cName == "Death Ring" and ("Necro" in sSubtype or "Undead" in sSubtype): return 1
 		return 0
