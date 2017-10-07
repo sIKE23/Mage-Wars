@@ -55,7 +55,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		if aTraitDict.get("Incapacitated"):
 				if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.name.split(',')[0]))
 				return {}
-		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if c.Name=="Lion Savagery" and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
+		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if (c.Name=="Lion Savagery" or c.Name=="Ballad of Courage") and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
 		if not attacker: defender = None
 		dTraitDict = (computeTraits(defender) if defender else {})
 		attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
@@ -279,8 +279,9 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
-		attack = deepcopy(attack["OriginalAttack"])
-		attack["OriginalAttack"] = originalAttack
+		if not aTraitDict.get('Counterstrike'):# != 'Counterstrike':
+			attack = deepcopy(attack["OriginalAttack"])
+			attack["OriginalAttack"] = originalAttack
 		atkTraits = attack["Traits"]
 		localADict = dict(aTraitDict)
 		#Runesmithing
@@ -1558,7 +1559,9 @@ def computeTraits(card):
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
 								if ('Siren' in name and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): append('Regenerate 1')
-								if (name == 'Naiya' and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): append('Regenerate 1'), extend('Channeling +1')
+								if (name == 'Naiya' and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): 
+									append('Regenerate 1')
+									append('Channeling +1')
 						if 'Mage' in subtype and not 'Magestats' in cardType:
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
