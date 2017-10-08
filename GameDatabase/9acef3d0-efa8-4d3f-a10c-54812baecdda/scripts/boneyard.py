@@ -815,7 +815,10 @@ def computeRevealCost(card): #For enchantment reveals
 		if not target: return cost
 		#Exceptions
 		name = card.Name
-		tLevel = int(sum(map(lambda x: int(x), target.Level.split('+'))))
+		if "/" in target.level:
+			tLevel = int(sum(map(lambda x: int(x), target.Level.split('/')[0])))
+		else:
+			tLevel = int(sum(map(lambda x: int(x), target.Level.split('+'))))
 		if name == "Mind Control":
 				cost = 2*tLevel
 		elif name in ["Charm","Fumble"]:

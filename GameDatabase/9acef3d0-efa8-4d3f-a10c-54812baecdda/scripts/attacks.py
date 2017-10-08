@@ -279,7 +279,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
-		if not aTraitDict.get('Counterstrike'):# != 'Counterstrike':
+		if not 'Counterstrike' in attack['Traits']:# != 'Counterstrike':
 			attack = deepcopy(attack["OriginalAttack"])
 			attack["OriginalAttack"] = originalAttack
 		atkTraits = attack["Traits"]
