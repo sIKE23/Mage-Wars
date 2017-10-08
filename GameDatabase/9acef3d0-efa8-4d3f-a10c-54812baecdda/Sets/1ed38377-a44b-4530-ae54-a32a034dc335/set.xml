@@ -423,7 +423,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlord Only" />
-			<property name="Text" value="You can only reveal Promotion when this creature attacks and damages an enemy creature. This creature gains Armor +1 and Melee +1. If this creature is Level 1, reduce the reveal cost of Promotion by 1. &#xD;&#xA; [Armor +1] [Melee +1]" />
+			<property name="Text" value="You can only reveal Promotion when this creature attacks and damages an enemy creature. This creature gains Armor +1 and Melee +1. If this creature is Level 1, reduce the reveal cost of Promotion by 1. &#xD;&#xA;[Armor +1] [Melee +1]" />
 			<property name="CardID" value="MWAWDE06" />
 		</card>
 
@@ -484,7 +484,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="This Mage gains Armor +1 &#xD;&#xA; [Armor +1]" />
+			<property name="Text" value="This Mage gains Armor +1 &#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWAWDQ03" />
 		</card>
 		
@@ -504,7 +504,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Novice" />
-			<property name="Text" value="This Mage gains Armor +1 &#xD;&#xA; [Armor +1]" />
+			<property name="Text" value="This Mage gains Armor +1 &#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWAWDQ04" />
 		</card>
 
@@ -544,7 +544,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This Mage gains Armor +1. Once per round, when this Mage is the target of an attack with an effect roll, you may force the attacker to reroll the effect die. &#xD;&#xA; [Armor +1]" />
+			<property name="Text" value="This Mage gains Armor +1. Once per round, when this Mage is the target of an attack with an effect roll, you may force the attacker to reroll the effect die. &#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWAWDQ06" />
 		</card>
 
