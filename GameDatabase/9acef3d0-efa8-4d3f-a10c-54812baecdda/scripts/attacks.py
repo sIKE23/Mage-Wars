@@ -1212,7 +1212,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 						remoteCall(mage.controller, "remotePlayerHeal", [healing])
 
 		#Demonic Link health drain
-		if [1 for c in getAttachments(attacker) if c.Name=="Demonic Link" and c.controller==attacker.controller] and not timesHasOccured("Demonic Link",attacker) and defender.Type == 'Creature' and dTraitDict.get("Living") and damage:
+		if [1 for c in getAttachments(attacker) if c.Name=="Demonic Link" and c.isFaceUp and c.controller==attacker.controller] and not timesHasOccured("Demonic Link",attacker) and defender.Type == 'Creature' and dTraitDict.get("Living") and damage:
 				mage = Card(aTraitDict.get('OwnerID'))
 				healing = min(1,mage.controller.damage)
 				if healing and not computeTraits(mage).get("Finite Life"):

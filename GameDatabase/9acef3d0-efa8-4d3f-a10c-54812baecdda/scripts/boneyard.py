@@ -54,7 +54,7 @@ def resolveBurns(card):
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	notify("Resolving Burns for {}...".format(card))	#found at least one
+	notify("Resolving Burns for {}...".format(card.controller, card))	#found at least one
 	numMarkers = card.markers[Burn]
 	Damage = 0
 	burnsRemoved = 0
@@ -77,7 +77,7 @@ def resolveRot(card):
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	notify("Resolving Rot for {}...".format(card))	#found at least one
+	notify("Resolving Rot for {}...".format(card.controller, card))	#found at least one
 	Damage = (card.markers[Rot])
 	#apply damage
 	addDamageAmount(card,Damage)
@@ -89,7 +89,7 @@ def resolveBleed(card):
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	notify("Resolving Bleed for {}...".format(card))	#found at least one
+	notify("Resolving Bleed for {}\'s {}...".format(card.controller, card))	#found at least one
 	Damage = (card.markers[Bleed])
 	#apply damage
 	addDamageAmount(card,Damage)
