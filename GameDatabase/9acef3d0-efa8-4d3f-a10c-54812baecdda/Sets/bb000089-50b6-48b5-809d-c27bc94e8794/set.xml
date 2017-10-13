@@ -7,40 +7,34 @@
 	version="2.0.0.0">
 
 	<cards>
-		<!--<card id="32e0369c-60a6-48b7-a31a-6ad444033461" name="Academy Forcemaster">
-			<property name="Nickname" value="Academy Forcemaster" />
+		
+		<card id="32e0369c-60a6-48b7-a31a-6ad444033461" name="Forcemaster">
+			<property name="Nickname" value="Forcemaster" />
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage, Dark Elf" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained in Mind magic and Dsjer-Tet spells. Non-Mind, Non-Dsjer-Tet creature spells cost triple spellpoints." />
-			<property name="Stats" value="Spellbook=40, Life=22, Armor=0, Channeling=7" />
-			<property name="StatLife" value="22" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Power Transfer: Once per round, when your Mage or a friendly force creature declares an attack, you may pay 1 mana and remove a Dissipate token from a force creature you control. If you do, the attacking creature gains Melee +2 for that attack." />
-				<alternate name="Academy Forcemaster" type="B">
-					<property name="Type" value="Creature" />
-					<property name="Subtype" value="Mage, Dark Elf" />
-					<property name="Level" value="4" />
-					<property name="MageTraining" value="Training: Trained in Mind magic and Dsjer-Tet spells. Non-Mind, Non-Dsjer-Tet creature spells cost triple spellpoints." />
-					<property name="Stats" value="Spellbook=40, Life=22, Armor=0, Channeling=7" />
-			<property name="StatLife" value="22" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-					<property name="MageSchoolCost" value="Mind=1, Creature=3" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-					<property name="Traits" value="" />
-					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Power Transfer: Once per round, when your Mage or a friendly force creature declares an attack, you may pay 1 mana and remove a Dissipate token from a force creature you control. If you do, the attacking creature gains Melee +2 for that attack." />
-				</alternate>
-		</card>-->
+		</card>
 		<card id="18c4ecbe-0a44-43c0-b053-a3c8e0abd8cd" name="Academy Forcemaster Stats">
 			<property name="Nickname" value="Academy Forcemaster Stats" />
 			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Dark Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Mind magic and Dsjer-Tet spells. Non-Mind, Non-Dsjer-Tet creature spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="22" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-7" />
+			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 		</card>
 
 

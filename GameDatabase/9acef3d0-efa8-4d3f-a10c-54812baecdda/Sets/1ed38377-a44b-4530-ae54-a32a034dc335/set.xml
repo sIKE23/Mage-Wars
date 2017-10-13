@@ -7,40 +7,35 @@
 	version="2.0.0.0">
 
 	<cards>
-		<!--<card id="223d270f-2fa8-413b-ae62-3f6d2213ed92" name="Academy Warlord">
-			<property name="Nickname" value="Academy Warlord" />
+		<!---->
+		
+		<card id="223d270f-2fa8-413b-ae62-3f6d2213ed92" name="Warlord">
+			<property name="Nickname" value="Warlord" />
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage, High Elf" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained in War Magic." />
-			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
-			<property name="StatLife" value="24" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="MageSchoolCost" value="War=1" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Battle Orders: Once per round, as a quick command spell, you may pay 3 mana. If you do, friendly Soldier creatures gain Melee +1 until the end of the round.  If you control a revealed formation, reduce the cost of this ability by 1." />
-				<alternate name="Academy Warlord" type="B">
-					<property name="Type" value="Creature" />
-					<property name="Subtype" value="Mage, High Elf" />
-					<property name="Level" value="4" />
-					<property name="MageTraining" value="Training: Trained in War Magic." />
-					<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
-			<property name="StatLife" value="24" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-					<property name="MageSchoolCost" value="War=1" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-					<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-					<property name="Traits" value="" />
-					<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Battle Orders: Once per round, as a quick command spell, you may pay 3 mana. If you do, friendly Soldier creatures gain Melee +1 until the end of the round.  If you control a revealed formation, reduce the cost of this ability by 1." />
-				</alternate>
-		</card>-->
+		</card>	
 		<card id="1d43c343-c85c-49e8-9038-dff61ea41aed" name="Academy Warlord Stats">
 			<property name="Nickname" value="Academy Warlord Stats" />
 			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained War magic." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-10" />
+			<property name="MageSchoolCost" value="War=1" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 		</card>
 
 		<card id="ec074139-9b10-432b-a21e-a8459e9ef6af" name="Seismic Burst">

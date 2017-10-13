@@ -57,18 +57,20 @@ def nextPhaseArena():
 
 			#resolve other automated items
 			for p in players:
+				remoteCall(p, "resetDiscounts",[])
+				remoteCall(p, "resetMarkers", [])
+				remoteCall(p, "resolveChanneling", [p])
 				for card in table:
 					traits = computeTraits(card)
 					if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
 					if card.markers[Rot] and card.controller.name == p.name: remoteCall(p, "resolveRot", [card])
 					if card.markers[Bleed] and card.controller.name == p.name: remoteCall(p, "resolveBleed", [card])
+					if card.markers[Disable] and card.controller.name == p.name: remoteCall(p, "resolveDisable",[card])
 					if 'Dissipate' in traits and card.controller.name == p.name: remoteCall(p, "resolveDissipate", [traits, card])
 					if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller.name == p.name and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
+					if card.Name == "Altar of Domination" and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveTalos", [card])
 					if card.Name in ["Staff of Storms"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveStormTokens", [card])
-				remoteCall(p, "resetDiscounts",[])
-				remoteCall(p, "resetMarkers", [])
-				remoteCall(p, "resolveChanneling", [p])
-				remoteCall(p, "resolveRegeneration", [])
+					if "Regenerate" in traits and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveRegeneration", [traits, card])
 				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching

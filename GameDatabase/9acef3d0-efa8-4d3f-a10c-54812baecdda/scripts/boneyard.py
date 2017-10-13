@@ -93,8 +93,19 @@ def resolveBleed(card):
 	Damage = (card.markers[Bleed])
 	#apply damage
 	addDamageAmount(card,Damage)
-	notify("{} damage added to {}.".format(Damage, card.Name))
-	notify("Finished auto-resolving Bleed for {}.".format(card))
+	notify("{} damage added to {}\'s {}.".format(Damage, card.controller, card.Name))
+	#notify("Finished auto-resolving Bleed for {}.".format(card))
+	
+	
+def resolveTalos(card):
+	countOutposts = 0
+	for c in table: #ugh - this is done much better in the next release
+		if "Outpost" in c.Subtype and c.controller == me and c.isFaceUp:
+				countOutposts += 1
+	if countOutposts >= 3:
+			card.markers[DominationToken] += 1
+			notify("Placing a Domination Token on to the {}...".format(card))
+
 
 def resolveDissipate(traits, card):
 	mute()
@@ -102,15 +113,6 @@ def resolveDissipate(traits, card):
 	if not getSetting("AutoResolveEffects", True):
 		return
 		
-	# ***************** THIS NEEDS MOVED *******************
-	
-	#countOutposts = 0
-	#for card in table: #ugh - this is done much better in the next release
-	#	if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
-	#			countOutposts += 1
-
-	
-
 	mageDict = eval(me.getGlobalVariable("MageDict"))
 	mageStatsID = int(mageDict["MageStatsID"])
 	mageID = int(mageDict["MageID"])
@@ -172,34 +174,23 @@ def resolveDissipate(traits, card):
 						notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
 						card.moveTo(me.piles['Discard Pile'])
 	#notify("Finished auto-resolving Dissipate for {}.".format(me))
-	if card.Name == "Altar of Domination" and card.controller == me and card.isFaceUp:
-		if countOutposts >= 3:
-				card.markers[DominationToken] += 1
-				notify("Placing a Domination Token on to the {}...".format(card))
-
-
-	# *********************** THIS NEEDS MOVED ***************************************
 
 	
-	#use the logic for Dissipate for Disable Markers
-	#cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
-	#if len(cardsWithDisable) > 0:
-	#	notify("Resolving Disable Markers for {}...".format(me))	#found at least one
-	#	for card in cardsWithDisable:
-	#		notify("{} removes a Disable Marker from {}".format(me, c.name))	#found at least one
-	#		card.markers[Disable] -= 1 # Remove Marker
-	#		notify("Finished auto-resolving Disable Markers for {}.".format(me))
+def resolveDisable(card):
+		notify("{} removes a Disable Marker from {}".format(me, card.name))	#found at least one
+		card.markers[Disable] -= 1 # Remove Marker
+		#notify("Finished auto-resolving Disable Markers for {}.".format(me))
 
 def resolveLoadTokens(card):
 	mute()
 	#loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
 	#for card in loadTokenCards:
-	notify("Resolving Load Tokens for {}...".format(card))	#found at least one
+	notify("Resolving Load Tokens for {}\'s {}...".format(card.controller, card))	#found at least one
 	if card.markers[LoadToken] == 0:
-		notify("Placing the First Load Token on {}...".format(card)) #found no load token on card
+		notify("Placing the First Load Token on {}\'s {}...".format(card.controller, card)) #found no load token on card
 		card.markers[LoadToken] = 1
 	elif card.markers[LoadToken] == 1:
-		notify("Placing the Second Load Token on {}...".format(card)) #found one load token on card
+		notify("Placing the Second Load Token on {}\'s {}...".format(card.controller, card)) #found one load token on card
 		card.markers[LoadToken] = 2
 	#notify("Finished adding Load Tokens for {}.".format(card))
 
@@ -399,42 +390,41 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
 			return
 
-def resolveRegeneration():
+def resolveRegeneration(traits, card):
  	mute()
- 	for card in table:
-			traits = computeTraits(card)
-			if ("Regenerate" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
-					notify("{} has the Finite Life Trait and can not Regenerate".format(card.name))
-					return
-			elif "Regenerate" in traits and card.controller == me and card.isFaceUp:
-					regenAmount = traits.get("Regenerate")
-					if "Mage" in card.Subtype and card.controller == me and me.damage != 0:
-							if me.damage <= regenAmount:
-									me.damage = 0
-									notify("{} regenerates and removes all damage.".format(card.name))
-							else:
-									me.damage -= regenAmount
-									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
-					elif "Mage" in card.Subtype and card.controller == me and me.damage != 0:
-							notify("{} is at full health.".format(card.name))
-					elif card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
-							damage = card.markers[Damage]
-							if damage <= regenAmount and damage != 0:
-									card.markers[Damage] = 0
-									notify("{} regenerates and removes all damage.".format(card.name))
-							elif damage == 0:
-									notify("{} is at full health.".format(card.name))
-							else:
-									card.markers[Damage] -= regenAmount
-									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
-
-			if ("Lifegain" in traits and not "Finite Life" in traits) and card.controller == me and card.isFaceUp:
-					lifeGainAmount = traits.get("Lifegain")
-					me.Life += lifeGainAmount
-					notify("{} gains {} Life from the brilliant glow of the Sunfire Amulet.".format(card.name,lifeGainAmount))
-			elif ("Lifegain" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
-					notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
-					return
+ 	#for card in table:
+			#traits = computeTraits(card)
+	if ("Regenerate" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			notify("{} has the Finite Life Trait and can not Regenerate".format(card.name))
+			return
+	elif "Regenerate" in traits and card.controller == me and card.isFaceUp:
+			regenAmount = traits.get("Regenerate")
+			if "Mage" in card.Subtype and card.controller == me and me.damage != 0:
+					if me.damage <= regenAmount:
+							me.damage = 0
+							notify("{}\'s {} regenerates and removes all damage.".format(card.controller, card.name))
+					else:
+							me.damage -= regenAmount
+							notify("{}\'s {} regenerates and removes {} damage.".format(card.controller, card.name, regenAmount))
+			elif "Mage" in card.Subtype and card.controller == me and me.damage != 0:
+					notify("{} is at full health.".format(card.name))
+			elif card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
+					damage = card.markers[Damage]
+					if damage <= regenAmount and damage != 0:
+							card.markers[Damage] = 0
+							notify("{}\'s {} regenerates and removes all damage.".format(card.controller, card.name))
+					elif damage == 0:
+							notify("{}\'s {} is at full health.".format(card.controller, card.name))
+					else:
+							card.markers[Damage] -= regenAmount
+							notify("{}\'s {} regenerates and removes {} damage.".format(card.controller, card.name,regenAmount))
+	if ("Lifegain" in traits and not "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			lifeGainAmount = traits.get("Lifegain")
+			me.Life += lifeGainAmount
+			notify("{} gains {} Life from the brilliant glow of the Sunfire Amulet.".format(card.name,lifeGainAmount))
+	elif ("Lifegain" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
+			return
 
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
