@@ -242,6 +242,7 @@ def canAttach(card,target):
 		if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
+			(cTargetBar == 'Equipment' and tType == 'Equipment') or
 			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
 			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or

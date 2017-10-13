@@ -49,7 +49,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="name=Dazzle;range type=Ranged;range=(0,1);damage type=Light;dice=1;effects={4: ['Stagger']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
-			<property name="AttackBar" value="[Ranged] [Light] [Dice=1] [d12] [4+ = Stagger] [Ethereal] [Unavoidable] [+2 vs Nonliving]" />
+			<property name="AttackBar" value="[Ranged] [Light] [Dice=1] [d12] [4+ = Stagger] [Ethereal] [Unavoidable] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When attacking a Nonliving creature, roll 2 extra attack dice and add 2 to your effect roll" />
 			<property name="CardID" value="MWAPRA01" />

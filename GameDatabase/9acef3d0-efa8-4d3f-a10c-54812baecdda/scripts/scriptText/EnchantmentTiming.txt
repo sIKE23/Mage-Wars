@@ -4,6 +4,7 @@ Block
 Cobra Reflexes
 Decoy
 Divine Intervention
+Divine Reversal
 Dodge
 Falcon Precision
 Force Crush
@@ -12,10 +13,12 @@ Force Orb
 Force Sword
 Forcefield
 Fumble
+Glancing Blow
 Jinx
 Knight's Blessing
 Knight's Courage
 Mind Shield
+Redirect
 Reverse Attack
 #
 Avoid Attack
@@ -23,6 +26,7 @@ Agony
 Bear Strength
 Critical Strike
 Divine Protection
+Demonic Bloodlust
 Hawkeye
 Lion Savagery
 Marked for Death

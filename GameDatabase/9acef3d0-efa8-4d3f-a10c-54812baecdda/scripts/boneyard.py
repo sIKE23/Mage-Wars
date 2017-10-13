@@ -243,7 +243,7 @@ def resolveUpkeep():
 	HarshforgeMonolithInPlay = 0
 	ManaPrismInPlay = 0
 	PsiOrbDisc = 0
-	upKeepIgnoreList = ["Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb", "Mana Prism"]
+	upKeepIgnoreList = ["Essence Drain","Minor Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb", "Mana Prism"]
 	for card in table:
 		if card.Name == "Mordok's Obelisk" and card.isFaceUp:
 			MordoksObeliskInPlay = 1
@@ -310,13 +310,27 @@ def resolveUpkeep():
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 		# Process Upkeep for Essence Drain
 		elif card.Name == "Essence Drain" and card.controller != me and card.isFaceUp:
+			target = getAttachTarget(card)
 			upKeepCost = getTextTraitValue(card, "Upkeep")
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
 				card.filter = upKeepFilter
-				processUpKeep(upKeepCost, card, Upkeep, notifystr)
+				processUpKeep(upKeepCost, card, target, notifystr)
+				if ManaPrismInPlay == 1:
+					addToken(ManaPrism, Mana)
+				upKeepCost = 0
+		#Process Upkeep for Minor Essence Drain
+		elif card.Name == "Minor Essence Drain" and card.controller != me and card.isFaceUp:
+			target = getAttachTarget(card)
+			upKeepCost = 1
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
+			else:
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+				card.filter = upKeepFilter
+				processUpKeep(upKeepCost, card, target, notifystr)
 				if ManaPrismInPlay == 1:
 					addToken(ManaPrism, Mana)
 				upKeepCost = 0
@@ -368,7 +382,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 		if choice == 1 and card1.isFaceUp:
 			me.Mana -= upKeepCost
 			card1.filter = None
-			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
+			notify("{} pays the Upkeep cost of {} for {} on {}".format(me, upKeepCost, card1, card2))
 			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
 				attatchedTo = getAttachTarget(card1)
 				damage = card1.markers[CrushToken]
@@ -386,8 +400,8 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			card1.filter = None
 			return
 		else:
-			card1.moveTo(me.piles['Discard'])
-			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
+			card2.moveTo(me.piles['Discard Pile'])
+			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card1, card2, card2))
 			return
 
 def resolveRegeneration(traits, card):
@@ -426,6 +440,44 @@ def resolveRegeneration(traits, card):
 			notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
 			return
 
+def resolveDotEnchantment(card):
+ 	mute()
+	target = getAttachTarget(card)
+	damageAmount = 0
+	if "Ghoul Rot" in card.Name and card.controller == me and card.isFaceUp:
+			damageAmount = 2
+	elif "Curse of Decay" in card.Name and card.controller == me and card.isFaceUp:
+			damageAmount = 1
+	elif "Arcane Corruption" in card.Name and card.controller == me and card.isFaceUp:
+		attachments = 	getAttachments(target)
+		for attach in attachments:
+			if attach.Type == "Enchantment" and attach.controller.name == target.controller.name:
+				damageAmount +=1
+	for p in players:
+		if p.name == target.controller.name:
+			remoteCall(p, "addDamageAmount", [target, damageAmount])
+			notify("{}\'s {} feels the effects of the {} curse and takes {} damage.".format(target.controller, target, card, damageAmount))
+
+def resolveCurseItem(card):			
+	mute()
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageID = int(mageDict["MageID"])
+	notifystr = "Do you wish to take 2 damage to keep your {}?".format(card.Name)
+	choiceList = ['Yes', 'No']
+	colorsList = ['#0000FF', '#FF0000']
+	choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+	if choice == 1:
+		for p in players:
+			if p.name == card.controller.name:
+				remoteCall(p, "addDamageAmount", [Card(mageID), 2])
+		notify("{}\'s {} is cursed! {} takes 2 damage from holding onto it!".format(me, card, me))
+		return
+	else:
+		card.moveTo(me.piles['Discard Pile'])
+		notify("{}\'s {} is cursed! {} throws it away before taking any damage!".format(me, card, me))
+		return
+			
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
