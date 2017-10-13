@@ -7,6 +7,35 @@
 	version="1.14.0.0">
 
 	<cards>
+	
+		<card id="00198aab-6c44-4ccc-8eaf-51df73dd3521" name="Priestess">
+			<property name="Nickname" value="Priestess" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="005e4ea3-d680-477a-957e-a2906de57be2" name="Academy Priestess Stats">
+			<property name="Nickname" value="Academy Priestess Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Holy Magic. Dark spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=21, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="21" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-8" />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
 		<card id="1a6d6ac5-11ba-4ac5-bac3-707893f925aa" name="Dazzle">
 			<property name="Nickname" value="Dazzle" />
 			<property name="Type" value="Attack" />
@@ -20,7 +49,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="name=Dazzle;range type=Ranged;range=(0,1);damage type=Light;dice=1;effects={4: ['Stagger']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
-			<property name="AttackBar" value="[Ranged] [Light] [Dice=1] [d12] [4+ = Stagger] [Ethereal] [Unavoidable] [+2 vs Nonliving]" />
+			<property name="AttackBar" value="[Ranged] [Light] [Dice=1] [d12] [4+ = Stagger] [Ethereal] [Unavoidable] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When attacking a Nonliving creature, roll 2 extra attack dice and add 2 to your effect roll" />
 			<property name="CardID" value="MWAPRA01" />

@@ -60,17 +60,40 @@ def nextPhaseArena():
 				remoteCall(p, "resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [p])
-				remoteCall(p, "resolveRegeneration", [])
-				remoteCall(p, "resolveBurns", [])
-				remoteCall(p, "resolveRot", [])
-				remoteCall(p, "resolveBleed", [])
-				remoteCall(p, "resolveDissipate", [])
-				remoteCall(p, "resolveLoadTokens", [])
-				remoteCall(p, "resolveStormTokens", [])
+				for card in table:
+					if not card.isFaceUp and card.Type == 'Enchantment' and card.controller.name == p.name: remoteCall(p, "revealAttachmentChannel", [card, 'Channeling'])
+				for card in table:
+					traits = computeTraits(card)
+					if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
+					if card.markers[Rot] and card.controller.name == p.name: remoteCall(p, "resolveRot", [card])
+					if card.markers[Bleed] and card.controller.name == p.name: remoteCall(p, "resolveBleed", [card])
+					if card.markers[Disable] and card.controller.name == p.name: remoteCall(p, "resolveDisable",[card])
+					if 'Dissipate' in traits and card.controller.name == p.name: remoteCall(p, "resolveDissipate", [traits, card])
+					if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller.name == p.name and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
+					if card.Name in ["Ghoul Rot", "Curse of Decay", "Arcane Corruption"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveDotEnchantment", [card]) 
+					if card.Name == "Curse Item" and card.controller.name != p.name and card.isFaceUp: 
+						target = getAttachTarget(card)
+						remoteCall(p, "resolveCurseItem", [target])
+					if card.Name == "Altar of Domination" and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveTalos", [card])
+					if card.Name in ["Staff of Storms"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveStormTokens", [card])
+					if "Regenerate" in traits and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveRegeneration", [traits, card])
 				remoteCall(p, "resolveUpkeep", [])
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
+	
+def revealAttachmentChannel(card,step):
+		recommendList = getEnchantRecommendationList(step)
+		options = ['{}\n{}\n{}'.format(card.Name.center(68,' '),(('('+getAttachTarget(card).Name+')').center(68,' ')),card.Text.split('\r\n')[0])]
+		colors = ['#CC6600' for i in options] #Orange
+		options.append('I would not like to reveal this enchantment.')
+		colors.append("#de2827")
+		choice = askChoice('Would you like to reveal this enchantment?', options,colors)
+		if choice == 1: 
+			revealEnchantment(card)
+			return 
+				
+	
 def resetDiscounts():
 	#reset discounts used
 	for tup in discountsUsed:

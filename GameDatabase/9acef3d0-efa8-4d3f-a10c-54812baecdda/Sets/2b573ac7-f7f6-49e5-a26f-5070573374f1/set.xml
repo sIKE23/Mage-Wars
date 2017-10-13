@@ -69,6 +69,7 @@
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />	
 				<alternate name="Warlord" type="2">
+					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
 					<property name="Stats" value="" />

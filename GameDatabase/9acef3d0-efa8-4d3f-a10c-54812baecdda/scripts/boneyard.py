@@ -13,6 +13,8 @@ def getStat(stats, stat): #searches stats string for stat and extract value
 
 
 ##################################Upkeep######################################\
+
+
 def resetMarkers():
 	mute()
 	for c in table:
@@ -36,7 +38,7 @@ def resetMarkers():
 								c.markers[key] = 0
 								c.markers[mDict[key]] = 1
 			if "Packleader's Cowl" == c.Name: c.markers[Guard] = 1
-			if "Lightning Raptor" == c.Name: c.markers[Charge] = 1
+			if "Lightning Raptor" == c.Name and c.markers[Charge]<5: c.markers[Charge] += 1
 			#add a Guard Marker to Orb Guardians when they are in the same zone as an Orb
 			if "Orb Guardian" in c.name:
 					for o in table:
@@ -47,177 +49,162 @@ def resetMarkers():
 	notify("{} resets all Action, Ability, Quickcast, and Ready Markers on the Mages cards by flipping them to their active side.".format(me.name))
 	debug("card,stats,subtype {} {} {}".format(c.name,c.Stats,c.Subtype))
 
-def resolveBurns():
+def resolveBurns(card):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	cardsWithBurn = [c for c in table if c.markers[Burn] and c.controller == me]
+	notify("Resolving Burns for {}...".format(card.controller, card))	#found at least one
+	numMarkers = card.markers[Burn]
+	Damage = 0
+	burnsRemoved = 0
+	zone = getZoneContaining(card)
+	isInZone = getCardsInZone(zone)
+	for i in range(0, numMarkers):
+		roll = rnd(0, 2)
+		if roll == 0: 
+			card.markers[Burn] -= 1
+			burnsRemoved += 1
+		Damage += roll
+	#apply damage
+	addDamageAmount(card,Damage)
+	if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
+	if burnsRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
+	notify("Finished auto-resolving Burns for {}.".format(card))
 
-	if len(cardsWithBurn) > 0:
-		notify("Resolving Burns for {}...".format(me))	#found at least one
-		for card in cardsWithBurn:
-			numMarkers = card.markers[Burn]
-			Damage = 0
-			burnsRemoved = 0
-			#SolInZone = "False"
-			zone = getZoneContaining(card)
-			isInZone = getCardsInZone(zone)
-			#for i in isInZone:
-		 		#if i.name == "Sol, Blazing Angel":
-		 			#SolInZone = "True"
-			for i in range(0, numMarkers):
-				roll = rnd(0, 2)
-				if roll == 0: #and not SolInZone == "True":
-					card.markers[Burn] -= 1
-					burnsRemoved += 1
-				Damage += roll
-			#apply damage
-			addDamageAmount(card,Damage)
-			if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!".format(card, Damage))
-			if burnsRemoved > 0: notify("{} Burns were removed from {}.".format(burnsRemoved,card))
-		notify("Finished auto-resolving Burns for {}.".format(me))
-
-def resolveRot():
+def resolveRot(card):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	cardsWithRot = [c for c in table if c.markers[Rot] and c.controller == me]
-	if len(cardsWithRot) > 0:
-		notify("Resolving Rot for {}...".format(me))	#found at least one
-		for card in cardsWithRot:
-			Damage = (card.markers[Rot])
-			#apply damage
-			addDamageAmount(card,Damage)
-			notify("{} damage added to {}.".format(Damage, card.Name))
-		notify("Finished auto-resolving Rot for {}.".format(me))
+	notify("Resolving Rot for {}...".format(card.controller, card))	#found at least one
+	Damage = (card.markers[Rot])
+	#apply damage
+	addDamageAmount(card,Damage)
+	notify("{} damage added to {}.".format(Damage, card.Name))
+	notify("Finished auto-resolving Rot for {}.".format(card))
 
-def resolveBleed():
+def resolveBleed(card):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	cardsWithBleed = [c for c in table if c.markers[Bleed] and c.controller == me]
-	if len(cardsWithBleed) > 0:
-		notify("Resolving Bleed for {}...".format(me))	#found at least one
-		for card in cardsWithBleed:
-			Damage = (card.markers[Bleed])
-			#apply damage
-			addDamageAmount(card,Damage)
-			notify("{} damage added to {}.".format(Damage, card.Name))
-		notify("Finished auto-resolving Bleed for {}.".format(me))
+	notify("Resolving Bleed for {}\'s {}...".format(card.controller, card))	#found at least one
+	Damage = (card.markers[Bleed])
+	#apply damage
+	addDamageAmount(card,Damage)
+	notify("{} damage added to {}\'s {}.".format(Damage, card.controller, card.Name))
+	#notify("Finished auto-resolving Bleed for {}.".format(card))
+	
+	
+def resolveTalos(card):
+	countOutposts = 0
+	for c in table: #ugh - this is done much better in the next release
+		if "Outpost" in c.Subtype and c.controller == me and c.isFaceUp:
+				countOutposts += 1
+	if countOutposts >= 3:
+			card.markers[DominationToken] += 1
+			notify("Placing a Domination Token on to the {}...".format(card))
 
-def resolveDissipate():
+
+def resolveDissipate(traits, card):
 	mute()
 #is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	countOutposts = 0
-	for card in table: #ugh - this is done much better in the next release
-		if "Outpost" in card.Subtype and card.controller == me and card.isFaceUp:
-				countOutposts += 1
-	for card in table:
-		traits = computeTraits(card)
-		mageDict = eval(me.getGlobalVariable("MageDict"))
-		mageStatsID = int(mageDict["MageStatsID"])
-		mageID = int(mageDict["MageID"])
-		if "Dissipate" in traits and card.controller == me and card.isFaceUp and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
-				notify("Resolving Dissipate for {}...".format(me))	#found at least one
-				card.markers[DissipateToken] -= 1 # Remove Token
-				if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
-						me.Mana += 1
-						notify("{} gains 1 Mana by removing a Dissipate Token from a Wispwillow Amulet.".format(me.name))
-				else:
-						notify("Removing 1 Dissipate Token from {}, there are {} Dissipate tokens left.".format(card.Name,card.markers[DissipateToken]))
-				if not card.markers[DissipateToken] and card.controller == me:
-						cardLevel = getCardLevel(card)
-						#Siren Songs with Fermata Markers, process these first so we can return the Fermata marker to the stats card to use on another song during this Upkeep
-						if "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue1] or card.markers[FermataGreen1]):
-										if askChoice("Do you want to extend the Song {} for a second more Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
-												# has chosen to extend the Song a Second round but can't pay
-												if me.Mana < cardLevel:
-														notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
-														card.moveTo(me.piles['Discard'])
-														return
-												# has chosen to extend the Song a Second round and now pays
-												me.Mana -= cardLevel
-												if card.markers[FermataBlue1] > 0:
-														card.markers[FermataBlue1] = 0
-														card.markers[FermataBlue2] = 1
-												elif card.markers[FermataGreen1] > 0:
-														card.markers[FermataGreen1] = 0
-														card.markers[FermataGreen2] = 1
-												notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
-						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
-							notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
-							card.moveTo(me.piles['Discard Pile'])
-							if card.markers[FermataBlue2]:
-								Card(mageStatsID).markers[FermataBlue1] = 1
-							elif card.markers[FermataGreen2]:
-									Card(mageStatsID).markers[FermataGreen1] = 1
-									#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
-						#Siren Songs without Fermata Markers
-						elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (Card(mageStatsID).markers[FermataBlue1] == 1 or Card(mageStatsID).markers[FermataGreen1] == 1):
-								if askChoice("Do you want to extend the Song {} for one Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
-										if me.Mana < cardLevel:
-												notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
-												card.moveTo(me.piles['Discard'])
-												return
-										me.Mana -= cardLevel
-										if Card(mageStatsID).markers[FermataBlue1] == 1:
-												card.markers[FermataBlue1] = 1
-												Card(mageStatsID).markers[FermataBlue1] = 0
-												notify("{} has decided to extend the Song {}, and moves the Blue Fermata Marker to this Song.".format(me,card.Name))
-										elif Card(mageStatsID).markers[FermataGreen1] == 1:
-												card.markers[FermataGreen1] = 1
-												Card(mageStatsID).markers[FermataGreen1] = 0
-												notify("{} has decided to extend the Song {}.".format(me,card.Name))
-								else:
-										card.moveTo(me.piles['Discard'])
-										notify("{} discards {} has decided not to extend the Song and it has expired. The Fermata Marker has been placed back on the {} Stats card.".format(me, card.Name,me))
-						else:
-							notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
-							card.moveTo(me.piles['Discard'])
-		#notify("Finished auto-resolving Dissipate for {}.".format(me))
-		if card.Name == "Altar of Domination" and card.controller == me and card.isFaceUp:
-			if countOutposts >= 3:
-					card.markers[DominationToken] += 1
-					notify("Placing a Domination Token on to the {}...".format(card))
+		
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageID = int(mageDict["MageID"])
+	if card.controller == me and 'Dissipate' in traits and card.isFaceUp:# and (card.markers[DissipateToken] or card.markers[FermataBlue1] or card.markers[FermataBlue2] or card.markers[FermataGreen1] or card.markers[FermataGreen2]):
+			notify("Resolving Dissipate for {}...".format(card))	#found at least one
+			card.markers[DissipateToken] -= 1 # Remove Token
+			if card.name == "Wispwillow Amulet" and card.controller == me and card.isFaceUp:
+					me.Mana += 1
+					notify("{} gains 1 Mana by removing a Dissipate Token from a Wispwillow Amulet.".format(me.name))
+			else:
+					notify("Removing 1 Dissipate Token from {}, there are {} Dissipate tokens left.".format(card.Name,card.markers[DissipateToken]))
+			if not card.markers[DissipateToken] and card.controller == me:
+					cardLevel = getCardLevel(card)
+					#Siren Songs with Fermata Markers, process these first so we can return the Fermata marker to the stats card to use on another song during this Upkeep
+					if "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue1] or card.markers[FermataGreen1]):
+									if askChoice("Do you want to extend the Song {} for a second more Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
+											# has chosen to extend the Song a Second round but can't pay
+											if me.Mana < cardLevel:
+													notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
+													card.moveTo(me.piles['Discard'])
+													return
+											# has chosen to extend the Song a Second round and now pays
+											me.Mana -= cardLevel
+											if card.markers[FermataBlue1] > 0:
+													card.markers[FermataBlue1] = 0
+													card.markers[FermataBlue2] = 1
+											elif card.markers[FermataGreen1] > 0:
+													card.markers[FermataGreen1] = 0
+													card.markers[FermataGreen2] = 1
+											notify("{} has decided to extend the Song {} and pays {} mana.".format(me,card.Name,cardLevel))
+					elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (card.markers[FermataBlue2] or card.markers[FermataGreen2]): # Song has a Fermata 2 Marker on it, Song will expire during this Upkeep
+						notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me)) # for testing
+						if card.markers[FermataBlue2]:
+							Card(mageStatsID).markers[FermataBlue1] = 1
+						elif card.markers[FermataGreen2]:
+							Card(mageStatsID).markers[FermataGreen1] = 1
+						card.moveTo(me.piles['Discard Pile'])
+							#notify("{} discards {} as the Song has expired. The Fermata Marker has been placed back on {} Stats card.".format(me,card.Name,me))
+					#Siren Songs without Fermata Markers
+					elif "Song" in card.Subtype and card.isFaceUp and Card(mageID).Name == "Siren" and (Card(mageStatsID).markers[FermataBlue1] == 1 or Card(mageStatsID).markers[FermataGreen1] == 1):
+							if askChoice("Do you want to extend the Song {} for one Round by paying {} mana?".format(card.Name,str(cardLevel)),["Yes","No"],["#171e78","#de2827"]) == 1:
+									if me.Mana < cardLevel:
+											notify("{} has insufficient mana in pool and the Song {} has Expired.".format(me,card.Name))
+											card.moveTo(me.piles['Discard'])
+											return
+									me.Mana -= cardLevel
+									if Card(mageStatsID).markers[FermataBlue1] == 1:
+											card.markers[FermataBlue1] = 1
+											Card(mageStatsID).markers[FermataBlue1] = 0
+											notify("{} has decided to extend the Song {}, and moves the Blue Fermata Marker to this Song.".format(me,card.Name))
+									elif Card(mageStatsID).markers[FermataGreen1] == 1:
+											card.markers[FermataGreen1] = 1
+											Card(mageStatsID).markers[FermataGreen1] = 0
+											notify("{} has decided to extend the Song {}.".format(me,card.Name))
+							else:
+									card.moveTo(me.piles['Discard Pile'])
+									notify("{} discards {} has decided not to extend the Song and it has expired. The Fermata Marker has been placed back on the {} Stats card.".format(me, card.Name,me))
+					else:
+						notify("{} discards {} as it no longer has any Dissipate Tokens".format(me, card.Name))
+						card.moveTo(me.piles['Discard Pile'])
+	#notify("Finished auto-resolving Dissipate for {}.".format(me))
 
-	#use the logic for Dissipate for Disable Markers
-	cardsWithDisable = [c for c in table if c.markers[Disable] and c.controller == me]
-	if len(cardsWithDisable) > 0:
-		notify("Resolving Disable Markers for {}...".format(me))	#found at least one
-		for card in cardsWithDisable:
-			notify("{} removes a Disable Marker from {}".format(me, c.name))	#found at least one
-			card.markers[Disable] -= 1 # Remove Marker
-			notify("Finished auto-resolving Disable Markers for {}.".format(me))
+	
+def resolveDisable(card):
+		notify("{} removes a Disable Marker from {}".format(me, card.name))	#found at least one
+		card.markers[Disable] -= 1 # Remove Marker
+		#notify("Finished auto-resolving Disable Markers for {}.".format(me))
 
-def resolveLoadTokens():
+def resolveLoadTokens(card):
 	mute()
-	loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer", "Dwarf Kanone"] and card.controller == me and card.isFaceUp]
-	for card in loadTokenCards:
-		notify("Resolving Load Tokens for {}...".format(me))	#found at least one
-		if card.markers[LoadToken] == 0:
-			notify("Placing the First Load Token on {}...".format(card.Name)) #found no load token on card
-			card.markers[LoadToken] = 1
-		elif card.markers[LoadToken] == 1:
-			notify("Placing the Second Load Token on {}...".format(card.Name)) #found one load token on card
-			card.markers[LoadToken] = 2
-		notify("Finished adding Load Tokens for {}.".format(me))
+	#loadTokenCards = [card for card in table if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller == me and card.isFaceUp]
+	#for card in loadTokenCards:
+	notify("Resolving Load Tokens for {}\'s {}...".format(card.controller, card))	#found at least one
+	if card.markers[LoadToken] == 0:
+		notify("Placing the First Load Token on {}\'s {}...".format(card.controller, card)) #found no load token on card
+		card.markers[LoadToken] = 1
+	elif card.markers[LoadToken] == 1:
+		notify("Placing the Second Load Token on {}\'s {}...".format(card.controller, card)) #found one load token on card
+		card.markers[LoadToken] = 2
+	#notify("Finished adding Load Tokens for {}.".format(card))
 
-def resolveStormTokens():
+def resolveStormTokens(card):
 	mute()
-	stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
-	for card in stormTokenCards:
-		if card.markers[StormToken] ==4:
-			return
-		notify("Resolving Storm Tokens for {}...".format(me))	#found at least one
-		if card.markers[StormToken] == 0 or card.markers[StormToken] < 4:
-			notify("Placing a Storm Token on the {}...".format(card.Name)) #Card needs a load token
-			card.markers[StormToken] += 1
-		notify("Finished adding Storm Tokens for {}.".format(me))
+	#stormTokenCards = [card for card in table if card.Name in ["Staff of Storms"] and card.controller == me and card.isFaceUp ]
+	#for card in stormTokenCards:
+	if card.markers[StormToken] ==4:
+		return
+	notify("Resolving Storm Tokens for {}...".format(card))	#found at least one
+	if card.markers[StormToken] == 0 or card.markers[StormToken] < 4:
+		notify("Placing a Storm Token on the {}...".format(card)) #Card needs a load token
+		card.markers[StormToken] += 1
+	#notify("Finished adding Storm Tokens for {}.".format(me))
 
 def resolveChanneling(p):
 	mute()
@@ -256,7 +243,7 @@ def resolveUpkeep():
 	HarshforgeMonolithInPlay = 0
 	ManaPrismInPlay = 0
 	PsiOrbDisc = 0
-	upKeepIgnoreList = ["Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb", "Mana Prism"]
+	upKeepIgnoreList = ["Essence Drain","Minor Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb", "Mana Prism"]
 	for card in table:
 		if card.Name == "Mordok's Obelisk" and card.isFaceUp:
 			MordoksObeliskInPlay = 1
@@ -269,7 +256,7 @@ def resolveUpkeep():
 			ManaPrism = card
 		if card.Name == "Psi-Orb" and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
 			PsiOrbDisc = 3
-			if PsiOrbDisc == 3: notify("The PSI-Orb has {} Upkeep discounts avaialbe this Round.".format(PsiOrbDisc))
+			if PsiOrbDisc == 3: notify("The PSI-Orb has {} Upkeep discounts available this Round.".format(PsiOrbDisc))
 
 	for card in table:
 		upKeepCost = 0
@@ -323,13 +310,27 @@ def resolveUpkeep():
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 		# Process Upkeep for Essence Drain
 		elif card.Name == "Essence Drain" and card.controller != me and card.isFaceUp:
+			target = getAttachTarget(card)
 			upKeepCost = getTextTraitValue(card, "Upkeep")
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
 				card.filter = upKeepFilter
-				processUpKeep(upKeepCost, card, Upkeep, notifystr)
+				processUpKeep(upKeepCost, card, target, notifystr)
+				if ManaPrismInPlay == 1:
+					addToken(ManaPrism, Mana)
+				upKeepCost = 0
+		#Process Upkeep for Minor Essence Drain
+		elif card.Name == "Minor Essence Drain" and card.controller != me and card.isFaceUp:
+			target = getAttachTarget(card)
+			upKeepCost = 1
+			if PsiOrbDisc > 0 and "Mind" in card.school:
+				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
+			else:
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+				card.filter = upKeepFilter
+				processUpKeep(upKeepCost, card, target, notifystr)
 				if ManaPrismInPlay == 1:
 					addToken(ManaPrism, Mana)
 				upKeepCost = 0
@@ -381,7 +382,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 		if choice == 1 and card1.isFaceUp:
 			me.Mana -= upKeepCost
 			card1.filter = None
-			notify("{} pays the Upkeep cost of {} for {}".format(me, upKeepCost, card1, card2))
+			notify("{} pays the Upkeep cost of {} for {} on {}".format(me, upKeepCost, card1, card2))
 			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
 				attatchedTo = getAttachTarget(card1)
 				damage = card1.markers[CrushToken]
@@ -399,43 +400,84 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			card1.filter = None
 			return
 		else:
-			card1.moveTo(me.piles['Discard'])
-			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
+			card2.moveTo(me.piles['Discard Pile'])
+			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card1, card2, card2))
 			return
 
-def resolveRegeneration():
+def resolveRegeneration(traits, card):
  	mute()
- 	for card in table:
-			traits = computeTraits(card)
-			if ("Regenerate" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
-					notify("{} has the Finite Life Trait and can not Regenerate".format(card.name))
-					return
-			elif "Regenerate" in traits and card.controller == me and card.isFaceUp:
-					regenAmount = traits.get("Regenerate")
-					if "Mage" in card.Subtype and card.controller == me and me.damage != 0:
-							if me.damage <= regenAmount:
-									me.damage = 0
-									notify("{} regenerates and removes all damage.".format(card.name))
-							else:
-									me.damage -= regenAmount
-									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
-					elif card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
-							damage = card.markers[Damage]
-							if damage <= regenAmount and damage != 0:
-									card.markers[Damage] = 0
-									notify("{} regenerates and removes all damage.".format(card.name))
-							else:
-									card.markers[Damage] -= regenAmount
-									notify("{} regenerates and removes {} damage.".format(card.name,regenAmount))
+ 	#for card in table:
+			#traits = computeTraits(card)
+	if ("Regenerate" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			notify("{} has the Finite Life Trait and can not Regenerate".format(card.name))
+			return
+	elif "Regenerate" in traits and card.controller == me and card.isFaceUp:
+			regenAmount = traits.get("Regenerate")
+			if "Mage" in card.Subtype and card.controller == me and me.damage != 0:
+					if me.damage <= regenAmount:
+							me.damage = 0
+							notify("{}\'s {} regenerates and removes all damage.".format(card.controller, card.name))
+					else:
+							me.damage -= regenAmount
+							notify("{}\'s {} regenerates and removes {} damage.".format(card.controller, card.name, regenAmount))
+			elif "Mage" in card.Subtype and card.controller == me and me.damage != 0:
+					notify("{} is at full health.".format(card.name))
+			elif card.Type in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']:
+					damage = card.markers[Damage]
+					if damage <= regenAmount and damage != 0:
+							card.markers[Damage] = 0
+							notify("{}\'s {} regenerates and removes all damage.".format(card.controller, card.name))
+					elif damage == 0:
+							notify("{}\'s {} is at full health.".format(card.controller, card.name))
+					else:
+							card.markers[Damage] -= regenAmount
+							notify("{}\'s {} regenerates and removes {} damage.".format(card.controller, card.name,regenAmount))
+	if ("Lifegain" in traits and not "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			lifeGainAmount = traits.get("Lifegain")
+			me.Life += lifeGainAmount
+			notify("{} gains {} Life from the brilliant glow of the Sunfire Amulet.".format(card.name,lifeGainAmount))
+	elif ("Lifegain" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
+			return
 
-			if ("Lifegain" in traits and not "Finite Life" in traits) and card.controller == me and card.isFaceUp:
-					lifeGainAmount = traits.get("Lifegain")
-					me.Life += lifeGainAmount
-					notify("{} gains {} Life from the brilliant glow of the Sunfire Amulet.".format(card.name,lifeGainAmount))
-			elif ("Lifegain" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
-					notify("{} has the Finite Life Trait and can not gain Life".format(card.name))
-					return
+def resolveDotEnchantment(card):
+ 	mute()
+	target = getAttachTarget(card)
+	damageAmount = 0
+	if "Ghoul Rot" in card.Name and card.controller == me and card.isFaceUp:
+			damageAmount = 2
+	elif "Curse of Decay" in card.Name and card.controller == me and card.isFaceUp:
+			damageAmount = 1
+	elif "Arcane Corruption" in card.Name and card.controller == me and card.isFaceUp:
+		attachments = 	getAttachments(target)
+		for attach in attachments:
+			if attach.Type == "Enchantment" and attach.controller.name == target.controller.name:
+				damageAmount +=1
+	for p in players:
+		if p.name == target.controller.name:
+			remoteCall(p, "addDamageAmount", [target, damageAmount])
+			notify("{}\'s {} feels the effects of the {} curse and takes {} damage.".format(target.controller, target, card, damageAmount))
 
+def resolveCurseItem(card):			
+	mute()
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageID = int(mageDict["MageID"])
+	notifystr = "Do you wish to take 2 damage to keep your {}?".format(card.Name)
+	choiceList = ['Yes', 'No']
+	colorsList = ['#0000FF', '#FF0000']
+	choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+	if choice == 1:
+		for p in players:
+			if p.name == card.controller.name:
+				remoteCall(p, "addDamageAmount", [Card(mageID), 2])
+		notify("{}\'s {} is cursed! {} takes 2 damage from holding onto it!".format(me, card, me))
+		return
+	else:
+		card.moveTo(me.piles['Discard Pile'])
+		notify("{}\'s {} is cursed! {} throws it away before taking any damage!".format(me, card, me))
+		return
+			
 def stranglevineReceiptPrompt(card,damage):#I suppose this would really be better done as a generic damage receipt prompt but...Q2.
 		mute()
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
@@ -762,7 +804,9 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 					 (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
 					 (cName == "Druid's Leaf Ring" and sType != "Enchantment" and ("Plant" in sSubtype)) or
 					 (cName == "Force Ring" and sType != "Enchantment" and ("Force" in sSubtype)) or
-					 (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)))):
+					 (cName == "Ring of the Ocean\'s Depths" and sType != "Enchantment" and ("Hydro" in sSubtype or "Aquatic" in sSubtype)) or
+					 (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)) or
+					 (cName == "Commander\'s Cape" and sType != "Enchantment" and ("Command" in sSubtype or ("Soldier" in sSubtype and "Creature" in sType))))):
 						return (1,cName)
 				#Discounts that apply no matter who casts the spell
 				if ((cName == "General's Signet Ring" and ("Soldier" in sSubtype)) or
@@ -798,7 +842,9 @@ def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY 
 							  (cName == "Ring of Curses" and ("Curse" in sSubtype)) or
 							  (cName == "Druid's Leaf Ring" and ("Plant" in sSubtype)) or
 							  (cName == "Force Ring" and ("Force" in sSubtype)) or
-							  (cName == "Ring of Command" and ("Command" in sSubtype))): return 1
+							  (cName == "Ring of Command" and ("Command" in sSubtype)) or
+							  (cName == "Voice of the Sea" and ("Song" in sSubtype)) or
+							  (cName == "Commander\'s Cape" and ("Command" in sSubtype))): return 1
 		if timesUsed <2 and cName == "Death Ring" and ("Necro" in sSubtype or "Undead" in sSubtype): return 1
 		return 0
 		#Returns discount as integer (0, if no discount)
@@ -811,7 +857,10 @@ def computeRevealCost(card): #For enchantment reveals
 		if not target: return cost
 		#Exceptions
 		name = card.Name
-		tLevel = int(sum(map(lambda x: int(x), target.Level.split('+'))))
+		if "/" in target.level:
+			tLevel = int(sum(map(lambda x: int(x), target.Level.split('/')[0])))
+		else:
+			tLevel = int(sum(map(lambda x: int(x), target.Level.split('+'))))
 		if name == "Mind Control":
 				cost = 2*tLevel
 		elif name in ["Charm","Fumble"]:

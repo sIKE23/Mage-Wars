@@ -444,19 +444,19 @@ def flipcard(card, x = 0, y = 0):
 			toggleAction(card) #Mages always start with an active action marker
 			toggleQuick(card)
 			if mageDict["MageRevealed"] == "False": mageSetup()
-			if "Wizard" in card.Name:
+			if "Wizard" in card.Name and int(card.Level) >4:
 					card.markers[VoltaricOFF] = 1
-			if "Forcemaster" == card.Name:
+			if "Forcemaster" == card.Name and int(card.Level) >4:
 					card.markers[DeflectR] = 1
-			if "Beastmaster" == card.Name:
+			if "Beastmaster" == card.Name and int(card.Level) >4:
 					card.markers[Pet] = 1
 			if "Priest" == card.Name:
 					card.markers[HolyAvenger] = 1
-			if "Druid" == card.Name:
+			if "Druid" == card.Name and int(card.Level) >4:
 					card.markers[Treebond] = 1
-			if "Necromancer" == card.Name:
+			if "Necromancer" == card.Name and int(card.Level) >4:
 					card.markers[EternalServant] = 1
-			if "Warlock" == card.Name:
+			if "Warlock" == card.Name and int(card.Level) >4:
 					card.markers[BloodReaper] = 1
 		if "Siren Stats" == card.Name:
 					card.markers[SirensCall] = 1
@@ -488,6 +488,8 @@ def flipcard(card, x = 0, y = 0):
 				card.markers[Taunt] = 1
 		if "Skeelax, Taunting Imp" == card.Name:
 				card.markers[TauntS] = 1
+		if "Mhegedden, Sealed Demon" == card.Name:
+				card.markers[SealToken] = 3
 		if "Ichthellid" == card.Name:
 				card.markers[EggToken] = 1
 		if "Afflicted Demon" == card.Name:
@@ -500,6 +502,8 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[LoadToken] = 1
 		if "Corrosive Orchid"  == card.Name:
 			card.markers[MistToken] = 1
+		if "Malakai\'s Basilica"  == card.Name:
+			card.markers[Light] = 1
 		if "Nightshade Lotus" == card.Name:
 			card.markers[MistToken] = 1
 		if "Azurean Genie" == card.Name:

@@ -55,7 +55,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		if aTraitDict.get("Incapacitated"):
 				if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.name.split(',')[0]))
 				return {}
-		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if c.Name=="Lion Savagery" and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
+		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if (c.Name=="Lion Savagery" or c.Name=="Ballad of Courage") and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
 		if not attacker: defender = None
 		dTraitDict = (computeTraits(defender) if defender else {})
 		attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
@@ -279,8 +279,9 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
-		attack = deepcopy(attack["OriginalAttack"])
-		attack["OriginalAttack"] = originalAttack
+		if not ('Counterstrike' in attack['Traits'] or 'Glancing' in attack['Traits']):
+			attack = deepcopy(attack["OriginalAttack"])
+			attack["OriginalAttack"] = originalAttack
 		atkTraits = attack["Traits"]
 		localADict = dict(aTraitDict)
 		#Runesmithing
@@ -908,11 +909,30 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
+				#Check for Redirect
+				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Redirect"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+						notify("{}'s attack is redirected!".format(attacker.name.split(',')[0]))
+						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+						return
+				#Check for Divine Reversal
+				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Divine Reversal"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+						notify("{}'s attack is reversed by a divine presence!".format(attacker.name.split(',')[0]))
+						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+						return
 				#Check for reverse attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
 						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
 						attack["OriginalAttack"]["original target dict"] = dTraitDict
 						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
+						return
+				#Check for Glancing Blow
+				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Glancing Blow"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+						notify("{}'s attack is magically deflected!".format(attacker.name.split(',')[0]))
+						attack["Dice"] -= 3
+						attack["Traits"]["Glancing"] = 'True'
+						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
 						return
 
 		if attack.get('EffectType','Attack')=='Attack':
@@ -1211,7 +1231,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 						remoteCall(mage.controller, "remotePlayerHeal", [healing])
 
 		#Demonic Link health drain
-		if [1 for c in getAttachments(attacker) if c.Name=="Demonic Link" and c.controller==attacker.controller] and not timesHasOccured("Demonic Link",attacker) and defender.Type == 'Creature' and dTraitDict.get("Living") and damage:
+		if [1 for c in getAttachments(attacker) if c.Name=="Demonic Link" and c.isFaceUp and c.controller==attacker.controller] and not timesHasOccured("Demonic Link",attacker) and defender.Type == 'Creature' and dTraitDict.get("Living") and damage:
 				mage = Card(aTraitDict.get('OwnerID'))
 				healing = min(1,mage.controller.damage)
 				if healing and not computeTraits(mage).get("Finite Life"):
@@ -1297,9 +1317,11 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 										 EternalServant,
 										 HolyAvenger,
 										 Pet]
+				#reusableGeneralTokens = [Light]
 				mage = Card(cardTraitsDict.get('MageID'))
 				for t in reusableAbilityTokens:
 						if card.markers[t]: mage.markers[t] = 1 #Return mage ability markers to their owner.
+				
 				if card.markers[WoundedPrey]:
 						mages = [m for m in table if m.Name == "Johktari Beastmaster" and not m.markers[WoundedPrey]] #WARNING: This may identify the wrong JBM if there are more than 1 in the match. Unfortunately, markers cannot be associated with players, so it is difficult to correctly reassign the marker (not impossible, just not worth the effort)
 						if mages:
@@ -1500,10 +1522,8 @@ def computeTraits(card):
 										elif (cName == 'Raincloud' and
 												('Conjuration' in cardType or cardType == 'Creature') and
 												'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
-										elif (cName == 'Hellscape' and
-												cardType == 'Creature' and
-												"Demon" in subtype and
-												'Living' in rawTraitsList): append('Regenerate 1')
+										#elif (cName == 'Shallow Sea' and
+												#"Siren" in name): append('Regenerate 1')
 										elif (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" in subtype): append('Melee +1')
@@ -1559,8 +1579,10 @@ def computeTraits(card):
 								if ('Mage' in cSubtype and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
-								if ('Siren' in name and cType in ['Conjuration-Terrain'] and cSubtype == 'Water'): append('Regenerate 1')
-								if (name == 'Naiya' and cType in ["Conjuration-Terrain"] and cSubtype == 'Water'): extend(['Armor +1','Channeling +1'])
+								if ('Siren' in name and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): append('Regenerate 1')
+								if (name == 'Naiya' and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): 
+									append('Regenerate 1')
+									append('Channeling +1')
 						if 'Mage' in subtype and not 'Magestats' in cardType:
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
@@ -1597,7 +1619,9 @@ def computeTraits(card):
 						elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						elif (cName == 'Rolling Fog'): append('Obscured')
 						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
-						elif (cName == 'Gravikor' and cardType == 'Creature' and cardGetDistance(c,card)<=2): append('Non-Flying')
+						elif (cName == 'Gravikor' and card.isFaceUp and cardType == 'Creature' and 'Flying' in rawTraitsList and cardGetDistance(c,card)<=2): 
+							append('Non-Flying')
+							remove('Flying')
 						#>>Altar of Skulls<<
 						#Incantations
 						elif (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])
@@ -1621,7 +1645,8 @@ def computeTraits(card):
 				#Also should add undead,zombie subtypes, but no way to do that without the spellDictionary.
 		if markers[Stuck] : extend(['Restrained','Unmovable'])
 		if markers[Daze]: append('Defense -{}'.format(str(markers[Daze])))
-
+		if markers[Light]: append('Light +{}'.format(str(markers[Light])))
+		
 		if markers[Pet] and 'Animal' in subtype: extend(['Melee +1','Armor +1','Life +3'])
 		if markers[BloodReaper] and 'Demon' in subtype: append('Bloodthirsty +2')
 		if markers[EternalServant] and 'Undead' in subtype and not "Legendary" in card.Traits: append('Piercing +1')
@@ -1631,6 +1656,7 @@ def computeTraits(card):
 		if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
 		if markers[SirensCall] and 'Aquatic' in subtype and cController == controller and 'Mage' not in subtype: extend(['Melee +2'])
+		if markers[Grapple]: extend(['Melee -2'])
 
 
 				#Harshforge monolith
