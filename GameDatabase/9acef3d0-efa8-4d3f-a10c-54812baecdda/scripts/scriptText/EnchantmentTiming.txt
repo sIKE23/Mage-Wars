@@ -72,3 +72,11 @@ Retaliate
 Counterstrike
 #
 Attack Ends
+#
+Channeling
+Arcane Corruption
+Ghoul Rot
+Iguana Regrowth
+Poisoned Blood
+Regrowth
+#

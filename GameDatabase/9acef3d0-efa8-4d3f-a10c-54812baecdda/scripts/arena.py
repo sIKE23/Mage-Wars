@@ -60,8 +60,10 @@ def nextPhaseArena():
 				remoteCall(p, "resetDiscounts",[])
 				remoteCall(p, "resetMarkers", [])
 				remoteCall(p, "resolveChanneling", [p])
-				for card in table:
-					if not card.isFaceUp and card.Type == 'Enchantment' and card.controller.name == p.name: remoteCall(p, "revealAttachmentChannel", [card, 'Channeling'])
+				# Work in progress here. I want to make it so you can choose to reveal enchantments before the automation goes along, but it's not
+				# done yet. 
+				#for card in table:
+					#if not card.isFaceUp and card.Type == 'Enchantment' and card.controller.name == p.name: remoteCall(p, "revealAttachmentChannel", [card, 'Channeling'])
 				for card in table:
 					traits = computeTraits(card)
 					if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
@@ -84,14 +86,15 @@ def nextPhaseArena():
 	
 def revealAttachmentChannel(card,step):
 		recommendList = getEnchantRecommendationList(step)
-		options = ['{}\n{}\n{}'.format(card.Name.center(68,' '),(('('+getAttachTarget(card).Name+')').center(68,' ')),card.Text.split('\r\n')[0])]
-		colors = ['#CC6600' for i in options] #Orange
-		options.append('I would not like to reveal this enchantment.')
-		colors.append("#de2827")
-		choice = askChoice('Would you like to reveal this enchantment?', options,colors)
-		if choice == 1: 
-			revealEnchantment(card)
-			return 
+		if card.name in recommendList:
+			options = ['{}\n{}\n{}'.format(card.Name.center(68,' '),(('('+getAttachTarget(card).Name+')').center(68,' ')),card.Text.split('\r\n')[0])]
+			colors = ['#CC6600' for i in options] #Orange
+			options.append('I would not like to reveal this enchantment.')
+			colors.append("#de2827")
+			choice = askChoice('Would you like to reveal this enchantment?', options,colors)
+			if choice == 1: 
+				revealEnchantment(card)
+				return 
 				
 	
 def resetDiscounts():
