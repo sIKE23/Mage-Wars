@@ -133,7 +133,26 @@
 			<property name="CardID" value="MWPROMO50" />
 		</card>
 
-
+		<card id="9524569a-a13f-4d3a-9e41-58413dcb90d8" name="Alfiya, Noble Enforcer">
+			<property name="Nickname" value="Alfiya, Noble Enforcer" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Dragon" />
+			<property name="Cost" value="24" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="8" />
+			<property name="Stats" value="Armor=3, Life=19" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="19" />
+			<property name="cAttacks" value="name=Holy Burst;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=5;effects={9:['Stun'], 5: ['Daze']};Piercing +X=3;Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="AttackBar" value="Radiant Touch:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=5] [5-8 = Daze; 9+ = Stun] [Ethereal] [+2 vs. Nonliving Creatures]" />
+			<property name="Traits" value="Aegis 1, Flying" />
+			<property name="Text" value="When Messenger of Bim-Shalla is Summoned, heal a friendly living creature within 1 zone the amount rolled on 4 attack dice." />
+			<property name="CardID" value="MWPROMO75" />
+		</card>
 		<card id="57355673-ff5f-4ac6-8d78-2a89c8791ee5" name="Asto Vidatu, Angel Slayer">
 			<property name="Nickname" value="Asto Vidatu" />
 			<property name="Type" value="Creature" />
@@ -598,6 +617,26 @@
 			<property name="Traits" value="Aegis 1, Flying, Wind Immunity, Legendary" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO34" />
+		</card>
+		<card id="197c7cd4-6a1f-47dc-b407-e5922406ae33" name="Sherean Leviathan">
+			<property name="Nickname" value="Sherean Leviathan" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Fish" />
+			<property name="Cost" value="22" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water" />
+			<property name="Level" value="5" />
+			<property name="Stats" value="Armor=3, Life=24" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="24" />
+			<property name="cAttacks" value="name=Endless Maw;action type=Quick;range type=Melee;range=(0,0);dice=7;Piercing +X=1" />
+			<property name="AttackBar" value="Endless Maw:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO61" />
 		</card>
 		<card id="82b98f7b-6f00-4f84-ba31-31275906b59c" name="Temple High Guard">
 			<property name="Nickname" value="Temple High Guard" />
