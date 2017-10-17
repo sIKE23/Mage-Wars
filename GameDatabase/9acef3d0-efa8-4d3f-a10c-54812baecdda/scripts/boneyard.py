@@ -460,7 +460,36 @@ def resolveDotEnchantment(card):
 	for p in players:
 		if p.name == target.controller.name:
 			remoteCall(p, "addDamageAmount", [target, damageAmount])
-			notify("{}\'s {} feels the effects of the {} curse and takes {} damage.".format(target.controller, target, card, damageAmount))
+			notify("{}\'s {} feels the effects of the {} and takes {} damage.".format(target.controller, target, card, damageAmount))
+			
+def resolveAreaDot(traits, card):
+ 	mute()
+	damageAmount = 0
+	type = {'Malacoda':'',
+			'Plagued':'',
+			'Idol':''}
+	if "Malacoda" in traits and card.controller == me and card.isFaceUp:
+			damageAmount += 2
+			type['Malacoda'] = 'Malacoda'
+	if "Plagued" in traits and card.controller == me and card.isFaceUp:
+			damageAmount += 1
+			type['Plagued'] = 'Plagued'
+	if "Pestilence" in traits and card.controller == me and card.isFaceUp:
+			damageAmount += 1
+			type['Idol']= 'The Idol of Pestilence'
+	if type['Malacoda'] != '' and type['Plagued'] != '' and type['Idol']!='':
+			type['Malacoda'] = 'Malacoda, '
+			type['Plagued'] = 'Plagued and '
+	elif type['Malacoda'] != '' and (type['Plagued'] != '' or type['Idol']!=''):
+			type['Malacoda'] = 'Malacoda and '
+	elif type['Malacoda'] == '' and type['Plagued'] != '' and type['Idol']!='':
+			type['Plagued'] = 'Plagued and '
+			
+	for p in players:
+		if p.name == card.controller.name:
+			remoteCall(p, "addDamageAmount", [card, damageAmount])
+			notify("{}\'s {} feels the effect(s) of ".format(card.controller,card) + "{Malacoda}{Plagued}{Idol}".format(**type)+ " and takes {} damage.".format(damageAmount))
+
 
 def resolveCurseItem(card):			
 	mute()

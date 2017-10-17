@@ -71,6 +71,8 @@ def nextPhaseArena():
 					if card.markers[Bleed] and card.controller.name == p.name: remoteCall(p, "resolveBleed", [card])
 					if card.markers[Disable] and card.controller.name == p.name: remoteCall(p, "resolveDisable",[card])
 					if 'Dissipate' in traits and card.controller.name == p.name: remoteCall(p, "resolveDissipate", [traits, card])
+					if 'Madrigal' in traits and card.controller.name == p.name: remoteCall(p, "resolveMadrigal", [traits, card])
+					if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
 					if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller.name == p.name and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
 					if card.Name in ["Ghoul Rot", "Curse of Decay", "Arcane Corruption"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveDotEnchantment", [card]) 
 					if card.Name == "Curse Item" and card.controller.name != p.name and card.isFaceUp: 
@@ -83,6 +85,27 @@ def nextPhaseArena():
 
 	update() #attempt to resolve phase indicator sometimes not switching
 
+	
+def resolveMadrigal(traits, card):
+	if ("Madrigal" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
+			notify("{} has the Finite Life Trait and can not heal".format(card.name))
+			return
+	if "Mage" in card.Subtype and card.controller == me and me.Damage > 1:
+			damageAmount = 2
+			subDamageAmount(card, 2)
+	elif "Mage" in card.Subtype and card.controller == me:
+			damageAmount = me.Damage
+			me.Damage = 0
+	elif "Mage" not in card.Subtype and card.markers[Damage]<2:
+			damageAmount = card.markers[Damage]
+			card.markers[Damage] = 0
+	else:
+			damageAmount = 2
+			subDamageAmount(card, 2)
+	if damageAmount > 0:
+		notify("{}'s Healing Madrigal heals {} damage from {} ".format(me,damageAmount, card.name))
+	else:
+		notify("{}'s {} is already at full health".format(me, card.name))
 	
 def revealAttachmentChannel(card,step):
 		recommendList = getEnchantRecommendationList(step)

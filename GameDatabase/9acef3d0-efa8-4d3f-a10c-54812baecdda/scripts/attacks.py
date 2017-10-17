@@ -1498,6 +1498,16 @@ def computeTraits(card):
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Aegis 1')
+										elif (cName == 'Healing Madrigal' and
+												c.isFaceUp and
+												cController == controller and
+												cardType == 'Creature' and
+												'Living' in rawTraitsList): append('Madrigal')
+										elif (cName == 'Plagued' and
+												c.isFaceUp and
+												cardType == 'Creature' and
+												not 'Poison Immunity' in rawTraitsList and
+												'Living' in rawTraitsList): append('Plagued')
 										elif (cName == 'Astral Anchor' and
 												cardType == 'Creature'): append('Anchored')
 										elif (cName == 'Standard Bearer' and
@@ -1571,6 +1581,10 @@ def computeTraits(card):
 										elif (cName == 'Sardonyx, Blight of the Living' and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Finite Life')
+										elif (cName == 'Malacoda' and
+												cardType == 'Creature' and
+												not 'Poison Immunity' in rawTraitsList and
+												'Living' in rawTraitsList): append('Malacoda')
 										elif (cName == 'Victorian Griffin' and
 												cardType == 'Creature'): remove('Elusive')
 										elif (cName == 'Steelclaw Cub' and
@@ -1610,23 +1624,24 @@ def computeTraits(card):
 										if cat: append('Elusive')
 						#Global effects
 						#Conjurations
-						elif (cName == 'Wreck of the Viridian Lace' and 'Pirate' in subtype and int(getGlobalVariable("PlayerWithIni")) == me._id): extend(['Melee +1', 'Ranged +1'])
-						elif (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
-						elif (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
-						elif (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
-						elif (cName == 'Mordok\'s Obelisk' and cardType == 'Creature'): append('Upkeep +1')
-						elif (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
-						elif (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
-						elif (cName == 'Rolling Fog'): append('Obscured')
-						elif (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
-						elif (cName == 'Gravikor' and card.isFaceUp and cardType == 'Creature' and 'Flying' in rawTraitsList and cardGetDistance(c,card)<=2): 
+						if (cName == 'Idol of Pestilence' and card.isFaceUp and cardType == 'Creature' and not 'Poison Immunity' in rawTraitsList and 'Living' in rawTraitsList): append('Pestilence')
+						if (cName == 'Wreck of the Viridian Lace' and 'Pirate' in subtype and int(getGlobalVariable("PlayerWithIni")) == me._id): extend(['Melee +1', 'Ranged +1'])
+						if (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
+						if (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
+						if (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
+						if (cName == 'Mordok\'s Obelisk' and cardType == 'Creature'): append('Upkeep +1')
+						if (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
+						if (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
+						if (cName == 'Rolling Fog'): append('Obscured')
+						if (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
+						if (cName == 'Gravikor' and card.isFaceUp and cardType == 'Creature' and 'Flying' in rawTraitsList and cardGetDistance(c,card)<=2): 
 							append('Non-Flying')
 							remove('Flying')
 						#>>Altar of Skulls<<
 						#Incantations
-						elif (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])
-						elif (cName == 'Call of the Wild' and cController == controller and 'Animal' in subtype): append('Melee +1')
-						elif (cName == 'Zombie Frenzy' and ('Zombie' in subtype or markers[Zombie])):
+						if (cName == 'Akiro\'s Battle Cry' and cController == controller and 'Soldier' in subtype): extend(['Charge +2,Fast'])
+						if (cName == 'Call of the Wild' and cController == controller and 'Animal' in subtype): append('Melee +1')
+						if (cName == 'Zombie Frenzy' and ('Zombie' in subtype or markers[Zombie])):
 								rawTraitsList = [t for t in rawTraitsList if t not in ['Lumbering','Pest','Slow']]
 								extend(['Fast','Bloodthirsty +1'])
 

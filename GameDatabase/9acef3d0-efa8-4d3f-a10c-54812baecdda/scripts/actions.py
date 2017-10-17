@@ -200,6 +200,14 @@ def subDamage(card, x = 0, y = 0):
 	else:
 			card.markers[Damage] -= 1
 
+def subDamageAmount(card,amount = 1):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	if "Mage" in card.Subtype and card.controller == me:
+			me.Damage -= amount
+	else:
+			card.markers[Damage] -= amount			
+			
 def clearTokens(card, x = 0, y = 0):
 	mute()
 	for tokenType in card.markers:
