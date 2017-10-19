@@ -55,7 +55,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		if aTraitDict.get("Incapacitated"):
 				if specialCase!="Counterstrike": whisper("{} is incapacitated and cannot attack!".format(attacker.name.split(',')[0]))
 				return {}
-		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if (c.Name=="Lion Savagery" or c.Name=="Ballad of Courage") and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
+		if attacker and (aTraitDict.get('Charge') or [1 for c in getAttachments(attacker) if (c.Name=="Lion Savagery" or c.Name=="Ballad of Courage") and c.isFaceUp and c.controller==attacker.controller]) and defender and getZoneContaining(attacker)==getZoneContaining(defender) and not specialCase and not hasAttackedThisTurn(attacker) and askChoice('Apply charge bonus to this attack?',['Yes','No'],["#01603e","#de2827"]) == 1: rememberCharge(attacker) #Let's try prompting for charge before opening menu, for a change.
 		if not attacker: defender = None
 		dTraitDict = (computeTraits(defender) if defender else {})
 		attackList = getAttackList(attacker) if attacker else [{'Dice':i+1} for i in range(7)]
@@ -280,7 +280,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
 		if not ('Counterstrike' in attack['Traits'] or 'Glancing' in attack['Traits']):
-			attack = deepcopy(attack["OriginalAttack"])
+			attack = deepcopy(attack["OriginalAttack"]) #I still don't understand what this is doing. Why do we need this? It looks like it just resets the attack to the original attack which causes problems when modifying - Shark
 			attack["OriginalAttack"] = originalAttack
 		atkTraits = attack["Traits"]
 		localADict = dict(aTraitDict)
@@ -299,6 +299,8 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 										break
 		#BM Conditional Ranged +1
 		if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
+		#Ring of tides for Siren
+		if attacker.name == 'Siren' and localADict.get("Tides") and ("Type" in attack.keys() and attack['Type']=="Hydro"): attack['Dice'] += 1
 		#Wildfire Imp Melee buff for attacking a Burning Object
 		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
 		#if "Wall of Fire" or "Fire Elemental" in defender.name and attack.get('Type') == 'Hydro': attack['Traits']['Ethereal'] = True
@@ -349,6 +351,12 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 							 (cName == 'Lightning Ring' and aType == 'Lightning'))):
 							localADict['Melee'] = localADict.get('Melee',0) + 1
 							localADict['Ranged'] = localADict.get('Ranged',0) + 1
+		#Force Armor
+		if "Forcemaster" in defender.Name and atkTraits.get("Piercing"): 
+			if atkTraits['Piercing'] >1:
+				atkTraits['Piercing'] = atkTraits['Piercing'] - 2
+			else:
+				atkTraits['Piercing'] = 0
 		attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
 		if dTraitDict.get('OwnerID'): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
 		return attack #If attack has zone attack trait, then it gains unavoidable
@@ -1378,6 +1386,8 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and (dTraitDict.get("Restrained") or dTraitDict.get("Incapacitated")): modRoll += 4
 		#Tidecaller's attack
 		if attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id : modRoll += 4
+		#Ring of Tides for a hydro attack from a Siren
+		if attacker.Name == "Siren" and "Tides" in aTraitDict and ("Type" in attack.keys() and attack['Type']=="Hydro") and int(getGlobalVariable("PlayerWithIni")) == me._id : modRoll += 2
 		if attacker.Name == "Temple of Light":
 				eventList = getEventList("Round")
 				for e in reversed(eventList):
@@ -1598,6 +1608,8 @@ def computeTraits(card):
 									append('Regenerate 1')
 									append('Channeling +1')
 						if 'Mage' in subtype and not 'Magestats' in cardType:
+								if cType == 'Equipment' and cName == 'Ring of Tides' and (cController == controller) and not c.markers[Disable] and int(getGlobalVariable("PlayerWithIni")) == me._id: append ('Tides')#This will need changed some day to just add attack dice, but this is a quick fix for the moment
+								if cType == 'Equipment' and cName == 'Force Armor' and (cController == controller) and not c.markers[Disable]: append('Force Armor')
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
 										traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])
@@ -1850,6 +1862,7 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
 		#Giant Wolf Spider's attack
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): d12Bonus += 4
 		if attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id: d12Bonus += 4
+		if attacker.Name == "Siren" and "Tides" in aTraitDict and ("Type" in attack.keys() and attack['Type']=="Hydro") and int(getGlobalVariable("PlayerWithIni")) == me._id : d12Bonus += 2
 		if attacker.Name == "Temple of Light":
 				eventList = getEventList("Round")
 				for e in reversed(eventList):
