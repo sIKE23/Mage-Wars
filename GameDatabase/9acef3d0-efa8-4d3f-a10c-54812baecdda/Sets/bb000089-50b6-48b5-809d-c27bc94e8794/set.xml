@@ -413,7 +413,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Forcemaster Only" />
-			<property name="Text" value="As an additional cost to reveal Redistributed Power, you must remove two Dissipate tokens from force creatures you control. This creature gains Melee +2.  If this spell would be destroyed by an opponent&apos;s effect, prevent that destruction, unless that opponent pays 3 mana. &#xD;&#xA;[Melee +2]" />
+			<property name="Text" value="As an additional cost to reveal Redistributed Power, you must remove two Dissipate tokens from force creatures you control. This creature gains Melee +2.  If this spell would be destroyed by an opponent&apos;s effect, prevent that destruction, unless that opponent pays 3 mana. &#xD;&#xA; [Melee +2]" />
 			<property name="CardID" value="MWAFME08" />
 		</card>
 		
@@ -472,7 +472,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Forcemaster Only" />
-			<property name="Text" value="This Mage gains Armor +1. Attacks targeting this Mage gain the Piercing -2 trait. &#xD;&#xA;[Armor +1]" />
+			<property name="Text" value="This Mage gains Armor +1. Attacks targeting this Mage gain the Piercing -2 trait. &#xD;&#xA; [Armor +1]" />
 			<property name="CardID" value="MWAFMQ01" />
 		</card>
 
