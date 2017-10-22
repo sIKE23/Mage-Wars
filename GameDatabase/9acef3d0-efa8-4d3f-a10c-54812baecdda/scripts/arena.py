@@ -386,6 +386,12 @@ def validateDeck(deck):
 				mageName = "Paladin"
 			if "Siren" in mageName:
 				mageName = "Siren"
+			if "Priestess" in mageName:
+				mageName = "Priestess"
+			if "Forcemaster" in mageName:
+				mageName = "Forcemaster"
+			if "Wizard" in mageName:
+				mageName = "Wizard"
 			if mageName in card.Traits:	# mage restriction
 				ok = True
 			for s in [school for school in spellbook if spellbook[school] == 1]: # school restriction
