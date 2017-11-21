@@ -264,7 +264,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
-			(cTargetBar == 'Mage' and 'Mage' not in tSubtype) or
+			(cTargetBar == 'Mage' and 'Mage' in tSubtype) or
 			(cTargetBar == 'Paladin Mage' and 'Mage' in tSubtype and tName == 'Paladin') or
 			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
 			(cTargetBar == 'Non-Flying Corporeal Creature' and tType == 'Creature' and not traits.get('Flying') and traits.get('Corporeal')) or
