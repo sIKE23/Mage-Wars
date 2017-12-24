@@ -247,8 +247,9 @@ def canAttach(card,target):
 			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or
 			(cTargetBar == 'Creature or Conjuration' and (tType == 'Creature' or tType == 'Conjuration')) or
-			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
+			(cTargetBar == 'Friendly Creature' and tType == 'Creature' and tController == cController) or
+			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and tController == cController) or
 			(cTargetBar == 'Demon Creature' and tType == 'Creature' and 'Demon' in tSubtype) or
 			(cTargetBar == 'Incorporeal Creature' and tType == 'Creature' and traits.get('Incorporeal')) or
@@ -370,7 +371,7 @@ def canBind(card,target):
 		or (tName == 'Huginn, Raven Familiar' and cType == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in cSubtype)
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
-		or (tName == 'Cassiel, Shield of Asyra' and ("Healing" in cSubtype or "Protection" in cSubtype))
+		or (tName == 'Cassiel, Shield of Bim-Shalla' and ("Healing" in cSubtype or "Protection" in cSubtype))
 		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
 #Spawnpoints
 		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)

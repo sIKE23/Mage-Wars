@@ -227,7 +227,7 @@ def validateDeck(deck):
 			spellbook["War"] = int(costval[1])
 		elif "Earth" in costval[0]:
 			spellbook["Earth"] = int(costval[1])
-		elif "Water" in costval[0] and c.name != "Druid":
+		elif "Water" in costval[0] and mageName != "Druid":
 			spellbook["Water"] = int(costval[1])
 		elif "Air" in costval[0]:
 			spellbook["Air"] = int(costval[1])
@@ -283,7 +283,7 @@ def validateDeck(deck):
 			except:
 				levels[card.School] = int(card.Level)
 
-		if card.Type == "Creature" and c.name == "Forcemaster": #check for the forcemaster rule
+		if card.Type == "Creature" and mageName == "Forcemaster": #check for the forcemaster rule
 			debug("FM creature test")
 			if "Mind" not in card.School:
 				if "+" in card.School:
@@ -296,7 +296,7 @@ def validateDeck(deck):
 				elif card.School != "": # only one school
 					booktotal += int(card.Level)
 
-		if "Water" in card.School and c.name == "Druid": #check for the druid rule
+		if "Water" in card.School and mageName == "Druid": #check for the druid rule
 			if "1" in card.Level:
 				debug("Druid Water test: {}".format(card.Name))
 				if "+" in card.School:
@@ -319,7 +319,7 @@ def validateDeck(deck):
 
 		#Siren is trained in Water and all spells with Song or or Pirate subtypes.
 		#By this point, Water has been correctly calculated, but the Song/Pirate spells are overcosted if they are not Water
-		if "Siren" in c.name and (("Water" in card.School and "+" in card.School) or ("Water" not in card.School)) and ("Song" in card.Subtype or "Pirate" in card.Subtype):
+		if "Siren" in mageName and (("Water" in card.School and "+" in card.School) or ("Water" not in card.School)) and ("Song" in card.Subtype or "Pirate" in card.Subtype):
 			#subtract 1 per level per count as this card has been added x2 per non-trained school already
 				if "+" in card.School:
 					level = card.Level.split("+")
@@ -336,7 +336,7 @@ def validateDeck(deck):
 
 		#Paladin is trained in Holy Level 3 Spells, War Level 2 Spells, and all Holy Creatures reguardless of their training
 		#By this point, Level 3 and Lower Holy Spells and Level 2 and Lower War Spells have been correctly calculated, but spells higher then the specifed levels have been undercosted
-		if "Holy" in card.School or "War" in card.School and "Paladin" in c.name:
+		if "Holy" in card.School or "War" in card.School and "Paladin" in mageName:
 				if "+" in card.School:
 						level = card.Level.split("+")
 						school = card.School.split("+")
@@ -358,9 +358,9 @@ def validateDeck(deck):
 										booktotal += int(level[count])
 										break
 				else:
-					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature" and "Paladin" in c.name:
+					 if "Holy" == card.School and int(card.Level) > 3 and card.Type != "Creature" and "Paladin" in mageName:
 						booktotal += int(card.Level)
-					 elif "War" == card.School and int(card.Level) > 2 and "Paladin" in c.name:
+					 elif "War" == card.School and int(card.Level) > 2 and "Paladin" in mageName:
 						booktotal += int(card.Level)
 
 		#multiple Epic cards are not allowed in the spellbook.
