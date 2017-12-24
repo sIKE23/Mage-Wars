@@ -382,12 +382,12 @@ def validateDeck(deck):
 				mageName = "Warlord"
 			if "Priest" in mageName:
 				mageName = "Priestess"
+			if "Priestess" in mageName:
+				mageName = "Priestess"
 			if "Paladin" in mageName:
 				mageName = "Paladin"
 			if "Siren" in mageName:
 				mageName = "Siren"
-			if "Priestess" in mageName:
-				mageName = "Priestess"
 			if "Forcemaster" in mageName:
 				mageName = "Forcemaster"
 			if "Wizard" in mageName:
