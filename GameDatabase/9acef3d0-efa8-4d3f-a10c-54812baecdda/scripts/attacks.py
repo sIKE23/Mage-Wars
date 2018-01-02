@@ -972,6 +972,11 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		for attachedCard in getAttachments(attacker):
 				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
 						damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,1)
+		#Press the Attack reroll opportunity
+		if [1 for c in table if c.Name=="Press the Attack" and c.isFaceUp and c.controller == attacker.controller and getZoneContaining(c) == getZoneContaining(attacker)] and (attack.get('RangeType') == 'Melee'):
+				cName = c
+				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,4)
+		
 		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
 				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
 				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
@@ -1114,6 +1119,16 @@ def akirosFavor(card,damageRoll,effectRoll,selection):
 			if choice == 1:
 					notify("With the Gloves of Skill, {} has decided to reroll the Attack Dice!".format(me))
 					damageRoll = rollD6(sum(damageRoll))
+			else: return (damageRoll,effectRoll)
+	elif selection == 4:
+			if me.mana >1:
+					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
+					if choice == 1:
+							notify("The soldier's formation has allowed {} to reroll the Attack Dice!".format(me))
+							damageRoll = rollD6(sum(damageRoll))
+							me.mana -= 2
+							notify("{} pays 2 mana to reroll the dice".format(me))
+					else: return (damageRoll,effectRoll)
 			else: return (damageRoll,effectRoll)
 	if "Akiro" in card.name:
 			toggleReady(akirosFavor)
@@ -1814,7 +1829,7 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
 	life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
 	atkTraits = attack.get('Traits',{})
 	if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
-	else: return
+	else: return 0
 	if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
 	return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
 
