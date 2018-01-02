@@ -345,7 +345,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 					attack.get('RangeType') in ['Melee','Counterstrike']): attack['Traits']['Piercing'] += 1
 				elif c.controller == attacker.controller: #Friendly effects
 						aType = attack.get('Type')
-						if ( "Mage" == attacker.Subtype and
+						if ( "Mage" in attacker.Subtype and
 							((cName == 'Dawnbreaker Ring' and aType == 'Light') or
 							 (cName == 'Fireshaper Ring' and aType == 'Flame') or
 							 (cName == 'Lightning Ring' and aType == 'Lightning'))):
@@ -966,12 +966,8 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		damageRoll,effectRoll = rollDice(dice) #base roll
 		# Gloves of Skill re-roll opportunity
 		if "Mage" in attacker.Subtype and [1 for c in table if c.Name=="Gloves of Skill" and c.isFaceUp and c.controller == attacker.controller] and (attack.get('RangeType') == 'Ranged') and not timesHasOccured("Gloves of Skill",attacker.controller):
-				choice = askChoice("Was your aim true? If not your Gloves of Skill will let you re-roll your Attack Dice?",["Yes! Re-Roll the Attack Dice!","No! Let them be!"],["#171e78","#de2827"])
-				if choice == 1:
-						notify("With the Gloves of Skill guiding their hands {} has decided to re-roll the Attack Dice!".format(me))
-						damageRoll = rollD6(sum(damageRoll))
-						rememberPlayerEvent("Gloves of Skill")
-				displayRoll(damageRoll,effectRoll)
+				cName = c
+				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,3)
 		# Akrio's Favor re-roll opportunity
 		for attachedCard in getAttachments(attacker):
 				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
@@ -1092,18 +1088,19 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 
 def akirosFavor(card,damageRoll,effectRoll,selection):
 	mute()
-	# the fucntion will all a player to Akiro's Favor to re-roll the appropriate dice based on the choices avaialbale
+	# the function will allow a player with Akiro's Favor revealed to re-roll the appropriate dice based on the choices avaialbale
 	# 1 - prompt to re-roll both Dice, 2 - prompt to re-roll only the effect die, 3 - prompt to re-roll only the attack dice
 	effectRoll = effectRoll
 	damageRoll = damageRoll
-	akirosFavor = card
+	if "Akiro" in card.name:
+			akirosFavor = card
 	if selection == 1:
 			choice = askChoice("You have Akiro's Favor! What would you like to re-roll?",["Re-roll Attack Dice","Re-roll Effect Die","Nothing!"],["#ff0000","#ebc815","#171e78"])
 			if choice == 1:
-					notify("With Akiro looking over his shoulder {} has decided to re-roll his Attack Dice!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to re-roll the Attack Dice!".format(me))
 					damageRoll = rollD6(sum(damageRoll))
 			elif choice == 2:
-					notify("With Akiro looking over his shoulder {} has decided to re-roll his Effect Die!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to re-roll the Effect Die!".format(me))
 					effectRoll = rollD12()
 			else: return (damageRoll,effectRoll)
 	elif selection == 2:
@@ -1113,12 +1110,13 @@ def akirosFavor(card,damageRoll,effectRoll,selection):
 					effectRoll = rollD12()
 			else: return (damageRoll,effectRoll)
 	elif selection == 3:
-			choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Attackt Dice?",["Yes!","No!"],["#171e78","#de2827"])
+			choice = askChoice("Your gloves increase your skill! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
 			if choice == 1:
-					notify("With Akiro looking over his shoulder {} has decided to reroll his Attack Dice!".format(me))
-					effectRoll = rollD6(sum(damageRoll))
+					notify("With the Gloves of Skill, {} has decided to reroll the Attack Dice!".format(me))
+					damageRoll = rollD6(sum(damageRoll))
 			else: return (damageRoll,effectRoll)
-	toggleReady(akirosFavor)
+	if "Akiro" in card.name:
+			toggleReady(akirosFavor)
 	displayRoll(damageRoll,effectRoll)
 	return (damageRoll,effectRoll)
 
@@ -1524,10 +1522,14 @@ def computeTraits(card):
 												cController == controller and
 												getAttachTarget(c) != card and
 												cardType == 'Creature'): extend(['Melee +1','Armor +1'])
-										elif (cName == 'Consecrated Ground' and
-												cardType == 'Creature' and
+										elif (cName == 'Press the Attack' and
 												cController == controller and
-												'Living' in rawTraitsList): append('Regenerate 1')
+												"Soldier" in subtype and
+												cardType == 'Creature'): extend(['Melee +1'])
+										elif (cName == 'Dig In' and
+												cController == controller and
+												"Soldier" in subtype and
+												cardType == 'Creature'): extend(['Armor +1'])
 								elif cType == 'Conjuration' or cType == 'Conjuration-Terrain':
 										if (cName == 'Consecrated Ground' and
 												cardType == 'Creature' and
@@ -1682,7 +1684,7 @@ def computeTraits(card):
 		if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
 		if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
-		if markers[SirensCall] and 'Aquatic' in subtype and cController == controller and 'Mage' not in subtype: extend(['Melee +2'])
+		if markers[SirensCall] and 'Aquatic' in subtype and "Siren" in controller.name and 'Mage' not in subtype: extend(['Melee +2'])
 		if markers[Grapple]: extend(['Melee -2'])
 
 

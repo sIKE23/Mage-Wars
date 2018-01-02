@@ -632,8 +632,8 @@
 			<property name="Stats" value="Armor=3, Life=24" />
 			<property name="StatArmor" value="3" />
 			<property name="StatLife" value="24" />
-			<property name="cAttacks" value="name=Endless Maw;action type=Quick;range type=Melee;range=(0,0);dice=7;Piercing +X=1" />
-			<property name="AttackBar" value="Endless Maw:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="cAttacks" value="name=Endless Maw;action type=Quick;range type=Melee;range=(0,0);dice=7;Piercing +X=2" />
+			<property name="AttackBar" value="Endless Maw:&#xD;&#xA;[Quick] [Melee] [Dice=7] [Piercing +2]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO61" />
