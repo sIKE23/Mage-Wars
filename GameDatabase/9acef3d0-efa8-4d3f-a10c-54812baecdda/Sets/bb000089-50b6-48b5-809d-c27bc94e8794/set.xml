@@ -28,7 +28,7 @@
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="7" />
 			<property name="StatLife" value="22" />
-			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatSpellBookPoints" value="80" />
 			<property name="StatStartingMana"  value="-7" />
 			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
 			<property name="Traits" value="" />

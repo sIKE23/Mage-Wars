@@ -248,6 +248,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Creature' and tType == 'Creature') or
 			(cTargetBar == 'Creature or Conjuration' and (tType == 'Creature' or tType == 'Conjuration')) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
+			(cTargetBar == 'Forcemaster Mage' and 'Mage' in tSubtype and "Forcemaster" in tName) or
 			(cTargetBar == 'Friendly Creature' and tType == 'Creature' and tController == cController) or
 			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and tController == cController) or
@@ -266,7 +267,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
 			(cTargetBar == 'Mage' and 'Mage' in tSubtype) or
-			(cTargetBar == 'Paladin Mage' and 'Mage' in tSubtype and tName == 'Paladin') or
+			(cTargetBar == 'Paladin Mage' and 'Mage' in tSubtype and 'Paladin' in tName) or
 			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
 			(cTargetBar == 'Non-Flying Corporeal Creature' and tType == 'Creature' and not traits.get('Flying') and traits.get('Corporeal')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal') and traits.get('Nonliving')) or

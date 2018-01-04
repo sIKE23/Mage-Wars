@@ -472,6 +472,7 @@ def canDeclareAttack(card):
 		if not card.isFaceUp: return False
 		if (card.Type == 'Creature' or
 			('Conjuration' in card.Type and card.AttackBar != '') or
+			('Enchantment' in card.Type and card.AttackBar != '') or
 			(("Familiar" in card.Traits or "Spawnpoint" in card.Traits) and [True for c in [getBound(card)] if c and c.Type == "Attack"]) or
 			computeTraits(card).get('Autonomous') or
 			[1 for attack in getAttackList(card) if attack.get('RangeType')=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
@@ -973,7 +974,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
 						damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,1)
 		#Press the Attack reroll opportunity
-		if [1 for c in table if c.Name=="Press the Attack" and c.isFaceUp and c.controller == attacker.controller and getZoneContaining(c) == getZoneContaining(attacker)] and (attack.get('RangeType') == 'Melee'):
+		if [1 for c in table if c.Name=="Press the Attack" and c.isFaceUp and c.controller == attacker.controller and "Soldier" in attacker.subtype and getZoneContaining(c) == getZoneContaining(attacker)] and (attack.get('RangeType') == 'Melee'):
 				cName = c
 				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,4)
 		
