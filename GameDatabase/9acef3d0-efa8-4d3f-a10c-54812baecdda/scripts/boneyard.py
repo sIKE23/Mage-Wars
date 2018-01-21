@@ -404,8 +404,8 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			card1.filter = None
 			return
 		else:
-			card2.moveTo(me.piles['Discard Pile'])
-			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card1, card2, card2))
+			card1.moveTo(me.piles['Discard Pile'])
+			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.".format(me, card2, card1, card1))
 			return
 
 def resolveRegeneration(traits, card):

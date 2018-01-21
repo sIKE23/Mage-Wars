@@ -251,6 +251,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Forcemaster Mage' and 'Mage' in tSubtype and "Forcemaster" in tName) or
 			(cTargetBar == 'Friendly Creature' and tType == 'Creature' and tController == cController) or
 			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
+			(cTargetBar == 'Friendly Living Non-Mage Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and tController == cController) or
 			(cTargetBar == 'Demon Creature' and tType == 'Creature' and 'Demon' in tSubtype) or
 			(cTargetBar == 'Incorporeal Creature' and tType == 'Creature' and traits.get('Incorporeal')) or
