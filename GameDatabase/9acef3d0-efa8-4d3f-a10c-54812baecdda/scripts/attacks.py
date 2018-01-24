@@ -519,7 +519,7 @@ def rollD6(dice):
 	count = dice
 	if (len(attackDiceBank) < count):
 			while (len(attackDiceBank) < 100):
-					attackDiceBank.append(randint(0,5))
+					attackDiceBank.append(rnd(0,5))
 	attackRoll = [0,0,0,0,0,0]
 	for x in range(count):
 			roll = int(attackDiceBank.pop())
@@ -533,7 +533,7 @@ def rollD12():
 	global effectDieBank
 	if (len(effectDieBank)) <= 1:
 			while (len(effectDieBank) < 50):
-					effectDieBank.append(randint(0,11))
+					effectDieBank.append(rnd(0,11))
 	effectRoll = int(effectDieBank.pop()) + 1
 	return effectRoll
 
