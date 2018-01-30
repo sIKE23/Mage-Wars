@@ -518,12 +518,11 @@ def rollD6(dice):
 	global attackDiceBank
 	count = dice
 	if (len(attackDiceBank) < count):
-			while (len(attackDiceBank) < 100):
-					attackDiceBank.append(rnd(0,5))
+			attackDiceBank=list(rndArray(0,5,1000))
 	attackRoll = [0,0,0,0,0,0]
 	for x in range(count):
-			roll = int(attackDiceBank.pop())
-			attackRoll[roll] += 1
+		roll = attackDiceBank.pop()
+		attackRoll[roll] += 1
 	debug("Raw Attack Dice Roll results: {}".format(attackRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
 	return attackRoll
