@@ -345,7 +345,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 					attack.get('RangeType') in ['Melee','Counterstrike']): attack['Traits']['Piercing'] += 1
 				elif c.controller == attacker.controller: #Friendly effects
 						aType = attack.get('Type')
-						if ( "Mage" == attacker.Subtype and
+						if ( "Mage" in attacker.Subtype and
 							((cName == 'Dawnbreaker Ring' and aType == 'Light') or
 							 (cName == 'Fireshaper Ring' and aType == 'Flame') or
 							 (cName == 'Lightning Ring' and aType == 'Lightning'))):
@@ -472,6 +472,7 @@ def canDeclareAttack(card):
 		if not card.isFaceUp: return False
 		if (card.Type == 'Creature' or
 			('Conjuration' in card.Type and card.AttackBar != '') or
+			('Enchantment' in card.Type and card.AttackBar != '') or
 			(("Familiar" in card.Traits or "Spawnpoint" in card.Traits) and [True for c in [getBound(card)] if c and c.Type == "Attack"]) or
 			computeTraits(card).get('Autonomous') or
 			[1 for attack in getAttackList(card) if attack.get('RangeType')=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
@@ -517,12 +518,11 @@ def rollD6(dice):
 	global attackDiceBank
 	count = dice
 	if (len(attackDiceBank) < count):
-			while (len(attackDiceBank) < 100):
-					attackDiceBank.append(randint(0,5))
+			attackDiceBank=list(rndArray(0,5,1000))
 	attackRoll = [0,0,0,0,0,0]
 	for x in range(count):
-			roll = int(attackDiceBank.pop())
-			attackRoll[roll] += 1
+		roll = attackDiceBank.pop()
+		attackRoll[roll] += 1
 	debug("Raw Attack Dice Roll results: {}".format(attackRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
 	return attackRoll
@@ -532,7 +532,7 @@ def rollD12():
 	global effectDieBank
 	if (len(effectDieBank)) <= 1:
 			while (len(effectDieBank) < 50):
-					effectDieBank.append(randint(0,11))
+					effectDieBank.append(rnd(0,11))
 	effectRoll = int(effectDieBank.pop()) + 1
 	return effectRoll
 
@@ -923,12 +923,6 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
-				#Check for Divine Reversal
-				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Divine Reversal"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is reversed by a divine presence!".format(attacker.name.split(',')[0]))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-						return
 				#Check for reverse attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
 						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
@@ -966,16 +960,20 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		damageRoll,effectRoll = rollDice(dice) #base roll
 		# Gloves of Skill re-roll opportunity
 		if "Mage" in attacker.Subtype and [1 for c in table if c.Name=="Gloves of Skill" and c.isFaceUp and c.controller == attacker.controller] and (attack.get('RangeType') == 'Ranged') and not timesHasOccured("Gloves of Skill",attacker.controller):
-				choice = askChoice("Was your aim true? If not your Gloves of Skill will let you re-roll your Attack Dice?",["Yes! Re-Roll the Attack Dice!","No! Let them be!"],["#171e78","#de2827"])
-				if choice == 1:
-						notify("With the Gloves of Skill guiding their hands {} has decided to re-roll the Attack Dice!".format(me))
-						damageRoll = rollD6(sum(damageRoll))
-						rememberPlayerEvent("Gloves of Skill")
-				displayRoll(damageRoll,effectRoll)
+				cName = c
+				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,3)
 		# Akrio's Favor re-roll opportunity
 		for attachedCard in getAttachments(attacker):
 				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
 						damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,1)
+		#Press the Attack reroll opportunity
+		if [1 for c in table if c.Name=="Press the Attack" and c.isFaceUp and c.controller == attacker.controller and "Soldier" in attacker.subtype and getZoneContaining(c) == getZoneContaining(attacker)] and (attack.get('RangeType') == 'Melee'):
+				cName = c
+				minorCreature=False
+				level = eval(attacker.Level)
+				if level <3: minorCreature=True
+				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,4, minorCreature)
+		
 		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
 				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
 				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
@@ -1090,20 +1088,21 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		defender = Card(dTraitDict.get('OwnerID'))
 		setEventList('Turn',[]) #Clear the turn event list
 
-def akirosFavor(card,damageRoll,effectRoll,selection):
+def akirosFavor(card,damageRoll,effectRoll,selection, minorCreature=False):
 	mute()
-	# the fucntion will all a player to Akiro's Favor to re-roll the appropriate dice based on the choices avaialbale
+	# the function will allow a player with Akiro's Favor revealed to re-roll the appropriate dice based on the choices avaialbale
 	# 1 - prompt to re-roll both Dice, 2 - prompt to re-roll only the effect die, 3 - prompt to re-roll only the attack dice
 	effectRoll = effectRoll
 	damageRoll = damageRoll
-	akirosFavor = card
+	if "Akiro" in card.name:
+			akirosFavor = card
 	if selection == 1:
 			choice = askChoice("You have Akiro's Favor! What would you like to re-roll?",["Re-roll Attack Dice","Re-roll Effect Die","Nothing!"],["#ff0000","#ebc815","#171e78"])
 			if choice == 1:
-					notify("With Akiro looking over his shoulder {} has decided to re-roll his Attack Dice!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to re-roll the Attack Dice!".format(me))
 					damageRoll = rollD6(sum(damageRoll))
 			elif choice == 2:
-					notify("With Akiro looking over his shoulder {} has decided to re-roll his Effect Die!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to re-roll the Effect Die!".format(me))
 					effectRoll = rollD12()
 			else: return (damageRoll,effectRoll)
 	elif selection == 2:
@@ -1113,12 +1112,34 @@ def akirosFavor(card,damageRoll,effectRoll,selection):
 					effectRoll = rollD12()
 			else: return (damageRoll,effectRoll)
 	elif selection == 3:
-			choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Attackt Dice?",["Yes!","No!"],["#171e78","#de2827"])
+			choice = askChoice("Your gloves increase your skill! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
 			if choice == 1:
-					notify("With Akiro looking over his shoulder {} has decided to reroll his Attack Dice!".format(me))
-					effectRoll = rollD6(sum(damageRoll))
+					notify("With the Gloves of Skill, {} has decided to reroll the Attack Dice!".format(me))
+					damageRoll = rollD6(sum(damageRoll))
 			else: return (damageRoll,effectRoll)
-	toggleReady(akirosFavor)
+	elif selection == 4:
+		if minorCreature==False:
+			if me.mana >1:
+					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
+					if choice == 1:
+							notify("The soldier's formation has allowed {} to reroll the Attack Dice!".format(me))
+							damageRoll = rollD6(sum(damageRoll))
+							me.mana -= 2
+							notify("{} pays 2 mana to reroll the dice".format(me))
+					else: return (damageRoll,effectRoll)
+			else: return (damageRoll,effectRoll)
+		else:
+			if me.mana >0:
+					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
+					if choice == 1:
+							notify("The soldier's formation has allowed {} to reroll the Attack Dice!".format(me))
+							damageRoll = rollD6(sum(damageRoll))
+							me.mana -= 1
+							notify("{} pays 1 mana to reroll the dice".format(me))
+					else: return (damageRoll,effectRoll)
+			else: return (damageRoll,effectRoll)
+	if "Akiro" in card.name:
+			toggleReady(akirosFavor)
 	displayRoll(damageRoll,effectRoll)
 	return (damageRoll,effectRoll)
 
@@ -1385,7 +1406,7 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 		#Giant Wolf Spider's attack
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and (dTraitDict.get("Restrained") or dTraitDict.get("Incapacitated")): modRoll += 4
 		#Tidecaller's attack
-		if attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id : modRoll += 4
+		if (attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id) : modRoll += 4
 		#Ring of Tides for a hydro attack from a Siren
 		if attacker.Name == "Siren" and "Tides" in aTraitDict and ("Type" in attack.keys() and attack['Type']=="Hydro") and int(getGlobalVariable("PlayerWithIni")) == me._id : modRoll += 2
 		if attacker.Name == "Temple of Light":
@@ -1489,8 +1510,12 @@ def computeTraits(card):
 												if isWithOrb:
 														extend(['Unmovable','Anchored'])
 														if markers[Guard]: extend(['Armor +2','Melee +1'])
-								elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
-								elif cName == 'Shrink': append('Pest')
+								if cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
+								if cName == 'Shrink': append('Pest')
+								if cName == 'Blessed Focus':
+									cCreature = getAttachTarget(c)
+									if cCreature.markers[Damage]==0: extend(['Melee +1','Piercing +1'])
+
 						# Get traits from cards in this zone
 						if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
 								#Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
@@ -1524,10 +1549,18 @@ def computeTraits(card):
 												cController == controller and
 												getAttachTarget(c) != card and
 												cardType == 'Creature'): extend(['Melee +1','Armor +1'])
-										elif (cName == 'Consecrated Ground' and
-												cardType == 'Creature' and
+										elif (cName == 'Press the Attack' and
 												cController == controller and
-												'Living' in rawTraitsList): append('Regenerate 1')
+												"Soldier" in subtype and
+												cardType == 'Creature'): extend(['Melee +1'])
+										elif (cName == 'Dig In' and
+												cController == controller and
+												"Soldier" in subtype and
+												cardType == 'Creature'): extend(['Armor +1'])
+										elif (cName == 'Fire at Will' and
+												cController == controller and
+												"Soldier" in subtype and
+												cardType == 'Creature'): extend(['Piercing +2'])
 								elif cType == 'Conjuration' or cType == 'Conjuration-Terrain':
 										if (cName == 'Consecrated Ground' and
 												cardType == 'Creature' and
@@ -1571,33 +1604,29 @@ def computeTraits(card):
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 1')
-										elif (cName == 'Dorseus, Stallion of Westlock' and
-												cController == controller and
-												cardType == 'Creature' and
-												'Living' in rawTraitsList): append('Regenerate 2')
-										elif (name == 'Guard Dog' and
+										if (name == 'Guard Dog' and
 												cController == controller and
 												'Conjuration' in cardType and
 												not getAttachTarget(c)): append('Vigilant')
-										elif (cName == 'Makunda' and
+										if (cName == 'Makunda' and
 												cController == controller and
 												c != card and
 												cardType == 'Creature' and
 												'Cat' in subtype): append('Piercing +1') #Long term, need to indicate that it is only melee attacks. For now, should not matter since no cats have ranged attacks.
-										elif (cName == 'Redclaw, Alpha Male' and
+										if (cName == 'Redclaw, Alpha Male' and
 												c != card and
 												cardType == 'Creature' and
 												'Canine' in subtype): extend(['Armor +1','Melee +1'])
-										elif (cName == 'Sardonyx, Blight of the Living' and
+										if (cName == 'Sardonyx, Blight of the Living' and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Finite Life')
-										elif (cName == 'Malacoda' and
+										if (cName == 'Malacoda' and
 												cardType == 'Creature' and
 												not 'Poison Immunity' in rawTraitsList and
 												'Living' in rawTraitsList): append('Malacoda')
-										elif (cName == 'Victorian Griffin' and
+										if (cName == 'Victorian Griffin' and
 												cardType == 'Creature'): remove('Elusive')
-										elif (cName == 'Steelclaw Cub' and
+										if (cName == 'Steelclaw Cub' and
 												name == 'Steelclaw Matriarch' and
 												cController == controller): append('Melee +1')
 								if ('Mage' in cSubtype and cController == controller): #Effects when creature is in same zone as controlling mage
@@ -1645,7 +1674,6 @@ def computeTraits(card):
 						if (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
 						if (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						if (cName == 'Rolling Fog'): append('Obscured')
-						if (cName == 'Harshforge Monolith' and cardType == 'Enchantment' and cardGetDistance(c,card)<=1): append('Upkeep +1')
 						if (cName == 'Gravikor' and card.isFaceUp and cardType == 'Creature' and 'Flying' in rawTraitsList and cardGetDistance(c,card)<=2): 
 							append('Non-Flying')
 							remove('Flying')
@@ -1682,7 +1710,7 @@ def computeTraits(card):
 		if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
 		if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
-		if markers[SirensCall] and 'Aquatic' in subtype and cController == controller and 'Mage' not in subtype: extend(['Melee +2'])
+		if markers[SirensCall] and 'Aquatic' in subtype and "Siren" in controller.name and 'Mage' not in subtype: extend(['Melee +2'])
 		if markers[Grapple]: extend(['Melee -2'])
 
 
@@ -1812,7 +1840,7 @@ def chanceToKill(aTraitDict,attack,dTraitDict):
 	life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
 	atkTraits = attack.get('Traits',{})
 	if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
-	else: return
+	else: return 0
 	if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
 	return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
 
@@ -1861,7 +1889,7 @@ def getD12Probability(rangeStr,aTraitDict,attack,dTraitDict):# needs to be chang
 		attacker = Card(aTraitDict['OwnerID'])
 		#Giant Wolf Spider's attack
 		if attacker.Name == "Giant Wolf Spider" and attack.get("Name") == "Poison Fangs" and dTraitDict.get("Restrained"): d12Bonus += 4
-		if attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id: d12Bonus += 4
+		if (attacker.Name == "Shoalsdeep Tidecaller" and int(getGlobalVariable("PlayerWithIni")) == me._id): d12Bonus += 4
 		if attacker.Name == "Siren" and "Tides" in aTraitDict and ("Type" in attack.keys() and attack['Type']=="Hydro") and int(getGlobalVariable("PlayerWithIni")) == me._id : d12Bonus += 2
 		if attacker.Name == "Temple of Light":
 				eventList = getEventList("Round")

@@ -28,7 +28,7 @@
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="7" />
 			<property name="StatLife" value="22" />
-			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatSpellBookPoints" value="80" />
 			<property name="StatStartingMana"  value="-7" />
 			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
 			<property name="Traits" value="" />
@@ -337,7 +337,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="You can only reveal Galvanize if this creature has a condition marker. Remove one condition marker from this creature by paying its removal cost, and this creature gains Melee +1. &#xD;&#xA; [Melee +1]" />
+			<property name="Text" value="You can only reveal Galvanize if this creature has a condition marker. Remove one condition marker from this creature by paying its removal cost, and this creature gains Melee +1. &#xD;&#xA;[Melee +1]" />
 			<property name="CardID" value="MWAFME04" />
 		</card>
 
@@ -387,7 +387,7 @@
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="cTargets" value="m0,M2))NULL" />
-			<property name="Target" value="non-mage Creature" />
+			<property name="Target" value="Non-Mage Creature" />
 			<property name="School" value="Mind"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />

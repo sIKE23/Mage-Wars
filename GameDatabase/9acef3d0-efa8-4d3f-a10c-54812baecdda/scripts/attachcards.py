@@ -247,8 +247,11 @@ def canAttach(card,target):
 			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or
 			(cTargetBar == 'Creature or Conjuration' and (tType == 'Creature' or tType == 'Conjuration')) or
-			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
+			(cTargetBar == 'Forcemaster Mage' and 'Mage' in tSubtype and "Forcemaster" in tName) or
+			(cTargetBar == 'Friendly Creature' and tType == 'Creature' and tController == cController) or
+			(cTargetBar == 'Friendly Living Creature' and tType == 'Creature' and traits.get('Living') and tController == cController) or
+			(cTargetBar == 'Friendly Living Non-Mage Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living') and tController == cController) or
 			(cTargetBar == 'Friendly, Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and tController == cController) or
 			(cTargetBar == 'Demon Creature' and tType == 'Creature' and 'Demon' in tSubtype) or
 			(cTargetBar == 'Incorporeal Creature' and tType == 'Creature' and traits.get('Incorporeal')) or
@@ -259,13 +262,14 @@ def canAttach(card,target):
 			(cTargetBar == 'Minor Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype and traits.get('Living') and (eval(target.Level) <= 2)) or
+			(cTargetBar == 'Minor Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype) or
 			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype) or
 			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Living Holy Creature' and tType == 'Creature' and 'Holy' in target.School and traits.get('Living')) or
 			(cTargetBar == 'Holy Creature' and tType == 'Creature' and 'Holy' in target.School) or
-			(cTargetBar == 'Mage' and 'Mage' not in tSubtype) or
-			(cTargetBar == 'Paladin Mage' and 'Mage' in tSubtype and tName == 'Paladin') or
+			(cTargetBar == 'Mage' and 'Mage' in tSubtype) or
+			(cTargetBar == 'Paladin Mage' and 'Mage' in tSubtype and 'Paladin' in tName) or
 			(cTargetBar == 'Non-Flying Creature' and tType == 'Creature' and not traits.get('Flying')) or
 			(cTargetBar == 'Non-Flying Corporeal Creature' and tType == 'Creature' and not traits.get('Flying') and traits.get('Corporeal')) or
 			(cTargetBar == 'Nonliving Corporeal Conjuration' and 'Conjuration' in tType and traits.get('Corporeal') and traits.get('Nonliving')) or
@@ -370,7 +374,7 @@ def canBind(card,target):
 		or (tName == 'Huginn, Raven Familiar' and cType == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
 		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in cSubtype)
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
-		or (tName == 'Cassiel, Shield of Asyra' and ("Healing" in cSubtype or "Protection" in cSubtype))
+		or (tName == 'Cassiel, Shield of Bim-Shalla' and ("Healing" in cSubtype or "Protection" in cSubtype))
 		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
 #Spawnpoints
 		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
