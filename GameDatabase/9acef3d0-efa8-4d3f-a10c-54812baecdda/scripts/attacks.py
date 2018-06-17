@@ -1617,11 +1617,14 @@ def computeTraits(card):
 												c != card and
 												cardType == 'Creature' and
 												'Canine' in subtype): extend(['Armor +1','Melee +1'])
+<<<<<<< HEAD
 										if (cName == 'Wychwood Hound' and
 												c != card and
 												not 'Wychwood' in traits and
 												cardType == 'Creature' and
 												'Wychwood Hound' in name): extend(['Armor +1','Melee +1', 'Wychwood'])
+=======
+>>>>>>> 3e7c7a34e992e0e9f3a3e95c103ac8b7c759beca
 										if (cName == 'Sardonyx, Blight of the Living' and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Finite Life')
