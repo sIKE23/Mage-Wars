@@ -279,9 +279,9 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
-		if not ('Counterstrike' in attack['Traits'] or 'Glancing' in attack['Traits']):
-			attack = deepcopy(attack["OriginalAttack"]) #I still don't understand what this is doing. Why do we need this? It looks like it just resets the attack to the original attack which causes problems when modifying - Shark
-			attack["OriginalAttack"] = originalAttack
+		#if not ('Counterstrike' in attack['Traits'] or 'Glancing' in attack['Traits']):
+		attack = deepcopy(attack["OriginalAttack"])
+		attack["OriginalAttack"] = originalAttack
 		atkTraits = attack["Traits"]
 		localADict = dict(aTraitDict)
 		#Runesmithing
@@ -358,6 +358,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 			else:
 				atkTraits['Piercing'] = 0
 		attack['Dice'] = getAdjustedDice(localADict,attack,dTraitDict)
+		#debug('attack[\'Dice\'] : {}'.format(str(attack['Dice'])))
 		if dTraitDict.get('OwnerID'): attack['d12'] = [computeD12(dTraitDict,entry) for entry in attack.get('d12',[]) if computeD12(dTraitDict,entry)]
 		return attack #If attack has zone attack trait, then it gains unavoidable
 
@@ -402,12 +403,13 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 		"""Decides how many dice should be rolled for attack based on the attacker (and the defender, if any)."""
 		attackDice = attack.get('Dice',0)
 		atkTraits = attack.get('Traits',{})
+		#debug("atkTraits : {}".format(atkTraits))
 		attacker = (Card(aTraitDict['OwnerID']) if 'OwnerID' in aTraitDict else None)
 		defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
 		atkOS = Card(attack['OriginalSourceID'])
 		if attacker and not "Autonomous" in atkOS.traits:
 				if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
-						if attack.get('RangeType') == 'Melee' and not attack.get("Action") == "Trample": attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
+						if (attack.get('RangeType') == 'Melee' or attack.get('RangeType') == 'Counterstrike') and not attack.get("Action") == "Trample": attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
 						if attack.get('RangeType') == 'Ranged' and not attack.get("Traits",{}).get("Zone Attack"): attackDice += aTraitDict.get('Ranged',0)
 				#No restriction on how many times may be applied
 				if not atkTraits.get('Spell'):
@@ -422,13 +424,14 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				level = eval(attacker.Level)
 				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
 				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
+				if 'Glancing' in atkTraits: attackDice -= 3
 		if defender:
 				attackDice -= dTraitDict.get('Aegis',0)
 				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or ("Mage" in defender.Subtype and defender.controller.Damage))
 																	and (attacker and not hasAttackedThisTurn(attacker))
 																	and defender.type == 'Creature'
 																	and not dTraitDict.get('Nonliving')
-																	and attack.get("RangeType") == "Melee"
+																	and (attack.get("RangeType") == "Melee" or attack.get('RangeType') == 'Counterstrike')
 																	and not attack.get("Action") == "Trample"
 																	) else 0)
 				attackDice += dTraitDict.get(attack.get('Type'),0) #Elemental weaknesses/resistances
@@ -473,6 +476,7 @@ def canDeclareAttack(card):
 		if (card.Type == 'Creature' or
 			('Conjuration' in card.Type and card.AttackBar != '') or
 			('Enchantment' in card.Type and card.AttackBar != '') or
+			('Incantation' in card.Type and card.AttackBar != '') or
 			(("Familiar" in card.Traits or "Spawnpoint" in card.Traits) and [True for c in [getBound(card)] if c and c.Type == "Attack"]) or
 			computeTraits(card).get('Autonomous') or
 			[1 for attack in getAttackList(card) if attack.get('RangeType')=='Damage Barrier'] != []): #Probably want better method for dealing with damage barriers.
@@ -523,7 +527,7 @@ def rollD6(dice):
 	for x in range(count):
 		roll = attackDiceBank.pop()
 		attackRoll[roll] += 1
-	debug("Raw Attack Dice Roll results: {}".format(attackRoll))
+	#debug("Raw Attack Dice Roll results: {}".format(attackRoll))
 	notify("{} rolls {} attack dice.".format(me,count))
 	return attackRoll
 
@@ -720,8 +724,8 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		if choice == 0 or choice == len(queryList): return False
 		defense = defenseList[choice-1]
 		defSource = Card(defense.get('Source'))
-		debug("{}".format(defSource))
-		debug(str(defender.level))
+		#debug("{}".format(defSource))
+		#debug(str(defender.level))
 		if defSource.Name == "Forcemaster": #Forcemaster's special defense
 				if me.mana == 0:
 						whisper("You cannot use that defense - you have no mana!")
@@ -931,10 +935,9 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						return
 				#Check for Glancing Blow
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Glancing Blow"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is magically deflected!".format(attacker.name.split(',')[0]))
-						attack["Dice"] -= 3
-						attack["Traits"]["Glancing"] = 'True'
-						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
+						notify("{}'s attack is magically deflected! Roll Manually for now, Sharkbait will automate some day".format(attacker.name.split(',')[0]))
+						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 
 		if attack.get('EffectType','Attack')=='Attack':
@@ -1079,7 +1082,7 @@ def counterstrikeStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						counterAttack['RangeType'] = 'Counterstrike'
 						counterAttack["OriginalAttack"]["RangeType"] = 'Counterstrike'
 						interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
-				defender.markers[Guard] = 0
+				defender.markers[Guard] = 0 
 		interimStep(aTraitDict,attack,dTraitDict,'Counterstrike','attackEndsStep')
 
 def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
@@ -1428,7 +1431,7 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 							(vs[0] == "Nonliving" and 'Nonliving' in dTraitDict) or
 							(vs[0] == "Incorporeal" and "Incorporeal" in dTraitDict) or
 							(vs[0] == "Undead" and "Undead" in defender.Subtype)): modRoll += vs[1]
-		debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
+		#debug('EffectRoll: {}, ModRoll: {}'.format(str(effectRoll),str(modRoll)))
 		effects = attack.get('d12',[])
 		if not effects or (dTraitDict.get('Incorporeal') and not attack.get('Traits',{}).get('Ethereal')): return None
 		for effect in effects:
@@ -1505,7 +1508,7 @@ def computeTraits(card):
 										if adra and adraAbility:
 												append('Flame +1')
 												adraAbility = False
-												debug('Triggered')
+												#debug('Triggered')
 								if cName == "Sentinel of V'tar":
 										for o in table:
 												isWithOrb = False
@@ -1617,11 +1620,6 @@ def computeTraits(card):
 												c != card and
 												cardType == 'Creature' and
 												'Canine' in subtype): extend(['Armor +1','Melee +1'])
-										if (cName == 'Wychwood Hound' and
-												c != card and
-												not 'Wychwood' in traits and
-												cardType == 'Creature' and
-												'Wychwood Hound' in name): extend(['Armor +1','Melee +1', 'Wychwood'])
 										if (cName == 'Sardonyx, Blight of the Living' and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Finite Life')
