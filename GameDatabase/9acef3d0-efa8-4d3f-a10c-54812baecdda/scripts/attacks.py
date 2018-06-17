@@ -923,12 +923,6 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
-				#Check for Divine Reversal
-				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Divine Reversal"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is reversed by a divine presence!".format(attacker.name.split(',')[0]))
-						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-						return
 				#Check for reverse attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
 						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
@@ -975,7 +969,10 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		#Press the Attack reroll opportunity
 		if [1 for c in table if c.Name=="Press the Attack" and c.isFaceUp and c.controller == attacker.controller and "Soldier" in attacker.subtype and getZoneContaining(c) == getZoneContaining(attacker)] and (attack.get('RangeType') == 'Melee'):
 				cName = c
-				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,4)
+				minorCreature=False
+				level = eval(attacker.Level)
+				if level <3: minorCreature=True
+				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,4, minorCreature)
 		
 		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
 				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
@@ -1091,7 +1088,7 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		defender = Card(dTraitDict.get('OwnerID'))
 		setEventList('Turn',[]) #Clear the turn event list
 
-def akirosFavor(card,damageRoll,effectRoll,selection):
+def akirosFavor(card,damageRoll,effectRoll,selection, minorCreature=False):
 	mute()
 	# the function will allow a player with Akiro's Favor revealed to re-roll the appropriate dice based on the choices avaialbale
 	# 1 - prompt to re-roll both Dice, 2 - prompt to re-roll only the effect die, 3 - prompt to re-roll only the attack dice
@@ -1121,6 +1118,7 @@ def akirosFavor(card,damageRoll,effectRoll,selection):
 					damageRoll = rollD6(sum(damageRoll))
 			else: return (damageRoll,effectRoll)
 	elif selection == 4:
+		if minorCreature==False:
 			if me.mana >1:
 					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
 					if choice == 1:
@@ -1128,6 +1126,16 @@ def akirosFavor(card,damageRoll,effectRoll,selection):
 							damageRoll = rollD6(sum(damageRoll))
 							me.mana -= 2
 							notify("{} pays 2 mana to reroll the dice".format(me))
+					else: return (damageRoll,effectRoll)
+			else: return (damageRoll,effectRoll)
+		else:
+			if me.mana >0:
+					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
+					if choice == 1:
+							notify("The soldier's formation has allowed {} to reroll the Attack Dice!".format(me))
+							damageRoll = rollD6(sum(damageRoll))
+							me.mana -= 1
+							notify("{} pays 1 mana to reroll the dice".format(me))
 					else: return (damageRoll,effectRoll)
 			else: return (damageRoll,effectRoll)
 	if "Akiro" in card.name:
@@ -1337,7 +1345,9 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 				reusableAbilityTokens = [BloodReaper,
 										 EternalServant,
 										 HolyAvenger,
-										 Pet]
+										 Pet,
+										 SirensCall,
+										 DivineChallenge]
 				#reusableGeneralTokens = [Light]
 				mage = Card(cardTraitsDict.get('MageID'))
 				for t in reusableAbilityTokens:
@@ -1481,7 +1491,9 @@ def computeTraits(card):
 				cController = c.controller
 				cSubtype = c.subtype
 				cType = c.type
-				if cSubtype == 'Mage' and cController == controller: traitDict['MageID'] = c._id #Each card knows which mage controls it.
+				if 'Mage' in cSubtype and cController == controller: 
+					traitDict['MageID'] = c._id #Each card knows which mage controls it.
+					mage = Card(traitDict['MageID'])
 				if c.isFaceUp: #only look at face-up cards
 						if getAttachTarget(c) == card: #Get traits from attachments to this card:
 								if cType in ['Enchantment','Conjuration']:
@@ -1502,8 +1514,12 @@ def computeTraits(card):
 												if isWithOrb:
 														extend(['Unmovable','Anchored'])
 														if markers[Guard]: extend(['Armor +2','Melee +1'])
-								elif cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
-								elif cName == 'Shrink': append('Pest')
+								if cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
+								if cName == 'Shrink': append('Pest')
+								if cName == 'Blessed Focus':
+									cCreature = getAttachTarget(c)
+									if cCreature.markers[Damage]==0: extend(['Melee +1','Piercing +1'])
+
 						# Get traits from cards in this zone
 						if getZoneContaining(c) == getZoneContaining(card): #get traits from cards in this zone.
 								#Note - we need to optimize the speed here, so we'll use if branching even though we are hardcoding specific cases.
@@ -1517,34 +1533,36 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												cController == controller and
 												'Corporeal' in rawTraitsList): append('Armor +2')
-										elif (cName == 'Sacred Ground' and
+										if (cName == 'Sacred Ground' and
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Aegis 1')
-										elif (cName == 'Healing Madrigal' and
+										if (cName == 'Healing Madrigal' and
 												c.isFaceUp and
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Madrigal')
-										elif (cName == 'Plagued' and
+										if (cName == 'Plagued' and
 												c.isFaceUp and
 												cardType == 'Creature' and
 												not 'Poison Immunity' in rawTraitsList and
 												'Living' in rawTraitsList): append('Plagued')
-										elif (cName == 'Astral Anchor' and
-												cardType == 'Creature'): append('Anchored')
-										elif (cName == 'Standard Bearer' and
+										if (cName == 'Standard Bearer' and
 												cController == controller and
 												getAttachTarget(c) != card and
 												cardType == 'Creature'): extend(['Melee +1','Armor +1'])
-										elif (cName == 'Press the Attack' and
+										if (cName == 'Press the Attack' and
 												cController == controller and
 												"Soldier" in subtype and
 												cardType == 'Creature'): extend(['Melee +1'])
-										elif (cName == 'Dig In' and
+										if (cName == 'Dig In' and
 												cController == controller and
 												"Soldier" in subtype and
 												cardType == 'Creature'): extend(['Armor +1'])
+										if (cName == 'Fire at Will' and
+												cController == controller and
+												"Soldier" in subtype and
+												cardType == 'Creature'): extend(['Piercing +2'])
 								elif cType == 'Conjuration' or cType == 'Conjuration-Terrain':
 										if (cName == 'Consecrated Ground' and
 												cardType == 'Creature' and
@@ -1552,69 +1570,68 @@ def computeTraits(card):
 												subtype != 'Mage' and
 												'Holy' in school and
 												'Living' in rawTraitsList): append('Regenerate 1')
-										elif (cName == 'Mohktari, Great Tree of Life' and
+										if (cName == 'Mohktari, Great Tree of Life' and
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 2')
-										elif (cName == 'Raincloud' and
+										if (cName == 'Raincloud' and
 												('Conjuration' in cardType or cardType == 'Creature') and
 												'Living' in rawTraitsList): extend(['Regenerate 1','Flame -2','Acid -2'])
-										#elif (cName == 'Shallow Sea' and
-												#"Siren" in name): append('Regenerate 1')
-										elif (cName == 'Shallow Sea' and
+										if (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" in subtype): append('Melee +1')
-										elif (cName == 'Shallow Sea' and
+										if (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
-												"Aquatic" not in subtype): append('Melee -1')
-										elif (cName == 'Steep Hill' and
+												"Aquatic" not in subtype): extend(['Melee -1', 'Ranged -1'])
+										if (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
-										elif (cName == 'Swamp' and cardType == 'Creature' and
+										if (cName == 'Swamp' and cardType == 'Creature' and
 												(not 'Aquatic' in subtype) and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): extend(['Slow-if-Non-Flying','Unmovable-if-Non-Flying','Non-Elusive'])
-										elif cName == 'Ethereal Mist': append('Obscured')
-										elif ((cName == 'Corrosive Pool'  or
+										if cName == 'Ethereal Mist': append('Obscured')
+										if ((cName == 'Corrosive Pool'  or
 												cName == 'Molten Rock') and
 												cardType == 'Creature' and
 												'Corporeal' in rawTraitsList and
 												("Non-Flying" in rawTraitsList or not 'Flying' in rawTraitsList)): append('Hindered-if-Non-Flying')
-										elif cName == 'Samandriel&apos;s Circle':
+										if cName == 'Samandriel&apos;s Circle':
 												if cardType == 'Creature' and 'Living' in rawTraitsList: append('Regenerate 1')
 												elif cardType == 'Creature' and 'Nonliving' in rawTraitsList: append('Hindered')
-										elif (cName == 'Septagram' and
+										if (cName == 'Septagram' and
 												(not "Mage" in subtype)): append('Warded')
 								elif cType == 'Creature':
 										if (cName == 'Highland Unicorn' and
 												cController == controller and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Regenerate 1')
-										elif (cName == 'Dorseus, Stallion of Westlock' and
-												cController == controller and
-												cardType == 'Creature' and
-												'Living' in rawTraitsList): append('Regenerate 2')
-										elif (name == 'Guard Dog' and
+										if (name == 'Guard Dog' and
 												cController == controller and
 												'Conjuration' in cardType and
 												not getAttachTarget(c)): append('Vigilant')
-										elif (cName == 'Makunda' and
+										if (cName == 'Makunda' and
 												cController == controller and
 												c != card and
 												cardType == 'Creature' and
 												'Cat' in subtype): append('Piercing +1') #Long term, need to indicate that it is only melee attacks. For now, should not matter since no cats have ranged attacks.
-										elif (cName == 'Redclaw, Alpha Male' and
+										if (cName == 'Redclaw, Alpha Male' and
 												c != card and
 												cardType == 'Creature' and
 												'Canine' in subtype): extend(['Armor +1','Melee +1'])
-										elif (cName == 'Sardonyx, Blight of the Living' and
+										if (cName == 'Wychwood Hound' and
+												c != card and
+												not 'Wychwood' in traits and
+												cardType == 'Creature' and
+												'Wychwood Hound' in name): extend(['Armor +1','Melee +1', 'Wychwood'])
+										if (cName == 'Sardonyx, Blight of the Living' and
 												cardType == 'Creature' and
 												'Living' in rawTraitsList): append('Finite Life')
-										elif (cName == 'Malacoda' and
+										if (cName == 'Malacoda' and
 												cardType == 'Creature' and
 												not 'Poison Immunity' in rawTraitsList and
 												'Living' in rawTraitsList): append('Malacoda')
-										elif (cName == 'Victorian Griffin' and
+										if (cName == 'Victorian Griffin' and
 												cardType == 'Creature'): remove('Elusive')
-										elif (cName == 'Steelclaw Cub' and
+										if (cName == 'Steelclaw Cub' and
 												name == 'Steelclaw Matriarch' and
 												cController == controller): append('Melee +1')
 								if ('Mage' in cSubtype and cController == controller): #Effects when creature is in same zone as controlling mage
@@ -1658,7 +1675,7 @@ def computeTraits(card):
 						if (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
 						if (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
 						if (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
-						if (cName == 'Mordok\'s Obelisk' and cardType == 'Creature'): append('Upkeep +1')
+						if (cName == 'Mordok\'s Obelisk' and cardType == 'Creature' and 'Mage' not in subtype): append('Upkeep +1')
 						if (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
 						if (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						if (cName == 'Rolling Fog'): append('Obscured')
@@ -1672,7 +1689,7 @@ def computeTraits(card):
 						if (cName == 'Zombie Frenzy' and ('Zombie' in subtype or markers[Zombie])):
 								rawTraitsList = [t for t in rawTraitsList if t not in ['Lumbering','Pest','Slow']]
 								extend(['Fast','Bloodthirsty +1'])
-
+		
 		if markers[Melee]: append('Melee +{}'.format(str(markers[Melee])))
 		if markers[Ranged]: append('Ranged +{}'.format(str(markers[Ranged])))
 		if markers[Armor]: append('Armor +{}'.format(str(markers[Armor])))
@@ -1698,7 +1715,7 @@ def computeTraits(card):
 		if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
 		if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
-		if markers[SirensCall] and 'Aquatic' in subtype and "Siren" in controller.name and 'Mage' not in subtype: extend(['Melee +2'])
+		if markers[SirensCall] and 'Aquatic' in subtype and "Siren" in mage.name and 'Mage' not in subtype: extend(['Melee +2'])
 		if markers[Grapple]: extend(['Melee -2'])
 
 
