@@ -17,6 +17,7 @@ Jinx
 Knight's Blessing
 Knight's Courage
 Mind Shield
+Nullify
 Redirect
 Reverse Attack
 #

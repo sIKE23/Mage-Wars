@@ -131,6 +131,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
 		if attack.get('Type','NoType') in dTraitDict.get('Immunity',[]): return False
+		if 'Drain' in attack.get('Traits',{}) and 'Nonliving' in dTraitDict: return False
 		aZone = getZoneContaining(attacker)
 		if attack.get('Range'):
 				if defender.Type == 'Conjuration-Wall':
@@ -180,12 +181,14 @@ def getAttackList(card):
 				#Split up the attacks:
 				attackKeyList0 = [attack.split(':\r\n') for attack in card.AttackBar.split(']\r\n')]
 				isAttackSpell = (card.Type == 'Attack')
+				isDrainSpell = (card.Name in ["Drain Life", "Siphon Life"])
 				#Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
 				attackKeyList1 = []
 				for attack in attackKeyList0:
-						name = (card.Name if isAttackSpell else attack[0])
-						attributes = (attack[0] if isAttackSpell else attack[1]).split('] [')
-						if isAttackSpell: attributes.append('Spell')
+						name = (card.Name if (isAttackSpell or isDrainSpell) else attack[0])
+						attributes = (attack[0] if (isAttackSpell or isDrainSpell) else attack[1]).split('] [')
+						if (isAttackSpell or isDrainSpell): attributes.append('Spell')
+						if isDrainSpell: attributes.append('Drain')
 						options = []
 						tempAttributes = attributes
 						for a in list(attributes):
@@ -209,7 +212,7 @@ def getAttackList(card):
 								 'OriginalSourceID': card._id
 								 #Later, when functionality is expanded to include non-attack effects, this will be modified
 								 }
-						if isAttackSpell:
+						if (isAttackSpell or isDrainSpell):
 								aDict['Range'] = [int(r) for r in card.Range.split('-')]
 								aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
 						#Now we extract the attributes
@@ -220,7 +223,7 @@ def getAttackList(card):
 								if attribute in ['Quick','Full',"Trample"] : aDict['Action'] = attribute
 								elif 'Ranged' in attribute:
 										aDict['RangeType'] = attribute.split(':')[0]
-										if not isAttackSpell: aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
+										if not (isAttackSpell or isDrainSpell): aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
 								elif 'Melee' in attribute:
 										aDict['RangeType'] = 'Melee'
 										aDict['Range'] = [0,0]
@@ -261,7 +264,7 @@ def getAttackList(card):
 
 		for c in table:
 				if "Mage" in card.Subtype:
-						if (c.Type in ['Equipment','Attack'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack') and
+						if (c.Type in ['Equipment','Attack', 'Incantation'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack' or c.Name in ["Drain Life", "Siphon Life"]) and
 							(getBindTarget(c) == card or (not canDeclareAttack(getBindTarget(c)) if getBindTarget(c) else True)) and
 							not c.markers[Disable]): attackList.extend(getAttackList(c))
 				if c.Type == 'Enchantment' and c.isFaceUp and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
@@ -279,7 +282,6 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
-		#if not ('Counterstrike' in attack['Traits'] or 'Glancing' in attack['Traits']):
 		attack = deepcopy(attack["OriginalAttack"])
 		attack["OriginalAttack"] = originalAttack
 		atkTraits = attack["Traits"]
@@ -410,7 +412,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 		if attacker and not "Autonomous" in atkOS.traits:
 				if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
 						if (attack.get('RangeType') == 'Melee' or attack.get('RangeType') == 'Counterstrike') and not attack.get("Action") == "Trample": attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
-						if attack.get('RangeType') == 'Ranged' and not attack.get("Traits",{}).get("Zone Attack"): attackDice += aTraitDict.get('Ranged',0)
+						if attack.get('RangeType') == 'Ranged' and not (attack.get("Traits",{}).get("Zone Attack") or attack.get("Traits",{}).get("Drain")): attackDice += aTraitDict.get('Ranged',0)
 				#No restriction on how many times may be applied
 				if not atkTraits.get('Spell'):
 						attackDice -= attacker.markers[Weak]
@@ -424,8 +426,9 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				level = eval(attacker.Level)
 				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
 				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
-				if 'Glancing' in atkTraits: attackDice -= 3
 		if defender:
+				if 'Glancing' in dTraitDict and not attack.get("Traits",{}).get("Drain"): attackDice -= 3
+				debug("dTraitDict: {}".format(dTraitDict))
 				attackDice -= dTraitDict.get('Aegis',0)
 				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or ("Mage" in defender.Subtype and defender.controller.Damage))
 																	and (attacker and not hasAttackedThisTurn(attacker))
@@ -780,7 +783,7 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 	if getSetting("BattleCalculator",True):
 		attack_traits = attack.get("Traits",{})
 		#1. Check for interception on ranged single target attacks
-		if attack.get("RangeType") == "Ranged" and not attack_traits.get("Zone Attack"):
+		if attack.get("RangeType") == "Ranged" and not (attack_traits.get("Zone Attack") or attack_traits.get("Drain")):
 			# Get list of valid interceptors
 			guard_dicts = [computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.markers[Guard] and c != defender and c.controller == defender.controller]
 			interceptor_dicts = [d for d in guard_dicts if d.get("Intercept") and not ("Restrained" in d or "Incapacitated" in d) and isLegalAttack(aTraitDict,attack,d)]
@@ -835,6 +838,7 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 		if (otherPlayer == me) or (not selfAttached and refusedReveal):
 				aTraitDict = computeTraits(attacker)
 				dTraitDict = computeTraits(defender)
+				debug('recalcing dTraitDict: {}'.format(dTraitDict))
 				if not dTraitDict.get('Flying') or not aTraitDict.get('Flying'): aTraitDict['Flying']=False
 				attack = computeAttack(aTraitDict,attack,dTraitDict)
 				nextPlayer = {'declareAttackStep': aController,
@@ -927,18 +931,19 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
-				#Check for reverse attack
+				#Check for Reverse Attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
 						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
 						attack["OriginalAttack"]["original target dict"] = dTraitDict
 						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
 						return
-				#Check for Glancing Blow
-				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Glancing Blow"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is magically deflected! Roll Manually for now, Sharkbait will automate some day".format(attacker.name.split(',')[0]))
+				#Check for Nullify
+				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Nullify"] and not timesHasUsedAbility(c)]) and attack.get("Traits",{}).get("Drain"):
+						notify("{}'s Spell is Nullified!".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
+
 
 		if attack.get('EffectType','Attack')=='Attack':
 			   if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
@@ -1237,6 +1242,8 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 		#Prep for Vampirism
 		aDamage = getStatusDict(attacker).get('Damage',0)
 		drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0)) if defender.Type in ["Mage","Creature"] else 0
+		drainLifeHealth = int(round(min(getRemainingLife(dTraitDict),damage,aDamage),0)) if defender.Type in ["Mage","Creature"] else 0
+
 		#if "Vine Marker" in defender.Name: drainableHealth = 0
 		#else: drainableHealth = int(round(min(getRemainingLife(dTraitDict)/float(2),damage/float(2),aDamage),0))
 
@@ -1292,6 +1299,17 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
 																   drainableHealth,
 																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
+		#Drain/Siphon Life
+		if (atkTraits.get('Drain') and drainLifeHealth and
+			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
+				if attacker.controller == me: healingQuery(aTraitDict,
+														   'Drain {} life from the target?'.format(drainLifeHealth,defender.name),
+														   drainLifeHealth,
+														   "{} drains {} life from {}".format(attacker.name,'{}',defender.name))
+				else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
+																   'Drain {} life from the target?'.format(drainLifeHealth,defender.name),
+																   drainLifeHealth,
+																   "{} drains {} life from {}".format(attacker.name,'{}',defender.name)])
 		#Reconstruct - Devouring Jelly for now
 		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and damage and attacker.markers[Damage] > 0):
 				cDamage = attacker.markers[Damage]
@@ -1519,6 +1537,7 @@ def computeTraits(card):
 														if markers[Guard]: extend(['Armor +2','Melee +1'])
 								if cName == "Maim Wings": rawTraitsList = [t for t in list(rawTraitsList) if t != 'Flying']
 								if cName == 'Shrink': append('Pest')
+								if cName == 'Glancing Blow': append('Glancing')
 								if cName == 'Blessed Focus':
 									cCreature = getAttachTarget(c)
 									if cCreature.markers[Damage]==0: extend(['Melee +1','Piercing +1'])

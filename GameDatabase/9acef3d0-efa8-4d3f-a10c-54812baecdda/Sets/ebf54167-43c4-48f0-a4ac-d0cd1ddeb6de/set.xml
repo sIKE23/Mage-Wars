@@ -3281,9 +3281,9 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magecast, Dark Mage Only" />
+			<property name="cAttacks" value="name=DrainLife;range type=Ranged;range=(0,1);dice=5;Critical Damage=True" />
+			<property name="AttackBar" value="[Ranged] [Dice=5] [Unavoidable] [Critical Damage]" />
+			<property name="Traits" value="Magecast, Dark Mage Only, Drain" />
 			<property name="Text" value="The target receives 5 attack dice of direct damage. The caster also heals damage equal to the damage received by the target creature." />
 			<property name="CardID" value="MW1I08" />
 		</card>

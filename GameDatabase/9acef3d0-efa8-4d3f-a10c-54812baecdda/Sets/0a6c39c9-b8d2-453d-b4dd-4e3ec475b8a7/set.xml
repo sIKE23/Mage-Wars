@@ -551,8 +551,8 @@
 			<property name="School" value="Dark"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
+			<property name="cAttacks" value="name=SiphonLife;range type=Ranged;range=(0,1);dice=3;Critical Damage=True" />
+			<property name="AttackBar" value="[Ranged] [Dice=3] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Magecast, Dark Mage Only" />
 			<property name="Text" value="Only a Mage may cast this spell. Roll 3 attack dice. Target Living creature receives that much direct damage. The caster may heal up to the amount of damage dealt." />
 			<property name="CardID" value="MWAWLI03" />
