@@ -164,7 +164,7 @@
 		<card id="cce03d98-ad14-4e26-b973-61e27f2e2567" name="Izimbila, Daughter of Badgers">
 			<property name="Nickname" value="Izimbila" />
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Wood Elf" />
+			<property name="Subtype" value="Soldier, Animal" />
 			<property name="Cost" value="9" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />

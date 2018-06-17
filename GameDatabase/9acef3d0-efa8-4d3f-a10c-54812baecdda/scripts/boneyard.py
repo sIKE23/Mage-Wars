@@ -450,6 +450,8 @@ def resolveDotEnchantment(card):
 	damageAmount = 0
 	if "Ghoul Rot" in card.Name and card.controller == me and card.isFaceUp:
 			damageAmount = 2
+	if "Force Crush" in card.Name and card.controller == me and card.isFaceUp:
+			damageAmount = 2
 	elif "Curse of Decay" in card.Name and card.controller == me and card.isFaceUp:
 			damageAmount = 1
 	elif "Arcane Corruption" in card.Name and card.controller == me and card.isFaceUp:

@@ -337,7 +337,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="You can only reveal Galvanize if this creature has a condition marker. Remove one condition marker from this creature by paying its removal cost, and this creature gains Melee +1. &#xD;&#xA; [Melee +1]" />
+			<property name="Text" value="You can only reveal Galvanize if this creature has a condition marker. Remove one condition marker from this creature by paying its removal cost, and this creature gains Melee +1. &#xD;&#xA;[Melee +1]" />
 			<property name="CardID" value="MWAFME04" />
 		</card>
 
