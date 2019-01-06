@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Elementalist"
+	id="98d1623f-49b6-4138-b4d3-873f997e0bb4"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+
+
+	<cards>		
+		<card id="b135f5d0-0a31-45c7-b5a3-a5058a6d0286" name="Elementalist">
+			<property name="Nickname" value="Elementalist" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card> 
+		<card id="728d2586-3b03-4722-a799-47e3cd82218c" name="Academy Elementalist Stats">
+			<property name="Nickname" value="Academy Elementalist Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained in the Air, Earth, Fire and Water Schools. Living objects cost triple spellpoints, even if Novice." />
+			<property name="Stats" value="Spellbook=43, Life=22, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="43" />
+			<property name="StatStartingMana"  value="-10" />
+			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, Living=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+		<!-- -->
+		<card id="eea22119-07b8-4eb0-8057-78a78fea6308" name="Beam of Frost">
+			<property name="Nickname" value="Beam of Frost" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Frost" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air/Water"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Beam of Frost;range type=Ranged;range=(0,1);damage type=Frost;dice=2;effects={4: ['Freeze', 'Freeze']}" />
+			<property name="AttackBar" value="[Ranged] [Frost] [Dice=2] [d12] [6+ = 2 Freeze]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAELA01" />
+		</card>
+		<card id="1061a961-f6d8-4e33-b57f-02bcc3d86158" name="Cone of Frost">
+			<property name="Nickname" value="Cone of Frost" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Frost" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air/Water"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Cone of Frost;range type=Ranged;range=(0,1);damage type=Frost;dice=2;effects={8: ['Freeze', 'Freeze']};Sweeping=True" />
+			<property name="AttackBar" value="[Ranged] [Frost] [Dice=2] [d12] [8+ = 2 Freeze] [Sweeping]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAELA02" />
+		</card>
+		<card id="10a6bab7-7ec6-4a21-b0b6-f20f4e67bb79" name="Gale Burst">
+			<property name="Nickname" value="Gale Burst" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Wind" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Gale Burst;range type=Ranged;range=(0,0);damage type=Wind;dice=3;Ethereal=True;+2 vs. Flying=True" />
+			<property name="AttackBar" value="[Ranged] [Wind] [Dice=3] [Ethereal] [+2 vs. Flying]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If a minor creature is damaged by Gale Burst, it becomes inactive. Gale Burst rolls 2 additional dice versus Flying creatures." />
+			<property name="CardID" value="MWAELA03" />
+		</card>
+		<card id="bce94cd3-5bbc-4761-a5fa-f8f12bd8ef75" name="Twister">
+			<property name="Nickname" value="Twister" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Wind" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Twister;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Wind;dice=3}Ethereal=True;+2 vs. Flying=True" />
+			<property name="AttackBar" value="[Ranged] [Zone] [Wind] [Dice=3] [Unavoidable] [Ethereal] [+2 vs. Flying]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If a minor creature is damaged by Twister, it becomes inactive. Twister rolls 2 additional dice versus Flying creatures." />
+			<property name="CardID" value="MWAEA04" />
+		</card>
+
+		<card id="c2dff24b-ab8e-4ef0-8d55-b8ac6225ca03" name="Dense Fog">
+			<property name="Nickname" value="Dense Fog" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Weather" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="StatArmor" value="" />
+			<property name="StatLife" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 1, Incorporeal" />
+			<property name="Text" value="Creatures in this zone cannot be targeted by anything but themselves." />
+			<property name="CardID" value="MWAELJ01" />
+		</card>
+		<card id="b1ad2245-1479-44f0-92f4-5127e55d88cc" name="Freeze Weapon">
+			<property name="Nickname" value="Freeze Weapon" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Frost" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))NULL" />
+			<property name="Target" value="Equipment" />
+			<property name="School" value="Air/Water" />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Melting 2, Frost Immunity" />
+			<property name="Text" value="Increase Freeze Weapon&apos;s cost by 2 if the target equipment is level 2. This equipment is Disabled (it loses all attack bars, action bars and non-trait abilities) and cannot be replaced. Flame attacks against Freeze Weapon roll 2 additional dice." />
+			<property name="CardID" value="MWAELJ02" />
+		</card>
+		<card id="89169377-cf5c-4e2f-9590-3052a08bacf4" name="Hellscape">
+			<property name="Nickname" value="Hellscape" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="Magma" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark+Fire" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=2, Life=5" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Flame Immunity" />
+			<property name="Text" value="Flame attacks against objects in this zone roll an extra die. At the beginning of the Upkeep Phase, place a Burn condition on all creatures and conjurations in this zone that do not already have a Burn condition. Hydro attacks against Hellscape roll 2 additional dice." />
+			<property name="CardID" value="MWAELJ03" />
+		</card>
+		<card id="e1691086-4b27-4961-83a8-60d8217e97fb" name="Ice Spikes">
+			<property name="Nickname" value="Ice Spikes" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Frost" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Melting 2, Frost Immunity" />
+			<property name="Text" value="When a non-frost creature in this zone activates, it receives 2 points of direct frost damage. Flame attacks against Ice Spikes roll 2 additional dice." />
+			<property name="CardID" value="MWAELJ04" />
+		</card>
+		<card id="eed44c73-bcba-4bcd-8f6a-59d4000c4699" name="Mana Shard">
+			<property name="Nickname" value="Mana Shard" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Mana" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane/Earth" />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=1, Life=5" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Flame Immunity" />
+			<property name="Text" value="During the Upkeep Phase, 1 object with channeling in this zone may gain 1 mana." />
+			<property name="CardID" value="MWAELJ05" />
+		</card>
+		<card id="4c12c7d1-7103-43b2-9c86-b8f9ae7f848d" name="Thunderstorm">
+			<property name="Nickname" value="Thunderstorm" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Cloud, Lightning, Weather" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="StatArmor" value="" />
+			<property name="StatLife" value="" />
+			<property name="cAttacks" value="name=Lightning Strike;range type=Ranged;range=(0,0);damage type=Lightning;dice=3;effects={5: ['Stagger']}Ethereal=True" />
+			<property name="AttackBar" value="Lightning Strike:&#xD;&#xA;[Ranged:0-0] [Lightning] [Dice=3] [d12] [5+ = Stagger] [Ethereal]" />
+			<property name="Traits" value="Dissipate 3, Incorporeal" />
+			<property name="Text" value="When a Dissipate token is removed from Thunderstorm, it makes the attack above, targeting a creature in its zone." />
+			<property name="CardID" value="MWAELJ06" />
+		</card>
+		<card id="04c203b7-c9f8-4f62-8a2d-188af552e647" name="Volcano">
+			<property name="Nickname" value="Volcano" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Magma, Seismic" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth+Fire" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=2, Life=6" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Eruption;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Flame;dice=4;effects={7: ['Burn']}" />
+			<property name="AttackBar" value="Eruption:&#xD;&#xA;[Ranged:0-0] [Zone] [Flame] [Dice=4] [d12] [7+ = Burn] [Unavoidable]" />
+			<property name="Traits" value="Dissipate 2, Flame Immunity" />
+			<property name="Text" value="When the last Dissipate token is removed from Volcano, it makes the attack above, before it is destroyed. Hydro attacks against the Volcano roll 2 additional dice." />
+			<property name="CardID" value="MWAELJ07" />
+		</card>
+
+		<card id="a5089f11-308d-4f6c-987b-753ac9cb6c55" name="Acid Ooze">
+			<property name="Nickname" value="Acid Ooze" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Acid, Ooze" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Engulfing Rust;action type=Quick;range type=Melee;range=(0,0);damage type=Acid;dice=2; effects={3+: ['Corrode']}" />
+			<property name="AttackBar" value="Engulfing Rust:&#xD;&#xA;[Quick] [Melee] [Acid] [Dice=2] [d12] [3+ = Corrode]" />
+			<property name="Traits" value="Nonliving, Resilient" />
+			<property name="Text" value="Acid Ooze ignores all non-critical damage from attacks. Direct damage and attack effects occur normally." />
+			<property name="CardID" value="MWAELC01" />
+		</card>
+		<card id="e3ef4d98-d993-4b4a-bf3b-cd836b36e513" name="Diamond Golem">
+			<property name="Nickname" value="Diamond Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Golem" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth+Fire"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=Diamond Fists;action type=Quick;range type=Melee;range=(0,0);dice=2;Critical Damage=True" />
+			<property name="AttackBar" value="Diamond Fists:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Critical Damage]" />
+			<property name="Traits" value="Nonliving, Flame Immunity, Psychic Immunity" />
+			<property name="Text" value="When Defending, during the Damage and Effects step, prevent 3 damage from that attack." />
+			<property name="CardID" value="MWAELC02" />
+		</card>
+		<card id="96a85eab-5c60-424a-a614-bf7ebc9d398f" name="Frost Elemental">
+			<property name="Nickname" value="Frost Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental, Frost" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="2+2" />
+			<property name="Stats" value="Armor=0, Life=23" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="23" />
+			<property name="cAttacks" value="name=Frozen Fists;action type=Quick;range type=Melee;range=(0,0);dice=5;effects={7+: ['Freeze', 'Freeze']}" />
+			<property name="AttackBar" value="Frozen Fists:&#xD;&#xA;[Quick] [Melee] [Dice=5] [d12] [7+ = 2 Freeze]" />
+			<property name="Traits" value="Melting 2, Nonliving, Frost Immunity" />
+			<property name="Text" value="Flame attacks against the Frost Elemental roll 2 additional dice." />
+			<property name="CardID" value="MWAELC03" />
+		</card>
+		<card id="18ab36a1-b74b-4467-b9bc-5ff057dd96f8" name="Galgommon">
+			<property name="Nickname" value="Galgommon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Lightning, Sprite" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=-, Life=4" />
+			<property name="StatDefense" value="" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Jolt;action type=Quick;range type=Melee;range=(0,0);damage type=Lightning;dice=2;effects={7+: ['Stagger']}Ethereal=True" />
+			<property name="AttackBar" value="Jolt:&#xD;&#xA;[Quick] [Melee] [Lightning] [Dice=2] [d12] [7+ = Stagger] [Ethereal]" />
+			<property name="Traits" value="Upkeep +1, Legendary, Lightning Immunity, Psychic Immunity, Incorporeal, Nonliving" />
+			<property name="Text" value="During the Upkeep Phase, destroy Galgommon unless you pay 1 mana." />
+			<property name="CardID" value="MWAELC04" />
+		</card>
+		<card id="a5257374-8791-43db-9f60-732515b42a25" name="Ice Golem">
+			<property name="Nickname" value="Ice Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Golem, Frost" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=13" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Frosty Fists;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={3+: ['Freeze']}" />
+			<property name="AttackBar" value="Frosty Fists:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [3+ = Freeze]" />
+			<property name="Traits" value="Melting 2, Nonliving, Frost Immunity, Psychic Immunity" />
+			<property name="Text" value="Flame attacks against the Ice Golem roll 2 additional dice." />
+			<property name="CardID" value="MWAELC05" />
+		</card>
+		<card id="bcc8be73-b8f5-4584-aef1-8050f1aab5bb" name="Magma Sprite">
+			<property name="Nickname" value="Magma Sprite" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Magma, Sprite" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth/Fire"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=1, Life=5" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Searing Tailwhip;action type=Quick;range type=Melee;range=(0,0);dice=1;effects={7+: ['Burn']}" />
+			<property name="AttackBar" value="Searing Tailwhip:&#xD;&#xA;[Quick] [Melee] [Dice=1] [d12] [7+ = Burn]" />
+			<property name="Traits" value="Psychic Immunity, Nonliving" />
+			<property name="Text" value="Frost attacks against the Magma Sprite roll 2 additional dice." />
+			<property name="CardID" value="MWAELC06" />
+		</card>
+		<card id="cde059b6-7fdb-4a4c-8ecc-2530f2ea0136" name="Mud Golem">
+			<property name="Nickname" value="Mud Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Golem" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Squish;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Squish:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Nonliving, Psychic Immunity" />
+			<property name="Text" value="As a full action, if Mud Golem has less than 3 Mud counters, it may place a Mud counter on itself. For each Mud counter on Mud Golem, increase its Life by 2 and it gains Melee +1." />
+			<property name="CardID" value="MWAELC07" />
+		</card>
+		<card id="34d6a55f-8c87-4055-9f81-ee8689463b7c" name="Rock Golem">
+			<property name="Nickname" value="Rock Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Golem" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=3, Life=4" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Stone Fist;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Stone Fist:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Nonliving, Psychic Immunity" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAELC08" />
+		</card>
+		<card id="e6b69390-c210-443a-bdf2-dd70bb886a4c" name="Tide Elemental">
+			<property name="Nickname" value="Tide Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Hydro, Elemental" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Tidal Crash;action type=Quick;range type=Melee;range=(0,0);damage type=Hydro;dice=4;effects={7+: ['Stagger']}" />
+			<property name="AttackBar" value="Tidal Crash:&#xD;&#xA;[Quick] [Melee] [Hydro] [Dice=4] [d12] [7+ = Stagger] [Extinguish]" />
+			<property name="Traits" value="Hydro Immunity, Nonliving, Resilient, Burnproof" />
+			<property name="Text" value="Tide Elemental ignores non-critical damage from attacks and is immune to Burn conditions. Frost attacks against it roll 2 additional dice. As a Quick Action the Tide Elemental can remove all Burn conditions from one object in this zone." />
+			<property name="CardID" value="MWAELC09" />
+		</card>
+				
+		<card id="648b2d6d-d69f-417f-b666-637bcbc67c21" name="Deep Freeze">
+			<property name="Nickname" value="Deep Freeze" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage, TObject" />
+			<property name="Target" value="Non-Mage Object" />
+			<property name="School" value="Air/Water"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This object loses and cannot gain the Melting X trait. Additionally, Freeze conditions are not removed at the end of this creature&apos;s activation. Flame attacks against this object roll 2 less dice." />
+			<property name="CardID" value="MWAELE01" />
+		</card>
+		<card id="2d87d057-a5d1-4be6-aec8-66caeb453977" name="Frost Trap">
+			<property name="Nickname" value="Frost Trap" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Frost, Trap" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature, tCorporeal" />
+			<property name="Target" value="Corporeal Creature"/>
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this creature activates, you must reveal Frost Trap. Place 2 Freeze conditions on this creature. Then, destroy Frost Trap." />
+			<property name="CardID" value="MWAELE02" />
+		</card>
+		<card id="16211ebd-2715-475e-8a41-b30d5f8e1858" name="Tar Trap">
+			<property name="Nickname" value="Tar Trap" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Tar, Trap" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature, tCorporeal" />
+			<property name="Target" value="Non-Flying Corporeal Creature" />
+			<property name="School" value="Earth+Fire"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="You must reveal Tar Trap when this creature activates. This creature cannot take non-spell actions, and Flame attacks against this creature roll an additional die. Uncontainable creatures are immune to Tar Trap." />
+			<property name="CardID" value="MWAELE03" />
+		</card>
+				
+		<card id="bd5ed44d-b6cc-4526-b924-f3a7ef53fc06" name="Amulet of Attunement">
+			<property name="Nickname" value="Amulet of Attunement" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Mana" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air/Earth/Fire/Water"  />
+			<property name="Level" value="1/1/1/1" />
+			<property name="Stats" value="Location=Amulet" />
+			<property name="StatEquipmentSlot" value="Amulet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Elementalist Only" />
+			<property name="Text" value="Once per round, when you have Priority, you may deactivate one Glyph and gain 2 mana." />
+			<property name="CardID" value="MWAELQ01" />
+		</card>
+		<card id="19eb19d7-5ef7-41bb-be05-747c9f9ea429" name="Dragon&apos;s Mantle">
+			<property name="Nickname" value="Dragon&apos;s Mantle" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor, Flame" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This mage gains Armor +1. Once per round, when this Mage is melee attacked and damaged you may pay 1 mana or deactivate your Fire Glyph. If you do, place a Burn condition on the attacker.&#xD;&#xA;[Armor +1]" />
+			<property name="CardID" value="MWAELQ02" />
+		</card>
+		<card id="e5752618-ca3d-40f4-93d5-79a9e423e7a0" name="Elemental Staff">
+			<property name="Nickname" value="Elemental Staff" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Staff" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air/Earth/Fire/Water"  />
+			<property name="Level" value="1/1/1/1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Elemental Resonance;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Elemental Resonance:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains a Defense. This defense can only be used when Melee attacked, you may pay 1 mana and deactivate one of your Glyphs. If you do, roll a d12: On a roll of 7+ the attack is avoided. This counts as a defense. If this Mage is level 5 or greater, Elemental Staff rolls an additional attack die. &#xD;&#xA;[Defense=7+ inf No Ranged]" />
+			<property name="CardID" value="MWAELQ03" />
+		</card>
+		<card id="d887f3ce-be43-4e3d-8c5e-f59d48343d4c" name="Wand of Ice and Fire">
+			<property name="Nickname" value="Wand of Ice and Fire" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Flame, Frost, Wand" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air/Fire/Water"  />
+			<property name="Level" value="1/1/1" />
+			<property name="Stats" value="Location=Shield" />
+			<property name="StatEquipmentSlot" value="Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Once per round, as a quick spell, you may pay 2 mana to place a Burn or Freeze condition on target Corporeal object up to 1 zone away." />
+			<property name="CardID" value="MWAELQ04" />
+		</card>
+		
+		<card id="a3d1f162-9e2d-4700-b364-413ea40412be" name="Neutralizing Mist">
+			<property name="Nickname" value="Neutralizing Mist" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Hydro" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TObject" />
+			<property name="Target" value="Object" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Remove any number of Corrode conditions from the target, paying the removal cost for each." />
+			<property name="CardID" value="MWAELI01" />
+		</card>
+		<card id="56fe2dad-5831-4a02-b2a6-247162b0a157" name="Rapid Dismantle">
+			<property name="Nickname" value="Rapid Dismantle" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Acid" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Water" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Choose up to 2 level 1 equipment objects attached to target Mage, and destroy them." />
+			<property name="CardID" value="MWAELI03" />
+		</card>
+		<card id="c8bfdd95-ddd3-4c9a-ad09-6aa51d3d96ee" name="Upheaval">
+			<property name="Nickname" value="Upheaval" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Seismic" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TConjuration" />
+			<property name="Target" value="Corporeal Conjuration" />
+			<property name="School" value="Earth"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If the target is a non-Epic level 1 Corporeal conjuration, destroy it. X = the Conjuration&apos;s mana cost plus the combined mana costs of any objects attached to it. (Hidden enchantments are mana cost 2.)" />
+			<property name="CardID" value="MWAELI04" />
+		</card>
+	</cards>
+</set>

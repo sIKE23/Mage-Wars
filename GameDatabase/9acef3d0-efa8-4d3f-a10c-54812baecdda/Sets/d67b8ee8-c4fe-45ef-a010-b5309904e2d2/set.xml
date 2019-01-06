@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Druid"
+	id="d67b8ee8-c4fe-45ef-a010-b5309904e2d2"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+
+	<cards>
+		<card id="08df9518-9ecb-41ef-a169-9e4d41891a3a" name="Druid">
+			<property name="Nickname" value="Druid" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="ac92f16e-c203-4fe1-99d4-e5d9f76392ba" name="Academy Druid Stats">
+			<property name="Nickname" value="Academy Druid Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Nature magic and level 1 Water spells. Fire and War spells cost triple spellpoints, even if Novice." />
+			<property name="Stats" value="Spellbook=40, Life=23, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="23" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-8" />
+			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Herbalist. Once per round, when you cast a potion, you may pay 1 mana to place 1 additional Charge token on it." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+		
+		<card id="dc4f4495-5fdb-4eb2-9b11-ade8f59ac74a" name="Acid Blast">
+			<property name="Nickname" value="Acid Blast" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Acid" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Acid Blast;range type=Ranged;range=(0,1);damage type=Acid;dice=2;effects={9: ['Corrode']}Sweeping=True;Unavoidable=True" />
+			<property name="AttackBar" value="[Ranged] [Acid] [Dice=2] [d12] [9+ = Corrode] [Sweeping] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this attack assigns effects place an additional Corrode on the defender." />
+			<property name="CardID" value="MWADRA01" />
+		</card>
+		<card id="5b3d0c17-59e3-4e86-a0fa-1e8142a07cbd" name="Spray of Barbs">
+			<property name="Nickname" value="Spray of Barbs" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Vine" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Spray of Barbs;range type=Ranged;range=(0,1);dice=2;Doublestrike=True;Piercing +X=2" />
+			<property name="AttackBar" value="[Ranged] [Dice=2] [Piercing +2] [Doublestrike]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRA02" />
+		</card>
+
+		<card id="80ab2f26-0ff0-45e4-a5ac-2bf4ee9bdb5a" name="Alluring Orchid">
+			<property name="Nickname" value="Alluring Orchid" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Plant, Flower, Vine" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Living, Regenerate 1" />
+			<property name="Text" value="Enemy minor creatures in this zone must attack Alluring Orchid, if able. When Alluring Orchid is melee attacked, during the counterstrike step, place a Rot condition on the attacker. Flame attacks against Alluring Orchid roll 2 additional dice." />
+			<property name="CardID" value="MWADRJ01" />
+		</card>
+		<card id="a4ba4f73-d64c-425b-ba32-ff4d52ddc430" name="Healing Tree">
+			<property name="Nickname" value="Healing Tree" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Plant, Tree" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=5" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Living, Regenerate 2" />
+			<property name="Text" value="Once per round, when you have Priority, Healing Tree may heal another friendly living object, in this zone, for 2 points of damage. Flame attacks agaisnt Healing Tree roll 2 additional dice." />
+			<property name="CardID" value="MWADRJ02" />
+		</card>
+		<card id="dbc176bf-bff2-4059-9314-01a0bd2ad000" name="Mana Lotus">
+			<property name="Nickname" value="Mana Lotus" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Mana, Plant, Vine" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 3, Living, Unique" />
+			<property name="Text" value="When the last dissipate token is removed from Mana Lotus, its controller gains 5 mana. Flame attacks against Mana Lotus roll 2 additional dice." />
+			<property name="CardID" value="MWADRJ03" />
+		</card>
+		<card id="c86a8378-eb6e-4d83-9203-e57711de2448" name="Meredia&apos;s Shrine">
+			<property name="Nickname" value="Meredia&apos;s Shrine" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Temple" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Unique" />
+			<property name="Text" value="As a quick action, friendly living creatures in this zone may pray; heal 2 points of damage from that creature or remove a condition from that creature with a removal cost 2 or less." />
+			<property name="CardID" value="MWADRJ04" />
+		</card>
+
+		<card id="4c16aee6-bbd5-4bc0-b2d8-40a1787ad2fc" name="Corpsebloom">
+			<property name="Nickname" value="Corpsebloom" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Plant" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Biting Blooms;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Biting Blooms:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Regenerate 1, Rooted" />
+			<property name="Text" value="After making a Biting Blooms attack, place a Stagger condition on Corpsebloom. Flame attacks against Corpsebloom roll 2 additional dice." />
+			<property name="CardID" value="MWADRC01" />
+		</card>
+		<card id="bfce518b-c101-4c85-b4f4-d5cf0e91def3" name="Darkfenne Owl">
+			<property name="Nickname" value="Darkfenne Owl" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Bird" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=Dive;action type=Quick;range type=Melee;range=(0,0);dice=1;" />
+			<property name="AttackBar" value="Dive:&#xD;&#xA;[Quick] [Melee] [Dice=1]" />
+			<property name="Traits" value="Flying, Pest" />
+			<property name="Text" value="Creatures in this zone cannot be healed. (this includes healing from the Regenerate X trait)" />
+			<property name="CardID" value="MWADRC02" />
+		</card>
+		<card id="dbf375db-61ff-49e7-a691-53920131be96" name="Hellfire Ants">
+			<property name="Nickname" value="Hellfire Ants" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect, Swarm" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=4" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=1000 Bites;action type=Quick;range type=Melee;range=(0,0);dice=1;Unavoidable=True" />
+			<property name="AttackBar" value="1000 Bites:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Unavoidable]" />
+			<property name="Traits" value="Elusive, Swarm" />
+			<property name="Text" value="Hellfire Ants can attack different targets with their additional strikes." />
+			<property name="CardID" value="MWADRC03" />
+		</card>
+		<card id="10f863c2-cd80-4e09-a6c8-1a85cfd949ff" name="Hunting Falcon">
+			<property name="Nickname" value="Hunting Falcon" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Bird" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Dive;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1" />
+			<property name="AttackBar" value="Dive:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="Flying" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC04" />
+		</card>
+		<card id="2c455417-4f67-4cc3-80c5-b52f210a5e53" name="Jungle Defender">
+			<property name="Nickname" value="Jungle Defender" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Plant, Tree, Sequoian" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatDefense" value="" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Branch Smash;action type=Full;range type=Melee;range=(0,0);dice=5;Reach=True;+2 vs. Flying=True" />
+			<property name="AttackBar" value="Branch Smash:&#xD;&#xA;[Full] [Melee] [Dice=5] [Reach] [+2 vs. Flying]" />
+			<property name="Traits" value="Regenerate 2" />
+			<property name="Text" value="When Jungle Defender attacks a Flying creature, it rolls 2 additional attack dice. Flame attacks against Jungle Defender roll 2 additional dice." />
+			<property name="CardID" value="MWADRC05" />
+		</card>
+		<card id="5b11ee52-b982-4065-b7ec-267f3bc58e82" name="Killer Bees">
+			<property name="Nickname" value="Killer Bees" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect, Swarm" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=1000 Stings;action type=Quick;range type=Melee;range=(0,0);dice=1;Critical Damage=True" />
+			<property name="AttackBar" value="1000 Stings:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Critical Damage]" />
+			<property name="Traits" value="Elusive, Flying, Swarm" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC06" />
+		</card>
+		<card id="b6ee1134-f60f-4a2e-bd11-7c23787deffe" name="Lashing Liana">
+			<property name="Nickname" value="Lashing Liana" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Plant, Vine" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Lashing Vines;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Lashing Vines:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Regenerate 2, Rooted, Unique" />
+			<property name="Text" value="When a friendly plant creature in this zone is damaged by a melee attack, Lashing Liana deals 2 direct damage to the attacker. Flame attacks against Lashing Liana roll 2 additional dice." />
+			<property name="CardID" value="MWADRC07" />
+		</card>
+		<card id="44a5cbf2-bdc6-4578-a96c-4ec9f497b057" name="Silverclaw Ratel">
+			<property name="Nickname" value="Silverclaw Ratel" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Weasel" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While he has damage on him, Silverclaw Ratel&apos;s Claws attack gains Doublestrike. Silverclaw Ratel cannot guard." />
+			<property name="CardID" value="MWADRC08" />
+		</card>
+		<card id="bb4b96a6-4a3e-42fa-8086-371b879b89d0" name="Swamp Lurker">
+			<property name="Nickname" value="Swamp Lurker" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Plant, Swamp" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Swamp Slam;action type=Quick;range type=Melee;range=(0,0);dice=3;" />
+			<property name="AttackBar" value="Swamp Slam:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Regenerate 2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC09" />
+		</card>
+		<card id="12f916ec-a3d7-4bb1-b429-c84fe644d0f3" name="Swamp Serpent">
+			<property name="Nickname" value="Swamp Serpent" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Aquatic, Reptile, Serpent" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature/Water"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Venomous Bite;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={8+: ['Rot']}" />
+			<property name="AttackBar" value="Venomous Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [8+ = Rot]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC10" />
+		</card>
+		<card id="70a06776-cf2d-4b12-8c82-34cdc3f227b8" name="Swamp Snapper">
+			<property name="Nickname" value="Swamp Snapper" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Aquatic, Reptile, Turtle" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=4, Life=7" />
+			<property name="StatArmor" value="4" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Snap;action type=Quick;range type=Melee;range=(0,0);dice=3;" />
+			<property name="AttackBar" value="Snap:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC11" />
+		</card>
+		<card id="47ce936e-1fdf-4557-acb5-1b463af98272" name="Wetland Titan Frog">
+			<property name="Nickname" value="Wetland Titan Frog" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Amphibian, Animal, Aquatic" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Tongue Lash;action type=Quick;range type=Melee;range=(0,0);dice=3;Reach=True;" />
+			<property name="AttackBar" value="Tongue Lash:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Reach]" />
+			<property name="Traits" value="Elusive" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC12" />
+		</card>
+		<card id="3972a2e2-8e0c-417e-89e6-ba35599beb1d" name="Wychwood Rat">
+			<property name="Nickname" value="Wychwood Rat" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Rat, Rodent" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark/Nature"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=2;" />
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While another friendly rat is in this zone, Wychwood Rat gains the Melee +1 trait." />
+			<property name="CardID" value="MWADRC13" />
+		</card>
+
+		<card id="832b9f50-e088-4409-9673-d51f669f7512" name="Overgrowth">
+			<property name="Nickname" value="Overgrowth" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Herbal" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature, tLiving" />
+			<property name="Target" value="Living Creature"/>
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This creature gains Life +2 and Melee +1 traits. If this creature is a plant, reduce the reveal cost of Overgrowth by 1." />
+			<property name="CardID" value="MWADRE01" />
+		</card>
+		<card id="fe3babb3-4fb5-4885-9902-c71ac491700a" name="Reclamation">
+			<property name="Nickname" value="Reclamation" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Plant, Vine" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TConjuration, tCorporeal" />
+			<property name="Target" value="Corporeal Conjuration" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Each Upkeep Phase, this Conjuration receives 2 direct damage." />
+			<property name="CardID" value="MWADRE02" />
+		</card>
+				
+		<card id="c64d33e9-0129-4eca-87eb-5f6ca2fa7e05" name="Blowgun">
+			<property name="Nickname" value="Blowgun" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Weapon" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Dart;action type=Quick;range type=Ranged;range=(0,1);dice=1;Piercing +X=2" />
+			<property name="AttackBar" value="Dart:&#xD;&#xA;[Quick] [Ranged: 0-1] [Dice=1] [Piercing 2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRQ01" />
+		</card>
+		<card id="0cff0de3-a623-4be2-bf3f-131f5302c4d4" name="Cleansing Potion">
+			<property name="Nickname" value="Cleansing Potion" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Potion" />
+			<property name="Cost" value="1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=" />
+			<property name="StatEquipmentSlot" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Cleansing Potion enters play, place 3 Charge tokens on it. Once per round, when you have Priority, you may remove a Charge token from Cleansing Potion. If you do, remove a Poison condition from a friendly creature in this zone by paying the removal cost. Cleansing Potion cannot be replaced. When there are no Charge tokens remaining on Cleansing Potion, destroy it." />
+			<property name="CardID" value="MWADRQ02" />
+		</card>
+		<card id="1d0590c4-a3c0-4756-a4ea-75953019fb5f" name="Corrosive Concoction">
+			<property name="Nickname" value="Corrosive Concoction" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Potion, Acid" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=" />
+			<property name="StatEquipmentSlot" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Corrosive Concoction enters play, place 3 Charge tokens on it. Once per round, when you damage an enemy creature with a non-spell attack, you may remove a Charge token from Corrosive Concoction to place a Corrode condition on that creature. Corrosive Concoction cannot be replaced. When there are no Charge tokens remaining on Corrosive Concoction, destroy it." />
+			<property name="CardID" value="MWADRQ03" />
+		</card>
+		<card id="0a29bd44-0e55-4f77-8023-70c95914d27d" name="Living Armor">
+			<property name="Nickname" value="Living Armor" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor, Plant" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Druid Only" />
+			<property name="Text" value="When Living Armor enters play, place 2 Armor +1 tokens on it. When you are attacked and damaged, remove an Armor +1 token from Living Armor. During the Upkeep Phase, Living Armor gains 2 Armor +1 tokens, to a maximum of 3." />
+			<property name="CardID" value="MWADRQ04" />
+		</card>
+		<card id="46200bc1-f286-4ddd-89ce-6fb87a149f56" name="Rage Tonic">
+			<property name="Nickname" value="Rage Tonic" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Potion" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=" />
+			<property name="StatEquipmentSlot" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Rage Tonic enters play, place 3 Charge tokens on it. Once per round, when you have Priority, you may remove a Charge token from Rage Tonic. If you do, target friendly Living creature in your zone gains Melee +1 until the end of the round. Rage Tonic cannot be replaced. When there are no Charge tokens remaining on Rage Tonic, destroy it." />
+			<property name="CardID" value="MWADRQ05" />
+		</card>
+	</cards>
+</set>
