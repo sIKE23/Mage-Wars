@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Monk"
+	id="deca5fd4-167d-4530-ade9-177c23ca54d3"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+
+	<cards>
+		<card id="bcacf527-05b6-41d3-b7bc-e8434c2ed6ec" name="Monk">
+			<property name="Nickname" value="Monk" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="6ed52b69-008d-4c87-873e-268412c7947f" name="Academy Monk Stats">
+			<property name="Nickname" value="Academy Monk Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="25" />
+			<property name="StatSpellBookPoints" value="38" />
+			<property name="StatStartingMana"  value="-9" />
+			<property name="MageSchoolCost" value="Mind=1" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="801da065-6f12-4ad5-afa1-cb50693e14e9" name="Dragon-Tail Sweep">
+			<property name="Nickname" value="Dragon-Tail Sweep" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Dragon-Tail Kick;range type=Melee;range=(0,0);dice=3;Sweeping=True" />
+			<property name="AttackBar" value="[Melee] [Dice=3] [Sweeping]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this attack is declared, you may pay 2 Ki. If you do, this attack rolls 1 additional attack die." />
+			<property name="CardID" value="MWAMKA01" />
+		</card>
+		<card id="23dd063b-4ada-4d94-80c5-8725c077044d" name="Fist of Iron">
+			<property name="Nickname" value="Fist of Iron" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Earth"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Fist of Iron;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="[Melee] [Dice=4]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this attack is declared, you may pay 3 Ki. If you do, this attack deals Critical Damage. Fist of Iron cannot gain the effect of the Melee +X trait." />
+			<property name="CardID" value="MWAMKA02" />
+		</card>
+		<card id="627bcd65-ceda-4199-8194-cc3ad5d55455" name="Fist of Lightning">
+			<property name="Nickname" value="Fist of Lightning" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Lightning, Martial" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Air"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Fist of Lightning;range type=Melee;range=(0,0);damage type=Lightning;dice=3;Ethereal=True" />
+			<property name="AttackBar" value="[Melee] [Lightning] [Dice=3] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If this attack is successful, you  may pay X Ki. If you do, the non-Mage defender becomes inactive. X=level of the defender plus 1." />
+			<property name="CardID" value="MWAMKA03" />
+		</card>
+		<card id="bd1f7d28-9656-4b51-afd3-5911f789f34b" name="Flying Side Kick">
+			<property name="Nickname" value="Flying Side Kick" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Flying Side Kick;range type=Melee;range=(0,0);dice=3;Reach=True" />
+			<property name="AttackBar" value="[Melee] [Dice=3] [Reach]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this attack is declared, you may pay 2 Ki. If you do, this attack rolls 2 additional attack dice." />
+			<property name="CardID" value="MWAMKA04" />
+		</card>
+		<card id="6d8e3760-f3dd-42fe-b81d-491d674cf568" name="Projected Leg Sweep">
+			<property name="Nickname" value="Projected Leg Sweep" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force, Martial" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Non-Flying Creature or Conjuration" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Projected Leg Sweep;range type=Melee;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
+			<property name="AttackBar" value="[Melee] [Dice=3] [d12] [7+= Stagger] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If this attack is successful, you may pay 2 Ki. If you do, gain +6 to the effect roll." />
+			<property name="CardID" value="MWAMKA05" />
+		</card>
+		<card id="fe1878d8-a53d-44c1-8180-7218d52e1d3c" name="Projected Palm">
+			<property name="Nickname" value="Projected Palm" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Force, Martial" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Projected Palm;range type=Ranged;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
+			<property name="AttackBar" value="[Ranged] [Dice=3] [d12] [7+= Stagger] [Ethereal]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this attack is declared, you may pay 2 Ki. If you do, this attack gains the Unavoidable trait." />
+			<property name="CardID" value="MWAMKA06" />
+		</card>
+		
+		<card id="34277ba0-2bbe-4d19-871b-0caf58446758" name="Hired Bodyguard">
+			<property name="Nickname" value="Hired Bodyguard" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Soldier" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=Shortsword;action type=Quick;range type=Melee;range=(0,0);dice=1" />
+			<property name="AttackBar" value="Shortsword:&#xD;&#xA;[Quick] [Melee] [Dice=1]" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="When this creature is summoned, place a guard marker on him." />
+			<property name="CardID" value="MWAMKC01" />
+		</card>
+		<card id="6d8f90ae-c915-46b5-a668-165f41f4ba3a" name="Oboko, Sohei Master">
+			<property name="Nickname" value="Oboko, Sohei Master" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Monk" />
+			<property name="Cost" value="11" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy+Mind"  />
+			<property name="Level" value="1+2" />
+			<property name="Stats" value="Defense=7+ inf, Armor=0, Life=9" />
+			<property name="StatDefense" value="7+ inf" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Closed Fist;action type=Quick;range type=Melee;range=(0,0);dice=4;Unavoidable=True" />
+			<property name="AttackBar" value="Closed Fist:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Unavoidable]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="As a full action, Oboko may meditate: you gain 2 Ki." />
+			<property name="CardID" value="MWAMKC02" />
+		</card>
+		<card id="924d6755-d804-47f9-a3d0-0eac3fbd24a5" name="Haruku, Shadowy Assassin">
+			<property name="Nickname" value="Haruku, Shadowy Assassin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Martial, Ninja" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark+War"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Backstab;action type=Quick;range type=Melee;range=(0,0);dice=4;" />
+			<property name="AttackBar" value="Backstab:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="Haruku cannot be targeted while active. While attacking an inactive creature, Backstab gains the Piercing +2 trait." />
+			<property name="CardID" value="MWAMKC03" />
+		</card>
+		<card id="78be4145-492e-4010-af82-55f153309aa3" name="Sohei Pupil">
+			<property name="Nickname" value="Sohei Pupil" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Monk" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy/Mind"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Swiftstrike;action type=Quick;range type=Melee;range=(0,0);dice=2;Unavoidable=True" />
+			<property name="AttackBar" value="Swiftstrike:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Unavoidable]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAMKC04" />
+		</card>
+						
+		<card id="0c3e07e2-475b-4615-aa66-98d4a6981dce" name="Chakra of Protection">
+			<property name="Nickname" value="Chakra of Protection" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Chakra, Protection" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While you control the fewest creatures, Melee attacks roll 1 less attack die against this Mage (to a minimum of 1)." />
+			<property name="CardID" value="MWAMKE01" />
+		</card>
+		<card id="183b4553-35e2-4753-a92d-8a315cf6f7d9" name="Martial Mastery">
+			<property name="Nickname" value="Martial Mastery" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Self" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Monk Only" />
+			<property name="Text" value="Only a Mage can cast this spell. While you control the fewest creatures, your attacks roll an additional attack die. Once per round, when you cast or reveal martial spell reduce its cost by 1 mana. Enchantments only receive this discount when they are revealed." />
+			<property name="CardID" value="MWAMKE02" />
+		</card>
+		<card id="f755edcd-490a-420f-a538-329b462b0765" name="Miss">
+			<property name="Nickname" value="Miss" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Fortune" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor, TCreature" />
+			<property name="Target" value="Minor Creature"/>
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="When this creature declares a non-spell attack, you must reveal Miss. The attack fails and is canceled. Then, destroy Miss." />
+			<property name="CardID" value="MWAMKE03" />
+		</card>
+		<card id="4daef286-8bd7-42f4-9cc8-70fc6e2d86fd" name="Reprisal">
+			<property name="Nickname" value="Reprisal" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Retribution" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature, tCorporeal" />
+			<property name="Target" value="Minor Corporeal Creature"/>
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="This creature&apos;s quick action melee attacks gain the Counterstrike trait. The first time this creature makes a counterstrike attack, destroy Reprisal." />
+			<property name="CardID" value="MWAMKE04" />
+		</card>
+		<card id="ceb6ff8f-3d45-4e49-9f5d-347a42500ae0" name="Sanctuary">
+			<property name="Nickname" value="Sanctuary" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Protection" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage, TCreature" />
+			<property name="Target" value="Friendly Non-Mage Creature"/>
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 1" />
+			<property name="Text" value="This creature is teleported outside the arena. When sanctuary is destroyed, return the creature to play in the zone it was last in. You cannot reveal Sanctuary during an action or activation. If this is a minor creature, reduce the reveal cost of Sanctuary by 1." />
+			<property name="CardID" value="MWAMKE05" />
+		</card>
+		<card id="2232edd3-86eb-42fe-9617-dd070c210993" name="Fortified Resolve">
+			<property name="Nickname" value="Fortified Resolve" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Chakra, Martial" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage"/>
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this Mage attacks and damages an enemy creature, place a Charge token on Fortified Resolve. When this Mage would be damaged by an attack, you may remove a charge token from Fortified Resolve to reduce the damage from that attack by 2." />
+			<property name="CardID" value="MWAMKE06" />
+		</card>
+		<card id="58939d4d-0c21-43ba-b23d-fdd6e6b0d703" name="Arcane Webbing">
+			<property name="Nickname" value="Arcane Webbing" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Martial, Diversion" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone"/>
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 1" />
+			<property name="Text" value="You can only reveal Arcane Webbing when you have Priority. Corporeal creatures in this zone roll 1 less attack die when making non-spell attacks (to a minimum of 1)." />
+			<property name="CardID" value="MWAMKE07" />
+		</card>
+				
+		<card id="1c458601-e6df-4712-acf8-f1faf43cb8b6" name="Bo staff">
+			<property name="Nickname" value="Bo Staff" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Martial, Staff" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon+Shield" />
+			<property name="StatEquipmentSlot" value="Weapon+Shield" />
+			<property name="cAttacks" value="name=Crane&apos;s Reach;action type=Quick;range type=Melee;range=(0,0);dice=3;Reach=True" />
+			<property name="AttackBar" value="Crane&apos;s Reach:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Reach]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Mage gains a Defense (7+ infinite). This defense can only be used when melee attacked, and if you pay 2 Ki. If this Mage is level 5 or higher, Bo Staff rolls an additional attack die. &#xD;&#xA;[Defense=7+ inf No Ranged]" />
+			<property name="CardID" value="MWAMKQ01" />
+		</card>
+		<card id="76738c91-2657-4ced-a3a4-90557cc1f01d" name="Dampening Cloak">
+			<property name="Nickname" value="Dampening Cloak" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Force, Cloak" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Cloak" />
+			<property name="StatEquipmentSlot" value="Cloak" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This Mage gains the Aegis 1 trait while being attacked by a Ranged attack." />
+			<property name="CardID" value="MWAMKQ02" />
+		</card>
+		<card id="5ec3b5de-6188-47e9-a25d-ed22410c9073" name="Devout Robes">
+			<property name="Nickname" value="Devout Robes" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Ki, Robes" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This Mage gains Armor +1. Once per round, as a quick spell, you may pay X Ki and remove a condition on this Mage. X = the condition&apos;s removal cost. &#xD;&#xA;[Armor+1]" />
+			<property name="CardID" value="MWAMKQ03" />
+		</card>
+		<card id="e2f48ef1-f64c-4924-ac2f-5d5b1696ca7c" name="Dragon&apos;s Lance">
+			<property name="Nickname" value="Dragon&apos;s Lance" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Martial, Lance" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="name=Dragon&apos;s Bite;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={7: ['Burn']}" />
+			<property name="AttackBar" value="Dragon&apos;s Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [7+= Burn]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When you declare a Dragon&apos;s Bite attack, you may spend 1 Ki. If you do, gain +6 to that effect roll. If this Mage is level 5 or higher, Dragon&apos;s Lance rolls an additional attack die." />
+			<property name="CardID" value="MWAMKQ04" />
+		</card>
+		<card id="64d4443c-d47e-42bb-820d-00c4f40e95cc" name="Gladius">
+			<property name="Nickname" value="Gladius" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Sword, Weapon" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Short Blade;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Short Blade:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="If this Mage is level 5 or greater, Gladius rolls an additional attack die." />
+			<property name="CardID" value="MWAMKQ05" />
+		</card>
+		<card id="9bba7d04-0a87-44e6-9359-339c8b488fdc" name="Golden Shield">
+			<property name="Nickname" value="Golden Shield" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Shield" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Shield" />
+			<property name="StatEquipmentSlot" value="Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This Mage gains a Defense which can only be used against ranged attacks. When Golden Shield successfully avoids an attack, place a 1 damage counter on it. When Golden Shield has 3 damage counters on it, destroy it. &#xD;&#xA;[Defense=7+ inf No Melee]" />
+			<property name="CardID" value="MWAMKQ06" />
+		</card>
+		<card id="67948f14-5b83-4645-9ec4-eb502367d243" name="Ring of Ki">
+			<property name="Nickname" value="Ring of Ki" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Ki, Meditation" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Monk Only" />
+			<property name="Text" value="When Channeling, you may pay 1 mana. If you do, gain 2 additional Ki." />
+			<property name="CardID" value="MWAMKQ07" />
+		</card>
+				
+		<card id="c4db5465-4669-495e-b49a-067ebf5a33fc" name="Distraction">
+			<property name="Nickname" value="Distraction" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Diversion" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Remove all Guard markers from creatures in the target zone." />
+			<property name="CardID" value="MWAMKI03" />
+		</card>
+		<card id="bb25146f-7824-4579-9830-0c933e916e35" name="Meditation">
+			<property name="Nickname" value="Meditation" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Ki, Meditation" />
+			<property name="Cost" value="0" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))SMage" />
+			<property name="Target" value="Self" />
+			<property name="School" value="Mind" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast" />
+			<property name="Text" value="Only a Mage can cast this spell. Gain 3 Ki." />
+			<property name="CardID" value="MWAMKI04" />
+		</card>
+	</cards>
+</set>
