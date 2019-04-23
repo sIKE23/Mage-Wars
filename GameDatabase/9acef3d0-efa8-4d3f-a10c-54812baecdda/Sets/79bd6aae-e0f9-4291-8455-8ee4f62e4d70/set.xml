@@ -354,6 +354,26 @@
 			<property name="Traits" value="Upkeep +1, Hydro +2, Incorporeal, Nonliving, Flame Immunity" />
 			<property name="Text" value="Hydro attacks gain the Ethereal trait against Fire Elemental" />
 			<property name="CardID" value="MWPROMO41" />
+		</card>		
+		<card id="92ea9047-f701-4543-b2a7-73c838f11a91" name="Force Phoenix">
+			<property name="Nickname" value="Force Phoenix" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Force, Construct" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=-, Life=7" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Force Talons;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Force Talons:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Aegis 2, Nonliving, Dissipate 5" />
+			<property name="Text" value="When Force Phoenix is destroyed, target non-Mage enemy creature in this zone becomes inactive." />
+			<property name="CardID" value="MWAPROMO13" />
 		</card>
 		<card id="019fbc44-d07c-4510-9cac-7c998613bb05" name="Galador, Protector of Straywood">
 			<property name="Nickname" value="Galador" />
@@ -414,6 +434,27 @@
 			<property name="Traits" value="Legendary, Holy Mage Only" />
 			<property name="Text" value="Joseph Trublood gains Armor +2 against attacks from Nonliving or Dark creatures." />
 			<property name="CardID" value="MWPROMO11" />
+		</card>
+		<card id="0f548ab9-9db9-4631-b2fc-1bb148b33628" name="Kraven, Werewolf Slave">
+			<property name="Nickname" value="Kraven, Werewolf Slave" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Canine, Lycanthrope" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatDefense" value="" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
+			<property name="cAttacks" value="name=Voracious Fangs;action type=Quick;range type=Melee;range=(0,0);dice=2;Piercing +X=1" />
+			<property name="AttackBar" value="Voracious Fangs:&#xD;&#xA;[Quick] [Melee] [Dice=2] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAPROMO16" />
 		</card>
 		<card id="73b104ed-5fec-46c2-a8fc-a64ae20f23b2" name="Kumanjaran Leopard">
 			<property name="Nickname" value="Kumanjaran Leopard" />
@@ -1307,6 +1348,25 @@
 			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWPROMO45" />
 		</card>
+		<card id="10cec7b1-f9ea-451b-8310-869f4fff4496" name="Leather Helmet">
+			<property name="Nickname" value="Leather Helmet" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Helmet" />
+			<property name="StatEquipmentSlot" value="Helmet" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Mage gains Armor +1.&#xD;&#xA;[Armor +1]" />
+			<property name="CardID" value="MWPROMO44" />
+		</card>
 		<card id="a91dde7c-ba80-4d21-a37b-2bac136f72e6" name="Leviathan Scale Armor">
 			<property name="Nickname" value="Leviathan Scale Armor" />
 			<property name="Type" value="Equipment" />
@@ -1518,6 +1578,24 @@
 		</card>
 
 
+<card id="c9acf130-b7b2-4c1a-9291-8f7c144003b5" name="Bound Healing">
+			<property name="Nickname" value="Bound Healing" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,tLiving,TCreature" />
+			<property name="Target" value="Non-Mage Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target Non-Mage Living Creature heals the amount rolled on 2 attack dice. heal the caster of this spell the amount rolled on 2 attack dice." />
+			<property name="CardID" value="MWAPROMO3" />
+		</card>
 		<card id="a1d0ef02-3e53-4a53-8dc5-6460c16b0021" name="Clear Mind">
 			<property name="Nickname" value="Clear Mind" />
 			<property name="Type" value="Incantation" />
