@@ -171,7 +171,7 @@ listMageWeapons = ["Johktari Hunting Knife","Rod of the Arcanum","Hellstar","Res
 ##########################		Other		############################
 
 debugMode = False
-currentPhaseMW = ""
+currentPhase = ""
 discountsUsed = [ ]
 tutorialTagsRead = []
 gameStartTime = ""
@@ -398,7 +398,7 @@ def setUpDiceAndPhaseCards():
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
 		init.anchor = (True)
 		init.alternate = myColor
-		currentPhaseMW = "Planning"
+		currentPhase = "Planning"
 		phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
 		phase.alternate = "Planning" #skips upkeep for first turn
 		phase.anchor = (True)
@@ -1337,7 +1337,7 @@ def getTextTraitValue(card, TraitName):
 def checkMageDeath(args):
 		#args = player,counter,value,scripted
 		mute()
-		global currentPhaseMW
+		global currentPhase
 
 		if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
 				for card in table:
@@ -2134,9 +2134,9 @@ def switchPhase(card, phase, phrase):
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
-	global currentPhaseMW
+	global currentPhase
 	mute()
-	currentPhaseMW = phase
+	currentPhase = phase
 	if debugMode:	#debuggin'
 		card.alternate = phase
 		notify("Phase changed to the {}".format(phrase))

@@ -77,7 +77,7 @@
 		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
 		<globalvariable name="bindDict" value=""/>
 		<globalvariable name="ColorsChosen" value=""/>
-		<globalvariable name="CurrentPhase" value="5"/>
+		<!--<globalvariable name="CurrentPhaseMW" value="5"/>-->
 		<globalvariable name="DeckLoaded" value="0"/>
 		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
 		<globalvariable name="DoneWithPhase" value=""/>
