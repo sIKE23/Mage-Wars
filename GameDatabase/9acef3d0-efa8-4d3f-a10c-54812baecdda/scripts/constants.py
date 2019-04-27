@@ -170,7 +170,7 @@ for token in tokenList:
 
 ##########################		Other		############################
 debugMode = False
-currentPhase = ""
+currentPhaseMW = ""
 discountsUsed = [ ]
 tutorialTagsRead = []
 gameStartTime = ""

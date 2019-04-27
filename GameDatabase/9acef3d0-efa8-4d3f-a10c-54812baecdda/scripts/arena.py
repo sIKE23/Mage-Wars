@@ -142,9 +142,9 @@ def switchPhase(card, phase, phrase):
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
-	global currentPhase
+	global currentPhaseMW
 	mute()
-	currentPhase = phase
+	currentPhaseMW = phase
 	if debugMode:	#debuggin'
 		card.alternate = phase
 		notify("Phase changed to the {}".format(phrase))

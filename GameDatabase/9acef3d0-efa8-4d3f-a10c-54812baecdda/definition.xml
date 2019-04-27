@@ -51,6 +51,14 @@
 		<font src="fonts/APHont-Bold.ttf" size="13" target="chat"/>
   </fonts>
 	<proxygen definitionsrc="proxy/CardGenData.xml"/>
+	<phases>
+		<phase name="Planning Phase" icon="Phases/Planning.png"/>
+		<phase name="Deployment Phase" icon="Phases/Deployment.png"/>
+		<phase name="First Quickcast Phase" icon="Phases/FirstQuickcast.png"/>
+		<phase name="Actions Phase" icon="Phases/CreatureAction.png"/>
+		<phase name="Final Quickcast Phase" icon="Phases/FinalQuickcast.png"/>
+		<phase name="Upkeep Phase" icon="Phases/Upkeep.png"/>
+	</phases> 
 	<documents>
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html"/>
 		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html"/>
