@@ -65,7 +65,6 @@ def onGameStarted():
 		publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
-		setPhase(5)
 	else:
 		choosePlayerColor()
 		if gameHost == me:
@@ -84,6 +83,8 @@ def chooseGame():
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
+		if choice < 5: setPhase(5)
+		else: setPhase(2)
 		if choice == 1:
 			setGlobalVariable("GameMode", "Arena")
 			setArenaBoard()
