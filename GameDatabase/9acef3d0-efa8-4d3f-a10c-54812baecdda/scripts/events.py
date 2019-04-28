@@ -65,8 +65,8 @@ def onGameStarted():
 		publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
+		nextTurn()
 		setPhase(5)
-
 	else:
 		choosePlayerColor()
 		if gameHost == me:
@@ -225,7 +225,6 @@ def setUpDiceAndPhaseCards():
 		#phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
 		#phase.alternate = "Planning" #skips upkeep for first turn
 		#phase.anchor = (True)
-
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)
@@ -304,7 +303,6 @@ def AskInitiative(playerID):
 	nextTurn()
 	setPhase(5)
 
-
 def moveRDA(card):
 	"""Moves the dice roll area/initiative/phase marker to the appropriate area"""
 	cardW,cardH = cardSizes[card.size]['width'],cardSizes[card.size]['height']
@@ -332,20 +330,10 @@ def moveRDA(card):
 		setGlobalVariable("Map",str(mapDict))
 
 	elif 'Player Token' in card.name:
-		if rdaChoice == "Side":
-			x = mapX - cardW - 10 - 100
-			y = rowY - zoneS
-		else:
-			x = columnX - zoneS
-			y = mapY + mapHeight + 10
-
-	elif cardType=='Phase' and 'Phase' in card.name:
-		if rdaChoice == "Side":
-			x = mapX - cardW - 10
+			x = mapX - cardW - 52
 			y = rowY - zoneS + 10
-		else:
-			x = columnX - zoneS + 100
-			y = mapY + mapHeight + 10 + 10
+
+
 	card.moveToTable(x,y,True)
 
 def onDeckLoaded(args):
@@ -533,7 +521,7 @@ def onCardDoubleClicked(args):
 def checkMageDeath(args):
 		#args = player,counter,value,scripted
 		mute()
-		global currentPhaseMW
+		#global currentPhaseMW
 
 		if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
 				for card in table:
