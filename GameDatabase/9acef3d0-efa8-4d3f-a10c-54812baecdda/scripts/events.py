@@ -222,9 +222,9 @@ def setUpDiceAndPhaseCards():
 		init.anchor = (True)
 		init.alternate = myColor
 		#currentPhaseMW = "Planning"
-		phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-		phase.alternate = "Planning" #skips upkeep for first turn
-		phase.anchor = (True)
+		#phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
+		#phase.alternate = "Planning" #skips upkeep for first turn
+		#phase.anchor = (True)
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)
