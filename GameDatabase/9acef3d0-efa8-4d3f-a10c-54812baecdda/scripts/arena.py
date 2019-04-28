@@ -225,7 +225,7 @@ def validateDeck(deck):
 				elif card.School != "": # only one school
 					booktotal += int(card.Level)
 
-		if "Water" in card.School and mageName == "Druid": #check for the druid rule
+		if "Water" in card.School and mageName == "Druid" and not "Nature" in card.School: #check for the druid rule
 			if "1" in card.Level:
 				debug("Druid Water test: {}".format(card.Name))
 				if "+" in card.School:
@@ -239,8 +239,13 @@ def validateDeck(deck):
 						i += 1
 				elif "/" in card.School: #this rule will calculate wrong if water is present as level 1 but wizard is trained in another element of the same spell too
 					level = card.Level.split("/")
-					levels[card.School] -= 1
-					booktotal += 1
+					schools = card.School.split("/")
+					i = 0
+					for s in schools:
+						if s in levels:
+							booktotal-=1
+					#levels[card.School] -= 1
+					#booktotal += 1
 				elif card.School != "": # only one school
 					levels[card.School] -= 1
 					booktotal += 1
@@ -323,9 +328,13 @@ def validateDeck(deck):
 				mageName = "Wizard"
 			if mageName in card.Traits:	# mage restriction
 				ok = True
+			if "Druid" in mageName and card.Name == "Ring of the Ocean\'s Depths":
+				ok = True
 			for s in [school for school in spellbook if spellbook[school] == 1]: # school restriction
 				if s + " Mage" in card.Traits: # s will hold the school like Holy or Dark
 					ok = True
+				#if s == "Water" and mageName == "Druid":
+					#ok = True
 			if not ok:
 				notify("*** ILLEGAL ***: the card {} is not legal in a {} Spellbook.".format(card.Name,mageName))
 				return False
