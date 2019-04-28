@@ -1692,7 +1692,6 @@ def computeTraits(card):
 						if (cName == 'Armory' and cController == controller and 'Soldier' in subtype): extend(['Armor +1','Piercing +1'])
 						if (cName == 'Rajan\'s Fury' and 'Animal' in subtype): append('Charge +1')
 						if (cName == 'Gate to Hell' and cController == controller and 'Demon' in subtype): append('Melee +1')
-						if (cName == 'Mordok\'s Obelisk' and cardType == 'Creature' and 'Mage' not in subtype): append('Upkeep +1')
 						if (cName == 'Deathlock' and cardType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain']): append('Finite Life')
 						if (cName == 'Etherian Lifetree' and 'Living' in rawTraitsList and c != card): append('Innate Life +2')
 						if (cName == 'Rolling Fog'): append('Obscured')

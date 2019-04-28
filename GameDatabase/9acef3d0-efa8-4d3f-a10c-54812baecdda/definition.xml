@@ -164,7 +164,7 @@
 		<gameboard name="Academy - 1x1" x="-362" y="-435" width="724" height="870" src="Images/GameBoards/GameBoard10.png"/>
 	</gameboards>
 	<table name="Table" visibility="undefined" ordered="False" width="1100" height="1100" background="Images/background.jpg" backgroundStyle="uniformToFill">
-		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="switchPhase"/>
+		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack"/>
 		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker"/>
