@@ -14,10 +14,10 @@ def nextPhaseArena():
 		return
 	card = None
 	checkMageDeath(0)
-	notify(str(currentPhase[0]))
+	notify(str(currentPhase()[0]))
 	setPhase((currentPhase()[1])%9+1)
 	notify(str(currentPhase()[0]) +"!!!!!") #for testing remove
-	if currentPhase[0] == "Initiative Phase":
+	if currentPhase()[0] == "Initiative Phase":
 		notify(str(currentPhase()[0]) +"!!!!!") #for testing remove
 		nextTurn()
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
@@ -25,16 +25,16 @@ def nextPhaseArena():
 			flipcard(init)
 		else:
 			remoteCall(init.controller, "flipcard", [init])
-	elif currentPhase[0] == "Reset Phase":
+	elif currentPhase()[0] == "Reset Phase":
 		notify(str(currentPhase()[0]) +"!!!!!") #for testing remove
 		for p in players:
 			remoteCall(p, "resetDiscounts",[])
 			remoteCall(p, "resetMarkers", [])
-	elif currentPhase[0] == "Channeling Phase":	
+	elif currentPhase()[0] == "Channeling Phase":	
 		notify(str(currentPhase()[0]) +"!!!!!") #for testing remove	
 		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
-	elif currentPhase[0] == "Upkeep Phase":
+	elif currentPhase()[0] == "Upkeep Phase":
 		notify(str(currentPhase()[0]) +"!!!!!") #for testing remove
 		for p in players:
 			for card in table:
