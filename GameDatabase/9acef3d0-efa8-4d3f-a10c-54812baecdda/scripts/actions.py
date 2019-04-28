@@ -127,18 +127,12 @@ def toggleDebug(group, x=0, y=0):
 
 def nextPhase(group,x=0,y=0):
 	mute()
-<<<<<<< HEAD
 	#currentPhaseMW = currentPhase()
 	#setPhase((currentPhaseMW[1])%9+1)
 	gameMode = getGlobalVariable("GameMode")
 	if gameMode == "Arena" or "Domination": nextPhaseArena()
 	elif gameMode == "Academy": nextPhaseAcademy()
-	
-=======
-	gameMode = getGlobalVariable("GameMode")
-	if gameMode == "Arena" or "Domination": nextPhaseArena()
-	elif gameMode == "Academy": nextPhaseAcademy()
->>>>>>> parent of a7296c9... Most of the way there
+
 
 ############################################################################
 ######################		Chat Actions			################################

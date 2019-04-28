@@ -54,13 +54,13 @@
 	<phases>
 		<phase name="Initiative Phase" icon="Phases/Initiative.png"/>
 		<phase name="Reset Phase" icon="Phases/Reset.png"/>
-		<phase name="Channel Phase" icon="Phases/Channeling.png"/>
+		<phase name="Channeling Phase" icon="Phases/Channeling.png"/>
 		<phase name="Upkeep Phase" icon="Phases/Upkeep.png"/>
 		<phase name="Planning Phase" icon="Phases/Planning.png"/>
 		<phase name="Deployment Phase" icon="Phases/Deployment.png"/>
-		<phase name="First Quickcast Phase" icon="Phases/FirstQuickcast.png"/>
+		<phase name="First QC Phase" icon="Phases/FirstQuickcast.png"/>
 		<phase name="Actions Phase" icon="Phases/CreatureAction.png"/>
-		<phase name="Final Quickcast Phase" icon="Phases/FinalQuickcast.png"/>
+		<phase name="Final QC Phase" icon="Phases/FinalQuickcast.png"/>
 	</phases> 
 	<documents>
 		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html"/>
@@ -80,7 +80,7 @@
 		<globalvariable name="avoidAttackTempStorage" value="Miss"/>
 		<globalvariable name="bindDict" value=""/>
 		<globalvariable name="ColorsChosen" value=""/>
-		<globalvariable name="CurrentPhase" value="5"/>
+		<!--<globalvariable name="CurrentPhase" value="5"/>-->
 		<globalvariable name="DeckLoaded" value="0"/>
 		<globalvariable name="DiceRollAreaPlacement" value="Side"/>
 		<globalvariable name="DoneWithPhase" value=""/>
@@ -164,7 +164,7 @@
 		<gameboard name="Academy - 1x1" x="-362" y="-435" width="724" height="870" src="Images/GameBoards/GameBoard10.png"/>
 	</gameboards>
 	<table name="Table" visibility="undefined" ordered="False" width="1100" height="1100" background="Images/background.jpg" backgroundStyle="uniformToFill">
-		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
+		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="switchPhase"/>
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
 		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack"/>
 		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker"/>
