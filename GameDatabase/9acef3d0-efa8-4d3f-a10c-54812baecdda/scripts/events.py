@@ -65,7 +65,6 @@ def onGameStarted():
 		publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
-		setPhase(5)
 	else:
 		choosePlayerColor()
 		if gameHost == me:
@@ -79,11 +78,13 @@ def chooseGame():
 	mute()
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
 	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Mage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
-	buttonColorList = ["#de2827","#171e78"];
-	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
+	buttonColorList = ["#de2827","#171e78","#01603e"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination","Mage Wars Academy"];
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
+		if choice < 3: setPhase(5)
+		else: setPhase(2)
 		if choice == 1:
 			setGlobalVariable("GameMode", "Arena")
 			setArenaBoard()
@@ -92,10 +93,10 @@ def chooseGame():
 			setGlobalVariable("GameMode", "Domination")
 			loadMapFile()
 			break
-#		elif choice == 3:
-#			setGlobalVariable("GameMode", "Arena")
-#			setAcademyBoard()
-#			break
+		elif choice == 3:
+			setGlobalVariable("GameMode", "Academy")
+			setAcademyBoard()
+			break
 	'''	elif choice == 3:
 			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
 			setArenaBoard()
@@ -220,10 +221,6 @@ def setUpDiceAndPhaseCards():
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
 		init.anchor = (True)
 		init.alternate = myColor
-		#currentPhaseMW = "Planning"
-		#phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-		#phase.alternate = "Planning" #skips upkeep for first turn
-		#phase.anchor = (True)
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)

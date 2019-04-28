@@ -91,19 +91,6 @@ def resetDiscounts():
 		discountsUsed.remove(tup)
 		discountsUsed.append((tup[0],tup[1],0))
 
-def advanceTurn():
-	mute()
-	nextPlayer = getNextPlayerNum()
-	nextPlayerName = getGlobalVariable("P" + str(nextPlayer) + "Name")
-	for p in players:
-		if p.name == nextPlayerName:
-			for p2 in players:
-				remoteCall(p2, "setActiveP", [p])
-
-#def setActiveP(p):
-#	p.setActive()
-
-
 def changeIniColor(card):
 	mute()
 	myColor = me.getGlobalVariable("MyColor")
@@ -113,14 +100,7 @@ def changeIniColor(card):
 	else:
 		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
 
-def getNextPlayerNum():
-	debug(getGlobalVariable("PlayerWithIni"))
-	activePlayer = int(getGlobalVariable("PlayerWithIni"))
-	nextPlayer = activePlayer + 1
-	if nextPlayer > len(getPlayers()):
-		nextPlayer = 1
-	return nextPlayer
-	
+
 def validateDeck(deck):
 	mute()
 

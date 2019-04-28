@@ -131,14 +131,15 @@ def nextPhase(group,x=0,y=0):
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
 	gameMode = getGlobalVariable("GameMode")
 	if debugMode:	#debuggin'
-		if gameMode == "Arena" or "Domination": nextPhaseArena()
-		elif gameMode == "Academy": nextPhaseAcademy()
+		if gameMode == "Arena" or gameMode == "Domination":
+		    nextPhaseArena()
+		else:
+		    nextPhaseAcademy()
 		return True
 	else:
 		doneWithPhase = getGlobalVariable("DoneWithPhase")
 		if str(playerNum) in doneWithPhase:
 			return
-
 		doneWithPhase += str(playerNum)
 		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
@@ -150,10 +151,12 @@ def nextPhase(group,x=0,y=0):
 			return False
 		else:
 			setGlobalVariable("DoneWithPhase", "")
-			if gameMode == "Arena" or "Domination": nextPhaseArena()
-			elif gameMode == "Academy": nextPhaseAcademy()
-			#nextPhaseArena()
-			return True
+			notify(gameMode)
+		if gameMode == "Arena" or gameMode == "Domination":
+		    nextPhaseArena()
+		else:
+		    nextPhaseAcademy()
+		return True
 
 
 
