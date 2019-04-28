@@ -65,8 +65,6 @@ def onGameStarted():
 		publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
-		nextTurn()
-		setPhase(5)
 	else:
 		choosePlayerColor()
 		if gameHost == me:
@@ -221,10 +219,17 @@ def setUpDiceAndPhaseCards():
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
 		init.anchor = (True)
 		init.alternate = myColor
+<<<<<<< HEAD
 		#currentPhaseMW = "Planning"
 		#phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
 		#phase.alternate = "Planning" #skips upkeep for first turn
 		#phase.anchor = (True)
+=======
+		currentPhaseMW = "Planning"
+		phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
+		phase.alternate = "Planning" #skips upkeep for first turn
+		phase.anchor = (True)
+>>>>>>> parent of a7296c9... Most of the way there
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)
@@ -300,8 +305,6 @@ def AskInitiative(playerID):
 		break
 	setGlobalVariable("GameSetup", str(0))
 	publicChatMsg("Game setup is complete! Players should now load their Spellbooks.")
-	nextTurn()
-	setPhase(5)
 
 def moveRDA(card):
 	"""Moves the dice roll area/initiative/phase marker to the appropriate area"""
@@ -531,7 +534,7 @@ def onCardDoubleClicked(args):
 def checkMageDeath(args):
 		#args = player,counter,value,scripted
 		mute()
-		#global currentPhaseMW
+		global currentPhaseMW
 
 		if getGlobalVariable("GameSetup") == "True" and me.Damage >= me.Life and askChoice('          Your Mage has fallen in the Arena! \n\nDo you wish to continue playing until the end of the current Phase?',['Yes','No'],["#01603e","#de2827"]) == 2:
 				for card in table:

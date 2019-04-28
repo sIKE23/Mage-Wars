@@ -14,6 +14,7 @@ def nextPhaseArena():
 		return
 	card = None
 	checkMageDeath(0)
+<<<<<<< HEAD
 	notify(str(currentPhase()[0]))
 	setPhase((currentPhase()[1])%9+1)
 	notify(str(currentPhase()[0]) +"!!!!!") #for testing remove
@@ -56,6 +57,9 @@ def nextPhaseArena():
 				if ("Regenerate" in traits or "Lifegain" in traits) and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveRegeneration", [traits, card])
 			remoteCall(p, "resolveUpkeep", [])
 	'''for c in table: #find phase card
+=======
+	for c in table: #find phase card
+>>>>>>> parent of a7296c9... Most of the way there
 		if c.model == "6a71e6e9-83fa-4604-9ff7-23c14bf75d48":
 			card = c
 			break
@@ -83,18 +87,28 @@ def nextPhaseArena():
 			goal = eval(getGlobalVariable("Goal"))
 			if goal.get("Type")=="Domination" and updateVtarScore() and checkDominationVictory(): return
 			setEventList('Round',[])
-			nextTurn()
 			setEventList('Turn',[])#Clear event list for new round
 			gameTurn = int(getGlobalVariable("RoundNumber")) + 1
 			setGlobalVariable("RoundNumber", str(gameTurn))
 			rTime = time.time()
 			roundTimes.append(rTime)
-			notify("Round {} Start Time: {}".format(str(turnNumber()),time.ctime(roundTimes[-1])))
+			notify("Round {} Start Time: {}".format(str(gameTurn),time.ctime(roundTimes[-1])))
 			notify("Ready Stage for Round #" + str(gameTurn) + ":  Performing Initiative, Reset, and Channeling Phases")
-			
+			init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
+			if init.controller == me:
+				flipcard(init)
+			else:
+				remoteCall(init.controller, "flipcard", [init])
 
 			#resolve other automated items
 			for p in players:
+				remoteCall(p, "resetDiscounts",[])
+				remoteCall(p, "resetMarkers", [])
+				remoteCall(p, "resolveChanneling", [p])
+				# Work in progress here. I want to make it so you can choose to reveal enchantments before the automation goes along, but it's not
+				# done yet. 
+				#for card in table:
+					#if not card.isFaceUp and card.Type == 'Enchantment' and card.controller.name == p.name: remoteCall(p, "revealAttachmentChannel", [card, 'Channeling'])
 				for card in table:
 					traits = computeTraits(card)
 					if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
@@ -113,7 +127,7 @@ def nextPhaseArena():
 					if card.Name in ["Staff of Storms"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveStormTokens", [card])
 					if ("Regenerate" in traits or "Lifegain" in traits) and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveRegeneration", [traits, card])
 				remoteCall(p, "resolveUpkeep", [])
-'''
+
 	update() #attempt to resolve phase indicator sometimes not switching
 
 	
@@ -138,6 +152,19 @@ def resolveMadrigal(traits, card):
 	else:
 		notify("{}'s {} is already at full health".format(me, card.name))
 	
+def revealAttachmentChannel(card,step):
+		recommendList = getEnchantRecommendationList(step)
+		if card.name in recommendList:
+			options = ['{}\n{}\n{}'.format(card.Name.center(68,' '),(('('+getAttachTarget(card).Name+')').center(68,' ')),card.Text.split('\r\n')[0])]
+			colors = ['#CC6600' for i in options] #Orange
+			options.append('I would not like to reveal this enchantment.')
+			colors.append("#de2827")
+			choice = askChoice('Would you like to reveal this enchantment?', options,colors)
+			if choice == 1: 
+				revealEnchantment(card)
+				return 
+				
+	
 def resetDiscounts():
 	#reset discounts used
 	for tup in discountsUsed:
@@ -156,17 +183,16 @@ def advanceTurn():
 #def setActiveP(p):
 #	p.setActive()
 
-def switchPhase(card="", phase="", phrase=""):
+def switchPhase(card, phase, phrase):
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
 	global currentPhaseMW
 	mute()
-	currentPhaseMW = currentPhase()
+	currentPhaseMW = phase
 	if debugMode:	#debuggin'
-		nextPhaseArena()
-		#card.alternate = phase
-		#notify("Phase changed to the {}".format(phrase))
+		card.alternate = phase
+		notify("Phase changed to the {}".format(phrase))
 		return True
 	else:
 		doneWithPhase = getGlobalVariable("DoneWithPhase")
@@ -176,22 +202,21 @@ def switchPhase(card="", phase="", phrase=""):
 		doneWithPhase += str(playerNum)
 		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
-			'''if card.controller == me:
+			if card.controller == me:
 				card.highlight = myHexColor
 			else:
-				remoteCall(card.controller, "remoteHighlight", [card, myHexColor])'''
-			notify("{} is done with the {}".format(me.name,currentPhaseMW[0]))
+				remoteCall(card.controller, "remoteHighlight", [card, myHexColor])
+			notify("{} is done with the {}".format(me.name,card.Name))
 			return False
 		else:
 			setGlobalVariable("DoneWithPhase", "")
-			'''if card.controller == me:
-				#card.highlight = None
-				#card.alternate = phase
-			#else:
-				#remoteCall(card.controller, "remoteHighlight", [card, None])
-				#remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
-			#notify("Phase changed to the {}".format(phrase))'''
-			nextPhaseArena()
+			if card.controller == me:
+				card.highlight = None
+				card.alternate = phase
+			else:
+				remoteCall(card.controller, "remoteHighlight", [card, None])
+				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
+			notify("Phase changed to the {}".format(phrase))
 
 			return True
 
