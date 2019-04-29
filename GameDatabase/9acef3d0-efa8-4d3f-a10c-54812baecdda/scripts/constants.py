@@ -168,6 +168,10 @@ for token in tokenList:
 		exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')
 		exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
 
+##########################	Academy Mages Start Mana		############################
+
+academyMageStartManaDict = {'Beastmaster':'1', 'Wizard':'3', 'Druid':'3', 'Elementalist':'0', 'Forcemaster':'3', 'Monk':'1', 'Priestest':'2', 'Warlock':'0', 'Warlord':'0', 'Necromancer':'1'}
+
 ##########################		Other		############################
 debugMode = False
 currentPhaseMW = ""

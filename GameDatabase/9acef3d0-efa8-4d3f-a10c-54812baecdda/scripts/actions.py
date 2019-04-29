@@ -235,8 +235,8 @@ def subDamageAmount(card,amount = 1):
 	if "Mage" in card.Subtype and card.controller == me:
 			me.Damage -= amount
 	else:
-			card.markers[Damage] -= amount			
-			
+			card.markers[Damage] -= amount
+
 def clearTokens(card, x = 0, y = 0):
 	mute()
 	for tokenType in card.markers:
@@ -384,7 +384,7 @@ def toggleQuick(card, x=0, y=0):
 		card.markers[Quick] = 1
 		card.markers[QuickBack] = 0
 		if mageDict['MageRevealed'] == 'True': notify("{} readies Quickcast Marker".format(card.Name))
-			
+
 def toggleFermata(card, x=0, y=0):
 	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -394,7 +394,7 @@ def toggleFermata(card, x=0, y=0):
 		card.markers[FermataBlue2] = 1
 	elif card.markers[FermataGreen1] > 0:
 		card.markers[FermataGreen1] = 0
-		card.markers[FermataGreen2] = 1	
+		card.markers[FermataGreen2] = 1
 	if mageDict['MageRevealed'] == 'True': notify("{} has decided to extend the song for a second round!".format(card.Name))
 
 def toggleVoltaric(card, x=0, y=0):
@@ -573,7 +573,7 @@ def flipcard(card, x = 0, y = 0):
 		if currentCardAlt == "":
 			card.alternate = "2"
 			if "Mage" in card.Subtype: notify("{} has decided to play with the Alternative Art version of the {}.".format(me, card))
-			else: notify("{} flips {} to an Alternate Art version of the card.".format(me, card)) 
+			else: notify("{} flips {} to an Alternate Art version of the card.".format(me, card))
 	 	if currentCardAlt != "":
 			if int(currentCardAlt) < cardAlts:
 				card.alternate = str(int(currentCardAlt) + 1)
@@ -597,6 +597,11 @@ def mageSetup():
 	#set initial health and channeling values
 	me.Channeling = int(magestats.StatChanneling)
 	me.Mana = me.Channeling + 10 + int(magestats.StatStartingMana)
+	for card in table:
+		if card.type == "Magestats" and "Academy" in card.set:
+			for key, value in academyMageStartManaDict.items():
+				if key in card.name:
+					me.Mana = me.Channeling + int(value)
 	me.Life = int(magestats.StatLife)
 	Card(mageID).Subtype = magestats.Subtype
 	Card(mageID).Level = magestats.Level
