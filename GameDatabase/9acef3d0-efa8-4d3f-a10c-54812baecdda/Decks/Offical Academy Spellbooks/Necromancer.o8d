@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="46e40822-6a96-46a6-835b-3177f29f77f1">Necromancer</card>
+    <card qty="1" id="1b4614e4-65e9-4b54-859a-4e128aa1c0dd">Academy Necromancer Stats</card>
+  </section>
+  <section name="Attack" shared="False" />
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="1" id="68f746a6-4d95-4381-9650-20d6261496f1">The Embalmed</card>
+    <card qty="1" id="18197e7e-0da6-4fbd-affc-e8fc76a68aa7">Matesis, the Fallen Pharaoh</card>
+    <card qty="2" id="fc7ac160-c33a-46b3-b62d-26a571e478c9">Mummified Swordmaster</card>
+    <card qty="2" id="c4eff50f-4851-4568-bb7a-7e75c87b4294">Priest of Abenek</card>
+    <card qty="1" id="a2c927dd-a185-4d07-aeb5-5858682c613a">Servant of Malacoda</card>
+    <card qty="2" id="8aabadfd-3a26-485b-80e7-20d72962ba7a">Vengeful Merchant</card>
+    <card qty="2" id="c9af347c-dc64-4a65-a039-3a62de1b31ff">Vengeful Voidwalker</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="de4ea6b3-1ae7-4463-9d31-c42e4312bf2f">Stench of Death</card>
+    <card qty="1" id="02d954e8-1836-48d0-b046-fec013ddefd6">Terrifying Visage</card>
+    <card qty="1" id="6fffc845-d5e0-4849-b23d-7d65594df85c">Unholy Reversal</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="b1117208-e1ef-4eb0-b33b-ba947a2fa230">Leather Chausses</card>
+    <card qty="2" id="c9e670da-4b5e-48dd-9ae6-9b47338825ad">Ramses' Black Death</card>
+    <card qty="1" id="67afeac3-26a0-44b5-a541-8523c3a8644c">Scepter of Undeath</card>
+    <card qty="1" id="102e680d-f0e3-4c70-a03a-b884d1667f2e">Soulreaper</card>
+    <card qty="1" id="c15a75da-1430-4d23-9301-02b9b61cd95e">Unholy Armor</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="d3c9c5b0-6b2d-4261-831a-16a29af7c7da">Crumble</card>
+    <card qty="2" id="aef8cb42-ff91-477d-8619-2f9aef923d2b">Fizzle</card>
+    <card qty="2" id="e603e3a7-9bca-4e3c-9b08-0ecf7a4c7f19">Ritual of Kallek</card>
+    <card qty="1" id="e83d404a-39f9-495e-a578-68e09966c853">Siphon Life</card>
+    <card qty="2" id="0690654e-18bb-4320-a511-ac4421af6b3f">Soul Harvest</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
