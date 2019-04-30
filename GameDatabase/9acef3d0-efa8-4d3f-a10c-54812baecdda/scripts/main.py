@@ -361,11 +361,3 @@ def getCardLevel(card):
 			level = card.Level.split("/")
 			cardLevel = int(level[0])
 		return cardLevel
-
-def getNextPlayerNum():
-	debug(getGlobalVariable("PlayerWithIni"))
-	activePlayer = int(getGlobalVariable("PlayerWithIni"))
-	nextPlayer = activePlayer + 1
-	if nextPlayer > len(getPlayers()):
-		nextPlayer = 1
-	return nextPlayer

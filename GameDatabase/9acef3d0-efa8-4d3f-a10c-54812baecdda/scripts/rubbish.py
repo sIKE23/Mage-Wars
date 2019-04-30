@@ -33,14 +33,4 @@ def findCard(group, model):
 			return c
 	return None
 	
-def advanceTurn():
-	mute()
-	nextPlayer = getNextPlayerNum()
-	nextPlayerName = getGlobalVariable("P" + str(nextPlayer) + "Name")
-	for p in players:
-		if p.name == nextPlayerName:
-			for p2 in players:
-				remoteCall(p2, "setActiveP", [p])
 
-#def setActiveP(p):
-#	p.setActive()

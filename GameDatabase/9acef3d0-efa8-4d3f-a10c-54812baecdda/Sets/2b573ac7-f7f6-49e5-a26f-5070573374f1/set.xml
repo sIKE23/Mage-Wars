@@ -53,7 +53,7 @@
 			<property name="StatLife" value="32" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
+			<property name="MageSchoolCost" value="Mind=1, T-Creature=3" />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />

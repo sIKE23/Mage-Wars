@@ -91,6 +91,19 @@ def resetDiscounts():
 		discountsUsed.remove(tup)
 		discountsUsed.append((tup[0],tup[1],0))
 
+def advanceTurn():
+	mute()
+	nextPlayer = getNextPlayerNum()
+	nextPlayerName = getGlobalVariable("P" + str(nextPlayer) + "Name")
+	for p in players:
+		if p.name == nextPlayerName:
+			for p2 in players:
+				remoteCall(p2, "setActiveP", [p])
+
+#def setActiveP(p):
+#	p.setActive()
+
+
 def changeIniColor(card):
 	mute()
 	myColor = me.getGlobalVariable("MyColor")
@@ -100,10 +113,16 @@ def changeIniColor(card):
 	else:
 		remoteCall(card.controller, "remoteSwitchPhase", [card, "myColor", ""])
 
-
-def validateDeck(deck):
+def getNextPlayerNum():
+	debug(getGlobalVariable("PlayerWithIni"))
+	activePlayer = int(getGlobalVariable("PlayerWithIni"))
+	nextPlayer = activePlayer + 1
+	if nextPlayer > len(getPlayers()):
+		nextPlayer = 1
+	return nextPlayer
+	
+'''def validateDeck(deck):
 	mute()
-
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 
 	for c in deck:
@@ -113,8 +132,7 @@ def validateDeck(deck):
 					mageName = c.name.split(" Stats")[0]
 					spellbook["spellpoints"] = int(c.StatSpellBookPoints)
 					break
-	#debug("Stats {}".format(stats))
-	#spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
+
 
 	#get school costs
 	for schoolcost in schoolcosts:
@@ -346,4 +364,4 @@ def validateDeck(deck):
 		return False
 
 	#all good!
-	return True
+	return True'''
