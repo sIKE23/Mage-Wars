@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="00198aab-6c44-4ccc-8eaf-51df73dd3521">Priestess</card>
+    <card qty="1" id="005e4ea3-d680-477a-957e-a2906de57be2">Academy Priestess Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="1a6d6ac5-11ba-4ac5-bac3-707893f925aa">Dazzle</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="2" id="2afa74eb-129c-4314-b2d9-81960578f1c8">Broken Wing Angel</card>
+    <card qty="1" id="3648ad82-1729-4e29-9063-c36983d10897">Ehren, Enduring Paladin</card>
+    <card qty="1" id="374c34af-bfef-4047-a2e2-584a87cd978d">Gloranna, Avenging Angel</card>
+    <card qty="1" id="4c1bdfe7-083f-4956-a3f0-00e09027d4e9">Meditating Monk</card>
+    <card qty="2" id="501bdfe7-083f-4956-a3f0-00e09027d4e9">Temple Sentry</card>
+    <card qty="1" id="5300ad83-f297-4ed2-8b4d-3a4b96ed3610">Temple Sharpshooter</card>
+    <card qty="2" id="58a453b5-f282-4fa1-8ee1-67005401a980">White Cloak Knight</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="606e0886-428c-4761-9dd8-a97ed48f71d0">Asyra's Touch</card>
+    <card qty="1" id="67f5b9fd-23ea-4f8a-94c2-ccc9ca2c96b6">Circle of Protection</card>
+    <card qty="1" id="7111c9e3-cea0-47e5-847a-8d7420aa4e5b">Gator Toughness</card>
+    <card qty="1" id="8bb16e9f-c42b-4a8c-9dbd-08441a4f7e92">Slumber</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="923b4488-486d-44c0-8c21-dd4f2c77a014">Asyran Robes</card>
+    <card qty="1" id="997b853d-89bd-461a-8dad-73edacd5b4ae">Faith Healer's Staff</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="b071d7d1-b9c5-4ab4-b542-0889f795b0d0">Crumble</card>
+    <card qty="1" id="b5707414-ecdb-4b65-9d6a-b7f0e1ae409c">Cure</card>
+    <card qty="2" id="b6d65d21-0bb0-49b3-89c0-fe5b0f7f329c">Disperse</card>
+    <card qty="2" id="ca7f7a43-288e-4653-b593-e6d857275c7e">Mend</card>
+    <card qty="1" id="de2b8c17-6502-4ec2-9a46-857d924275c6">Reveal Magic</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

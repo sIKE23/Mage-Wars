@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="08df9518-9ecb-41ef-a169-9e4d41891a3a">Druid</card>
+    <card qty="1" id="ac92f16e-c203-4fe1-99d4-e5d9f76392ba">Academy Druid Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="dc4f4495-5fdb-4eb2-9b11-ade8f59ac74a">Acid Blast</card>
+    <card qty="2" id="5b3d0c17-59e3-4e86-a0fa-1e8142a07cbd">Spray of Barbs</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="2" id="80ab2f26-0ff0-45e4-a5ac-2bf4ee9bdb5a">Alluring Orchid</card>
+    <card qty="1" id="a4ba4f73-d64c-425b-ba32-ff4d52ddc430">Healing Tree</card>
+    <card qty="1" id="dbc176bf-bff2-4059-9314-01a0bd2ad000">Mana Lotus</card>
+    <card qty="1" id="c86a8378-eb6e-4d83-9203-e57711de2448">Meredia's Shrine</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="4c16aee6-bbd5-4bc0-b2d8-40a1787ad2fc">Corpsebloom</card>
+    <card qty="2" id="b6ee1134-f60f-4a2e-bd11-7c23787deffe">Lashing Liana</card>
+    <card qty="1" id="2c455417-4f67-4cc3-80c5-b52f210a5e53">Jungle Defender</card>
+    <card qty="1" id="5b11ee52-b982-4065-b7ec-267f3bc58e82">Killer Bees</card>
+    <card qty="1" id="44a5cbf2-bdc6-4578-a96c-4ec9f497b057">Silverclaw Ratel</card>
+    <card qty="1" id="bb4b96a6-4a3e-42fa-8086-371b879b89d0">Swamp Lurker</card>
+    <card qty="2" id="3972a2e2-8e0c-417e-89e6-ba35599beb1d">Wychwood Rat</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="832b9f50-e088-4409-9673-d51f669f7512">Overgrowth</card>
+    <card qty="1" id="fe3babb3-4fb5-4885-9902-c71ac491700a">Reclamation</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="c64d33e9-0129-4eca-87eb-5f6ca2fa7e05">Blowgun</card>
+    <card qty="1" id="0a29bd44-0e55-4f77-8023-70c95914d27d">Living Armor</card>
+    <card qty="1" id="0cff0de3-a623-4be2-bf3f-131f5302c4d4">Cleansing Potion</card>
+    <card qty="2" id="1d0590c4-a3c0-4756-a4ea-75953019fb5f">Corrosive Concoction</card>
+    <card qty="2" id="46200bc1-f286-4ddd-89ce-6fb87a149f56">Rage Tonic</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="d3c9c5b0-6b2d-4261-831a-16a29af7c7da">Crumble</card>
+    <card qty="1" id="dff45020-4e2c-4fe1-87a5-52741a6c2794">Disperse</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
