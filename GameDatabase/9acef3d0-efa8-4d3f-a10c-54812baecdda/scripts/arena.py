@@ -19,13 +19,15 @@ def nextPhaseArena():
 			flipcard(init)
 		else:
 			remoteCall(init.controller, "flipcard", [init])
-		setPhase(2)
-	elif currentPhase()[0] == "Reset Phase":
+		#setPhase(2) #Combining the Initiative, Reset, and channeling phases in order to cut down on the amount of passing needed
+	#elif currentPhase()[0] == "Reset Phase":
+		setEventList('Round',[])#This helps track defenses, arcane zap, etc
+		setEventList('Turn',[])#This helps track defenses, arcane zap, etc
 		for p in players:
 			remoteCall(p, "resetDiscounts",[])
 			remoteCall(p, "resetMarkers", [])
-		setPhase(3)
-	elif currentPhase()[0] == "Channeling Phase":	
+		#setPhase(3)
+	#elif currentPhase()[0] == "Channeling Phase":	
 		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
 		setPhase(4)
