@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="223d270f-2fa8-413b-ae62-3f6d2213ed92">Warlord</card>
+    <card qty="1" id="1d43c343-c85c-49e8-9038-dff61ea41aed">Academy Warlord Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="a2e828be-7057-40a7-bdfa-470355e4b97f">Stalagmite</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="2" id="b925a719-b425-48ec-bca9-8c7a1fc682d2">Elven Soldier</card>
+    <card qty="1" id="9ca9fb53-e3dc-4b46-b232-f4d1aa29e8f5">Harshforge Construct</card>
+    <card qty="2" id="39c8d850-b5a8-4399-9b50-9771cda4501b">Harshforge Knight</card>
+    <card qty="1" id="cce03d98-ad14-4e26-b973-61e27f2e2567">Izimbila, Daughter of Badgers</card>
+    <card qty="2" id="efc26830-93e6-4ea2-90e8-dd219ec3b5cd">Kelsar Ranger</card>
+    <card qty="1" id="abeb7257-6c99-4c4c-9365-1d5be6a83530">Straywood Scout</card>
+    <card qty="1" id="6d3abf7d-7491-4c58-9abf-7fdcbb72b5b0">Torgo, Pit Troll</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="2f02b1e4-875e-4826-a719-97e87735189b">Defend Me</card>
+    <card qty="1" id="3063faf4-ae79-4ae2-8dd3-6afe29035687">Dig In</card>
+    <card qty="1" id="167dc78e-05dd-4314-847b-15c738acc404">Press the Attack</card>
+    <card qty="2" id="662f438e-c5da-47c5-bc2f-36a362add5af">Promotion</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="60589ea6-8e73-4066-8c8a-cf28b8c44bf3">Commander's Cape</card>
+    <card qty="2" id="e4f87497-1da8-4ec1-a15d-23c0be7a6d00">Ivarium Halberd</card>
+    <card qty="1" id="96214113-b3ff-4015-a86a-dc1bfb49ea8e">Leather Belt</card>
+    <card qty="1" id="93f7af5d-3398-48e4-bb14-f4da8f56a4a3">Leather Vest</card>
+    <card qty="1" id="43403c20-9e63-444e-9d9b-73ab99a0df4e">Strategist's Helm</card>
+    <card qty="1" id="cf572afb-fe6f-4373-b24a-66fa532432af">Tempered Faulds</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="d3c9c5b0-6b2d-4261-831a-16a29af7c7da">Crumble</card>
+    <card qty="1" id="a1a9d082-ab5a-4c2d-b947-ca91a4ec72be">Focused Strike</card>
+    <card qty="1" id="32feb5de-c6ed-4508-8a52-9c0fbdb2e93f">Gear Up</card>
+    <card qty="1" id="ec92f65e-43e2-4aa2-bae4-92ae341f5b5f">Mend</card>
+    <card qty="1" id="395c7fed-49e0-4ad1-b83d-3e1c1998a13e">Sweeping Strike</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
