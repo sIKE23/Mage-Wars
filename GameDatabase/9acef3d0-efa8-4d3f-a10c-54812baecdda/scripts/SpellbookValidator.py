@@ -4,8 +4,9 @@ Created 30 April 2019
 
 Changelog:
 	Sharkbait: 10 May 2019:
-		Finished up the first iteration of Level X training. I am pretty sure everything is at least functional for now except counting those mages as 
-		School mages (Paladin being a War mage for level 2 and under spells, etc)
+		Finished up the first iteration of Level X training. I am pretty sure everything is at least functional for now except
+		counting those mages as School mages. Currently, as long as the mage is at least a little trained in that school, the 
+		validator will let it validate regardless of level.
 
 	Sharkbait: 30 April 2019:
 		Added Combo School-type, card counts, Mage Only
@@ -115,7 +116,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 				rawCardLevel = sum(rawCardLevel)
 			else:
 				cardSchoolList = [card.school, '']
-				rawCardLevel = card.level
+				rawCardLevel = int(card.level)
 				
 			cardSubtypeList = card.subtype.replace(' ','').split(',') #Get card Subtype(s)
 			cardTypeList = card.type.replace(' ','').split(',') #Get card Type
@@ -159,8 +160,11 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 			#Check that both the mage is trained/opposed in a type of card and that the card is one of those types(Forcemaster, creatures = 3)
 			elif  ((mageTypeTrnList != [] and True in [cardType in mageTypeTrnList for cardType in cardTypeList])
 				or (mageTypeOppList != [] and True in [cardType in mageTypeOppList for cardType in cardTypeList])):
-					SBPmod = trainOrOpposed(card, mageTypeTrnList, mageTypeOppList)
-					SBPadd = rawCardLevel*SBPmod					
+					if mageName == 'Forcemaster' and 'Mind' in cardSchoolList:
+						SBPadd = rawCardLevel
+					else:
+						SBPmod = trainOrOpposed(card.type, mageTypeTrnList, mageTypeOppList)
+						SBPadd = rawCardLevel*SBPmod					
 					
 			#Check for school training (regardless of level at first)
 			elif ((True in [cardSchool in schoolTrn for cardSchool in cardSchoolList])
@@ -178,36 +182,16 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 						else:
 							SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
 							SBPadd = SBPmod*int(card.level)
-			
-			'''This needs to be rewritten
-			#This is to cover a mage trained up to X Level of a particular school
-			elif (levelXList != []
-				and [card.school in Pairing for Pairing in levelXList]):	
-					SBPadd = levelXListProcess
-			
-			#Check for an AND school
-			elif "+" in card.school:
-				SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
-				spellbook['booktotal']+=SBPadd
-				#notify(str(SBPadd))
-			#Check for an OR school
-			elif "/" in card.school:
-				SBPadd = multiOrSchool(card, spellbook)
-				spellbook['booktotal']+=SBPadd
-				#notify(str(SBPadd))
-			#Check if the School of the card is either trained or opposed and add accordingly
-			elif card.school in spellbook:
-				SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
-				spellbook['booktotal']+=SBPmod*int(card.level)
-				#notify(str(SBPmod*int(card.level)))'''
-				
-
-
 				
 			#If nothing else triggers, it should cost 2/level
 			if SBPadd == 0:
-				SBPadd = 2*int(card.level)
-				#notify(str(2*int(card.level)))
+				if "+" in card.school:
+					SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
+				elif "/" in card.school:
+					SBPadd = multiOrSchool(card, spellbook)
+				else:
+					SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
+					SBPadd = SBPmod*int(card.level)
 
 			#This creates a Dict to count all the non-Mage and non-Magestats cards
 			checkCounts(card, cardDict)
