@@ -3,6 +3,10 @@
 Created 30 April 2019
 
 Changelog:
+	Sharkbait: 10 May 2019:
+		Finished up the first iteration of Level X training. I am pretty sure everything is at least functional for now except counting those mages as 
+		School mages (Paladin being a War mage for level 2 and under spells, etc)
+
 	Sharkbait: 30 April 2019:
 		Added Combo School-type, card counts, Mage Only
 		
@@ -71,12 +75,17 @@ def getUniqueTraining(spellbook):
 			school, type = key.split('-')[1:]
 			comboSTList.append(school)
 			comboSTList.append(type)
-			schoolTrn.append(school)#************ This will need to be done when you to the LevelX stuff too (for X Mage only stuff)
-		#elif key.startswith('L-'): - will need to pick out the level at some point
+			if school not in schoolTrn:
+				schoolTrn.append(school)
+		elif key.startswith('L-'): #- will need to pick out the level at some point
+			level, school = key.split('-')[1:3]
+			levelXList += [(school, level)]
+			if school not in schoolTrn:
+				schoolTrn.append(school)
 		else:
 			if spellbook[key]==1:
 				schoolTrn.append(key)
-			else:
+			elif spellbook[key]==3:
 				schoolOpp.append(key)
 
 	return [schoolTrn, schoolOpp, mageSubtypeTrnList, mageSubtypeOppList, mageTypeTrnList, mageTypeOppList, comboSTList, levelXList]
@@ -88,77 +97,127 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 	mute()
 	cardDict = {}
 	for card in deck: #run through deck adding levels and checking counts
-		#notify(card.name)
-		#temporary way to make sure combo checks elements not letters
-		if '/' in card.school:
-			cardSchool = card.school.replace(' ', '').split('/')
-		elif '+' in card.school:
-			cardSchool = card.school.replace(' ', '').split('+')
-		else:
-			cardSchool = [card.school, '']
-		#This creates a Dict to count all the non-Mage and non-Magestats cards
-		if not ("Mage" in card.subtype or "Magestats" in card.subtype):
+		SBPadd = 0
+		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype):
+			#notify(card.name)
+			
+			#temporary way to make sure combo checks elements not letters. Also hijacked in the rewrite
+			if '/' in card.school:
+				cardSchoolList = card.school.replace(' ', '').split('/')
+				rawCardLevel = card.level.split('/')[0]
+				rawCardLevel = int(rawCardLevel)
+			elif '+' in card.school:
+				cardSchoolList = card.school.replace(' ', '').split('+')
+				cardLevel = card.level.split('+')
+				rawCardLevel = []
+				for i in range(len(cardLevel)):
+					rawCardLevel.append(int(cardLevel[i]))
+				rawCardLevel = sum(rawCardLevel)
+			else:
+				cardSchoolList = [card.school, '']
+				rawCardLevel = card.level
+				
+			cardSubtypeList = card.subtype.replace(' ','').split(',') #Get card Subtype(s)
+			cardTypeList = card.type.replace(' ','').split(',') #Get card Type
+				
+			#Check if the card is Novice. No matter the school, it only costs (card.level) points
+			if "Novice" in card.Traits:
+				SBPadd = int(card.level)
+				spellbook['booktotal']+=SBPadd
+				continue
+				#notify(str(SBPadd))
+				#checkForNovice(card) For more academy functionality later.. .maybe
+				
+			#Talos doesn't cost anything
+			if "Talos" in card.Name:
+				debug("Talos")
+				continue
+				
+			#Check that both the mage is trained/opposed in subtypes and that the card has at least one of those subtypes
+			if mageSubtypeTrnList != [] and True in [cardSubtype in mageSubtypeTrnList for cardSubtype in cardSubtypeList]:
+				if '+' in card.school:
+					SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp, 1)
+					spellbook['booktotal']+=SBPadd
+					#notify(str(SBPadd))
+				elif '/' in card.school:
+					SBPadd = multiOrSchool(card, spellbook)
+					#notify(str(SBPadd))
+				else:
+					spellbook['booktotal']+=int(card.level)
+					#notify(card.level)
+					
+			#Check that the card has a combination of School and Type that matches the mage's training
+			if (comboSTList != []
+				and True in [cardType in comboSTList for cardType in cardTypeList]
+				and True in [comboCardSchool in comboSTList for comboCardSchool in cardSchoolList]):
+					SBPadd = comboSTListProcess(card, comboSTList, spellbook, schoolTrn, mageTypeTrnList)
+					#spellbook['booktotal']+=SBPadd
+					#notify(card.name)
+					#notify("comboSTList add: "+ str(SBPadd))
+					
+					
+			#Check that both the mage is trained/opposed in a type of card and that the card is one of those types(Forcemaster, creatures = 3)
+			elif  ((mageTypeTrnList != [] and True in [cardType in mageTypeTrnList for cardType in cardTypeList])
+				or (mageTypeOppList != [] and True in [cardType in mageTypeOppList for cardType in cardTypeList])):
+					SBPmod = trainOrOpposed(card, mageTypeTrnList, mageTypeOppList)
+					SBPadd = rawCardLevel*SBPmod					
+					
+			#Check for school training (regardless of level at first)
+			elif ((True in [cardSchool in schoolTrn for cardSchool in cardSchoolList])
+				or (True in [cardSchool in schoolOpp for cardSchool in cardSchoolList])):
+					#notify("159: " +card.name)
+					if (levelXList != [] and False not in [cardSchool not in schoolOpp for cardSchool in cardSchoolList]):
+						SBPadd = levelXListProcess(card, levelXList, spellbook, schoolTrn, schoolOpp)
+						#notify("Processing levelXList")
+					else:
+						#notify("Not Processing levelXList")
+						if "+" in card.school:
+							SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
+						elif "/" in card.school:
+							SBPadd = multiOrSchool(card, spellbook)
+						else:
+							SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
+							SBPadd = SBPmod*int(card.level)
+			
+			'''This needs to be rewritten
+			#This is to cover a mage trained up to X Level of a particular school
+			elif (levelXList != []
+				and [card.school in Pairing for Pairing in levelXList]):	
+					SBPadd = levelXListProcess
+			
+			#Check for an AND school
+			elif "+" in card.school:
+				SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
+				spellbook['booktotal']+=SBPadd
+				#notify(str(SBPadd))
+			#Check for an OR school
+			elif "/" in card.school:
+				SBPadd = multiOrSchool(card, spellbook)
+				spellbook['booktotal']+=SBPadd
+				#notify(str(SBPadd))
+			#Check if the School of the card is either trained or opposed and add accordingly
+			elif card.school in spellbook:
+				SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
+				spellbook['booktotal']+=SBPmod*int(card.level)
+				#notify(str(SBPmod*int(card.level)))'''
+				
+
+
+				
+			#If nothing else triggers, it should cost 2/level
+			if SBPadd == 0:
+				SBPadd = 2*int(card.level)
+				#notify(str(2*int(card.level)))
+
+			#This creates a Dict to count all the non-Mage and non-Magestats cards
 			checkCounts(card, cardDict)
+			
 			if "Only" in card.traits:
 				checkMageSchoolOnly(card, mageName, schoolTrn)
-				#checkSchoolOnly(card, ) This is going to be a pain in the ass
-		cardSubtypeList = card.subtype.replace(' ','').split(',') #Get card Subtype(s)
-		cardTypeList = card.type.replace(' ','').split(',') #Get card Type
-		#This ignores the mage and the stats cards since they don't count for SBP 
-		if "Mage" in card.Subtype or "Magestats" in card.Subtype:
-			debug("Mage, Magestats")
-		#Check if the card is Novice. No matter the school, it only costs (card.level) points
-		elif "Novice" in card.Traits:
-			SBPadd = int(card.level)
-			spellbook['booktotal']+=SBPadd
-			#notify(str(SBPadd))
-			#checkForNovice(card) For more academy functionality later.. .maybe
-		#Talos doesn't cost anything
-		elif "Talos" in card.Name:
-			debug("Talos")
-		#Check that both the mage is trained/opposed in subtypes and that the card has at least one of those subtypes
-		elif mageSubtypeTrnList != [] and True in [cardSubtype in mageSubtypeTrnList for cardSubtype in cardSubtypeList]:
-			if '+' in card.school:
-				SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp, 1)
-				spellbook['booktotal']+=SBPadd
-				#notify(str(SBPadd))
-			elif '/' in card.school:
-				SBPadd = multiOrSchool(card, spellbook)
-				#notify(str(SBPadd))
-			else:
-				spellbook['booktotal']+=int(card.level)
-				#notify(card.level)
-		#Check that the card has a combination of School and Type that matches the mage's training
-		elif (comboSTList != []
-			and True in [cardType in comboSTList for cardType in cardTypeList]
-			and True in [comboCardSchool in comboSTList for comboCardSchool in cardSchool]):
-				SBPadd = comboSTListProcess(card, comboSTList, spellbook, schoolTrn, mageTypeTrnList)
-				spellbook['booktotal']+=SBPadd
-				#notify(str(SBPadd))
-		#Check for an AND school
-		elif "+" in card.school:
-			SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
-			spellbook['booktotal']+=SBPadd
-			#notify(str(SBPadd))
-		#Check for an OR school
-		elif "/" in card.school:
-			SBPadd = multiOrSchool(card, spellbook)
-			spellbook['booktotal']+=SBPadd
-			#notify(str(SBPadd))
-		#Check if the School of the card is either trained or opposed and add accordingly
-		elif card.school in spellbook:
-			SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
-			spellbook['booktotal']+=SBPmod*int(card.level)
-			#notify(str(SBPmod*int(card.level)))
-		#Check that both the mage is trained/opposed in a type of card and that the card is one of those types
-		elif mageTypeTrnList != [] and True in [cardType in mageTypeTrnList for cardType in cardTypeList] and "Mage" not in cardSubtypeList:
-			spellbook['booktotal']+=int(card.level)
-		elif mageTypeOppList != [] and True in [cardType in mageTypeOppList for cardType in cardTypeList] and "Mage" not in cardSubtypeList:
-			spellbook['booktotal']+=3*int(card.level)
-		#If nothing else triggers, it should cost 2/level
-		else:
-			spellbook['booktotal']+=2*int(card.level)
-			#notify(str(2*int(card.level)))
+				#checkSchoolOnly(card, ) This is going to be a pain in the ass for the "Level X" trained mages
+				
+			spellbook['booktotal']+=SBPadd	
+			#notify("spellbook['booktotal']: " +str(spellbook['booktotal']))
 	return (spellbook['booktotal'], cardDict)
 		
 		
@@ -216,12 +275,56 @@ def comboSTListProcess(card, comboSTList, spellbook, schoolTrn, mageTypeTrnList)
 	return SBPadd
 	
 	
+
+def levelXListProcess(card, levelXList, spellbook, schoolTrn, schoolOpp):
+	SBPadd = 0
+	#This should just compare the level of the spell to the level of the training in the proper school and return SBPadd based on that
+	while levelXList != [] and SBPadd == 0:
+		#SBPadd = 0
+		currentTrainedSchoolLevel = levelXList[0:1]
+		levelXList = levelXList[1:]
+		currentTrnSchool = currentTrainedSchoolLevel[0][0]
+		#notify("currentTrnSchool: " + currentTrnSchool)
+		currentTrnLevel = int(currentTrainedSchoolLevel[0][1])
+		#notify("currentTrnLevel: " + str(currentTrnLevel))
+		index = 0
+		#If the card in question has a + cost and the mage has training in the card's school...
+		if '+' in card.school and currentTrnSchool in card.school:		
+			cardLevel = card.level.split('+')
+			#If the card's level is below threshold, treat normally
+			if  int(cardLevel[index])<=currentTrnLevel:	
+				tempAdd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
+				SBPadd+=tempAdd
+				#notify("285 SBPadd: "+str(SBPadd))
+				index+=1
+			#If the card's level is above, delete the "training" from the list and run the And School processing
+			#int(cardLevel[index])=>currentTrnLevel:
+			else:
+				newSchoolTrn = schoolTrn.remove(currentTrnSchool)
+				tempAdd = multiAndSchool(card, spellbook, newSchoolTrn, schoolOpp)
+				SBPadd+=tempAdd
+				#notify("293 SBPadd: "+str(SBPadd))
+				index+=1
+		elif '/' in card.school and currentTrnSchool in card.school:
+			cardLevel = int(card.level.split('/')[0])				
+			SBPadd += int(cardLevel)
+			#notify("298 SBPadd: "+str(SBPadd))
+		else:
+			if  int(card.level)<=currentTrnLevel:	
+				SBPadd+=int(card.level)	
+				#notify("302 SBPadd: "+str(SBPadd))
+			else:
+				SBPadd += 2*int(card.level)
+				#notify("305 SBPadd: "+str(SBPadd))
+	return SBPadd
+	
+	
 #There's potential to use this more than current, but I'm tired and haven't been able to come up with it fully yet
-def trainOrOpposed(cardSchool, schoolTrn, schoolOpp):
+def trainOrOpposed(cardAttribute, mageTraining, mageOpposed):
 	mute()
-	if cardSchool in schoolTrn:
+	if cardAttribute in mageTraining:
 		SBPmod=1
-	elif cardSchool in schoolOpp:
+	elif cardAttribute in mageOpposed:
 		SBPmod=3
 	else:
 		SBPmod=2
@@ -303,6 +406,9 @@ def checkMageSchoolOnly(card, mageName, schoolTrn):
 		notify("***ILLEGAL DECK***: the card {} is not legal in a {} Spellbook.".format(card.Name,mageName))
 		return False
 
+#trainOrOpposed
+def mageTypeTrnProcessing(card, mageTypeTrnList, mageTypeOppList):
+	return
 
 
 def	checkForNovice(card):
