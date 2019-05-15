@@ -3,6 +3,13 @@
 Created 30 April 2019
 
 Changelog:
+	Sharkbait: 15 May 2019:
+		Fixed a few errors. The Level X code was causing the level X logic to apply to all training a mage had, not just the 
+		school that was trained up to Level X. It has been adjusted now to check for the whole school training first. Subtype
+		training was causing an issue where the SBPadd could be overwritten, so I made it part of the if/elif branching scheme. 
+		Subtyping was also doing the '/' costs wrong due to only checking for school. This has been fixed with comments near the 
+		function explaining.**************WHEN YOU EDIT THIS NEXT, TAKE TIME TO ADD COMMENTS**************************
+		
 	Sharkbait: 10 May 2019:
 		Finished up the first iteration of Level X training. I am pretty sure everything is at least functional for now except
 		counting those mages as School mages. Currently, as long as the mage is at least a little trained in that school, the 
@@ -138,17 +145,16 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 			if mageSubtypeTrnList != [] and True in [cardSubtype in mageSubtypeTrnList for cardSubtype in cardSubtypeList]:
 				if '+' in card.school:
 					SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp, 1)
-					spellbook['booktotal']+=SBPadd
 					#notify(str(SBPadd))
 				elif '/' in card.school:
-					SBPadd = multiOrSchool(card, spellbook)
+					SBPadd = multiOrSchool(card, spellbook, True)
 					#notify(str(SBPadd))
 				else:
-					spellbook['booktotal']+=int(card.level)
-					#notify(card.level)
+					SBPadd += int(card.level)
+					#notify("SBPadd: "+str(SBPadd))
 					
 			#Check that the card has a combination of School and Type that matches the mage's training
-			if (comboSTList != []
+			elif (comboSTList != []
 				and True in [cardType in comboSTList for cardType in cardTypeList]
 				and True in [comboCardSchool in comboSTList for comboCardSchool in cardSchoolList]):
 					SBPadd = comboSTListProcess(card, comboSTList, spellbook, schoolTrn, mageTypeTrnList)
@@ -170,10 +176,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 			elif ((True in [cardSchool in schoolTrn for cardSchool in cardSchoolList])
 				or (True in [cardSchool in schoolOpp for cardSchool in cardSchoolList])):
 					#notify("159: " +card.name)
-					if (levelXList != [] and False not in [cardSchool not in schoolOpp for cardSchool in cardSchoolList]):
-						SBPadd = levelXListProcess(card, levelXList, spellbook, schoolTrn, schoolOpp)
-						#notify("Processing levelXList")
-					else:
+					if card.school in spellbook:
 						#notify("Not Processing levelXList")
 						if "+" in card.school:
 							SBPadd = multiAndSchool(card, spellbook, schoolTrn, schoolOpp)
@@ -182,6 +185,12 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 						else:
 							SBPmod = trainOrOpposed(card.school, schoolTrn, schoolOpp)
 							SBPadd = SBPmod*int(card.level)
+					elif (levelXList != [] and False not in [cardSchool not in schoolOpp for cardSchool in cardSchoolList]):
+						#notify("Processing levelXList")
+						SBPadd = levelXListProcess(card, levelXList, spellbook, schoolTrn, schoolOpp)
+						
+					#else:
+
 				
 			#If nothing else triggers, it should cost 2/level
 			if SBPadd == 0:
@@ -224,15 +233,20 @@ def multiAndSchool(card, spellbook, schoolTrn, schoolOpp, sbpForce = 0):
 	return bookTotalAdd
 
 
-
-def multiOrSchool(card, spellbook):	
+#Will take the lowest training in the school list. If the subtype flag is true, it will return as trained no matter what as of 15 May 2019.
+#This is because there is no mage currently opposed to subtypes. If that changes, the code will need to adjust, I just don't have time today.
+def multiOrSchool(card, spellbook, subtype = False):	
 	mute()
+	
 	schools = card.school.split('/')
 	cardLevel = int(card.level.split('/')[0])
 	SBPmod = 2
-	for s in schools:
-		if s in spellbook and spellbook[s]==1:
-			SBPmod = 1
+	if subtype == False:
+		for s in schools:
+			if s in spellbook and spellbook[s]==1:
+				SBPmod = 1
+	else:
+		SBPmod = 1
 	return cardLevel*SBPmod
 	
 	
@@ -272,8 +286,14 @@ def levelXListProcess(card, levelXList, spellbook, schoolTrn, schoolOpp):
 		currentTrnLevel = int(currentTrainedSchoolLevel[0][1])
 		#notify("currentTrnLevel: " + str(currentTrnLevel))
 		index = 0
+		
+		
+		
+		
+		
+		
 		#If the card in question has a + cost and the mage has training in the card's school...
-		if '+' in card.school and currentTrnSchool in card.school:		
+		if '+' in card.school:# and currentTrnSchool in card.school:		
 			cardLevel = card.level.split('+')
 			#If the card's level is below threshold, treat normally
 			if  int(cardLevel[index])<=currentTrnLevel:	
