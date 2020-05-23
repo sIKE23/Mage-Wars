@@ -245,6 +245,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Equipment' and tType == 'Equipment') or
 			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
 			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
+			(cTargetBar == 'Corporeal Conjuration' and ('Conjuration' in tType) and traits.get('Corporeal')) or
 			(cTargetBar == 'Creature' and tType == 'Creature') or
 			(cTargetBar == 'Creature or Conjuration' and (tType == 'Creature' or tType == 'Conjuration')) or
 			(cTargetBar == 'Enemy Creature' and tType == 'Creature' and tController != cController) or
@@ -281,7 +282,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype) or
 			(cTargetBar == 'Zone or Object') or
 			(cTargetBar == 'Object or Zone')): return True
-	elif ((cType == 'Equipment' and tSubtype == 'Mage') or
+	elif ((cType == 'Equipment' and 'Mage' in tSubtype) or
 		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType == 'Creature' and not traits.get('Flying'))): return True
 	return False
 

@@ -6,16 +6,8 @@
 	octgnVersion="3.1.255.0"
 	scriptVersion ="3.1.0.2"
 
-	version="2.1.22.0"
+	version="2.1.31.0"
 
-	markersize="12"
-	tags="Mage Wars"
-	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
-	setsurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
-	gameurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
-	authors="sIKE, ACG, lettucemode, Cosworth, Sharkbait"
-	iconurl="http://octgn.gamersjudgement.com/wordpress/magewars/wp-content/uploads/sites/33/2013/06/image1.png"
-	usetwosidedtable="False">
 	<scripts>
 		<script src="scripts/academy.py"/>
 		<script src="scripts/actions.py"/>
@@ -29,6 +21,7 @@
 		<script src="scripts/domination.py"/>
 		<script src="scripts/events.py"/>
 		<script src="scripts/main.py"/>
+		<script src="scripts/SpellbookValidator.py"/>
 		<script src="scripts/textfunctions.py"/>
 	</scripts>
 	<events>
@@ -209,7 +202,6 @@
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck"/>
 			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee"/>
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged"/>
-			<!--<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution"/>-->
 			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep"/>
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot"/>
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam"/>
@@ -241,7 +233,6 @@
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck"/>
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee"/>
 			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged"/>
-			<!--<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution"/>-->
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot"/>
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam"/>
 			<cardaction menu="Remove Sleep Marker" default="False" shortcut="Ctrl+Shift+P" execute="subSleep"/>
@@ -289,6 +280,14 @@
 		</hand>
 		<group name="Discard Pile" visibility="all" ordered="False" icon="Images/Groups/Discard.png" collapsed="False">
 		</group>
+		<group name="Spellbook" visibility="me" ordered="True" viewState="expanded" icon="Images/Groups/Spellbook.png">
+			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown"/>
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications"/>
+			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
+		</group>
+		<group name="Discard Pile" visibility="all" ordered="False" icon="Images/Groups/Discard.png" collapsed="False">
+		</group>
+
 		<group name="Obliterate Pile" visibility="all" ordered="False" icon="Images/Groups/Obliterate.png" collapsed="True">
 		</group>
 	</player>

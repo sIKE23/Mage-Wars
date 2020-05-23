@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="b135f5d0-0a31-45c7-b5a3-a5058a6d0286">Elementalist</card>
+    <card qty="1" id="728d2586-3b03-4722-a799-47e3cd82218c">Academy Elementalist Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="eea22119-07b8-4eb0-8057-78a78fea6308">Beam of Frost</card>
+    <card qty="1" id="1061a961-f6d8-4e33-b57f-02bcc3d86158">Cone of Frost</card>
+    <card qty="2" id="10a6bab7-7ec6-4a21-b0b6-f20f4e67bb79">Gale Burst</card>
+    <card qty="1" id="bce94cd3-5bbc-4761-a5fa-f8f12bd8ef75">Twister</card>
+  </section>
+  <section name="Conjuration" shared="False">
+    <card qty="1" id="c2dff24b-ab8e-4ef0-8d55-b8ac6225ca03">Dense Fog</card>
+    <card qty="1" id="89169377-cf5c-4e2f-9590-3052a08bacf4">Hellscape</card>
+    <card qty="1" id="e1691086-4b27-4961-83a8-60d8217e97fb">Ice Spikes</card>
+    <card qty="1" id="4c12c7d1-7103-43b2-9c86-b8f9ae7f848d">Thunderstorm</card>
+    <card qty="1" id="04c203b7-c9f8-4f62-8a2d-188af552e647">Volcano</card>
+  </section>
+  <section name="Creature" shared="False">
+    <card qty="1" id="a5089f11-308d-4f6c-987b-753ac9cb6c55">Acid Ooze</card>
+    <card qty="1" id="a5257374-8791-43db-9f60-732515b42a25">Ice Golem</card>
+    <card qty="2" id="bcc8be73-b8f5-4584-aef1-8050f1aab5bb">Magma Sprite</card>
+    <card qty="1" id="cde059b6-7fdb-4a4c-8ecc-2530f2ea0136">Mud Golem</card>
+    <card qty="2" id="34d6a55f-8c87-4055-9f81-ee8689463b7c">Rock Golem</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="648b2d6d-d69f-417f-b666-637bcbc67c21">Deep Freeze</card>
+    <card qty="2" id="2d87d057-a5d1-4be6-aec8-66caeb453977">Frost Trap</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="bd5ed44d-b6cc-4526-b924-f3a7ef53fc06">Amulet of Attunement</card>
+    <card qty="1" id="19eb19d7-5ef7-41bb-be05-747c9f9ea429">Dragon's Mantle</card>
+    <card qty="1" id="e5752618-ca3d-40f4-93d5-79a9e423e7a0">Elemental Staff</card>
+    <card qty="1" id="d887f3ce-be43-4e3d-8c5e-f59d48343d4c">Wand of Ice and Fire</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="b6d65d21-0bb0-49b3-89c0-fe5b0f7f329c">Disperse</card>
+    <card qty="1" id="56fe2dad-5831-4a02-b2a6-247162b0a157">Rapid Dismantle</card>
+    <card qty="1" id="c8bfdd95-ddd3-4c9a-ad09-6aa51d3d96ee">Upheaval</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

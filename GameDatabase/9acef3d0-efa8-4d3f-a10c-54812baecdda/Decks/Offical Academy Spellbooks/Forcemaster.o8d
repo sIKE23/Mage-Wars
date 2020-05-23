@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="32e0369c-60a6-48b7-a31a-6ad444033461">Forcemaster</card>
+    <card qty="1" id="18c4ecbe-0a44-43c0-b053-a3c8e0abd8cd">Academy Forcemaster Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="85e1046a-b4cd-40b4-9b08-8ba1788229bf">Force Daggers</card>
+    <card qty="2" id="c381f725-e3c6-407e-8039-beab331869d6">Telekinetic Bolt</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="2" id="252db70f-53d3-4c92-82f3-8f0832c73169">Eye of Itadjet</card>
+    <card qty="2" id="5f798d36-1d1d-4e14-a79e-3ad41dd95141">Force Caracal</card>
+    <card qty="1" id="1d4d0993-60da-4b56-a7e1-6a1dbc52bc9c">Force Golem</card>
+    <card qty="2" id="b69e50c8-9682-4eec-8af1-b41a34ed1b51">Psionic Cobra</card>
+    <card qty="1" id="ca2b10a9-0c08-4649-997b-6fcbfef289f0">Tjusut, the Risen King</card>
+    <card qty="2" id="445e4660-ce91-45c2-9bf2-d17669eb5053">Tomb Guardian</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="c4c418bf-4cde-4000-b9c4-585c98d4349c">Desperate Focus</card>
+    <card qty="1" id="e6f782bc-66f4-46ff-ae01-1a16a10a86f8">Drop Item</card>
+    <card qty="1" id="e99b27e9-f9ae-4f6c-8cde-3ea17563b8cb">Force Shield</card>
+    <card qty="1" id="ab745e70-052a-497c-a307-e45939fcaa8c">Galvanize</card>
+    <card qty="1" id="57793fab-de11-4206-959c-882f34e2d4f9">Mass Cowardice</card>
+    <card qty="2" id="b2085151-be46-4b1c-b4b1-293e3600d009">Mind Seize</card>
+    <card qty="1" id="b3f3c7a6-a55b-456b-aba6-1eb73ab3bdc3">Redistributed Power</card>
+    <card qty="1" id="de52f68c-50a8-443a-9986-da785f930c33">Repulsion Field</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="78afb56f-0d84-4e81-9432-697752136f85">Force Armor</card>
+    <card qty="1" id="1f1e7da2-0476-4cb4-a509-b95be027602b">Jeweled Scarab</card>
+    <card qty="1" id="e5d118ee-1439-4986-ba88-32611aee7182">Illusory Leggings</card>
+    <card qty="1" id="0354689d-511e-4ba6-b4bb-c13fe33e40d4">Shifratar</card>
+    <card qty="2" id="c8ada27f-b20e-4a89-812a-48ea97ab24fd">Symbiotic Orb</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="dff45020-4e2c-4fe1-87a5-52741a6c2794">Disperse</card>
+    <card qty="1" id="427cb8da-3db4-4836-8ecd-7f3ea277d21a">Siphon Energy</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

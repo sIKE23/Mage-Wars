@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="bcacf527-05b6-41d3-b7bc-e8434c2ed6ec">Monk</card>
+    <card qty="1" id="6ed52b69-008d-4c87-873e-268412c7947f">Academy Monk Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="2" id="801da065-6f12-4ad5-afa1-cb50693e14e9">Dragon-Tail Sweep</card>
+    <card qty="2" id="23dd063b-4ada-4d94-80c5-8725c077044d">Fist of Iron</card>
+    <card qty="2" id="627bcd65-ceda-4199-8194-cc3ad5d55455">Fist of Lightning</card>
+    <card qty="2" id="bd1f7d28-9656-4b51-afd3-5911f789f34b">Flying Side Kick</card>
+    <card qty="3" id="6d8e3760-f3dd-42fe-b81d-491d674cf568">Projected Leg Sweep</card>
+    <card qty="3" id="fe1878d8-a53d-44c1-8180-7218d52e1d3c">Projected Palm</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="1" id="6d8f90ae-c915-46b5-a668-165f41f4ba3a">Oboko, Sohei Master</card>
+    <card qty="2" id="78be4145-492e-4010-af82-55f153309aa3">Sohei Pupil</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="0c3e07e2-475b-4615-aa66-98d4a6981dce">Chakra of Protection</card>
+    <card qty="2" id="2232edd3-86eb-42fe-9617-dd070c210993">Fortified Resolve</card>
+    <card qty="1" id="183b4553-35e2-4753-a92d-8a315cf6f7d9">Martial Mastery</card>
+    <card qty="2" id="f755edcd-490a-420f-a538-329b462b0765">Miss</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="1c458601-e6df-4712-acf8-f1faf43cb8b6">Bo staff</card>
+    <card qty="1" id="76738c91-2657-4ced-a3a4-90557cc1f01d">Dampening Cloak</card>
+    <card qty="1" id="5ec3b5de-6188-47e9-a25d-ed22410c9073">Devout Robes</card>
+    <card qty="1" id="e2f48ef1-f64c-4924-ac2f-5d5b1696ca7c">Dragon's Lance</card>
+    <card qty="1" id="67948f14-5b83-4645-9ec4-eb502367d243">Ring of Ki</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="d3c9c5b0-6b2d-4261-831a-16a29af7c7da">Crumble</card>
+    <card qty="1" id="c4db5465-4669-495e-b49a-067ebf5a33fc">Distraction</card>
+    <card qty="1" id="e4c97004-8be5-4a2c-81b7-2b90863f7209">Disperse</card>
+    <card qty="2" id="bb25146f-7824-4579-9830-0c933e916e35">Meditation</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

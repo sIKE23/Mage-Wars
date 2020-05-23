@@ -54,7 +54,7 @@ def onGameStarted():
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
-		debugMode = True
+		#debugMode = True
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
@@ -355,7 +355,7 @@ def onDeckLoaded(args):
 			setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
 			if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
 			mageDict = eval(me.getGlobalVariable("MageDict"))
-			for card in me.hand:
+			for card in me.piles["Spellbook"]:
 				if card.Subtype == "Mage":
 						mageDict["MageID"] = card._id
 				elif card.Type == "Magestats":
@@ -494,6 +494,10 @@ def onCardArrowTargeted(args):
 						elif defender.Type in typeIgnoreList or defender.Name in typeIgnoreList or defender.Type == "Magestats":
 							mute()
 							publicChatMsg("{} is not a legal target".format(defender.Name))
+							attacker.arrow(defender,False)
+						elif attacker.Name == "Symbiotic Orb":
+							castSpell(attacker,defender)
+							attach(attacker,defender)
 							attacker.arrow(defender,False)
 						elif attacker.Type !="Enchantment":
 								castSpell(attacker,defender) #Assume that player wants to cast card on target

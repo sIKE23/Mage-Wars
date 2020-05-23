@@ -418,7 +418,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 						attackDice -= attacker.markers[Weak]
 						attackDice -= attacker.markers[Stagger] * 2
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Agony" or c.Name == "Shrink")]: attackDice -= 2
-						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Tangleroot"]: attackDice -= 1
+						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Tangleroot"]: attackDice -= c.markers[DissipateToken]
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Knight\'s Courage")] and defender.markers[Strongest]: 
 								attackDice += 2 
 								atkTraits['Piercing'] = atkTraits.get('Piercing',0) + 1
@@ -426,6 +426,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				level = eval(attacker.Level)
 				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
 				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
+				if [True for c in getAttachments(defender) if c.isFaceUp and c.Name == "Force Shield"] and attack.get('RangeType') == 'Melee': attackDice -= c.markers[DissipateToken]
 		if defender:
 				if 'Glancing' in dTraitDict and not attack.get("Traits",{}).get("Drain"): attackDice -= 3
 				debug("dTraitDict: {}".format(dTraitDict))
@@ -797,7 +798,19 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 					notify("{} leaps in front of {} to intercept the attack!".format(Card(choice["OwnerID"]),defender))
 					dTraitDict = choice
 					defender = Card(choice["OwnerID"])
-				#choice_options = ["Intercept with {}".format(Card(d["OwnerID"]).Name) for d in interceptor_dicts] + ["Don't intercept"]
+		#if attack.get("RangeType") == "Melee"
+			#symb_dicts = [computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.name("Symbiotic Orb") and c.markers[Ready] = 1 and c != defender and c.controller == defender.controller]
+			#if symb_dicts:
+				#buttonColorList = ["#de2827","#171e78","#01603e"]
+				#buttonList = ["Defend using 3 Mana","Defend using dissipate","Do not defend"]
+				#choice = askChoice("{} is being targeted by {}'s {}. Would you like to use your Symbiotic Orb to defend?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
+				#if choice == 1:
+				#	notify("{} spends 3 mana and their Symbiotic Orb deflects the blow!".format(me))
+				#elif choice == 2:
+				#	notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)".format(me))
+				#else:
+				#	notify("{} chooses not to power the Symbiotic Orb for this attack".format(me))
+			#choice_options = ["Intercept with {}".format(Card(d["OwnerID"]).Name) for d in interceptor_dicts] + ["Don't intercept"]
 				#choice_colors = ["#009933" for d in interceptor_dicts] + ["#ff0000"]
 				#choice = askChoice(choice_text,choice_options,choice_colors)
 				#if 1 <= choice <= len(interceptor_dicts):
@@ -936,6 +949,54 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
 						attack["OriginalAttack"]["original target dict"] = dTraitDict
 						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
+						return
+				#Check for Symbiotic Orb
+				symb_dicts = [computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.name in ["Symbiotic Orb"] and c.markers[Ready] == 1 and c != defender and c.controller == defender.controller and attack.get("RangeType") == "Melee" and not attack.get("Traits",{}).get("Unavoidable")]
+				if symb_dicts:
+						buttonColorList = ["#de2827","#171e78","#01603e"]
+						buttonList = ["Defend using 3 Mana","Defend using dissipate","Do not defend"]
+						choice = askChoice("{} is being targeted by {}'s {}. Would you like to use your Symbiotic Orb to defend?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
+						if choice == 1:
+							if me.mana >=3:
+								me.mana -= 3
+								for c in getCardsInZone(getZoneContaining(defender)):
+									if c.name in ["Symbiotic Orb"]:
+										toggleReady(c) 
+								notify("{} spends 3 mana and their Symbiotic Orb deflects the blow!".format(me))
+								rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+								interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+								return
+							else:
+								notify("{} doesn't have enough mana to spend!".format(me))
+								buttonList2 = ["Defend using dissipate","Do not defend"]
+								buttonColorList2 = ["#171e78","#01603e"]
+								choice = askChoice("{} is being targeted by {}'s {}. Would you like to use your Symbiotic Orb to defend?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList2,buttonColorList2)
+								if choice == 1:
+									for c in getCardsInZone(getZoneContaining(defender)):
+										if c.name in ["Symbiotic Orb"]:
+											toggleReady(c) 
+									notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)".format(me))
+									rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+									interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+									return
+								else:
+									notify("{} chooses not to power the Symbiotic Orb for this attack".format(me))
+						elif choice == 2:
+							for c in getCardsInZone(getZoneContaining(defender)):
+								if c.name in ["Symbiotic Orb"]:
+									toggleReady(c) 
+							notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)".format(me))
+							rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+							interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+							return
+						else:
+							notify("{} chooses not to power the Symbiotic Orb for this attack".format(me))
+				
+				#Check for Block
+				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
+						notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
+						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for Nullify
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Nullify"] and not timesHasUsedAbility(c)]) and attack.get("Traits",{}).get("Drain"):
@@ -1592,6 +1653,11 @@ def computeTraits(card):
 												subtype != 'Mage' and
 												'Holy' in school and
 												'Living' in rawTraitsList): append('Regenerate 1')
+										if (cName == 'Consecrated Ground' and
+												cardType == 'Creature' and
+												cController != controller and
+												subtype != 'Mage' and
+												'Holy' not in school): append('Consecrated Ground Damage')
 										if (cName == 'Mohktari, Great Tree of Life' and
 												cController == controller and
 												cardType == 'Creature' and

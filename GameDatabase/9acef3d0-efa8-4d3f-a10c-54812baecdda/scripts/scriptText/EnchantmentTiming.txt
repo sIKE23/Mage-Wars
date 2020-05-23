@@ -11,6 +11,7 @@ Falcon Precision
 Force Orb
 Force Sword
 Forcefield
+Force Shield
 Fumble
 Glancing Blow
 Jinx
@@ -20,6 +21,7 @@ Mind Shield
 Nullify
 Redirect
 Reverse Attack
+Tangleroot
 #
 Avoid Attack
 Agony
@@ -51,7 +53,6 @@ Rhino Hide
 Rise Again
 Rust
 Standard Bearer
-Tangleroot
 Vampirism
 #
 Damage and Effects

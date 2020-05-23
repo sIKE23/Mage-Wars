@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="0a13b5b8-a37b-43d3-877e-9972e4313387">Beastmaster</card>
+    <card qty="1" id="0a21940e-a4fd-4b85-8cf9-16ebdd6de9b2">Academy Beastmaster Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="1a72b4b5-80a9-44bb-a697-e71969ff2dfe">Lightning Jolt</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="1" id="369d7f74-7a46-4d7d-9c38-d7c172adcce9">Darkfenne Asp</card>
+    <card qty="1" id="3fabb5a9-a04e-4979-8d33-1ff04964c872">Pellian Lynx</card>
+    <card qty="1" id="40d10f95-fb85-42a9-a910-bfca2c43f6f3">Rajah, Jungle's Talon</card>
+    <card qty="1" id="41f044b2-9356-494d-a7fa-2ba28cfa5983">Razortusk</card>
+    <card qty="1" id="447c950c-7612-4078-a704-f2ed31b6d3aa">Ridgeback Skunk</card>
+    <card qty="1" id="4815ff77-a388-47fd-a456-0ddcfbef326c">Slavörg, Fang of the First Moon</card>
+    <card qty="1" id="4d22c3dc-f6a0-4841-adf2-168538d4e0b4">Tarraki, Thousand Bites</card>
+    <card qty="1" id="4e564a45-1d59-46b2-ba5d-50293874b714">Wychwood Faerie</card>
+    <card qty="3" id="4f6070fd-df30-4796-8309-987f66e2d5d2">Wychwood Hound</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="5836215f-fb53-43aa-83f3-ae6c37e08a4d">Badger Frenzy</card>
+    <card qty="1" id="66f7875c-5c52-4be7-96de-051d461c99e9">Gator Toughness</card>
+    <card qty="1" id="7105e27a-e8a4-4f34-b63b-5a2d49e78af5">Iguana Regrowth</card>
+    <card qty="1" id="7544114e-4657-431c-a2a6-a91e972a6a00">Joined Strength</card>
+    <card qty="1" id="80aecaf5-6e97-48fd-8d81-3c2c56f3da43">Panther Stealth</card>
+    <card qty="2" id="8aba1b51-d636-4e11-843e-efa8f21ded3a">Tangleroot</card>
+    <card qty="2" id="8ba14d55-8d94-4749-9420-0d3c2d1fa24a">Wolf Fury</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="ad452cfa-84cf-4f17-9ad3-86e9f34a7b3b">Emerald Elk Stave</card>
+    <card qty="1" id="adbeeaf6-7945-402d-95b8-7fd41c775695">Johktari Hunting Knife</card>
+    <card qty="1" id="b1117208-e1ef-4eb0-b33b-ba947a2fa230">Leather Chausses</card>
+    <card qty="1" id="c1a98dd8-af3f-4a3d-8c23-df736f4a3739">Wychwood Ironvine</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="d3c9c5b0-6b2d-4261-831a-16a29af7c7da">Crumble</card>
+    <card qty="1" id="dff45020-4e2c-4fe1-87a5-52741a6c2794">Disperse</card>
+    <card qty="1" id="e6fd8d19-169d-4579-bfa8-25f657c48138">Group Mend</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

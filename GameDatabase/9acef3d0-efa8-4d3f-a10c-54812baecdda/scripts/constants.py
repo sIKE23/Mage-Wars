@@ -158,7 +158,7 @@ gameBoardsDict = {
 					}
 
 ##########################		Lists			############################
-listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shiftratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade"]
+listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shiftratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade", "Soulreaper"]
 typeChannelingList = ["Mana Flower","Mana Crystal","Moonglow Amulet"]
 typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
 tokenList = ["Armor","Banish","Bleed","Burn","Charge","Cripple","Corrode","Disable","Daze","Grapple","Growth","Mana","Melee","Rage",

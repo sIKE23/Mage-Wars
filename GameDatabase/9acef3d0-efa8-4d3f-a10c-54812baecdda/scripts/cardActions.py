@@ -112,8 +112,12 @@ def CA_Guard(arg):
 #############################
 
 def removeDamage(card,amount):
-	amount = min(card.markers[Damage],amount)
-	card.markers[Damage] -= amount
+	if "Mage" in card.Subtype:
+			healed = min(card.controller.Damage,amount)
+			card.controller.Damage -= healed
+	else:
+			healed = min(card.markers[Damage],amount)
+			card.markers[Damage] -= healed
 	return amount
 
 def buff(card,traits,duration):
@@ -131,9 +135,10 @@ def buff(card,traits,duration):
 
 #CX stands for codex function
 
-def CX_heal(card,amount):
+def CX_heal(card,roll):
 	#TODO Check whether card is living
 	#TODO: bCX functions
+	amount = roll[2] + roll[4] + 2*roll[3] + 2*roll[5]
 	amount = removeDamage(card,amount)
 	#TODO: aCX functions
 	return amount
@@ -282,14 +287,17 @@ def asyranCleric_f1(arg):
 			target = arg2["target"]
 			actor = arg2["actor"]
 			#TODO: Fix check for living trait; getBasicTraits is not sufficient long term
-			if not (target.isFaceUp and target.Type=="Creature" and "Living" in getBasicTraits(target)):
+			if not (target.isFaceUp and target.Type=="Creature" and "NonLiving" not in target.Traits):
 				whisper("Invalid target! Must target living creature.")
 				return
 			if cardGetDistance(actor,target) > 1:
 				whisper("{} is too far away to heal. Target must be within 1 zone.".format(target.nickname))
 				return
 			notify("Asyran Cleric casts Healing Light!")
-			amount = str(CX_heal(target,simpleRollDice(1)))
+			
+			#TODO: I'm pretty sure the rollDice function was intended to be replaced, bolted on the damageRoll, effectRoll for now to function. Also added to the CX_Heal function the ability to parse the roll
+			damageRoll,effectRoll = rollDice(1)
+			amount = str(CX_heal(target,damageRoll))
 			notify("{} heals {} damage!".format(target.nickname,amount))
 
 	arg["function"] = clickFunction

@@ -19,13 +19,15 @@ def nextPhaseArena():
 			flipcard(init)
 		else:
 			remoteCall(init.controller, "flipcard", [init])
-		setPhase(2)
-	elif currentPhase()[0] == "Reset Phase":
+		#setPhase(2) #Combining the Initiative, Reset, and channeling phases in order to cut down on the amount of passing needed
+	#elif currentPhase()[0] == "Reset Phase":
+		setEventList('Round',[])#This helps track defenses, arcane zap, etc
+		setEventList('Turn',[])#This helps track defenses, arcane zap, etc
 		for p in players:
 			remoteCall(p, "resetDiscounts",[])
 			remoteCall(p, "resetMarkers", [])
-		setPhase(3)
-	elif currentPhase()[0] == "Channeling Phase":	
+		#setPhase(3)
+	#elif currentPhase()[0] == "Channeling Phase":	
 		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
 		setPhase(4)
@@ -39,7 +41,7 @@ def nextPhaseArena():
 				if card.markers[Disable] and card.controller.name == p.name: remoteCall(p, "resolveDisable",[card])
 				if 'Dissipate' in traits and card.controller.name == p.name: remoteCall(p, "resolveDissipate", [traits, card])
 				if 'Madrigal' in traits and card.controller.name == p.name: remoteCall(p, "resolveMadrigal", [traits, card])
-				if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
+				if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits or "Consecrated Ground Damage" in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
 				if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller.name == p.name and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
 				if card.Name in ["Ghoul Rot", "Curse of Decay", "Arcane Corruption", "Force Crush"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveDotEnchantment", [card]) 
 				if card.Name == "Curse Item" and card.controller.name != p.name and card.isFaceUp: 
@@ -121,9 +123,8 @@ def getNextPlayerNum():
 		nextPlayer = 1
 	return nextPlayer
 	
-def validateDeck(deck):
+'''def validateDeck(deck):
 	mute()
-
 	spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
 
 	for c in deck:
@@ -133,8 +134,7 @@ def validateDeck(deck):
 					mageName = c.name.split(" Stats")[0]
 					spellbook["spellpoints"] = int(c.StatSpellBookPoints)
 					break
-	#debug("Stats {}".format(stats))
-	#spellbook = {"Dark":2,"Holy":2,"Nature":2,"Mind":2,"Arcane":2,"War":2,"Earth":2,"Water":2,"Air":2,"Fire":2,"Creature":0}
+
 
 	#get school costs
 	for schoolcost in schoolcosts:
@@ -366,4 +366,4 @@ def validateDeck(deck):
 		return False
 
 	#all good!
-	return True
+	return True'''

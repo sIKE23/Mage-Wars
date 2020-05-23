@@ -469,29 +469,31 @@ def resolveAreaDot(traits, card):
 	damageAmount = 0
 	type = {'Malacoda':'',
 			'Plagued':'',
-			'Idol':''}
+			'Idol':'',
+			'Consecrated':''}
 	if "Malacoda" in traits and card.controller == me and card.isFaceUp:
 			damageAmount += 2
-			type['Malacoda'] = 'Malacoda'
+			type['Malacoda'] = 'Malacoda, '
 	if "Plagued" in traits and card.controller == me and card.isFaceUp:
 			damageAmount += 1
-			type['Plagued'] = 'Plagued'
+			type['Plagued'] = 'Plagued, '
 	if "Pestilence" in traits and card.controller == me and card.isFaceUp:
 			damageAmount += 1
-			type['Idol']= 'The Idol of Pestilence'
-	if type['Malacoda'] != '' and type['Plagued'] != '' and type['Idol']!='':
-			type['Malacoda'] = 'Malacoda, '
-			type['Plagued'] = 'Plagued and '
-	elif type['Malacoda'] != '' and (type['Plagued'] != '' or type['Idol']!=''):
-			type['Malacoda'] = 'Malacoda and '
-	elif type['Malacoda'] == '' and type['Plagued'] != '' and type['Idol']!='':
-			type['Plagued'] = 'Plagued and '
-			
+			type['Idol']= 'Idol of Pestilence, '
+	if "Consecrated Ground Damage" in traits and card.controller == me and card.isFaceUp:
+			damageAmount += 1
+			type['Consecrated'] = 'Consecrated Ground;'
+	if type['Malacoda'] != '' and (type['Plagued'] == '' and type['Idol'] == '' and type['Consecrated'] == ''):
+			type['Malacoda'] = 'Malacoda;'
+	elif type['Plagued'] != '' and (type['Idol'] == '' and type['Consecrated'] == ''):
+			type['Plagued'] = 'Plagued;'
+	elif type['Idol'] != '' and type['Consecrated'] == '':
+			type['Idol'] = 'Idol of Pestilence;'
 	for p in players:
 		if p.name == card.controller.name:
 			remoteCall(p, "addDamageAmount", [card, damageAmount])
-			notify("{}\'s {} feels the effect(s) of ".format(card.controller,card) + "{Malacoda}{Plagued}{Idol}".format(**type)+ " and takes {} damage.".format(damageAmount))
-
+			notify("{}\'s {} feels the effect of the following: ".format(card.controller,card) + "{Malacoda}{Plagued}{Idol}{Consecrated}".format(**type)+ " and takes {} damage.".format(damageAmount))
+			
 
 def resolveCurseItem(card):			
 	mute()
@@ -715,7 +717,7 @@ def castSpell(card,target=None):
 				#Reduce printed cost by sum of discounts
 				if "Fang of the First Moon" in card.Name:
 						castDiscount = 0
-						for c in me.discard:
+						for c in me.piles['Discard Pile']:
 								if "Animal" in c.Subtype:
 										castDiscount += 2
 								if castDiscount > 0: discountList = [(card, (castDiscount,"Found {} discarded animal creatures in {}'s discard pile".format(castDiscount,me)))]

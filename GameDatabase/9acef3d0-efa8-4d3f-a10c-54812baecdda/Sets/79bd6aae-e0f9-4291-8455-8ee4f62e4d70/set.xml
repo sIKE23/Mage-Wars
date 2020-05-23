@@ -971,7 +971,7 @@
 			<property name="cTargets" value="m0,M2))tIncorporeal,TCreature" />
 			<property name="Target" value="Incorporeal Creature" />
 			<property name="School" value="Holy"  />
-			<property name="Level" value="2" />
+			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />

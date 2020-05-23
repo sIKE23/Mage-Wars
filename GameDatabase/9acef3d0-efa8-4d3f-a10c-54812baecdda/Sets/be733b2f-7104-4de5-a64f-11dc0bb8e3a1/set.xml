@@ -60,7 +60,7 @@
 			<property name="StatLife" value="36" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Holy=1, War=1, Dark=3" />
+			<property name="MageSchoolCost" value="L-3-Holy=1, L-2-War=1, C-Holy-Creature=1, Dark=3" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Valor; Once per round, when the Paladin melee attacks and damages the strongest enemy creature, he gains 1 Valor.&#xD;&#xA;Divine Auras&#xD;&#xA;As a quick action, the Paladin may gain an aura of his choice. Each aura has its own cost in Valor.&#xD;&#xA;Chivalrous Challenge&#xD;&#xA;During the Upkeep Phase, the Paladin may place his Challenge Marker on a target enemy creature within 2 zones. Once per round, the Paladin and his Challenged enemy may re-roll any number of their attack dice while melee attacking each other. If the Challenged enemy attacks any other object, gain 1 Valor. When the Challenged enemy is destroyed, return the marker to the Paladin. During the Upkeep Phase you may pay 2 Valor to return the Challenge marker from an enemy creature." />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
@@ -97,7 +97,7 @@
 			<property name="StatLife" value="30" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Water=1" />
+			<property name="MageSchoolCost" value="Water=1, S-Pirate=1, S-Song=1" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Siren&apos;s Call: As a Psychic Song quick spell the Siren may pay 1 mana to place her Siren&apos;s Call marker on target non-Mage creature within 2 zones. During its action phase that creature MUST move at least 1 zone closer to the Siren, if possible, and may not attack her. Return the marker at the end their Action Phase. Friendly aquatic creatures also gain Melee +2.&#xD;&#xA;Fermata: The Siren may extend an expiring song she controls by paying mana equal to its Level and placing a Fermata marker on it. The Siren may only have two songs affected by Fermata markers at a time, and each song may only be extended a maximum of up to 2 rounds.&#xD;&#xA;Amphibious: The Siren gains Regenerate 1 while in zones with aquatic terrain attached." />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />

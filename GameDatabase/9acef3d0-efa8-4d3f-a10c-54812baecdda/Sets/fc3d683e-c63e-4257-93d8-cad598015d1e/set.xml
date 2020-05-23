@@ -48,7 +48,7 @@
 			<property name="StatLife" value="30" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Nature=1, Fire=3, War=3" />
+			<property name="MageSchoolCost" value="Nature=1, L-1-Water=1, Fire=3, War=3" />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />

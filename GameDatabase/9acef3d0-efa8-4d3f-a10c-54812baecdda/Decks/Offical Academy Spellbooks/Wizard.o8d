@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="0b441073-8bbf-4957-9094-9ff101fb37cf">Wizard</card>
+    <card qty="1" id="0cc1de2e-39af-4c34-a9a4-8985eb3ee7ef">Academy Wizard Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="1" id="10cfffeb-67bb-44a0-bd8b-683d8153f651">Arcane Missiles</card>
+    <card qty="1" id="12e89ddc-9741-41ee-9f20-09cc28b4f645">Forked Lightning</card>
+    <card qty="2" id="1a72b4b5-80a9-44bb-a697-e71969ff2dfe">Lightning Jolt</card>
+    <card qty="1" id="1d3991af-0717-4abb-880c-d815ad95714b">Piercing Thunderstrike</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="1" id="35b3487b-57d4-45ed-b9aa-0cce08d7d143">Azurean Genie</card>
+    <card qty="2" id="38ae548d-a4cd-425c-b832-38b2b3280aca">Jade Gremlin</card>
+    <card qty="1" id="3acb4b02-c623-4d77-877d-7ed1956e9a8a">Lightning Raptor</card>
+    <card qty="2" id="3cc08dca-587c-4e03-8fd6-102a8eba319f">Mana Worm</card>
+    <card qty="1" id="3dd6b5e7-4bf8-4e3d-9cff-97eb4f449f04">Paralyzing Basilisk</card>
+    <card qty="1" id="425b0393-78fe-44a4-a5a3-c1d5e954db39">Redcrested Cockatrice</card>
+    <card qty="1" id="456d1907-3949-4503-a8f5-cd85e37375f9">Sailfin Hydra</card>
+    <card qty="1" id="472d458d-7714-4e5d-a49e-f1483f537b78">Satyr Gruff</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="1" id="62078586-0956-442b-a882-67b0cb4afefb">Dodge</card>
+    <card qty="1" id="63e66932-56af-43ad-b583-5395295ef9c9">Exile</card>
+    <card qty="2" id="68f156d5-7032-4e6f-a8fc-001733cbf2b7">Giant Size</card>
+    <card qty="1" id="7ccd0a36-8ff6-4ca0-8d6d-5b931a7730af">Minor Essence Drain</card>
+    <card qty="2" id="8829bf8a-b4a5-42af-ae44-2d24ce3779c1">Shrink</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="b9416c3f-de96-49e0-9c8f-7e818db2fc42">Rod of the Arcanum</card>
+    <card qty="1" id="bc4fac9b-cfb9-448e-a0ac-57e95092c02b">Sistarran Robes</card>
+    <card qty="1" id="bc8cfb9b-8a8a-44bc-b2e3-9bb1209e9f07">Wispwillow Amulet</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="1" id="d3c9c5b0-6b2d-4261-831a-16a29af7c7da">Crumble</card>
+    <card qty="1" id="dff45020-4e2c-4fe1-87a5-52741a6c2794">Disperse</card>
+    <card qty="1" id="ec92f65e-43e2-4aa2-bae4-92ae341f5b5f">Mend</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>

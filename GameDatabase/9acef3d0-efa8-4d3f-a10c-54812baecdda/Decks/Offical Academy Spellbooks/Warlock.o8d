@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="9acef3d0-efa8-4d3f-a10c-54812baecdda">
+  <section name="Mage" shared="False">
+    <card qty="1" id="0f49d44a-65c9-4603-9468-202bfbe537f3">Warlock</card>
+    <card qty="1" id="9c9102c9-60f3-4f55-8825-15a2774d5ca9">Academy Warlock Stats</card>
+  </section>
+  <section name="Attack" shared="False">
+    <card qty="3" id="14497585-2895-4283-8d39-5dcfb597e193">Firestream</card>
+    <card qty="1" id="1670867b-9542-43cc-8afa-ffd676b65432">Twin Fireball</card>
+  </section>
+  <section name="Conjuration" shared="False" />
+  <section name="Creature" shared="False">
+    <card qty="1" id="228350cb-8201-4e11-89dd-8f0c7557bee3">Afflicted Demon</card>
+    <card qty="2" id="24123c10-4e5b-4495-bf31-1088b1b69500">Combustion Demon</card>
+    <card qty="1" id="25fa30e2-24ba-4112-8e18-8d4fa91a61b9">Drakas, Imp Overlord</card>
+    <card qty="1" id="2a4f0cbc-6a64-4a68-bb3f-bd8ddd023752">Khali-Gar, Blade Maiden</card>
+    <card qty="1" id="291e55ab-d166-4247-b909-f982e9f2ea48">Kharne, Horned Demon</card>
+    <card qty="1" id="20e90477-12b6-4d58-b351-debd82f4ea54">Mhegedden, Sealed Demon</card>
+    <card qty="1" id="2f6bec45-0156-40cc-bf56-1c15963d7f45">Sanguine Hunter</card>
+  </section>
+  <section name="Enchantment" shared="False">
+    <card qty="2" id="40ac8844-126a-4535-821f-7ecbe71242bb">Curse Item</card>
+    <card qty="2" id="4575a8a5-1c7d-4859-80c8-dca61e151e4d">Demonic Link</card>
+    <card qty="1" id="47b76fd0-6757-4431-b77e-1c1f4d1d7abe">Gator Toughness</card>
+  </section>
+  <section name="Equipment" shared="False">
+    <card qty="1" id="702fb3ef-d0e1-47ce-b553-ff0c5e1d442a">Burning Cuirass</card>
+    <card qty="2" id="742e455b-d551-4458-b9e7-490762f1188f">Demonhide Mask</card>
+    <card qty="1" id="749e80c0-00b1-4e6e-b09c-cbdb97837d3c">Eye of Bael</card>
+    <card qty="1" id="76d366d5-9102-47ed-a4eb-cded80b83031">Hellstar</card>
+  </section>
+  <section name="Incantation" shared="False">
+    <card qty="2" id="e4c97004-8be5-4a2c-81b7-2b90863f7209">Disperse</card>
+    <card qty="1" id="e9127dd1-742f-4d76-860c-4dbd84c1e43c">Sneak Attack</card>
+  </section>
+  <notes><![CDATA[]]></notes>
+</deck>
