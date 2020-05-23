@@ -465,8 +465,8 @@
 			<property name="Text" value="When Satyr Gruff attacks and deals 4 or more damage to an enemy creature, place a Stagger condition on that creature." />
 			<property name="CardID" value="MWA01C15" />
 		</card>
-		<card id="4815ff77-a388-47fd-a456-0ddcfbef326c"  name="Slavörg, Fang of the First Moon" >
-			<property name="Nickname" value="Slavörg" />
+		<card id="4815ff77-a388-47fd-a456-0ddcfbef326c"  name="Slavorg, Fang of the First Moon" >
+			<property name="Nickname" value="Slavorg" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Animal, Cat" />
 			<property name="Cost" value="15" />

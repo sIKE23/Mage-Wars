@@ -6,7 +6,7 @@
 	octgnVersion="3.1.255.0"
 	scriptVersion ="3.1.0.2"
 
-	version="2.1.24.0"
+	version="2.1.31.0"
 
 	markersize="12"
 	tags="Mage Wars"
@@ -210,7 +210,6 @@
 			<cardaction menu="Add Stuck Marker" default="False" shortcut="Ctrl+K" execute="addStuck"/>
 			<cardaction menu="Add Melee +1 Marker" default="False" shortcut="Alt+M" execute="addMelee"/>
 			<cardaction menu="Add Ranged +1 Marker" default="False" shortcut="Alt+N" execute="addRanged"/>
-			<!--<cardaction menu="Add Retribution Token" default="False" shortcut="Ctrl+N" execute="addRetribution"/>-->
 			<cardaction menu="Add Sleep Marker" default="False" shortcut="Ctrl+P" execute="addSleep"/>
 			<cardaction menu="Add Rot Marker" default="False" shortcut="Alt+R" execute="addRot"/>
 			<cardaction menu="Add Slam Marker" default="False" shortcut="Ctrl+S" execute="addSlam"/>
@@ -242,7 +241,6 @@
 			<cardaction menu="Remove Stuck Marker" default="False" shortcut="Ctrl+Shift+K" execute="subStuck"/>
 			<cardaction menu="Remove Melee +1 Marker" default="False" shortcut="Ctrl+Alt+M" execute="subMelee"/>
 			<cardaction menu="Remove Ranged +1 Marker" default="False" shortcut="Ctrl+Alt+N" execute="subRanged"/>
-			<!--<cardaction menu="Remove Retribution Token" default="False" shortcut="Ctrl+Shift+N" execute="subRetribution"/>-->
 			<cardaction menu="Remove Rot Marker" default="False" shortcut="Ctrl+Alt+R" execute="subRot"/>
 			<cardaction menu="Remove Slam Marker" default="False" shortcut="Ctrl+Shift+S" execute="subSlam"/>
 			<cardaction menu="Remove Sleep Marker" default="False" shortcut="Ctrl+Shift+P" execute="subSleep"/>
@@ -283,11 +281,11 @@
 		<counter name="Life" default="0" reset="True" icon="Images/Counters/life.png"/>
 		<globalvariable name="MyColor" value=""/>
 		<globalvariable name="MageDict" value="{'MageRevealed' : 'False', 'MageID' : 000000, 'MageStatsID' : 00000}"/>
-		<hand name="Spellbook" visibility="me" ordered="False" icon="Images/Groups/Spellbook.png">
+		<group name="Spellbook" visibility="me" ordered="True" viewState="expanded" icon="Images/Groups/Spellbook.png">
 			<cardaction menu="Play card facedown" default="True" shortcut="Alt+P" execute="playCardFaceDown"/>
 			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications"/>
 			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
-		</hand>
+		</group>
 		<group name="Discard Pile" visibility="all" ordered="False" icon="Images/Groups/Discard.png" collapsed="False">
 		</group>
 		<group name="Obliterate Pile" visibility="all" ordered="False" icon="Images/Groups/Obliterate.png" collapsed="True">

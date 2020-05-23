@@ -254,6 +254,18 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
 			if mageDict['MageRevealed'] == 'True': notify("{} readies Red Action Marker".format(card.Name))
+		elif card.markers[ActionRed] == 1 and card.markers[Slam]>0:
+			card.markers[ActionRed] = 0
+			card.markers[ActionRedUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker and the slam turns to a daze".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker and the slam remains unchanged".format(card.Name))
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
@@ -263,6 +275,18 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
 			if mageDict['MageRevealed'] == 'True': notify("{} readies Blue Action Marker".format(card.Name))
+		elif card.markers[ActionBlue] == 1 and card.markers[Slam]>0:
+			card.markers[ActionBlue] = 0
+			card.markers[ActionBlueUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker and the slam turns to a daze".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker and the slam remains unchanged".format(card.Name))
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
@@ -272,6 +296,18 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
 			if mageDict['MageRevealed'] == 'True': notify("{} readies Green Action Marker".format(card.Name))
+		elif card.markers[ActionGreen] == 1 and card.markers[Slam]>0:
+			card.markers[ActionGreen] = 0
+			card.markers[ActionGreenUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker and the slam turns to a daze".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker and the slam remains unchanged".format(card.Name))
 		else:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
@@ -281,6 +317,18 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
 			if mageDict['MageRevealed'] == 'True': notify("{} readies Yellow Action Marker".format(card.Name))
+		elif card.markers[ActionYellow] == 1 and card.markers[Slam]>0:
+			card.markers[ActionYellow] = 0
+			card.markers[ActionYellowUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam turns to a daze".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam remains unchanged".format(card.Name))
 		else:
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
@@ -290,6 +338,18 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionPurple] = 1
 			card.markers[ActionPurpleUsed] = 0
 			if mageDict['MageRevealed'] == 'True': notify("{} readies Purple Action Marker".format(card.Name))
+		elif card.markers[ActionPurple] == 1 and card.markers[Slam]>0:
+			card.markers[ActionPurple] = 0
+			card.markers[ActionPurpleUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker and the slam turns to a daze".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker and the slam remains unchanged".format(card.Name))
 		else:
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
@@ -299,6 +359,18 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGrey] = 1
 			card.markers[ActionGreyUsed] = 0
 			if mageDict['MageRevealed'] == 'True': notify("{} readies Grey Action Marker".format(card.Name))
+		elif card.markers[ActionGrey] == 1 and card.markers[Slam]>0:
+			card.markers[ActionGrey] = 0
+			card.markers[ActionGreyUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker and the slam turns to a daze".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker and the slam remains unchanged".format(card.Name))
 		else:
 			card.markers[ActionGrey] = 0
 			card.markers[ActionGreyUsed] = 1
@@ -558,6 +630,10 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[Ready] = 1
 		if "Packleader's Cowl" == card.Name:
 			card.markers[Guard] = 1
+		if "Ehren, Enduring Paladin" == card.Name:
+			card.markers[Damage] = 7
+		if "Symbiotic Orb" == card.Name:
+			card.markers[Ready] = 1
 	# if card is already face up and doesnt have any card alternates
 	elif card.isFaceUp and cardAlts == 1:
 		notify("{} turns {} face down.".format(me, card.Name))
@@ -732,7 +808,7 @@ def createCard(group,x=0,y=0):
 		if guid and quantity:
 				cards = ([table.create(guid,0,0,1,True)] if quantity == 1 else table.create(guid,0,0,quantity,True))
 				for card in cards:
-						card.moveTo(me.hand)
+						card.moveTo(me.piles["spellbook"])
 						if not debugMode:
 							notify("*** ILLEGAL *** - Spellbook is no longer valid")
 						notify("A card was created and was placed into {}'s spellbook.".format(me))

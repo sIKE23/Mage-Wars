@@ -41,7 +41,7 @@ def nextPhaseArena():
 				if card.markers[Disable] and card.controller.name == p.name: remoteCall(p, "resolveDisable",[card])
 				if 'Dissipate' in traits and card.controller.name == p.name: remoteCall(p, "resolveDissipate", [traits, card])
 				if 'Madrigal' in traits and card.controller.name == p.name: remoteCall(p, "resolveMadrigal", [traits, card])
-				if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
+				if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits or "Consecrated Ground Damage" in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
 				if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller.name == p.name and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
 				if card.Name in ["Ghoul Rot", "Curse of Decay", "Arcane Corruption", "Force Crush"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveDotEnchantment", [card]) 
 				if card.Name == "Curse Item" and card.controller.name != p.name and card.isFaceUp: 

@@ -121,7 +121,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="name=Projected Leg Sweep;range type=Melee;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
-			<property name="AttackBar" value="[Melee] [Dice=3] [d12] [7+= Stagger] [Ethereal]" />
+			<property name="AttackBar" value="[Melee] [Dice=3] [d12] [7+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If this attack is successful, you may pay 2 Ki. If you do, gain +6 to the effect roll." />
 			<property name="CardID" value="MWAMKA05" />
@@ -139,7 +139,7 @@
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="name=Projected Palm;range type=Ranged;range=(0,0);dice=3;effects={7: ['Stagger']};Ethereal=True" />
-			<property name="AttackBar" value="[Ranged] [Dice=3] [d12] [7+= Stagger] [Ethereal]" />
+			<property name="AttackBar" value="[Ranged] [Dice=3] [d12] [7+ = Stagger] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When this attack is declared, you may pay 2 Ki. If you do, this attack gains the Unavoidable trait." />
 			<property name="CardID" value="MWAMKA06" />
