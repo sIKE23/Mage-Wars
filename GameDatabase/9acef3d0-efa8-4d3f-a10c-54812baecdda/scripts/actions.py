@@ -67,7 +67,7 @@ def updateTimer(endTime,notifications):
 				setGlobalVariable("timerIsRunning",str(False))
 
 def playerDone(group, x=0, y=0):
-	notify("{} is done".format(me.name))
+	notify("{} is done\n".format(me.name))
 
 def useUntargetedAbility(attacker, x=0, y=0):
 		mute()
@@ -90,7 +90,7 @@ def flipCoin(group, x = 0, y = 0):
 def createVineMarker(group, x=0, y=0):
 	mute()
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0", x, y)
-	notify("{} creates a Green Vine Marker.".format(me))
+	notify("{} creates a Green Vine Marker.\n".format(me))
 
 def createCompassRose(group, x=0, y=0):
 	table.create("7ff8ed79-159c-46e5-9e87-649b3269a931", 450, -40 )
@@ -105,7 +105,7 @@ def concede(group=table, x = 0, y = 0):
 		for card in table:
 			if "Mage" in card.Subtype and card.controller == me:
 				card.orientation = 1
-				notify("{} has conceded the game".format(me))
+				notify("{} has conceded the game\n".format(me))
 			playersState = eval(getGlobalVariable("PlayersState"))
 			if not me._id in playersState:
 				playersState.append(me._id)
@@ -115,15 +115,15 @@ def concede(group=table, x = 0, y = 0):
 			setGlobalVariable("PlayersState", str(playersState))
 #		reportGame('Conceded')
 	else:
-		notify("{} was about to concede the game, but thought better of it...".format(me))
+		notify("{} was about to concede the game, but thought better of it...\n".format(me))
 
 def toggleDebug(group, x=0, y=0):
 	global debugMode
 	debugMode = not debugMode
 	if debugMode:
-		notify("{} turns on debug".format(me))
+		notify("{} turns on debug\n".format(me))
 	else:
-		notify("{} turns off debug".format(me))
+		notify("{} turns off debug\n".format(me))
 
 def nextPhase(group,x=0,y=0):
 	mute()
@@ -131,7 +131,7 @@ def nextPhase(group,x=0,y=0):
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
 	gameMode = getGlobalVariable("GameMode")
 	if debugMode:	#debuggin'
-		if gameMode == "Arena" or "Domination": nextPhaseArena()
+		if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
 		elif gameMode == "Academy": nextPhaseAcademy()
 		return True
 	else:
@@ -143,14 +143,14 @@ def nextPhase(group,x=0,y=0):
 		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if currentPhase()[1]<5:
-				notify("{} is ready to move on with the {}".format(me.name,currentPhase()[0]))
+				notify("{} is ready to move on with the {}\n".format(me.name,currentPhase()[0]))
 			else:
-				notify("{} is done with the {}".format(me.name,currentPhase()[0]))
+				notify("{} is done with the {}\n".format(me.name,currentPhase()[0]))
 
 			return False
 		else:
 			setGlobalVariable("DoneWithPhase", "")
-			if gameMode == "Arena" or "Domination": nextPhaseArena()
+			if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
 			elif gameMode == "Academy": nextPhaseAcademy()
 			#nextPhaseArena()
 			return True
@@ -200,7 +200,7 @@ def addDamage(card, x = 0,y = 0):
 			me.Damage += 1
 	else:
 			card.markers[Damage] += 1
-			notify("{} adds {} damage to {}".format(me, '1', card.Name))
+			notify("{} adds {} damage to {}\n".format(me, '1', card.Name))
 
 def addDamageAmount(card,amount = 1):
 	mute()
@@ -225,6 +225,7 @@ def subDamage(card, x = 0, y = 0):
 			me.Damage -= 1
 	else:
 			card.markers[Damage] -= 1
+			notify("{} removes {} damage from {}\n".format(me, '1', card.Name))
 
 def subDamageAmount(card,amount = 1):
 	mute()
@@ -238,7 +239,7 @@ def clearTokens(card, x = 0, y = 0):
 	mute()
 	for tokenType in card.markers:
 		card.markers[tokenType] = 0
-	notify("{} removes all tokens from {}".format(me, card.Name))
+	notify("{} removes all tokens from {}\n".format(me, card.Name))
 
 ##########################     Toggle Actions/Tokens     ##############################
 
@@ -253,7 +254,7 @@ def toggleAction(card, x=0, y=0):
 		if card.markers[ActionRedUsed] > 0:
 			card.markers[ActionRed] = 1
 			card.markers[ActionRedUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Red Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Red Action Marker\n".format(card.Name))
 		elif card.markers[ActionRed] == 1 and card.markers[Slam]>0:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
@@ -263,18 +264,18 @@ def toggleAction(card, x=0, y=0):
 			if choice == 1:
 				card.markers[Slam] = 0
 				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker and the slam turns to a daze".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker and the slam turns to a daze\n".format(card.Name))
 			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker and the slam remains unchanged".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker and the slam remains unchanged\n".format(card.Name))
 		else:
 			card.markers[ActionRed] = 0
 			card.markers[ActionRedUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Red Action Marker\n".format(card.Name))
 	elif myColor == 2: # Blue
 		if card.markers[ActionBlueUsed] > 0:
 			card.markers[ActionBlue] = 1
 			card.markers[ActionBlueUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Blue Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Blue Action Marker\n".format(card.Name))
 		elif card.markers[ActionBlue] == 1 and card.markers[Slam]>0:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
@@ -284,18 +285,18 @@ def toggleAction(card, x=0, y=0):
 			if choice == 1:
 				card.markers[Slam] = 0
 				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker and the slam turns to a daze".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker and the slam turns to a daze\n".format(card.Name))
 			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker and the slam remains unchanged".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker and the slam remains unchanged\n".format(card.Name))
 		else:
 			card.markers[ActionBlue] = 0
 			card.markers[ActionBlueUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Blue Action Marker\n".format(card.Name))
 	elif myColor == 3: #Green
 		if card.markers[ActionGreenUsed] > 0:
 			card.markers[ActionGreen] = 1
 			card.markers[ActionGreenUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Green Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Green Action Marker\n".format(card.Name))
 		elif card.markers[ActionGreen] == 1 and card.markers[Slam]>0:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
@@ -305,18 +306,18 @@ def toggleAction(card, x=0, y=0):
 			if choice == 1:
 				card.markers[Slam] = 0
 				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker and the slam turns to a daze".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker and the slam turns to a daze\n".format(card.Name))
 			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker and the slam remains unchanged".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker and the slam remains unchanged\n".format(card.Name))
 		else:
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker\n".format(card.Name))
 	elif myColor == 4: #Yellow
 		if card.markers[ActionYellowUsed] > 0:
 			card.markers[ActionYellow] = 1
 			card.markers[ActionYellowUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Yellow Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Yellow Action Marker\n".format(card.Name))
 		elif card.markers[ActionYellow] == 1 and card.markers[Slam]>0:
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
@@ -326,18 +327,18 @@ def toggleAction(card, x=0, y=0):
 			if choice == 1:
 				card.markers[Slam] = 0
 				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam turns to a daze".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam turns to a daze\n".format(card.Name))
 			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam remains unchanged".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam remains unchanged\n".format(card.Name))
 		else:
 			card.markers[ActionYellow] = 0
 			card.markers[ActionYellowUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker\n".format(card.Name))
 	elif myColor == 5: #Purple
 		if card.markers[ActionPurpleUsed] > 0:
 			card.markers[ActionPurple] = 1
 			card.markers[ActionPurpleUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Purple Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Purple Action Marker\n".format(card.Name))
 		elif card.markers[ActionPurple] == 1 and card.markers[Slam]>0:
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
@@ -347,18 +348,18 @@ def toggleAction(card, x=0, y=0):
 			if choice == 1:
 				card.markers[Slam] = 0
 				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker and the slam turns to a daze".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker and the slam turns to a daze\n".format(card.Name))
 			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker and the slam remains unchanged".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker and the slam remains unchanged\n".format(card.Name))
 		else:
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker\n".format(card.Name))
 	elif myColor == 6: #Grey
 		if card.markers[ActionGreyUsed] > 0:
 			card.markers[ActionGrey] = 1
 			card.markers[ActionGreyUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Grey Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Grey Action Marker\n".format(card.Name))
 		elif card.markers[ActionGrey] == 1 and card.markers[Slam]>0:
 			card.markers[ActionGrey] = 0
 			card.markers[ActionGreyUsed] = 1
@@ -368,13 +369,13 @@ def toggleAction(card, x=0, y=0):
 			if choice == 1:
 				card.markers[Slam] = 0
 				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker and the slam turns to a daze".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker and the slam turns to a daze\n".format(card.Name))
 			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker and the slam remains unchanged".format(card.Name))
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker and the slam remains unchanged\n".format(card.Name))
 		else:
 			card.markers[ActionGrey] = 0
 			card.markers[ActionGreyUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker\n".format(card.Name))
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
@@ -382,11 +383,11 @@ def toggleDeflect(card, x=0, y=0):
 	if card.markers[DeflectR] > 0:
 		card.markers[DeflectR] = 0
 		card.markers[DeflectU] = 1
-		notify("{} uses deflect".format(card.Name))
+		notify("{} uses deflect\n".format(card.Name))
 	else:
 		card.markers[DeflectR] = 1
 		card.markers[DeflectU] = 0
-		notify("{} readies deflect".format(card.Name))
+		notify("{} readies deflect\n".format(card.Name))
 
 def toggleGatetoHell(card, x=0, y=0):
 	mute()
@@ -411,11 +412,11 @@ def toggleInvisible(card, x=0, y=0):
 	if card.markers[Invisible] > 0:
 		card.markers[Invisible] = 0
 		card.markers[Visible] = 1
-		notify("{} becomes visible".format(card.Name))
+		notify("{} becomes visible\n".format(card.Name))
 	else:
 		card.markers[Invisible] = 1
 		card.markers[Visible] = 0
-		notify("{} becomes invisible".format(card.Name))
+		notify("{} becomes invisible\n".format(card.Name))
 
 def toggleReady(card, x=0, y=0):
 	mute()
@@ -423,11 +424,11 @@ def toggleReady(card, x=0, y=0):
 	if card.markers[Ready] > 0:
 		card.markers[Ready] = 0
 		card.markers[Used] = 1
-		notify("{} spends the Ready Marker on {}".format(me, card.Name))
+		notify("{} spends the Ready Marker on {}\n".format(me, card.Name))
 	else:
 		card.markers[Ready] = 1
 		card.markers[Used] = 0
-		notify("{} readies the Ready Marker on {}".format(me, card.Name))
+		notify("{} readies the Ready Marker on {}\n".format(me, card.Name))
 
 def toggleReadyII(card, x=0, y=0):
 	mute()
@@ -435,11 +436,11 @@ def toggleReadyII(card, x=0, y=0):
 	if card.markers[ReadyII] > 0:
 		card.markers[ReadyII] = 0
 		card.markers[UsedII] = 1
-		notify("{} spends the Ready Marker II on {}".format(me, card.Name))
+		notify("{} spends the Ready Marker II on {}\n".format(me, card.Name))
 	else:
 		card.markers[ReadyII] = 1
 		card.markers[UsedII] = 0
-		notify("{} readies the Ready Marker II on {}".format(me, card.Name))
+		notify("{} readies the Ready Marker II on {}\n".format(me, card.Name))
 
 def toggleQuick(card, x=0, y=0):
 	mute()
@@ -448,11 +449,11 @@ def toggleQuick(card, x=0, y=0):
 	if card.markers[Quick] > 0:
 		card.markers[Quick] = 0
 		card.markers[QuickBack] = 1
-		if mageDict['MageRevealed'] == 'True': notify("{} spends Quickcast action".format(card.Name))
+		if mageDict['MageRevealed'] == 'True': notify("{} spends Quickcast action\n".format(card.Name))
 	else:
 		card.markers[Quick] = 1
 		card.markers[QuickBack] = 0
-		if mageDict['MageRevealed'] == 'True': notify("{} readies Quickcast Marker".format(card.Name))
+		if mageDict['MageRevealed'] == 'True': notify("{} readies Quickcast Marker\n".format(card.Name))
 			
 def toggleFermata(card, x=0, y=0):
 	mute()
@@ -464,7 +465,7 @@ def toggleFermata(card, x=0, y=0):
 	elif card.markers[FermataGreen1] > 0:
 		card.markers[FermataGreen1] = 0
 		card.markers[FermataGreen2] = 1	
-	if mageDict['MageRevealed'] == 'True': notify("{} has decided to extend the song for a second round!".format(card.Name))
+	if mageDict['MageRevealed'] == 'True': notify("{} has decided to extend the song for a second round!\n".format(card.Name))
 
 def toggleVoltaric(card, x=0, y=0):
 	mute()
@@ -472,17 +473,17 @@ def toggleVoltaric(card, x=0, y=0):
 	if card.markers[VoltaricON] > 0:
 		card.markers[VoltaricON] = 0
 		card.markers[VoltaricOFF] = 1
-		notify("{} disables Voltaric shield".format(card.Name))
+		notify("{} disables Voltaric shield\n".format(card.Name))
 	else:
 		if askChoice("Do you want to enable your Voltaric Shield by paying 2 mana?",["Yes","No"],["#171e78","#de2827"]) == 1:
 			if me.Mana < 2:
-				notify("{} has insufficient mana in pool".format(me))
+				notify("{} has insufficient mana in pool\n".format(me))
 				return
 			me.Mana -= 2
 			card.markers[VoltaricON] = 1
 			card.markers[VoltaricOFF] = 0
-			notify("{}  spends two mana to enable his Voltaric shield".format(me))
-		else: notify("{} chose not to enable his Voltaric shield".format(me))
+			notify("{}  spends two mana to enable his Voltaric shield\n".format(me))
+		else: notify("{} chose not to enable his Voltaric shield\n".format(me))
 
 ############################################################################
 ######################		Other  Actions		################################
@@ -494,9 +495,9 @@ def rotateCard(card, x = 0, y = 0):
 	if card.controller == me:
 		card.orientation = (card.orientation + 1) % 4
 		if card.isFaceUp:
-			notify("{} Rotates {}".format(me, card.Name))
+			notify("{} Rotates {}\n".format(me, card.Name))
 		else:
-			notify("{} Rotates a card".format(me))
+			notify("{} Rotates a card\n".format(me))
 
 def flipcard(card, x = 0, y = 0):
 	mute()
@@ -508,25 +509,25 @@ def flipcard(card, x = 0, y = 0):
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == '':
 			card.alternate = "B"
-			notify("{} flips the Vine Marker to use its Black side.".format(me))
+			notify("{} flips the Vine Marker to use its Black side.\n".format(me))
 		else:
 			card.alternate = ""
-			notify("{} flips the Vine Marker to use its Green side.".format(me))
+			notify("{} flips the Vine Marker to use its Green side.\n".format(me))
 		return
 	elif "Alt Zone" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.alternate = ""
 		else:
 			card.alternate = "B"
-		notify("{} flips Zone Marker.".format(me))
+		notify("{} flips Zone Marker.\n".format(me))
 		return
 	elif "V'Tar Orb" in card.Name and card.controller == me:
 		if card.alternate == "B":
 			card.alternate = ""
-			notify("{} flips V'Tar Orb Off".format(me))
+			notify("{} flips V'Tar Orb Off\n".format(me))
 		else:
 			card.alternate = "B"
-			notify("{} flips V'Tar Orb On.".format(me))
+			notify("{} flips V'Tar Orb On.\n".format(me))
 		return
 	elif "Player Token" in card.Name:
 		nextPlayer = getNextPlayerNum()
@@ -550,7 +551,7 @@ def flipcard(card, x = 0, y = 0):
 			toggleAction(card) #Mages always start with an active action marker
 			toggleQuick(card)
 			if mageDict["MageRevealed"] == "False": mageSetup()
-			if "Wizard" in card.Name and int(card.Level) >4:
+			if ("Wizard" in card.Name or "Wizard - Playtest" in card.Name) and int(card.Level) >4:
 					card.markers[VoltaricOFF] = 1
 			if "Forcemaster" == card.Name and int(card.Level) >4:
 					card.markers[DeflectR] = 1
@@ -579,12 +580,12 @@ def flipcard(card, x = 0, y = 0):
 		if "Paladin Stats" == card.Name:
 					card.markers[DivineChallenge] = 1
 		if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
-			notify("{} increases the Channeling stat by 1 as a result of {} being revealed".format(me, card))
+			notify("{} increases the Channeling stat by 1 as a result of {} being revealed\n".format(me, card))
 			me.Channeling += 1
 		if "Harmonize" == card.Name and card.controller == me and isAttached(card) and card.isFaceUp == True:
 			magecard = getAttachTarget(card)
 			if magecard.Subtype == "Mage":
-				notify("{} increases the Channeling stat by 1 as a result of {} being revealed".format(me, card))
+				notify("{} increases the Channeling stat by 1 as a result of {} being revealed\n".format(me, card))
 				me.Channeling += 1
 		if "Invisible Stalker" == card.Name:
 				card.markers[Invisible] = 1
@@ -634,9 +635,11 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[Damage] = 7
 		if "Symbiotic Orb" == card.Name:
 			card.markers[Ready] = 1
+		if "Living Armor" in card.Name:
+			card.markers[Armor] = 2
 	# if card is already face up and doesnt have any card alternates
 	elif card.isFaceUp and cardAlts == 1:
-		notify("{} turns {} face down.".format(me, card.Name))
+		notify("{} turns {} face down.\n".format(me, card.Name))
 		for marker in card.markers: card.markers[marker] = 0
 		card.isFaceUp = False
 		card.peek()
@@ -645,15 +648,15 @@ def flipcard(card, x = 0, y = 0):
 		currentCardAlt = card.alternate
 		if currentCardAlt == "":
 			card.alternate = "2"
-			if "Mage" in card.Subtype: notify("{} has decided to play with the Alternative Art version of the {}.".format(me, card))
-			else: notify("{} flips {} to an Alternate Art version of the card.".format(me, card)) 
+			if "Mage" in card.Subtype: notify("{} has decided to play with the Alternative Art version of the {}.\n".format(me, card))
+			else: notify("{} flips {} to an Alternate Art version of the card.\n".format(me, card)) 
 	 	if currentCardAlt != "":
 			if int(currentCardAlt) < cardAlts:
 				card.alternate = str(int(currentCardAlt) + 1)
-				if "Mage" in card.Subtype: notify("{} has decided to play with the Standard Art version of the {}.".format(me, card))
-				else: notify("{} flips {} to an Alternate Art version of the card.".format(me, card))
+				if "Mage" in card.Subtype: notify("{} has decided to play with the Standard Art version of the {}.\n".format(me, card))
+				else: notify("{} flips {} to an Alternate Art version of the card.\n".format(me, card))
 			elif int(currentCardAlt) == cardAlts:
-				notify("{} turns {} face down.".format(me, card.Name))
+				notify("{} turns {} face down.\n".format(me, card.Name))
 				card.alternate = ""
 				for marker in card.markers: card.markers[marker] = 0
 				card.isFaceUp = False
@@ -688,22 +691,21 @@ def mageSetup():
 	mageDict["MageRevealed"] = "True"
 	me.setGlobalVariable("MageDict",str(mageDict))
 	# here is where issue #360 should be called from.....and replace the line below.
-	notify("{} enters the Arena! - Channeling is set to {} and Mana is set to {} and Life set to {}".format(Card(mageID),me.Channeling,me.Mana,me.Life))
+	notify("{} enters the Arena! - Channeling is set to {} and Mana is set to {} and Life set to {}\n".format(Card(mageID),me.Channeling,me.Mana,me.Life))
 	mageRevealMessage(mage)
 
 def discard(card, x=0, y=0):
 	mute()
-	notify("Card Name: {}".format(card.name))
 	if card.controller != me:
 		whisper("{} does not control {} - discard cancelled".format(me, card))
 		return
 	if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
-			notify("{} decreases the Channeling stat by 1 because {} is being discarded".format(me, card))
+			notify("{} decreases the Channeling stat by 1 because {} is being discarded\n".format(me, card))
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
 		if "Mage" in card.Subtype:
-			notify("{} decreases the Channeling stat by 1 as a result of {} being discarded".format(me, card))
+			notify("{} decreases the Channeling stat by 1 as a result of {} being discarded\n".format(me, card))
 			me.Channeling -= 1
 	elif card.special == "Scenario":
 		obliterate(card)
@@ -711,7 +713,7 @@ def discard(card, x=0, y=0):
 	card.isFaceUp = True
 	detach(card)
 	card.moveTo(me.piles['Discard Pile'])
-	notify("{} discards {}".format(me, card))
+	notify("{} discards {}\n".format(me, card))
 
 def obliterate(card, x=0, y=0):
 	mute()
@@ -719,15 +721,15 @@ def obliterate(card, x=0, y=0):
 		whisper("{} does not control {} - card obliteration cancelled".format(me, card))
 		return
 	if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
-			notify("{} decreases the Channeling stat by 1 because {} has been obliterated".format(me, card))
+			notify("{} decreases the Channeling stat by 1 because {} has been obliterated\n".format(me, card))
 			me.Channeling -= 1
 	elif "Harmonize" == card.Name and card.controller == me:
 		discardedCard = getAttachTarget(card)
 		if magecard.Subtype == "Mage":
-			notify("{} decreases the Channeling stat by 1 because {} has been obliterated".format(me, card))
+			notify("{} decreases the Channeling stat by 1 because {} has been obliterated\n".format(me, card))
 			me.Channeling -= 1
 	else:
-			notify("{} obliterates {}".format(me, card))
+			notify("{} obliterates {}\n".format(me, card))
 	card.isFaceUp = True
 	detach(card)
 	card.moveTo(me.piles['Obliterate Pile'])
@@ -760,9 +762,9 @@ def addToken(card, tokenType):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative, Phase, and Vine Markers
 	card.markers[tokenType] += 1
 	if card.isFaceUp:
-		notify("{} added to {}".format(tokenType[0], card.Name))
+		notify("{} added to {}\n".format(tokenType[0], card.Name))
 	else:
-		notify("{} added to face-down card.".format(tokenType[0]))
+		notify("{} added to face-down card.\n".format(tokenType[0]))
 
 def subToken(card, tokenType):
 	mute()
@@ -770,9 +772,9 @@ def subToken(card, tokenType):
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] -= 1
 		if card.isFaceUp:
-			notify("{} removed from {}".format(tokenType[0], card.Name))
+			notify("{} removed from {}\n".format(tokenType[0], card.Name))
 		else:
-			notify("{} removed from face-down card.".format(tokenType[0]))
+			notify("{} removed from face-down card.\n".format(tokenType[0]))
 
 def toggleToken(card, tokenType):
 	mute()
@@ -780,15 +782,15 @@ def toggleToken(card, tokenType):
 	if card.markers[tokenType] > 0:
 		card.markers[tokenType] = 0
 		if card.isFaceUp:
-			notify("{} removes a {} from {}".format(me, tokenType[0], card.Name))
+			notify("{} removes a {} from {}\n".format(me, tokenType[0], card.Name))
 		else:
-			notify("{} removed from face-down card.".format(tokenType[0]))
+			notify("{} removed from face-down card.\n".format(tokenType[0]))
 	else:
 		card.markers[tokenType] = 1
 		if card.isFaceUp:
-			notify("{} adds a {} token to {}".format(me, tokenType[0], card.Name))
+			notify("{} adds a {} token to {}\n".format(me, tokenType[0], card.Name))
 		else:
-			notify("{} added to face-down card.".format(tokenType[0]))
+			notify("{} added to face-down card.\n".format(tokenType[0]))
 
 def playCardFaceDown(card, x=0, y=0):
 	mute()
@@ -798,7 +800,7 @@ def playCardFaceDown(card, x=0, y=0):
 	moveCardToDefaultLocation(card)
 	card.peek()
 	card.highlight = myHexColor
-	notify("{} prepares a Spell from their Spellbook by placing a card face down on the table.".format(me))
+	notify("{} prepares a Spell from their Spellbook by placing a card face down on the table.\n".format(me))
 
 def createCard(group,x=0,y=0):
 		mute()
@@ -808,7 +810,7 @@ def createCard(group,x=0,y=0):
 		if guid and quantity:
 				cards = ([table.create(guid,0,0,1,True)] if quantity == 1 else table.create(guid,0,0,quantity,True))
 				for card in cards:
-						card.moveTo(me.piles["spellbook"])
+						card.moveTo(me.piles["Spellbook"])
 						if not debugMode:
-							notify("*** ILLEGAL *** - Spellbook is no longer valid")
-						notify("A card was created and was placed into {}'s spellbook.".format(me))
+							notify("*** ILLEGAL *** - Spellbook is no longer valid\n")
+						notify("A card was created and was placed into {}'s spellbook.\n".format(me))

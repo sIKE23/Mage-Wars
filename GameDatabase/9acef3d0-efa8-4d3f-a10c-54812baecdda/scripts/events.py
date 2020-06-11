@@ -79,8 +79,8 @@ def chooseGame():
 	mute()
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
 	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Mage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
-	buttonColorList = ["#de2827","#171e78"];
-	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
+	buttonColorList = ["#de2827","#171e78", "#01603e"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination", "Mage Wars Arena: Community Playtest Rules"];
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
@@ -92,10 +92,10 @@ def chooseGame():
 			setGlobalVariable("GameMode", "Domination")
 			loadMapFile()
 			break
-#		elif choice == 3:
-#			setGlobalVariable("GameMode", "Arena")
-#			setAcademyBoard()
-#			break
+		elif choice == 3:
+			setGlobalVariable("GameMode", "Playtest")
+			setArenaBoard()
+			break
 	'''	elif choice == 3:
 			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
 			setArenaBoard()

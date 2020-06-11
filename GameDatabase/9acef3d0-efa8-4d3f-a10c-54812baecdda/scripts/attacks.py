@@ -123,10 +123,10 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		atkTraits = attack.get('Traits',{})
 		if defender.name == "V'Tar Orb Off": return True
 		if not "Life" in defender.Stats: return False
-		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name and timesHasOccured("Arcane Zap",attacker.controller): return False
+		if attack["Name"] == "Arcane Zap" and ("Wizard" in attacker.Name or "Wizard - Playtest" in attacker.Name) and timesHasOccured("Arcane Zap",attacker.controller): return False
 		# AOE attacks that don't affect attacker
 		elif (attack["Name"] in
-			["Blinding Flash", "Electrify", "Ring of Fire"]
+			["Blinding Flash", "Electrify", "Ring of Fire", "Quake Stomp"]
 			and attacker == defender): return False
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
@@ -243,7 +243,7 @@ def getAttackList(card):
 												aDict['Dice'] = strength
 												appendEventList('Round',['ToLX', strength])
 												me.mana -= strength #Since maximum and mana supply are enforced,guaranteed to not be over limit
-												notify("{} spends {} mana to power the Light Blast from the Temple of Light".format(me,str(strength)))
+												notify("{} spends {} mana to power the Light Blast from the Temple of Light\n".format(me,str(strength)))
 												toggleReady(card)
 										else:
 												aDict['Dice'] = 0
@@ -305,7 +305,8 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		if attacker.name == 'Siren' and localADict.get("Tides") and ("Type" in attack.keys() and attack['Type']=="Hydro"): attack['Dice'] += 1
 		#Wildfire Imp Melee buff for attacking a Burning Object
 		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
-		#if "Wall of Fire" or "Fire Elemental" in defender.name and attack.get('Type') == 'Hydro': attack['Traits']['Ethereal'] = True
+		#Hydro Homies
+		if ("Wall of Fire" in defender.name or "Fire Elemental" in defender.name) and attack.get('Type') == 'Hydro': attack['Traits']['Ethereal'] = True
 		#Knight of the Red Helm attacking the Strongest (currently a token)
 		if defender.markers[Strongest] and attacker.Name == "Knight of the Red Helm": localADict['Melee'] = localADict.get('Melee',0) + 2
 		#Drokkar attacking Prey, currently works on anything with a grapple marker, not his specific prey
@@ -417,6 +418,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				if not atkTraits.get('Spell'):
 						attackDice -= attacker.markers[Weak]
 						attackDice -= attacker.markers[Stagger] * 2
+						if (not "Aquatic" in atkOS.traits and "Shallow Sea" in aTraitDict): attackDice -=1 #Moved this here so that it doesn't affect spell attacks. Previously, computeTraits conferred Melee -1 and Ranged -1.
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Agony" or c.Name == "Shrink")]: attackDice -= 2
 						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Tangleroot"]: attackDice -= c.markers[DissipateToken]
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Knight\'s Courage")] and defender.markers[Strongest]: 
@@ -519,7 +521,7 @@ def displayRoll(attackRoll,effectRoll):
 	dieCard.markers[effectDie] = effectRoll
 	playSoundFX('Dice')
 	time.sleep(1)
-	notify("{} rolled {} Normal Damage, {} Critical Damage, and {} on the effect die".format(me, normalDamage, criticalDamage, effectRoll))
+	notify("{} rolled {} Normal Damage, {} Critical Damage, and {} on the effect die\n".format(me, normalDamage, criticalDamage, effectRoll))
 
 def rollD6(dice):
 	mute()
@@ -532,7 +534,7 @@ def rollD6(dice):
 		roll = attackDiceBank.pop()
 		attackRoll[roll] += 1
 	#debug("Raw Attack Dice Roll results: {}".format(attackRoll))
-	notify("{} rolls {} attack dice.".format(me,count))
+	notify("{} rolls {} attack dice.\n".format(me,count))
 	return attackRoll
 
 def rollD12():
@@ -737,16 +739,16 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 				payManaChoice = askChoice("Pay 1 mana to use your innate defense?",["Yes","No"],["#01603e","#de2827"])
 				if payManaChoice == 1:
 						me.mana -= 1
-						notify("{} pays 1 mana.".format(me))
+						notify("{} pays 1 mana.\n".format(me))
 				else: return False
 		elif (defSource.Name == "Dodge" and int(defender.level) <= 2): #No need to roll dice if defender is minor for dodge
 			rememberDefenseUse(defender,defense)
-			notify("{} reflexively dodges the attack!".format(defender))
+			notify("{} reflexively dodges the attack!\n".format(defender))
 			return defense
 
 		rememberDefenseUse(defender,defense)
 		defense = computeDefense(aTraitDict,attack,dTraitDict,defense) #NOW we modify the defense
-		notify("{} attempts to avoid the attack using {}!".format(defender,
+		notify("{} attempts to avoid the attack using {}!\n".format(defender,
 																 ('its innate defense' if defSource == defender else 'its defense from {}'.format(defSource))))
 
 		damageRoll,effectRoll = rollDice(0)
@@ -762,10 +764,10 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
 				rememberAbilityUse(defSource)
 		if (effectRoll >= defense.get('Minimum',13)):
-			   notify("{} succeeds in its defense attempt! Attack avoided!".format(defender))
+			   notify("{} succeeds in its defense attempt! Attack avoided!\n".format(defender))
 			   return defense
 		else:
-			   notify("{} fails to defend itself...".format(defender))
+			   notify("{} fails to defend itself...\n".format(defender))
 			   return False
 
 ############################################################################
@@ -795,21 +797,9 @@ def initializeAttackSequence(aTraitDict,attack,dTraitDict): #Here is the defende
 				to_color = lambda x: "#009933" if x else "#ff0000"
 				choice = listQuery(menu_text,interceptor_dicts,to_text,to_color)
 				if choice:
-					notify("{} leaps in front of {} to intercept the attack!".format(Card(choice["OwnerID"]),defender))
+					notify("{} leaps in front of {} to intercept the attack!\n".format(Card(choice["OwnerID"]),defender))
 					dTraitDict = choice
 					defender = Card(choice["OwnerID"])
-		#if attack.get("RangeType") == "Melee"
-			#symb_dicts = [computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.name("Symbiotic Orb") and c.markers[Ready] = 1 and c != defender and c.controller == defender.controller]
-			#if symb_dicts:
-				#buttonColorList = ["#de2827","#171e78","#01603e"]
-				#buttonList = ["Defend using 3 Mana","Defend using dissipate","Do not defend"]
-				#choice = askChoice("{} is being targeted by {}'s {}. Would you like to use your Symbiotic Orb to defend?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
-				#if choice == 1:
-				#	notify("{} spends 3 mana and their Symbiotic Orb deflects the blow!".format(me))
-				#elif choice == 2:
-				#	notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)".format(me))
-				#else:
-				#	notify("{} chooses not to power the Symbiotic Orb for this attack".format(me))
 			#choice_options = ["Intercept with {}".format(Card(d["OwnerID"]).Name) for d in interceptor_dicts] + ["Don't intercept"]
 				#choice_colors = ["#009933" for d in interceptor_dicts] + ["#ff0000"]
 				#choice = askChoice(choice_text,choice_options,choice_colors)
@@ -847,7 +837,11 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 		for p in playersList:
 				if p != me: otherPlayer = p
 		selfAttached = revealAttachmentQuery([attacker,defender],prevStepName)
-
+		#Intent: If Akiro's is revealed after the roll dice step, allow them to reroll what they choose. Without this, if not revealed before the roll Dice step starts, the card can still be revealed but won't trigger the option
+		if selfAttached:
+			for attachedCard in getAttachments(attacker):
+				if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
+						damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,1)
 		if (otherPlayer == me) or (not selfAttached and refusedReveal):
 				aTraitDict = computeTraits(attacker)
 				dTraitDict = computeTraits(defender)
@@ -878,37 +872,37 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
 		#Check for helm of fear
 		if "Mage" in defender.Subtype and [1 for c in table if c.Name=="Helm of Fear" and c.isFaceUp and c.controller == defender.controller] and (attack.get('RangeType') == 'Melee') and (attack.get('RangeType') != 'Counterstrike') and ((not aTraitDict.get("Nonliving")) or (not "Psychic" in aTraitDict.get("Immunity",[]))):
-				notify("The Helm of Fear radiates a terrifying aura!")
+				notify("The Helm of Fear radiates a terrifying aura!\n")
 				damageRoll,effectRoll = rollDice(0)
 				if effectRoll >= 9:
-						notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!".format(attacker.name.split(',')[0]))
+						notify("{} cowers in fear under the malevolent gaze of the Warlock's Helm of Fear! It cannot attack Warlock this turn!\n".format(attacker.name.split(',')[0]))
 						return
 				else:
-						notify("{} resists the urge to panic!".format(attacker.name.split(',')[0]))
+						notify("{} resists the urge to panic!\n".format(attacker.name.split(',')[0]))
 		#Remember arcane zap
-		if attack["Name"] == "Arcane Zap" and "Wizard" in attacker.Name: rememberPlayerEvent("Arcane Zap",attacker.controller)
+		if attack["Name"] == "Arcane Zap" and ("Wizard" in attacker.Name or "Wizard - Playtest" in attacker.Name): rememberPlayerEvent("Arcane Zap",attacker.controller)
 		#If the defender is not flying, the attacker should lose the flying trait
-		if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker,attack.get('Name','a nameless attack')))
-		elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender,attack.get('Name','damage barrier'),attacker))
-		else: notify("{} attacks {} with {}!".format(attacker,defender,attack.get('Name','a nameless attack')))
+		if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!\n".format(attacker,attack.get('Name','a nameless attack')))
+		elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!\n".format(defender,attack.get('Name','damage barrier'),attacker))
+		else: notify("\n{} attacks {} with {}!\n".format(attacker,defender,attack.get('Name','a nameless attack')))
 		#Check for daze
 		if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
-				notify("{} is rolling the Effect Die to check the Dazed condition.".format(attacker))#gotta figure that gender thing of yours out.
+				notify("{} is rolling the Effect Die to check the Dazed condition.\n".format(attacker))#gotta figure that gender thing of yours out.
 				damageRoll,effectRoll = rollDice(0)
 				if effectRoll < 7:
 						for attachedCard in getAttachments(attacker):
 								if attachedCard.isFaceUp and attachedCard.Name == "Akiro's Favor" and attachedCard.markers[Ready]:
 										damageRoll,effectRoll = akirosFavor(attachedCard,damageRoll,effectRoll,2)
 								if effectRoll < 7:
-										notify("{} is so dazed that it completely misses!".format(attacker))
+										notify("{} is so dazed that it completely misses!\n".format(attacker))
 										rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 										interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
 										return
-						notify("{} is so dazed that it completely misses!".format(attacker))
+						notify("{} is so dazed that it completely misses!\n".format(attacker))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
 						return
-				else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker))
+				else: notify("Though dazed, {} manages to avoid fumbling the attack.\n".format(attacker))
 		interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
@@ -917,36 +911,36 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 		defender = Card(dTraitDict.get('OwnerID'))
 		# Cancel spell if jinxed
 		if [1 for c in getAttachments(attacker) if c.Name == "Jinx" and c.isFaceUp] and attack.get("Traits",{}).get("Spell") and attack.get("Action") == "Quick":
-				notify("Jinx!")
+				notify("Jinx!\n")
 				return
 		if not attack.get('RangeType') == 'Damage Barrier':
 				#Check for forcefield
 				if len([reduceFF(c) for c in getAttachments(defender) if c.isFaceUp and c.name == "Forcefield" and c.markers[FFToken]]):
-						notify("The forcefield absorbs the attack!".format(attacker.name.split(',')[0]))
+						notify("The forcefield absorbs the attack!\n".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for fumble
 				if len([rememberAbilityUse(c) for c in getAttachments(attacker) if c.isFaceUp and c.name == "Fumble" and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Spell") and not attack.get("Traits",{}).get("Zone Attack") and not aTraitDict.get("Unmovable"):
-						notify("{} fumbles the attack!".format(attacker.name.split(',')[0]))
+						notify("{} fumbles the attack!\n".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for block
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
+						notify("{}'s attack is blocked!\n".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for Redirect
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Redirect"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is redirected!".format(attacker.name.split(',')[0]))
+						notify("{}'s attack is redirected!\n".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for Reverse Attack
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Reverse Attack"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is magically reversed!".format(attacker.name.split(',')[0]))
+						notify("{}'s attack is magically reversed!\n".format(attacker.name.split(',')[0]))
 						attack["OriginalAttack"]["original target dict"] = dTraitDict
 						interimStep(aTraitDict,attack,aTraitDict,'Avoid Attack','rollDiceStep')
 						return
@@ -962,12 +956,12 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 								for c in getCardsInZone(getZoneContaining(defender)):
 									if c.name in ["Symbiotic Orb"]:
 										toggleReady(c) 
-								notify("{} spends 3 mana and their Symbiotic Orb deflects the blow!".format(me))
+								notify("{} spends 3 mana and their Symbiotic Orb deflects the blow!\n".format(me))
 								rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 								interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 								return
 							else:
-								notify("{} doesn't have enough mana to spend!".format(me))
+								notify("{} doesn't have enough mana to spend!\n".format(me))
 								buttonList2 = ["Defend using dissipate","Do not defend"]
 								buttonColorList2 = ["#171e78","#01603e"]
 								choice = askChoice("{} is being targeted by {}'s {}. Would you like to use your Symbiotic Orb to defend?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList2,buttonColorList2)
@@ -975,32 +969,32 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 									for c in getCardsInZone(getZoneContaining(defender)):
 										if c.name in ["Symbiotic Orb"]:
 											toggleReady(c) 
-									notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)".format(me))
+									notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)\n".format(me))
 									rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 									interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 									return
 								else:
-									notify("{} chooses not to power the Symbiotic Orb for this attack".format(me))
+									notify("{} chooses not to power the Symbiotic Orb for this attack\n".format(me))
 						elif choice == 2:
 							for c in getCardsInZone(getZoneContaining(defender)):
 								if c.name in ["Symbiotic Orb"]:
 									toggleReady(c) 
-							notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)".format(me))
+							notify("{} spends a local dissipate token and their Symbiotic Orb deflects the blow! (this has to be done manually)\n".format(me))
 							rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 							interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 							return
 						else:
-							notify("{} chooses not to power the Symbiotic Orb for this attack".format(me))
+							notify("{} chooses not to power the Symbiotic Orb for this attack\n".format(me))
 				
 				#Check for Block
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Block"] and not timesHasUsedAbility(c)]) and not attack.get("Traits",{}).get("Unavoidable"):
-						notify("{}'s attack is blocked!".format(attacker.name.split(',')[0]))
+						notify("{}'s attack is blocked!\n".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Check for Nullify
 				if len([rememberAbilityUse(c) for c in getAttachments(defender) if c.isFaceUp and c.name in ["Nullify"] and not timesHasUsedAbility(c)]) and attack.get("Traits",{}).get("Drain"):
-						notify("{}'s Spell is Nullified!".format(attacker.name.split(',')[0]))
+						notify("{}'s Spell is Nullified!\n".format(attacker.name.split(',')[0]))
 						rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
@@ -1024,7 +1018,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		defender = Card(dTraitDict.get('OwnerID'))
 		dice = attack.get('Dice',-1)
 		if dice < 0:
-				notify('Error: invalid attack format - no dice found')
+				notify('Error: invalid attack format - no dice found\n')
 				return
 		damageRoll,effectRoll = rollDice(dice) #base roll
 		# Gloves of Skill re-roll opportunity
@@ -1044,7 +1038,7 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 				damageRoll,effectRoll = akirosFavor(cName,damageRoll,effectRoll,4, minorCreature)
 		
 		if "V'Tar Orb" in defender.name and attack.get('RangeType') == 'Melee': #If V'Tar Orb is attacked and "Hit", handle Control Markers and end attack sequence
-				notify("{} scores a Hit on the V'Tar Orb!".format(attacker.name))
+				notify("{} scores a Hit on the V'Tar Orb!\n".format(attacker.name))
 				remoteCall(defender.controller, "placeControlMarker", [attacker.controller, defender])
 				buttonColorList = ["#de2827","#171e78","#01603e"]
 				buttonList = ["Gain 2 Mana","Heal 2 damage","Gain 1 Mana and Heal 1 damage"]
@@ -1052,21 +1046,21 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 						choice = askChoice("As the Orb Powered On by the touch of the {}, it released a small amount of residual energy, your Mage may choose how to use this energy as an immediate bonus!".format(attacker.name),buttonList,buttonColorList)
 						if choice == 1:
 								attacker.controller.mana += 2
-								notify("{} Gains 2 Mana from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
+								notify("{} Gains 2 Mana from a small amount of residual energy release by the V'Tar Orb when it was Powered On\n".format(attacker.controller.name))
 								break
 						elif choice == 2:
 								if attacker.controller.damage > 1:
 										attacker.controller.damage -= 2
-										notify("{} Heals 2 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
+										notify("{} Heals 2 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On\n".format(attacker.controller.name))
 								elif attacker.controller.damage == 1:
 										attacker.controller.damage -= 1
-										notify("{} Heals 1 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
+										notify("{} Heals 1 Damage from a small amount of residual energy release by the V'Tar Orb when it was Powered On\n".format(attacker.controller.name))
 								break
 						elif choice == 3:
 								attacker.controller.mana += 1
 								if attacker.controller.damage >= 1:
 										attacker.controller.damage -= 1
-										notify("{} Heals 1 Damage and Gains 1 Mana when a small amount of residual energy was released by the V'Tar Orb when it was Powered On".format(attacker.controller.name))
+										notify("{} Heals 1 Damage and Gains 1 Mana when a small amount of residual energy was released by the V'Tar Orb when it was Powered On\n".format(attacker.controller.name))
 								break
 				return
 		elif "V'Tar Orb" in defender.name and attack.get('RangeType') != 'Melee':
@@ -1079,22 +1073,30 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
+		#Handle Blur
 		for attachedCard in getAttachments(defender):
-				if attachedCard.isFaceUp and attachedCard.Name == "Blur":
+				if attachedCard.isFaceUp and attachedCard.Name == "Blur" and damage:
 						if defender.controller.mana == 0:
 								detach(attachedCard)
 								attachedCard.moveTo(me.piles['Discard'])
 								alignAttachments(defender)
-								notify("{} does not have enough mana to pay for Blur, it has been Destroyed!".format(defender.Name))
+								notify("{} does not have enough mana to pay for Blur, it has been Destroyed!\n".format(defender.Name))
 						payManaChoice = askChoice("Pay 1 mana to maintain Blur on your {}?".format(defender.Name),["Yes","No"],["#01603e","#de2827"])
 						if payManaChoice == 1:
 								defender.controller.mana -= 1
-								notify("{} pays 1 mana for Blur.".format(me))
+								notify("{} pays 1 mana for Blur.\n".format(me))
 						else:
 								detach(attachedCard)
-								attachedCard.moveTo(me.piles['Discard'])
+								attachedCard.moveTo(me.piles['Discard Pile'])
 								alignAttachments(defender)
-								notify("{} did not pay to maintain Blur, it has been Destroyed.".format(me))
+								notify("{} did not pay to maintain Blur, it has been Destroyed.\n".format(me))
+		#Living Armor Token Removal
+		if "Living Armor" in dTraitDict and damage:
+			for c in table:
+				if "Living Armor" in c.Name:
+					if c.markers[Armor] > 0:
+						c.markers[Armor] -= 1
+						notify("Living Armor loses 1 Armor token\n")
 		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
 		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
@@ -1110,6 +1112,8 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		if attacker.Name == 'Wall of Thorns':
 				level = eval(defender.Level)
 				strikes = (level - 1 if level > 1 else 1)
+		if "Swarm" in aTraitDict:
+				strikes = (int(attacker.StatLife)-attacker.markers[Damage]+1)
 		if timesHasUsedAttack(attacker,attack['OriginalAttack']) < strikes: declareAttackStep(aTraitDict,attack,dTraitDict)
 		else: interimStep(aTraitDict,attack,dTraitDict,'Additional Strikes','damageBarrierStep')
 
@@ -1168,22 +1172,22 @@ def akirosFavor(card,damageRoll,effectRoll,selection, minorCreature=False):
 	if selection == 1:
 			choice = askChoice("You have Akiro's Favor! What would you like to re-roll?",["Re-roll Attack Dice","Re-roll Effect Die","Nothing!"],["#ff0000","#ebc815","#171e78"])
 			if choice == 1:
-					notify("With Akiro looking over his shoulder {} has decided to re-roll the Attack Dice!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to re-roll the Attack Dice!\n".format(me))
 					damageRoll = rollD6(sum(damageRoll))
 			elif choice == 2:
-					notify("With Akiro looking over his shoulder {} has decided to re-roll the Effect Die!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to re-roll the Effect Die!\n".format(me))
 					effectRoll = rollD12()
 			else: return (damageRoll,effectRoll)
 	elif selection == 2:
 			choice = askChoice("You have Akiro's Favor! Would you like to re-roll the Effect Die?",["Yes!","No!"],["#171e78","#de2827"])
 			if choice == 1:
-					notify("With Akiro looking over his shoulder {} has decided to reroll his Effect Die!".format(me))
+					notify("With Akiro looking over his shoulder {} has decided to reroll his Effect Die!\n".format(me))
 					effectRoll = rollD12()
 			else: return (damageRoll,effectRoll)
 	elif selection == 3:
 			choice = askChoice("Your gloves increase your skill! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
 			if choice == 1:
-					notify("With the Gloves of Skill, {} has decided to reroll the Attack Dice!".format(me))
+					notify("With the Gloves of Skill, {} has decided to reroll the Attack Dice!\n".format(me))
 					damageRoll = rollD6(sum(damageRoll))
 			else: return (damageRoll,effectRoll)
 	elif selection == 4:
@@ -1191,20 +1195,20 @@ def akirosFavor(card,damageRoll,effectRoll,selection, minorCreature=False):
 			if me.mana >1:
 					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
 					if choice == 1:
-							notify("The soldier's formation has allowed {} to reroll the Attack Dice!".format(me))
+							notify("The soldier's formation has allowed {} to reroll the Attack Dice!\n".format(me))
 							damageRoll = rollD6(sum(damageRoll))
 							me.mana -= 2
-							notify("{} pays 2 mana to reroll the dice".format(me))
+							notify("{} pays 2 mana to reroll the dice\n".format(me))
 					else: return (damageRoll,effectRoll)
 			else: return (damageRoll,effectRoll)
 		else:
 			if me.mana >0:
 					choice = askChoice("Your Formation increases the attack's effectiveness! Would you like to re-roll the Attack Dice?",["Yes!","No!"],["#171e78","#de2827"])
 					if choice == 1:
-							notify("The soldier's formation has allowed {} to reroll the Attack Dice!".format(me))
+							notify("The soldier's formation has allowed {} to reroll the Attack Dice!\n".format(me))
 							damageRoll = rollD6(sum(damageRoll))
 							me.mana -= 1
-							notify("{} pays 1 mana to reroll the dice".format(me))
+							notify("{} pays 1 mana to reroll the dice\n".format(me))
 					else: return (damageRoll,effectRoll)
 			else: return (damageRoll,effectRoll)
 	if "Akiro" in card.name:
@@ -1242,12 +1246,12 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 												'Heal {} for {} damage?'.format(defender.name,str(healingAmt)),
 												healingAmt,
 												"{} heals {} for {} damage!".format(attacker.name,defender.name,{}))
-				else: notify("{} attempts to heal {} but fails.".format(attacker.name,defender.name))
+				else: notify("{} attempts to heal {} but fails.\n".format(attacker.name,defender.name))
 				return 0 #Uh-oh...healing is treated as an attack for abilities that remember that. No worries; this will become irrelevant it Q2, and does not matter now.
 		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
 		actualDmg,actualEffect = computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict)
 		if defender.markers[VoltaricON] and actualDmg:#Voltaric Shield
-				notify("The Voltaric Shield absorbs {} points of damage!".format(str(min(actualDmg,3))))
+				notify("The Voltaric Shield absorbs {} points of damage!\n".format(str(min(actualDmg,3))))
 				actualDmg = max(actualDmg-3,0)
 				defender.markers[VoltaricON] = 0
 				defender.markers[VoltaricOFF] = 1
@@ -1270,7 +1274,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 				applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
 				return actualDmg
 		else:
-				notify('{} has elected not to apply auto-calculated battle results'.format(me))
+				notify('{} has elected not to apply auto-calculated battle results\n'.format(me))
 				whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
 
 def remotePlayerHeal(amount):
@@ -1310,14 +1314,14 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
 		if "Mage" in defender.Subtype: defender.controller.Damage += damage
 		else: defender.markers[Damage] += damage
-		notify("{} inflicts {} damage on {}{} average roll)".format(attacker,
+		notify("{} inflicts {} damage on {}{} average roll)\n".format(attacker,
 																	str(damage),
 																	defender,
 																	('! (an above' if damage >= expectedDmg else '... (a below')))
 
 		#Vine Markers are always destroyed from any amount of damage
 		if "Vine Marker" in defender.name and damage >0:
-			  notify("{} is smashed into the ground and destroyed.".format(defender))
+			  notify("{} is smashed into the ground and destroyed.\n".format(defender))
 			  defender.moveTo(me.piles['Discard'])
 			  return #No sense going any further.
 
@@ -1327,7 +1331,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 				healing = min(2,mage.controller.damage)
 				if healing and not computeTraits(mage).get("Finite Life"):
 						rememberPlayerEvent("Blood Reaper",attacker.controller)
-						notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)".format(mage,str(healing)))
+						notify("{}'s health is restored by his Reaper's blood offering! (-{} Damage)\n".format(mage,str(healing)))
 						remoteCall(mage.controller, "remotePlayerHeal", [healing])
 
 		#Demonic Link health drain
@@ -1336,7 +1340,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 				healing = min(1,mage.controller.damage)
 				if healing and not computeTraits(mage).get("Finite Life"):
 						rememberPlayerEvent("Demonic Link", attacker.controller)
-						notify("{}'s health is restored by the Demonic Link! (-{} Damage)".format(mage,str(healing)))
+						notify("{}'s health is restored by the Demonic Link! (-{} Damage)\n".format(mage,str(healing)))
 						remoteCall(mage.controller, "remotePlayerHeal", [healing])
 						
 		#Malakai's Fire
@@ -1348,7 +1352,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 			dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if damage else 0)
 			defender.controller.Mana -= dManaDrain
 		else: dManaDrain = ""
-		if dManaDrain: notify("{} drains {} mana from {}!".format(attacker,str(dManaDrain),defender.controller.name))
+		if dManaDrain: notify("{} drains {} mana from {}!\n".format(attacker,str(dManaDrain),defender.controller.name))
 		#Vampirism
 		if (atkTraits.get('Vampiric') and drainableHealth and
 			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
@@ -1377,23 +1381,23 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 				reconstructAmount = 2
 				if cDamage <= 2:
 						attacker.markers[Damage] = 0
-						notify("{} reconstructs {} Life and removes all damage.".format(attacker.Name,cDamage))
+						notify("{} reconstructs {} Life and removes all damage.\n".format(attacker.Name,cDamage))
 				else:
 						attacker.markers[Damage] -= reconstructAmount
-						notify("{} reconstructs 2 Life and removes {} damage.".format(attacker.Name,reconstructAmount))
+						notify("{} reconstructs 2 Life and removes {} damage.\n".format(attacker.Name,reconstructAmount))
 		#Finally, apply conditions
 		effects = ([rawEffect.split(' ')[1],rawEffect.split(' ')[1]] if '2' in rawEffect else rawEffect.split(' & ')) if rawEffect else []
 		for e in effects:
 				if e in conditionsList:
 						if e == "Damage" and "Mage" in defender.Subtype: defender.controller.damage += 1
 						else: defender.markers[eval(e)]+=1
-				notify('{} {}'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
+				notify('{} {}\n'.format(defender.Name,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
 
 def malakaisFirePrompt(heathen):
 		mute()
 		if me.mana >= 1 and askChoice("Smite the heathen with Malakai's Fire?",["Yes (1 mana)","No"],["#01603e","#de2827"])==1:
 				me.mana -= 1
-				notify("{} pays 1 mana to Smite the heathen {} with Malakai's Fire.".format(me,heathen))
+				notify("{} pays 1 mana to Smite the heathen {} with Malakai's Fire.\n".format(me,heathen))
 				rememberPlayerEvent("Malakai's Fire")
 				remoteCall(heathen.controller,"malakaisFireReceiptPrompt",[heathen])
 
@@ -1412,7 +1416,7 @@ def malakaisFireReceiptPrompt(heathen):
 							   "... AND I WILL STRIKE DOWN UPON THEE WITH GREAT VENGEANCE AND FURIOUS ANGER THOSE WHO ATTEMPT TO POISON AND DESTROY MY BROTHERS. AND YOU WILL KNOW MY NAME IS MALAKAI WHEN I LAY MY LIGHT UPON THEE \n-The book of Malakai, 25:17"]
 				passage=rnd(0,len(bookOfMalakai)-1)
 				notify(bookOfMalakai[passage])
-				notify("{} is seared by the flames of righteousness! (+1 Burn)".format(heathen.Name.split(",")[0]))
+				notify("{} is seared by the flames of righteousness! (+1 Burn)\n".format(heathen.Name.split(",")[0]))
 
 def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		mute()
@@ -1436,7 +1440,7 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 						if card.markers[t]: mage.markers[t] = 1 #Return mage ability markers to their owner.
 				
 				if card.markers[WoundedPrey]:
-						mages = [m for m in table if m.Name == "Johktari Beastmaster" and not m.markers[WoundedPrey]] #WARNING: This may identify the wrong JBM if there are more than 1 in the match. Unfortunately, markers cannot be associated with players, so it is difficult to correctly reassign the marker (not impossible, just not worth the effort)
+						mages = [m for m in table if m.Name == "Johktari Beastmaster stats" and not m.markers[WoundedPrey]] #WARNING: This may identify the wrong JBM if there are more than 1 in the match. Unfortunately, markers cannot be associated with players, so it is difficult to correctly reassign the marker (not impossible, just not worth the effort)
 						if mages:
 								mage = mages[0]
 								mage.markers[WoundedPrey] = 1
@@ -1444,7 +1448,7 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 				if ((attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type == 'Creature') or
 					card.markers[Zombie]): obliterate(card)
 				else: discard(card)
-		else: notify("{} does not accept the destruction of {}.".format(me,card))
+		else: notify("{} does not accept the destruction of {}.\n".format(me,card))
 
 def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment was revealed
 		recommendList = getEnchantRecommendationList(step)
@@ -1469,6 +1473,12 @@ def computeRoll(roll,effectRoll,aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict["OwnerID"])
 		armor = computeArmor(aTraitDict,attack,dTraitDict)
 		atkTraits = attack.get('Traits',{})
+		gameMode = getGlobalVariable("GameMode")
+		#Attempt to implement different effects for Ethereal based on community playtest project
+		if gameMode == "Playtest":
+				if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + (((roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0)),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
+		else:
+				if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + ((2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0)),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
 		if dTraitDict.get('Incorporeal'): return (roll[2] + roll[4] + ((2*(roll[3]+roll[5])) if atkTraits.get('Ethereal') else 0)),computeEffect(effectRoll,aTraitDict,attack,dTraitDict)
 		normal = roll[2] + 2*roll[3]
 		critical = roll[4] + 2*roll[5]
@@ -1573,7 +1583,8 @@ def computeTraits(card):
 				cController = c.controller
 				cSubtype = c.subtype
 				cType = c.type
-				if 'Mage' in cSubtype and cController == controller: 
+				cMarkers = c.markers
+				if 'Mage' in cSubtype and cController == controller and 'Magestats' not in cType: 
 					traitDict['MageID'] = c._id #Each card knows which mage controls it.
 					mage = Card(traitDict['MageID'])
 				if c.isFaceUp: #only look at face-up cards
@@ -1670,7 +1681,7 @@ def computeTraits(card):
 												"Aquatic" in subtype): append('Melee +1')
 										if (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
-												"Aquatic" not in subtype): extend(['Melee -1', 'Ranged -1'])
+												"Aquatic" not in subtype): append('Shallow Sea')
 										if (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
 										if (cName == 'Swamp' and cardType == 'Creature' and
@@ -1727,6 +1738,9 @@ def computeTraits(card):
 						if 'Mage' in subtype and not 'Magestats' in cardType:
 								if cType == 'Equipment' and cName == 'Ring of Tides' and (cController == controller) and not c.markers[Disable] and int(getGlobalVariable("PlayerWithIni")) == me._id: append ('Tides')#This will need changed some day to just add attack dice, but this is a quick fix for the moment
 								if cType == 'Equipment' and cName == 'Force Armor' and (cController == controller) and not c.markers[Disable]: append('Force Armor')
+								if cType == 'Equipment' and cName == 'Living Armor' and cController == controller: 
+									append('Armor +{}'.format(str(cMarkers[Armor])))
+									append('Living Armor')
 								if cType == 'Equipment' and (cController == controller or getAttachTarget(c) == card) and not c.markers[Disable]:
 										rawText = c.text.split('\r\n[')
 										traitsGranted = ([t.strip('[]') for t in rawText[1].split('] [')] if len(rawText) == 2 else [])

@@ -22,11 +22,11 @@ def attachToTarget(card,x=0,y=0):
 			if len(target) == 0 or (len(target) == 1 and card in target):
 				c,t = detach(card)
 				if t:
-					notify("{} detaches {} from {}.".format(me,c,t))
+					notify("{} detaches {} from {}.\n".format(me,c,t))
 			elif len(target) == 1:
 				c,t = attach(card, target[0])
 				if t:
-					notify("{} attaches {} to {}.".format(me,c,t))
+					notify("{} attaches {} to {}.\n".format(me,c,t))
 			else:
 				whisper("Incorrect targets, select up to 1 target.")
 				return
@@ -51,7 +51,7 @@ def enchantmentAttachCost(card,target): #Target useful for when things like Hars
 	discount = 0
 	foundDiscounts = []
 	infostr = 'Enchantments cost 2 mana to cast.'
-	notifyStr = "{} attaches a hidden enchantment on {}, with a base cost of 2 mana.".format(me, target.name)
+	notifyStr = "{} attaches a hidden enchantment on {}, with a base cost of 2 mana.\n".format(me, target.name)
 	for c in table:
 		if c.controller == me and c.isFaceUp and "[Casting Discount]" in c.Text and c != card:
 			dc = findDiscount(card, c)
@@ -72,7 +72,7 @@ def enchantmentAttachCost(card,target): #Target useful for when things like Hars
 	manacost = askInteger(infostr, 2 - discount)
 	if manacost == None: return # player closed the window and didn't cast the spell
 	elif me.Mana < manacost:
-		notify("{} has insufficient mana in pool".format(me))
+		notify("{} has insufficient mana in pool\n".format(me))
 		return
 	for dc in foundDiscounts:
 		doDiscount(dc)

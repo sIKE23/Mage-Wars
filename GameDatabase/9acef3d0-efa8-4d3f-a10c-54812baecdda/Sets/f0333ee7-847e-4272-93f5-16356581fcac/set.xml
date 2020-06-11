@@ -86,7 +86,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Epic" />
-		<property name="Text" value="During each Upkeep Phase, the Mage that controls the most Living objects, may heal a non-Mage Living object up to 2 points of damage. The same Mage may also remove 1 condition marker from a non-Mage Living object by paying its removal cost." />
+			<property name="Text" value="During each Upkeep Phase, the Mage that controls the most Living objects, may heal a non-Mage Living object up to 2 points of damage. The same Mage may also remove 1 condition marker from a non-Mage Living object by paying its removal cost." />
 			<property name="CardID" value="LG01J03" />
 		</card>
 		<card id="3c047679-3feb-4842-b82a-7e00ba0dcebb" name="Mind&apos;s Eye">

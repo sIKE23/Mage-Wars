@@ -35,6 +35,7 @@ def nextPhaseArena():
 		for p in players:
 			for card in table:
 				traits = computeTraits(card)
+				if (card.Name == "Living Armor" or card.Name == "Living Armor - Playtest"): remoteCall(p, "resolveLivingArmor", [traits, card])
 				if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
 				if card.markers[Rot] and card.controller.name == p.name: remoteCall(p, "resolveRot", [card])
 				if card.markers[Bleed] and card.controller.name == p.name: remoteCall(p, "resolveBleed", [card])
@@ -65,6 +66,41 @@ def nextPhaseArena():
 		setPhase(1)
 	update() #attempt to resolve phase indicator sometimes not switching
 
+def resolveLivingArmor(traits, card):
+	gamemode = getGlobalVariable("GameMode")
+	mage = Card(traits['MageID']) 
+	if gamemode == "Playtest" and card.isFaceUp:
+		if card.markers[Armor] < 3:
+			notifystr = "Would you like to pay 1 mana to add 2 Armor Tokens due to Living Armor?"
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+			if me.Mana == 0:
+				notify("{} cannot afford to add more armor to Living Armor".format(me))
+			elif choice == 1 :
+				me.Mana -= 1
+				if card.markers[Armor] < 2:
+					card.markers[Armor]+=2
+					notify("{} has chosen to pay 1 mana to add 2 Armor Tokens to Living Armor".format(me))
+				elif card.markers[Armor] < 3:
+					card.markers[Armor]+=1
+					notify("{} has chosen to pay 1 mana to add Armor Tokens to Living Armor, but only adds 1 due to reaching the max of 3".format(me))
+			elif choice == 2:
+				notify("{} has chosen not to pay for Armor Tokens".format(me))
+				return
+		else:
+			notify("Living Armor has 3 tokens already and will not generate more")
+			
+	else:
+		if card.markers[Armor] < 2 and card.isFaceUp:
+			card.markers[Armor]+=2
+			notify("Living Armor generates 2 Armor Tokens")
+		elif card.markers[Armor] < 3 and card.isFaceUp:
+			card.markers[Armor]+=1
+			notify("Living Armor generates 1 Armor Token")
+		else:
+			notify("Living Armor has 3 tokens already and will not generate more")
+	return
 	
 def resolveMadrigal(traits, card):
 	if ("Madrigal" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:

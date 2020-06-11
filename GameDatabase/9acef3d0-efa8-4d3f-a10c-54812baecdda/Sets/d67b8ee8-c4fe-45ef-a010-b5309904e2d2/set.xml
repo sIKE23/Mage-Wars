@@ -431,7 +431,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This creature gains Life +2 and Melee +1 traits. If this creature is a plant, reduce the reveal cost of Overgrowth by 1." />
+			<property name="Text" value="This creature gains Life +2 and Melee +1 traits. If this creature is a plant, reduce the reveal cost of Overgrowth by 1.&#xD;&#xA;[Life +2] [Melee +1]" />
 			<property name="CardID" value="MWADRE01" />
 		</card>
 		<card id="fe3babb3-4fb5-4885-9902-c71ac491700a" name="Reclamation">
