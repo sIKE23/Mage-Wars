@@ -17,15 +17,6 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Wizard(Air)" type="2">
-					<property name="Type" value="Creature" />
-					<property name="Subtype" value="Mage, Human" />
-					<property name="Level" value="" />
-					<property name="Stats" value="" />
-					<property name="cAttacks" value="" />
-					<property name="AttackBar" value="" />
-					<property name="Traits" value="" />
-				</alternate>
 		</card>
 		<card id="b3375390-16f2-4054-955f-fefa3b89ffff" name="Wizard - Playtest Stats">
 			<property name="Nickname" value="Wizard Stats" />

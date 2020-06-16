@@ -21,6 +21,8 @@ ActionGrey = ("Grey Action Marker","623f07fb-9cfb-4b4b-a350-6b208f0ef29e")
 ActionGreyUsed = ("Grey Action Marker Used","99bd454e-fab9-47c6-9f59-54a112eeb2da")
 ActionPurple = ("Purple Action Marker","edb61e00-a666-480a-81f3-20eb9944b0ea")
 ActionPurpleUsed = ("Purple Action Marker Used","158f738b-6034-4c6d-b4ca-5abcf159ed9f")
+AirGlyphActive = ("Air Glyph Active", "e8237864-1442-4b66-9e9f-57abe2f518fd")
+AirGlyphInactive = ("Air Glyph Inactive", "4da1b360-d498-4514-bb35-904c25e7481d")
 Armor = ("Armor +1","b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc")
 Banish = ("Banish","fdaa2c02-a65a-40e0-a315-962f9315b732")
 Bleed = ("Bleed: Upkeep: Take 1 Damage. Remove with 1 Healing. Removal Cost: 2","df8e1a68-9fc3-46be-ac4f-7d9c61805cf5")
@@ -44,6 +46,8 @@ Disable = ("Disable: Remove 1 each Reset Phase","f68b3b5b-0755-40f4-84db-bf3197a
 DissipateToken = ("Dissipate Token","96348698-ae05-4c59-89bb-e79dad50ad1f")
 DivineChallenge = ("Divine Challenge", "203022f6-4c33-4ba8-addf-a7ec46760fdc")
 DominationToken = ("Domination Token","d2beb747-0d46-4ae9-bb86-c125441fcae1")
+EarthGlyphActive = ("Earth Glyph Active", "ae3ed2d0-1f32-4373-b61a-54f1a92aa847")
+EarthGlyphInactive = ("Earth Glyph Inactive", "acb58bb4-2bc1-4534-9d68-a18a68d764b4")
 EternalServant = ("Eternal Servant: Reanimate, Piercing +1","86a71cf6-35ce-4728-a2f8-6701b1e29aa4")
 EggToken = ("Egg Token","874c7fbb-c566-4f17-b14e-ae367716dce5")
 FFToken = ("Forcefield Token","fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b")
@@ -51,6 +55,8 @@ FermataBlue1 = ("Fermata (Blue) 1","332e2df0-3101-462d-a2b4-b489170f4212")
 FermataBlue2 = ("Fermata (Blue) 2","00113acf-e34c-4150-992f-fdcdca2978b2")
 FermataGreen1 = ("Fermata (Green) 1","de825d87-c78f-4c35-aba4-e2abce2ef000")
 FermataGreen2 = ("Fermata (Green) 2","e724865e-9e9a-486d-a230-1b7d94de2d6c")
+FireGlyphActive = ("Fire Glyph Active", "d9d4073d-c8dd-495d-bc5c-3d1535fd1231")
+FireGlyphInactive = ("Fire Glyph Inactive", "af3f117c-1933-4bf0-ab6f-e083423ec052")
 GateClosed = ("The Gate to Hell is Closed!","fcdf5fa2-cb09-47a3-8c81-d4b87380b397")
 GateOpened = ("The Gate to Hell has been Opened, Bim-Shalla have mercy on our souls!","fd17ee65-9bc8-4a00-a359-ff8e2418ad5c")
 Grapple = ("Grapple: May only Melee and rolls 2 less dice vs Grappler","f1247aea-2067-44e6-a496-8ea1a8789da9")
@@ -59,6 +65,7 @@ Guard = ("Guard","91ed27dc-294d-4732-ab71-37911f4011f2")
 HolyAvenger = ("Holy Avenger","99381ac8-7d73-4d75-9787-60e6411d3613")
 Ichthellid = ("Ichthellid Larva: Removal Cost: 5","c8bff05e-e43a-4b23-b467-9c4596050f28")
 Invisible = ("Invisible: Cannot be targeted. Elusive. Pest.","8d994fe9-2422-4a9d-963d-3ad10b2b823d")
+Ki = ("Ki", "8af4c052-a38c-4f59-bd31-2e62ba3063f2")
 Light = ("Light +1", "14a7b28a-7abc-4330-b139-c7939469df89")
 LoadToken = ("Load Token","d32267be-f4c5-48c6-8396-83c0db406942")
 Mana = ("Mana","7ff7afc3-ae04-49bf-9961-1a04b0f6ac19")
@@ -105,6 +112,8 @@ VoltaricOFF = ("Voltaric Off","d91aabe0-d9cd-4b7e-b994-4e1c7a51c027")
 VTar =	("V'Tar","3c74d2dd-cabd-4f90-8845-18297d503b70")
 VTarOrbOn = ("V'Tar Orb On","3d339a9d-8804-4afa-9bd5-1cabb1bebc9f")
 VTarOrbOff  = ("V'Tar Orb Off","3f056a2d-3045-4f38-ae8b-f2155250f4dc")
+WaterGlyphActive = ("Water Glyph Active", "9e7b7949-fdda-4d2a-b16f-e35e9ac9cf20")
+WaterGlyphInactive = ("Water Glyph Inactive", "ffe746d4-7711-492b-981d-c34121eca290")
 Weak = ("Weak: -1 Attack Dice for Non-Spell Attacks - Removal Cost: 2","22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba")
 Wish = ("Wish Token","fcf39fa4-238a-4cb6-92bb-5f561be747c0")
 WoundedPrey = ("Wounded Prey","42f6cee3-3de4-4c90-a77c-9fb2c432d78d")
@@ -158,11 +167,11 @@ gameBoardsDict = {
 					}
 
 ##########################		Lists			############################
-listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shiftratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade", "Soulreaper"]
+listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shiftratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade", "Soulreaper", "Dragon\'s Lance", "Gladius"]
 typeChannelingList = ["Mana Flower","Mana Crystal","Moonglow Amulet"]
 typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
 tokenList = ["Armor","Banish","Bleed","Burn","Charge","Cripple","Corrode","Disable","Daze","Grapple","Growth","Mana","Melee","Rage",
-					"Ranged","Retribution","Rot","Slam","Stagger","Strongest","Stun","Stuck","Sleep","Tainted","Veteran","Weak","Wish","Wrath","Zombie"]
+					"Ranged","Rot","Slam","Stagger","Strongest","Stun","Stuck","Sleep","Tainted","Veteran","Weak","Wish","Wrath","Zombie"]
 
 for token in tokenList:
 		exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')

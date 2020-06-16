@@ -386,7 +386,8 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 		if choice == 1 and card1.isFaceUp:
 			me.Mana -= upKeepCost
 			card1.filter = None
-			notify("{} pays the Upkeep cost of {} for {} on {}\n".format(me, upKeepCost, card1, card2))
+			target = getAttachTarget(card1)
+			notify("{} pays the Upkeep cost of {} for {} on the {}\n".format(me, upKeepCost, card1, target))
 			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
 				attatchedTo = getAttachTarget(card1)
 				damage = card1.markers[CrushToken]
@@ -397,6 +398,10 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 					card1.markers[FFToken] += 1
 					card1.filter = None
 					notify("{} adds a Forcefield token to {}, which has a total of {} Forcefield tokens now.\n".format(me.name,card1.name, card1.markers[FFToken]))
+				#'''Playtesting'''
+				elif card1.Name == "The Void" and card1.controller == me and card1.isFaceUp:
+					target.markers[Ki] +=1
+					notify("Giving the {} 1 additional Ki".format(target))
 			return
 		if choice == 1 and not card1.isFaceUp:
 			me.Mana -= upKeepCost

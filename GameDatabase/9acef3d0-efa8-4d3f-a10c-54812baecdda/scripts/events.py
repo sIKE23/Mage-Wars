@@ -481,6 +481,7 @@ def onCardArrowTargeted(args):
 												attacker.arrow(defender,False)
 												return
 						if attack and attack.get('SourceID')==attacker._id:
+								debug('Starting Attack Sequence with {} attack'.format(str(attack["Name"])))
 								remoteCall(defender.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
 								attacker.arrow(defender,False)
 						elif attack.get("Dice"): rollDice(attack.get("Dice"))

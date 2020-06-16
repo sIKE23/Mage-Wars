@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
 	name="Playtest: Elementalist Vs Monk - Mage Wars Community Project"
-	id="d9d7e352-5bae-4dd2-8354-8132d9603fdd"
+	id="e452c577-bf1f-4b75-b5b3-c10540295ed1"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
 
-
+	<markers>
+		<marker id="e8237864-1442-4b66-9e9f-57abe2f518fd" name="Air Glyph Active" />
+		<marker id="4da1b360-d498-4514-bb35-904c25e7481d" name="Air Glyph Inactive" />
+		<marker id="d9d4073d-c8dd-495d-bc5c-3d1535fd1231" name="Fire Glyph Active" />
+		<marker id="af3f117c-1933-4bf0-ab6f-e083423ec052" name="Fire Glyph Inactive" />
+		<marker id="ae3ed2d0-1f32-4373-b61a-54f1a92aa847" name="Earth Glyph Active" />
+		<marker id="acb58bb4-2bc1-4534-9d68-a18a68d764b4" name="Earth Glyph Inactive" />
+		<marker id="9e7b7949-fdda-4d2a-b16f-e35e9ac9cf20" name="Water Glyph Active" />
+		<marker id="ffe746d4-7711-492b-981d-c34121eca290" name="Water Glyph Inactive" />
+		<marker id="8af4c052-a38c-4f59-bd31-2e62ba3063f2" name="Ki" />
+	</markers>
 	<cards>		
 		<card id="3733d383-65c2-4597-921c-6055d518df17" name="Elementalist">
 			<property name="Nickname" value="Elementalist" />
@@ -43,7 +53,7 @@
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
 		</card>
 		<card id="521ee29e-a942-49f5-888b-2977f1968ddb" name="Monk Stats V1">
 			<property name="Nickname" value="Monk Stats" />
@@ -60,6 +70,7 @@
 			<property name="MageSchoolCost" value="Mind=1, Martial=1, Monk=1" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
 			<property name="MageAbilities" value="" />
 		</card>
 		<card id="7e03a65e-767c-4228-b630-0dd3552c9d81" name="Monk Stats V2">
@@ -77,6 +88,7 @@
 			<property name="MageSchoolCost" value="Mind=1, Martial=1, Monk=1" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
 			<property name="MageAbilities" value="" />
 		</card>
 		<card id="6c0e4dad-ce42-4567-aa04-d87f3f0b942b" name="Paralyzing Strike">
@@ -265,7 +277,7 @@
 			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Air+Water"  />
-			<property name="Level" value="3+3" />
+			<property name="Level" value="2+3" />
 			<property name="Stats" value="Armor=-, Life=16" />
 			<property name="StatArmor" value="-" />
 			<property name="StatLife" value="16" />
@@ -290,7 +302,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="" />
+			<property name="Text" value="&#xD;&#xA;[BattleMeditation]" />
 			<property name="CardID" value="MWAMKE04" />
 		</card>
 		<card id="6235de72-cb5b-4ac5-9e01-49ad99ca9ce2" name="Five Point Death Strike">
@@ -307,7 +319,7 @@
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
+			<property name="Traits" value="UpKip" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWAMKE04" />
 		</card>
@@ -325,7 +337,7 @@
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
-			<property name="Traits" value="Upkeep +1" />
+			<property name="Traits" value="Upkeep +1, Ki 1" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWAMKE04" />
 		</card>
@@ -352,7 +364,7 @@
 			<property name="Nickname" value="Ice Ring" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Frost" />
-			<property name="Cost" value="3" />
+			<property name="Cost" value="5" />
 			<property name="Action" value="Quick" />
 			<property name="Range" value="0-2" />
 			<property name="cTargets" value="m0,M2))SMage" />

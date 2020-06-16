@@ -467,6 +467,58 @@ def toggleFermata(card, x=0, y=0):
 		card.markers[FermataGreen2] = 1	
 	if mageDict['MageRevealed'] == 'True': notify("{} has decided to extend the song for a second round!\n".format(card.Name))
 
+def toggleAirGlyph(card, x=0, y=0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	if card.markers[AirGlyphActive] > 0:
+		card.markers[AirGlyphActive] = 0
+		card.markers[AirGlyphInactive] = 1
+		notify("{} deactivates the Air Glyph\n".format(me))
+	elif card.markers[AirGlyphInactive] > 0:
+		card.markers[AirGlyphInactive] = 0
+		card.markers[AirGlyphActive] = 1
+		notify("{} Activates the Air Glyph\n".format(me))
+		
+def toggleEarthGlyph(card, x=0, y=0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	if card.markers[EarthGlyphActive] > 0:
+		card.markers[EarthGlyphActive] = 0
+		card.markers[EarthGlyphInactive] = 1
+		notify("{} deactivates the Earth Glyph\n".format(me))
+	elif card.markers[EarthGlyphInactive] > 0:
+		card.markers[EarthGlyphInactive] = 0
+		card.markers[EarthGlyphActive] = 1
+		notify("{} Activates the Earth Glyph\n".format(me))
+		
+def toggleFireGlyph(card, x=0, y=0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	if card.markers[FireGlyphActive] > 0:
+		card.markers[FireGlyphActive] = 0
+		card.markers[FireGlyphInactive] = 1
+		notify("{} deactivates the Fire Glyph\n".format(me))
+	elif card.markers[FireGlyphInactive] > 0:
+		card.markers[FireGlyphInactive] = 0
+		card.markers[FireGlyphActive] = 1
+		notify("{} Activates the Fire Glyph\n".format(me))
+
+def toggleWaterGlyph(card, x=0, y=0):
+	mute()
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	if card.markers[WaterGlyphActive] > 0:
+		card.markers[WaterGlyphActive] = 0
+		card.markers[WaterGlyphInactive] = 1
+		notify("{} deactivates the Water Glyph\n".format(me))
+	elif card.markers[WaterGlyphInactive] > 0:
+		card.markers[WaterGlyphInactive] = 0
+		card.markers[WaterGlyphActive] = 1
+		notify("{} Activates the Water Glyph\n".format(me))
+
 def toggleVoltaric(card, x=0, y=0):
 	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -619,6 +671,12 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[GateClosed] = 1
 		if "Dissipate" in traits:
 			card.markers[DissipateToken] = traits.get("Dissipate",0)
+		if "Battle Meditation" in card.Name:
+			target = getAttachTarget(card)
+			target.markers[Ki] += 2
+			notify("{} meditates for battle and gains 2 Ki\n".format(me))
+		if "Monk" in card.Name and 'Magestats' not in card.Type:
+			card.markers[Ki] += 3
 		if "Defense" in card.Stats and not card.Name=="Forcemaster":
 			if "1x" in card.Stats:
 				card.markers[Ready] = 1
@@ -637,6 +695,13 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[Ready] = 1
 		if "Living Armor" in card.Name:
 			card.markers[Armor] = 2
+		if "Elementalist Stats" in card.Name:
+			card.markers[AirGlyphInactive] = 1
+			card.markers[EarthGlyphInactive] = 1
+			card.markers[FireGlyphInactive] = 1
+			card.markers[WaterGlyphInactive] = 1
+		if card.Name in ["Hired Bodyguard", "Temple Sentry"]:
+			card.markers[Guard] = 1
 	# if card is already face up and doesnt have any card alternates
 	elif card.isFaceUp and cardAlts == 1:
 		notify("{} turns {} face down.\n".format(me, card.Name))

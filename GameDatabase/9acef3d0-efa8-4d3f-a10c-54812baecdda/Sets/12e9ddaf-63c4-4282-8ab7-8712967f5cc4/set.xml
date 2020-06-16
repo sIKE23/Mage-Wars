@@ -103,6 +103,25 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWPROMO52" />
 		</card>
+		<card id="9af6eb20-67fa-4efa-9a9a-51523941666a" name="Staff of Storms">
+			<property name="Nickname" value="Staff of Storms" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO28" />
+		</card>
 		<card id="4f128170-df69-4014-81c4-ad01794e97b5" name="Bloodthirsty Strike">
 			<property name="Nickname" value="Bloodthirsty Strike" />
 			<property name="Type" value="Incantation" />

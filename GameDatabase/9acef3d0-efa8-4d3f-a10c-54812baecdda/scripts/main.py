@@ -220,6 +220,7 @@ def storeEvent(arg):
 	memory.append(arg)
 	setGlobalVariable("gameMemory",str(memory))
 
+'''#This function doesn't... function. It might get deleted in the future once I can confirm that nothing actually calls it'''
 def timesHasOccurred(event,keys): #Searches memory for instances of this event that have occurred. Only registers a match if all given keys match those from a remembered instance. Returns number of matches
 	event["round"] = int(getGlobalVariable("RoundNumber"))
 	memory = eval(getGlobalVariable("gameMemory"))
@@ -230,7 +231,7 @@ def timesHasOccured(event,player=me):
 		eventList = getEventList('Round')
 		count = 0
 		for e in eventList:
-				if e[0] == 'Event' and e[1][0] == player._id: count += 1
+				if e[0] == 'Event' and e[1][0] == player._id and e[1][1]==event: count += 1
 		return count
 
 def getEvents(round):

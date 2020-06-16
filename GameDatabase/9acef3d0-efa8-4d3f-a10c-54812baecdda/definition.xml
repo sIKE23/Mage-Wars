@@ -247,10 +247,9 @@
 			<cardaction menu="Remove Stun Marker" default="False" shortcut="Ctrl+Alt+S" execute="subStun"/>
 			<cardaction menu="Remove Tainted Marker" default="False" shortcut="Ctrl+Alt+T" execute="subTaint"/>
 			<cardaction menu="Remove Veteran Marker" default="False" shortcut="Ctrl+Alt+V" execute="subVeteran"/>
-			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Shift+W" execute="subWeak"/>
-			<cardaction menu="Remove Wrath Marker" default="False" shortcut="Ctrl+Alt+W" execute="subWrath"/>
+			<cardaction menu="Remove Weak Marker" default="False" shortcut="Ctrl+Alt+W" execute="subWeak"/>
 			<cardaction menu="Remove Zombie Marker" default="False" shortcut="Ctrl+Shift+Z" execute="subZombie"/>
-			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+A" execute="clearTokens"/>
+			<cardaction menu="Remove All Markers/Tokens" default="False" shortcut="Ctrl+Shift+Z" execute="clearTokens"/>
 		</cardactions>
 		<cardactions menu="Toggle Markers">
 			<cardaction menu="Toggle Action Marker" default="False" shortcut="Ctrl+A" execute="toggleAction"/>
@@ -262,6 +261,10 @@
 			<cardaction menu="Toggle Deflect Marker" default="False" shortcut="Alt+Shift+D" execute="toggleDeflect"/>
 			<cardaction menu="Toggle Invisible Marker" default="False" shortcut="Ctrl+I" execute="toggleInvisible"/>
 			<cardaction menu="Toggle Gate To Hell Marker" default="False" shortcut="Ctrl+Shift+G" execute="toggleGatetoHell"/>
+			<cardaction menu="Toggle Air Glyph" default="False" shortcut="Ctrl+Shift+A" execute="toggleAirGlyph"/>
+			<cardaction menu="Toggle Earth Glyph" default="False" shortcut="Ctrl+Shift+E" execute="toggleEarthGlyph"/>
+			<cardaction menu="Toggle Fire Glyph" default="False" shortcut="Ctrl+Shift+F" execute="toggleFireGlyph"/>
+			<cardaction menu="Toggle Water Glyph" default="False" shortcut="Ctrl+Shift+W" execute="toggleWaterGlyph"/>
 		</cardactions>
 			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard"/>
 			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>

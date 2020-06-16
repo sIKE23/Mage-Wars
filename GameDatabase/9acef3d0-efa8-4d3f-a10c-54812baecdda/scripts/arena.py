@@ -35,6 +35,9 @@ def nextPhaseArena():
 		for p in players:
 			for card in table:
 				traits = computeTraits(card)
+				if 'UpKip' in traits and card.controller.name == p.name: remoteCall(p, "resolveKiUpkeep", [traits, card])
+				if card.Name == 'Ring of Ki' and card.controller.name == p.name: remoteCall(p, "resolveKiGen", [traits, card])
+				if "Ki" in traits and not "Magestats" in card.type and card.controller.name == p.name: remoteCall(p, "resolveKiGen", [traits, card])
 				if (card.Name == "Living Armor" or card.Name == "Living Armor - Playtest"): remoteCall(p, "resolveLivingArmor", [traits, card])
 				if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
 				if card.markers[Rot] and card.controller.name == p.name: remoteCall(p, "resolveRot", [card])
@@ -100,6 +103,60 @@ def resolveLivingArmor(traits, card):
 			notify("Living Armor generates 1 Armor Token")
 		else:
 			notify("Living Armor has 3 tokens already and will not generate more")
+	return
+	
+def resolveKiGen(traits, card):
+	mute()
+	#is the setting on?
+	if not getSetting("AutoResolveEffects", True):
+		return
+		
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageID = int(mageDict["MageID"])
+	mage = Card(mageID)
+	if card.name == 'Ring of Ki':
+		notifystr = "Would you like to pay 1 mana to gain 2 Ki?"
+		choiceList = ['Yes', 'No']
+		colorsList = ['#0000FF', '#FF0000']
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+		if choice == 1 :
+			me.Mana -= 1
+			mage.markers[Ki]+=2
+			notify("{} has chosen to pay 1 mana to gain 2 Ki".format(me))
+		elif choice == 2:
+			notify("{} has chosen not to pay for Ki".format(me))
+	if card.controller == me and 'Ki' in traits and card.isFaceUp:
+		notify("Generating Ki for {}...\n".format(card))	#found at least one
+		card.markers[Ki] += 1 
+	return
+	
+def resolveKiUpkeep(traits, card):
+	mute()
+	#is the setting on?
+	if not getSetting("AutoResolveEffects", True):
+		return
+		
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageID = int(mageDict["MageID"])
+	mage = Card(mageID)
+	if card.name == 'Five Point Death Strike':
+		target = getAttachTarget(card)
+		notifystr = "Would you like to pay 1 Ki to keep the Five Point Death Strike attached to {}?".format(target.name)
+		choiceList = ['Yes', 'No']
+		colorsList = ['#0000FF', '#FF0000']
+		if mage.markers[Ki]<1:
+			notify("{} cannot afford to keep powering the Death Strike".format(me))
+			card.moveTo(me.piles['Discard Pile'])
+		else:
+			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+			if choice == 1 :
+				mage.markers[Ki]-=1
+				notify("{} has chosen to pay 1 Ki to prolong the Death Strike!".format(me))
+			elif choice == 2:
+				notify("{} has chosen not to continue powering the Death Strike".format(me))
+				card.moveTo(me.piles['Discard Pile'])
 	return
 	
 def resolveMadrigal(traits, card):

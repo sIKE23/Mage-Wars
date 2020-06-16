@@ -279,6 +279,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Non-Mage Living Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living')) or
 			(cTargetBar == 'Non-Mage, Non-Epic Living Creature' and tType == 'Creature' and 'Mage' not in tSubtype and traits.get('Living') and not traits.get('Epic')) or
 			(cTargetBar == 'Non-Mage Object' and 'Mage' not in tSubtype) or
+			(cTargetBar == 'Self' and 'Mage' in tSubtype and cController == tController) or
 			(cTargetBar == 'Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype) or
 			(cTargetBar == 'Zone or Object') or
 			(cTargetBar == 'Object or Zone')): return True
@@ -377,6 +378,7 @@ def canBind(card,target):
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
 		or (tName == 'Cassiel, Shield of Bim-Shalla' and ("Healing" in cSubtype or "Protection" in cSubtype))
 		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
+		or ('Elemental Drake' in tName and (card.School in ['Water', 'Fire', 'Earth', 'Air'] and cType in ['Attack', 'Creature', ' Incantation']))
 #Spawnpoints
 		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
 		or (tName == 'Battle Forge' and cType == 'Equipment')
