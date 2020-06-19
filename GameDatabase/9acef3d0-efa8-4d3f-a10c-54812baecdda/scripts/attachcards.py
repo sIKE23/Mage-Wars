@@ -378,7 +378,7 @@ def canBind(card,target):
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
 		or (tName == 'Cassiel, Shield of Bim-Shalla' and ("Healing" in cSubtype or "Protection" in cSubtype))
 		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
-		or ('Elemental Drake' in tName and (card.School in ['Water', 'Fire', 'Earth', 'Air'] and cType in ['Attack', 'Creature', ' Incantation']))
+		or ('Elemental Drake' in tName and (card.School in ['Water', 'Fire', 'Earth', 'Air'] and cType in ['Attack', 'Creature', ' Incantation', 'Conjuration', 'Enchantment', 'Equipment']))
 #Spawnpoints
 		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
 		or (tName == 'Battle Forge' and cType == 'Equipment')
@@ -392,6 +392,7 @@ def canBind(card,target):
 		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Vine' in cSubtype)
 		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
 		or (tName == 'Echo of the Depths' and cType == 'Creature' and 'Water' in card.School)
+		or (tName == 'Natural Pandemonium' and cType =='Creature' and cSubtype in ['Elemental', 'Golem', 'Sprite'])
 #Spellbind (only)
 		or (tName == 'Helm of Command' and cType == 'Incantation' and 'Epic' not in card.Traits and 'Command' in cSubtype)
 		or (tName == 'Elemental Wand' and cType == 'Attack' and 'Epic' not in card.Traits)
@@ -400,20 +401,7 @@ def canBind(card,target):
 	return False
 
 
-#def alignMounted(card):
-#	"""
-#	Aligns the card mounted upon input card.
-#	Requires that input card belong to calling player
-#	"""
-#	mute()
-#
-#	#1: Retrieve bound card and end function if there are none.
-#	mounted = getMounted(card)
-#	if not mounted: return
-#
-#	#2: Align the cards
-#	cardList = [card,mounted]
-#	alignCards(cardList,card.width-117,0) #For now, we will simply put the cards side by side.
+
 
 ############################################################################
 ##########################    Zones       ##################################

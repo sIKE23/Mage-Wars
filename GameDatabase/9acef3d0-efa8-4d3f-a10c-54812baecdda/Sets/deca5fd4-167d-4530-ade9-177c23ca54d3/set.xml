@@ -425,7 +425,7 @@
 			<property name="Stats" value="Location=Weapon/Shield" />
 			<property name="StatEquipmentSlot" value="Weapon/Shield" />
 			<property name="cAttacks" value="name=Dragon&apos;s Bite;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={7: ['Burn']}" />
-			<property name="AttackBar" value="Dragon&apos;s Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [7+= Burn]" />
+			<property name="AttackBar" value="Dragon&apos;s Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [7+ = Burn]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="When you declare a Dragon&apos;s Bite attack, you may spend 1 Ki. If you do, gain +6 to that effect roll. If this Mage is level 5 or higher, Dragon&apos;s Lance rolls an additional attack die." />
 			<property name="CardID" value="MWAMKQ04" />

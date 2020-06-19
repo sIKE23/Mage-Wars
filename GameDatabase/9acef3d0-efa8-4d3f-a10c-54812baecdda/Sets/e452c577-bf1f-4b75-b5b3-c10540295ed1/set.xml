@@ -40,7 +40,7 @@
 			<property name="StatLife" value="32" />
 			<property name="StatSpellBookPoints" value="135" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, Living=3" />
+			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, War=3, Nature=3, Holy=3, Arcane=3, Dark=3, Mind=3" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="MageAbilities" value="" />
@@ -67,9 +67,9 @@
 			<property name="StatLife" value="32" />
 			<property name="StatSpellBookPoints" value="100" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Mind=1, Martial=1, Monk=1" />
+			<property name="MageSchoolCost" value="Mind=1, S-Martial=1, S-Monk=1, T-Creature=3" />
 			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Straight Punch:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Ki 1, Uncontainable" />
 			<property name="MageAbilities" value="" />
 		</card>
@@ -85,9 +85,9 @@
 			<property name="StatLife" value="32" />
 			<property name="StatSpellBookPoints" value="100" />
 			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Mind=1, Martial=1, Monk=1" />
+			<property name="MageSchoolCost" value="Mind=1, S-Martial=1, S-Monk=1, T-Creature=3" />
 			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Straight Punch:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Ki 1, Uncontainable" />
 			<property name="MageAbilities" value="" />
 		</card>
@@ -146,7 +146,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="PSJ07" />
 		</card>
-		<card id="0c708234-68fe-42ab-9f05-dda6ecf48ab1" name="Natural Pandemonium">
+		<card id="0c708234-68fe-42ab-9f05-dda6ecf48ab1" name="Natural Pandemonium V1">
 			<property name="Nickname" value="Natural Pandemonium" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Anomaly" />
@@ -157,10 +157,52 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Earth+Air+Fire+Water" />
 			<property name="Level" value="1+1+1+1" />
-			<property name="Stats" value="Channeling=1, Armor=2, Life=14" />
+			<property name="Stats" value="Armor=2, Life=14" />
 			<property name="StatChanneling" value="1" />
 			<property name="StatArmor" value="2" />
 			<property name="StatLife" value="14" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Spawnpoint, Zone Exclusive, Epic, Elementalist Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MW1J10" />
+		</card>
+		<card id="1ad0f996-c392-4188-925e-2d91e1e97423" name="Natural Pandemonium V2">
+			<property name="Nickname" value="Natural Pandemonium" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Anomaly" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth+Air+Fire+Water" />
+			<property name="Level" value="1+1+1+1" />
+			<property name="Stats" value="Armor=2, Life=12" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="14" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Spawnpoint, Zone Exclusive, Epic, Elementalist Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MW1J10" />
+		</card>
+		<card id="01ddd263-53c3-4f60-adc8-c99c265cf6c0" name="Natural Pandemonium V3">
+			<property name="Nickname" value="Natural Pandemonium" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Anomaly" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth+Air+Fire+Water" />
+			<property name="Level" value="1+1+1+1" />
+			<property name="Stats" value="Armor=2, Life=12" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="12" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Spawnpoint, Zone Exclusive, Epic, Elementalist Only" />
@@ -178,27 +220,27 @@
 			<property name="Target" value="Zone" />
 			<property name="School" value="Air"  />
 			<property name="Level" value="6" />
-			<property name="Stats" value="Armor=-, Life=20" />
+			<property name="Stats" value="Armor=-, Life=16" />
 			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="20" />
+			<property name="StatLife" value="16" />
 			<property name="cAttacks" value="name=Attack 1;action type=Quick;range type=Melee;range=(0,0);damage type=Wind;dice=2; effects={4+: ['Push']}" />
-			<property name="AttackBar" value="Attack 1:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=5] [d12] [4+ = Push] [Ethereal]&#xD;&#xA;Attack 2:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Wind] [Dice=4] [d12] [5-8 = Push; 9+ = Push &amp; Daze]" />
-			<property name="Traits" value="Incorporeal, Upkeep +1, Wind Immunity, Lightning Immunity" />
+			<property name="AttackBar" value="Attack 1:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=5] [d12] [4+ = Push] [Ethereal] [+2 vs. Flying]&#xD;&#xA;Attack 2:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Wind] [Dice=4] [d12] [5-8 = Push; 9+ = Push &amp; Daze] [+2 vs. Flying]" />
+			<property name="Traits" value="Incorporeal, Upkeep +1, Wind -2, Flying" />
 			<property name="Text" value="." />
 			<property name="CardID" value="MWAELC01" />
 		</card>
-		<card id="9636b2cd-c8ba-403f-8366-8711bc607bdf" name="Elemental Drake V1">
+		<card id="9636b2cd-c8ba-403f-8366-8711bc607bdf" name="Elemental Drake V3">
 			<property name="Nickname" value="Elemental Drake" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Drake, Elemental" />
-			<property name="Cost" value="13" />
+			<property name="Cost" value="14" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
 			<property name="School" value="Air/Fire/Earth/Water"  />
 			<property name="Level" value="3/3/3/3" />
-			<property name="Stats" value="Armor=2, Life=12" />
+			<property name="Stats" value="Channeling=1, Armor=2, Life=12" />
 			<property name="StatArmor" value="2" />
 			<property name="StatLife" value="12" />
 			<property name="cAttacks" value="" />
@@ -282,8 +324,8 @@
 			<property name="StatArmor" value="-" />
 			<property name="StatLife" value="16" />
 			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="Heavy Rain Punch:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [9+ = Push] [Ethereal]&#xD;&#xA;Lightning Strike:&#xD;&#xA;[Full] [Ranged:1-2] [Lightning] [Dice=5] [d12] [6-8 = Daze; 9+ = Stun] [Ethereal]" />
-			<property name="Traits" value="Flying, Legendary, Incorporeal, Upkeep +1, Lightning Immunity, Wind -2" />
+			<property name="AttackBar" value="Heavy Rain Punch:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [9+ = Push] [Ethereal]&#xD;&#xA;Lightning Strike:&#xD;&#xA;[Full] [Ranged:1-2] [Lightning] [Dice=5] [d12] [6-9 = Daze; 10+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Flying, Legendary, Incorporeal, Upkeep +1, Lightning -1, Wind -1" />
 			<property name="Text" value="." />
 			<property name="CardID" value="MWAELC01" />
 		</card>
@@ -395,7 +437,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [6+ = Daze]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="" />
+			<property name="Text" value="&#xD;&#xA;[Nunchucks]" />
 			<property name="CardID" value="MW1Q07" />
 		</card>
 		<card id="c75a255f-fa7f-4d30-b8e6-4ea15c4cdff9" name="Sai">
@@ -412,9 +454,9 @@
 			<property name="Stats" value="Location=Weapon" />
 			<property name="StatEquipmentSlot" value="Weapon" />
 			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +2]" />
+			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +2]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="" />
+			<property name="Text" value="&#xD;&#xA;[Sai]" />
 			<property name="CardID" value="MW1Q07" />
 		</card>
 		<card id="b1a65b41-5fe7-4c06-808f-6cc0f5765cff" name="Seismic Hammer">
@@ -455,7 +497,7 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q07" />
 		</card>
-		<card id="dc13468d-b3ea-4ab4-9312-0c1dbbdccbde" name="Sword of the Elements V1">
+		<card id="dc13468d-b3ea-4ab4-9312-0c1dbbdccbde" name="Sword of the Elements V3">
 			<property name="Nickname" value="Sword of the Elements" />
 			<property name="Type" value="Equipment" />
 			<property name="Subtype" value="Elemental" />

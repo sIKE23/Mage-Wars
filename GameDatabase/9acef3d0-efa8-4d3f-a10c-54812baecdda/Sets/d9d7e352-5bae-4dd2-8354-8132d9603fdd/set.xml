@@ -56,6 +56,26 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWAPRC03" />
 		</card>
+		<card id="418f688f-64b0-442f-bb98-8afc05ea6615" name="Killer Bees - Playtest">
+			<property name="Nickname" value="Killer Bees" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect, Swarm" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=1000 Stings;action type=Quick;range type=Melee;range=(0,0);dice=1;Critical Damage=True" />
+			<property name="AttackBar" value="1000 Stings:&#xD;&#xA;[Quick] [Poison] [Melee] [Dice=1] [Critical Damage]" />
+			<property name="Traits" value="Elusive, Flying, Swarm" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC06" />
+		</card>
 		<card id="8eebd024-28aa-46d1-8a09-106e0073db74" name="The Embalmed - Playtest">
 			<property name="Nickname" value=" The Embalmed" />
 			<property name="Type" value="Creature" />
@@ -170,6 +190,24 @@
 			<property name="Text" value="When Enchantment Transfusion is revealed, you may move any enchantment you control from this creature to one legal target creature up to 2 zones away from this creature. X = 1 for each hidden enchantment moved, or its Level for each revealed enchantment moved. Then, destroy Enchantment Transfusion." />
 			<property name="CardID" value="MWSTX1CKE04" />
 		</card>
+		<card id="24fedf40-ffcc-4954-a4e4-ea18f62836ec" name="Eye for an Eye - Playtest">
+			<property name="Nickname" value="Eye for an Eye" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Retribution" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Friendly Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="Eye for an Eye can only be revealed before the Roll Dice Step of an attack. During the Damage and Effects Step, the attacker suffers the same damage and effects as the defender. Then, destroy Eye for an Eye." />
+			<property name="CardID" value="PSE05" />
+		</card>
 		<card id="3b7fc88e-4eb5-4e1e-be79-3291bf4b6aa3" name="Harmonize - Playtest">
 			<property name="Nickname" value="Harmonize" />
 			<property name="Type" value="Enchantment" />
@@ -207,6 +245,24 @@
 			<property name="Text" value="You may bind a non-Epic incantation spell from your spellbook to Mage Wand. As a quick spell, you may pay 3 mana to change the bound spell." />
 			<property name="CardID" value="MW1Q19" />
 		</card>
+		<card id="1a12a265-0e8f-4bfb-aa65-9cc3da8d7d65" name="Martial Mastery - Playtest">
+			<property name="Nickname" value="Martial Mastery" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Self" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Monk Only" />
+			<property name="Text" value="Only a Mage can cast this spell. While you control the fewest creatures, your attacks roll an additional attack die. Once per round, when you cast or reveal martial spell reduce its cost by 1 mana. Enchantments only receive this discount when they are revealed." />
+			<property name="CardID" value="MWAMKE02" />
+		</card>
 		<card id="8980cee7-4682-4e0c-8d04-054f128365aa" name="Living Armor - Playtest">
 			<property name="Nickname" value="Living Armor" />
 			<property name="Type" value="Equipment" />
@@ -242,6 +298,24 @@
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magecast" />
 			<property name="Text" value="Only a Mage can cast this spell. Choose another friendly creature to receive 2 direct damage, then gain 3 mana. You can only cast this spell once per round." />
+			<property name="CardID" value="MWANI03" />
+		</card>
+		<card id="c99bbb6b-63ca-4239-a970-927eee82937f" name="Ritual of Kallek again - Playtest">
+			<property name="Nickname" value="Ritual of Kallek" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Mana, Ritual, Dsjer-Tet" />
+			<property name="Cost" value="0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))SMage" />
+			<property name="Target" value="Friendly Mage" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast" />
+			<property name="Text" value="Only a Mage can cast this spell. Choose another friendly creature to receive 4 direct damage, then gain 2 mana. You can only cast this spell once per round." />
 			<property name="CardID" value="MWANI03" />
 		</card>
 	</cards>
