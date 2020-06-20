@@ -497,7 +497,7 @@ def resolveAreaDot(traits, card):
 	for p in players:
 		if p.name == card.controller.name:
 			remoteCall(p, "addDamageAmount", [card, damageAmount])
-			notify("{}\'s {} feels the effect of the following: ".format(card.controller,card) + "\n{Malacoda}\n{Plagued}\n{Idol}\n{Consecrated}\n".format(**type)+ " and takes {} damage.\n".format(damageAmount))
+			notify("{}\'s {} feels the effect of the following: ".format(card.controller,card) + "\n{Malacoda}\n{Plagued}\n{Idol}\n{Consecrated}\n".format(**type)+ "and takes {} damage.\n".format(damageAmount))
 			
 
 def resolveCurseItem(card):			

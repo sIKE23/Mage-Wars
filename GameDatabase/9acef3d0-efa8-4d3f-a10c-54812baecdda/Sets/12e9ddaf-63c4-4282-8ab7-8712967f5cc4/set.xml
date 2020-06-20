@@ -17,7 +17,7 @@
 			<property name="Range" value="0-0" />
 			<property name="cTargets" value="m0,M0))_Zone" />
 			<property name="Target" value="Zone" />
-			<property name="School" value="Arcane+Dark"  />
+			<property name="School" value="Arcane/Dark"  />
 			<property name="Level" value="5/5" />
 			<property name="Stats" value="Armor=2, Life=14" />
 			<property name="StatArmor" value="2" />
