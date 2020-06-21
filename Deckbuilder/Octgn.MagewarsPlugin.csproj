@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Octgn.Magewars</RootNamespace>
     <AssemblyName>Octgn.Magewars</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -34,14 +34,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Octgn.Core">
-      <HintPath>D:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Core.dll</HintPath>
+    <Reference Include="Octgn.Core, Version=3.4.273.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>octgn libraries\Octgn.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Octgn.DataNew">
-      <HintPath>D:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.DataNew.dll</HintPath>
+    <Reference Include="Octgn.DataNew, Version=3.4.273.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>octgn libraries\Octgn.DataNew.dll</HintPath>
     </Reference>
-    <Reference Include="Octgn.Library">
-      <HintPath>D:\Users\fczajka\Documents\OCTGN\OCTGN\Octgn.Library.dll</HintPath>
+    <Reference Include="Octgn.Library, Version=3.4.273.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>octgn libraries\Octgn.Library.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -57,13 +60,18 @@
     <Compile Include="Magewars.validator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="octgn libraries\Octgn.Core.dll" />
+    <Content Include="octgn libraries\Octgn.DataNew.dll" />
+    <Content Include="octgn libraries\Octgn.Library.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo "Copy files to plugin folder..."
-xcopy "Octgn.Magewars.dll" "D:\Users\fczajka\Documents\OCTGN\Plugins\mwPlugin" /y /q /c
-xcopy "Octgn.Magewars.dll" "D:\Github\Mage-Wars\GameDatabase\9acef3d0-efa8-4d3f-a10c-54812baecdda\Plugins\Octgn.MagewarsPlugin" /y /q /c
-	</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,6 +9,7 @@
 *.cache
 *.suo
 *.back.aip
+*.nupkg
 !OCTGN-SBB-for-MageWars.exe
 ####################
 # VS Upgrade stuff #
