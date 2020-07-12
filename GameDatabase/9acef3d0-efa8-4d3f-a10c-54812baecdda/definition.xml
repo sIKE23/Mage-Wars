@@ -6,16 +6,40 @@
 	octgnVersion="3.1.255.0"
 	scriptVersion ="3.1.0.2"
 
-	version="2.2.1.0"
+	version="2.2.1.4"
 
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
 	setsurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
-	gameurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
+	gameurl="https://www.dropbox.com/sh/nifbqikhcff4a6l/AAB3UZtoe9j96LvAz5PawA2Na?dl=0"
 	authors="sIKE, ACG, lettucemode, Cosworth, Sharkbait"
 	iconurl="http://octgn.gamersjudgement.com/wordpress/magewars/wp-content/uploads/sites/33/2013/06/image1.png"
 	usetwosidedtable="False">
+	<!--Sets by GUID
+	0a6c39c9-b8d2-453d-b4dd-4e3ec475b8a7 - Mage Wars Academy: Warlock
+	1ed38377-a44b-4530-ae54-a32a034dc335 - Mage Wars Academy: Warlord
+	2b573ac7-f7f6-49e5-a26f-5070573374f1 - Forcemaster vs Warlord
+	8c377c82-86af-45ca-ac7c-75230b803532 - Mage Wars Battlegrounds: Domination
+	12e9ddaf-63c4-4282-8ab7-8712967f5cc4 - Playtest: Promo Errata - Mage Wars Community Project
+	044e91fe-c322-4ed9-ac55-ffc0e55df940 - Mage Wars Academy: Priestess
+	53c31411-eba8-4394-8f5d-92ab68160c01 - Mage Wars Academy: Necromancer
+	79bd6aae-e0f9-4291-8455-8ee4f62e4d70 - Promo
+	98d1623f-49b6-4138-b4d3-873f997e0bb4 - Mage Wars Academy: Elementalist
+	4943fc26-46c8-4f48-90d4-7db5d6ce6952 - Conquest of Kumanjaro
+	a27a7cb8-7d98-46e4-bf71-a940b7350afe - "Gameboards" 
+	ac23b0f6-73c1-488b-9376-f3e81e0afc3a - Mage Wars Academy: Beastmaster vs. Wizard
+	bb000089-50b6-48b5-809d-c27bc94e8794 - Mage Wars Academy: Forcemaster
+	be733b2f-7104-4de5-a64f-11dc0bb8e3a1 - Paladin vs Siren
+	d9d7e352-5bae-4dd2-8354-8132d9603fdd - Playtest: Errata - Mage Wars Community Project
+	d67b8ee8-c4fe-45ef-a010-b5309904e2d2 - Mage Wars Academy: Druid
+	deca5fd4-167d-4530-ade9-177c23ca54d3 - Mage Wars Academy: Monk
+	e452c577-bf1f-4b75-b5b3-c10540295ed1 - Playtest: Elementalist Vs Monk - Mage Wars Community Project
+	ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de - Core
+	f0333ee7-847e-4272-93f5-16356581fcac - Lost Grimore
+	fc3d683e-c63e-4257-93d8-cad598015d1e - Druid vs Necromancer
+	ffed488f-d9ce-48a9-aed9-88b105ede18b - Forged in Fire 
+	-->
 	<scripts>
 		<script src="scripts/academy.py"/>
 		<script src="scripts/actions.py"/>
@@ -31,6 +55,7 @@
 		<script src="scripts/main.py"/>
 		<script src="scripts/SpellbookValidator.py"/>
 		<script src="scripts/textfunctions.py"/>
+		<script src="scripts/TokenManipulation.py"/>
 	</scripts>
 	<events>
 		<event name="OnTableLoaded" action="onTableLoaded"/>
@@ -50,7 +75,7 @@
 	</sounds>
 	<fonts>
 		<font src="fonts/APHont-Bold.ttf" size="13" target="chat"/>
-  </fonts>
+	</fonts>
 	<proxygen definitionsrc="proxy/CardGenData.xml"/>
 	<phases>
 		<phase name="Initiative Phase" icon="Phases/Initiative.png"/>

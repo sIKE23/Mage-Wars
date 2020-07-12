@@ -248,6 +248,7 @@ def rememberBuffs(card):
 	"Returns a list of text-formatted traits granted via memorized buffs"
 	memory = eval(getGlobalVariable("gameMemory"))
 	roundNo = int(getGlobalVariable("RoundNumber"))
+
 	cardID = card._id
 	buffs = []
 	extend = buffs.extend

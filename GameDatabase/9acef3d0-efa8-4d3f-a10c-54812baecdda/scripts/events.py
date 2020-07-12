@@ -57,7 +57,7 @@ def onGameStarted():
 		#debugMode = True
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
-		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
+		me.setGlobalVariable("MyColor",str(4)) #Purple for testing
 		me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 		setUpDiceAndPhaseCards()
 		setGlobalVariable("GameSetup",str(0))
@@ -452,7 +452,19 @@ def onCardArrowTargeted(args):
 		mute()
 		attacker,defender = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
 		if args.player == me == attacker.controller and args.targeted:
+				mageDict = eval(me.getGlobalVariable("MageDict"))
+				mageStatsID = int(mageDict["MageStatsID"])
+				mageStats = Card(mageStatsID)
 				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and ('Conjuration' in defender.type or defender.type == 'Creature'):
+						#Elementalist Glyphs to buff attacks
+						if (mageStats.markers[AirGlyphActive] or mageStats.markers[FireGlyphActive]):
+							notifystr = "Would you like Deactivate a Glyph to buff this attack?"
+							choiceList = ['Yes', 'No']
+							colorsList = ['#0000FF', '#FF0000']
+							choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+							if choice == 1:
+								buffWithGlyphs(mageStats, attacker)
+						
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
 						attack = diceRollMenu(attacker,defender)

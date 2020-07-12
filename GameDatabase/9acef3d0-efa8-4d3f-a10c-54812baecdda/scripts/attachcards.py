@@ -239,7 +239,7 @@ def canAttach(card,target):
 		if s in traits.get('Immunity',[]): return False
 	if cName in ['Force Hold','Force Crush','Tanglevine','Stranglevine'] and traits.get('Uncontainable'): return False
 	if cType == 'Enchantment':
-		if ((cName == 'Harmonize' and 'Channeling' in target.Stats) or
+		if (('Harmonize' in cName and 'Channeling' in target.Stats) or
 			(cName == 'Barkskin' and tName == 'Druid') or
 			(cName == 'Forcefield' and tName == 'Forcemaster') or
 			(cTargetBar == 'Equipment' and tType == 'Equipment') or
@@ -378,7 +378,7 @@ def canBind(card,target):
 		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
 		or (tName == 'Cassiel, Shield of Bim-Shalla' and ("Healing" in cSubtype or "Protection" in cSubtype))
 		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
-		or ('Elemental Drake' in tName and (card.School in ['Water', 'Fire', 'Earth', 'Air'] and cType in ['Attack', 'Creature', ' Incantation', 'Conjuration', 'Enchantment', 'Equipment']))
+		or ('Elemental Drake' in tName and (cType in ['Attack', 'Creature', ' Incantation', 'Conjuration', 'Enchantment', 'Equipment']))
 #Spawnpoints
 		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
 		or (tName == 'Battle Forge' and cType == 'Equipment')
@@ -396,7 +396,7 @@ def canBind(card,target):
 #Spellbind (only)
 		or (tName == 'Helm of Command' and cType == 'Incantation' and 'Epic' not in card.Traits and 'Command' in cSubtype)
 		or (tName == 'Elemental Wand' and cType == 'Attack' and 'Epic' not in card.Traits)
-		or (tName == 'Mage Wand' and cType == 'Incantation' and 'Epic' not in card.Traits)):
+		or ('Mage Wand' in tName and cType == 'Incantation' and 'Epic' not in card.Traits)):
 		return True
 	return False
 

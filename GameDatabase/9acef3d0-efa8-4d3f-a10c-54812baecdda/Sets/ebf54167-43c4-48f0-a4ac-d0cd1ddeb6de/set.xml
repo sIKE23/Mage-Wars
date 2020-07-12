@@ -3390,8 +3390,8 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
+			<property name="cAttacks" value="name=Heal;range type=Ranged;range=(0,2);dice=8;" />
+			<property name="AttackBar" value="[Ranged] [Dice=8] [Unavoidable] [Heal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Heal target creature the amount rolled on 8 attack dice." />
 			<property name="CardID" value="MW1I14" />

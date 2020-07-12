@@ -57,6 +57,7 @@ FermataGreen1 = ("Fermata (Green) 1","de825d87-c78f-4c35-aba4-e2abce2ef000")
 FermataGreen2 = ("Fermata (Green) 2","e724865e-9e9a-486d-a230-1b7d94de2d6c")
 FireGlyphActive = ("Fire Glyph Active", "d9d4073d-c8dd-495d-bc5c-3d1535fd1231")
 FireGlyphInactive = ("Fire Glyph Inactive", "af3f117c-1933-4bf0-ab6f-e083423ec052")
+Freeze = ("Freeze: -1 on non-spell attacks, lumbering, -2 life, remove 1 upon activation", "c40445e9-118c-4212-af4c-76d12d4c1fe0")
 GateClosed = ("The Gate to Hell is Closed!","fcdf5fa2-cb09-47a3-8c81-d4b87380b397")
 GateOpened = ("The Gate to Hell has been Opened, Bim-Shalla have mercy on our souls!","fd17ee65-9bc8-4a00-a359-ff8e2418ad5c")
 Grapple = ("Grapple: May only Melee and rolls 2 less dice vs Grappler","f1247aea-2067-44e6-a496-8ea1a8789da9")
@@ -145,9 +146,9 @@ playerColorDict = {
 		1 : {"PlayerColor":"Red","Hex":"#de2827","ControlMarker":ControlMarkerRed}, #Red - R=222 G=40  B=39
 		2 : {"PlayerColor":"Blue","Hex":"#171e78","ControlMarker":ControlMarkerBlue}, #Blue - R=23  G=30  B=120
 		3 : {"PlayerColor":"Green","Hex":"#01603e","ControlMarker":ControlMarkerGreen}, #Green - R=1   G=96  B=62
-		4 : {"PlayerColor":"Yellow","Hex":"#f7d917","ControlMarker":ControlMarkerYellow}, #Yellow - R=247 G=217 B=23
-		5 : {"PlayerColor":"Purple","Hex":"#8a2be2","ControlMarker":ControlMarkerPurple}, #Purple - R=138 G=43 B=226
-		6 : {"PlayerColor":"Grey","Hex":"#696969","ControlMarker":ControlMarkerGrey} #Grey - R=105 G=105 B=105
+		#4 : {"PlayerColor":"Yellow","Hex":"#f7d917","ControlMarker":ControlMarkerYellow}, #Yellow - R=247 G=217 B=23
+		4 : {"PlayerColor":"Purple","Hex":"#8a2be2","ControlMarker":ControlMarkerPurple}, #Purple - R=138 G=43 B=226
+		#6 : {"PlayerColor":"Grey","Hex":"#696969","ControlMarker":ControlMarkerGrey} #Grey - R=105 G=105 B=105
 			 }
 
 listControlMarkers = [ControlMarkerRed,ControlMarkerBlue,ControlMarkerGreen,ControlMarkerYellow,ControlMarkerPurple,ControlMarkerGrey];

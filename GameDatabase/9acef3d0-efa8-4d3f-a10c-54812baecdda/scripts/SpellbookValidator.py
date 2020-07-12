@@ -121,13 +121,14 @@ def getUniqueTraining(spellbook):
 				mageTypeTrnList.append(key.split('-')[1])
 			else:
 				mageTypeOppList.append(key.split('-')[1])
+		#Future Idea: Could make this handle FM and monk's training in mind creatures
 		elif key.startswith('C-'):
 			school, type = key.split('-')[1:]
 			comboSTList.append(school)
 			comboSTList.append(type)
 			if school not in schoolTrn:
 				schoolTrn.append(school)
-		elif key.startswith('L-'): #- will need to pick out the level at some point
+		elif key.startswith('L-'): 
 			level, school = key.split('-')[1:3]
 			levelXList += [school, level]
 			if school not in schoolTrn:
@@ -200,7 +201,11 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 			#Check that both the mage is trained/opposed in a type of card and that the card is one of those types(Forcemaster, creatures = 3)
 			elif  ((mageTypeTrnList != [] and True in [cardType in mageTypeTrnList for cardType in cardTypeList])
 				or (mageTypeOppList != [] and True in [cardType in mageTypeOppList for cardType in cardTypeList])):
+					#Theoretically this needs updated for the general case, but since this is the last
+					#of Mage Wars 1.0, I can punt this to 2nd edition
 					if mageName == 'Forcemaster' and 'Mind' in cardSchoolList:
+						SBPadd = rawCardLevel
+					elif mageName == 'Monk' and 'Mind' in cardSchoolList:
 						SBPadd = rawCardLevel
 					else:
 						SBPmod = trainOrOpposed(card.type, mageTypeTrnList, mageTypeOppList)
@@ -237,7 +242,6 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 			
 			if "Only" in card.traits:
 				checkMageSchoolOnly(card, mageName, schoolTrn)
-				#checkSchoolOnly(card, ) This is going to be a pain in the ass for the "Level X" trained mages
 			
 			#notify(card.name)
 			#notify(str(SBPadd))	
@@ -340,19 +344,22 @@ def levelXListProcess(card, levelXList, spellbook, schoolTrn, schoolOpp):
 			cardLevel = int(card.level.split('/')[0])
 			#check each school for training first since that will be the lowest cost
 			for current_card_school in cardSchools:
-				if (current_card_school in spellbook):
+				if (current_card_school in spellbook and spellbook[current_card_school]==1):
 					SBPadd = multiOrSchool(card, spellbook)
 			
-			for current_card_school in cardSchools:
-				if (current_card_school in levelXList):
-					#If the current card school is in levelXList compare the level to level x training
-					LevelX_index = LevelX_schools.index(current_card_school)
-					if int(cardLevel) <= int(LevelX_levels[LevelX_index]):
-						SBPmod = 1
-						SBPadd = SBPadd+SBPmod*int(cardLevel)
-					else:
-						SBPmod = 2
-						SBPadd = SBPadd+SBPmod*int(cardLevel)
+				#Might not need this part
+			if SBPadd == 0:
+				#But for now I'm leaving it in
+				for current_card_school in cardSchools:
+					if (current_card_school in levelXList):
+						#If the current card school is in levelXList compare the level to level x training
+						LevelX_index = LevelX_schools.index(current_card_school)
+						if int(cardLevel) <= int(LevelX_levels[LevelX_index]):
+							SBPmod = 1
+							SBPadd = SBPadd+SBPmod*int(cardLevel)
+						else:
+							SBPmod = 2
+							SBPadd = SBPadd+SBPmod*int(cardLevel)
 		else:
 			LevelX_index = LevelX_schools.index(card.school)
 			if  int(card.level)<=int(LevelX_levels[LevelX_index]):	

@@ -1,4 +1,4 @@
-﻿//Version: 1.14.0.0
+﻿//Version: 2.2.2.0
 
 namespace Octgn.MageWarsValidator
 {
@@ -139,52 +139,139 @@ namespace Octgn.MageWarsValidator
             string reporttxt = "";
             bool Talos = false;
             int hashtotal = 0;
+            
+            //THIS COVERS THE UNIQUE TRAINING OF EXISTING MAGES. NOT FUTURE PROOFING SINCE FINAL SET BEING RELEASED, WILL MAKE 2.0 BETTER FUNCTIONALITY
+            List<string> subtypeTrain = new List<string>();
+            List<string> comboTrain = new List<string>();
+            List<string> levelXTrain = new List<string>();
+            
 
             Dictionary<string, int> training = new Dictionary<string, int>()
                 {
                     {"Dark", 2},{"Holy",2},{"Nature",2},{"Mind",2},{"Arcane",2},{"War",2},{"Earth",2},{"Water",2},{"Air",2},{"Fire",2},{"Creature",0}
                 };
-
+            
             Dictionary<string, int> levels = new Dictionary<string, int>()
                 {
                     {"Dark", 0},{"Holy",0},{"Nature",0},{"Mind",0},{"Arcane",0},{"War",0},{"Earth",0},{"Water",0},{"Air",0},{"Fire",0},{"Creature",0}
                 };
 
+
+
+            
+
             foreach (var section in secArray)
             {
                 foreach (var card in section.Cards)
                 {
+                    char[] delimSubtypeChars = {',', ' '};
+                    char[] delimSchoolChars = {'+', '/'};
+                    string[] cardSubtypes = Array.ConvertAll(Property(card, "Subtype").Split(delimSubtypeChars, StringSplitOptions.RemoveEmptyEntries), p => p.Trim());
+                    string[] cardSchools = Array.ConvertAll(Property(card, "School").Split(delimSchoolChars, StringSplitOptions.RemoveEmptyEntries), p => p.Trim());
+                    string[] cardLevels = Array.ConvertAll(Property(card, "Level").Split(delimSchoolChars, StringSplitOptions.RemoveEmptyEntries), p => p.Trim());
+                    bool subtypeFlag = false;
+                    bool comboTrainFlag = false;
+                    bool levelXFlag = false;
                     hashtotal += card.GetHashCode() + card.Quantity;
-
-                    //MessageBox.Show(String.Format("{0}", card.Name));
-                    if (Property(card, "Subtype").Contains("Mage"))
+                    string Cname = Property(card, "Name");
+                    
+                    //THIS PART IS THE EQUIVALENT OF statCardParse(deck) IN THE SBV
+                    //Get things like the Mage Name, Training, and Spellbook Limit
+                    if (Property(card, "Subtype").Contains("Mage") && Property(card, "Type").Contains("Creature"))
                     {
-                        var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
-                        var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
                         magename = card.Name;
+                    }
+                    if (Property(card, "Subtype").Contains("Mage") && Property(card, "Type").Contains("Magestats"))
+                    {
+                        // magename = card.Name.Split(' ')[0];
+                        // mageName
+                        var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
+                        
+                        // mageschoolcost IS THE EQUIVALENT OF 'spellbook' IN THE SpellbookValidator.py
+
+                        var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
+                        // mageStats
                         reporttxt += string.Format("{1}\n", card.Quantity.ToString(), card.Name);
+                        
+                        
+                        
+                        
+                        
                         foreach (var msc in mageschoolcost)
                         {
                             foreach (var t in training.ToList())
                             {
                                 if (msc.Contains(t.Key)) //scan mageschoolcost for training info
                                 {
-
                                     var tlevel = Splitme(msc, "=");
                                     training[t.Key] = Convert.ToInt32(tlevel[1]);
+                                    string messageStr = DictionaryToString(training);
                                 }
                             }
                         }
+
+                        //Figure out how many spellbook points are allowed by the mage from the "Stats" property
                         foreach (var mstat in magespellbooklimit)
                         {
                             if (mstat.Contains("Spellbook"))
                             {
                                 spellpoints = Convert.ToInt32(Splitme(mstat, "=")[1]);
+                                //spellPointsTotal
+                            }
+                        }
+
+                        char[] delimiterChars = {'-', '=', ' '};
+                        foreach (string msc in mageschoolcost)
+                        // for key in spellbook:
+                        {
+                            if (msc.StartsWith("S-") | (msc.StartsWith(" S-")))
+                            // if key.startswith ('S-'):
+                            {
+                                string[] addStr = msc.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+                                foreach (string tempStr in addStr)
+                                {
+                                    int len = tempStr.Length;
+                                    if (len > 1)
+                                    {
+                                        subtypeTrain.Add(tempStr);
+                                    }
+                                }
+                                 
+                            }
+                            else if (msc.StartsWith("C-") | (msc.StartsWith(" C-")))
+                            // elif key.startswith ('C-'):
+                            {
+                                string[] addStr = msc.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+                                foreach (string tempStr in addStr)
+                                {
+                                    comboTrain.Add(tempStr);
+                                }
+                            }
+                            else if (msc.StartsWith("L-") | (msc.StartsWith(" L-")))
+                            // elif key.startswith ('L-'):
+                            {
+                                
+                                string[] addStr = msc.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+                                foreach (string tempStr in addStr)
+                                {
+                                    if (tempStr.Length > 1)
+                                    {
+                                        training[tempStr] = 2;
+                                    }
+                                    levelXTrain.Add(tempStr);
+                                }
                             }
                         }
                         continue;
                     }
+                    
+                    
+                    
 
+
+
+
+                    // FROM HERE BELOW ARE THINGS WRAPPED UP IN cardPointCount FROM THE SBV. WILL NEED TO REWRITE WITH THE NEW METHODOLOGY
                     if (HasProperty(card, "Traits"))
                     {
                         if (Property(card, "Traits").Contains("Novice")) //Novice spells always cost 1 point
@@ -209,6 +296,7 @@ namespace Octgn.MageWarsValidator
 
                     if (HasProperty(card, "School") & HasProperty(card, "Level"))
                     {
+                        bool isEmptyLevelX = isEmpty(levelXTrain);
                         var school = Property(card, "School");
                         var level = Property(card, "Level");
                         var typestr = Property(card, "Type");
@@ -233,8 +321,7 @@ namespace Octgn.MageWarsValidator
                             string[] levs = level.Split('+');
                             string[] schs = school.Split('+');
                             for (int i = 0; i < levs.Length; ++i)
-                                if (schs[i] != "Water")
-                                    totalLevel += Convert.ToInt32(levs[i]);
+                                totalLevel += Convert.ToInt32(levs[i]);
                         }
                         else
                         {
@@ -245,7 +332,137 @@ namespace Octgn.MageWarsValidator
                         int cost = 0;
                         if (!Talos)
                         {
-                            if (school.Contains("+")) //add all spell levels
+                            bool isEmptySub = isEmpty(subtypeTrain);
+                            bool isEmptyCombo = isEmpty(comboTrain);
+                            if (!isEmptySub)
+                            {
+                                foreach(string sType in subtypeTrain)
+                                {
+                                    foreach(string cSType in cardSubtypes)
+                                    {
+                                        if (sType == cSType)
+                                        {
+                                            subtypeFlag = true;
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+
+                            if(!isEmptyCombo)
+                            {
+                                //I'm cheating on this part since Paladin's the only combo trained mage (Holy + Creature) that will exist in 1.0 as of 7/7/2020
+                                //I'm going to just move on to the next edition project. I can fix if ever needed in the future
+                                foreach(string cSchool in cardSchools)
+                                {
+                                    if (cSchool.Contains("Holy") & Property(card, "Type").Contains("Creature"))
+                                    {
+                                        comboTrainFlag = true;
+                                    }
+                                }
+ 
+                            }
+
+                            if(!isEmptyLevelX)
+                            {
+                                foreach(string cSchool in cardSchools)
+                                {
+                                    if (levelXTrain.Contains(cSchool))
+                                    {
+                                        int Lx_ind = levelXTrain.IndexOf(cSchool);
+                                        int trainLevel = Convert.ToInt32(levelXTrain[Lx_ind-1]);
+                                        int c_ind = Array.IndexOf(cardSchools, cSchool);
+                                        int cLevel = Convert.ToInt32(cardLevels[c_ind]);
+                                        if (cLevel <= trainLevel)
+                                        {
+                                            levelXFlag = true;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (subtypeFlag)
+                            {
+                                cost = totalLevel;
+                                //This is only built to handle if someone is trained in subtypes (vs Opposed training) since that's all that exists for MW 1. 
+                                //It wouldn't be hard to adjust for opposed training, but probably isn't worth the effort at the moment
+                            }
+                            else if (comboTrainFlag)
+                            {
+                                cost = totalLevel;
+                                //This is only built to handle if someone is combo trained (vs combo Opposed training) since that's all that exists for MW 1. 
+                                //It wouldn't be hard to adjust for opposed training, but probably isn't worth the effort at the moment
+                            }
+                            else if (levelXFlag)
+                            {
+                                //If the levelxflag is triggered and / in the cost, split the level and schools and just do cost = totalLevel
+                                if (school.Contains('/'))
+                                {
+                                    cost = totalLevel;
+                                }
+                                else
+                                {
+                                    foreach(string cSchool in cardSchools)
+                                    {
+                                        int curInd = Array.IndexOf(cardSchools, cSchool);
+                                        int curLevel = Convert.ToInt32(cardLevels[curInd]);
+                                        if (levelXTrain.Contains(cSchool))
+                                        {
+                                            int Lx_ind = levelXTrain.IndexOf(cSchool);
+                                            int trainLevel = Convert.ToInt32(levelXTrain[Lx_ind-1]);
+                                            if (curLevel<=trainLevel)
+                                            {
+                                                cost += curLevel;
+                                            }
+                                            else
+                                            {
+                                                cost += training[cSchool]*curLevel;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cost += training[cSchool]*curLevel;
+                                        }
+                                    }
+                                }
+                            }
+                            else if ((magename == "Forcemaster" & "Creature" == Property(card, "Type")) | (magename == "Monk" & "Creature" == Property(card, "Type")))
+                            {
+                                if (!school.Contains("Mind")) //"Mind" not in schools
+                                {
+                                    if (school.Contains("+"))
+                                    {
+                                        foreach (var lev in Splitme(level, "+"))
+                                        {
+                                            cost += Convert.ToInt32(lev)*3;
+                                        }
+
+                                    }
+                                    else //handle single school or "/" school cards
+                                    {
+                                        var lev = Splitme(level, "/");
+                                        cost += Convert.ToInt32(lev[0])*3;
+                                    }
+                                }
+                                else
+                                {
+                                    if (school.Contains("+"))
+                                    {
+                                        foreach (var lev in Splitme(level, "+"))
+                                        {
+                                            cost += Convert.ToInt32(lev);
+                                        }
+
+                                    }
+                                    else //handle single school or "/" school cards
+                                    {
+                                        var lev = Splitme(level, "/");
+                                        cost += Convert.ToInt32(lev[0]);
+                                    }
+                                }
+                            }
+                            else if (school.Contains("+")) //add all spell levels
                             {
                                 var lev = Splitme(level, "+");
                                 int x = 0;
@@ -285,85 +502,6 @@ namespace Octgn.MageWarsValidator
                                 }
                             }
                         }
-
-                        //Paladin is trained in level 3 holy, level 2 war, and all holy creatures
-                        //If the current card is in the paladin's trainings, it has already been correctly added (assuming paladin's trainings contains Holy=1 and War=1)
-                        //so we only need to check for the exceptions
-                        if (magename.Contains("Paladin"))
-                        {
-                            string delim = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
-                            if (school.Contains("Holy"))
-                            {
-                                int holyLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("Holy")]);
-                                if (holyLevel > 3 && Property(card, "Type") != "Creature")
-                                {
-                                    spellbook += holyLevel * card.Quantity;
-                                    cost += holyLevel;
-                                }
-                            }
-                            if (school.Contains("War"))
-                            {
-                                int warLevel = Convert.ToInt32(Splitme(level, delim)[Splitme(school, delim).ToList().IndexOf("War")]);
-                                if (warLevel > 2 && !school.Contains("+"))
-                                {
-                                    spellbook += warLevel * card.Quantity;
-                                    cost += warLevel;
-                                }
-                            }
-                            //{
-                            // Holy Creature rules go here should check of Creatures that are in two schools Holy + Other School 
-                            // (other school should also exclude War)
-                            // we need to reduce the spellbook & cost by the spelllevel as if they were a 1x training.
-                            //spellbook -= spellLevel * card.Quantity;
-                            //cost -= spellLevel
-                            //}
-                        }
-
-                        //Siren is trained in Water and all spells with Song or Pirate subtypes.
-                        //By this point, Water has been correctly calculated, but the Song/Pirate spells are overcosted if they are not Water
-                        if (magename.Contains("Siren") && !school.Contains("Water") &&
-                            (Property(card, "Subtype").Contains("Song") || Property(card, "Subtype").Contains("Pirate")))
-                        {
-                            //subtract 1 per level per count as this card has been added x2 per non-trained school already
-                            spellbook -= totalLevel * card.Quantity;
-                            cost -= totalLevel;
-                        }
-
-                        //Forcemaster rule: Pay 3x for non-mind creatures
-                        if (magename == "Forcemaster" & "Creature" == Property(card, "Type"))
-                        {
-                            if (!school.Contains("Mind")) //"Mind" not in schools
-                            {
-                                if (school.Contains("+"))
-                                {
-                                    foreach (var lev in Splitme(level, "+"))
-                                    {
-                                        spellbook += Convert.ToInt32(lev) * card.Quantity; // we just add 1 point per spell level as 2 points already have been added
-                                        cost += Convert.ToInt32(lev);
-                                    }
-
-                                }
-                                else //handle single school or "/" school cards
-                                {
-                                    var lev = Splitme(level, "/");
-                                    spellbook += Convert.ToInt32(lev[0]) * card.Quantity;
-                                    cost += Convert.ToInt32(lev[0]);
-                                }
-                            }
-                        }
-
-                        //Druid pays double for Water spells 2 and up
-                        if (magename == "Druid" && school.Contains("Water"))
-                        {
-                            string delimin = school.Contains("+") ? "+" : school.Contains("/") ? "/" : "";
-                            var waterLevel = Convert.ToInt32(Splitme(level, delimin)[Splitme(school, delimin).ToList().IndexOf("Water")]);  //whee
-                            if (waterLevel > 1)
-                            {
-                                spellbook += waterLevel * card.Quantity;
-                                cost += waterLevel;
-                            }
-                        }
-
                         //check for multiples of Epic spells
                         if (Property(card, "Traits").Contains("Epic") && card.Quantity > 1)
                         {
@@ -371,7 +509,6 @@ namespace Octgn.MageWarsValidator
                                 card.Quantity + " copies found in spellbook.");
                             return;
                         }
-
                         //check for illegal school- or mage-specific spells
                         if (Property(card, "Traits").Contains("Only"))
                         {
@@ -398,8 +535,29 @@ namespace Octgn.MageWarsValidator
                                 foreach (string schoolKey in training.Keys)
                                 {
                                     if (training[schoolKey] == 1 && onlyPhrase.Contains(schoolKey + " Mage"))
-                                        legal = true;
+                                        {
+                                            legal = true;
+                                        }
+                                    else if(!isEmptyLevelX)
+                                    {
+                                        foreach(string cSchool in cardSchools)
+                                        {
+                                            if (levelXTrain.Contains(cSchool))
+                                            {
+                                                int Lx_ind = levelXTrain.IndexOf(cSchool);
+                                                int trainLevel = Convert.ToInt32(levelXTrain[Lx_ind-1]);
+                                                int c_ind = Array.IndexOf(cardSchools, cSchool);
+                                                int cLevel = Convert.ToInt32(cardLevels[c_ind]);
+                                                if (cLevel <= trainLevel)
+                                                {
+                                                    legal = true;
+                                                }
+                                            }
+
+                                        }
+                                    }
                                 }
+
 
                                 if (!legal)
                                 {
@@ -436,21 +594,25 @@ namespace Octgn.MageWarsValidator
 
                         cardcount += card.Quantity;
                         reporttxt += string.Format("{0} - {1} - {2}\n", totalLevel.ToString(), cost.ToString(), (cost * card.Quantity).ToString());
-
+                        spellbook+=cost*card.Quantity;
                     }   //card has school and level 
                 }   //foreach card
             }   //foreach section
-            foreach (var t in training)
-            {
-                spellbook += t.Value * levels[t.Key];
-            }
+
             string reporttmp = "A Mage Wars Spellbook, built using the OCTGN SBB " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + "\n\n";
             reporttmp += string.Format("Spellbook points: {0} used of {0} allowed\n\n", spellbook, spellpoints);
             reporttmp += "Key: Quantity - Spell Name - Spell Level - Spellbook Cost - Total Spellbook Cost\n\n";
             reporttmp += reporttxt;
-            //System.Windows.MessageBox.Show(reporttmp);
             Clipboard.SetText(reporttmp);
-            System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook, magename, spellpoints));
+            if (magename == "none in deck")
+            {
+                System.Windows.MessageBox.Show("Validation result:\nNo mage is detected in the book");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(String.Format("Validation result:\n{0} spellpoints in the deck using '{1}' as the mage. {2} spellpoints are allowed.\nDeck has been copied to the clipboard.", spellbook, magename, spellpoints));
+            }
+            
             if (spellbook <= spellpoints)
             {
                 deckValidated = true;
@@ -469,6 +631,29 @@ namespace Octgn.MageWarsValidator
         private bool HasProperty(IMultiCard card, string name)
         {
             return card.GetFullCardProperties().Any(x => x.Key.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public string DictionaryToString(Dictionary < string, int > dictionary)
+        {
+            string dictionaryString = "{";  
+            foreach(KeyValuePair < string, int > keyValues in dictionary) 
+            {
+                dictionaryString += keyValues.Key + " : " + keyValues.Value + ", ";  
+            }
+            return dictionaryString.TrimEnd(',', ' ') + "}";  
+        } 
+        public static bool isEmpty<T>(List<T> list)
+        {
+            if (list == null)
+            {
+                return true;
+            }
+            return !list.Any();
+        }
+        private string messageBoxTest(string message)
+        {
+            string str = message;
+            return str;
         }
 
         private string Property(IMultiCard card, string p)

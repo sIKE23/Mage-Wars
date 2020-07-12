@@ -97,6 +97,8 @@ def resolveBleed(card):
 	#notify("Finished auto-resolving Bleed for {}.".format(card))
 	
 	
+	
+	
 def resolveTalos(card):
 	countOutposts = 0
 	for c in table: #ugh - this is done much better in the next release
@@ -248,6 +250,7 @@ def resolveUpkeep():
 	ManaPrismInPlay = 0
 	PsiOrbDisc = 0
 	upKeepIgnoreList = ["Essence Drain","Minor Essence Drain","Mind Control","Stranglevine","Mordok's Obelisk","Harshforge Monolith","Psi-Orb", "Mana Prism"]
+	
 	for card in table:
 		if card.Name == "Mordok's Obelisk" and card.isFaceUp:
 			MordoksObeliskInPlay = 1
@@ -261,6 +264,7 @@ def resolveUpkeep():
 		if card.Name == "Psi-Orb" and card.isFaceUp and card.controller == me: # if the player has Psi-Orb in play set Discount to 3
 			PsiOrbDisc = 3
 			if PsiOrbDisc == 3: notify("The PSI-Orb has {} Upkeep discounts available this Round.\n".format(PsiOrbDisc))
+
 
 	for card in table:
 		upKeepCost = 0
@@ -346,6 +350,12 @@ def resolveUpkeep():
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+		# Process Monk Upkeep
+		elif card.Type in ["Equipment", "Enchantment"] and card.isFaceUp and "Monk" not in card.Subtype and "Martial" not in card.Subtype and "Mind" not in card.School and card.controller == me:
+			target = getAttachTarget(card)
+			upKeepCost = 1
+			notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+			card.filter = upKeepFilter
 		# Process Upkeep for Stranglevine
 		else:
 			if card.Name == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
@@ -412,6 +422,20 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			card1.moveTo(me.piles['Discard Pile'])
 			notify("{} has chosen not to pay the Upkeep cost for {} effect on {} and has placed {} in the discard pile.\n".format(me, card2, card1, card1))
 			return
+
+def resolveMelting(traits, card):
+	mute()
+	#is the setting on?
+	if not getSetting("AutoResolveEffects", True):
+		return
+	if ("FrozenTundra" in traits and "Melting" in traits) and card.controller == me and card.isFaceUp:
+		notify("{} is in the Frozen Tundra and will not melt\n".format(card.name))
+		return
+	meltAmount = traits.get("Melting")
+	#apply damage
+	addDamageAmount(card,meltAmount)
+	notify("{}\'s {} melts adding {} damage.\n".format(card.controller, card.Name, meltAmount))
+	#notify("Finished auto-resolving Bleed for {}.".format(card))
 
 def resolveRegeneration(traits, card):
  	mute()

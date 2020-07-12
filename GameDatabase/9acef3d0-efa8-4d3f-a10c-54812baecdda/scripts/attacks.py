@@ -35,7 +35,8 @@ superlativeTraits = ["Regenerate",
 					 "Dissipate",
 					 "Ki",
 					 "Sai"
-					 "Nunchucks"]
+					 "Nunchucks",
+					 "Melting"]
 
 ############################################################################
 ######################		Dice Roll Menu		####################
@@ -129,7 +130,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 		if attack["Name"] == "Arcane Zap" and ("Wizard" in attacker.Name or "Wizard - Playtest" in attacker.Name) and timesHasOccured("Arcane Zap",attacker.controller): return False
 		# AOE attacks that don't affect attacker
 		elif (attack["Name"] in
-			["Blinding Flash", "Electrify", "Ring of Fire", "Quake Stomp"]
+			["Blinding Flash", "Electrify", "Ring of Fire", "Quake Stomp", "Tornado"]
 			and attacker == defender): return False
 		if (defender.name == "Tanglevine" or defender.name  == "Stranglevine") and attack.get('RangeType') != "Melee": return False
 		if attacker.controller.Mana + attacker.markers[Mana] < attack.get('Cost',0) - (sum([getCastDiscount(c,atkOS,defender)[0] for c in table]) if atkOS.Type == "Attack" else 0): return False
@@ -185,12 +186,14 @@ def getAttackList(card):
 				attackKeyList0 = [attack.split(':\r\n') for attack in card.AttackBar.split(']\r\n')]
 				isAttackSpell = (card.Type == 'Attack')
 				isDrainSpell = (card.Name in ["Drain Life", "Siphon Life"])
+				#Trying to add healing
+				isHealSpell = (card.Name in ["Heal"])
 				#Split 'or' clauses into multiple attacks. CURRENTLY ASSUMES that every attack has at most one OR clause. (!!!)
 				attackKeyList1 = []
 				for attack in attackKeyList0:
 						name = (card.Name if (isAttackSpell or isDrainSpell) else attack[0])
-						attributes = (attack[0] if (isAttackSpell or isDrainSpell) else attack[1]).split('] [')
-						if (isAttackSpell or isDrainSpell): attributes.append('Spell')
+						attributes = (attack[0] if (isAttackSpell or isDrainSpell or isHealSpell) else attack[1]).split('] [')
+						if (isAttackSpell or isDrainSpell or isHealSpell): attributes.append('Spell')
 						if isDrainSpell: attributes.append('Drain')
 						options = []
 						tempAttributes = attributes
@@ -226,7 +229,7 @@ def getAttackList(card):
 								if attribute in ['Quick','Full',"Trample"] : aDict['Action'] = attribute
 								elif 'Ranged' in attribute:
 										aDict['RangeType'] = attribute.split(':')[0]
-										if not (isAttackSpell or isDrainSpell): aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
+										if not (isAttackSpell or isDrainSpell or isHealSpell): aDict['Range'] = [int(r) for r in attribute.split(':')[1].split('-')]
 								elif 'Melee' in attribute:
 										aDict['RangeType'] = 'Melee'
 										aDict['Range'] = [0,0]
@@ -267,7 +270,7 @@ def getAttackList(card):
 
 		for c in table:
 				if "Mage" in card.Subtype:
-						if (c.Type in ['Equipment','Attack', 'Incantation'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack' or c.Name in ["Drain Life", "Siphon Life"]) and
+						if (c.Type in ['Equipment','Attack', 'Incantation'] and card.controller == c.controller and (c.isFaceUp or c.Type=='Attack' or c.Name in ["Drain Life", "Siphon Life", "Heal"]) and
 							(getBindTarget(c) == card or (not canDeclareAttack(getBindTarget(c)) if getBindTarget(c) else True)) and
 							not c.markers[Disable]): attackList.extend(getAttackList(c))
 				if c.Type == 'Enchantment' and c.isFaceUp and getAttachTarget(c) == card and c.AttackBar: attackList.extend(getAttackList(c))
@@ -282,10 +285,9 @@ def getAttackList(card):
 		return attackList
 
 def computeAttack(aTraitDict,attack,dTraitDict):
-	#Ki Buffs
-		#debug("Compute Attack Function")
+			#debug("Compute Attack Function")
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
-		debug("COMPUTE ATTACK\n")
+		#debug("COMPUTE ATTACK\n")
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		KiDice = 0
 		KiEffect = 0
@@ -321,16 +323,6 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		atkTraits = attack["Traits"]
 		localADict = dict(aTraitDict)
 		
-		#Ki buffs
-		#debug("**************Applying Ki Buffs in computeAttack")
-		#if attack["Name"] in ["Dragon-Tail Sweep", "Fist of Iron", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm", "Dragon\'s Bite"] and KiDice !=0:
-				#attack["Dice"] = attack["Dice"] + KiDice
-				#debug("KiDice: {}".format(str(KiDice)))
-		#debug("**************After applying Ki Buffs in computeAttack")
-		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
-		#	attack["KiEffect"] = KiEffect
-		#	attack["Traits"][KiTrait] = True
-		
 		#Runesmithing
 		atkOS = Card(attack['OriginalSourceID'])
 		if atkOS.markers[RuneofPrecision] and atkOS.type == 'Equipment' and not atkTraits.get('Spell'): atkTraits['Piercing'] = atkTraits.get('Piercing',0) + 1
@@ -339,7 +331,12 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 				eventList = getEventList('Round')
 				for e in eventList:
 						if e[0] == 'Attack' and e[1][0] == dTraitDict.get('OwnerID') and e[1][3] > 0:
-								victim = Card(e[1][1]) if e[1][1] else None
+								#This is to prevent gaining the HA benefit against conjurations or walls
+								conjCheck = Card(e[1][0]).Type
+								if "Conjuration" not in conjCheck:
+									victim = Card(e[1][1]) if e[1][1] else None
+								else: 
+									victim = None
 								if victim and victim.controller==attacker.controller and (victim.Type == 'Creature' or ('Conjuration' in victim.Type and 'Holy' in victim.School)) and victim != attacker:
 										localADict['Melee'] = localADict.get('Melee',0) + 2
 										localADict['Piercing'] = localADict.get('Piercing',0) + 1
@@ -472,7 +469,11 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				if not atkTraits.get('Spell'):
 						attackDice -= attacker.markers[Weak]
 						attackDice -= attacker.markers[Stagger] * 2
-						if (not "Aquatic" in atkOS.traits and "Shallow Sea" in aTraitDict): attackDice -=1 #Moved this here so that it doesn't affect spell attacks. Previously, computeTraits conferred Melee -1 and Ranged -1.
+						if (not "Aquatic" in atkOS.traits and "Shallow Sea" in aTraitDict):
+							if not "Flying" in atkOS.traits:
+								attackDice -=1 
+							elif "Flying" in atkOS.traits and attack.get('RangeType') == "Melee" and not "Flying" in dTraitDict:
+								attackDice -=1 
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Agony" or c.Name == "Shrink")]: attackDice -= 2
 						if [True for c in getAttachments(attacker) if c.isFaceUp and c.Name == "Tangleroot"]: attackDice -= c.markers[DissipateToken]
 						if [True for c in getAttachments(attacker) if c.isFaceUp and (c.Name == "Knight\'s Courage")] and defender.markers[Strongest]: 
@@ -487,6 +488,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 						attackDice += 2
 					else:
 						attackDice += 1
+				if attacker.markers[FireGlyphActive]:
+					attackDice +=3
 				level = eval(attacker.Level)
 				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
 				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
@@ -495,6 +498,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				if 'Glancing' in dTraitDict and not attack.get("Traits",{}).get("Drain"): attackDice -= 3
 				#debug("dTraitDict: {}".format(dTraitDict))
 				attackDice -= dTraitDict.get('Aegis',0)
+				if dTraitDict.get('DampCloak') and attack.get('RangeType') == 'Ranged':
+					attackDice -= 1
 				attackDice += (aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or ("Mage" in defender.Subtype and defender.controller.Damage))
 																	and (attacker and not hasAttackedThisTurn(attacker))
 																	and defender.type == 'Creature'
@@ -898,8 +903,8 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 		mute()
 		GhostForm = False
 		DefensiveStance = False
-		debug("INTERIM STEP \n")
-		debug("dTraitDict upon entrance: {}\n".format(str(dTraitDict)))
+		#debug("INTERIM STEP \n")
+		#debug("dTraitDict upon entrance: {}\n".format(str(dTraitDict)))
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		#First, check if the defender is dead. If it is, this attack needs to end now.
 		attacker = Card(aTraitDict.get('OwnerID'))
@@ -950,8 +955,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		mute()
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
-		debug("DECLARE ATTACK STEP\n")
-		debug("Attack Traits: {}\n".format(str(attack["Traits"])))
+		#debug("DECLARE ATTACK STEP\n")
+		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		#1. Check whether any creatures in the zone are guarding and not restrained. If they are, and this is not one of them, cancel attack (if melee)
 		if (not "Elusive" in aTraitDict) and attack.get("RangeType") == "Melee" and not defender.markers[Guard]:
@@ -1110,21 +1115,11 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						return
 				#Monk Defense Check
 				if "Monk" in defender.name:
-					#Pay 1 Ki to give counterstrike to attacks For Follow Up
-					#if defender.markers[Ki] > 0:
-						#buttonColorList = ["#de2827","#171e78"]
-						#buttonList = ["Yes", "No"]
-						#choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend 1 Ki to use Follow Up your Monk?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
-						#if choice == 1:
-							#defender.markers[Ki] -= 3
-							#attack_list = getAttackList(defender)
-							#for attack in attack_list:
-								#attack['Traits']['Counterstrike'] = True
 					#Pay 3 Ki to "Parry"
 					if defender.markers[Ki] > 2:
 						if attack.get("RangeType",{})=='Melee' and not attack.get("Traits",{}).get("Unavoidable") and not "Incapacitated" in dTraitDict:
 							buttonColorList = ["#de2827","#171e78","#01603e","#f7d917"]
-							buttonList = ["Parry","Defensive Stance (Gain Resilient)","Ghost Form (Gain Incorporeal)","No"]
+							buttonList = ["Parry","Ghost Form (Gain Incorporeal)", "Follow Up","No"]
 							choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend Ki to use an ability of your Monk?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
 							if choice ==1:
 								defender.markers[Ki] -= 3
@@ -1132,30 +1127,33 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 								rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
 								interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 								return
-							elif choice ==2: 
-								defender.markers[Ki] -= 4
-								dTraitDict["Resilient"] = True
-								dTraitDict["DefensiveStance"] = True
-								notify("{} spends 4 Ki and becomes Resilient\n".format(defender.name.split(',')[0]))
-							elif choice ==3:
-								defender.markers[Ki] -= 3
-								dTraitDict["Incorporeal"] = True
-								dTraitDict["Ghost Form"] = True
-								notify("{} spends 3 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
-						elif not attack.get("RangeType",{})=='Melee' or attack.get("Traits",{}).get("Unavoidable"):
-							buttonColorList = ["#de2827","#171e78","#01603e"]
-							buttonList = ["Defensive Stance (Gain Resilient)","Ghost Form (Gain Incorporeal)", "No"]
-							choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend Ki to use an ability of your Monk?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
-							if choice ==1: 
-								defender.markers[Ki] -= 4
-								dTraitDict["Resilient"] = True
-								dTraitDict["DefensiveStance"] = True
-								notify("{} spends 4 Ki and becomes Resilient\n".format(defender.name.split(',')[0]))
 							elif choice ==2:
 								defender.markers[Ki] -= 3
 								dTraitDict["Incorporeal"] = True
 								dTraitDict["Ghost Form"] = True
 								notify("{} spends 3 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
+							elif choice ==3:
+								defender.markers[Ki] -= 1
+								defender.markers[Guard] +=1
+								notify("{} spends 1 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
+						elif not attack.get("RangeType",{})=='Melee' or attack.get("Traits",{}).get("Unavoidable"):
+							buttonColorList = ["#de2827","#171e78","#01603e"]
+							buttonList = ["Ghost Form (Gain Incorporeal)", "No"]
+							choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend Ki to use an ability of your Monk?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
+							if choice ==1:
+								defender.markers[Ki] -= 3
+								dTraitDict["Incorporeal"] = True
+								dTraitDict["Ghost Form"] = True
+								notify("{} spends 3 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
+					#Pay 1 Ki to give counterstrike to attacks For Follow Up
+					elif defender.markers[Ki] > 0:
+						buttonColorList = ["#de2827","#171e78"]
+						buttonList = ["Yes", "No"]
+						choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend 1 Ki for your Monk to use Follow Up?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
+						if choice == 1:
+							defender.markers[Ki] -= 1
+							defender.markers[Guard] +=1
+							notify("{} spends 1 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
 		if attack.get('EffectType','Attack')=='Attack':
 			   if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
 					   #Spiked buckler code here, perhaps?
@@ -1170,7 +1168,7 @@ def reduceFF(card):
 
 def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		mute()
-		debug("ROLL DICE STEP\n")
+		#debug("ROLL DICE STEP\n")
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		attacker = Card(aTraitDict.get('OwnerID'))
@@ -1229,8 +1227,8 @@ def rollDiceStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 
 def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #Executed by defender
 		mute()
-		debug("DAMAGE AND EFFECTS STEP\n")
-		debug("Attack Traits: {}\n".format(str(attack["Traits"])))
+		#debug("DAMAGE AND EFFECTS STEP\n")
+		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		damage = damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
@@ -1251,6 +1249,11 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								attachedCard.moveTo(me.piles['Discard Pile'])
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.\n".format(me))
+		for attachedCard in getAttachments(attacker):				
+			if attachedCard.isFaceUp and attachedCard.Name == "Fortified Resolve" and damage > 0 and not timesHasOccured("FortRes",attacker.controller):
+				attachedCard.markers[Charge] +=1
+				rememberPlayerEvent("FortRes",attacker.controller)
+				notify("Fortified Resolve charges up. It now has {} charges\n".format(attachedCard.markers[Charge]))
 		#Living Armor Token Removal
 		if "Living Armor" in dTraitDict and damage:
 			for c in table:
@@ -1260,9 +1263,6 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 						notify("Living Armor loses 1 Armor token\n")
 						
 		#Battle Meditation
-		#temporary 
-		
-		#Real code
 		if damage > 0 and "BattleMeditation" in aTraitDict and not timesHasOccured("BMAttack",attacker.controller):
 			attacker.markers[Ki]+=1
 			rememberPlayerEvent("BMAttack",attacker.controller)
@@ -1295,11 +1295,13 @@ def additionalStrikesStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 
 def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
 		mute()
+		debug("Damage Barrier Step")
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		deathFlag = False
 		#Check for death here
 		if getRemainingLife(dTraitDict) == 0:
+				debug("Death Prompt")
 				deathPrompt(dTraitDict,attack,aTraitDict)
 				deathFlag = True
 		#But damage barriers can still happen after death!
@@ -1337,6 +1339,11 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
+		if attacker.markers[AirGlyphActive] or attacker.markers[FireGlyphActive]:
+			attacker.markers[AirGlyphActive] -= 1
+			attacker.markers[FireGlyphActive] -= 1
+			attacker.markers[AirGlyphInactive] = 1
+			attacker.markers[FireGlyphInactive] = 1 
 		setEventList('Turn',[]) #Clear the turn event list
 
 def akirosFavor(card,damageRoll,effectRoll,selection, minorCreature=False):
@@ -1416,8 +1423,8 @@ healingQuery
 def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
-		debug("DAMAGE RECEIPT MENU\n")
-		debug("Attack Traits: {}\n".format(str(attack["Traits"])))
+		#debug("DAMAGE RECEIPT MENU\n")
+		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		atkTraits = attack.get('Traits',{})
 		#If it is healing, we heal and then end the attack, since it is not an attack.
 		if False and attack.get('EffectType','Attack')=='Heal':
@@ -1437,13 +1444,25 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 				defender.markers[VoltaricOFF] = 1
 		if defender.type == "Creature": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
 		else: dManaDrain = ""
-
-		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} Apply these results?'.format(attacker.Name,
+		for attachedCard in getAttachments(defender):
+			if attachedCard.isFaceUp and attachedCard.Name == "Fortified Resolve":
+					if attachedCard.markers[Charge]>0:
+						FRChoice = askChoice("Spend a charge marker to reduce incoming damage by 2?",["Yes","No"],["#01603e","#de2827"])
+						if FRChoice == 1:
+							attachedCard.markers[Charge] -= 1
+							actualDmg -= 2
+							notify("{}\'s Fortified Resolve absorbs 2 damage\n".format(me))
+		
+		normalDamage = roll[2] + 2* roll[3] # calculate the results for Normal Damage
+		criticalDamage = roll[4] + 2* roll[5] # calculate the results for Critical Damage
+		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} ({} normal damage and {} critical damage were rolled.)\nApply these results?'.format(attacker.Name,
 																										  actualDmg,
 																										  ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
 																										  defender.Name,
 																										  (' It will also drain {} mana from {}.'.format(
-																												  str(dManaDrain),defender.controller.name) if dManaDrain else '')),
+																												  str(dManaDrain),defender.controller.name) if dManaDrain else ''),
+																										   normalDamage,
+																										   criticalDamage),
 						   ['Yes',"Other Damage Amount",'No'],
 						   ["#01603e","#FF6600","#de2827"])
 		if choice == 1:
@@ -1465,7 +1484,7 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 		defender = Card(dTraitDict.get('OwnerID',''))
 		atkTraits = attack.get('Traits',{})
 		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
-		conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Rot','Slam','Sleep','Stagger','Stuck','Stun','Tainted','Weak']
+		conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Freeze', 'Rot','Slam','Sleep','Stagger','Stuck','Stun','Tainted','Weak']
 		effectsInflictDict = {'Damage' : "suffers 1 point of direct damage! (+1 Damage)",
 							  'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
 							  'Burn' : 'is set ablaze! (+1 Burn)',
@@ -1608,22 +1627,7 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 						   ["Yes","No"],
 						   ["#01603e","#de2827"])
 		if choice == 1:
-				reusableAbilityTokens = [BloodReaper,
-										 EternalServant,
-										 HolyAvenger,
-										 Pet,
-										 SirensCall,
-										 DivineChallenge]
-				#reusableGeneralTokens = [Light]
-				mage = Card(cardTraitsDict.get('MageID'))
-				for t in reusableAbilityTokens:
-						if card.markers[t]: mage.markers[t] = 1 #Return mage ability markers to their owner.
-				
-				if card.markers[WoundedPrey]:
-						mages = [m for m in table if m.Name == "Johktari Beastmaster stats" and not m.markers[WoundedPrey]] #WARNING: This may identify the wrong JBM if there are more than 1 in the match. Unfortunately, markers cannot be associated with players, so it is difficult to correctly reassign the marker (not impossible, just not worth the effort)
-						if mages:
-								mage = mages[0]
-								mage.markers[WoundedPrey] = 1
+				returnMarkers(card, cardTraitsDict)
 				deathMessage(cardTraitsDict,attack,aTraitDict)
 				if ((attack.get('Traits',{}).get('Devour') and cardTraitsDict.get("Corporeal") and card.Type == 'Creature') or
 					card.markers[Zombie]): obliterate(card)
@@ -1686,6 +1690,8 @@ def computeEffect(effectRoll,aTraitDict,attack,dTraitDict):
 			modRoll += 6
 		#Ring of Tides for a hydro attack from a Siren
 		if attacker.Name == "Siren" and "Tides" in aTraitDict and ("Type" in attack.keys() and attack['Type']=="Hydro") and int(getGlobalVariable("PlayerWithIni")) == me._id : modRoll += 2
+		if attacker.markers[AirGlyphActive]:
+			modRoll +=4
 		if attacker.Name == "Temple of Light":
 				eventList = getEventList("Round")
 				for e in reversed(eventList):
@@ -1865,6 +1871,7 @@ def computeTraits(card):
 										if (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" not in subtype): append('Shallow Sea')
+										if (cName == 'Frozen Tundra'): append('FrozenTundra')
 										if (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
 										if (cName == 'Swamp' and cardType == 'Creature' and
@@ -1921,6 +1928,7 @@ def computeTraits(card):
 						if 'Mage' in subtype and not 'Magestats' in cardType:
 								if cType == 'Equipment' and cName == 'Ring of Tides' and (cController == controller) and not c.markers[Disable] and int(getGlobalVariable("PlayerWithIni")) == me._id: append ('Tides')#This will need changed some day to just add attack dice, but this is a quick fix for the moment
 								if cType == 'Equipment' and cName == 'Force Armor' and (cController == controller) and not c.markers[Disable]: append('Force Armor')
+								if cType == 'Equipment' and cName == 'Dampening Cloak' and (cController == controller) and not c.markers[Disable]: append('DampCloak')
 								if cType == 'Equipment' and cName == 'Living Armor' and cController == controller: 
 									append('Armor +{}'.format(str(cMarkers[Armor])))
 									append('Living Armor')
@@ -1996,7 +2004,7 @@ def computeTraits(card):
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
 		if markers[SirensCall] and 'Aquatic' in subtype and "Siren" in mage.name and 'Mage' not in subtype: extend(['Melee +2'])
 		if markers[Grapple]: extend(['Melee -2'])
-
+		if markers[EarthGlyphActive] and 'Magestats' not in card.Type: append('Armor +2')
 
 				#Harshforge monolith
 
@@ -2005,7 +2013,7 @@ def computeTraits(card):
 		if 'Nonliving' in rawTraitsList: extend(['Poison Immunity','Finite Life'])
 		if 'Rooted' in rawTraitsList: extend(['Unmovable','Non-Flying'])
 		if 'Restrained' in rawTraitsList: extend(['Defense -2','Non-Flying'])
-		if 'Incapacitated' in rawTraitsList: append('Non-Flying')
+		if 'Incapacitated' in rawTraitsList and 'Flying' in listedTraits: remove('Flying')#append('Non-Flying')
 		if (name == 'Gargoyle Sentry' and markers[Guard]): extend(['Armor +3','Tough -3'])
 		if (name == 'Dwarf Panzergarde' and markers[Guard]): extend(['Defense +3'])
 		if (name == 'Dragonclaw Wolverine' and markers[Rage]):
@@ -2169,6 +2177,83 @@ def processKiBuff(attack, aTraitDict, dTraitDict):
 			notify("{} has chosen not enhance {} with Ki Techniques\n".format(me, attack["Name"]))
 	return KiDice, KiEffect, KiTrait
 	
+def buffWithGlyphs(mageStats, attacker):
+	if me.Mana > 6:
+		if timesHasOccured("AirGlyphDeactivate",attacker.controller) and timesHasOccured("FireGlyphDeactivate",attacker.controller):
+			notifystr = "You have already deactivated both this round"
+			choiceList = ['OK']
+			colorsList = ['#FF0000']
+			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+			choice = 4
+		elif timesHasOccured("FireGlyphDeactivate",attacker.controller):
+			notifystr = "Would you like to deactivate your Air Glyph?"
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+			if choice == 2:
+				choice = 4
+		elif timesHasOccured("AirGlyphDeactivate",attacker.controller):
+			notifystr = "Would you like to deactivate your Fire Glyph?"
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+			if choice == 1:
+				choice = 2
+			else:
+				choice = 4
+		else:
+			notifystr = "Which buff would you like to apply?"
+			choiceList = ['Air (+4 effect)', 'Fire (+3 dice)', 'both' ,'None']
+			colorsList = ['#0000FF','#0000FF','#0000FF', '#FF0000']
+			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+		if choice == 1:
+			me.Mana -=3
+			mageStats.markers[AirGlyphActive] = 0
+			mageStats.markers[AirGlyphInactive] = 1
+			attacker.markers[AirGlyphActive] +=1
+			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
+			notify("{} has chosen to pay 3 mana and deactivate the Air Glyph to give this attack +4 to the effect roll\n".format(me))
+		elif choice == 2:
+			me.Mana -=3
+			mageStats.markers[FireGlyphActive] = 0
+			mageStats.markers[FireGlyphInactive] = 1
+			attacker.markers[FireGlyphActive] +=1
+			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
+			notify("{} has chosen to pay 3 mana and deactivate the Fire Glyph to give this attack +3 dice\n".format(me))
+		elif choice ==3:
+			me.Mana -=6
+			mageStats.markers[AirGlyphActive] = 0
+			mageStats.markers[AirGlyphInactive] = 1
+			attacker.markers[AirGlyphActive] +=1
+			mageStats.markers[FireGlyphActive] = 0
+			mageStats.markers[FireGlyphInactive] = 1
+			attacker.markers[FireGlyphActive] +=1
+			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
+			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
+			notify("{} has chosen to pay 6 mana and deactivate both Air and Fire Glyphs to give this attack +3 dice and +4 to the effect roll\n".format(me))
+	elif me.Mana > 3:
+		notifystr = "Which buff would you like to apply?"
+		choiceList = ['Air (+4 effect)', 'Fire (+3 dice)','None']
+		colorsList = ['#0000FF','#0000FF','#FF0000']
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+		if choice == 1:
+			me.Mana -=3
+			mageStats.markers[AirGlyphActive] = 0
+			mageStats.markers[AirGlyphInactive] = 1
+			attacker.markers[AirGlyphActive] +=1
+			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
+			notify("{} has chosen to pay 3 mana and deactivate the Air Glyph to give this attack +4 to the effect roll\n".format(me))
+		elif choice == 2:
+			me.Mana -=3
+			mageStats.markers[FireGlyphActive] = 0
+			mageStats.markers[FireGlyphInactive] = 1
+			attacker.markers[FireGlyphActive] +=1
+			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
+			notify("{} has chosen to pay 3 mana and deactivate the Fire Glyph to give this attack +3 dice\n".format(me))
+	else:
+		notify("You don't have enough Mana to pay for the buffs")
+	
+	return
 
 def getStatusDict(card): #Will later expand to make this more useful
 		if "Mage" in card.Subtype: return {'Damage' : card.controller.Damage, 'Mana' : card.controller.Mana}

@@ -35,10 +35,14 @@ def nextPhaseArena():
 		for p in players:
 			for card in table:
 				traits = computeTraits(card)
+				#redo the below for removing glyphs
+				if (card.markers[EarthGlyphActive] or card.markers[FireGlyphInactive] or card.markers[AirGlyphInactive]) and 'Magestats' not in card.Type: remoteCall(p, "getRidofGlyphs", [card])
+				if (card.markers[EarthGlyphActive] or card.markers[WaterGlyphActive]) and ('Magestats' in card.Type or "Drake" in card.Name) and card.controller.name == p.name: remoteCall(p, "resolveUpkeepGlyphs", [traits, card])
 				if 'UpKip' in traits and card.controller.name == p.name: remoteCall(p, "resolveKiUpkeep", [traits, card])
 				if card.Name == 'Ring of Ki' and card.controller.name == p.name: remoteCall(p, "resolveKiGen", [traits, card])
 				if "Ki" in traits and not "Magestats" in card.type and card.controller.name == p.name: remoteCall(p, "resolveKiGen", [traits, card])
-				if (card.Name == "Living Armor" or card.Name == "Living Armor - Playtest"): remoteCall(p, "resolveLivingArmor", [traits, card])
+				if (card.Name == "Living Armor" or card.Name == "Living Armor - Playtest") and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveLivingArmor", [traits, card])
+				if "Melting" in traits and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveMelting",[traits, card])
 				if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
 				if card.markers[Rot] and card.controller.name == p.name: remoteCall(p, "resolveRot", [card])
 				if card.markers[Bleed] and card.controller.name == p.name: remoteCall(p, "resolveBleed", [card])
@@ -105,6 +109,12 @@ def resolveLivingArmor(traits, card):
 			notify("Living Armor has 3 tokens already and will not generate more")
 	return
 	
+def getRidofGlyphs(card):
+	card.markers[FireGlyphInactive] = 0
+	card.markers[AirGlyphInactive] = 0
+	card.markers[EarthGlyphActive] -= 1
+	
+	
 def resolveKiGen(traits, card):
 	mute()
 	#is the setting on?
@@ -129,6 +139,34 @@ def resolveKiGen(traits, card):
 	if card.controller == me and 'Ki' in traits and card.isFaceUp:
 		notify("Generating Ki for {}...\n".format(card))	#found at least one
 		card.markers[Ki] += 1 
+	return
+	
+def resolveUpkeepGlyphs(traits, card):
+	mageDict = eval(me.getGlobalVariable("MageDict"))
+	mageStatsID = int(mageDict["MageStatsID"])
+	mageStats = Card(mageStatsID)
+	mage = Card(traits["MageID"])
+	if card.markers[EarthGlyphActive]:
+		notifystr = "Would you like to pay 2 mana to give 2 Armor to a friendly creature?"
+		choiceList = ['Yes', 'No']
+		colorsList = ['#0000FF', '#FF0000']
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+		if choice == 1 :
+			me.Mana -= 2
+			mageStats.markers[EarthGlyphActive] = 0
+			mageStats.markers[EarthGlyphInactive] = 1
+			mage.markers[EarthGlyphActive] +=1
+			notify("{} has chosen to pay 2 mana to give a friendly creature 2 Armor.\n(You'll have to manually move the Glyph token from your mage to target for now)\n".format(me))
+	if card.markers[WaterGlyphActive]:
+		notifystr = "Would you like to pay 2 mana to heal a friendly creature by 2?"
+		choiceList = ['Yes', 'No']
+		colorsList = ['#0000FF', '#FF0000']
+		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+		if choice == 1 :
+			me.Mana -= 2
+			mageStats.markers[WaterGlyphActive] = 0
+			mageStats.markers[WaterGlyphInactive] = 1
+			notify("{} has chosen to pay 2 mana to heal a friendly creature by 2.\n(You'll have to manually heal the target for now)\n".format(me))			
 	return
 	
 def resolveKiUpkeep(traits, card):

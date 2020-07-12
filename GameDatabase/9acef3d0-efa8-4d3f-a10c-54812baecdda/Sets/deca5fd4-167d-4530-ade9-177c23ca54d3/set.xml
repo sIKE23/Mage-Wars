@@ -408,7 +408,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="This Mage gains Armor +1. Once per round, as a quick spell, you may pay X Ki and remove a condition on this Mage. X = the condition&apos;s removal cost. &#xD;&#xA;[Armor+1]" />
+			<property name="Text" value="This Mage gains Armor +1. Once per round, as a quick spell, you may pay X Ki and remove a condition on this Mage. X = the condition&apos;s removal cost. &#xD;&#xA;[Armor +1]" />
 			<property name="CardID" value="MWAMKQ03" />
 		</card>
 		<card id="e2f48ef1-f64c-4924-ac2f-5d5b1696ca7c" name="Dragon&apos;s Lance">

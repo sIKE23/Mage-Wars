@@ -313,28 +313,8 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionGreen] = 0
 			card.markers[ActionGreenUsed] = 1
 			if mageDict['MageRevealed'] == 'True': notify("{} spends Green Action Marker\n".format(card.Name))
-	elif myColor == 4: #Yellow
-		if card.markers[ActionYellowUsed] > 0:
-			card.markers[ActionYellow] = 1
-			card.markers[ActionYellowUsed] = 0
-			if mageDict['MageRevealed'] == 'True': notify("{} readies Yellow Action Marker\n".format(card.Name))
-		elif card.markers[ActionYellow] == 1 and card.markers[Slam]>0:
-			card.markers[ActionYellow] = 0
-			card.markers[ActionYellowUsed] = 1
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
-			if choice == 1:
-				card.markers[Slam] = 0
-				card.markers[Daze] += 1
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam turns to a daze\n".format(card.Name))
-			else:
-				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam remains unchanged\n".format(card.Name))
-		else:
-			card.markers[ActionYellow] = 0
-			card.markers[ActionYellowUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker\n".format(card.Name))
-	elif myColor == 5: #Purple
+	
+	elif myColor == 4: #Purple
 		if card.markers[ActionPurpleUsed] > 0:
 			card.markers[ActionPurple] = 1
 			card.markers[ActionPurpleUsed] = 0
@@ -355,7 +335,28 @@ def toggleAction(card, x=0, y=0):
 			card.markers[ActionPurple] = 0
 			card.markers[ActionPurpleUsed] = 1
 			if mageDict['MageRevealed'] == 'True': notify("{} spends Purple Action Marker\n".format(card.Name))
-	elif myColor == 6: #Grey
+	'''elif myColor == 5: #Yellow
+		if card.markers[ActionYellowUsed] > 0:
+			card.markers[ActionYellow] = 1
+			card.markers[ActionYellowUsed] = 0
+			if mageDict['MageRevealed'] == 'True': notify("{} readies Yellow Action Marker\n".format(card.Name))
+		elif card.markers[ActionYellow] == 1 and card.markers[Slam]>0:
+			card.markers[ActionYellow] = 0
+			card.markers[ActionYellowUsed] = 1
+			choiceList = ['Yes', 'No']
+			colorsList = ['#0000FF', '#FF0000']
+			choice = askChoice("Would you like to flip the slam to a daze?", choiceList, colorsList)
+			if choice == 1:
+				card.markers[Slam] = 0
+				card.markers[Daze] += 1
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam turns to a daze\n".format(card.Name))
+			else:
+				if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker and the slam remains unchanged\n".format(card.Name))
+		else:
+			card.markers[ActionYellow] = 0
+			card.markers[ActionYellowUsed] = 1
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Yellow Action Marker\n".format(card.Name))'''
+	'''elif myColor == 6: #Grey
 		if card.markers[ActionGreyUsed] > 0:
 			card.markers[ActionGrey] = 1
 			card.markers[ActionGreyUsed] = 0
@@ -375,7 +376,7 @@ def toggleAction(card, x=0, y=0):
 		else:
 			card.markers[ActionGrey] = 0
 			card.markers[ActionGreyUsed] = 1
-			if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker\n".format(card.Name))
+			if mageDict['MageRevealed'] == 'True': notify("{} spends Grey Action Marker\n".format(card.Name))'''
 
 def toggleDeflect(card, x=0, y=0):
 	mute()
@@ -675,7 +676,7 @@ def flipcard(card, x = 0, y = 0):
 			target = getAttachTarget(card)
 			target.markers[Ki] += 2
 			notify("{} meditates for battle and gains 2 Ki\n".format(me))
-		if "Monk" in card.Name and 'Magestats' not in card.Type:
+		if "Monk" in card.Name and 'Magestats' not in card.Type and 'Mage' in card.Subtype:
 			card.markers[Ki] += 3
 		if "Defense" in card.Stats and not card.Name=="Forcemaster":
 			if "1x" in card.Stats:
@@ -761,6 +762,7 @@ def mageSetup():
 
 def discard(card, x=0, y=0):
 	mute()
+	cardTraitsDict=computeTraits(card)
 	if card.controller != me:
 		whisper("{} does not control {} - discard cancelled".format(me, card))
 		return
@@ -775,6 +777,7 @@ def discard(card, x=0, y=0):
 	elif card.special == "Scenario":
 		obliterate(card)
 		return
+	returnMarkers(card, cardTraitsDict)
 	card.isFaceUp = True
 	detach(card)
 	card.moveTo(me.piles['Discard Pile'])
