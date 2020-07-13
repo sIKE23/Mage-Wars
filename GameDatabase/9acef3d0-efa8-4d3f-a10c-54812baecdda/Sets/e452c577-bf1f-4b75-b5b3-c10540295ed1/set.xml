@@ -62,11 +62,11 @@
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
-			<property name="Stats" value="Spellbook=100, Life=32, Armor=0, Channeling=10" />
+			<property name="Stats" value="Spellbook=105, Life=32, Armor=0, Channeling=10" />
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="32" />
-			<property name="StatSpellBookPoints" value="100" />
+			<property name="StatSpellBookPoints" value="105" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Mind=1, S-Martial=1, S-Monk=1, T-Creature=3" />
 			<property name="cAttacks" value="" />
@@ -303,7 +303,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="&#xD;&#xA;[Armor +1] [Wind -2] [Hydro -2] [Flame -2] [Frost -2] [Lightning -2] [Acid -2]" />
+			<property name="Text" value="&#xD;&#xA;[Armor +1] [Wind -1] [Hydro -1] [Flame -1] [Frost -1] [Lightning -1] [Acid -1]" />
 			<property name="CardID" value="MW1Q07" />
 		</card>
 		<card id="127d68be-faa7-4939-8b17-e346248e04c0" name="Ice Ring">
@@ -379,25 +379,6 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="Pulsating Blow:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [9+ = Daze]&#xD;&#xA;Pulsating Blow 2:&#xD;&#xA; [Quick] [Melee] [Dice=7]" />
 			<property name="Traits" value="" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MW1Q07" />
-		</card>
-		<card id="dc13468d-b3ea-4ab4-9312-0c1dbbdccbde" name="Sword of the Elements V3">
-			<property name="Nickname" value="Sword of the Elements" />
-			<property name="Type" value="Equipment" />
-			<property name="Subtype" value="Elemental" />
-			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))SMage" />
-			<property name="Target" value="Mage" />
-			<property name="School" value="Air/Fire/Earth/Water" />
-			<property name="Level" value="1/1/1/1" />
-			<property name="Stats" value="Location=Weapon" />
-			<property name="StatEquipmentSlot" value="Weapon" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="Substance Cut:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
-			<property name="Traits" value="Elementalist Only" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q07" />
 		</card>

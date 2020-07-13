@@ -489,7 +489,7 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 					else:
 						attackDice += 1
 				if attacker.markers[FireGlyphActive]:
-					attackDice +=3
+					attackDice +=2
 				level = eval(attacker.Level)
 				if Card(attack['OriginalSourceID']).name in listMageWeapons and "Mage" in attacker.Subtype and level >= 5: attackDice += 1
 				if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] > 1 : attackDice += attacker.markers[Charge]
@@ -1250,7 +1250,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.\n".format(me))
 		for attachedCard in getAttachments(attacker):				
-			if attachedCard.isFaceUp and attachedCard.Name == "Fortified Resolve" and damage > 0 and not timesHasOccured("FortRes",attacker.controller):
+			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name and damage > 0 and not timesHasOccured("FortRes",attacker.controller):
 				attachedCard.markers[Charge] +=1
 				rememberPlayerEvent("FortRes",attacker.controller)
 				notify("Fortified Resolve charges up. It now has {} charges\n".format(attachedCard.markers[Charge]))
@@ -1445,7 +1445,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		if defender.type == "Creature": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
 		else: dManaDrain = ""
 		for attachedCard in getAttachments(defender):
-			if attachedCard.isFaceUp and attachedCard.Name == "Fortified Resolve":
+			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name:
 					if attachedCard.markers[Charge]>0:
 						FRChoice = askChoice("Spend a charge marker to reduce incoming damage by 2?",["Yes","No"],["#01603e","#de2827"])
 						if FRChoice == 1:

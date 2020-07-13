@@ -58,7 +58,7 @@ def nextPhaseArena():
 				if card.Name == "Altar of Domination" and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveTalos", [card])
 				if card.Name in ["Staff of Storms"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveStormTokens", [card])
 				if ("Regenerate" in traits or "Lifegain" in traits) and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveRegeneration", [traits, card])
-			remoteCall(p, "resolveUpkeep", [])
+			remoteCall(p, "resolveUpkeep", [traits])
 		setPhase(5)
 	elif currentPhase()[0] == "Planning Phase":
 		setPhase(6)

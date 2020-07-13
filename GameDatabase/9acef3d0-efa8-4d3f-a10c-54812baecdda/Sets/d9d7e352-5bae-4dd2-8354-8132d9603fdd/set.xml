@@ -56,6 +56,46 @@
 			<property name="Text" value="" />
 			<property name="CardID" value="MWAPRC03" />
 		</card>
+		<card id="d82050a5-7c50-4d0a-96fe-75f4fe8eaf93" name="Frost Elemental - Playtest">
+			<property name="Nickname" value="Frost Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental, Frost" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="2+2" />
+			<property name="Stats" value="Armor=0, Life=23" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="23" />
+			<property name="cAttacks" value="name=Frozen Fists;action type=Quick;range type=Melee;range=(0,0);dice=5;effects={7+: ['Freeze', 'Freeze']}" />
+			<property name="AttackBar" value="Frozen Fists:&#xD;&#xA;[Quick] [Melee] [Frost] [Dice=5] [d12] [7+ = 2 Freeze]" />
+			<property name="Traits" value="Melting 2, Nonliving, Frost Immunity, Flame +2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAELC03" />
+		</card>
+		<card id="cca66c58-d95f-4005-94de-ac5e1f8759ca" name="Ice Golem - Playtest">
+			<property name="Nickname" value="Ice Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Golem, Frost" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=13" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Frosty Fists;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={3+: ['Freeze']}" />
+			<property name="AttackBar" value="Frosty Fists:&#xD;&#xA;[Quick] [Melee] [Frost] [Dice=3] [d12] [3+ = Freeze]" />
+			<property name="Traits" value="Melting 1, Nonliving, Frost Immunity, Psychic Immunity" />
+			<property name="Text" value="Flame attacks against the Ice Golem roll 2 additional dice." />
+			<property name="CardID" value="MWAELC05" />
+		</card>
 		<card id="418f688f-64b0-442f-bb98-8afc05ea6615" name="Killer Bees - Playtest">
 			<property name="Nickname" value="Killer Bees" />
 			<property name="Type" value="Creature" />
@@ -93,6 +133,26 @@
 			<property name="Traits" value="Nonliving" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWANMC03" />
+		</card>
+		<card id="81ac0faa-fa8b-4ff3-a9ce-918ecf228061" name="Tide Elemental - Playtest">
+			<property name="Nickname" value="Tide Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Hydro, Elemental" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Tidal Crash;action type=Quick;range type=Melee;range=(0,0);damage type=Hydro;dice=4;effects={7+: ['Stagger']}" />
+			<property name="AttackBar" value="Tidal Crash:&#xD;&#xA;[Quick] [Melee] [Hydro] [Dice=4] [d12] [7+ = Stagger] [Extinguish]" />
+			<property name="Traits" value="Hydro Immunity, Nonliving, Resilient, Burnproof, Frost +2" />
+			<property name="Text" value="Tide Elemental ignores non-critical damage from attacks and is immune to Burn conditions. Frost attacks against it roll 2 additional dice. As a Quick Action the Tide Elemental can remove all Burn conditions from one object in this zone." />
+			<property name="CardID" value="MWAELC09" />
 		</card>
 		<card id="fcf58b65-53e6-4463-ad22-32cf05531465" name="Zombie Brute - Playtest">
 			<property name="Nickname" value="Zombie Brute" />
@@ -208,6 +268,24 @@
 			<property name="Text" value="Eye for an Eye can only be revealed before the Roll Dice Step of an attack. During the Damage and Effects Step, the attacker suffers the same damage and effects as the defender. Then, destroy Eye for an Eye." />
 			<property name="CardID" value="PSE05" />
 		</card>
+		<card id="eb8231ba-644c-469e-ba59-b3050cd3c67d" name="Fortified Resolve">
+			<property name="Nickname" value="Fortified Resolve" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Chakra, Martial" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage"/>
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this Mage attacks and damages an enemy creature, place a Charge token on Fortified Resolve. When this Mage would be damaged by an attack, you may remove a charge token from Fortified Resolve to reduce the damage from that attack by 2." />
+			<property name="CardID" value="MWAMKE06" />
+		</card>
 		<card id="3b7fc88e-4eb5-4e1e-be79-3291bf4b6aa3" name="Harmonize - Playtest">
 			<property name="Nickname" value="Harmonize" />
 			<property name="Type" value="Enchantment" />
@@ -297,25 +375,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magecast" />
-			<property name="Text" value="Only a Mage can cast this spell. Choose another friendly creature to receive 2 direct damage, then gain 3 mana. You can only cast this spell once per round." />
-			<property name="CardID" value="MWANI03" />
-		</card>
-		<card id="c99bbb6b-63ca-4239-a970-927eee82937f" name="Ritual of Kallek again - Playtest">
-			<property name="Nickname" value="Ritual of Kallek" />
-			<property name="Type" value="Incantation" />
-			<property name="Subtype" value="Mana, Ritual, Dsjer-Tet" />
-			<property name="Cost" value="0" />
-			<property name="Action" value="Quick"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))SMage" />
-			<property name="Target" value="Friendly Mage" />
-			<property name="School" value="Arcane"  />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magecast" />
-			<property name="Text" value="Only a Mage can cast this spell. Choose another friendly creature to receive 4 direct damage, then gain 2 mana. You can only cast this spell once per round." />
+			<property name="Text" value="The casting Mage loses 2 life, then gains 3 mana. You can only cast this spell once per round." />
 			<property name="CardID" value="MWANI03" />
 		</card>
 	</cards>

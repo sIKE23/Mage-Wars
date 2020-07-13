@@ -235,11 +235,19 @@ def resolveChanneling(p):
 														x += 1
 										if x == 3: #max 3 outpost count.
 												break
+						if c.name == "Echo of the Depths":
+							songFind = False
+							for c2 in table:
+								if c2.isFaceUp and "Song" in c2.Subtype and c2.Subtype != None:
+									songFind = True
+							if songFind == True:
+								addMana(c)
+							
 	if p == me:
 		me.Mana += me.Channeling
 		notify("{} channels {} mana.\n".format(me.name,me.Channeling))
 
-def resolveUpkeep():
+def resolveUpkeep(traits):
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
@@ -351,7 +359,7 @@ def resolveUpkeep():
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 		# Process Monk Upkeep
-		elif card.Type in ["Equipment", "Enchantment"] and card.isFaceUp and "Monk" not in card.Subtype and "Martial" not in card.Subtype and "Mind" not in card.School and card.controller == me:
+		elif 'Monk' in Card(traits['MageID']).name and card.Type in ["Equipment", "Enchantment"] and card.isFaceUp and "Monk" not in card.Subtype and "Martial" not in card.Subtype and "Mind" not in card.School and card.controller == me:
 			target = getAttachTarget(card)
 			upKeepCost = 1
 			notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
