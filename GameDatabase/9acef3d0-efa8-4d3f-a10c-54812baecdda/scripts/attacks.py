@@ -1426,6 +1426,7 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		#debug("DAMAGE RECEIPT MENU\n")
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		atkTraits = attack.get('Traits',{})
+		totalDice = roll[0]+roll[1]+roll[2]+roll[3]+roll[4]+roll[5]
 		#If it is healing, we heal and then end the attack, since it is not an attack.
 		if False and attack.get('EffectType','Attack')=='Heal':
 				healingAmt = min(sum([{0:0,1:0,2:1,3:2,4:1,5:2}.get(i,0)*roll[i] for i in range(len(roll))]),getStatusDict(defender).get('Damage',0))
@@ -1444,6 +1445,16 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 				defender.markers[VoltaricOFF] = 1
 		if defender.type == "Creature": dManaDrain = (min(atkTraits.get('Mana Drain',0)+atkTraits.get('Mana Transfer',0),defender.controller.Mana) if actualDmg else 0) #Prep for mana drain
 		else: dManaDrain = ""
+		if "Incorporeal" in dTraitDict:
+			if "Ethereal" in attack.get("Traits"):
+				nonBlanks = roll[2] + roll[3]+roll[4]+roll[5]
+				onesRolled = None
+			else:
+				nonBlanks = None
+				onesRolled = roll[2]+roll[4]
+		else:
+			nonBlanks = None
+			onesRolled = None
 		for attachedCard in getAttachments(defender):
 			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name:
 					if attachedCard.markers[Charge]>0:
@@ -1455,14 +1466,16 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		
 		normalDamage = roll[2] + 2* roll[3] # calculate the results for Normal Damage
 		criticalDamage = roll[4] + 2* roll[5] # calculate the results for Critical Damage
-		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} ({} normal damage and {} critical damage were rolled.)\nApply these results?'.format(attacker.Name,
+		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} ({} normal damage and {} critical damage were rolled.){}{}\nApply these results?'.format(attacker.Name,
 																										  actualDmg,
 																										  ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
 																										  defender.Name,
 																										  (' It will also drain {} mana from {}.'.format(
 																												  str(dManaDrain),defender.controller.name) if dManaDrain else ''),
 																										   normalDamage,
-																										   criticalDamage),
+																										   criticalDamage,
+																										   ('({}/{} dice rolled damage.) '.format(str(nonBlanks),str(totalDice)) if nonBlanks else ''),
+																										   ('({}/{} dice rolled ones.) '.format(str(onesRolled),str(totalDice)) if onesRolled else '')),
 						   ['Yes',"Other Damage Amount",'No'],
 						   ["#01603e","#FF6600","#de2827"])
 		if choice == 1:

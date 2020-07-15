@@ -727,7 +727,7 @@ def castSpell(card,target=None):
 		binder = getBindTarget(card)
 		caster = getBindTarget(card)
 		if not caster or not ("Familiar" in caster.Traits or "Spawnpoint" in caster.Traits):
-				casters = [d for d in table if "Mage" in d.Subtype and d.isFaceUp and d.controller == me]
+				casters = [d for d in table if "Mage" in d.Subtype and d.isFaceUp and d.controller == me and not "Magestats" in d.Type]
 				if casters: caster = casters[0]
 				else:
 						whisper("And just who do you expect to cast that? You need to play a mage first.")
@@ -739,6 +739,7 @@ def castSpell(card,target=None):
 				else: whisper("No single target for {} detected. Cost calculation is more effective if you select a target.".format(card))
 		if card.Type == "Enchantment" and not canAttach(card,target): return
 		#Long term, invalid targets will result in spell cancellation. Won't enforce that for now, though.
+		debug("Caster: " + caster.Name)
 		if costStr:
 				cardType = card.Type
 				#First, determine the base cost
@@ -766,6 +767,19 @@ def castSpell(card,target=None):
 								cost -= discAmt
 								discountAppend((c,discAmt,d[1])) #Keep track of which discounts we are applying, and how much of each was applied
 						else: break #Stop if the cost of the spell reaches 0; we don't need any more discounts.
+				#Magebane
+				for attachment in getAttachments(caster):
+					if attachment.Name == 'Magebane' and attachment.isFaceUp:
+						if askChoice("The caster is cursed by Magebane. Would you like to take 1 damage to cast the spell?",["Yes","No"],["#171e78","#de2827"]) == 1:
+							if "Mage" in caster.Subtype:
+								caster.controller.Damage += 1
+								notify("{} suffers damage from {}\n".format(caster,attachment))
+							else:
+								caster.markers[Damage] += 1
+								notify("{} suffers damage from {}\n".format(caster,attachment))
+						else:
+							return
+				
 				#Ask the player how much mana they want to pay
 				discountSourceNames = "\n".join(["{} -{}".format(d[2],str(d[1])) for d in usedDiscounts])
 				#discountSourceNames = '\n'.join(map(lambda t: "{} (-{})".format(t[0].Name,str(t[1])),usedDiscounts))
@@ -799,6 +813,7 @@ def castSpell(card,target=None):
 				elif "Conjuration" in card.Type: notify("{} conjures {}!\n".format(caster,card.Name))
 				else: notify("{} casts {}!\n".format(caster,card.Name))
 				if card.Type != "Enchantment" and not card.isFaceUp: flipcard(card)
+				
 				if not binder or not "Spellbind" in binder.Traits:
 						unbind(card) #If it is not bound, unbind it from its card
 						if card.Type in ["Attack","Incantation"]: moveCardToDefaultLocation(card,True)
