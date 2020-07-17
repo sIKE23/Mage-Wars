@@ -1,5 +1,7 @@
+#Nothing specific to arena to see here. This is on the chopping block
 
-def nextPhaseArena2():
+
+'''def nextPhaseArena2():
 	mute()
 	global roundTimes
 	global gameTurn
@@ -104,9 +106,9 @@ def switchPhase(card, phase, phrase):
 				remoteCall(card.controller, "remoteSwitchPhase", [card, phase, phrase])
 			notify("Phase changed to the {}".format(phrase))
 
-			return True
+			return True'''
 
-def validateDeck(deck):
+'''def validateDeck(deck):
 	mute()
 	for c in deck:
 		if c.Subtype == "Mage":
@@ -288,3 +290,4 @@ def validateDeck(deck):
 
 	#all good!
 	return True
+'''

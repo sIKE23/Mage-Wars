@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd" 
 	name="Mage Wars Battlegrounds: Domination" 
 	id="8c377c82-86af-45ca-ac7c-75230b803532" 
@@ -15,6 +15,8 @@
 		<marker id="1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" name="Grey Control Marker" />
 		<marker id="9ea607d3-dade-44dc-a69d-1c0d5691a246" name="Taunt (Skeelax)" />
 	</markers>
+
+
 	<cards>
 		<card id="2bc9e256-d325-435a-81ea-e6ad31b3f56b" name="Bolt of V&apos;Tar">
 			<property name="Nickname" value="Bolt of V&apos;Tar" />
@@ -33,7 +35,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="This attack gains the Mana Drain +X and Piercing +X traits. X is the number of V&apos;Tar Orbs you control." />
 			<property name="CardID" value="MWBG1A01" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="3f7a8262-09e1-40bd-8fb9-c7c6ac880ae0" name="Dragon&apos;s Breath">
 			<property name="Nickname" value="Dragon&apos;s Breath" />
@@ -47,12 +48,11 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Dragon&apos;s Breath;range type=Ranged;range=(0,3);damage type=Flame;dice=4;effects={10: ['Burn', 'Burn'], 3: ['Burn']};Defrost=True" />
+			<property name="cAttacks" value="name=Dragon&apos;s Breath;range type=Ranged;range=(0,3);damage type=Flame;dice=4;effects={3: ['Burn'], 10: ['Burn', 'Burn']};Defrost=True" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [3-9 = Burn; 10+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="At the end of the attack, as part of the same attack action, Dragon&apos;s Breath may attack a second target (similar to a Sweeping attack). The second target must be in an adjacent zone, 1 zone farther away than the first target. Both targets must be within range." />
 			<property name="CardID" value="MWBG1A02" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="4d8e3876-3c1d-4448-895e-4fc929625673" name="Hurl Meteorite">
 			<property name="Nickname" value="Hurl Meteorite" />
@@ -66,12 +66,11 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Hurl Meteorite;range type=Ranged;range=(0,3);dice=9;effects={9: ['Stun'], 5: ['Daze']}" />
-			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze; 9+ = Stun]" />
+			<property name="cAttacks" value="name=Hurl Meteorite;range type=Ranged;range=(0,3);dice=9;effects={5: ['Daze;9+']}" />
+			<property name="AttackBar" value="[Ranged] [Dice=9] [d12] [5-8 = Daze;9+ = Stun]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWBG1A03" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="5c22f66f-bbeb-4027-b20f-3e468d428111" name="Sandstorm">
 			<property name="Nickname" value="Sandstorm" />
@@ -85,12 +84,11 @@
 			<property name="School" value="Air+Earth" />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Sandstorm;range type=Ranged;range=(0,2);Zone Attack=True;damage type=Wind;dice=2;effects={10: ['Push', 'Daze'], 4: ['Push'], 7: ['Daze']};Piercing +X=1;+2 vs. Flying=True;Unavoidable=True" />
-			<property name="AttackBar" value="[Ranged] [Zone Attack] [Wind] [Dice=2] [d12] [4-6 = Push; 7-9 = Daze; 10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
+			<property name="cAttacks" value="name=Sandstorm;range type=Ranged;range=(0,2);Zone Attack=True;damage type=Wind;dice=2;effects={4: ['Push;7-9']};Piercing +X=1;+2 vs. Flying=True;Unavoidable=True" />
+			<property name="AttackBar" value="[Ranged] [Zone Attack] [Wind] [Dice=2] [d12] [4-6 = Push;7-9 = Daze;10+ = Push &amp; Daze] [Piercing +1] [+2 vs. Flying] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="If Pushed, roll for random direction." />
 			<property name="CardID" value="MWBG1A04" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="6e4c7b12-9bc4-4c19-976f-840e40999a03" name="V&apos;Tarrian Energy Wave">
 			<property name="Nickname" value="V&apos;Tarrian Energy Wave" />
@@ -109,7 +107,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="This attack rolls 1 extra attack die for each V&apos;Tar Orb your control. It also affects any wall between the 2 targeted zones." />
 			<property name="CardID" value="MWBG1A05" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="6ffd7fe8-14ac-4bfa-8da4-aef87dbaa61a" name="Windstorm">
 			<property name="Nickname" value="Windstorm" />
@@ -128,7 +125,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
 			<property name="CardID" value="MWBG1A06" />
-			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -144,12 +140,13 @@
 			<property name="School" value="War" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=2, Life=5" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="5" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary" />
 			<property name="Text" value="Whenever a creature comes into play, which you control, you may place a Guard marker on it." />
 			<property name="CardID" value="MWBG1J01" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="27dacd66-4f54-465e-a728-10358b0c7548" name="Gravikor">
 			<property name="Nickname" value="Gravikor" />
@@ -163,12 +160,13 @@
 			<property name="School" value="Earth" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=4, Life=6" />
+			<property name="StatArmor" value="4" />
+			<property name="StatLife" value="6" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
 			<property name="Text" value="All creatures within 2 zones of Gravikor lose, and cannot gain, the Flying trait." />
 			<property name="CardID" value="MWBG1J02" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="54e67290-5e6a-4d8a-8bf0-bbb8fddf7ddd" name="V&apos;Torrak Gate">
 			<property name="Nickname" value="V&apos;Torrak Gate" />
@@ -182,12 +180,13 @@
 			<property name="School" value="Arcane"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=-, Life=6" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="6" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Incorporeal" />
 			<property name="Text" value="Friendly Creatures in zones with V&apos;Tar Orbs may use a move action to Teleport to this zone." />
 			<property name="CardID" value="MWBG1J03" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="62a0b1ac-91d1-4dc5-9bcc-eb4209261388" name="Raincloud">
 			<property name="Nickname" value="Raincloud" />
@@ -201,12 +200,13 @@
 			<property name="School" value="Air+Water"  />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="Armor=-, Life=5" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="5" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Incorporeal, Flying, Hydro Immunity" />
 			<property name="Text" value="All objects in Raincloud&apos;s zone gain the Flame -2, Acid -2, and Regenerate 1 traits. Each Upkeep Phase you may remove 1 Burn or Corrode condition from 1 object in Raincloud&apos;s zone, by paying its removal cost. Once per round, immediately before or after any friendly Action Phase, you may pay 1 mana to move Raincloud 1 zone and attach it to that zone." />
 			<property name="CardID" value="MWBG1J04" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="71e32301-4724-497d-9224-9f052fcf9808" name="Galaxxus">
 			<property name="Nickname" value="Galaxxus" />
@@ -220,12 +220,13 @@
 			<property name="School" value="War"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=7" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="7" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Epic" />
 			<property name="Text" value="Each Upkeep Phase you gain one V&apos;Tar. When cast, it must be placed in a zone without a V&apos;Tar Orb, and that zone must be adjacent to a zone with a V&apos;Tar Orb you control." />
 			<property name="CardID" value="MWBG1J05" />
-			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -241,12 +242,13 @@
 			<property name="School" value="Mind" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Armor=-, Life=4" />
-			<property name="cAttacks" value="name=Wall of Force" size="Horizontal Cards;Passage Blocked=True;Line of Sight Blocked=True" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="4" />
+			<property name="cAttacks" value="name=Wall of Force;Passage Blocked=True;Line of Sight Blocked=True" />
 			<property name="AttackBar" value="[Passage Blocked] [Line of Sight Blocked]" />
 			<property name="Traits" value="Incorporeal, Extendable" />
 			<property name="Text" value="During the Upkeep Phase, you may pay X mana to Reconstruct Wall of Force for X damage." />
 			<property name="CardID" value="MWBG1W01" />
-			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -262,12 +264,13 @@
 			<property name="School" value="War"  />
 			<property name="Level" value="2" />
 			<property name="Stats" value="Armor=3, Life=6" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="6" />
 			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Gains the Vigilant trait while in the same zone as a friendly conjuration (including an V&apos;Tar Orb you control), which is not attached to any object in the zone." />
 			<property name="CardID" value="MWBG1C01" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="9153fc63-f781-443a-ab94-10c5acb50faa" name="Oscuda">
 			<property name="Nickname" value="Oscuda" />
@@ -281,12 +284,13 @@
 			<property name="School" value="Nature" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=2, Life=10" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="10" />
 			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1||name=Stink Cloud;action type=Full;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Poison;dice=2;effects={7: ['Daze']};Unavoidable=True;Critical Damage=True" />
 			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]&#xD;&#xA;Stink Cloud:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Poison] [Dice=2] [d12] [7+ = Daze] [Unavoidable] [Critical Damage]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="Oscuda is immune to his Stink Cloud attack." />
 			<property name="CardID" value="MWBG1C02" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="42464e26-8982-4244-b06e-2aab60f88203" name="Skeelax, Taunting Imp">
 			<property name="Nickname" value="Skeelax" />
@@ -300,12 +304,14 @@
 			<property name="School" value="Dark" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Defense=6+ 1x, Armor=1, Life=9" />
+			<property name="StatDefense" value="6+ 1x" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="9" />
 			<property name="cAttacks" value="name=Trident;action type=Quick;range type=Melee;range=(0,0);dice=2;effects={5: ['Taunt']}" />
 			<property name="AttackBar" value="Trident:&#xD;&#xA;[Quick] [Melee] [Dice=2] [d12] [5+ = Taunt]" />
 			<property name="Traits" value="Flame -2, Legendary, Warlock Only" />
 			<property name="Text" value="During the Upkeep Phase, while Skeelax is in the same zone as an object with a Burn condition, he gains the Regenerate 2 trait." />
 			<property name="CardID" value="MWBG1C03" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="721428d1-878a-457b-8885-4e5f9bb2e20c" name="Slaknir, Goblin Chieftain">
 			<property name="Nickname" value="Slaknir" />
@@ -319,12 +325,13 @@
 			<property name="School" value="War" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="Armor=1, Life=9" />
-			<property name="cAttacks" value="name=Tribal Staff;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1||name=Move Out!;action type=Quick;range type=Ranged;range=(0,1);Target goblin you control is Pushed 1 zone in the direction of your choice.] =True" />
-			<property name="AttackBar" value="Tribal Staff:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Move Out!:&#xD;&#xA;[Quick] [Ranged:0-1] [Target goblin you control is Pushed 1 zone in the direction of your choice.] " />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Tribal Staff;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1||name=Move Out!;action type=Quick;range type=Ranged;range=(0,1);Target goblin you control is Pushed 1 zone in the direction of your choice.=True" />
+			<property name="AttackBar" value="Tribal Staff:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]&#xD;&#xA;Move Out!:&#xD;&#xA;[Quick] [Ranged:0-1] [Target goblin you control is Pushed 1 zone in the direction of your choice.]" />
 			<property name="Traits" value="Legendary" />
 			<property name="Text" value="All friendly goblins gain the Elusive trait." />
 			<property name="CardID" value="MWBG1C04" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="865954e9-4c67-4858-b3e0-484c66e19db9" name="Sslak, Orb Guardian">
 			<property name="Nickname" value="Sslak" />
@@ -338,12 +345,13 @@
 			<property name="School" value="Arcane+Dark"  />
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
 			<property name="cAttacks" value="name=Impaling Spines;action type=Quick;range type=Melee;range=(0,0);dice=3;Piercing +X=1" />
 			<property name="AttackBar" value="Impaling Spines:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="Sslak gains the Unmovable and Anchored traits while in a zone with a V&apos;Tar Orb." />
 			<property name="CardID" value="MWBG1C05" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="5688957a-e243-4999-8301-b869be3f6fdb" name="Usslak, Greater Orb Guardian">
 			<property name="Nickname" value="Usslak" />
@@ -357,12 +365,13 @@
 			<property name="School" value="Arcane+Dark"  />
 			<property name="Level" value="2+1" />
 			<property name="Stats" value="Armor=2, Life=11" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="11" />
 			<property name="cAttacks" value="name=Impaling Spines;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
 			<property name="AttackBar" value="Impaling Spines:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Psychic Immunity" />
 			<property name="Text" value="Usslak gains the Unmovable  and Anchored traits while in a zone with a V&apos;Tar Orb." />
 			<property name="CardID" value="MWBG1C06" />
-			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -383,7 +392,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Creatures cannot be Teleported to or from this zone." />
 			<property name="CardID" value="MWBD1E01" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="bf217fd3-18c0-4b61-a33a-117167533f3d" name="Plagued">
 			<property name="Nickname" value="Plagued" />
@@ -402,7 +410,6 @@
 			<property name="Traits" value="Magebind +2" />
 			<property name="Text" value="Each Upkeep Phase, place a point of direct poison damage on each Living creature in this zone (including this creature)." />
 			<property name="CardID" value="MWBG1E02" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="c0dbf89b-5373-47b5-ab1f-979400ea69f8" name="Sentinel of V&apos;Tar">
 			<property name="Nickname" value="Sentinel of V&apos;Tar" />
@@ -421,7 +428,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="While in the same zone as a V&apos;Tar Orb you control, this creature has the Unmovable and Anchored traits, and gains Armor +2 and the Melee +1 trait while guarding." />
 			<property name="CardID" value="MWBG1E03" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="d44f62c7-0a73-4ac1-9b21-9b32638b205c" name="V&apos;Tar Force Sentry">
 			<property name="Nickname" value="V&apos;Tar Force Sentry" />
@@ -431,7 +437,7 @@
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="cTargets" value="m0,M2))NULL" />
-			<property name="Target" value="Zone with V’Tar Orb" />
+			<property name="Target" value="Zone with V&apos;Tar Orb" />
 			<property name="School" value="Mind"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
@@ -440,7 +446,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Once per round, before or after a friendly creature&apos;s Action Phase you may Push a target enemy creature within 1 zone, 1 zone away. Cannot Push a creature through a wall with the Passage Attacks trait. Use a ready marker to track this ability.&#xD;&#xA;[ReadyMarker]" />
 			<property name="CardID" value="MWBG1E04" />
-			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -461,7 +466,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="may pay 3 mana to Push a different creature in that zone, one zone in any direction, and repeat this process. A creature cannot be affected by Cascading Force Wave more than once in the same casting. Creatures cannot be Pushed through walls with the Passage Attacks trait." />
 			<property name="CardID" value="MWBG1I01" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="ec457b85-b18a-4e4f-b6c6-7a498a8ebbe4" name="V&apos;Tarrian Healing Song">
 			<property name="Nickname" value="V&apos;Tarrian Healing Song" />
@@ -480,7 +484,6 @@
 			<property name="Traits" value="" />
 			<property name="Text" value="Target must be in a zone with a V&apos;Tar Orb you control. Heal target creature the amount rolled on 2 attack dice, add an additional 2 attack dice to the roll for each V&apos;Tar Orb you control." />
 			<property name="CardID" value="MWBG1I02" />
-			<property name="tAttacks" value="" />
 		</card>
 		<card id="f397a9b9-24dd-4f0b-a3a0-17337ec69d9f" name="V&apos;Tar Suppression">
 			<property name="Nickname" value="V&apos;Tar Suppression" />
@@ -499,7 +502,6 @@
 			<property name="Traits" value="Epic" />
 			<property name="Text" value="During the next Upkeep Phase V&apos;Tar Orbs do not function (they do not generate V&apos;Tar and the do not provide mana or healing)." />
 			<property name="CardID" value="MWBG1I03" />
-			<property name="tAttacks" value="" />
 		</card>
 
 
@@ -515,34 +517,30 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Mage gains +2 to the effect die roll for all melee and ranged attacks he makes that deal wind damage. If he makes multiple attacks in the same round, all of them receive this bonus.&#xD;&#xA;[Wind] [+2]" />
 			<property name="CardID" value="MWBG1Q01" />
-			<property name="tAttacks" value="" />
 		</card>
 
 		<card id="fb43bb92-b597-441e-b2eb-d18ef6b8cc77" name="Secret Passage">
 			<property name="Nickname" value="Secret Passage" />
 			<property name="Type" value="Internal" />
-			<property name="tAttacks" value="" />
 		</card>
 
 		<card id="fc31f61b-2af8-41f7-8474-bb9be0f32926" name="Spiked Pit Trap">
 			<property name="Nickname" value="Spiked Pit Trap" />
 			<property name="Type" value="Internal" />
-			<property name="tAttacks" value="" />
 		</card>
 
 		<card id="fd339a9d-8804-4afa-9bd5-1cabb1bebc9f" name="V&apos;Tar Orb Off">
 			<property name="Nickname" value="V&apos;Tar Orb Off" />
 			<property name="Type" value="Conjuration" />
 				<alternate name="V&apos;Tar Orb On" type="B">
-					<property name="Nickname" value="V&apos;Tar Orb On" />
-					<property name="Type" value="Conjuration"/>
+					<property name="Type" value="Conjuration" />
 				</alternate>
-			<property name="tAttacks" value="" />
 		</card>	
 
 	</cards>

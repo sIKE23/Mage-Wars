@@ -1,5 +1,5 @@
 #######
-#v2.0.0.0#
+#v3.0.0.0#
 #######
 
 def onTableLoaded():
@@ -53,16 +53,18 @@ def onGameStarted():
 
 	#if there's only one player, go into debug mode
 	if len(getPlayers()) == 1:
-		debugMode = True
+		#debugMode = True
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
-		me.setGlobalVariable("MyColor",str(5)) #Purple for testing
+		me.setGlobalVariable("MyColor",str(4)) #Purple for testing
+		me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 		setUpDiceAndPhaseCards()
-		setGlobalVariable("GameSetup", str(0))
-		notify("There is only one player, so there is no need to roll for initative.")
-		notify("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
+		setGlobalVariable("GameSetup",str(0))
+		publicChatMsg("There is only one player, so there is no need to roll for initative.")
+		#publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
+		setPhase(5)
 	else:
 		choosePlayerColor()
 		if gameHost == me:
@@ -72,9 +74,9 @@ def onGameStarted():
 def chooseGame():
 	mute()
 	#buttonColorList = ["#de2827","#171e78","#01603e","#f7d917","#c680b4","#c0c0c0"];
-	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Wage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
-	buttonColorList = ["#de2827","#171e78"];
-	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination"];
+	#choiceList = ["Mage Wars Arena","Wage Wars Arena: Domination","Mage Wars Arena: Co-Op Teams","Mage Wars Arena: Domination Co-Op Teams","Mage Wars Academy","Mage Wars Academy: Co-Op Teams"];
+	buttonColorList = ["#de2827","#171e78", "#01603e"];
+	choiceList = ["Mage Wars Arena","Mage Wars Arena: Domination", "Mage Wars Arena: Community Playtest Rules"];
 
 	while (True):
 		choice = askChoice("What would you like to Play?", choiceList, buttonColorList)
@@ -85,6 +87,10 @@ def chooseGame():
 		elif choice == 2:
 			setGlobalVariable("GameMode", "Domination")
 			loadMapFile()
+			break
+		elif choice == 3:
+			setGlobalVariable("GameMode", "Playtest")
+			setArenaBoard()
 			break
 	'''	elif choice == 3:
 			setGlobalVariable("GameMode", "ArenaCoOpTeamPlay")
@@ -114,12 +120,24 @@ def setArenaBoard(): # should this be moved to arena.py?
 	defineRectangularMap(zoneDef[0],zoneDef[1],zoneDef[2])
 	return
 
+def setAcademyBoard():
+	mute()
+	#For now, let's just define a region of the appropriate size. We also need an image (or do we?)
+	table.board = gameBoardsDict[10]["boardName"]
+	defineRectangularMap(1,1,900)
+
 def defineRectangularMap(I,J,tilesize):
 	mapDict = createMap(I,J,[[1 for j in range(J)] for i in range(I)],tilesize)
-	mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
-	mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
+	#If the map is a single zone, then all start locations are the same.
+	if len(mapDict['zoneArray'][0]) == 1 and len(mapDict['zoneArray']) == 1:
+		mapDict.get('zoneArray')[0][0]['startLocation'] = '*'
+	#Otherwise, place them on opposite corners of the board
+	else:
+		mapDict.get('zoneArray')[0][0]['startLocation'] = '1'
+		mapDict.get('zoneArray')[-1][-1]['startLocation'] = '2'
 	mapDict["RDA"] = (2,2)
 	setGlobalVariable("Map", str(mapDict))
+	debug("AAAAA "+str(mapDict))
 
 def choosePlayerColor():
 	mute()
@@ -200,10 +218,10 @@ def setUpDiceAndPhaseCards(): #some of this is for arena only, I think....
 		initativeCard.anchor = (True)
 		initativeCard.alternate = myColor
 		setGlobalVariable("InitativeCard",str(initativeCard._id))
-		phaseCard = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase Marker/Next Phase Button
-		phaseCard.anchor = (True)
-		phaseCard.alternate = "5" #Game starts at the Planning Phase
-		setGlobalVariable("PhaseCard",str(phaseCard._id))
+		#phaseCard = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase Marker/Next Phase Button
+		#phaseCard.anchor = (True)
+		#phaseCard.alternate = "5" #Game starts at the Planning Phase
+		#setGlobalVariable("PhaseCard",str(phaseCard._id))
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)
@@ -278,6 +296,8 @@ def AskInitiative(playerID):
 		break
 	setGlobalVariable("GameSetup", str(0))
 	notify("Game setup is complete! Players should now load their Spellbooks.")
+	nextTurn()
+	setPhase(5)
 
 def moveRDA(card):
 	"""Moves the dice roll area/initiative/phase marker to the appropriate area"""
@@ -313,13 +333,6 @@ def moveRDA(card):
 			x = columnX - zoneS
 			y = mapY + mapHeight + 10
 
-	elif cardType=='Phase' and 'Phase' in card.nickname:
-		if rdaChoice == "Side":
-			x = mapX - cardW - 10
-			y = rowY - zoneS + 10
-		else:
-			x = columnX - zoneS + 100
-			y = mapY + mapHeight + 10 + 10
 	card.moveToTable(x,y,True)
 
 def onDeckLoaded(args):
@@ -339,11 +352,19 @@ def onDeckLoaded(args):
 		elif debugMode or validateDeck(args.groups[0]):
 			setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
 			if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
-			mageSetup()
+			setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
+			if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
+			mageDict = eval(me.getGlobalVariable("MageDict"))
+			for card in me.piles["Spellbook"]:
+				if card.Subtype == "Mage":
+						mageDict["MageID"] = card._id
+				elif card.Type == "Magestats":
+						mageDict["MageStatsID"] = card._id
+			me.setGlobalVariable("MageDict",str(mageDict))
 			tutorialMessage("Play Card")
 		else:
-			#notify and delete deck
-			notify("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
+			#publicChatMsg and delete deck
+			publicChatMsg("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
 			for group in args.groups:
 				for card in group:
 					if card.controller == me:
@@ -352,7 +373,7 @@ def onDeckLoaded(args):
 #OnDeckLoaded Event Functions#
 def mageSetup():
 	#set initial health and channeling values
-	for c in me.hand:
+	for c in me.piles["Spellbook"]:
 		if c.Subtype == "Mage":
 			stats = c.Stats.split(",")
 			#me.Mage = c.name - when #1278 happens and game Counters support strings....
@@ -478,6 +499,17 @@ def onCardArrowTargeted(args):
 	mute()
 	source,target = args.fromCard,args.toCard #Should probably make an attack declaration function. Eventually.
 	if args.player == me == source.controller and args.targeted and not args.scripted and getSetting("DeclareAttackWithArrow",True): targetMenu(source,target)
+# WIP - Tinkering required
+
+def onCardDoubleClicked(args):
+	#args = card, mouseButton, keysDown
+	mute()
+	if args.card.type == "DiceRoll":
+		genericAttack(0)
+
+	if args.card.type =="Phase":
+		nextPhase(table)
+
 
 def checkMageDeath(args):
 	#args = player,counter,value,scripted
@@ -523,14 +555,6 @@ def concede(group=table, x = 0, y = 0):
 	else:
 		notify("{} was about to concede the game, but thought better of it...".format(me))
 
-def onCardDoubleClicked(args):
-	#args = card, mouseButton, keysDown
-	mute()
-	if args.card.type == "DiceRoll":
-		genericAttack(0)
-
-	if args.card.type =="Phase":
-		nextPhase(table)
 
 def playerStats():
 	mute()

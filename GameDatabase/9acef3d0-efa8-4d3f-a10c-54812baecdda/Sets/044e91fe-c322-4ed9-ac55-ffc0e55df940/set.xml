@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Priestess"
+	id="044e91fe-c322-4ed9-ac55-ffc0e55df940"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="1.4.2.1"
+	version="1.14.0.0">
+
+	<cards>
+	
+		<card id="00198aab-6c44-4ccc-8eaf-51df73dd3521" name="Priestess">
+			<property name="Nickname" value="Priestess" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="005e4ea3-d680-477a-957e-a2906de57be2" name="Academy Priestess Stats">
+			<property name="Nickname" value="Academy Priestess Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Holy Magic. Dark spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=21, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="21" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-8" />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+		<card id="1a6d6ac5-11ba-4ac5-bac3-707893f925aa" name="Dazzle">
+			<property name="Nickname" value="Dazzle" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Light" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))TCreature||TConjuration" />
+			<property name="Target" value="Creature or Conjuration" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Dazzle;range type=Ranged;range=(0,1);damage type=Light;dice=1;effects={4: ['Stagger']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="AttackBar" value="[Ranged] [Light] [Dice=1] [d12] [4+ = Stagger] [Ethereal] [Unavoidable] [+2 vs. Nonliving Creatures]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When attacking a Nonliving creature, roll 2 extra attack dice and add 2 to your effect roll" />
+			<property name="CardID" value="MWAPRA01" />
+		</card>
+
+		
+		<card id="23825fa1-d189-48b0-bd5e-e6c6e3ee786f" name="Aurora Lucere, Dawnbreaker&apos;s Chosen">
+			<property name="Nickname" value="Aurora" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight, Soldier" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=10" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Oathkeeper;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Oathkeeper:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="Aurora Lucere treats Minor Creatures as Pests, and gains Aegis 2 trait when attacked by a Minor creatures" />
+			<property name="CardID" value="MWAPRC01" />
+		</card>
+		<card id="2afa74eb-129c-4314-b2d9-81960578f1c8" name="Broken Wing Angel">
+			<property name="Nickname" value="Broken Wing Angel" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Angel" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=5" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Heart&apos;s Strike;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Heart&apos;s Strike:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Broken Wing Angel is summoned, you may heal a Living creature in her zone the amount rolled on 3 attack dice" />
+			<property name="CardID" value="MWAPRC02" />
+		</card>
+		<card id="34c042f0-f9d8-4a49-b73a-7913be56577b" name="Disciple of Radiance">
+			<property name="Nickname" value="Disciple of Radiance" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Cleric" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Light Staff;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Light Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Whenever your Mage casts or reveals a healing spell, Disciple of Radiance may deal 1 direct light damage to a target creature in her zone." />
+			<property name="CardID" value="MWAPRC03" />
+		</card>
+		<card id="3648ad82-1729-4e29-9063-c36983d10897" name="Ehren, Enduring Paladin">
+			<property name="Nickname" value="Ehren" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight, Soldier" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=15" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="15" />
+			<property name="cAttacks" value="name=Sword of the Last Watch;action type=Quick;range type=Melee;range=(0,0);dice=1" />
+			<property name="AttackBar" value="Sword of the Last Watch:&#xD;&#xA;[Quick] [Melee] [Dice=1]" />
+			<property name="Traits" value="Legendary" />
+			<property name="Text" value="When summoned, place 7 damage on Ehren. The first time he has 0 damage, place 4 Melee +1 tokens on him." />
+			<property name="CardID" value="MWAPRC04" />
+		</card>
+		<card id="374c34af-bfef-4047-a2e2-584a87cd978d" name="Gloranna, Avenging Angel">
+			<property name="Nickname" value="Gloranna" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Angel" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Holy Water Sprinkler;action type=Full;range type=Melee;range=(0,0);dice=1;Sweeping=True" />
+			<property name="AttackBar" value="Holy Water Sprinkler:&#xD;&#xA;[Full] [Melee] [Dice=1] [Sweeping]" />
+			<property name="Traits" value="Aegis, Legendary" />
+			<property name="Text" value="Holy Water Sprinkler rolls an additioanl attack die for each Holy creature in your discard pile, to a maximum of 4 Holy Creatures." />
+			<property name="CardID" value="MWAPRC05" />
+		</card>
+		<card id="42178587-5e41-48db-98e1-a1edd6a1f7a7" name="Lowland Unicorn">
+			<property name="Nickname" value="Lowland Unicorn" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Horse" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Horn;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Horn:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During your Upkeep Phase, you may heal a Living creature in this zone 1 damage." />
+			<property name="CardID" value="MWAPRC06" />
+		</card>
+		<card id="4c1bdfe7-083f-4956-a3f0-00e09027d4e9" name="Meditating Monk">
+			<property name="Nickname" value="Meditating Monk" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Monk" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy/Mind"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=5" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Eagle Strike;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Eagle Strike:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Unique" />
+			<property name="Text" value="As a Full Action, Meditating Monk may meditate: You gain 1 mana." />
+			<property name="CardID" value="MWAPRC07" />
+		</card>
+		<card id="501bdfe7-083f-4956-a3f0-00e09027d4e9" name="Temple Sentry">
+			<property name="Nickname" value="Temple Sentry" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight, Soldier" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=5" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Mace;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Mace:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Temple Sentry gains +2 Armor while guarding. When Temple Sentry is summoned, place a guard marker on him." />
+			<property name="CardID" value="MWAPRC08" />
+		</card>
+		<card id="5300ad83-f297-4ed2-8b4d-3a4b96ed3610" name="Temple Sharpshooter">
+			<property name="Nickname" value="Temple Sharpshooter" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="High Elf, Soldier" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Aimed Strike;action type=Full;range type=Ranged;range=(0,1);dice=3;Piercing +X=1" />
+			<property name="AttackBar" value="Aimed Strike:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAPRC09" />
+		</card>
+		<card id="58a453b5-f282-4fa1-8ee1-67005401a980" name="White Cloak Knight">
+			<property name="Nickname" value="White Cloak Knight" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Knight, Soldier" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Gleaming Sword;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Gleaming Sword:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="White Cloak Knight is immune to the damage and effects of attack spells." />
+			<property name="CardID" value="MWAPRC10" />
+		</card>
+
+
+		<card id="606e0886-428c-4761-9dd8-a97ed48f71d0" name="Asyra&apos;s Touch">
+			<property name="Nickname" value="Asyra&apos;s Touch" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Protection" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor,tLiving,TCreature" />
+			<property name="Target" value="Minor Living Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value=""/>
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This creature gains Aegis 1. If this creature is level 1, you may reduce the reveal cost of Asyra&apos;s Touch by 1.&#xD;&#xA;[Aegis 1]" />
+			<property name="CardID" value="MWAPRE01" />
+		</card>
+		<card id="6369bcbb-84cf-4c07-a471-d866a77d936e" name="Blessed Focus">
+			<property name="Nickname" value="Blessed Focus" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Blessing" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,sHoly,TCreature" />
+			<property name="Target" value="Living Holy Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value=""/>
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While this creature has no damage, it gains the Melee +1 trait and Piercing +1 on its attacks." />
+			<property name="CardID" value="MWAPRE02" />
+		</card>
+		<card id="67f5b9fd-23ea-4f8a-94c2-ccc9ca2c96b6" name="Circle of Protection">
+			<property name="Nickname" value="Circle of Protection" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Protection" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value=""/>
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="All friendly living creatures in this zone gain +1 Armor. During the Upkeep Phase, you may heal 1 damage from a Living Holy creature in this zone.&#xD;&#xA;[Armor +1]" />
+			<property name="CardID" value="MWAPRE03" />
+		</card>
+		<card id="7111c9e3-cea0-47e5-847a-8d7420aa4e5b" name="Gator Toughness">
+			<property name="Nickname" value="Gator Toughness" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="This creature gains Armor +1 and Life +2.&#xD;&#xA;[Armor +1] [Life +2]" />
+			<property name="CardID" value="MWA01E07" />
+		</card>
+		<card id="735fb53d-48ab-4293-b431-084c6aa99d49" name="Glancing Blow">
+			<property name="Nickname" value="Glancing Blow" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Protection" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="War"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="When this creature is attacked, you must reveal Glancing Blow at the beginning of the Roll Dice step. If you do, that attack rolls 3 less attack dice (minimum 1 die). Then, destroy Glancing Blow." />
+			<property name="CardID" value="MWAPRE05" />
+		</card>
+		<card id="79fef38c-4785-430b-8dc8-95bd7c8459d1" name="Paladin&apos;s Valor">
+			<property name="Nickname" value="Paladin&apos;s Valor" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Blessing, Protection" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,SKnight,TCreature" />
+			<property name="Target" value="Living Knight Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 1" />
+			<property name="Text" value="This creature gains Armor +2 and when attacking a creature of an equal or higher level it gains Melee +2.&#xD;&#xA;[Armor +2]" />
+			<property name="CardID" value="MWAPRE06" />
+		</card>
+		<card id="7b1645c9-5815-4c05-850d-1d89c4a7f8bd" name="Restore">
+			<property name="Nickname" value="Restore" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 3, Epic, Holy Mage Only" />
+			<property name="Text" value="This creature gains Life +10.&#xD;&#xA;[Life +10]" />
+			<property name="CardID" value="MWAPRE07" />
+		</card>
+		<card id="841d0f78-ea2f-4372-9f3c-e77b3c2a9c26" name="Second Chance">
+			<property name="Nickname" value="Second Chance" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))^Friendly,lMinor,tLiving,TCreature" />
+			<property name="Target" value="Friendly Living Minor Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this creature is destroyed you may reveal Second Chance. You may immediately summon this creature into the zone it was destroyed in as a free action.&#xD;&#xA;X = the creature&apos;s casting cost." />
+			<property name="CardID" value="MWAPRE08" />
+		</card>
+		<card id="8bb16e9f-c42b-4a8c-9dbd-08441a4f7e92" name="Slumber">
+			<property name="Nickname" value="Slumber" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Psychic" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))lMinor,tLiving,TCreature" />
+			<property name="Target" value="Minor Living Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 2" />
+			<property name="Text" value="You may reveal Slumber when this creature is activated. This creature is sleeping. It cannot guard, take actions, or use defenses. If this creature is attacked and damaged, remove a Dissipate token. X = this creature&apos;s Level." />
+			<property name="CardID" value="MWAPRE09" />
+		</card>
+
+
+		<card id="923b4488-486d-44c0-8c21-dd4f2c77a014" name="Asyran Robes">
+			<property name="Nickname" value="Asyran Robes" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Robe" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="This Mage gains Aegis 1.&#xD;&#xA;Each Upkeep Phase you may move 1 damage from a friendly Living creature in this zone to this Mage.&#xD;&#xA;[Aegis 1]" />
+			<property name="CardID" value="MWAPRQ01" />
+		</card>
+		<card id="997b853d-89bd-461a-8dad-73edacd5b4ae" name="Faith Healer&apos;s Staff">
+			<property name="Nickname" value="Faith Healer&apos;s Staff" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Staff, Weapon" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Righteous Strike;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Righteous Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During the Upkeep Phase you may pay 1 mana to heal a living creature in this zone the amount rolled on 1 attack die.&#xD;&#xA;If this Mage is level 5 or greater, the Staff Strike attack rolls an additional attack die." />
+			<property name="CardID" value="MWAPRQ02" />
+		</card>
+		<card id="a781730e-e7e9-4885-b2d8-9c87b47c05c3" name="Resplendent Bow">
+			<property name="Nickname" value="Resplendent Bow" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Bow, Weapon" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon+Shield" />
+			<property name="StatEquipmentSlot" value="Weapon+Shield" />
+			<property name="cAttacks" value="name=Arrow of Light;action type=Full;range type=Ranged;range=(0,1);damage type=Light;dice=2;Piercing +X=1" />
+			<property name="AttackBar" value="Arrow of Light:&#xD;&#xA;[Full] [Ranged:0-1] [Light] [Dice=2] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If Resplendent Bow attacks another friendly Living creature, instead of dealing damage, you may heal them the amount rolled on 2 attack dice.&#xD;&#xA;If this Mage is level 5 or greater, the Arrow of Light attack rolls an additional attack die." />
+			<property name="CardID" value="MWAPRQ03" />
+		</card>
+
+
+		<card id="b071d7d1-b9c5-4ab4-b542-0889f795b0d0" name="Crumble">
+			<property name="Nickname" value="Crumble" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Acid" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))NULL" />
+			<property name="Target" value="Equipment" />
+			<property name="School" value="Water" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Gain 2 mana. Destroy target equipment. X = the casting cost of target equipment." />
+			<property name="CardID" value="MWA01I01" />
+		</card>
+		<card id="b5707414-ecdb-4b65-9d6a-b7f0e1ae409c" name="Cure">
+			<property name="Nickname" value="Cure" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Remove one condition marker on target creature by paying its removal cost. If you do, heal the targeted creature the amount rolled on 2 attack dice." />
+			<property name="CardID" value="MWAPRI02" />
+		</card>
+		<card id="b6d65d21-0bb0-49b3-89c0-fe5b0f7f329c" name="Disperse">
+			<property name="Nickname" value="Disperse" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TEnchantment" />
+			<property name="Target" value="Revealed Enchantment" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Destroy target enchantment. X = the reveal cost of target enchantment." />
+			<property name="CardID" value="MWAPRI03" />
+		</card>
+		<card id="ca7f7a43-288e-4653-b593-e6d857275c7e" name="Mend">
+			<property name="Nickname" value="Mend" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Heal target creature the amount rolled on 3 attack dice." />
+			<property name="CardID" value="MWAPRI04" />
+		</card>
+		<card id="db1df456-3d70-4514-81dd-0e6e5728ccc9" name="Remove Curse">
+			<property name="Nickname" value="Remove Curse" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic, Protection" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M0))NULL" />
+			<property name="Target" value="Friendly Object" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Destroy as many revealed curse enchantments from the target as you wish, paying the total mana cost (casting and reveal) for each one. Then gain 2 mana." />
+			<property name="CardID" value="MWAPRI05" />
+		</card>
+		<card id="de2b8c17-6502-4ec2-9a46-857d924275c6" name="Reveal Magic">
+			<property name="Nickname" value="Reveal Magic" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic, Truesight" />
+			<property name="Cost" value="0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M0))NULL" />
+			<property name="Target" value="Hidden Enchantment" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Peek at target hidden enchantment.The controller cannot reveal it once Reveal Magic has been cast. It cannot be revealed this round. If it is a mandatory enchantment, then it is not destroyed if it would be forced to be revealed this round." />
+			<property name="CardID" value="MWAPRI06" />
+		</card>
+	</cards>
+</set>

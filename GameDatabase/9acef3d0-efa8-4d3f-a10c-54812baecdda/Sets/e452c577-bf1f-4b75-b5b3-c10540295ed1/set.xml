@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Playtest: Elementalist Vs Monk - Mage Wars Community Project"
+	id="e452c577-bf1f-4b75-b5b3-c10540295ed1"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+
+	<markers>
+		<marker id="e8237864-1442-4b66-9e9f-57abe2f518fd" name="Air Glyph Active" />
+		<marker id="4da1b360-d498-4514-bb35-904c25e7481d" name="Air Glyph Inactive" />
+		<marker id="d9d4073d-c8dd-495d-bc5c-3d1535fd1231" name="Fire Glyph Active" />
+		<marker id="af3f117c-1933-4bf0-ab6f-e083423ec052" name="Fire Glyph Inactive" />
+		<marker id="ae3ed2d0-1f32-4373-b61a-54f1a92aa847" name="Earth Glyph Active" />
+		<marker id="acb58bb4-2bc1-4534-9d68-a18a68d764b4" name="Earth Glyph Inactive" />
+		<marker id="9e7b7949-fdda-4d2a-b16f-e35e9ac9cf20" name="Water Glyph Active" />
+		<marker id="ffe746d4-7711-492b-981d-c34121eca290" name="Water Glyph Inactive" />
+		<marker id="8af4c052-a38c-4f59-bd31-2e62ba3063f2" name="Ki" />
+		<marker id="c40445e9-118c-4212-af4c-76d12d4c1fe0" name="Freeze" />
+	</markers>
+	<cards>		
+		<card id="3733d383-65c2-4597-921c-6055d518df17" name="Elementalist">
+			<property name="Nickname" value="Elementalist" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="c5c954df-2ff6-41ff-a9fa-1a6c0fc3dca2" name="Elementalist Stats">
+			<property name="Nickname" value="Elementalist Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Air, Earth, Fire and Water Schools. Living objects cost triple spellpoints" />
+			<property name="Stats" value="Spellbook=135, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="135" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, War=3, Nature=3, Holy=3, Arcane=3, Dark=3, Mind=3" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="MageAbilities" value="" />
+		</card>
+		<card id="1bd6e2c9-1617-4aed-8771-e233978f7080" name="Monk">
+			<property name="Nickname" value="Monk" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
+		</card>
+		<card id="521ee29e-a942-49f5-888b-2977f1968ddb" name="Monk Stats">
+			<property name="Nickname" value="Monk Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
+			<property name="Stats" value="Spellbook=105, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="105" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Mind=1, S-Martial=1, S-Monk=1, T-Creature=3" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Straight Punch:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
+			<property name="MageAbilities" value="" />
+		</card>
+		<card id="6c0e4dad-ce42-4567-aa04-d87f3f0b942b" name="Paralyzing Strike">
+			<property name="Nickname" value="Paralyzing Strike" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Paralyzing Strike;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="[Melee] [Dice=4]" />
+			<property name="Traits" value="Monk Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAMKA01" />
+		</card>
+		<card id="bd6110e8-eedf-4748-945e-860cd50107c9" name="Paralyzing Strike V2">
+			<property name="Nickname" value="Paralyzing Strike" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Paralyzing Strike;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="[Melee] [Dice=4]" />
+			<property name="Traits" value="Monk Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAMKA01" />
+		</card>
+		<!-- -->
+		<card id="660f4d72-3107-4b1e-b7d9-b479c08f5985" name="Frozen Tundra">
+			<property name="Nickname" value="Frozen Tundra" />
+			<property name="Type" value="Conjuration-Terrain" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water/Air" />
+			<property name="Level" value="2/2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="PSJ07" />
+		</card>
+
+		<card id="01ddd263-53c3-4f60-adc8-c99c265cf6c0" name="Natural Pandemonium">
+			<property name="Nickname" value="Natural Pandemonium" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Anomaly" />
+			<property name="Cost" value="10" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Earth+Air+Fire+Water" />
+			<property name="Level" value="1+1+1+1" />
+			<property name="Stats" value="Armor=2, Life=12" />
+			<property name="StatChanneling" value="1" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Spawnpoint, Zone Exclusive, Epic, Elementalist Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MW1J10" />
+		</card>
+		<card id="c6513867-eda9-4abf-95f2-5505f738cdeb" name="Wind Elemental">
+			<property name="Nickname" value="Wind Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental, Wind" />
+			<property name="Cost" value="22" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air"  />
+			<property name="Level" value="6" />
+			<property name="Stats" value="Armor=-, Life=13" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="16" />
+			<property name="cAttacks" value="name=Attack 1;action type=Quick;range type=Melee;range=(0,0);damage type=Wind;dice=2; effects={4+: ['Push']}" />
+			<property name="AttackBar" value="Wind Up Punch:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=5] [d12] [4+ = Push] [Ethereal] [+2 vs. Flying]&#xD;&#xA;Tornado:&#xD;&#xA;[Full] [Ranged:0-0] [Zone Attack] [Wind] [Dice=4] [d12] [5-8 = Push; 9+ = Push &amp; Daze] [+2 vs. Flying]" />
+			<property name="Traits" value="Incorporeal, Upkeep +1, Wind -2, Flying" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWAELC01" />
+		</card>
+		<card id="9636b2cd-c8ba-403f-8366-8711bc607bdf" name="Elemental Drake">
+			<property name="Nickname" value="Elemental Drake" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Drake, Elemental" />
+			<property name="Cost" value="14" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air/Fire/Earth/Water"  />
+			<property name="Level" value="3/3/3/3" />
+			<property name="Stats" value="Channeling=1, Armor=2, Life=12" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Slash:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="Familiar, Flying, Legendary, Elementalist Only" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWAELC01" />
+		</card>
+		<card id="511a7b82-17f6-49f4-beb1-ddaa6d1917e7" name="Steam Elemental V2">
+			<property name="Nickname" value="Steam Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental, Flame, Hydro" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Fire/Water"  />
+			<property name="Level" value="2/2" />
+			<property name="Stats" value="Armor=-, Life=7" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Steam Blast:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [5-8 = Daze; 10+ = Stun]" />
+			<property name="Traits" value="Incorporeal, Non-living, Obscured" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWAELC01" />
+		</card>
+		<card id="f847af2b-81d6-4225-87ef-7f5774d332e8" name="Steam Elemental V1">
+			<property name="Nickname" value="Steam Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental, Flame, Hydro" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Fire/Water"  />
+			<property name="Level" value="2/2" />
+			<property name="Stats" value="Armor=-, Life=7" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Steam Blast:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [5-8 = Daze; 10+ = Stun]" />
+			<property name="Traits" value="Incorporeal, Non-living, Obscured" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWAELC01" />
+		</card>
+		<card id="06b46e82-e77e-4776-a480-f4f547af935a" name="Stormfront Elemental">
+			<property name="Nickname" value="Stormfront Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental" />
+			<property name="Cost" value="20" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="2+3" />
+			<property name="Stats" value="Armor=-, Life=13" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="16" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Heavy Rain Punch:&#xD;&#xA;[Quick] [Melee] [Wind] [Dice=4] [d12] [9+ = Push] [Ethereal]&#xD;&#xA;Lightning Strike:&#xD;&#xA;[Full] [Ranged:1-2] [Lightning] [Dice=5] [d12] [6-9 = Daze; 10+ = Stun] [Ethereal]" />
+			<property name="Traits" value="Flying, Legendary, Incorporeal, Upkeep +1, Lightning -1, Wind -1" />
+			<property name="Text" value="." />
+			<property name="CardID" value="MWAELC01" />
+		</card>
+		<card id="b8582a87-7ee4-44d4-b461-12c2678f02b1" name="Battle Meditation">
+			<property name="Nickname" value="Battle Meditation" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Meditation, Martial" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage"/>
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="&#xD;&#xA;[BattleMeditation]" />
+			<property name="CardID" value="MWAMKE04" />
+		</card>
+		<card id="6235de72-cb5b-4ac5-9e01-49ad99ca9ce2" name="Five Point Death Strike">
+			<property name="Nickname" value="FPDS" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Martial, Curse" />
+			<property name="Cost" value="2+3" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature"/>
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="UpKip" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAMKE04" />
+		</card>
+		<card id="b0d66d4a-7790-41d6-bb37-d1d281569c60" name="Elemental Mail">
+			<property name="Nickname" value="Elemental Mail" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Elemental" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air/Fire/Earth/Water" />
+			<property name="Level" value="1/1/1/1" />
+			<property name="Stats" value="Location=Chest" />
+			<property name="StatEquipmentSlot" value="Chest" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="&#xD;&#xA;[Armor +1] [Wind -1] [Hydro -1] [Flame -1] [Frost -1] [Lightning -1] [Acid -1]" />
+			<property name="CardID" value="MW1Q07" />
+		</card>
+		<card id="127d68be-faa7-4939-8b17-e346248e04c0" name="Ice Ring">
+			<property name="Nickname" value="Ice Ring" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Frost" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air/Water" />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Location=Ring" />
+			<property name="StatEquipmentSlot" value="Ring" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MW1Q07" />
+		</card>
+		<card id="af090b27-e08b-4aff-9847-98cee544c1f6" name="Nunchucks">
+			<property name="Nickname" value="Nunchucks" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [6+ = Daze]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="&#xD;&#xA;[Nunchucks]" />
+			<property name="CardID" value="MW1Q07" />
+		</card>
+		<card id="c75a255f-fa7f-4d30-b8e6-4ea15c4cdff9" name="Sai">
+			<property name="Nickname" value="Sai" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Quick Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="&#xD;&#xA;[Sai]" />
+			<property name="CardID" value="MW1Q07" />
+		</card>
+		<card id="b1a65b41-5fe7-4c06-808f-6cc0f5765cff" name="Seismic Hammer">
+			<property name="Nickname" value="Seismic Hammer" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Earth" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Pulsating Blow:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [9+ = Daze]&#xD;&#xA;Pulsating Blow 2:&#xD;&#xA; [Quick] [Melee] [Dice=7]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MW1Q07" />
+		</card>
+		<card id="88212a32-a932-4b15-86b1-f6c32df16cd7" name="Meltdown">
+			<property name="Nickname" value="Meltdown" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Flame" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Fire+Earth" />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Epic" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWSTX1CKI01" />
+		</card>
+		<card id="f61037cd-f28d-4f74-8038-b024be5936e7" name="Weapon Strike V2">
+			<property name="Nickname" value="Weapon Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M1))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Mage Cast" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWSTX1CKI01" />
+		</card>
+	</cards>
+</set>

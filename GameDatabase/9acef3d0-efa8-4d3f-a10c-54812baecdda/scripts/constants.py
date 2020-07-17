@@ -135,6 +135,18 @@ gameBoardsDict = {
 				8 : {"boardName":"Double Westlock - 6x4","zoneDef":(6,4,167),"buttonColor":"#171e78"}
 						 }
 
+
+##########################		Lists			############################
+listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shifratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade", "Soulreaper", "Dragon\'s Lance", "Gladius"]
+typeChannelingList = ["Mana Flower","Mana Crystal","Moonglow Amulet"]
+typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
+tokenList = ["Armor","Banish","Bleed","Burn","Charge","Cripple","Corrode","Disable","Daze","Grapple","Growth","Mana","Melee","Rage",
+					"Ranged","Rot","Slam","Stagger","Strongest","Stun","Stuck","Sleep","Tainted","Veteran","Weak","Wish","Wrath","Zombie"]
+
+for token in tokenList:
+		exec('def add'+token+'(card, x = 0, y = 0):\n\taddToken(card,'+token+')')
+		exec('def sub'+token+'(card, x = 0, y = 0):\n\tsubToken(card,'+token+')')
+
 #Misc#
 debugMode = False
 currentPhase = ""
@@ -146,7 +158,3 @@ roundTimes = []
 gameTurn = 0
 gameNum = 0
 infostr = ""
-
-typeChannelingList = ['Mana Flower','Mana Crystal','Moonglow Amulet']
-
-typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]

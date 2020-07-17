@@ -1,6 +1,8 @@
                                                                                                                                                                                                                                    ###########################################################################
-##########################    v1.13.0.0     #######################################
+##########################    v3.0.0.0     #######################################
 ###########################################################################
+
+
 ############################
 # Card Attachment and Alignment
 ############################
@@ -92,49 +94,52 @@ def detach(card):
 		return card,target
 	return card,None
 
-def alignAttachments(card):
-	"""Orders <card> and its attachments"""
+def alignCards(cardList,xOffset,yOffset):
+	"""
+	Input is a list of card objects that need to be aligned. The first card in the list is the card against which the second will be aligned.
+	This function is recursive. When called, the first call should be on the card to which the rest are attached.
+	The input MUST be a list of length at least 2.
+	"""
 	mute()
-	if card.controller == me:
-		attachments = getAttachments(card)
-		prevCards  = [card]
-		count = 1
-		x,y = card.position
-		alignQueue = {}
-		side = (-1 if card.isInverted(y) else 1)
-		for c in attachments:
-			Y = y-(count*side)*12
-			#Please align your own cards first...
-			if c.controller == me:
-				c.moveToTable(x,Y)
-				for p in reversed(prevCards):
-					if p.controller == me:
-						c.index = p.index
-						break
-			#...before assisting other players
-			else:
-				controller = c.controller
-				if controller not in alignQueue: alignQueue[controller] = []
-				alignQueue[controller].append({'cardId' : c._id, 'X' : x, 'Y' : Y, 'prevCardIds' : [i._id for i in prevCards]})
-			count += 1
-			prevCards.append(c)
-		#Remotely trigger alignment in other players
-		alignedPlayers = [me]
-		for p in alignQueue:
-			if p in getPlayers():
-				alignedPlayers.append(p)
-				rnd(1,10) #avoids desync issues
-				remoteCall(p,'remoteAlign',[alignQueue[p],alignedPlayers])
 
-def remoteAlign(alignData,alignedPlayers):
+	#1: Align the second card in the list with the first
+	c0,c1 = cardList[0],cardList[1]
+	x0,y0 = c0.position
+	x1,y1 = x0 + xOffset, y0 + yOffset
+
+	c1.moveToTable(x1,y1)
+
+	#2: Move the second card beneath the first
+	c1.index = c0.index
+
+	#3: Slice the list. If it is now shorter than 2 cards, we are done.
+	cardList = cardList[1:]
+	if len(cardList) < 2: return
+
+	#4: Otherwise, the owner of the second card in the new list calls this function.
+	nextCard = cardList[1]
+	remoteCall(nextCard.controller,"alignCards",[cardList,xOffset,yOffset])
+
+def alignAttachments(card):
+	"""
+	Aligns the attachments of input card.
+	Requires that input card belong to calling player
+
+	"""
 	mute()
-	for d in alignData:
-		card,X,Y,prevCards = Card(d['cardId']),d['X'],d['Y'],[Card(i) for i in d['prevCardIds']]
-		card.moveToTable(X,Y)
-		for c in reversed(prevCards):
-			if c.controller in alignedPlayers:
-				card.index = c.index
-				break
+
+	#1: Retrieve attachments and end function if there are none.
+	attachments = getAttachments(card)
+
+	if not attachments: return
+
+	#2: Controller of first attachment calls alignCards
+	cardList = [card] + attachments
+	firstAttachment = attachments[0]
+
+	remoteCall(firstAttachment.controller,"alignCards",[cardList,0,-12])
+
+	#3: Profit??? Seriously, the previous method was way too convoluted.
 
 def detachAll(card):
 	"""Removes all attachments from <card> and places them in front of their owners"""
@@ -209,6 +214,7 @@ def setGlobalDictEntry(dictionary,key,value):
 	gDict[key] = value
 	setGlobalVariable(dictionary,str(gDict))
 
+#Need to go through and figure out what is and isn't working yet
 def canAttach(card,target):
 	"""Determines whether <card> may be attached to <target>"""
 	cTargets = card.cTargets
@@ -312,27 +318,33 @@ def getBound(card):
 	bound = map(lambda key: Card(key),[k for k in bDict if bDict[k]==card._id])
 	if bound and bound[0] in table: return bound[0]
 
+def isBound(card):
+	"""Determines whether <card> is attached to anything."""
+	mute()
+	if getGlobalDictEntry('bindDict',card._id) and card in table:
+		return True
+	return False
+
 def getBindTarget(card):
 	mute()
 	result = getGlobalDictEntry('bindDict',card._id)
 	if result and card in table: return Card(result)
 
 def alignBound(card):
+	"""
+	Aligns the card bound to input card.
+	Requires that input card belong to calling player
+
+	"""
 	mute()
+
+	#1: Retrieve bound card and end function if there are none.
 	bound = getBound(card)
 	if not bound: return
-	x,y = card.position
-	x -= 0
-	y += 30
-	z = card.index
-	if bound.controller == me: moveAndSetIndex(bound,x,y,z)
-	else: remoteCall(bound.controller,'moveAndSetIndex',[bound,x,y,z])
-	card.index = z+1 #Assumes I control <card>. Not sure why I need this when alignAttachments works without, but it seems that moving a card brings it to the front.
 
-def moveAndSetIndex(card,x,y,z):
-	mute()
-	card.moveToTable(x,y)
-	card.index = z
+	#2: Align the cards
+	cardList = [card,bound]
+	alignCards(cardList,0,30)
 
 def canBind(card,target):
 	"""Determines whether <card> may be attached to <target>"""
@@ -346,31 +358,35 @@ def canBind(card,target):
 		or not target.isFaceUp): return False
 	tName = target.Name
 #Familiars
-	if ((tName == 'Goblin Builder' and 'Conjuration' in card.Type and card.Name not in['Tanglevine','Stranglevine','Quicksand'])
-		or (tName == 'Thoughtspore' and card.Type in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
-		#or sectarus, but I haven't got around to it yet.
-		or (tName == 'Wizard\'s Tower' and card.Type == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
-		or (tName == 'Sersiryx, Imp Familiar' and ((card.Type == 'Attack' and 'Fire' in card.School) or (card.Type == 'Enchantment' and 'Curse' in card.Subtype)) and sum([int(i) for i in card.level.split('+')])<=2)
-		or (tName == 'Fellella, Pixie Familiar' and card.Type == 'Enchantment')
-		or (tName == 'Huginn, Raven Familiar' and card.Type == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
-		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in card.Subtype)
-		or (tName == 'Sectarus, Dark Rune Sword' and (card.Type == 'Enchantment' and 'Curse' in card.Subtype))
+	if ((tName == 'Goblin Builder' and 'Conjuration' in cType and card.Name not in ['Tanglevine','Stranglevine','Quicksand'])
+		or (tName == 'Thoughtspore' and cType in ['Attack','Incantation'] and sum([int(i) for i in card.level.split('+')])<=2)
+		or (tName == 'Wizard\'s Tower' and cType == 'Attack' and 'Epic' not in card.Traits and card.Action == 'Quick')
+		or (tName == 'Sersiryx, Imp Familiar' and ((cType == 'Attack' and 'Fire' in card.School) or (cType == 'Enchantment' and 'Curse' in cSubtype)) and sum([int(i) for i in card.level.split('+')])<=2)
+		or (tName == 'Fellella, Pixie Familiar' and cType == 'Enchantment')
+		or (tName == 'Huginn, Raven Familiar' and cType == 'Incantation' and sum([int(i) for i in card.level.split('+')])<=2)
+		or (tName == 'Gurmash, Orc Sergeant' and 'Command' in cSubtype)
+		or (tName == 'Sectarus, Dark Rune Sword' and (cType == 'Enchantment' and 'Curse' in cSubtype))
+		or (tName == 'Cassiel, Shield of Bim-Shalla' and ("Healing" in cSubtype or "Protection" in cSubtype))
+		or (tName == 'Naiya' and not 'Creature' in cType and ('Water' in card.School or 'Song' in cSubtype))
+		or ('Elemental Drake' in tName and (cType in ['Attack', 'Creature', ' Incantation', 'Conjuration', 'Enchantment', 'Equipment']))
 #Spawnpoints
-		or (tName == 'Barracks' and card.Type == 'Creature' and 'Soldier' in card.Subtype and target.markers[Mana] >= 2)
-		or (tName == 'Battle Forge' and card.Type == 'Equipment')
-		or (tName == 'Gate to Voltari' and card.Type == 'Creature' and 'Arcane' in card.School and not ("Incorporeal" in card.Traits) and target.markers[Mana] >= 3)
-		or (tName == 'Lair' and card.Type == 'Creature' and 'Animal' in card.Subtype)
-		or (tName == 'Pentagram' and card.Type == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits) and target.markers[Mana] >= 2)
-		or (tName == 'Temple of Asyra' and card.Type == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
-		or (tName == 'Graveyard' and card.Type == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
-		or (tName == 'Seedling Pod' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Plant' in card.Subtype and target.markers[Mana] >= 3)
-		or (tName == 'Samara Tree' and card.name == 'Seedling Pod')
-		or (tName == 'Vine Tree' and card.Type in ['Creature','Conjuration','Conjuration-Wall'] and 'Vine' in card.Subtype)
-		or (tName == 'Libro Mortuos' and card.Type == 'Creature' and 'Undead' in card.Subtype)
+		or (tName == 'Barracks' and cType == 'Creature' and 'Soldier' in cSubtype and target.markers[Mana] >= 2)
+		or (tName == 'Battle Forge' and cType == 'Equipment')
+		or (tName == 'Gate to Voltari' and cType == 'Creature' and 'Arcane' in card.School and not ("Incorporeal" in card.Traits) and target.markers[Mana] >= 3)
+		or (tName == 'Lair' and cType == 'Creature' and 'Animal' in cSubtype)
+		or (tName == 'Pentagram' and cType == 'Creature' and 'Dark' in card.School and not ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits) and target.markers[Mana] >= 2)
+		or (tName == 'Temple of Asyra' and cType == 'Creature' and 'Holy' in card.School and target.markers[Mana] >= 2)
+		or (tName == 'Graveyard' and cType == 'Creature' and 'Dark' in card.School and ('Nonliving' in card.Traits or 'Incorporeal' in card.Traits))
+		or (tName == 'Seedling Pod' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Plant' in cSubtype and target.markers[Mana] >= 3)
+		or (tName == 'Samara Tree' and card.Name == 'Seedling Pod')
+		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Vine' in cSubtype)
+		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
+		or (tName == 'Echo of the Depths' and cType == 'Creature' and 'Water' in card.School)
+		or (tName == 'Natural Pandemonium' and cType =='Creature' and cSubtype in ['Elemental', 'Golem', 'Sprite'])
 #Spellbind (only)
-		or (tName == 'Helm of Command' and card.Type == 'Incantation' and 'Epic' not in card.Traits and 'Command' in card.Subtype)
-		or (tName == 'Elemental Wand' and card.Type == 'Attack' and 'Epic' not in card.Traits)
-		or (tName == 'Mage Wand' and card.Type == 'Incantation' and 'Epic' not in card.Traits)):
+		or (tName == 'Helm of Command' and cType == 'Incantation' and 'Epic' not in card.Traits and 'Command' in cSubtype)
+		or (tName == 'Elemental Wand' and cType == 'Attack' and 'Epic' not in card.Traits)
+		or ('Mage Wand' in tName and cType == 'Incantation' and 'Epic' not in card.Traits)):
 		return True
 	return False
 

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Playtest: Promo Errata - Mage Wars Community Project"
+	id="12e9ddaf-63c4-4282-8ab7-8712967f5cc4"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+
+
+	<cards>		
+		<card id="9209c479-cafc-4674-abdc-c98e206a73ad" name="Asto Vidatu, Angel Slayer">
+			<property name="Nickname" value="Asto Vidatu" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Manticore" />
+			<property name="Cost" value="20" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane/Dark"  />
+			<property name="Level" value="5/5" />
+			<property name="Stats" value="Armor=2, Life=14" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="14" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=5||name=Toxic Spines;action type=Full;range type=Ranged;range=(0,1);dice=2;effects={8: ['Cripple']};Piercing +X=1||name=Poison Stinger;action type=Full;range type=Melee;range=(0,0);dice=2;effects={9: ['Weak', 'Weak'], 5: ['Weak']};Piercing +X=1" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=5]&#xD;&#xA;Toxic Spines:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=2] [d12] [8+ = Cripple] [Piercing +1]&#xD;&#xA;Poison Stinger:&#xD;&#xA;[Full] [Melee] [Dice=2] [d12] [5-8 = Weak; 9+ = 2 Weak] [Piercing +1]" />
+			<property name="Traits" value="Flying, Legendary, Tough -2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO56" />
+		</card>
+		<card id="e51ee882-7c4d-4964-bef7-9451b96fe021" name="Victorian Griffin">
+			<property name="Nickname" value="Victorian Griffin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Griffin" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="4" />
+			<property name="Stats" value="Armor=2, Life=15" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="15" />
+			<property name="cAttacks" value="name=Razor Talons;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
+			<property name="AttackBar" value="Razor Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="Text" value="While Victorian Griffin has the Flying trait, enemy creatures in its zone are hindered and the also lose and cannot gain the Elusive trait." />
+			<property name="Traits" value="Flying" />
+			<property name="CardID" value="MWPROMO62" />
+		</card>
+		<card id="99dd8a46-3afb-446b-a7ff-fddde6d6ec49" name="Asyra&apos;s Grace">
+			<property name="Nickname" value="Asyra&apos;s Grace" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Protection" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Disspiate 1, Epic, Holy Mage Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO12" />
+		</card>
+		<card id="0d5476d3-1582-4c50-a680-148fcf138234" name="Debilitate">
+			<property name="Nickname" value="Debilitate" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse" />
+			<property name="Cost" value="2+4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Epic" />
+			<property name="Text" value="This creature loses, and cannot gain, Melee +X traits." />
+			<property name="CardID" value="MWPROMO29" />
+		</card>
+		<card id="1f7ac76f-5763-441f-a9a1-0cd241650b4b" name="Heart of Gravikor">
+			<property name="Nickname" value="Heart of Gravikor" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War+Earth" />
+			<property name="Level" value="2+1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Mighty Bash;action type=Quick;range type=Melee;range=(0,0);dice=4;+2 vs. Corporeal Conjurations=True||name=Returning Throw;action type=Full;range type=Ranged;range=(0,1);dice=3;effects={8: ['Slam']}" />
+			<property name="AttackBar" value="Mighty Bash:&#xD;&#xA;[Quick] [Melee] [Dice=4] [+2 vs. Corporeal Conjurations]&#xD;&#xA;Returning Throw:&#xD;&#xA;[Full] [Ranged:0-1] [Dice=3] [d12] [8+ = Slam]" />
+			<property name="Traits" value="Legendary, War Mage Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO52" />
+		</card>
+		<card id="9af6eb20-67fa-4efa-9a9a-51523941666a" name="Staff of Storms">
+			<property name="Nickname" value="Staff of Storms" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Air" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWPROMO28" />
+		</card>
+		<card id="4f128170-df69-4014-81c4-ad01794e97b5" name="Bloodthirsty Strike">
+			<property name="Nickname" value="Bloodthirsty Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Martial, Psychic, Curse" />
+			<property name="Cost" value="2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,tCorporeal,TCreature" />
+			<property name="Target" value="Non-Mage Corporeal Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Target creature the Bloodthirsty +2 trait until the end of the round." />
+			<property name="CardID" value="MWPROMO38" />
+		</card>
+		<card id="789e8397-8e14-4baf-92a3-1c49862a47a9" name="Flame Strike">
+			<property name="Nickname" value="Flame Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Flame, Martial" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Fire" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Flame Strike;damage type=Flame;effects={10: ['Burn', 'Burn'], 4: ['Burn']};Defrost=True" />
+			<property name="AttackBar" value="[Flame] [d12] [4-9 = Burn; 10+ = 2 Burn] [Defrost]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristics above; the flame damage type, an effect roll, and the Defrost trait." />
+			<property name="CardID" value="MWPROMO39" />
+		</card>
+		<card id="3d5223bf-a42c-499b-9119-e40c39d88617" name="Holy Strike">
+			<property name="Nickname" value="Holy Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Target&apos;s next melee attack this round gains the Ethereal trait." />
+			<property name="CardID" value="MWPROMO32" />
+		</card>
+		<card id="dd69f54d-d61b-476a-b7df-315c74470574" name="Lightning Strike">
+			<property name="Nickname" value="Lightning Strike" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Lightning" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature,tCorporeal" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Air" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Lightning Strike;damage type=Lightning;effects={8: ['Stun'], 5: ['Daze']}" />
+			<property name="AttackBar" value="[Lightning] [5-7 = Daze; 8+ = Stun]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Target&apos;s next melee attack this round, if it has no damage type, and no effect die roll, gains all of the attack bar characteristics above; the lightning damage type, and an effect roll." />
+			<property name="CardID" value="MWPROMO40" />
+		</card>
+	</cards>
+</set>

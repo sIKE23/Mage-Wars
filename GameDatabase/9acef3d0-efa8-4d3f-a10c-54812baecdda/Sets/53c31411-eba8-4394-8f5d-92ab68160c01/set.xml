@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars Academy: Necromancer"
+	id="53c31411-eba8-4394-8f5d-92ab68160c01"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.1.21.0">
+	
+	<cards>
+		<card id="46e40822-6a96-46a6-835b-3177f29f77f1" name="Necromancer">
+			<property name="Nickname" value="Necromancer" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="1b4614e4-65e9-4b54-859a-4e128aa1c0dd" name="Academy Necromancer Stats">
+			<property name="Nickname" value="Academy Necromancer Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Dark magic and Dsjer-Tet spells. Holy spells cost triple spellpoints, even if Novice." />
+			<property name="Stats" value="Spellbook=40, Life=23, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-9" />
+			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+			<property name="Traits" value="Once per round, when an enemy Living creature is destroyed, you may remove up to 2 damage from a mummy creature you control" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+		<card id="3f3f65da-ae91-4610-83d6-d6b6a51f3e06" name="Brittle Harvester">
+			<property name="Nickname" value="Brittle Harvester" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Skeleton" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Scythe;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Scythe:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Nonliving, Psychic Immunity" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWANMC01" />
+		</card>
+		<card id="ad657886-cbee-4806-bd42-7dc8f62e59dd" name="Darkfenne Rat">
+			<property name="Nickname" value="Darkfenne Rat" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Rat, Rodent" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark/Nature"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Bite;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Bite:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="If there is another friendly rat in this zone, Darkfenne Rat&apos;s attack gains the Piercing +2 trait." />
+			<property name="CardID" value="MWANMC02" />
+		</card>
+		<card id="68f746a6-4d95-4381-9650-20d6261496f1" name="The Embalmed">
+			<property name="Nickname" value=" The Embalmed" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="When summoning The Embalmed, remove a non-Epic Living creature in any discard pile from the game. This creature becomes a copy of the removed creature gaining The Embalmed&apos;s traits and subtypes. X = the removed creature&apos;s mana cost." />
+			<property name="CardID" value="MWANMC03" />
+		</card>
+		<card id="e1ca682a-56e0-4c14-97f6-b566efaad1a2" name="Matatoomba, Plagued Spirit">
+			<property name="Nickname" value="Matatoomba, Plagued Spirit" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Spirit, Fear" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=-, Life=6" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Plaguetouch;action type=Quick;range type=Melee;range=(0,0);dice=3;Ethereal=True;Critical Damage=True" />
+			<property name="AttackBar" value="Plaguetouch:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Ethereal] [Critical Damage]" />
+			<property name="Traits" value="Incorporeal, Nonliving, Legendary" />
+			<property name="Text" value="Minor creatures cannot declare attacks targeting Matatoomba. Creatures with Psychic Immunity ignore this effect." />
+			<property name="CardID" value="MWANMC05" />
+		</card>
+		<card id="18197e7e-0da6-4fbd-affc-e8fc76a68aa7" name="Matesis, the Fallen Pharaoh">
+			<property name="Nickname" value="Matesis, the Fallen Pharaoh" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=2, Life=12" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="12" />
+			<property name="cAttacks" value="name=Undead Might;action type=Quick;range type=Melee;range=(0,0);dice=5;" />
+			<property name="AttackBar" value="Undead Might:&#xD;&#xA;[Quick] [Melee] [Dice=5]" />
+			<property name="Traits" value="Nonliving, Legendary" />
+			<property name="Text" value="When a melee attack is declared targeting Matesis while he is guarding, you may change the target of the attack to another friendly mummy in this zone. This does not cause Matesis to lose his guard marker." />
+			<property name="CardID" value="MWANMC04" />
+		</card>
+		<card id="fc7ac160-c33a-46b3-b62d-26a571e478c9" name="Mummified Swordmaster">
+			<property name="Nickname" value="Mummified Swordmaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatDefense" value="" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Twin Blades;action type=Quick;range type=Melee;range=(0,0);dice=3;" />
+			<property name="AttackBar" value="Twin Blades:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="While Mummified Swordmaster is damaged, it may spend a Full Action to make a Twin Blades attack with the Doublestrike trait." />
+			<property name="CardID" value="MWANMC06" />
+		</card>
+		<card id="605763fb-9bac-45da-9a9e-8221a75934cd" name="Plagued Voidwalker">
+			<property name="Nickname" value="Plagued Voidwalker" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=8" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Plague Strike;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={9+: ['Rot']}" />
+			<property name="AttackBar" value="Plague Strike:&#xD;&#xA;[Quick] [Melee] [Dice=3] [d12] [9+ = Rot]" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="While Plagued Voidwalker is damaged, Plague Strike gains +4 to its effect roll." />
+			<property name="CardID" value="MWANMC07" />
+		</card>
+		<card id="c4eff50f-4851-4568-bb7a-7e75c87b4294" name="Priest of Abenek">
+			<property name="Nickname" value="Priest of Abenek" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy, Cleric" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=2;" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="As a full action, Priest of Abenek may place 1 direct damage on a living creature in this zone. If he does, he may remove 1 damage from a friendly mummy in this zone." />
+			<property name="CardID" value="MWANMC08" />
+		</card>
+		<card id="eddff111-8f06-412e-b6c8-4a17ebaca6c9" name="Xiro, the Unpassable">
+			<property name="Nickname" value="Xiro" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Animal, Cat, Dsjer-Tet" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=9" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="9" />
+			<property name="cAttacks" value="name=Pounce;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
+			<property name="AttackBar" value="Pounce:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="While guarding, Xiro gains Armor +2" />
+			<property name="CardID" value="MWANMC09" />
+		</card>
+		<card id="a2c927dd-a185-4d07-aeb5-5858682c613a" name="Servant of Malacoda">
+			<property name="Nickname" value="Servant of Malacoda" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Orc, Cleric" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=1, Life=7" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="name=Corroded Blade;action type=Quick;range type=Melee;range=(0,0);dice=2;" />
+			<property name="AttackBar" value="Corroded Blade:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Whenever Servant of Malacoda is melee attacked, he deals 2 direct poison damage to his attacker." />
+			<property name="CardID" value="MWANMC10" />
+		</card>
+		<card id="8aabadfd-3a26-485b-80e7-20d72962ba7a" name="Vengeful Merchant">
+			<property name="Nickname" value="Vengeful Merchant" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Spirit, Pirate" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=-, Life=5" />
+			<property name="StatArmor" value="-" />
+			<property name="StatLife" value="5" />
+			<property name="cAttacks" value="name=Deathtouch;action type=Quick;range type=Melee;range=(0,0);dice=1;Ethereal=True;Critical Damage=True" />
+			<property name="AttackBar" value="Deathtouch:&#xD;&#xA;[Quick] [Melee] [Dice=1] [Ethereal] [Critical Damage]" />
+			<property name="Traits" value="Incorporeal, Nonliving" />
+			<property name="Text" value="When declaring a Deathtouch attack, you may place 2 damage on your Mage to gain the melee + 2 trait for that attack." />
+			<property name="CardID" value="MWANMC11" />
+		</card>
+		<card id="c9af347c-dc64-4a65-a039-3a62de1b31ff" name="Vengeful Voidwalker">
+			<property name="Nickname" value="Vengeful Voidwalker" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Claws;action type=Quick;range type=Melee;range=(0,0);dice=2;" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="While Vengeful Voidwalker is damaged, its attacks roll 1 additional attack die." />
+			<property name="CardID" value="MWANMC12" />
+		</card>
+				
+		<card id="1de39755-8d4f-4c92-b1c1-a71cfc653563" name="Cowardice">
+			<property name="Nickname" value="Cowardice" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse, Psychic" />
+			<property name="Cost" value="2+0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Minor Living Creature" />
+			<property name="School" value="Dark/Mind"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dissipate 1" />
+			<property name="Text" value="Cowardice may only be revealed when this creature is activated. This creature cannot make a melee attack against a creature of a greater level." />
+			<property name="CardID" value="MWANME01" />
+		</card>
+		<card id="36731ef3-e78a-4e08-ade6-def5138327cf" name="Curse of Servitude">
+			<property name="Nickname" value="Curse of Servitude" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse, Psychic, Dsjer-Tet" />
+			<property name="Cost" value="2+5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,TCreature" />
+			<property name="Target" value="Non-Mage Creature"/>
+			<property name="School" value="Mind"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Unique" />
+			<property name="Text" value="When this creature activates, its controller must either place 2 damage on it, or attack a friendly creature." />
+			<property name="CardID" value="MWANME02" />
+		</card>
+		<card id="284bad38-c419-435d-8c2f-3f3e129b00aa" name="Curse of Weakness">
+			<property name="Nickname" value="Curse of Weakness" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse, Poison" />
+			<property name="Cost" value="2+1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature, tCorporeal" />
+			<property name="Target" value="Corporeal Creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During the Upkeep Phase, the controller of this spell may pay 2 mana. If they do, place a Weak condition on this creature." />
+			<property name="CardID" value="MWANME03" />
+		</card>
+		<card id="de4ea6b3-1ae7-4463-9d31-c42e4312bf2f" name="Stench of Death">
+			<property name="Nickname" value="Stench of Death" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse, Poison" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="During the Upkeep Phase, all creatures in this zone receive 1 direct poison damage." />
+			<property name="CardID" value="MWANME04" />
+		</card>
+		<card id="02d954e8-1836-48d0-b046-fec013ddefd6" name="Terrifying Visage">
+			<property name="Nickname" value="Terrifying Visage" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Illusion, Fear" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))!SMage,TCreature" />
+			<property name="Target" value="Non-Mage Creature" />
+			<property name="School" value="Dark/Mind"  />
+			<property name="Level" value="1/1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Melee attacks from creatures of a lower level roll 2 less attack dice against this creature (to a minimum of 1). This does not affect creatures with the Nonliving or Psychic Immunity traits. X = this creatures level -1." />
+			<property name="CardID" value="MWANME05" />
+		</card>
+		<card id="6fffc845-d5e0-4849-b23d-7d65594df85c" name="Unholy Reversal">
+			<property name="Nickname" value="Unholy Reversal" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Curse" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="You must reveal Unholy Reversal when damage on this creature would be healed. Prevent up to 3 points of healing, then deal 3 direct damage to this creature. Then, destroy Unholy Reversal." />
+			<property name="CardID" value="MWANME06" />
+		</card>
+		
+		<card id="c9e670da-4b5e-48dd-9ae6-9b47338825ad" name="Ramses&apos; Black Death">
+			<property name="Nickname" value="Ramses&apos; Black Death" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Vampiric, Dsjer-Tet" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=" />
+			<property name="StatEquipmentSlot" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Ramses Black Death enters play, place 2 Charge tokens on it. Once per round, as a quick spell action, you may removed a Charge token from it. If you do, all other Living creatures in this zone receive 1 direct damage, then heal yourself 1 damage for each creature that received damage. When there are no Charge Tokens remaining on Ramses Black Death, destroy it." />
+			<property name="CardID" value="MWANMQ01" />
+		</card>
+		<card id="102e680d-f0e3-4c70-a03a-b884d1667f2e" name="Soulreaper">
+			<property name="Nickname" value="Soulreaper" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Sword" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon" />
+			<property name="StatEquipmentSlot" value="Weapon" />
+			<property name="cAttacks" value="name=Maim;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Maim:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Vampiric]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When you cast Soulreaper, your Mage receives 3 direct damage. When declaring a Maim attack, your Mage receives 2 direct damage. If this Mage is level 5 or higher, Soulreaper rolls an additional attack die." />
+			<property name="CardID" value="MWANMQ03" />
+		</card>
+		<card id="67afeac3-26a0-44b5-a541-8523c3a8644c" name="Scepter of Undeath">
+			<property name="Nickname" value="Scepter of Undeath" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Staff, Necro" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Once per round, when a minor undead creature in your zone activates, you may pay 2 mana. If you do, that creature rolls 2 additional attack dice on their next attack this round. If that creature is a mummy, reduce the cost of this ability by 1 mana." />
+			<property name="CardID" value="MWANMQ04" />
+		</card>
+		<card id="c15a75da-1430-4d23-9301-02b9b61cd95e" name="Unholy Armor">
+			<property name="Nickname" value="Unholy Armor" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece+Belt" />
+			<property name="StatEquipmentSlot" value="Chestpiece+Belt" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dark Mage Only" />
+			<property name="Text" value="Reduce the mana cost of Unholy Armor by the number of Corporeal creatures you control. When you cast Unholy Armor, all corporeal creatures you control receive 1 direct damage. This Mage gains Armor +2.&#xD;&#xA;[Armor +2]" />
+			<property name="CardID" value="MWANMQ05" />
+		</card>
+
+		<card id="0690654e-18bb-4320-a511-ac4421af6b3f" name="Soul Harvest">
+			<property name="Nickname" value="Soul Harvest" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Necro" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Non-Legendary Minor Living Creature" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Necromancer Only, Epic" />
+			<property name="Text" value="Destroy target creature and heal damage from your Mage equal to twice its level. X = target creature&apos;s mana cost plus the combined total mana costs of enchantments on that creature. (hidden enchantments cost 2 mana.)" />
+			<property name="CardID" value="MWANMI01" />
+		</card>
+		<card id="9dc879c5-1763-43a7-ab85-53ece8a6ffca" name="Abyssal Sacrifice">
+			<property name="Nickname" value="Abyssal Sacrifice" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="1" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Friendly Creature" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Dark Mage Only" />
+			<property name="Text" value="Destroy the Target Creature. If you do, target a different friendly Dark creature in that zone, place a Melee +1 marker on it, and remove damage from it equal to the level of the destroyed creature." />
+			<property name="CardID" value="MWANMI03" />
+		</card>
+		<card id="aef8cb42-ff91-477d-8619-2f9aef923d2b" name="Fizzle">
+			<property name="Nickname" value="Fizzle" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="Cost" value="X" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))Revealed Enemy Enchantment" />
+			<property name="Target" value="Revealed Enemy Enchantment" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Novice" />
+			<property name="Text" value="Target revealed enchantment is turned face down, and its controller loses mana equal to its level. It cannot be revealed this round. X = the reveal cost of the enchantment." />
+			<property name="CardID" value="MWANMI04" />
+		</card>
+		<card id="e603e3a7-9bca-4e3c-9b08-0ecf7a4c7f19" name="Ritual of Kallek">
+			<property name="Nickname" value="Ritual of Kallek" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Mana, Ritual, Dsjer-Tet" />
+			<property name="Cost" value="0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))SMage" />
+			<property name="Target" value="Friendly Mage" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast" />
+			<property name="Text" value="Only a Mage can cast this spell. Choose another friendly creature to receive 2 direct damage, then gain 3 mana. You can only cast this spell once per round." />
+			<property name="CardID" value="MWANI03" />
+		</card>
+	</cards>
+</set>

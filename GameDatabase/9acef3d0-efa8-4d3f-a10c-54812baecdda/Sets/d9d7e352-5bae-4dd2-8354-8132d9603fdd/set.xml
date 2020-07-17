@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Playtest: Errata - Mage Wars Community Project"
+	id="d9d7e352-5bae-4dd2-8354-8132d9603fdd"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+
+
+	<cards>		
+		<card id="407cda3e-aa5a-4c5d-83ec-f5ab7a68c8e7" name="Wizard - Playtest">
+			<property name="Nickname" value="Wizard" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="b3375390-16f2-4054-955f-fefa3b89ffff" name="Wizard - Playtest Stats">
+			<property name="Nickname" value="Wizard Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+			<property name="cAttacks" value="name=Arcane Zap;effects={};Spell=True;action type=Quick;range type=Ranged;range=(0,1);dice=3;Ethereal=True;Counts as an attack spell. May be cast once per round.=True||name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 2] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
+		</card>
+		<!-- -->
+		<card id="ede168cd-b7fc-430a-bb94-e5c61ae784e9" name="Disciple of Radiance - Playtest">
+			<property name="Nickname" value="Disciple of Radiance" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Cleric" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=1, Life=6" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="name=Light Staff;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Light Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+			<property name="Traits" value="" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAPRC03" />
+		</card>
+		<card id="d82050a5-7c50-4d0a-96fe-75f4fe8eaf93" name="Frost Elemental - Playtest">
+			<property name="Nickname" value="Frost Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Elemental, Frost" />
+			<property name="Cost" value="15" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="2+2" />
+			<property name="Stats" value="Armor=0, Life=23" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="23" />
+			<property name="cAttacks" value="name=Frozen Fists;action type=Quick;range type=Melee;range=(0,0);dice=5;effects={7+: ['Freeze', 'Freeze']}" />
+			<property name="AttackBar" value="Frozen Fists:&#xD;&#xA;[Quick] [Melee] [Frost] [Dice=5] [d12] [7+ = 2 Freeze]" />
+			<property name="Traits" value="Melting 2, Nonliving, Frost Immunity, Flame +2" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWAELC03" />
+		</card>
+		<card id="cca66c58-d95f-4005-94de-ac5e1f8759ca" name="Ice Golem - Playtest">
+			<property name="Nickname" value="Ice Golem" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Golem, Frost" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Air+Water"  />
+			<property name="Level" value="1+1" />
+			<property name="Stats" value="Armor=0, Life=13" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="13" />
+			<property name="cAttacks" value="name=Frosty Fists;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={3+: ['Freeze']}" />
+			<property name="AttackBar" value="Frosty Fists:&#xD;&#xA;[Quick] [Melee] [Frost] [Dice=3] [d12] [3+ = Freeze]" />
+			<property name="Traits" value="Melting 1, Nonliving, Frost Immunity, Psychic Immunity" />
+			<property name="Text" value="Flame attacks against the Ice Golem roll 2 additional dice." />
+			<property name="CardID" value="MWAELC05" />
+		</card>
+		<card id="418f688f-64b0-442f-bb98-8afc05ea6615" name="Killer Bees - Playtest">
+			<property name="Nickname" value="Killer Bees" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Insect, Swarm" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=0, Life=3" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="3" />
+			<property name="cAttacks" value="name=1000 Stings;action type=Quick;range type=Melee;range=(0,0);dice=1;Critical Damage=True" />
+			<property name="AttackBar" value="1000 Stings:&#xD;&#xA;[Quick] [Poison] [Melee] [Dice=1] [Critical Damage]" />
+			<property name="Traits" value="Elusive, Flying, Swarm" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRC06" />
+		</card>
+		<card id="8eebd024-28aa-46d1-8a09-106e0073db74" name="The Embalmed - Playtest">
+			<property name="Nickname" value=" The Embalmed" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Mummy" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Nonliving" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWANMC03" />
+		</card>
+		<card id="81ac0faa-fa8b-4ff3-a9ce-918ecf228061" name="Tide Elemental - Playtest">
+			<property name="Nickname" value="Tide Elemental" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Aquatic, Hydro, Elemental" />
+			<property name="Cost" value="12" />
+			<property name="Action" value="Full"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Water"  />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0, Life=8" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="name=Tidal Crash;action type=Quick;range type=Melee;range=(0,0);damage type=Hydro;dice=4;effects={7+: ['Stagger']}" />
+			<property name="AttackBar" value="Tidal Crash:&#xD;&#xA;[Quick] [Melee] [Hydro] [Dice=4] [d12] [7+ = Stagger] [Extinguish]" />
+			<property name="Traits" value="Hydro Immunity, Nonliving, Resilient, Burnproof, Frost +2" />
+			<property name="Text" value="Tide Elemental ignores non-critical damage from attacks and is immune to Burn conditions. Frost attacks against it roll 2 additional dice. As a Quick Action the Tide Elemental can remove all Burn conditions from one object in this zone." />
+			<property name="CardID" value="MWAELC09" />
+		</card>
+		<card id="fcf58b65-53e6-4463-ad22-32cf05531465" name="Zombie Brute - Playtest">
+			<property name="Nickname" value="Zombie Brute" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Undead, Zombie" />
+			<property name="Cost" value="13" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Dark" />
+			<property name="Level" value="3" />
+			<property name="Stats" value="Armor=0, Life=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="10" />
+			<property name="cAttacks" value="name=Mangling Claws;action type=Quick;range type=Melee;range=(0,0);dice=4" />
+			<property name="AttackBar" value="Mangling Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
+			<property name="Traits" value="Bloodthirsty +2, Lumbering, Resilient, Psychic Immunity, Nonliving" />
+			<property name="Text" value="" />
+			<property name="CardID" value="DNC22" />
+		</card>
+		<card id="093ec23d-9b53-4189-bccb-6f59e59e0740" name="Alluring Orchid - Playtest">
+			<property name="Nickname" value="Alluring Orchid" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Plant, Flower, Vine" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Armor=0, Life=6" />
+			<property name="StatArmor" value="0" />
+			<property name="StatLife" value="6" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Living" />
+			<property name="Text" value="Enemy minor creatures in this zone must attack Alluring Orchid, if able. When Alluring Orchid is melee attacked, during the counterstrike step, place a Rot condition on the attacker. Flame attacks against Alluring Orchid roll 2 additional dice." />
+			<property name="CardID" value="MWADRJ01" />
+		</card>
+		<card id="535762c1-77e2-450f-b76f-73fca28bc672" name="Meredia&apos;s Blessing - Playtest">
+			<property name="Nickname" value="Meredia&apos;s Blessing" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Statue, Artifact" />
+			<property name="Cost" value="6" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Armor=2, Life=8" />
+			<property name="StatArmor" value="2" />
+			<property name="StatLife" value="8" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Zone Exclusive, Epic" />
+			<property name="Text" value="During each Upkeep Phase, the Mage that controls the most Living objects, may heal a non-Mage Living object up to 2 points of damage. The same Mage may also remove 1 condition marker from a non-Mage Living object by paying its removal cost." />
+			<property name="CardID" value="LG01J03" />
+		</card>
+		<card id="35c5987a-983e-44fb-8f20-ec8bd30bc400" name="Pillar of Righteous Flame - Playtest">
+			<property name="Nickname" value="Pillar of Righteous Flame" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Flame, Light" />
+			<property name="Cost" value="9" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-1" />
+			<property name="cTargets" value="m0,M1))_Zone" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="name=Holy Fire;range type=Ranged;range=(0,0);damage type=Light;dice=4;effects={7: ['Daze'], 9: ['Burn']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="AttackBar" value="Holy Fire:&#xD;&#xA;[Ranged:0-0] [Light] [Dice=4] [d12] [7-8 = Daze; 9+ = Burn] [Ethereal] [+2 vs. Nonliving Creatures]" />
+			<property name="Traits" value="Dissipate 4, Epic" />
+			<property name="Text" value="When Pillar of Righteous Flame is cast, or a Dissipate token is removed, it attacks an enemy creature in its zone. Pillar of Righteous Flame attacks each enemy creature immediately after they enter the zone." />
+			<property name="CardID" value="PSJ06" />
+		</card>
+		<card id="f81947b0-e4c8-4c67-a553-7913b4fc2277" name="Enchantment Transfusion - Playtest">
+			<property name="Nickname" value="Enchantment Transfusion" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Metamagic" />
+			<property name="Cost" value="2+X" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature" />
+			<property name="Target" value="Creature" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When Enchantment Transfusion is revealed, you may move any enchantment you control from this creature to one legal target creature up to 2 zones away from this creature. X = 1 for each hidden enchantment moved, or its Level for each revealed enchantment moved. Then, destroy Enchantment Transfusion." />
+			<property name="CardID" value="MWSTX1CKE04" />
+		</card>
+		<card id="24fedf40-ffcc-4954-a4e4-ea18f62836ec" name="Eye for an Eye - Playtest">
+			<property name="Nickname" value="Eye for an Eye" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Retribution" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))NULL" />
+			<property name="Target" value="Friendly Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Holy Mage Only" />
+			<property name="Text" value="Eye for an Eye can only be revealed before the Roll Dice Step of an attack. During the Damage and Effects Step, the attacker suffers the same damage and effects as the defender. Then, destroy Eye for an Eye." />
+			<property name="CardID" value="PSE05" />
+		</card>
+		<card id="eb8231ba-644c-469e-ba59-b3050cd3c67d" name="Fortified Resolve">
+			<property name="Nickname" value="Fortified Resolve" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Chakra, Martial" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage"/>
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="When this Mage attacks and damages an enemy creature, place a Charge token on Fortified Resolve. When this Mage would be damaged by an attack, you may remove a charge token from Fortified Resolve to reduce the damage from that attack by 2." />
+			<property name="CardID" value="MWAMKE06" />
+		</card>
+		<card id="3b7fc88e-4eb5-4e1e-be79-3291bf4b6aa3" name="Harmonize - Playtest">
+			<property name="Nickname" value="Harmonize" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Mana, Song" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))TCreature||TConjuration||TEnchantment||TEquipment" />
+			<property name="Target" value="Object" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magebind +2" />
+			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
+			<property name="CardID" value="MW1E20" />
+		</card>
+		<card id="b0d2a9af-7a04-4b5e-a3ba-531242802248" name="Mage Wand - Playtest">
+			<property name="Nickname" value="Mage Wand" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="2" />
+			<property name="Stats" value="Location=Weapon/Shield" />
+			<property name="StatEquipmentSlot" value="Weapon/Shield" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Spellbind, Epic" />
+			<property name="Text" value="You may bind a non-Epic incantation spell from your spellbook to Mage Wand. As a quick spell, you may pay 3 mana to change the bound spell." />
+			<property name="CardID" value="MW1Q19" />
+		</card>
+		<card id="1a12a265-0e8f-4bfb-aa65-9cc3da8d7d65" name="Martial Mastery - Playtest">
+			<property name="Nickname" value="Martial Mastery" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Martial" />
+			<property name="Cost" value="2+2" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Self" />
+			<property name="School" value="Mind"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Monk Only" />
+			<property name="Text" value="Only a Mage can cast this spell. While you control the fewest creatures, your attacks roll an additional attack die. Once per round, when you cast or reveal martial spell reduce its cost by 1 mana. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Martial] [x1]" />
+			<property name="CardID" value="MWAMKE02" />
+		</card>
+		<card id="8980cee7-4682-4e0c-8d04-054f128365aa" name="Living Armor - Playtest">
+			<property name="Nickname" value="Living Armor" />
+			<property name="Type" value="Equipment" />
+			<property name="Subtype" value="Armor, Plant" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))SMage" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="Nature"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="Location=Chestpiece" />
+			<property name="StatEquipmentSlot" value="Chestpiece" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Druid Only" />
+			<property name="Text" value="" />
+			<property name="CardID" value="MWADRQ04" />
+		</card>
+		<card id="c648a119-847b-448a-922b-9a19e8b45312" name="Ritual of Kallek - Playtest">
+			<property name="Nickname" value="Ritual of Kallek" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Mana, Ritual, Dsjer-Tet" />
+			<property name="Cost" value="0" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0-0" />
+			<property name="cTargets" value="m0,M0))SMage" />
+			<property name="Target" value="Friendly Mage" />
+			<property name="School" value="Arcane"  />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Magecast" />
+			<property name="Text" value="The casting Mage loses 2 life, then gains 3 mana. You can only cast this spell once per round." />
+			<property name="CardID" value="MWANI03" />
+		</card>
+	</cards>
+</set>
