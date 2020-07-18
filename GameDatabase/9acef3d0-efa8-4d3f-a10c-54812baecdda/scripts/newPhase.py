@@ -46,7 +46,7 @@ def nextPhase():
 def nextPhaseArena():
 	#The Ready Stage
 	#rewriting to update to 2020 standard
-	if currentPhase()[0] == "Initiative Phase" #Initative Phase
+	if currentPhase()[0] == "Initiative Phase": #Initative Phase
 		#Check for Domination victory
 		goal = eval(getGlobalVariable("Goal"))
 		if goal.get("Type")=="Domination" and updateVtarScore() and checkDominationVictory(): return
@@ -80,7 +80,7 @@ def nextPhaseArena():
 		setPhase(4)
 		
 
-	elif currentPhase()[0] == "Upkeep Phase"  #Reset Phase
+	elif currentPhase()[0] == "Upkeep Phase":  #Reset Phase
 		tutorialMessage("Actions Menu")
 		#This will probably need rewritten again at some point
 		for p in players:

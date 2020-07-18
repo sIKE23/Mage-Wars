@@ -2,6 +2,8 @@
 #v2.0.0.0#
 #######
 
+
+
 def optionsMenu(group,x=0,y=0):
 	#Consolidates the many game toggle options into a single menu
 	settingsList = [

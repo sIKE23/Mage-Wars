@@ -13,7 +13,9 @@ sys.path.append(wd("lib"))
 import os
 from math import factorial
 from copy import deepcopy
-from random import randint
+#from random import randint
+
+
 
 
 def useUntargetedAbility(card, x=0, y=0):
@@ -369,7 +371,7 @@ def remoteDeleteCard(card):
 	card.delete()
 
 def returnToHand(card): #Return card to your hand
-	card.moveTo(me.hand
+	card.moveTo(me.piles["Spellbook"])
 
 #---------------------------------------------------------------------------
 # Table card actions

@@ -51,7 +51,7 @@
 		<script src="scripts/constants.py" />
 		<script src="scripts/domination.py" />
 		<script src="scripts/events.py" />
-		<script src="scripts/main.py" />
+		<script src="scripts/main.py" /><!---->
 		<script src="scripts/textfunctions.py" />
 		<script src="scripts/newPhase.py" />
 		<script src="scripts/SpellbookValidator.py"/>
