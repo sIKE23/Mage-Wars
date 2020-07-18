@@ -884,10 +884,13 @@ def revealEnchantmentMenu(): #Returns true if at least 1 attachment was revealed
 	#Get a list of my enchantments and their targets
 	myEnchantments = [(e,getLocation(e)) for e in table if e.Type == "Enchantment" and not e.isFaceUp and e.controller == me]
 
-	#Present menu
+	#Present menu if face down enchantments exist
 	options = ["{}\n{}\n{}".format(e[0].Nickname.center(68,' '),e[1],e[0].Text.split('\r\n')[0]) for e in myEnchantments] + ["I would not like to reveal an enchantment."]
 	colors = ['#CC6600' for i in options] + ["#de2827"]
-	choice = askChoice('Would you like to reveal an enchantment?',options,colors)
+	if myEnchantments:
+		choice = askChoice('Would you like to reveal an enchantment?',options,colors)
+	else:
+		choice = 0
 
 	#Player chose not to reveal an enchantment
 	if choice in [0,len(options)]: return False

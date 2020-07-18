@@ -146,7 +146,7 @@ def createCard(group,x=0,y=0):
 		if guid and quantity:
 				cards = ([table.create(guid,0,0,1,True)] if quantity == 1 else table.create(guid,0,0,quantity,True))
 				for card in cards:
-						card.moveTo(me.hand)
+						card.moveTo(me.piles["Spellbook"])
 						if not debugMode:
 							notify("*** ILLEGAL *** - Spellbook is no longer valid")
 						notify("A card was created and was placed into {}'s spellbook.".format(me))
@@ -782,7 +782,7 @@ def discard(card,x=0,y=0):
 		obliterate(card)
 		return
 	#I don't know where or what returnMarkers is officially yet, I have to keep searching for it or make it
-	returnMarkers(card, cardTraitsDict)
+	#returnMarkers(card, cardTraitsDict)
 	card.isFaceUp = True
 	detach(card)
 	card.moveTo(me.piles['Discard Pile'])
