@@ -247,7 +247,7 @@ def resolveChanneling(p):
 		me.Mana += me.Channeling
 		notify("{} channels {} mana.\n".format(me.name,me.Channeling))
 
-def resolveUpkeep(traits):
+def resolveUpkeep():
 	mute()
 	#is the setting on?
 	if not getSetting("AutoResolveUpkeep", True):
@@ -275,6 +275,10 @@ def resolveUpkeep(traits):
 
 
 	for card in table:
+		traits = computeTraits(card)
+		#debug("Card: {}".format(card.name))
+		#debug("Card Controller: {}".format(card.controller.name))
+		#debug("Card Mage: {}".format(Card(traits['MageID']).name))
 		upKeepCost = 0
 		obeliskUpKeepCost = 0
 		monolithUpKeepCost = 0

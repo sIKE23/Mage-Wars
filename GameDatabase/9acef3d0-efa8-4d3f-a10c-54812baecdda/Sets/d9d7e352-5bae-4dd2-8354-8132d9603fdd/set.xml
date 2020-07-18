@@ -338,7 +338,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Monk Only" />
-			<property name="Text" value="Only a Mage can cast this spell. While you control the fewest creatures, your attacks roll an additional attack die. Once per round, when you cast or reveal martial spell reduce its cost by 1 mana. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Only a Mage can cast this spell. While you control the fewest creatures, your attacks roll an additional attack die. Once per round, when you cast or reveal martial spell reduce its cost by 1 mana. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Martial] [x1]" />
 			<property name="CardID" value="MWAMKE02" />
 		</card>
 		<card id="8980cee7-4682-4e0c-8d04-054f128365aa" name="Living Armor - Playtest">

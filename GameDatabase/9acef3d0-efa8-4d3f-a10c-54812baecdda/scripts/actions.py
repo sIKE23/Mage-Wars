@@ -658,7 +658,7 @@ def flipcard(card, x = 0, y = 0):
 				toggleAction(card)
 		if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
 				card.markers[Guard] = 1
-		if card.Name in ["Ballista", "Akiro's Hammer", "Dwarf Kanone"]:
+		if card.Name in ["Ballista", "Akiro's Hammer"]:
 			card.markers[LoadToken] = 1
 		if "Corrosive Orchid"  == card.Name:
 			card.markers[MistToken] = 1

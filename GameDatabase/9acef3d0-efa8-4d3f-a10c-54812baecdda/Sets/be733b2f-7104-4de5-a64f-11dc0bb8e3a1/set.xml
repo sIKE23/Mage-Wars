@@ -1288,7 +1288,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Water Mage Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a hydro or aquatic spell. Enchantments only receive this discount when they are revealed." />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a hydro or aquatic spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Hydro,Aquatic] [x1]" />
 			<property name="CardID" value="PSQ08" />
 		</card>
 		<card id="44e16242-5bbf-479a-b92a-aba214250795" name="Ring of Tides">
@@ -1323,8 +1323,7 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
 			<property name="StatEquipmentSlot" value="Weapon" />
-			<property name="cAttacks" value="name=Spearpoint Thrust;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={5: ['Push']};Piercing +X=2||name=Shoalsdeep Trident;
-=True" />
+			<property name="cAttacks" value="name=Spearpoint Thrust;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={5: ['Push']};Piercing +X=2||name=Shoalsdeep Trident;=True" />
 			<property name="AttackBar" value="Spearpoint Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [5+ = Push] [Piercing +2]&#xD;&#xA;
 			Wave Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Hydro] [Dice=3] [d12] [5+ = Push] [Extinguish]" /> 
 			<property name="Traits" value="Siren Only" />

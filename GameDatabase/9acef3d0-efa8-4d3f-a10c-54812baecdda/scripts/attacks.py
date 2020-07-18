@@ -28,7 +28,7 @@ additiveTraits = ["Melee","Ranged",
 				  "Lifebond",
 				  "Lifegain",
 				  "Upkeep",
-				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
+				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
 superlativeTraits = ["Regenerate",
 					 "Aegis",
 					 "Uproot",
@@ -455,12 +455,6 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 		defender = (Card(dTraitDict['OwnerID']) if 'OwnerID' in dTraitDict else None)
 		atkOS = Card(attack['OriginalSourceID'])
 
-		#if attack["Name"] in ["Dragon-Tail Sweep", "Fist of Iron", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm", "Dragon\'s Bite"] and attack.has_key("KiDice"):
-				#if attack["Name"]
-				
-				#attack["Dice"] = attack["Dice"] + attack["KiDice"]
-				#debug("KiDice: {}".format(str(attack["KiDice"])))
-		
 		if attacker and not "Autonomous" in atkOS.traits:
 				if not hasAttackedThisTurn(attacker): #Once per attack sequence bonuses
 						if (attack.get('RangeType') == 'Melee' or attack.get('RangeType') == 'Counterstrike') and not attack.get("Action") == "Trample": attackDice += aTraitDict.get('Melee',0) + (aTraitDict.get('Charge',0) if hasCharged(attacker) else 0)#Charge Bonus
@@ -515,6 +509,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 																	and (attacker and not hasAttackedThisRound(attacker))
 																	and attack.get('RangeType') != 'Damage Barrier'):
 								attackDice += 1
+				if ([True for c in getAttachments(defender) if c.isFaceUp and c.name == "Tar Trap"] and attack.get("Type")=="Flame"):
+					attackDice += 1
 				vs = atkTraits.get('VS')
 				if vs: #We'll assume each attack has only one vs+ trait
 						if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
@@ -612,6 +608,11 @@ def rollD12():
 					effectDieBank.append(rnd(0,11))
 	effectRoll = int(effectDieBank.pop()) + 1
 	return effectRoll
+	
+def simpleRollDice(dice):
+	"RollDice function which returns a plain number, rather than a list of values"
+	values,effect = rollDice(dice)
+	return values[2] + values[4] + 2 * (values[3] + values[5])
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -919,14 +920,10 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 		if selfAttached:
 			if dTraitDict.has_key("Ghost Form"):
 				GhostForm = True
-			elif dTraitDict.has_key("DefensiveStance"):
-				DefensiveStance = True
 			aTraitDict = computeTraits(attacker)
 			dTraitDict = computeTraits(defender)
 			if GhostForm:
-				dTraitDict["Incorporeal"] = True
-			elif DefensiveStance:
-				dTraitDict["Resilient"] = True			
+				dTraitDict["Incorporeal"] = True		
 			#debug('recalcing dTraitDict: {}'.format(dTraitDict))
 		#Intent: If Akiro's is revealed after the roll dice step, allow them to reroll what they choose. Without this, if not revealed before the roll Dice step starts, the card can still be revealed but won't trigger the option
 		if selfAttached:
@@ -968,7 +965,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		#Ki buffs
 		#debug('Checking Ki Buffs here')
 		if attack["Name"] in ["Dragon-Tail Sweep", "Fist of Iron", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm", "Dragon\'s Bite"] or attacker.name == 'Monk':
-			KiDice, KiEffect, KiTrait = processKiBuff(attack, aTraitDict, dTraitDict)
+			KiDice, KiEffect, KiTrait = processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict)
 			attack["KiDice"] = KiDice
 			attack["KiEffect"] = KiEffect
 			if KiTrait != "":
@@ -1116,7 +1113,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 				#Monk Defense Check
 				if "Monk" in defender.name:
 					#Pay 3 Ki to "Parry"
-					if defender.markers[Ki] > 2:
+					if defender.markers[Ki] > 2 and not timesHasOccured("GhostForm",defender.controller):
 						if attack.get("RangeType",{})=='Melee' and not attack.get("Traits",{}).get("Unavoidable") and not "Incapacitated" in dTraitDict:
 							buttonColorList = ["#de2827","#171e78","#01603e","#f7d917"]
 							buttonList = ["Parry","Ghost Form (Gain Incorporeal)", "Follow Up","No"]
@@ -1128,10 +1125,11 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 								interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 								return
 							elif choice ==2:
-								defender.markers[Ki] -= 3
+								defender.markers[Ki] -= 4
 								dTraitDict["Incorporeal"] = True
 								dTraitDict["Ghost Form"] = True
-								notify("{} spends 3 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
+								notify("{} spends 4 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
+								rememberPlayerEvent("GhostForm",defender.controller)
 							elif choice ==3:
 								defender.markers[Ki] -= 1
 								defender.markers[Guard] +=1
@@ -1141,12 +1139,12 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 							buttonList = ["Ghost Form (Gain Incorporeal)", "No"]
 							choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend Ki to use an ability of your Monk?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
 							if choice ==1:
-								defender.markers[Ki] -= 3
+								defender.markers[Ki] -= 4
 								dTraitDict["Incorporeal"] = True
 								dTraitDict["Ghost Form"] = True
-								notify("{} spends 3 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
+								notify("{} spends 4 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
 					#Pay 1 Ki to give counterstrike to attacks For Follow Up
-					elif defender.markers[Ki] > 0:
+					elif defender.markers[Ki] > 0 and not timesHasOccured("GhostForm",defender.controller):
 						buttonColorList = ["#de2827","#171e78"]
 						buttonList = ["Yes", "No"]
 						choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend 1 Ki for your Monk to use Follow Up?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
@@ -1154,6 +1152,9 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 							defender.markers[Ki] -= 1
 							defender.markers[Guard] +=1
 							notify("{} spends 1 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
+					elif timesHasOccured("GhostForm",defender.controller):
+						dTraitDict["Incorporeal"] = True
+						dTraitDict["Ghost Form"] = True
 		if attack.get('EffectType','Attack')=='Attack':
 			   if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
 					   #Spiked buckler code here, perhaps?
@@ -1250,7 +1251,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.\n".format(me))
 		for attachedCard in getAttachments(attacker):				
-			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name and damage > 0 and not timesHasOccured("FortRes",attacker.controller):
+			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name and damage > 0 and not timesHasOccured("FortRes",attacker.controller) and defender.Type == "Creature":
 				attachedCard.markers[Charge] +=1
 				rememberPlayerEvent("FortRes",attacker.controller)
 				notify("Fortified Resolve charges up. It now has {} charges\n".format(attachedCard.markers[Charge]))
@@ -1266,7 +1267,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 		if damage > 0 and "BattleMeditation" in aTraitDict and not timesHasOccured("BMAttack",attacker.controller):
 			attacker.markers[Ki]+=1
 			rememberPlayerEvent("BMAttack",attacker.controller)
-			notify("{}\'s Battle Meditation generates 1 Ki from the attack!".format(me))
+			notify("{}\'s Battle Meditation generates 1 Ki from the attack!".format(attacker.controller.name))
 		if damage > 0 and "BattleMeditation" in dTraitDict and not timesHasOccured("BMDefense",defender.controller):
 			defender.markers[Ki]+=1
 			rememberPlayerEvent("BMDefense",defender.controller)
@@ -1339,10 +1340,11 @@ def attackEndsStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
-		if attacker.markers[AirGlyphActive] or attacker.markers[FireGlyphActive]:
+		if attacker.markers[AirGlyphActive] and not "Drake" in attacker.Name:
 			attacker.markers[AirGlyphActive] -= 1
-			attacker.markers[FireGlyphActive] -= 1
 			attacker.markers[AirGlyphInactive] = 1
+		if attacker.markers[FireGlyphActive] and not "Drake" in attacker.Name:
+			attacker.markers[FireGlyphActive] -= 1
 			attacker.markers[FireGlyphInactive] = 1 
 		setEventList('Turn',[]) #Clear the turn event list
 
@@ -2083,7 +2085,7 @@ The following functions evaluate the adjusted traits and attacks of a card, give
 state of the game and the cards attached to it.
 """
 
-def processKiBuff(attack, aTraitDict, dTraitDict):
+def processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict):
 	KiDice = False
 	KiEffect = False
 	KiTrait = ""
@@ -2091,106 +2093,109 @@ def processKiBuff(attack, aTraitDict, dTraitDict):
 	mageStatsID = int(mageDict["MageStatsID"])
 	mageID = int(mageDict["MageID"])
 	mage = Card(mageID)
-	if mage.markers[Ki] >0 and ('Nunchucks' in aTraitDict or "Sai" in aTraitDict) and attack["RangeType"]=='Melee':
-		if 'Nunchucks' in aTraitDict:
-			notifystr = "Would you like to pay 1 Ki to give this attack 1 additional die with Nunchucks?"
+	if timesHasOccured("GhostForm",attacker.controller):
+		KiTrait = "Ethereal"
+	else:
+		if mage.markers[Ki] >0 and ('Nunchucks' in aTraitDict or "Sai" in aTraitDict) and attack["RangeType"]=='Melee':
+			if 'Nunchucks' in aTraitDict:
+				notifystr = "Would you like to pay 1 Ki to give this attack 1 additional die with Nunchucks?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=1
+					notify("{} has chosen to pay 1 Ki for their nunchucks to give {} one additional die\n".format(me, attack["Name"]))
+					KiDice = True
+			if mage.markers[Ki] >0 and "Sai" in aTraitDict:
+				notifystr = "Would you like to pay 1 Ki to give this attack + 2 Piercing?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=1
+					notify("{} has chosen to pay 1 Ki for their Sai to give {} Piercing +2\n".format(me, attack["Name"]))
+					KiTrait = "Piercing+2"
+		if mage.markers[Ki] > 0 and attack["Name"] == "Dragon\'s Bite":
+				notifystr = "Would you like to pay 1 Ki to give this attack +6 to the Effect Roll?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=1
+					notify("{} has chosen to pay 1 Ki to give {} +6 to the Effect Roll\n".format(me, attack["Name"]))
+					KiEffect = True
+				elif choice == 2:
+					notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
+		elif mage.markers[Ki] > 1 and attack["Name"] in ["Dragon-Tail Sweep", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm"]:
+			if attack["Name"] == "Dragon-Tail Sweep":
+				notifystr = "Would you like to pay 2 Ki to give this attack 1 additional die?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=2
+					notify("{} has chosen to pay 2 Ki to give {} one additional die\n".format(me, attack["Name"]))
+					KiDice = True
+				elif choice == 2:
+					notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
+			elif attack["Name"] == "Flying Side Kick":
+				notifystr = "Would you like to pay 2 Ki to give this attack 2 additional dice?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=2
+					notify("{} has chosen to pay 2 Ki to give {} two additional die\n".format(me, attack["Name"]))
+					KiDice = True
+				elif choice == 2:
+					notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
+			elif attack["Name"] == "Projected Leg Sweep":
+				notifystr = "Would you like to pay 2 Ki to give this attack +6 to the Effect Roll?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=2
+					notify("{} has chosen to pay 1 Ki to give {} +6 to the Effect Roll\n".format(me, attack["Name"]))
+					KiEffect = True
+				elif choice == 2:
+					notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
+			elif attack["Name"] == 'Projected Palm':
+				notifystr = "Would you like to pay 2 Ki to give this attack Unavoidable?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					mage.markers[Ki]-=2
+					notify("{} has chosen to pay 2 Ki to give {} Unavoidable.\n".format(me, attack["Name"]))
+					KiTrait = "Unavoidable"
+				elif choice == 2:
+					notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
+		elif mage.markers[Ki] > 2 and attack["Name"] == "Fist of Iron":
+			notifystr = "Would you like to pay 3 Ki to make this attack do Critical Damage?"
 			choiceList = ['Yes', 'No']
 			colorsList = ['#0000FF', '#FF0000']
 			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
 			if choice == 1 :
-				mage.markers[Ki]-=1
-				notify("{} has chosen to pay 1 Ki for their nunchucks to give {} one additional die\n".format(me, attack["Name"]))
-				KiDice = True
-		if mage.markers[Ki] >0 and "Sai" in aTraitDict:
-			notifystr = "Would you like to pay 1 Ki to give this attack + 2 Piercing?"
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-			if choice == 1 :
-				mage.markers[Ki]-=1
-				notify("{} has chosen to pay 1 Ki for their Sai to give {} Piercing +2\n".format(me, attack["Name"]))
-				KiTrait = "Piercing+2"
-	if mage.markers[Ki] > 0 and attack["Name"] == "Dragon\'s Bite":
-			notifystr = "Would you like to pay 1 Ki to give this attack +6 to the Effect Roll?"
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-			if choice == 1 :
-				mage.markers[Ki]-=1
-				notify("{} has chosen to pay 1 Ki to give {} +6 to the Effect Roll\n".format(me, attack["Name"]))
-				KiEffect = True
+				mage.markers[Ki]-=3
+				notify("{} has chosen to pay 3 Ki to make {} deal Critical Damage\n".format(me, attack["Name"]))
+				KiTrait = "Critical Damage"
 			elif choice == 2:
 				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-	elif mage.markers[Ki] > 1 and attack["Name"] in ["Dragon-Tail Sweep", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm"]:
-		if attack["Name"] == "Dragon-Tail Sweep":
-			notifystr = "Would you like to pay 2 Ki to give this attack 1 additional die?"
+		if mage.markers[Ki] > 3 and mage.name == 'Monk' and KiTrait != 'Critical Damage':
+			notifystr = "Would you like to pay 4 Ki to make this attack do Critical Damage?"
 			choiceList = ['Yes', 'No']
 			colorsList = ['#0000FF', '#FF0000']
 			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
 			if choice == 1 :
-				mage.markers[Ki]-=2
-				notify("{} has chosen to pay 2 Ki to give {} one additional die\n".format(me, attack["Name"]))
-				KiDice = True
+				mage.markers[Ki]-=4
+				notify("{} has chosen to pay 4 Ki to make {} deal Critical Damage with the Strike Through technique\n".format(me, attack["Name"]))
+				KiTrait = "Critical Damage"
 			elif choice == 2:
-				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-		elif attack["Name"] == "Flying Side Kick":
-			notifystr = "Would you like to pay 2 Ki to give this attack 2 additional dice?"
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-			if choice == 1 :
-				mage.markers[Ki]-=2
-				notify("{} has chosen to pay 2 Ki to give {} two additional die\n".format(me, attack["Name"]))
-				KiDice = True
-			elif choice == 2:
-				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-		elif attack["Name"] == "Projected Leg Sweep":
-			notifystr = "Would you like to pay 2 Ki to give this attack +6 to the Effect Roll?"
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-			if choice == 1 :
-				mage.markers[Ki]-=2
-				notify("{} has chosen to pay 1 Ki to give {} +6 to the Effect Roll\n".format(me, attack["Name"]))
-				KiEffect = True
-			elif choice == 2:
-				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-		elif attack["Name"] == 'Projected Palm':
-			notifystr = "Would you like to pay 2 Ki to give this attack Unavoidable?"
-			choiceList = ['Yes', 'No']
-			colorsList = ['#0000FF', '#FF0000']
-			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-			if choice == 1 :
-				mage.markers[Ki]-=2
-				notify("{} has chosen to pay 2 Ki to give {} Unavoidable.\n".format(me, attack["Name"]))
-				KiTrait = "Unavoidable"
-			elif choice == 2:
-				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-	elif mage.markers[Ki] > 2 and attack["Name"] == "Fist of Iron":
-		notifystr = "Would you like to pay 3 Ki to make this attack do Critical Damage?"
-		choiceList = ['Yes', 'No']
-		colorsList = ['#0000FF', '#FF0000']
-		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-		if choice == 1 :
-			mage.markers[Ki]-=3
-			notify("{} has chosen to pay 3 Ki to make {} deal Critical Damage\n".format(me, attack["Name"]))
-			KiTrait = "Critical Damage"
-		elif choice == 2:
-			notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-	if mage.markers[Ki] > 3 and mage.name == 'Monk' and KiTrait != 'Critical Damage':
-		notifystr = "Would you like to pay 4 Ki to make this attack do Critical Damage?"
-		choiceList = ['Yes', 'No']
-		colorsList = ['#0000FF', '#FF0000']
-		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-		if choice == 1 :
-			mage.markers[Ki]-=4
-			notify("{} has chosen to pay 4 Ki to make {} deal Critical Damage with the Strike Through technique\n".format(me, attack["Name"]))
-			KiTrait = "Critical Damage"
-		elif choice == 2:
-			notify("{} has chosen not enhance {} with Ki Techniques\n".format(me, attack["Name"]))
+				notify("{} has chosen not enhance {} with Ki Techniques\n".format(me, attack["Name"]))
 	return KiDice, KiEffect, KiTrait
 	
-def buffWithGlyphs(mageStats, attacker):
+def buffWithGlyphs(mageStats, attacker, drake = None):
 	if me.Mana > 6:
 		if timesHasOccured("AirGlyphDeactivate",attacker.controller) and timesHasOccured("FireGlyphDeactivate",attacker.controller):
 			notifystr = "You have already deactivated both this round"
@@ -2216,34 +2221,50 @@ def buffWithGlyphs(mageStats, attacker):
 				choice = 4
 		else:
 			notifystr = "Which buff would you like to apply?"
-			choiceList = ['Air (+4 effect)', 'Fire (+3 dice)', 'both' ,'None']
+			choiceList = ['Air (+4 effect)', 'Fire (+2 dice)', 'both' ,'None']
 			colorsList = ['#0000FF','#0000FF','#0000FF', '#FF0000']
 			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
 		if choice == 1:
 			me.Mana -=3
-			mageStats.markers[AirGlyphActive] = 0
-			mageStats.markers[AirGlyphInactive] = 1
+			if drake and drake.markers[AirGlyphActive]>0 and drake != attacker:
+				drake.markers[AirGlyphActive] = 0
+				drake.markers[AirGlyphInactive] = 1
+			else:
+				mageStats.markers[AirGlyphActive] = 0
+				mageStats.markers[AirGlyphInactive] = 1
 			attacker.markers[AirGlyphActive] +=1
 			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
 			notify("{} has chosen to pay 3 mana and deactivate the Air Glyph to give this attack +4 to the effect roll\n".format(me))
 		elif choice == 2:
 			me.Mana -=3
-			mageStats.markers[FireGlyphActive] = 0
-			mageStats.markers[FireGlyphInactive] = 1
+			if drake and drake.markers[FireGlyphActive]>0 and drake != attacker:
+				drake.markers[FireGlyphActive] = 0
+				drake.markers[FireGlyphInactive] = 1
+			else:
+				mageStats.markers[FireGlyphActive] = 0
+				mageStats.markers[FireGlyphInactive] = 1
 			attacker.markers[FireGlyphActive] +=1
 			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
-			notify("{} has chosen to pay 3 mana and deactivate the Fire Glyph to give this attack +3 dice\n".format(me))
+			notify("{} has chosen to pay 3 mana and deactivate the Fire Glyph to give this attack +2 dice\n".format(me))
 		elif choice ==3:
 			me.Mana -=6
-			mageStats.markers[AirGlyphActive] = 0
-			mageStats.markers[AirGlyphInactive] = 1
+			if drake and drake.markers[AirGlyphActive]>0 and drake != attacker:
+				drake.markers[AirGlyphActive] = 0
+				drake.markers[AirGlyphInactive] = 1
+			else:
+				mageStats.markers[AirGlyphActive] = 0
+				mageStats.markers[AirGlyphInactive] = 1
 			attacker.markers[AirGlyphActive] +=1
-			mageStats.markers[FireGlyphActive] = 0
-			mageStats.markers[FireGlyphInactive] = 1
+			if drake and drake.markers[FireGlyphActive]>0 and drake != attacker:
+				drake.markers[FireGlyphActive] = 0
+				drake.markers[FireGlyphInactive] = 1
+			else:
+				mageStats.markers[FireGlyphActive] = 0
+				mageStats.markers[FireGlyphInactive] = 1
 			attacker.markers[FireGlyphActive] +=1
 			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
 			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
-			notify("{} has chosen to pay 6 mana and deactivate both Air and Fire Glyphs to give this attack +3 dice and +4 to the effect roll\n".format(me))
+			notify("{} has chosen to pay 6 mana and deactivate both Air and Fire Glyphs to give this attack +2 dice and +4 to the effect roll\n".format(me))
 	elif me.Mana > 3:
 		notifystr = "Which buff would you like to apply?"
 		choiceList = ['Air (+4 effect)', 'Fire (+3 dice)','None']
@@ -2251,18 +2272,26 @@ def buffWithGlyphs(mageStats, attacker):
 		choice = askChoice("{}".format(notifystr), choiceList, colorsList)
 		if choice == 1:
 			me.Mana -=3
-			mageStats.markers[AirGlyphActive] = 0
-			mageStats.markers[AirGlyphInactive] = 1
+			if drake and drake.markers[AirGlyphActive]>0 and drake != attacker:
+				drake.markers[AirGlyphActive] = 0
+				drake.markers[AirGlyphInactive] = 1
+			else:
+				mageStats.markers[AirGlyphActive] = 0
+				mageStats.markers[AirGlyphInactive] = 1
 			attacker.markers[AirGlyphActive] +=1
 			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
 			notify("{} has chosen to pay 3 mana and deactivate the Air Glyph to give this attack +4 to the effect roll\n".format(me))
 		elif choice == 2:
 			me.Mana -=3
-			mageStats.markers[FireGlyphActive] = 0
-			mageStats.markers[FireGlyphInactive] = 1
+			if drake and drake.markers[FireGlyphActive]>0 and drake != attacker:
+				drake.markers[FireGlyphActive] = 0
+				drake.markers[FireGlyphInactive] = 1
+			else:
+				mageStats.markers[FireGlyphActive] = 0
+				mageStats.markers[FireGlyphInactive] = 1
 			attacker.markers[FireGlyphActive] +=1
 			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
-			notify("{} has chosen to pay 3 mana and deactivate the Fire Glyph to give this attack +3 dice\n".format(me))
+			notify("{} has chosen to pay 3 mana and deactivate the Fire Glyph to give this attack +2 dice\n".format(me))
 	else:
 		notify("You don't have enough Mana to pay for the buffs")
 	

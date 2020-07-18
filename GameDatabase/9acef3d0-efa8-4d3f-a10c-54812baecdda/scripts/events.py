@@ -457,13 +457,17 @@ def onCardArrowTargeted(args):
 				mageStats = Card(mageStatsID)
 				if getSetting("DeclareAttackWithArrow",True) and getSetting('BattleCalculator',True) and canDeclareAttack(attacker) and ('Conjuration' in defender.type or defender.type == 'Creature'):
 						#Elementalist Glyphs to buff attacks
-						if (mageStats.markers[AirGlyphActive] or mageStats.markers[FireGlyphActive]):
+						drake = None
+						for c in table:
+							if "Elemental Drake" in c.name:
+								drake = c
+						if (mageStats.markers[AirGlyphActive] or mageStats.markers[FireGlyphActive]) or ((drake.markers[AirGlyphActive] or drake.markers[FireGlyphActive]) if drake else False):
 							notifystr = "Would you like Deactivate a Glyph to buff this attack?"
 							choiceList = ['Yes', 'No']
 							colorsList = ['#0000FF', '#FF0000']
 							choice = askChoice("{}".format(notifystr), choiceList, colorsList)
 							if choice == 1:
-								buffWithGlyphs(mageStats, attacker)
+								buffWithGlyphs(mageStats, attacker, drake)
 						
 						aTraitDict = computeTraits(attacker)
 						dTraitDict = computeTraits(defender)
