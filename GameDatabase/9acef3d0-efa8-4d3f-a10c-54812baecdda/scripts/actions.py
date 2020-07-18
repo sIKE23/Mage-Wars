@@ -561,6 +561,8 @@ def flipcard(card,x = 0,y = 0):
 	tutorialMessage("Advance Phase")
 	cardalt = card.alternates
 	cZone = getZoneContaining(card)
+	traits = computeTraits(card)
+	mageDict = eval(me.getGlobalVariable("MageDict"))
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == "":
@@ -599,11 +601,13 @@ def flipcard(card,x = 0,y = 0):
 		card.isFaceUp = True
 		if card.Type != "Enchantment"  and "Conjuration" not in card.Type: #leaves the highlight around Enchantments and Conjurations
 			card.highlight = None
-		if card.Type == "Creature": #places action marker on card
+		if card.Type == "Creature" and not "Mage" in card.Subtype : #places action marker on card
 			toggleAction(card)
-		if card.Subtype == "Mage": #once more to flip action to active side
+		elif card.Type == "Creature" and "Mage" in card.Subtype:
 			toggleAction(card)
+			toggleAction(card) #Mages always start with an active action marker
 			toggleQuick(card)
+			if mageDict["MageRevealed"] == "False": mageSetup()
 			if "Wizard" in card.Name and int(card.Level) >4:
 				card.markers[VoltaricOFF] = 1
 			if "Forcemaster" == card.Name and int(card.Level) >4:

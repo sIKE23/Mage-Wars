@@ -4,40 +4,51 @@ Block
 Cobra Reflexes
 Decoy
 Divine Intervention
-Enchantment Transfusion
+Divine Reversal
+Dodge
+Eye for an Eye
 Falcon Precision
-Force Crush
-Force Hold
 Force Orb
 Force Sword
 Forcefield
+Force Shield
 Fumble
+Glancing Blow
+Jinx
+Knight's Blessing
+Knight's Courage
 Mind Shield
+Nullify
+Redirect
 Reverse Attack
+Tangleroot
 #
 Avoid Attack
 Agony
 Bear Strength
 Critical Strike
-Decoy
 Divine Protection
-Enchantment Transfusion
+Demonic Bloodlust
 Hawkeye
 Lion Savagery
 Marked for Death
 Sacred Ground
+Shrink
 Standard Bearer
+Wolf Fury
 #
 Roll Dice
 Akiro's Favor
+Badger Frenzy
 Barkskin
 Brace Yourself
 Bull Endurance
-Decoy
 Divine Intervention
-Enchantment Transfusion
 Fortified Position
+Gator Toughness
 Healing Charm
+Iguana Regrowth
+Joined Strength 
 Rhino Hide
 Rise Again
 Rust
@@ -45,24 +56,28 @@ Standard Bearer
 Vampirism
 #
 Damage and Effects
-Decoy
+Blind
 Divine Might
 Enchantment Transfusion
+Giant Size
+Penance
 #
 Additional Strikes
 Circle of Fire
 Circle of Light
 Circle of Lightning
-Decoy
-Enchantment Transfusion
 #
 Damage Barrier
-Decoy
-Enchantment Transfusion
 Retaliate
 #
 Counterstrike
-Decoy
-Enchantment Transfusion
 #
 Attack Ends
+#
+Channeling
+Arcane Corruption
+Ghoul Rot
+Iguana Regrowth
+Poisoned Blood
+Regrowth
+#

@@ -370,28 +370,7 @@ def onDeckLoaded(args):
 					if card.controller == me:
 						card.delete()
 	
-#OnDeckLoaded Event Functions#
-def mageSetup():
-	#set initial health and channeling values
-	for c in me.piles["Spellbook"]:
-		if c.Subtype == "Mage":
-			stats = c.Stats.split(",")
-			#me.Mage = c.name - when #1278 happens and game Counters support strings....
-			break
-	for stat in stats:
-		debug("stat {}".format(stat))
-		statval = stat.split("=")
-		if "Channeling" in statval[0]:
-			me.Channeling = int(statval[1])
-			me.Mana = 10+me.Channeling
-			#if debugMode: me.Mana = 100
-			whisper("Channeling set to {} and Mana to {}".format(me.Channeling,me.Mana))
-		elif "Life" in statval[0]:
-			me.Life = int(statval[1])
-			whisper("Life set to {}".format(me.Life))
 
-	setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
-	if eval(getGlobalVariable("GameSetup")) == len(getPlayers()): setGlobalVariable("GameSetup","True")
 
 
 ###############################

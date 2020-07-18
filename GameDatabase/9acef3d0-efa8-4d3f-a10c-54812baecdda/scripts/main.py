@@ -13,7 +13,7 @@ sys.path.append(wd("lib"))
 import os
 from math import factorial
 from copy import deepcopy
-#from random import randint
+from random import randint
 
 
 
