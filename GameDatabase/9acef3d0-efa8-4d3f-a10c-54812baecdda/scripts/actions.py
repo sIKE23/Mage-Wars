@@ -3,7 +3,6 @@
 #######
 
 
-
 def optionsMenu(group,x=0,y=0):
 	#Consolidates the many game toggle options into a single menu
 	settingsList = [
@@ -223,8 +222,18 @@ def addDamage(card,x = 0,y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
 	if "Mage" in card.Subtype and card.controller == me:
 		me.Damage += 1
+		notify("1 Damage added to the {}".format(card.name))
 	else:
 		addToken(card,Damage)
+
+def addDamageFromAttack(card,amount =1,x = 0,y = 0):
+	debug("addDamageFromAttack")
+	debug("Damage amount passed: {}".format(amount))
+	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
+	if "Mage" in card.Subtype and card.controller == me:
+		me.Damage += amount
+	else:
+		addToken(card,Damage,amount)
 
 def addOther(card,x = 0,y = 0):
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList or not card.isFaceUp: return
@@ -833,10 +842,11 @@ def addToken(card,tokenType, amount = 1):
 	mute()
 	if card.Type in typeIgnoreList or card.Name in typeIgnoreList: return  # do not place markers/tokens on table objects like Initative,Phase,and Vine Markers
 	card.markers[tokenType] += amount
-	if card.isFaceUp:
-		notify("{} added to {}".format(tokenType[0],card.Name))
-	else:
-		notify("{} added to face-down card.".format(tokenType[0]))
+	if amount > 0:
+		if card.isFaceUp:
+			notify("{} {} Token{} added to {}".format(amount,tokenType[0],"s" if amount >1 else '',card.Name))
+		else:
+			notify("{} {} added to face-down card.".format(amount,tokenType[0]))
 
 def subToken(card,tokenType):
 	mute()

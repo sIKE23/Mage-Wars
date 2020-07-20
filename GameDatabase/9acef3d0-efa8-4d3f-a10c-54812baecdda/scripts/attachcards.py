@@ -474,12 +474,22 @@ def zoneGetBorder(zone,card): #like getContain, but for borders. Snaps to the ne
 	return (border[0]-X/2,border[1]-Y/2)
 
 def cardGetDistance(card1,card2):
+	debug("cardGetDistance:\n")
+	debug("card1: {}\ncard2: {}".format(card1.name,card2.name))
 	zone1 = getZoneContaining(card1)
+	debug("zone1: {}".format(zone1))
 	zone2 = getZoneContaining(card2)
+	debug("zone2: {}".format(zone2))
 	return zoneGetDistance(zone1,zone2)
 
 def zoneGetDistance(zone1,zone2):
-	return abs(zone1['i']-zone2['i']) + abs(zone1['j']-zone2['j'])
+	try:
+		output = abs(zone1['i']-zone2['i']) + abs(zone1['j']-zone2['j'])
+		debug('zoneGetDistance worked')
+	except:
+		output = 0
+		debug('zoneGetDistance exception')	
+	return output
 
 def getZoneContaining(card): #returns the zone occupied by the card. If attached, will return zone occupied by attachee.
 	if not getGlobalVariable("Map"): return

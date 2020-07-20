@@ -46,6 +46,7 @@
 		<script src="scripts/arenaUpkeep.py"/>
 		<script src="scripts/attachcards.py" />
 		<script src="scripts/attacks.py" />
+		<script src="scripts/attackSequence.py" />
 		<script src="scripts/cardActions.py" />
 		<script src="scripts/changelog.py" />
 		<script src="scripts/constants.py" />

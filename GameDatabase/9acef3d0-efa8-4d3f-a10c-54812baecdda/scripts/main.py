@@ -18,6 +18,7 @@ from random import randint
 
 
 
+
 def useUntargetedAbility(card, x=0, y=0):
 	mute()
 	debug(card.nickname)
@@ -86,11 +87,16 @@ def statsParser(stringList):
 	return output
 
 def rangeMatcher(source,target,cRangeString):
+	debug("rangeMatcher\n")
 	"Returns true if source and target are within range."
 	distance = cardGetDistance(source,target)
+	debug("distance: {}".format(distance))
 	rangeSet = cRangeString.split(",")
+	debug("rangeSet: {}".format(rangeSet))
 	minimum = int(rangeSet[0][1:])
+	debug("minimum: {}".format(minimum))
 	maximum = int(rangeSet[1][1:])
+	debug("maximum: {}".format(maximum))
 	return (minimum <= distance <= maximum)
 
 def targetMatcher(source,target,cTargetString):
@@ -118,7 +124,8 @@ def buffMatcher(source,target,cBuffString):
 			disqualified = False
 			reqList = candidate.split(",")
 			for req in reqList:
-				if req[0] == "[": buff.extend(req[1:].split(";"))
+				#This isn't going to work for debuffs... might need to make a dBuff string?
+				if req[0] == "[": buff.extend(req[1:-1].split(";"))
 				else: disqualified = not targetReqParser(source,target,req)
 				if disqualified: break
 			if not disqualified: 
@@ -149,7 +156,7 @@ def targetReqParser(source,target,req):
 	elif tag == "_": satisfies = False #For now. Will change later.
 	elif tag == "^": satisfies = ((value in ["friendly","controlled"]) == (target.controller == source.controller)) #A temporary placeholder until we get alignment working.
 	if notFlag: satisfies = not satisfies
-	debug(source.Name+" "+target.Name+" "+tag+" "+value+" "+str(satisfies))
+	debug("targetReqParser: \n"+source.Name+" "+target.Name+" "+tag+" "+value+" "+str(satisfies)+"\n")
 	return satisfies
 
 
@@ -185,12 +192,12 @@ def establishTurnOrder():
 	"The calling player chooses a turn order for all players"
 	pass
 
-def getTurnOrder():
+def getTurnOrder():#WIP
 	"""
 	Retrieves the current turn order as a list of all player objects in order, with the current player first
 	Use getTurnOrder()[0] to get the first player
 	"""
-	debug("getTurnOrder()")
+	#debug("getTurnOrder()")
 	return getPlayers() #TEMPORARY! Todo: implament turn order. For now, we will just use the id list
 
 ######################################
@@ -292,16 +299,21 @@ def targetMenu(source,target):
 	"This will be a general function determining what happens when one card targets another, regardless of the method."
 	#args = player,fromCard,toCard,targeted,scripted
 	mute()
+	debug("targetMenu")
 	if not source and target: return
 
 	if isValidAttackSource(source) and isValidAttackTarget(target) and getSetting('BattleCalculator',True):
+		#WIP can get rid of these
 		aTraitDict = computeTraits(source)
 		dTraitDict = computeTraits(target)
-		attack = attackChoicePrompt(source,target)#diceRollMenu(source,target)
+		#-----------------------------
+
+
+		attack = attackChoicePrompt(source,target)
 		if attack:
 			if attack.get("Cost") and not payForAttackSpell(me,attack): return
-			if attack.get('SourceID')==source._id:
-				remoteCall(target.controller,'initializeAttackSequence',[aTraitDict,attack,dTraitDict])
+			if attack.get('source id')==source._id:
+				remoteCall(target.controller,'initializeAttackSequence',[source,attack,target])
 				source.arrow(target,False)
 				return
 			elif attack.get("Dice"): 
@@ -562,10 +574,10 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 						return (card.markers[Mana],cName)
 				#Discounts from Markers on Equipment
 				if isBound(spell) == True and card.type == 'Equipment' and getBindTarget(spell) == card:
-					 	boundCasterTraits = computeTraits(card)
-						#Rune of Power
-						if boundCasterTraits.get('Spellbind') == True and caster.markers[RuneofPower] == 1:
-							return (1,"Rune of Power on {}".format(cName))
+					boundCasterTraits = computeTraits(card)
+					#Rune of Power
+					if boundCasterTraits.get('Spellbind') == True and caster.markers[RuneofPower] == 1:
+						return (1,"Rune of Power on {}".format(cName))
 		if timesUsed <2: #Twice-per-round discounts
 				if cName == "Death Ring" and (mageCast or spawnpointCast) and sType != "Enchantment" and ("Necro" in sSubtype or "Undead" in sSubtype):
 						return (1,cName)

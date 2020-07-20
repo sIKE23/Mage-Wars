@@ -39,9 +39,10 @@ superlativeTraits = ["Regenerate",
 					 "Melting"]
 
 ############################################################################
-######################		Dice Roll Menu		####################
+######################		Attack Choice Prompt		####################
 ############################################################################
 """
+#WIP need to update this description
 The entire module is called through this function. All definitions of data should go through here.
 
 ---Code Structure---
@@ -51,28 +52,20 @@ diceRollMenu:
 		isLegalAttack
 
 """
+def isInRange(attacker, attack, defender):
+	atkMinRange = attack['range'][0]
+	atkMaxRange = attack['range'][1]
+	attackType = attack['range type']
+	distanceBetweenSrcTgt = cardGetDistance(attacker, defender)
 
-def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
-	"""
-	Prompts the attacking player to select an attack. Assumes that there exists an attacker and a defender.
-	If you want to restrict the types of attack that can be chosen, you can set permissible action types in actionFilters
-	If you set the action filter to "None", it will only pick up attacks without an action type.
-	"""
-	mute()
-	debug("attackChoicePrompt({},{},{})".format(attacker.name,defender.name,str(actionFilters)))
+	if attackType == 'Melee' and getZoneContaining(attacker)==getZoneContaining(defender):
+		return True
+	elif attackType == 'Ranged' and atkMinRange <= distanceBetweenSrcTgt and distanceBetweenSrcTgt <= atkMaxRange:
+		return True
+	else:
+		return False
 
-	#1: Populate the attack list.
-	def filterPredicate(attack): #For clarity
-		return attack.get("action type","None") in actionFilters or "Counterstrike" in actionFilters and attack.get("Counterstrike")
-	attackList = [attack for attack in getAttacks(attacker) if filterPredicate(attack)]
-
-	#2: Get a modified list of attacks for populating the menu.
-	modifiedAttacks = [computeAttack(attacker,attack,defender) for attack in attackList]
-
-	#3: Compute the kill chances for the modified attacks
-	killChances = [chanceToKill(attacker,attack,defender) for attack in modifiedAttacks]
-
-	#4: Generate the list of choices that will appear on the menu
+def createAttackOptionsList(modifiedAttacks, killChances, effectChances):
 	options = []
 	append = options.append
 
@@ -86,15 +79,50 @@ def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
 
 	colors = ["#CC0000" for i in options] #Red
 	choiceText = "Use which attack?" if options else "No legal attacks available!"
+	return choiceText
 
-	#5: Display the menu to the player and allow them to choose an option
+def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
+	"""
+	Prompts the attacking player to select an attack. Assumes that there exists an attacker and a defender.
+	If you want to restrict the types of attack that can be chosen, you can set permissible action types in actionFilters
+	If you set the action filter to "None", it will only pick up attacks without an action type. Called from main.py (targetMenu())
+	"""
+	mute()
+	debug("attackChoicePrompt\n({},\n{},\n{})\n".format(attacker.name,defender.name,str(actionFilters)))
+
+	#1: Populate the attack list.
+	def filterPredicate(attack): #For clarity
+		return attack.get("action type","None") in actionFilters or "Counterstrike" in actionFilters and attack.get("Counterstrike")
+	attackList = [attack for attack in getAttacks(attacker) if filterPredicate(attack)]
+
+	#2: Filter attackList by range
+	attackList = [attack for attack in attackList if isInRange(attacker, attack, defender)]
+	
+	#3: Get a modified list of attacks for populating the menu. #WIP
+	modifiedAttacks = [computeAttack(attacker,attack,defender) for attack in attackList]
+
+	#4: Compute the kill chances for the modified attacks
+	killChances = [chanceToKill(attacker,attack,defender) for attack in modifiedAttacks]
+
+	#5: Compute Effect chances for the modified attacks
+	effectChances = [chanceForEffect(attacker, attack, defender) for attack in modifiedAttacks]
+
+	#6: Generate the list of choices that will appear on the menu
+	choiceText = createAttackOptionsList(modifiedAttacks, killChances, effectChances)
+	
+
+	#7: Display the menu to the player and allow them to choose an option
 	choice = askChoice(choiceText, options, colors)
 
-	#6: Initiate the chosen attack. Note that the attack will be pulled from the UNMODIFIED attack list.
+	#8: Initiate the chosen attack. Note that the attack will be pulled from the UNMODIFIED attack list.
+	#WIP This should return the attackList[index] to the targetMenu() function that called it and let that one initialize that attack sequence
 	if choice > 0:
 		index = choice - 1
-		initializeAttackSequence(attacker,attackList[index],defender)
+		return(attackList[index])
+		#initializeAttackSequence(attacker,attackList[index],defender)
 
+
+#WIP don't think we need this anymore
 def diceRollMenu(attacker = None,defender = None,specialCase = None):
 		mute()
 		setEventList('Turn',[]) #Clear the turn event list. Will need to be changed when we implement sweeping/zone attacks properly
@@ -150,6 +178,7 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 						setSetting('lastStandardDiceRollInput',dice)
 						return {'Dice' : dice}
 
+#WIP used by diceRollMenu that will be obsolete
 def getActionColor(action):
 		if action.get('EffectType','Attack') == 'Heal': return "#663300"        #Heal is always in orange
 		#Assume is an attack
@@ -157,6 +186,7 @@ def getActionColor(action):
 		if action.get('RangeType') == 'Ranged': return '#0f3706'     #Nonspell ranged attacks are green
 		return '#CC0000'                                                        #Default to red
 
+#WIP used by diceRollMenu that will be obsolete
 def isLegalAttack(aTraitDict,attack,dTraitDict):
 		if not (aTraitDict.get('OwnerID') and dTraitDict.get('OwnerID')): return True
 		attacker = Card(aTraitDict.get('OwnerID'))
@@ -254,6 +284,7 @@ we can store these properties in the xml files with the following notation (no s
 
 
 def parseAttack(string):
+	debug("parseAttack\n")
 	"Takes a raw attack string for a single attack (in the format used in the new xml fields) and returns a properly formatted dictionary object"
 	#Requires that string contain exactly 1 properly formatted attack
 	#Does not store the information of the original source of the attack
@@ -269,13 +300,20 @@ def parseAttack(string):
 		"Mana Drain +X" : int,
 		"Mana Transfer +X" : int,
 		"Charge +X": int,
+		"Vampiric": bool,
+		"Defrost": bool,
+		"Ethereal": bool,
 	}
 
 	output = {}
 	fields = string.split(";")
 	for field in fields:
+		debug('field: {}'.format(field))
 		pair = field.split("=")
-		output[pair[0]] = typeMatcher.get(pair[0],str)(pair[1])
+		if typeMatcher.get(pair[0],str) in [tuple,dict]:
+			output[pair[0]] = typeMatcher.get(pair[0],str)(eval(pair[1]))
+		else:
+			output[pair[0]] = typeMatcher.get(pair[0],str)(pair[1])
 	return output
 
 def getAttacks(card):
@@ -288,52 +326,142 @@ def getAttacks(card):
 	"""
 
 	#Requires that card be a card that may legally declare an attack
-	debug("getAttacks({})".format(card.Name))
+	debug("getAttacks({})\n".format(card.Name))
 	output = []
 	append = output.append
 	#1: parse attacks given in the card's cAttacks field
 	if card.cAttacks:
 		rawAttackList = card.cAttacks.split("||")
 		for string in rawAttackList:
-			debug("string = {}".format(string))
+			debug("string in cAttacks: {}\n".format(string))
 			attack = parseAttack(string)
 			attack["user id"] = card._id
 			attack["source id"] = card._id
 			append(attack)
-			debug("attack = " + str(attack))
+			debug("attack: " + str(attack)+"\n")
 	#2: parse attacks from attached cards
 	attachments = getAttachments(card) + ([c for c in table if c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp] if "Mage" in card.Subtype else [])
 	for a in attachments:
 		if a.tAttacks:
 			rawAttackList = a.tAttacks.split("||")
 			for string in rawAttackList:
+				debug("string in tAttacks: {}\n".format(string))
 				attack = parseAttack(string)
 				attack["user id"] = card._id
 				attack["source id"] = a._id
 				append(attack)
+				debug("attack: " + str(attack)+"\n")
 	#3: parse attacks from other sources
 	"""Notation: 'on parse function' = oPF_getAttacks, which is assumed to contain only a function"""
 	[spellDictionary[c.Name]["oPF_getAttacks"](c,card,output) for c in table if "oPF_getAttacks" in spellDictionary.get(c.Name,{})]
-	debug(str(output))
+	debug("getAttacks output: {}\n".format(str(output)))
 	return output
 
+def addDiceToAttack(attacker, attack, defender):
+	'''
+	Returns an int with the amount of Dice to add to an attack based various modifiers in the attack from both attacker and defender
+	Dice Add traits:
+	Melee +
+	Ranged +
+	Bloodthirsty
+	Charge
+	Damage Type +
+	Dice + (Tar Trap/Roll X additional dice if...)
+	'''
+
+	debug("addDiceToAttack\n")
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+	rangeType = attack['range type']
+	diceToAdd = 0
+
+	if rangeType == 'Melee' or rangeType == 'Counterstrike':
+		#Melee +
+		if aTraitDict.get(rangeType,0)>0:
+			diceToAdd += aTraitDict.get(rangeType,0)
+		#Bloodthirsty
+		diceToAdd += aTraitDict.get('Bloodthirsty',0) if ((defender.markers[Damage] or ("Mage" in defender.Subtype and defender.controller.Damage))	and (attacker and not hasAttackedThisTurn(attacker)) and defender.type == 'Creature' and not dTraitDict.get('Nonliving')) else 0
+		#Charge
+		diceToAdd += aTraitDict.get('Charge',0) if hasCharged(attacker) else 0
+		#Damage Type +
+		try: diceToAdd += dTraitDict[attack['damage type']] if dTraitDict[attack['damage type']]>0 else 0
+		except: diceToAdd += 0
+		#Dice +
+	elif rangeType == 'Ranged':
+		#Ranged +
+		diceToAdd += aTraitDict.get(rangeType,0)
+		#Damage Type +
+		try: diceToAdd += dTraitDict[attack['damage type']] if dTraitDict[attack['damage type']]>0 else 0
+		except: diceToAdd += 0
+		#Dice +
+	return diceToAdd
+
+def subDiceFromAttack(attacker, attack, defender):
+	'''
+	Returns an int with the amount of Dice to remove from an attack based various modifiers in the attack from both attacker and defender
+	Dice Subtract traits:
+	Melee -
+	Ranged -
+	Weak
+	Stagger
+	Damage Type -
+	Dice - (Agony)
+	'''
+
+	debug("subDiceFromAttack\n")
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+	rangeType = attack['range type']
+	diceToSubtract = 0
+
+	#WIP need to add logic for spell attacks too, but just getting regular attacks up and running for now
+	if rangeType == 'Melee' or rangeType == 'Counterstrike':#Non-Spell melee/counterstrikes
+		#Melee +
+		if aTraitDict.get(rangeType,0)<0:
+			diceToSubtract += abs(aTraitDict.get(rangeType,0))
+		#Weak
+		diceToSubtract += attacker.markers[Weak]
+		#Stagger
+		diceToSubtract += attacker.markers[Stagger]*2
+		#Damage Type +
+		try: diceToSubtract += abs(dTraitDict[attack['damage type']]) if dTraitDict[attack['damage type']]<0 else 0
+		except: diceToSubtract +=0
+		#Dice +
+		#Aegis
+	elif rangeType == 'Ranged':#Ranged non-Spell attacks
+		#Aegis
+		#Weak
+		diceToSubtract += attacker.markers[Weak]
+		#Stagger
+		diceToSubtract += attacker.markers[Stagger]*2
+		#Damage Type -
+		try: diceToSubtract += abs(dTraitDict[attack['damage type']]) if dTraitDict[attack['damage type']]<0 else 0
+		except: diceToSubtract +=0
+	
+	return diceToSubtract
+
+
 def computeAttack(attacker,attack,defender):#WIP
+	debug("computeAttack\n")
 	#Returns a new dictionary object containing the modified form of the attack, taking all bonuses into account. Does NOT modify the original attack.
 	attack = deepcopy(attack)
 
 	#1: compute all buffs on the attacker and defender
-	# Attacker: Melee +X, Piercing +X,
-	# Defender: Armor +X, Tough +X,
+	diceToAdd = addDiceToAttack(attacker, attack, defender)
+	diceToSubtract = subDiceFromAttack(attacker, attack, defender)
+	
 	#2: modify output based on buffs computed in #1
+	attack['dice'] += diceToAdd
+	attack['dice'] -= diceToSubtract
 
 	#3: take special abilities (from the spelldictionary) into account
+	#WIP
 
-	#4: normalize dice to 0 if negative
-	attack["dice"] = max(attack["dice"],0)
-
+	#4: normalize dice to 1 if negative
+	attack["dice"] = max(attack["dice"],1)
 	return attack
 
-def computeD12(dTraitDict,d12Pair):
+def computeD12(dTraitDict,d12Pair):#WIP
 		defender = Card(dTraitDict.get('OwnerID'))
 		effectText = d12Pair[1]
 		effects = []
@@ -458,7 +586,7 @@ def getAttackTraitStr(atkTraitDict): ##Takes an attack trait dictionary and retu
 				if atkTraitDict[key]: attackList.append(text)
 		return attackList
 
-def canDeclareAttack(card):#WIP will need to rewrite to take cAttacks into account
+def canDeclareAttack(card):#WIP not currently called
 		if not card.isFaceUp: return False
 		if (card.Type == 'Creature' or
 			('Conjuration' in card.Type and card.AttackBar != '') or
@@ -833,9 +961,9 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 			   notify("{} fails to defend {}...".format(defender.nickname,pRef(defender)))
 			   return False
 
-############################################################################
-######################      Seven Steps of an Attack    ####################
-############################################################################
+####################################
+######### Old Functions area #######
+####################################
 
 """
 notation:
@@ -866,308 +994,8 @@ argument will contain the following keys:
 """
 
 
-def revealEnchantmentMenu(): #Returns true if at least 1 attachment was revealed
-	"""
-	Prompts the player to reveal an enchantment. 
-	For now, it will simply look at all enchantments the player has. 
-	Later I may add the ability to recommend enchantments.
-	Returns boolean of whether enchantment was revealed.
-	"""
-	def getLocation(enchantment):
-		#Is it attached to a card?
-		attachTarget = getAttachTarget(enchantment)
-		if attachTarget: return attachTarget.Nickname
-		#Otherwise, return the zone
-		zone = getZoneContaining(enchantment)
-		return "Zone {},{}".format(str(zone[i]+1),str(zone[j]+1))
-
-	#Get a list of my enchantments and their targets
-	myEnchantments = [(e,getLocation(e)) for e in table if e.Type == "Enchantment" and not e.isFaceUp and e.controller == me]
-
-	#Present menu if face down enchantments exist
-	options = ["{}\n{}\n{}".format(e[0].Nickname.center(68,' '),e[1],e[0].Text.split('\r\n')[0]) for e in myEnchantments] + ["I would not like to reveal an enchantment."]
-	colors = ['#CC6600' for i in options] + ["#de2827"]
-	if myEnchantments:
-		choice = askChoice('Would you like to reveal an enchantment?',options,colors)
-	else:
-		choice = 0
-
-	#Player chose not to reveal an enchantment
-	if choice in [0,len(options)]: return False
-
-	#Player selected an enchantment to reveal
-	return revealEnchantment(myEnchantments[choice-1][0])
-
-
-def revealEnchantmentsStep(nextPlayer,nextStep,argument,doneList=[]):
-	"""
-	Step where players have a chance to reveal enchantments. Each player in turn order may reveal an enchantment or pass
-	doneList - players who are done revealing enchantments
-	nextStep - string naming the function for the step to be executed after completing the reveal enchantments step
-	nextPlayer - the player object for the player that will execute the next step
-	argument - the argument to be passed to the function for the next step
-	"""
-	turnOrder = getTurnOrder()
-
-	# If everybody is finished revealing enchantments, we need to proceed to the next step
-	if len(doneList) == len(turnOrder):
-		remoteCall(nextPlayer,nextStep,[argument])
-		return
-
-	#Otherwise, ask the current player if they want to reveal any enchantments.
-	#If yes, perform this step again
-	if revealEnchantmentMenu(): revealEnchantmentsStep(nextPlayer,nextStep,argument) #Reset the done list
-	#If no, proceed to the next player in turn order
-	else:
-		# Add me to the done list
-		doneList.append(me) 
-
-		# Find my place in the turnOrder list
-		myTurnNo = 0
-		while turnOrder[myTurnNo] != me:
-			myTurnNo += 1
-
-		# Find the next player to reveal enchantments
-		nextRevealerNo = (myTurnNo + 1) % len(turnOrder)
-		nextRevealer = turnOrder[nextRevealerNo]
-
-		# Next player to reveal enchantments gets a chance to do so
-		remoteCall(nextRevealer,"revealEnchantmentsStep",[nextPlayer,nextStep,argument,doneList])
-
-def initializeAttackSequence(attacker,attack,defender): #Here is the defender's chance to ignore the attack if they have disabled their battle calculator
-	mute()
-
-	#for now, let's package everything together beforehand
-	argument = {
-		"identifier":	"attack",
-		"sourceID":		Card(attack['source id'])._id,
-		"attackerID":	attacker._id,
-		"defenderID":	defender._id,
-		"attack": 		attack,
-		"hit":			True,
-		"damage": 		0,
-		"effects":		[],
-		"strike":		1,
-	}
-	
-	if getSetting("BattleCalculator",True): 
-		remoteCall(
-			getTurnOrder()[0],			# First player
-			"revealEnchantmentsStep",	# Interim step
-				[attacker.controller,	# Next player
-				"declareAttackStep",	# Next Step
-				argument]				# Argument
-		)			
-
-	else:
-		if attacker.controller == me: genericAttack(table)
-		else:
-			remoteCall(attacker.controller,'whisper',['{} has disabled Battle Calculator, so generic dice menu will be used'])
-			remoteCall(attacker.controller,'genericAttack',[table])
-
-def declareAttackStep(argument): #Executed by attacker #WIP lots of other logic to add in here I think from 2020 function
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["sourceID"])
-	attack 		= 	argument["attack"]
-
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-	
-	#1: resolve bAS effects - Monk using Ki? #WIP
-	[d["bAS_DeclareAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_DeclareAttack" in d]
-
-	#2: check for daze
-	if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
-		notify("{} is rolling the Effect Die to check the Dazed condition.".format(attacker.nickname))#gotta figure that gender thing of yours out.
-		damageRoll,effectRoll = rollDice(0)
-		if effectRoll < 7:
-			notify("{} is so dazed that {} completely misses!".format(attacker.nickname,pSub(attacker)))
-			#remember attack use
-			additionalStrikesStep(argument)
-			return
-		else: notify("Though dazed, {} manages to avoid fumbling the attack.".format(attacker.nickname))
-
-	#3: give appropriate notification
-
-	if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!".format(attacker.nickname,attack.get('Name','a nameless attack')))
-	elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
-	else: notify("{} attacks {} with {}!".format(attacker.nickname,defender.nickname,attack.get('name','a nameless attack')))
-
-	#4: resolve aAS effects
-	[d["aAS_DeclareAttack"]["function"](c,card) for (c,d) in spellList if "aAS_DeclareAttack" in d]
-
-	#5: end attack if cancelled
-	if argument.get("cancel"): return
-
-	#6: Next step
-	remoteCall(
-		getTurnOrder()[0],			# First player
-		"revealEnchantmentsStep",	# Interim step
-			[defender.controller,	# Next player
-			"avoidAttackStep",		# Next Step
-			argument]				# Argument
-	)		
-
-def avoidAttackStep(argument): #Executed by defender
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["sourceID"])
-	attack 		= 	argument["attack"]
-
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	#1: resolve bAS effects
-	[d["bAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_AvoidAttack" in d]
-
-	#2: Roll defenses
-	pass #defenseQuery(argument) #DefenseQuery will set the argument[hit] to false
-
-	#3: resolve aAS effects
-	[d["aAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "aAS_AvoidAttack" in d]
-
-	#4: end attack if cancelled
-	if argument.get("cancel"): return
-
-	#5: go to the next step. If !hit, skip to additional strikes step
-	if argument["hit"]:
-		remoteCall(
-			getTurnOrder()[0],			# First player
-			"revealEnchantmentsStep",	# Interim step
-				[attacker.controller,	# Next player
-				"rollDiceStep",			# Next Step
-				argument]				# Argument
-	)
-	else:
-		remoteCall(
-			getTurnOrder()[0],			# First player
-			"revealEnchantmentsStep",	# Interim step
-				[attacker.controller,	# Next player
-				"additionalStrikesStep",# Next Step
-				argument]				# Argument
-	)
-
-def rollDiceStep(argument): #Executed by attacker
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["sourceID"])
-	attack 		= 	argument["attack"]
-
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	#1: resolve bAS effects
-	[d["bAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
-
-	#2: roll dice
-	dice = attack.get('dice',-1)
-	if dice < 0:
-		notify('Error: invalid attack format - no dice found')
-		return
-	damageRoll,effectRoll = rollDice(dice)
-
-	argument["roll"] = (damageRoll,effectRoll)
-
-	#3: resolve aAS effects
-	[d["aAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
-
-	#4: end attack if cancelled
-	if argument.get("cancel"): return
-
-	#5: Go to next step
-	remoteCall(
-		getTurnOrder()[0],			# First player
-		"revealEnchantmentsStep",	# Interim step
-			[defender.controller,	# Next player
-			"damageAndEffectsStep",	# Next Step
-			argument]				# Argument
-	)
-
-def damageAndEffectsStep(argument): #Executed by defender
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["sourceID"])
-	attack 		= 	argument["attack"]
-
-	aTraitDict = computeTraits(attacker)
-	dTraitDict = computeTraits(defender)
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	#1: resolve bAS effects
-	[d["bAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
-
-	#2: apply damage and effects
-	damageRoll,effectRoll = argument["roll"]
-	applyAttackResultsPrompt(argument,damageRoll,effectRoll) #damageReceiptMenu(aTraitDict,attack,dTraitDict,damageRoll,effectRoll)
-
-	#3: resolve aAS effects
-	[d["aAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "aAS_RollDice" in d]
-
-	#4: end attack if cancelled
-	if argument.get("cancel"): return
-
-	#5: Go to next step
-	remoteCall(
-		getTurnOrder()[0],			# First player
-		"revealEnchantmentsStep",	# Interim step
-			[attacker.controller,	# Next player
-			"additionalStrikesStep",# Next Step
-			argument]				# Argument
-	)
-
-	remoteCall(attacker.controller,'additionalStrikesStep',[argument])
-
-def applyAttackResultsPrompt(argument,damageRoll,effectRoll):
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	attack 		= 	argument["attack"]
-
-	defPlayer	=	defender.controller
-	attPlayer	=	attacker.controller
-
-	#1: Get damage and effects
-	damage,effects = getAttackResults(argument,damageRoll,effectRoll)
-
-	#2: Generate informational statement
-	statement = "{}'s attack ({}) will result in the following:".format(attacker.nickname,attack["name"])
-	results = []
-	append = results.append
-
-	if damage: append("{} damage inflicted upon {}".format(str(damage),defender.nickname))
-	if effects: append("Effects: {}".format(" and ".join(effects)))
-	if damage and attack.get("Mana Drain +X"): append("{} mana drained from {}".format(attack["Mana Drain +X"],defPlayer.Name))
-	if damage and attack.get("Mana Transfer +X"): append("{} mana transferred from {} to {}".format(attack["Mana Transfer +X"],defPlayer.Name,attPlayer.name))
-
-	append("\nConfirm these results")
-	statement += "\n".join(results)
-
-	#3: Prompt player to accept damage
-	choice = askChoice(statement,["Accept","Reject (cancels attack)"],["#0f3706","#CC0000"])
-
-	#4: If player did not accept, flag the attack as cancelled and return
-	if not choice == 1:
-		argument["cancel"] = True
-		return
-
-	#5: Apply damage and effects
-	argument["damage"] = damage
-	argument["effects"] = effects
-	applyDamageAndEffects(argument)
-
-def applyDamageAndEffects(argument):
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	attack 		= 	argument["attack"]
-
-	#1: Compute actual damage
-	#WIP this is unfinished (see below for old one)
-	
-
-def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In general, need to adjust functions to accomodate partially or fully untargeted attacks.
+#old function, DELETE later when done referencing
+'''def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In general, need to adjust functions to accomodate partially or fully untargeted attacks.
 		attacker = Card(aTraitDict.get('OwnerID',''))
 		defender = Card(dTraitDict.get('OwnerID',''))
 		atkTraits = attack.get('Traits',{})
@@ -1246,8 +1074,10 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 				if e in conditionsList:
 						if e=="Damage" and defender.Subtype == "Mage": defender.controller.damage += 1
 						else: defender.markers[eval(e)]+=1
-				notify('{} {}'.format(defender.nickname,effectsInflictDict.get(e,'is affected by {}!'.format(e))))
+				notify('{} {}'.format(defender.nickname,effectsInflictDict.get(e,'is affected by {}!'.format(e))))'''
 
+#Not currently called
+'''
 def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
@@ -1283,137 +1113,8 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		else:
 				notify('{} has elected not to apply auto-calculated battle results'.format(me))
 				whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
+'''
 
-def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by attacker
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	atkOS 		= 	Card(argument["sourceID"])
-	attack 		= 	argument["attack"]
-	atkTraits 	= 	attack.get('Traits',{})
-
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	#1: store use of the attack in memory
-	storeEvent(deepcopy(argument))
-
-	#2: resolve bAS effects
-	[d["bAS_AdditionalStrikes"]["function"](c,argument) for (c,d) in spellList if "bAS_AdditionalStrikes" in d]
-
-	#3: resolve strikes
-
-	strikes = 1
-	if atkTraits.get('Doublestrike'): strikes = 2
-	elif atkTraits.get('Triplestrike'): strikes = 3
-	elif attacker.Name == 'Wall of Thorns':
-		level = int(defender.Level)
-		strikes = (level - 1 if level > 1 else 1)
-
-	#4: resolve aAS effects
-	[d["aAS_AdditionalStrikes"]["function"](c,argument) for (c,d) in spellList if "aAS_AdditionalStrikes" in d]
-
-	#5: end attack if cancelled
-	if argument.get("cancel"): return
-
-	#6: if there are strikes remaining and defender is not dead, resolve them.
-
-	if argument["strike"] < strikes and not isDead(defender):
-		#Adjust argument and reset parameters
-		argument["strike"] += 1
-		argument["hit"] = True
-		argument["damage"] = 0
-		argument["conditions"] = []
-
-		#Go back to declareAttackStep and begin a new strike 
-		remoteCall(
-			getTurnOrder()[0],			# First player
-			"revealEnchantmentsStep",	# Interim step
-				[attacker.controller,	# Next player
-				"declareAttackStep",	# Next Step
-				argument]				# Argument
-	)
-
-	#7: if not, go to the next step
-	else:
-		remoteCall(
-			getTurnOrder()[0],			# First player
-			"revealEnchantmentsStep",	# Interim step
-				[defender.controller,	# Next player
-				"damageBarrierStep",	# Next Step
-				argument]				# Argument
-		)
-
-def damageBarrierStep(argument): #Executed by defender
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	attack 		= 	argument["attack"]
-
-	aTraitDict = computeTraits(attacker)
-	dTraitDict = computeTraits(defender)
-
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	#1: resolve bAS effects
-	[d["bAS_DamageBarrier"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
-
-	#2: resolve damage barrier
-	if attack.get("range type") == "Melee" and argument["hit"]:
-		attackList = getAttacks(defender)
-		dBarrier = None
-		for a in attackList:
-			if a.get('action type') == 'Damage Barrier':
-				dBarrier = a
-				break
-		if dBarrier:
-			# create a new dbarrier attack and resolve it. Depends on how I implement attack sources.
-			pass
-
-	#3: resolve aAS effects
-	[d["aAS_DamageBarrier"]["function"](c,argument) for (c,d) in spellList if "aAS_DamageBarrier" in d]
-
-	#4: end attack if cancelled or if defender is now dead
-	if argument.get("cancel") or isDead(defender): return
-
-	#5: Go to next step
-	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[defender.controller,	# Next player
-		"counterstrikeStep",	# Next Step
-		argument]				# Argument
-	)
-
-def counterstrikeStep(argument): #Executed by defender
-	mute()
-	attacker 	= 	Card(argument["attackerID"])
-	defender 	= 	Card(argument["defenderID"])
-	attack 		= 	argument["attack"]
-
-	aTraitDict = computeTraits(attacker)
-	dTraitDict = computeTraits(defender)
-
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	if attack.get('RangeType') == 'Melee':
-		counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
-		if counterAttack:
-			counterAttack['RangeType'] = 'Counterstrike'
-			interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
-		defender.markers[Guard] = 0
-
-	#?: Go to next step
-	remoteCall(
-	getTurnOrder()[0],			# First player
-	"revealEnchantmentsStep",	# Interim step
-		[attacker.controller,	# Next player
-		"attackEndsStep",		# Next Step
-		argument]				# Argument
-	)
-
-def attackEndsStep(argument): #Executed by attacker
-		mute()
-		setEventList('Turn',[]) #Clear the turn event list
 
 ############################################################################
 ######################    Applying Damage and Effects   ####################
@@ -1432,7 +1133,8 @@ damageReceiptMenu:
 healingQuery
 
 """
-
+#Not being called currently. Delete
+'''
 def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
@@ -1474,6 +1176,8 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		else:
 				notify('{} has elected not to apply auto-calculated battle results'.format(me))
 				whisper('(Battle calculator not giving the right results? Report the bug to us so we can fix it!)')
+'''
+
 
 def remotePlayerHeal(amount):
 		me.damage -= amount
@@ -1649,6 +1353,7 @@ def computeTraits(card):
 				cSubtype = c.subtype
 				cType = c.type
 				cBuffs = c.cBuffs
+				debug("c Name: {}".format(cName))
 				#Search arena for passive buffs
 				if cBuffs:
 					cBuffRange = cBuffs.split("))")[0]
@@ -1710,6 +1415,7 @@ def computeTraits(card):
 						else: traitDict['Immunity'].append(formTrait[1])
 				else: traitDict[formTrait[0]] = True
 		traitDict['OwnerID'] = card._id #Tag the dictionary with its owner's ID in case we need to extract it later (extracting the owner is MUCH faster than extracting the dictionary)
+		debug("traitDict: {}".format)
 		return traitDict
 
 def traitParser(traitStr):
@@ -1796,17 +1502,28 @@ def expectedDamage(aTraitDict,attack,dTraitDict):
 		return sum([computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict)*distrDict[key] for key in distrDict])/float(6**dice)
 
 def chanceToKill(attacker,attack,defender):
-		aTraitDict = computeTraits(attacker)
-		dTraitDict = computeTraits(defender)
-		dice = attack.get('Dice',0)
-		armor = computeArmor(aTraitDict,attack,dTraitDict)
-		defender = Card(dTraitDict['OwnerID'])
-		life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
-		atkTraits = attack.get('Traits',{})
-		if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
-		else: return
-		if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
-		return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+	dice = attack.get('Dice',0)
+	armor = computeArmor(aTraitDict,attack,dTraitDict)
+	defender = Card(dTraitDict['OwnerID'])
+	life = getRemainingLife(dTraitDict)# if 'OwnerID' in dTraitDict else None))
+	atkTraits = attack.get('Traits',{})
+	if dice <= len(damageDict)-1 : distrDict = damageDict[dice]
+	else: return
+	if (dTraitDict.get('Incorporeal') and not atkTraits.get('Ethereal')): return (sum([nCr(dice,r)*(2**r)*(4**(dice-r)) for r in range(dice+1) if r >= life])/float(6**dice))
+	return (sum([distrDict[key] for key in distrDict if computeAggregateDamage(eval(key)[0],eval(key)[1],aTraitDict,attack,dTraitDict) >= life])/float(6**dice))
+
+def chanceForEffect(attacker, attack, defender):
+	aTraitDict = computeTraits(attacker)
+	dTraitDict = computeTraits(defender)
+	effects = attack.get('effects')
+	conditionTypes = {	'Flame' : ['Burn'],
+						'Psychic' : ['Sleep'],
+						'Acid' : ['Corrode'],
+						'Poison' : ['Rot','Cripple','Tainted','Weak']}
+	#WIP
+	return
 
 def computeAggregateDamage(normal,critical,aTraitDict,attack,dTraitDict):
 		defender = Card(dTraitDict["OwnerID"])
