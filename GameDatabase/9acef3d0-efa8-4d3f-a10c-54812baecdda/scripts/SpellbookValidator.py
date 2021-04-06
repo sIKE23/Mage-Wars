@@ -173,8 +173,10 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 			if "Novice" in card.Traits:
 				SBPadd = int(card.level)
 				spellbook['booktotal']+=SBPadd
-				continue
+				#notify(card.name)
 				#notify(str(SBPadd))
+				#notify("spellbook['booktotal']: " +str(spellbook['booktotal']))
+				continue
 				#checkForNovice(card) For more academy functionality later.. .maybe
 				
 			#Talos doesn't cost anything
@@ -203,9 +205,9 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 				or (mageTypeOppList != [] and True in [cardType in mageTypeOppList for cardType in cardTypeList])):
 					#Theoretically this needs updated for the general case, but since this is the last
 					#of Mage Wars 1.0, I can punt this to 2nd edition
-					if mageName == 'Forcemaster' and 'Mind' in cardSchoolList:
+					if 'Forcemaster' in mageName and 'Mind' in cardSchoolList:
 						SBPadd = rawCardLevel
-					elif mageName == 'Monk' and 'Mind' in cardSchoolList:
+					elif 'Monk' in mageName and 'Mind' in cardSchoolList:
 						SBPadd = rawCardLevel
 					else:
 						SBPmod = trainOrOpposed(card.type, mageTypeTrnList, mageTypeOppList)
@@ -244,7 +246,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 				checkMageSchoolOnly(card, mageName, schoolTrn)
 			
 			#notify(card.name)
-			#notify(str(SBPadd))	
+			##notify(str(SBPadd))	
 			spellbook['booktotal']+=SBPadd	
 			#notify("spellbook['booktotal']: " +str(spellbook['booktotal']))
 	return (spellbook['booktotal'], cardDict)

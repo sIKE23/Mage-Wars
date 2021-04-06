@@ -635,9 +635,9 @@ def flipcard(card, x = 0, y = 0):
 		if card.Name in typeChannelingList and card.controller == me and card.isFaceUp == True:
 			notify("{} increases the Channeling stat by 1 as a result of {} being revealed\n".format(me, card))
 			me.Channeling += 1
-		if "Harmonize" == card.Name and card.controller == me and isAttached(card) and card.isFaceUp == True:
+		if "Harmonize" in card.Name and card.controller == me and isAttached(card) and card.isFaceUp == True:
 			magecard = getAttachTarget(card)
-			if magecard.Subtype == "Mage":
+			if "Mage" in magecard.Subtype :
 				notify("{} increases the Channeling stat by 1 as a result of {} being revealed\n".format(me, card))
 				me.Channeling += 1
 		if "Invisible Stalker" == card.Name:
@@ -658,7 +658,7 @@ def flipcard(card, x = 0, y = 0):
 				toggleAction(card)
 		if "Orb Guardian" in card.name and card.special == "Scenario" and [1 for c in getCardsInZone(myZone) if "V'Tar Orb" in c.name]:
 				card.markers[Guard] = 1
-		if card.Name in ["Ballista", "Akiro's Hammer"]:
+		if card.Name in ["Ballista", "Akiro's Hammer", "Dwarf Kanone"]:
 			card.markers[LoadToken] = 1
 		if "Corrosive Orchid"  == card.Name:
 			card.markers[MistToken] = 1

@@ -217,7 +217,7 @@ def resolveChanneling(p):
 										traits = computeTraits(c)
 										channel = getStat(c.Stats,"Channeling")
 										channelBoost = 0
-										#channelBoost = len([k for k in table if k.isFaceUp and k.name == "Harmonize" and c == getAttachTarget(k)]) #Well, you can't really attach more than 1 harmonize anyway. But if there were another spell that boosted channeling, we could add it to this list.
+										channelBoost = len([k for k in table if k.isFaceUp and "Harmonize" in  k.name and c == getAttachTarget(k)]) #Well, you can't really attach more than 1 harmonize anyway. But if there were another spell that boosted channeling, we could add it to this list.
 										if 'Channeling' in traits:
 											channelBoost = traits['Channeling']
 										debug("Found Channeling stat {} in card {}".format(channel,c.name))

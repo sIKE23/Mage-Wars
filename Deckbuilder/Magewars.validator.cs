@@ -427,7 +427,7 @@ namespace Octgn.MageWarsValidator
                                     }
                                 }
                             }
-                            else if ((magename == "Forcemaster" & "Creature" == Property(card, "Type")) | (magename == "Monk" & "Creature" == Property(card, "Type")))
+                            else if ((magename.Contains("Forcemaster") & "Creature" == Property(card, "Type")) | (magename.Contains("Monk") & "Creature" == Property(card, "Type")))
                             {
                                 if (!school.Contains("Mind")) //"Mind" not in schools
                                 {
@@ -528,6 +528,8 @@ namespace Octgn.MageWarsValidator
                                 if (mname.Contains("Priestess")) mname = "Priestess";
                                 if (mname.Contains("Paladin")) mname = "Paladin";
                                 if (mname.Contains("Siren")) mname = "Siren";
+                                if (mname.Contains("Forcemaster")) mname = "Forcemaster";
+                                if (mname.Contains("Monk")) mname = "Monk";
                                 if (onlyPhrase.Contains(mname))
                                     legal = true;
 
@@ -595,6 +597,7 @@ namespace Octgn.MageWarsValidator
                         cardcount += card.Quantity;
                         reporttxt += string.Format("{0} - {1} - {2}\n", totalLevel.ToString(), cost.ToString(), (cost * card.Quantity).ToString());
                         spellbook+=cost*card.Quantity;
+                        //System.Windows.MessageBox.Show(card.Name + "\nPoints:"+cost);
                     }   //card has school and level 
                 }   //foreach card
             }   //foreach section
