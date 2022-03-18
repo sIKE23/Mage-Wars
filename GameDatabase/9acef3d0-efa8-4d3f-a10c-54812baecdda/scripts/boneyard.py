@@ -54,15 +54,30 @@ def resolveBurns(card):
 	#is the setting on?
 	if not getSetting("AutoResolveEffects", True):
 		return
-	notify("Resolving Burns for {}...\n".format(card.controller, card))	#found at least one
+	notify("Resolving Burns for {}'s {}...\n".format(card.controller, card))	#found at least one
 	numMarkers = card.markers[Burn]
 	Damage = 0
 	burnsRemoved = 0
 	zone = getZoneContaining(card)
 	isInZone = getCardsInZone(zone)
+	KassandraFlag = False
+	HellscapeFlag = False
+	for c in isInZone:
+		if c.name == "Hellscape":
+			HellscapeFlag = True
+			
+	if numMarkers == 0 and HellscapeFlag and card.isFaceUp:
+		card.markers[Burn] = 1
+		numMarkers += 1
+		notify("Hellscape adds a burn to {}.\n".format(card))
+		
+	for c in isInZone:
+		if c.name == "Kassandra of the Purging Flame" and c.isFaceUp:
+			KassandraFlag = True
+			
 	for i in range(0, numMarkers):
 		roll = rnd(0, 2)
-		if roll == 0: 
+		if roll == 0 and not KassandraFlag: 
 			card.markers[Burn] -= 1
 			burnsRemoved += 1
 		Damage += roll
@@ -70,6 +85,7 @@ def resolveBurns(card):
 	addDamageAmount(card,Damage)
 	if Damage > 0: notify("Adramelech laughs while {} continues to Burn, {} damage was added!\n".format(card, Damage))
 	if burnsRemoved > 0: notify("{} Burns were removed from {}.\n".format(burnsRemoved,card))
+	if Damage == 0 and burnsRemoved == 0 and KassandraFlag == True: notify("The Burns do no damage to {}, but Kassandra has prevented the flames from going out".format(card))
 	#notify("Finished auto-resolving Burns for {}.".format(card))
 
 def resolveRot(card):
@@ -244,8 +260,19 @@ def resolveChanneling(p):
 								addMana(c)
 							
 	if p == me:
-		me.Mana += me.Channeling
-		notify("{} channels {} mana.\n".format(me.name,me.Channeling))
+		if c.Stats != None and c.Name == "Siren":
+			traits = computeTraits(c)
+			if "Channeling" in traits:
+				channelAmt = me.Channeling + traits['Channeling']
+				me.Mana += channelAmt
+				notify("{} channels {} mana.\n".format(me.name,channelAmt))
+				notify("Siren's Channeling is boosted by the Aquatic Terrain")
+			else:
+				me.Mana += me.Channeling
+				notify("{} channels {} mana.\n".format(me.name,me.Channeling))
+		else:
+			me.Mana += me.Channeling
+			notify("{} channels {} mana.\n".format(me.name,me.Channeling))
 
 def resolveUpkeep():
 	mute()
@@ -276,13 +303,16 @@ def resolveUpkeep():
 
 	for card in table:
 		traits = computeTraits(card)
-		#debug("Card: {}".format(card.name))
-		#debug("Card Controller: {}".format(card.controller.name))
-		#debug("Card Mage: {}".format(Card(traits['MageID']).name))
+		# debug("Card: {}".format(card))
+		# debug("Card Controller: {}".format(card.controller.name))
+		# debug("Card Mage: {}".format(Card(traits['MageID']).name))
 		upKeepCost = 0
 		obeliskUpKeepCost = 0
 		monolithUpKeepCost = 0
+		target = None
 		upKeepFilter = "#ABFFFFFF" #Light Blue - R=126 G=198 B=222
+		if card.Type == 'Enchantment' and card.isFaceUp:
+				target = getAttachTarget(card)
 		# Process Upkeep for Harshforge Monolith
 		if card.Type == "Enchantment" and card.controller == me and HarshforgeMonolithInPlay == 1:
 			monolithUpKeepCost = 1
@@ -309,7 +339,7 @@ def resolveUpkeep():
 			processUpKeep(obeliskUpKeepCost, card, MordoksObelisk, notifystr)
 			if ManaPrismInPlay == 1:
 				addToken(ManaPrism, Mana)
-		 # Process Upkeep for Cards with the Upkeep Card Trait
+		#Process Upkeep for Cards with the Upkeep Card Trait
 		if not card.Name in upKeepIgnoreList and "Upkeep" in card.Traits and card.controller == me and card.isFaceUp:
 			upKeepCost = getTraitValue(card, "Upkeep")
 			if PsiOrbDisc > 0 and "Mind" in card.school:
@@ -320,8 +350,8 @@ def resolveUpkeep():
 					notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 				else:
 					notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
-		# Process Upkeep for Cards with the Upkeep Trait in the Card Text that is attached to Objects (Creatures)
-		elif not card.Name in upKeepIgnoreList and "[Upkeep" in card.Text and card.controller == me and card.isFaceUp and isAttached(card) == True:
+		#Process Upkeep for Cards with the Upkeep Trait in the Card Text that is attached to Objects (Creatures)
+		elif not card.Name in upKeepIgnoreList and "Upkeep" in card.Text and card.controller == me and card.isFaceUp and isAttached(card) == True:
 			attatchedTo = getAttachTarget(card)
 			upKeepCost = getTextTraitValue(card, "Upkeep")
 			if PsiOrbDisc > 0 and "Mind" in card.school:
@@ -330,7 +360,7 @@ def resolveUpkeep():
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name, attatchedTo.Name)
 		# Process Upkeep for Essence Drain
 		elif card.Name == "Essence Drain" and card.controller != me and card.isFaceUp:
-			target = getAttachTarget(card)
+			#target = getAttachTarget(card)
 			upKeepCost = getTextTraitValue(card, "Upkeep")
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
@@ -343,7 +373,7 @@ def resolveUpkeep():
 				upKeepCost = 0
 		#Process Upkeep for Minor Essence Drain
 		elif card.Name == "Minor Essence Drain" and card.controller != me and card.isFaceUp:
-			target = getAttachTarget(card)
+			#target = getAttachTarget(card)
 			upKeepCost = 1
 			if PsiOrbDisc > 0 and "Mind" in card.school:
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
@@ -362,12 +392,6 @@ def resolveUpkeep():
 				PsiOrbDisc, notifystr, upKeepCost = processPsiOrb(card, PsiOrbDisc, upKeepCost)
 			else:
 				notifystr = "Do you wish to pay the Upkeep +{} cost for the {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
-		# Process Monk Upkeep
-		elif 'Monk' in Card(traits['MageID']).name and card.Type in ["Equipment", "Enchantment"] and card.isFaceUp and "Monk" not in card.Subtype and "Martial" not in card.Subtype and "Mind" not in card.School and card.controller == me:
-			target = getAttachTarget(card)
-			upKeepCost = 1
-			notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
-			card.filter = upKeepFilter
 		# Process Upkeep for Stranglevine
 		else:
 			if card.Name == "Stranglevine" and card.controller == me and card.isFaceUp and isAttached(card) == True:
@@ -376,6 +400,16 @@ def resolveUpkeep():
 				card.markers[CrushToken] += 1
 				upKeepCost = card.markers[CrushToken]
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
+		# Process Monk Upkeep
+		if (target is not None or ('Monk' in Card(traits['MageID']).name and 'Equipment' in card.Type)) and card.isFaceUp and "Monk" not in card.Subtype and "Martial" not in card.Subtype and "Mind" not in card.School and card.owner == me:
+			if card.type == 'Enchantment' and 'Monk' in target.name and 'Mage' in target.Subtype:
+				upKeepCost = 1
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+				card.filter = upKeepFilter
+			elif card.type == 'Equipment':
+				upKeepCost = 1
+				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
+				card.filter = upKeepFilter
 
 		if upKeepCost > 0:
 			card.filter = upKeepFilter
@@ -409,7 +443,7 @@ def processUpKeep(upKeepCost, card1, card2, notifystr):
 			me.Mana -= upKeepCost
 			card1.filter = None
 			target = getAttachTarget(card1)
-			notify("{} pays the Upkeep cost of {} for {} on the {}\n".format(me, upKeepCost, card1, target))
+			notify("{} pays the Upkeep cost of {} for {}\n".format(me, upKeepCost, card1))
 			if card1.Name == "Stranglevine" and card1.controller == me and card1.isFaceUp and isAttached(card1) == True:
 				attatchedTo = getAttachTarget(card1)
 				damage = card1.markers[CrushToken]
@@ -496,10 +530,12 @@ def resolveDotEnchantment(card):
 	elif "Curse of Decay" in card.Name and card.controller == me and card.isFaceUp:
 			damageAmount = 1
 	elif "Arcane Corruption" in card.Name and card.controller == me and card.isFaceUp:
-		attachments = 	getAttachments(target)
+		attachments = getAttachments(target)
 		for attach in attachments:
 			if attach.Type == "Enchantment" and attach.controller.name == target.controller.name:
 				damageAmount +=1
+	elif "Reclamation" in card.Name and card.controller == me and card.isFaceUp:
+		damageAmount = 2
 	for p in players:
 		if p.name == target.controller.name:
 			remoteCall(p, "addDamageAmount", [target, damageAmount])
@@ -509,12 +545,16 @@ def resolveAreaDot(traits, card):
  	mute()
 	damageAmount = 0
 	type = {'Malacoda':'',
+			'PoisonGasCloud':'',
 			'Plagued':'',
 			'Idol':'',
 			'Consecrated':''}
 	if "Malacoda" in traits and card.controller == me and card.isFaceUp:
 			damageAmount += 2
 			type['Malacoda'] = 'Malacoda, '
+	if "PoisonGasCloud" in traits and card.controller == me and card.isFaceUp:
+			damageAmount += 2
+			type['PoisonGasCloud'] = 'Poison Gas Cloud, '
 	if "Plagued" in traits and card.controller == me and card.isFaceUp:
 			damageAmount += 1
 			type['Plagued'] = 'Plagued, '
@@ -533,7 +573,7 @@ def resolveAreaDot(traits, card):
 	for p in players:
 		if p.name == card.controller.name:
 			remoteCall(p, "addDamageAmount", [card, damageAmount])
-			notify("{}\'s {} feels the effect of the following: ".format(card.controller,card) + "\n{Malacoda}\n{Plagued}\n{Idol}\n{Consecrated}\n".format(**type)+ "and takes {} damage.\n".format(damageAmount))
+			notify("{}\'s {} feels the effect of the following: ".format(card.controller,card) + "\n{Malacoda}\n{PoisonGasCloud}\n{Plagued}\n{Idol}\n{Consecrated}\n".format(**type)+ "and takes {} damage.\n".format(damageAmount))
 			
 
 def resolveCurseItem(card):			
@@ -741,6 +781,8 @@ def castSpell(card,target=None):
 				targets = [c for c in table if c.targetedBy==me]
 				if targets and len(targets) == 1: target = targets[0]
 				else: whisper("No single target for {} detected. Cost calculation is more effective if you select a target.".format(card))
+		if target is not None:
+			tTraits = computeTraits(target)
 		if card.Type == "Enchantment" and not canAttach(card,target): return
 		#Long term, invalid targets will result in spell cancellation. Won't enforce that for now, though.
 		debug("Caster: " + caster.Name)
@@ -783,16 +825,28 @@ def castSpell(card,target=None):
 								notify("{} suffers damage from {}\n".format(caster,attachment))
 						else:
 							return
-				
+				#Harshforge Plate
+				harshforgePlateTax = 0
+				if (cardType in ["Enchantment", "Incantation"] and
+					card.Name not in ["Disperse", "Crumble"] and
+					#WRONG, THIS NEEDS TO BE TARGET NOT CARD card.targetedBy is not None):
+					target is not None):
+						if (("HarshforgePlate" in tTraits or "HarshforgePlate" in computeTraits(Card(tTraits['MageID']))) 
+							and ('Mage' in target.subtype or 'Equipment' in target.Type)
+							and card.controller != target.controller):
+								harshforgePlateTax = 2
+								cost += harshforgePlateTax
 				#Ask the player how much mana they want to pay
 				discountSourceNames = "\n".join(["{} -{}".format(d[2],str(d[1])) for d in usedDiscounts])
 				#discountSourceNames = '\n'.join(map(lambda t: "{} (-{})".format(t[0].Name,str(t[1])),usedDiscounts))
 				discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
+				hfpstring = "(Harshforge Plate added 2 mana to the cost)\n" if harshforgePlateTax > 0 else ""
 				pronoun = {"Male":"he","Female":"she"}.get(getGender(caster),"it")
 				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Name.split(",")[0],pronoun) if (caster.Type != "Mage" and caster.markers[Mana]) else ""
 				cost = askInteger("We think this spell costs {} mana.\n\n".format(str(cost))+
 									 discountString+
 									 casterString+
+									 hfpstring+
 									 "How much mana would you like to pay?",cost)
 				if cost == None: return
 				if cost > casterMana + ownerMana:
@@ -969,7 +1023,7 @@ def computeRevealCost(card): #For enchantment reveals
 		return cost
 
 def computeCastCost(card,target=None): #Does NOT take discounts into consideration. Just computes base casting cost of the card. NOT reveal cost.
-		cost = 2 if card.Type == 'Enchantment' else None
+		cost = 2 if (card.Type == 'Enchantment' and not card.Subtype == 'Aura') else None
 		try: cost = int(card.Cost)
 		except: pass
 		if target: #Compute exact cost based on target. For now, cards like dissolve will have to target the spell they want to destroy. Does not check for target legality.

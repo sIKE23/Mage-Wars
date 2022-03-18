@@ -701,6 +701,16 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[EarthGlyphInactive] = 1
 			card.markers[FireGlyphInactive] = 1
 			card.markers[WaterGlyphInactive] = 1
+		if "Disarm" in card.Name:
+			card.markers[Disable] = 1
+		if "Straywood Scout" in card.Name:
+			card.markers[scoutToken] = 1
+		if "Sistarran Wizard Stats" in card.Name:
+			card.markers[Rewind] = 1
+		if "Altar of Peace" in card.Name:
+			card.markers[AegisToken] = 1
+			card.markers[ToughToken] = 1
+			card.markers[DefenseToken] = 1
 		if card.Name in ["Hired Bodyguard", "Temple Sentry"]:
 			card.markers[Guard] = 1
 	# if card is already face up and doesnt have any card alternates
@@ -737,7 +747,12 @@ def mageSetup():
 	mageStatsID = int(mageDict["MageStatsID"])
 	magestats = Card(mageStatsID)
 	#set initial health and channeling values
-	me.Channeling = int(magestats.StatChanneling)
+	#me.Channeling = int(magestats.StatChanneling)
+	gameMode = getGlobalVariable("GameMode")
+	if gameMode == "Arena" or gameMode == "Domination": 
+		me.Channeling = int(magestats.StatChanneling)
+	elif gameMode == "Playtest": 
+		me.Channeling = 10
 	me.Mana = me.Channeling + 10 + int(magestats.StatStartingMana)
 	me.Life = int(magestats.StatLife)
 	Card(mageID).Subtype = magestats.Subtype

@@ -198,6 +198,7 @@ def getAttachTarget(card):
 	mute()
 	result = getGlobalDictEntry('attachDict',card._id)
 	if result and card in table: return Card(result[0])
+	else: return None
 
 def getGlobalDictEntry(dictionary,key):
 	"""Dictionary is input as a string. If the value is empty, returns False"""
@@ -235,13 +236,13 @@ def canAttach(card,target):
 	for a in attachments:
 		if (a.isFaceUp or a.controller == me) and a.Name == cName: return False
 	traits = computeTraits(target)
-	for s in card.Subtype.split(', '):
-		if s in traits.get('Immunity',[]): return False
+	#for s in card.Subtype.split(', '):
+	#	if s in traits.get('Immunity',[]): return False
 	if cName in ['Force Hold','Force Crush','Tanglevine','Stranglevine'] and traits.get('Uncontainable'): return False
 	if cType == 'Enchantment':
 		if (('Harmonize' in cName and 'Channeling' in target.Stats) or
 			(cName == 'Barkskin' and tName == 'Druid') or
-			(cName == 'Forcefield' and tName == 'Forcemaster') or
+			(cName == 'Forcefield' and 'Forcemaster' in tName) or
 			(cTargetBar == 'Equipment' and tType == 'Equipment') or
 			(cTargetBar == 'Corporeal Creature' and tType == 'Creature' and traits.get('Corporeal')) or
 			(cTargetBar == 'Corporeal Conjuration or Creature' and ('Conjuration' in tType or tType == 'Creature') and traits.get('Corporeal')) or
@@ -264,6 +265,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Minor Living Creature' and tType == 'Creature' and traits.get('Living') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype and traits.get('Living') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and (eval(target.Level) <= 2)) or
+			(cTargetBar == 'Monk Creature' and tType == 'Creature' and 'Monk' in tSubtype) or
 			(cTargetBar == 'Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype) or
 			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype) or
 			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
@@ -393,6 +395,7 @@ def canBind(card,target):
 		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
 		or (tName == 'Echo of the Depths' and cType == 'Creature' and 'Water' in card.School)
 		or (tName == 'Natural Pandemonium' and cType =='Creature' and cSubtype in ['Elemental', 'Golem', 'Sprite'])
+		or (tName == 'Dojo' and cSubtype in ['Monk', 'Martial'] and cType in ['Creature', 'Enchantment', 'Equipment'])
 #Spellbind (only)
 		or (tName == 'Helm of Command' and cType == 'Incantation' and 'Epic' not in card.Traits and 'Command' in cSubtype)
 		or (tName == 'Elemental Wand' and cType == 'Attack' and 'Epic' not in card.Traits)

@@ -449,7 +449,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Each Upkeep Phase, this Conjuration receives 2 direct damage." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MWADRE02" />
 		</card>
 				

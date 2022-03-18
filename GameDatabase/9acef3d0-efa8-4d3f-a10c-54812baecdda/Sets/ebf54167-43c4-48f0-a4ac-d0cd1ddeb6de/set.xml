@@ -5,58 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	<markers>
-		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
-		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
-		<marker id="82df2507-4fba-4c81-a1de-71e70b9a16f5" name="Cripple" />
-		<marker id="3ef51126-e2c0-44b3-b781-0b3f8476cb20" name="Daze" />
-		<marker id="91ed27dc-294d-4732-ab71-37911f4011f2" name="Guard" />
-		<marker id="f4a2d3d3-4a95-4b9a-b899-81ea58293167" name="Pet" />
-		<marker id="aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" name="Ready" />
-		<marker id="73fffebd-a8f0-43bd-a118-6aebc366ecf6" name="Ready II" />
-		<marker id="81360faf-87d6-42a8-a719-c49386bd2ab5" name="Rot" />
-		<marker id="ad0e8e3c-c1af-47b7-866d-427f8908dea4" name="Sleep" />
-		<marker id="4bbac09e-a46c-42de-9272-422e8074533f" name="Stun" />
-		<marker id="16f03c44-5656-4e9d-9629-90c4ff1765a7" name="Taunt(Sosroku)" />
-		<marker id="ab8708ac-9735-4803-ba4d-4932a787540d" name="Used" />
-		<marker id="61bec951-ebb1-48f7-a2ab-0b6364d262e6" name="Used II" />
-		<marker id="d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" name="Voltaric OFF" />
-		<marker id="a6e79926-db8d-4095-9aee-e3b46bf24a3f" name="Voltaric ON" />
-		<marker id="22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" name="Weak" />
-		<marker id="a1f061ec-efbe-444e-8e06-8d973600696c" name="DieBlank" />
-		<marker id="8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165" name="Die1" />
-		<marker id="b881f652-9384-43e1-9758-e68b04583b3b" name="Die2" />
-		<marker id="a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39" name="Die1s" />
-		<marker id="101976ea-ec22-4496-a762-6fbc0d1a41bb" name="Die2s" />
-		<marker id="3cdf4231-065d-400e-9c74-d0ae669e852c" name="Die12" />
-		<marker id="11370fe9-41a4-4f05-9249-29a179c0031b" name="Quick" />
-		<marker id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Quick Used" />
-		<marker id="4dd182d2-6e69-499c-b2ad-38701c0fb60d" name="Action Red" />
-		<marker id="2e069a99-1696-4cbe-b6c6-13e1dda29563" name="Action Red Used" />
-		<marker id="c980c190-448d-414f-9397-a5f17068ac58" name="Action Blue" />
-		<marker id="5926df42-919d-4c63-babb-5bfedd14f649" name="Action Blue Used" />
-		<marker id="9cd83c4b-91b7-4386-9d9a-70719971f949" name="Action Green" />
-		<marker id="5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" name="Action Green Used" />
-		<marker id="2ec4ddea-9596-45cc-a084-23caa32511be" name="Action Yellow" />
-		<marker id="7c145c5d-54c3-4f5b-bf66-f4d52f240af6" name="Action Yellow Used" />
-		<marker id="edb61e00-a666-480a-81f3-20eb9944b0ea" name="Action Purple" />
-		<marker id="158f738b-6034-4c6d-b4ca-5abcf159ed9f" name="Action Purple Used" />
-		<marker id="623f07fb-9cfb-4b4b-a350-6b208f0ef29e" name="Action Grey" />
-		<marker id="99bd454e-fab9-47c6-9f59-54a112eeb2da" name="Action Grey Used" />
-		<marker id="874c7fbb-c566-4f17-b14e-ae367716dce5" name="Egg Token" />
-		<marker id="fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" name="Mist Token" />
-		<marker id="d32267be-f4c5-48c6-8396-83c0db406942" name="Load Token" />
-		<marker id="6383011a-c544-443d-b039-9f7ba8de4c6b" name="Storm Token" />
-		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate Token" />
-		<marker id="fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" name="Forcefield Token" />
-		<marker id="fdaa2c02-a65a-40e0-a315-962f9315b732" name="Banish" />
-		<marker id="feb7e8f8-5c38-4978-92c8-2d47d54bdd29" name="Rage" />
-		<marker id="fffe964a-3839-4bc0-ba85-3268b59817c6" name="Wrath" />
-		<marker id="fcdf5fa2-cb09-47a3-8c81-d4b87380b397" name="Gate Closed" />
-		<marker id="fd17ee65-9bc8-4a00-a359-ff8e2418ad5c" name="Gate Opened" />
-		<marker id="7ff7afc3-ae04-49bf-9961-1a04b0f6ac19" name="Mana" />
-		<marker id="f316259d-10ad-471f-bdbc-884d11a8ced9" name="Damage" />
-	</markers>
+	
 
 
 	<cards>
@@ -242,7 +191,7 @@
 					<property name="Traits" value="" />
 				</alternate>
 		</card>
-		<card id="e27b8293-65cd-4479-b5e9-2616201ba512" name="Wizard Stats">
+		<card id="903b8ef6-2b5f-4f22-a9e1-8b371e1a6d89" name="Wizard Stats">
 			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
@@ -256,7 +205,7 @@
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
 			<property name="cAttacks" value="name=Arcane Zap;effects={};Spell=True;action type=Quick;range type=Ranged;range=(0,1);dice=3;Ethereal=True;Counts as an attack spell. May be cast once per round.=True||name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 2] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 		</card>
 		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard Stats (Earth)">
@@ -794,8 +743,8 @@
 			<property name="Text" value="Controller gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
 			<property name="CardID" value="MW1J13" />
 		</card>
-		<card id="cfbeb5ae-3c91-4b05-94e2-bbde8bec21f9" name="Mana Syphon">
-			<property name="Nickname" value="Mana Syphon" />
+		<card id="cfbeb5ae-3c91-4b05-94e2-bbde8bec21f9" name="Mana Siphon">
+			<property name="Nickname" value="Mana Siphon" />
 			<property name="Type" value="Conjuration" />
 			<property name="Subtype" value="Portal, Mana" />
 			<property name="Cost" value="12" />

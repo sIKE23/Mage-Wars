@@ -5,15 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	<markers>
-		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" />
-		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" />
-		<marker id="c8bff05e-e43a-4b23-b467-9c4596050f28" name="Ichthellid Larva" />
-		<marker id="de101060-a4b4-4387-a7f8-aab82ecff2c8" name="Zombie" />
-		<marker id="ced2ce11-5e69-46a9-9fbb-887e96bdf805" name="Treebond" />
-		<marker id="86a71cf6-35ce-4728-a2f8-6701b1e29aa4" name="Eternal Servant" />
-		<marker id="d7472637-7c6d-4593-bc16-5975155c2926" name="Crush Token" />
-	</markers>
+
 
 
 	<cards>

@@ -5,9 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	<markers>
-        <marker id="a95c1445-674c-4ab6-9247-d0b0fac80fb3" name="SealToken" />
-    </markers>
+
 	<cards>
 	
 		<card id="0f49d44a-65c9-4603-9468-202bfbe537f3" name="Warlock">

@@ -5,10 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	
-	<markers>
-		<marker id="c40445e9-118c-4212-af4c-76d12d4c1fe0" name="Freeze" />
-	</markers>
+
 
 	<cards>		
 		<card id="b135f5d0-0a31-45c7-b5a3-a5058a6d0286" name="Elementalist">

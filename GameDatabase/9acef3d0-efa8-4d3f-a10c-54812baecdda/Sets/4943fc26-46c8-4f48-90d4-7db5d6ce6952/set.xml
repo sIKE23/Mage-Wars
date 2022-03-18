@@ -5,13 +5,6 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	<markers>
-		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" />
-		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" />
-		<marker id="826e81c3-6281-4a43-be30-bac60343c58f" name="Tainted" />
-		<marker id="99381ac8-7d73-4d75-9787-60e6411d3613" name="Holy Avenger" />
-		<marker id="42f6cee3-3de4-4c90-a77c-9fb2c432d78d" name="Wounded Prey" />
-	</markers>
 
 
 	<cards>

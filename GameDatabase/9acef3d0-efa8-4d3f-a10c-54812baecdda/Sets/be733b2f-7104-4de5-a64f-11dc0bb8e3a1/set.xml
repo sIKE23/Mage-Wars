@@ -6,27 +6,7 @@
 	gameVersion="1.4.2.1"
 	version="2.0.0.0">
 
-	<markers>
-		<marker id="f1247aea-2067-44e6-a496-8ea1a8789da9" name="Grapple" />
-		<marker id="f25d3ead-bb56-48dd-be22-f8c0faa26485" name="Martyr&apos;s Aura" />
-		<marker id="f356a905-6c71-4a70-a72e-b673d15a3eef" name="Solar Aura" />
-		<marker id="f4dba8be-5aeb-47d1-b7df-1dd6d9ef5fa0" name="Resolute Aura" />
-		<marker id="f56a9ec4-cc79-4894-8b02-8fbbd7edbc58" name="Retribution Aura" />
-		<marker id="f6eaf1e9-f0b0-4ac3-9719-7463777fb031" name="Siren&apos;s Call" />
-		<marker id="f7fc4b07-9596-48f4-a049-d5be58ae254c" name="Valor" />
-		<marker id="f8d3ef71-6cee-4a72-8ae1-5615362eae07" name="Cleansing Aura" />
-		<marker id="f965154e-3551-47c9-8722-2e572f26c0fb" name="Vengeful Aura " />
-		<marker id="540f077d-fb38-464b-936a-ec94d60caea9" name="Gold" />
-		<marker id="203022f6-4c33-4ba8-addf-a7ec46760fdc" name="Divine Challenge" />
-		<marker id="8c8dbf31-6ba3-4d14-ab1f-3771960671a5" name="Hate" />
-		<marker id="50861f40-93b8-4dc6-a6ba-108cc584de8e" name="Love" />
-		<marker id="332e2df0-3101-462d-a2b4-b489170f4212" name="Fermata (Blue) 1" />
-		<marker id="00113acf-e34c-4150-992f-fdcdca2978b2" name="Fermata (Blue) 2" />
-		<marker id="de825d87-c78f-4c35-aba4-e2abce2ef000" name="Fermata (Green) 1" />
-		<marker id="e724865e-9e9a-486d-a230-1b7d94de2d6c" name="Fermata (Green) 2" />
-		<marker id="c89baa9e-21c8-4f8c-8635-b258d5d80172" name="Suffocation" />
-		<!--<marker id="14a7b28a-7abc-4330-b139-c7939469df89" name="Light" />-->
-	</markers>
+
 
 	<cards>
 		<card id="30a60bad-bf32-46a2-a69e-e949d288b7ac" name="Paladin">
@@ -939,7 +919,114 @@
 			<property name="CardID" value="PSC26" />
 		</card>
 
-
+		<card id="bfc27f71-bf47-4aa2-bb1c-399c1b51761e" name="Retribution Aura">
+			<property name="Nickname" value="Aura" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Aura" />
+			<property name="Cost" value="0+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="0" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="THIS IS NOT AUTOMATED YET. Attach this card to the Paladin when cast. When an enemy creature casts an enchantment or incantation targeting a friendly creature in the Paladin&apos;s zone, that enemy receives 1 direct light damage, regardless of range or LoS." />
+			<property name="CardID" value="PSE00" />
+		</card>
+		<card id="9126a610-c89b-4c2f-809f-c66e5132094d" name="Martyr&apos;s Aura">
+			<property name="Nickname" value="Aura" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Aura" />
+			<property name="Cost" value="0+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="0" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="THIS IS NOT AUTOMATED YET. Attach this card to the Paladin when cast. When a friendly creature in the Paladin&apos;s zone receives damage from an enemy controlled attack or effect, you may transfer up to 2 of that damage to the Paladin instead." />
+			<property name="CardID" value="PSE00" />
+		</card>
+		<card id="e1ce7eab-db3e-40a8-adf3-7fc6d29ba217" name="Resolute Aura">
+			<property name="Nickname" value="Aura" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Aura" />
+			<property name="Cost" value="0+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="0" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Attach this card to the Paladin when cast. Friendly creatures in the Paladin&apos;s zone gain the Tough -2 trait. Other friendly creatures in the Paladin&apos;s zone gain Armor +2." />
+			<property name="CardID" value="PSE00" />
+		</card>
+		<card id="e73ffef2-e646-4d20-9d67-b00ec8f1ca4e" name="Vengeful Aura">
+			<property name="Nickname" value="Aura" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Aura" />
+			<property name="Cost" value="0+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="0" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="Attach this card to the Paladin when cast. Friendly creatures in the Paladin&apos;s zone gain Melee +1, and also gain Piercing +2 on their melee attacks." />
+			<property name="CardID" value="PSE00" />
+		</card>
+		<card id="75ec9101-a19e-47ab-9cf6-baaf5bf781d7" name="Cleansing Aura">
+			<property name="Nickname" value="Aura" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Aura" />
+			<property name="Cost" value="0+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="0" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="THIS IS NOT AUTOMATED YET. Attach this card to the Paladin when cast. As a quick healing spell action, the Paladin may pay 1 Valor: heal target friendly creature in his zone 2 damage, and he may also remove a poison condition marker from them by paying its removal cost." />
+			<property name="CardID" value="PSE00" />
+		</card>
+		<card id="90816bbf-ea53-4b12-ba80-70374e426b01" name="Solar Aura">
+			<property name="Nickname" value="Aura" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="Aura" />
+			<property name="Cost" value="0+0" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0-2" />
+			<property name="cTargets" value="m0,M2))tLiving,TCreature" />
+			<property name="Target" value="Paladin Mage" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="0" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+			<property name="Text" value="THIS IS NOT AUTOMATED YET. Attach this card to the Paladin when cast. When a friendly creature in the Paladin&apos;s zone makes a light attack, he may pay 1 Valor. If he does, the attack adds +2 to its effect roll. If it deals damage, the defender also receives 1 direct light damage" />
+			<property name="CardID" value="PSE00" />
+		</card>
 		<card id="327c59fe-1cab-4f4e-8145-31db7d3b8989" name="Blind">
 			<property name="Nickname" value="Blind" />
 			<property name="Type" value="Enchantment" />
@@ -1288,7 +1375,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Water Mage Only" />
-			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a hydro or aquatic spell. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Hydro,Aquatic] [x1]" />
+			<property name="Text" value="Once per round, this Mage may pay 1 less mana when she casts or reveals a hydro or aquatic spell. Enchantments only receive this discount when they are revealed." />
 			<property name="CardID" value="PSQ08" />
 		</card>
 		<card id="44e16242-5bbf-479a-b92a-aba214250795" name="Ring of Tides">
@@ -1323,7 +1410,8 @@
 			<property name="Level" value="2" />
 			<property name="Stats" value="Location=Weapon" />
 			<property name="StatEquipmentSlot" value="Weapon" />
-			<property name="cAttacks" value="name=Spearpoint Thrust;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={5: ['Push']};Piercing +X=2||name=Shoalsdeep Trident;=True" />
+			<property name="cAttacks" value="name=Spearpoint Thrust;action type=Quick;range type=Melee;range=(0,0);dice=4;effects={5: ['Push']};Piercing +X=2||name=Shoalsdeep Trident;
+=True" />
 			<property name="AttackBar" value="Spearpoint Thrust:&#xD;&#xA;[Quick] [Melee] [Dice=4] [d12] [5+ = Push] [Piercing +2]&#xD;&#xA;
 			Wave Blast:&#xD;&#xA;[Full] [Ranged:0-1] [Hydro] [Dice=3] [d12] [5+ = Push] [Extinguish]" /> 
 			<property name="Traits" value="Siren Only" />

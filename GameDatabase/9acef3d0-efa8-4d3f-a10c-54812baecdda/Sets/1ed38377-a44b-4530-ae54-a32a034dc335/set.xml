@@ -327,7 +327,7 @@
 			<property name="CardID" value="MWAWDE01" />
 		</card>
 
-		<card id="3063faf4-ae79-4ae2-8dd3-6afe29035687" name="Dig In">
+		<card id="0e5f4d50-4db2-4fda-8f23-2c2c0369e54a" name="Dig In">
 			<property name="Nickname" value="Dig In" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Command, Formation" />
@@ -384,7 +384,7 @@
 			<property name="CardID" value="MWAWDE04" />
 		</card>
 	
-		<card id="167dc78e-05dd-4314-847b-15c738acc404" name="Press the Attack">
+		<card id="fddece4a-7d27-4f7d-a648-639bd7de0751" name="Press the Attack">
 			<property name="Nickname" value="Press the Attack" />
 			<property name="Type" value="Enchantment" />
 			<property name="Subtype" value="Command, Formation" />

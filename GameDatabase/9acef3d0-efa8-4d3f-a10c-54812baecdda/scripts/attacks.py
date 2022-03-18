@@ -28,7 +28,7 @@ additiveTraits = ["Melee","Ranged",
 				  "Lifebond",
 				  "Lifegain",
 				  "Upkeep",
-				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic']
+				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
 superlativeTraits = ["Regenerate",
 					 "Aegis",
 					 "Uproot",
@@ -152,7 +152,7 @@ def isLegalAttack(aTraitDict,attack,dTraitDict):
 						dZone = getZoneContaining(defender)
 						distance = zoneGetDistance(aZone,dZone)
 						if dTraitDict.get("Obscured") and distance > 1: return False #Obscured Check
-						minRange = (0 if (attack.get('RangeType')=='Ranged' and dTraitDict.get('Flying')) else attack.get('Range')[0])
+						minRange = (0 if (attack.get('RangeType')=='Ranged' and ((dTraitDict.get('Flying') and not aTraitDict.get('Flying')) or (aTraitDict.get('Flying') and not dTraitDict.get('Flying')))) else attack.get('Range')[0])
 						if not (minRange <= distance <= attack.get('Range')[1]): return False
 		if (dTraitDict.get('Flying') and
 			not aTraitDict.get('Flying') and
@@ -341,6 +341,15 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 										localADict['Melee'] = localADict.get('Melee',0) + 2
 										localADict['Piercing'] = localADict.get('Piercing',0) + 1
 										break
+		#Kajarah
+		if attack["Name"] == "Serrated Edge" and not hasAttackedThisRound(attacker): 
+				debug("Serrated Edge Detected")
+				eventList = getEventList('Round')
+				for e in eventList:
+						if e[0] == 'Attack' and Card(e[1][1]) == Card(dTraitDict.get('OwnerID')) and 'Animal' in Card(e[1][0]).Subtype and Card(e[1][0]).controller == attacker.controller and e[1][3] > 0:
+								debug('dice added to attack')
+								localADict['Ranged'] = localADict.get('Ranged',0) + 1
+								break
 		#BM Conditional Ranged +1
 		if attacker.Name == "Johktari Beastmaster" and not atkTraits.get("Spell"): localADict['Ranged'] = localADict.get('Ranged',0) + 1
 		#Ring of tides for Siren
@@ -362,7 +371,11 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		#Wounded prey
 		if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and defender.Subtype != 'Mage' and (attacker.controller != defender.controller or (attacker.controller == defender.controller and card.special == "Scenario")) and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
 		#()()()()This has an issue where the JBM's own creature attacks the JBM with the marker on her. It's a super corner case, but will need fixed sometime
-		
+		#Straywood Scout Token
+		if defender and defender.markers[scoutToken] and not "Straywood Scout" in defender.name:
+			localADict['Melee'] = localADict.get('Melee',0) + 1
+			localADict['Ranged'] = localADict.get('Ranged',0) + 1
+		if defender and defender.markers[AegisToken]: attack['Dice'] -= defender.markers[AegisToken]
 		#if defender and defender.markers[WoundedPrey] and defender.Type == 'Creature' and attacker.controller != defender.controller and ("Mage" in attacker.Subtype or (attacker.Type == "Creature" and "Animal" in attacker.Subtype)) and defender.markers[Damage] and dTraitDict.get('Living'): localADict['Melee'] = localADict.get('Melee',0) + 1
 		attack['Traits']['Piercing'] = atkTraits.get('Piercing',0) + localADict.get('Piercing',0)#Need to fix attack traitDict so it has same format as creature traitDict
 		if localADict.get('Unavoidable'): attack['Traits']['Unavoidable'] = True
@@ -509,8 +522,6 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 																	and (attacker and not hasAttackedThisRound(attacker))
 																	and attack.get('RangeType') != 'Damage Barrier'):
 								attackDice += 1
-				if ([True for c in getAttachments(defender) if c.isFaceUp and c.name == "Tar Trap"] and attack.get("Type")=="Flame"):
-					attackDice += 1
 				vs = atkTraits.get('VS')
 				if vs: #We'll assume each attack has only one vs+ trait
 						if ((vs[0] == "Corporeal Conjurations" and 'Conjuration' in defender.Type and 'Corporeal' in dTraitDict) or
@@ -608,11 +619,6 @@ def rollD12():
 					effectDieBank.append(rnd(0,11))
 	effectRoll = int(effectDieBank.pop()) + 1
 	return effectRoll
-	
-def simpleRollDice(dice):
-	"RollDice function which returns a plain number, rather than a list of values"
-	values,effect = rollDice(dice)
-	return values[2] + values[4] + 2 * (values[3] + values[5])
 
 ############################################################################
 ######################            Event Memory          ####################
@@ -904,7 +910,7 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 		mute()
 		GhostForm = False
 		DefensiveStance = False
-		#debug("INTERIM STEP \n")
+		debug("INTERIM STEP \n")
 		#debug("dTraitDict upon entrance: {}\n".format(str(dTraitDict)))
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		#First, check if the defender is dead. If it is, this attack needs to end now.
@@ -917,9 +923,9 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 		for p in playersList:
 				if p != me: otherPlayer = p
 		selfAttached = revealAttachmentQuery([attacker,defender],prevStepName)
-		if selfAttached:
-			if dTraitDict.has_key("Ghost Form"):
-				GhostForm = True
+		#if selfAttached:
+		if dTraitDict.has_key("Ghost Form"):
+			GhostForm = True
 			aTraitDict = computeTraits(attacker)
 			dTraitDict = computeTraits(defender)
 			if GhostForm:
@@ -953,6 +959,9 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		#debug("DECLARE ATTACK STEP\n")
+		if (not attack['KiTrait'] or attack['KiTrait'] == ''):
+			KiTrait = ''
+			#debug("KiTrait: {}\n".format(KiTrait))
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		#1. Check whether any creatures in the zone are guarding and not restrained. If they are, and this is not one of them, cancel attack (if melee)
@@ -964,7 +973,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		if atkOS.Name == "Dancing Scimitar": rememberAbilityUse(atkOS) #Make a note of Dancing Scimitar's use if used to attack.
 		#Ki buffs
 		#debug('Checking Ki Buffs here')
-		if attack["Name"] in ["Dragon-Tail Sweep", "Fist of Iron", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm", "Dragon\'s Bite"] or attacker.name == 'Monk':
+		if (attack["Name"] in ["Dragon-Tail Sweep", "Fist of Iron", "Flying Side Kick", "Projected Leg Sweep", "Projected Palm", "Dragon\'s Bite"] or attacker.name == 'Monk') and "Dancing Scimitar" not in Card(attack['OriginalSourceID']).name:
 			KiDice, KiEffect, KiTrait = processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict)
 			attack["KiDice"] = KiDice
 			attack["KiEffect"] = KiEffect
@@ -973,6 +982,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 					temp = KiTrait.split('+')
 					attack["Traits"][temp[0]]=int(temp[1])
 					attack["KiTrait"] = KiTrait
+				elif "Ethereal" in KiTrait and attack['Traits'].has_key('Spell'):
+					KiTrait = ''
 				else:
 					attack["Traits"][KiTrait] = True
 					attack["KiTrait"] = KiTrait
@@ -996,6 +1007,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		else: notify("\n{} attacks {} with {}!\n".format(attacker,defender,attack.get('Name','a nameless attack')))
 		#Check for daze
 		if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
+				debug("Daze 2\n")
 				notify("{} is rolling the Effect Die to check the Dazed condition.\n".format(attacker))#gotta figure that gender thing of yours out.
 				damageRoll,effectRoll = rollDice(0)
 				if effectRoll < 7:
@@ -1012,6 +1024,26 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 						interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','additionalStrikesStep')
 						return
 				else: notify("Though dazed, {} manages to avoid fumbling the attack.\n".format(attacker))
+		#Monk Strike Through check
+		if (attacker.markers[Ki] > 3 and
+			attacker.name == 'Monk' and
+			KiTrait != 'Critical Damage' and
+			attack.get('RangeType') == 'Melee' and 
+			"Dancing Scimitar" not in Card(attack['OriginalSourceID']).name and
+			not timesHasOccured("GhostForm",attacker.controller)):
+				notifystr = "Would you like to pay 4 Ki to make this attack do Critical Damage?"
+				choiceList = ['Yes', 'No']
+				colorsList = ['#0000FF', '#FF0000']
+				choice = askChoice("{}".format(notifystr), choiceList, colorsList)
+				if choice == 1 :
+					attacker.markers[Ki]-=4
+					notify("{} has chosen to pay 4 Ki to make {} deal Critical Damage with the Strike Through technique\n".format(me, attack["Name"]))
+					KiTrait = "Critical Damage"
+					attack["Traits"][KiTrait] = True
+					attack["KiTrait"] = KiTrait
+				elif choice == 2:
+					notify("{} has chosen not to enhance {} with Ki Techniques\n".format(me, attack["Name"]))
+						
 		interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
 def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
@@ -1131,9 +1163,9 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 								notify("{} spends 4 Ki and becomes Incorporeal\n".format(defender.name.split(',')[0]))
 								rememberPlayerEvent("GhostForm",defender.controller)
 							elif choice ==3:
-								defender.markers[Ki] -= 1
+								defender.markers[Ki] -= 2
 								defender.markers[Guard] +=1
-								notify("{} spends 1 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
+								notify("{} spends 2 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
 						elif not attack.get("RangeType",{})=='Melee' or attack.get("Traits",{}).get("Unavoidable"):
 							buttonColorList = ["#de2827","#171e78","#01603e"]
 							buttonList = ["Ghost Form (Gain Incorporeal)", "No"]
@@ -1147,11 +1179,11 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 					elif defender.markers[Ki] > 0 and not timesHasOccured("GhostForm",defender.controller):
 						buttonColorList = ["#de2827","#171e78"]
 						buttonList = ["Yes", "No"]
-						choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend 1 Ki for your Monk to use Follow Up?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
+						choice = askChoice("{} is being targeted by {}'s {}. Would you like to spend 2 Ki for your Monk to use Follow Up?".format(defender.Name,attacker.Name,attack.get("Name")),buttonList,buttonColorList)
 						if choice == 1:
-							defender.markers[Ki] -= 1
+							defender.markers[Ki] -= 2
 							defender.markers[Guard] +=1
-							notify("{} spends 1 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
+							notify("{} spends 2 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
 					elif timesHasOccured("GhostForm",defender.controller):
 						dTraitDict["Incorporeal"] = True
 						dTraitDict["Ghost Form"] = True
@@ -1251,7 +1283,7 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 								alignAttachments(defender)
 								notify("{} did not pay to maintain Blur, it has been Destroyed.\n".format(me))
 		for attachedCard in getAttachments(attacker):				
-			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name and damage > 0 and not timesHasOccured("FortRes",attacker.controller) and defender.Type == "Creature":
+			if attachedCard.isFaceUp and "Fortified Resolve" in attachedCard.Name and damage > 0 and not timesHasOccured("FortRes",attacker.controller) and "Dancing Scimitar" not in Card(attack['OriginalSourceID']).name:
 				attachedCard.markers[Charge] +=1
 				rememberPlayerEvent("FortRes",attacker.controller)
 				notify("Fortified Resolve charges up. It now has {} charges\n".format(attachedCard.markers[Charge]))
@@ -1267,11 +1299,11 @@ def damageAndEffectsStep(aTraitDict,attack,dTraitDict,damageRoll,effectRoll): #E
 		if damage > 0 and "BattleMeditation" in aTraitDict and not timesHasOccured("BMAttack",attacker.controller):
 			attacker.markers[Ki]+=1
 			rememberPlayerEvent("BMAttack",attacker.controller)
-			notify("{}\'s Battle Meditation generates 1 Ki from the attack!".format(attacker.controller.name))
+			notify("{}\'s Battle Meditation generates 1 Ki from the attack!".format(attacker.name))
 		if damage > 0 and "BattleMeditation" in dTraitDict and not timesHasOccured("BMDefense",defender.controller):
 			defender.markers[Ki]+=1
 			rememberPlayerEvent("BMDefense",defender.controller)
-			notify("{}\'s Battle Meditation generates 1 Ki!".format(me))
+			notify("{}\'s Battle Meditation generates 1 Ki!".format(defender.name))
 		rememberAttackUse(attacker,defender,attack['OriginalAttack'],damage) #Record that the attack was declared, using the original attack as an identifier
 		interimStep(aTraitDict,attack,dTraitDict,'Damage and Effects','additionalStrikesStep')
 
@@ -1760,6 +1792,7 @@ def computeTraits(card):
 		"""This is the centralized function that reads all traits possessed by a card. Do NOT compute traits anywhere else, ONLY compute them here.
 		It returns a dictionary of traits. This function will end up being quite long and complex.It works together with traitParser. Standard format
 		for traits is a dictionary."""
+		debug("computeTraits being called")
 		traitDict = {}
 		markers = card.markers
 		name = card.name
@@ -1831,6 +1864,19 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												cController == controller and
 												'Corporeal' in rawTraitsList): append('Armor +2')
+										if (cName == 'Resolute Aura' and
+												cardType == 'Creature' and
+												cController == controller): extend(['Tough -2'])
+										if (cName == 'Resolute Aura' and
+												cardType == 'Creature' and
+												cController == controller and
+												name != "Paladin"): append('Armor +2')
+										if (cName == 'Vengeful Aura' and
+												cardType == 'Creature' and
+												cController == controller): append('Melee +1')
+										if (cName == 'Vengeful Aura' and
+												cardType == 'Creature' and
+												cController == controller): extend(['Piercing +2'])
 										if (cName == 'Sacred Ground' and
 												cController == controller and
 												cardType == 'Creature' and
@@ -1886,6 +1932,15 @@ def computeTraits(card):
 										if (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" not in subtype): append('Shallow Sea')
+										if (cName == 'Hellscape' and
+												name != "Hellscape" and
+												"Flame Immunity" not in rawTraitsList): append('Hellscape')
+										if (cName == 'Hellscape' and
+												"Flame Immunity" not in rawTraitsList): append('Flame +1')
+										if (cName == 'Poison Gas Cloud' and
+												cardType == 'Creature' and
+												"Nonliving" not in rawTraitsList and
+												"Poison Immunity" not in rawTraitsList): append('PoisonGasCloud')
 										if (cName == 'Frozen Tundra'): append('FrozenTundra')
 										if (cName == 'Steep Hill' and
 												cardType == 'Creature'): append("Ranged +1-if-Non-Flying")
@@ -1936,7 +1991,9 @@ def computeTraits(card):
 								if ('Mage' in cSubtype and cController == controller): #Effects when creature is in same zone as controlling mage
 										if name == 'Goran, Werewolf Pet': append('Bloodthirsty +1')
 										if markers[Pet] and 'Animal' in subtype: append('Melee +1')
-								if ('Siren' in name and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): append('Regenerate 1')
+								if ('Siren' in name and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): 
+									append('Channeling +1')
+									append('AquaticTerrain')
 								if (name == 'Naiya' and 'Conjuration-Terrain' in cType and cSubtype == 'Aquatic'): 
 									append('Regenerate 1')
 									append('Channeling +1')
@@ -2008,7 +2065,7 @@ def computeTraits(card):
 		if markers[Stuck] : extend(['Restrained','Unmovable'])
 		if markers[Daze]: append('Defense -{}'.format(str(markers[Daze])))
 		if markers[Light]: append('Light +{}'.format(str(markers[Light])))
-		
+		if markers[Obscured]: append('Obscured')
 		if markers[Pet] and 'Animal' in subtype: extend(['Melee +1','Armor +1','Life +3'])
 		if markers[BloodReaper] and 'Demon' in subtype: append('Bloodthirsty +2')
 		if markers[EternalServant] and 'Undead' in subtype and not "Legendary" in card.Traits: append('Piercing +1')
@@ -2020,6 +2077,8 @@ def computeTraits(card):
 		if markers[SirensCall] and 'Aquatic' in subtype and "Siren" in mage.name and 'Mage' not in subtype: extend(['Melee +2'])
 		if markers[Grapple]: extend(['Melee -2'])
 		if markers[EarthGlyphActive] and 'Magestats' not in card.Type: append('Armor +2')
+		if markers[ToughToken]: extend(['Tough -2'])
+		if markers[DefenseToken]: extend(['Defense +1'])
 
 				#Harshforge monolith
 
@@ -2093,7 +2152,7 @@ def processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict):
 	mageStatsID = int(mageDict["MageStatsID"])
 	mageID = int(mageDict["MageID"])
 	mage = Card(mageID)
-	if timesHasOccured("GhostForm",attacker.controller):
+	if timesHasOccured("GhostForm",attacker.controller):#And non-spell attack?
 		KiTrait = "Ethereal"
 	else:
 		if mage.markers[Ki] >0 and ('Nunchucks' in aTraitDict or "Sai" in aTraitDict) and attack["RangeType"]=='Melee':
@@ -2182,17 +2241,20 @@ def processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict):
 				KiTrait = "Critical Damage"
 			elif choice == 2:
 				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-		if mage.markers[Ki] > 3 and mage.name == 'Monk' and KiTrait != 'Critical Damage':
-			notifystr = "Would you like to pay 4 Ki to make this attack do Critical Damage?"
+		if mage.markers[Ki] > 2 and mage.name == 'Monk' and not timesHasOccured("GhostForm",attacker.controller):
+			notifystr = "Would you like to pay 4 Ki to use Ghost Form?"
 			choiceList = ['Yes', 'No']
 			colorsList = ['#0000FF', '#FF0000']
 			choice = askChoice("{}".format(notifystr), choiceList, colorsList)
-			if choice == 1 :
-				mage.markers[Ki]-=4
-				notify("{} has chosen to pay 4 Ki to make {} deal Critical Damage with the Strike Through technique\n".format(me, attack["Name"]))
-				KiTrait = "Critical Damage"
+			if choice == 1:
+				defender.markers[Ki] -= 4
+				aTraitDict["Incorporeal"] = True
+				aTraitDict["Ghost Form"] = True
+				KiTrait = "Ethereal"
+				notify("{} spends 4 Ki and becomes Incorporeal\n".format(attacker.name.split(',')[0]))
+				rememberPlayerEvent("GhostForm",attacker.controller)
 			elif choice == 2:
-				notify("{} has chosen not enhance {} with Ki Techniques\n".format(me, attack["Name"]))
+				notify("{} has chosen not to use Ghost Form\n".format(me, attack["Name"]))	
 	return KiDice, KiEffect, KiTrait
 	
 def buffWithGlyphs(mageStats, attacker, drake = None):
@@ -2265,7 +2327,7 @@ def buffWithGlyphs(mageStats, attacker, drake = None):
 			rememberPlayerEvent("FireGlyphDeactivate",attacker.controller)
 			rememberPlayerEvent("AirGlyphDeactivate",attacker.controller)
 			notify("{} has chosen to pay 6 mana and deactivate both Air and Fire Glyphs to give this attack +2 dice and +4 to the effect roll\n".format(me))
-	elif me.Mana > 3:
+	elif me.Mana > 2:
 		notifystr = "Which buff would you like to apply?"
 		choiceList = ['Air (+4 effect)', 'Fire (+3 dice)','None']
 		colorsList = ['#0000FF','#0000FF','#FF0000']

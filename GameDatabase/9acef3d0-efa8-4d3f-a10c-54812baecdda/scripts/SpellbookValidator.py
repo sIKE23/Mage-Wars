@@ -147,7 +147,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 	cardDict = {}
 	for card in deck: #run through deck adding levels and checking counts
 		SBPadd = 0
-		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype):
+		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype or "Aura" in card.Subtype):
 			debug(card.name)
 			
 			#temporary way to make sure combo checks elements not letters. Also hijacked in the rewrite
@@ -246,7 +246,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 				checkMageSchoolOnly(card, mageName, schoolTrn)
 			
 			#notify(card.name)
-			##notify(str(SBPadd))	
+			#notify(str(SBPadd))	
 			spellbook['booktotal']+=SBPadd	
 			#notify("spellbook['booktotal']: " +str(spellbook['booktotal']))
 	return (spellbook['booktotal'], cardDict)

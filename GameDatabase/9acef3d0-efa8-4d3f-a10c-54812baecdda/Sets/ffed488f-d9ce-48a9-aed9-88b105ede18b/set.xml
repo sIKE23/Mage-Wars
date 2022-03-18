@@ -5,14 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="2.0.0.0" 
 	version="2.0.0.0">
-	<markers>
-		<marker id="ae179c85-11ce-4be7-b9c9-352139d0c8f2" name="Rune of Fortification" />
-		<marker id="b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" name="Rune of Power" />
-		<marker id="c2a265f9-ad97-4976-a83c-78891a224478" name="Rune of Precision" />
-		<marker id="d10ada1f-c03b-4077-b6cb-c9667d6b2744" name="Rune of Reforging" />
-		<marker id="e0bb0e90-4831-43c6-966e-27c8dc2d2eef" name="Rune of Shielding" />
-		<marker id="f68b3b5b-0755-40f4-84db-bf3197a667cb" name="Disable" />
-	</markers>
+
 
 
 	<cards>
@@ -758,7 +751,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="War Mage Only" />
-			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast.&#xD;&#xA;[Armor +2]" />
+			<property name="Text" value="Mage gains Armor +2. Enemy controlled enchantments and incantations, which target this Mage, cost 2 additional mana to cast.&#xD;&#xA;[Armor +2] [HarshforgePlate]" />
 			<property name="CardID" value="MWSTX2FFQ05" />
 		</card>
 		<card id="82a0a369-821d-4f9f-bf27-17363de8e71d" name="Morning Star">

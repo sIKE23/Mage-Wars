@@ -76,7 +76,7 @@
 			<property name="Nickname" value="Fist of Lightning" />
 			<property name="Type" value="Attack" />
 			<property name="Subtype" value="Lightning, Martial" />
-			<property name="Cost" value="3" />
+			<property name="Cost" value="2" />
 			<property name="Action" value="Full"  />
 			<property name="Range" value="0-0" />
 			<property name="cTargets" value="m0,M0))TCreature||TConjuration" />

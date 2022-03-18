@@ -21,6 +21,7 @@ ActionGrey = ("Grey Action Marker","623f07fb-9cfb-4b4b-a350-6b208f0ef29e")
 ActionGreyUsed = ("Grey Action Marker Used","99bd454e-fab9-47c6-9f59-54a112eeb2da")
 ActionPurple = ("Purple Action Marker","edb61e00-a666-480a-81f3-20eb9944b0ea")
 ActionPurpleUsed = ("Purple Action Marker Used","158f738b-6034-4c6d-b4ca-5abcf159ed9f")
+AegisToken = ("Aegis +1", "87654f3f-a418-485c-a3e9-1a628b36216e")		
 AirGlyphActive = ("Air Glyph Active", "e8237864-1442-4b66-9e9f-57abe2f518fd")
 AirGlyphInactive = ("Air Glyph Inactive", "4da1b360-d498-4514-bb35-904c25e7481d")
 Armor = ("Armor +1","b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc")
@@ -40,6 +41,7 @@ Cripple = ("Cripple: Restrained. After acting, roll 7+ to remove. - Removal Cost
 CrushToken = ("Crush Token","d7472637-7c6d-4593-bc16-5975155c2926")
 Damage = ("Damage","f316259d-10ad-471f-bdbc-884d11a8ced9")
 Daze = ("Daze: Attacks - Escape roll of 7+ or the Attack fails. -2 Defenses - Removal Cost: 2","3ef51126-e2c0-44b3-b781-0b3f8476cb20")
+DefenseToken = ("+1 to Defense Rolls", "b5586a56-4963-4480-b5f3-65cfd37c3a64")
 DeflectR = ("Deflect Ready","684fcda0-e69d-426e-861c-5a92bc984f55")
 DeflectU = ("Deflect Used","2c5b85ea-93de-4a99-b64d-da6c48baa205")
 Disable = ("Disable: Remove 1 each Reset Phase","f68b3b5b-0755-40f4-84db-bf3197a667cb")
@@ -80,12 +82,14 @@ Ranged = ("Ranged +1","cfb394b2-8571-439a-8833-476122a9eaa5")
 Ready = ("Ready","aaea8e90-e9c5-4fbc-8de3-4bf651d784a7")
 ReadyII = ("Ready II","73fffebd-a8f0-43bd-a118-6aebc366ecf6")
 Retribution = ("Retribution: Melee +1","88fc4b07-9596-48f4-a049-d5be58ae254c")
+Rewind = ("Rewind", "a4e2b624-bb01-49cb-bd80-172037083ab1")
 Rot = ("Rot: During Upkeep take 1 Damage - Removal Cost 2","81360faf-87d6-42a8-a719-c49386bd2ab5")
 RuneofFortification = ("Rune of Fortification: If this equipment gives an Armor +X bonus to the Mage, it gives an additional Armor +1.","ae179c85-11ce-4be7-b9c9-352139d0c8f2")
 RuneofPower = ("Rune of Power: Once per round, you may pay 1 less mana when casting a spell bound to this equipment or using a spell action provided by this equipment.","b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07")
 RuneofPrecision = ("Rune of Precision: This equipment's non-spell attacks gain the Piercing +1 trait.","c2a265f9-ad97-4976-a83c-78891a224478")
 RuneofReforging = ("Rune of Reforging: This equipment gains the Cantrip trait.","d10ada1f-c03b-4077-b6cb-c9667d6b2744")
 RuneofShielding = ("Rune of Shielding: If this equipment gives your Mage a Defense, the first time each round that defense is used, add +2 to the Defense roll.","e0bb0e90-4831-43c6-966e-27c8dc2d2eef")
+scoutToken = ("Scout","8ad5fb76-adb9-4ebb-b8c7-a662535f3cba")
 SecretPassage = ("Secret Passage","a4b3bb92-b597-441e-b2eb-d18ef6b8cc77")
 SirensCall = ("Siren's Call","f6eaf1e9-f0b0-4ac3-9719-7463777fb031")
 Slam = ("Slam: Incapacitated. Replace with Daze when activated. - Removal Cost: 3","f7379e4e-8120-4f1f-b734-51f1bd9fbab9")
@@ -102,6 +106,7 @@ Tainted = ("Tainted: This can't be healed. - Removal Cost: 3","826e81c3-6281-4a4
 Taunt = ("Taunt (Sosroku)","16f03c44-5656-4e9d-9629-90c4ff1765a7")
 TauntS = ("Taunt (Skeelax)","9ea607d3-dade-44dc-a69d-1c0d5691a246")
 TauntT = ("Taunt (Thorg)","8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7")
+ToughToken = ("Tough -2", "ca9aa78d-aa84-4025-a315-1c61d527464f")
 Treebond = ("Treebond: Innate Life +4, Lifebond +2, Armor +1","ced2ce11-5e69-46a9-9fbb-887e96bdf805")
 Turn = ("Turn","e0a54bea-6e30-409d-82cd-44a944e591dc")
 Used = ("Used","ab8708ac-9735-4803-ba4d-4932a787540d")
@@ -120,6 +125,7 @@ Wish = ("Wish Token","fcf39fa4-238a-4cb6-92bb-5f561be747c0")
 WoundedPrey = ("Wounded Prey","42f6cee3-3de4-4c90-a77c-9fb2c432d78d")
 Wrath = ("Wrath","fffe964a-3839-4bc0-ba85-3268b59817c6")
 Zombie = ("Zombie: Psychic Immunity, Slow, Nonliving, Bloodthirsty +0","de101060-a4b4-4387-a7f8-aab82ecff2c8")
+Obscured = ("Obscured", "de371fc4-c01a-4c3e-ba15-eb89857959a1")
 
 ##########################		Dice-related			########################
 attackDie = [("No Damage","a1f061ec-efbe-444e-8e06-8d973600696c"),
@@ -168,7 +174,7 @@ gameBoardsDict = {
 					}
 
 ##########################		Lists			############################
-listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shifratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade", "Soulreaper", "Dragon\'s Lance", "Gladius"]
+listMageWeapons = ["Johktari Hunting Knife","Faith Healer\'s Staff", "Rod of the Arcanum","Hellstar","Resplendent Bow", "Shiftratar", "Ivarium Halberd", "Thorn Whip", "Elemental Staff", "Bo Staff", "Sacrificial Blade", "Soulreaper", "Dragon\'s Lance", "Gladius"]
 typeChannelingList = ["Mana Flower","Mana Crystal","Moonglow Amulet"]
 typeIgnoreList = ["Internal","Phase","DiceRoll","V'Tar Orb Off","V'Tar Orb On"]
 tokenList = ["Armor","Banish","Bleed","Burn","Charge","Cripple","Corrode","Disable","Daze","Grapple","Growth","Mana","Melee","Rage",
