@@ -397,7 +397,7 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Fireball;range type=Ranged;range=(0,2);damage type=Flame;dice=6;effects={4: ['Burn'], 11: ['Burn', 'Burn']};Defrost=True" />
+			<property name="tAttacks" value="name=Fireball;action type=Quick;range type=Ranged;range=(0,2);damage type=Flame;dice=6;effects={4: ['Burn'], 11: ['Burn', 'Burn']};Defrost=True" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=6] [d12] [4-10 = Burn; 11+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />

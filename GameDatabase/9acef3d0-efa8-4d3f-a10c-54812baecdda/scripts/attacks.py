@@ -92,7 +92,7 @@ def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
 
 	#1: Populate the attack list.
 	def filterPredicate(attack): #For clarity
-		return attack.get("action type","None") in actionFilters or "Counterstrike" in actionFilters and attack.get("Counterstrike")
+		return attack.get("action type","None") in actionFilters or "Counterstrike" in actionFilters and attack.get("Counterstrike")# Need to add "action type" to attack spells, change cAttacks to tAttacks
 	attackList = [attack for attack in getAttacks(attacker) if filterPredicate(attack)]
 
 	#2: Filter attackList by range
