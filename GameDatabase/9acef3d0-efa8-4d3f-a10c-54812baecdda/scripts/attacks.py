@@ -340,7 +340,7 @@ def getAttacks(card):
 			append(attack)
 			debug("attack: " + str(attack)+"\n")
 	#2: parse attacks from attached cards
-	attachments = getAttachments(card) + ([c for c in table if c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp] if "Mage" in card.Subtype else [])
+	attachments = getAttachments(card) + ([c for c in table if (c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp) or (c.controller==card.controller and c.Type == "Attack")] if "Mage" in card.Subtype else [])
 	for a in attachments:
 		if a.tAttacks:
 			rawAttackList = a.tAttacks.split("||")
@@ -1353,7 +1353,7 @@ def computeTraits(card):
 				cSubtype = c.subtype
 				cType = c.type
 				cBuffs = c.cBuffs
-				debug("c Name: {}".format(cName))
+				#debug("c Name: {}".format(cName))
 				#Search arena for passive buffs
 				if cBuffs:
 					cBuffRange = cBuffs.split("))")[0]

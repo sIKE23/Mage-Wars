@@ -2831,7 +2831,7 @@
 			<property name="Level" value="1+1" />
 			<property name="Stats" value="Location=Weapon" />
 			<property name="StatEquipmentSlot" value="Weapon" />
-			<property name="cAttacks" value="name=Searing Thrash;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=4;effects={7: ['Burn'], 11: ['Burn', 'Burn']};Reach=True;Defrost=True" />
+			<property name="tAttacks" value="name=Searing Thrash;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=4;effects={7: ['Burn'], 11: ['Burn', 'Burn']};Reach=True;Defrost=True" />
 			<property name="AttackBar" value="Searing Thrash:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Reach] [Defrost]" />
 			<property name="Traits" value="Warlock Only" />
 			<property name="Text" value="" />

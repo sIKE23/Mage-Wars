@@ -306,7 +306,7 @@ namespace Octgn.MageWarsValidator
                             }
 
                             //Forcemaster rule: Pay 3x for non-mind creatures
-                            if (magename == "Forcemaster" & "Creature" == Property(card, "Type"))
+                            if (magename.Contains("Forcemaster") & "Creature" == Property(card, "Type"))
                             {
                                 if (!school.Contains("Mind")) //"Mind" not in schools
                                 {
