@@ -140,14 +140,14 @@ def declareAttackStep(argument): #Executed by attacker #WIP lots of other logic 
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 	debug("spellList: {}".format(spellList))
 
 	#1: resolve bAS effects - Monk using Ki? #WIP
 	[d["bAS_DeclareAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_DeclareAttack" in d]
 
 	#2: check for daze
-	if attacker.markers[Daze] and attack.get('range type') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
+	if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
 		notify("{} is rolling the Effect Die to check the Dazed condition.\n".format(attacker.nickname))#gotta figure that gender thing of yours out.
 		damageRoll,effectRoll = rollDice(0)
 		if effectRoll < 7:
@@ -158,8 +158,8 @@ def declareAttackStep(argument): #Executed by attacker #WIP lots of other logic 
 		else: notify("Though dazed, {} manages to avoid fumbling the attack.\n".format(attacker.nickname))
 
 	#3: give appropriate notification
-	if attack.get('range type') == 'Counterstrike': notify("{} retaliates with {}!\n".format(attacker.nickname,attack.get('Name','a nameless attack')))
-	elif attack.get('range type') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!\n".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
+	if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!\n".format(attacker.nickname,attack.get('Name','a nameless attack')))
+	elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!\n".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
 	else: notify("{} attacks {} with {}!\n".format(attacker.nickname,defender.nickname,attack.get('name','a nameless attack')))
 
 	#4: resolve aAS effects
@@ -185,7 +185,7 @@ def avoidAttackStep(argument): #Executed by defender
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: resolve bAS effects
 	[d["bAS_AvoidAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_AvoidAttack" in d]
@@ -225,7 +225,7 @@ def rollDiceStep(argument): #Executed by attacker
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 	debug("spellList: {}\n".format(spellList))
 
 	#1: resolve bAS effects
@@ -266,7 +266,7 @@ def damageAndEffectsStep(argument): #Executed by defender
 
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: resolve bAS effects #Example: Fortified resolve, brace yourself
 	[d["bAS_DamageAndEffects"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
@@ -393,7 +393,7 @@ def additionalStrikesStep(argument):#aTraitDict,attack,dTraitDict): #Executed by
 	attack 		= 	argument["attack"]
 	atkTraits 	= 	attack.get('Traits',{})
 
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: store use of the attack in memory
 	storeEvent(deepcopy(argument))
@@ -454,7 +454,7 @@ def damageBarrierStep(argument): #Executed by defender
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
 
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: resolve bAS effects
 	[d["bAS_DamageBarrier"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
@@ -496,9 +496,10 @@ def counterstrikeStep(argument): #Executed by defender
 	aTraitDict = computeTraits(attacker)
 	dTraitDict = computeTraits(defender)
 
-	spellList = [(c,spellDictionary.get(card.Name,{})) for c in table if c.Name in spellDictionary]
-
-	if attack.get('RangeType') == 'Melee':
+	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
+	debug("spellList")
+	debug(spellList)
+	if attack.get('range type') == 'Melee':
 		counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
 		if counterAttack:
 			counterAttack['RangeType'] = 'Counterstrike'

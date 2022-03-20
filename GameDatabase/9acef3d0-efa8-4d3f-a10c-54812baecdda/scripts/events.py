@@ -60,7 +60,7 @@ def onGameStarted():
 		me.color = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
 		setUpDiceAndPhaseCards()
 		setGlobalVariable("GameSetup",str(0))
-		publicChatMsg("There is only one player, so there is no need to roll for initative.")
+		#publicChatMsg("There is only one player, so there is no need to roll for initative.")
 		#publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
@@ -364,7 +364,7 @@ def onDeckLoaded(args):
 			tutorialMessage("Play Card")
 		else:
 			#publicChatMsg and delete deck
-			publicChatMsg("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
+			#publicChatMsg("Validation of {}'s spellbook FAILED. Please choose another spellbook.".format(me.name))
 			for group in args.groups:
 				for card in group:
 					if card.controller == me:

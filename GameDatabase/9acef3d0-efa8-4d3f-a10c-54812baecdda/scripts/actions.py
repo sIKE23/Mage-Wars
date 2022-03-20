@@ -75,14 +75,6 @@ def genericAttack(group,x=0,y=0):
 	dice = diceRollMenu(None,defender).get('Dice',-1)
 	if dice >=0: rollDice(dice)
 
-def flipCoin(group,x = 0,y = 0): #do we still need this ACG? from before my time......we can get rid of it and the menu item.....
-	mute()
-	n = rnd(1,2)
-	if n == 1:
-		notify("{} flips heads.".format(me))
-	else:
-		notify("{} flips tails.".format(me))
-
 def createVineMarker(group,x=0,y=0):
 	mute()
 	table.create("ed8ec185-6cb2-424f-a46e-7fd7be2bc1e0",x,y)
@@ -107,7 +99,7 @@ def toggleDebug(group,x=0,y=0):
 def nextPhase(group,x=0,y=0):
 	mute()
 	gameMode = getGlobalVariable("GameMode")
-	if gameMode == "Arena" or "Domination": nextPhaseArena()
+	if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
 	elif gameMode == "Academy": nextPhaseAcademy()
 
 ############################################################################

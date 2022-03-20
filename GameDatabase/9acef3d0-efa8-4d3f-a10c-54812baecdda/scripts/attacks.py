@@ -79,7 +79,7 @@ def createAttackOptionsList(modifiedAttacks, killChances, effectChances):
 
 	colors = ["#CC0000" for i in options] #Red
 	choiceText = "Use which attack?" if options else "No legal attacks available!"
-	return choiceText
+	return choiceText, options, colors
 
 def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
 	"""
@@ -108,7 +108,7 @@ def attackChoicePrompt(attacker,defender,actionFilters=["Quick","Full"]):
 	effectChances = [chanceForEffect(attacker, attack, defender) for attack in modifiedAttacks]
 
 	#6: Generate the list of choices that will appear on the menu
-	choiceText = createAttackOptionsList(modifiedAttacks, killChances, effectChances)
+	choiceText, options, colors = createAttackOptionsList(modifiedAttacks, killChances, effectChances)
 	
 
 	#7: Display the menu to the player and allow them to choose an option
@@ -140,8 +140,9 @@ def diceRollMenu(attacker = None,defender = None,specialCase = None):
 				attackList = [computeAttack(attacker,attack,defender) for attack in attackList if attack.get('action type') != 'Damage Barrier']
 				choiceText = "Use which attack?"
 		if specialCase == 'Counterstrike':
+				debug('Counterstrike found')
 				for a in list(attackList):
-						if a.get('Traits',{}).get('Counterstrike'): a['RangeType'] = 'Counterstrike'
+						if a.get('Traits',{}).get('Counterstrike'): a['range type'] = 'Counterstrike'
 						else: attackList.remove(a)
 		choices = []
 		for a in list(attackList):
@@ -295,7 +296,7 @@ def parseAttack(string):
 		"effects" : dict,
 		"range" : tuple,
 		# --- Traits
-		"Counterstrike" : int,
+		"Counterstrike" : bool,
 		"Piercing +X" : int,
 		"Mana Drain +X" : int,
 		"Mana Transfer +X" : int,
