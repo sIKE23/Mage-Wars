@@ -2,14 +2,13 @@
 # removing roundTimes as python GlobalVariables
 
 def nextPhase(group,x=0,y=0):
-	mute()	
-	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
-	currentPhase = eval(getGlobalVariable("CurrentPhase"))
-	phaseCard = Card(int(getGlobalVariable("PhaseCard")))
+	mute()
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
 	gameMode = getGlobalVariable("GameMode")
-	if debugMode:	#debuggin'
+
+
+	if debugMode:	#
 		if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
 		elif gameMode == "Academy": nextPhaseAcademy()
 		return True
@@ -22,8 +21,10 @@ def nextPhase(group,x=0,y=0):
 		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if currentPhase()[1]<5:
+				remoteHighlight(phaseCard, myHexColor)
 				notify("{} is ready to move on with the {}\n".format(me.name,currentPhase()[0]))
 			else:
+				remoteHighlight(phaseCard, myHexColor)
 				notify("{} is done with the {}\n".format(me.name,currentPhase()[0]))
 
 			return False
@@ -37,7 +38,6 @@ def nextPhase(group,x=0,y=0):
 def nextPhaseArena():
 	mute()
 	global roundTimes
-
 	gameIsOver = getGlobalVariable("GameIsOver")
 	if gameIsOver:	#don't advance phase once the game is done
 		notify("Game is Over!")
@@ -48,7 +48,7 @@ def nextPhaseArena():
 	checkMageDeath(0)
 	if currentPhase()[0] == "Initiative Phase":
 		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-		if init.controller == me:
+		if init.controller == me and len(getPlayers())>1:
 			flipcard(init)
 		else:
 			remoteCall(init.controller, "flipcard", [init])
@@ -64,7 +64,6 @@ def nextPhaseArena():
 		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
 		setPhase(4)
-	
 	elif currentPhase()[0] == "Upkeep Phase":
 		for p in players:
 			for card in table:
@@ -97,25 +96,16 @@ def nextPhaseArena():
 		setPhase(5)
 	elif currentPhase()[0] == "Planning Phase":
 		setPhase(6)
-
 	elif currentPhase()[0] == "Deployment Phase":
 		setPhase(7)
-		update()
-
-	#The Action Stage
 	elif currentPhase()[0] == "First QC Phase":
 		setPhase(8)
-		update()
-
 	elif currentPhase()[0] == "Actions Phase":
 		setPhase(9)
-		update()
-
 	elif currentPhase()[0] == "Final QC Phase":
 		nextTurn()
-	update()
-	#else:
-		#notify("Error 23")
+		setPhase(1)
+	update() #attempt to resolve phase indicator sometimes not switching
 
 def changeIniMarker():
 	mute()

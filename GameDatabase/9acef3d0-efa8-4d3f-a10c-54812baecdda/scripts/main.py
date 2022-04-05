@@ -16,7 +16,14 @@ from copy import deepcopy
 from random import randint
 
 
-
+#TEMPORARY STORAGE
+def getNextPlayerNum():
+	debug(getGlobalVariable("PlayerWithIni"))
+	activePlayer = int(getGlobalVariable("PlayerWithIni"))
+	nextPlayer = activePlayer + 1
+	if nextPlayer > len(getPlayers()):
+		nextPlayer = 1
+	return nextPlayer
 
 
 def useUntargetedAbility(card, x=0, y=0):

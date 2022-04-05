@@ -1354,6 +1354,9 @@ def computeTraits(card):
 				cSubtype = c.subtype
 				cType = c.type
 				cBuffs = c.cBuffs
+				if 'Mage' in cSubtype and cController == controller and 'Magestats' not in cType: 
+					traitDict['MageID'] = c._id #Each card knows which mage controls it.
+					mage = Card(traitDict['MageID'])
 				#debug("c Name: {}".format(cName))
 				#Search arena for passive buffs
 				if cBuffs:

@@ -175,7 +175,7 @@ for token in tokenList:
 
 #Misc#
 debugMode = False
-currentPhase = ""
+currentPhaseMW = ""
 discountsUsed = [ ]
 tutorialTagsRead = []
 gameStartTime = ""
