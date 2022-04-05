@@ -218,10 +218,6 @@ def setUpDiceAndPhaseCards(): #some of this is for arena only, I think....
 		initativeCard.anchor = (True)
 		initativeCard.alternate = myColor
 		setGlobalVariable("InitativeCard",str(initativeCard._id))
-		#phaseCard = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase Marker/Next Phase Button
-		#phaseCard.anchor = (True)
-		#phaseCard.alternate = "5" #Game starts at the Planning Phase
-		#setGlobalVariable("PhaseCard",str(phaseCard._id))
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)

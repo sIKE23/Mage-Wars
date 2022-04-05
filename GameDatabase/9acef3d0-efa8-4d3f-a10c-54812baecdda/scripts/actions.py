@@ -98,9 +98,33 @@ def toggleDebug(group,x=0,y=0):
 
 def nextPhase(group,x=0,y=0):
 	mute()
+	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
+	playerNum = mwPlayerDict[me._id]["PlayerNum"]
 	gameMode = getGlobalVariable("GameMode")
-	if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
-	elif gameMode == "Academy": nextPhaseAcademy()
+	if debugMode:	#debuggin'
+		if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
+		elif gameMode == "Academy": nextPhaseAcademy()
+		return True
+	else:
+		doneWithPhase = getGlobalVariable("DoneWithPhase")
+		if str(playerNum) in doneWithPhase:
+			return
+
+		doneWithPhase += str(playerNum)
+		if len(doneWithPhase) != len(getPlayers()):
+			setGlobalVariable("DoneWithPhase", doneWithPhase)
+			if currentPhase()[1]<5:
+				notify("{} is ready to move on with the {}\n".format(me.name,currentPhase()[0]))
+			else:
+				notify("{} is done with the {}\n".format(me.name,currentPhase()[0]))
+
+			return False
+		else:
+			setGlobalVariable("DoneWithPhase", "")
+			if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
+			elif gameMode == "Academy": nextPhaseAcademy()
+			#nextPhaseArena()
+			return True
 
 ############################################################################
 ######################		Chat Actions			################################

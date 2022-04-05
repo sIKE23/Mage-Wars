@@ -1,22 +1,15 @@
 # removing gameTurn as python GlobalVariables
 # removing roundTimes as python GlobalVariables
 
-def nextPhase():
-	mute()
+def nextPhase(group,x=0,y=0):
+	mute()	
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']
+	currentPhase = eval(getGlobalVariable("CurrentPhase"))
+	phaseCard = Card(int(getGlobalVariable("PhaseCard")))
 	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
 	playerNum = mwPlayerDict[me._id]["PlayerNum"]
-	#currentPhase = eval(getGlobalVariable("CurrentPhase"))
-	phaseCard = Card(int(getGlobalVariable("PhaseCard"))) #the card ID for the Phase Card this game
-	gameIsOver = getGlobalVariable("GameIsOver")
 	gameMode = getGlobalVariable("GameMode")
-	if gameIsOver:	#don't advance phase once the game is done
-		notify("Game is Over!")
-		return
-#	if getGlobalVariable("GameSetup") != "True": # Player setup is not done yet.
-#		return
-
-	if debugMode:	#
+	if debugMode:	#debuggin'
 		if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
 		elif gameMode == "Academy": nextPhaseAcademy()
 		return True
@@ -29,10 +22,8 @@ def nextPhase():
 		if len(doneWithPhase) != len(getPlayers()):
 			setGlobalVariable("DoneWithPhase", doneWithPhase)
 			if currentPhase()[1]<5:
-				remoteHighlight(phaseCard, myHexColor)
 				notify("{} is ready to move on with the {}\n".format(me.name,currentPhase()[0]))
 			else:
-				remoteHighlight(phaseCard, myHexColor)
 				notify("{} is done with the {}\n".format(me.name,currentPhase()[0]))
 
 			return False
@@ -44,48 +35,41 @@ def nextPhase():
 			return True
 
 def nextPhaseArena():
-	#The Ready Stage
-	#rewriting to update to 2020 standard
-	if currentPhase()[0] == "Initiative Phase": #Initative Phase
-		#Check for Domination victory
-		goal = eval(getGlobalVariable("Goal"))
-		if goal.get("Type")=="Domination" and updateVtarScore() and checkDominationVictory(): return
-		#Various Logging BS
-		setEventList('Round',[])
-		setEventList('Turn',[]) #Clear event list for new round
-		gameTurn = int(getGlobalVariable("RoundNumber")) + 1
-		setGlobalVariable("RoundNumber", str(gameTurn))
-		roundTimes = eval(getGlobalVariable("RoundTimes"))
-		rTime = time.time()
-		roundTimes.append(rTime)
-		setGlobalVariable("RoundTimes",str(roundTimes))
-		notify("\n****** Round {} ******\nStart Time: {}\n".format(str(gameTurn),time.ctime(roundTimes[-1])))
-		#End of logging BS
-		
-		#This is here in case line 73's function doesn't work
-		#init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
-		#if init.controller == me:
-		#	flipcard(init)
-		#else:
-		#	remoteCall(init.controller, "flipcard", [init])
+	mute()
+	global roundTimes
 
-		#notify("{Player with Initative} has Initative this round")#need to finish this....
-		changeIniMarker() # this should change to the proper players ini marker color
-		
+	gameIsOver = getGlobalVariable("GameIsOver")
+	if gameIsOver:	#don't advance phase once the game is done
+		notify("Game is Over!")
+		return
+	if getGlobalVariable("GameSetup") != "True": # Player setup is not done yet.
+		return
+	card = None
+	checkMageDeath(0)
+	if currentPhase()[0] == "Initiative Phase":
+		init = [card for card in table if card.model == "8ad1880e-afee-49fe-a9ef-b0c17aefac3f"][0]
+		if init.controller == me:
+			flipcard(init)
+		else:
+			remoteCall(init.controller, "flipcard", [init])
+		#setPhase(2) #Combining the Initiative, Reset, and channeling phases in order to cut down on the amount of passing needed
+	#elif currentPhase()[0] == "Reset Phase":
+		setEventList('Round',[])#This helps track defenses, arcane zap, etc
+		setEventList('Turn',[])#This helps track defenses, arcane zap, etc
 		for p in players:
-			#remoteCall(p, "playerStats",[])  #WTAF is 'playerStats' ?
 			remoteCall(p, "resetDiscounts",[])
 			remoteCall(p, "resetMarkers", [])
+		#setPhase(3)
+	#elif currentPhase()[0] == "Channeling Phase":	
+		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
 		setPhase(4)
-		
-
-	elif currentPhase()[0] == "Upkeep Phase":  #Reset Phase
-		tutorialMessage("Actions Menu")
-		#This will probably need rewritten again at some point
+	
+	elif currentPhase()[0] == "Upkeep Phase":
 		for p in players:
 			for card in table:
 				traits = computeTraits(card)
+				#redo the below for removing glyphs
 				if (card.markers[EarthGlyphActive] or card.markers[FireGlyphInactive] or card.markers[AirGlyphInactive]) and 'Magestats' not in card.Type and "Drake" not in card.Name: remoteCall(p, "getRidofGlyphs", [card])
 				if (card.markers[EarthGlyphActive] or card.markers[WaterGlyphActive]) and ('Magestats' in card.Type or "Drake" in card.Name) and card.controller.name == p.name: remoteCall(p, "resolveUpkeepGlyphs", [traits, card])
 				if 'UpKip' in traits and card.controller.name == p.name: remoteCall(p, "resolveKiUpkeep", [traits, card])
@@ -93,15 +77,16 @@ def nextPhaseArena():
 				if "Ki" in traits and not "Magestats" in card.type and card.controller.name == p.name: remoteCall(p, "resolveKiGen", [traits, card])
 				if (card.Name == "Living Armor" or card.Name == "Living Armor - Playtest") and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveLivingArmor", [traits, card])
 				if "Melting" in traits and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveMelting",[traits, card])
-				if card.markers[Burn] and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
+				if (card.markers[Burn] or "Hellscape" in traits) and card.controller.name == p.name: remoteCall(p, "resolveBurns", [card])
 				if card.markers[Rot] and card.controller.name == p.name: remoteCall(p, "resolveRot", [card])
 				if card.markers[Bleed] and card.controller.name == p.name: remoteCall(p, "resolveBleed", [card])
 				if card.markers[Disable] and card.controller.name == p.name: remoteCall(p, "resolveDisable",[card])
 				if 'Dissipate' in traits and card.controller.name == p.name: remoteCall(p, "resolveDissipate", [traits, card])
 				if 'Madrigal' in traits and card.controller.name == p.name: remoteCall(p, "resolveMadrigal", [traits, card])
-				if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits or "Consecrated Ground Damage" in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
+				if 'AquaticTerrain' in traits and card.controller.name == p.name: remoteCall(p, "resolveSirenHeal",[traits, card])
+				if ('Malacoda' in traits or 'Pestilence' in traits or 'Plagued' in traits or "Consecrated Ground Damage" in traits or "PoisonGasCloud" in traits) and card.controller.name == p.name: remoteCall(p, "resolveAreaDot", [traits, card])
 				if card.Name in ["Ballista", "Akiro's Hammer"] and card.controller.name == p.name and card.isFaceUp and card.markers[LoadToken] < 2: remoteCall(p, "resolveLoadTokens", [card])
-				if card.Name in ["Ghoul Rot", "Curse of Decay", "Arcane Corruption", "Force Crush"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveDotEnchantment", [card]) 
+				if card.Name in ["Ghoul Rot", "Curse of Decay", "Arcane Corruption", "Force Crush", "Reclamation"] and card.controller.name == p.name and card.isFaceUp: remoteCall(p, "resolveDotEnchantment", [card]) 
 				if card.Name == "Curse Item" and card.controller.name != p.name and card.isFaceUp: 
 					target = getAttachTarget(card)
 					remoteCall(p, "resolveCurseItem", [target])
