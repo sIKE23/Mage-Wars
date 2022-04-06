@@ -94,37 +94,7 @@ def toggleDebug(group,x=0,y=0):
 	else:
 		notify("{} turns off debug".format(me))
 
-#DIFFERENCE: NO CONCEDE FUNCTION, NO TOGGLE DEBUG, NEXT PHASE IS MOSTLY MOVED ELSEWHERE. GOOD IDEA FOR MAIN VERSION
 
-def nextPhase(group,x=0,y=0):
-	mute()
-	mwPlayerDict = eval(getGlobalVariable("MWPlayerDict"))
-	playerNum = mwPlayerDict[me._id]["PlayerNum"]
-	gameMode = getGlobalVariable("GameMode")
-	if debugMode:	#debuggin'
-		if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
-		elif gameMode == "Academy": nextPhaseAcademy()
-		return True
-	else:
-		doneWithPhase = getGlobalVariable("DoneWithPhase")
-		if str(playerNum) in doneWithPhase:
-			return
-
-		doneWithPhase += str(playerNum)
-		if len(doneWithPhase) != len(getPlayers()):
-			setGlobalVariable("DoneWithPhase", doneWithPhase)
-			if currentPhase()[1]<5:
-				notify("{} is ready to move on with the {}\n".format(me.name,currentPhase()[0]))
-			else:
-				notify("{} is done with the {}\n".format(me.name,currentPhase()[0]))
-
-			return False
-		else:
-			setGlobalVariable("DoneWithPhase", "")
-			if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
-			elif gameMode == "Academy": nextPhaseAcademy()
-			#nextPhaseArena()
-			return True
 
 ############################################################################
 ######################		Chat Actions			################################
@@ -754,38 +724,6 @@ def flipcard(card,x = 0,y = 0):
 			notify("{} flips {} to the standard version of the card.".format(me,card))
 			card.alternate = ""
 
-#Might want to move this elsewhere, but it shall reside here for now
-def mageSetup():
-	mute()
-	mageDict = eval(me.getGlobalVariable("MageDict"))
-	if mageDict["MageStatsID"] == 00000 or mageDict["MageRevealed"] == "True": return #deck hasn't been loaded or the mage the mage card was flipped face down after mageSetup() has already run once
-	mageID = int(mageDict["MageID"])
-	mage = Card(mageID)
-	mageStatsID = int(mageDict["MageStatsID"])
-	magestats = Card(mageStatsID)
-	#set initial health and channeling values
-	me.Channeling = int(magestats.StatChanneling)
-	me.Mana = me.Channeling + 10 + int(magestats.StatStartingMana)
-	me.Life = int(magestats.StatLife)
-	Card(mageID).Subtype = magestats.Subtype
-	Card(mageID).Level = magestats.Level
-	Card(mageID).Stats = magestats.Stats #havent decided if this is needed yet....proxygen??
-	Card(mageID).AttackBar = magestats.AttackBar
-	Card(mageID).Traits = magestats.Traits
-	Card(mageID).cAttacks = magestats.cAttacks
-	mage.alternate = "2"
-	Card(mageID).Subtype = Card(mageID).alternateProperty("", "Subtype")
-	Card(mageID).Level = Card(mageID).alternateProperty("", "Level")
-	Card(mageID).Stats = Card(mageID).alternateProperty("", "Stats") #havent decided if this is needed yet....proxygen??
-	Card(mageID).AttackBar = Card(mageID).alternateProperty("", "AttackBar")
-	Card(mageID).Traits = Card(mageID).alternateProperty("", "Traits")
-	Card(mageID).cAttacks = Card(mageID).alternateProperty("", "cAttacks")
-	mage.alternate = ""
-	mageDict["MageRevealed"] = "True"
-	me.setGlobalVariable("MageDict",str(mageDict))
-	# here is where issue #360 should be called from.....and replace the line below.
-	notify("{} enters the Arena! - Channeling is set to {} and Mana is set to {} and Life set to {}\n".format(Card(mageID),me.Channeling,me.Mana,me.Life))
-	mageRevealMessage(mage)
 
 def discard(card,x=0,y=0):
 	mute()

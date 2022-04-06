@@ -393,8 +393,8 @@ def canBind(card,target):
 ############################################################################
 ##########################    Zones       ##################################
 ############################################################################
-
-def createMap(I,J,zoneArray,tileSize):
+#Moved to GameStart.py
+'''def createMap(I,J,zoneArray,tileSize):
 	mapDict = {'I' : I,
 			   'J' : J,
 			   'tileSize' : tileSize,
@@ -411,14 +411,15 @@ def createMap(I,J,zoneArray,tileSize):
 			if z: zoneList.append(z)
 	mapDict['zoneArray'] = array
 	mapDict['zoneList'] = zoneList
-	return mapDict
+	return mapDict'''
 
-def createZone(i,j,mapX,mapY,size):
+#Moved to GameStart.py
+'''def createZone(i,j,mapX,mapY,size):
 	return  {'i' : i,
 			 'j' : j,
 			 'x' : mapX+i*size,
 			 'y' : mapY+j*size,
-			 'size' : size}
+			 'size' : size}'''
 
 def zoneContains(zone,card): #returns whether an object is inside the zone
 	x,y = card.position
