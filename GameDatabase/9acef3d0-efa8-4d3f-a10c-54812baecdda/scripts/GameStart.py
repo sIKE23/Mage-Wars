@@ -10,54 +10,55 @@ def onTableLoaded():
 	#if there's only one player, go into debug mode
 
 
-
+#Run when OCTGN is loaded
 def onGameStarted():
-	mute()
-	global debugMode
+    mute()
+    global debugMode
 
-	#Set default map
-	defineRectangularMap(4,3,250)
+    #Set default map
+    defineRectangularMap(4,3,250)
 
-	#set the Game Host (this player will be the owner of the Initative and Phase Markers)
-	setGlobalVariable("GameHostID",str((sorted([x._id for x in getPlayers()])[0])))
+    #set the Game Host (this player will be the owner of the Initative and Phase Markers)
+    setGlobalVariable("GameHostID",str((sorted([x._id for x in getPlayers()])[0])))
 
-	#create a dictionary of attachments and bound spells and enable autoattachment
-	setGlobalVariable("attachDict",str({}))
-	setGlobalVariable("bindDict",str({}))
-	setSetting("AutoAttach", True)
+    #create a dictionary of attachments and bound spells and enable autoattachment
+    setGlobalVariable("attachDict",str({}))
+    setGlobalVariable("bindDict",str({}))
+    setSetting("AutoAttach", True)
 
-	#set global event lists for rounds and single actions
-	setGlobalVariable("roundEventList",str([]))
-	setGlobalVariable("turnEventList",str([]))
+    #set global event lists for rounds and single actions
+    setGlobalVariable("roundEventList",str([]))
+    setGlobalVariable("turnEventList",str([]))
 
-	#above to be replaced with consolidated game memory:
-	setGlobalVariable("gameMemory",str([]))
+    #above to be replaced with consolidated game memory:
+    setGlobalVariable("gameMemory",str([]))
 
-	#Set the round to 0
-	setGlobalVariable("RoundNumber", str(1))
-	setGlobalVariable("timerIsRunning",str(False))
+    #Set the round to 0
+    setGlobalVariable("RoundNumber", str(1))
+    setGlobalVariable("timerIsRunning",str(False))
 
-	#set the goal
-	setGlobalVariable("Goal",str({}))
+    #set the goal
+    setGlobalVariable("Goal",str({}))
 
-	# bring up window to point to documentation
-	documentationReminder()
-	#new Player Order
-	setGlobalVariable("PlayersIDList",str([]))
-	setGlobalVariable("MWPlayerDict",str({}))
-	gameHost = Player(int(getGlobalVariable("GameHostID")))
+    # bring up window to point to documentation
+    documentationReminder()
+    #new Player Order
+    setGlobalVariable("PlayersIDList",str([]))
+    setGlobalVariable("MWPlayerDict",str({}))
+    setGlobalVariable("MageRevealed",str(0))
+    gameHost = Player(int(getGlobalVariable("GameHostID")))
 
-	if me == gameHost:
-		setRDALocation()
-		if getSetting("AutoBoard", True):
-			chooseGame()
-		else:
-			table.board = "Westlock - 4X3"
-			setGlobalVariable("GameMode", "Arena")
+    if me == gameHost:
+        setRDALocation()
+        if getSetting("AutoBoard", True):
+            chooseGame()
+        else:
+            table.board = "Westlock - 4X3"
+            setGlobalVariable("GameMode", "Arena")
 
 	#if there's only one player, go into debug mode - Currently does not go into debug mode so players can validate decks
 	if len(getPlayers()) == 1:
-		#debugMode = True
+		debugMode = True
 		setGlobalVariable("PlayerWithIni", str(me._id))
 		setGlobalVariable("MWPlayerDict",str({1:{"PlayerNum": 1,"PlayerName":me.name}}))
 		me.setGlobalVariable("MyColor",str(4)) #Purple for testing
@@ -65,7 +66,7 @@ def onGameStarted():
 		setUpDiceAndPhaseCards()
 		setGlobalVariable("GameSetup",str(0))
 		#publicChatMsg("There is only one player, so there is no need to roll for initative.")
-		#publicChatMsg("Enabling debug mode. In debug mode, deck validation is turned off and you can advance to the next phase by yourself.")
+		#publicChatMsg("Enabling debug mode. In debug mode you can advance to the next phase by yourself.")
 		tutorialMessage("Introduction")
 		tutorialMessage("Load Deck")
 		setPhase(5)
@@ -310,7 +311,7 @@ def onDeckLoaded(args):
             notify ("{} has attempted to load a second Spellbook, the game will be reset".format(me))
             gameNum += 1
             resetGame()
-        elif debugMode or validateDeck(args.groups[0]):
+        elif validateDeck(args.groups[0]):
             setGlobalVariable("DeckLoaded", str(int(getGlobalVariable("DeckLoaded"))+1))
             if eval(getGlobalVariable("DeckLoaded")) == len(getPlayers()): setGlobalVariable("DeckLoaded","True")
             setGlobalVariable("GameSetup", str(int(getGlobalVariable("GameSetup"))+1))
@@ -367,7 +368,7 @@ def mageSetup():
     mageRevealMessage(mage)
     setGlobalVariable("MageRevealed", str(int(getGlobalVariable("MageRevealed"))+1))
     if eval(getGlobalVariable("MageRevealed")) == len(getPlayers()): setGlobalVariable("MageRevealed","True")
-    if getGlobalVariable("MageRevealed") == "True":
+    if getGlobalVariable("MageRevealed") == "True" and len(getPlayers())>1:
         rollForInitiative()
 
 #Called by MageSetup()

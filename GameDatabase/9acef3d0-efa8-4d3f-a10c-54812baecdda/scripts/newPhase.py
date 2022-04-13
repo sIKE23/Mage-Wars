@@ -8,7 +8,7 @@ def nextPhase(group,x=0,y=0):
 	gameMode = getGlobalVariable("GameMode")
 
 
-	if debugMode:	#
+	if debugMode:	
 		if gameMode == "Arena" or "Domination" or "Playtest": nextPhaseArena()
 		elif gameMode == "Academy": nextPhaseAcademy()
 		return True
@@ -52,15 +52,11 @@ def nextPhaseArena():
 			flipcard(init)
 		else:
 			remoteCall(init.controller, "flipcard", [init])
-		#setPhase(2) #Combining the Initiative, Reset, and channeling phases in order to cut down on the amount of passing needed
-	#elif currentPhase()[0] == "Reset Phase":
 		setEventList('Round',[])#This helps track defenses, arcane zap, etc
 		setEventList('Turn',[])#This helps track defenses, arcane zap, etc
 		for p in players:
 			remoteCall(p, "resetDiscounts",[])
 			remoteCall(p, "resetMarkers", [])
-		#setPhase(3)
-	#elif currentPhase()[0] == "Channeling Phase":	
 		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
 		setPhase(4)

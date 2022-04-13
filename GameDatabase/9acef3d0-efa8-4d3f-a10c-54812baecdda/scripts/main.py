@@ -179,7 +179,7 @@ def getAllTraits(card):
 ######       Transactions       ######
 ######################################
 
-def transaction(player,delta):
+def manaTransaction(player,delta):
 	"Handles mana transactions, changing the value of player's by delta as long as it does not drop below 0. Returns whether the transaction succeeded."
 	if canTransact(player,delta):
 		player.Mana += delta
@@ -294,13 +294,15 @@ def isValidAttackTarget(card):
 
 def payForAttackSpell(player,attack):
 	"Returns boolean for whether or not cost was paid"
-	originalSource = Card(attack.get('OriginalSourceID'))
+	originalSource = Card(attack.get('source id'))
+	if not originalSource.isFaceUp:
+		flipcard(originalSource)
 	if originalSource.Type == "Attack": return castSpell(originalSource)
 	else:
 		cost = attack.get('Cost')
 		realCost = askInteger('Enter amount to pay for {}'.format(attack.get('Name')),cost)
 		if realCost == None: return False
-		else: return transaction(player,-realCost)
+		else: return manaTransaction(player,-realCost)
 
 def targetMenu(source,target):
 	"This will be a general function determining what happens when one card targets another, regardless of the method."
@@ -310,16 +312,15 @@ def targetMenu(source,target):
 	if not source and target: return
 
 	if isValidAttackSource(source) and isValidAttackTarget(target) and getSetting('BattleCalculator',True):
-		#WIP can get rid of these
+		'''#WIP can get rid of these
 		aTraitDict = computeTraits(source)
-		dTraitDict = computeTraits(target)
-		#-----------------------------
+		dTraitDict = computeTraits(target)'''
 
 
 		attack = attackChoicePrompt(source,target)
 		if attack:
 			if attack.get("Cost") and not payForAttackSpell(me,attack): return
-			if attack.get('source id')==source._id:
+			if attack.get('user id')==source._id:
 				remoteCall(target.controller,'initializeAttackSequence',[source,attack,target])
 				source.arrow(target,False)
 				return
@@ -396,6 +397,8 @@ def returnToHand(card): #Return card to your hand
 # Table card actions
 #---------------------------------------------------------------------------
 
+
+'''This needs complete overhaul - Sharkey 12 April 2022'''
 def castSpell(card,target=None):
 		#Figure out who is casting the spell
 		binder = getBindTarget(card)

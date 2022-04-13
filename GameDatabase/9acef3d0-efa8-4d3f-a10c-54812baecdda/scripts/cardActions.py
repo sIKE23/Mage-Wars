@@ -251,7 +251,7 @@ def adramelechsTorment_f1(arg):
 			if target.markers[Burn] > 0:
 				whisper("{} is already burning!".format(target.nickname))
 				return
-			paid = transaction(actor.controller,-2)
+			paid = manaTransaction(actor.controller,-2)
 			if paid: 
 				target.markers[Burn] += 1
 				notify("Adramelech's Torment sets {} aflame! (+1 Burn)".format(target.nickname))

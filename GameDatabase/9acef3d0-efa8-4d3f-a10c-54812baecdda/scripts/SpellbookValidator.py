@@ -82,7 +82,7 @@ def validateDeck(deck):
 def statCardParse(deck):
 	mute()
 	for c in deck:
-		debug(c.name)
+		#debug(c.name)
 		if c.Type == "Magestats":
 			mageStats = c.Stats.split(",")
 			mageTraining = c.MageSchoolCost.replace(' ','')
@@ -148,7 +148,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 	for card in deck: #run through deck adding levels and checking counts
 		SBPadd = 0
 		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype):
-			debug(card.name)
+			#debug(card.name)
 			
 			#temporary way to make sure combo checks elements not letters. Also hijacked in the rewrite
 			if '/' in card.school:
@@ -179,7 +179,7 @@ def cardPointCount(deck, spellbook, schoolTrn, schoolOpp, mageSubtypeTrnList, ma
 				
 			#Talos doesn't cost anything
 			if "Talos" in card.Name:
-				debug("Talos")
+				#debug("Talos")
 				continue
 				
 			#Check that both the mage is trained/opposed in subtypes and that the card has at least one of those subtypes

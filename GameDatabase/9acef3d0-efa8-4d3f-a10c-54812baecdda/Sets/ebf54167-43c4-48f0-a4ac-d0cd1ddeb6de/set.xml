@@ -260,8 +260,8 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 		</card>
-		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard Stats (Earth)">
-			<property name="Nickname" value="Wizard Stats (Earth)" />
+		<card id="2d170aeb-80ef-489e-90cc-ad0d83a08a65" name="Wizard Stats">
+			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
@@ -277,40 +277,7 @@
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 		</card>
-		<card id="4f252cfc-75a7-42b8-9f4c-2fb4a40b227e" name="Wizard Stats (Fire)">
-			<property name="Nickname" value="Wizard Stats (Fire)" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="6" />
-			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
-			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="10" />
-			<property name="StatLife" value="32" />
-			<property name="StatSpellBookPoints" value="120" />
-			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Arcane=1, Fire=1" />
-			<property name="cAttacks" value="name=Arcane Zap;effects={};Spell=True;action type=Quick;range type=Ranged;range=(0,1);dice=3;Ethereal=True;Counts as an attack spell. May be cast once per round.=True||name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
-		</card>
-		<card id="7f276a4a-d18d-426f-890e-e50b143e7940" name="Wizard Stats (Water)">
-			<property name="Nickname" value="Wizard Stats (Water)" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="6" />
-			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
-			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="10" />
-			<property name="StatLife" value="32" />
-			<property name="StatSpellBookPoints" value="120" />
-			<property name="StatStartingMana"  value="0" />
-			<property name="MageSchoolCost" value="Arcane=1, Water=1" />
-			<property name="cAttacks" value="name=Arcane Zap;effects={};Spell=True;action type=Quick;range type=Ranged;range=(0,1);dice=3;Ethereal=True;Counts as an attack spell. May be cast once per round.=True||name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
-			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 1] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
-			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
-		</card>
+
 		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard Stats (Apprentice)">
 			<property name="Nickname" value="Wizard Stats (Apprentice)" />
 			<property name="Type" value="Magestats" />
@@ -342,7 +309,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Blinding Flash;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Light;dice=2;effects={10: ['Stun'], 4: ['Daze']};Ethereal=True;Unavoidable=True;+2 vs. Nonliving Creatures=True" />
+			<property name="tAttacks" value="name=Blinding Flash;action type=Full;Cost=7;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Light;dice=2;effects={10: ['Stun'], 4: ['Daze']};Ethereal=True;Unavoidable=True;+2 vs. Nonliving Creatures=True" />
 			<property name="AttackBar" value="[Ranged] [Zone Attack] [Light] [Dice=2] [d12] [4-9 = Daze; 10+ = Stun] [Ethereal] [Unavoidable] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
@@ -360,7 +327,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Chain Lightning;range type=Ranged;range=(0,1);damage type=Lightning;dice=5;effects={8: ['Stun'], 5: ['Daze']};Ethereal=True" />
+			<property name="tAttacks" value="name=Chain Lightning;action type=Full;Cost=12;range type=Ranged;range=(0,1);damage type=Lightning;dice=5;effects={8: ['Stun'], 5: ['Daze']};Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=5] [d12] [5-7 = Daze; 8+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Each time Chain Lightning damages a target, it may attack another target. That target must be in LoS of the last target, and may be up to 1 zone away from that target. Each successive attack rolls 1 fewer attack dice, and subtracts 1 more from the effect die roll. Chain Lightning can&apos;t attack the same target twice." />
@@ -379,7 +346,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Electrify;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Lightning;dice=4;effects={7: ['Daze'], 9: ['Stun']};Ethereal=True;Unavoidable=True" />
+			<property name="tAttacks" value="name=Electrify;action type=Full;Cost=9;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Lightning;dice=4;effects={7: ['Daze'], 9: ['Stun']};Ethereal=True;Unavoidable=True" />
 			<property name="AttackBar" value="[Ranged] [Zone Attack] [Lightning] [Dice=4] [d12] [7-8 = Daze; 9+ = Stun] [Ethereal] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
@@ -397,7 +364,7 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="tAttacks" value="name=Fireball;action type=Quick;range type=Ranged;range=(0,2);damage type=Flame;dice=6;effects={4: ['Burn'], 11: ['Burn', 'Burn']};Defrost=True" />
+			<property name="tAttacks" value="name=Fireball;action type=Quick;Cost=8;range type=Ranged;range=(0,2);damage type=Flame;dice=6;effects={4: ['Burn'], 11: ['Burn', 'Burn']};Defrost=True" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=6] [d12] [4-10 = Burn; 11+ = 2 Burn] [Defrost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -415,7 +382,7 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Firestorm;range type=Ranged;range=(0,1);Zone Attack=True;damage type=Flame;dice=5;effects={10: ['Burn', 'Burn'], 5: ['Burn']};Defrost=True;Unavoidable=True" />
+			<property name="tAttacks" value="name=Firestorm;action type=Full;Cost=11;range type=Ranged;range=(0,1);Zone Attack=True;damage type=Flame;dice=5;effects={10: ['Burn', 'Burn'], 5: ['Burn']};Defrost=True;Unavoidable=True" />
 			<property name="AttackBar" value="[Ranged] [Zone Attack] [Flame] [Dice=5] [d12] [5-9 = Burn; 10+ = 2 Burn] [Defrost] [Unavoidable]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -433,7 +400,7 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Flameblast;range type=Ranged;range=(0,1);damage type=Flame;dice=4;effects={7: ['Burn'], 11: ['Burn', 'Burn']};Unavoidable=True;Defrost=True" />
+			<property name="tAttacks" value="name=Flameblast;action type=Quick;Cost=5;range type=Ranged;range=(0,1);damage type=Flame;dice=4;effects={7: ['Burn'], 11: ['Burn', 'Burn']};Unavoidable=True;Defrost=True" />
 			<property name="AttackBar" value="[Ranged] [Flame] [Dice=4] [d12] [7-10 = Burn; 11+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -451,7 +418,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Lightning Bolt;range type=Ranged;range=(0,2);damage type=Lightning;dice=5;effects={8: ['Stun'], 6: ['Daze']};Ethereal=True" />
+			<property name="tAttacks" value="name=Lightning Bolt;action type=Quick;Cost=8;range type=Ranged;range=(0,2);damage type=Lightning;dice=5;effects={8: ['Stun'], 6: ['Daze']};Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=5] [d12] [6-7 = Daze; 8+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -469,7 +436,7 @@
 			<property name="School" value="Water" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Geyser;range type=Ranged;range=(0,1);damage type=Hydro;dice=3;effects={5: ['Daze']};Unavoidable=True" />
+			<property name="tAttacks" value="name=Geyser;action type=Quick;Cost=4;range type=Ranged;range=(0,1);damage type=Hydro;dice=3;effects={5: ['Daze']};Unavoidable=True" />
 			<property name="AttackBar" value="[Ranged] [Hydro] [Dice=3] [d12] [5+ = Daze] [Unavoidable]" />
 			<property name="Text" value="" />
 			<property name="Traits" value="" />
@@ -487,7 +454,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Jet Stream;range type=Ranged;range=(0,2);damage type=Wind;dice=2;effects={4: ['Push'], 11: ['Push', 'Daze']};Ethereal=True;+2 vs. Flying=True" />
+			<property name="tAttacks" value="name=Jet Stream;action type=Quick;Cost=4;range type=Ranged;range=(0,2);damage type=Wind;dice=2;effects={4: ['Push'], 11: ['Push', 'Daze']};Ethereal=True;+2 vs. Flying=True" />
 			<property name="AttackBar" value="[Ranged] [Wind] [Dice=2] [d12] [4-10 = Push; 11+ = Push &amp; Daze] [Ethereal] [+2 vs. Flying]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -505,7 +472,7 @@
 			<property name="School" value="Holy" />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Pillar of Light;range type=Ranged;range=(0,2);damage type=Light;dice=2;effects={4: ['Daze'], 11: ['Stun']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
+			<property name="tAttacks" value="name=Pillar of Light;action type=Quick;Cost=5;range type=Ranged;range=(0,2);damage type=Light;dice=2;effects={4: ['Daze'], 11: ['Stun']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
 			<property name="AttackBar" value="[Ranged] [Light] [Dice=2] [d12] [4-10 = Daze; 11+ = Stun] [Ethereal] [+2 vs. Nonliving Creatures]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
@@ -523,7 +490,7 @@
 			<property name="School" value="Fire" />
 			<property name="Level" value="2" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Ring of Fire;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Flame;dice=5;effects={7: ['Burn'], 11: ['Burn', 'Burn']};Unavoidable=True;Defrost=True" />
+			<property name="tAttacks" value="name=Ring of Fire;action type=Full;Cost=9;range type=Ranged;range=(0,0);Zone Attack=True;damage type=Flame;dice=5;effects={7: ['Burn'], 11: ['Burn', 'Burn']};Unavoidable=True;Defrost=True" />
 			<property name="AttackBar" value="[Ranged] [Zone Attack] [Flame] [Dice=5] [d12] [7-10 = Burn; 11+ = 2 Burn] [Unavoidable] [Defrost]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="Attacks all objects in the zone except the caster." />
@@ -541,7 +508,7 @@
 			<property name="School" value="Air" />
 			<property name="Level" value="3" />
 			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Thunderbolt;range type=Ranged;range=(0,3);damage type=Lightning;dice=6;effects={7: ['Stun'], 4: ['Daze']};Ethereal=True" />
+			<property name="tAttacks" value="name=Thunderbolt;action type=Full;Cost=10;range type=Ranged;range=(0,3);damage type=Lightning;dice=6;effects={7: ['Stun'], 4: ['Daze']};Ethereal=True" />
 			<property name="AttackBar" value="[Ranged] [Lightning] [Dice=6] [d12] [4-6 = Daze; 7+ = Stun] [Ethereal]" />
 			<property name="Traits" value="" />
 			<property name="Text" value="" />
