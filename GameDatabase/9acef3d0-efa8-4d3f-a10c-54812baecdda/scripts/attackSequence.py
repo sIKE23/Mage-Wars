@@ -110,7 +110,7 @@ def initializeAttackSequence(attacker,attack,defender): #Here is the defender's 
 		"sourceID":		Card(attack['source id'])._id,
 		"attackerID":	attacker._id,
 		"defenderID":	defender._id,
-		"attack": 		attack,
+		"attack": 		attack,#Of note, this is the modified attack from the attackChoicePrompt
 		"hit":			True,
 		"damage": 		0,
 		"effects":		[],
@@ -143,11 +143,11 @@ def declareAttackStep(argument): #Executed by attacker #WIP lots of other logic 
 	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 	debug("spellList: {}".format(spellList))
 
-	#1: resolve bAS effects - Monk using Ki? #WIP
+	#1: resolve bAS effects in the spell dictionary (still a WIP)- Monk using Ki? #WIP
 	[d["bAS_DeclareAttack"]["function"](c,argument) for (c,d) in spellList if "bAS_DeclareAttack" in d]
 
 	#2: check for daze
-	if attacker.markers[Daze] and attack.get('RangeType') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
+	if attacker.markers[Daze] and attack.get('range type') != 'Damage Barrier' and not "Autonomous" in atkOS.traits:
 		notify("{} is rolling the Effect Die to check the Dazed condition.\n".format(attacker.nickname))#gotta figure that gender thing of yours out.
 		damageRoll,effectRoll = rollDice(0)
 		if effectRoll < 7:
@@ -158,11 +158,11 @@ def declareAttackStep(argument): #Executed by attacker #WIP lots of other logic 
 		else: notify("Though dazed, {} manages to avoid fumbling the attack.\n".format(attacker.nickname))
 
 	#3: give appropriate notification
-	if attack.get('RangeType') == 'Counterstrike': notify("{} retaliates with {}!\n".format(attacker.nickname,attack.get('Name','a nameless attack')))
-	elif attack.get('RangeType') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!\n".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
+	if attack.get('range type') == 'Counterstrike': notify("{} retaliates with {}!\n".format(attacker.nickname,attack.get('Name','a nameless attack')))
+	elif attack.get('range type') == 'Damage Barrier': notify("{} is assaulted by the {} of {}!\n".format(defender.nickname,attack.get('Name','damage barrier'),attacker))
 	else: notify("{} attacks {} with {}!\n".format(attacker.nickname,defender.nickname,attack.get('name','a nameless attack')))
 
-	#4: resolve aAS effects
+	#4: resolve aAS effects in the spell dictionary (still a WIP)-
 	[d["aAS_DeclareAttack"]["function"](c,card) for (c,d) in spellList if "aAS_DeclareAttack" in d]
 
 	#5: end attack if cancelled
@@ -232,7 +232,7 @@ def rollDiceStep(argument): #Executed by attacker
 	[d["bAS_RollDice"]["function"](c,argument) for (c,d) in spellList if "bAS_RollDice" in d]
 
 	debug("attack: {}".format(attack))
-	#2: roll dice
+	#2: roll dice 
 	dice = attack.get('dice',-1)
 	if dice < 0:
 		notify('Error: invalid attack format - no dice found')
@@ -264,8 +264,8 @@ def damageAndEffectsStep(argument): #Executed by defender
 	atkOS 		= 	Card(argument["sourceID"])
 	attack 		= 	argument["attack"]
 
-	aTraitDict = computeTraits(attacker)
-	dTraitDict = computeTraits(defender)
+	#aTraitDict = computeTraits(attacker)
+	#dTraitDict = computeTraits(defender)
 	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 
 	#1: resolve bAS effects #Example: Fortified resolve, brace yourself
@@ -350,13 +350,18 @@ def getAttackResults(argument): #WIP this needs cleaned up heavily
 	
 	#make a computeDamageToApply function
     #Needs to take resilient, incorporeal,vet belt, etc into account
+
+
 	#Make a compute total armor function
 	armor = getStat(defender.Stats,'Armor') #WIP temporary 
 	debug("armor: {}\n".format(armor))
 
+
 	normalDamage = damageRoll[2]+2*damageRoll[3]
 	criticalDamage = damageRoll[4]+2*damageRoll[5]
-	
+
+	#Need a function to compute effect results
+
 	damage = (max(normalDamage-armor,0)) + criticalDamage
 	effects = None
 	debug("damage: {}\n".format(damage))
@@ -451,8 +456,8 @@ def damageBarrierStep(argument): #Executed by defender
 	defender 	= 	Card(argument["defenderID"])
 	attack 		= 	argument["attack"]
 
-	aTraitDict = computeTraits(attacker)
-	dTraitDict = computeTraits(defender)
+	#aTraitDict = computeTraits(attacker) ##########Artifacts of the old attack sequence, can probably delete
+	#dTraitDict = computeTraits(defender)
 
 	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 
@@ -493,17 +498,17 @@ def counterstrikeStep(argument): #Executed by defender
 	defender 	= 	Card(argument["defenderID"])
 	attack 		= 	argument["attack"]
 
-	aTraitDict = computeTraits(attacker)
-	dTraitDict = computeTraits(defender)
+	#aTraitDict = computeTraits(attacker) ##########Artifacts of the old attack sequence, can probably delete
+	#dTraitDict = computeTraits(defender)
 
 	spellList = [(c,spellDictionary.get(c.Name,{})) for c in table if c.Name in spellDictionary]
 	debug("spellList")
 	debug(spellList)
 	if attack.get('range type') == 'Melee':
-		counterAttack = diceRollMenu(defender,attacker,'Counterstrike')
+		counterAttack = False #diceRollMenu(defender,attacker,'Counterstrike')			#######diceRollMenu is obsolete, need to rewrite to use new attack method(s)
 		if counterAttack:
-			counterAttack['RangeType'] = 'Counterstrike'
-			interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep')
+			counterAttack['range type'] = 'Counterstrike'
+			interimStep(dTraitDict,counterAttack,aTraitDict,'Counterstrike','declareAttackStep') ##########Artifact of the old attack sequence, need to rewrite
 		defender.markers[Guard] = 0
 
 	#?: Go to next step

@@ -3,8 +3,8 @@
 	name="Core"
 	id="ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	gameVersion="2.0.0.0"
-	version="2.0.0.0">
+	gameVersion="3.0.0.0"
+	version="3.0.0.0">
 	<markers>
 		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" />
 		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" />
@@ -204,6 +204,7 @@
 			<property name="Traits" value="Melee +1" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="cBuffs" value="m0,M0))@self,[Melee +1]" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		</card>
 		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
