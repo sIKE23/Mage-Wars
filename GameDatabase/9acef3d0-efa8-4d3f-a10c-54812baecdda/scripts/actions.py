@@ -558,6 +558,7 @@ def flipcard(card,x = 0,y = 0):
 	cZone = getZoneContaining(card)
 	traits = computeTraits(card)
 	mageDict = eval(me.getGlobalVariable("MageDict"))
+	
 	# markers that are cards in game that have two sides
 	if "Vine Marker" in card.Name and card.controller == me:
 		if card.alternate == "":
@@ -598,11 +599,16 @@ def flipcard(card,x = 0,y = 0):
 			card.highlight = None
 		if card.Type == "Creature" and not "Mage" in card.Subtype : #places action marker on card
 			toggleAction(card)
+			attacks = getAttacks(card)
+			#debug('attacks: {}\n'.format(attacks))
+			card.properties['Attacks'] = str(attacks)
+			#card.Attacks = str(attacks)
+			#debug('card.properties[\'Attacks\'] {}\n'.format(card.properties['Attacks']))
 		elif card.Type == "Creature" and "Mage" in card.Subtype:
 			toggleAction(card)
 			toggleAction(card) #Mages always start with an active action marker
 			toggleQuick(card)
-			if mageDict["MageRevealed"] == "False": mageSetup()
+			if mageDict["MageRevealed"] == "False": mageSetup(card)
 			if "Wizard" in card.Name and int(card.Level) >4:
 				card.markers[VoltaricOFF] = 1
 			if "Forcemaster" == card.Name and int(card.Level) >4:

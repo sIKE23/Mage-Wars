@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
+	name="Mage Wars 3.0 test set"
+	id="20a795b2-b80e-4792-8ea7-41704836c18a"
+	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
+	gameVersion="2.0.0.0"
+	version="2.0.0.0">
+	
+	<cards>
+        <card id="d02fe15b-b44b-4252-b34b-3586c9a9d261" name="Firestream">
+			<property name="Nickname" value="Firestream" />
+			<property name="Type" value="Attack" />
+			<property name="Subtype" value="Flame" />
+			<property name="Cost" value="4" />
+			<property name="Action" value="Quick"  />
+			<property name="Range" value="0,1" />
+            <property name="rangeType" value = "Ranged" />
+			<property name="Target" value="Creature/Conjuration" />
+			<property name="School" value="Fire"  />
+			<property name="Level" value="1" />
+			<property name="tAttacks" value="damageType=Flame;dice=4;effects={6: ['Burn']}" />
+			<property name="Traits" value="" />
+		</card>
+
+		<card id="bc7980fc-c6a5-4d83-8179-d4d712937666" name="Animal Kinship">
+			<property name="Nickname" value="Animal Kinship" />
+			<property name="Type" value="Conjuration" />
+			<property name="Subtype" value="Totem" />
+			<property name="Cost" value="8" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0,1" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="2" />
+			<property name="StatArmor" value="3" />
+			<property name="StatLife" value="7" />
+			<property name="Traits" value="Zone Exclusive, Beastmaster Only" />
+		</card>
+
+		<card id="e381733f-6f1f-4fd9-a9dc-e7891a37d0be" name="Blue Gremlin">
+			<property name="Nickname" value="Blue Gremlin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Gremlin" />
+			<property name="Cost" value="7" />
+			<property name="Action" value="Full" />
+			<property name="Range" value="0,0" />
+			<property name="Target" value="Zone" />
+			<property name="School" value="Arcane" />
+			<property name="Level" value="2" />
+			<property name="StatDefense" value="8+ 1x" />
+			<property name="StatArmor" value="1" />
+			<property name="StatLife" value="7" />
+			<property name="cAttacks" value="actionType=Quick;rangeType=Melee;range=(0,0);dice=3;Piercing +X=1" />
+			<property name="AttackBar" value="Claws:&#xD;&#xA;[Quick] [Melee] [Dice=3] [Piercing +1]" />
+			<property name="Traits" value="Pest" />
+		</card>
+
+		<card id="b9af2345-f1d6-47dc-a9e4-1c8e99a09617" name="Bear Strength">
+			<property name="Nickname" value="Bear Strength" />
+			<property name="Type" value="Enchantment" />
+			<property name="Subtype" value="" />
+			<property name="Cost" value="3" />
+			<property name="revealCost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0,2" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Nature" />
+			<property name="Level" value="1" />
+			<property name="cBuffs" value="m0,M0))@target,[Melee +2]" /><!-- rewrite this-->
+			<property name="Text" value="This creature gains the Melee +2 trait.&#xD;&#xA;[Melee +2]" />
+		</card>
+
+		<card id="c02c15ac-008b-4128-8e54-20c54569c287" name="Gauntlets of Strength">
+			<property name="Nickname" value="Gauntlets of Strength" />
+			<property name="Type" value="Equipment" />
+			<property name="Cost" value="3" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0,2" />
+			<property name="Target" value="Mage" />
+			<property name="School" value="War" />
+			<property name="Level" value="1" />
+			<property name="StatEquipmentSlot" value="Gloves" />
+			<property name="cBuffs" value="m0,M0))@target,[Melee +1]" /> <!-- rewrite this-->
+			<property name="Text" value="Mage gains the Melee +1 trait. &#xD;&#xA;[Melee +1]" />
+		</card>
+
+		<card id="96719b92-1dd5-4a7e-b7eb-574464feeca8" name="Minor Heal">
+			<property name="Nickname" value="Minor Heal" />
+			<property name="Type" value="Incantation" />
+			<property name="Subtype" value="Healing" />
+			<property name="Cost" value="5" />
+			<property name="Action" value="Quick" />
+			<property name="Range" value="0,1" />
+			<property name="Target" value="Living Creature" />
+			<property name="School" value="Holy" />
+			<property name="Level" value="1" />
+			<property name="Stats" value="" />
+			<property name="Text" value="Heal target creature the amount rolled on 5 attack dice." />
+		</card>
+
+    </cards>
+</set>

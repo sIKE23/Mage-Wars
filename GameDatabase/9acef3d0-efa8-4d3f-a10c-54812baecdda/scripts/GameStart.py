@@ -334,8 +334,8 @@ def onDeckLoaded(args):
 
 
 
-#Called by flipcard() when a mage is flipped for the first time
-def mageSetup():
+#Called by flipcard() when a mage is flipped for the first time - This needs rewritten at some point
+def mageSetup(card):
     mute()
     mageDict = eval(me.getGlobalVariable("MageDict"))
     if mageDict["MageStatsID"] == 00000 or mageDict["MageRevealed"] == "True": return #deck hasn't been loaded or the mage the mage card was flipped face down after mageSetup() has already run once
@@ -347,6 +347,7 @@ def mageSetup():
     me.Channeling = int(magestats.StatChanneling)
     me.Mana = me.Channeling + 10 + int(magestats.StatStartingMana)
     me.Life = int(magestats.StatLife)
+    me.mage = card
     Card(mageID).Subtype = magestats.Subtype
     Card(mageID).Level = magestats.Level
     Card(mageID).Stats = magestats.Stats #havent decided if this is needed yet....proxygen??

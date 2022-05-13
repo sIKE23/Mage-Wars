@@ -198,7 +198,7 @@ we can store these properties in the xml files with the following notation (no s
 
 
 def parseAttack(string):
-	debug("parseAttack\n")
+	#debug("parseAttack\n")
 	"Takes a raw attack string for a single attack (in the format used in the new xml fields) and returns a properly formatted dictionary object"
 	#Requires that string contain exactly 1 properly formatted attack
 	#Does not store the information of the original source of the attack
@@ -222,7 +222,7 @@ def parseAttack(string):
 	output = {}
 	fields = string.split(";")
 	for field in fields:
-		debug('field: {}'.format(field))
+		#debug('field: {}'.format(field))
 		pair = field.split("=")
 		if typeMatcher.get(pair[0],str) in [tuple,dict]:
 			output[pair[0]] = typeMatcher.get(pair[0],str)(eval(pair[1]))
@@ -240,35 +240,35 @@ def getAttacks(card):
 	"""
 
 	#Requires that card be a card that may legally declare an attack
-	debug("getAttacks({})\n".format(card.Name))
+	#debug("getAttacks({})\n".format(card.Name))
 	output = []
 	append = output.append
 	#1: parse attacks given in the card's cAttacks field
 	if card.cAttacks:
 		rawAttackList = card.cAttacks.split("||")
 		for string in rawAttackList:
-			debug("string in cAttacks: {}\n".format(string))
+			#debug("string in cAttacks: {}\n".format(string))
 			attack = parseAttack(string)
 			attack["user id"] = card._id
 			attack["source id"] = card._id
 			append(attack)
-			debug("attack: " + str(attack)+"\n")
+			#debug("attack: " + str(attack)+"\n")
 	#2: parse attacks from attached cards or Attack(Type) cards
 	attackSources = getAttachments(card) + ([c for c in table if (c.controller==card.controller and c.Type == "Equipment" and c.isFaceUp) or (c.controller==card.controller and c.Type == "Attack")] if "Mage" in card.Subtype else [])
 	for a in attackSources:
 		if a.tAttacks:
 			rawAttackList = a.tAttacks.split("||")
 			for string in rawAttackList:
-				debug("string in tAttacks: {}\n".format(string))
+				#debug("string in tAttacks: {}\n".format(string))
 				attack = parseAttack(string)
 				attack["user id"] = card._id
 				attack["source id"] = a._id
 				append(attack)
-				debug("attack: " + str(attack)+"\n")
+				#debug("attack: " + str(attack)+"\n")
 	#3: parse attacks from other sources
 	"""Notation: 'on parse function' = oPF_getAttacks, which is assumed to contain only a function"""
 	[spellDictionary[c.Name]["oPF_getAttacks"](c,card,output) for c in table if "oPF_getAttacks" in spellDictionary.get(c.Name,{})]
-	debug("getAttacks output: {}\n".format(str(output)))
+	#debug("getAttacks output: {}\n".format(str(output)))
 	return output
 
 def addDiceToAttack(attacker, attack, defender):
