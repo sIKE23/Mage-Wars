@@ -17,26 +17,26 @@ This module contains the functions relating to dice rolling and battle computati
 ############################################################################
 
 additiveTraits = ["Melee","Ranged",
-				  "Armor","Life","Innate Life","Channeling","Defense",
-				  "Tough",
-				  "Charge",
-				  "Bloodthirsty",
-				  "Piercing",
-				  "Mana Drain",
-				  "Mana Transfer",
-				  "Magebind",
-				  "Lifebond",
-				  "Lifegain",
-				  "Upkeep",
-				  'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
+				"Armor","Life","Innate Life","Channeling","Defense",
+				"Tough",
+				"Charge",
+				"Bloodthirsty",
+				"Piercing",
+				"Mana Drain",
+				"Mana Transfer",
+				"Magebind",
+				"Lifebond",
+				"Lifegain",
+				"Upkeep",
+				'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
 superlativeTraits = ["Regenerate",
-					 "Aegis",
-					 "Uproot",
-					 "Dissipate",
-					 "Ki",
-					 "Sai"
-					 "Nunchucks",
-					 "Melting"]
+					"Aegis",
+					"Uproot",
+					"Dissipate",
+					"Ki",
+					"Sai"
+					"Nunchucks",
+					"Melting"]
 
 ############################################################################
 ######################		Dice Roll Menu		####################
@@ -211,13 +211,13 @@ def getAttackList(card):
 						name = attack[0]
 						attributes = attack[1]
 						aDict = {'Name':name,
-								 'd12':[],
-								 'Traits': {},
-								 'EffectType': 'Attack',
-								 'SourceID': card._id,
-								 'OriginalSourceID': card._id
-								 #Later, when functionality is expanded to include non-attack effects, this will be modified
-								 }
+								'd12':[],
+								'Traits': {},
+								'EffectType': 'Attack',
+								'SourceID': card._id,
+								'OriginalSourceID': card._id
+								#Later, when functionality is expanded to include non-attack effects, this will be modified
+								}
 						if (isAttackSpell or isDrainSpell):
 								aDict['Range'] = [int(r) for r in card.Range.split('-')]
 								aDict['Cost'] = int(card.Cost) if card.Cost != 'X' else 0
@@ -238,7 +238,7 @@ def getAttackList(card):
 								elif 'Dice' in attribute:
 										if attribute.split('=')[1] != 'X':
 												aDict['Dice'] = int(attribute.split('=')[1])
- 										elif card.name == "Temple of Light" and card.controller == me:
+										elif card.name == "Temple of Light" and card.controller == me:
 												X = 0
 												for c in table:
 														if "Temple" in c.subtype and c.controller == me: X += 1
@@ -362,8 +362,6 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 		if defender.markers[Strongest] and attacker.Name == "Knight of the Red Helm": localADict['Melee'] = localADict.get('Melee',0) + 2
 		#Drokkar attacking Prey, currently works on anything with a grapple marker, not his specific prey
 		if attacker.Name == "Drokkar" and attack["Name"] == "Tail Spike" and defender.markers[Grapple]: localADict['Melee'] = localADict.get('Melee',0) + 2
-		#Wildfire Imp Melee buff for attacking a Burning Object
-		if attacker.Name == "Wildfire Imp" and defender.markers[Burn]: localADict['Melee'] = localADict.get('Melee',0) + 2
 		#Lightning Raptor Counterstrike buff with 5 Charge tokens
 		if attacker.Name == "Lightning Raptor" and attacker.markers[Charge] == 5: attack['Traits']['Counterstrike'] = True
 		#Bloodfire Helmet Demon buff
@@ -395,8 +393,8 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 					and attack.get("Action") == "Quick"):
 						attack['Traits']['Doublestrike'] = True
 				elif (cName == "Lion Savagery"
-					  and attacker == getAttachTarget(c)
-					  and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
+					and attacker == getAttachTarget(c)
+					and attack.get('RangeType') in ["Melee","Counterstrike"]): #Making the big assumption that the attacker did not earlier make a ranged attack if this one is melee; I know it overlooks some cases, but it should hold up until Q2, I think.
 						attack['Traits']['Piercing'] += 1
 				elif (cName == 'Tooth & Nail' and #Global effects
 					'Animal' in attacker.Subtype and
@@ -405,8 +403,8 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 						aType = attack.get('Type')
 						if ( "Mage" in attacker.Subtype and
 							((cName == 'Dawnbreaker Ring' and aType == 'Light') or
-							 (cName == 'Fireshaper Ring' and aType == 'Flame') or
-							 (cName == 'Lightning Ring' and aType == 'Lightning'))):
+							(cName == 'Fireshaper Ring' and aType == 'Flame') or
+							(cName == 'Lightning Ring' and aType == 'Lightning'))):
 							localADict['Melee'] = localADict.get('Melee',0) + 1
 							localADict['Ranged'] = localADict.get('Ranged',0) + 1
 		#Force Armor
@@ -428,9 +426,9 @@ def computeD12(dTraitDict,d12Pair):
 		elif '2 ' in effectText: effects = [effectText.strip('2 '),effectText.strip('2 ')]
 		else: effects = [effectText]
 		conditionTypes = {'Flame' : ['Burn'],
-						  'Psychic' : ['Sleep'],
-						  'Acid' : ['Corrode'],
-						  'Poison' : ['Rot','Cripple','Tainted','Weak']}
+						'Psychic' : ['Sleep'],
+						'Acid' : ['Corrode'],
+						'Poison' : ['Rot','Cripple','Tainted','Weak']}
 		#First, make replacements for slamming unmovable creatures
 		if dTraitDict.get('Unmovable'):
 				for n,i in enumerate(effects):
@@ -774,9 +772,9 @@ def getDefenseList(aTraitDict,attack,dTraitDict):
 				if (d.get('Restrictions') == 'No Melee' and attack.get('RangeType') in ['Melee','Counterstrike'] or
 					d.get('Restrictions') == 'No Ranged' and attack.get('RangeType') == 'Ranged' or
 					(Card(d.get('Source')).name == 'Tarok, the Skyhunter' and
-					 not (attacker.Type == 'Creature' and
-						  aTraitDict.get('Flying') and
-						  attack.get('RangeType') in ['Melee','Counterstrike']))): defenseList.remove(d)
+					not (attacker.Type == 'Creature' and
+						aTraitDict.get('Flying') and
+						attack.get('RangeType') in ['Melee','Counterstrike']))): defenseList.remove(d)
 		#We should also search for enchantment pseudo-defenses, like block.
 		return defenseList
 
@@ -797,10 +795,10 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		if atkTraits.get('Unavoidable') or not defenseList: return False
 		modDefenseList = [computeDefense(aTraitDict,attack,dTraitDict,d) for d in defenseList]
 		queryList = ['{}\nSuccess Rate {}% | Uses Remaining: {}'.format(Card(d.get('Source')).name.center(68,' '),
-																	   str(round(((13-d.get('Minimum'))/12.0)*100,1)),
-																	   ("Infinite" if d.get('Uses',0) == "inf" else
+																	str(round(((13-d.get('Minimum'))/12.0)*100,1)),
+																	("Infinite" if d.get('Uses',0) == "inf" else
 																		str(d.get('Uses',0) - timesHasUsedDefense(defender,d))))
-					 for d in modDefenseList]
+					for d in modDefenseList]
 		colors = ["#996600" for d in queryList]
 		queryList.append('I won\'t roll defense')
 		colors.append("#000000")
@@ -827,7 +825,7 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		rememberDefenseUse(defender,defense)
 		defense = computeDefense(aTraitDict,attack,dTraitDict,defense) #NOW we modify the defense
 		notify("{} attempts to avoid the attack using {}!\n".format(defender,
-																 ('its innate defense' if defSource == defender else 'its defense from {}'.format(defSource))))
+																('its innate defense' if defSource == defender else 'its defense from {}'.format(defSource))))
 
 		damageRoll,effectRoll = rollDice(0)
 		if defense.get('Uses',0)>=1 and defSource.markers[Ready]: #Flip the defense marker
@@ -842,11 +840,11 @@ def defenseQuery(aTraitDict,attack,dTraitDict):
 		if defSource.Name == "Dancing Scimitar": #Note whether Dancing Scimitar has been used
 				rememberAbilityUse(defSource)
 		if (effectRoll >= defense.get('Minimum',13)):
-			   notify("{} succeeds in its defense attempt! Attack avoided!\n".format(defender))
-			   return defense
+			notify("{} succeeds in its defense attempt! Attack avoided!\n".format(defender))
+			return defense
 		else:
-			   notify("{} fails to defend itself...\n".format(defender))
-			   return False
+			notify("{} fails to defend itself...\n".format(defender))
+			return False
 
 ############################################################################
 ######################      Seven Steps of an Attack    ####################
@@ -943,13 +941,13 @@ def interimStep(aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,refus
 				if not dTraitDict.get('Flying') or not aTraitDict.get('Flying'): aTraitDict['Flying']=False
 				attack = computeAttack(aTraitDict,attack,dTraitDict)
 				nextPlayer = {'declareAttackStep': aController,
-							  'avoidAttackStep' : dController,
-							  'rollDiceStep' : aController,
-							  'damageAndEffectsStep' : dController,
-							  'additionalStrikesStep' : aController,
-							  'damageBarrierStep' : dController,
-							  'counterstrikeStep' : dController,
-							  'attackEndsStep' : aController}[nextStepFunction]
+							'avoidAttackStep' : dController,
+							'rollDiceStep' : aController,
+							'damageAndEffectsStep' : dController,
+							'additionalStrikesStep' : aController,
+							'damageBarrierStep' : dController,
+							'counterstrikeStep' : dController,
+							'attackEndsStep' : aController}[nextStepFunction]
 				remoteCall(nextPlayer,nextStepFunction,[aTraitDict,attack,dTraitDict]+([damageRoll,effectRoll] if (damageRoll != None and effectRoll != None) else []))
 		else: 
 				remoteCall(otherPlayer,'interimStep',[aTraitDict,attack,dTraitDict,prevStepName,nextStepFunction,(not selfAttached),damageRoll,effectRoll])
@@ -1188,11 +1186,11 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						dTraitDict["Incorporeal"] = True
 						dTraitDict["Ghost Form"] = True
 		if attack.get('EffectType','Attack')=='Attack':
-			   if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
-					   #Spiked buckler code here, perhaps?
-					   rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
-					   interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
-					   return
+			if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
+					#Spiked buckler code here, perhaps?
+					rememberAttackUse(attacker,defender,attack['OriginalAttack'],0)
+					interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
+					return
 		interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','rollDiceStep')
 
 def reduceFF(card):
@@ -1501,17 +1499,17 @@ def damageReceiptMenu(aTraitDict,attack,dTraitDict,roll,effectRoll):
 		normalDamage = roll[2] + 2* roll[3] # calculate the results for Normal Damage
 		criticalDamage = roll[4] + 2* roll[5] # calculate the results for Critical Damage
 		choice = askChoice('{}\'s attack will inflict {} damage {}on {}.{} ({} normal damage and {} critical damage were rolled.){}{}\nApply these results?'.format(attacker.Name,
-																										  actualDmg,
-																										  ('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
-																										  defender.Name,
-																										  (' It will also drain {} mana from {}.'.format(
-																												  str(dManaDrain),defender.controller.name) if dManaDrain else ''),
-																										   normalDamage,
-																										   criticalDamage,
-																										   ('({}/{} dice rolled damage.) '.format(str(nonBlanks),str(totalDice)) if nonBlanks else ''),
-																										   ('({}/{} dice rolled ones.) '.format(str(onesRolled),str(totalDice)) if onesRolled else '')),
-						   ['Yes',"Other Damage Amount",'No'],
-						   ["#01603e","#FF6600","#de2827"])
+																										actualDmg,
+																										('and an effect ({}) '.format(actualEffect) if actualEffect else ''),
+																										defender.Name,
+																										(' It will also drain {} mana from {}.'.format(
+																												str(dManaDrain),defender.controller.name) if dManaDrain else ''),
+																										normalDamage,
+																										criticalDamage,
+																										('({}/{} dice rolled damage.) '.format(str(nonBlanks),str(totalDice)) if nonBlanks else ''),
+																										('({}/{} dice rolled ones.) '.format(str(onesRolled),str(totalDice)) if onesRolled else '')),
+						['Yes',"Other Damage Amount",'No'],
+						["#01603e","#FF6600","#de2827"])
 		if choice == 1:
 				applyDamageAndEffects(aTraitDict,attack,dTraitDict,actualDmg,actualEffect)
 				return actualDmg #for remembering damage. Pretty crude; We'll come up with a better alternative in Q2
@@ -1533,22 +1531,22 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 		expectedDmg = expectedDamage(aTraitDict,attack,dTraitDict)
 		conditionsList = ['Bleed','Burn','Corrode','Cripple','Damage','Daze','Freeze', 'Rot','Slam','Sleep','Stagger','Stuck','Stun','Tainted','Weak']
 		effectsInflictDict = {'Damage' : "suffers 1 point of direct damage! (+1 Damage)",
-							  'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
-							  'Burn' : 'is set ablaze! (+1 Burn)',
-							  'Corrode' : 'corrodes! (+1 Corrode)',
-							  'Cripple' : 'is crippled! (+1 Cripple)',
-							  'Daze' : 'is dazed! (+1 Daze)',
-							  'Rot' : 'rots! (+1 Rot)',
-							  'Slam' : 'is slammed to the ground! (+1 Slam)',
-							  'Sleep' : 'falls fast alseep! (+1 Sleep)',
-							  'Stagger' : 'staggers about, not quite sure what is going on! (Minor Creatures can not Attack or Guard, Major Creatures -2 to All Attacks)',
-							  'Stuck' : 'is stuck fast! (+1 Stuck)',
-							  'Stun' : 'is stunned! (Stun)',
-							  'Tainted' : "'s wounds fester! (+1 Tainted)",
-							  'Weak' : 'is weakened! (+1 Weak)',
-							  'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
-							  'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
-							  'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
+							'Bleed' : 'bleeds from its wounds! (+1 Bleed)',
+							'Burn' : 'is set ablaze! (+1 Burn)',
+							'Corrode' : 'corrodes! (+1 Corrode)',
+							'Cripple' : 'is crippled! (+1 Cripple)',
+							'Daze' : 'is dazed! (+1 Daze)',
+							'Rot' : 'rots! (+1 Rot)',
+							'Slam' : 'is slammed to the ground! (+1 Slam)',
+							'Sleep' : 'falls fast alseep! (+1 Sleep)',
+							'Stagger' : 'staggers about, not quite sure what is going on! (Minor Creatures can not Attack or Guard, Major Creatures -2 to All Attacks)',
+							'Stuck' : 'is stuck fast! (+1 Stuck)',
+							'Stun' : 'is stunned! (Stun)',
+							'Tainted' : "'s wounds fester! (+1 Tainted)",
+							'Weak' : 'is weakened! (+1 Weak)',
+							'Snatch' : 'is snatched toward {}! (Snatch)'.format(attacker),
+							'Push' : 'is pushed away from {}! (Push 1)'.format(attacker),
+							'Taunt' : 'wants to attack {}! (Taunt)'.format(attacker)}
 
 		#Prep for Vampirism
 		aDamage = getStatusDict(attacker).get('Damage',0)
@@ -1567,9 +1565,9 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 
 		#Vine Markers are always destroyed from any amount of damage
 		if "Vine Marker" in defender.name and damage >0:
-			  notify("{} is smashed into the ground and destroyed.\n".format(defender))
-			  defender.moveTo(me.piles['Discard'])
-			  return #No sense going any further.
+			notify("{} is smashed into the ground and destroyed.\n".format(defender))
+			defender.moveTo(me.piles['Discard'])
+			return #No sense going any further.
 
 		#Bloodreaper health drain
 		if attacker.markers[BloodReaper] and not timesHasOccured("Blood Reaper",attacker.controller) and defender.Type == 'Creature' and dTraitDict.get("Living") and 'Demon' in attacker.Subtype and damage:
@@ -1603,24 +1601,24 @@ def applyDamageAndEffects(aTraitDict,attack,dTraitDict,damage,rawEffect): #In ge
 		if (atkTraits.get('Vampiric') and drainableHealth and
 			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
 				if attacker.controller == me: healingQuery(aTraitDict,
-														   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
-														   drainableHealth,
-														   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name))
+														'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
+														drainableHealth,
+														"{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name))
 				else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
-																   'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
-																   drainableHealth,
-																   "{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
+																'Heal {} damage through vampirism?'.format(drainableHealth,defender.name),
+																drainableHealth,
+																"{} heals {} damage through vampirism!".format(attacker.name,'{}',defender.name)])
 		#Drain/Siphon Life
 		if (atkTraits.get('Drain') and drainLifeHealth and
 			(dTraitDict.get('Living') or not dTraitDict.get('Nonliving')) and defender.Type == 'Creature' > 0): #Long term, give all creatures Living trait by default, eliminate nonliving condition
 				if attacker.controller == me: healingQuery(aTraitDict,
-														   'Drain {} life from the target?'.format(drainLifeHealth,defender.name),
-														   drainLifeHealth,
-														   "{} drains {} life from {}".format(attacker.name,'{}',defender.name))
+														'Drain {} life from the target?'.format(drainLifeHealth,defender.name),
+														drainLifeHealth,
+														"{} drains {} life from {}".format(attacker.name,'{}',defender.name))
 				else: remoteCall(attacker.controller,'healingQuery',[aTraitDict,
-																   'Drain {} life from the target?'.format(drainLifeHealth,defender.name),
-																   drainLifeHealth,
-																   "{} drains {} life from {}".format(attacker.name,'{}',defender.name)])
+																'Drain {} life from the target?'.format(drainLifeHealth,defender.name),
+																drainLifeHealth,
+																"{} drains {} life from {}".format(attacker.name,'{}',defender.name)])
 		#Reconstruct - Devouring Jelly for now
 		if (attacker.Name=="Devouring Jelly" and defender.Type == 'Creature' and dTraitDict.get('Corporeal') and damage and attacker.markers[Damage] > 0):
 				cDamage = attacker.markers[Damage]
@@ -1652,14 +1650,14 @@ def malakaisFireReceiptPrompt(heathen):
 		if askChoice("Malakai smites {}! Apply Burn condition?".format(heathen.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
 				heathen.markers[Burn]+=1
 				bookOfMalakai=["...AND THE HEATHENS IN THEIR TREACHERY DOTH BURN LIKE CANDLES, SPAKE MALAKAI. AND LO, SO THEY DID BURN.\n- The book of Malakai, 16:3",
-							   "...AND HE LIT A THOUSAND FIRES BENEATH THE FOUL. AND MALAKAI SAW THAT IT WAS JUST.\n- The book of Malakai, 19:25",
-							   "...LET HE WHO JUDGETH WITH NO CAUSE BE JUDGED FIRST. AND THEN BURN HIM.\n-The book of Malakai, 4:22",
-							   "...BEHOLD YE, FOR THIS IS THE FLAME OF RIGHTEOUSNESS. SEE THAT IT BURNETH EVERMORE IN YOUR HEART. AND ALSO IN THE HEARTS OF THE UNBELIEVERS, BUT IN A MORE LITERAL SENSE.\n-The book of Malakai, 5:18",
-							   "...FOR I AM THE CANDLE IN THE DARK. THE FEAR IN THE EYES OF THE UNJUST. THE BANE OF THE IMPURE.\n-The book of Malakai, 8:9",
-							   "...ALL WHO KNEEL BEFORE EVIL SHALL CLAIM THE FIRE OF WRATH AS THEIR REWARD. AS WILL THE EVIL THEMSELVES. REALLY, THOU SHOULDST NOT DISCRIMINATE IN ITS DISTRIBUTION.\n-The book of Malakai, 3:19",
-							   "...AND MALAKAI GESTURED AT THE LADDINITES, AND LO! EACH BECAME A PILLAR OF FLAME, THEIR WICKEDNESS BURNING BRIGHTER THAN THE SUN.\n-The book of Malakai, 2:4",
-							   "...AND MALAKAI DID SEE THAT THEY HAD VERILY REPENTED. AND PROCLAIMING THAT SOME CRIMES ARE FORGIVEN BUT THROUGH FLAME, HE SEARED THEIR WICKEDNESS FROM THEIR BONES.\n-The book of Malakai, 8:7",
-							   "... AND I WILL STRIKE DOWN UPON THEE WITH GREAT VENGEANCE AND FURIOUS ANGER THOSE WHO ATTEMPT TO POISON AND DESTROY MY BROTHERS. AND YOU WILL KNOW MY NAME IS MALAKAI WHEN I LAY MY LIGHT UPON THEE \n-The book of Malakai, 25:17"]
+							"...AND HE LIT A THOUSAND FIRES BENEATH THE FOUL. AND MALAKAI SAW THAT IT WAS JUST.\n- The book of Malakai, 19:25",
+							"...LET HE WHO JUDGETH WITH NO CAUSE BE JUDGED FIRST. AND THEN BURN HIM.\n-The book of Malakai, 4:22",
+							"...BEHOLD YE, FOR THIS IS THE FLAME OF RIGHTEOUSNESS. SEE THAT IT BURNETH EVERMORE IN YOUR HEART. AND ALSO IN THE HEARTS OF THE UNBELIEVERS, BUT IN A MORE LITERAL SENSE.\n-The book of Malakai, 5:18",
+							"...FOR I AM THE CANDLE IN THE DARK. THE FEAR IN THE EYES OF THE UNJUST. THE BANE OF THE IMPURE.\n-The book of Malakai, 8:9",
+							"...ALL WHO KNEEL BEFORE EVIL SHALL CLAIM THE FIRE OF WRATH AS THEIR REWARD. AS WILL THE EVIL THEMSELVES. REALLY, THOU SHOULDST NOT DISCRIMINATE IN ITS DISTRIBUTION.\n-The book of Malakai, 3:19",
+							"...AND MALAKAI GESTURED AT THE LADDINITES, AND LO! EACH BECAME A PILLAR OF FLAME, THEIR WICKEDNESS BURNING BRIGHTER THAN THE SUN.\n-The book of Malakai, 2:4",
+							"...AND MALAKAI DID SEE THAT THEY HAD VERILY REPENTED. AND PROCLAIMING THAT SOME CRIMES ARE FORGIVEN BUT THROUGH FLAME, HE SEARED THEIR WICKEDNESS FROM THEIR BONES.\n-The book of Malakai, 8:7",
+							"... AND I WILL STRIKE DOWN UPON THEE WITH GREAT VENGEANCE AND FURIOUS ANGER THOSE WHO ATTEMPT TO POISON AND DESTROY MY BROTHERS. AND YOU WILL KNOW MY NAME IS MALAKAI WHEN I LAY MY LIGHT UPON THEE \n-The book of Malakai, 25:17"]
 				passage=rnd(0,len(bookOfMalakai)-1)
 				notify(bookOfMalakai[passage])
 				notify("{} is seared by the flames of righteousness! (+1 Burn)\n".format(heathen.Name.split(",")[0]))
@@ -1671,8 +1669,8 @@ def deathPrompt(cardTraitsDict,attack={},aTraitDict={}):
 		if "Mage" in card.Subtype: return
 
 		choice = askChoice("{} appears to be destoyed. Accept destruction?".format(card.name),
-						   ["Yes","No"],
-						   ["#01603e","#de2827"])
+						["Yes","No"],
+						["#01603e","#de2827"])
 		if choice == 1:
 				returnMarkers(card, cardTraitsDict)
 				deathMessage(cardTraitsDict,attack,aTraitDict)
@@ -1688,8 +1686,8 @@ def revealAttachmentQuery(cardList,step): #Returns true if at least 1 attachment
 				aList = []
 				for card in cardList:
 						aList.extend([c for c in getAttachments(card) if (c.controller == me and
-																		  not c.isFaceUp and
-																		  c.Name in recommendList)])
+																		not c.isFaceUp and
+																		c.Name in recommendList)])
 				if not aList: return (False if recurText == 'an' else True)
 				options = ['{}\n{}\n{}'.format(c.Name.center(68,' '),(('('+getAttachTarget(c).Name+')').center(68,' ')),c.Text.split('\r\n')[0]) for c in aList]
 				colors = ['#CC6600' for i in options] #Orange
@@ -1801,9 +1799,9 @@ def computeTraits(card):
 		cardType = card.type
 		school = card.school
 		rawTraitsList = ({'Creature' : ['Living','Corporeal'],
-						  'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
-						  'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
-						  'Conjuration-Terrain' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(cardType,[])) #Get innate traits depending on card type
+						'Conjuration' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
+						'Conjuration-Wall' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity'],
+						'Conjuration-Terrain' : ['Nonliving','Corporeal','Unmovable','Psychic Immunity']}.get(cardType,[])) #Get innate traits depending on card type
 		append = rawTraitsList.append
 		extend = rawTraitsList.extend
 		remove = rawTraitsList.remove

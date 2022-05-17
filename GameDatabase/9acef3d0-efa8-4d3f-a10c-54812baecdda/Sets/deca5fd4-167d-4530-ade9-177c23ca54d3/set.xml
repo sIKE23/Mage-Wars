@@ -7,35 +7,6 @@
 	version="2.0.0.0">
 
 	<cards>
-		<card id="bcacf527-05b6-41d3-b7bc-e8434c2ed6ec" name="Monk">
-			<property name="Nickname" value="Monk" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card>
-		<card id="6ed52b69-008d-4c87-873e-268412c7947f" name="Academy Monk Stats">
-			<property name="Nickname" value="Academy Monk Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
-			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="25" />
-			<property name="StatSpellBookPoints" value="38" />
-			<property name="StatStartingMana"  value="-9" />
-			<property name="MageSchoolCost" value="Mind=1" />
-			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Stuff" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
-
 		<card id="801da065-6f12-4ad5-afa1-cb50693e14e9" name="Dragon-Tail Sweep">
 			<property name="Nickname" value="Dragon-Tail Sweep" />
 			<property name="Type" value="Attack" />

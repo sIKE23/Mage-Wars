@@ -7,35 +7,6 @@
 	version="2.0.0.0">
 
 	<cards>
-		<card id="08df9518-9ecb-41ef-a169-9e4d41891a3a" name="Druid">
-			<property name="Nickname" value="Druid" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card>
-		<card id="ac92f16e-c203-4fe1-99d4-e5d9f76392ba" name="Academy Druid Stats">
-			<property name="Nickname" value="Academy Druid Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained Nature magic and level 1 Water spells. Fire and War spells cost triple spellpoints, even if Novice." />
-			<property name="Stats" value="Spellbook=40, Life=23, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="23" />
-			<property name="StatSpellBookPoints" value="40" />
-			<property name="StatStartingMana"  value="-8" />
-			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
-			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Herbalist. Once per round, when you cast a potion, you may pay 1 mana to place 1 additional Charge token on it." />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
-		
 		<card id="dc4f4495-5fdb-4eb2-9b11-ade8f59ac74a" name="Acid Blast">
 			<property name="Nickname" value="Acid Blast" />
 			<property name="Type" value="Attack" />

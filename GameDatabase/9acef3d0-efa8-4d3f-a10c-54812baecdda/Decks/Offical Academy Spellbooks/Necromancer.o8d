@@ -4,8 +4,6 @@
     <card qty="1" id="46e40822-6a96-46a6-835b-3177f29f77f1">Necromancer</card>
     <card qty="1" id="1b4614e4-65e9-4b54-859a-4e128aa1c0dd">Academy Necromancer Stats</card>
   </section>
-  <section name="Attack" shared="False" />
-  <section name="Conjuration" shared="False" />
   <section name="Creature" shared="False">
     <card qty="1" id="68f746a6-4d95-4381-9650-20d6261496f1">The Embalmed</card>
     <card qty="1" id="18197e7e-0da6-4fbd-affc-e8fc76a68aa7">Matesis, the Fallen Pharaoh</card>
@@ -16,6 +14,7 @@
     <card qty="2" id="c9af347c-dc64-4a65-a039-3a62de1b31ff">Vengeful Voidwalker</card>
   </section>
   <section name="Enchantment" shared="False">
+    <card qty="1" id="284bad38-c419-435d-8c2f-3f3e129b00aa">Curse of Weakness</card>
     <card qty="1" id="de4ea6b3-1ae7-4463-9d31-c42e4312bf2f">Stench of Death</card>
     <card qty="1" id="02d954e8-1836-48d0-b046-fec013ddefd6">Terrifying Visage</card>
     <card qty="1" id="6fffc845-d5e0-4849-b23d-7d65594df85c">Unholy Reversal</card>
@@ -32,7 +31,9 @@
     <card qty="2" id="aef8cb42-ff91-477d-8619-2f9aef923d2b">Fizzle</card>
     <card qty="2" id="e603e3a7-9bca-4e3c-9b08-0ecf7a4c7f19">Ritual of Kallek</card>
     <card qty="1" id="e83d404a-39f9-495e-a578-68e09966c853">Siphon Life</card>
-    <card qty="2" id="0690654e-18bb-4320-a511-ac4421af6b3f">Soul Harvest</card>
+    <card qty="1" id="0690654e-18bb-4320-a511-ac4421af6b3f">Soul Harvest</card>
   </section>
+  <section name="Attack" shared="False" />
+  <section name="Conjuration" shared="False" />
   <notes><![CDATA[]]></notes>
 </deck>

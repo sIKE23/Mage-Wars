@@ -7,34 +7,6 @@
 	version="2.1.21.0">
 	
 	<cards>
-		<card id="46e40822-6a96-46a6-835b-3177f29f77f1" name="Necromancer">
-			<property name="Nickname" value="Necromancer" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card>
-		<card id="1b4614e4-65e9-4b54-859a-4e128aa1c0dd" name="Academy Necromancer Stats">
-			<property name="Nickname" value="Academy Necromancer Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained Dark magic and Dsjer-Tet spells. Holy spells cost triple spellpoints, even if Novice." />
-			<property name="Stats" value="Spellbook=40, Life=23, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="24" />
-			<property name="StatSpellBookPoints" value="40" />
-			<property name="StatStartingMana"  value="-9" />
-			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
-			<property name="Traits" value="Once per round, when an enemy Living creature is destroyed, you may remove up to 2 damage from a mummy creature you control" />
-			<property name="MageAbilities" value="Stuff" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
 		<card id="3f3f65da-ae91-4610-83d6-d6b6a51f3e06" name="Brittle Harvester">
 			<property name="Nickname" value="Brittle Harvester" />
 			<property name="Type" value="Creature" />

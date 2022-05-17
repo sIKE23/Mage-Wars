@@ -1,14 +1,801 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <set xmlns:noNamespaceSchemaLocation="CardSet.xsd"
-	name="Playtest: Errata - Mage Wars Community Project"
+	name="Mages"
 	id="d9d7e352-5bae-4dd2-8354-8132d9603fdd"
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
+	
 
 
-	<cards>		
-		<card id="407cda3e-aa5a-4c5d-83ec-f5ab7a68c8e7" name="Wizard - Playtest">
+	<cards>
+		<card id="4f27a0aa-8ef2-42cc-ae24-1ae0bf0f8a64" name="Adramelech Warlock">
+			<property name="Nickname" value="Adramelech Warlock" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />	
+				<alternate name="Adramelech Warlock" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>	
+		</card>
+		<card id="8c17a03b-4800-4253-ac32-925581fdbbe0" name="Adramelech Warlock Stats">
+			<property name="Nickname" value="Adramelech Warlock Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook construction." />
+			<property name="Stats" value="Spellbook=120, Life=33, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="33" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
+			<property name="MageSchoolFullTraining" value="Dark, Fire" />
+			<property name="MageSchoolOpposed" value="Holy" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Fireweaving: Once per round, at the end of her Action Phase, the Warlock may target an object up to 2 zones away. She may move a Burn conditon from that object to another target object in that same zone.&#xD;&#xA;Smoldering Curses: Enemy creatures gain the Flame +1 trait if they have one or more revealed curse you control attached to them.&#xD;&#xA;Demonic Reward: If a friednly demon attacks and damages an enemy creature with a Burn condition, it may heal one damage. Each friendly demon may only trigger this ability once per round." />
+			<property name="cAttacks" value="name=Burning Touch;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=1;effects={5: ['Burn']};Defrost=True" />
+			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [d12] [5+ = Burn] [Defrost]" />
+		</card>	
+
+		<card id="b52ee3c1-ee9f-494c-8c45-55f2b1ff6313" name="Anvil Throne Warlord">
+			<property name="Nickname" value="Anvil Throne Warlord" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />	
+				<alternate name="Anvil Throne Warlord" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>	
+		</card>
+		<card id="988facc7-debe-493b-95f0-95f0be0157cb" name="Anvil Throne Warlord Stats">
+			<property name="Nickname" value="Anvil Throne Warlord Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Dwarf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="34" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="War=1, Earth=1, Arcane=3" />
+			<property name="MageSchoolFullTraining" value="War, Earth" />
+			<property name="MageSchoolOpposed" value="Arcane" />
+			<property name="Traits" value="Tough -2" />
+			<property name="MageAbilities" value="Runesmithing: When an equipment comes into play attached to this mage, he may pay 1 mana to assign one Rune to it. If this equipment would be destroyed by a spell or ability an opponent controls, prevent that destruction unless that opponent pays 2 mana. Each rune may only be assigned once per game.&#xD;&#xA;&#xD;&#xA;Battle Orders: Once per round, the Warlord may pay 1 mana and cast one of the following quick command spells. The chosen spell affects all friendly soldiers in his zone at the time it is cast, and the effect last until the end of the round.&#xD;&#xA;&#xD;&#xA;Take Aim! - Ranged attacks gain Piercing +2; Quick March! - Gain Fast trait; Hold the Line! - Gain Armor +1 and Tough -2 traits.&#xD;&#xA;Battle Hardened: Warlord has the Tough -2 trait." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+		</card>
+
+	<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
+			<property name="Nickname" value="Beastmaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+	  			<alternate name="Beastmaster" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
+	      	</alternate>
+		</card>
+		<card id="665fd551-678d-4b5c-94a3-347dd320f20a" name="Beastmaster Stats">
+			<property name="Nickname" value="Beastmaster Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Wood Elf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="36" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Quick Summoning: Once per round, the Beastmaster may summon a Level 1 Animal creature as a quick spell. &#xD;&#xA;PET: When a friendly non-Legendary animal creature comes into play, you may make it your Pet. Pay mana equal to the creatures Level +1, then place the Pet maker on it. Pet gains Melee +1, Armor +1, and Life +3. Whenever Pet is in the same zone as his Beastmaster, it gains an additional Melee +1. If Pet is destroyed, you may assign the marker again in the same manner when a new animal is summond." />
+			<property name="Traits" value="Melee +1" />
+		</card>
+		<card id="608f34d9-e0dd-4ca4-9840-2ef90b742058" name="Beastmaster Stats (Apprentice)">
+			<property name="Nickname" value="Beastmaster Stats (Apprentice)" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Wood Elf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
+			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="0a13b5b8-a37b-43d3-877e-9972e4313387" name="Beastmaster">
+			<property name="Nickname" value="Beastmaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="0a21940e-a4fd-4b85-8cf9-16ebdd6de9b2" name="Academy Beastmaster Stats">
+			<property name="Nickname" value="Academy Beastmaster Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Wood Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Nature Magic. Fire spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-10" />
+			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="d20c9d4a-65a7-4018-bffc-16ed0cb62912" name="Druid">
+			<property name="Nickname" value="Druid" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Druid" type="B">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>
+		</card>
+		<card id="df9efcd7-c4d2-4c8c-ac16-ea9eca1f5260" name="Druid Stats">
+			<property name="Nickname" value="Druid Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Wood Elf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple." />
+			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="30" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Nature=1, L-1-Water=1, Fire=3, War=3" />
+			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolPartialTraining" value="Water,1" />
+			<property name="MageSchoolOpposed" value="Fire, War" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Spreading Vines: During the Deployment Phase, you may place a Vine marker in a zone. Whenever you, or an object you control, casts a Vine spell, you may target a zone containing a friendly Vine marker, or target an object in that zone, or a border of that zone. Then, destroy that marker. &#xD;&#xA;TREEBOND: When a friend tree conjuration comes into play you may choose to bond with it. Place your Treebond marker on it, You gain Innate Life +4 and Channel +1. The gains Innate Life +4, Armor +1, and Lifebond +2. If the tree is destroyed, the Treebond marker is permanently destroyed." />
+		</card>
+		<card id="08df9518-9ecb-41ef-a169-9e4d41891a3a" name="Druid">
+			<property name="Nickname" value="Druid" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="ac92f16e-c203-4fe1-99d4-e5d9f76392ba" name="Academy Druid Stats">
+			<property name="Nickname" value="Academy Druid Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Nature magic and level 1 Water spells. Fire and War spells cost triple spellpoints, even if Novice." />
+			<property name="Stats" value="Spellbook=40, Life=23, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="23" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-8" />
+			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
+			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolOpposed" value="Fire, War" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Herbalist. Once per round, when you cast a potion, you may pay 1 mana to place 1 additional Charge token on it." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="6d6d6058-2d93-4146-9661-84824315e18a" name="Elementalist">
+			<property name="Nickname" value="Elementalist" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="6da10aed-ff62-45fa-80ec-454444c208f3" name="Elementalist Stats">
+			<property name="Nickname" value="Elementalist Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Air, Earth, Fire and Water Schools. Living objects cost triple spellpoints" />
+			<property name="Stats" value="Spellbook=125, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="125" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, War=3, Nature=3, Holy=3, Arcane=3, Dark=3, Mind=3" />
+			<property name="MageSchoolFullTraining" value="Air,Earth,Fire,Water" />
+			<property name="MageSchoolOpposed" value="War,Nature,Holy,Arcane,Dark,Mind" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="" />
+		</card>
+
+		<card id="b135f5d0-0a31-45c7-b5a3-a5058a6d0286" name="Elementalist">
+			<property name="Nickname" value="Elementalist" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card> 
+		<card id="728d2586-3b03-4722-a799-47e3cd82218c" name="Academy Elementalist Stats"><!--NEED TO FIX-->
+			<property name="Nickname" value="Academy Elementalist Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained in the Air, Earth, Fire and Water Schools. Living objects cost triple spellpoints, even if Novice." />
+			<property name="Stats" value="Spellbook=43, Life=22, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="43" />
+			<property name="StatStartingMana"  value="-10" />
+			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, Living=3" />
+			<property name="MageSchoolFullTraining" value="Air,Earth,Fire,Water" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="7f88625f-591b-41ef-861d-4a89a4a57f24" name="Forcemaster">
+			<property name="Nickname" value="Forcemaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />	
+				<alternate name="Forcemaster" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>	
+		</card>
+		<card id="6d6362dc-1130-4bd0-ae5b-55ae2c59bc82" name="Forcemaster Stats">
+			<property name="Nickname" value="Forcemaster Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Mind school of Magic. Non-Mind creature spells cost triple during spellbook construction." />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10, Defense=7+ 1x" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatDefense" value="Defense=7+ 1x" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Mind=1, T-Creature=3" />
+			<property name="MageSchoolFullTraining" value="Mind" />
+			<property name="MageTypeOpposed" value="Creature" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Deflect: The Forcemaster uses telekinesis to deflect attacks. She has a Defense which can be used once per round, and avoids attacks on a roll of 7+. She must pay 1 mana each time she uses this Defense (before rolling for the Defense). This Defense uses its own unique ready marker &quot;Deflect&quot;.&#xD;&#xA;Force Pull: Once per round, she may cast this quick force spell. Target creature is Pushed 1 zone TOWARDS her. Will not Push a creature through a wall with the Passage Attacks trait." />
+		</card>
+
+		<card id="32e0369c-60a6-48b7-a31a-6ad444033461" name="Forcemaster">
+			<property name="Nickname" value="Forcemaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="18c4ecbe-0a44-43c0-b053-a3c8e0abd8cd" name="Academy Forcemaster Stats">
+			<property name="Nickname" value="Academy Forcemaster Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Dark Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Mind magic and Dsjer-Tet spells. Non-Mind, Non-Dsjer-Tet creature spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="22" />
+			<property name="StatSpellBookPoints" value="80" />
+			<property name="StatStartingMana"  value="-7" />
+			<property name="MageSchoolCost" value="Mind=1, Creature=3" />
+			<property name="MageTypeOpposed" value="Creature" />
+			<property name="MageSchoolFullTraining" value="Mind" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="e0a0b790-fbfb-4a08-a12e-77e415134391" name="Johktari Beastmaster">
+			<property name="Nickname" value="Johktari Beastmaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Johktari Beastmaster" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
+				</alternate>
+		</card>
+		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Johktari Beastmaster Stats">
+			<property name="Nickname" value="Johktari Beastmaster Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
+			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
+			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="34" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="Traits" value="Fast" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Wounded Prey: Once per round, before or after any friendly creature Action Phase, she may place her Wounded Prey marker on an enemy damaged non-Mage Living Creature. She, and all friendly animal creatures gain the melee +1 trait when attacking this creature. The marker is returned to her if the creature has no damage on it, or is destroyed. &#xD;&#xA;Sprinting: She has the Fast trait. &#xD;&#xA;Archery Skill: She has the Ranged +1 trait for all of her non-spell ranged attacks." />
+		</card>
+		
+		<card id="16d22e1d-f763-40ca-9158-da704aafc43f" name="Monk">
+			<property name="Nickname" value="Monk" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
+		</card>
+		<card id="9bdc5109-6652-4f84-9679-0343a756b843" name="Monk Stats">
+			<property name="Nickname" value="Monk Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human, Monk" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
+			<property name="Stats" value="Spellbook=115, Life=35, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="35" />
+			<property name="StatSpellBookPoints" value="115" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Mind=1, S-Martial=1, S-Monk=1, T-Creature=3" />
+			<property name="MageSchoolFullTraining" value="Mind" />
+			<property name="MageSubtypeTraining" value="Martial, Monk" />
+			<property name="MageTypeOpposed" value="Creature" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Straight Punch:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Ki 1, Uncontainable" />
+			<property name="MageAbilities" value="" />
+		</card>		
+
+		<card id="bcacf527-05b6-41d3-b7bc-e8434c2ed6ec" name="Monk">
+			<property name="Nickname" value="Monk" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="6ed52b69-008d-4c87-873e-268412c7947f" name="Academy Monk Stats"><!--NEED TO FIX-->
+			<property name="Nickname" value="Academy Monk Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="25" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-9" />
+			<property name="MageSchoolCost" value="Mind=1, S-Monk=1, S-Martial=1" />
+			<property name="MageSchoolFullTraining" value="Mind" />
+			<property name="MageSubtypeTraining" value="Martial, Monk" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="6b830552-8420-4797-bbb5-3ec5bb768265" name="Necromancer">
+			<property name="Nickname" value="Necromancer" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Necromancer" type="B">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>
+		</card>
+		<card id="682d3b40-7c08-437b-9c88-16e2f389773f" name="Necromancer Stats">
+			<property name="Nickname" value="Necromancer Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage,Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Dark School of Magic. Holy spells cost triple during spellbook construction." />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+			<property name="MageSchoolFullTraining" value="Dark" />
+			<property name="MageSchoolOpposed" value="Holy" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="Poison Immunity" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Plague Master: The Necromancer has the Poison Immunity trait. During the Upkeep Phase, for each object with one or more poison condition markers on it. the Necromancer may pay 1 mana to place 1 direct poison damage on that object. &#xD;&#xA;Eternal Servant: When a friendly non-Legendary, non-Epic, undead creature comes into play, you may make it your Eternal Servant. Its attacks gain Piercing +1. Place the Eternal Servant marker on it. If this creature is destroyed, you may pay mana equal to its casting cost to Reanimate it. You may place the marker on this creature again when it comes into play, or save it to reassign." />
+		</card>
+
+
+		<card id="46e40822-6a96-46a6-835b-3177f29f77f1" name="Necromancer">
+			<property name="Nickname" value="Necromancer" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="1b4614e4-65e9-4b54-859a-4e128aa1c0dd" name="Academy Necromancer Stats">
+			<property name="Nickname" value="Academy Necromancer Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Dark magic and Dsjer-Tet spells. Holy spells cost triple spellpoints, even if Novice." />
+			<property name="Stats" value="Spellbook=40, Life=23, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-9" />
+			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
+			<property name="MageSchoolFullTraining" value="Dark" />
+			<property name="MageSubtypeTraining" value="Dsjer-Tet" />
+			<property name="MageSchoolOpposed" value="Holy" />
+			<property name="Traits" value="Once per round, when an enemy Living creature is destroyed, you may remove up to 2 damage from a mummy creature you control" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+		<card id="30a60bad-bf32-46a2-a69e-e949d288b7ac" name="Paladin">
+			<property name="Nickname" value="Paladin" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Paladin" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>
+		</card>
+		<card id="7dba45df-7c80-42a2-8cdc-2c02b170fd8c" name="Paladin Stats">
+			<property name="Nickname" value="Paladin Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in Holy level 3, War level 2, and all Holy Creatures. Dark Spells cost triple." />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="36" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="L-3-Holy=1,L-2-War=1,C-Holy-Creature=1,Dark=3" />
+			<property name="MageSchoolOpposed" value="Dark" /><!--***************-->
+			<property name="MageSchoolPartialTraining" value="Holy,3,War,2" /><!--***************-->
+			<property name="MageSubtypeTraining" value="" /><!--***************-->
+			<property name="MageComboTraining" value="Holy,School;Creature,Type" /><!--***************-->
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Valor; Once per round, when the Paladin melee attacks and damages the strongest enemy creature, he gains 1 Valor.&#xD;&#xA;Divine Auras&#xD;&#xA;As a quick action, the Paladin may gain an aura of his choice. Each aura has its own cost in Valor.&#xD;&#xA;Chivalrous Challenge&#xD;&#xA;During the Upkeep Phase, the Paladin may place his Challenge Marker on a target enemy creature within 2 zones. Once per round, the Paladin and his Challenged enemy may re-roll any number of their attack dice while melee attacking each other. If the Challenged enemy attacks any other object, gain 1 Valor. When the Challenged enemy is destroyed, return the marker to the Paladin. During the Upkeep Phase you may pay 2 Valor to return the Challenge marker from an enemy creature." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+		</card>
+		<card id="d3c7466b-2e15-436b-a6e8-799aa7132136" name="Pellian Forcemaster">
+			<property name="Nickname" value="Pellian Forcemaster" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="720a045d-e808-4542-8be2-f1a3c3196080" name="Pellian Forcemaster Stats">
+			<property name="Nickname" value="Pellian Forcemaster Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Mind=1, T-Creature=3" />
+			<property name="MageTypeOpposed" value="Creature" />
+			<property name="MageSchoolFullTraining" value="Mind" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Basic Melee:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="" />
+		</card>		
+
+		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
+			<property name="Nickname" value="Priest" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Priest" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
+				</alternate>
+		</card>
+		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest Stats">
+			<property name="Nickname" value="Priest Stats" />
+		 	<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained In the Holy school. Dark spells cost triple during spellbook construction. The Priest counts a &quot;Priestess&quot; - using spells which say Priestess Only." />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="MageSchoolFullTraining" value="Holy" />
+			<property name="MageSchoolOpposed" value="Dark" />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="34" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="cAttacks" value="name=Hand of Purification;action type=Quick;range type=Melee;range=(0,0);damage type=Light;dice=2;effects={9: ['Daze']};Ethereal=True" />
+			<property name="AttackBar" value="Hand of Purification:&#xD;&#xA;[Quick] [Melee] [Light] [Dice=2] [d12] [9+ = Daze] [Ethereal]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Holy Avenger: When a friendly non-Legendary Holy creature comes into play you may make it your Holy Avenger. Pay mana equal to its Level +1, and place the Holy Avenger marker on It. It gains +5 Life. Each round, the first time it attacks an enemy creature who attacked and damaged another friendly creature or Holy conjuration that round, it gains Melee +2 and Piercing +1 for that attack. If it is destroyed, you may assign the marker again in the same manner. &#xD;&#xD;&#xA;Malakai&apos;s Fire: Once per round, 4 the Priest attacks and damages an enemy creature with an attack which deals light damage, he may pay 1 mana to place a Burn condition on that creature." />
+		</card>
+		<card id="b5de32e7-8b57-44f2-a25a-b7bae56bffb7" name="Priestess">
+			<property name="Nickname" value="Priestess" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Priestess" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
+				</alternate>
+		</card>
+		<card id="352e2f88-a99e-46f0-86f9-ab7b05d978cb" name="Priestess Stats">
+			<property name="Nickname" value="Priestess Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="MageSchoolFullTraining" value="Holy" />
+			<property name="MageSchoolOpposed" value="Dark" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal costs." />
+		</card>
+		<card id="9b9af674-185b-4e60-9943-fa6f1c35d4b2" name="Priestess Stats (Apprentice)">
+			<property name="Nickname" value="Priestess Stats (Apprentice)" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Holy school. Dark spells cost triple during spellbook creation." />
+			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="MageSchoolFullTraining" value="Holy" />
+			<property name="MageSchoolOpposed" value="Dark" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="" />
+		</card>
+
+		<card id="00198aab-6c44-4ccc-8eaf-51df73dd3521" name="Priestess">
+			<property name="Nickname" value="Priestess" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="005e4ea3-d680-477a-957e-a2906de57be2" name="Academy Priestess Stats">
+			<property name="Nickname" value="Academy Priestess Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, High Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Holy Magic. Dark spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=21, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="21" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-8" />
+			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
+			<property name="MageSchoolFullTraining" value="Holy" />
+			<property name="MageSchoolOpposed" value="Dark" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+		<card id="97d362aa-8ea9-4000-a711-45d716b55a47" name="Siren">
+			<property name="Nickname" value="Siren" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Siren" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />	
+				</alternate>
+		</card>
+		<card id="f4ded825-e127-49ba-8f8e-ad105cf5a234" name="Siren Stats">
+			<property name="Nickname" value="Siren Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Aquatic, Merren" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Water school, as well as pirate and song spells." />
+			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Water=1, S-Pirate=1, S-Song=1, S-Aquatic=1" />
+			<property name="MageSchoolFullTraining" value="Water" /><!--***************-->
+			<property name="MageSubtypeTraining" value="Pirate, Song, Aquatic" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Siren&apos;s Call: As a Psychic Song quick spell the Siren may pay 1 mana to place her Siren&apos;s Call marker on target non-Mage creature within 2 zones. During its action phase that creature MUST move at least 1 zone closer to the Siren, if possible, and may not attack her. Return the marker at the end their Action Phase. Friendly aquatic creatures also gain Melee +2.&#xD;&#xA;Fermata: The Siren may extend an expiring song she controls by paying mana equal to its Level and placing a Fermata marker on it. The Siren may only have two songs affected by Fermata markers at a time, and each song may only be extended a maximum of up to 2 rounds.&#xD;&#xA;Amphibious: The Siren gains Regenerate 1 while in zones with aquatic terrain attached." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+		</card>
+
+		<card id="11f1c87f-9858-4720-8383-358000f66fe5" name="Sistarran Wizard">
 			<property name="Nickname" value="Wizard" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
@@ -18,7 +805,208 @@
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 		</card>
-		<card id="b3375390-16f2-4054-955f-fefa3b89ffff" name="Wizard - Playtest Stats">
+		<card id="14c2b137-d796-4d7e-9982-9f156bc37ada" name="Sistarran Wizard Stats">
+			<property name="Nickname" value="Wizard Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="" />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="32" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+			<property name="MageSchoolFullTraining" value="Arcane,Air" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="Basic Melee:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="" />
+		</card>
+
+		<card id="2253ac7a-0146-4022-bd2e-4f5403ad8e1d" name="Warlock">
+			<property name="Nickname" value="Warlock" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Warlock" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
+				</alternate>
+		</card>
+		<card id="52fdb62d-59e3-4b5e-904e-d92ae2be7012" name="Warlock Stats">
+			<property name="Nickname" value="Warlock Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
+			<property name="Stats" value="Spellbook=120, Life=38, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="38" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
+			<property name="MageSchoolFullTraining" value="Dark, Fire" />
+			<property name="MageSchoolOpposed" value="Holy" />
+			<property name="Traits" value="Melee +1" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Curseweaving: Once per round, if a creature is destroyed that has 1 or more curse spells you control attached to it, you may return one of those spells to your spellbook, instead of placing it in your discard pile. &#xD;&#xA;Blood Reaper: When a friendly non-Legendary demon creature comes into play, you may make it your Bloodreaper. Warlock loses Life equal to the creature&apos;s Level +1, then places the Bloodreaper marker on it. Bloodreaper gains the Bloodthirsty +2 trait. The first time each round that it attacks and damages a Living creature, the Warlock may heal 2 damage. If it is destroyed, you may assign the marker in the same manner when a new demon is summoned. &#xD;&#xA;Battle Skill: Warlock has the Melee +1 trait." />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+		</card>
+		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
+			<property name="Nickname" value="Warlock (Apprentice)" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
+			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Dark=1, Fire=1, Holy=3" />
+			<property name="MageSchoolFullTraining" value="Dark, Fire" />
+			<property name="MageSchoolOpposed" value="Holy" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="" />
+			<property name="Traits" value="" />
+		</card>
+
+		<card id="0f49d44a-65c9-4603-9468-202bfbe537f3" name="Warlock">
+			<property name="Nickname" value="Warlock" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>
+		<card id="9c9102c9-60f3-4f55-8825-15a2774d5ca9" name="Academy Warlock Stats">
+			<property name="Nickname" value="Academy Warlock Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Dark Magic. Holy spells cost triple SBP." />
+			<property name="Stats" value="Spellbook=40, Life=26, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="26" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-10" />
+			<property name="MageSchoolCost" value="Dark=1,Fire=1,Holy=3" />
+			<property name="MageSchoolFullTraining" value="Dark,Fire" />
+			<property name="MageSchoolOpposed" value="Holy" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+	<card id="5cf0be26-ce65-405f-9c4a-312f31bceedb" name="Warlord">
+			<property name="Nickname" value="Warlord" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />	
+				<alternate name="Warlord" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />				
+				</alternate>
+			</card>
+		<card id="3b8c0ce6-8b89-4f40-b60a-a1530507ca4f" name="Warlord Stats">
+			<property name="Nickname" value="Warlord Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Dwarf" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="9" />
+			<property name="StatLife" value="36" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="War=1, Earth=1, Arcane=3" />
+			<property name="MageSchoolFullTraining" value="War, Earth" />
+			<property name="MageSchoolOpposed" value="Arcane" />
+			<property name="Traits" value="Melee +1" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Veterans: Whenever a friendly non-Mage creature melee attacks and destroys an enemy creature, place a veteran badge token on that creature (maximum of one token per creature). That creature gains Melee +1 and Armor +1.&#xD;&#xA;Battle Orders: Once per round, the Warlord may pay 1 mana and cast one of the following quick command spells. The chosen spell affects all friendly soldiers in his zone at the time it is cast and the effect lasts until the end of the round. To Battle! - Gain charge +1 trait; Release Volley! - Gain Ranged +1 trait; On Guard! - Gain Melee +1 and Armor +1 while guarding.&#xD;&#xA;Battle Skill: Warlord has Melee +1 trait." />
+		</card>
+
+		<card id="223d270f-2fa8-413b-ae62-3f6d2213ed92" name="Warlord">
+			<property name="Nickname" value="Warlord" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+		</card>	
+		<card id="1d43c343-c85c-49e8-9038-dff61ea41aed" name="Academy Warlord Stats">
+			<property name="Nickname" value="Academy Warlord Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Elf" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained War magic." />
+			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-10" />
+			<property name="MageSchoolCost" value="War=1" />
+			<property name="MageSchoolFullTraining" value="War" />
+			<property name="Traits" value="" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
+		</card>
+
+		<card id="4208e1b0-b570-42de-9e62-5ce15b97b91e" name="Wizard">
+			<property name="Nickname" value="Wizard" />
+			<property name="Type" value="Creature" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
+			<property name="Stats" value="" />
+			<property name="cAttacks" value="" />
+			<property name="AttackBar" value="" />
+			<property name="Traits" value="" />
+				<alternate name="Wizard(Air)" type="2">
+					<property name="Type" value="Creature" />
+					<property name="Subtype" value="Mage, Human" />
+					<property name="Level" value="" />
+					<property name="Stats" value="" />
+					<property name="cAttacks" value="" />
+					<property name="AttackBar" value="" />
+					<property name="Traits" value="" />
+				</alternate>
+		</card>
+		
+		<card id="56ee2c14-3d58-4c08-a0c9-3c9bc85a765b" name="Wizard Stats">
 			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
@@ -31,352 +1019,60 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+			<property name="MageSchoolFullTraining" value="Arcane,Air" />
 			<property name="cAttacks" value="name=Arcane Zap;effects={};Spell=True;action type=Quick;range type=Ranged;range=(0,1);dice=3;Ethereal=True;Counts as an attack spell. May be cast once per round.=True||name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Arcane Zap:&#xD;&#xA;[Cost = 2] [Spell] [Quick] [Ranged:0-1] [Dice=3] [Ethereal] [Counts as an attack spell. May be cast once per round.]&#xD;&#xA;Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Voltaric Shield: Each Upkeep Phase, the Wizard may pay 2 mana to activate his Voltaric Shield (flip the shield marker to the ON side). The first time the Wizard is attacked and dealt damage this round, if the shield is on, flip the shield marker to the off side, and cancel up to 3 points of damage. If the shield marker is still on at then end of the round, flip it to the off side." />
 		</card>
-		<!-- -->
-		<card id="ede168cd-b7fc-430a-bb94-e5c61ae784e9" name="Disciple of Radiance - Playtest">
-			<property name="Nickname" value="Disciple of Radiance" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Cleric" />
-			<property name="Cost" value="5" />
-			<property name="Action" value="Full"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Holy"  />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=1, Life=6" />
-			<property name="StatArmor" value="1" />
-			<property name="StatLife" value="6" />
-			<property name="cAttacks" value="name=Light Staff;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Light Staff:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-			<property name="Traits" value="" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWAPRC03" />
-		</card>
-		<card id="d82050a5-7c50-4d0a-96fe-75f4fe8eaf93" name="Frost Elemental - Playtest">
-			<property name="Nickname" value="Frost Elemental" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Elemental, Frost" />
-			<property name="Cost" value="15" />
-			<property name="Action" value="Full"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Air+Water"  />
-			<property name="Level" value="2+2" />
-			<property name="Stats" value="Armor=0, Life=23" />
+
+		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard Stats (Apprentice)">
+			<property name="Nickname" value="Wizard Stats (Apprentice)" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="6" />
+			<property name="MageTraining" value="Training: Trained in the Arcane school, and an elemental school of his choice: Fire, Earth, Air, or Water." />
+			<property name="Stats" value="Spellbook=120, Life=24, Armor=0, Channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="23" />
-			<property name="cAttacks" value="name=Frozen Fists;action type=Quick;range type=Melee;range=(0,0);dice=5;effects={7+: ['Freeze', 'Freeze']}" />
-			<property name="AttackBar" value="Frozen Fists:&#xD;&#xA;[Quick] [Melee] [Frost] [Dice=5] [d12] [7+ = 2 Freeze]" />
-			<property name="Traits" value="Melting 2, Nonliving, Frost Immunity, Flame +2" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWAELC03" />
+			<property name="StatChanneling" value="10" />
+			<property name="StatLife" value="24" />
+			<property name="StatSpellBookPoints" value="120" />
+			<property name="StatStartingMana"  value="0" />
+			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+			<property name="MageSchoolFullTraining" value="Arcane,Air" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
+			<property name="MageAbilities" value="" />
 		</card>
-		<card id="cca66c58-d95f-4005-94de-ac5e1f8759ca" name="Ice Golem - Playtest">
-			<property name="Nickname" value="Ice Golem" />
+
+
+		<card id="0b441073-8bbf-4957-9094-9ff101fb37cf" name="Wizard">
+			<property name="Nickname" value="Wizard" />
 			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Golem, Frost" />
-			<property name="Cost" value="8" />
-			<property name="Action" value="Full"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Air+Water"  />
-			<property name="Level" value="1+1" />
-			<property name="Stats" value="Armor=0, Life=13" />
-			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="13" />
-			<property name="cAttacks" value="name=Frosty Fists;action type=Quick;range type=Melee;range=(0,0);dice=3;effects={3+: ['Freeze']}" />
-			<property name="AttackBar" value="Frosty Fists:&#xD;&#xA;[Quick] [Melee] [Frost] [Dice=3] [d12] [3+ = Freeze]" />
-			<property name="Traits" value="Melting 1, Nonliving, Frost Immunity, Psychic Immunity" />
-			<property name="Text" value="Flame attacks against the Ice Golem roll 2 additional dice." />
-			<property name="CardID" value="MWAELC05" />
-		</card>
-		<card id="418f688f-64b0-442f-bb98-8afc05ea6615" name="Killer Bees - Playtest">
-			<property name="Nickname" value="Killer Bees" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Insect, Swarm" />
-			<property name="Cost" value="7" />
-			<property name="Action" value="Full"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Nature"  />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Armor=0, Life=3" />
-			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="3" />
-			<property name="cAttacks" value="name=1000 Stings;action type=Quick;range type=Melee;range=(0,0);dice=1;Critical Damage=True" />
-			<property name="AttackBar" value="1000 Stings:&#xD;&#xA;[Quick] [Poison] [Melee] [Dice=1] [Critical Damage]" />
-			<property name="Traits" value="Elusive, Flying, Swarm" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWADRC06" />
-		</card>
-		<card id="8eebd024-28aa-46d1-8a09-106e0073db74" name="The Embalmed - Playtest">
-			<property name="Nickname" value=" The Embalmed" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Undead, Mummy" />
-			<property name="Cost" value="2+X" />
-			<property name="Action" value="Full"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Dark"  />
-			<property name="Level" value="3" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Nonliving" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWANMC03" />
-		</card>
-		<card id="81ac0faa-fa8b-4ff3-a9ce-918ecf228061" name="Tide Elemental - Playtest">
-			<property name="Nickname" value="Tide Elemental" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Aquatic, Hydro, Elemental" />
-			<property name="Cost" value="12" />
-			<property name="Action" value="Full"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Water"  />
-			<property name="Level" value="3" />
-			<property name="Stats" value="Armor=0, Life=8" />
-			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="8" />
-			<property name="cAttacks" value="name=Tidal Crash;action type=Quick;range type=Melee;range=(0,0);damage type=Hydro;dice=4;effects={7+: ['Stagger']}" />
-			<property name="AttackBar" value="Tidal Crash:&#xD;&#xA;[Quick] [Melee] [Hydro] [Dice=4] [d12] [7+ = Stagger] [Extinguish]" />
-			<property name="Traits" value="Hydro Immunity, Nonliving, Resilient, Burnproof, Frost +2" />
-			<property name="Text" value="Tide Elemental ignores non-critical damage from attacks and is immune to Burn conditions. Frost attacks against it roll 2 additional dice. As a Quick Action the Tide Elemental can remove all Burn conditions from one object in this zone." />
-			<property name="CardID" value="MWAELC09" />
-		</card>
-		<card id="fcf58b65-53e6-4463-ad22-32cf05531465" name="Zombie Brute - Playtest">
-			<property name="Nickname" value="Zombie Brute" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Undead, Zombie" />
-			<property name="Cost" value="13" />
-			<property name="Action" value="Full" />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Dark" />
-			<property name="Level" value="3" />
-			<property name="Stats" value="Armor=0, Life=10" />
-			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="10" />
-			<property name="cAttacks" value="name=Mangling Claws;action type=Quick;range type=Melee;range=(0,0);dice=4" />
-			<property name="AttackBar" value="Mangling Claws:&#xD;&#xA;[Quick] [Melee] [Dice=4]" />
-			<property name="Traits" value="Bloodthirsty +2, Lumbering, Resilient, Psychic Immunity, Nonliving" />
-			<property name="Text" value="" />
-			<property name="CardID" value="DNC22" />
-		</card>
-		<card id="093ec23d-9b53-4189-bccb-6f59e59e0740" name="Alluring Orchid - Playtest">
-			<property name="Nickname" value="Alluring Orchid" />
-			<property name="Type" value="Conjuration" />
-			<property name="Subtype" value="Plant, Flower, Vine" />
-			<property name="Cost" value="3" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-1" />
-			<property name="cTargets" value="m0,M1))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Nature" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Armor=0, Life=6" />
-			<property name="StatArmor" value="0" />
-			<property name="StatLife" value="6" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Living" />
-			<property name="Text" value="Enemy minor creatures in this zone must attack Alluring Orchid, if able. When Alluring Orchid is melee attacked, during the counterstrike step, place a Rot condition on the attacker. Flame attacks against Alluring Orchid roll 2 additional dice." />
-			<property name="CardID" value="MWADRJ01" />
-		</card>
-		<card id="535762c1-77e2-450f-b76f-73fca28bc672" name="Meredia&apos;s Blessing - Playtest">
-			<property name="Nickname" value="Meredia&apos;s Blessing" />
-			<property name="Type" value="Conjuration" />
-			<property name="Subtype" value="Statue, Artifact" />
-			<property name="Cost" value="6" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-1" />
-			<property name="cTargets" value="m0,M1))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Nature" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Armor=2, Life=8" />
-			<property name="StatArmor" value="2" />
-			<property name="StatLife" value="8" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Zone Exclusive, Epic" />
-			<property name="Text" value="During each Upkeep Phase, the Mage that controls the most Living objects, may heal a non-Mage Living object up to 2 points of damage. The same Mage may also remove 1 condition marker from a non-Mage Living object by paying its removal cost." />
-			<property name="CardID" value="LG01J03" />
-		</card>
-		<card id="35c5987a-983e-44fb-8f20-ec8bd30bc400" name="Pillar of Righteous Flame - Playtest">
-			<property name="Nickname" value="Pillar of Righteous Flame" />
-			<property name="Type" value="Conjuration" />
-			<property name="Subtype" value="Flame, Light" />
-			<property name="Cost" value="9" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-1" />
-			<property name="cTargets" value="m0,M1))_Zone" />
-			<property name="Target" value="Zone" />
-			<property name="School" value="Holy" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="name=Holy Fire;range type=Ranged;range=(0,0);damage type=Light;dice=4;effects={7: ['Daze'], 9: ['Burn']};Ethereal=True;+2 vs. Nonliving Creatures=True" />
-			<property name="AttackBar" value="Holy Fire:&#xD;&#xA;[Ranged:0-0] [Light] [Dice=4] [d12] [7-8 = Daze; 9+ = Burn] [Ethereal] [+2 vs. Nonliving Creatures]" />
-			<property name="Traits" value="Dissipate 4, Epic" />
-			<property name="Text" value="When Pillar of Righteous Flame is cast, or a Dissipate token is removed, it attacks an enemy creature in its zone. Pillar of Righteous Flame attacks each enemy creature immediately after they enter the zone." />
-			<property name="CardID" value="PSJ06" />
-		</card>
-		<card id="f81947b0-e4c8-4c67-a553-7913b4fc2277" name="Enchantment Transfusion - Playtest">
-			<property name="Nickname" value="Enchantment Transfusion" />
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Metamagic" />
-			<property name="Cost" value="2+X" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))TCreature" />
-			<property name="Target" value="Creature" />
-			<property name="School" value="Arcane" />
-			<property name="Level" value="1" />
+			<property name="Subtype" value="Mage" />
+			<property name="Level" value="" />
 			<property name="Stats" value="" />
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When Enchantment Transfusion is revealed, you may move any enchantment you control from this creature to one legal target creature up to 2 zones away from this creature. X = 1 for each hidden enchantment moved, or its Level for each revealed enchantment moved. Then, destroy Enchantment Transfusion." />
-			<property name="CardID" value="MWSTX1CKE04" />
 		</card>
-		<card id="24fedf40-ffcc-4954-a4e4-ea18f62836ec" name="Eye for an Eye - Playtest">
-			<property name="Nickname" value="Eye for an Eye" />
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Retribution" />
-			<property name="Cost" value="2+2" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))NULL" />
-			<property name="Target" value="Friendly Creature" />
-			<property name="School" value="Holy" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Holy Mage Only" />
-			<property name="Text" value="Eye for an Eye can only be revealed before the Roll Dice Step of an attack. During the Damage and Effects Step, the attacker suffers the same damage and effects as the defender. Then, destroy Eye for an Eye." />
-			<property name="CardID" value="PSE05" />
-		</card>
-		<card id="eb8231ba-644c-469e-ba59-b3050cd3c67d" name="Fortified Resolve">
-			<property name="Nickname" value="Fortified Resolve" />
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Chakra, Martial" />
-			<property name="Cost" value="2+2" />
-			<property name="Action" value="Quick"  />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))SMage" />
-			<property name="Target" value="Mage"/>
-			<property name="School" value="Mind"  />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
+		<card id="0cc1de2e-39af-4c34-a9a4-8985eb3ee7ef" name="Academy Wizard Stats">
+			<property name="Nickname" value="Academy Wizard Stats" />
+			<property name="Type" value="Magestats" />
+			<property name="Subtype" value="Mage, Human" />
+			<property name="Level" value="4" />
+			<property name="MageTraining" value="Training: Trained Arcane and Air Magic." />
+			<property name="Stats" value="Spellbook=40, Life=21, Armor=0, Channeling=7" />
+			<property name="StatArmor" value="0" />
+			<property name="StatChanneling" value="7" />
+			<property name="StatLife" value="21" />
+			<property name="StatSpellBookPoints" value="40" />
+			<property name="StatStartingMana"  value="-7" />
+			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
+			<property name="MageSchoolFullTraining" value="Arcane,Air" />
 			<property name="Traits" value="" />
-			<property name="Text" value="When this Mage attacks and damages an enemy creature, place a Charge token on Fortified Resolve. When this Mage would be damaged by an attack, you may remove a charge token from Fortified Resolve to reduce the damage from that attack by 2." />
-			<property name="CardID" value="MWAMKE06" />
-		</card>
-		<card id="3b7fc88e-4eb5-4e1e-be79-3291bf4b6aa3" name="Harmonize - Playtest">
-			<property name="Nickname" value="Harmonize" />
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Mana, Song" />
-			<property name="Cost" value="2+2" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))TCreature||TConjuration||TEnchantment||TEquipment" />
-			<property name="Target" value="Object" />
-			<property name="School" value="Arcane" />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="Harmonize can only target an object that has the Channeling attribute. This object gains Channeling +1.&#xD;&#xA;[Channeling +1]" />
-			<property name="CardID" value="MW1E20" />
-		</card>
-		<card id="b0d2a9af-7a04-4b5e-a3ba-531242802248" name="Mage Wand - Playtest">
-			<property name="Nickname" value="Mage Wand" />
-			<property name="Type" value="Equipment" />
-			<property name="Subtype" value="" />
-			<property name="Cost" value="5" />
-			<property name="Action" value="Quick" />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))SMage" />
-			<property name="Target" value="Mage" />
-			<property name="School" value="Arcane" />
-			<property name="Level" value="2" />
-			<property name="Stats" value="Location=Weapon/Shield" />
-			<property name="StatEquipmentSlot" value="Weapon/Shield" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Spellbind, Epic" />
-			<property name="Text" value="You may bind a non-Epic incantation spell from your spellbook to Mage Wand. As a quick spell, you may pay 3 mana to change the bound spell." />
-			<property name="CardID" value="MW1Q19" />
-		</card>
-		<card id="1a12a265-0e8f-4bfb-aa65-9cc3da8d7d65" name="Martial Mastery - Playtest">
-			<property name="Nickname" value="Martial Mastery" />
-			<property name="Type" value="Enchantment" />
-			<property name="Subtype" value="Martial" />
-			<property name="Cost" value="2+2" />
-			<property name="Action" value="Quick"  />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))SMage" />
-			<property name="Target" value="Self" />
-			<property name="School" value="Mind"  />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Monk Only" />
-			<property name="Text" value="Only a Mage can cast this spell. While you control the fewest creatures, your attacks roll an additional attack die. Once per round, when you cast or reveal martial spell reduce its cost by 1 mana. Enchantments only receive this discount when they are revealed.&#xD;&#xA;[Casting Discount] [1] [Martial] [x1]" />
-			<property name="CardID" value="MWAMKE02" />
-		</card>
-		<card id="8980cee7-4682-4e0c-8d04-054f128365aa" name="Living Armor - Playtest">
-			<property name="Nickname" value="Living Armor" />
-			<property name="Type" value="Equipment" />
-			<property name="Subtype" value="Armor, Plant" />
-			<property name="Cost" value="4" />
-			<property name="Action" value="Quick"  />
-			<property name="Range" value="0-2" />
-			<property name="cTargets" value="m0,M2))SMage" />
-			<property name="Target" value="Mage" />
-			<property name="School" value="Nature"  />
-			<property name="Level" value="1" />
-			<property name="Stats" value="Location=Chestpiece" />
-			<property name="StatEquipmentSlot" value="Chestpiece" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Druid Only" />
-			<property name="Text" value="" />
-			<property name="CardID" value="MWADRQ04" />
-		</card>
-		<card id="c648a119-847b-448a-922b-9a19e8b45312" name="Ritual of Kallek - Playtest">
-			<property name="Nickname" value="Ritual of Kallek" />
-			<property name="Type" value="Incantation" />
-			<property name="Subtype" value="Mana, Ritual, Dsjer-Tet" />
-			<property name="Cost" value="0" />
-			<property name="Action" value="Quick"  />
-			<property name="Range" value="0-0" />
-			<property name="cTargets" value="m0,M0))SMage" />
-			<property name="Target" value="Friendly Mage" />
-			<property name="School" value="Arcane"  />
-			<property name="Level" value="1" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="Magecast" />
-			<property name="Text" value="The casting Mage loses 2 life, then gains 3 mana. You can only cast this spell once per round." />
-			<property name="CardID" value="MWANI03" />
+			<property name="MageAbilities" value="Stuff" />
+			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
+			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 		</card>
 	</cards>
 </set>

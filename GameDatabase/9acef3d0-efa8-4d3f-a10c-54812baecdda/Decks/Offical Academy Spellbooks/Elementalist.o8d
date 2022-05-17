@@ -25,7 +25,7 @@
     <card qty="2" id="34d6a55f-8c87-4055-9f81-ee8689463b7c">Rock Golem</card>
   </section>
   <section name="Enchantment" shared="False">
-    <card qty="2" id="648b2d6d-d69f-417f-b666-637bcbc67c21">Deep Freeze</card>
+    <card qty="1" id="648b2d6d-d69f-417f-b666-637bcbc67c21">Deep Freeze</card>
     <card qty="2" id="2d87d057-a5d1-4be6-aec8-66caeb453977">Frost Trap</card>
   </section>
   <section name="Equipment" shared="False">

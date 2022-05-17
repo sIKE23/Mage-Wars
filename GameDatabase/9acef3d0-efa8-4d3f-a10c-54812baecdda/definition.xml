@@ -5,7 +5,7 @@
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	octgnVersion="3.1.255.0"
 	scriptVersion ="3.1.0.2"
-	version="2.2.1.30"
+	version="2.2.1.31"
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
@@ -299,6 +299,14 @@
 		<property name="cTargets" type="String" hidden="True" ignoreText="False"/>
 		<property name="cBuffs" type="String" hidden="True" ignoreText="False"/>
 		<property name="cAttacks" type="String" hidden="True" ignoreText="False"/>
+		<!--Mage Training properties-->
+		<property name="MageSchoolFullTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolOpposed" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolPartialTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolTrainingLevel" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSubtypeTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageComboTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageTypeOpposed" type="String" hidden="True" ignoreText="False"/>
 		<!--Memory-->
 		<property name="Memory" type="String" hidden="True" ignoreText="False"/>
 		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0"/>

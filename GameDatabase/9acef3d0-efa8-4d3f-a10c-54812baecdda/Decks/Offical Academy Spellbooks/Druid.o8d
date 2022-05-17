@@ -21,7 +21,7 @@
     <card qty="1" id="5b11ee52-b982-4065-b7ec-267f3bc58e82">Killer Bees</card>
     <card qty="1" id="44a5cbf2-bdc6-4578-a96c-4ec9f497b057">Silverclaw Ratel</card>
     <card qty="1" id="bb4b96a6-4a3e-42fa-8086-371b879b89d0">Swamp Lurker</card>
-    <card qty="2" id="3972a2e2-8e0c-417e-89e6-ba35599beb1d">Wychwood Rat</card>
+    <card qty="3" id="3972a2e2-8e0c-417e-89e6-ba35599beb1d">Wychwood Rat</card>
   </section>
   <section name="Enchantment" shared="False">
     <card qty="2" id="832b9f50-e088-4409-9673-d51f669f7512">Overgrowth</card>
