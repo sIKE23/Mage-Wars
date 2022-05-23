@@ -5,8 +5,6 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	
-
 
 	<cards>
 		<card id="4f27a0aa-8ef2-42cc-ae24-1ae0bf0f8a64" name="Adramelech Warlock">
@@ -48,7 +46,6 @@
 			<property name="cAttacks" value="name=Burning Touch;action type=Quick;range type=Melee;range=(0,0);damage type=Flame;dice=1;effects={5: ['Burn']};Defrost=True" />
 			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [d12] [5+ = Burn] [Defrost]" />
 		</card>	
-
 		<card id="b52ee3c1-ee9f-494c-8c45-55f2b1ff6313" name="Anvil Throne Warlord">
 			<property name="Nickname" value="Anvil Throne Warlord" />
 			<property name="Type" value="Creature" />
@@ -89,7 +86,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		</card>
 
-	<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
+		<card id="2b2ab8c5-65c0-4a49-8fab-e01e7d2c145f" name="Beastmaster">
 			<property name="Nickname" value="Beastmaster" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
@@ -121,8 +118,8 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
-			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Nature" />
+			<property name="MageSchoolOpposed" value="Fire" />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Quick Summoning: Once per round, the Beastmaster may summon a Level 1 Animal creature as a quick spell. &#xD;&#xA;PET: When a friendly non-Legendary animal creature comes into play, you may make it your Pet. Pay mana equal to the creatures Level +1, then place the Pet maker on it. Pet gains Melee +1, Armor +1, and Life +3. Whenever Pet is in the same zone as his Beastmaster, it gains an additional Melee +1. If Pet is destroyed, you may assign the marker again in the same manner when a new animal is summond." />
@@ -141,8 +138,8 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
-			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Nature" />
+			<property name="MageSchoolOpposed" value="Fire" />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="MageAbilities" value="" />
@@ -171,8 +168,8 @@
 			<property name="StatSpellBookPoints" value="40" />
 			<property name="StatStartingMana"  value="-10" />
 			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
-			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Nature" />
+			<property name="MageSchoolOpposed" value="Fire" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Stuff" />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
@@ -188,7 +185,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-				<alternate name="Druid" type="B">
+				<alternate name="Druid" type="2">
 					<property name="Type" value="Creature" />
 					<property name="Subtype" value="Mage" />
 					<property name="Level" value="" />
@@ -211,7 +208,7 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Nature=1, L-1-Water=1, Fire=3, War=3" />
-			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Nature" />
 			<property name="MageSchoolPartialTraining" value="Water,1" />
 			<property name="MageSchoolOpposed" value="Fire, War" />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
@@ -242,7 +239,7 @@
 			<property name="StatSpellBookPoints" value="40" />
 			<property name="StatStartingMana"  value="-8" />
 			<property name="MageSchoolCost" value="Nature=1, Water=1, Fire=3, War=3" />
-			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Nature, Water" />
 			<property name="MageSchoolOpposed" value="Fire, War" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Herbalist. Once per round, when you cast a potion, you may pay 1 mana to place 1 additional Charge token on it." />
@@ -290,7 +287,7 @@
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 		</card> 
-		<card id="728d2586-3b03-4722-a799-47e3cd82218c" name="Academy Elementalist Stats"><!--NEED TO FIX-->
+		<card id="728d2586-3b03-4722-a799-47e3cd82218c" name="Academy Elementalist Stats">
 			<property name="Nickname" value="Academy Elementalist Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, High Elf" />
@@ -408,8 +405,8 @@
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Nature School. Fire Spells cost triple during spell book construction" />
 			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-			<property name="MageSchoolFullTraining" value="Nature" /><!--***************-->
-			<property name="MageSchoolOpposed" value="Fire" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Nature" />
+			<property name="MageSchoolOpposed" value="Fire" />
 			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="9" />
@@ -452,7 +449,7 @@
 			<property name="AttackBar" value="Straight Punch:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 			<property name="Traits" value="Ki 1, Uncontainable" />
 			<property name="MageAbilities" value="" />
-		</card>		
+		</card>
 
 		<card id="bcacf527-05b6-41d3-b7bc-e8434c2ed6ec" name="Monk">
 			<property name="Nickname" value="Monk" />
@@ -464,7 +461,7 @@
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
 		</card>
-		<card id="6ed52b69-008d-4c87-873e-268412c7947f" name="Academy Monk Stats"><!--NEED TO FIX-->
+		<card id="6ed52b69-008d-4c87-873e-268412c7947f" name="Academy Monk Stats">
 			<property name="Nickname" value="Academy Monk Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
@@ -589,10 +586,10 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="L-3-Holy=1,L-2-War=1,C-Holy-Creature=1,Dark=3" />
-			<property name="MageSchoolOpposed" value="Dark" /><!--***************-->
-			<property name="MageSchoolPartialTraining" value="Holy,3,War,2" /><!--***************-->
-			<property name="MageSubtypeTraining" value="" /><!--***************-->
-			<property name="MageComboTraining" value="Holy,School;Creature,Type" /><!--***************-->
+			<property name="MageSchoolOpposed" value="Dark" />
+			<property name="MageSchoolPartialTraining" value="Holy,3,War,2" />
+			<property name="MageSubtypeTraining" value="" />
+			<property name="MageComboTraining" value="Holy,School;Creature,Type" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Valor; Once per round, when the Paladin melee attacks and damages the strongest enemy creature, he gains 1 Valor.&#xD;&#xA;Divine Auras&#xD;&#xA;As a quick action, the Paladin may gain an aura of his choice. Each aura has its own cost in Valor.&#xD;&#xA;Chivalrous Challenge&#xD;&#xA;During the Upkeep Phase, the Paladin may place his Challenge Marker on a target enemy creature within 2 zones. Once per round, the Paladin and his Challenged enemy may re-roll any number of their attack dice while melee attacking each other. If the Challenged enemy attacks any other object, gain 1 Valor. When the Challenged enemy is destroyed, return the marker to the Paladin. During the Upkeep Phase you may pay 2 Valor to return the Challenge marker from an enemy creature." />
 			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=3" />
@@ -787,7 +784,7 @@
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Water=1, S-Pirate=1, S-Song=1, S-Aquatic=1" />
-			<property name="MageSchoolFullTraining" value="Water" /><!--***************-->
+			<property name="MageSchoolFullTraining" value="Water" />
 			<property name="MageSubtypeTraining" value="Pirate, Song, Aquatic" />
 			<property name="Traits" value="" />
 			<property name="MageAbilities" value="Abilities:&#xD;&#xA;Siren&apos;s Call: As a Psychic Song quick spell the Siren may pay 1 mana to place her Siren&apos;s Call marker on target non-Mage creature within 2 zones. During its action phase that creature MUST move at least 1 zone closer to the Siren, if possible, and may not attack her. Return the marker at the end their Action Phase. Friendly aquatic creatures also gain Melee +2.&#xD;&#xA;Fermata: The Siren may extend an expiring song she controls by paying mana equal to its Level and placing a Fermata marker on it. The Siren may only have two songs affected by Fermata markers at a time, and each song may only be extended a maximum of up to 2 rounds.&#xD;&#xA;Amphibious: The Siren gains Regenerate 1 while in zones with aquatic terrain attached." />
@@ -916,7 +913,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
 		</card>
 
-	<card id="5cf0be26-ce65-405f-9c4a-312f31bceedb" name="Warlord">
+		<card id="5cf0be26-ce65-405f-9c4a-312f31bceedb" name="Warlord">
 			<property name="Nickname" value="Warlord" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
@@ -934,7 +931,7 @@
 					<property name="AttackBar" value="" />
 					<property name="Traits" value="" />				
 				</alternate>
-			</card>
+		</card>
 		<card id="3b8c0ce6-8b89-4f40-b60a-a1530507ca4f" name="Warlord Stats">
 			<property name="Nickname" value="Warlord Stats" />
 			<property name="Type" value="Magestats" />
@@ -965,7 +962,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-		</card>	
+		</card>
 		<card id="1d43c343-c85c-49e8-9038-dff61ea41aed" name="Academy Warlord Stats">
 			<property name="Nickname" value="Academy Warlord Stats" />
 			<property name="Type" value="Magestats" />

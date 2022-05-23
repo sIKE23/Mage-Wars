@@ -383,8 +383,8 @@ def onCardsMoved(args):
 	indices = args.indexs
 	#loop over all cards
 	for i, card in enumerate(cards):
-	  	position = card.position
-	  	if card.controller == me and fromGroups[i]==table:
+		position = card.position
+		if card.controller == me and fromGroups[i]==table:
 			if not (getAttachTarget(card) in cards or getBindTarget(card) in cards): #Only check for detach if the attachtarget was not moved
 				unbind(card)
 				c,t = detach(card)
@@ -418,10 +418,10 @@ def onCardsMoved(args):
 						unbindAll(card)
 				if not ((indices[i] != position and xs[i]==str(int(position[0])) and ys[i]==str(int(position[1]))) or # Do not realign if it is only the index that is changing. Prevents recursions.
 						isAttached(card) or
-	  					getBindTarget(card) or
-	  					toGroups[i] != table):
-	  					alignAttachments(card)
-	  					alignBound(card)
+						getBindTarget(card) or
+						toGroups[i] != table):
+						alignAttachments(card)
+						alignBound(card)
 
 
 def onScriptedCardsMoved(args):

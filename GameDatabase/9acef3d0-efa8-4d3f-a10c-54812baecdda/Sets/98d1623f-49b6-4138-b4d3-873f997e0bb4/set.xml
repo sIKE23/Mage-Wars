@@ -8,7 +8,6 @@
 
 
 	<cards>		
-		<!-- -->
 		<card id="eea22119-07b8-4eb0-8057-78a78fea6308" name="Beam of Frost">
 			<property name="Nickname" value="Beam of Frost" />
 			<property name="Type" value="Attack" />

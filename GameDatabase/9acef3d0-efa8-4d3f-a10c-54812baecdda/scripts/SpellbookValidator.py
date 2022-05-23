@@ -33,9 +33,11 @@ Changelog:
 
 
 def validateDeck(deck):
+	#deck object comes from OCTGN API
 	mute()
+	#rewrite to be a dictionary that gets passed?
 	mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName = parseMageStatCard(deck)
-	bookTotal =createSpellbookAndCheck(deck, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName)
+	bookTotal = createSpellbookAndCheck(deck, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName)
 	notify("Spellbook of {} calculated to {} points".format(me,bookTotal))
 	return True
 
@@ -135,7 +137,7 @@ def isOpposedCardSchool(mageSchoolOpposed,card):
 			opposedFound.append(True)
 		else:
 			opposedFound.append(False)
-	if not False in opposedFound:
+	if True in opposedFound:
 		return True
 	else:
 		return False
