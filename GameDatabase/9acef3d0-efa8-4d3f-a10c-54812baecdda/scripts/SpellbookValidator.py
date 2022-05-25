@@ -50,7 +50,7 @@ def parseMageStatCard(deck):
             mageSchoolOpposed = c.MageSchoolOpposed.replace(' ','').split(',')
             mageSchoolPartialTraining = c.MageSchoolPartialTraining.replace(' ','').split(',')
             mageSubtypeTraining = c.MageSubtypeTraining.replace(' ','').split(',')
-            mageComboTraining = c.MageComboTraining.replace(' ','').split(';')#might need to rework this a bit on the set.xml property line. School = Holy, Type = Creature?
+            mageComboTraining = c.MageComboTraining.replace(' ','').split(';')
             mageTypeOpposed = c.MageTypeOpposed.replace(' ','').split(',')
             mageName = c.name.split(" Stats")[0]
             break
@@ -268,7 +268,7 @@ def checkCounts(card, cardDict):
 		cardDict[card.name]+=1
 	else:
 		cardDict[card.name]=1
-	level = getCardLevel(card)
+	level = getRawCardLevel(card)
 	if "Epic" in card.traits and cardDict[card.name]>1:
 		notify("***ILLEGAL DECK***: multiple copies of Epic card {} found in spellbook".format(card.Name))
 		return False
