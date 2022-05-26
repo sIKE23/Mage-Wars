@@ -4,7 +4,7 @@ Created 30 April 2019
 
 Changelog:
 	Sharkbait: 17 May 2022:
-		What is it about May and me redoing this script? Anyway, refactored again and it's much betterTM now.
+		What is it about May and me redoing this script? Anyway, refactored again and it's much betterTM now. It can still be improved, but this will do for the moment
 
 
 	Sharkbait: 16 May 2020: 
@@ -35,9 +35,7 @@ Changelog:
 def validateDeck(deck):
 	#deck object comes from OCTGN API
 	mute()
-	#rewrite to be a dictionary that gets passed?
-	mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName = parseMageStatCard(deck)
-	bookTotal = createSpellbookAndCheck(deck, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName)
+	bookTotal = createSpellbookAndCheck(deck)
 	notify("Spellbook of {} calculated to {} points".format(me,bookTotal))
 	return True
 
@@ -52,25 +50,24 @@ def parseMageStatCard(deck):
             mageSubtypeTraining = c.MageSubtypeTraining.replace(' ','').split(',')
             mageComboTraining = c.MageComboTraining.replace(' ','').split(';')
             mageTypeOpposed = c.MageTypeOpposed.replace(' ','').split(',')
-            mageName = c.name.split(" Stats")[0]
+            mageName = c.nickname.split(" Stats")[0]
             break
     return [mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName]
 	
-def createSpellbookAndCheck(deck, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName):
+def createSpellbookAndCheck(deck):
 	mute()
 	cardDict = {}
 	totalBookPointsCost = 0
+	mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName = parseMageStatCard(deck)
 	for card in deck: #run through deck adding levels and checking counts
 		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype or "Aura" in card.Subtype or "Talos" in card.Name):#None of these cards cost points to include
 			debug(card.name)
 			totalBookPointsCost += countSpellbookPointTotal(card, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed)
 			debug(totalBookPointsCost)
-			
 			#This creates a Dict to count and check limits on all the non-Mage and non-Magestats cards.
 			checkCounts(card, cardDict)
-
 			if "Only" in card.traits:
-				checkMageSchoolOnly(card, mageName, [mageSchoolFullTraining,mageSchoolPartialTraining])
+				checkMageAndSchoolOnly(card, mageName, [mageSchoolFullTraining,mageSchoolPartialTraining])
 	return totalBookPointsCost
 
 def countSpellbookPointTotal(card, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed):
@@ -264,10 +261,7 @@ def getRawCardLevel(card):
 
 def checkCounts(card, cardDict):
 	mute()
-	if card.name in cardDict:
-		cardDict[card.name]+=1
-	else:
-		cardDict[card.name]=1
+	cardDict = addCardToCardDict(card, cardDict)
 	level = getRawCardLevel(card)
 	if "Epic" in card.traits and cardDict[card.name]>1:
 		notify("***ILLEGAL DECK***: multiple copies of Epic card {} found in spellbook".format(card.Name))
@@ -279,32 +273,19 @@ def checkCounts(card, cardDict):
 		notify("***ILLEGAL DECK***: there are too many copies of {} in {}'s Spellbook.".format(card.name, me))
 		return False
 
-def checkMageSchoolOnly(card, mageName, schoolTrn):
+def addCardToCardDict(card, cardDict):
+	mute()
+	if card.name in cardDict:
+		cardDict[card.name]+=1
+	else:
+		cardDict[card.name]=1
+	return cardDict
+
+def checkMageAndSchoolOnly(card, mageName, schoolTrn):
 	mute()
 	ok = False
-	if "Beastmaster" in mageName:
-		mageName = "Beastmaster"
-	if "Wizard" in mageName:
-		mageName = "Wizard"
-	if "Warlock" in mageName:
-		mageName = "Warlock"
-	if "Warlord" in mageName:
-		mageName = "Warlord"
-	if "Priest" in mageName:
-		mageName = "Priestess"
-	if "Priestess" in mageName:
-		mageName = "Priestess"
-	if "Paladin" in mageName:
-		mageName = "Paladin"
-	if "Siren" in mageName:
-		mageName = "Siren"
-	if "Forcemaster" in mageName:
-		mageName = "Forcemaster"
-	if "Wizard" in mageName:
-		mageName = "Wizard"
-	if "Druid" in mageName:
-		mageName = "Druid"
-		
+
+	#Still needs to account for level X training
 	schoolList = ["Holy", "Dark", "Mind", "Arcane", "Nature", "War", "Fire", "Water", "Air", "Earth"]
 	
 	if mageName+" Only" in card.traits:

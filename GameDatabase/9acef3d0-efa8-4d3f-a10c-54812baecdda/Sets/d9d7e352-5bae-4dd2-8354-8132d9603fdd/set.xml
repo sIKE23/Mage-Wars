@@ -8,7 +8,7 @@
 
 	<cards>
 		<card id="4f27a0aa-8ef2-42cc-ae24-1ae0bf0f8a64" name="Adramelech Warlock">
-			<property name="Nickname" value="Adramelech Warlock" />
+			<property name="Nickname" value="Warlock" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
@@ -27,7 +27,7 @@
 				</alternate>	
 		</card>
 		<card id="8c17a03b-4800-4253-ac32-925581fdbbe0" name="Adramelech Warlock Stats">
-			<property name="Nickname" value="Adramelech Warlock Stats" />
+			<property name="Nickname" value="Warlock Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
@@ -47,7 +47,7 @@
 			<property name="AttackBar" value="Burning Touch:&#xD;&#xA;[Quick] [Melee] [Flame] [Dice=1] [d12] [5+ = Burn] [Defrost]" />
 		</card>	
 		<card id="b52ee3c1-ee9f-494c-8c45-55f2b1ff6313" name="Anvil Throne Warlord">
-			<property name="Nickname" value="Anvil Throne Warlord" />
+			<property name="Nickname" value="Warlord" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
@@ -66,7 +66,7 @@
 				</alternate>	
 		</card>
 		<card id="988facc7-debe-493b-95f0-95f0be0157cb" name="Anvil Throne Warlord Stats">
-			<property name="Nickname" value="Anvil Throne Warlord Stats" />
+			<property name="Nickname" value="Warlord Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Dwarf" />
 			<property name="Level" value="6" />
@@ -126,7 +126,7 @@
 			<property name="Traits" value="Melee +1" />
 		</card>
 		<card id="608f34d9-e0dd-4ca4-9840-2ef90b742058" name="Beastmaster Stats (Apprentice)">
-			<property name="Nickname" value="Beastmaster Stats (Apprentice)" />
+			<property name="Nickname" value="Beastmaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Wood Elf" />
 			<property name="Level" value="6" />
@@ -156,7 +156,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="0a21940e-a4fd-4b85-8cf9-16ebdd6de9b2" name="Academy Beastmaster Stats">
-			<property name="Nickname" value="Academy Beastmaster Stats" />
+			<property name="Nickname" value="Beastmaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Wood Elf" />
 			<property name="Level" value="4" />
@@ -227,7 +227,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="ac92f16e-c203-4fe1-99d4-e5d9f76392ba" name="Academy Druid Stats">
-			<property name="Nickname" value="Academy Druid Stats" />
+			<property name="Nickname" value="Druid Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="4" />
@@ -288,7 +288,7 @@
 			<property name="Traits" value="" />
 		</card> 
 		<card id="728d2586-3b03-4722-a799-47e3cd82218c" name="Academy Elementalist Stats">
-			<property name="Nickname" value="Academy Elementalist Stats" />
+			<property name="Nickname" value="Elementalist Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, High Elf" />
 			<property name="Level" value="4" />
@@ -359,7 +359,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="18c4ecbe-0a44-43c0-b053-a3c8e0abd8cd" name="Academy Forcemaster Stats">
-			<property name="Nickname" value="Academy Forcemaster Stats" />
+			<property name="Nickname" value="Forcemaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Dark Elf" />
 			<property name="Level" value="4" />
@@ -380,7 +380,7 @@
 		</card>
 
 		<card id="e0a0b790-fbfb-4a08-a12e-77e415134391" name="Johktari Beastmaster">
-			<property name="Nickname" value="Johktari Beastmaster" />
+			<property name="Nickname" value="Beastmaster" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
@@ -399,7 +399,7 @@
 				</alternate>
 		</card>
 		<card id="f248612c-0328-4ca0-b9ec-f719da169cfc" name="Johktari Beastmaster Stats">
-			<property name="Nickname" value="Johktari Beastmaster Stats" />
+			<property name="Nickname" value="Beastmaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
@@ -462,7 +462,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="6ed52b69-008d-4c87-873e-268412c7947f" name="Academy Monk Stats">
-			<property name="Nickname" value="Academy Monk Stats" />
+			<property name="Nickname" value="Monk Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="4" />
@@ -534,7 +534,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="1b4614e4-65e9-4b54-859a-4e128aa1c0dd" name="Academy Necromancer Stats">
-			<property name="Nickname" value="Academy Necromancer Stats" />
+			<property name="Nickname" value="Necromancer Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="4" />
@@ -596,7 +596,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		</card>
 		<card id="d3c7466b-2e15-436b-a6e8-799aa7132136" name="Pellian Forcemaster">
-			<property name="Nickname" value="Pellian Forcemaster" />
+			<property name="Nickname" value="Forcemaster" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
@@ -606,7 +606,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="720a045d-e808-4542-8be2-f1a3c3196080" name="Pellian Forcemaster Stats">
-			<property name="Nickname" value="Pellian Forcemaster Stats" />
+			<property name="Nickname" value="Forcemaster Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
@@ -627,7 +627,7 @@
 		</card>		
 
 		<card id="dcc4eb0b-a61f-4000-b873-7840fd0b0688" name="Priest">
-			<property name="Nickname" value="Priest" />
+			<property name="Nickname" value="Priestess" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="" />
@@ -646,7 +646,7 @@
 				</alternate>
 		</card>
 		<card id="ec7164f6-b2c3-4eb6-8416-70709eb83762" name="Priest Stats">
-			<property name="Nickname" value="Priest Stats" />
+			<property name="Nickname" value="Priestess Stats" />
 		 	<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
@@ -703,7 +703,7 @@
 			<property name="MageAbilities" value="Mage Abilities:&#xD;&#xA;Divine Reward: Once per round, if the Priestess casts and resolves a Holy incantation spell, or reveals a Holy enchantment spell that she controls, she gains 1 life. &#xD;&#xA;Restore: As a quick spell, the Priestess can remove one condition marker from a friendly creature up to 1 zone away by paying its removal cost. As a full action spell, she can remove as many condition markers as she wishes from that creature by paying their removal costs." />
 		</card>
 		<card id="9b9af674-185b-4e60-9943-fa6f1c35d4b2" name="Priestess Stats (Apprentice)">
-			<property name="Nickname" value="Priestess Stats (Apprentice)" />
+			<property name="Nickname" value="Priestess Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, High Elf" />
 			<property name="Level" value="6" />
@@ -733,7 +733,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="005e4ea3-d680-477a-957e-a2906de57be2" name="Academy Priestess Stats">
-			<property name="Nickname" value="Academy Priestess Stats" />
+			<property name="Nickname" value="Priestess Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, High Elf" />
 			<property name="Level" value="4" />
@@ -862,7 +862,7 @@
 			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=3]" />
 		</card>
 		<card id="1a179a08-8c76-4583-a995-0037bd60a215" name="Warlock (Apprentice)">
-			<property name="Nickname" value="Warlock (Apprentice)" />
+			<property name="Nickname" value="Warlock" />
 			<property name="Type" value="Creature" />
 			<property name="Subtype" value="Mage" />
 			<property name="Level" value="6" />
@@ -893,7 +893,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="9c9102c9-60f3-4f55-8825-15a2774d5ca9" name="Academy Warlock Stats">
-			<property name="Nickname" value="Academy Warlock Stats" />
+			<property name="Nickname" value="Warlock Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="4" />
@@ -964,7 +964,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="1d43c343-c85c-49e8-9038-dff61ea41aed" name="Academy Warlord Stats">
-			<property name="Nickname" value="Academy Warlord Stats" />
+			<property name="Nickname" value="Warlord Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Elf" />
 			<property name="Level" value="4" />
@@ -1023,7 +1023,7 @@
 		</card>
 
 		<card id="2563e3d8-8f45-482a-9009-d80a51fdf377" name="Wizard Stats (Apprentice)">
-			<property name="Nickname" value="Wizard Stats (Apprentice)" />
+			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
@@ -1053,7 +1053,7 @@
 			<property name="Traits" value="" />
 		</card>
 		<card id="0cc1de2e-39af-4c34-a9a4-8985eb3ee7ef" name="Academy Wizard Stats">
-			<property name="Nickname" value="Academy Wizard Stats" />
+			<property name="Nickname" value="Wizard Stats" />
 			<property name="Type" value="Magestats" />
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="4" />

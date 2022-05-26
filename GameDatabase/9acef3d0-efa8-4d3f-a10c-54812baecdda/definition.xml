@@ -298,15 +298,15 @@
 		<property name="cBuffs" type="String" hidden="True" ignoreText="False"/>
 		<property name="cAttacks" type="String" hidden="True" ignoreText="False"/>
 		<!--Mage Training properties-->
-		<property name="MageTraining" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSchoolFullTraining" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSchoolOpposed" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSchoolPartialTraining" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSchoolTrainingLevel" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSubtypeTraining" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageComboTraining" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageTypeOpposed" type="String" hidden="False" ignoreText="False"/>
+		<property name="MageTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolCost" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolFullTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolOpposed" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolPartialTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolTrainingLevel" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSubtypeTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageComboTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageTypeOpposed" type="String" hidden="True" ignoreText="False"/>
 		<!--Memory-->
 		<property name="Memory" type="String" hidden="True" ignoreText="False"/>
 		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0"/>
