@@ -120,46 +120,58 @@ namespace Octgn.MageWarsValidator
                 return;
             }
 
-            var curDeck = con.GetLoadedDeck();
-
-            if (curDeck == null)
+            var loadedDeck = con.GetLoadedDeck();
+            //System.Windows.MessageBox.Show(loadedDeck.GetType().Name);
+            if (loadedDeck == null)
             {
-
                 MessageBox.Show("You must have a Mage Wars deck loaded to use this feature.");
                 return;
             }
 
             deckValidated = false;
 
-            var secArray = curDeck.Sections.ToArray();
+            var secArray = loadedDeck.Sections.ToArray(); // Is this needed?
             int cardcount = 0;
             int spellbook = 0;
-            string magename = "none in deck";
+            string magename = "none in deck"; // won't be needed after rework
             int spellpoints = 0;
             string reporttxt = "";
             bool Talos = false;
             int hashtotal = 0;
             
-            //THIS COVERS THE UNIQUE TRAINING OF EXISTING MAGES. NOT FUTURE PROOFING SINCE FINAL SET BEING RELEASED, WILL MAKE 2.0 BETTER FUNCTIONALITY
+            //won't be needed after rework
             List<string> subtypeTrain = new List<string>();
             List<string> comboTrain = new List<string>();
             List<string> levelXTrain = new List<string>();
             
 
-            Dictionary<string, int> training = new Dictionary<string, int>()
+            Dictionary<string, int> training = new Dictionary<string, int>() // won't be needed after rework
                 {
                     {"Dark", 2},{"Holy",2},{"Nature",2},{"Mind",2},{"Arcane",2},{"War",2},{"Earth",2},{"Water",2},{"Air",2},{"Fire",2},{"Creature",0}
                 };
             
-            Dictionary<string, int> levels = new Dictionary<string, int>()
+            Dictionary<string, int> levels = new Dictionary<string, int>() // won't be needed after rework
                 {
                     {"Dark", 0},{"Holy",0},{"Nature",0},{"Mind",0},{"Arcane",0},{"War",0},{"Earth",0},{"Water",0},{"Air",0},{"Fire",0},{"Creature",0}
                 };
 
-
-
+            IMultiCard mageStatCard = getMageStatCard(loadedDeck);  //Will need to handle what to do with Null at some point
+                   
+            if (mageStatCard == null)
+            {
+                System.Windows.MessageBox.Show("Validation result:\nNo mage stat card is detected in the book");
+            }
+            else
+            {
+                reporttxt += string.Format("{1}\n", mageStatCard.Quantity.ToString(), mageStatCard.Name); 
+            }
             
-
+            spellpoints = countSpellPointTotal(loadedDeck, mageStatCard);
+            
+            
+            
+            
+            
             foreach (var section in secArray)
             {
                 foreach (var card in section.Cards)
@@ -175,103 +187,12 @@ namespace Octgn.MageWarsValidator
                     hashtotal += card.GetHashCode() + card.Quantity;
                     string Cname = Property(card, "Name");
                     
-                    //THIS PART IS THE EQUIVALENT OF statCardParse(deck) IN THE SBV
-                    //Get things like the Mage Name, Training, and Spellbook Limit
-                    if (Property(card, "Subtype").Contains("Mage") && Property(card, "Type").Contains("Creature"))
+
+                    if (Property(card, "Subtype").Contains("Mage") && Property(card, "Type").Contains("Creature") && magename == "none in deck")
                     {
-                        magename = card.Name;
+                        magename = Property(card, "Nickname");
                     }
-                    if (Property(card, "Subtype").Contains("Mage") && Property(card, "Type").Contains("Magestats"))
-                    {
-                        // magename = card.Name.Split(' ')[0];
-                        // mageName
-                        var mageschoolcost = Splitme(Property(card, "MageSchoolCost"), ",");
-                        
-                        // mageschoolcost IS THE EQUIVALENT OF 'spellbook' IN THE SpellbookValidator.py
 
-                        var magespellbooklimit = Splitme(Property(card, "Stats"), ",");
-                        // mageStats
-                        reporttxt += string.Format("{1}\n", card.Quantity.ToString(), card.Name);
-                        
-                        
-                        
-                        
-                        
-                        foreach (var msc in mageschoolcost)
-                        {
-                            foreach (var t in training.ToList())
-                            {
-                                if (msc.Contains(t.Key)) //scan mageschoolcost for training info
-                                {
-                                    var tlevel = Splitme(msc, "=");
-                                    training[t.Key] = Convert.ToInt32(tlevel[1]);
-                                    string messageStr = DictionaryToString(training);
-                                }
-                            }
-                        }
-
-                        //Figure out how many spellbook points are allowed by the mage from the "Stats" property
-                        foreach (var mstat in magespellbooklimit)
-                        {
-                            if (mstat.Contains("Spellbook"))
-                            {
-                                spellpoints = Convert.ToInt32(Splitme(mstat, "=")[1]);
-                                //spellPointsTotal
-                            }
-                        }
-
-                        char[] delimiterChars = {'-', '=', ' '};
-                        foreach (string msc in mageschoolcost)
-                        // for key in spellbook:
-                        {
-                            if (msc.StartsWith("S-") | (msc.StartsWith(" S-")))
-                            // if key.startswith ('S-'):
-                            {
-                                string[] addStr = msc.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
-                                foreach (string tempStr in addStr)
-                                {
-                                    int len = tempStr.Length;
-                                    if (len > 1)
-                                    {
-                                        subtypeTrain.Add(tempStr);
-                                    }
-                                }
-                                 
-                            }
-                            else if (msc.StartsWith("C-") | (msc.StartsWith(" C-")))
-                            // elif key.startswith ('C-'):
-                            {
-                                string[] addStr = msc.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
-                                foreach (string tempStr in addStr)
-                                {
-                                    comboTrain.Add(tempStr);
-                                }
-                            }
-                            else if (msc.StartsWith("L-") | (msc.StartsWith(" L-")))
-                            // elif key.startswith ('L-'):
-                            {
-                                
-                                string[] addStr = msc.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
-                                foreach (string tempStr in addStr)
-                                {
-                                    if (tempStr.Length > 1)
-                                    {
-                                        training[tempStr] = 2;
-                                    }
-                                    levelXTrain.Add(tempStr);
-                                }
-                            }
-                        }
-                        continue;
-                    }
-                    
-                    
-                    
-
-
-
-
-                    // FROM HERE BELOW ARE THINGS WRAPPED UP IN cardPointCount FROM THE SBV. WILL NEED TO REWRITE WITH THE NEW METHODOLOGY
                     if (HasProperty(card, "Traits"))
                     {
                         if (Property(card, "Traits").Contains("Novice")) //Novice spells always cost 1 point
@@ -520,17 +441,7 @@ namespace Octgn.MageWarsValidator
                                 bool legal = false;
 
                                 //check mage restriction
-                                string mname = magename;
-                                if (mname.Contains("Beastmaster")) mname = "Beastmaster";
-                                if (mname.Contains("Wizard")) mname = "Wizard";
-                                if (mname.Contains("Warlock")) mname = "Warlock";
-                                if (mname.Contains("Warlord")) mname = "Warlord";
-                                if (mname.Contains("Priestess")) mname = "Priestess";
-                                if (mname.Contains("Paladin")) mname = "Paladin";
-                                if (mname.Contains("Siren")) mname = "Siren";
-                                if (mname.Contains("Forcemaster")) mname = "Forcemaster";
-                                if (mname.Contains("Monk")) mname = "Monk";
-                                if (onlyPhrase.Contains(mname))
+                                if (onlyPhrase.Contains(magename))
                                     legal = true;
 
                                 //check class restriction
@@ -596,7 +507,7 @@ namespace Octgn.MageWarsValidator
 
                         cardcount += card.Quantity;
                         reporttxt += string.Format("{0} - {1} - {2}\n", totalLevel.ToString(), cost.ToString(), (cost * card.Quantity).ToString());
-                        spellbook+=cost*card.Quantity;
+                        spellbook += cost*card.Quantity;
                         //System.Windows.MessageBox.Show(card.Name + "\nPoints:"+cost);
                     }   //card has school and level 
                 }   //foreach card
@@ -607,9 +518,9 @@ namespace Octgn.MageWarsValidator
             reporttmp += "Key: Quantity - Spell Name - Spell Level - Spellbook Cost - Total Spellbook Cost\n\n";
             reporttmp += reporttxt;
             Clipboard.SetText(reporttmp);
-            if (magename == "none in deck")
+            if (mageStatCard == null)
             {
-                System.Windows.MessageBox.Show("Validation result:\nNo mage is detected in the book");
+                System.Windows.MessageBox.Show("Validation result:\nNo mage stat card is detected in the book");
             }
             else
             {
@@ -623,6 +534,270 @@ namespace Octgn.MageWarsValidator
                 totalCards = cardcount;
                 validatedDeckHash = hashtotal;
             }
+        
+        }// OnClick
+
+        // DOWN HERE
+        public int countSpellPointTotal(IDeck loadedDeck, IMultiCard mageStatCard)
+        {
+            int totalSpellPoints = 0;
+            var secArray = loadedDeck.Sections.ToArray();
+            foreach (var section in secArray)
+            {
+                foreach (var card in section.Cards)
+                {
+                    if (!(Property(card, "Subtype").Contains("Mage") || Property(card, "Type").Contains("Magestats") || Property(card, "Subtype").Contains("Aura")))
+                    {
+                        System.Windows.MessageBox.Show(card.Name);
+                        totalSpellPoints += determineCardPointTotal(card, mageStatCard);
+                    }
+                    //Check mage/school only cards
+                }
+            }
+
+            return totalSpellPoints;
+        }
+
+
+        public int determineCardPointTotal(IMultiCard card, IMultiCard mageStatCard)
+        {
+            /*remaining functions to make
+            Full School Training
+            Type Opposed (FM, creatures)
+            School Opposed
+            All others
+            */
+            int cardSpellPoints = 0;
+            int rawCardLevel = getRawCardlevel(card);
+            System.Windows.MessageBox.Show("rawCardLevel: "+rawCardLevel.ToString());
+
+
+            if (isNovice(card))
+            {
+                System.Windows.MessageBox.Show("Is Novice");
+                int multiplier = 1;
+                cardSpellPoints = multiplier*rawCardLevel;
+            }
+            else if (isComboTraining(card, mageStatCard))
+            {
+                System.Windows.MessageBox.Show("Is Combo");
+                int multiplier = 1;
+                cardSpellPoints = multiplier*rawCardLevel;
+            }
+            else if (isSubtypeTraining(card, mageStatCard))
+            {
+                System.Windows.MessageBox.Show("Is Subtype");
+                int multiplier = 1;
+                cardSpellPoints = multiplier*rawCardLevel;                
+            }
+            else if (hasPartialTraining(card, mageStatCard))
+            {
+                System.Windows.MessageBox.Show("Partial Training");
+                cardSpellPoints = partialTrainingPointsToAdd(card, mageStatCard);
+            }
+            return cardSpellPoints;
+        }
+
+
+        public int partialTrainingPointsToAdd(IMultiCard card, IMultiCard mageStatCard)
+        {
+            int cardSpellPoints = 0;
+            if (Property(card, "School").Contains("+"))
+            {
+                string[] cardSchoolList = splitCardProperty(card, "School");
+                string[] cardLevelList = splitCardProperty(card, "Level");
+                string Training = Property(mageStatCard, "MageSchoolPartialTraining");
+                foreach(string school in cardSchoolList)
+                {
+                    if (Training.Contains(school))
+                    {
+                        string[] magePartialTraining = Training.Replace(" ",String.Empty).Split(',');
+                        int mageIndex = Array.FindIndex(magePartialTraining, m => m == school) + 1;
+                        int cardIndex = Array.FindIndex(cardSchoolList, m => m == school);
+                        int cardSchoolLevel = Int32.Parse(cardLevelList[cardIndex]);
+                        int mageTrainingLevel = Int32.Parse(magePartialTraining[mageIndex]);
+                            if (cardSchoolLevel<=mageTrainingLevel)
+                            {
+                                int multiplier = 1;
+                                cardSpellPoints += cardSchoolLevel*multiplier;
+                            }
+                            else
+                            {
+                                int multiplier = 2;
+                                cardSpellPoints += cardSchoolLevel*multiplier;
+                            }
+                    }
+                    else
+                    {
+                        int cardIndex = Array.FindIndex(cardSchoolList, m => m == school);
+                        int cardSchoolLevel = Int32.Parse(cardLevelList[cardIndex]);
+                        int multiplier = 2;
+                        cardSpellPoints += cardSchoolLevel*multiplier;
+                    }
+                }
+                return cardSpellPoints;
+            }
+            else
+            {
+                int cardLevel = getRawCardlevel(card);
+                int multiplier = 1;
+                cardSpellPoints += cardLevel*multiplier;
+                return cardSpellPoints;
+            }
+        }
+
+        public bool hasPartialTraining(IMultiCard card,IMultiCard mageStatCard)
+        {
+            string Training = Property(mageStatCard, "MageSchoolPartialTraining");
+            if (!(Training.Contains('0')))
+            {
+                if (hasSchoolMatch(Training, card))
+                {
+                    return hasLevelMatch(Training, card);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool hasLevelMatch(string Training, IMultiCard card)
+        {
+            string[] cardSchoolList = splitCardProperty(card, "School");
+            string[] cardLevelList = splitCardProperty(card, "Level");
+            foreach(string school in cardSchoolList)
+            {
+                if (Training.Contains(school))
+                {
+                    string[] magePartialTraining = Training.Replace(" ",String.Empty).Split(',');
+                    int mageIndex = Array.FindIndex(magePartialTraining, m => m == school) + 1;
+                    int cardIndex = Array.FindIndex(cardSchoolList, m => m == school);
+                    if (Int32.Parse(cardLevelList[cardIndex])<=Int32.Parse(magePartialTraining[mageIndex]))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool hasSchoolMatch(string Training,IMultiCard card)
+        {
+            string[] cardSchoolList = splitCardProperty(card, "School");
+            foreach (var school in cardSchoolList)
+            {
+                if (Training.Contains(school))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public string[] splitCardProperty(IMultiCard card, string property)
+        {
+            if (Property(card, property).Contains('+'))
+            {
+                string[] cardPropertyList = Property(card, property).Replace(" ",String.Empty).Split('+');
+                return cardPropertyList;
+            }
+            else
+            {
+                string[] cardPropertyList = Property(card, property).Replace(" ",String.Empty).Split('/');
+                return cardPropertyList;
+            }
+        }
+
+        public bool isSubtypeTraining(IMultiCard card,IMultiCard mageStatCard)
+        {
+            bool subtypeFlag = false;
+            if (!(Property(mageStatCard, "MageSubtypeTraining").Contains('0')))
+            {   
+                string[] mageSubtypeTraining = Property(mageStatCard, "MageSubtypeTraining").Replace(" ",String.Empty).Split(',');
+                foreach (var element in mageSubtypeTraining)
+                {
+                    if(Property(card, "Subtype").Contains(element))
+                    {
+                        subtypeFlag = true;
+                    }
+                }
+            }
+            return subtypeFlag;
+        }
+
+
+        public bool isComboTraining(IMultiCard card, IMultiCard mageStatCard)
+        {
+            bool comboFlag = false;
+            if (!(Property(mageStatCard, "MageComboTraining").Contains('0')))
+            {   
+                comboFlag = true;
+                string[] comboTraining = Property(mageStatCard, "MageComboTraining").Replace(" ",String.Empty).Split(';');
+                foreach(var element in comboTraining)
+                {
+                    string[] testableAttributes = element.Replace(" ",String.Empty).Split(',');
+                    if (!(Property(card, testableAttributes[1]).Contains(testableAttributes[0])))
+                    {
+                        comboFlag = false;
+                        return comboFlag;
+                    }
+                }
+            }
+            return comboFlag;
+        }
+
+        public bool isNovice(IMultiCard card)
+        {
+            if (Property(card, "Traits").Contains("Novice"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int getRawCardlevel(IMultiCard card)
+        {
+            int rawCardLevel = 0;
+            if (Property(card, "Level").Contains("+"))
+            {
+                string[] cardLevel = Property(card, "Level").Split('+');
+                foreach (var level in cardLevel)
+                {
+                    rawCardLevel += Int32.Parse(level);
+                }
+            }
+            else
+            {
+                string[] cardLevel = Property(card, "Level").Split('/');
+                rawCardLevel += Int32.Parse(cardLevel[0]);
+            }
+            return rawCardLevel;
+        }
+        
+
+        private IMultiCard getMageStatCard(IDeck loadedDeck)
+        {
+            var secArray = loadedDeck.Sections.ToArray();
+            foreach (var section in secArray)
+            {
+                foreach (var card in section.Cards)
+                {
+                    if (Property(card, "Subtype").Contains("Mage") && Property(card, "Type").Contains("Magestats"))
+                    {
+                        return card;
+                    }
+                    
+                }
+            }
+            return null;
         }
 
         private string[] Splitme(string prop, string delimstr)
@@ -645,6 +820,7 @@ namespace Octgn.MageWarsValidator
             }
             return dictionaryString.TrimEnd(',', ' ') + "}";  
         } 
+
         public static bool isEmpty<T>(List<T> list)
         {
             if (list == null)
@@ -653,6 +829,7 @@ namespace Octgn.MageWarsValidator
             }
             return !list.Any();
         }
+
         private string messageBoxTest(string message)
         {
             string str = message;
