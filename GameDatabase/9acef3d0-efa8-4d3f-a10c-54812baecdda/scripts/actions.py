@@ -726,7 +726,7 @@ def flipcard(card, x = 0, y = 0):
 			card.alternate = "2"
 			if "Mage" in card.Subtype: notify("{} has decided to play with the Alternative Art version of the {}.\n".format(me, card))
 			else: notify("{} flips {} to an Alternate Art version of the card.\n".format(me, card)) 
-	 	if currentCardAlt != "":
+		if currentCardAlt != "":
 			if int(currentCardAlt) < cardAlts:
 				card.alternate = str(int(currentCardAlt) + 1)
 				if "Mage" in card.Subtype: notify("{} has decided to play with the Standard Art version of the {}.\n".format(me, card))

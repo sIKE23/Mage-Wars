@@ -31,7 +31,6 @@ Changelog: (just for fun, nothing actually helpful here anymore)
 		Completed all functionality except Combo School-Type, Level X, card counts, and redoing Mage and School only cards
 #######'''
 
-###### instead of parsing the stat card, find it and pass it with each card being compared
 def validateDeck(deck):
 	#deck object comes from OCTGN API
 	mute()
@@ -131,13 +130,13 @@ def addPointsBasedOnFullSchoolTraining(mageStatCard, card):
 		for school in cardSchoolList:
 			if school in training:
 				cardLevelIndex = cardSchoolList.index(school)
-				cardPointsCost = addPoints('trained', int(cardLevelList[cardLevelIndex]))
+				cardPointsCost += addPoints('trained', int(cardLevelList[cardLevelIndex]))
 			elif school in opposed:
 				cardLevelIndex = cardSchoolList.index(school)
-				cardPointsCost = addPoints('opposed', int(cardLevelList[cardLevelIndex]))
+				cardPointsCost += addPoints('opposed', int(cardLevelList[cardLevelIndex]))
 			else:
 				cardLevelIndex = cardSchoolList.index(school)
-				cardPointsCost = addPoints('neutral', int(cardLevelList[cardLevelIndex]))		
+				cardPointsCost += addPoints('neutral', int(cardLevelList[cardLevelIndex]))		
 	else:
 		cardLevel = getTotalCardLevel(card)
 		opposedFound = []
@@ -212,9 +211,9 @@ def partialTrainingPointsToAdd(mageStatCard, card):
 		cardPointsCost = addPoints('trained', cardLevel)		
 		return cardPointsCost
 
-def isSubtypeInTraining(mageStatCard, card):
-	cardSubtypeList = card.subtype.replace(' ','').split(',') 
-	if mageStatCard.MageSubtypeTraining != '':
+def isSubtypeInTraining(mageStatCard, card): 
+	if mageStatCard.MageSubtypeTraining != '' and card.Subtype != '':
+		cardSubtypeList = card.subtype.replace(' ','').split(',')
 		if True in [cardSubtype in mageStatCard.MageSubtypeTraining for cardSubtype in cardSubtypeList]:
 			return True
 		else:
