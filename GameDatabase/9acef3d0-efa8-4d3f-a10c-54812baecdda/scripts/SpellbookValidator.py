@@ -200,6 +200,9 @@ def partialTrainingPointsToAdd(mageStatCard, card):
 					cardPointsCost += addPoints('trained', int(cardLevel[cardLevelIndex]))
 				else:
 					cardPointsCost += addPoints('neutral', int(cardLevel[cardLevelIndex]))	
+			elif school in mageStatCard.MageSchoolFullTraining.replace(' ','').split(','):
+				cardLevelIndex = cardSchool.index(school)
+				cardPointsCost += addPoints('trained', int(cardLevel[cardLevelIndex]))
 			else:
 				cardLevelIndex = cardSchool.index(school)
 				cardPointsCost += addPoints('neutral', int(cardLevel[cardLevelIndex]))
