@@ -406,12 +406,6 @@ namespace Octgn.MageWarsValidator
                     }
                     
                 }
-                
-                /*bool allOpposedFlag = false;
-                if (opposedFound.All(o => o == true))
-                {
-                    allOpposedFlag = true;
-                }//Can probably just wrap this in to the appropriate else if, but I'm going to dinner. Refactor later*/
 
                 if (trainingFound)
                 {

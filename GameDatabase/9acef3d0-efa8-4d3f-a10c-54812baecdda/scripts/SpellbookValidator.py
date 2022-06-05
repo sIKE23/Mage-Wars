@@ -2,7 +2,7 @@
 #v2.2.0.0#
 Created 30 April 2019
 
-Changelog:
+Changelog: (just for fun, nothing actually helpful here anymore)
 	Sharkbait: 17 May 2022:
 		What is it about May and me redoing this script? Anyway, refactored again and it's much betterTM now. It can still be improved, but this will do for the moment
 
@@ -31,113 +31,87 @@ Changelog:
 		Completed all functionality except Combo School-Type, Level X, card counts, and redoing Mage and School only cards
 #######'''
 
-
+###### instead of parsing the stat card, find it and pass it with each card being compared
 def validateDeck(deck):
 	#deck object comes from OCTGN API
 	mute()
-	bookTotal = createSpellbookAndCheck(deck)
-	notify("Spellbook of {} calculated to {} points".format(me,bookTotal))
+	mageStatCard = findMageStatCard(deck)
+	if mageStatCard == "Your deck is missing a Magestats card.":
+		notify(mageStatCard)
+	else:
+		calculatedSpellbookPointTotal = createSpellbookAndCheck(deck, mageStatCard)
+		notify("Spellbook of {} calculated to {} points".format(me,calculatedSpellbookPointTotal))
 	return True
 
-def parseMageStatCard(deck):
-    mute()
-    for c in deck:
-        debug(c.name)
-        if c.Type == "Magestats":
-            mageSchoolFullTraining = c.MageSchoolFullTraining.replace(' ','').split(',')
-            mageSchoolOpposed = c.MageSchoolOpposed.replace(' ','').split(',')
-            mageSchoolPartialTraining = c.MageSchoolPartialTraining.replace(' ','').split(',')
-            mageSubtypeTraining = c.MageSubtypeTraining.replace(' ','').split(',')
-            mageComboTraining = c.MageComboTraining.replace(' ','').split(';')
-            mageTypeOpposed = c.MageTypeOpposed.replace(' ','').split(',')
-            mageName = c.nickname.split(" Stats")[0]
-            break
-    return [mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName]
-	
-def createSpellbookAndCheck(deck):
+def findMageStatCard(deck):
+	mute()
+	for card in deck:
+		if card.Type == 'Magestats':
+			return card
+	return "Your deck is missing a Magestats card."
+
+def createSpellbookAndCheck(deck, mageStatCard):
 	mute()
 	cardDict = {}
 	totalBookPointsCost = 0
-	mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed, mageName = parseMageStatCard(deck)
 	for card in deck: #run through deck adding levels and checking counts
 		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype or "Aura" in card.Subtype or "Talos" in card.Name):#None of these cards cost points to include
 			debug(card.name)
-			totalBookPointsCost += countSpellbookPointTotal(card, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed)
+			totalBookPointsCost += countCardPointCost(mageStatCard, card)
 			debug(totalBookPointsCost)
+
 			#This creates a Dict to count and check limits on all the non-Mage and non-Magestats cards.
 			checkCounts(card, cardDict)
-			if "Only" in card.traits:
-				checkMageAndSchoolOnly(card, mageName, [mageSchoolFullTraining,mageSchoolPartialTraining])
+			
+			checkForMageSchoolRestrictionViolation(mageStatCard, card)
+
 	return totalBookPointsCost
 
-def countSpellbookPointTotal(card, mageSchoolFullTraining, mageSchoolOpposed, mageSchoolPartialTraining, mageSubtypeTraining, mageComboTraining, mageTypeOpposed):
-	spellbookPointTotal = 0
-	rawCardLevel = getRawCardLevel(card)
+def countCardPointCost(mageStatCard, card):
+	cardPointsCost = 0
+	totalCardLevel = getTotalCardLevel(card)
 	if isNovice(card):
 		debug('Novice')
-		multiplier = 1
-		spellbookPointTotal += rawCardLevel*multiplier
-		debug(spellbookPointTotal)
-	elif mageComboTraining != [''] and compareCardToCombo(mageComboTraining, card):
+		cardPointsCost += addPoints('trained', totalCardLevel)
+	elif isCardCombo(mageStatCard, card):
 		debug('Combo')
-		multiplier = 1
-		spellbookPointTotal += rawCardLevel*multiplier
-	elif mageSubtypeTraining != [''] and compareSubtypeToTraining(mageSubtypeTraining, card):
+		cardPointsCost += addPoints('trained', totalCardLevel)
+	elif isSubtypeInTraining(mageStatCard, card):
 		debug('Subtype')
-		multiplier = 1
-		spellbookPointTotal += rawCardLevel*multiplier
-		debug(spellbookPointTotal)
-	elif mageSchoolPartialTraining != [''] and compareToPartialTraining(mageSchoolPartialTraining, card):
+		cardPointsCost += addPoints('trained', totalCardLevel)
+	elif compareToPartialTraining(mageStatCard, card):
 		debug('Partial')
-		spellbookPointTotal += partialTrainingPointsToAdd(mageSchoolPartialTraining, card)
-		debug(spellbookPointTotal)
-	elif mageSchoolFullTraining !=[''] and hasSchoolMatch(mageSchoolFullTraining, card):
-		debug('FullMatch')
-		spellbookPointTotal += fullSchoolTrainingPointsToAdd(mageSchoolFullTraining, mageSchoolOpposed, card)
-		debug(spellbookPointTotal)
-	elif mageTypeOpposed !=[''] and isOpposedCardType(mageTypeOpposed, card):
+		cardPointsCost += partialTrainingPointsToAdd(mageStatCard, card)
+	elif isOpposedCardType(mageStatCard, card):
 		debug('Opposed Type Match')
-		multiplier = 3
-		spellbookPointTotal += rawCardLevel*multiplier
-		debug(spellbookPointTotal)
-	elif mageSchoolOpposed !=[''] and isOpposedCardSchool(mageSchoolOpposed,card):
-		debug('School Opposed Match')
-		multiplier = 3
-		spellbookPointTotal += rawCardLevel*multiplier
-		debug(spellbookPointTotal)
+		cardPointsCost += addPoints('opposed', totalCardLevel)
+	elif (hasSchoolMatch(mageStatCard.MageSchoolFullTraining, card)) or (hasSchoolMatch(mageStatCard.MageSchoolOpposed, card)):
+		debug('Full or OpposedMatch')
+		cardPointsCost += addPointsBasedOnFullSchoolTraining(mageStatCard, card)
 	else:
 		debug('No Train or Opposed')
+		cardPointsCost += addPoints('neutral', totalCardLevel)
+	return cardPointsCost
+
+def addPoints(training, level):
+	if training == 'trained':
+		multiplier = 1
+		cardPointsCost = multiplier*level
+	elif training == 'opposed':
+		multiplier = 3
+		cardPointsCost = multiplier*level
+	else:
 		multiplier = 2
-		spellbookPointTotal += rawCardLevel*multiplier
-		debug(spellbookPointTotal)
-	return spellbookPointTotal
+		cardPointsCost = multiplier*level
+	return cardPointsCost
 
-def splitCardSchool(card):
-	if '+' in card.School:
-		cardSchool = card.school.split('+')
+def splitCardProperty(card, property):
+	splitProperty = getattr(card, property)
+	if '+' in splitProperty:
+		cardProperty = splitProperty.split('+')
 	else:
-		cardSchool = card.school.split('/')
-	return cardSchool
-
-def splitCardLevel(card):
-	if '+' in card.Level:
-		cardLevel = card.level.split('+')
-	else:
-		cardLevel = card.level.split('/')
-	return cardLevel
-
-def isOpposedCardSchool(mageSchoolOpposed,card):
-	cardSchool = splitCardSchool(card)
-	opposedFound = []
-	for school in cardSchool:
-		if school in mageSchoolOpposed:
-			opposedFound.append(True)
-		else:
-			opposedFound.append(False)
-	if True in opposedFound:
-		return True
-	else:
-		return False
+		cardProperty = splitProperty.split('/')
+	return cardProperty
 
 def isOpposedCardType(mageTypeOpposed, card):
 	cardType = card.type.replace(' ','').split(',')
@@ -146,97 +120,116 @@ def isOpposedCardType(mageTypeOpposed, card):
 	else:
 		return False
 
-def fullSchoolTrainingPointsToAdd(Training, opposed, card):
+#Still some refactoring to do here
+def addPointsBasedOnFullSchoolTraining(mageStatCard, card):
+	cardPointsCost = 0
+	cardSchoolList = splitCardProperty(card, 'school')
+	training = mageStatCard.MageSchoolFullTraining
+	opposed = mageStatCard.MageSchoolOpposed
 	if '+' in card.School:
-		spellbookPointsToAdd = 0
-		cardSchool = splitCardSchool(card)
-		cardLevel = splitCardLevel(card)
-		for school in cardSchool:
-			if school in Training:
-				cardLevelIndex = cardSchool.index(school)
-				multiplier = 1
-				spellbookPointsToAdd += int(cardLevel[cardLevelIndex])*multiplier
+		cardLevelList = splitCardProperty(card, 'level')
+		for school in cardSchoolList:
+			if school in training:
+				cardLevelIndex = cardSchoolList.index(school)
+				cardPointsCost = addPoints('trained', int(cardLevelList[cardLevelIndex]))
 			elif school in opposed:
-				cardLevelIndex = cardSchool.index(school)
-				multiplier = 3
-				spellbookPointsToAdd += int(cardLevel[cardLevelIndex])*multiplier
+				cardLevelIndex = cardSchoolList.index(school)
+				cardPointsCost = addPoints('opposed', int(cardLevelList[cardLevelIndex]))
 			else:
-				cardLevelIndex = cardSchool.index(school)
-				multiplier = 2
-				spellbookPointsToAdd += int(cardLevel[cardLevelIndex])*multiplier
-		return spellbookPointsToAdd		
+				cardLevelIndex = cardSchoolList.index(school)
+				cardPointsCost = addPoints('neutral', int(cardLevelList[cardLevelIndex]))		
 	else:
-		cardLevel = getRawCardLevel(card)
-		multiplier = 1
-		spellbookPointsToAdd = cardLevel*multiplier			
-		return spellbookPointsToAdd
+		cardLevel = getTotalCardLevel(card)
+		opposedFound = []
+		trainingFound = False
+		for school in cardSchoolList:
+			if school in training:
+				trainingFound = True
+				opposedFound.append(False)
+			elif school in opposed:
+				opposedFound.append(True)
+			else:
+				opposedFound.append(False)
+		if trainingFound:
+			cardPointsCost = addPoints('trained', cardLevel)
+		elif all(opposedFound):
+			cardPointsCost = addPoints('opposed', cardLevel)
+		else:
+			cardPointsCost = addPoints('neutral', cardLevel)
+	return cardPointsCost
 
-def compareToPartialTraining(mageSchoolPartialTraining, card):
-	if hasSchoolMatch(mageSchoolPartialTraining, card):
-		return hasLevelMatch(mageSchoolPartialTraining, card)
-	else:
-		return False
+def compareToPartialTraining(mageStatCard, card):
+	if mageStatCard.MageSchoolPartialTraining != '':
+		mageSchoolPartialTraining = mageStatCard.MageSchoolPartialTraining.replace(' ','').split(',')
+		if hasSchoolMatch(mageSchoolPartialTraining, card):
+			return hasLevelMatch(mageSchoolPartialTraining, card)
+		else:
+			return False
+	return False
 
 def hasSchoolMatch(Training, card):
-	cardSchool = splitCardSchool(card)
+	cardSchool = splitCardProperty(card, 'school')
 	for school in cardSchool:
 		if school in Training:
 			return True
 	return False
 
-def hasLevelMatch(mageSchoolPartialTraining, card):
-	cardSchool = splitCardSchool(card)
-	cardLevel = splitCardLevel(card)
+def hasLevelMatch(Training, card):
+	cardSchool = splitCardProperty(card, 'school')
+	cardLevel = splitCardProperty(card, 'level')
 	for school in cardSchool:
-		if school in mageSchoolPartialTraining:
-			mageSchoolLevelIndex = mageSchoolPartialTraining.index(school)+1
+		if school in Training:
+			mageSchoolLevelIndex = Training.index(school)+1
 			cardLevelIndex = cardSchool.index(school)
-			if int(mageSchoolPartialTraining[mageSchoolLevelIndex]) >= int(cardLevel[cardLevelIndex]):
+			if int(Training[mageSchoolLevelIndex]) >= int(cardLevel[cardLevelIndex]):
 				return True
 	return False
 
-
-def partialTrainingPointsToAdd(mageSchoolPartialTraining, card):
+#Still some refactoring to do here
+def partialTrainingPointsToAdd(mageStatCard, card):
+	mageSchoolPartialTraining = mageStatCard.MageSchoolPartialTraining.replace(' ','').split(',')
 	if '+' in card.School:
-		spellbookPointsToAdd = 0
-		cardSchool = splitCardSchool(card)
-		cardLevel = splitCardLevel(card)
+		cardPointsCost = 0
+		cardSchool = splitCardProperty(card, 'school')
+		cardLevel = splitCardProperty(card, 'level')
 		for school in cardSchool:
 			if school in mageSchoolPartialTraining:
 				mageSchoolLevelIndex = mageSchoolPartialTraining.index(school)+1
 				cardLevelIndex = cardSchool.index(school)
 				if int(mageSchoolPartialTraining[mageSchoolLevelIndex]) >= int(cardLevel[cardLevelIndex]):
-					multiplier = 1
-					spellbookPointsToAdd += int(cardLevel[cardLevelIndex])*multiplier
+					cardPointsCost += addPoints('trained', int(cardLevel[cardLevelIndex]))
 				else:
-					multiplier = 2
-					spellbookPointsToAdd += int(cardLevel[cardLevelIndex])*multiplier	
+					cardPointsCost += addPoints('neutral', int(cardLevel[cardLevelIndex]))	
 			else:
 				cardLevelIndex = cardSchool.index(school)
-				multiplier = 2
-				spellbookPointsToAdd += int(cardLevel[cardLevelIndex])*multiplier
-		return spellbookPointsToAdd		
+				cardPointsCost += addPoints('neutral', int(cardLevel[cardLevelIndex]))
+		return cardPointsCost		
 	else:
-		cardLevel = getRawCardLevel(card)
-		multiplier = 1
-		spellbookPointsToAdd = cardLevel*multiplier			
-		return spellbookPointsToAdd
+		cardLevel = getTotalCardLevel(card)
+		cardPointsCost = addPoints('trained', cardLevel)		
+		return cardPointsCost
 
-def compareSubtypeToTraining(mageSubtypeTraining, card):
-	cardSubtypeList = card.subtype.replace(' ','').split(',') 	#Get card Subtype(s)
-	if True in [cardSubtype in mageSubtypeTraining for cardSubtype in cardSubtypeList]:
-		return True
+def isSubtypeInTraining(mageStatCard, card):
+	cardSubtypeList = card.subtype.replace(' ','').split(',') 
+	if mageStatCard.MageSubtypeTraining != '':
+		if True in [cardSubtype in mageStatCard.MageSubtypeTraining for cardSubtype in cardSubtypeList]:
+			return True
+		else:
+			return False
 	else:
 		return False
 
-def compareCardToCombo(mageComboTraining, card):
-	comboFlag = True
-	for element in mageComboTraining:
-		testableAttributes = element.replace(' ','').split(',')
-		if not testableAttributes[0] in getattr(card, testableAttributes[1]): 
-			comboFlag = False
-			return comboFlag
-	return comboFlag
+def isCardCombo(mageStatCard, card):
+	if mageStatCard.MageComboTraining != '':
+		comboFlag = True
+		mageComboTraining = mageStatCard.MageComboTraining.Split(';')
+		for element in mageComboTraining:
+			testableAttributes = element.replace(' ','').split(',')
+			if not testableAttributes[0] in getattr(card, testableAttributes[1]): 
+				comboFlag = False
+				return comboFlag
+		return comboFlag
+	return False
 
 
 def isNovice(card):
@@ -245,24 +238,24 @@ def isNovice(card):
     else:
         return False
 
-def getRawCardLevel(card):
+def getTotalCardLevel(card):
 	if '/' in card.school:
-		rawCardLevel = card.level.split('/')[0]
-		rawCardLevel = int(rawCardLevel)
+		totalCardLevel = card.level.split('/')[0]
+		totalCardLevel = int(totalCardLevel)
 	elif '+' in card.school:
 		cardLevel = card.level.split('+')
-		rawCardLevel = 0
+		totalCardLevel = 0
 		for level in cardLevel:
-			rawCardLevel += int(level)
+			totalCardLevel += int(level)
 	else:
-		rawCardLevel = int(card.level)
-	return rawCardLevel
+		totalCardLevel = int(card.level)
+	return totalCardLevel
 
 
 def checkCounts(card, cardDict):
 	mute()
 	cardDict = addCardToCardDict(card, cardDict)
-	level = getRawCardLevel(card)
+	level = getTotalCardLevel(card)
 	if "Epic" in card.traits and cardDict[card.name]>1:
 		notify("***ILLEGAL DECK***: multiple copies of Epic card {} found in spellbook".format(card.Name))
 		return False
@@ -281,19 +274,26 @@ def addCardToCardDict(card, cardDict):
 		cardDict[card.name]=1
 	return cardDict
 
-def checkMageAndSchoolOnly(card, mageName, schoolTrn):
-	mute()
-	ok = False
+def checkForMageSchoolRestrictionViolation(mageStatCard, card):
+	if "Only" in card.traits:
+		mageRestrictionName = mageStatCard.Nickname.replace(' ','').split('Stats')[0]
+		if isCorrectMage(card, mageRestrictionName) or isCorrectSchool(mageStatCard, card):
+			return False
+		else:
+			notify("***ILLEGAL DECK***: the card {} is not legal in a {} Spellbook.".format(card.Name,mageStatCard.Name.split(" Stats")[0]))
+			return True
+	return False
 
-	#Still needs to account for level X training
-	schoolList = ["Holy", "Dark", "Mind", "Arcane", "Nature", "War", "Fire", "Water", "Air", "Earth"]
-	
-	if mageName+" Only" in card.traits:
-		ok = True
-		
-	if [mageTrn in schoolList for mageTrn in schoolTrn]:
-		ok = True
+def isCorrectMage(card, name):
+	legal = False
+	if name+" Only" in card.traits:
+		legal = True
+	return legal
 
-	if not ok:
-		notify("***ILLEGAL DECK***: the card {} is not legal in a {} Spellbook.".format(card.Name,mageName))
-		return False
+def isCorrectSchool(mageStatCard, card):
+	legal = False
+	if compareToPartialTraining(mageStatCard, card):
+		legal = True
+	elif (hasSchoolMatch(mageStatCard.MageSchoolFullTraining, card)):
+		legal = True
+	return legal
