@@ -5,40 +5,8 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	<markers>
-        <marker id="a95c1445-674c-4ab6-9247-d0b0fac80fb3" name="SealToken" />
-    </markers>
-	<cards>
-	
-		<card id="0f49d44a-65c9-4603-9468-202bfbe537f3" name="Warlock">
-			<property name="Nickname" value="Warlock" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card>
-		<card id="9c9102c9-60f3-4f55-8825-15a2774d5ca9" name="Academy Warlock Stats">
-			<property name="Nickname" value="Academy Warlock Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained Dark Magic. Holy spells cost triple SBP." />
-			<property name="Stats" value="Spellbook=40, Life=26, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="26" />
-			<property name="StatSpellBookPoints" value="40" />
-			<property name="StatStartingMana"  value="-10" />
-			<property name="MageSchoolCost" value="Dark=1, Holy=3" />
-			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Stuff" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
-		
+
+	<cards>		
 		<card id="14497585-2895-4283-8d39-5dcfb597e193" name="Firestream">
 			<property name="Nickname" value="Firestream" />
 			<property name="Type" value="Attack" />

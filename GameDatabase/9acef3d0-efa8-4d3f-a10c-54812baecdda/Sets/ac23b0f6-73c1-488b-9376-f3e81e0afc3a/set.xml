@@ -5,73 +5,9 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	<markers>
-		<marker id="06c01638-6a75-43ef-82bc-807764521c5a" name="Academy Action" />
-		<marker id="1eeac15f-fb5d-4305-b39c-16b1b1c8b6e3" name="Academy Action Used" />
-		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate Token" />
-		<marker id="4546a2ed-3ac4-4baf-8d56-9f51af888a75" name="Charge" />
-		<marker id="ede2252f-b47f-4ea2-a448-08fd3b22d506" name="Stagger" />
-		<marker id="fcf39fa4-238a-4cb6-92bb-5f561be747c0" name="Wish" />
-	</markers>
 
 
 	<cards>
-		<card id="0a13b5b8-a37b-43d3-877e-9972e4313387" name="Beastmaster">
-			<property name="Nickname" value="Beastmaster" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card>
-		<card id="0a21940e-a4fd-4b85-8cf9-16ebdd6de9b2" name="Academy Beastmaster Stats">
-			<property name="Nickname" value="Academy Beastmaster Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Wood Elf" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained Nature Magic. Fire spells cost triple SBP." />
-			<property name="Stats" value="Spellbook=40, Life=24, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="24" />
-			<property name="StatSpellBookPoints" value="40" />
-			<property name="StatStartingMana"  value="-10" />
-			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
-			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Stuff" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
-		<card id="0b441073-8bbf-4957-9094-9ff101fb37cf" name="Wizard">
-			<property name="Nickname" value="Wizard" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card>
-		<card id="0cc1de2e-39af-4c34-a9a4-8985eb3ee7ef" name="Academy Wizard Stats">
-			<property name="Nickname" value="Academy Wizard Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, Human" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained Arcane and Air Magic." />
-			<property name="Stats" value="Spellbook=40, Life=21, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="21" />
-			<property name="StatSpellBookPoints" value="40" />
-			<property name="StatStartingMana"  value="-7" />
-			<property name="MageSchoolCost" value="Arcane=1, Air=1" />
-			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Stuff" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
 		<card id="10cfffeb-67bb-44a0-bd8b-683d8153f651"  name="Arcane Missiles" >
 			<property name="Nickname" value="Arcane Missiles" />
 			<property name="Type" value="Attack" />

@@ -3,23 +3,23 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	name="Mage Wars"
 	id="9acef3d0-efa8-4d3f-a10c-54812baecdda"
-	octgnVersion="3.1.225.0"
+	octgnVersion="3.1.255.0"
 	scriptVersion ="3.1.0.2"
 	version="3.0.0.0"
 	markersize="12"
 	tags="Mage Wars"
 	description="Mage Wars is the customizable strategy game of dueling mages. Players take on the role of powerful mages, stepping into the arena to battle for supremacy. Mage Wars is a unique genre-breaking concept, combining the best elements of customizable card games and tactical miniature games."
-	setsurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
-	gameurl="http://octgn.gamersjudgement.com/wordpress/magewars/"
-	authors="Shark bait, Cosworth, sIKE, lettucemode, ACG, Kharhaz"
-	iconurl="http://octgn.gamersjudgement.com/wordpress/magewars/wp-content/uploads/sites/33/2013/06/image1.png"
+	gameurl="https://www.dropbox.com/sh/nifbqikhcff4a6l/AAB3UZtoe9j96LvAz5PawA2Na?dl=0"
+	authors="sIKE, ACG, lettucemode, Cosworth, Sharkbait"
+	iconurl="https://www.flickr.com/photos/189515972@N05/50174254377/in/album-72157715310165553/"
+	setsurl=""
 	usetwosidedtable="False">
 	<!--Sets by GUID
 	0a6c39c9-b8d2-453d-b4dd-4e3ec475b8a7 - Mage Wars Academy: Warlock
+	0f38e296-f074-4867-9440-b246c0addc38 - Mage Wars Arena: Final Release
 	1ed38377-a44b-4530-ae54-a32a034dc335 - Mage Wars Academy: Warlord
 	2b573ac7-f7f6-49e5-a26f-5070573374f1 - Forcemaster vs Warlord
 	8c377c82-86af-45ca-ac7c-75230b803532 - Mage Wars Battlegrounds: Domination
-	12e9ddaf-63c4-4282-8ab7-8712967f5cc4 - Playtest: Promo Errata - Mage Wars Community Project
 	044e91fe-c322-4ed9-ac55-ffc0e55df940 - Mage Wars Academy: Priestess
 	53c31411-eba8-4394-8f5d-92ab68160c01 - Mage Wars Academy: Necromancer
 	79bd6aae-e0f9-4291-8455-8ee4f62e4d70 - Promo
@@ -29,57 +29,192 @@
 	ac23b0f6-73c1-488b-9376-f3e81e0afc3a - Mage Wars Academy: Beastmaster vs. Wizard
 	bb000089-50b6-48b5-809d-c27bc94e8794 - Mage Wars Academy: Forcemaster
 	be733b2f-7104-4de5-a64f-11dc0bb8e3a1 - Paladin vs Siren
-	d9d7e352-5bae-4dd2-8354-8132d9603fdd - Playtest: Errata - Mage Wars Community Project
 	d67b8ee8-c4fe-45ef-a010-b5309904e2d2 - Mage Wars Academy: Druid
 	deca5fd4-167d-4530-ade9-177c23ca54d3 - Mage Wars Academy: Monk
-	e452c577-bf1f-4b75-b5b3-c10540295ed1 - Playtest: Elementalist Vs Monk - Mage Wars Community Project
 	ebf54167-43c4-48f0-a4ac-d0cd1ddeb6de - Core
 	f0333ee7-847e-4272-93f5-16356581fcac - Lost Grimore
 	fc3d683e-c63e-4257-93d8-cad598015d1e - Druid vs Necromancer
 	ffed488f-d9ce-48a9-aed9-88b105ede18b - Forged in Fire 
 	-->
-
+	<!--
+	Known issues to still be resolved:
+	DarkfenneOwl not preventing healing
+	-->
 	<scripts>
-		<script src="scripts/academy.py" />
-		<script src="scripts/actions.py" />
+		<script src="scripts/academy.py"/>
+		<script src="scripts/actions.py"/>
+		<script src="scripts/arena.py"/>
 		<script src="scripts/arenaUpkeep.py"/>
-		<script src="scripts/attachcards.py" />
-		<script src="scripts/attacks.py" />
-		<script src="scripts/attackSequence.py" />
-		<script src="scripts/cardActions.py" />
-		<!--<script src="scripts/cardObjectManagement.py" />-->
-		<script src="scripts/changelog.py" />
-		<script src="scripts/constants.py" />
-		<script src="scripts/domination.py" />
-		<script src="scripts/events.py" />
-		<script src="scripts/GameStart.py" />
-		<script src="scripts/main.py" /><!---->
-		<script src="scripts/newPhase.py" />
-		<script src="scripts/textfunctions.py" />
-		<script src="scripts/traitComputation.py" />
+		<script src="scripts/attachcards.py"/>
+		<script src="scripts/attacks.py"/>
+		<script src="scripts/attackSequence.py"/>
+		<script src="scripts/cardActions.py"/>
+		<script src="scripts/cardObjectManagement.py"/>
+		<script src="scripts/changelog.py"/>
+		<script src="scripts/constants.py"/>
+		<script src="scripts/domination.py"/>
+		<script src="scripts/events.py"/>
+		<script src="scripts/GameStart.py"/>
+		<script src="scripts/main.py"/>
+		<script src="scripts/newPhase.py"/>
+		<script src="scripts/rubbish.py"/>
 		<script src="scripts/SpellbookValidator.py"/>
+		<script src="scripts/Tests.py"/>
+		<script src="scripts/textfunctions.py"/>
 		<script src="scripts/TokenManipulation.py"/>
+		<script src="scripts/traitComputation.py"/>
 	</scripts>
 	<events>
-		<event name="OnTableLoaded" action="onTableLoaded" />
-		<event name="OnGameStarted" action="onGameStarted" />
-		<event name="OnDeckLoaded" action="onDeckLoaded" />
-		<event name="OnChangeCounter" action="checkMageDeath" />
-		<event name="OnCardsMoved" action="onCardsMoved" />
-		<event name="OnCardClicked" action="onCardClicked" />
-		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved" />
-		<event name="OnCardArrowTargeted" action="onCardArrowTargeted" />
-		<event name="OnCardDoubleClicked" action="onCardDoubleClicked" />
+		<event name="OnTableLoaded" action="onTableLoaded"/>
+		<event name="OnGameStarted" action="onGameStarted"/>
+		<event name="OnDeckLoaded" action="onDeckLoaded"/>
+		<event name="OnCounterChanged" action="checkMageDeath"/>
+		<event name="OnCardsMoved" action="onCardsMoved"/>
+		<event name="OnScriptedCardsMoved" action="onScriptedCardsMoved"/>
+		<event name="OnCardArrowTargeted" action="onCardArrowTargeted"/>
+		<event name="OnCardDoubleClicked" action="onCardDoubleClicked"/>
+		<event name="OnCardClicked" action="onCardClicked"/>
 	</events>
 	<sounds>
-    	<sound name="Dice" src="Sounds/dice.mp3" />
-		<sound name="Alarm" src="Sounds/alarm.mp3" />
-		<sound name="Notification" src="Sounds/notification.mp3" />
+		<sound name="Dice" src="Sounds/dice.mp3"/>
+		<sound name="Alarm" src="Sounds/alarm.mp3"/>
+		<sound name="Notification" src="Sounds/notification.mp3"/>
 	</sounds>
 	<fonts>
-		<font src="fonts/APHont-Bold.ttf" size="13" target="chat" />
-  </fonts>
-	<proxygen definitionsrc="proxy/CardGenData.xml" />
+		<font src="fonts/APHont-Bold.ttf" size="13" target="chat"/>
+	</fonts>
+	<proxygen definitionsrc="proxy/CardGenData.xml"/>
+	<markers>
+		<marker id="e8237864-1442-4b66-9e9f-57abe2f518fd" name="Air Glyph Active" src="Markers/e8237864-1442-4b66-9e9f-57abe2f518fd.png" />
+		<marker id="4da1b360-d498-4514-bb35-904c25e7481d" name="Air Glyph Inactive" src="Markers/4da1b360-d498-4514-bb35-904c25e7481d.png" />
+		<marker id="d9d4073d-c8dd-495d-bc5c-3d1535fd1231" name="Fire Glyph Active" src="Markers/d9d4073d-c8dd-495d-bc5c-3d1535fd1231.png" />
+		<marker id="af3f117c-1933-4bf0-ab6f-e083423ec052" name="Fire Glyph Inactive" src="Markers/af3f117c-1933-4bf0-ab6f-e083423ec052.png" />
+		<marker id="ae3ed2d0-1f32-4373-b61a-54f1a92aa847" name="Earth Glyph Active" src="Markers/ae3ed2d0-1f32-4373-b61a-54f1a92aa847.png" />
+		<marker id="acb58bb4-2bc1-4534-9d68-a18a68d764b4" name="Earth Glyph Inactive" src="Markers/acb58bb4-2bc1-4534-9d68-a18a68d764b4.png" />
+		<marker id="9e7b7949-fdda-4d2a-b16f-e35e9ac9cf20" name="Water Glyph Active" src="Markers/9e7b7949-fdda-4d2a-b16f-e35e9ac9cf20.png" />
+		<marker id="ffe746d4-7711-492b-981d-c34121eca290" name="Water Glyph Inactive" src="Markers/ffe746d4-7711-492b-981d-c34121eca290.png" />
+		<marker id="8af4c052-a38c-4f59-bd31-2e62ba3063f2" name="Ki" src="Markers/8af4c052-a38c-4f59-bd31-2e62ba3063f2.png" />
+		<marker id="c40445e9-118c-4212-af4c-76d12d4c1fe0" name="Freeze" src="Markers/c40445e9-118c-4212-af4c-76d12d4c1fe0.png" />
+		<marker id="14a7b28a-7abc-4330-b139-c7939469df89" name="Light" src="Markers/yellow.png" />
+		<marker id="5c97e301-99fa-4581-a01c-617bc2c5eaa3" name="Strongest" src="Markers/red.png" />
+		<marker id="50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce" name="Blood Reaper" src="Markers/50d83b50-c8b1-47bc-a4a8-8bd6b9b621ce.png" />
+		<marker id="f9eb0f3a-63de-49eb-832b-05912fc9ec64" name="Burn" src="Markers/f9eb0f3a-63de-49eb-832b-05912fc9ec64.png" />
+		<marker id="82df2507-4fba-4c81-a1de-71e70b9a16f5" name="Cripple" src="Markers/82df2507-4fba-4c81-a1de-71e70b9a16f5.png" />
+		<marker id="3ef51126-e2c0-44b3-b781-0b3f8476cb20" name="Daze" src="Markers/3ef51126-e2c0-44b3-b781-0b3f8476cb20.png" />
+		<marker id="91ed27dc-294d-4732-ab71-37911f4011f2" name="Guard" src="Markers/91ed27dc-294d-4732-ab71-37911f4011f2.png" />
+		<marker id="f4a2d3d3-4a95-4b9a-b899-81ea58293167" name="Pet" src="Markers/f4a2d3d3-4a95-4b9a-b899-81ea58293167.png" />
+		<marker id="aaea8e90-e9c5-4fbc-8de3-4bf651d784a7" name="Ready" src="Markers/aaea8e90-e9c5-4fbc-8de3-4bf651d784a7.png" />
+		<marker id="73fffebd-a8f0-43bd-a118-6aebc366ecf6" name="Ready II" src="Markers/73fffebd-a8f0-43bd-a118-6aebc366ecf6.png" />
+		<marker id="81360faf-87d6-42a8-a719-c49386bd2ab5" name="Rot" src="Markers/81360faf-87d6-42a8-a719-c49386bd2ab5.png" />
+		<marker id="ad0e8e3c-c1af-47b7-866d-427f8908dea4" name="Sleep" src="Markers/ad0e8e3c-c1af-47b7-866d-427f8908dea4.png" />
+		<marker id="4bbac09e-a46c-42de-9272-422e8074533f" name="Stun" src="Markers/4bbac09e-a46c-42de-9272-422e8074533f.png" />
+		<marker id="16f03c44-5656-4e9d-9629-90c4ff1765a7" name="Taunt(Sosroku)" src="Markers/16f03c44-5656-4e9d-9629-90c4ff1765a7.png" />
+		<marker id="ab8708ac-9735-4803-ba4d-4932a787540d" name="Used" src="Markers/ab8708ac-9735-4803-ba4d-4932a787540d.png" />
+		<marker id="61bec951-ebb1-48f7-a2ab-0b6364d262e6" name="Used II" src="Markers/61bec951-ebb1-48f7-a2ab-0b6364d262e6.png" />
+		<marker id="d91aabe0-d9cd-4b7e-b994-4e1c7a51c027" name="Voltaric OFF" src="Markers/d91aabe0-d9cd-4b7e-b994-4e1c7a51c027.png" />
+		<marker id="a6e79926-db8d-4095-9aee-e3b46bf24a3f" name="Voltaric ON" src="Markers/a6e79926-db8d-4095-9aee-e3b46bf24a3f.png" />
+		<marker id="22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba" name="Weak" src="Markers/22ef0c9e-6c0b-4e24-a4fa-e9d83f24fcba.png" />
+		<marker id="a1f061ec-efbe-444e-8e06-8d973600696c" name="DieBlank" src="Markers/a1f061ec-efbe-444e-8e06-8d973600696c.png" />
+		<marker id="8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165" name="Die1" src="Markers/8cc1704a-6f2f-4dbf-a80c-8f79a5a8d165.png" />
+		<marker id="b881f652-9384-43e1-9758-e68b04583b3b" name="Die2" src="Markers/b881f652-9384-43e1-9758-e68b04583b3b.png" />
+		<marker id="a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39" name="Die1s" src="Markers/a3d3fff3-bb1c-4469-9a9d-f8dc1f341d39.png" />
+		<marker id="101976ea-ec22-4496-a762-6fbc0d1a41bb" name="Die2s" src="Markers/101976ea-ec22-4496-a762-6fbc0d1a41bb.png" />
+		<marker id="3cdf4231-065d-400e-9c74-d0ae669e852c" name="Die12" src="Markers/3cdf4231-065d-400e-9c74-d0ae669e852c.png" />
+		<marker id="11370fe9-41a4-4f05-9249-29a179c0031b" name="Quick" src="Markers/11370fe9-41a4-4f05-9249-29a179c0031b.png" />
+		<marker id="a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" name="Quick Used" src="Markers/a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd.png" />
+		<marker id="4dd182d2-6e69-499c-b2ad-38701c0fb60d" name="Action Red" src="Markers/4dd182d2-6e69-499c-b2ad-38701c0fb60d.png" />
+		<marker id="2e069a99-1696-4cbe-b6c6-13e1dda29563" name="Action Red Used" src="Markers/2e069a99-1696-4cbe-b6c6-13e1dda29563.png" />
+		<marker id="c980c190-448d-414f-9397-a5f17068ac58" name="Action Blue" src="Markers/c980c190-448d-414f-9397-a5f17068ac58.png" />
+		<marker id="5926df42-919d-4c63-babb-5bfedd14f649" name="Action Blue Used" src="Markers/5926df42-919d-4c63-babb-5bfedd14f649.png" />
+		<marker id="9cd83c4b-91b7-4386-9d9a-70719971f949" name="Action Green" src="Markers/9cd83c4b-91b7-4386-9d9a-70719971f949.png" />
+		<marker id="5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee" name="Action Green Used" src="Markers/5f20a2e2-cc59-4de7-ab90-cc7d1ced0eee.png" />
+		<marker id="2ec4ddea-9596-45cc-a084-23caa32511be" name="Action Yellow" src="Markers/2ec4ddea-9596-45cc-a084-23caa32511be.png" />
+		<marker id="7c145c5d-54c3-4f5b-bf66-f4d52f240af6" name="Action Yellow Used" src="Markers/7c145c5d-54c3-4f5b-bf66-f4d52f240af6.png" />
+		<marker id="edb61e00-a666-480a-81f3-20eb9944b0ea" name="Action Purple" src="Markers/edb61e00-a666-480a-81f3-20eb9944b0ea.png" />
+		<marker id="158f738b-6034-4c6d-b4ca-5abcf159ed9f" name="Action Purple Used" src="Markers/158f738b-6034-4c6d-b4ca-5abcf159ed9f.png" />
+		<marker id="623f07fb-9cfb-4b4b-a350-6b208f0ef29e" name="Action Grey" src="Markers/623f07fb-9cfb-4b4b-a350-6b208f0ef29e.png" />
+		<marker id="99bd454e-fab9-47c6-9f59-54a112eeb2da" name="Action Grey Used" src="Markers/99bd454e-fab9-47c6-9f59-54a112eeb2da.png" />
+		<marker id="874c7fbb-c566-4f17-b14e-ae367716dce5" name="Egg Token" src="Markers/874c7fbb-c566-4f17-b14e-ae367716dce5.png" />
+		<marker id="fcc2ffeb-6ae6-45c8-930e-8f3521d326eb" name="Mist Token" src="Markers/fcc2ffeb-6ae6-45c8-930e-8f3521d326eb.png" />
+		<marker id="d32267be-f4c5-48c6-8396-83c0db406942" name="Load Token" src="Markers/d32267be-f4c5-48c6-8396-83c0db406942.png" />
+		<marker id="6383011a-c544-443d-b039-9f7ba8de4c6b" name="Storm Token" src="Markers/6383011a-c544-443d-b039-9f7ba8de4c6b.png" />
+		<marker id="fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b" name="Forcefield Token" src="Markers/fc23dce7-d58a-4c7d-a1b2-af9e23f5f29b.png" />
+		<marker id="fdaa2c02-a65a-40e0-a315-962f9315b732" name="Banish" src="Markers/fdaa2c02-a65a-40e0-a315-962f9315b732.png" />
+		<marker id="feb7e8f8-5c38-4978-92c8-2d47d54bdd29" name="Rage" src="Markers/feb7e8f8-5c38-4978-92c8-2d47d54bdd29.png" />
+		<marker id="fffe964a-3839-4bc0-ba85-3268b59817c6" name="Wrath" src="Markers/fffe964a-3839-4bc0-ba85-3268b59817c6.png" />
+		<marker id="fcdf5fa2-cb09-47a3-8c81-d4b87380b397" name="Gate Closed" src="Markers/fcdf5fa2-cb09-47a3-8c81-d4b87380b397.png" />
+		<marker id="fd17ee65-9bc8-4a00-a359-ff8e2418ad5c" name="Gate Opened" src="Markers/fd17ee65-9bc8-4a00-a359-ff8e2418ad5c.png" />
+		<marker id="7ff7afc3-ae04-49bf-9961-1a04b0f6ac19" name="Mana" src="Markers/7ff7afc3-ae04-49bf-9961-1a04b0f6ac19.png" />
+		<marker id="f316259d-10ad-471f-bdbc-884d11a8ced9" name="Damage" src="Markers/f316259d-10ad-471f-bdbc-884d11a8ced9.png" />
+	    <marker id="a95c1445-674c-4ab6-9247-d0b0fac80fb3" name="SealToken" src="Markers/a95c1445-674c-4ab6-9247-d0b0fac80fb3.png" />
+		<marker id="b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc" name="Armor +1" src="Markers/b3b6b5d3-4bda-4769-9bac-6ed48f7eb0fc.png" />
+		<marker id="684fcda0-e69d-426e-861c-5a92bc984f55" name="Deflect Ready" src="Markers/684fcda0-e69d-426e-861c-5a92bc984f55.png" />
+		<marker id="2c5b85ea-93de-4a99-b64d-da6c48baa205" name="Deflect Used" src="Markers/2c5b85ea-93de-4a99-b64d-da6c48baa205.png" />
+		<marker id="8d994fe9-2422-4a9d-963d-3ad10b2b823d" name="Invisible" src="Markers/8d994fe9-2422-4a9d-963d-3ad10b2b823d.png" />
+		<marker id="e96b3791-fbcf-40a2-9c11-106342703db9" name="Melee +1" src="Markers/e96b3791-fbcf-40a2-9c11-106342703db9.png" />
+		<marker id="cfb394b2-8571-439a-8833-476122a9eaa5" name="Ranged +1" src="Markers/cfb394b2-8571-439a-8833-476122a9eaa5.png" />
+		<marker id="f7379e4e-8120-4f1f-b734-51f1bd9fbab9" name="Slam" src="Markers/f7379e4e-8120-4f1f-b734-51f1bd9fbab9.png" />
+		<marker id="8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7" name="Taunt (Thorg)" src="Markers/8b5e3fe0-7cb1-44cd-9e9c-dadadbf04ab7.png" />
+		<marker id="72ee460f-adc1-41ab-9231-765001f9e08e" name="Veteran" src="Markers/72ee460f-adc1-41ab-9231-765001f9e08e.png" />
+		<marker id="b9b205a2-a998-44f5-97dc-c7f315afbbe2" name="Visible" src="Markers/b9b205a2-a998-44f5-97dc-c7f315afbbe2.png" />
+		<marker id="d2beb747-0d46-4ae9-bb86-c125441fcae1" name="Domination Token" src="Markers/d2beb747-0d46-4ae9-bb86-c125441fcae1.png" />
+		<marker id="3c74d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" src="Markers/3c74d2dd-cabd-4f90-8845-18297d503b70.png" />		
+		<marker id="c56839d2-46f4-49a8-85e4-3838e7f09cc2" name="Control Marker Red" src="Markers/c56839d2-46f4-49a8-85e4-3838e7f09cc2.png" />
+		<marker id="da724182-3695-4124-becc-928eb870c5dc" name="Control Marker Blue" src="Markers/da724182-3695-4124-becc-928eb870c5dc.png" />
+		<marker id="e97408e7-985b-46d9-a5e7-98ffb4a3f587" name="Control Marker Green" src="Markers/e97408e7-985b-46d9-a5e7-98ffb4a3f587.png" />
+		<marker id="fe2adfab-4cda-4a1d-843a-84865747ff98" name="Control Marker Yellow" src="Markers/fe2adfab-4cda-4a1d-843a-84865747ff98.png" />
+		<marker id="5d6e5424-031b-44d4-9e0e-eb93f29baf6d" name="Control Marker Purple" src="Markers/5d6e5424-031b-44d4-9e0e-eb93f29baf6d.png" />
+		<marker id="1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" name="Grey Control Marker" src="Markers/1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f.png" />
+		<marker id="9ea607d3-dade-44dc-a69d-1c0d5691a246" name="Taunt (Skeelax)" src="Markers/9ea607d3-dade-44dc-a69d-1c0d5691a246.png" />
+		<marker id="df8e1a68-9fc3-46be-ac4f-7d9c61805cf5" name="Bleed" src="Markers/df8e1a68-9fc3-46be-ac4f-7d9c61805cf5.png" />
+		<marker id="a01e836f-0768-4aba-94d8-018982dfc122" name="Stuck" src="Markers/a01e836f-0768-4aba-94d8-018982dfc122.png" />
+		<marker id="826e81c3-6281-4a43-be30-bac60343c58f" name="Tainted" src="Markers/826e81c3-6281-4a43-be30-bac60343c58f.png" />
+		<marker id="99381ac8-7d73-4d75-9787-60e6411d3613" name="Holy Avenger" src="Markers/99381ac8-7d73-4d75-9787-60e6411d3613.png" />
+		<marker id="42f6cee3-3de4-4c90-a77c-9fb2c432d78d" name="Wounded Prey" src="Markers/42f6cee3-3de4-4c90-a77c-9fb2c432d78d.png" />
+		<marker id="06c01638-6a75-43ef-82bc-807764521c5a" name="Academy Action" src="Markers/06c01638-6a75-43ef-82bc-807764521c5a.png" />
+		<marker id="1eeac15f-fb5d-4305-b39c-16b1b1c8b6e3" name="Academy Action Used" src="Markers/1eeac15f-fb5d-4305-b39c-16b1b1c8b6e3.png" />
+		<marker id="96348698-ae05-4c59-89bb-e79dad50ad1f" name="Dissipate Token" src="Markers/96348698-ae05-4c59-89bb-e79dad50ad1f.png" />
+		<marker id="4546a2ed-3ac4-4baf-8d56-9f51af888a75" name="Charge" src="Markers/4546a2ed-3ac4-4baf-8d56-9f51af888a75.png" />
+		<marker id="ede2252f-b47f-4ea2-a448-08fd3b22d506" name="Stagger" src="Markers/ede2252f-b47f-4ea2-a448-08fd3b22d506.png" />
+		<marker id="fcf39fa4-238a-4cb6-92bb-5f561be747c0" name="Wish" src="Markers/fcf39fa4-238a-4cb6-92bb-5f561be747c0.png" />
+		<marker id="f1247aea-2067-44e6-a496-8ea1a8789da9" name="Grapple" src="Markers/f1247aea-2067-44e6-a496-8ea1a8789da9.png" />
+		<marker id="f25d3ead-bb56-48dd-be22-f8c0faa26485" name="Martyr&apos;s Aura" src="Markers/f25d3ead-bb56-48dd-be22-f8c0faa26485.png" />
+		<marker id="f356a905-6c71-4a70-a72e-b673d15a3eef" name="Solar Aura" src="Markers/f356a905-6c71-4a70-a72e-b673d15a3eef.png" />
+		<marker id="f4dba8be-5aeb-47d1-b7df-1dd6d9ef5fa0" name="Resolute Aura" src="Markers/f4dba8be-5aeb-47d1-b7df-1dd6d9ef5fa0.png" />
+		<marker id="f56a9ec4-cc79-4894-8b02-8fbbd7edbc58" name="Retribution Aura" src="Markers/f56a9ec4-cc79-4894-8b02-8fbbd7edbc58.png" />
+		<marker id="f6eaf1e9-f0b0-4ac3-9719-7463777fb031" name="Siren&apos;s Call" src="Markers/f6eaf1e9-f0b0-4ac3-9719-7463777fb031.png" />
+		<marker id="f7fc4b07-9596-48f4-a049-d5be58ae254c" name="Valor" src="Markers/f7fc4b07-9596-48f4-a049-d5be58ae254c.png" />
+		<marker id="f8d3ef71-6cee-4a72-8ae1-5615362eae07" name="Cleansing Aura" src="Markers/f8d3ef71-6cee-4a72-8ae1-5615362eae07.png" />
+		<marker id="f965154e-3551-47c9-8722-2e572f26c0fb" name="Vengeful Aura " src="Markers/f965154e-3551-47c9-8722-2e572f26c0fb.png" />
+		<marker id="540f077d-fb38-464b-936a-ec94d60caea9" name="Gold" src="Markers/540f077d-fb38-464b-936a-ec94d60caea9.png" />
+		<marker id="203022f6-4c33-4ba8-addf-a7ec46760fdc" name="Divine Challenge" src="Markers/203022f6-4c33-4ba8-addf-a7ec46760fdc.png" />
+		<marker id="8c8dbf31-6ba3-4d14-ab1f-3771960671a5" name="Hate" src="Markers/8c8dbf31-6ba3-4d14-ab1f-3771960671a5.png" />
+		<marker id="50861f40-93b8-4dc6-a6ba-108cc584de8e" name="Love" src="Markers/50861f40-93b8-4dc6-a6ba-108cc584de8e.png" />
+		<marker id="00113acf-e34c-4150-992f-fdcdca2978b2" name="Fermata (Blue) 1" src="Markers/00113acf-e34c-4150-992f-fdcdca2978b2.png" />
+		<marker id="de825d87-c78f-4c35-aba4-e2abce2ef000" name="Fermata (Blue) 2" src="Markers/de825d87-c78f-4c35-aba4-e2abce2ef000.png" />
+		<marker id="332e2df0-3101-462d-a2b4-b489170f4212" name="Fermata (Green) 1" src="Markers/332e2df0-3101-462d-a2b4-b489170f4212.png" />
+		<marker id="e724865e-9e9a-486d-a230-1b7d94de2d6c" name="Fermata (Green) 2" src="Markers/e724865e-9e9a-486d-a230-1b7d94de2d6c.png" />
+		<marker id="c89baa9e-21c8-4f8c-8635-b258d5d80172" name="Suffocation" src="Markers/c89baa9e-21c8-4f8c-8635-b258d5d80172.png" />
+		<marker id="c3de25bf-4845-4d2d-8a28-6c31ad12af46" name="Corrode" src="Markers/c3de25bf-4845-4d2d-8a28-6c31ad12af46.png" />
+		<marker id="c580e015-96ff-4b8c-8905-28688bcd70e8" name="Growth" src="Markers/c580e015-96ff-4b8c-8905-28688bcd70e8.png" />
+		<marker id="c8bff05e-e43a-4b23-b467-9c4596050f28" name="Ichthellid Larva" src="Markers/c8bff05e-e43a-4b23-b467-9c4596050f28.png" />
+		<marker id="de101060-a4b4-4387-a7f8-aab82ecff2c8" name="Zombie" src="Markers/de101060-a4b4-4387-a7f8-aab82ecff2c8.png" />
+		<marker id="ced2ce11-5e69-46a9-9fbb-887e96bdf805" name="Treebond" src="Markers/ced2ce11-5e69-46a9-9fbb-887e96bdf805.png" />
+		<marker id="86a71cf6-35ce-4728-a2f8-6701b1e29aa4" name="Eternal Servant" src="Markers/86a71cf6-35ce-4728-a2f8-6701b1e29aa4.png" />
+		<marker id="d7472637-7c6d-4593-bc16-5975155c2926" name="Crush Token" src="Markers/d7472637-7c6d-4593-bc16-5975155c2926.png" />
+		<marker id="ae179c85-11ce-4be7-b9c9-352139d0c8f2" name="Rune of Fortification" src="Markers/ae179c85-11ce-4be7-b9c9-352139d0c8f2.png" />
+		<marker id="b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07" name="Rune of Power" src="Markers/b3dd4c8e-35a9-407f-b9c8-a0b0ff1d3f07.png" />
+		<marker id="c2a265f9-ad97-4976-a83c-78891a224478" name="Rune of Precision" src="Markers/c2a265f9-ad97-4976-a83c-78891a224478.png" />
+		<marker id="d10ada1f-c03b-4077-b6cb-c9667d6b2744" name="Rune of Reforging" src="Markers/d10ada1f-c03b-4077-b6cb-c9667d6b2744.png" />
+		<marker id="e0bb0e90-4831-43c6-966e-27c8dc2d2eef" name="Rune of Shielding" src="Markers/e0bb0e90-4831-43c6-966e-27c8dc2d2eef.png" />
+		<marker id="f68b3b5b-0755-40f4-84db-bf3197a667cb" name="Disable" src="Markers/f68b3b5b-0755-40f4-84db-bf3197a667cb.png" />
+		<marker id="a4e2b624-bb01-49cb-bd80-172037083ab1" name="Rewind" src="Markers/blue.png" />
+		<marker id="8ad5fb76-adb9-4ebb-b8c7-a662535f3cba" name="scoutToken" src="Markers/green.png" />
+		<marker id="de371fc4-c01a-4c3e-ba15-eb89857959a1" name="Obscured" src="Markers/blue.png" />
+		<marker id="87654f3f-a418-485c-a3e9-1a628b36216e" name="Aegis" src="Markers/blue.png" />
+		<marker id="ca9aa78d-aa84-4025-a315-1c61d527464f" name="Tough -2" src="Markers/yellow.png" />
+		<marker id="b5586a56-4963-4480-b5f3-65cfd37c3a64" name="Defense +1" src="Markers/green.png" />
+	</markers>
 	<phases>
 		<phase name="Initiative Phase" icon="Phases/Initiative.png"/>
 		<phase name="Reset Phase" icon="Phases/Reset.png"/>
@@ -92,17 +227,17 @@
 		<phase name="Final QC Phase" icon="Phases/FinalQuickcast.png"/>
 	</phases> 
 	<documents>
-		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html" />
-		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html" />
-		<document name="How to Build your own Domination Map" icon="Documents/MW-Help.png" src="Documents/Map Building How-To.html" />
-		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html" />
-		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v2.html" />
-		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html" />
-		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html" />
-		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html" />
+		<document name="Playing Mage Wars on OCTGN" icon="Documents/MW-Help.png" src="Documents/MW-Help.html"/>
+		<document name="OCTGN Apprentice Mode" icon="Documents/MW-Help.png" src="Documents/MW-OCTGN-Apprentice-Mode.html"/>
+		<document name="How to Build your own Domination Map" icon="Documents/MW-Help.png" src="Documents/Map Building How-To.html"/>
+		<document name="Keyboard Shortcut Mappings" icon="Documents/MW-Help.png" src="Documents/MW-KeyMap.html"/>
+		<document name="Mage Wars Complete Codex" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Complete.Codex.v2.html"/>
+		<document name="Mage Wars Condition Markers" icon="Documents/MW-Help.png" src="Documents/Mage.Wars.Condition.Marker.Reference.Sheet.html"/>
+		<document name="Spellbook Builder Install Help" icon="Documents/MW-Help.png" src="Plugins/Plugin-Help.html"/>
+		<document name="ChangeLog" icon="Documents/MW-Help.png" src="Documents/ChangeLog.html"/>
 	</documents>
 	<gameModes>
-		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2" />
+		<gameMode name="1v1" shortDescription="1 vs. 1 Player Game" image="Documents/Images/MageWars.png" playerCount="2"/>
 	</gameModes>
 	<globalvariables>
 		<globalvariable name="attachDict" value=""/>
@@ -133,17 +268,17 @@
 		<globalvariable name="TimerIsRunning" value="False"/>
 		<globalvariable name="turnEventList" value=""/>
 	</globalvariables>
-		<card back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
+	<card back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" width="60" height="80" cornerRadius="3">
 		<property name="Type" type="String" hidden="False" ignoreText="False"/>
 		<property name="Subtype" type="String" hidden="False" ignoreText="False"/>
 		<property name="Cost" type="String" hidden="False" ignoreText="False"/>
-		<property name="revealCost" type="String" hidden="False" ignoreText="False"/>
 		<property name="Action" type="String" hidden="False" ignoreText="False"/>
 		<property name="Range" type="String" hidden="False" ignoreText="False"/>
-		<property name="rangeType" type="String" hidden="False" ignoreText="False"/>
 		<property name="Target" type="String" hidden="False" ignoreText="False"/>
 		<property name="School" type="String" hidden="False" ignoreText="False"/>
 		<property name="Level" type="String" hidden="False" ignoreText="False"/>
+		<property name="rangeType" type="String" hidden="False" ignoreText="False"/>
+		<property name="revealCost" type="String" hidden="False" ignoreText="False"/>
 		<property name="Stats" type="String" hidden="False" ignoreText="False"/>
 		<property name="StatArmor" type="String" hidden="True" ignoreText="False"/>
 		<property name="StatChanneling" type="String" hidden="True" ignoreText="False"/>
@@ -156,8 +291,6 @@
 		<property name="Traits" type="String" hidden="False" ignoreText="False"/>
 		<property name="Text" type="String" hidden="False" ignoreText="False"/>
 		<property name="CardID" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageTraining" type="String" hidden="False" ignoreText="False"/>
-		<property name="MageSchoolCost" type="String" hidden="False" ignoreText="False"/>
 		<property name="MageAbilities" type="String" hidden="False" ignoreText="False"/>
 		<property name="Special" type="String" hidden="True" ignoreText="False"/>
 		<property name="Special1" type="String" hidden="True" ignoreText="False"/>
@@ -170,56 +303,66 @@
 		<property name="PPos" type="String" hidden="True" ignoreText="False"/>
 		<property name="PRef" type="String" hidden="True" ignoreText="False"/>
 		<!--translations of properties into code versions-->
-		<property name="cTargets" type="String" hidden="True" ignoreText="False" />
-		<property name="cBuffs" type="String" hidden="True" ignoreText="False" />
-		<property name="cAttacks" type="String" hidden="True" ignoreText="False" />
-		<property name="tAttacks" type="String" hidden="True" ignoreText="False" />
+		<property name="cTargets" type="String" hidden="True" ignoreText="False"/>
+		<property name="cBuffs" type="String" hidden="True" ignoreText="False"/>
+		<property name="cAttacks" type="String" hidden="True" ignoreText="False"/>
+		<property name="tAttacks" type="String" hidden="True" ignoreText="False"/>
+		<!--Mage Training properties-->
+		<property name="MageTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolCost" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolFullTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolOpposed" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolPartialTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSchoolTrainingLevel" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageSubtypeTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageComboTraining" type="String" hidden="True" ignoreText="False"/>
+		<property name="MageTypeOpposed" type="String" hidden="True" ignoreText="False"/>
 		<!--Memory-->
-		<property name="Memory" type="String" hidden="True" ignoreText="False" />
-		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0" />
-		<size name="InitativeMarkers" width="50" height="50" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="PhaseMarkers" width="90" height="20" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="DominationMarkers" width="90" height="40" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0" />
-		<size name="Dice Roll Area" width="130" height="80" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="3" />
-		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="3" />
+		<property name="Memory" type="String" hidden="True" ignoreText="False"/>
+		<size name="ModularBoardPieces" width="250" height="250" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="0"/>
+		<size name="InitativeMarkers" width="50" height="50" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0"/>
+		<size name="PhaseMarkers" width="90" height="20" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0"/>
+		<size name="DominationMarkers" width="90" height="40" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="0"/>
+		<size name="Dice Roll Area" width="130" height="80" back="Images/Cards/lg-card-back.jpg" front="Images/Cards/lg-card-back.jpg" cornerRadius="3"/>
+		<size name="Horizontal Cards" width="80" height="60" backWidth="60" backHeight="80" backCornerRadius="3" back="Images/Cards/sm-card-back.jpg" front="Images/Cards/sm-card-back.jpg" cornerRadius="3"/>
 	</card>
 	<gameboards x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard.png" >
-		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg" />
-		<gameboard name="Inferno - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard2.jpg" />
-		<gameboard name="Marble Floors - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard3.jpg" />
-		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard4.jpg" />
-		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard5.jpg" />
-		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard6.jpg" />
-		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard7.jpg" />
-		<gameboard name="Double Westlock - 6x4" x="-500" y="-334" width="1000" height="667" src="Images/GameBoards/GameBoard8.jpg" />
+		<gameboard name="Westlock - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard1.jpg"/>
+		<gameboard name="Inferno - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard2.jpg"/>
+		<gameboard name="Marble Floors - 4X3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard3.jpg"/>
+		<gameboard name="Forest - 4x3" x="-500" y="-375" width="1000" height="750" src="Images/GameBoards/GameBoard4.jpg"/>
+		<gameboard name="Slimy Rocks - 4X4" x="-500" y="-500" width="1000" height="1000" src="Images/GameBoards/GameBoard5.jpg"/>
+		<gameboard name="Forest - 5X4" x="-500" y="-400" width="1000" height="800" src="Images/GameBoards/GameBoard6.jpg"/>
+		<gameboard name="Westlock Apprentice - 3x2" x="-375" y="-250" width="750" height="500" src="Images/GameBoards/GameBoard7.jpg"/>
+		<gameboard name="OCTGN Forest Apprentice - 3x3" x="-450" y="-450" width="900" height="900" src="Images/GameBoards/GameBoard8.jpg"/>
 	</gameboards>
 	<table name="Table" visibility="undefined" ordered="False" width="1100" height="1100" background="Images/background.jpg" backgroundStyle="uniformToFill">
-		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase" />
+		<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Down" execute="nextPhase"/>
 		<groupaction menu="Done" default="False" shortcut="Ctrl+Right" execute="playerDone"/>
-		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack" />
-		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
-		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose" />
-		<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede" />
-		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex" />
-		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList" />
-		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard" />
-		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer" />
-		<groupaction menu="Game Options" default="False" shortcut="" execute="optionsMenu" />
+		<groupaction menu="Roll Dice" default="False" shortcut="TAB" execute="genericAttack"/>
+		<groupaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker"/>
+		<groupaction menu="Show Rose Compass" default="False" shortcut="Ctrl+F2" execute="createCompassRose"/>
+		<groupaction menu="Concede Game" default="False" shortcut="Ctrl+End" execute="concede"/>
+		<groupaction menu="Search Codex" default="False" shortcut="Ctrl+H" execute="searchCodex"/>
+		<groupaction menu="Information on New Features" default="False" shortcut="" execute="getNewFeaturesList"/>
+		<groupaction menu="Create Card" default="False" shortcut="" execute="createCard"/>
+		<groupaction menu="Set Timer" default="False" shortcut="" execute="setTimer"/>
+		<groupaction menu="Game Options" default="False" shortcut="" execute="optionsMenu"/>
 		<groupactions menu="Chat Shortcuts">
-			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes" />
-			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+2" execute="sayNo" />
-			<groupaction menu="Say Pass" default="False" shortcut="Ctrl+Shift+3" execute="sayPass" />
-			<groupaction menu="Say Thinking..." default="False" shortcut="Ctrl+Shift+4" execute="sayThinking" />
-			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking" />
-			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn" />
-			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn" />
-			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant" />
+			<groupaction menu="Say Yes" default="False" shortcut="Ctrl+Shift+1" execute="sayYes"/>
+			<groupaction menu="Say No" default="False" shortcut="Ctrl+Shift+2" execute="sayNo"/>
+			<groupaction menu="Say Pass" default="False" shortcut="Ctrl+Shift+3" execute="sayPass"/>
+			<groupaction menu="Say Thinking..." default="False" shortcut="Ctrl+Shift+4" execute="sayThinking"/>
+			<groupaction menu="Ask are you Thinking?" default="False" shortcut="Ctrl+Shift+5" execute="askThinking"/>
+			<groupaction menu="Your Turn?" default="False" shortcut="Ctrl+Shift+6" execute="askYourTurn"/>
+			<groupaction menu="My Turn?" default="False" shortcut="Ctrl+Shift+7" execute="askMyTurn"/>
+			<groupaction menu="Do you wish to Reveal your Enchantment?" default="False" shortcut="Ctrl+Shift+8" execute="askRevealEnchant"/>
 		</groupactions>
 		<groupactions menu="Alternate Hotkeys">
-			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack" />
-			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase" />
+			<groupaction menu="Roll Dice" default="False" shortcut="F1" execute="genericAttack"/>
+			<groupaction menu="Next Phase" default="False" shortcut="Ctrl+Enter" execute="nextPhase"/>
 		</groupactions>
-		<groupaction menu="Toggle Debug Mode On/Off" default="False" execute="toggleDebug" />
+		<groupaction menu="Toggle Debug Mode On/Off" default="False" execute="toggleDebug"/>
 		<cardactions menu="Add Markers">
 			<cardaction menu="Add Damage Counter" default="False" shortcut="F2" execute="addDamage"/>
 			<cardaction menu="Add Mana Counter" default="False" shortcut="Ctrl+M" execute="addMana"/>
@@ -295,17 +438,16 @@
 			<cardaction menu="Toggle Fire Glyph" default="False" shortcut="Ctrl+Shift+F" execute="toggleFireGlyph"/>
 			<cardaction menu="Toggle Water Glyph" default="False" shortcut="Ctrl+Shift+W" execute="toggleWaterGlyph"/>
 		</cardactions>
-			<cardaction menu="Format Card (for testing only)" default="False" execute="testFormatting" />
-			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard" />
-			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard" />
-			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker" />
-			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget" />
-			<cardaction menu="Card Action Menu" shortcut="TAB" execute="actionMenu" />
-			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction" />
-			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard" />
-			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate" />
-			<cardaction menu="Double Click" default="True" execute="defaultAction" />
-			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications" />
+			<cardaction menu="Flip Card / Show Card Alternate" default="False" shortcut="Ctrl+F" execute="flipcard"/>
+			<cardaction menu="Rotate Card" default="False" shortcut="Ctrl+E" execute="rotateCard"/>
+			<cardaction menu="Create Vine Marker Here" default="False" shortcut="Ctrl+F1" execute="createVineMarker"/>
+			<cardaction menu="Attach to Targeted Card" shortcut="Ctrl+Shift+Q" execute="attachToTarget"/>
+			<cardaction menu="Card Actions Menu" shortcut="TAB" execute="actionMenu"/>
+			<cardaction menu="Detach" shortcut="Ctrl+Alt+Q" execute="menuDetachAction"/>
+			<cardaction menu="Discard" default="False" shortcut="Del" execute="discard"/>
+			<cardaction menu="Obliterate Card" default="False" shortcut="End" execute="obliterate"/>
+			<cardaction menu="Double Click" default="True" execute="defaultAction"/>
+			<cardaction menu="Get Rulings/Clarifications for Card" default="False" shortcut="Ctrl+H" execute="getRulingsAndClarifications"/>
 	</table>
 	<player summary="Chan: {#Channeling} | Mana: {#Mana} | Dam: {#Damage}| Life: {#Life}">
 		<counter name="Channeling" default="0" reset="True" icon="Images/Counters/channeling.png"/>
@@ -325,12 +467,12 @@
 		</group>
 	</player>
 	<deck>
-		<section name="Mage" group="Spellbook" />
-		<section name="Attack" group="Spellbook" />
-		<section name="Conjuration" group="Spellbook" />
-		<section name="Creature" group="Spellbook" />
-		<section name="Enchantment" group="Spellbook" />
-		<section name="Equipment" group="Spellbook" />
-		<section name="Incantation" group="Spellbook" />
+		<section name="Mage" group="Spellbook"/>
+		<section name="Attack" group="Spellbook"/>
+		<section name="Conjuration" group="Spellbook"/>
+		<section name="Creature" group="Spellbook"/>
+		<section name="Enchantment" group="Spellbook"/>
+		<section name="Equipment" group="Spellbook"/>
+		<section name="Incantation" group="Spellbook"/>
 	</deck>
 </game>

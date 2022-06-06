@@ -5,41 +5,9 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda"
 	gameVersion="2.0.0.0"
 	version="2.0.0.0">
-	
-	<markers>
-		<marker id="c40445e9-118c-4212-af4c-76d12d4c1fe0" name="Freeze" />
-	</markers>
+
 
 	<cards>		
-		<card id="b135f5d0-0a31-45c7-b5a3-a5058a6d0286" name="Elementalist">
-			<property name="Nickname" value="Elementalist" />
-			<property name="Type" value="Creature" />
-			<property name="Subtype" value="Mage" />
-			<property name="Level" value="" />
-			<property name="Stats" value="" />
-			<property name="cAttacks" value="" />
-			<property name="AttackBar" value="" />
-			<property name="Traits" value="" />
-		</card> 
-		<card id="728d2586-3b03-4722-a799-47e3cd82218c" name="Academy Elementalist Stats">
-			<property name="Nickname" value="Academy Elementalist Stats" />
-			<property name="Type" value="Magestats" />
-			<property name="Subtype" value="Mage, High Elf" />
-			<property name="Level" value="4" />
-			<property name="MageTraining" value="Training: Trained in the Air, Earth, Fire and Water Schools. Living objects cost triple spellpoints, even if Novice." />
-			<property name="Stats" value="Spellbook=43, Life=22, Armor=0, Channeling=7" />
-			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="7" />
-			<property name="StatLife" value="24" />
-			<property name="StatSpellBookPoints" value="43" />
-			<property name="StatStartingMana"  value="-10" />
-			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, Living=3" />
-			<property name="Traits" value="" />
-			<property name="MageAbilities" value="Stuff" />
-			<property name="cAttacks" value="name=Basic Melee Attack;action type=Quick;range type=Melee;range=(0,0);dice=2" />
-			<property name="AttackBar" value="Basic Melee Attack:&#xD;&#xA;[Quick] [Melee] [Dice=2]" />
-		</card>
-		<!-- -->
 		<card id="eea22119-07b8-4eb0-8057-78a78fea6308" name="Beam of Frost">
 			<property name="Nickname" value="Beam of Frost" />
 			<property name="Type" value="Attack" />

@@ -5,16 +5,7 @@
 	gameId="9acef3d0-efa8-4d3f-a10c-54812baecdda" 
 	gameVersion="2.0.0.0" 
 	version="2.0.0.0">
-	<markers>
-		<marker id="3c74d2dd-cabd-4f90-8845-18297d503b70" name="V&apos;Tar" />		
-		<marker id="c56839d2-46f4-49a8-85e4-3838e7f09cc2" name="Control Marker Red" />
-		<marker id="da724182-3695-4124-becc-928eb870c5dc" name="Control Marker Blue" />
-		<marker id="e97408e7-985b-46d9-a5e7-98ffb4a3f587" name="Control Marker Green" />
-		<marker id="fe2adfab-4cda-4a1d-843a-84865747ff98" name="Control Marker Yellow" />
-		<marker id="5d6e5424-031b-44d4-9e0e-eb93f29baf6d" name="Control Marker Purple" />
-		<marker id="1b9d7c43-9cd3-4218-8451-4fd7edfc8a4f" name="Grey Control Marker" />
-		<marker id="9ea607d3-dade-44dc-a69d-1c0d5691a246" name="Taunt (Skeelax)" />
-	</markers>
+
 
 
 	<cards>
