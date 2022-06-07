@@ -293,6 +293,7 @@ namespace Octgn.MageWarsValidator
                     {
                         //System.Windows.MessageBox.Show(card.Name);
                         totalSpellPoints += determineCardPointTotal(card, mageStatCard);
+                        //System.Windows.MessageBox.Show(totalSpellPoints.ToString());
                     }
                 }
             }
@@ -325,13 +326,13 @@ namespace Octgn.MageWarsValidator
             {
                 cardSpellPoints = partialTrainingPointsToAdd(card, mageStatCard)*card.Quantity;
             }
-            else if (isOpposedCardType(card, mageStatCard))
-            {
-                cardSpellPoints += addPoints("opposed", totalCardLevel)*card.Quantity;
-            }
             else if ((hasSchoolMatch(Property(mageStatCard,"MageSchoolOpposed"),card)) || (hasSchoolMatch(Property(mageStatCard,"MageSchoolFullTraining"),card)))
             {
                 cardSpellPoints += addPointsBasedOnFullSchoolTraining(mageStatCard, card)*card.Quantity;
+            }
+            else if (isOpposedCardType(card, mageStatCard))
+            {
+                cardSpellPoints += addPoints("opposed", totalCardLevel)*card.Quantity;
             }
             else
             {
