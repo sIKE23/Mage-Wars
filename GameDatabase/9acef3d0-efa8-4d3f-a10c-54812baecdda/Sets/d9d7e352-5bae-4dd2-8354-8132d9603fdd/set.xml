@@ -32,9 +32,9 @@
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook construction." />
-			<property name="Stats" value="Spellbook=120, Life=33, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=33, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="33" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -71,9 +71,9 @@
 			<property name="Subtype" value="Mage, Dwarf" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
-			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="34" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -111,9 +111,9 @@
 			<property name="Subtype" value="Mage, Wood Elf" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Nature school. Fire spells cost triple during spellbook creation." />
-			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="36" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -201,9 +201,9 @@
 			<property name="Subtype" value="Mage, Wood Elf" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Nature school and Level 1 of the Water School. Fire and War spells cost triple." />
-			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="30" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -263,11 +263,11 @@
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Air, Earth, Fire and Water Schools. Living objects cost triple spellpoints" />
-			<property name="Stats" value="Spellbook=125, Life=32, Armor=0, Channeling=10" />
+			<property name="Stats" value="Spellbook=120, Life=32, Armor=0, Channeling=10" />
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="32" />
-			<property name="StatSpellBookPoints" value="125" />
+			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Air=1, Earth=1, Fire=1, Water=1, War=3, Nature=3, Holy=3, Arcane=3, Dark=3, Mind=3" />
 			<property name="MageSchoolFullTraining" value="Air,Earth,Fire,Water" />
@@ -407,9 +407,9 @@
 			<property name="MageSchoolCost" value="Nature=1, Fire=3" />
 			<property name="MageSchoolFullTraining" value="Nature" />
 			<property name="MageSchoolOpposed" value="Fire" />
-			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="34" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -435,11 +435,11 @@
 			<property name="Subtype" value="Mage, Human, Monk" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Trained in the Mind school as well as martial and monk spells. Creature spells in which the Monk is not trained, cost triple spellbook points." />
-			<property name="Stats" value="Spellbook=115, Life=35, Armor=0, Channeling=10" />
+			<property name="Stats" value="Spellbook=120, Life=35, Armor=0, Channeling=10" />
 			<property name="StatArmor" value="0" />
 			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="35" />
-			<property name="StatSpellBookPoints" value="115" />
+			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
 			<property name="MageSchoolCost" value="Mind=1, S-Martial=1, S-Monk=1, T-Creature=3" />
 			<property name="MageSchoolFullTraining" value="Mind" />
@@ -579,9 +579,9 @@
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in Holy level 3, War level 2, and all Holy Creatures. Dark Spells cost triple." />
-			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="36" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -654,9 +654,9 @@
 			<property name="MageSchoolCost" value="Holy=1, Dark=3" />
 			<property name="MageSchoolFullTraining" value="Holy" />
 			<property name="MageSchoolOpposed" value="Dark" />
-			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=34, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="34" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -777,9 +777,9 @@
 			<property name="Subtype" value="Mage, Aquatic, Merren" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Water school, as well as pirate and song spells." />
-			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=30, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="32" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -847,9 +847,9 @@
 			<property name="Subtype" value="Mage, Human" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the Dark and Fire schools. Holy spells cost triple during spellbook creation." />
-			<property name="Stats" value="Spellbook=120, Life=38, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=38, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="38" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />
@@ -938,9 +938,9 @@
 			<property name="Subtype" value="Mage, Dwarf" />
 			<property name="Level" value="6" />
 			<property name="MageTraining" value="Training: Trained in the War and Earth schools of Magic. Arcane spells cost triple during spellbook construction." />
-			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, Channeling=9" />
+			<property name="Stats" value="Spellbook=120, Life=36, Armor=0, channeling=10" />
 			<property name="StatArmor" value="0" />
-			<property name="StatChanneling" value="9" />
+			<property name="StatChanneling" value="10" />
 			<property name="StatLife" value="36" />
 			<property name="StatSpellBookPoints" value="120" />
 			<property name="StatStartingMana"  value="0" />

@@ -1,7 +1,7 @@
 #######
 #v2.0.0.0#
 #######
-
+#from APIMock import *
 ############################
 # Card Attachment and Alignment
 ############################
@@ -16,23 +16,20 @@ def menuDetachAction(card,x=0,y=0):
 def attachToTarget(card,x=0,y=0):
 	"""This command is used to explicitly attach one card to the card currently being targeted."""
 	mute()
-	if isAttachCardsEnabled() == "True":
-		if card.controller == me:
-			target = [cards for cards in table if cards.targetedBy==me]
-			if len(target) == 0 or (len(target) == 1 and card in target):
-				c,t = detach(card)
-				if t:
-					notify("{} detaches {} from {}.\n".format(me,c,t))
-			elif len(target) == 1:
-				c,t = attach(card, target[0])
-				if t:
-					notify("{} attaches {} to {}.\n".format(me,c,t))
-			else:
-				whisper("Incorrect targets, select up to 1 target.")
-				return
-	else:
-		whisper("AttachCards must be enabled to use this feature")
-	return
+	if card.controller == me:
+		target = [cards for cards in table if cards.targetedBy==me]
+		if len(target) == 0 or (len(target) == 1 and card in target):
+			c,t = detach(card)
+			if t:
+				notify("{} detaches {} from {}.\n".format(me,c,t))
+		elif len(target) == 1:
+			c,t = attach(card, target[0])
+			if t:
+				notify("{} attaches {} to {}.\n".format(me,c,t))
+		else:
+			whisper("Incorrect targets, select up to 1 target.")
+			return
+
 
 def attach(card,target):
 	"""Controller of <card> may attach it to <target>."""
@@ -266,6 +263,7 @@ def canAttach(card,target):
 			(cTargetBar == 'Minor Living Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype and traits.get('Living') and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Minor Soldier Creature' and tType == 'Creature' and 'Soldier' in tSubtype and (eval(target.Level) <= 2)) or
 			(cTargetBar == 'Monk Creature' and tType == 'Creature' and 'Monk' in tSubtype) or
+			(cTargetBar == 'Monk Mage' and tType == 'Creature' and 'Monk' in tSubtype) or
 			(cTargetBar == 'Animal Creature' and tType == 'Creature' and 'Animal' in tSubtype) or
 			(cTargetBar == 'Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype) or
 			(cTargetBar == 'Living Knight Creature' and tType == 'Creature' and 'Knight' in tSubtype and traits.get('Living')) or
@@ -289,9 +287,6 @@ def canAttach(card,target):
 		(cName in ['Tanglevine','Stranglevine','Quicksand'] and tType == 'Creature' and not traits.get('Flying'))): return True
 	return False
 
-def isAttachCardsEnabled():
-	"""Checks whether the attachCards module is turned on."""
-	return getSetting("attachCards", "True")
 
 ############################################################################
 ##########################  Bound Spells  ##################################
@@ -394,8 +389,7 @@ def canBind(card,target):
 		or (tName == 'Vine Tree' and cType in ['Creature','Conjuration','Conjuration-Wall','Conjuration-Terrain'] and 'Vine' in cSubtype)
 		or (tName == 'Libro Mortuos' and cType == 'Creature' and 'Undead' in cSubtype)
 		or (tName == 'Echo of the Depths' and cType == 'Creature' and 'Water' in card.School)
-		or (tName == 'Natural Pandemonium' and cType =='Creature' and cSubtype in ['Elemental', 'Golem', 'Sprite'])
-		or (tName == 'Dojo' and cSubtype in ['Monk', 'Martial'] and cType in ['Creature', 'Enchantment', 'Equipment'])
+		or (tName == 'Dojo' and ('Monk' in cSubtype or 'Martial' in cSubtype) and cType in ['Creature', 'Enchantment', 'Equipment'])
 #Spellbind (only)
 		or (tName == 'Helm of Command' and cType == 'Incantation' and 'Epic' not in card.Traits and 'Command' in cSubtype)
 		or (tName == 'Elemental Wand' and cType == 'Attack' and 'Epic' not in card.Traits)

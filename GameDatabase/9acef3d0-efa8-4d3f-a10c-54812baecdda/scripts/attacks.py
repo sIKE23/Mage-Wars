@@ -28,7 +28,7 @@ additiveTraits = ["Melee","Ranged",
 				"Lifebond",
 				"Lifegain",
 				"Upkeep",
-				'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Retribution']
+				'Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic','Frost']
 superlativeTraits = ["Regenerate",
 					"Aegis",
 					"Uproot",
@@ -254,7 +254,7 @@ def getAttackList(card):
 										else:
 												aDict['Dice'] = 0
 
-								elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic'] : aDict['Type'] = attribute
+								elif attribute in ['Flame','Acid','Lightning','Light','Wind','Hydro','Poison','Psychic', 'Frost'] : aDict['Type'] = attribute
 								elif attribute == 'd12' : effectSwitch = True
 								elif effectSwitch:
 										options = attribute.split('; ')
@@ -285,7 +285,7 @@ def getAttackList(card):
 		return attackList
 
 def computeAttack(aTraitDict,attack,dTraitDict):
-			#debug("Compute Attack Function")
+		#debug("Compute Attack Function")
 		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		#debug("COMPUTE ATTACK\n")
 		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
@@ -299,6 +299,7 @@ def computeAttack(aTraitDict,attack,dTraitDict):
 			KiEffect = attack["KiEffect"]
 		if "KiTrait" in attack:
 			KiTrait = attack["KiTrait"]
+
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID')) if dTraitDict else None
 		originalAttack = attack["OriginalAttack"]
@@ -474,6 +475,8 @@ def getAdjustedDice(aTraitDict,attack,dTraitDict):
 				if not atkTraits.get('Spell'):
 						attackDice -= attacker.markers[Weak]
 						attackDice -= attacker.markers[Stagger] * 2
+						if attacker.markers[Freeze]:
+							attackDice -=1
 						if (not "Aquatic" in atkOS.traits and "Shallow Sea" in aTraitDict):
 							if not "Flying" in atkOS.traits:
 								attackDice -=1 
@@ -957,11 +960,8 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
 		#debug("DECLARE ATTACK STEP\n")
-		if (not attack['KiTrait'] or attack['KiTrait'] == ''):
+		if not attack.get('KiTrait'):
 			KiTrait = ''
-			#debug("KiTrait: {}\n".format(KiTrait))
-		#debug("Attack Traits: {}\n".format(str(attack["Traits"])))
-		#debug("Attack Name: {} , Attack Dice: {}".format(str(attack["Name"]),str(attack["Dice"])))
 		#1. Check whether any creatures in the zone are guarding and not restrained. If they are, and this is not one of them, cancel attack (if melee)
 		if (not "Elusive" in aTraitDict) and attack.get("RangeType") == "Melee" and not defender.markers[Guard]:
 			guard_dicts = [ computeTraits(c) for c in getCardsInZone(getZoneContaining(defender)) if c.markers[Guard] and c.controller != attacker.controller ]
@@ -1023,7 +1023,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 						return
 				else: notify("Though dazed, {} manages to avoid fumbling the attack.\n".format(attacker))
 		#Monk Strike Through check
-		if (attacker.markers[Ki] > 3 and
+		'''if (attacker.markers[Ki] > 3 and
 			attacker.name == 'Monk' and
 			KiTrait != 'Critical Damage' and
 			attack.get('RangeType') == 'Melee' and 
@@ -1040,7 +1040,7 @@ def declareAttackStep(aTraitDict,attack,dTraitDict): #Executed by attacker
 					attack["Traits"][KiTrait] = True
 					attack["KiTrait"] = KiTrait
 				elif choice == 2:
-					notify("{} has chosen not to enhance {} with Ki Techniques\n".format(me, attack["Name"]))
+					notify("{} has chosen not to enhance {} with Ki Techniques\n".format(me, attack["Name"]))'''
 						
 		interimStep(aTraitDict,attack,dTraitDict,'Declare Attack','avoidAttackStep')
 
@@ -1141,7 +1141,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 						interimStep(aTraitDict,attack,dTraitDict,'Avoid Attack','additionalStrikesStep')
 						return
 				#Monk Defense Check
-				if "Monk" in defender.name:
+				'''if "Monk" in defender.name:
 					#Pay 3 Ki to "Parry"
 					if defender.markers[Ki] > 2 and not timesHasOccured("GhostForm",defender.controller):
 						if attack.get("RangeType",{})=='Melee' and not attack.get("Traits",{}).get("Unavoidable") and not "Incapacitated" in dTraitDict:
@@ -1184,7 +1184,7 @@ def avoidAttackStep(aTraitDict,attack,dTraitDict): #Executed by defender
 							notify("{} spends 2 Ki to Counterstrike!\n".format(defender.name.split(',')[0]))
 					elif timesHasOccured("GhostForm",defender.controller):
 						dTraitDict["Incorporeal"] = True
-						dTraitDict["Ghost Form"] = True
+						dTraitDict["Ghost Form"] = True'''
 		if attack.get('EffectType','Attack')=='Attack':
 			if defenseQuery(aTraitDict,attack,dTraitDict)!=False: #Skip to additional strikes step if you avoided the attack
 					#Spiked buckler code here, perhaps?
@@ -1329,6 +1329,7 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
 		debug("Damage Barrier Step")
 		attacker = Card(aTraitDict.get('OwnerID'))
 		defender = Card(dTraitDict.get('OwnerID'))
+		debug(defender.name)
 		deathFlag = False
 		#Check for death here
 		if getRemainingLife(dTraitDict) == 0:
@@ -1345,6 +1346,8 @@ def damageBarrierStep(aTraitDict,attack,dTraitDict): #Executed by defender
 								break
 				if dBarrier:
 						bTraitDict = computeTraits(Card(dBarrier.get('SourceID',defender._id)))
+						debug(bTraitDict)
+						debug(dBarrier)
 						declareAttackStep(bTraitDict,dBarrier,aTraitDict)
 		if deathFlag:
 				setEventList('Turn',[]) #Clear the turn event list
@@ -1930,6 +1933,8 @@ def computeTraits(card):
 										if (cName == 'Shallow Sea' and
 												cardType == 'Creature' and
 												"Aquatic" not in subtype): append('Shallow Sea')
+										if (cName == 'Frozen Tundra' and
+												'Frost' not in subtype): append('Frost +1')
 										if (cName == 'Hellscape' and
 												name != "Hellscape" and
 												"Flame Immunity" not in rawTraitsList): append('Hellscape')
@@ -1981,8 +1986,6 @@ def computeTraits(card):
 												cardType == 'Creature' and
 												not 'Poison Immunity' in rawTraitsList and
 												'Living' in rawTraitsList): append('Malacoda')
-										if (cName == 'Victorian Griffin' and
-												cardType == 'Creature'): remove('Elusive')
 										if (cName == 'Steelclaw Cub' and
 												name == 'Steelclaw Matriarch' and
 												cController == controller): append('Melee +1')
@@ -2068,7 +2071,7 @@ def computeTraits(card):
 		if markers[BloodReaper] and 'Demon' in subtype: append('Bloodthirsty +2')
 		if markers[EternalServant] and 'Undead' in subtype and not "Legendary" in card.Traits: append('Piercing +1')
 		if markers[Treebond] and 'Tree' in subtype: extend(['Innate Life +4','Armor +1','Lifebond +2'])
-		if markers[Veteran] and 'Soldier' in subtype: extend(['Armor +1','Melee +1'])
+		if markers[Veteran]: extend(['Armor +1','Melee +1'])
 		if markers[HolyAvenger] and 'Holy' in card.School and not 'Legendary' in card.Traits: append('Life +5')
 		if markers[Wrath]: append('Melee +{}'.format(str(markers[Wrath])))
 		if markers[Rage]: append('Melee +{}'.format(str(markers[Rage])))
@@ -2239,7 +2242,7 @@ def processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict):
 				KiTrait = "Critical Damage"
 			elif choice == 2:
 				notify("{} has chosen not enhance {} with Ki\n".format(me, attack["Name"]))
-		if mage.markers[Ki] > 2 and mage.name == 'Monk' and not timesHasOccured("GhostForm",attacker.controller):
+		'''if mage.markers[Ki] > 2 and mage.name == 'Monk' and not timesHasOccured("GhostForm",attacker.controller):
 			notifystr = "Would you like to pay 4 Ki to use Ghost Form?"
 			choiceList = ['Yes', 'No']
 			colorsList = ['#0000FF', '#FF0000']
@@ -2252,7 +2255,7 @@ def processKiBuff(attacker, defender, attack, aTraitDict, dTraitDict):
 				notify("{} spends 4 Ki and becomes Incorporeal\n".format(attacker.name.split(',')[0]))
 				rememberPlayerEvent("GhostForm",attacker.controller)
 			elif choice == 2:
-				notify("{} has chosen not to use Ghost Form\n".format(me, attack["Name"]))	
+				notify("{} has chosen not to use Ghost Form\n".format(me, attack["Name"]))	'''
 	return KiDice, KiEffect, KiTrait
 	
 def buffWithGlyphs(mageStats, attacker, drake = None):

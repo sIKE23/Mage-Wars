@@ -400,17 +400,6 @@ def resolveUpkeep():
 				card.markers[CrushToken] += 1
 				upKeepCost = card.markers[CrushToken]
 				notifystr = "Do you wish to pay the Upkeep +{} cost for {} attached to {}?".format(upKeepCost, card.Name, attatchedTo.Name)
-		# Process Monk Upkeep
-		if (target is not None or ('Monk' in Card(traits['MageID']).name and 'Equipment' in card.Type)) and card.isFaceUp and "Monk" not in card.Subtype and "Martial" not in card.Subtype and "Mind" not in card.School and card.owner == me:
-			if card.type == 'Enchantment' and 'Monk' in target.name and 'Mage' in target.Subtype:
-				upKeepCost = 1
-				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
-				card.filter = upKeepFilter
-			elif card.type == 'Equipment':
-				upKeepCost = 1
-				notifystr = "Do you wish to pay the Upkeep +{} cost for {}?".format(upKeepCost, card.Name)
-				card.filter = upKeepFilter
-
 		if upKeepCost > 0:
 			card.filter = upKeepFilter
 			processUpKeep(upKeepCost, card, Upkeep, notifystr)
@@ -484,8 +473,8 @@ def resolveMelting(traits, card):
 	#notify("Finished auto-resolving Bleed for {}.".format(card))
 
 def resolveRegeneration(traits, card):
- 	mute()
- 	#for card in table:
+	mute()
+	#for card in table:
 			#traits = computeTraits(card)
 	if ("Regenerate" in traits and "Finite Life" in traits) and card.controller == me and card.isFaceUp:
 			notify("{} has the Finite Life Trait and can not Regenerate\n".format(card.name))
@@ -520,7 +509,7 @@ def resolveRegeneration(traits, card):
 			return
 
 def resolveDotEnchantment(card):
- 	mute()
+	mute()
 	target = getAttachTarget(card)
 	damageAmount = 0
 	if "Ghoul Rot" in card.Name and card.controller == me and card.isFaceUp:
@@ -542,7 +531,7 @@ def resolveDotEnchantment(card):
 			notify("{}\'s {} feels the effects of the {} and takes {} damage.\n".format(target.controller, target, card, damageAmount))
 			
 def resolveAreaDot(traits, card):
- 	mute()
+	mute()
 	damageAmount = 0
 	type = {'Malacoda':'',
 			'PoisonGasCloud':'',
@@ -601,10 +590,10 @@ def stranglevineReceiptPrompt(card,damage):#I suppose this would really be bette
 		if askChoice("Apply {} damage to {} from Stranglevine?".format(str(damage),card.Name.split(",")[0]),["Yes","No"],["#01603e","#de2827"])==1:
 				addDamageAmount(card,damage)
 				strangleMessages=["Stranglevine tightens its hold on {}! ({} damage)\n",
-								  "As Stranglevine grows, its hold on {} tightens! ({} damage)\n",
-								  "{} is constricted by Stranglevine! ({} damage)\n",
-								  "Stranglevine crushes {}! ({} damage)\n",
-								  "Stranglevine writhes and constricts {}! ({} damage)\n"]
+								"As Stranglevine grows, its hold on {} tightens! ({} damage)\n",
+								"{} is constricted by Stranglevine! ({} damage)\n",
+								"Stranglevine crushes {}! ({} damage)\n",
+								"Stranglevine writhes and constricts {}! ({} damage)\n"]
 				message=rnd(0,len(strangleMessages)-1)
 				notify(strangleMessages[message].format(card,str(damage)))
 				traitsDict = computeTraits(card)
@@ -649,7 +638,7 @@ def getTextTraitValue(card, TraitName):
 		TraitCost = int(STraitCost[1].strip('[]'))
 	return (TraitCost)
 
-def getTraitValue(card, TraitName):
+'''def getTraitValue(card, TraitName):
 	listofTraits = ""
 	debug("{} has the {} trait".format(card.name, TraitName))
 	listofTraits = card.Traits.split(", ")
@@ -725,7 +714,7 @@ def getTextTraitValue(card, TraitName):
 		TraitCost = 0
 	else:
 		TraitCost = int(STraitCost[1].strip('[]'))
-	return (TraitCost)
+	return (TraitCost)'''
 
 def placeControlMarker(attacker,defender):
 	mute()
@@ -844,10 +833,10 @@ def castSpell(card,target=None):
 				pronoun = {"Male":"he","Female":"she"}.get(getGender(caster),"it")
 				casterString = "{} will pay what {} can. You will pay the rest.\n\n".format(caster.Name.split(",")[0],pronoun) if (caster.Type != "Mage" and caster.markers[Mana]) else ""
 				cost = askInteger("We think this spell costs {} mana.\n\n".format(str(cost))+
-									 discountString+
-									 casterString+
-									 hfpstring+
-									 "How much mana would you like to pay?",cost)
+									discountString+
+									casterString+
+									hfpstring+
+									"How much mana would you like to pay?",cost)
 				if cost == None: return
 				if cost > casterMana + ownerMana:
 						whisper('You do not have enough mana to cast {}!'.format(card.Name))
@@ -906,8 +895,8 @@ def revealEnchantment(card):
 				discountSourceNames = '\n'.join(map(lambda t: t[0].Name,usedDiscounts))
 				discountString = "The following discounts were applied: \n{}\n\n".format(discountSourceNames) if discountSourceNames else ""
 				cost = askInteger("We think this enchantment costs {} mana to reveal.\n\n".format(str(cost))+
-									 discountString+
-									 "How much mana would you like to pay?",cost)
+									discountString+
+									"How much mana would you like to pay?",cost)
 				if cost == None: return
 				#Do we have enough mana?
 				if cost > ownerMana:
@@ -945,15 +934,15 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 				#Discounts that only apply when your mage casts the spell
 				if (mageCast and
 					((cName == "Arcane Ring" and sType != "Enchantment" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
-					 (cName == "Enchanter's Ring" and target and target.controller == card.controller and (target.type == "Creature" or target.Subtype == "Mage") and sType == "Enchantment") or
-					 (cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
-					 (cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
-					 (cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
-					 (cName == "Druid's Leaf Ring" and sType != "Enchantment" and ("Plant" in sSubtype)) or
-					 (cName == "Force Ring" and sType != "Enchantment" and ("Force" in sSubtype)) or
-					 (cName == "Ring of the Ocean\'s Depths" and sType != "Enchantment" and ("Hydro" in sSubtype or "Aquatic" in sSubtype)) or
-					 (cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)) or
-					 (cName == "Commander\'s Cape" and sType != "Enchantment" and ("Command" in sSubtype or ("Soldier" in sSubtype and "Creature" in sType))))):
+					(cName == "Enchanter's Ring" and target and target.controller == card.controller and (target.type == "Creature" or target.Subtype == "Mage") and sType == "Enchantment") or
+					(cName == "Ring of Asyra" and ("Holy" in sSchool) and sType == "Incantation") or
+					(cName == "Ring of Beasts" and sType == "Creature" and ("Animal" in sSubtype)) or
+					(cName == "Ring of Curses" and sType != "Enchantment" and ("Curse" in sSubtype)) or
+					(cName == "Druid's Leaf Ring" and sType != "Enchantment" and ("Plant" in sSubtype)) or
+					(cName == "Force Ring" and sType != "Enchantment" and ("Force" in sSubtype)) or
+					(cName == "Ring of the Ocean\'s Depths" and sType != "Enchantment" and ("Hydro" in sSubtype or "Aquatic" in sSubtype)) or
+					(cName == "Ring of Command" and sType != "Enchantment" and ("Command" in sSubtype)) or
+					(cName == "Commander\'s Cape" and sType != "Enchantment" and ("Command" in sSubtype or ("Soldier" in sSubtype and "Creature" in sType))))):
 						return (1,cName)
 				#Discounts that apply no matter who casts the spell
 				if ((cName == "General's Signet Ring" and ("Soldier" in sSubtype)) or
@@ -965,7 +954,7 @@ def getCastDiscount(card,spell,target=None): #Discount granted by <card> to <spe
 						return (card.markers[Mana],cName)
 				#Discounts from Markers on Equipment
 				if isBound(spell) == True and card.type == 'Equipment' and getBindTarget(spell) == card:
-					 	boundCasterTraits = computeTraits(card)
+						boundCasterTraits = computeTraits(card)
 						#Rune of Power
 						if boundCasterTraits.get('Spellbind') == True and caster.markers[RuneofPower] == 1:
 							return (1,"Rune of Power on {}".format(cName))
@@ -985,13 +974,13 @@ def getRevealDiscount(card,spell): #Discount granted by <card> to <spell>. ONLY 
 		sSchool = spell.School
 		timesUsed = timesHasUsedAbility(card)
 		if timesUsed < 1 and ((cName == "Arcane Ring" and (("Metamagic" in sSubtype) or ("Mana" in sSubtype))) or
-							  (cName == "Ring of Asyra" and ("Holy" in sSchool)) or
-							  (cName == "Ring of Curses" and ("Curse" in sSubtype)) or
-							  (cName == "Druid's Leaf Ring" and ("Plant" in sSubtype)) or
-							  (cName == "Force Ring" and ("Force" in sSubtype)) or
-							  (cName == "Ring of Command" and ("Command" in sSubtype)) or
-							  (cName == "Voice of the Sea" and ("Song" in sSubtype)) or
-							  (cName == "Commander\'s Cape" and ("Command" in sSubtype))): return 1
+							(cName == "Ring of Asyra" and ("Holy" in sSchool)) or
+							(cName == "Ring of Curses" and ("Curse" in sSubtype)) or
+							(cName == "Druid's Leaf Ring" and ("Plant" in sSubtype)) or
+							(cName == "Force Ring" and ("Force" in sSubtype)) or
+							(cName == "Ring of Command" and ("Command" in sSubtype)) or
+							(cName == "Voice of the Sea" and ("Song" in sSubtype)) or
+							(cName == "Commander\'s Cape" and ("Command" in sSubtype))): return 1
 		if timesUsed <2 and cName == "Death Ring" and ("Necro" in sSubtype or "Undead" in sSubtype): return 1
 		return 0
 		#Returns discount as integer (0, if no discount)

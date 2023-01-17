@@ -1,35 +1,5 @@
-'''#######
-#v2.2.0.0#
-Created 30 April 2019
+#from APIMock import *
 
-Changelog: (just for fun, nothing actually helpful here anymore)
-	Sharkbait: 17 May 2022:
-		What is it about May and me redoing this script? Anyway, refactored again and it's much betterTM now. It can still be improved, but this will do for the moment
-
-
-	Sharkbait: 16 May 2020: 
-		hahaha.... a year later. Anyways, I fixed the issue with multi school, level X cost spells with the druid.
-		This doesn't address mage-only cards for level X yet, but I'm not sure it's super necessary right now.
-	
-	
-	Sharkbait: 15 May 2019:
-		Fixed a few errors. The Level X code was causing the level X logic to apply to all training a mage had, not just the 
-		school that was trained up to Level X. It has been adjusted now to check for the whole school training first. Subtype
-		training was causing an issue where the spellbookPointsToAdd could be overwritten, so I made it part of the if/elif branching scheme. 
-		Subtyping was also doing the '/' costs wrong due to only checking for school. This has been fixed with comments near the 
-		function explaining.**************WHEN YOU EDIT THIS NEXT, TAKE TIME TO ADD COMMENTS**************************
-		
-	Sharkbait: 10 May 2019:
-		Finished up the first iteration of Level X training. I am pretty sure everything is at least functional for now except
-		counting those mages as School mages. Currently, as long as the mage is at least a little trained in that school, the 
-		validator will let it validate regardless of level.
-
-	Sharkbait: 30 April 2019:
-		Added Combo School-type, card counts, Mage Only
-		
-	Sharkbait: 30 April 2019:
-		Completed all functionality except Combo School-Type, Level X, card counts, and redoing Mage and School only cards
-#######'''
 
 def validateDeck(deck):
 	#deck object comes from OCTGN API
@@ -55,7 +25,7 @@ def createSpellbookAndCheck(deck, mageStatCard):
 	totalBookPointsCost = 0
 	for card in deck: #run through deck adding levels and checking counts
 		if not ("Mage" in card.Subtype or "Magestats" in card.Subtype or "Aura" in card.Subtype or "Talos" in card.Name):#None of these cards cost points to include
-			debug(card.name)
+			debug(card.Name)
 			totalBookPointsCost += countCardPointCost(mageStatCard, card)
 			debug(totalBookPointsCost)
 
@@ -81,12 +51,12 @@ def countCardPointCost(mageStatCard, card):
 	elif compareToPartialTraining(mageStatCard, card):
 		debug('Partial')
 		cardPointsCost += partialTrainingPointsToAdd(mageStatCard, card)
-	elif isOpposedCardType(mageStatCard, card):
-		debug('Opposed Type Match')
-		cardPointsCost += addPoints('opposed', totalCardLevel)
 	elif (hasSchoolMatch(mageStatCard.MageSchoolFullTraining, card)) or (hasSchoolMatch(mageStatCard.MageSchoolOpposed, card)):
 		debug('Full or OpposedMatch')
 		cardPointsCost += addPointsBasedOnFullSchoolTraining(mageStatCard, card)
+	elif isOpposedCardType(mageStatCard, card):
+		debug('Opposed Type Match')
+		cardPointsCost += addPoints('opposed', totalCardLevel)
 	else:
 		debug('No Train or Opposed')
 		cardPointsCost += addPoints('neutral', totalCardLevel)
@@ -112,17 +82,27 @@ def splitCardProperty(card, property):
 		cardProperty = splitProperty.split('/')
 	return cardProperty
 
-def isOpposedCardType(mageTypeOpposed, card):
-	cardType = card.type.replace(' ','').split(',')
+def isOpposedCardType(mageStatCard, card):
+	if mageStatCard.MageTypeOpposed != '':
+		cardType = card.Type.replace(' ','')
+		if True in [cardType in mageStatCard.MageTypeOpposed]:
+			return True
+		else:
+			return False
+	else:
+		return False
+
+'''def isOpposedCardType(mageTypeOpposed, card):
+	cardType = card.Type.replace(' ','').split(',')
 	if mageTypeOpposed in cardType:
 		return	True
 	else:
-		return False
+		return False'''
 
 #Still some refactoring to do here
 def addPointsBasedOnFullSchoolTraining(mageStatCard, card):
 	cardPointsCost = 0
-	cardSchoolList = splitCardProperty(card, 'school')
+	cardSchoolList = splitCardProperty(card, 'School')
 	training = mageStatCard.MageSchoolFullTraining
 	opposed = mageStatCard.MageSchoolOpposed
 	if '+' in card.School:
@@ -167,15 +147,15 @@ def compareToPartialTraining(mageStatCard, card):
 	return False
 
 def hasSchoolMatch(Training, card):
-	cardSchool = splitCardProperty(card, 'school')
+	cardSchool = splitCardProperty(card, 'School')
 	for school in cardSchool:
 		if school in Training:
 			return True
 	return False
 
 def hasLevelMatch(Training, card):
-	cardSchool = splitCardProperty(card, 'school')
-	cardLevel = splitCardProperty(card, 'level')
+	cardSchool = splitCardProperty(card, 'School')
+	cardLevel = splitCardProperty(card, 'Level')
 	for school in cardSchool:
 		if school in Training:
 			mageSchoolLevelIndex = Training.index(school)+1
@@ -189,8 +169,8 @@ def partialTrainingPointsToAdd(mageStatCard, card):
 	mageSchoolPartialTraining = mageStatCard.MageSchoolPartialTraining.replace(' ','').split(',')
 	if '+' in card.School:
 		cardPointsCost = 0
-		cardSchool = splitCardProperty(card, 'school')
-		cardLevel = splitCardProperty(card, 'level')
+		cardSchool = splitCardProperty(card, 'School')
+		cardLevel = splitCardProperty(card, 'Level')
 		for school in cardSchool:
 			if school in mageSchoolPartialTraining:
 				mageSchoolLevelIndex = mageSchoolPartialTraining.index(school)+1
@@ -224,7 +204,7 @@ def isSubtypeInTraining(mageStatCard, card):
 def isCardCombo(mageStatCard, card):
 	if mageStatCard.MageComboTraining != '':
 		comboFlag = True
-		mageComboTraining = mageStatCard.MageComboTraining.Split(';')
+		mageComboTraining = mageStatCard.MageComboTraining.split(';')
 		for element in mageComboTraining:
 			testableAttributes = element.replace(' ','').split(',')
 			if not testableAttributes[0] in getattr(card, testableAttributes[1]): 
@@ -241,16 +221,16 @@ def isNovice(card):
         return False
 
 def getTotalCardLevel(card):
-	if '/' in card.school:
-		totalCardLevel = card.level.split('/')[0]
+	if '/' in card.School:
+		totalCardLevel = card.Level.split('/')[0]
 		totalCardLevel = int(totalCardLevel)
-	elif '+' in card.school:
-		cardLevel = card.level.split('+')
+	elif '+' in card.School:
+		cardLevel = card.Level.split('+')
 		totalCardLevel = 0
 		for level in cardLevel:
 			totalCardLevel += int(level)
 	else:
-		totalCardLevel = int(card.level)
+		totalCardLevel = int(card.Level)
 	return totalCardLevel
 
 
@@ -258,26 +238,26 @@ def checkCounts(card, cardDict):
 	mute()
 	cardDict = addCardToCardDict(card, cardDict)
 	level = getTotalCardLevel(card)
-	if "Epic" in card.traits and cardDict[card.name]>1:
+	if "Epic" in card.Traits and cardDict[card.Name]>1:
 		notify("***ILLEGAL DECK***: multiple copies of Epic card {} found in spellbook".format(card.Name))
 		return False
-	elif level == 1 and cardDict[card.name]>6:
-		notify("***ILLEGAL DECK***: there are too many copies of {} in {}'s Spellbook.".format(card.name, me))
+	elif level == 1 and cardDict[card.Name]>6:
+		notify("***ILLEGAL DECK***: there are too many copies of {} in {}'s Spellbook.".format(card.Name, me))
 		return False
-	elif level > 1 and cardDict[card.name]>4:
-		notify("***ILLEGAL DECK***: there are too many copies of {} in {}'s Spellbook.".format(card.name, me))
+	elif level > 1 and cardDict[card.Name]>4:
+		notify("***ILLEGAL DECK***: there are too many copies of {} in {}'s Spellbook.".format(card.Name, me))
 		return False
 
 def addCardToCardDict(card, cardDict):
 	mute()
-	if card.name in cardDict:
-		cardDict[card.name]+=1
+	if card.Name in cardDict:
+		cardDict[card.Name]+=1
 	else:
-		cardDict[card.name]=1
+		cardDict[card.Name]=1
 	return cardDict
 
 def checkForMageSchoolRestrictionViolation(mageStatCard, card):
-	if "Only" in card.traits:
+	if "Only" in card.Traits:
 		mageRestrictionName = mageStatCard.Nickname.replace(' ','').split('Stats')[0]
 		if isCorrectMage(card, mageRestrictionName) or isCorrectSchool(mageStatCard, card):
 			return False
@@ -288,7 +268,7 @@ def checkForMageSchoolRestrictionViolation(mageStatCard, card):
 
 def isCorrectMage(card, name):
 	legal = False
-	if name+" Only" in card.traits:
+	if name+" Only" in card.Traits:
 		legal = True
 	return legal
 

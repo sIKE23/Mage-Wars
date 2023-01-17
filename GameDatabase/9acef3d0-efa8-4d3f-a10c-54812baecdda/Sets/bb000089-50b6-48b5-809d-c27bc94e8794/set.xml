@@ -319,7 +319,7 @@
 			<property name="Action" value="Quick"  />
 			<property name="Range" value="0-2" />
 			<property name="cTargets" value="m0,M2))NULL" />
-			<property name="Target" value="Friendly Minor Creature" />
+			<property name="Target" value="Minor Creature" />
 			<property name="School" value="Mind"  />
 			<property name="Level" value="1" />
 			<property name="Stats" value="" />

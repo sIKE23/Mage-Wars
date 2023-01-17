@@ -705,8 +705,6 @@ def flipcard(card, x = 0, y = 0):
 			card.markers[Disable] = 1
 		if "Straywood Scout" in card.Name:
 			card.markers[scoutToken] = 1
-		if "Sistarran Wizard Stats" in card.Name:
-			card.markers[Rewind] = 1
 		if "Altar of Peace" in card.Name:
 			card.markers[AegisToken] = 1
 			card.markers[ToughToken] = 1

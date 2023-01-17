@@ -1,7 +1,6 @@
 # removing gameTurn as python GlobalVariables
 # removing roundTimes as python GlobalVariables
 
-
 def nextPhaseArena():
 	mute()
 	myHexColor = playerColorDict[eval(me.getGlobalVariable("MyColor"))]['Hex']

@@ -19,13 +19,11 @@ def nextPhaseArena():
 			flipcard(init)
 		else:
 			remoteCall(init.controller, "flipcard", [init])
-
 		setEventList('Round',[])#This helps track defenses, arcane zap, etc
 		setEventList('Turn',[])#This helps track defenses, arcane zap, etc
 		for p in players:
 			remoteCall(p, "resetDiscounts",[])
 			remoteCall(p, "resetMarkers", [])
-	
 		for p in players:
 			remoteCall(p, "resolveChanneling", [p])
 		setPhase(4)
