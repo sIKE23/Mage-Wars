@@ -430,7 +430,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
-			<property name="Text" value="During the Upkeep Phase, each Living creature receives 1 point of direct poison damage." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1J11" />
 			<alternate name="Idol of Pestilence" type="2" />
 		</card>
@@ -532,7 +532,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Zone Exclusive, Legendary, Epic" />
-			<property name="Text" value="All non-Mage creatures gain the Upkeep +1 trait." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1J16" />
 		</card>
 		<card id="6a65ca7e-df13-4c27-90cb-44d4c86b2610" name="Pentagram">
@@ -573,7 +573,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Incorporeal, Wind +2" />
-			<property name="Text" value="Each Upkeep Phase all Living creatures in Poison Gas Cloud&apos;s zone receive 2 points of direct poison damage. If a Living creature enters this zone, or starts its Action Phase in this zone, it may not take more than one move action this round." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1J18" />
 		</card>
 		<card id="d6f98712-aa0d-45b5-950e-7f9b991f5684" name="Deathlock">
@@ -1209,7 +1209,7 @@
 			<property name="cAttacks" value="name=Talons;action type=Quick;range type=Melee;range=(0,0);dice=4;Piercing +X=1" />
 			<property name="AttackBar" value="Talons:&#xD;&#xA;[Quick] [Melee] [Dice=4] [Piercing +1]" />
 			<property name="Traits" value="Slow, Poison Immunity, Legendary" />
-			<property name="Text" value="Each Upkeep Phase, all Living creatures in Malacoda&apos;s zone receive 2 points of direct poison damage." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1C23" />
 			<alternate name="Malacoda" type="2" />
 		</card>
@@ -1680,7 +1680,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magecast, Unique, Dark Mage Only" />
-			<property name="Text" value="Each Upkeep Phase, the controller of Death Link may heal up to 2 damage from his Mage and place it on this creature as direct damage, regardless of distance or LoS." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1E08" />
 		</card>
 		<card id="9527b6ab-5931-40ec-99ac-bb0d03c3bce6" name="Agony">
@@ -1878,7 +1878,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Magebind +2" />
-			<property name="Text" value="Each Upkeep Phase, this creature receives 2 direct poison damage." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1E19" />
 			<alternate name="Ghoul Rot" type="2" />
 		</card>
@@ -2626,7 +2626,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="Warlock Only" />
-			<property name="Text" value="During the Upkeep Phase, for each creature that has at least one curse you control attached to it, you may spend 1 mana to deal 1 direct damage to that creature." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1Q21" />
 		</card>
 		<card id="b28a0c37-8690-4bb4-826a-131cd9f12294" name="Moonglow Amulet">
@@ -2855,7 +2855,7 @@
 			<property name="cAttacks" value="" />
 			<property name="AttackBar" value="" />
 			<property name="Traits" value="" />
-			<property name="Text" value="Teleport target creature out of the arena. Place 3 Banish tokens on it. Remove 1 Banish token each Upkeep Phase. When the final token is removed, return the creature to the last zone it was in. While out of the arena, this creature cannot take any action, its action marker remains unchanged, and it can only be affected by attached spells, conditions, or its own traits and abilities." />
+			<property name="Text" value="" />
 			<property name="CardID" value="MW1I01" />
 		</card>
 		<card id="a1959fe8-780f-4720-a446-0c2f999e2df2" name="Battle Fury">
