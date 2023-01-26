@@ -215,15 +215,11 @@ def setUpDiceAndPhaseCards():
 	myColor = me.getGlobalVariable("MyColor")
 	gameHost = Player(int(getGlobalVariable("GameHostID")))
 	if tableSetup == "False" and gameHost == me: #me.name == gameHost.name:
-		RDA = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd",0,0) #Roll Dice Area
+		RDA = table.create("c752b2b7-3bc7-45db-90fc-9d27aa23f1a9",0,0) #Roll Dice Area
 		RDA.anchor = (True)
 		init = table.create("8ad1880e-afee-49fe-a9ef-b0c17aefac3f",0,0) #initiative token
 		init.anchor = (True)
 		init.alternate = myColor
-		#currentPhaseMW = "Planning"
-		#phase = table.create("6a71e6e9-83fa-4604-9ff7-23c14bf75d48",0,0) #Phase token/Next Phase Button
-		#phase.alternate = "Planning" #skips upkeep for first turn
-		#phase.anchor = (True)
 		for c in table:
 			if c.type in ['DiceRoll','Phase']: moveRDA(c)
 		setGlobalVariable("TableSetup", True)

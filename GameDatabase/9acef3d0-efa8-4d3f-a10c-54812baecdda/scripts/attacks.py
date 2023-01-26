@@ -579,9 +579,9 @@ def displayRoll(attackRoll,effectRoll):
 	mute()
 	mapDict = eval(getGlobalVariable('Map'))
 	for c in table:
-			if c.model == "a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd" and c.controller == me: c.delete()
+			if c.model == "c752b2b7-3bc7-45db-90fc-9d27aa23f1a9" and c.controller == me: c.delete()
 	dieCardX, dieCardY = mapDict.get('DiceBoxLocation',(0,0))
-	dieCard = table.create("a6ce63f9-a3fb-4ab2-8d9f-7d4b0108d7fd", dieCardX, dieCardY) #dice field
+	dieCard = table.create("c752b2b7-3bc7-45db-90fc-9d27aa23f1a9", dieCardX, dieCardY) #dice field
 	dieCard.anchor = (True)
 
 	normalDamage = attackRoll[2] + 2* attackRoll[3] # calculate the results for Normal Damage
